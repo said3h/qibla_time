@@ -17,33 +17,44 @@ jobs:
       - name: Build iOS Application
         run: |
           flutter pub get
+          
           # 1. Prepare Flutter build artifacts. 
-          # Even if it fails at the signing check, it usually generates the necessary frameworks.
+          # We let it fail but it completes the AOT compilation and asset bundling.
           flutter build ios --release --no-codesign || true
           
-          # 2. Ensure CocoaPods is strictly up to date and linking correctly
+          # 2. Re-apply Config Injection (in case Flutter migration overwrote them)
+          echo '#include "Generated.xcconfig"' > ios/Flutter/Release.xcconfig
+          echo '#include "Override.xcconfig"' >> ios/Flutter/Release.xcconfig
+          
+          # 3. Deep Clean to solve "Stale file" errors
+          rm -rf build/ios/iphoneos
+          rm -rf ~/Library/Developer/Xcode/DerivedData/Runner-*
+          
+          # 4. Manual Pod setup
           cd ios
           pod install
           cd ..
           
-          # 3. Use xcodebuild directly to bypass the Flutter Tool's pre-emptive Team ID check.
-          # We use the flags we just added to the project file as backup.
+          # 5. The "Master" Build Command
+          # Passing the flags again on command line to be absolutely sure.
           xcodebuild -workspace ios/Runner.xcworkspace \
                      -scheme Runner \
                      -configuration Release \
                      -sdk iphoneos \
+                     -derivedDataPath build/ios_derived_data \
                      CODE_SIGNING_ALLOWED=NO \
                      CODE_SIGNING_REQUIRED=NO \
                      CODE_SIGNING_IDENTITY="" \
                      AD_HOC_CODE_SIGNING_ALLOWED=YES \
                      COMPILER_INDEX_STORE_ENABLE=NO \
+                     ENABLE_USER_SCRIPT_SANDBOXING=NO \
                      build
       - name: Create IPA
         run: |
-          # Manual packaging of the produced .app bundle into a .ipa file
+          # Manual packaging of the produced .app bundle
           mkdir -p Payload
-          # Locate the .app bundle
-          APP_PATH=$(find build/ios/iphoneos -name "*.app" | head -n 1)
+          # Locate the .app bundle in our custom derivedDataPath
+          APP_PATH=$(find build/ios_derived_data -name "*.app" | grep "Release-iphoneos" | head -n 1)
           echo "Found app at: $APP_PATH"
           cp -r "$APP_PATH" Payload/
           zip -r QiblaTime.ipa Payload
