@@ -17,8 +17,27 @@ jobs:
       - name: Build iOS Application
         run: |
           flutter pub get
-          # We use the higher-level command but with extra flags for CI stability
-          flutter build ios --release --no-codesign --verbose
+          # 1. Prepare Flutter build artifacts. 
+          # Even if it fails at the signing check, it usually generates the necessary frameworks.
+          flutter build ios --release --no-codesign || true
+          
+          # 2. Ensure CocoaPods is strictly up to date and linking correctly
+          cd ios
+          pod install
+          cd ..
+          
+          # 3. Use xcodebuild directly to bypass the Flutter Tool's pre-emptive Team ID check.
+          # We use the flags we just added to the project file as backup.
+          xcodebuild -workspace ios/Runner.xcworkspace \
+                     -scheme Runner \
+                     -configuration Release \
+                     -sdk iphoneos \
+                     CODE_SIGNING_ALLOWED=NO \
+                     CODE_SIGNING_REQUIRED=NO \
+                     CODE_SIGNING_IDENTITY="" \
+                     AD_HOC_CODE_SIGNING_ALLOWED=YES \
+                     COMPILER_INDEX_STORE_ENABLE=NO \
+                     build
       - name: Create IPA
         run: |
           # Manual packaging of the produced .app bundle into a .ipa file
