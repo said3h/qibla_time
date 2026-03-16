@@ -1,4 +1,23 @@
-load File.join(File.dirname(File.realpath(__FILE__)), 'Flutter', 'podhelper.rb')
+# Dynamically find the Flutter SDK path
+def flutter_root
+  # Check environment variable first (set by flutter build)
+  return ENV['FLUTTER_ROOT'] if ENV['FLUTTER_ROOT']
+
+  # Fallback to Generated.xcconfig
+  xcconfig_path = File.expand_path(File.join('..', 'Flutter', 'Generated.xcconfig'), __FILE__)
+  if File.exist?(xcconfig_path)
+    File.foreach(xcconfig_path) do |line|
+      matches = line.match(/\AFLUTTER_ROOT=(.*)\z/)
+      return matches[1].strip if matches
+    end
+  end
+
+  # Ultimate fallback for CI if everything else fails (common path on GitHub runner)
+  return '/Users/runner/hostedtoolcache/flutter/stable-3.24.0-x64'
+end
+
+# Load the real podhelper from the SDK
+require File.expand_path(File.join('packages', 'flutter_tools', 'bin', 'podhelper'), flutter_root)
 
 platform :ios, '13.0'
 
