@@ -14,20 +14,22 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-          architecture: x64
-      - name: Flutter Submodule/Plugin Setup
+          flutter-version: '3.24.0'
+      - name: Clean and Get Dependencies
         run: |
+          flutter clean
           flutter pub get
-          # We run this to let Flutter generate the necessary native files, 
-          # even if it fails at the signing stage, we want the generated files.
-          flutter build ios --release --no-codesign || true
+      - name: Pre-build iOS (Generate native files)
+        run: |
+          # This generates the necessary Flutter frameworks and plugins
+          flutter build ios --release --no-codesign --verbose || true
       - name: Install CocoaPods
         run: |
           cd ios
           pod install
       - name: Build iOS (Manual xcodebuild)
         run: |
-          # Now we build using xcodebuild directly to bypass the "Team ID" requirement
+          # Build using xcodebuild with flags to skip signing and use ad-hoc signing where needed
           xcodebuild -workspace ios/Runner.xcworkspace \
                      -scheme Runner \
                      -configuration Release \
@@ -36,11 +38,18 @@ jobs:
                      CODE_SIGNING_REQUIRED=NO \
                      CODE_SIGNING_IDENTITY="" \
                      AD_HOC_CODE_SIGNING_ALLOWED=YES \
+                     COMPILER_INDEX_STORE_ENABLE=NO \
                      build
       - name: Prepare IPA
         run: |
-          mkdir Payload
-          cp -r build/ios/iphoneos/Runner.app Payload
+          mkdir -p Payload
+          # Use find to locate the .app safely in case of path variations
+          APP_PATH=$(find build/ios/iphoneos -name "*.app" | head -n 1)
+          if [ -z "$APP_PATH" ]; then
+            APP_PATH=$(find ~/Library/Developer/Xcode/DerivedData -name "Runner.app" | grep "Release-iphoneos" | head -n 1)
+          fi
+          echo "Found App at: $APP_PATH"
+          cp -r "$APP_PATH" Payload/
           zip -r QiblaTime.ipa Payload
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
