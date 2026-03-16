@@ -11,19 +11,19 @@ jobs:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
       - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
-        with:
-          channel: 'stable'
-          architecture: x64
-      - name: Flutter Pub Upgrade & Clean
+      - name: Flutter Submodule/Plugin Setup
         run: |
-          flutter pub upgrade
-          flutter clean
-      - run: flutter pub get
+          flutter pub get
+          # We run this to let Flutter generate the necessary native files, 
+          # even if it fails at the signing stage, we want the generated files.
+          flutter build ios --release --no-codesign || true
+      - name: Install CocoaPods
+        run: |
+          cd ios
+          pod install
       - name: Build iOS (Manual xcodebuild)
         run: |
-          flutter build bundle --release
-          # This command builds the iOS project without requiring a Team ID or Signing
+          # Now we build using xcodebuild directly to bypass the "Team ID" requirement
           xcodebuild -workspace ios/Runner.xcworkspace \
                      -scheme Runner \
                      -configuration Release \
@@ -31,6 +31,7 @@ jobs:
                      CODE_SIGNING_ALLOWED=NO \
                      CODE_SIGNING_REQUIRED=NO \
                      CODE_SIGNING_IDENTITY="" \
+                     AD_HOC_CODE_SIGNING_ALLOWED=YES \
                      build
       - name: Prepare IPA
         run: |
