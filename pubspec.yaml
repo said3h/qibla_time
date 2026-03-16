@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.4.0 <4.0.0'
+  sdk: '>=3.3.0 <4.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -101,7 +101,5 @@ flutter:
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
 
-# Pin win32 to avoid UnmodifiableUint8ListView error with Dart 3.4+
-# win32 5.5.0 uses this removed API; 5.4.0 does not.
 dependency_overrides:
-  win32: 5.4.0
+  win32: 5.5.4
