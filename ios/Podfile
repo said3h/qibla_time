@@ -1,38 +1,13 @@
-# Dynamically find the Flutter SDK path
-def flutter_root
-  # Check environment variable first (set by flutter build)
-  return ENV['FLUTTER_ROOT'] if ENV['FLUTTER_ROOT']
-
-  # Fallback to Generated.xcconfig
-  xcconfig_path = File.expand_path(File.join('..', 'Flutter', 'Generated.xcconfig'), __FILE__)
-  if File.exist?(xcconfig_path)
-    File.foreach(xcconfig_path) do |line|
-      matches = line.match(/\AFLUTTER_ROOT=(.*)\z/)
-      return matches[1].strip if matches
-    end
-  end
-
-  # Ultimate fallback for CI if everything else fails (common path on GitHub runner)
-  return '/Users/runner/hostedtoolcache/flutter/stable-3.24.0-x64'
-end
-
-# Load the real podhelper from the SDK
-require File.expand_path(File.join('packages', 'flutter_tools', 'bin', 'podhelper'), flutter_root)
+# Standard Flutter Podfile for iOS stabilization
+load File.join(File.dirname(File.realpath(__FILE__)), 'Flutter', 'podhelper.rb')
 
 platform :ios, '13.0'
-
-# CocoaPods analytics sends network stats synchronous to update.
-# This slows down local development and CI, so it's disabled by default.
-install! 'cocoapods', :deterministic_uuids => false
 
 target 'Runner' do
   use_frameworks!
   use_modular_headers!
 
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
-  target 'RunnerTests' do
-    inherit! :search_paths
-  end
 end
 
 post_install do |installer|
@@ -40,9 +15,9 @@ post_install do |installer|
     flutter_additional_ios_build_settings(target)
     target.build_configurations.each do |config|
       config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
-      # Disable code signing for pods
+      # Additional stabilization flags
       config.build_settings['ENABLE_BITCODE'] = 'NO'
-      config.build_settings['INFOPLIST_KEY_LSApplicationCategoryType'] = 'public.app-category.utilities'
+      config.build_settings['APPLICATION_EXTENSION_API_ONLY'] = 'NO'
     end
   end
 end
