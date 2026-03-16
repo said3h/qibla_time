@@ -6,21 +6,39 @@ import '../../../core/constants/app_constants.dart';
 
 // Provides the current coordinates of the user
 final locationProvider = FutureProvider<Position?>((ref) async {
-  bool serviceEnabled;
-  LocationPermission permission;
+  try {
+    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      return null;
+    }
 
-  serviceEnabled = await Geolocator.isLocationServiceEnabled();
-  if (!serviceEnabled) return null;
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return null;
+      }
+    }
 
-  permission = await Geolocator.checkPermission();
-  if (permission == LocationPermission.denied) {
-    permission = await Geolocator.requestPermission();
-    if (permission == LocationPermission.denied) return null;
+    if (permission == LocationPermission.deniedForever) {
+      return null;
+    }
+
+    // Try to get last known position for speed
+    Position? lastKnown = await Geolocator.getLastKnownPosition();
+    if (lastKnown != null) {
+      // If last known is recent enough (e.g., < 1 hour), we could use it, 
+      // but for prayer times accurate location is better.
+      // Let's still try to get a fresh one with a timeout.
+    }
+
+    return await Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.medium, // Medium is usually enough for prayer times
+      timeLimit: const Duration(seconds: 10),
+    ).catchError((e) => lastKnown); // Fallback to last known if fresh fails
+  } catch (e) {
+    return null;
   }
-  
-  if (permission == LocationPermission.deniedForever) return null;
-
-  return await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
 });
 
 // Provides the chosen calculation method

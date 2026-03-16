@@ -60,88 +60,107 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
   Widget _buildHijriBanner() {
     return Container(
-       padding: const EdgeInsets.symmetric(vertical: 32.0, horizontal: 16.0),
-       decoration: BoxDecoration(
-         color: AppTheme.primaryGreen,
-         borderRadius: BorderRadius.circular(16.0),
-         boxShadow: [
-            BoxShadow(
-              color: AppTheme.primaryGreen.withOpacity(0.3),
-              blurRadius: 10,
-              offset: const Offset(0, 5),
-            ),
-         ]
-       ),
-       child: Column(
-         children: [
-            Text(
-              currentHijri.toFormat("MMMM"), // Hijri Month Name
-              style: const TextStyle(color: AppTheme.accentGold, fontSize: 32, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              '${currentHijri.hDay} ${currentHijri.toFormat("MMMM")}, ${currentHijri.hYear} AH',
-              style: const TextStyle(color: Colors.white, fontSize: 20),
-            )
-         ],
-       ),
+      padding: const EdgeInsets.all(24.0),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [AppTheme.primaryGreen, Color(0xFF006430)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(20.0),
+        boxShadow: [
+          BoxShadow(
+            color: AppTheme.primaryGreen.withOpacity(0.3),
+            blurRadius: 15,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          const Text(
+            'TODAY',
+            style: TextStyle(color: Colors.white70, fontSize: 12, letterSpacing: 2, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 12),
+          Text(
+            '${currentHijri.hDay} ${currentHijri.toFormat("MMMM")}',
+            style: const TextStyle(color: AppTheme.accentGold, fontSize: 28, fontWeight: FontWeight.bold),
+          ),
+          Text(
+            '${currentHijri.hYear} AH',
+            style: const TextStyle(color: Colors.white, fontSize: 18),
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 16.0),
+            child: Divider(color: Colors.white24, thickness: 1),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(Icons.calendar_month, color: Colors.white70, size: 18),
+              const SizedBox(width: 8),
+              Text(
+                DateFormat('EEEE, d MMMM yyyy').format(selectedDate),
+                style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w500),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 
   Widget _buildGregorianDatePicker() {
-    return InkWell(
-      onTap: () async {
-        final DateTime? picked = await showDatePicker(
-          context: context,
-          initialDate: selectedDate,
-          firstDate: DateTime(2000),
-          lastDate: DateTime(2100),
-          builder: (context, child) {
-            return Theme(
-              data: Theme.of(context).copyWith(
-                colorScheme: const ColorScheme.light(
-                  primary: AppTheme.primaryGreen, 
-                  onPrimary: Colors.white, 
-                  onSurface: AppTheme.textDark, 
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Check specific date',
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppTheme.textDark),
+        ),
+        const SizedBox(height: 12),
+        InkWell(
+          onTap: () async {
+            final DateTime? picked = await showDatePicker(
+              context: context,
+              initialDate: selectedDate,
+              firstDate: DateTime(2000),
+              lastDate: DateTime(2100),
+              builder: (context, child) => Theme(
+                data: Theme.of(context).copyWith(
+                  colorScheme: const ColorScheme.light(primary: AppTheme.primaryGreen),
                 ),
-                textButtonTheme: TextButtonThemeData(
-                  style: TextButton.styleFrom(
-                    foregroundColor: AppTheme.primaryGreen, 
-                  ),
-                ),
+                child: child!,
               ),
-              child: child!,
             );
+            if (picked != null && picked != selectedDate) {
+              _onDateChanged(picked);
+            }
           },
-        );
-        if (picked != null && picked != selectedDate) {
-          _onDateChanged(picked);
-        }
-      },
-      child: Container(
-         padding: const EdgeInsets.all(16.0),
-         decoration: BoxDecoration(
-           color: Colors.white,
-           borderRadius: BorderRadius.circular(12),
-           border: Border.all(color: Colors.grey.shade200),
-         ),
-         child: Row(
-           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-           children: [
-             Row(
-                children: [
-                  const Icon(Icons.calendar_today, color: AppTheme.primaryGreen),
-                  const SizedBox(width: 12),
-                  Text(
-                    DateFormat('EEEE, MMMM d, yyyy').format(selectedDate),
-                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                  ),
-                ],
-             ),
-             const Icon(Icons.edit, color: AppTheme.textLight, size: 20),
-           ],
-         ),
-      ),
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(15),
+              border: Border.all(color: Colors.grey.shade200),
+              boxShadow: [
+                BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 10, offset: const Offset(0, 4)),
+              ],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  DateFormat('MMMM d, yyyy').format(selectedDate),
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                ),
+                const Icon(Icons.event, color: AppTheme.primaryGreen),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -149,18 +168,19 @@ class _CalendarScreenState extends State<CalendarScreen> {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
-        color: isCurrentMonth ? AppTheme.accentGold.withOpacity(0.1) : Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: isCurrentMonth ? AppTheme.accentGold : Colors.grey.shade200),
+        color: isCurrentMonth ? AppTheme.primaryGreen.withOpacity(0.05) : Colors.white,
+        borderRadius: BorderRadius.circular(15),
+        border: Border.all(color: isCurrentMonth ? AppTheme.primaryGreen.withOpacity(0.1) : Colors.grey.shade100),
       ),
       child: ListTile(
-        title: Text(eventName, style: const TextStyle(fontWeight: FontWeight.w600)),
-        subtitle: Text(hijriDateString, style: TextStyle(color: isCurrentMonth ? AppTheme.primaryGreen : AppTheme.textLight)),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+        title: Text(eventName, style: const TextStyle(fontWeight: FontWeight.bold, color: AppTheme.textDark)),
+        subtitle: Text(hijriDateString, style: const TextStyle(color: AppTheme.textLight)),
         trailing: isCurrentMonth 
-            ? const Chip(
-                label: Text('This Month', style: TextStyle(color: Colors.white, fontSize: 10)),
-                backgroundColor: AppTheme.primaryGreen,
-                padding: EdgeInsets.zero,
+            ? Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                decoration: BoxDecoration(color: AppTheme.primaryGreen, borderRadius: BorderRadius.circular(20)),
+                child: const Text('SOON', style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold)),
               )
             : null,
       ),

@@ -7,7 +7,8 @@ import 'package:geolocator/geolocator.dart';
 
 // Stream of compass heading events
 final compassProvider = StreamProvider<CompassEvent>((ref) {
-  return FlutterCompass.events!;
+  // Ensure we are listening only to valid events
+  return FlutterCompass.events?.where((event) => event.heading != null) ?? const Stream.empty();
 });
 
 // Provides the precise bearing to Mecca from the user's location

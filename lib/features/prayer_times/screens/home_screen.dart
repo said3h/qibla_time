@@ -52,24 +52,39 @@ class HomeScreen extends ConsumerWidget {
   }
 
   Widget _buildLocationError() {
-    return const Center(
+    return Center(
       child: Padding(
-        padding: EdgeInsets.all(24.0),
+        padding: const EdgeInsets.all(32.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.location_off, size: 64, color: AppTheme.textLight),
-            SizedBox(height: 16),
-            Text(
-              'Location Access Required',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            const Icon(Icons.location_off_rounded, size: 80, color: AppTheme.textLight),
+            const SizedBox(height: 24),
+            const Text(
+              'Location Required',
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 8),
-            Text(
-              'Please enable location services and grant permissions to calculate accurate prayer times.',
-              style: TextStyle(color: AppTheme.textLight),
+            const SizedBox(height: 12),
+            const Text(
+              'QiblaTime needs your location to calculate precise prayer times and Qibla direction.',
+              style: TextStyle(color: AppTheme.textLight, fontSize: 16),
               textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 32),
+            ElevatedButton.icon(
+              onPressed: () => Geolocator.openAppSettings(),
+              icon: const Icon(Icons.settings),
+              label: const Text('Open App Settings'),
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                backgroundColor: AppTheme.primaryGreen,
+                foregroundColor: Colors.white,
+              ),
+            ),
+            TextButton(
+              onPressed: () => Geolocator.openLocationSettings(),
+              child: const Text('Check System Location'),
             ),
           ],
         ),

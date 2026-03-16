@@ -23,7 +23,7 @@ class QiblaScreen extends ConsumerWidget {
         data: (CompassEvent event) {
           final heading = event.heading;
           if (heading == null) {
-            return const Center(child: Text('Compass sensor not found on this device.'));
+            return _buildSensorError('Compass heading is null. Try moving the device in a figure-eight pattern.');
           }
 
           return bearingAsync.when(
@@ -32,8 +32,6 @@ class QiblaScreen extends ConsumerWidget {
                 return _buildLocationRequiredError();
               }
 
-              // Calculate how much to rotate the compass image
-              // The arrow image usually points up (0 degrees).
               final compassRotation = -1 * (heading * (pi / 180));
               final qiblaRotation = qiblaBearing * (pi / 180);
 
@@ -55,10 +53,15 @@ class QiblaScreen extends ConsumerWidget {
                   ),
                   _buildCompassVisuals(compassRotation, qiblaRotation),
                   const SizedBox(height: 40),
+                  Text(
+                    'Heading: ${heading.toInt()}°',
+                    style: const TextStyle(color: AppTheme.textLight, fontWeight: FontWeight.w500),
+                  ),
+                  const SizedBox(height: 20),
                   const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 32.0),
+                    padding: EdgeInsets.symmetric(horizontal: 40.0),
                     child: Text(
-                      'Keep your device away from magnetic objects to ensure accurate calibration.',
+                      'Keep your device flat and away from magnets for best accuracy.',
                       textAlign: TextAlign.center,
                       style: TextStyle(color: AppTheme.textLight, fontSize: 13),
                     ),
@@ -67,11 +70,38 @@ class QiblaScreen extends ConsumerWidget {
               );
             },
             loading: () => const Center(child: CircularProgressIndicator(color: AppTheme.primaryGreen)),
-            error: (error, _) => Center(child: Text('Error computing bearing: $error')),
+            error: (error, _) => _buildSensorError('Location Service Error: $error'),
           );
         },
-        loading: () => const Center(child: CircularProgressIndicator(color: AppTheme.primaryGreen)),
-        error: (error, _) => Center(child: Text('Compass Error: $error')),
+        loading: () => const Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircularProgressIndicator(color: AppTheme.primaryGreen),
+              SizedBox(height: 16),
+              Text('Initializing Compass...'),
+            ],
+          ),
+        ),
+        error: (error, _) => _buildSensorError('Compass Sensor Error: $error'),
+      ),
+    );
+  }
+
+  Widget _buildSensorError(String message) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(32.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(Icons.explore_off_outlined, size: 64, color: Colors.redAccent),
+            const SizedBox(height: 16),
+            const Text('Sensor Issue', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 8),
+            Text(message, textAlign: TextAlign.center, style: const TextStyle(color: AppTheme.textLight)),
+          ],
+        ),
       ),
     );
   }
