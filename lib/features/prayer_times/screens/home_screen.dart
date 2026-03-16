@@ -7,6 +7,7 @@ import '../services/quran_service.dart';
 import '../../tracking/services/tracking_service.dart';
 import '../../../core/theme/app_theme.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:geolocator/geolocator.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
