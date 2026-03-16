@@ -8,6 +8,7 @@ import '../../tracking/services/tracking_service.dart';
 import '../../../core/theme/app_theme.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:geolocator/geolocator.dart';
+import '../../support/screens/settings_screen.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -34,7 +35,7 @@ class HomeScreen extends ConsumerWidget {
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () {
-              // Navigate to Settings
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const SettingsScreen()));
             },
           ),
         ],
@@ -106,7 +107,7 @@ class HomeScreen extends ConsumerWidget {
       child: ListView(
         padding: const EdgeInsets.all(16.0),
         children: [
-          _buildNextPrayerCard(nextPrayer, prayerTimes),
+          _buildNextPrayerCard(ref, nextPrayer, prayerTimes),
           const SizedBox(height: 24),
           const Text(
             'Today\'s Prayers',
@@ -119,43 +120,70 @@ class HomeScreen extends ConsumerWidget {
           _buildPrayerListItem(context, ref, 'Maghrib', prayerTimes.maghrib, timeFormat, nextPrayer == Prayer.maghrib),
           _buildPrayerListItem(context, ref, 'Isha', prayerTimes.isha, timeFormat, nextPrayer == Prayer.isha),
           const SizedBox(height: 24),
-          _buildDailyVerseCard(),
+          _buildDailyVerseCard(ref),
         ],
       ),
     );
   }
 
-  Widget _buildNextPrayerCard(Prayer nextPrayer, PrayerTimes prayerTimes) {
+  Widget _buildNextPrayerCard(WidgetRef ref, Prayer nextPrayer, PrayerTimes prayerTimes) {
     String nextName = nextPrayer.name.toUpperCase();
     if (nextName == "NONE" || nextName == "INVALID") nextName = "FAJR (Tomorrow)";
 
-    DateTime? nextTime = prayerTimes.timeForPrayer(nextPrayer);
-    
+    final countdownAsync = ref.watch(nextPrayerCountdownProvider);
+    final nextTime = prayerTimes.timeForPrayer(nextPrayer);
+
+    // Dynamic Gradients
+    List<Color> gradientColors;
+    switch (nextPrayer) {
+      case Prayer.fajr:
+        gradientColors = [const Color(0xFF0F2027), const Color(0xFF203A43)];
+        break;
+      case Prayer.dhuhr:
+        gradientColors = [const Color(0xFF2980B9), const Color(0xFF6DD5FA)];
+        break;
+      case Prayer.asr:
+        gradientColors = [const Color(0xFFF2994A), const Color(0xFFF2C94C)];
+        break;
+      case Prayer.maghrib:
+        gradientColors = [const Color(0xFFE96443), const Color(0xFF904E95)];
+        break;
+      case Prayer.isha:
+        gradientColors = [const Color(0xFF232526), const Color(0xFF414345)];
+        break;
+      default:
+        gradientColors = [AppTheme.primaryGreen, const Color(0xFF006430)];
+    }
+
     return Container(
-      padding: const EdgeInsets.all(24.0),
+      padding: const EdgeInsets.all(28.0),
       decoration: BoxDecoration(
-        color: AppTheme.primaryGreen,
-        borderRadius: BorderRadius.circular(20),
+        gradient: LinearGradient(
+          colors: gradientColors,
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: AppTheme.primaryGreen.withOpacity(0.3),
-            blurRadius: 10,
-            offset: const Offset(0, 5),
+            color: gradientColors[0].withOpacity(0.4),
+            blurRadius: 15,
+            offset: const Offset(0, 8),
           ),
         ],
       ),
       child: Column(
         children: [
           const Text(
-            'Next Prayer',
-            style: TextStyle(color: Colors.white70, fontSize: 16),
+            'NEXT PRAYER',
+            style: TextStyle(color: Colors.white70, fontSize: 13, letterSpacing: 2, fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 12),
           Text(
             nextName,
             style: const TextStyle(
               color: AppTheme.accentGold,
-              fontSize: 32,
+              fontSize: 36,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -163,11 +191,45 @@ class HomeScreen extends ConsumerWidget {
           if (nextTime != null)
             Text(
               DateFormat.jm().format(nextTime),
-              style: const TextStyle(color: Colors.white, fontSize: 24),
+              style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w500),
             ),
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 20.0),
+            child: Divider(color: Colors.white24, thickness: 1),
+          ),
+          countdownAsync.when(
+            data: (duration) => Column(
+              children: [
+                const Text(
+                  'TIME REMAINING',
+                  style: TextStyle(color: Colors.white60, fontSize: 11, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  _formatDuration(duration),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 32,
+                    fontWeight: FontWeight.w300,
+                    fontFamily: 'Courier', // Using a monospaced font feel for the timer
+                  ),
+                ),
+              ],
+            ),
+            loading: () => const SizedBox(height: 40, child: CircularProgressIndicator(color: Colors.white)),
+            error: (_, __) => const Text('Error', style: TextStyle(color: Colors.white)),
+          ),
         ],
       ),
     );
+  }
+
+  String _formatDuration(Duration? duration) {
+    if (duration == null) return "00:00:00";
+    final hours = duration.inHours.toString().padLeft(2, '0');
+    final minutes = duration.inMinutes.remainder(60).toString().padLeft(2, '0');
+    final seconds = duration.inSeconds.remainder(60).toString().padLeft(2, '0');
+    return "$hours:$minutes:$seconds";
   }
 
   Widget _buildPrayerListItem(BuildContext context, WidgetRef ref, String name, DateTime time, DateFormat format, bool isNext) {
@@ -197,44 +259,98 @@ class HomeScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildDailyVerseCard() {
-    final dailyVerse = QuranVerseService.getVerseOfTheDay();
+  Widget _buildDailyVerseCard(WidgetRef ref) {
+    final dailyVerseAsync = ref.watch(dailyVerseProvider);
 
-    return Container(
-      padding: const EdgeInsets.all(20.0),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.grey.shade200),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Row(
-            children: [
-              Icon(Icons.menu_book, color: AppTheme.accentGold),
-              SizedBox(width: 8),
-              Text(
-                'Verse of the Day',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppTheme.textDark),
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          Text(
-            '"${dailyVerse['verse']}"',
-            style: const TextStyle(fontSize: 16, fontStyle: FontStyle.italic, color: AppTheme.textDark),
-          ),
-          const SizedBox(height: 8),
-          Align(
-            alignment: Alignment.centerRight,
-            child: Text(
-              dailyVerse['ref']!,
-              style: const TextStyle(fontSize: 14, color: AppTheme.textLight),
+    return dailyVerseAsync.when(
+      data: (verse) => Container(
+        padding: const EdgeInsets.all(24.0),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(24),
+          border: Border.all(color: Colors.grey.shade100),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.03),
+              blurRadius: 20,
+              offset: const Offset(0, 10),
             ),
-          ),
-        ],
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Row(
+                  children: [
+                    Icon(Icons.menu_book_rounded, color: AppTheme.accentGold, size: 20),
+                    SizedBox(width: 8),
+                    Text(
+                      'DAILY VERSE',
+                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: AppTheme.textLight, letterSpacing: 1),
+                    ),
+                  ],
+                ),
+                IconButton(
+                  icon: const Icon(Icons.play_circle_fill, color: AppTheme.primaryGreen, size: 32),
+                  onPressed: () async {
+                    final url = Uri.parse(verse.audioUrl);
+                    if (await canLaunchUrl(url)) {
+                      await launchUrl(url, mode: LaunchMode.externalApplication);
+                    }
+                  },
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            Text(
+              verse.arabicText,
+              textAlign: TextAlign.right,
+              style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: AppTheme.primaryGreen,
+                fontFamily: 'Traditional Arabic', // Fallback to system fonts
+              ),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              verse.transliterationText,
+              style: TextStyle(fontSize: 14, fontStyle: FontStyle.italic, color: Colors.grey.shade600),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 12),
+            const Divider(height: 24, thickness: 0.5),
+            Text(
+              '"${verse.translationText}"',
+              style: const TextStyle(fontSize: 16, color: AppTheme.textDark, height: 1.5),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 16),
+            Align(
+              alignment: Alignment.centerRight,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                decoration: BoxDecoration(
+                  color: AppTheme.accentGold.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Text(
+                  verse.reference,
+                  style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.orange),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
+      loading: () => const Center(child: Padding(
+        padding: EdgeInsets.all(20.0),
+        child: CircularProgressIndicator(color: AppTheme.primaryGreen),
+      )),
+      error: (e, _) => const Text('Unable to load daily verse. Check connection.'),
     );
   }
 }

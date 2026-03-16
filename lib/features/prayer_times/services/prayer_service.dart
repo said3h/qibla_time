@@ -62,3 +62,27 @@ final prayerTimesProvider = FutureProvider<PrayerTimes?>((ref) async {
   final date = DateComponents.from(DateTime.now());
   return PrayerTimes(coordinates, date, params);
 });
+
+// Provides a countdown until the next prayer, updating every second
+final nextPrayerCountdownProvider = StreamProvider<Duration?>((ref) async* {
+  // Yield immediately
+  yield _calculateRemainingTime(ref);
+
+  // Then yield every second
+  yield* Stream.periodic(const Duration(seconds: 1), (_) {
+    return _calculateRemainingTime(ref);
+  });
+});
+
+Duration? _calculateRemainingTime(Ref ref) {
+  final prayerTimes = ref.read(prayerTimesProvider).value;
+  if (prayerTimes == null) return null;
+
+  final nextPrayer = prayerTimes.nextPrayer();
+  final nextTime = prayerTimes.timeForPrayer(nextPrayer);
+
+  if (nextTime == null) return null;
+
+  final diff = nextTime.difference(DateTime.now());
+  return diff.isNegative ? Duration.zero : diff;
+}

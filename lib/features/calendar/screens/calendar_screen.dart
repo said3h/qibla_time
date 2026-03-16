@@ -41,21 +41,44 @@ class _CalendarScreenState extends State<CalendarScreen> {
           _buildHijriBanner(),
           const SizedBox(height: 24),
           _buildGregorianDatePicker(),
-          const SizedBox(height: 24),
+          const SizedBox(height: 32),
           Text(
-            'Upcoming Islamic Events (${currentHijri.hYear})',
+            'Important Events (${currentHijri.hYear} AH)',
             style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppTheme.primaryGreen),
           ),
-          const SizedBox(height: 12),
-          _buildEventItem('Ramadan Begins', '1 Ramadan', currentHijri.hMonth == 9),
-          _buildEventItem('Eid al-Fitr', '1 Shawwal', currentHijri.hMonth == 10),
-          _buildEventItem('Day of Arafah', '9 Dhu al-Hijjah', currentHijri.hMonth == 12),
-          _buildEventItem('Eid al-Adha', '10 Dhu al-Hijjah', currentHijri.hMonth == 12),
-          _buildEventItem('Islamic New Year', '1 Muharram', currentHijri.hMonth == 1),
-          _buildEventItem('Ashura', '10 Muharram', currentHijri.hMonth == 1),
+          const SizedBox(height: 16),
+          ..._buildUpcomingEvents(),
         ],
       ),
     );
+  }
+
+  List<Widget> _buildUpcomingEvents() {
+    final List<Map<String, dynamic>> events = [
+      {'name': 'Islamic New Year', 'day': 1, 'month': 1},
+      {'name': 'Ashura', 'day': 10, 'month': 1},
+      {'name': 'Ramadan Begins', 'day': 1, 'month': 9},
+      {'name': 'Eid al-Fitr', 'day': 1, 'month': 10},
+      {'name': 'Day of Arafah', 'day': 9, 'month': 12},
+      {'name': 'Eid al-Adha', 'day': 10, 'month': 12},
+    ];
+
+    return events.map((event) {
+      final hCalendar = HijriCalendar();
+      hCalendar.hYear = currentHijri.hYear;
+      hCalendar.hMonth = event['month'];
+      hCalendar.hDay = event['day'];
+      
+      final gregorianDate = hCalendar.hijriToGregorian(hCalendar.hYear, hCalendar.hMonth, hCalendar.hDay);
+      final isCurrent = currentHijri.hMonth == event['month'];
+      
+      return _buildEventItem(
+        event['name'], 
+        '${event['day']} ${hCalendar.toFormat("MMMM")}', 
+        DateFormat('EEEE, d MMM yyyy').format(gregorianDate),
+        isCurrent
+      );
+    }).toList();
   }
 
   Widget _buildHijriBanner() {
@@ -164,7 +187,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
     );
   }
 
-  Widget _buildEventItem(String eventName, String hijriDateString, bool isCurrentMonth) {
+  Widget _buildEventItem(String eventName, String hijriDateString, String gregorianDateString, bool isCurrentMonth) {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
@@ -173,14 +196,21 @@ class _CalendarScreenState extends State<CalendarScreen> {
         border: Border.all(color: isCurrentMonth ? AppTheme.primaryGreen.withOpacity(0.1) : Colors.grey.shade100),
       ),
       child: ListTile(
-        contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
         title: Text(eventName, style: const TextStyle(fontWeight: FontWeight.bold, color: AppTheme.textDark)),
-        subtitle: Text(hijriDateString, style: const TextStyle(color: AppTheme.textLight)),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 4),
+            Text(hijriDateString, style: const TextStyle(color: AppTheme.primaryGreen, fontWeight: FontWeight.w600, fontSize: 13)),
+            Text(gregorianDateString, style: const TextStyle(color: AppTheme.textLight, fontSize: 12)),
+          ],
+        ),
         trailing: isCurrentMonth 
             ? Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 decoration: BoxDecoration(color: AppTheme.primaryGreen, borderRadius: BorderRadius.circular(20)),
-                child: const Text('SOON', style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold)),
+                child: const Text('THIS MONTH', style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold)),
               )
             : null,
       ),
