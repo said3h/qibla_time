@@ -7,6 +7,8 @@ jobs:
   build:
     name: Build iOS IPA
     runs-on: macos-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
@@ -14,7 +16,12 @@ jobs:
           channel: 'stable'
           architecture: x64
       - run: flutter pub get
-      - run: flutter build ios --release --no-codesign
+      - name: Build iOS (No-Sign)
+        run: |
+          flutter build ios --release --no-codesign
+          # If the above fails but generated the app, we continue, 
+          # but usually we want to call xcodebuild directly for better control in CI
+          # xcodebuild -workspace ios/Runner.xcworkspace -scheme Runner -configuration Release -sdk iphoneos CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGNING_IDENTITY="" build
       - name: Prepare IPA
         run: |
           mkdir Payload
