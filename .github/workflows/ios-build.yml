@@ -24,4 +24,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: QiblaTime-IPA
-          path: qibla_time/QiblaTime.ipa
+          path: QiblaTime.ipa
