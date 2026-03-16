@@ -16,12 +16,18 @@ jobs:
           channel: 'stable'
           architecture: x64
       - run: flutter pub get
-      - name: Build iOS (No-Sign)
+      - name: Build iOS (Manual xcodebuild)
         run: |
-          flutter build ios --release --no-codesign
-          # If the above fails but generated the app, we continue, 
-          # but usually we want to call xcodebuild directly for better control in CI
-          # xcodebuild -workspace ios/Runner.xcworkspace -scheme Runner -configuration Release -sdk iphoneos CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGNING_IDENTITY="" build
+          flutter build bundle --release
+          # This command builds the iOS project without requiring a Team ID or Signing
+          xcodebuild -workspace ios/Runner.xcworkspace \
+                     -scheme Runner \
+                     -configuration Release \
+                     -sdk iphoneos \
+                     CODE_SIGNING_ALLOWED=NO \
+                     CODE_SIGNING_REQUIRED=NO \
+                     CODE_SIGNING_IDENTITY="" \
+                     build
       - name: Prepare IPA
         run: |
           mkdir Payload
