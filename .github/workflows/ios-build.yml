@@ -14,6 +14,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
+          flutter-version: '3.24.5'
       - name: Prepare Flutter Dart bundle
         run: |
           flutter pub get
