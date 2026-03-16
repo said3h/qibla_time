@@ -1,5 +1,18 @@
-# Standard Flutter Podfile for iOS stabilization
-load File.join(File.dirname(File.realpath(__FILE__)), 'Flutter', 'podhelper.rb')
+# Standard Flutter Podfile with robust loading for CI
+podhelper_path = File.join(File.dirname(File.realpath(__FILE__)), 'Flutter', 'podhelper.rb')
+unless File.exist?(podhelper_path)
+  # Fallback: Locate podhelper in the Flutter SDK directly (essential for CI)
+  if ENV['FLUTTER_ROOT']
+    podhelper_path = File.join(ENV['FLUTTER_ROOT'], 'packages', 'flutter_tools', 'bin', 'podhelper.rb')
+  end
+end
+
+if File.exist?(podhelper_path)
+  load podhelper_path
+else
+  # Ultimate fallback for standard GitHub runner paths
+  load '/Users/runner/hostedtoolcache/flutter/stable-3.24.0-x64/packages/flutter_tools/bin/podhelper.rb' rescue nil
+end
 
 platform :ios, '13.0'
 
