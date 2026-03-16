@@ -14,47 +14,39 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-      - name: Build iOS Application
+      - name: Prepare Flutter Dart bundle
         run: |
           flutter pub get
+          # Build ONLY the Dart kernel/assets — this does NOT touch Xcode or signing
+          flutter build bundle
           
-          # 1. Prepare Flutter build artifacts. 
-          # We let it fail but it completes the AOT compilation and asset bundling.
-          flutter build ios --release --no-codesign || true
-          
-          # 2. Re-apply Config Injection (in case Flutter migration overwrote them)
-          echo '#include "Generated.xcconfig"' > ios/Flutter/Release.xcconfig
-          echo '#include "Override.xcconfig"' >> ios/Flutter/Release.xcconfig
-          
-          # 3. Deep Clean to solve "Stale file" errors
-          rm -rf build/ios/iphoneos
-          rm -rf ~/Library/Developer/Xcode/DerivedData/Runner-*
-          
-          # 4. Manual Pod setup
+      - name: Install CocoaPods dependencies
+        run: |
           cd ios
-          pod install
+          pod install --repo-update
           cd ..
           
-          # 5. The "Master" Build Command
-          # Passing the flags again on command line to be absolutely sure.
-          xcodebuild -workspace ios/Runner.xcworkspace \
-                     -scheme Runner \
-                     -configuration Release \
-                     -sdk iphoneos \
-                     -derivedDataPath build/ios_derived_data \
-                     CODE_SIGNING_ALLOWED=NO \
-                     CODE_SIGNING_REQUIRED=NO \
-                     CODE_SIGNING_IDENTITY="" \
-                     AD_HOC_CODE_SIGNING_ALLOWED=YES \
-                     COMPILER_INDEX_STORE_ENABLE=NO \
-                     ENABLE_USER_SCRIPT_SANDBOXING=NO \
-                     build
-      - name: Create IPA
+      - name: Build iOS with xcodebuild
         run: |
-          # Manual packaging of the produced .app bundle
+          # Use xcodebuild directly, passing all no-sign flags
+          xcodebuild \
+            -workspace ios/Runner.xcworkspace \
+            -scheme Runner \
+            -configuration Release \
+            -sdk iphoneos \
+            -derivedDataPath build/ios_derived_data \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_IDENTITY="" \
+            AD_HOC_CODE_SIGNING_ALLOWED=YES \
+            COMPILER_INDEX_STORE_ENABLE=NO \
+            ENABLE_USER_SCRIPT_SANDBOXING=NO \
+            build
+            
+      - name: Package as IPA
+        run: |
           mkdir -p Payload
-          # Locate the .app bundle in our custom derivedDataPath
-          APP_PATH=$(find build/ios_derived_data -name "*.app" | grep "Release-iphoneos" | head -n 1)
+          APP_PATH=$(find build/ios_derived_data -name "Runner.app" -path "*Release-iphoneos*" | head -n 1)
           echo "Found app at: $APP_PATH"
           cp -r "$APP_PATH" Payload/
           zip -r QiblaTime.ipa Payload
