@@ -1,0 +1,27 @@
+name: Build iOS
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build iOS IPA
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          architecture: x64
+      - run: flutter pub get
+      - run: flutter build ios --release --no-codesign
+      - name: Prepare IPA
+        run: |
+          mkdir Payload
+          cp -r build/ios/iphoneos/Runner.app Payload
+          zip -r QiblaTime.ipa Payload
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: QiblaTime-IPA
+          path: qibla_time/QiblaTime.ipa
