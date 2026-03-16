@@ -100,3 +100,8 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+# Pin win32 to avoid UnmodifiableUint8ListView error with Dart 3.4+
+# win32 5.5.0 uses this removed API; 5.4.0 does not.
+dependency_overrides:
+  win32: 5.4.0
