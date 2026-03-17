@@ -44,8 +44,15 @@ class QuranVerseService {
         reference: '${data[0]['surah']['englishName']} [${data[0]['surah']['number']}:${data[0]['numberInSurah']}]',
         audioUrl: 'https://cdn.islamic.network/quran/audio/128/ar.alafasy/$verseNumber.mp3',
       );
-    } else {
-      throw Exception('Failed to load daily verse');
+    } catch (e) {
+      // Offline Fallback: Ayat al-Kursi
+      return QuranVerse(
+        arabicText: 'ٱللَّهُ لَآ إِلَٰهَ إِلَّا هُوَ ٱلْحَىُّ ٱلْقَيُّومُ ۚ لَا تَأْخُذُهُۥ سِنَةٌ وَلَا نَوْمٌ',
+        translationText: 'Allah! No hay más dios que Él, el Viviente, el Subsistente por Sí mismo. Ni la somnolencia ni el sueño se apoderan de Él.',
+        transliterationText: 'Allahu la ilaha illa huwal hayyul qayyum...',
+        reference: 'Al-Baqara [2:255]',
+        audioUrl: '',
+      );
     }
   }
 }

@@ -6,6 +6,7 @@ import '../../prayer_times/services/prayer_service.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/constants/app_constants.dart';
 import '../../prayer_times/services/adhan_manager.dart';
+import '../screens/support_tab.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
@@ -20,6 +21,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   bool adhanAsr = true;
   bool adhanMaghrib = true;
   bool adhanIsha = true;
+  String selectedAdhan = 'adhan_makkah';
+  int timeOffset = 0;
 
   @override
   void initState() {
@@ -35,6 +38,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       adhanAsr = prefs.getBool('adhan_asr') ?? true;
       adhanMaghrib = prefs.getBool('adhan_maghrib') ?? true;
       adhanIsha = prefs.getBool('adhan_isha') ?? true;
+      selectedAdhan = prefs.getString('selected_adhan') ?? 'adhan_makkah';
+      timeOffset = prefs.getInt('time_offset') ?? 0;
     });
   }
 
@@ -77,6 +82,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           _buildSectionHeader('Prayer Calculation'),
           _buildCalculationMethodSelector(),
           _buildMadhabSelector(),
+          _buildRegionalAdjustmentTile(),
+          
+          const SizedBox(height: 24),
+          _buildSectionHeader('Adhan Sound Library'),
+          _buildAdhanSoundLibrary(),
           
           const SizedBox(height: 24),
           _buildSectionHeader('Quran & Content'),
@@ -90,10 +100,22 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           ),
           
           const SizedBox(height: 24),
+          _buildSectionHeader('Estrategia y Apoyo'),
+          ListTile(
+            title: const Text('Sadaqah Jariyah'),
+            subtitle: const Text('Apoya el desarrollo de QiblaTime'),
+            leading: const Icon(Icons.favorite, color: Colors.redAccent),
+            trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const SupportTab()));
+            },
+          ),
+
+          const SizedBox(height: 24),
           _buildSectionHeader('App Info'),
           ListTile(
             title: const Text('Version'),
-            trailing: const Text('1.0.0 (Gold)'),
+            trailing: const Text('1.1.0 (PRO)'),
           ),
         ],
       ),
@@ -146,6 +168,74 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         );
       }
     );
+  }
+
+  Widget _buildAdhanSoundLibrary() {
+    final sounds = {
+      'adhan_makkah': 'Makkah (Al-Haram)',
+      'adhan_madinah': 'Madinah (An-Nabawi)',
+      'adhan_alaqsa': 'Al-Aqsa (Jerusalén)',
+      'adhan_istanbul': 'Estambul (Sultan Ahmed)',
+      'adhan_cairo': 'El Cairo (Egipto)',
+    };
+
+    return Column(
+      children: sounds.entries.map((entry) {
+        final isSelected = selectedAdhan == entry.key;
+        return ListTile(
+          title: Text(entry.value),
+          leading: Radio<String>(
+            value: entry.key,
+            groupValue: selectedAdhan,
+            activeColor: AppTheme.primaryGreen,
+            onChanged: (value) async {
+              if (value != null) {
+                final prefs = await SharedPreferences.getInstance();
+                await prefs.setString('selected_adhan', value);
+                setState(() => selectedAdhan = value);
+                ref.read(adhanManagerProvider).scheduleTodayAdhans();
+              }
+            },
+          ),
+          trailing: IconButton(
+            icon: const Icon(Icons.play_arrow, color: AppTheme.primaryGreen),
+            onPressed: () {
+              // Preview sound logic
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Reproduciendo vista previa de ${entry.value}...')),
+              );
+            },
+          ),
+        );
+      }).toList(),
+    );
+  }
+
+  Widget _buildRegionalAdjustmentTile() {
+    return ListTile(
+      title: const Text('Ajuste Regional (Buffer)'),
+      subtitle: Text('$timeOffset minutos agregados a cada rezo'),
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          IconButton(
+            icon: const Icon(Icons.remove_circle_outline),
+            onPressed: () => _updateOffset(timeOffset - 1),
+          ),
+          IconButton(
+            icon: const Icon(Icons.add_circle_outline),
+            onPressed: () => _updateOffset(timeOffset + 1),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _updateOffset(int newValue) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('time_offset', newValue);
+    ref.invalidate(prayerTimesProvider);
+    setState(() => timeOffset = newValue);
   }
 
   Widget _buildSectionHeader(String title) {

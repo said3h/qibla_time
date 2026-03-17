@@ -12,6 +12,9 @@ import '../../support/screens/settings_screen.dart';
 import '../../support/screens/dua_screen.dart';
 import '../../dhikr/screens/dhikr_screen.dart';
 import '../services/adhan_manager.dart';
+import '../../focus/screens/focus_mode_screen.dart';
+import '../../focus/services/mosque_service.dart';
+import '../../tracking/screens/analytics_screen.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -106,6 +109,7 @@ class HomeScreen extends ConsumerWidget {
   Widget _buildPrayerTimesView(BuildContext context, WidgetRef ref, PrayerTimes prayerTimes) {
     final nextPrayer = prayerTimes.nextPrayer();
     final timeFormat = DateFormat.jm();
+    final mosqueState = ref.watch(mosqueProvider);
 
     return RefreshIndicator(
       onRefresh: () async {
@@ -116,9 +120,11 @@ class HomeScreen extends ConsumerWidget {
       child: ListView(
         padding: const EdgeInsets.all(16.0),
         children: [
+          if (mosqueState.isInsideMosque)
+            _buildMosqueModeBanner(mosqueState.mosqueName),
           _buildNextPrayerCard(ref, nextPrayer, prayerTimes),
           const SizedBox(height: 16),
-          _buildStreakBadge(ref),
+          _buildStreakBadge(context, ref),
           const SizedBox(height: 24),
           _buildQuickActions(context),
           const SizedBox(height: 24),
@@ -151,7 +157,7 @@ class HomeScreen extends ConsumerWidget {
             () => Navigator.push(context, MaterialPageRoute(builder: (context) => const DuaScreen())),
           ),
         ),
-        const SizedBox(width: 16),
+        const SizedBox(width: 12),
         Expanded(
           child: _buildActionButton(
             context,
@@ -159,6 +165,16 @@ class HomeScreen extends ConsumerWidget {
             Icons.fingerprint,
             AppTheme.accentGold,
             () => Navigator.push(context, MaterialPageRoute(builder: (context) => const DhikrScreen())),
+          ),
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          child: _buildActionButton(
+            context,
+            'Focus',
+            Icons.center_focus_strong,
+            Colors.indigo,
+            () => Navigator.push(context, MaterialPageRoute(builder: (context) => const FocusModeScreen())),
           ),
         ),
       ],
@@ -235,9 +251,19 @@ class HomeScreen extends ConsumerWidget {
       ),
       child: Column(
         children: [
-          const Text(
-            'NEXT PRAYER',
-            style: TextStyle(color: Colors.white70, fontSize: 13, letterSpacing: 2, fontWeight: FontWeight.bold),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                'NEXT PRAYER',
+                style: TextStyle(color: Colors.white70, fontSize: 13, letterSpacing: 2, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(width: 8),
+              GestureDetector(
+                onTap: () => _showCalculationInfo(ref, ref.context),
+                child: Icon(Icons.info_outline, color: Colors.white.withOpacity(0.5), size: 16),
+              ),
+            ],
           ),
           const SizedBox(height: 12),
           Text(
@@ -415,34 +441,163 @@ class HomeScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildStreakBadge(WidgetRef ref) {
+  Widget _buildStreakBadge(BuildContext context, WidgetRef ref) {
     final streak = ref.watch(prayerTrackingProvider.notifier).getStreak();
     if (streak == 0) return const SizedBox.shrink();
 
     return Center(
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        decoration: BoxDecoration(
-          color: Colors.orange.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: Colors.orange.withOpacity(0.3)),
+      child: InkWell(
+        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const AnalyticsScreen())),
+        borderRadius: BorderRadius.circular(20),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          decoration: BoxDecoration(
+            color: Colors.orange.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: Colors.orange.withOpacity(0.3)),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(Icons.local_fire_department, color: Colors.orange, size: 20),
+              const SizedBox(width: 6),
+              Text(
+                '$streak DAY STREAK',
+                style: const TextStyle(
+                  color: Colors.orange,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                  letterSpacing: 0.5,
+                ),
+              ),
+              const SizedBox(width: 8),
+              const Icon(Icons.insights, color: Colors.orange, size: 16),
+            ],
+          ),
         ),
-        child: Row(
+      ),
+    );
+  }
+  Widget _buildMosqueModeBanner(String? mosqueName) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      decoration: BoxDecoration(
+        color: AppTheme.primaryGreen,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: AppTheme.primaryGreen.withOpacity(0.3),
+            blurRadius: 8,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          const Icon(Icons.mosque, color: Colors.white, size: 24),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  mosqueName ?? 'Modo Mezquita',
+                  style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+                ),
+                const Text(
+                  'Auto-Silencio Activo (ADAB)',
+                  style: TextStyle(color: Colors.white70, fontSize: 12),
+                ),
+              ],
+            ),
+          ),
+          const Icon(Icons.volume_off, color: Colors.white, size: 20),
+        ],
+      ),
+    );
+  }
+
+  void _showCalculationInfo(WidgetRef ref, BuildContext context) async {
+    final metadata = await ref.read(calculationMetadataProvider.future);
+    if (metadata == null || !context.mounted) return;
+
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) => Container(
+        padding: const EdgeInsets.all(24),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
+        ),
+        child: Column(
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Icon(Icons.local_fire_department, color: Colors.orange, size: 20),
-            const SizedBox(width: 6),
-            Text(
-              '$streak DAY STREAK',
-              style: const TextStyle(
-                color: Colors.orange,
-                fontWeight: FontWeight.bold,
-                fontSize: 14,
-                letterSpacing: 0.5,
+            Center(
+              child: Container(
+                width: 40,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade300,
+                  borderRadius: BorderRadius.circular(2),
+                ),
               ),
             ),
+            const SizedBox(height: 24),
+            const Text(
+              'Transparencia de Cálculos',
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: AppTheme.primaryGreen),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Tus horarios de oración se calculan basándose en los siguientes parámetros astronómicos:',
+              style: TextStyle(color: Colors.grey.shade600, fontSize: 14),
+            ),
+            const SizedBox(height: 24),
+            _buildInfoRow(Icons.account_balance, 'Método', metadata.methodName),
+            _buildInfoRow(Icons.architecture, 'Ángulo Fajr', '${metadata.fajrAngle}°'),
+            _buildInfoRow(Icons.architecture, 'Ángulo Isha', '${metadata.ishaAngle}°'),
+            _buildInfoRow(Icons.history_toggle_off, 'Madhab (Asr)', metadata.madhab == Madhab.hanafi ? 'Hanafi (Sombra x2)' : 'Shafi/Otros (Sombra x1)'),
+            const SizedBox(height: 24),
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: AppTheme.primaryGreen.withOpacity(0.05),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: const Row(
+                children: [
+                  Icon(Icons.lightbulb_outline, color: AppTheme.primaryGreen),
+                  SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      'Puedes cambiar estos ajustes en la sección de Configuración para adaptarlos a tu mezquita local.',
+                      style: TextStyle(fontSize: 12, color: AppTheme.primaryGreen),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 24),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildInfoRow(IconData icon, String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        children: [
+          Icon(icon, size: 20, color: AppTheme.accentGold),
+          const SizedBox(width: 12),
+          Text(label, style: const TextStyle(fontWeight: FontWeight.w500)),
+          const Spacer(),
+          Text(value, style: const TextStyle(fontWeight: FontWeight.bold, color: AppTheme.primaryGreen)),
+        ],
       ),
     );
   }

@@ -46,7 +46,6 @@ class PrayerTrackingNotifier extends StateNotifier<Map<String, List<String>>> {
     while (true) {
       final dateKey = "${date.year}-${date.month}-${date.day}";
       final list = state[dateKey] ?? [];
-      // If all 5 prayers (Fajr, Dhuhr, Asr, Maghrib, Isha) are done
       if (list.length >= 5) {
         streak++;
         date = date.subtract(const Duration(days: 1));
@@ -55,5 +54,44 @@ class PrayerTrackingNotifier extends StateNotifier<Map<String, List<String>>> {
       }
     }
     return streak;
+  }
+
+  Map<String, double> getPrayerStats() {
+    if (state.isEmpty) return {};
+    
+    final Map<String, int> counts = {
+      'Fajr': 0, 'Dhuhr': 0, 'Asr': 0, 'Maghrib': 0, 'Isha': 0
+    };
+    
+    int totalDays = state.length;
+    for (var prayers in state.values) {
+      for (var prayer in prayers) {
+        if (counts.containsKey(prayer)) {
+          counts[prayer] = counts[prayer]! + 1;
+        }
+      }
+    }
+    
+    return counts.map((key, value) => MapEntry(key, value / totalDays));
+  }
+
+  Map<String, double> getMonthlyStats() {
+    if (state.isEmpty) return {};
+    
+    final Map<String, List<int>> monthlyData = {};
+    
+    state.forEach((dateKey, prayers) {
+      final parts = dateKey.split('-');
+      final monthKey = "${parts[0]}-${parts[1]}"; // YYYY-MM
+      
+      if (!monthlyData.containsKey(monthKey)) {
+        monthlyData[monthKey] = [0, 0]; // [completed, total_possible]
+      }
+      
+      monthlyData[monthKey]![0] += prayers.length;
+      monthlyData[monthKey]![1] += 5;
+    });
+    
+    return monthlyData.map((key, value) => MapEntry(key, value[0] / value[1]));
   }
 }
