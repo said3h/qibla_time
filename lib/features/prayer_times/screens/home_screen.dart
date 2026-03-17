@@ -11,6 +11,7 @@ import 'package:geolocator/geolocator.dart';
 import '../../support/screens/settings_screen.dart';
 import '../../support/screens/dua_screen.dart';
 import '../../dhikr/screens/dhikr_screen.dart';
+import '../services/adhan_manager.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -47,6 +48,12 @@ class HomeScreen extends ConsumerWidget {
           if (prayerTimes == null) {
             return _buildLocationError();
           }
+          
+          // Automagically schedule adhans for today
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            ref.read(adhanManagerProvider).scheduleTodayAdhans();
+          });
+
           return _buildPrayerTimesView(context, ref, prayerTimes);
         },
         loading: () => const Center(child: CircularProgressIndicator(color: AppTheme.primaryGreen)),

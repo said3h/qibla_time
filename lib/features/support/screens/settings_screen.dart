@@ -5,6 +5,7 @@ import 'package:adhan/adhan.dart';
 import '../../prayer_times/services/prayer_service.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/constants/app_constants.dart';
+import '../../prayer_times/services/adhan_manager.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
@@ -40,6 +41,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   Future<void> _toggleSetting(String key, bool value) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(key, value);
+    
+    // Reschedule adhans immediately
+    ref.read(adhanManagerProvider).scheduleTodayAdhans();
+    
     setState(() {
       switch (key) {
         case 'adhan_fajr': adhanFajr = value; break;
