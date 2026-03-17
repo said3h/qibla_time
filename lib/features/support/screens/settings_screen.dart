@@ -161,7 +161,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           value: isHanafi,
           activeColor: AppTheme.primaryGreen,
           onChanged: (value) async {
-            await snapshot.data?.setBool('madhab_hanafi', value);
+            final prefs = await SharedPreferences.getInstance();
+            await prefs.setBool('madhab_hanafi', value);
+            if (!context.mounted) return;
             ref.invalidate(madhabProvider);
             setState(() {});
           },
@@ -181,7 +183,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
     return Column(
       children: sounds.entries.map((entry) {
-        final isSelected = selectedAdhan == entry.key;
         return ListTile(
           title: Text(entry.value),
           leading: Radio<String>(

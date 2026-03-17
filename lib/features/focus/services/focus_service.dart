@@ -1,9 +1,5 @@
-import 'dart:async';
-import 'package:flutter_riverpod/riverpod.dart';
-import 'package:proximity_sensor/proximity_sensor.dart';
 import 'package:flutter/foundation.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:flutter/services.dart';
 
 class FocusState {
   final bool isActive;

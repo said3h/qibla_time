@@ -1,8 +1,5 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'dart:async';
-import '../../prayer_times/services/prayer_service.dart';
 
 class MosqueState {
   final bool isInsideMosque;
@@ -29,7 +26,6 @@ class MosqueState {
 }
 
 class MosqueNotifier extends StateNotifier<MosqueState> {
-  final Ref _ref;
   StreamSubscription<Position>? _positionSubscription;
   
   // Example "Home Masjid" coordinates (to be configurable by user later)
@@ -37,7 +33,7 @@ class MosqueNotifier extends StateNotifier<MosqueState> {
   static const double _targetLon = -3.7038;
   static const double _geofenceRadius = 50.0; // 50 meters
 
-  MosqueNotifier(this._ref) : super(MosqueState()) {
+  MosqueNotifier() : super(MosqueState()) {
     _startMonitoring();
   }
 
@@ -84,5 +80,5 @@ class MosqueNotifier extends StateNotifier<MosqueState> {
 }
 
 final mosqueProvider = StateNotifierProvider<MosqueNotifier, MosqueState>((ref) {
-  return MosqueNotifier(ref);
+  return MosqueNotifier();
 });

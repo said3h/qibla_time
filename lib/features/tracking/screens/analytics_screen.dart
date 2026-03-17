@@ -107,10 +107,15 @@ class AnalyticsScreen extends ConsumerWidget {
           final count = data[key]?.length ?? 0;
           
           Color color;
-          if (count == 0) color = Colors.grey.shade100;
-          else if (count < 3) color = AppTheme.primaryGreen.withOpacity(0.3);
-          else if (count < 5) color = AppTheme.primaryGreen.withOpacity(0.6);
-          else color = AppTheme.primaryGreen;
+          if (count == 0) {
+            color = Colors.grey.shade100;
+          } else if (count < 3) {
+            color = AppTheme.primaryGreen.withOpacity(0.3);
+          } else if (count < 5) {
+            color = AppTheme.primaryGreen.withOpacity(0.6);
+          } else {
+            color = AppTheme.primaryGreen;
+          }
 
           return Container(
             width: 20,

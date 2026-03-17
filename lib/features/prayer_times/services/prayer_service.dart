@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:adhan/adhan.dart';
@@ -144,7 +145,7 @@ final calculationMetadataProvider = FutureProvider<CalculationMetadata?>((ref) a
     case CalculationMethod.karachi: name = "University of Islamic Sciences, Karachi"; break;
     case CalculationMethod.umm_al_qura: name = "Umm al-Qura University, Makkah"; break;
     case CalculationMethod.dubai: name = "Dubai / UAE"; break;
-    case CalculationMethod.moonsighting_committee: name = "Moonsighting Committee"; break;
+    case CalculationMethod.moon_sighting_committee: name = "Moonsighting Committee"; break;
     case CalculationMethod.north_america: name = "ISNA (North America)"; break;
     case CalculationMethod.tehran: name = "Institute of Geophysics, Tehran"; break;
     case CalculationMethod.turkey: name = "Turkey (Diyanet)"; break;
@@ -157,7 +158,7 @@ final calculationMetadataProvider = FutureProvider<CalculationMetadata?>((ref) a
   return CalculationMetadata(
     method: method,
     madhab: madhab,
-    fajrAngle: params.fajrAngle,
+    fajrAngle: params.fajrAngle ?? 0,
     ishaAngle: params.ishaAngle,
     methodName: name,
   );
