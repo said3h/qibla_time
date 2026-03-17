@@ -158,8 +158,8 @@ final calculationMetadataProvider = FutureProvider<CalculationMetadata?>((ref) a
   return CalculationMetadata(
     method: method,
     madhab: madhab,
-    fajrAngle: params.fajrAngle ?? 0,
-    ishaAngle: params.ishaAngle,
+    fajrAngle: params.fajrAngle,
+    ishaAngle: params.ishaAngle ?? 0,
     methodName: name,
   );
 });
