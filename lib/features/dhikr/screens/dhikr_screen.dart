@@ -62,6 +62,20 @@ class _DhikrScreenState extends State<DhikrScreen> {
     _count = 0; // Reset count for the next phrase
   }
 
+  void _reset() {
+    HapticFeedback.mediumImpact();
+    setState(() {
+      _count = 0;
+    });
+  }
+
+  void _changePhrase(String newPhrase) {
+    setState(() {
+      _currentDhikr = newPhrase;
+      _count = 0; // Usually resetting count on new phrase
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

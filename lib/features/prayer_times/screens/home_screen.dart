@@ -406,6 +406,8 @@ class HomeScreen extends ConsumerWidget {
       )),
       error: (e, _) => const Text('Unable to load daily verse. Check connection.'),
     );
+  }
+
   Widget _buildStreakBadge(WidgetRef ref) {
     final streak = ref.watch(prayerTrackingProvider.notifier).getStreak();
     if (streak == 0) return const SizedBox.shrink();
