@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:adhan/adhan.dart';
+import '../../prayer_times/services/prayer_service.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/constants/app_constants.dart';
 
@@ -67,6 +69,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           _buildAdhanTile('Isha', adhanIsha, (v) => _toggleSetting('adhan_isha', v)),
           
           const SizedBox(height: 24),
+          _buildSectionHeader('Prayer Calculation'),
+          _buildCalculationMethodSelector(),
+          _buildMadhabSelector(),
+          
+          const SizedBox(height: 24),
           _buildSectionHeader('Quran & Content'),
           ListTile(
             title: const Text('Quran Language'),
@@ -85,6 +92,54 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildCalculationMethodSelector() {
+    return ListTile(
+      title: const Text('Calculation Method'),
+      subtitle: const Text('Muslim World League (Default)'),
+      trailing: const Icon(Icons.more_vert),
+      onTap: () async {
+        final prefs = await SharedPreferences.getInstance();
+        if (!mounted) return;
+        
+        showModalBottomSheet(
+          context: context,
+          builder: (context) => ListView(
+            shrinkWrap: true,
+            children: CalculationMethod.values.map((method) => ListTile(
+              title: Text(method.name.replaceAll('_', ' ').toUpperCase()),
+              onTap: () async {
+                await prefs.setInt(AppConstants.keyCalculationMethod, method.index);
+                ref.invalidate(calculationMethodProvider);
+                if (mounted) Navigator.pop(context);
+                setState(() {});
+              },
+            )).toList(),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildMadhabSelector() {
+    return FutureBuilder<SharedPreferences>(
+      future: SharedPreferences.getInstance(),
+      builder: (context, snapshot) {
+        final isHanafi = snapshot.data?.getBool('madhab_hanafi') ?? false;
+        return SwitchListTile(
+          title: const Text('Madhab (Asr calculation)'),
+          subtitle: Text(isHanafi ? 'Hanafi' : 'Shafi (Standard)'),
+          value: isHanafi,
+          activeColor: AppTheme.primaryGreen,
+          onChanged: (value) async {
+            await snapshot.data?.setBool('madhab_hanafi', value);
+            ref.invalidate(madhabProvider);
+            setState(() {});
+          },
+        );
+      }
     );
   }
 

@@ -47,25 +47,19 @@ class _DhikrScreenState extends State<DhikrScreen> {
     setState(() {
       _count++;
       _totalCount++;
-      if (_count % _goal == 0) {
+      if (_count >= _goal) {
         HapticFeedback.heavyImpact(); // Stronger feedback on reaching the goal (e.g., 33)
+        _rotateDhikr();
       }
     });
     _saveTotalCount();
   }
 
-  void _reset() {
-    HapticFeedback.mediumImpact();
-    setState(() {
-      _count = 0;
-    });
-  }
-
-  void _changePhrase(String newPhrase) {
-    setState(() {
-      _currentDhikr = newPhrase;
-      _count = 0; // Usually resetting count on new phrase
-    });
+  void _rotateDhikr() {
+    int currentIndex = _dhikrPhrases.indexOf(_currentDhikr);
+    int nextIndex = (currentIndex + 1) % _dhikrPhrases.length;
+    _currentDhikr = _dhikrPhrases[nextIndex];
+    _count = 0; // Reset count for the next phrase
   }
 
   @override

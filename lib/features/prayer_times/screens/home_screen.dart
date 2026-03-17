@@ -9,6 +9,8 @@ import '../../../core/theme/app_theme.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:geolocator/geolocator.dart';
 import '../../support/screens/settings_screen.dart';
+import '../../support/screens/dua_screen.dart';
+import '../../dhikr/screens/dhikr_screen.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -108,6 +110,10 @@ class HomeScreen extends ConsumerWidget {
         padding: const EdgeInsets.all(16.0),
         children: [
           _buildNextPrayerCard(ref, nextPrayer, prayerTimes),
+          const SizedBox(height: 16),
+          _buildStreakBadge(ref),
+          const SizedBox(height: 24),
+          _buildQuickActions(context),
           const SizedBox(height: 24),
           const Text(
             'Today\'s Prayers',
@@ -122,6 +128,54 @@ class HomeScreen extends ConsumerWidget {
           const SizedBox(height: 24),
           _buildDailyVerseCard(ref),
         ],
+      ),
+    );
+  }
+
+  Widget _buildQuickActions(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: _buildActionButton(
+            context,
+            'Duas',
+            Icons.auto_stories,
+            AppTheme.primaryGreen,
+            () => Navigator.push(context, MaterialPageRoute(builder: (context) => const DuaScreen())),
+          ),
+        ),
+        const SizedBox(width: 16),
+        Expanded(
+          child: _buildActionButton(
+            context,
+            'Tasbih',
+            Icons.fingerprint,
+            AppTheme.accentGold,
+            () => Navigator.push(context, MaterialPageRoute(builder: (context) => const DhikrScreen())),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildActionButton(BuildContext context, String label, IconData icon, Color color, VoidCallback onTap) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(16),
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 16),
+        decoration: BoxDecoration(
+          color: color.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: color.withOpacity(0.2)),
+        ),
+        child: Column(
+          children: [
+            Icon(icon, color: color, size: 28),
+            const SizedBox(height: 8),
+            Text(label, style: TextStyle(color: color, fontWeight: FontWeight.bold)),
+          ],
+        ),
       ),
     );
   }
@@ -351,6 +405,36 @@ class HomeScreen extends ConsumerWidget {
         child: CircularProgressIndicator(color: AppTheme.primaryGreen),
       )),
       error: (e, _) => const Text('Unable to load daily verse. Check connection.'),
+    );
+  Widget _buildStreakBadge(WidgetRef ref) {
+    final streak = ref.watch(prayerTrackingProvider.notifier).getStreak();
+    if (streak == 0) return const SizedBox.shrink();
+
+    return Center(
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        decoration: BoxDecoration(
+          color: Colors.orange.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: Colors.orange.withOpacity(0.3)),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(Icons.local_fire_department, color: Colors.orange, size: 20),
+            const SizedBox(width: 6),
+            Text(
+              '$streak DAY STREAK',
+              style: const TextStyle(
+                color: Colors.orange,
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+                letterSpacing: 0.5,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

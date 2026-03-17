@@ -48,16 +48,24 @@ final calculationMethodProvider = FutureProvider<CalculationMethod>((ref) async 
   return CalculationMethod.values[index];
 });
 
+// Provides the chosen Madhab
+final madhabProvider = FutureProvider<Madhab>((ref) async {
+  final prefs = await SharedPreferences.getInstance();
+  final isHanafi = prefs.getBool('madhab_hanafi') ?? false;
+  return isHanafi ? Madhab.hanafi : Madhab.shafi;
+});
+
 // Combines location, date and method to output the PrayerTimes object
 final prayerTimesProvider = FutureProvider<PrayerTimes?>((ref) async {
   final position = await ref.watch(locationProvider.future);
   final method = await ref.watch(calculationMethodProvider.future);
+  final madhab = await ref.watch(madhabProvider.future);
   
   if (position == null) return null;
 
   final coordinates = Coordinates(position.latitude, position.longitude);
   final params = method.getParameters();
-  params.madhab = Madhab.shafi; // Default, can be configurable later
+  params.madhab = madhab;
 
   final date = DateComponents.from(DateTime.now());
   return PrayerTimes(coordinates, date, params);
