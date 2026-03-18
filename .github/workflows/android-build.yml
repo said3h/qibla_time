@@ -1,8 +1,8 @@
-name: Build Android APK
+name: Build Android
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -14,42 +14,41 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: 'stable'
-          flutter-version: '3.29.0'
-          cache: true
-
       - name: Set up Java
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Install Android SDK 35
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.19.3
+          cache: true
+
+      - name: Show Flutter environment
+        run: |
+          flutter --version
+          flutter doctor -v
+
+      - name: Install Android SDK
         run: |
           export ANDROID_HOME=/usr/local/lib/android/sdk
           export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
           yes | sdkmanager --licenses
-          sdkmanager "platforms;android-35" "build-tools;35.0.0"
+          sdkmanager "platforms;android-36" "build-tools;34.0.0"
 
       - name: Get Flutter dependencies
-        run: flutter pub get
-
-      - name: Build Flutter bundle
-        run: flutter build bundle
+        run: flutter pub upgrade
 
       - name: Build Android APK
         run: flutter build apk --release --split-per-abi
 
-      - name: Build universal APK (optional)
-        run: flutter build apk --release
-
       - name: Upload APK artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: QiblaTime-APK
+          name: qibla-time-android-apk
           path: |
             build/app/outputs/flutter-apk/*.apk
           retention-days: 30
