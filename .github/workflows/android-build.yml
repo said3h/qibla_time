@@ -1,0 +1,48 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build Android APK
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          flutter-version: '3.24.5'
+          cache: true
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Get Flutter dependencies
+        run: flutter pub get
+
+      - name: Build Flutter bundle
+        run: flutter build bundle
+
+      - name: Build Android APK
+        run: flutter build apk --release --split-per-abi
+
+      - name: Build universal APK (optional)
+        run: flutter build apk --release
+
+      - name: Upload APK artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: QiblaTime-APK
+          path: |
+            build/app/outputs/flutter-apk/*.apk
+          retention-days: 30
