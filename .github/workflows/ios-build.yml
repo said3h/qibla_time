@@ -9,35 +9,51 @@ jobs:
   build:
     name: Build iOS IPA
     runs-on: macos-latest
+    permissions:
+      contents: write
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+      
     steps:
-      - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
           flutter-version: '3.24.5'
-      - name: Prepare Flutter Dart bundle
+          cache: true
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+
+      - name: Install CocoaPods
+        run: sudo gem install cocoapods
+
+      - name: Get Flutter dependencies
+        run: flutter pub get
+
+      - name: Build Flutter bundle
+        run: flutter build bundle
+
+      - name: Install iOS pods
+        working-directory: ./ios
         run: |
-          flutter pub get
-          # Build ONLY the Dart kernel/assets — this does NOT touch Xcode or signing
-          flutter build bundle
-          
-      - name: Install CocoaPods dependencies
-        run: |
-          cd ios
           pod install --repo-update
-          cd ..
-          
-      - name: Build iOS with xcodebuild
+
+      - name: Build iOS app
         run: |
-          # Use xcodebuild directly, passing all no-sign flags
           xcodebuild \
             -workspace ios/Runner.xcworkspace \
             -scheme Runner \
             -configuration Release \
             -sdk iphoneos \
             -derivedDataPath build/ios_derived_data \
+            -arch arm64 \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_IDENTITY="" \
@@ -45,16 +61,25 @@ jobs:
             COMPILER_INDEX_STORE_ENABLE=NO \
             ENABLE_USER_SCRIPT_SANDBOXING=NO \
             build
-            
-      - name: Package as IPA
+
+      - name: Find and copy app
         run: |
           mkdir -p Payload
-          APP_PATH=$(find build/ios_derived_data -name "Runner.app" -path "*Release-iphoneos*" | head -n 1)
+          APP_PATH=$(find build/ios_derived_data/Build/Products -name "Runner.app" -type d | head -n 1)
+          if [ -z "$APP_PATH" ]; then
+            echo "Error: Runner.app not found"
+            exit 1
+          fi
           echo "Found app at: $APP_PATH"
-          cp -r "$APP_PATH" Payload/
+          cp -r "$APP_PATH" Payload/Runner.app
+
+      - name: Package as IPA
+        run: |
           zip -r QiblaTime.ipa Payload
-      - name: Upload Artifact
+
+      - name: Upload IPA artifact
         uses: actions/upload-artifact@v4
         with:
           name: QiblaTime-IPA
           path: QiblaTime.ipa
+          retention-days: 30
