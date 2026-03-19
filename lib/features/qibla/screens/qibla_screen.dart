@@ -1,648 +1,422 @@
 import 'dart:math';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_compass/flutter_compass.dart';
-import 'package:google_fonts/google_fonts.dart';
-import '../services/qibla_service.dart';
-import '../../../core/theme/app_theme.dart';
 
-/// Pantalla de Qibla con brújula mejorada
-/// Diseño inspirado en prototipo: Kaaba en el borde del círculo
+import 'package:flutter/material.dart';
+import 'package:flutter_compass/flutter_compass.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../../../core/theme/app_theme.dart';
+import '../services/qibla_service.dart';
+
 class QiblaScreen extends ConsumerWidget {
   const QiblaScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final tokens = QiblaThemes.current;
     final compassAsync = ref.watch(compassProvider);
     final bearingAsync = ref.watch(qiblaBearingProvider);
     final distanceAsync = ref.watch(distanceToMeccaProvider);
 
     return Scaffold(
-      backgroundColor: AppTheme.night,
-      appBar: AppBar(
-        title: Text(
-          'Qibla',
-          style: GoogleFonts.amiri(
-            fontSize: 28,
-            fontWeight: FontWeight.bold,
-            color: AppTheme.gold,
-          ),
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.info_outline, color: AppTheme.gold),
-            onPressed: () => _showInfoDialog(context),
-          ),
-        ],
-      ),
-      body: compassAsync.when(
-        data: (CompassEvent event) {
-          final heading = event.heading;
-          if (heading == null) {
-            return _buildSensorError('Compass heading is null. Try moving the device in a figure-eight pattern.');
-          }
+      backgroundColor: tokens.bgPage,
+      body: SafeArea(
+        child: compassAsync.when(
+          data: (CompassEvent event) {
+            final heading = event.heading;
+            if (heading == null) {
+              return _buildError(tokens, 'No se pudo leer la brujula.');
+            }
 
-          return bearingAsync.when(
-            data: (double? qiblaBearing) {
-              if (qiblaBearing == null) {
-                return _buildLocationRequiredError();
-              }
+            return bearingAsync.when(
+              data: (bearing) {
+                if (bearing == null) {
+                  return _buildError(tokens, 'Activa la ubicacion para calcular la Qibla.');
+                }
 
-              final compassRotation = -1 * (heading * (pi / 180));
-              final qiblaRotation = qiblaBearing * (pi / 180);
+                final dialRotation = -(heading * pi / 180);
+                final needleRotation = (bearing - heading) * pi / 180;
 
-              return SingleChildScrollView(
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  children: [
-                    // Información de distancia
-                    distanceAsync.when(
-                      data: (dist) => dist != null
-                          ? _buildDistanceCard(dist)
-                          : const SizedBox(),
-                      loading: () => const SizedBox(),
-                      error: (_, __) => const SizedBox(),
-                    ),
-                    
-                    const SizedBox(height: 24),
-                    
-                    // Brújula principal con Kaaba en el borde
-                    _buildCompassVisuals(compassRotation, qiblaRotation),
-                    
-                    const SizedBox(height: 32),
-                    
-                    // Información de dirección
-                    _buildDirectionInfo(heading, qiblaBearing),
-                    
-                    const SizedBox(height: 24),
-                    
-                    // Método de cálculo
-                    _buildCalculationMethodCard(),
-                    
-                    const SizedBox(height: 16),
-                    
-                    // Tips de precisión
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Text(
-                        'Mantén el dispositivo plano y alejado de imanes para mayor precisión.',
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.dmSans(
-                          fontSize: 12,
-                          color: AppTheme.muted,
+                return SingleChildScrollView(
+                  padding: const EdgeInsets.fromLTRB(20, 14, 20, 28),
+                  child: Column(
+                    children: [
+                      _buildHeader(context, tokens),
+                      const SizedBox(height: 18),
+                      distanceAsync.when(
+                        data: (distance) => _buildDistanceCard(tokens, distance),
+                        loading: () => _buildDistanceCard(tokens, null),
+                        error: (_, __) => _buildDistanceCard(tokens, null),
+                      ),
+                      const SizedBox(height: 20),
+                      _buildCompass(tokens, dialRotation, needleRotation),
+                      const SizedBox(height: 18),
+                      Text(
+                        '${bearing.toStringAsFixed(0)}°',
+                        style: GoogleFonts.amiri(
+                          fontSize: 44,
+                          fontWeight: FontWeight.w300,
+                          color: tokens.primaryLight,
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              );
-            },
-            loading: () => Center(child: CircularProgressIndicator(color: AppTheme.gold)),
-            error: (error, _) => _buildSensorError('Location Service Error: $error'),
-          );
-        },
-        loading: () => Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CircularProgressIndicator(color: AppTheme.gold),
-              const SizedBox(height: 16),
-              Text(
-                'Inicializando brújula...',
-                style: GoogleFonts.dmSans(color: AppTheme.muted),
-              ),
-            ],
-          ),
-        ),
-        error: (error, _) => _buildSensorError('Compass Sensor Error: $error'),
-      ),
-    );
-  }
-
-  Widget _buildDistanceCard(double distance) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            AppTheme.gold.withOpacity(0.15),
-            AppTheme.gold.withOpacity(0.05),
-          ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppTheme.gold.withOpacity(0.3)),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          _buildStatItem(
-            icon: Icons.place_outlined,
-            value: distance.toStringAsFixed(0),
-            unit: 'km',
-            label: 'Distancia a la Kaaba',
-          ),
-          Container(
-            width: 1,
-            height: 40,
-            color: AppTheme.gold.withOpacity(0.3),
-          ),
-          _buildStatItem(
-            icon: Icons.my_location,
-            value: '±3',
-            unit: 'm',
-            label: 'Precisión GPS',
-            valueColor: AppTheme.accent,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildStatItem({
-    required IconData icon,
-    required String value,
-    required String unit,
-    required String label,
-    Color? valueColor,
-  }) {
-    return Column(
-      children: [
-        Icon(icon, color: AppTheme.gold, size: 24),
-        const SizedBox(height: 8),
-        RichText(
-          text: TextSpan(
-            style: GoogleFonts.dmSans(
-              fontSize: 24,
-              fontWeight: FontWeight.w500,
-              color: valueColor ?? AppTheme.goldLight,
-            ),
-            children: [
-              TextSpan(text: value),
-              TextSpan(
-                text: unit,
-                style: GoogleFonts.dmSans(
-                  fontSize: 14,
-                  color: AppTheme.muted,
-                ),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          label,
-          style: GoogleFonts.dmSans(
-            fontSize: 11,
-            color: AppTheme.muted,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildCompassVisuals(double compassRotation, double qiblaRotation) {
-    return Container(
-      width: 280,
-      height: 280,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        gradient: RadialGradient(
-          colors: [
-            AppTheme.surface,
-            AppTheme.surface.withOpacity(0.8),
-          ],
-        ),
-        border: Border.all(color: AppTheme.gold.withOpacity(0.3), width: 2),
-        boxShadow: [
-          BoxShadow(
-            color: AppTheme.gold.withOpacity(0.1),
-            blurRadius: 30,
-            spreadRadius: 5,
-          ),
-          BoxShadow(
-            color: Colors.black.withOpacity(0.3),
-            blurRadius: 20,
-            offset: const Offset(0, 10),
-          ),
-        ],
-      ),
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          // Anillo decorativo exterior
-          Container(
-            width: 260,
-            height: 260,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(color: AppTheme.gold.withOpacity(0.1), width: 1),
-            ),
-          ),
-          
-          // Anillo con marcas de grados
-          Transform.rotate(
-            angle: compassRotation,
-            child: SizedBox(
-              width: 240,
-              height: 240,
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  // Norte (rojo)
-                  const Positioned(
-                    top: 0,
-                    child: Text('N', style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.red,
-                    )),
-                  ),
-                  // Sur
-                  Positioned(
-                    bottom: 0,
-                    child: Text('S', style: TextStyle(
-                      fontSize: 16,
-                      color: AppTheme.muted,
-                    )),
-                  ),
-                  // Este
-                  Positioned(
-                    right: 0,
-                    child: Text('E', style: TextStyle(
-                      fontSize: 16,
-                      color: AppTheme.muted,
-                    )),
-                  ),
-                  // Oeste
-                  Positioned(
-                    left: 0,
-                    child: Text('O', style: TextStyle(
-                      fontSize: 16,
-                      color: AppTheme.muted,
-                    )),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          
-          // Líneas de grados decorativas
-          ...List.generate(36, (index) {
-            final angle = (index * 10) * (pi / 180);
-            final isMajor = index % 9 == 0;
-            return Transform.rotate(
-              angle: angle + compassRotation,
-              child: Align(
-                alignment: Alignment.topCenter,
-                child: Container(
-                  width: isMajor ? 2 : 1,
-                  height: isMajor ? 15 : 8,
-                  margin: const EdgeInsets.only(top: 8),
-                  color: isMajor 
-                      ? AppTheme.gold.withOpacity(0.5) 
-                      : AppTheme.gold.withOpacity(0.2),
-                ),
-              ),
-            );
-          }),
-          
-          // Aguja de Qibla (apunta hacia la Kaaba)
-          Transform.rotate(
-            angle: compassRotation + qiblaRotation,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                // Kaaba en el BORDE del círculo (como en el prototipo)
-                Container(
-                  width: 50,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: AppTheme.gold,
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppTheme.gold.withOpacity(0.5),
-                        blurRadius: 15,
-                        spreadRadius: 3,
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+                        decoration: BoxDecoration(
+                          color: tokens.bgSurface2,
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(color: tokens.border),
+                        ),
+                        child: Text(
+                          '🧭 ${_getDirectionName(bearing)} · Direccion a la Kaaba',
+                          style: GoogleFonts.dmSans(
+                            fontSize: 12,
+                            color: tokens.textSecondary,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 14),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Text(
+                          'Manten el dispositivo plano y alejado de imanes para mayor precision.',
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.dmSans(
+                            fontSize: 11,
+                            height: 1.6,
+                            color: tokens.textMuted,
+                          ),
+                        ),
                       ),
                     ],
                   ),
-                  child: const Icon(
-                    Icons.mosque,
-                    color: Colors.white,
-                    size: 30,
-                  ),
-                ),
-                // Línea conectora (aguja)
-                Container(
-                  width: 4,
-                  height: 100,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        AppTheme.gold,
-                        AppTheme.gold.withOpacity(0.3),
-                      ],
-                    ),
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          
-          // Centro de la brújula
-          Container(
-            width: 20,
-            height: 20,
-            decoration: BoxDecoration(
-              color: AppTheme.gold,
-              shape: BoxShape.circle,
-              border: Border.all(color: Colors.white, width: 2),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.3),
-                  blurRadius: 10,
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildDirectionInfo(double heading, double qiblaBearing) {
-    final direction = _getDirectionName(qiblaBearing);
-    
-    return Column(
-      children: [
-        Text(
-          '${qiblaBearing.toStringAsFixed(0)}°',
-          style: GoogleFonts.amiri(
-            fontSize: 48,
-            fontWeight: FontWeight.w300,
-            color: AppTheme.goldLight,
-          ),
-        ),
-        const SizedBox(height: 8),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          decoration: BoxDecoration(
-            color: AppTheme.surface2,
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: AppTheme.gold.withOpacity(0.2)),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(Icons.explore, size: 16, color: AppTheme.gold),
-              const SizedBox(width: 8),
-              Text(
-                '$direction • Sureste',
-                style: GoogleFonts.dmSans(
-                  fontSize: 13,
-                  color: AppTheme.muted,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  String _getDirectionName(double bearing) {
-    if (bearing >= 337.5 || bearing < 22.5) return 'Norte';
-    if (bearing >= 22.5 && bearing < 67.5) return 'Noreste';
-    if (bearing >= 67.5 && bearing < 112.5) return 'Este';
-    if (bearing >= 112.5 && bearing < 157.5) return 'Sureste';
-    if (bearing >= 157.5 && bearing < 202.5) return 'Sur';
-    if (bearing >= 202.5 && bearing < 247.5) return 'Suroeste';
-    if (bearing >= 247.5 && bearing < 292.5) return 'Oeste';
-    if (bearing >= 292.5 && bearing < 337.5) return 'Noroeste';
-    return 'Norte';
-  }
-
-  Widget _buildCalculationMethodCard() {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: AppTheme.surface,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppTheme.border),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'MÉTODO DE CÁLCULO',
-            style: GoogleFonts.dmSans(
-              fontSize: 10,
-              fontWeight: FontWeight.w500,
-              color: AppTheme.muted,
-              letterSpacing: 1.5,
-            ),
-          ),
-          const SizedBox(height: 12),
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: [
-              _buildMethodChip('MWL', true),
-              _buildMethodChip('ISNA', false),
-              _buildMethodChip('Egypt', false),
-              _buildMethodChip('Makkah', false),
-              _buildMethodChip('Tehran', false),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildMethodChip(String label, bool isActive) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      decoration: BoxDecoration(
-        color: isActive 
-            ? AppTheme.gold.withOpacity(0.15) 
-            : AppTheme.surface2,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: isActive 
-              ? AppTheme.gold.withOpacity(0.3) 
-              : AppTheme.border,
-        ),
-      ),
-      child: Text(
-        label,
-        style: GoogleFonts.dmSans(
-          fontSize: 11,
-          fontWeight: FontWeight.w500,
-          color: isActive ? AppTheme.goldLight : AppTheme.muted,
+                );
+              },
+              loading: () => _buildLoading(tokens),
+              error: (_, __) => _buildError(tokens, 'No se pudo calcular el bearing de la Qibla.'),
+            );
+          },
+          loading: () => _buildLoading(tokens),
+          error: (_, __) => _buildError(tokens, 'No se pudo iniciar la brujula.'),
         ),
       ),
     );
   }
 
-  Widget _buildSensorError(String message) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(32),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.explore_off_outlined, size: 80, color: Colors.redAccent.withOpacity(0.7)),
-            const SizedBox(height: 24),
-            Text(
-              'Sensor Issue',
-              style: GoogleFonts.dmSans(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                color: AppTheme.text,
-              ),
-            ),
-            const SizedBox(height: 12),
-            Text(
-              message,
-              textAlign: TextAlign.center,
-              style: GoogleFonts.dmSans(
-                color: AppTheme.muted,
-                fontSize: 14,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildLocationRequiredError() {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.location_disabled, size: 80, color: AppTheme.muted),
-            const SizedBox(height: 24),
-            Text(
-              'Acceso a Ubicación Requerido',
-              style: GoogleFonts.dmSans(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: AppTheme.text,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 12),
-            Text(
-              'Permite el acceso a la ubicación para calcular la dirección precisa de la Qibla.',
-              style: GoogleFonts.dmSans(
-                color: AppTheme.muted,
-                fontSize: 14,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 32),
-            ElevatedButton.icon(
-              onPressed: () => _openLocationSettings(),
-              icon: const Icon(Icons.settings),
-              label: const Text('Abrir Configuración'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  void _openLocationSettings() {
-    // Implementar apertura de configuración
-  }
-
-  void _showInfoDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: AppTheme.surface,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: Text(
-          'Cómo usar la brújula',
-          style: GoogleFonts.amiri(
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-            color: AppTheme.gold,
-          ),
-        ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildInfoItem(
-              Icons.phone_android,
-              'Mantén el dispositivo plano',
-              'Evita inclinaciones para mayor precisión',
-            ),
-            const SizedBox(height: 16),
-            _buildInfoItem(
-              Icons.block,
-              'Aleja de imanes',
-              'Los campos magnéticos afectan la brújula',
-            ),
-            const SizedBox(height: 16),
-            _buildInfoItem(
-              Icons.refresh,
-              'Calibra si es necesario',
-              'Mueve en forma de 8 si la precisión es baja',
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Entendido'),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildInfoItem(IconData icon, String title, String description) {
+  Widget _buildHeader(BuildContext context, QiblaTokens tokens) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Icon(icon, color: AppTheme.gold, size: 28),
-        const SizedBox(width: 16),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                title,
-                style: GoogleFonts.dmSans(
-                  fontWeight: FontWeight.w500,
-                  color: AppTheme.text,
+                'Qibla',
+                style: GoogleFonts.amiri(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: tokens.primary,
                 ),
               ),
-              const SizedBox(height: 4),
               Text(
-                description,
+                'القبلة · Direccion a la Kaaba',
                 style: GoogleFonts.dmSans(
-                  fontSize: 12,
-                  color: AppTheme.muted,
+                  fontSize: 11,
+                  color: tokens.textSecondary,
                 ),
               ),
             ],
           ),
         ),
+        IconButton(
+          onPressed: () => _showInfoDialog(context, tokens),
+          icon: Icon(Icons.info_outline, color: tokens.primary),
+        ),
       ],
     );
   }
-}
 
+  Widget _buildDistanceCard(QiblaTokens tokens, double? distance) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      decoration: BoxDecoration(
+        color: tokens.primaryBg,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: tokens.primaryBorder),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          _buildStat(tokens, Icons.place_outlined, distance == null ? '--' : distance.toStringAsFixed(0), 'km', 'Distancia'),
+          Container(width: 1, height: 40, color: tokens.primaryBorder),
+          _buildStat(tokens, Icons.my_location, '±3', 'm', 'Precision', valueColor: tokens.accent),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStat(
+    QiblaTokens tokens,
+    IconData icon,
+    String value,
+    String unit,
+    String label, {
+    Color? valueColor,
+  }) {
+    return Column(
+      children: [
+        Icon(icon, size: 18, color: tokens.primary),
+        const SizedBox(height: 5),
+        RichText(
+          text: TextSpan(
+            text: value,
+            style: GoogleFonts.dmSans(
+              fontSize: 22,
+              fontWeight: FontWeight.w500,
+              color: valueColor ?? tokens.primaryLight,
+            ),
+            children: [
+              TextSpan(
+                text: ' $unit',
+                style: GoogleFonts.dmSans(
+                  fontSize: 11,
+                  color: tokens.textSecondary,
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 2),
+        Text(
+          label,
+          style: GoogleFonts.dmSans(fontSize: 10, color: tokens.textSecondary),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildCompass(QiblaTokens tokens, double dialRotation, double needleRotation) {
+    return Container(
+      width: 280,
+      height: 280,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: tokens.bgSurface,
+        border: Border.all(color: tokens.primaryBorder, width: 2),
+      ),
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Container(
+            width: 248,
+            height: 248,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: tokens.border),
+            ),
+          ),
+          Transform.rotate(
+            angle: dialRotation,
+            child: SizedBox(
+              width: 260,
+              height: 260,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  ...List.generate(36, (index) {
+                    final isMajor = index % 9 == 0;
+                    return Transform.rotate(
+                      angle: index * 10 * pi / 180,
+                      child: Align(
+                        alignment: Alignment.topCenter,
+                        child: Container(
+                          width: isMajor ? 2 : 1,
+                          height: isMajor ? 14 : 9,
+                          margin: const EdgeInsets.only(top: 10),
+                          color: tokens.primary.withOpacity(isMajor ? 0.55 : 0.22),
+                        ),
+                      ),
+                    );
+                  }),
+                  Positioned(top: 24, child: _cardinal('N', Colors.red.shade400)),
+                  Positioned(bottom: 24, child: _cardinal('S', tokens.textSecondary)),
+                  Positioned(right: 24, child: _cardinal('E', tokens.textSecondary)),
+                  Positioned(left: 24, child: _cardinal('O', tokens.textSecondary)),
+                ],
+              ),
+            ),
+          ),
+          Transform.rotate(
+            angle: needleRotation,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  width: 46,
+                  height: 46,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: tokens.primary,
+                    boxShadow: [
+                      BoxShadow(
+                        color: tokens.primary.withOpacity(0.35),
+                        blurRadius: 16,
+                        spreadRadius: 2,
+                      ),
+                    ],
+                  ),
+                  child: const Center(child: Text('🕋', style: TextStyle(fontSize: 20))),
+                ),
+                Container(
+                  width: 3,
+                  height: 96,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4),
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [tokens.primary, Colors.transparent],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            width: 16,
+            height: 16,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: tokens.primary,
+              border: Border.all(color: tokens.bgApp, width: 2),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _cardinal(String label, Color color) {
+    return Text(
+      label,
+      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: color),
+    );
+  }
+
+  Widget _buildLoading(QiblaTokens tokens) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CircularProgressIndicator(color: tokens.primary),
+          const SizedBox(height: 14),
+          Text(
+            'Inicializando brujula...',
+            style: GoogleFonts.dmSans(color: tokens.textSecondary),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildError(QiblaTokens tokens, String text) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Text(
+          text,
+          textAlign: TextAlign.center,
+          style: GoogleFonts.dmSans(fontSize: 14, color: tokens.textSecondary),
+        ),
+      ),
+    );
+  }
+
+  String _getDirectionName(double bearing) {
+    if (bearing >= 337.5 || bearing < 22.5) return 'Norte';
+    if (bearing < 67.5) return 'Noreste';
+    if (bearing < 112.5) return 'Este';
+    if (bearing < 157.5) return 'Sureste';
+    if (bearing < 202.5) return 'Sur';
+    if (bearing < 247.5) return 'Suroeste';
+    if (bearing < 292.5) return 'Oeste';
+    return 'Noroeste';
+  }
+
+  void _showInfoDialog(BuildContext context, QiblaTokens tokens) {
+    showDialog<void>(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          backgroundColor: tokens.bgSurface,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Como usar la brujula',
+                  style: GoogleFonts.amiri(
+                    fontSize: 24,
+                    color: tokens.primary,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                _infoRow(tokens, '📱', 'Manten el dispositivo plano', 'Evita inclinaciones para mayor precision'),
+                _infoRow(tokens, '🚫', 'Aleja imanes y metal', 'Los campos magneticos afectan la lectura'),
+                _infoRow(tokens, '🔄', 'Calibra si es necesario', 'Mueve el telefono en forma de 8'),
+                const SizedBox(height: 16),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text('Entendido'),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _infoRow(QiblaTokens tokens, String emoji, String title, String subtitle) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 14),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(emoji, style: const TextStyle(fontSize: 22)),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: GoogleFonts.dmSans(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                    color: tokens.textPrimary,
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  subtitle,
+                  style: GoogleFonts.dmSans(
+                    fontSize: 11,
+                    color: tokens.textSecondary,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

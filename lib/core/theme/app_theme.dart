@@ -289,8 +289,10 @@ class QiblaThemes {
     isha: QiblaHero(bg: Color(0xFF0E0E0E), tint: Color(0xFF161616), label: Color(0xFF686868)),
   );
 
-  /// Tema actual (por defecto: dark)
-  static QiblaTokens get current => dark;
+  static String currentName = 'dark';
+
+  /// Tema actual
+  static QiblaTokens get current => fromName(currentName);
 
   /// Obtener tema por nombre
   static QiblaTokens fromName(String name) {
@@ -356,8 +358,7 @@ class AppTheme {
       );
 
   // Theme Data para Material
-  static ThemeData get darkTheme {
-    const tokens = QiblaThemes.dark;
+  static ThemeData buildTheme(QiblaTokens tokens) {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
@@ -417,6 +418,8 @@ class AppTheme {
       ),
     );
   }
+
+  static ThemeData get darkTheme => buildTheme(QiblaThemes.dark);
 
   static TextTheme _buildTextTheme(QiblaTokens tokens) {
     return TextTheme(
