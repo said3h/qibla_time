@@ -39,3 +39,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  
+  # Assets de audio para Adhan y otros sonidos
+  assets:
+    - assets/audio/

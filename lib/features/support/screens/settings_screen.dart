@@ -7,6 +7,7 @@ import '../../../core/theme/app_theme.dart';
 import '../../../core/constants/app_constants.dart';
 import '../../prayer_times/services/adhan_manager.dart';
 import '../screens/support_tab.dart';
+import '../screens/adhan_selector_screen.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
@@ -21,7 +22,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   bool adhanAsr = true;
   bool adhanMaghrib = true;
   bool adhanIsha = true;
-  String selectedAdhan = 'adhan_makkah';
+  String selectedAdhan = 'adhan_makkah.mp3';
   int timeOffset = 0;
 
   @override
@@ -38,7 +39,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       adhanAsr = prefs.getBool('adhan_asr') ?? true;
       adhanMaghrib = prefs.getBool('adhan_maghrib') ?? true;
       adhanIsha = prefs.getBool('adhan_isha') ?? true;
-      selectedAdhan = prefs.getString('selected_adhan') ?? 'adhan_makkah';
+      selectedAdhan = prefs.getString('selected_adhan') ?? 'adhan_makkah.mp3';
       timeOffset = prefs.getInt('time_offset') ?? 0;
     });
   }
@@ -46,10 +47,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   Future<void> _toggleSetting(String key, bool value) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(key, value);
-    
+
     // Reschedule adhans immediately
     ref.read(adhanManagerProvider).scheduleTodayAdhans();
-    
+
     setState(() {
       switch (key) {
         case 'adhan_fajr': adhanFajr = value; break;
@@ -77,17 +78,17 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           _buildAdhanTile('Asr', adhanAsr, (v) => _toggleSetting('adhan_asr', v)),
           _buildAdhanTile('Maghrib', adhanMaghrib, (v) => _toggleSetting('adhan_maghrib', v)),
           _buildAdhanTile('Isha', adhanIsha, (v) => _toggleSetting('adhan_isha', v)),
-          
+
           const SizedBox(height: 24),
           _buildSectionHeader('Prayer Calculation'),
           _buildCalculationMethodSelector(),
           _buildMadhabSelector(),
           _buildRegionalAdjustmentTile(),
-          
+
           const SizedBox(height: 24),
           _buildSectionHeader('Adhan Sound Library'),
           _buildAdhanSoundLibrary(),
-          
+
           const SizedBox(height: 24),
           _buildSectionHeader('Quran & Content'),
           ListTile(
@@ -98,7 +99,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               // Show language picker
             },
           ),
-          
+
           const SizedBox(height: 24),
           _buildSectionHeader('Estrategia y Apoyo'),
           ListTile(
@@ -115,7 +116,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           _buildSectionHeader('App Info'),
           ListTile(
             title: const Text('Version'),
-            trailing: const Text('1.1.0 (PRO)'),
+            trailing: const Text('1.2.0 (PRO)'),
           ),
         ],
       ),
@@ -130,7 +131,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       onTap: () async {
         final prefs = await SharedPreferences.getInstance();
         if (!mounted) return;
-        
+
         showModalBottomSheet(
           context: context,
           builder: (context) => ListView(
@@ -173,43 +174,95 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   }
 
   Widget _buildAdhanSoundLibrary() {
-    final sounds = {
-      'adhan_makkah': 'Makkah (Al-Haram)',
-      'adhan_madinah': 'Madinah (An-Nabawi)',
-      'adhan_alaqsa': 'Al-Aqsa (Jerusalén)',
-      'adhan_istanbul': 'Estambul (Sultan Ahmed)',
-      'adhan_cairo': 'El Cairo (Egipto)',
-    };
-
     return Column(
-      children: sounds.entries.map((entry) {
-        return ListTile(
-          title: Text(entry.value),
-          leading: Radio<String>(
-            value: entry.key,
-            groupValue: selectedAdhan,
-            activeColor: AppTheme.primaryGreen,
-            onChanged: (value) async {
-              if (value != null) {
-                final prefs = await SharedPreferences.getInstance();
-                await prefs.setString('selected_adhan', value);
-                setState(() => selectedAdhan = value);
-                ref.read(adhanManagerProvider).scheduleTodayAdhans();
-              }
+      children: [
+        // Botón principal para abrir el selector completo
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 8),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                AppTheme.primaryGreen,
+                AppTheme.primaryGreen.withOpacity(0.8),
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: AppTheme.primaryGreen.withOpacity(0.3),
+                blurRadius: 10,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: ListTile(
+            contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+            leading: Container(
+              width: 50,
+              height: 50,
+              decoration: const BoxDecoration(
+                color: Colors.white24,
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(
+                Icons.music_note,
+                color: Colors.white,
+                size: 28,
+              ),
+            ),
+            title: const Text(
+              'Seleccionar Adhan',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
+            ),
+            subtitle: Text(
+              'Adhan actual: ${_getAdhanDisplayName()}',
+              style: const TextStyle(color: Colors.white70),
+            ),
+            trailing: const Icon(
+              Icons.arrow_forward_ios,
+              color: Colors.white,
+              size: 20,
+            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AdhanSelectorScreen()),
+              ).then((_) => _loadSettings());
             },
           ),
-          trailing: IconButton(
-            icon: const Icon(Icons.play_arrow, color: AppTheme.primaryGreen),
-            onPressed: () {
-              // Preview sound logic
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Reproduciendo vista previa de ${entry.value}...')),
-              );
-            },
+        ),
+        
+        const SizedBox(height: 12),
+        
+        // Lista rápida de adhans disponibles
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: Text(
+            'Adhans disponibles: Makkah, Madinah, Cairo, Istanbul, Abdulmalik',
+            style: TextStyle(
+              color: Colors.grey.shade600,
+              fontSize: 12,
+            ),
           ),
-        );
-      }).toList(),
+        ),
+      ],
     );
+  }
+
+  String _getAdhanDisplayName() {
+    final name = selectedAdhan
+        .replaceAll('adhan_', '')
+        .replaceAll('.mp3', '')
+        .split('_')
+        .map((word) => word[0].toUpperCase() + word.substring(1))
+        .join(' ');
+    return name;
   }
 
   Widget _buildRegionalAdjustmentTile() {
@@ -244,7 +297,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 4.0),
       child: Text(
         title.toUpperCase(),
-        style: const TextStyle(color: AppTheme.primaryGreen, fontWeight: FontWeight.bold, fontSize: 12, letterSpacing: 1),
+        style: const TextStyle(
+          color: AppTheme.primaryGreen,
+          fontWeight: FontWeight.bold,
+          fontSize: 12,
+          letterSpacing: 1,
+        ),
       ),
     );
   }
