@@ -15,7 +15,7 @@ void main() {
               NavigationDestination(icon: Icon(Icons.explore_outlined), label: 'Qibla'),
               NavigationDestination(icon: Icon(Icons.auto_awesome_outlined), label: 'Tasbih'),
               NavigationDestination(icon: Icon(Icons.volunteer_activism_outlined), label: 'Dua'),
-              NavigationDestination(icon: Icon(Icons.settings_outlined), label: 'Ajustes'),
+              NavigationDestination(icon: Icon(Icons.menu_book_outlined), label: 'Coran'),
             ],
           ),
         ),
@@ -27,6 +27,6 @@ void main() {
     expect(find.text('Qibla'), findsOneWidget);
     expect(find.text('Tasbih'), findsOneWidget);
     expect(find.text('Dua'), findsOneWidget);
-    expect(find.text('Ajustes'), findsOneWidget);
+    expect(find.text('Coran'), findsOneWidget);
   });
 }

@@ -8,6 +8,11 @@ import 'package:share_plus/share_plus.dart';
 import '../../../core/services/connectivity_service.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../hadith/services/hadith_service.dart';
+import '../../qibla/screens/qibla_screen.dart';
+import '../../dhikr/screens/dhikr_screen.dart';
+import '../../support/screens/dua_screen.dart';
+import '../../support/screens/settings_screen.dart';
+import '../../quran/screens/quran_screen.dart';
 import '../../tracking/services/tracking_service.dart';
 import '../services/adhan_manager.dart';
 import '../services/prayer_service.dart';
@@ -58,7 +63,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           child: ListView(
             padding: EdgeInsets.zero,
             children: [
-              _buildHeader(tokens, locationLabelAsync.valueOrNull, connectivityAsync.valueOrNull ?? true),
+              _buildHeader(context, tokens, locationLabelAsync.valueOrNull, connectivityAsync.valueOrNull ?? true),
               bannerAsync.when(
                 data: (banner) => banner == null ? const SizedBox.shrink() : _buildTravelBanner(tokens, banner),
                 loading: () => const SizedBox.shrink(),
@@ -96,7 +101,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 
-  Widget _buildHeader(QiblaTokens tokens, String? locationLabel, bool isOnline) {
+  Widget _buildHeader(BuildContext context, QiblaTokens tokens, String? locationLabel, bool isOnline) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 12, 20, 10),
       child: Row(
@@ -124,14 +129,20 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             ),
           ),
           Container(
-            width: 34,
-            height: 34,
             decoration: BoxDecoration(
               color: tokens.bgSurface,
               shape: BoxShape.circle,
               border: Border.all(color: tokens.border),
             ),
-            child: Icon(Icons.settings, size: 17, color: tokens.textPrimary),
+            child: IconButton(
+              tooltip: 'Coran',
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => const QuranScreen()),
+                );
+              },
+              icon: Icon(Icons.menu_book, size: 17, color: tokens.textPrimary),
+            ),
           ),
         ],
       ),
@@ -627,10 +638,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   Widget _buildQuickActions(QiblaTokens tokens) {
     final actions = [
-      ('🧭', 'Qibla'),
-      ('📿', 'Tasbih'),
-      ('🤲', 'Dua'),
-      ('⚙️', 'Ajustes'),
+      ('🧭', 'Qibla', const QiblaScreen()),
+      ('📿', 'Tasbih', const DhikrScreen()),
+      ('🤲', 'Dua', const DuasScreen()),
+      ('⚙️', 'Ajustes', const SettingsScreen()),
     ];
 
     return Padding(
@@ -647,22 +658,30 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ),
         itemBuilder: (_, index) {
           final action = actions[index];
-          return Container(
-            decoration: BoxDecoration(
-              color: tokens.bgSurface,
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: tokens.border),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(action.$1, style: const TextStyle(fontSize: 22)),
-                const SizedBox(height: 6),
-                Text(
-                  action.$2,
-                  style: GoogleFonts.dmSans(fontSize: 9, color: tokens.textSecondary),
-                ),
-              ],
+          return InkWell(
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => action.$3 as Widget),
+              );
+            },
+            borderRadius: BorderRadius.circular(16),
+            child: Container(
+              decoration: BoxDecoration(
+                color: tokens.bgSurface,
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: tokens.border),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(action.$1, style: const TextStyle(fontSize: 22)),
+                  const SizedBox(height: 6),
+                  Text(
+                    action.$2,
+                    style: GoogleFonts.dmSans(fontSize: 9, color: tokens.textSecondary),
+                  ),
+                ],
+              ),
             ),
           );
         },

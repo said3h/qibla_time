@@ -359,20 +359,24 @@ class AppTheme {
 
   // Theme Data para Material
   static ThemeData buildTheme(QiblaTokens tokens) {
+    final brightness = ThemeData.estimateBrightnessForColor(tokens.bgPage);
+    final colorScheme = ColorScheme.fromSeed(
+      seedColor: tokens.primary,
+      brightness: brightness,
+    ).copyWith(
+      primary: tokens.primary,
+      onPrimary: tokens.bgPage,
+      secondary: tokens.primaryLight,
+      onSecondary: tokens.bgPage,
+      surface: tokens.bgSurface,
+      onSurface: tokens.textPrimary,
+      error: tokens.danger,
+    );
+
     return ThemeData(
       useMaterial3: true,
-      brightness: Brightness.dark,
-      colorScheme: ColorScheme.dark(
-        primary: tokens.primary,
-        onPrimary: tokens.bgPage,
-        secondary: tokens.primaryLight,
-        onSecondary: tokens.bgPage,
-        surface: tokens.bgSurface,
-        onSurface: tokens.textPrimary,
-        background: tokens.bgPage,
-        onBackground: tokens.textPrimary,
-        error: tokens.danger,
-      ),
+      brightness: brightness,
+      colorScheme: colorScheme,
       scaffoldBackgroundColor: tokens.bgPage,
       appBarTheme: AppBarTheme(
         backgroundColor: tokens.bgApp,
@@ -409,12 +413,25 @@ class AppTheme {
           ),
         ),
       ),
-      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      navigationBarTheme: NavigationBarThemeData(
         backgroundColor: tokens.bgApp,
-        selectedItemColor: tokens.primary,
-        unselectedItemColor: tokens.textSecondary,
-        type: BottomNavigationBarType.fixed,
-        elevation: 8,
+        indicatorColor: tokens.primaryBg,
+        labelTextStyle: MaterialStateProperty.resolveWith((states) {
+          final color = states.contains(MaterialState.selected)
+              ? tokens.primary
+              : tokens.textSecondary;
+          return GoogleFonts.dmSans(
+            fontSize: 11,
+            fontWeight: FontWeight.w500,
+            color: color,
+          );
+        }),
+        iconTheme: MaterialStateProperty.resolveWith((states) {
+          final color = states.contains(MaterialState.selected)
+              ? tokens.primary
+              : tokens.textSecondary;
+          return IconThemeData(color: color, size: 22);
+        }),
       ),
     );
   }

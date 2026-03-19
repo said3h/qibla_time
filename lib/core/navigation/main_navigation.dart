@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import '../../features/prayer_times/screens/home_screen.dart';
 import '../../features/qibla/screens/qibla_screen.dart';
 import '../../features/dhikr/screens/dhikr_screen.dart';
-import '../../features/support/screens/settings_screen.dart';
 import '../../features/support/screens/dua_screen.dart';
+import '../../features/quran/screens/quran_screen.dart';
 import '../theme/app_theme.dart';
 
 class MainNavigation extends StatefulWidget {
@@ -21,11 +21,13 @@ class _MainNavigationState extends State<MainNavigation> {
     const QiblaScreen(),
     const DhikrScreen(),
     const DuasScreen(),
-    const SettingsScreen(),
+    const QuranScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
+    final tokens = QiblaThemes.current;
+
     return Scaffold(
       body: _screens[_currentIndex],
       bottomNavigationBar: NavigationBar(
@@ -37,33 +39,33 @@ class _MainNavigationState extends State<MainNavigation> {
         },
         height: 78,
         labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
-        backgroundColor: AppTheme.deep,
-        indicatorColor: AppTheme.primaryBg,
+        backgroundColor: tokens.bgApp,
+        indicatorColor: tokens.primaryBg,
         destinations: [
           NavigationDestination(
             icon: const Icon(Icons.home_outlined),
-            selectedIcon: Icon(Icons.home_rounded, color: AppTheme.primaryGreen),
+            selectedIcon: Icon(Icons.home_rounded, color: tokens.primary),
             label: 'Inicio',
           ),
           NavigationDestination(
             icon: const Icon(Icons.explore_outlined),
-            selectedIcon: Icon(Icons.explore, color: AppTheme.primaryGreen),
+            selectedIcon: Icon(Icons.explore, color: tokens.primary),
             label: 'Qibla',
           ),
           NavigationDestination(
             icon: const Icon(Icons.auto_awesome_outlined),
-            selectedIcon: Icon(Icons.auto_awesome, color: AppTheme.primaryGreen),
+            selectedIcon: Icon(Icons.auto_awesome, color: tokens.primary),
             label: 'Tasbih',
           ),
           NavigationDestination(
             icon: const Icon(Icons.volunteer_activism_outlined),
-            selectedIcon: Icon(Icons.volunteer_activism, color: AppTheme.primaryGreen),
+            selectedIcon: Icon(Icons.volunteer_activism, color: tokens.primary),
             label: 'Dua',
           ),
           NavigationDestination(
-            icon: const Icon(Icons.settings_outlined),
-            selectedIcon: Icon(Icons.settings, color: AppTheme.primaryGreen),
-            label: 'Ajustes',
+            icon: const Icon(Icons.menu_book_outlined),
+            selectedIcon: Icon(Icons.menu_book, color: tokens.primary),
+            label: 'Coran',
           ),
         ],
       ),
