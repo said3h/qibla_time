@@ -57,6 +57,79 @@ class AppTheme {
   );
 
   // ═══════════════════════════════════════════════════════════
+  // TEXT THEMES
+  // ═══════════════════════════════════════════════════════════
+  
+  /// TextTheme con Google Fonts
+  static TextTheme get textTheme => TextTheme(
+    // Títulos grandes - Amiri para estilo árabe/caligráfico
+    displayLarge: GoogleFonts.amiri(
+      fontSize: 32,
+      fontWeight: FontWeight.bold,
+      color: goldLight,
+    ),
+    displayMedium: GoogleFonts.amiri(
+      fontSize: 28,
+      fontWeight: FontWeight.bold,
+      color: goldLight,
+    ),
+    displaySmall: GoogleFonts.amiri(
+      fontSize: 24,
+      fontWeight: FontWeight.bold,
+      color: goldLight,
+    ),
+    
+    // Títulos de sección
+    headlineLarge: GoogleFonts.dmSans(
+      fontSize: 22,
+      fontWeight: FontWeight.w500,
+      color: text,
+    ),
+    headlineMedium: GoogleFonts.dmSans(
+      fontSize: 18,
+      fontWeight: FontWeight.w500,
+      color: text,
+    ),
+    headlineSmall: GoogleFonts.dmSans(
+      fontSize: 16,
+      fontWeight: FontWeight.w500,
+      color: text,
+    ),
+    
+    // Cuerpo de texto
+    bodyLarge: GoogleFonts.dmSans(
+      fontSize: 16,
+      color: text,
+    ),
+    bodyMedium: GoogleFonts.dmSans(
+      fontSize: 14,
+      color: muted,
+    ),
+    bodySmall: GoogleFonts.dmSans(
+      fontSize: 12,
+      color: muted,
+    ),
+    
+    // Labels y botones
+    labelLarge: GoogleFonts.dmSans(
+      fontSize: 14,
+      fontWeight: FontWeight.w500,
+      color: text,
+    ),
+    labelMedium: GoogleFonts.dmSans(
+      fontSize: 12,
+      fontWeight: FontWeight.w500,
+      color: muted,
+    ),
+    labelSmall: GoogleFonts.dmSans(
+      fontSize: 10,
+      fontWeight: FontWeight.w500,
+      color: muted,
+      letterSpacing: 1.5,
+    ),
+  );
+
+  // ═══════════════════════════════════════════════════════════
   // THEME DATA
   // ═══════════════════════════════════════════════════════════
   
@@ -94,73 +167,7 @@ class AppTheme {
     ),
     
     // Typography con Google Fonts
-    textTheme: TextTheme(
-      // Títulos grandes - Amiri para estilo árabe/caligráfico
-      displayLarge: GoogleFonts.amiri(
-        fontSize: 32,
-        fontWeight: FontWeight.bold,
-        color: goldLight,
-      ),
-      displayMedium: GoogleFonts.amiri(
-        fontSize: 28,
-        fontWeight: FontWeight.bold,
-        color: goldLight,
-      ),
-      displaySmall: GoogleFonts.amiri(
-        fontSize: 24,
-        fontWeight: FontWeight.bold,
-        color: goldLight,
-      ),
-      
-      // Títulos de sección
-      headlineLarge: GoogleFonts.dmsans(
-        fontSize: 22,
-        fontWeight: FontWeight.w500,
-        color: text,
-      ),
-      headlineMedium: GoogleFonts.dmsans(
-        fontSize: 18,
-        fontWeight: FontWeight.w500,
-        color: text,
-      ),
-      headlineSmall: GoogleFonts.dmsans(
-        fontSize: 16,
-        fontWeight: FontWeight.w500,
-        color: text,
-      ),
-      
-      // Cuerpo de texto
-      bodyLarge: GoogleFonts.dmsans(
-        fontSize: 16,
-        color: text,
-      ),
-      bodyMedium: GoogleFonts.dmsans(
-        fontSize: 14,
-        color: muted,
-      ),
-      bodySmall: GoogleFonts.dmsans(
-        fontSize: 12,
-        color: muted,
-      ),
-      
-      // Labels y botones
-      labelLarge: GoogleFonts.dmsans(
-        fontSize: 14,
-        fontWeight: FontWeight.w500,
-        color: text,
-      ),
-      labelMedium: GoogleFonts.dmsans(
-        fontSize: 12,
-        fontWeight: FontWeight.w500,
-        color: muted,
-      ),
-      labelSmall: GoogleFonts.dmsans(
-        fontSize: 10,
-        fontWeight: FontWeight.w500,
-        color: muted,
-        letterSpacing: 1.5,
-      ),
-    ),
+    textTheme: textTheme,
     
     // Card Theme
     cardTheme: CardTheme(
@@ -182,7 +189,7 @@ class AppTheme {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
-        textStyle: GoogleFonts.dmsans(
+        textStyle: GoogleFonts.dmSans(
           fontSize: 14,
           fontWeight: FontWeight.w500,
         ),
@@ -193,7 +200,7 @@ class AppTheme {
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         foregroundColor: gold,
-        textStyle: GoogleFonts.dmsans(fontSize: 14),
+        textStyle: GoogleFonts.dmSans(fontSize: 14),
       ),
     ),
     
@@ -235,8 +242,8 @@ class AppTheme {
         borderRadius: BorderRadius.circular(12),
         borderSide: const BorderSide(color: gold, width: 2),
       ),
-      labelStyle: GoogleFonts.dmsans(color: muted),
-      hintStyle: GoogleFonts.dmsans(color: muted.withOpacity(0.5)),
+      labelStyle: GoogleFonts.dmSans(color: muted),
+      hintStyle: GoogleFonts.dmSans(color: muted.withOpacity(0.5)),
     ),
     
     // Navigation Bar (Material 3)
@@ -245,13 +252,13 @@ class AppTheme {
       indicatorColor: gold.withOpacity(0.15),
       labelTextStyle: MaterialStateProperty.resolveWith((states) {
         if (states.contains(MaterialState.selected)) {
-          return GoogleFonts.dmsans(
+          return GoogleFonts.dmSans(
             fontSize: 11,
             fontWeight: FontWeight.w500,
             color: gold,
           );
         }
-        return GoogleFonts.dmsans(
+        return GoogleFonts.dmSans(
           fontSize: 11,
           fontWeight: FontWeight.w400,
           color: muted,
