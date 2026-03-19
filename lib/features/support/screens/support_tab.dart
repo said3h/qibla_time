@@ -20,13 +20,13 @@ class SupportTab extends StatelessWidget {
           children: [
             const Icon(Icons.favorite_rounded, color: Colors.redAccent, size: 64),
             const SizedBox(height: 24),
-            const Text(
+            Text(
               'Apoya el Desarrollo',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppTheme.primaryGreen),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 16),
-            const Text(
+            Text(
               'QiblaTime es y siempre será gratuita para la Ummah. Tu apoyo nos ayuda a cubrir los costes de servidores y APIs, y a seguir añadiendo funciones premium.',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 16, color: AppTheme.textLight, height: 1.5),
@@ -61,12 +61,12 @@ class SupportTab extends StatelessWidget {
             const SizedBox(height: 48),
             const Divider(),
             const SizedBox(height: 24),
-            const Text(
+            Text(
               '¿A dónde va mi apoyo?',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppTheme.textDark),
             ),
             const SizedBox(height: 8),
-            const Text(
+            Text(
               '• Mantenimiento de servidores de oración.\n• Actualización de la biblioteca de Duas.\n• Desarrollo de nuevas funciones offline.\n• Sin publicidad intrusiva, NUNCA.',
               style: TextStyle(color: AppTheme.textLight, height: 1.8),
             ),

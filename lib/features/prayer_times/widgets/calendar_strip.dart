@@ -88,7 +88,7 @@ class CalendarStrip extends StatelessWidget {
             const SizedBox(height: 4),
             // Día Hijri
             Text(
-              '${hijriDate.day} ${_getHijriMonthAbbr(hijriDate.month)}',
+               '${hijriDate.hDay} ${_getHijriMonthAbbr(hijriDate.hMonth)}',
               style: GoogleFonts.dmSans(
                 fontSize: 9,
                 color: AppTheme.muted,

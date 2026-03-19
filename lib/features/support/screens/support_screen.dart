@@ -24,22 +24,22 @@ class SupportScreen extends StatelessWidget {
          children: [
            const Icon(Icons.favorite, color: Colors.red, size: 80),
            const SizedBox(height: 24),
-           const Text(
-             'JazakAllah Khair!',
-             textAlign: TextAlign.center,
-             style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: AppTheme.primaryGreen),
-           ),
+            Text(
+              'JazakAllah Khair!',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: AppTheme.primaryGreen),
+            ),
            const SizedBox(height: 16),
-           const Text(
-             'QiblaTime is completely free and contains absolutely zero intrusive ads.\n\nDeveloping and maintaining accurate astronomical algorithms and testing on multiple devices takes considerable time and effort.',
-             textAlign: TextAlign.center,
-             style: TextStyle(fontSize: 16, color: AppTheme.textDark, height: 1.5),
-           ),
+            Text(
+              'QiblaTime is completely free and contains absolutely zero intrusive ads.\n\nDeveloping and maintaining accurate astronomical algorithms and testing on multiple devices takes considerable time and effort.',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 16, color: AppTheme.textDark, height: 1.5),
+            ),
            const SizedBox(height: 48),
-           const Text(
-             'How you can help:',
-             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppTheme.textDark),
-           ),
+            Text(
+              'How you can help:',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppTheme.textDark),
+            ),
            const SizedBox(height: 16),
            _buildSupportCard(
              icon: Icons.star_rate,
@@ -68,10 +68,10 @@ class SupportScreen extends StatelessWidget {
            const SizedBox(height: 24),
            const Divider(),
            const SizedBox(height: 16),
-           const Text(
-             '"Charity does not decrease wealth."\n— Prophet Muhammad (PBUH)',
-             textAlign: TextAlign.center,
-             style: TextStyle(fontStyle: FontStyle.italic, color: AppTheme.textLight),
+            Text(
+              '"Charity does not decrease wealth."\n— Prophet Muhammad (PBUH)',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontStyle: FontStyle.italic, color: AppTheme.textLight),
            )
          ],
        ),
@@ -110,11 +110,11 @@ class SupportScreen extends StatelessWidget {
                   children: [
                     Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                     const SizedBox(height: 4),
-                    Text(description, style: const TextStyle(color: AppTheme.textLight, fontSize: 14)),
+                     Text(description, style: TextStyle(color: AppTheme.textLight, fontSize: 14)),
                   ],
                 ),
               ),
-              Icon(Icons.chevron_right, color: AppTheme.textLight)
+               Icon(Icons.chevron_right, color: AppTheme.textLight)
             ],
           ),
         ),

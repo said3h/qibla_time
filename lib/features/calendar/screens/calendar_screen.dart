@@ -85,7 +85,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
     return Container(
       padding: const EdgeInsets.all(24.0),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
+        gradient: LinearGradient(
           colors: [AppTheme.primaryGreen, Color(0xFF006430)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -108,7 +108,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
           const SizedBox(height: 12),
           Text(
             '${currentHijri.hDay} ${currentHijri.toFormat("MMMM")}',
-            style: const TextStyle(color: AppTheme.accentGold, fontSize: 28, fontWeight: FontWeight.bold),
+            style: TextStyle(color: AppTheme.accentGold, fontSize: 28, fontWeight: FontWeight.bold),
           ),
           Text(
             '${currentHijri.hYear} AH',
@@ -138,7 +138,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'Check specific date',
           style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppTheme.textDark),
         ),
@@ -152,7 +152,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
               lastDate: DateTime(2100),
               builder: (context, child) => Theme(
                 data: Theme.of(context).copyWith(
-                  colorScheme: const ColorScheme.light(primary: AppTheme.primaryGreen),
+                  colorScheme: ColorScheme.light(primary: AppTheme.primaryGreen),
                 ),
                 child: child!,
               ),
@@ -202,8 +202,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 4),
-            Text(hijriDateString, style: const TextStyle(color: AppTheme.primaryGreen, fontWeight: FontWeight.w600, fontSize: 13)),
-            Text(gregorianDateString, style: const TextStyle(color: AppTheme.textLight, fontSize: 12)),
+            Text(hijriDateString, style: TextStyle(color: AppTheme.primaryGreen, fontWeight: FontWeight.w600, fontSize: 13)),
+            Text(gregorianDateString, style: TextStyle(color: AppTheme.textLight, fontSize: 12)),
           ],
         ),
         trailing: isCurrentMonth 

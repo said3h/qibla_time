@@ -40,7 +40,7 @@ class _MainNavigationState extends State<MainNavigation> {
         },
         backgroundColor: Colors.white,
         indicatorColor: AppTheme.primaryGreen.withOpacity(0.2),
-        destinations: const [
+        destinations: [
           NavigationDestination(
             icon: Icon(Icons.access_time_outlined),
             selectedIcon: Icon(Icons.access_time_filled, color: AppTheme.primaryGreen),

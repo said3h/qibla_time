@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:adhan/adhan.dart';
+import 'package:hijri/hijri_calendar.dart';
 import '../services/prayer_service.dart';
 import '../services/adhan_manager.dart';
 import '../../../core/theme/app_theme.dart';
@@ -72,7 +73,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   Widget _buildHeader(QiblaTokens tokens) {
     final now = DateTime.now();
-    final hijri = DateTime.now();
+    final hijri = HijriCalendar.fromDate(now);
     
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 16, 20, 12),
@@ -120,7 +121,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   border: Border.all(color: tokens.primaryBorder),
                 ),
                 child: Text(
-                  '${hijri.iDay} ${hijri.iMonthShort} ${hijri.iYear}',
+                  '${hijri.hDay} ${hijri.getShortMonthName()} ${hijri.hYear}',
                   style: GoogleFonts.amiri(
                     fontSize: 13,
                     color: tokens.primaryLight,

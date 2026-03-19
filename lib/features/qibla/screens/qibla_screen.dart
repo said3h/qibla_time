@@ -97,7 +97,7 @@ class QiblaScreen extends ConsumerWidget {
                 ),
               );
             },
-            loading: () => const Center(child: CircularProgressIndicator(color: AppTheme.gold)),
+            loading: () => Center(child: CircularProgressIndicator(color: AppTheme.gold)),
             error: (error, _) => _buildSensorError('Location Service Error: $error'),
           );
         },
@@ -105,7 +105,7 @@ class QiblaScreen extends ConsumerWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const CircularProgressIndicator(color: AppTheme.gold),
+              CircularProgressIndicator(color: AppTheme.gold),
               const SizedBox(height: 16),
               Text(
                 'Inicializando brújula...',
@@ -260,7 +260,7 @@ class QiblaScreen extends ConsumerWidget {
                     )),
                   ),
                   // Sur
-                  const Positioned(
+                  Positioned(
                     bottom: 0,
                     child: Text('S', style: TextStyle(
                       fontSize: 16,
@@ -268,7 +268,7 @@ class QiblaScreen extends ConsumerWidget {
                     )),
                   ),
                   // Este
-                  const Positioned(
+                  Positioned(
                     right: 0,
                     child: Text('E', style: TextStyle(
                       fontSize: 16,
@@ -276,7 +276,7 @@ class QiblaScreen extends ConsumerWidget {
                     )),
                   ),
                   // Oeste
-                  const Positioned(
+                  Positioned(
                     left: 0,
                     child: Text('O', style: TextStyle(
                       fontSize: 16,

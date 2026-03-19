@@ -114,7 +114,7 @@ class _AdhanSelectorScreenState extends State<AdhanSelectorScreen> {
         ),
         backgroundColor: AppTheme.backgroundWhite,
         elevation: 0,
-        iconTheme: const IconThemeData(color: AppTheme.primaryGreen),
+        iconTheme: IconThemeData(color: AppTheme.primaryGreen),
       ),
       body: Column(
         children: [
@@ -271,7 +271,7 @@ class _AdhanSelectorScreenState extends State<AdhanSelectorScreen> {
             ),
             // Checkbox de selección
             if (isSelected)
-              const Icon(
+              Icon(
                 Icons.check_circle,
                 color: AppTheme.primaryGreen,
               ),

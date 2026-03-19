@@ -186,10 +186,9 @@ class _PrayerHeroCardState extends State<PrayerHeroCard> {
                       const SizedBox(height: 4),
                       Text(
                         _formatDuration(_remaining!),
-                        style: GoogleFonts.dmSans(
+                        style: const TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.w300,
-                          color: tokens.textPrimary,
                           fontFamily: 'monospace',
                         ),
                       ),
@@ -218,7 +217,7 @@ class _PrayerHeroCardState extends State<PrayerHeroCard> {
                     color: Colors.orange, size: 18),
                   const SizedBox(width: 6),
                   Text(
-                    '$streak DÍAS',
+                    '${widget.streak} DÍAS',
                     style: GoogleFonts.dmSans(
                       fontSize: 11,
                       fontWeight: FontWeight.w600,
