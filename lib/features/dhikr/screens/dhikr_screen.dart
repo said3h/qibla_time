@@ -1,15 +1,13 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../../core/theme/app_theme.dart';
-import '../../../core/constants/app_constants.dart';
 
-/// Pantalla de Dhikr (Tasbih) con diseño del prototipo
-/// - Contador circular grande (155x155px)
-/// - Rotación automática de frases cada 33
-/// - Dots indicadores de ciclo
-/// - Árabe + transliteración + significado
+import '../../../core/constants/app_constants.dart';
+import '../../../core/theme/app_theme.dart';
+
 class DhikrScreen extends StatefulWidget {
   const DhikrScreen({super.key});
 
@@ -17,43 +15,18 @@ class DhikrScreen extends StatefulWidget {
   State<DhikrScreen> createState() => _DhikrScreenState();
 }
 
-class DhikrPhrase {
-  final String arabic;
-  final String transliteration;
-  final String meaning;
-
-  const DhikrPhrase({
-    required this.arabic,
-    required this.transliteration,
-    required this.meaning,
-  });
-}
-
 class _DhikrScreenState extends State<DhikrScreen> {
+  final List<({String arabic, String transliteration, String meaning})> _phrases = const [
+    (arabic: 'سُبْحَانَ اللَّه', transliteration: 'SubhanAllah', meaning: 'Gloria a Allah'),
+    (arabic: 'اَلْحَمْدُ لِلَّهِ', transliteration: 'Alhamdulillah', meaning: 'Alabado sea Allah'),
+    (arabic: 'اللَّهُ أَكْبَر', transliteration: 'Allahu Akbar', meaning: 'Allah es el mas Grande'),
+  ];
+
   int _count = 0;
   int _totalCount = 0;
-  int _cycle = 1;
-  final int _goal = 33;
   int _currentPhraseIndex = 0;
-
-  // Frases del prototipo
-  final List<DhikrPhrase> _phrases = [
-    const DhikrPhrase(
-      arabic: 'سُبْحَانَ اللَّهِ',
-      transliteration: 'SubhanAllah',
-      meaning: 'Gloria a Allah',
-    ),
-    const DhikrPhrase(
-      arabic: 'الْحَمْدُ لِلَّهِ',
-      transliteration: 'Alhamdulillah',
-      meaning: 'Alabado sea Allah',
-    ),
-    const DhikrPhrase(
-      arabic: 'اللَّهُ أَكْبَرُ',
-      transliteration: 'Allahu Akbar',
-      meaning: 'Allah es el más Grande',
-    ),
-  ];
+  final int _goal = 33;
+  final int _dailyGoal = 99;
 
   @override
   void initState() {
@@ -63,9 +36,8 @@ class _DhikrScreenState extends State<DhikrScreen> {
 
   Future<void> _loadTotalCount() async {
     final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      _totalCount = prefs.getInt(AppConstants.keyDhikrTotalCount) ?? 0;
-    });
+    if (!mounted) return;
+    setState(() => _totalCount = prefs.getInt(AppConstants.keyDhikrTotalCount) ?? 0);
   }
 
   Future<void> _saveTotalCount() async {
@@ -78,211 +50,202 @@ class _DhikrScreenState extends State<DhikrScreen> {
     setState(() {
       _count++;
       _totalCount++;
-      
-      // Rotar frase cada 33
       if (_count >= _goal) {
-        HapticFeedback.heavyImpact();
-        _rotatePhrase();
+        _count = 0;
+        _currentPhraseIndex = (_currentPhraseIndex + 1) % _phrases.length;
       }
     });
     _saveTotalCount();
-  }
-
-  void _rotatePhrase() {
-    setState(() {
-      _currentPhraseIndex = (_currentPhraseIndex + 1) % _phrases.length;
-      _count = 0;
-      _cycle = _currentPhraseIndex + 1;
-    });
   }
 
   void _reset() {
     HapticFeedback.mediumImpact();
     setState(() {
       _count = 0;
-      _cycle = 1;
+      _totalCount = 0;
       _currentPhraseIndex = 0;
     });
+    _saveTotalCount();
   }
-
-  DhikrPhrase get _currentPhrase => _phrases[_currentPhraseIndex];
 
   @override
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
+    final phrase = _phrases[_currentPhraseIndex];
+    final progress = _count / _goal;
+    final dailyProgress = (_totalCount / _dailyGoal).clamp(0.0, 1.0);
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
-      appBar: AppBar(
-        backgroundColor: tokens.bgApp,
-        title: Text(
-          'Tasbih',
-          style: GoogleFonts.amiri(
-            fontSize: 28,
-            fontWeight: FontWeight.bold,
-            color: tokens.primary,
-          ),
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.refresh, color: tokens.primary),
-            tooltip: 'Reiniciar',
-            onPressed: _reset,
-          ),
-        ],
-      ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            children: [
-              // Frase en árabe grande
-              Text(
-                _currentPhrase.arabic,
-                style: GoogleFonts.amiri(
-                  fontSize: 36,
-                  fontWeight: FontWeight.bold,
-                  color: tokens.primaryLight,
-                  height: 1.8,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              
-              // Transliteración
-              Text(
-                _currentPhrase.transliteration,
-                style: GoogleFonts.dmSans(
-                  fontSize: 16,
-                  color: tokens.textSecondary,
-                  fontWeight: FontWeight.w500,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              
-              // Significado
-              Text(
-                _currentPhrase.meaning,
-                style: GoogleFonts.dmSans(
-                  fontSize: 13,
-                  color: tokens.textMuted,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              
-              const SizedBox(height: 32),
-              
-              // Contador circular grande (155x155px como en el prototipo)
-              GestureDetector(
-                onTap: _increment,
-                child: Container(
-                  width: 155,
-                  height: 155,
-                  decoration: BoxDecoration(
-                    color: tokens.bgSurface,
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: tokens.primary,
-                      width: 3,
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: tokens.primary.withOpacity(0.2),
-                        blurRadius: 20,
-                        spreadRadius: 5,
-                      ),
+        child: ListView(
+          padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Tasbih', style: GoogleFonts.amiri(fontSize: 26, color: tokens.primary, fontWeight: FontWeight.bold)),
+                      Text('تسبيح · Dhikr', style: GoogleFonts.dmSans(fontSize: 10, color: tokens.textSecondary)),
                     ],
                   ),
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          '$_count',
-                          style: GoogleFonts.dmSans(
-                            fontSize: 56,
-                            fontWeight: FontWeight.w300,
-                            color: tokens.textPrimary,
-                          ),
-                        ),
-                        Text(
-                          'de $_goal',
-                          style: GoogleFonts.dmSans(
-                            fontSize: 12,
-                            color: tokens.textMuted,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
                 ),
-              ),
-              
-              const SizedBox(height: 24),
-              
-              // Dots indicadores de ciclo (3 dots)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(3, (index) {
-                  final isActive = index == _currentPhraseIndex;
-                  return Container(
-                    width: 8,
-                    height: 8,
-                    margin: const EdgeInsets.symmetric(horizontal: 4),
-                    decoration: BoxDecoration(
-                      color: isActive ? tokens.primary : tokens.bgSurface2,
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: isActive ? tokens.primary : tokens.borderMed,
-                        width: 1,
+                IconButton(onPressed: _reset, icon: Icon(Icons.refresh, color: tokens.primary)),
+              ],
+            ),
+            const SizedBox(height: 18),
+            Text(phrase.arabic, textAlign: TextAlign.center, style: GoogleFonts.amiri(fontSize: 32, color: tokens.primaryLight)),
+            const SizedBox(height: 4),
+            Text(phrase.transliteration, textAlign: TextAlign.center, style: GoogleFonts.dmSans(fontSize: 13, color: tokens.textSecondary)),
+            const SizedBox(height: 2),
+            Text(phrase.meaning, textAlign: TextAlign.center, style: GoogleFonts.dmSans(fontSize: 11, color: tokens.textMuted)),
+            const SizedBox(height: 22),
+            GestureDetector(
+              onTap: _increment,
+              child: SizedBox(
+                width: 180,
+                height: 180,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    SizedBox(
+                      width: 180,
+                      height: 180,
+                      child: CustomPaint(
+                        painter: _RingPainter(
+                          backgroundColor: tokens.bgSurface2,
+                          progressColor: tokens.primary,
+                          progress: progress,
+                        ),
                       ),
                     ),
-                  );
-                }),
-              ),
-              
-              const SizedBox(height: 16),
-              
-              // Total y ciclo
-              Text(
-                'Total: $_totalCount  •  Ciclo $_cycle/3',
-                style: GoogleFonts.dmSans(
-                  fontSize: 12,
-                  color: tokens.textMuted,
-                ),
-              ),
-              
-              const Spacer(),
-              
-              // Lifetime total
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                decoration: BoxDecoration(
-                  color: tokens.primaryBg,
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: tokens.primaryBorder),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.analytics, color: tokens.primary, size: 20),
-                    const SizedBox(width: 8),
-                    Text(
-                      'Lifetime: $_totalCount',
-                      style: GoogleFonts.dmSans(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        color: tokens.primaryLight,
+                    Container(
+                      width: 168,
+                      height: 168,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: tokens.bgSurface,
+                        border: Border.all(color: tokens.primaryBorder),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('$_count', style: GoogleFonts.dmSans(fontSize: 54, fontWeight: FontWeight.w300, color: tokens.textPrimary)),
+                          Text('de $_goal', style: GoogleFonts.dmSans(fontSize: 11, color: tokens.textSecondary)),
+                        ],
                       ),
                     ),
                   ],
                 ),
               ),
-              
-              const SizedBox(height: 24),
-            ],
-          ),
+            ),
+            const SizedBox(height: 16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(
+                3,
+                (index) => Container(
+                  width: 9,
+                  height: 9,
+                  margin: const EdgeInsets.symmetric(horizontal: 4),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: index == _currentPhraseIndex ? tokens.primary : tokens.bgSurface2,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 12),
+            Text(
+              'Total hoy: $_totalCount · Ciclo ${_currentPhraseIndex + 1}/3',
+              textAlign: TextAlign.center,
+              style: GoogleFonts.dmSans(fontSize: 11, color: tokens.textSecondary),
+            ),
+            const SizedBox(height: 16),
+            Container(
+              padding: const EdgeInsets.all(14),
+              decoration: BoxDecoration(
+                color: tokens.bgSurface,
+                borderRadius: BorderRadius.circular(14),
+                border: Border.all(color: tokens.border),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text('META DIARIA', style: GoogleFonts.dmSans(fontSize: 9, letterSpacing: 1.2, color: tokens.textSecondary)),
+                      ),
+                      Text('$_totalCount / $_dailyGoal', style: GoogleFonts.dmSans(fontSize: 10, color: tokens.primary)),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(99),
+                    child: LinearProgressIndicator(
+                      minHeight: 6,
+                      value: dailyProgress,
+                      color: tokens.primary,
+                      backgroundColor: tokens.bgSurface2,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 14),
+            Center(
+              child: OutlinedButton(
+                onPressed: _reset,
+                style: OutlinedButton.styleFrom(
+                  side: BorderSide(color: tokens.borderMed),
+                  foregroundColor: tokens.textSecondary,
+                ),
+                child: const Text('Reiniciar'),
+              ),
+            ),
+          ],
         ),
       ),
     );
+  }
+}
+
+class _RingPainter extends CustomPainter {
+  const _RingPainter({
+    required this.backgroundColor,
+    required this.progressColor,
+    required this.progress,
+  });
+
+  final Color backgroundColor;
+  final Color progressColor;
+  final double progress;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final rect = Offset.zero & size;
+    const strokeWidth = 6.0;
+    final background = Paint()
+      ..color = backgroundColor
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = strokeWidth;
+    final foreground = Paint()
+      ..color = progressColor
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = strokeWidth
+      ..strokeCap = StrokeCap.round;
+
+    canvas.drawArc(rect.deflate(strokeWidth), -math.pi / 2, math.pi * 2, false, background);
+    canvas.drawArc(rect.deflate(strokeWidth), -math.pi / 2, math.pi * 2 * progress, false, foreground);
+  }
+
+  @override
+  bool shouldRepaint(covariant _RingPainter oldDelegate) {
+    return oldDelegate.progress != progress ||
+        oldDelegate.backgroundColor != backgroundColor ||
+        oldDelegate.progressColor != progressColor;
   }
 }

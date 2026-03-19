@@ -1,23 +1,7 @@
-// Pantalla de Duas con diseño del prototipo
-// Cards organizadas por categorías con íconos
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import '../../../core/theme/app_theme.dart';
-
-class Dua {
-  final String category;
-  final String arabic;
-  final String translation;
-  final IconData icon;
-
-  const Dua({
-    required this.category,
-    required this.arabic,
-    required this.translation,
-    required this.icon,
-  });
-}
 
 class DuasScreen extends StatelessWidget {
   const DuasScreen({super.key});
@@ -25,132 +9,104 @@ class DuasScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
-
-    final duas = [
-      const Dua(
-        category: '🌅 Al despertar',
-        arabic: 'الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ',
-        translation: 'Alabado sea Allah quien nos dio vida después de habernos hecho morir, y a Él es el retorno.',
-        icon: Icons.wb_sunny_outlined,
-      ),
-      const Dua(
-        category: '🍽️ Antes de comer',
-        arabic: 'بِسْمِ اللَّهِ وَعَلَى بَرَكَةِ اللَّهِ',
-        translation: 'En el nombre de Allah y con la bendición de Allah.',
-        icon: Icons.restaurant,
-      ),
-      const Dua(
-        category: '🕌 Para pedir perdón',
-        arabic: 'اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي',
-        translation: 'Oh Allah, ciertamente Tú eres Indulgente y amas la indulgencia, así que perdóname.',
-        icon: Icons.favorite_outline,
-      ),
-      const Dua(
-        category: '🌙 Antes de dormir',
-        arabic: 'بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا',
-        translation: 'En Tu nombre, oh Allah, muero y vivo.',
-        icon: Icons.nights_stay_outlined,
-      ),
-      const Dua(
-        category: '🚗 Al salir de casa',
-        arabic: 'بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ',
-        translation: 'En el nombre de Allah, me encomiendo a Allah y no hay fuerza ni poder excepto con Allah.',
-        icon: Icons.directions_car_outlined,
-      ),
-      const Dua(
-        category: '🕌 Al entrar a la mezquita',
-        arabic: 'اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ',
-        translation: 'Oh Allah, ábreme las puertas de Tu misericordia.',
-        icon: Icons.mosque,
-      ),
-      const Dua(
-        category: '🤲 Por el conocimiento',
-        arabic: 'رَبِّ زِدْنِي عِلْمًا',
-        translation: 'Señor mío, auméntame en conocimiento.',
-        icon: Icons.school_outlined,
-      ),
-      const Dua(
-        category: '💪 Por la paciencia',
-        arabic: 'رَبَّنَا أَفْرِغْ عَلَيْنَا صَبْرًا وَتَوَفَّنَا مُسْلِمِينَ',
-        translation: 'Señor nuestro, derrama sobre nosotros paciencia y haznos morir sumisos a Ti.',
-        icon: Icons.self_improvement_outlined,
-      ),
+    const categories = [
+      ('🌅', 'Manana', '12 adhkar'),
+      ('🌇', 'Tarde', '12 adhkar'),
+      ('🌙', 'Dormir', '8 adhkar'),
+      ('✈️', 'Viaje', '6 duas'),
+      ('🍽️', 'Comida', '4 duas'),
+      ('💊', 'Enfermedad', '5 duas'),
+    ];
+    const duas = [
+      ('🌅 Al despertar', 'الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا', 'Al-ḥamdu lillahi alladhi ahyana ba da ma amatana', 'Alabado sea Allah quien nos devolvio la vida despues del sueno.'),
+      ('🤍 Para pedir perdon', 'اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي', 'Allahumma innaka afuwwun tuhibb al-afwa fa fu anni', 'Oh Allah, Tu eres Indulgente y amas perdonar, asi que perdoname.'),
+      ('🚗 Al salir de casa', 'بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ', 'Bismi llah tawakkaltu ala llah wa la hawla wa la quwwata illa billah', 'En el nombre de Allah, me encomiendo a Allah y no hay fuerza sino en El.'),
     ];
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
-      appBar: AppBar(
-        backgroundColor: tokens.bgApp,
-        title: Text(
-          'Duas',
-          style: GoogleFonts.amiri(
-            fontSize: 28,
-            fontWeight: FontWeight.bold,
-            color: tokens.primary,
-          ),
-        ),
-      ),
-      body: ListView(
-        padding: const EdgeInsets.all(16),
-        children: [
-          ...duas.map((dua) => _buildDuaCard(dua, tokens)),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildDuaCard(Dua dua, QiblaTokens tokens) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: tokens.bgSurface,
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: tokens.border),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Categoría con ícono
-          Row(
-            children: [
-              Icon(dua.icon, size: 18, color: tokens.primary),
-              const SizedBox(width: 8),
-              Text(
-                dua.category,
-                style: GoogleFonts.dmSans(
-                  fontSize: 11,
-                  fontWeight: FontWeight.w600,
-                  color: tokens.primary,
-                  letterSpacing: 0.5,
+      body: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
+          children: [
+            Text('Dua & Adhkar', style: GoogleFonts.amiri(fontSize: 26, color: tokens.primary, fontWeight: FontWeight.bold)),
+            Text('الأدعية والأذكار', style: GoogleFonts.dmSans(fontSize: 10, color: tokens.textSecondary)),
+            const SizedBox(height: 16),
+            Text('CATEGORIAS', style: GoogleFonts.dmSans(fontSize: 9, letterSpacing: 1.4, color: tokens.textSecondary)),
+            const SizedBox(height: 10),
+            GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: categories.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 8,
+                mainAxisSpacing: 8,
+                childAspectRatio: 1.55,
+              ),
+              itemBuilder: (_, index) {
+                final category = categories[index];
+                return Container(
+                  padding: const EdgeInsets.all(14),
+                  decoration: BoxDecoration(
+                    color: tokens.bgSurface,
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(color: tokens.border),
+                  ),
+                  child: Row(
+                    children: [
+                      Text(category.$1, style: const TextStyle(fontSize: 24)),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(category.$2, style: GoogleFonts.dmSans(fontSize: 12, color: tokens.textPrimary, fontWeight: FontWeight.w500)),
+                            Text(category.$3, style: GoogleFonts.dmSans(fontSize: 10, color: tokens.textSecondary)),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+            const SizedBox(height: 16),
+            Text('FAVORITOS', style: GoogleFonts.dmSans(fontSize: 9, letterSpacing: 1.4, color: tokens.textSecondary)),
+            const SizedBox(height: 10),
+            ...duas.map(
+              (dua) => Container(
+                margin: const EdgeInsets.only(bottom: 8),
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: tokens.bgSurface,
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: tokens.border),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(dua.$1, style: GoogleFonts.dmSans(fontSize: 10, color: tokens.primary, letterSpacing: 1.0)),
+                        ),
+                        const Text('❤️', style: TextStyle(fontSize: 16)),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    Text(dua.$2, textAlign: TextAlign.right, style: GoogleFonts.amiri(fontSize: 18, color: tokens.textPrimary, height: 1.9)),
+                    const SizedBox(height: 8),
+                    Text(dua.$3, style: GoogleFonts.dmSans(fontSize: 11, color: tokens.textSecondary, fontStyle: FontStyle.italic, height: 1.6)),
+                    const SizedBox(height: 6),
+                    Text(dua.$4, style: GoogleFonts.dmSans(fontSize: 12, color: tokens.textPrimary, height: 1.7)),
+                  ],
                 ),
               ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          
-          // Árabe
-          Text(
-            dua.arabic,
-            style: GoogleFonts.amiri(
-              fontSize: 20,
-              height: 2,
-              color: tokens.textPrimary,
             ),
-            textAlign: TextAlign.right,
-          ),
-          const SizedBox(height: 12),
-          
-          // Traducción
-          Text(
-            dua.translation,
-            style: GoogleFonts.dmSans(
-              fontSize: 13,
-              color: tokens.textSecondary,
-              height: 1.6,
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hijri/hijri_calendar.dart';
-import 'package:intl/intl.dart';
 
 import '../../../core/theme/app_theme.dart';
 import '../../tracking/services/tracking_service.dart';
@@ -18,6 +17,8 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
+  static const _weekdays = ['Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom'];
+
   @override
   void initState() {
     super.initState();
@@ -39,38 +40,39 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     return Scaffold(
       backgroundColor: tokens.bgPage,
       body: SafeArea(
-        child: prayerTimesAsync.when(
-          data: (prayerTimes) {
-            if (prayerTimes == null) {
-              return _buildLocationError(tokens);
-            }
-
-            final remaining = countdownAsync.value;
-
-            return RefreshIndicator(
-              onRefresh: () async => ref.refresh(prayerTimesProvider),
-              color: tokens.primary,
-              backgroundColor: tokens.bgSurface,
-              child: ListView(
-                padding: EdgeInsets.zero,
-                children: [
-                  _buildHeader(tokens),
-                  _buildCalendarStrip(tokens),
-                  _buildNextPrayerCard(prayerTimes, remaining, tokens, streak),
-                  _buildPrayerList(prayerTimes, tracking, dateKey, tokens),
-                  const SizedBox(height: 24),
-                ],
+        child: RefreshIndicator(
+          onRefresh: () async => ref.refresh(prayerTimesProvider),
+          color: tokens.primary,
+          backgroundColor: tokens.bgSurface,
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              _buildHeader(tokens),
+              _buildCalendarStrip(tokens),
+              prayerTimesAsync.when(
+                data: (prayerTimes) => _buildHeroSection(
+                  prayerTimes,
+                  countdownAsync.value,
+                  tracking[dateKey] ?? const [],
+                  tokens,
+                  streak,
+                ),
+                loading: () => _buildLoadingHero(tokens),
+                error: (_, __) => _buildFallbackHero(tokens),
               ),
-            );
-          },
-          loading: () => Center(
-            child: CircularProgressIndicator(color: tokens.primary),
-          ),
-          error: (error, _) => Center(
-            child: Text(
-              'Error: $error',
-              style: GoogleFonts.dmSans(color: tokens.textPrimary),
-            ),
+              prayerTimesAsync.when(
+                data: (prayerTimes) => _buildPrayerSection(
+                  prayerTimes,
+                  tracking[dateKey] ?? const [],
+                  dateKey,
+                  tokens,
+                ),
+                loading: () => _buildPrayerSkeleton(tokens),
+                error: (_, __) => _buildPrayerFallback(tokens),
+              ),
+              _buildQuickActions(tokens),
+              const SizedBox(height: 16),
+            ],
           ),
         ),
       ),
@@ -78,13 +80,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   Widget _buildHeader(QiblaTokens tokens) {
-    final now = DateTime.now();
-    final hijri = HijriCalendar.fromDate(now);
-
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 14, 20, 10),
+      padding: const EdgeInsets.fromLTRB(20, 12, 20, 10),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             child: Column(
@@ -93,49 +91,30 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 Text(
                   'QiblaTime',
                   style: GoogleFonts.amiri(
-                    fontSize: 28,
+                    fontSize: 24,
                     fontWeight: FontWeight.bold,
                     color: tokens.primary,
                   ),
                 ),
                 Text(
-                  'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم',
-                  style: GoogleFonts.amiri(
-                    fontSize: 13,
+                  '📍 Alicante, Espana',
+                  style: GoogleFonts.dmSans(
+                    fontSize: 10,
                     color: tokens.textSecondary,
-                    height: 1.7,
                   ),
                 ),
               ],
             ),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text(
-                DateFormat('EEE, d MMM yyyy', 'es').format(now),
-                style: GoogleFonts.dmSans(
-                  fontSize: 11,
-                  color: tokens.textSecondary,
-                ),
-              ),
-              const SizedBox(height: 6),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                decoration: BoxDecoration(
-                  color: tokens.primaryBg,
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: tokens.primaryBorder),
-                ),
-                child: Text(
-                  '${hijri.hDay} ${hijri.getShortMonthName()} ${hijri.hYear}',
-                  style: GoogleFonts.amiri(
-                    fontSize: 13,
-                    color: tokens.primaryLight,
-                  ),
-                ),
-              ),
-            ],
+          Container(
+            width: 34,
+            height: 34,
+            decoration: BoxDecoration(
+              color: tokens.bgSurface,
+              shape: BoxShape.circle,
+              border: Border.all(color: tokens.border),
+            ),
+            child: Icon(Icons.settings, size: 17, color: tokens.textPrimary),
           ),
         ],
       ),
@@ -144,81 +123,86 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   Widget _buildCalendarStrip(QiblaTokens tokens) {
     final today = DateTime.now();
-    final dates = List.generate(6, (index) => today.subtract(Duration(days: 3 - index)));
+    final dates = List.generate(7, (index) => today.subtract(Duration(days: 3 - index)));
 
     return SizedBox(
-      height: 76,
+      height: 68,
       child: ListView.separated(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
+        itemCount: dates.length,
+        separatorBuilder: (_, __) => const SizedBox(width: 6),
+        itemBuilder: (_, index) {
           final date = dates[index];
           final hijri = HijriCalendar.fromDate(date);
           final isToday = _isSameDay(date, today);
+          final hasEvent = index == 3 || index == 4;
 
           return Container(
-            width: 54,
-            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
+            width: 46,
+            padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 4),
             decoration: BoxDecoration(
               color: isToday ? tokens.primaryBg : tokens.bgSurface,
               borderRadius: BorderRadius.circular(14),
-              border: Border.all(
-                color: isToday ? tokens.primaryBorder : tokens.border,
-              ),
+              border: Border.all(color: isToday ? tokens.activeBorder : tokens.border),
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  DateFormat('EEE', 'es').format(date),
-                  style: GoogleFonts.dmSans(
-                    fontSize: 9,
-                    color: tokens.textSecondary,
-                  ),
+                  _weekdays[date.weekday - 1],
+                  style: GoogleFonts.dmSans(fontSize: 9, color: tokens.textSecondary),
                 ),
                 Text(
                   '${date.day}',
                   style: GoogleFonts.dmSans(
-                    fontSize: 16,
+                    fontSize: 15,
                     fontWeight: FontWeight.w500,
                     color: tokens.textPrimary,
                   ),
                 ),
                 Text(
                   '${hijri.hDay} ${hijri.getShortMonthName()}',
-                  style: GoogleFonts.dmSans(
-                    fontSize: 8,
-                    color: tokens.textSecondary,
-                  ),
+                  style: GoogleFonts.dmSans(fontSize: 7, color: tokens.textMuted),
                   overflow: TextOverflow.ellipsis,
                 ),
+                if (hasEvent)
+                  Container(
+                    width: 4,
+                    height: 4,
+                    margin: const EdgeInsets.only(top: 3),
+                    decoration: BoxDecoration(color: tokens.primary, shape: BoxShape.circle),
+                  ),
               ],
             ),
           );
         },
-        separatorBuilder: (_, __) => const SizedBox(width: 6),
-        itemCount: dates.length,
       ),
     );
   }
 
-  Widget _buildNextPrayerCard(
-    PrayerTimes prayerTimes,
+  Widget _buildHeroSection(
+    PrayerTimes? prayerTimes,
     Duration? remaining,
+    List<String> completed,
     QiblaTokens tokens,
     int streak,
   ) {
+    if (prayerTimes == null) {
+      return _buildFallbackHero(tokens);
+    }
+
     final nextPrayer = prayerTimes.nextPrayer();
     final nextTime = prayerTimes.timeForPrayer(nextPrayer);
     final hero = tokens.getHero(nextPrayer.name.toLowerCase());
-    final prayerName = _displayName(nextPrayer);
+    final names = _prayerName(nextPrayer);
 
     return Container(
-      margin: const EdgeInsets.fromLTRB(16, 14, 16, 16),
+      margin: const EdgeInsets.fromLTRB(16, 0, 16, 12),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: hero.bg,
-        borderRadius: BorderRadius.circular(22),
+        borderRadius: BorderRadius.circular(24),
         border: Border.all(color: tokens.primaryBorder),
         gradient: LinearGradient(
           begin: Alignment.topLeft,
@@ -229,113 +213,162 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'PROXIMA ORACION',
-            style: GoogleFonts.dmSans(
-              fontSize: 9,
-              letterSpacing: 1.5,
-              color: hero.label,
-              fontWeight: FontWeight.w500,
-            ),
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  'Proxima oracion'.toUpperCase(),
+                  style: GoogleFonts.dmSans(
+                    fontSize: 9,
+                    color: hero.label,
+                    letterSpacing: 1.5,
+                  ),
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: tokens.primaryBg,
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: tokens.primaryBorder),
+                ),
+                child: Text(
+                  '🔥 $streak dias',
+                  style: GoogleFonts.dmSans(fontSize: 10, color: tokens.primaryLight),
+                ),
+              ),
+            ],
           ),
-          const SizedBox(height: 4),
+          const SizedBox(height: 6),
           Text(
-            '${prayerName.$1} · ${prayerName.$2}',
+            '${names.$1} · ${names.$2}',
             style: GoogleFonts.amiri(
-              fontSize: 28,
+              fontSize: 32,
               color: tokens.primaryLight,
-              fontWeight: FontWeight.bold,
+              height: 1.1,
             ),
           ),
           const SizedBox(height: 2),
           Text(
             nextTime == null
-                ? '--:--'
-                : '${DateFormat('HH:mm').format(nextTime)} · ${_formatRemainingText(remaining)}',
-            style: GoogleFonts.dmSans(
-              fontSize: 12,
-              color: tokens.textSecondary,
-            ),
+                ? 'Sin hora disponible'
+                : 'Hoy a las ${_formatTime(nextTime)} · ${_formatRemaining(remaining)}',
+            style: GoogleFonts.dmSans(fontSize: 12, color: tokens.textSecondary),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 14),
           Row(
-            children: _buildCountdownBlocks(remaining, tokens),
+            children: _buildCountdown(tokens, remaining),
           ),
-          if (streak > 0) ...[
-            const SizedBox(height: 14),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              decoration: BoxDecoration(
-                color: tokens.primaryBg,
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: tokens.primaryBorder),
-              ),
-              child: Text(
-                '🔥 $streak dias seguidos',
-                style: GoogleFonts.dmSans(
-                  fontSize: 11,
-                  color: tokens.primaryLight,
-                ),
-              ),
-            ),
-          ],
         ],
       ),
     );
   }
 
-  List<Widget> _buildCountdownBlocks(Duration? remaining, QiblaTokens tokens) {
-    final totalSeconds = remaining?.inSeconds ?? 0;
-    final hours = (totalSeconds ~/ 3600).toString().padLeft(2, '0');
-    final minutes = ((totalSeconds % 3600) ~/ 60).toString().padLeft(2, '0');
-    final seconds = (totalSeconds % 60).toString().padLeft(2, '0');
-    final values = [
-      (hours, 'horas'),
-      (minutes, 'min'),
-      (seconds, 'seg'),
-    ];
-
-    return values
-        .map(
-          (item) => Expanded(
-            child: Container(
-              margin: const EdgeInsets.only(right: 8),
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.18),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Column(
-                children: [
-                  Text(
-                    item.$1,
-                    style: GoogleFonts.dmSans(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                      color: tokens.textPrimary,
-                    ),
-                  ),
-                  Text(
-                    item.$2,
-                    style: GoogleFonts.dmSans(
-                      fontSize: 8,
-                      color: tokens.textSecondary,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        )
-        .toList();
+  Widget _buildLoadingHero(QiblaTokens tokens) {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: tokens.bgSurface,
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: tokens.border),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Cargando horarios', style: GoogleFonts.dmSans(color: tokens.textPrimary)),
+          const SizedBox(height: 8),
+          LinearProgressIndicator(color: tokens.primary, backgroundColor: tokens.bgSurface2),
+        ],
+      ),
+    );
   }
 
-  Widget _buildPrayerList(
-    PrayerTimes prayerTimes,
-    Map<String, List<String>> tracking,
+  Widget _buildFallbackHero(QiblaTokens tokens) {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: tokens.bgSurface,
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: tokens.border),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Activa la ubicacion para ver tus horarios',
+            style: GoogleFonts.dmSans(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+              color: tokens.textPrimary,
+            ),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            'La pantalla principal sigue visible aunque los horarios aun no esten listos.',
+            style: GoogleFonts.dmSans(
+              fontSize: 12,
+              height: 1.5,
+              color: tokens.textSecondary,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  List<Widget> _buildCountdown(QiblaTokens tokens, Duration? remaining) {
+    final hours = ((remaining?.inHours ?? 0)).toString().padLeft(2, '0');
+    final minutes = (((remaining?.inMinutes ?? 0) % 60)).toString().padLeft(2, '0');
+    final seconds = (((remaining?.inSeconds ?? 0) % 60)).toString().padLeft(2, '0');
+    final items = [(hours, 'horas'), (minutes, 'min'), (seconds, 'seg')];
+
+    return [
+      for (int i = 0; i < items.length; i++) ...[
+        Container(
+          constraints: const BoxConstraints(minWidth: 54),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+          decoration: BoxDecoration(
+            color: Colors.black.withOpacity(0.25),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Column(
+            children: [
+              Text(
+                items[i].$1,
+                style: GoogleFonts.dmSans(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w500,
+                  color: tokens.textPrimary,
+                ),
+              ),
+              Text(
+                items[i].$2,
+                style: GoogleFonts.dmSans(fontSize: 7, color: tokens.textSecondary),
+              ),
+            ],
+          ),
+        ),
+        if (i != items.length - 1)
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+            child: Text(':', style: TextStyle(fontSize: 20, color: tokens.primary)),
+          ),
+      ],
+    ];
+  }
+
+  Widget _buildPrayerSection(
+    PrayerTimes? prayerTimes,
+    List<String> completed,
     String dateKey,
     QiblaTokens tokens,
   ) {
+    if (prayerTimes == null) {
+      return _buildPrayerFallback(tokens);
+    }
+
     final prayers = [
       ('Fajr', 'فجر', prayerTimes.fajr),
       ('Dhuhr', 'ظهر', prayerTimes.dhuhr),
@@ -343,37 +376,42 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       ('Maghrib', 'مغرب', prayerTimes.maghrib),
       ('Isha', 'عشاء', prayerTimes.isha),
     ];
-    final nextPrayer = prayerTimes.nextPrayer().name.toLowerCase();
-    final completed = tracking[dateKey] ?? <String>[];
+    final nextPrayerName = prayerTimes.nextPrayer().name.toLowerCase();
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'ORACIONES DE HOY',
-            style: GoogleFonts.dmSans(
-              fontSize: 10,
-              letterSpacing: 1.5,
-              color: tokens.textSecondary,
-              fontWeight: FontWeight.w500,
-            ),
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  'Oraciones de hoy'.toUpperCase(),
+                  style: GoogleFonts.dmSans(
+                    fontSize: 9,
+                    color: tokens.textSecondary,
+                    letterSpacing: 1.5,
+                  ),
+                ),
+              ),
+              Text(
+                '${completed.length}/5',
+                style: GoogleFonts.dmSans(fontSize: 10, color: tokens.primary),
+              ),
+            ],
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 8),
           ...prayers.map((prayer) {
-            final isCurrent = prayer.$1.toLowerCase() == nextPrayer;
+            final isCurrent = prayer.$1.toLowerCase() == nextPrayerName;
             final isDone = completed.contains(prayer.$1);
-
             return Container(
               margin: const EdgeInsets.only(bottom: 6),
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 11),
               decoration: BoxDecoration(
                 color: isCurrent ? tokens.activeBg : tokens.bgSurface,
                 borderRadius: BorderRadius.circular(14),
-                border: Border.all(
-                  color: isCurrent ? tokens.activeBorder : tokens.border,
-                ),
+                border: Border.all(color: isCurrent ? tokens.activeBorder : tokens.border),
               ),
               child: Row(
                 children: [
@@ -381,49 +419,32 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          prayer.$1,
-                          style: GoogleFonts.amiri(
-                            fontSize: 18,
-                            color: tokens.textPrimary,
-                          ),
-                        ),
-                        Text(
-                          prayer.$2,
-                          style: GoogleFonts.amiri(
-                            fontSize: 13,
-                            color: tokens.textSecondary,
-                          ),
-                        ),
+                        Text(prayer.$1, style: GoogleFonts.amiri(fontSize: 16, color: tokens.textPrimary)),
+                        Text(prayer.$2, style: GoogleFonts.amiri(fontSize: 11, color: tokens.textSecondary)),
                       ],
                     ),
                   ),
                   Text(
-                    DateFormat('HH:mm').format(prayer.$3),
+                    _formatTime(prayer.$3),
                     style: GoogleFonts.dmSans(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
                       color: isCurrent ? tokens.primaryLight : tokens.textPrimary,
                     ),
                   ),
-                  const SizedBox(width: 12),
+                  const SizedBox(width: 10),
                   GestureDetector(
-                    onTap: () => ref
-                        .read(prayerTrackingProvider.notifier)
-                        .togglePrayer(DateTime.now(), prayer.$1),
+                    onTap: () => ref.read(prayerTrackingProvider.notifier).togglePrayer(DateTime.now(), prayer.$1),
                     child: Container(
                       width: 22,
                       height: 22,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: isDone ? tokens.accent : Colors.transparent,
-                        border: Border.all(
-                          color: isDone ? tokens.accent : tokens.textSecondary,
-                          width: 1.5,
-                        ),
+                        border: Border.all(color: isDone ? tokens.accent : tokens.textMuted, width: 1.5),
                       ),
                       child: isDone
-                          ? Icon(Icons.check, size: 14, color: tokens.bgPage)
+                          ? Icon(Icons.check, size: 12, color: tokens.bgPage)
                           : null,
                     ),
                   ),
@@ -436,35 +457,85 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 
-  Widget _buildLocationError(QiblaTokens tokens) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(28),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.location_off_rounded, size: 72, color: tokens.textMuted),
-            const SizedBox(height: 20),
-            Text(
-              'Ubicacion requerida',
-              style: GoogleFonts.dmSans(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: tokens.textPrimary,
-              ),
+  Widget _buildPrayerSkeleton(QiblaTokens tokens) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        children: List.generate(
+          3,
+          (_) => Container(
+            height: 58,
+            margin: const EdgeInsets.only(bottom: 6),
+            decoration: BoxDecoration(
+              color: tokens.bgSurface,
+              borderRadius: BorderRadius.circular(14),
+              border: Border.all(color: tokens.border),
             ),
-            const SizedBox(height: 8),
-            Text(
-              'QiblaTime necesita tu ubicacion para calcular horarios de oracion y Qibla.',
-              style: GoogleFonts.dmSans(
-                fontSize: 13,
-                color: tokens.textSecondary,
-                height: 1.6,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ],
+          ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildPrayerFallback(QiblaTokens tokens) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: tokens.bgSurface,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: tokens.border),
+        ),
+        child: Text(
+          'Los horarios apareceran aqui cuando tengamos ubicacion.',
+          style: GoogleFonts.dmSans(fontSize: 12, color: tokens.textSecondary),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildQuickActions(QiblaTokens tokens) {
+    final actions = [
+      ('🧭', 'Qibla'),
+      ('📿', 'Tasbih'),
+      ('🤲', 'Dua'),
+      ('⚙️', 'Ajustes'),
+    ];
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 10, 16, 8),
+      child: GridView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount: actions.length,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 4,
+          mainAxisSpacing: 8,
+          crossAxisSpacing: 8,
+          childAspectRatio: 0.95,
+        ),
+        itemBuilder: (_, index) {
+          final action = actions[index];
+          return Container(
+            decoration: BoxDecoration(
+              color: tokens.bgSurface,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: tokens.border),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(action.$1, style: const TextStyle(fontSize: 22)),
+                const SizedBox(height: 6),
+                Text(
+                  action.$2,
+                  style: GoogleFonts.dmSans(fontSize: 9, color: tokens.textSecondary),
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
@@ -473,7 +544,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     return a.year == b.year && a.month == b.month && a.day == b.day;
   }
 
-  (String, String) _displayName(Prayer prayer) {
+  (String, String) _prayerName(Prayer prayer) {
     switch (prayer) {
       case Prayer.fajr:
         return ('Fajr', 'فجر');
@@ -490,10 +561,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     }
   }
 
-  String _formatRemainingText(Duration? remaining) {
-    if (remaining == null) return 'Sin cuenta atras';
-    final hours = remaining.inHours;
-    final minutes = remaining.inMinutes.remainder(60);
-    return 'En ${hours}h ${minutes}min';
+  String _formatTime(DateTime dateTime) {
+    final hour = dateTime.hour.toString().padLeft(2, '0');
+    final minute = dateTime.minute.toString().padLeft(2, '0');
+    return '$hour:$minute';
+  }
+
+  String _formatRemaining(Duration? remaining) {
+    if (remaining == null) return 'sin cuenta atras';
+    return 'en ${remaining.inHours}h ${remaining.inMinutes.remainder(60)}min';
   }
 }

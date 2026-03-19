@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import '../../features/prayer_times/screens/home_screen.dart';
 import '../../features/qibla/screens/qibla_screen.dart';
-import '../../features/calendar/screens/calendar_screen.dart';
 import '../../features/dhikr/screens/dhikr_screen.dart';
 import '../../features/support/screens/settings_screen.dart';
+import '../../features/support/screens/dua_screen.dart';
 import '../theme/app_theme.dart';
 
 class MainNavigation extends StatefulWidget {
@@ -19,8 +19,8 @@ class _MainNavigationState extends State<MainNavigation> {
   final List<Widget> _screens = [
     const HomeScreen(),
     const QiblaScreen(),
-    const CalendarScreen(),
     const DhikrScreen(),
+    const DuasScreen(),
     const SettingsScreen(),
   ];
 
@@ -44,8 +44,8 @@ class _MainNavigationState extends State<MainNavigation> {
         indicatorColor: AppTheme.primaryBg,
         destinations: [
           NavigationDestination(
-            icon: const Icon(Icons.access_time_outlined),
-            selectedIcon: Icon(Icons.access_time_filled, color: AppTheme.primaryGreen),
+            icon: const Icon(Icons.home_outlined),
+            selectedIcon: Icon(Icons.home_rounded, color: AppTheme.primaryGreen),
             label: 'Inicio',
           ),
           NavigationDestination(
@@ -54,14 +54,14 @@ class _MainNavigationState extends State<MainNavigation> {
             label: 'Qibla',
           ),
           NavigationDestination(
-            icon: const Icon(Icons.calendar_month_outlined),
-            selectedIcon: Icon(Icons.calendar_month, color: AppTheme.primaryGreen),
-            label: 'Calend.',
-          ),
-          NavigationDestination(
             icon: const Icon(Icons.auto_awesome_outlined),
             selectedIcon: Icon(Icons.auto_awesome, color: AppTheme.primaryGreen),
             label: 'Tasbih',
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.volunteer_activism_outlined),
+            selectedIcon: Icon(Icons.volunteer_activism, color: AppTheme.primaryGreen),
+            label: 'Dua',
           ),
           NavigationDestination(
             icon: const Icon(Icons.settings_outlined),

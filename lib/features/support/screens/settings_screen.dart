@@ -7,10 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/constants/app_constants.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/theme/theme_provider.dart';
-import '../../prayer_times/services/adhan_manager.dart';
 import '../../prayer_times/services/prayer_service.dart';
-import '../screens/adhan_selector_screen.dart';
-import '../screens/support_tab.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
@@ -24,18 +21,19 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   bool adhanDhuhr = true;
   bool adhanAsr = true;
   bool adhanMaghrib = true;
-  bool adhanIsha = true;
-  String selectedAdhan = 'adhan_makkah.mp3';
+  bool adhanIsha = false;
+  bool haptics = true;
+  bool autoLocation = true;
   int timeOffset = 0;
   bool isHanafi = false;
   CalculationMethod calculationMethod = CalculationMethod.muslim_world_league;
 
   static const _themes = [
-    ('dark', 'Oscuro', 'Cielo antes del Fajr. Ideal para la noche.', Icons.dark_mode),
-    ('light', 'Claro', 'Pergamino y arena. Para uso exterior.', Icons.light_mode),
-    ('amoled', 'AMOLED', 'Negro puro y ahorro de bateria.', Icons.circle),
-    ('deuteranopia', 'Deuteranopia', 'Sistema azul-amarillo mas accesible.', Icons.visibility),
-    ('monochrome', 'Monocromo', 'Contraste por luminosidad.', Icons.contrast),
+    ('dark', 'Oscuro', 'Cielo antes del Fajr', '🌙'),
+    ('light', 'Claro', 'Para uso en exteriores', '☀️'),
+    ('amoled', 'AMOLED', 'Negro puro, ahorra bateria', '⚫'),
+    ('deuteranopia', 'Deuteranopia', 'Sin rojo/verde', '👁'),
+    ('monochrome', 'Monocromia', 'Acromatopsia y baja vision', '⬜'),
   ];
 
   @override
@@ -52,20 +50,17 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       adhanDhuhr = prefs.getBool('adhan_dhuhr') ?? true;
       adhanAsr = prefs.getBool('adhan_asr') ?? true;
       adhanMaghrib = prefs.getBool('adhan_maghrib') ?? true;
-      adhanIsha = prefs.getBool('adhan_isha') ?? true;
-      selectedAdhan = prefs.getString('selected_adhan') ?? 'adhan_makkah.mp3';
+      adhanIsha = prefs.getBool('adhan_isha') ?? false;
       timeOffset = prefs.getInt('time_offset') ?? 0;
       isHanafi = prefs.getBool('madhab_hanafi') ?? false;
-      final methodIndex = prefs.getInt(AppConstants.keyCalculationMethod) ??
-          CalculationMethod.muslim_world_league.index;
+      final methodIndex = prefs.getInt(AppConstants.keyCalculationMethod) ?? CalculationMethod.muslim_world_league.index;
       calculationMethod = CalculationMethod.values[methodIndex];
     });
   }
 
-  Future<void> _toggleSetting(String key, bool value) async {
+  Future<void> _toggleBool(String key, bool value) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(key, value);
-    ref.read(adhanManagerProvider).scheduleTodayAdhans();
     if (!mounted) return;
     setState(() {
       switch (key) {
@@ -88,20 +83,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     });
   }
 
-  Future<void> _updateOffset(int newValue) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt('time_offset', newValue);
-    ref.invalidate(prayerTimesProvider);
-    if (!mounted) return;
-    setState(() => timeOffset = newValue);
-  }
-
-  Future<void> _setMadhab(bool value) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('madhab_hanafi', value);
-    ref.invalidate(madhabProvider);
-    if (!mounted) return;
-    setState(() => isHanafi = value);
+  Future<void> _setTheme(String theme) async {
+    await ref.read(themeControllerProvider.notifier).setTheme(theme);
   }
 
   Future<void> _setCalculationMethod(CalculationMethod method) async {
@@ -112,13 +95,19 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     setState(() => calculationMethod = method);
   }
 
-  String _getAdhanDisplayName() {
-    return selectedAdhan
-        .replaceAll('adhan_', '')
-        .replaceAll('.mp3', '')
-        .split('_')
-        .map((word) => word[0].toUpperCase() + word.substring(1))
-        .join(' ');
+  Future<void> _setMadhab(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('madhab_hanafi', value);
+    ref.invalidate(madhabProvider);
+    if (!mounted) return;
+    setState(() => isHanafi = value);
+  }
+
+  Future<void> _updateOffset(int newValue) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('time_offset', newValue);
+    if (!mounted) return;
+    setState(() => timeOffset = newValue);
   }
 
   @override
@@ -129,96 +118,171 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     return Scaffold(
       backgroundColor: tokens.bgPage,
       body: SafeArea(
-        child: Column(
+        child: ListView(
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
           children: [
-            _buildHeader(tokens),
-            Expanded(
-              child: ListView(
-                padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
+            Text('Ajustes', style: GoogleFonts.amiri(fontSize: 26, color: tokens.primary, fontWeight: FontWeight.bold)),
+            Text('الإعدادات', style: GoogleFonts.dmSans(fontSize: 10, color: tokens.textSecondary)),
+            const SizedBox(height: 16),
+            _buildProfileCard(tokens),
+            const SizedBox(height: 16),
+            _buildSectionTitle(tokens, 'Apariencia'),
+            ..._themes.map((theme) => _buildThemeTile(tokens, themeName, theme.$1, theme.$2, theme.$3, theme.$4)),
+            const SizedBox(height: 14),
+            _buildSectionTitle(tokens, 'Notificaciones · Adhan'),
+            _buildToggleTile(tokens, 'Fajr', '6:12 · Adhan Al-Aqsa', adhanFajr, (v) => _toggleBool('adhan_fajr', v)),
+            _buildToggleTile(tokens, 'Dhuhr', '13:45 · Adhan Makkah', adhanDhuhr, (v) => _toggleBool('adhan_dhuhr', v)),
+            _buildToggleTile(tokens, 'Asr', '17:14 · Adhan Makkah', adhanAsr, (v) => _toggleBool('adhan_asr', v)),
+            _buildToggleTile(tokens, 'Maghrib', '19:52 · Adhan Al-Aqsa', adhanMaghrib, (v) => _toggleBool('adhan_maghrib', v)),
+            _buildToggleTile(tokens, 'Isha', '21:28 · Adhan Makkah', adhanIsha, (v) => _toggleBool('adhan_isha', v)),
+            _buildSimpleToggleTile(tokens, 'Vibracion haptica', 'En Tasbih y notificaciones', haptics, (v) => setState(() => haptics = v)),
+            const SizedBox(height: 14),
+            _buildSectionTitle(tokens, 'Calculo de horarios'),
+            _buildValueTile(tokens, 'Metodo', calculationMethod.name.replaceAll('_', ' ').toUpperCase(), onTap: _showMethodSheet),
+            _buildValueTile(tokens, 'Madhab (Asr)', isHanafi ? 'Hanafi' : 'Shafi', onTap: () => _setMadhab(!isHanafi)),
+            _buildValueTile(tokens, 'Ajuste manual', '±$timeOffset min', trailing: _offsetButtons(tokens)),
+            _buildSimpleToggleTile(tokens, 'Ubicacion', 'GPS automatico', autoLocation, (v) => setState(() => autoLocation = v)),
+            const SizedBox(height: 14),
+            _buildSectionTitle(tokens, 'Sadaqah · Apoyo'),
+            Container(
+              margin: const EdgeInsets.only(bottom: 5),
+              padding: const EdgeInsets.all(14),
+              decoration: BoxDecoration(
+                color: tokens.primaryBg,
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: tokens.primaryBorder),
+              ),
+              child: Row(
                 children: [
-                  _buildSectionTitle('Apariencia', tokens),
-                  ..._themes.map((theme) => _buildThemeTile(
-                        tokens,
-                        id: theme.$1,
-                        title: theme.$2,
-                        description: theme.$3,
-                        icon: theme.$4,
-                        selected: themeName == theme.$1,
-                      )),
-                  const SizedBox(height: 20),
-                  _buildSectionTitle('Notificaciones', tokens),
-                  _buildToggleTile(tokens,
-                      title: 'Fajr',
-                      subtitle: 'Adhan al inicio de la oracion',
-                      value: adhanFajr,
-                      onChanged: (value) => _toggleSetting('adhan_fajr', value)),
-                  _buildToggleTile(tokens,
-                      title: 'Dhuhr',
-                      subtitle: 'Recordatorio puntual',
-                      value: adhanDhuhr,
-                      onChanged: (value) => _toggleSetting('adhan_dhuhr', value)),
-                  _buildToggleTile(tokens,
-                      title: 'Asr',
-                      subtitle: 'Notificacion activa',
-                      value: adhanAsr,
-                      onChanged: (value) => _toggleSetting('adhan_asr', value)),
-                  _buildToggleTile(tokens,
-                      title: 'Maghrib',
-                      subtitle: 'Aviso al comenzar',
-                      value: adhanMaghrib,
-                      onChanged: (value) => _toggleSetting('adhan_maghrib', value)),
-                  _buildToggleTile(tokens,
-                      title: 'Isha',
-                      subtitle: 'Ultima oracion del dia',
-                      value: adhanIsha,
-                      onChanged: (value) => _toggleSetting('adhan_isha', value)),
-                  const SizedBox(height: 20),
-                  _buildSectionTitle('Calculo de horarios', tokens),
-                  _buildInfoTile(tokens,
-                      title: 'Metodo',
-                      subtitle: 'Escoge el criterio de calculo',
-                      value: calculationMethod.name.replaceAll('_', ' ').toUpperCase(),
-                      onTap: _showCalculationMethodPicker),
-                  _buildInfoTile(tokens,
-                      title: 'Madhab (Asr)',
-                      subtitle: 'Jurisprudencia usada en Asr',
-                      value: isHanafi ? 'Hanafi' : 'Shafi',
-                      onTap: () => _setMadhab(!isHanafi)),
-                  _buildInfoTile(tokens,
-                      title: 'Ajuste manual',
-                      subtitle: 'Compensacion local',
-                      value: '$timeOffset min',
-                      trailing: _buildOffsetControl(tokens),
-                      onTap: null),
-                  const SizedBox(height: 20),
-                  _buildSectionTitle('Audio y soporte', tokens),
-                  _buildInfoTile(tokens,
-                      title: 'Biblioteca de Adhan',
-                      subtitle: 'Actual: ${_getAdhanDisplayName()}',
-                      value: 'Abrir',
-                      onTap: () async {
-                        await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const AdhanSelectorScreen(),
-                          ),
-                        );
-                        _loadSettings();
-                      }),
-                  _buildInfoTile(tokens,
-                      title: 'Apoya QiblaTime',
-                      subtitle: 'Sadaqah Jariyah y ayuda al proyecto',
-                      value: 'Ver',
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const SupportTab(),
-                          ),
-                        );
-                      }),
+                  const Text('💛', style: TextStyle(fontSize: 28)),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Apoya el desarrollo', style: GoogleFonts.dmSans(fontSize: 13, color: tokens.primaryLight, fontWeight: FontWeight.w500)),
+                        Text('Cada donacion es una Sadaqah Jariya', style: GoogleFonts.dmSans(fontSize: 10, color: tokens.textSecondary)),
+                      ],
+                    ),
+                  ),
                 ],
               ),
+            ),
+            _buildValueTile(tokens, 'Sadaqah tracker', '→'),
+            const SizedBox(height: 14),
+            _buildSectionTitle(tokens, 'Acerca de'),
+            _buildValueTile(tokens, 'Version', '3.0.0'),
+            _buildValueTile(tokens, 'Licencias open source', '→'),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildProfileCard(QiblaTokens tokens) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: tokens.bgSurface,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: tokens.border),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 52,
+            height: 52,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: tokens.primaryBg,
+              border: Border.all(color: tokens.primaryBorder, width: 2),
+            ),
+            child: const Center(child: Text('🕌', style: TextStyle(fontSize: 24))),
+          ),
+          const SizedBox(width: 14),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Abdullah Garcia', style: GoogleFonts.dmSans(fontSize: 15, color: tokens.textPrimary, fontWeight: FontWeight.w500)),
+                const SizedBox(height: 4),
+                Row(
+                  children: [
+                    _stat(tokens, '14', 'racha'),
+                    const SizedBox(width: 12),
+                    _stat(tokens, '487', 'oraciones'),
+                    const SizedBox(width: 12),
+                    _stat(tokens, '3.2k', 'tasbih'),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _stat(QiblaTokens tokens, String value, String label) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(value, style: GoogleFonts.dmSans(fontSize: 16, color: tokens.primaryLight, fontWeight: FontWeight.w500)),
+        Text(label, style: GoogleFonts.dmSans(fontSize: 9, color: tokens.textSecondary)),
+      ],
+    );
+  }
+
+  Widget _buildSectionTitle(QiblaTokens tokens, String text) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 2, bottom: 8),
+      child: Text(text.toUpperCase(), style: GoogleFonts.dmSans(fontSize: 9, letterSpacing: 1.5, color: tokens.textSecondary)),
+    );
+  }
+
+  Widget _buildThemeTile(QiblaTokens tokens, String themeName, String id, String title, String subtitle, String emoji) {
+    final selected = themeName == id;
+    return InkWell(
+      onTap: () => _setTheme(id),
+      borderRadius: BorderRadius.circular(14),
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 5),
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: selected ? tokens.activeBg : tokens.bgSurface,
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(color: selected ? tokens.activeBorder : tokens.border),
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 36,
+              height: 36,
+              decoration: BoxDecoration(
+                color: tokens.bgSurface2,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Center(child: Text(emoji)),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(title, style: GoogleFonts.dmSans(fontSize: 13, color: tokens.textPrimary, fontWeight: FontWeight.w500)),
+                  Text(subtitle, style: GoogleFonts.dmSans(fontSize: 10, color: tokens.textSecondary)),
+                ],
+              ),
+            ),
+            Container(
+              width: 18,
+              height: 18,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: selected ? tokens.primary : Colors.transparent,
+                border: Border.all(color: selected ? tokens.primary : tokens.borderMed),
+              ),
+              child: selected ? Icon(Icons.check, size: 10, color: tokens.bgPage) : null,
             ),
           ],
         ),
@@ -226,160 +290,17 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     );
   }
 
-  Widget _buildHeader(QiblaTokens tokens) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 14, 20, 18),
-      child: Row(
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Ajustes',
-                  style: GoogleFonts.amiri(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: tokens.primary,
-                  ),
-                ),
-                Text(
-                  'الاعدادات · Preferencias y apariencia',
-                  style: GoogleFonts.dmSans(
-                    fontSize: 11,
-                    color: tokens.textSecondary,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-            decoration: BoxDecoration(
-              color: tokens.primaryBg,
-              borderRadius: BorderRadius.circular(18),
-              border: Border.all(color: tokens.primaryBorder),
-            ),
-            child: Text(
-              'v2',
-              style: GoogleFonts.dmSans(
-                fontSize: 11,
-                fontWeight: FontWeight.w500,
-                color: tokens.primaryLight,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+  Widget _buildToggleTile(QiblaTokens tokens, String title, String subtitle, bool value, ValueChanged<bool> onChanged) {
+    return _buildSimpleToggleTile(tokens, title, subtitle, value, onChanged);
   }
 
-  Widget _buildSectionTitle(String title, QiblaTokens tokens) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 4, bottom: 10),
-      child: Text(
-        title.toUpperCase(),
-        style: GoogleFonts.dmSans(
-          fontSize: 10,
-          fontWeight: FontWeight.w500,
-          letterSpacing: 1.5,
-          color: tokens.textSecondary,
-        ),
-      ),
-    );
-  }
-
-  Widget _buildThemeTile(
-    QiblaTokens tokens, {
-    required String id,
-    required String title,
-    required String description,
-    required IconData icon,
-    required bool selected,
-  }) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
-      child: InkWell(
-        onTap: () => ref.read(themeControllerProvider.notifier).setTheme(id),
-        borderRadius: BorderRadius.circular(16),
-        child: Container(
-          padding: const EdgeInsets.all(14),
-          decoration: BoxDecoration(
-            color: selected ? tokens.activeBg : tokens.bgSurface,
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(
-              color: selected ? tokens.activeBorder : tokens.border,
-            ),
-          ),
-          child: Row(
-            children: [
-              Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: tokens.bgSurface2,
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: tokens.border),
-                ),
-                child: Icon(icon, color: tokens.primary),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      style: GoogleFonts.dmSans(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        color: tokens.textPrimary,
-                      ),
-                    ),
-                    const SizedBox(height: 2),
-                    Text(
-                      description,
-                      style: GoogleFonts.dmSans(
-                        fontSize: 11,
-                        height: 1.5,
-                        color: tokens.textSecondary,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                width: 20,
-                height: 20,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: selected ? tokens.primary : Colors.transparent,
-                  border: Border.all(color: selected ? tokens.primary : tokens.borderMed),
-                ),
-                child: selected
-                    ? Icon(Icons.check, size: 12, color: tokens.bgPage)
-                    : null,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildToggleTile(
-    QiblaTokens tokens, {
-    required String title,
-    required String subtitle,
-    required bool value,
-    required ValueChanged<bool> onChanged,
-  }) {
+  Widget _buildSimpleToggleTile(QiblaTokens tokens, String title, String subtitle, bool value, ValueChanged<bool> onChanged) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 6),
+      margin: const EdgeInsets.only(bottom: 5),
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
       decoration: BoxDecoration(
         color: tokens.bgSurface,
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(12),
         border: Border.all(color: tokens.border),
       ),
       child: Row(
@@ -388,105 +309,57 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title,
-                    style: GoogleFonts.dmSans(
-                      fontSize: 13,
-                      color: tokens.textPrimary,
-                      fontWeight: FontWeight.w500,
-                    )),
-                const SizedBox(height: 2),
-                Text(subtitle,
-                    style: GoogleFonts.dmSans(
-                      fontSize: 10,
-                      color: tokens.textSecondary,
-                    )),
+                Text(title, style: GoogleFonts.dmSans(fontSize: 13, color: tokens.textPrimary)),
+                Text(subtitle, style: GoogleFonts.dmSans(fontSize: 10, color: tokens.textSecondary)),
               ],
             ),
           ),
           Switch.adaptive(
             value: value,
+            onChanged: onChanged,
             activeColor: tokens.bgPage,
             activeTrackColor: tokens.primary,
             inactiveTrackColor: tokens.bgSurface2,
-            onChanged: onChanged,
           ),
         ],
       ),
     );
   }
 
-  Widget _buildInfoTile(
-    QiblaTokens tokens, {
-    required String title,
-    required String subtitle,
-    required String value,
-    required VoidCallback? onTap,
-    Widget? trailing,
-  }) {
+  Widget _buildValueTile(QiblaTokens tokens, String title, String value, {VoidCallback? onTap, Widget? trailing}) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 6),
+      margin: const EdgeInsets.only(bottom: 5),
       decoration: BoxDecoration(
         color: tokens.bgSurface,
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(12),
         border: Border.all(color: tokens.border),
       ),
       child: ListTile(
         onTap: onTap,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-        title: Text(title,
-            style: GoogleFonts.dmSans(
-              fontSize: 13,
-              color: tokens.textPrimary,
-              fontWeight: FontWeight.w500,
-            )),
-        subtitle: Text(subtitle,
-            style: GoogleFonts.dmSans(
-              fontSize: 10,
-              color: tokens.textSecondary,
-            )),
-        trailing: trailing ??
-            Text(value,
-                style: GoogleFonts.dmSans(
-                  fontSize: 12,
-                  color: tokens.primary,
-                  fontWeight: FontWeight.w500,
-                )),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        title: Text(title, style: GoogleFonts.dmSans(fontSize: 13, color: tokens.textPrimary)),
+        trailing: trailing ?? Text(value, style: GoogleFonts.dmSans(fontSize: 12, color: tokens.primary, fontWeight: FontWeight.w500)),
       ),
     );
   }
 
-  Widget _buildOffsetControl(QiblaTokens tokens) {
+  Widget _offsetButtons(QiblaTokens tokens) {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        IconButton(
-          onPressed: () => _updateOffset(timeOffset - 1),
-          icon: Icon(Icons.remove_circle_outline, color: tokens.textSecondary),
-        ),
-        Text(
-          '$timeOffset',
-          style: GoogleFonts.dmSans(
-            fontSize: 13,
-            fontWeight: FontWeight.w500,
-            color: tokens.primary,
-          ),
-        ),
-        IconButton(
-          onPressed: () => _updateOffset(timeOffset + 1),
-          icon: Icon(Icons.add_circle_outline, color: tokens.primary),
-        ),
+        IconButton(onPressed: () => _updateOffset(timeOffset - 1), icon: Icon(Icons.remove_circle_outline, color: tokens.textSecondary)),
+        Text('±$timeOffset', style: GoogleFonts.dmSans(fontSize: 12, color: tokens.primary, fontWeight: FontWeight.w500)),
+        IconButton(onPressed: () => _updateOffset(timeOffset + 1), icon: Icon(Icons.add_circle_outline, color: tokens.primary)),
       ],
     );
   }
 
-  Future<void> _showCalculationMethodPicker() async {
+  Future<void> _showMethodSheet() async {
     final tokens = QiblaThemes.current;
     await showModalBottomSheet<void>(
       context: context,
       backgroundColor: tokens.bgSurface,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-      ),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
       builder: (context) {
         return ListView(
           padding: const EdgeInsets.all(16),
@@ -494,20 +367,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           children: CalculationMethod.values.map((method) {
             final selected = method == calculationMethod;
             return ListTile(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
               tileColor: selected ? tokens.activeBg : tokens.bgSurface2,
-              title: Text(
-                method.name.replaceAll('_', ' ').toUpperCase(),
-                style: GoogleFonts.dmSans(
-                  color: selected ? tokens.primaryLight : tokens.textPrimary,
-                  fontWeight: selected ? FontWeight.w600 : FontWeight.w400,
-                ),
-              ),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+              title: Text(method.name.replaceAll('_', ' ').toUpperCase(), style: GoogleFonts.dmSans(color: selected ? tokens.primaryLight : tokens.textPrimary)),
               trailing: selected ? Icon(Icons.check, color: tokens.primary) : null,
               onTap: () async {
                 await _setCalculationMethod(method);
-                if (!context.mounted) return;
-                Navigator.pop(context);
+                if (context.mounted) Navigator.pop(context);
               },
             );
           }).toList(),
