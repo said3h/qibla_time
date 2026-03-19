@@ -1,269 +1,462 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-/// Tema de QiblaTime inspirado en diseño night/profesional
-/// Basado en el prototipo qiblatime-prototype.html
+/// QiblaTime Design Tokens v2.0
+/// Basado en qiblatime-palettes-v2.js
+/// 5 temas: dark, light, amoled, deuteranopia, monochrome
+class QiblaTokens {
+  // Fondos
+  final Color bgPage;
+  final Color bgApp;
+  final Color bgSurface;
+  final Color bgSurface2;
+
+  // Acento principal
+  final Color primary;
+  final Color primaryLight;
+  final Color primaryBg;
+  final Color primaryBorder;
+
+  // Estado activo
+  final Color activeBg;
+  final Color activeBorder;
+
+  // Texto
+  final Color textPrimary;
+  final Color textSecondary;
+  final Color textMuted;
+
+  // Semánticos
+  final Color accent;
+  final Color confirm;
+  final Color danger;
+
+  // Bordes
+  final Color border;
+  final Color borderMed;
+
+  // Hero dinámico por oración
+  final QiblaHero fajr;
+  final QiblaHero dhuhr;
+  final QiblaHero asr;
+  final QiblaHero maghrib;
+  final QiblaHero isha;
+
+  const QiblaTokens({
+    required this.bgPage,
+    required this.bgApp,
+    required this.bgSurface,
+    required this.bgSurface2,
+    required this.primary,
+    required this.primaryLight,
+    required this.primaryBg,
+    required this.primaryBorder,
+    required this.activeBg,
+    required this.activeBorder,
+    required this.textPrimary,
+    required this.textSecondary,
+    required this.textMuted,
+    required this.accent,
+    required this.confirm,
+    required this.danger,
+    required this.border,
+    required this.borderMed,
+    required this.fajr,
+    required this.dhuhr,
+    required this.asr,
+    required this.maghrib,
+    required this.isha,
+  });
+
+  /// Obtener hero por nombre de oración
+  QiblaHero getHero(String prayer) {
+    switch (prayer.toLowerCase()) {
+      case 'fajr':
+        return fajr;
+      case 'dhuhr':
+        return dhuhr;
+      case 'asr':
+        return asr;
+      case 'maghrib':
+        return maghrib;
+      case 'isha':
+        return isha;
+      default:
+        return asr;
+    }
+  }
+}
+
+/// Hero dinámico por oración
+class QiblaHero {
+  final Color bg;
+  final Color tint;
+  final Color label;
+
+  const QiblaHero({
+    required this.bg,
+    required this.tint,
+    required this.label,
+  });
+}
+
+/// Temas disponibles
+class QiblaThemes {
+  // ═══════════════════════════════════════════════════════════
+  // TEMA 1: DARK (Por defecto)
+  // Cielo antes del Fajr. Dorado espiritual, marino profundo.
+  // ═══════════════════════════════════════════════════════════
+  static const QiblaTokens dark = QiblaTokens(
+    // Fondos
+    bgPage: Color(0xFF0A0E14),
+    bgApp: Color(0xFF141B27),
+    bgSurface: Color(0xFF1C2535),
+    bgSurface2: Color(0xFF243044),
+
+    // Acento principal
+    primary: Color(0xFFC9A84C),
+    primaryLight: Color(0xFFE8C97A),
+    primaryBg: Color(0x21C9A84C),
+    primaryBorder: Color(0x52C9A84C),
+
+    // Estado activo
+    activeBg: Color(0x2EC9A84C),
+    activeBorder: Color(0xFFC9A84C),
+
+    // Texto
+    textPrimary: Color(0xFFEEE8D5),
+    textSecondary: Color(0xFF8A9BAD),
+    textMuted: Color(0xFF5A6A7A),
+
+    // Semánticos
+    accent: Color(0xFF2E8B70),
+    confirm: Color(0xFFC9A84C),
+    danger: Color(0xFFC94A4A),
+
+    // Bordes
+    border: Color(0x12FFFFFF),
+    borderMed: Color(0x21FFFFFF),
+
+    // Hero dinámico
+    fajr: QiblaHero(bg: Color(0xFF0D1F35), tint: Color(0xFF1A3A5C), label: Color(0xFF6A9BB5)),
+    dhuhr: QiblaHero(bg: Color(0xFF1A2E1A), tint: Color(0xFF243824), label: Color(0xFF6A9B7A)),
+    asr: QiblaHero(bg: Color(0xFF1A2A3A), tint: Color(0xFF1E3248), label: Color(0xFF7A9AB5)),
+    maghrib: QiblaHero(bg: Color(0xFF2D1A0E), tint: Color(0xFF3D2510), label: Color(0xFFC4784A)),
+    isha: QiblaHero(bg: Color(0xFF14101E), tint: Color(0xFF1E1530), label: Color(0xFF7A6A9B)),
+  );
+
+  // ═══════════════════════════════════════════════════════════
+  // TEMA 2: LIGHT
+  // Pergamino y arena. Luz solar del mediodía.
+  // ═══════════════════════════════════════════════════════════
+  static const QiblaTokens light = QiblaTokens(
+    bgPage: Color(0xFFFAF7F0),
+    bgApp: Color(0xFFF5F0E6),
+    bgSurface: Color(0xFFFFFFFF),
+    bgSurface2: Color(0xFFEDE8DC),
+
+    primary: Color(0xFF8B6914),
+    primaryLight: Color(0xFF6B4F0E),
+    primaryBg: Color(0x1A8B6914),
+    primaryBorder: Color(0x478B6914),
+
+    activeBg: Color(0x298B6914),
+    activeBorder: Color(0xFF8B6914),
+
+    textPrimary: Color(0xFF2C2416),
+    textSecondary: Color(0xFF7A6E5E),
+    textMuted: Color(0xFFA89880),
+
+    accent: Color(0xFF1E6B52),
+    confirm: Color(0xFF8B6914),
+    danger: Color(0xFF9B2222),
+
+    border: Color(0x14000000),
+    borderMed: Color(0x26000000),
+
+    fajr: QiblaHero(bg: Color(0xFFDDE8F0), tint: Color(0xFFC8DCE8), label: Color(0xFF4A7A9B)),
+    dhuhr: QiblaHero(bg: Color(0xFFE8F0DC), tint: Color(0xFFD4E8C8), label: Color(0xFF4A7A5A)),
+    asr: QiblaHero(bg: Color(0xFFE0E8F0), tint: Color(0xFFCCD8E8), label: Color(0xFF4A6A8B)),
+    maghrib: QiblaHero(bg: Color(0xFFF0E0C8), tint: Color(0xFFE8CCA8), label: Color(0xFF9B5A28)),
+    isha: QiblaHero(bg: Color(0xFFE0DCF0), tint: Color(0xFFCCC8E8), label: Color(0xFF5A4A8B)),
+  );
+
+  // ═══════════════════════════════════════════════════════════
+  // TEMA 3: AMOLED
+  // Negro puro. Ahorro máximo de batería en OLED/AMOLED.
+  // ═══════════════════════════════════════════════════════════
+  static const QiblaTokens amoled = QiblaTokens(
+    bgPage: Color(0xFF000000),
+    bgApp: Color(0xFF000000),
+    bgSurface: Color(0xFF0D0D0D),
+    bgSurface2: Color(0xFF1A1A1A),
+
+    primary: Color(0xFFC9A84C),
+    primaryLight: Color(0xFFE8C97A),
+    primaryBg: Color(0x1AC9A84C),
+    primaryBorder: Color(0x47C9A84C),
+
+    activeBg: Color(0x33C9A84C),
+    activeBorder: Color(0xFFE8C97A),
+
+    textPrimary: Color(0xFFF5F2EA),
+    textSecondary: Color(0xFF7A8A96),
+    textMuted: Color(0xFF4A5A66),
+
+    accent: Color(0xFF2A7A62),
+    confirm: Color(0xFFC9A84C),
+    danger: Color(0xFFB84444),
+
+    border: Color(0x0FFFFFFF),
+    borderMed: Color(0x1CFFFFFF),
+
+    fajr: QiblaHero(bg: Color(0xFF050D18), tint: Color(0xFF0A1A2E), label: Color(0xFF5A8AAA)),
+    dhuhr: QiblaHero(bg: Color(0xFF051005), tint: Color(0xFF0A1E0A), label: Color(0xFF5A8A6A)),
+    asr: QiblaHero(bg: Color(0xFF080D14), tint: Color(0xFF0D1828), label: Color(0xFF6A8AAA)),
+    maghrib: QiblaHero(bg: Color(0xFF150800), tint: Color(0xFF261200), label: Color(0xFFB06030)),
+    isha: QiblaHero(bg: Color(0xFF08050F), tint: Color(0xFF100A1E), label: Color(0xFF6A5A8A)),
+  );
+
+  // ═══════════════════════════════════════════════════════════
+  // TEMA 4: DEUTERANOPIA
+  // Daltonismo rojo-verde. Sistema azul-amarillo.
+  // ═══════════════════════════════════════════════════════════
+  static const QiblaTokens deuteranopia = QiblaTokens(
+    bgPage: Color(0xFF0D1016),
+    bgApp: Color(0xFF131924),
+    bgSurface: Color(0xFF1B2230),
+    bgSurface2: Color(0xFF222C3D),
+
+    primary: Color(0xFFD4A827),
+    primaryLight: Color(0xFFF0C84A),
+    primaryBg: Color(0x21D4A827),
+    primaryBorder: Color(0x59D4A827),
+
+    activeBg: Color(0x33D4A827),
+    activeBorder: Color(0xFFF0C84A),
+
+    textPrimary: Color(0xFFE8E4D8),
+    textSecondary: Color(0xFF8896AA),
+    textMuted: Color(0xFF5A6678),
+
+    accent: Color(0xFF4A8EC4),
+    confirm: Color(0xFFD4A827),
+    danger: Color(0xFFD4721A),
+
+    border: Color(0x12FFFFFF),
+    borderMed: Color(0x21FFFFFF),
+
+    fajr: QiblaHero(bg: Color(0xFF0E1A28), tint: Color(0xFF162436), label: Color(0xFF5A8AB0)),
+    dhuhr: QiblaHero(bg: Color(0xFF201A08), tint: Color(0xFF30280A), label: Color(0xFFA08828)),
+    asr: QiblaHero(bg: Color(0xFF0E1828), tint: Color(0xFF142030), label: Color(0xFF5A7AA0)),
+    maghrib: QiblaHero(bg: Color(0xFF241408), tint: Color(0xFF341E0C), label: Color(0xFFB07040)),
+    isha: QiblaHero(bg: Color(0xFF0E0E1E), tint: Color(0xFF14142E), label: Color(0xFF6A6A9A)),
+  );
+
+  // ═══════════════════════════════════════════════════════════
+  // TEMA 5: MONOCROMA
+  // Acromatopsia total + baja visión. Solo luminosidad.
+  // ═══════════════════════════════════════════════════════════
+  static const QiblaTokens monochrome = QiblaTokens(
+    bgPage: Color(0xFF0C0C0C),
+    bgApp: Color(0xFF161616),
+    bgSurface: Color(0xFF222222),
+    bgSurface2: Color(0xFF2E2E2E),
+
+    primary: Color(0xFFE8E8E8),
+    primaryLight: Color(0xFFFFFFFF),
+    primaryBg: Color(0x14FFFFFF),
+    primaryBorder: Color(0x38FFFFFF),
+
+    activeBg: Color(0x23FFFFFF),
+    activeBorder: Color(0xFFFFFFFF),
+
+    textPrimary: Color(0xFFF0EFEA),
+    textSecondary: Color(0xFF909090),
+    textMuted: Color(0xFF606060),
+
+    accent: Color(0xFFD0D0D0),
+    confirm: Color(0xFFE8E8E8),
+    danger: Color(0xFFAAAAAA),
+
+    border: Color(0x1AFFFFFF),
+    borderMed: Color(0x33FFFFFF),
+
+    fajr: QiblaHero(bg: Color(0xFF111111), tint: Color(0xFF1A1A1A), label: Color(0xFF707070)),
+    dhuhr: QiblaHero(bg: Color(0xFF181818), tint: Color(0xFF202020), label: Color(0xFF808080)),
+    asr: QiblaHero(bg: Color(0xFF141414), tint: Color(0xFF1C1C1C), label: Color(0xFF757575)),
+    maghrib: QiblaHero(bg: Color(0xFF1C1C1C), tint: Color(0xFF242424), label: Color(0xFF888888)),
+    isha: QiblaHero(bg: Color(0xFF0E0E0E), tint: Color(0xFF161616), label: Color(0xFF686868)),
+  );
+
+  /// Tema actual (por defecto: dark)
+  static QiblaTokens get current => dark;
+
+  /// Obtener tema por nombre
+  static QiblaTokens fromName(String name) {
+    switch (name.toLowerCase()) {
+      case 'light':
+        return light;
+      case 'amoled':
+        return amoled;
+      case 'deuteranopia':
+        return deuteranopia;
+      case 'monochrome':
+        return monochrome;
+      default:
+        return dark;
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// ALIAS PARA COMPATIBILIDAD
+// ═══════════════════════════════════════════════════════════
+
 class AppTheme {
-  // ═══════════════════════════════════════════════════════════
-  // PALETA DE COLORES (Del prototipo)
-  // ═══════════════════════════════════════════════════════════
-  
-  // Colores principales - Gold & Night theme
-  static const Color gold = Color(0xFFC9A84C);           // Oro principal
-  static const Color goldLight = Color(0xFFE8C97A);      // Oro claro
-  static const Color night = Color(0xFF0A0E14);          // Fondo principal (night)
-  static const Color deep = Color(0xFF141B27);           // Superficie oscura
-  static const Color surface = Color(0xFF1C2535);        // Cards
-  static const Color surface2 = Color(0xFF243044);       // Surface secundario
-  
-  // Colores de texto
-  static const Color text = Color(0xFFEEE8D5);           // Texto principal
-  static const Color muted = Color(0xFF8A9BAD);          // Texto secundario
-  
-  // Colores de acento
-  static const Color accent = Color(0xFF4FC3A1);         // Verde agua (success)
-  static const Color border = Color(0x0FFFFFFF);         // Borde sutil (6% opacity)
-  
-  // ═══════════════════════════════════════════════════════════
-  // COLORES LEGACY (Para compatibilidad)
-  // ═══════════════════════════════════════════════════════════
-  
-  static const Color primaryGreen = gold;                // Alias para compatibilidad
-  static const Color accentGold = goldLight;             // Alias para compatibilidad
-  static const Color backgroundWhite = night;            // Alias para compatibilidad
-  static const Color textDark = text;                    // Alias para compatibilidad
-  static const Color textLight = muted;                  // Alias para compatibilidad
+  // Colores legacy (usando tema dark por defecto)
+  static Color get primaryGreen => QiblaThemes.dark.primary;
+  static Color get accentGold => QiblaThemes.dark.primaryLight;
+  static Color get backgroundWhite => QiblaThemes.dark.bgPage;
+  static Color get textDark => QiblaThemes.dark.textPrimary;
+  static Color get textLight => QiblaThemes.dark.textMuted;
 
-  // ═══════════════════════════════════════════════════════════
-  // GRADIENTES
-  // ═══════════════════════════════════════════════════════════
-  
-  /// Gradiente para el Hero de la próxima oración
-  static const LinearGradient prayerHeroGradient = LinearGradient(
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-    colors: [
-      Color(0xFF1A3A5C),  // Azul oscuro
-      Color(0xFF0F2840),  // Azul noche
-      Color(0xFF1A3525),  // Verde oscuro
-    ],
-  );
+  // Gradientes
+  static LinearGradient get prayerHeroGradient => const LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: [Color(0xFF1A3A5C), Color(0xFF0F2840), Color(0xFF1A3525)],
+      );
 
-  /// Gradiente dorado para tarjetas especiales
-  static LinearGradient get goldGradient => const LinearGradient(
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-    colors: [gold, Color(0xFFB8963C)],
-  );
+  static LinearGradient goldGradient => LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: [QiblaThemes.dark.primary, const Color(0xFFB8963C)],
+      );
 
-  // ═══════════════════════════════════════════════════════════
-  // TEXT THEMES
-  // ═══════════════════════════════════════════════════════════
-  
-  /// TextTheme con Google Fonts
-  static TextTheme get textTheme => TextTheme(
-    // Títulos grandes - Amiri para estilo árabe/caligráfico
-    displayLarge: GoogleFonts.amiri(
-      fontSize: 32,
-      fontWeight: FontWeight.bold,
-      color: goldLight,
-    ),
-    displayMedium: GoogleFonts.amiri(
-      fontSize: 28,
-      fontWeight: FontWeight.bold,
-      color: goldLight,
-    ),
-    displaySmall: GoogleFonts.amiri(
-      fontSize: 24,
-      fontWeight: FontWeight.bold,
-      color: goldLight,
-    ),
-    
-    // Títulos de sección
-    headlineLarge: GoogleFonts.dmSans(
-      fontSize: 22,
-      fontWeight: FontWeight.w500,
-      color: text,
-    ),
-    headlineMedium: GoogleFonts.dmSans(
-      fontSize: 18,
-      fontWeight: FontWeight.w500,
-      color: text,
-    ),
-    headlineSmall: GoogleFonts.dmSans(
-      fontSize: 16,
-      fontWeight: FontWeight.w500,
-      color: text,
-    ),
-    
-    // Cuerpo de texto
-    bodyLarge: GoogleFonts.dmSans(
-      fontSize: 16,
-      color: text,
-    ),
-    bodyMedium: GoogleFonts.dmSans(
-      fontSize: 14,
-      color: muted,
-    ),
-    bodySmall: GoogleFonts.dmSans(
-      fontSize: 12,
-      color: muted,
-    ),
-    
-    // Labels y botones
-    labelLarge: GoogleFonts.dmSans(
-      fontSize: 14,
-      fontWeight: FontWeight.w500,
-      color: text,
-    ),
-    labelMedium: GoogleFonts.dmSans(
-      fontSize: 12,
-      fontWeight: FontWeight.w500,
-      color: muted,
-    ),
-    labelSmall: GoogleFonts.dmSans(
-      fontSize: 10,
-      fontWeight: FontWeight.w500,
-      color: muted,
-      letterSpacing: 1.5,
-    ),
-  );
+  // Theme Data para Material
+  static ThemeData get darkTheme {
+    final tokens = QiblaThemes.dark;
+    return ThemeData(
+      useMaterial3: true,
+      brightness: Brightness.dark,
+      colorScheme: ColorScheme.dark(
+        primary: tokens.primary,
+        onPrimary: tokens.bgPage,
+        secondary: tokens.primaryLight,
+        onSecondary: tokens.bgPage,
+        surface: tokens.bgSurface,
+        onSurface: tokens.textPrimary,
+        background: tokens.bgPage,
+        onBackground: tokens.textPrimary,
+        error: tokens.danger,
+      ),
+      scaffoldBackgroundColor: tokens.bgPage,
+      appBarTheme: AppBarTheme(
+        backgroundColor: tokens.bgApp,
+        foregroundColor: tokens.primary,
+        elevation: 0,
+        centerTitle: true,
+        titleTextStyle: GoogleFonts.amiri(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+          color: tokens.primary,
+        ),
+      ),
+      textTheme: _buildTextTheme(tokens),
+      cardTheme: CardTheme(
+        color: tokens.bgSurface,
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+          side: BorderSide(color: tokens.border),
+        ),
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: tokens.primary,
+          foregroundColor: tokens.bgPage,
+          elevation: 0,
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          textStyle: GoogleFonts.dmSans(
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: tokens.bgApp,
+        selectedItemColor: tokens.primary,
+        unselectedItemColor: tokens.textSecondary,
+        type: BottomNavigationBarType.fixed,
+        elevation: 8,
+      ),
+    );
+  }
 
-  // ═══════════════════════════════════════════════════════════
-  // THEME DATA
-  // ═══════════════════════════════════════════════════════════
-  
-  static final ThemeData lightTheme = ThemeData(
-    useMaterial3: true,
-    brightness: Brightness.dark,
-    
-    // Color Scheme
-    colorScheme: const ColorScheme.dark(
-      primary: gold,
-      onPrimary: night,
-      secondary: goldLight,
-      onSecondary: night,
-      surface: deep,
-      onSurface: text,
-      background: night,
-      onBackground: text,
-      error: Colors.redAccent,
-    ),
-    
-    // Scaffold
-    scaffoldBackgroundColor: night,
-    
-    // AppBar
-    appBarTheme: AppBarTheme(
-      backgroundColor: deep,
-      foregroundColor: gold,
-      elevation: 0,
-      centerTitle: true,
-      titleTextStyle: GoogleFonts.amiri(
+  static TextTheme _buildTextTheme(QiblaTokens tokens) {
+    return TextTheme(
+      displayLarge: GoogleFonts.amiri(
+        fontSize: 32,
+        fontWeight: FontWeight.bold,
+        color: tokens.primaryLight,
+      ),
+      displayMedium: GoogleFonts.amiri(
+        fontSize: 28,
+        fontWeight: FontWeight.bold,
+        color: tokens.primaryLight,
+      ),
+      displaySmall: GoogleFonts.amiri(
         fontSize: 24,
         fontWeight: FontWeight.bold,
-        color: gold,
+        color: tokens.primaryLight,
       ),
-    ),
-    
-    // Typography con Google Fonts
-    textTheme: textTheme,
-    
-    // Card Theme
-    cardTheme: CardTheme(
-      color: surface,
-      elevation: 0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-        side: const BorderSide(color: Color(0x0FFFFFFF)),
+      headlineLarge: GoogleFonts.dmSans(
+        fontSize: 22,
+        fontWeight: FontWeight.w500,
+        color: tokens.textPrimary,
       ),
-    ),
-    
-    // Elevated Button
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: gold,
-        foregroundColor: night,
-        elevation: 0,
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
-        textStyle: GoogleFonts.dmSans(
-          fontSize: 14,
-          fontWeight: FontWeight.w500,
-        ),
+      headlineMedium: GoogleFonts.dmSans(
+        fontSize: 18,
+        fontWeight: FontWeight.w500,
+        color: tokens.textPrimary,
       ),
-    ),
-    
-    // Text Button
-    textButtonTheme: TextButtonThemeData(
-      style: TextButton.styleFrom(
-        foregroundColor: gold,
-        textStyle: GoogleFonts.dmSans(fontSize: 14),
+      headlineSmall: GoogleFonts.dmSans(
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+        color: tokens.textPrimary,
       ),
-    ),
-    
-    // Icon Button
-    iconButtonTheme: IconButtonThemeData(
-      style: IconButton.styleFrom(
-        foregroundColor: gold,
+      bodyLarge: GoogleFonts.dmSans(
+        fontSize: 16,
+        color: tokens.textPrimary,
       ),
-    ),
-    
-    // Bottom Navigation
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      backgroundColor: deep,
-      selectedItemColor: gold,
-      unselectedItemColor: muted,
-      type: BottomNavigationBarType.fixed,
-      elevation: 8,
-    ),
-    
-    // Divider
-    dividerTheme: const DividerThemeData(
-      color: Color(0x0FFFFFFF),
-      thickness: 1,
-    ),
-    
-    // Input Decoration
-    inputDecorationTheme: InputDecorationTheme(
-      filled: true,
-      fillColor: surface,
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: const BorderSide(color: Color(0x0FFFFFFF)),
+      bodyMedium: GoogleFonts.dmSans(
+        fontSize: 14,
+        color: tokens.textSecondary,
       ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: const BorderSide(color: Color(0x0FFFFFFF)),
+      bodySmall: GoogleFonts.dmSans(
+        fontSize: 12,
+        color: tokens.textMuted,
       ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: const BorderSide(color: gold, width: 2),
+      labelLarge: GoogleFonts.dmSans(
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
+        color: tokens.textPrimary,
       ),
-      labelStyle: GoogleFonts.dmSans(color: muted),
-      hintStyle: GoogleFonts.dmSans(color: muted.withOpacity(0.5)),
-    ),
-    
-    // Navigation Bar (Material 3)
-    navigationBarTheme: NavigationBarThemeData(
-      backgroundColor: deep,
-      indicatorColor: gold.withOpacity(0.15),
-      labelTextStyle: MaterialStateProperty.resolveWith((states) {
-        if (states.contains(MaterialState.selected)) {
-          return GoogleFonts.dmSans(
-            fontSize: 11,
-            fontWeight: FontWeight.w500,
-            color: gold,
-          );
-        }
-        return GoogleFonts.dmSans(
-          fontSize: 11,
-          fontWeight: FontWeight.w400,
-          color: muted,
-        );
-      }),
-    ),
-  );
+      labelMedium: GoogleFonts.dmSans(
+        fontSize: 12,
+        fontWeight: FontWeight.w500,
+        color: tokens.textSecondary,
+      ),
+      labelSmall: GoogleFonts.dmSans(
+        fontSize: 10,
+        fontWeight: FontWeight.w500,
+        color: tokens.textMuted,
+        letterSpacing: 1.5,
+      ),
+    );
+  }
 }

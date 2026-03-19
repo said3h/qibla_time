@@ -2,7 +2,7 @@ name: qibla_time
 description: "A new Flutter project."
 publish_to: 'none'
 
-version: 1.2.0+1
+version: 1.3.0+1
 
 environment:
   sdk: '>=3.3.0 <4.0.0'
@@ -46,3 +46,14 @@ flutter:
   # Assets de audio para Adhan y otros sonidos
   assets:
     - assets/audio/
+  
+  # Fuentes personalizadas Amiri
+  fonts:
+    - family: Amiri
+      fonts:
+        - asset: assets/fonts/Amiri-Regular.ttf
+        - asset: assets/fonts/Amiri-Bold.ttf
+          weight: 700
+    - family: AmiriQuran
+      fonts:
+        - asset: assets/fonts/AmiriQuran.ttf

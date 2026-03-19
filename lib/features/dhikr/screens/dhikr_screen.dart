@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/constants/app_constants.dart';
 
+/// Pantalla de Dhikr (Tasbih) con diseño del prototipo
+/// - Contador circular grande (155x155px)
+/// - Rotación automática de frases cada 33
+/// - Dots indicadores de ciclo
+/// - Árabe + transliteración + significado
 class DhikrScreen extends StatefulWidget {
   const DhikrScreen({super.key});
 
@@ -11,17 +17,42 @@ class DhikrScreen extends StatefulWidget {
   State<DhikrScreen> createState() => _DhikrScreenState();
 }
 
+class DhikrPhrase {
+  final String arabic;
+  final String transliteration;
+  final String meaning;
+
+  const DhikrPhrase({
+    required this.arabic,
+    required this.transliteration,
+    required this.meaning,
+  });
+}
+
 class _DhikrScreenState extends State<DhikrScreen> {
   int _count = 0;
   int _totalCount = 0;
+  int _cycle = 1;
   final int _goal = 33;
-  String _currentDhikr = 'SubhanAllah'; // Starting Default
+  int _currentPhraseIndex = 0;
 
-  final List<String> _dhikrPhrases = [
-    'SubhanAllah',
-    'Alhamdulillah',
-    'Allahu Akbar',
-    'La ilaha illallah'
+  // Frases del prototipo
+  final List<DhikrPhrase> _phrases = [
+    const DhikrPhrase(
+      arabic: 'سُبْحَانَ اللَّهِ',
+      transliteration: 'SubhanAllah',
+      meaning: 'Gloria a Allah',
+    ),
+    const DhikrPhrase(
+      arabic: 'الْحَمْدُ لِلَّهِ',
+      transliteration: 'Alhamdulillah',
+      meaning: 'Alabado sea Allah',
+    ),
+    const DhikrPhrase(
+      arabic: 'اللَّهُ أَكْبَرُ',
+      transliteration: 'Allahu Akbar',
+      meaning: 'Allah es el más Grande',
+    ),
   ];
 
   @override
@@ -47,146 +78,210 @@ class _DhikrScreenState extends State<DhikrScreen> {
     setState(() {
       _count++;
       _totalCount++;
+      
+      // Rotar frase cada 33
       if (_count >= _goal) {
-        HapticFeedback.heavyImpact(); // Stronger feedback on reaching the goal (e.g., 33)
-        _rotateDhikr();
+        HapticFeedback.heavyImpact();
+        _rotatePhrase();
       }
     });
     _saveTotalCount();
   }
 
-  void _rotateDhikr() {
-    int currentIndex = _dhikrPhrases.indexOf(_currentDhikr);
-    int nextIndex = (currentIndex + 1) % _dhikrPhrases.length;
-    _currentDhikr = _dhikrPhrases[nextIndex];
-    _count = 0; // Reset count for the next phrase
+  void _rotatePhrase() {
+    setState(() {
+      _currentPhraseIndex = (_currentPhraseIndex + 1) % _phrases.length;
+      _count = 0;
+      _cycle = _currentPhraseIndex + 1;
+    });
   }
 
   void _reset() {
     HapticFeedback.mediumImpact();
     setState(() {
       _count = 0;
+      _cycle = 1;
+      _currentPhraseIndex = 0;
     });
   }
 
-  void _changePhrase(String newPhrase) {
-    setState(() {
-      _currentDhikr = newPhrase;
-      _count = 0; // Usually resetting count on new phrase
-    });
-  }
+  DhikrPhrase get _currentPhrase => _phrases[_currentPhraseIndex];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-       backgroundColor: AppTheme.backgroundWhite,
-       appBar: AppBar(
-         title: const Text('Dhikr (Tasbih)', style: TextStyle(fontWeight: FontWeight.bold)),
-         actions: [
-            IconButton(
-              icon: const Icon(Icons.refresh),
-               tooltip: 'Reset Session',
-              onPressed: _reset,
-            ),
-         ],
-       ),
-       body: SafeArea(
-         child: Padding(
-           padding: const EdgeInsets.all(24.0),
-           child: Column(
-             children: [
-               _buildPhraseSelector(),
-               const Spacer(),
-               Text(
-                 _currentDhikr,
-                 style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: AppTheme.primaryGreen),
-                 textAlign: TextAlign.center,
-               ),
-               const SizedBox(height: 16),
-               Text(
-                 'Goal: $_goal',
-                 style: const TextStyle(fontSize: 18, color: AppTheme.textLight),
-               ),
-               const SizedBox(height: 40),
-               GestureDetector(
-                 onTap: _increment,
-                 child: Container(
-                   width: 250,
-                   height: 250,
-                   decoration: BoxDecoration(
-                     color: Colors.white,
-                     shape: BoxShape.circle,
-                     border: Border.all(color: AppTheme.accentGold, width: 8),
-                     boxShadow: [
-                       BoxShadow(
-                         color: AppTheme.primaryGreen.withOpacity(0.15),
-                         spreadRadius: 10,
-                         blurRadius: 20,
-                       ),
-                     ],
-                   ),
-                   child: Center(
-                     child: Text(
-                       '$_count',
-                       style: const TextStyle(
-                         fontSize: 80,
-                         fontWeight: FontWeight.bold,
-                         color: AppTheme.textDark,
-                       ),
-                     ),
-                   ),
-                 ),
-               ),
-               const Spacer(),
-               Container(
-                 padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
-                 decoration: BoxDecoration(
-                   color: AppTheme.primaryGreen.withOpacity(0.1),
-                   borderRadius: BorderRadius.circular(16),
-                 ),
-                 child: Row(
-                   mainAxisAlignment: MainAxisAlignment.center,
-                   children: [
-                     const Icon(Icons.analytics, color: AppTheme.primaryGreen),
-                     const SizedBox(width: 8),
-                     Text(
-                       'Lifetime Total: $_totalCount',
-                       style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppTheme.primaryGreen),
-                     ),
-                   ],
-                 ),
-               ),
-               const SizedBox(height: 16),
-             ],
-           ),
-         ),
-       ),
-    );
-  }
+    final tokens = QiblaThemes.current;
 
-  Widget _buildPhraseSelector() {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: _dhikrPhrases.map((phrase) {
-          final isSelected = _currentDhikr == phrase;
-          return Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            child: ChoiceChip(
-              label: Text(phrase),
-              selected: isSelected,
-              onSelected: (selected) {
-                 if (selected) _changePhrase(phrase);
-              },
-              backgroundColor: Colors.white,
-              selectedColor: AppTheme.primaryGreen,
-              labelStyle: TextStyle(
-                color: isSelected ? Colors.white : AppTheme.textDark,
-                fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+    return Scaffold(
+      backgroundColor: tokens.bgPage,
+      appBar: AppBar(
+        backgroundColor: tokens.bgApp,
+        title: Text(
+          'Tasbih',
+          style: GoogleFonts.amiri(
+            fontSize: 28,
+            fontWeight: FontWeight.bold,
+            color: tokens.primary,
+          ),
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.refresh, color: tokens.primary),
+            tooltip: 'Reiniciar',
+            onPressed: _reset,
+          ),
+        ],
+      ),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            children: [
+              // Frase en árabe grande
+              Text(
+                _currentPhrase.arabic,
+                style: GoogleFonts.amiri(
+                  fontSize: 36,
+                  fontWeight: FontWeight.bold,
+                  color: tokens.primaryLight,
+                  height: 1.8,
+                ),
+                textAlign: TextAlign.center,
               ),
-            ),
-          );
-        }).toList(),
+              
+              // Transliteración
+              Text(
+                _currentPhrase.transliteration,
+                style: GoogleFonts.dmSans(
+                  fontSize: 16,
+                  color: tokens.textSecondary,
+                  fontWeight: FontWeight.w500,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              
+              // Significado
+              Text(
+                _currentPhrase.meaning,
+                style: GoogleFonts.dmSans(
+                  fontSize: 13,
+                  color: tokens.textMuted,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              
+              const SizedBox(height: 32),
+              
+              // Contador circular grande (155x155px como en el prototipo)
+              GestureDetector(
+                onTap: _increment,
+                child: Container(
+                  width: 155,
+                  height: 155,
+                  decoration: BoxDecoration(
+                    color: tokens.bgSurface,
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: tokens.primary,
+                      width: 3,
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: tokens.primary.withOpacity(0.2),
+                        blurRadius: 20,
+                        spreadRadius: 5,
+                      ),
+                    ],
+                  ),
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          '$_count',
+                          style: GoogleFonts.dmSans(
+                            fontSize: 56,
+                            fontWeight: FontWeight.w300,
+                            color: tokens.textPrimary,
+                          ),
+                        ),
+                        Text(
+                          'de $_goal',
+                          style: GoogleFonts.dmSans(
+                            fontSize: 12,
+                            color: tokens.textMuted,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              
+              const SizedBox(height: 24),
+              
+              // Dots indicadores de ciclo (3 dots)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(3, (index) {
+                  final isActive = index == _currentPhraseIndex;
+                  return Container(
+                    width: 8,
+                    height: 8,
+                    margin: const EdgeInsets.symmetric(horizontal: 4),
+                    decoration: BoxDecoration(
+                      color: isActive ? tokens.primary : tokens.bgSurface2,
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: isActive ? tokens.primary : tokens.borderMed,
+                        width: 1,
+                      ),
+                    ),
+                  );
+                }),
+              ),
+              
+              const SizedBox(height: 16),
+              
+              // Total y ciclo
+              Text(
+                'Total: $_totalCount  •  Ciclo $_cycle/3',
+                style: GoogleFonts.dmSans(
+                  fontSize: 12,
+                  color: tokens.textMuted,
+                ),
+              ),
+              
+              const Spacer(),
+              
+              // Lifetime total
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                decoration: BoxDecoration(
+                  color: tokens.primaryBg,
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: tokens.primaryBorder),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.analytics, color: tokens.primary, size: 20),
+                    const SizedBox(width: 8),
+                    Text(
+                      'Lifetime: $_totalCount',
+                      style: GoogleFonts.dmSans(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: tokens.primaryLight,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              
+              const SizedBox(height: 24),
+            ],
+          ),
+        ),
       ),
     );
   }
