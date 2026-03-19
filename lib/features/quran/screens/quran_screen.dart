@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theme/app_theme.dart';
+import '../../hafiz/screens/hafiz_mode_screen.dart';
 import '../models/quran_models.dart';
 import '../services/quran_service.dart';
 
@@ -20,8 +21,26 @@ class QuranScreen extends ConsumerWidget {
         child: ListView(
           padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
           children: [
-            Text('Coran', style: GoogleFonts.amiri(fontSize: 26, color: tokens.primary, fontWeight: FontWeight.bold)),
-            Text('القرآن الكريم · 114 suras', style: GoogleFonts.dmSans(fontSize: 10, color: tokens.textSecondary)),
+            Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Coran', style: GoogleFonts.amiri(fontSize: 26, color: tokens.primary, fontWeight: FontWeight.bold)),
+                      Text('القرآن الكريم · 114 suras', style: GoogleFonts.dmSans(fontSize: 10, color: tokens.textSecondary)),
+                    ],
+                  ),
+                ),
+                OutlinedButton.icon(
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (_) => const HafizModeScreen()));
+                  },
+                  icon: const Icon(Icons.auto_stories),
+                  label: const Text('Hafiz'),
+                ),
+              ],
+            ),
             const SizedBox(height: 16),
             ...surahs.map((surah) => _SurahTile(surah: surah)),
           ],

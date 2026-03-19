@@ -143,6 +143,7 @@ class QuranService {
       final arabic = arabicAyahs[index] as Map<String, dynamic>;
       final translation = translationAyahs[index] as Map<String, dynamic>;
       return SurahAyah(
+        number: arabic['number'] as int,
         numberInSurah: arabic['numberInSurah'] as int,
         arabic: arabic['text'] as String,
         translation: translation['text'] as String,

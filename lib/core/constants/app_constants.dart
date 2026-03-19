@@ -17,4 +17,7 @@ class AppConstants {
   static const String keyAccessibilityFontScale = 'accessibility_font_scale';
   static const String keyAccessibilityHighContrast = 'accessibility_high_contrast';
   static const String keyAccessibilityUseSystemBold = 'accessibility_use_system_bold';
+  static const String keyCloudBackupEnabled = 'cloud_backup_enabled';
+  static const String keyCloudWifiOnly = 'cloud_backup_wifi_only';
+  static const String keyCloudLastBackup = 'cloud_backup_last_backup';
 }

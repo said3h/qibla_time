@@ -16,14 +16,18 @@ class SurahSummary {
 
 class SurahAyah {
   const SurahAyah({
+    required this.number,
     required this.numberInSurah,
     required this.arabic,
     required this.translation,
   });
 
+  final int number;
   final int numberInSurah;
   final String arabic;
   final String translation;
+
+  String get audioUrl => 'https://cdn.islamic.network/quran/audio/128/ar.alafasy/$number.mp3';
 }
 
 class SurahDetail {

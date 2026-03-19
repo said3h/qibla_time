@@ -2,12 +2,15 @@ import 'package:adhan/adhan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../core/services/cloud_sync_service.dart';
 import '../../../core/constants/app_constants.dart';
 import '../../../core/theme/accessibility_provider.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/theme/theme_provider.dart';
+import '../../hafiz/services/hafiz_service.dart';
 import '../../prayer_times/services/prayer_cache_service.dart';
 import '../../prayer_times/services/prayer_service.dart';
 import '../../prayer_times/services/travel_mode_service.dart';
@@ -28,6 +31,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   bool haptics = true;
   bool autoLocation = true;
   bool travelerMode = true;
+  bool cloudBackupEnabled = false;
+  bool cloudWifiOnly = true;
   int timeOffset = 0;
   bool isHanafi = false;
   CalculationMethod calculationMethod = CalculationMethod.muslim_world_league;
@@ -56,6 +61,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       adhanMaghrib = prefs.getBool('adhan_maghrib') ?? true;
       adhanIsha = prefs.getBool('adhan_isha') ?? false;
       travelerMode = prefs.getBool(AppConstants.keyTravelerModeEnabled) ?? true;
+      cloudBackupEnabled = prefs.getBool(AppConstants.keyCloudBackupEnabled) ?? false;
+      cloudWifiOnly = prefs.getBool(AppConstants.keyCloudWifiOnly) ?? true;
       timeOffset = prefs.getInt('time_offset') ?? 0;
       isHanafi = prefs.getBool('madhab_hanafi') ?? false;
       final methodIndex = prefs.getInt(AppConstants.keyCalculationMethod) ?? CalculationMethod.muslim_world_league.index;
@@ -95,6 +102,18 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     ref.invalidate(travelerModeEnabledProvider);
   }
 
+  Future<void> _toggleCloudBackup(bool value) async {
+    await ref.read(cloudSyncServiceProvider).setEnabled(value);
+    if (!mounted) return;
+    setState(() => cloudBackupEnabled = value);
+  }
+
+  Future<void> _toggleCloudWifiOnly(bool value) async {
+    await ref.read(cloudSyncServiceProvider).setWifiOnly(value);
+    if (!mounted) return;
+    setState(() => cloudWifiOnly = value);
+  }
+
   Future<void> _setTheme(String theme) async {
     await ref.read(themeControllerProvider.notifier).setTheme(theme);
   }
@@ -130,6 +149,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     final lastLocation = ref.watch(lastLocationLabelProvider).valueOrNull;
     final recentLocations = ref.watch(recentLocationsProvider).valueOrNull ?? const [];
     final cacheStatus = ref.watch(prayerCacheStatusProvider);
+    final lastBackup = ref.watch(_lastBackupProvider).valueOrNull;
+    final deviceId = ref.watch(_deviceIdProvider).valueOrNull;
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
@@ -258,6 +279,41 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ),
             _buildValueTile(tokens, 'Sadaqah tracker', '→'),
             const SizedBox(height: 14),
+            _buildSectionTitle(tokens, 'Cloud backup beta'),
+            _buildSimpleToggleTile(tokens, 'Backup automatico', 'Prepara snapshots anonimos de tus datos', cloudBackupEnabled, _toggleCloudBackup),
+            _buildSimpleToggleTile(tokens, 'Solo con WiFi', 'Evita usar datos moviles para sync futuro', cloudWifiOnly, _toggleCloudWifiOnly),
+            _buildValueTile(tokens, 'ID anonimo', deviceId ?? 'Generando...'),
+            _buildValueTile(tokens, 'Ultimo backup', lastBackup == null ? 'Nunca' : lastBackup.toLocal().toString().substring(0, 16)),
+            _buildValueTile(
+              tokens,
+              'Exportar backup',
+              'Compartir',
+              onTap: () async {
+                final snapshot = await ref.read(cloudSyncServiceProvider).createBackupSnapshot(ref.read(hafizServiceProvider));
+                if (!mounted) return;
+                await Share.share(snapshot.toJsonString());
+                ref.invalidate(_lastBackupProvider);
+              },
+            ),
+            _buildValueTile(
+              tokens,
+              'Restaurar backup',
+              'Importar JSON',
+              onTap: _showRestoreDialog,
+            ),
+            Container(
+              margin: const EdgeInsets.only(bottom: 14),
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: tokens.primaryBg,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: tokens.primaryBorder),
+              ),
+              child: Text(
+                'Base del sync en nube lista. Cuando el backend quede definido, este mismo formato anonimo servira para restaurar entre dispositivos.',
+                style: GoogleFonts.dmSans(fontSize: 10, height: 1.6, color: tokens.textPrimary),
+              ),
+            ),
             _buildSectionTitle(tokens, 'Acerca de'),
             _buildValueTile(tokens, 'Version', '3.0.0'),
             _buildValueTile(tokens, 'Licencias open source', '→'),
@@ -469,4 +525,49 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       },
     );
   }
+
+  Future<void> _showRestoreDialog() async {
+    final controller = TextEditingController();
+    final tokens = QiblaThemes.current;
+    await showDialog<void>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: tokens.bgSurface,
+          title: Text('Restaurar backup', style: GoogleFonts.dmSans(color: tokens.textPrimary, fontWeight: FontWeight.w600)),
+          content: TextField(
+            controller: controller,
+            minLines: 8,
+            maxLines: 12,
+            style: GoogleFonts.dmSans(color: tokens.textPrimary),
+            decoration: const InputDecoration(hintText: 'Pega aqui el JSON exportado'),
+          ),
+          actions: [
+            TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancelar')),
+            ElevatedButton(
+              onPressed: () async {
+                await ref.read(cloudSyncServiceProvider).restoreFromJson(ref.read(hafizServiceProvider), controller.text.trim());
+                if (!context.mounted) return;
+                Navigator.pop(context);
+                ref.invalidate(themeControllerProvider);
+                ref.invalidate(accessibilityControllerProvider);
+                if (!mounted) return;
+                _loadSettings();
+                ScaffoldMessenger.of(this.context).showSnackBar(const SnackBar(content: Text('Backup restaurado')));
+              },
+              child: const Text('Restaurar'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 }
+
+final _lastBackupProvider = FutureProvider<DateTime?>((ref) async {
+  return ref.watch(cloudSyncServiceProvider).getLastBackup();
+});
+
+final _deviceIdProvider = FutureProvider<String>((ref) async {
+  return ref.watch(cloudSyncServiceProvider).getDeviceId();
+});
