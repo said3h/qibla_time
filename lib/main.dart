@@ -23,7 +23,7 @@ class QiblaTimeApp extends StatelessWidget {
     return MaterialApp(
       title: 'QiblaTime',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightTheme,
+      theme: AppTheme.darkTheme,
       home: const MainNavigation(),
     );
   }

@@ -314,12 +314,33 @@ class QiblaThemes {
 // ═══════════════════════════════════════════════════════════
 
 class AppTheme {
+  final tokens = QiblaThemes.dark;
+  
   // Colores legacy (usando tema dark por defecto)
   static Color get primaryGreen => QiblaThemes.dark.primary;
   static Color get accentGold => QiblaThemes.dark.primaryLight;
   static Color get backgroundWhite => QiblaThemes.dark.bgPage;
   static Color get textDark => QiblaThemes.dark.textPrimary;
   static Color get textLight => QiblaThemes.dark.textMuted;
+  
+  // Nuevos colores del diseño v2
+  static Color get gold => QiblaThemes.dark.primary;
+  static Color get goldLight => QiblaThemes.dark.primaryLight;
+  static Color get night => QiblaThemes.dark.bgPage;
+  static Color get deep => QiblaThemes.dark.bgApp;
+  static Color get surface => QiblaThemes.dark.bgSurface;
+  static Color get surface2 => QiblaThemes.dark.bgSurface2;
+  static Color get text => QiblaThemes.dark.textPrimary;
+  static Color get muted => QiblaThemes.dark.textMuted;
+  static Color get accent => QiblaThemes.dark.accent;
+  static Color get confirm => QiblaThemes.dark.confirm;
+  static Color get danger => QiblaThemes.dark.danger;
+  static Color get border => QiblaThemes.dark.border;
+  static Color get borderMed => QiblaThemes.dark.borderMed;
+  static Color get activeBg => QiblaThemes.dark.activeBg;
+  static Color get activeBorder => QiblaThemes.dark.activeBorder;
+  static Color get primaryBg => QiblaThemes.dark.primaryBg;
+  static Color get primaryBorder => QiblaThemes.dark.primaryBorder;
 
   // Gradientes
   static LinearGradient get prayerHeroGradient => const LinearGradient(
@@ -328,7 +349,7 @@ class AppTheme {
         colors: [Color(0xFF1A3A5C), Color(0xFF0F2840), Color(0xFF1A3525)],
       );
 
-  static LinearGradient goldGradient => LinearGradient(
+  static LinearGradient goldGradient() => LinearGradient(
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
         colors: [QiblaThemes.dark.primary, const Color(0xFFB8963C)],
