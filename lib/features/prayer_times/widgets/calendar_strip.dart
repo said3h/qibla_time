@@ -69,7 +69,7 @@ class CalendarStrip extends StatelessWidget {
             // Día de la semana
             Text(
               dayName,
-              style: GoogleFonts.dmsans(
+              style: GoogleFonts.dmSans(
                 fontSize: 11,
                 color: isToday ? AppTheme.goldLight : AppTheme.muted,
                 fontWeight: isToday ? FontWeight.w600 : FontWeight.w400,
@@ -79,7 +79,7 @@ class CalendarStrip extends StatelessWidget {
             // Número del día
             Text(
               date.day.toString(),
-              style: GoogleFonts.dmsans(
+              style: GoogleFonts.dmSans(
                 fontSize: 22,
                 fontWeight: FontWeight.w500,
                 color: isToday ? AppTheme.goldLight : AppTheme.text,
@@ -89,7 +89,7 @@ class CalendarStrip extends StatelessWidget {
             // Día Hijri
             Text(
               '${hijriDate.day} ${_getHijriMonthAbbr(hijriDate.month)}',
-              style: GoogleFonts.dmsans(
+              style: GoogleFonts.dmSans(
                 fontSize: 9,
                 color: AppTheme.muted,
               ),

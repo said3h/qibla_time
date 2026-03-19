@@ -56,7 +56,7 @@ class PrayerHeroCard extends StatelessWidget {
             children: [
               Text(
                 'PRÓXIMA ORACIÓN',
-                style: GoogleFonts.dmsans(
+                style: GoogleFonts.dmSans(
                   fontSize: 9,
                   fontWeight: FontWeight.w500,
                   color: Colors.white.withOpacity(0.7),
@@ -87,7 +87,7 @@ class PrayerHeroCard extends StatelessWidget {
           if (nextPrayerTime != null)
             Text(
               DateFormat('HH:mm').format(nextPrayerTime),
-              style: GoogleFonts.dmsans(
+              style: GoogleFonts.dmSans(
                 fontSize: 13,
                 color: Colors.white.withOpacity(0.7),
               ),
@@ -107,7 +107,7 @@ class PrayerHeroCard extends StatelessWidget {
                     children: [
                       Text(
                         'TIEMPO RESTANTE',
-                        style: GoogleFonts.dmsans(
+                        style: GoogleFonts.dmSans(
                           fontSize: 9,
                           fontWeight: FontWeight.w500,
                           color: Colors.white.withOpacity(0.6),
@@ -117,7 +117,7 @@ class PrayerHeroCard extends StatelessWidget {
                       const SizedBox(height: 4),
                       Text(
                         _formatDuration(timeRemaining!),
-                        style: GoogleFonts.dmsans(
+                        style: GoogleFonts.dmSans(
                           fontSize: 28,
                           fontWeight: FontWeight.w300,
                           color: Colors.white,
@@ -150,7 +150,7 @@ class PrayerHeroCard extends StatelessWidget {
                   const SizedBox(width: 6),
                   Text(
                     '$streak DÍAS',
-                    style: GoogleFonts.dmsans(
+                    style: GoogleFonts.dmSans(
                       fontSize: 11,
                       fontWeight: FontWeight.w600,
                       color: AppTheme.goldLight,

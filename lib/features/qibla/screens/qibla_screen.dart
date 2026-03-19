@@ -87,7 +87,7 @@ class QiblaScreen extends ConsumerWidget {
                       child: Text(
                         'Mantén el dispositivo plano y alejado de imanes para mayor precisión.',
                         textAlign: TextAlign.center,
-                        style: GoogleFonts.dmsans(
+                        style: GoogleFonts.dmSans(
                           fontSize: 12,
                           color: AppTheme.muted,
                         ),
@@ -109,7 +109,7 @@ class QiblaScreen extends ConsumerWidget {
               const SizedBox(height: 16),
               Text(
                 'Inicializando brújula...',
-                style: GoogleFonts.dmsans(color: AppTheme.muted),
+                style: GoogleFonts.dmSans(color: AppTheme.muted),
               ),
             ],
           ),
@@ -173,7 +173,7 @@ class QiblaScreen extends ConsumerWidget {
         const SizedBox(height: 8),
         RichText(
           text: TextSpan(
-            style: GoogleFonts.dmsans(
+            style: GoogleFonts.dmSans(
               fontSize: 24,
               fontWeight: FontWeight.w500,
               color: valueColor ?? AppTheme.goldLight,
@@ -182,7 +182,7 @@ class QiblaScreen extends ConsumerWidget {
               TextSpan(text: value),
               TextSpan(
                 text: unit,
-                style: GoogleFonts.dmsans(
+                style: GoogleFonts.dmSans(
                   fontSize: 14,
                   color: AppTheme.muted,
                 ),
@@ -193,7 +193,7 @@ class QiblaScreen extends ConsumerWidget {
         const SizedBox(height: 4),
         Text(
           label,
-          style: GoogleFonts.dmsans(
+          style: GoogleFonts.dmSans(
             fontSize: 11,
             color: AppTheme.muted,
           ),
@@ -404,7 +404,7 @@ class QiblaScreen extends ConsumerWidget {
               const SizedBox(width: 8),
               Text(
                 '$direction • Sureste',
-                style: GoogleFonts.dmsans(
+                style: GoogleFonts.dmSans(
                   fontSize: 13,
                   color: AppTheme.muted,
                 ),
@@ -442,7 +442,7 @@ class QiblaScreen extends ConsumerWidget {
         children: [
           Text(
             'MÉTODO DE CÁLCULO',
-            style: GoogleFonts.dmsans(
+            style: GoogleFonts.dmSans(
               fontSize: 10,
               fontWeight: FontWeight.w500,
               color: AppTheme.muted,
@@ -482,7 +482,7 @@ class QiblaScreen extends ConsumerWidget {
       ),
       child: Text(
         label,
-        style: GoogleFonts.dmsans(
+        style: GoogleFonts.dmSans(
           fontSize: 11,
           fontWeight: FontWeight.w500,
           color: isActive ? AppTheme.goldLight : AppTheme.muted,
@@ -502,7 +502,7 @@ class QiblaScreen extends ConsumerWidget {
             const SizedBox(height: 24),
             Text(
               'Sensor Issue',
-              style: GoogleFonts.dmsans(
+              style: GoogleFonts.dmSans(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
                 color: AppTheme.text,
@@ -512,7 +512,7 @@ class QiblaScreen extends ConsumerWidget {
             Text(
               message,
               textAlign: TextAlign.center,
-              style: GoogleFonts.dmsans(
+              style: GoogleFonts.dmSans(
                 color: AppTheme.muted,
                 fontSize: 14,
               ),
@@ -534,7 +534,7 @@ class QiblaScreen extends ConsumerWidget {
             const SizedBox(height: 24),
             Text(
               'Acceso a Ubicación Requerido',
-              style: GoogleFonts.dmsans(
+              style: GoogleFonts.dmSans(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: AppTheme.text,
@@ -544,7 +544,7 @@ class QiblaScreen extends ConsumerWidget {
             const SizedBox(height: 12),
             Text(
               'Permite el acceso a la ubicación para calcular la dirección precisa de la Qibla.',
-              style: GoogleFonts.dmsans(
+              style: GoogleFonts.dmSans(
                 color: AppTheme.muted,
                 fontSize: 14,
               ),
@@ -625,7 +625,7 @@ class QiblaScreen extends ConsumerWidget {
             children: [
               Text(
                 title,
-                style: GoogleFonts.dmsans(
+                style: GoogleFonts.dmSans(
                   fontWeight: FontWeight.w500,
                   color: AppTheme.text,
                 ),
@@ -633,7 +633,7 @@ class QiblaScreen extends ConsumerWidget {
               const SizedBox(height: 4),
               Text(
                 description,
-                style: GoogleFonts.dmsans(
+                style: GoogleFonts.dmSans(
                   fontSize: 12,
                   color: AppTheme.muted,
                 ),
