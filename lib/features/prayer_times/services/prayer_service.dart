@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/constants/app_constants.dart';
 import 'prayer_cache_service.dart';
 import 'travel_mode_service.dart';
+import 'widget_sync_service.dart';
 
 class CalculationMetadata {
   final CalculationMethod method;
@@ -132,6 +133,7 @@ final prayerTimesProvider = FutureProvider<PrayerTimes?>((ref) async {
   final tomorrow = now.add(const Duration(days: 1));
 
   if (offset == 0) {
+    await _syncWidgetSnapshot(ref, baseTimes);
     final tomorrowTimes = PrayerTimes(coordinates, DateComponents.from(tomorrow), params);
     await ref.read(prayerCacheServiceProvider).storePrayerTimes(
           position: position,
@@ -153,6 +155,7 @@ final prayerTimesProvider = FutureProvider<PrayerTimes?>((ref) async {
   params.adjustments.isha = offset;
   
   final adjusted = PrayerTimes(coordinates, date, params);
+  await _syncWidgetSnapshot(ref, adjusted);
   await ref.read(prayerCacheServiceProvider).storePrayerTimes(
         position: position,
         date: now,
@@ -170,6 +173,23 @@ final prayerTimesProvider = FutureProvider<PrayerTimes?>((ref) async {
 
   return adjusted;
 });
+
+Future<void> _syncWidgetSnapshot(Ref ref, PrayerTimes prayerTimes) async {
+  final nextPrayer = prayerTimes.nextPrayer();
+  final nextTime = prayerTimes.timeForPrayer(nextPrayer);
+  if (nextTime == null) return;
+  final diff = nextTime.difference(DateTime.now());
+  final hours = diff.inHours;
+  final minutes = diff.inMinutes.remainder(60);
+  await ref.read(widgetSyncServiceProvider).syncNextPrayer(
+        PrayerSnapshot(
+          name: nextPrayer.name.toUpperCase(),
+          timeLabel: '${nextTime.hour.toString().padLeft(2, '0')}:${nextTime.minute.toString().padLeft(2, '0')}',
+          countdownLabel: '${hours}h ${minutes}m',
+          themeKey: nextPrayer.name.toLowerCase(),
+        ),
+      );
+}
 
 final calculationMetadataProvider = FutureProvider<CalculationMetadata?>((ref) async {
   final method = await ref.watch(calculationMethodProvider.future);

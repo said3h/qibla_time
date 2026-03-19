@@ -85,6 +85,53 @@ class QiblaTokens {
         return asr;
     }
   }
+
+  QiblaTokens copyWith({
+    Color? bgPage,
+    Color? bgApp,
+    Color? bgSurface,
+    Color? bgSurface2,
+    Color? primary,
+    Color? primaryLight,
+    Color? primaryBg,
+    Color? primaryBorder,
+    Color? activeBg,
+    Color? activeBorder,
+    Color? textPrimary,
+    Color? textSecondary,
+    Color? textMuted,
+    Color? accent,
+    Color? confirm,
+    Color? danger,
+    Color? border,
+    Color? borderMed,
+  }) {
+    return QiblaTokens(
+      bgPage: bgPage ?? this.bgPage,
+      bgApp: bgApp ?? this.bgApp,
+      bgSurface: bgSurface ?? this.bgSurface,
+      bgSurface2: bgSurface2 ?? this.bgSurface2,
+      primary: primary ?? this.primary,
+      primaryLight: primaryLight ?? this.primaryLight,
+      primaryBg: primaryBg ?? this.primaryBg,
+      primaryBorder: primaryBorder ?? this.primaryBorder,
+      activeBg: activeBg ?? this.activeBg,
+      activeBorder: activeBorder ?? this.activeBorder,
+      textPrimary: textPrimary ?? this.textPrimary,
+      textSecondary: textSecondary ?? this.textSecondary,
+      textMuted: textMuted ?? this.textMuted,
+      accent: accent ?? this.accent,
+      confirm: confirm ?? this.confirm,
+      danger: danger ?? this.danger,
+      border: border ?? this.border,
+      borderMed: borderMed ?? this.borderMed,
+      fajr: fajr,
+      dhuhr: dhuhr,
+      asr: asr,
+      maghrib: maghrib,
+      isha: isha,
+    );
+  }
 }
 
 /// Hero dinámico por oración

@@ -14,4 +14,7 @@ class AppConstants {
   static const String keyTravelerLastLocationLabel = 'traveler_last_location_label';
   static const String keyTravelerLastTimezone = 'traveler_last_timezone';
   static const String keyHadithFavorites = 'hadith_favorites';
+  static const String keyAccessibilityFontScale = 'accessibility_font_scale';
+  static const String keyAccessibilityHighContrast = 'accessibility_high_contrast';
+  static const String keyAccessibilityUseSystemBold = 'accessibility_use_system_bold';
 }

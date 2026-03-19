@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/constants/app_constants.dart';
+import '../../../core/theme/accessibility_provider.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/theme/theme_provider.dart';
 import '../../prayer_times/services/prayer_cache_service.dart';
@@ -125,6 +126,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
     final themeName = ref.watch(themeControllerProvider);
+    final accessibility = ref.watch(accessibilityControllerProvider);
     final lastLocation = ref.watch(lastLocationLabelProvider).valueOrNull;
     final recentLocations = ref.watch(recentLocationsProvider).valueOrNull ?? const [];
     final cacheStatus = ref.watch(prayerCacheStatusProvider);
@@ -142,6 +144,41 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             const SizedBox(height: 16),
             _buildSectionTitle(tokens, 'Apariencia'),
             ..._themes.map((theme) => _buildThemeTile(tokens, themeName, theme.$1, theme.$2, theme.$3, theme.$4)),
+            const SizedBox(height: 14),
+            _buildSectionTitle(tokens, 'Accesibilidad'),
+            Container(
+              margin: const EdgeInsets.only(bottom: 5),
+              padding: const EdgeInsets.all(14),
+              decoration: BoxDecoration(
+                color: tokens.bgSurface,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: tokens.border),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Tamano de texto', style: GoogleFonts.dmSans(fontSize: 13, color: tokens.textPrimary)),
+                  const SizedBox(height: 4),
+                  Text('Escala actual: ${accessibility.fontScale.toStringAsFixed(1)}x', style: GoogleFonts.dmSans(fontSize: 10, color: tokens.textSecondary)),
+                  Slider(
+                    value: accessibility.fontScale,
+                    min: 0.8,
+                    max: 1.5,
+                    divisions: 7,
+                    label: '${accessibility.fontScale.toStringAsFixed(1)}x',
+                    onChanged: (value) => ref.read(accessibilityControllerProvider.notifier).setFontScale(value),
+                  ),
+                ],
+              ),
+            ),
+            _buildSimpleToggleTile(tokens, 'Alto contraste', 'Mejora legibilidad en toda la app', accessibility.highContrast, (v) => ref.read(accessibilityControllerProvider.notifier).setHighContrast(v)),
+            _buildSimpleToggleTile(tokens, 'Usar negrita del sistema', 'Respeta la preferencia de VoiceOver/TalkBack', accessibility.useSystemBoldText, (v) => ref.read(accessibilityControllerProvider.notifier).setUseSystemBoldText(v)),
+            _buildValueTile(
+              tokens,
+              'Restablecer accesibilidad',
+              'Reset',
+              onTap: () => ref.read(accessibilityControllerProvider.notifier).reset(),
+            ),
             const SizedBox(height: 14),
             _buildSectionTitle(tokens, 'Notificaciones · Adhan'),
             _buildToggleTile(tokens, 'Fajr', '6:12 · Adhan Al-Aqsa', adhanFajr, (v) => _toggleBool('adhan_fajr', v)),

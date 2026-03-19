@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'core/services/storage_service.dart';
+import 'core/theme/accessibility_provider.dart';
 import 'core/theme/app_theme.dart';
 import 'core/theme/theme_provider.dart';
 import 'core/navigation/main_navigation.dart';
 
 import 'features/prayer_times/services/notification_service.dart';
+import 'features/prayer_times/services/widget_sync_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await StorageService.init();
   await NotificationService.init();
+  await WidgetSyncService().configure();
   runApp(
     const ProviderScope(
       child: QiblaTimeApp(),
@@ -24,13 +27,34 @@ class QiblaTimeApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final themeName = ref.watch(themeControllerProvider);
-    final tokens = QiblaThemes.fromName(themeName);
+    final accessibility = ref.watch(accessibilityControllerProvider);
+    var tokens = QiblaThemes.fromName(themeName);
+    if (accessibility.highContrast) {
+      tokens = tokens.copyWith(
+        bgSurface: Color.alphaBlend(tokens.primary.withOpacity(0.06), tokens.bgSurface),
+        border: tokens.primary.withOpacity(0.42),
+        textSecondary: tokens.textPrimary,
+        textMuted: tokens.textSecondary,
+      );
+    }
     QiblaThemes.currentName = themeName;
 
     return MaterialApp(
       title: 'QiblaTime',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.buildTheme(tokens),
+      builder: (context, child) {
+        final mediaQuery = MediaQuery.of(context);
+        final textScale = mediaQuery.textScaler.scale(1) * accessibility.fontScale;
+        final effectiveBold = accessibility.useSystemBoldText ? mediaQuery.boldText : false;
+        return MediaQuery(
+          data: mediaQuery.copyWith(
+            textScaler: TextScaler.linear(textScale),
+            boldText: effectiveBold,
+          ),
+          child: child ?? const SizedBox.shrink(),
+        );
+      },
       home: const MainNavigation(),
     );
   }
