@@ -30,7 +30,7 @@ class QiblaScreen extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.info_outline, color: AppTheme.gold),
+            icon: Icon(Icons.info_outline, color: AppTheme.gold),
             onPressed: () => _showInfoDialog(context),
           ),
         ],
@@ -645,3 +645,4 @@ class QiblaScreen extends ConsumerWidget {
     );
   }
 }
+

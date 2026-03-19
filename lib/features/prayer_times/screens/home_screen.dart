@@ -72,7 +72,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   Widget _buildHeader(QiblaTokens tokens) {
     final now = DateTime.now();
-    final hijri = HijriCalendar.now();
+    final hijri = DateTime.now()();
     
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 16, 20, 12),

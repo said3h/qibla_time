@@ -44,7 +44,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
           const SizedBox(height: 32),
           Text(
             'Important Events (${currentHijri.hYear} AH)',
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppTheme.primaryGreen),
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppTheme.primaryGreen),
           ),
           const SizedBox(height: 16),
           ..._buildUpcomingEvents(),
@@ -178,7 +178,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   DateFormat('MMMM d, yyyy').format(selectedDate),
                   style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                 ),
-                const Icon(Icons.event, color: AppTheme.primaryGreen),
+                Icon(Icons.event, color: AppTheme.primaryGreen),
               ],
             ),
           ),
@@ -197,7 +197,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
       ),
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-        title: Text(eventName, style: const TextStyle(fontWeight: FontWeight.bold, color: AppTheme.textDark)),
+        title: Text(eventName, style: TextStyle(fontWeight: FontWeight.bold, color: AppTheme.textDark)),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -217,3 +217,4 @@ class _CalendarScreenState extends State<CalendarScreen> {
     );
   }
 }
+

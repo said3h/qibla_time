@@ -114,7 +114,7 @@ class SupportScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              const Icon(Icons.chevron_right, color: AppTheme.textLight)
+              Icon(Icons.chevron_right, color: AppTheme.textLight)
             ],
           ),
         ),
@@ -122,3 +122,4 @@ class SupportScreen extends StatelessWidget {
     );
   }
 }
+
