@@ -29,17 +29,16 @@ class AdhanManager {
     for (var entry in prayers.entries) {
       final prayerName = entry.key;
       final prayerTime = entry.value;
-      
+
       // Check if user enabled Adhan for this prayer
       final isEnabled = prefs.getBool('adhan_${prayerName.toLowerCase()}') ?? true;
-      final selectedSound = prefs.getString('selected_adhan') ?? 'adhan_makkah';
-      
+
       if (isEnabled && prayerTime.isAfter(DateTime.now())) {
+        // scheduleAdhan now uses the user's selected adhan from SettingsService
         await NotificationService.scheduleAdhan(
           id,
           'Adhan: $prayerName',
           prayerTime,
-          selectedSound, // Use selected sound
         );
       }
       id++;
