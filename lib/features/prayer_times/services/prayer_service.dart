@@ -4,6 +4,8 @@ import 'package:geolocator/geolocator.dart';
 import 'package:adhan/adhan.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/constants/app_constants.dart';
+import 'prayer_cache_service.dart';
+import 'travel_mode_service.dart';
 
 class CalculationMetadata {
   final CalculationMethod method;
@@ -53,7 +55,12 @@ final locationProvider = FutureProvider<Position?>((ref) async {
       // Save for offline fallback
       await prefs.setDouble('last_lat', freshPosition.latitude);
       await prefs.setDouble('last_lng', freshPosition.longitude);
-      
+      await ref.read(travelModeServiceProvider).recordLocationUpdate(freshPosition);
+      await ref.read(prayerCacheServiceProvider).invalidateIfFarFrom(freshPosition);
+      ref.invalidate(travelBannerProvider);
+      ref.invalidate(recentLocationsProvider);
+      ref.invalidate(lastLocationLabelProvider);
+
       return freshPosition;
     } catch (e) {
       // Fallback to cached coordinates
@@ -114,10 +121,26 @@ final prayerTimesProvider = FutureProvider<PrayerTimes?>((ref) async {
   final params = metadata.method.getParameters();
   params.madhab = metadata.madhab;
 
-  final date = DateComponents.from(DateTime.now());
+  final now = DateTime.now();
+  final date = DateComponents.from(now);
   final baseTimes = PrayerTimes(coordinates, date, params);
-  
-  if (offset == 0) return baseTimes;
+  await ref.read(prayerCacheServiceProvider).storePrayerTimes(
+        position: position,
+        date: now,
+        prayerTimes: baseTimes,
+      );
+  final tomorrow = now.add(const Duration(days: 1));
+
+  if (offset == 0) {
+    final tomorrowTimes = PrayerTimes(coordinates, DateComponents.from(tomorrow), params);
+    await ref.read(prayerCacheServiceProvider).storePrayerTimes(
+          position: position,
+          date: tomorrow,
+          prayerTimes: tomorrowTimes,
+        );
+    ref.invalidate(prayerCacheStatusProvider);
+    return baseTimes;
+  }
 
   // Apply regional offset if defined
   // Since PrayerTimes itself is immutable and doesn't expose an easy 'addMinutes' globally,
@@ -129,7 +152,23 @@ final prayerTimesProvider = FutureProvider<PrayerTimes?>((ref) async {
   params.adjustments.maghrib = offset;
   params.adjustments.isha = offset;
   
-  return PrayerTimes(coordinates, date, params);
+  final adjusted = PrayerTimes(coordinates, date, params);
+  await ref.read(prayerCacheServiceProvider).storePrayerTimes(
+        position: position,
+        date: now,
+        prayerTimes: adjusted,
+      );
+
+  final tomorrowTimes = PrayerTimes(coordinates, DateComponents.from(tomorrow), params);
+  await ref.read(prayerCacheServiceProvider).storePrayerTimes(
+        position: position,
+        date: tomorrow,
+        prayerTimes: tomorrowTimes,
+      );
+
+  ref.invalidate(prayerCacheStatusProvider);
+
+  return adjusted;
 });
 
 final calculationMetadataProvider = FutureProvider<CalculationMetadata?>((ref) async {

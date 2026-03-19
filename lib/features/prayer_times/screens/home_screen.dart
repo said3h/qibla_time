@@ -3,11 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hijri/hijri_calendar.dart';
+import 'package:share_plus/share_plus.dart';
 
+import '../../../core/services/connectivity_service.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../hadith/services/hadith_service.dart';
 import '../../tracking/services/tracking_service.dart';
 import '../services/adhan_manager.dart';
 import '../services/prayer_service.dart';
+import '../services/travel_mode_service.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -18,6 +22,8 @@ class HomeScreen extends ConsumerStatefulWidget {
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   static const _weekdays = ['Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom'];
+  bool _hadithExpanded = false;
+  int _hadithOffset = 0;
 
   @override
   void initState() {
@@ -33,6 +39,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final prayerTimesAsync = ref.watch(prayerTimesProvider);
     final countdownAsync = ref.watch(nextPrayerCountdownProvider);
     final tracking = ref.watch(prayerTrackingProvider);
+    final bannerAsync = ref.watch(travelBannerProvider);
+    final connectivityAsync = ref.watch(connectivityStatusProvider);
+    final locationLabelAsync = ref.watch(lastLocationLabelProvider);
+    final hadithsAsync = ref.watch(allHadithsProvider);
+    final favoritesAsync = ref.watch(hadithFavoritesProvider);
     final streak = ref.read(prayerTrackingProvider.notifier).getStreak();
     final now = DateTime.now();
     final dateKey = '${now.year}-${now.month}-${now.day}';
@@ -47,7 +58,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           child: ListView(
             padding: EdgeInsets.zero,
             children: [
-              _buildHeader(tokens),
+              _buildHeader(tokens, locationLabelAsync.valueOrNull, connectivityAsync.valueOrNull ?? true),
+              bannerAsync.when(
+                data: (banner) => banner == null ? const SizedBox.shrink() : _buildTravelBanner(tokens, banner),
+                loading: () => const SizedBox.shrink(),
+                error: (_, __) => const SizedBox.shrink(),
+              ),
               _buildCalendarStrip(tokens),
               prayerTimesAsync.when(
                 data: (prayerTimes) => _buildHeroSection(
@@ -60,6 +76,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 loading: () => _buildLoadingHero(tokens),
                 error: (_, __) => _buildFallbackHero(tokens),
               ),
+              _buildHadithSection(tokens, hadithsAsync.valueOrNull, favoritesAsync.valueOrNull ?? const <int>{}),
               prayerTimesAsync.when(
                 data: (prayerTimes) => _buildPrayerSection(
                   prayerTimes,
@@ -79,7 +96,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 
-  Widget _buildHeader(QiblaTokens tokens) {
+  Widget _buildHeader(QiblaTokens tokens, String? locationLabel, bool isOnline) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 12, 20, 10),
       child: Row(
@@ -97,7 +114,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                 ),
                 Text(
-                  '📍 Alicante, Espana',
+                  '${isOnline ? '📍' : '📴'} ${locationLabel ?? 'Ubicacion pendiente'}',
                   style: GoogleFonts.dmSans(
                     fontSize: 10,
                     color: tokens.textSecondary,
@@ -117,6 +134,36 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             child: Icon(Icons.settings, size: 17, color: tokens.textPrimary),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildTravelBanner(QiblaTokens tokens, String message) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 0, 16, 10),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+        decoration: BoxDecoration(
+          color: tokens.primaryBg,
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(color: tokens.primaryBorder),
+        ),
+        child: Row(
+          children: [
+            Icon(Icons.flight_takeoff, color: tokens.primary, size: 18),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Text(message, style: GoogleFonts.dmSans(fontSize: 11, color: tokens.textPrimary)),
+            ),
+            IconButton(
+              onPressed: () async {
+                await ref.read(travelModeServiceProvider).clearPendingBanner();
+                ref.invalidate(travelBannerProvider);
+              },
+              icon: Icon(Icons.close, size: 16, color: tokens.textSecondary),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -490,6 +537,89 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         child: Text(
           'Los horarios apareceran aqui cuando tengamos ubicacion.',
           style: GoogleFonts.dmSans(fontSize: 12, color: tokens.textSecondary),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHadithSection(QiblaTokens tokens, List<dynamic>? hadiths, Set<int> favorites) {
+    if (hadiths == null || hadiths.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
+    final hadith = hadiths[_hadithOffset % hadiths.length];
+    final isFavorite = favorites.contains(hadith.id);
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: tokens.bgSurface,
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(color: tokens.border),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    'HADITH DIARIO',
+                    style: GoogleFonts.dmSans(fontSize: 9, color: tokens.textSecondary, letterSpacing: 1.4),
+                  ),
+                ),
+                Text(hadith.grade, style: GoogleFonts.dmSans(fontSize: 10, color: tokens.primary)),
+              ],
+            ),
+            const SizedBox(height: 10),
+            Text(
+              hadith.arabic,
+              textAlign: TextAlign.right,
+              style: GoogleFonts.amiri(fontSize: 19, height: 1.8, color: tokens.textPrimary),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              hadith.translation,
+              style: GoogleFonts.dmSans(fontSize: 12, height: 1.6, color: tokens.textPrimary),
+              maxLines: _hadithExpanded ? null : 3,
+              overflow: _hadithExpanded ? null : TextOverflow.ellipsis,
+            ),
+            const SizedBox(height: 6),
+            Text(
+              '${hadith.reference} · ${hadith.category}',
+              style: GoogleFonts.dmSans(fontSize: 10, color: tokens.textSecondary),
+            ),
+            const SizedBox(height: 10),
+            Row(
+              children: [
+                TextButton(
+                  onPressed: () => setState(() => _hadithExpanded = !_hadithExpanded),
+                  child: Text(_hadithExpanded ? 'Ver menos' : 'Ver mas'),
+                ),
+                TextButton(
+                  onPressed: () async {
+                    await Share.share('${hadith.translation}\n\n${hadith.reference}');
+                  },
+                  child: const Text('Compartir'),
+                ),
+                TextButton(
+                  onPressed: () async {
+                    await ref.read(hadithServiceProvider).toggleFavorite(hadith.id);
+                    ref.invalidate(hadithFavoritesProvider);
+                  },
+                  child: Text(isFavorite ? 'Favorito' : 'Guardar'),
+                ),
+                const Spacer(),
+                IconButton(
+                  tooltip: 'Siguiente',
+                  onPressed: () => setState(() => _hadithOffset = (_hadithOffset + 1) % hadiths.length),
+                  icon: Icon(Icons.arrow_forward, color: tokens.primary),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );

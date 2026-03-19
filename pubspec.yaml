@@ -26,6 +26,10 @@ dependencies:
   audioplayers: ^6.1.0
   permission_handler: ^11.3.1
   timezone: ^0.9.4
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  connectivity_plus: ^6.1.5
+  geocoding: ^3.0.0
   proximity_sensor: ^1.0.1
   
   # Google Fonts para tipografía DM Sans y Amiri (árabe)
@@ -46,6 +50,7 @@ flutter:
   # Assets de audio para Adhan y otros sonidos
   assets:
     - assets/audio/
+    - assets/hadiths/
   
   # Fuentes personalizadas Amiri
   fonts:

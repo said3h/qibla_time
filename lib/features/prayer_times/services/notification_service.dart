@@ -109,4 +109,28 @@ class NotificationService {
   static Future<void> cancel(int id) async {
     await _notificationsPlugin.cancel(id);
   }
+
+  static Future<void> showInstant({
+    required String title,
+    required String body,
+  }) async {
+    await _notificationsPlugin.show(
+      DateTime.now().millisecondsSinceEpoch ~/ 1000,
+      title,
+      body,
+      const NotificationDetails(
+        android: AndroidNotificationDetails(
+          'travel_channel',
+          'Travel Mode Notifications',
+          channelDescription: 'Notifications for traveler mode updates',
+          importance: Importance.defaultImportance,
+        ),
+        iOS: DarwinNotificationDetails(
+          presentAlert: true,
+          presentSound: false,
+          presentBadge: false,
+        ),
+      ),
+    );
+  }
 }

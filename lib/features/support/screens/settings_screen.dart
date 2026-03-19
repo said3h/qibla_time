@@ -7,7 +7,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/constants/app_constants.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/theme/theme_provider.dart';
+import '../../prayer_times/services/prayer_cache_service.dart';
 import '../../prayer_times/services/prayer_service.dart';
+import '../../prayer_times/services/travel_mode_service.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
@@ -24,6 +26,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   bool adhanIsha = false;
   bool haptics = true;
   bool autoLocation = true;
+  bool travelerMode = true;
   int timeOffset = 0;
   bool isHanafi = false;
   CalculationMethod calculationMethod = CalculationMethod.muslim_world_league;
@@ -51,6 +54,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       adhanAsr = prefs.getBool('adhan_asr') ?? true;
       adhanMaghrib = prefs.getBool('adhan_maghrib') ?? true;
       adhanIsha = prefs.getBool('adhan_isha') ?? false;
+      travelerMode = prefs.getBool(AppConstants.keyTravelerModeEnabled) ?? true;
       timeOffset = prefs.getInt('time_offset') ?? 0;
       isHanafi = prefs.getBool('madhab_hanafi') ?? false;
       final methodIndex = prefs.getInt(AppConstants.keyCalculationMethod) ?? CalculationMethod.muslim_world_league.index;
@@ -81,6 +85,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           break;
       }
     });
+  }
+
+  Future<void> _toggleTravelerMode(bool value) async {
+    await ref.read(travelModeServiceProvider).setEnabled(value);
+    if (!mounted) return;
+    setState(() => travelerMode = value);
+    ref.invalidate(travelerModeEnabledProvider);
   }
 
   Future<void> _setTheme(String theme) async {
@@ -114,6 +125,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
     final themeName = ref.watch(themeControllerProvider);
+    final lastLocation = ref.watch(lastLocationLabelProvider).valueOrNull;
+    final recentLocations = ref.watch(recentLocationsProvider).valueOrNull ?? const [];
+    final cacheStatus = ref.watch(prayerCacheStatusProvider);
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
@@ -142,6 +156,43 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             _buildValueTile(tokens, 'Madhab (Asr)', isHanafi ? 'Hanafi' : 'Shafi', onTap: () => _setMadhab(!isHanafi)),
             _buildValueTile(tokens, 'Ajuste manual', '±$timeOffset min', trailing: _offsetButtons(tokens)),
             _buildSimpleToggleTile(tokens, 'Ubicacion', 'GPS automatico', autoLocation, (v) => setState(() => autoLocation = v)),
+            const SizedBox(height: 14),
+            _buildSectionTitle(tokens, 'Modo viajero'),
+            _buildSimpleToggleTile(tokens, 'Modo Viajero', 'Detecta cambios >50 km y actualiza horarios', travelerMode, _toggleTravelerMode),
+            _buildValueTile(tokens, 'Ultima ubicacion', lastLocation ?? 'Sin datos'),
+            if (recentLocations.isNotEmpty)
+              Container(
+                margin: const EdgeInsets.only(bottom: 8),
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: tokens.bgSurface,
+                  borderRadius: BorderRadius.circular(14),
+                  border: Border.all(color: tokens.border),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Ultimas ubicaciones', style: GoogleFonts.dmSans(fontSize: 11, color: tokens.textPrimary, fontWeight: FontWeight.w500)),
+                    const SizedBox(height: 8),
+                    ...recentLocations.take(5).map((location) => Padding(
+                          padding: const EdgeInsets.only(bottom: 6),
+                          child: Text('• ${location.label}', style: GoogleFonts.dmSans(fontSize: 10, color: tokens.textSecondary)),
+                        )),
+                  ],
+                ),
+              ),
+            _buildSectionTitle(tokens, 'Cache inteligente'),
+            _buildValueTile(tokens, 'Cache valido hasta', cacheStatus.validUntil?.toLocal().toString().substring(0, 16) ?? 'Sin cache'),
+            _buildValueTile(tokens, 'Entradas cacheadas', '${cacheStatus.entryCount}'),
+            _buildValueTile(
+              tokens,
+              'Limpiar cache',
+              'Borrar',
+              onTap: () async {
+                await ref.read(prayerCacheServiceProvider).clear();
+                ref.invalidate(prayerCacheStatusProvider);
+              },
+            ),
             const SizedBox(height: 14),
             _buildSectionTitle(tokens, 'Sadaqah · Apoyo'),
             Container(
