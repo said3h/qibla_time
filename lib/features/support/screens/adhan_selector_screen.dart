@@ -36,11 +36,10 @@ class _AdhanSelectorScreenState extends State<AdhanSelectorScreen> {
 
   Future<void> _selectAdhan(String file) async {
     await _settingsService.saveAdhan(file);
-    if (mounted) {
-      setState(() {
-        _selectedAdhan = file;
-      });
-    }
+    if (!mounted) return;
+    setState(() {
+      _selectedAdhan = file;
+    });
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Adhan guardado: ${_getAdhanName(file)}'),

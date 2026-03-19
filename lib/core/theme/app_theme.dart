@@ -317,30 +317,30 @@ class AppTheme {
   final tokens = QiblaThemes.dark;
   
   // Colores legacy (usando tema dark por defecto)
-  static Color get primaryGreen => QiblaThemes.dark.primary;
-  static Color get accentGold => QiblaThemes.dark.primaryLight;
-  static Color get backgroundWhite => QiblaThemes.dark.bgPage;
-  static Color get textDark => QiblaThemes.dark.textPrimary;
-  static Color get textLight => QiblaThemes.dark.textMuted;
+  static const Color primaryGreen = Color(0xFFC9A84C);
+  static const Color accentGold = Color(0xFFE8C97A);
+  static const Color backgroundWhite = Color(0xFF0A0E14);
+  static const Color textDark = Color(0xFFF3EBD1);
+  static const Color textLight = Color(0xFF9BA7B4);
   
   // Nuevos colores del diseño v2
-  static Color get gold => QiblaThemes.dark.primary;
-  static Color get goldLight => QiblaThemes.dark.primaryLight;
-  static Color get night => QiblaThemes.dark.bgPage;
-  static Color get deep => QiblaThemes.dark.bgApp;
-  static Color get surface => QiblaThemes.dark.bgSurface;
-  static Color get surface2 => QiblaThemes.dark.bgSurface2;
-  static Color get text => QiblaThemes.dark.textPrimary;
-  static Color get muted => QiblaThemes.dark.textMuted;
-  static Color get accent => QiblaThemes.dark.accent;
-  static Color get confirm => QiblaThemes.dark.confirm;
-  static Color get danger => QiblaThemes.dark.danger;
-  static Color get border => QiblaThemes.dark.border;
-  static Color get borderMed => QiblaThemes.dark.borderMed;
-  static Color get activeBg => QiblaThemes.dark.activeBg;
-  static Color get activeBorder => QiblaThemes.dark.activeBorder;
-  static Color get primaryBg => QiblaThemes.dark.primaryBg;
-  static Color get primaryBorder => QiblaThemes.dark.primaryBorder;
+  static const Color gold = Color(0xFFC9A84C);
+  static const Color goldLight = Color(0xFFE8C97A);
+  static const Color night = Color(0xFF0A0E14);
+  static const Color deep = Color(0xFF141B27);
+  static const Color surface = Color(0xFF1C2535);
+  static const Color surface2 = Color(0xFF243044);
+  static const Color text = Color(0xFFF3EBD1);
+  static const Color muted = Color(0xFF9BA7B4);
+  static const Color accent = Color(0xFF66D9EF);
+  static const Color confirm = Color(0xFF69C08A);
+  static const Color danger = Color(0xFFE57373);
+  static const Color border = Color(0x1FE8C97A);
+  static const Color borderMed = Color(0x38E8C97A);
+  static const Color activeBg = Color(0x2BC9A84C);
+  static const Color activeBorder = Color(0x52C9A84C);
+  static const Color primaryBg = Color(0x21C9A84C);
+  static const Color primaryBorder = Color(0x52C9A84C);
 
   // Gradientes
   static LinearGradient get prayerHeroGradient => const LinearGradient(
@@ -357,7 +357,7 @@ class AppTheme {
 
   // Theme Data para Material
   static ThemeData get darkTheme {
-    final tokens = QiblaThemes.dark;
+    const tokens = QiblaThemes.dark;
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,

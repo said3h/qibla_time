@@ -1,4 +1,5 @@
 import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter/foundation.dart';
 
 /// Servicio para reproducir archivos de audio (Adhan, Quran, etc.)
 class AudioService {
@@ -25,7 +26,7 @@ class AudioService {
         await _player.play(AssetSource('audio/$fileName'));
       }
     } catch (e) {
-      print('Error al reproducir audio: $e');
+      debugPrint('Error al reproducir audio: $e');
       rethrow;
     }
   }
@@ -35,7 +36,7 @@ class AudioService {
     try {
       await _player.stop();
     } catch (e) {
-      print('Error al detener audio: $e');
+      debugPrint('Error al detener audio: $e');
     }
   }
 
@@ -44,7 +45,7 @@ class AudioService {
     try {
       await _player.pause();
     } catch (e) {
-      print('Error al pausar audio: $e');
+      debugPrint('Error al pausar audio: $e');
     }
   }
 
@@ -53,7 +54,7 @@ class AudioService {
     try {
       await _player.resume();
     } catch (e) {
-      print('Error al reanudar audio: $e');
+      debugPrint('Error al reanudar audio: $e');
     }
   }
 
@@ -62,7 +63,7 @@ class AudioService {
     try {
       await _player.setVolume(volume);
     } catch (e) {
-      print('Error al establecer volumen: $e');
+      debugPrint('Error al establecer volumen: $e');
     }
   }
 
@@ -72,7 +73,7 @@ class AudioService {
       await _player.stop();
       await _player.dispose();
     } catch (e) {
-      print('Error al liberar recursos: $e');
+      debugPrint('Error al liberar recursos: $e');
     }
   }
 

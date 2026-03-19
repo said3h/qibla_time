@@ -40,30 +40,30 @@ class _MainNavigationState extends State<MainNavigation> {
         },
         backgroundColor: Colors.white,
         indicatorColor: AppTheme.primaryGreen.withOpacity(0.2),
-        destinations: [
+        destinations: const [
           NavigationDestination(
             icon: Icon(Icons.access_time_outlined),
-            selectedIcon: Icon(Icons.access_time_filled, color: AppTheme.primaryGreen),
+            selectedIcon: Icon(Icons.access_time_filled),
             label: 'Prayers',
           ),
           NavigationDestination(
             icon: Icon(Icons.explore_outlined),
-            selectedIcon: Icon(Icons.explore, color: AppTheme.primaryGreen),
+            selectedIcon: Icon(Icons.explore),
             label: 'Qibla',
           ),
           NavigationDestination(
             icon: Icon(Icons.calendar_month_outlined),
-            selectedIcon: Icon(Icons.calendar_month, color: AppTheme.primaryGreen),
+            selectedIcon: Icon(Icons.calendar_month),
             label: 'Calendar',
           ),
           NavigationDestination(
             icon: Icon(Icons.volunteer_activism_outlined), // Using this for Tasbih/Dhikr feeling
-            selectedIcon: Icon(Icons.volunteer_activism, color: AppTheme.primaryGreen),
+            selectedIcon: Icon(Icons.volunteer_activism),
             label: 'Dhikr',
           ),
           NavigationDestination(
             icon: Icon(Icons.favorite_outline),
-            selectedIcon: Icon(Icons.favorite, color: AppTheme.primaryGreen),
+            selectedIcon: Icon(Icons.favorite),
             label: 'Support',
           ),
         ],

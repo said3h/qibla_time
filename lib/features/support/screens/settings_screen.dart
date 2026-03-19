@@ -141,7 +141,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               onTap: () async {
                 await prefs.setInt(AppConstants.keyCalculationMethod, method.index);
                 ref.invalidate(calculationMethodProvider);
-                if (mounted) Navigator.pop(context);
+                if (!context.mounted) return;
+                Navigator.pop(context);
+                if (!this.context.mounted) return;
                 setState(() {});
               },
             )).toList(),
