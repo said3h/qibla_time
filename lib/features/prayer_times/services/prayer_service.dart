@@ -56,7 +56,7 @@ final locationProvider = FutureProvider<Position?>((ref) async {
       // Save for offline fallback
       await prefs.setDouble('last_lat', freshPosition.latitude);
       await prefs.setDouble('last_lng', freshPosition.longitude);
-      await ref.read(travelModeServiceProvider).recordLocationUpdate(freshPosition);
+      await ref.read(travelModeServiceProvider).recordLocationUpdate(freshPosition, ref: ref);
       await ref.read(prayerCacheServiceProvider).invalidateIfFarFrom(freshPosition);
       ref.invalidate(travelBannerProvider);
       ref.invalidate(recentLocationsProvider);

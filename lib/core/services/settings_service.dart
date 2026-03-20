@@ -1,77 +1,84 @@
+// lib/core/services/settings_service.dart
+//
+// Añadido: getPrayerNotificationEnabled / savePrayerNotificationEnabled
+// para controlar cada oración individualmente (como muestra el prototipo)
+
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// Servicio para gestionar las preferencias del usuario
 class SettingsService {
-  // Singleton
-  static final SettingsService _instance = SettingsService._internal();
-  factory SettingsService() => _instance;
-  SettingsService._internal();
+  SettingsService._();
+  static final SettingsService instance = SettingsService._();
 
-  // Claves de preferencias
-  static const String _adhanKey = 'selected_adhan';
-  static const String _calculationMethodKey = 'calculation_method';
-  static const String _madhabKey = 'madhab';
-  static const String _notificationsEnabledKey = 'notifications_enabled';
+  // ── Adhan ────────────────────────────────────────────────────
+  static const _keyAdhan = 'selected_adhan';
 
-  // ==================== ADHAN ====================
-  
-  /// Guarda el archivo de adhan seleccionado
   Future<void> saveAdhan(String fileName) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_adhanKey, fileName);
+    await prefs.setString(_keyAdhan, fileName);
   }
 
-  /// Obtiene el archivo de adhan seleccionado
   Future<String> getAdhan() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getString(_adhanKey) ?? 'adhan_makkah.mp3';
+    return prefs.getString(_keyAdhan) ?? 'azan1.mp3';
   }
 
-  // ==================== CALCULATION METHOD ====================
-  
-  /// Guarda el método de cálculo seleccionado
-  Future<void> saveCalculationMethod(int methodId) async {
+  // ── Notificaciones globales ───────────────────────────────────
+  static const _keyNotifications = 'prayer_notifications';
+
+  Future<void> saveNotificationsEnabled(bool value) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt(_calculationMethodKey, methodId);
+    await prefs.setBool(_keyNotifications, value);
   }
 
-  /// Obtiene el método de cálculo seleccionado
-  Future<int> getCalculationMethod() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getInt(_calculationMethodKey) ?? 1; // Default: Muslim World League
-  }
-
-  // ==================== MADHAB ====================
-  
-  /// Guarda el Madhab seleccionado (0 = Shafi, 1 = Hanafi)
-  Future<void> saveMadhab(int madhabId) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt(_madhabKey, madhabId);
-  }
-
-  /// Obtiene el Madhab seleccionado
-  Future<int> getMadhab() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getInt(_madhabKey) ?? 0; // Default: Shafi
-  }
-
-  // ==================== NOTIFICATIONS ====================
-  
-  /// Guarda si las notificaciones están habilitadas
-  Future<void> saveNotificationsEnabled(bool enabled) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(_notificationsEnabledKey, enabled);
-  }
-
-  /// Obtiene si las notificaciones están habilitadas
   Future<bool> getNotificationsEnabled() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getBool(_notificationsEnabledKey) ?? true;
+    return prefs.getBool(_keyNotifications) ?? true;
   }
 
-  // ==================== RESET ====================
-  
-  /// Restablece todas las preferencias a los valores por defecto
+  // ── Notificaciones por oración ───────────────────────────────
+  // Keys: 'prayer_notif_fajr', 'prayer_notif_dhuhr', etc.
+
+  Future<void> savePrayerNotificationEnabled(
+    String prayerKey,  // 'fajr', 'dhuhr', 'asr', 'maghrib', 'isha'
+    bool value,
+  ) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('prayer_notif_$prayerKey', value);
+  }
+
+  Future<bool> getPrayerNotificationEnabled(String prayerKey) async {
+    final prefs = await SharedPreferences.getInstance();
+    // Por defecto todas activadas
+    return prefs.getBool('prayer_notif_$prayerKey') ?? true;
+  }
+
+  // ── Método de cálculo ────────────────────────────────────────
+  static const _keyCalcMethod = 'calculation_method';
+
+  Future<void> saveCalculationMethod(int value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt(_keyCalcMethod, value);
+  }
+
+  Future<int> getCalculationMethod() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getInt(_keyCalcMethod) ?? 1; // 1 = Muslim World League
+  }
+
+  // ── Madhab ───────────────────────────────────────────────────
+  static const _keyMadhab = 'prayer_madhab';
+
+  Future<void> saveMadhab(int value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt(_keyMadhab, value);
+  }
+
+  Future<int> getMadhab() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getInt(_keyMadhab) ?? 0; // 0 = Shafi
+  }
+
+  // ── Reset ─────────────────────────────────────────────────────
   Future<void> resetAll() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.clear();

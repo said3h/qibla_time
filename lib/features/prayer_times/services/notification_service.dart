@@ -1,136 +1,128 @@
+// lib/features/prayer_times/services/notification_service.dart
+//
+// REGLA DE NOMBRES POR PLATAFORMA:
+//
+//   Flutter assets:  'azan1.mp3'          → assets/audio/azan1.mp3
+//   iOS bundle:      'azan1.mp3'          → ios/Runner/azan1.mp3
+//   Android raw:     'adhan_azan1'        → res/raw/adhan_azan1.mp3
+//
+// Android no acepta recursos en res/raw/ que empiecen por número,
+// por eso añadimos el prefijo 'adhan_' al convertir el nombre.
+
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
-import '../../../core/services/settings_service.dart';
+import 'package:timezone/data/latest.dart' as tz;
 
 class NotificationService {
-  static final FlutterLocalNotificationsPlugin _notificationsPlugin =
-      FlutterLocalNotificationsPlugin();
-  static final SettingsService _settingsService = SettingsService();
+  NotificationService._();
+  static final NotificationService instance = NotificationService._();
 
-  static Future<void> init() async {
+  final FlutterLocalNotificationsPlugin _plugin =
+      FlutterLocalNotificationsPlugin();
+
+  // ── Inicialización ────────────────────────────────────────────
+
+  Future<void> initialize() async {
     tz.initializeTimeZones();
 
-    const AndroidInitializationSettings androidSettings =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
-    const DarwinInitializationSettings iosSettings = DarwinInitializationSettings(
-      requestAlertPermission: true,
-      requestBadgePermission: true,
-      requestSoundPermission: true,
-    );
-
-    const InitializationSettings settings = InitializationSettings(
-      android: androidSettings,
-      iOS: iosSettings,
-    );
-
-    await _notificationsPlugin.initialize(settings);
-  }
-
-  /// Programa una notificación de Adhan con el sonido seleccionado por el usuario
-  static Future<void> scheduleAdhan(
-    int id,
-    String title,
-    DateTime scheduledTime,
-  ) async {
-    // Obtener el adhan seleccionado por el usuario
-    final selectedAdhan = await _settingsService.getAdhan();
-    
-    // Para Android: quitar extensión .mp3 para RawResourceAndroidNotificationSound
-    final androidSoundName = selectedAdhan.replaceAll('.mp3', '').toLowerCase();
-    
-    // Para iOS: usar extensión .caf (o .mp3 si está en el bundle)
-    final iosSoundName = selectedAdhan.replaceAll('.mp3', '');
-
-    await _notificationsPlugin.zonedSchedule(
-      id,
-      title,
-      'It is time for prayer',
-      tz.TZDateTime.from(scheduledTime, tz.local),
-      NotificationDetails(
-        android: AndroidNotificationDetails(
-          'adhan_channel',
-          'Adhan Notifications',
-          channelDescription: 'Notifications for prayer times',
-          importance: Importance.max,
-          priority: Priority.high,
-          sound: RawResourceAndroidNotificationSound(androidSoundName),
-          fullScreenIntent: true,
-        ),
-        iOS: DarwinNotificationDetails(
-          sound: iosSoundName,
-          presentSound: true,
-          presentAlert: true,
-          presentBadge: true,
+    await _plugin.initialize(
+      const InitializationSettings(
+        android: AndroidInitializationSettings('@mipmap/ic_launcher'),
+        iOS: DarwinInitializationSettings(
+          requestAlertPermission: true,
+          requestBadgePermission: true,
+          requestSoundPermission: true,
         ),
       ),
+    );
+  }
+
+  // ── Programar Adhan ───────────────────────────────────────────
+
+  /// [adhanFile] viene de AdhanModel.file — ej: 'azan1.mp3'
+  Future<void> scheduleAdhan({
+    required int id,
+    required String prayerName,
+    required DateTime scheduledAt,
+    required String adhanFile,
+  }) async {
+    // Android res/raw: sin extensión y con prefijo para evitar nombre numérico
+    // 'azan1.mp3' → 'adhan_azan1'
+    final androidSound = 'adhan_${adhanFile.replaceAll('.mp3', '')}';
+
+    final details = NotificationDetails(
+      android: AndroidNotificationDetails(
+        'adhan_channel',
+        'Adhan',
+        channelDescription: 'Notificaciones de tiempo de oración',
+        importance: Importance.max,
+        priority: Priority.high,
+        sound: UriAndroidNotificationSound(androidSound),
+        playSound: true,
+        enableVibration: true,
+      ),
+      iOS: DarwinNotificationDetails(
+        sound: adhanFile,          // iOS acepta 'azan1.mp3' directamente
+        presentAlert: true,
+        presentBadge: true,
+        presentSound: true,
+      ),
+    );
+
+    await _plugin.zonedSchedule(
+      id,
+      'QiblaTime — $prayerName',
+      'Es la hora de la oración',
+      tz.TZDateTime.from(scheduledAt, tz.local),
+      details,
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
     );
   }
 
-  /// Programa una notificación con sonido por defecto del sistema
-  static Future<void> scheduleAdhanWithDefaultSound(
-    int id,
-    String title,
-    DateTime scheduledTime,
-  ) async {
-    await _notificationsPlugin.zonedSchedule(
-      id,
-      title,
-      'It is time for prayer',
-      tz.TZDateTime.from(scheduledTime, tz.local),
-      const NotificationDetails(
-        android: AndroidNotificationDetails(
-          'adhan_channel',
-          'Adhan Notifications',
-          channelDescription: 'Notifications for prayer times',
-          importance: Importance.max,
-          priority: Priority.high,
-          // Usar sonido por defecto del sistema
-          sound: null,
-        ),
-        iOS: DarwinNotificationDetails(
-          sound: 'default',
-          presentSound: true,
-        ),
-      ),
-      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-      uiLocalNotificationDateInterpretation:
-          UILocalNotificationDateInterpretation.absoluteTime,
-    );
-  }
-
-  static Future<void> cancelAll() async {
-    await _notificationsPlugin.cancelAll();
-  }
-
-  static Future<void> cancel(int id) async {
-    await _notificationsPlugin.cancel(id);
-  }
-
-  static Future<void> showInstant({
+  /// Notificación inmediata (modo viajero, debug)
+  Future<void> showInstant({
     required String title,
     required String body,
+    String adhanFile = 'azan1.mp3',
   }) async {
-    await _notificationsPlugin.show(
-      DateTime.now().millisecondsSinceEpoch ~/ 1000,
-      title,
-      body,
-      const NotificationDetails(
+    final androidSound = 'adhan_${adhanFile.replaceAll('.mp3', '')}';
+
+    await _plugin.show(
+      99, title, body,
+      NotificationDetails(
         android: AndroidNotificationDetails(
-          'travel_channel',
-          'Travel Mode Notifications',
-          channelDescription: 'Notifications for traveler mode updates',
-          importance: Importance.defaultImportance,
+          'adhan_channel', 'Adhan',
+          importance: Importance.max,
+          priority: Priority.high,
+          sound: UriAndroidNotificationSound(androidSound),
+          playSound: true,
         ),
         iOS: DarwinNotificationDetails(
+          sound: adhanFile,
           presentAlert: true,
-          presentSound: false,
-          presentBadge: false,
+          presentSound: true,
         ),
       ),
     );
+  }
+
+  Future<void> cancel(int id) async => _plugin.cancel(id);
+  Future<void> cancelAll()    async => _plugin.cancelAll();
+
+  Future<bool> requestPermission() async {
+    final android = _plugin.resolvePlatformSpecificImplementation<
+        AndroidFlutterLocalNotificationsPlugin>();
+    if (android != null) {
+      return await android.requestNotificationsPermission() ?? false;
+    }
+    final ios = _plugin.resolvePlatformSpecificImplementation<
+        IOSFlutterLocalNotificationsPlugin>();
+    if (ios != null) {
+      return await ios.requestPermissions(
+            alert: true, badge: true, sound: true) ?? false;
+    }
+    return false;
   }
 }

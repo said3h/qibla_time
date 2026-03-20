@@ -13,29 +13,34 @@ class AdhanModel {
   /// Lista de adhans disponibles
   static List<AdhanModel> get availableAdhans => [
         AdhanModel(
-          name: 'Makkah',
-          file: 'adhan_makkah.mp3',
-          description: 'Estilo tradicional de La Meca',
+          name: 'Adhan 1',
+          file: 'azan1.mp3',
+          description: 'Llamada a la oración 1',
         ),
         AdhanModel(
-          name: 'Madinah',
-          file: 'adhan_madinah.mp3',
-          description: 'Estilo de Medina',
+          name: 'Adhan 2',
+          file: 'azan2.mp3',
+          description: 'Llamada a la oración 2',
         ),
         AdhanModel(
-          name: 'Cairo',
-          file: 'adhan_cairo.mp3',
-          description: 'Estilo egipcio clásico',
+          name: 'Adhan 3',
+          file: 'azan3.mp3',
+          description: 'Llamada a la oración 3',
         ),
         AdhanModel(
-          name: 'Istanbul',
-          file: 'adhan_istanbul.mp3',
-          description: 'Estilo turco otomano',
+          name: 'Adhan 4',
+          file: 'azan4.mp3',
+          description: 'Llamada a la oración 4',
         ),
         AdhanModel(
-          name: 'Abdulmalik',
-          file: 'adhan_abdulmalik.mp3',
-          description: 'Abdulmalik Al-Nu\'man',
+          name: 'Adhan 5',
+          file: 'azan5.mp3',
+          description: 'Llamada a la oración 5',
+        ),
+        AdhanModel(
+          name: 'Adhan 6',
+          file: 'azan6.mp3',
+          description: 'Llamada a la oración 6',
         ),
       ];
 

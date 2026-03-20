@@ -95,13 +95,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     });
   }
 
-  Future<void> _toggleTravelerMode(bool value) async {
-    await ref.read(travelModeServiceProvider).setEnabled(value);
-    if (!mounted) return;
-    setState(() => travelerMode = value);
-    ref.invalidate(travelerModeEnabledProvider);
-  }
-
   Future<void> _toggleCloudBackup(bool value) async {
     await ref.read(cloudSyncServiceProvider).setEnabled(value);
     if (!mounted) return;
@@ -146,8 +139,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     final tokens = QiblaThemes.current;
     final themeName = ref.watch(themeControllerProvider);
     final accessibility = ref.watch(accessibilityControllerProvider);
-    final lastLocation = ref.watch(lastLocationLabelProvider).valueOrNull;
-    final recentLocations = ref.watch(recentLocationsProvider).valueOrNull ?? const [];
     final cacheStatus = ref.watch(prayerCacheStatusProvider);
     final lastBackup = ref.watch(_lastBackupProvider).valueOrNull;
     final deviceId = ref.watch(_deviceIdProvider).valueOrNull;
@@ -215,30 +206,105 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             _buildValueTile(tokens, 'Ajuste manual', '±$timeOffset min', trailing: _offsetButtons(tokens)),
             _buildSimpleToggleTile(tokens, 'Ubicacion', 'GPS automatico', autoLocation, (v) => setState(() => autoLocation = v)),
             const SizedBox(height: 14),
+            
+            // ── SECCIÓN TRAVEL MODE ────────────────────────────────────────
             _buildSectionTitle(tokens, 'Modo viajero'),
-            _buildSimpleToggleTile(tokens, 'Modo Viajero', 'Detecta cambios >50 km y actualiza horarios', travelerMode, _toggleTravelerMode),
-            _buildValueTile(tokens, 'Ultima ubicacion', lastLocation ?? 'Sin datos'),
-            if (recentLocations.isNotEmpty)
-              Container(
-                margin: const EdgeInsets.only(bottom: 8),
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: tokens.bgSurface,
-                  borderRadius: BorderRadius.circular(14),
-                  border: Border.all(color: tokens.border),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Ultimas ubicaciones', style: GoogleFonts.dmSans(fontSize: 11, color: tokens.textPrimary, fontWeight: FontWeight.w500)),
-                    const SizedBox(height: 8),
-                    ...recentLocations.take(5).map((location) => Padding(
-                          padding: const EdgeInsets.only(bottom: 6),
-                          child: Text('• ${location.label}', style: GoogleFonts.dmSans(fontSize: 10, color: tokens.textSecondary)),
+
+            // Toggle principal
+            Consumer(
+              builder: (context, ref, _) {
+                final enabledAsync = ref.watch(travelerModeEnabledProvider);
+                return enabledAsync.when(
+                  data: (enabled) => _buildSimpleToggleTile(
+                    tokens,
+                    'Modo Viajero',
+                    'Detecta automáticamente cambios de ciudad (>50 km)',
+                    enabled,
+                    (value) async {
+                      await ref.read(travelModeServiceProvider).setEnabled(value);
+                      ref.invalidate(travelerModeEnabledProvider);
+                    },
+                  ),
+                  loading: () => _buildSimpleToggleTile(tokens, 'Modo Viajero', 'Cargando...', false, (_) {}),
+                  error: (_, __) => const SizedBox.shrink(),
+                );
+              },
+            ),
+
+            const SizedBox(height: 6),
+
+            // Ubicaciones recientes
+            Consumer(
+              builder: (context, ref, _) {
+                final locationsAsync = ref.watch(recentLocationsProvider);
+                return locationsAsync.when(
+                  data: (locations) {
+                    if (locations.isEmpty) {
+                      return _buildSettingRow(
+                        label: 'Ubicaciones recientes',
+                        subtitle: 'Sin historial de viajes',
+                        trailing: Icon(Icons.history, color: tokens.textMuted, size: 18),
+                        tokens: tokens,
+                      );
+                    }
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 4, bottom: 8, top: 4),
+                          child: Text(
+                            'UBICACIONES RECIENTES',
+                            style: TextStyle(
+                              fontSize: 9,
+                              color: tokens.textSecondary,
+                              letterSpacing: 1.4,
+                            ),
+                          ),
+                        ),
+                        ...locations.map((loc) => Container(
+                          margin: const EdgeInsets.only(bottom: 5),
+                          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 11),
+                          decoration: BoxDecoration(
+                            color: tokens.bgSurface,
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: tokens.border),
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(Icons.location_on_outlined, color: tokens.primary, size: 16),
+                              const SizedBox(width: 10),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      loc.label,
+                                      style: TextStyle(fontSize: 13, color: tokens.textPrimary),
+                                    ),
+                                    Text(
+                                      _formatDate(loc.timestamp),
+                                      style: TextStyle(fontSize: 10, color: tokens.textSecondary),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         )),
-                  ],
-                ),
-              ),
+                      ],
+                    );
+                  },
+                  loading: () => const SizedBox(height: 40),
+                  error: (_, __) => _buildSettingRow(
+                    label: 'Ubicaciones recientes',
+                    subtitle: 'Error al cargar',
+                    trailing: Icon(Icons.error, color: tokens.danger, size: 18),
+                    tokens: tokens,
+                  ),
+                );
+              },
+            ),
+            
             _buildSectionTitle(tokens, 'Cache inteligente'),
             _buildValueTile(tokens, 'Cache valido hasta', cacheStatus.validUntil?.toLocal().toString().substring(0, 16) ?? 'Sin cache'),
             _buildValueTile(tokens, 'Entradas cacheadas', '${cacheStatus.entryCount}'),
@@ -560,6 +626,48 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           ],
         );
       },
+    );
+  }
+
+  // ── HELPERS PARA TRAVEL MODE ────────────────────────────────────
+
+  String _formatDate(DateTime date) {
+    final now = DateTime.now();
+    final diff = now.difference(date);
+    if (diff.inDays == 0) return 'Hoy';
+    if (diff.inDays == 1) return 'Ayer';
+    if (diff.inDays < 7) return 'Hace ${diff.inDays} días';
+    return '${date.day}/${date.month}/${date.year}';
+  }
+
+  Widget _buildSettingRow({
+    required String label,
+    required String subtitle,
+    required Widget trailing,
+    required QiblaTokens tokens,
+  }) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 11),
+      decoration: BoxDecoration(
+        color: tokens.bgSurface,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: tokens.border),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(label, style: TextStyle(fontSize: 13, color: tokens.textPrimary)),
+                Text(subtitle, style: TextStyle(fontSize: 10, color: tokens.textSecondary)),
+              ],
+            ),
+          ),
+          trailing,
+        ],
+      ),
     );
   }
 }

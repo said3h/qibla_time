@@ -1,54 +1,135 @@
+// lib/features/tracking/services/tracking_service.dart
+//
+// Gestiona el registro de oraciones completadas.
+// Almacena en SharedPreferences como JSON.
+//
+// Estructura de datos:
+// {
+//   "2026-03-19": {"fajr": true, "dhuhr": true, "asr": false, "maghrib": false, "isha": false},
+//   "2026-03-18": {"fajr": true, "dhuhr": true, "asr": true,  "maghrib": true,  "isha": true},
+//   ...
+// }
+
+import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../../core/constants/app_constants.dart';
-import 'dart:convert';
+import '../models/tracking_models.dart';
 
-// Provider for tracking completed prayers
-final prayerTrackingProvider = StateNotifierProvider<PrayerTrackingNotifier, Map<String, List<String>>>((ref) {
+// ── Providers ──────────────────────────────────────────────────
+
+final prayerTrackingProvider =
+    StateNotifierProvider<PrayerTrackingNotifier, TrackingState>((ref) {
   return PrayerTrackingNotifier();
 });
 
-class PrayerTrackingNotifier extends StateNotifier<Map<String, List<String>>> {
-  PrayerTrackingNotifier() : super({}) {
-    _loadData();
+// ── Notifier ───────────────────────────────────────────────────
+
+class PrayerTrackingNotifier extends StateNotifier<TrackingState> {
+  static const _prefsKey = 'prayer_tracking_data';
+
+  PrayerTrackingNotifier() : super(TrackingState.empty()) {
+    _load();
   }
 
-  Future<void> _loadData() async {
+  // ── Carga inicial ───────────────────────────────────────────
+
+  Future<void> _load() async {
     final prefs = await SharedPreferences.getInstance();
-    final String? data = prefs.getString(AppConstants.keyMarkedPrayers);
-    if (data != null) {
-      final Map<String, dynamic> decoded = json.decode(data);
-      state = decoded.map((key, value) => MapEntry(key, List<String>.from(value)));
-    }
+    final raw = prefs.getString(_prefsKey);
+    if (raw == null) return;
+
+    try {
+      final Map<String, dynamic> decoded = json.decode(raw);
+      final data = decoded.map((date, prayers) {
+        final map = (prayers as Map<String, dynamic>)
+            .map((k, v) => MapEntry(k, v as bool));
+        return MapEntry(date, map);
+      });
+      state = TrackingState.fromData(data);
+    } catch (_) {}
   }
 
-  Future<void> togglePrayer(DateTime date, String prayerName) async {
-    final dateKey = "${date.year}-${date.month}-${date.day}";
-    final currentList = List<String>.from(state[dateKey] ?? []);
-    
-    if (currentList.contains(prayerName)) {
-      currentList.remove(prayerName);
-    } else {
-      currentList.add(prayerName);
-    }
-
-    final newState = {...state, dateKey: currentList};
-    state = newState;
-
+  Future<void> _save() async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(AppConstants.keyMarkedPrayers, json.encode(newState));
+    await prefs.setString(_prefsKey, json.encode(state.data));
   }
 
-  int getStreak() {
+  // ── Marcar / desmarcar oración ──────────────────────────────
+
+  Future<void> togglePrayer(String prayer, {DateTime? date}) async {
+    final key = _dateKey(date ?? DateTime.now());
+    final dayData = Map<String, bool>.from(state.data[key] ?? _emptyDay());
+    dayData[prayer] = !(dayData[prayer] ?? false);
+
+    final newData = Map<String, Map<String, bool>>.from(state.data);
+    newData[key] = dayData;
+    state = TrackingState.fromData(newData);
+    await _save();
+  }
+
+  bool isPrayerDone(String prayer, {DateTime? date}) {
+    final key = _dateKey(date ?? DateTime.now());
+    return state.data[key]?[prayer] ?? false;
+  }
+
+  // ── Helpers ─────────────────────────────────────────────────
+
+  static String _dateKey(DateTime date) =>
+      '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
+
+  static Map<String, bool> _emptyDay() => {
+    'fajr': false, 'dhuhr': false, 'asr': false,
+    'maghrib': false, 'isha': false,
+  };
+
+  // ── Métodos para compatibilidad con HomeScreen ─────────────
+
+  /// Devuelve la racha actual (para compatibilidad)
+  int getStreak() => state.currentStreak;
+
+  /// Devuelve las oraciones completadas para una fecha (para compatibilidad)
+  List<String> getCompletedPrayers(DateTime date) {
+    final key = _dateKey(date);
+    final dayData = state.data[key];
+    if (dayData == null) return [];
+    return dayData.entries.where((e) => e.value).map((e) => e.key).toList();
+  }
+
+  /// Comprueba si una oración está completada en una fecha
+  bool isPrayerCompleted(String prayer, DateTime date) {
+    final key = _dateKey(date);
+    return state.data[key]?[prayer] ?? false;
+  }
+}
+
+// ── Estado ─────────────────────────────────────────────────────
+
+class TrackingState {
+  final Map<String, Map<String, bool>> data;
+
+  const TrackingState({required this.data});
+
+  factory TrackingState.empty() => const TrackingState(data: {});
+
+  factory TrackingState.fromData(Map<String, Map<String, bool>> data) =>
+      TrackingState(data: data);
+
+  // ── Racha actual ────────────────────────────────────────────
+
+  int get currentStreak {
     int streak = 0;
-    DateTime date = DateTime.now();
-    
+    var day = DateTime.now();
+
+    // Si hoy no tiene 5/5 todavía, empezar desde ayer
+    final todayKey = _fmt(day);
+    final todayCount = _countForDay(todayKey);
+    if (todayCount < 5) day = day.subtract(const Duration(days: 1));
+
     while (true) {
-      final dateKey = "${date.year}-${date.month}-${date.day}";
-      final list = state[dateKey] ?? [];
-      if (list.length >= 5) {
+      final key = _fmt(day);
+      if (_countForDay(key) == 5) {
         streak++;
-        date = date.subtract(const Duration(days: 1));
+        day = day.subtract(const Duration(days: 1));
       } else {
         break;
       }
@@ -56,42 +137,96 @@ class PrayerTrackingNotifier extends StateNotifier<Map<String, List<String>>> {
     return streak;
   }
 
-  Map<String, double> getPrayerStats() {
-    if (state.isEmpty) return {};
-    
-    final Map<String, int> counts = {
-      'Fajr': 0, 'Dhuhr': 0, 'Asr': 0, 'Maghrib': 0, 'Isha': 0
-    };
-    
-    int totalDays = state.length;
-    for (var prayers in state.values) {
-      for (var prayer in prayers) {
-        if (counts.containsKey(prayer)) {
-          counts[prayer] = counts[prayer]! + 1;
+  // ── Mejor racha histórica ───────────────────────────────────
+
+  int get bestStreak {
+    if (data.isEmpty) return 0;
+    int best = 0, current = 0;
+
+    final sortedKeys = data.keys.toList()..sort();
+    DateTime? prev;
+
+    for (final key in sortedKeys) {
+      final date = DateTime.parse(key);
+      final isComplete = _countForDay(key) == 5;
+      final isConsecutive = prev != null &&
+          date.difference(prev).inDays == 1;
+
+      if (isComplete && (prev == null || isConsecutive)) {
+        current++;
+        best = current > best ? current : best;
+      } else {
+        current = isComplete ? 1 : 0;
+      }
+      prev = isComplete ? date : null;
+    }
+    return best;
+  }
+
+  // ── Heatmap — últimos 30 días ───────────────────────────────
+
+  List<HeatmapDay> get last30Days {
+    final result = <HeatmapDay>[];
+    for (int i = 29; i >= 0; i--) {
+      final date = DateTime.now().subtract(Duration(days: i));
+      final key = _fmt(date);
+      result.add(HeatmapDay(
+        date: date,
+        completed: _countForDay(key),
+      ));
+    }
+    return result;
+  }
+
+  // ── Progreso por oración (últimos 30 días) ──────────────────
+
+  Map<String, double> get prayerCompletion {
+    const prayers = ['fajr', 'dhuhr', 'asr', 'maghrib', 'isha'];
+    final counts  = {for (final p in prayers) p: 0};
+    int totalDays = 0;
+
+    for (int i = 0; i < 30; i++) {
+      final key = _fmt(DateTime.now().subtract(Duration(days: i)));
+      if (data.containsKey(key)) {
+        totalDays++;
+        for (final p in prayers) {
+          if (data[key]?[p] == true) counts[p] = (counts[p] ?? 0) + 1;
         }
       }
     }
-    
-    return counts.map((key, value) => MapEntry(key, value / totalDays));
+
+    if (totalDays == 0) return {for (final p in prayers) p: 0.0};
+    return counts.map((p, c) => MapEntry(p, c / totalDays));
   }
 
-  Map<String, double> getMonthlyStats() {
-    if (state.isEmpty) return {};
-    
-    final Map<String, List<int>> monthlyData = {};
-    
-    state.forEach((dateKey, prayers) {
-      final parts = dateKey.split('-');
-      final monthKey = "${parts[0]}-${parts[1]}"; // YYYY-MM
-      
-      if (!monthlyData.containsKey(monthKey)) {
-        monthlyData[monthKey] = [0, 0]; // [completed, total_possible]
-      }
-      
-      monthlyData[monthKey]![0] += prayers.length;
-      monthlyData[monthKey]![1] += 5;
-    });
-    
-    return monthlyData.map((key, value) => MapEntry(key, value[0] / value[1]));
+  // ── Totales del mes actual ───────────────────────────────────
+
+  MonthlyStats get currentMonthStats {
+    final now = DateTime.now();
+    int completed = 0, fullDays = 0;
+
+    for (int i = 1; i <= now.day; i++) {
+      final date = DateTime(now.year, now.month, i);
+      final key  = _fmt(date);
+      final count = _countForDay(key);
+      completed += count;
+      if (count == 5) fullDays++;
+    }
+
+    return MonthlyStats(
+      month:          now.month,
+      year:           now.year,
+      prayersCompleted: completed,
+      fullDays:       fullDays,
+      totalDays:      now.day,
+    );
   }
+
+  // ── Helpers privados ─────────────────────────────────────────
+
+  int _countForDay(String key) =>
+      data[key]?.values.where((v) => v).length ?? 0;
+
+  static String _fmt(DateTime d) =>
+      '${d.year}-${d.month.toString().padLeft(2, '0')}-${d.day.toString().padLeft(2, '0')}';
 }

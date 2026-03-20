@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- android/app/src/main/res/layout/prayer_widget.xml -->
+<!--
+    Layout del widget. Usa colores hardcodeados compatibles con
+    el tema oscuro de QiblaTime (#0D1117 fondo, #D4AF37 dorado).
+    RemoteViews no soporta CSS variables — los colores van fijos aquí.
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@drawable/widget_background"
+    android:gravity="center_vertical">
+
+    <!-- Etiqueta superior -->
+    <TextView
+        android:id="@+id/widget_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Próxima oración"
+        android:textColor="#8B949E"
+        android:textSize="10sp"
+        android:letterSpacing="0.1"
+        android:textAllCaps="true"
+        android:layout_marginBottom="4dp"/>
+
+    <!-- Nombre de la oración — fuente grande, dorado -->
+    <TextView
+        android:id="@+id/widget_prayer_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Asr"
+        android:textColor="#D4AF37"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="2dp"/>
+
+    <!-- Hora de la oración -->
+    <TextView
+        android:id="@+id/widget_prayer_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="17:14"
+        android:textColor="#F0F6FC"
+        android:textSize="14sp"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Divider -->
+    <View
+        android:layout_width="40dp"
+        android:layout_height="1dp"
+        android:background="#30363D"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Cuenta atrás -->
+    <TextView
+        android:id="@+id/widget_countdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="En 2h 33min"
+        android:textColor="#8B949E"
+        android:textSize="12sp"/>
+
+    <!-- Botón abrir app -->
+    <TextView
+        android:id="@+id/widget_open_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Abrir QiblaTime →"
+        android:textColor="#D4AF37"
+        android:textSize="11sp"
+        android:layout_marginTop="10dp"/>
+
+</LinearLayout>

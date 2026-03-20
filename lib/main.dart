@@ -12,7 +12,7 @@ import 'features/prayer_times/services/widget_sync_service.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await StorageService.init();
-  await NotificationService.init();
+  await NotificationService.instance.initialize();
   await WidgetSyncService().configure();
   runApp(
     const ProviderScope(

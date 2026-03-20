@@ -14,6 +14,7 @@ import '../../support/screens/dua_screen.dart';
 import '../../support/screens/settings_screen.dart';
 import '../../quran/screens/quran_screen.dart';
 import '../../tracking/services/tracking_service.dart';
+import '../../tracking/screens/analytics_screen.dart';
 import '../services/adhan_manager.dart';
 import '../services/prayer_service.dart';
 import '../services/travel_mode_service.dart';
@@ -43,7 +44,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final tokens = QiblaThemes.current;
     final prayerTimesAsync = ref.watch(prayerTimesProvider);
     final countdownAsync = ref.watch(nextPrayerCountdownProvider);
-    final tracking = ref.watch(prayerTrackingProvider);
     final bannerAsync = ref.watch(travelBannerProvider);
     final connectivityAsync = ref.watch(connectivityStatusProvider);
     final locationLabelAsync = ref.watch(lastLocationLabelProvider);
@@ -51,7 +51,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final favoritesAsync = ref.watch(hadithFavoritesProvider);
     final streak = ref.read(prayerTrackingProvider.notifier).getStreak();
     final now = DateTime.now();
-    final dateKey = '${now.year}-${now.month}-${now.day}';
+    final completedPrayers = ref.read(prayerTrackingProvider.notifier).getCompletedPrayers(now);
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
@@ -74,7 +74,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 data: (prayerTimes) => _buildHeroSection(
                   prayerTimes,
                   countdownAsync.value,
-                  tracking[dateKey] ?? const [],
+                  completedPrayers,
                   tokens,
                   streak,
                 ),
@@ -85,8 +85,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               prayerTimesAsync.when(
                 data: (prayerTimes) => _buildPrayerSection(
                   prayerTimes,
-                  tracking[dateKey] ?? const [],
-                  dateKey,
+                  completedPrayers,
+                  now,
                   tokens,
                 ),
                 loading: () => _buildPrayerSkeleton(tokens),
@@ -420,7 +420,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Widget _buildPrayerSection(
     PrayerTimes? prayerTimes,
     List<String> completed,
-    String dateKey,
+    DateTime date,
     QiblaTokens tokens,
   ) {
     if (prayerTimes == null) {
@@ -492,7 +492,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                   const SizedBox(width: 10),
                   GestureDetector(
-                    onTap: () => ref.read(prayerTrackingProvider.notifier).togglePrayer(DateTime.now(), prayer.$1),
+                    onTap: () => ref.read(prayerTrackingProvider.notifier).togglePrayer(prayer.$1, date: DateTime.now()),
                     child: Container(
                       width: 22,
                       height: 22,
@@ -640,6 +640,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final actions = [
       ('🧭', 'Qibla', const QiblaScreen()),
       ('📿', 'Tasbih', const DhikrScreen()),
+      ('📊', 'Stats', const AnalyticsScreen()),
       ('🤲', 'Dua', const DuasScreen()),
       ('⚙️', 'Ajustes', const SettingsScreen()),
     ];

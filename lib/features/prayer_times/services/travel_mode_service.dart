@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,6 +8,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/constants/app_constants.dart';
 import 'notification_service.dart';
+import 'prayer_service.dart';
+import 'adhan_manager.dart';
 
 class RecentLocation {
   const RecentLocation({
@@ -53,7 +56,7 @@ class TravelModeService {
     await prefs.setBool(AppConstants.keyTravelerModeEnabled, value);
   }
 
-  Future<void> recordLocationUpdate(Position position) async {
+  Future<void> recordLocationUpdate(Position position, {dynamic ref}) async {
     final prefs = await SharedPreferences.getInstance();
     final timezone = DateTime.now().timeZoneName;
     final label = await _resolveLocationLabel(position);
@@ -71,12 +74,24 @@ class TravelModeService {
         position.longitude,
       );
       if (enabled && (distance > 50000 || previousTimezone != timezone)) {
-        const banner = 'Detectada nueva ubicacion - Horarios actualizados';
+        final banner = 'Nueva ubicación detectada: $label · ${(distance / 1000).round()} km';
         await prefs.setString(AppConstants.keyTravelerPendingBanner, banner);
-        await NotificationService.showInstant(
-          title: 'Modo Viajero',
-          body: banner,
+        await NotificationService.instance.showInstant(
+          title: 'QiblaTime — Nueva ubicación',
+          body: '$label · Horarios actualizados',
         );
+
+        // ← NUEVO: Reprogramar Adhans con la nueva ubicación
+        if (ref != null) {
+          ref.invalidate(prayerTimesProvider);
+          await Future.delayed(const Duration(milliseconds: 500));
+          await ref.read(adhanManagerProvider).scheduleTodayAdhans();
+
+          // Invalidar providers de UI
+          ref.invalidate(travelBannerProvider);
+          ref.invalidate(recentLocationsProvider);
+          ref.invalidate(lastLocationLabelProvider);
+        }
       }
     }
 

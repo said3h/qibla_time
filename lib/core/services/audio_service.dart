@@ -1,85 +1,71 @@
-import 'package:audioplayers/audioplayers.dart';
-import 'package:flutter/foundation.dart';
+// lib/core/services/audio_service.dart
+//
+// Reproduce adhans desde Flutter assets para el preview
+// en AdhanSelectorScreen.
 
-/// Servicio para reproducir archivos de audio (Adhan, Quran, etc.)
+import 'package:audioplayers/audioplayers.dart';
+
 class AudioService {
-  // Singleton
-  static final AudioService _instance = AudioService._internal();
-  factory AudioService() => _instance;
-  AudioService._internal();
+  AudioService._();
+  static final AudioService instance = AudioService._();
 
   final AudioPlayer _player = AudioPlayer();
 
   /// Estado del reproductor
   bool get isPlaying => _player.state == PlayerState.playing;
 
-  /// Reproducir un archivo de audio desde assets
-  /// [fileName] - Nombre del archivo (ej: 'adhan_makkah.mp3')
-  /// [isLocalFile] - Si es true, busca en el sistema de archivos local
-  Future<void> play(String fileName, {bool isLocalFile = false}) async {
+  /// Duración total del audio actual
+  Future<Duration?> get duration async {
     try {
-      await _player.stop();
-      
-      if (isLocalFile) {
-        await _player.play(DeviceFileSource(fileName));
-      } else {
-        await _player.play(AssetSource('audio/$fileName'));
-      }
+      return await _player.getDuration();
     } catch (e) {
-      debugPrint('Error al reproducir audio: $e');
-      rethrow;
+      return null;
     }
   }
 
-  /// Detener la reproducción actual
-  Future<void> stop() async {
+  /// Posición actual de reproducción
+  Future<Duration?> get position async {
     try {
-      await _player.stop();
+      return await _player.getCurrentPosition();
     } catch (e) {
-      debugPrint('Error al detener audio: $e');
+      return null;
     }
   }
 
-  /// Pausar la reproducción
-  Future<void> pause() async {
-    try {
-      await _player.pause();
-    } catch (e) {
-      debugPrint('Error al pausar audio: $e');
-    }
-  }
-
-  /// Reanudar la reproducción
-  Future<void> resume() async {
-    try {
-      await _player.resume();
-    } catch (e) {
-      debugPrint('Error al reanudar audio: $e');
-    }
-  }
-
-  /// Establecer volumen (0.0 a 1.0)
-  Future<void> setVolume(double volume) async {
-    try {
-      await _player.setVolume(volume);
-    } catch (e) {
-      debugPrint('Error al establecer volumen: $e');
-    }
-  }
-
-  /// Liberar recursos del reproductor
-  Future<void> dispose() async {
-    try {
-      await _player.stop();
-      await _player.dispose();
-    } catch (e) {
-      debugPrint('Error al liberar recursos: $e');
-    }
-  }
-
-  /// Escuchar cambios en el estado del jugador
   Stream<PlayerState> get onPlayerStateChanged => _player.onPlayerStateChanged;
+  Stream<void>        get onPlayerComplete      => _player.onPlayerComplete;
+  Stream<Duration>    get onPositionChanged     => _player.onPositionChanged;
+  Stream<Duration?>   get onDurationChanged     => _player.onDurationChanged;
 
-  /// Escuchar cuando se completa la reproducción
-  Stream<void> get onPlayerComplete => _player.onPlayerComplete;
+  /// [fileName] viene de AdhanModel.file — ej: 'azan1.mp3'
+  /// AssetSource busca en assets/audio/ (declarado en pubspec.yaml)
+  Future<void> playAdhan(String fileName) async {
+    await stop();
+    await _player.play(AssetSource('audio/$fileName'));
+    // resuelve a: assets/audio/azan1.mp3
+  }
+
+  /// Alias para compatibilidad con código existente
+  Future<void> play(String fileName, {bool isLocalFile = false}) async {
+    await stop();
+    if (isLocalFile) {
+      await _player.play(DeviceFileSource(fileName));
+    } else {
+      await _player.play(AssetSource('audio/$fileName'));
+    }
+  }
+
+  Future<void> stop()   async => _player.stop();
+  Future<void> pause()  async => _player.pause();
+  Future<void> resume() async => _player.resume();
+
+  Future<void> setVolume(double volume) async {
+    await _player.setVolume(volume.clamp(0.0, 1.0));
+  }
+
+  Future<void> seek(Duration position) async {
+    await _player.seek(position);
+  }
+
+  Future<void> dispose() async => _player.dispose();
 }

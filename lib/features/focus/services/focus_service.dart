@@ -1,104 +1,169 @@
+// lib/features/focus/services/focus_service.dart
+//
+// Gestiona el estado del modo enfoque:
+// - Activación / desactivación
+// - Conteo de rak'ahs via sujud (2 sujudes = 1 rak'ah)
+// - DND automático
+// - Sensor de proximidad
+
 import 'dart:async';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:proximity_sensor/proximity_sensor.dart';
-import 'package:flutter/foundation.dart';
-import 'package:permission_handler/permission_handler.dart';
+
+final focusProvider =
+    StateNotifierProvider<FocusNotifier, FocusState>((ref) {
+  return FocusNotifier();
+});
+
+// ── Estado ─────────────────────────────────────────────────────
 
 class FocusState {
   final bool isActive;
-  final int rakahs;
-  final bool isNear;
+  final int  rakahs;
+  final bool isNear;       // sensor detecta proximidad ahora mismo
   final bool dndActive;
+  final int  sujudCount;   // 0 o 1 — dentro de la rak'ah actual
 
-  FocusState({
-    this.isActive = false,
-    this.rakahs = 0,
-    this.isNear = false,
-    this.dndActive = false,
+  const FocusState({
+    this.isActive   = false,
+    this.rakahs     = 0,
+    this.isNear     = false,
+    this.dndActive  = false,
+    this.sujudCount = 0,
   });
 
   FocusState copyWith({
     bool? isActive,
-    int? rakahs,
+    int?  rakahs,
     bool? isNear,
     bool? dndActive,
-  }) {
-    return FocusState(
-      isActive: isActive ?? this.isActive,
-      rakahs: rakahs ?? this.rakahs,
-      isNear: isNear ?? this.isNear,
-      dndActive: dndActive ?? this.dndActive,
-    );
-  }
+    int?  sujudCount,
+  }) => FocusState(
+    isActive:   isActive   ?? this.isActive,
+    rakahs:     rakahs     ?? this.rakahs,
+    isNear:     isNear     ?? this.isNear,
+    dndActive:  dndActive  ?? this.dndActive,
+    sujudCount: sujudCount ?? this.sujudCount,
+  );
 }
 
+// ── Notifier ───────────────────────────────────────────────────
+
 class FocusNotifier extends StateNotifier<FocusState> {
-  StreamSubscription<int>? _subscription;
-  DateTime? _lastTriggerTime;
+  FocusNotifier() : super(const FocusState());
 
-  FocusNotifier() : super(FocusState());
+  StreamSubscription? _sensorSub;
 
-  Future<void> startFocus() async {
-    bool dndEnabled = false;
-    
-    // Attempt to enable DND if permission is granted (Android specific usually)
-    if (await Permission.accessNotificationPolicy.isGranted) {
-      // In a real app, we would use a MethodChannel or a DND package here.
-      // For now, we simulate the state and log the intent.
-      dndEnabled = true;
-      debugPrint('DND Mode activated for Prayer Focus');
-    }
+  // Debounce: evita doble conteo si el sensor oscila
+  DateTime? _lastSujudTime;
+  static const _debounce = Duration(milliseconds: 800);
 
-    state = FocusState(isActive: true, dndActive: dndEnabled);
-    _listenToSensor();
+  // Tiempo mínimo que el sensor debe detectar proximidad
+  // para contar como sujud real (evita falsos positivos)
+  Timer? _proximityTimer;
+  static const _minProximityDuration = Duration(milliseconds: 500);
+
+  // ── Activar ─────────────────────────────────────────────────
+
+  Future<void> activate() async {
+    state = const FocusState(isActive: true);
+    await _tryEnableDnd();
+    _startSensor();
   }
 
-  Future<void> stopFocus() async {
-    _subscription?.cancel();
-    if (state.dndActive) {
-      debugPrint('DND Mode deactivated');
-    }
-    state = state.copyWith(isActive: false, dndActive: false);
+  // ── Desactivar ───────────────────────────────────────────────
+
+  Future<void> deactivate() async {
+    _stopSensor();
+    await _tryDisableDnd();
+    state = const FocusState(isActive: false);
   }
 
-  void _listenToSensor() {
-    _subscription?.cancel();
-    // proximity_sensor returns 1 for near, 0 for far
-    _subscription = ProximitySensor.events.listen((int event) {
-      final bool isNear = event > 0;
-      
-      if (isNear && !state.isNear) {
-        // Transition from far to near (Start of Sujood)
-        _handleNearTrigger();
+  // ── Sensor de proximidad ─────────────────────────────────────
+
+  void _startSensor() {
+    _sensorSub = ProximitySensor.events.listen((int event) {
+      final isNear = event > 0;
+
+      if (isNear) {
+        // Iniciar timer: solo contar si permanece cerca >= 500ms
+        _proximityTimer ??= Timer(_minProximityDuration, () {
+          state = state.copyWith(isNear: true);
+          _onProximityConfirmed();
+        });
+      } else {
+        // Se alejó
+        _proximityTimer?.cancel();
+        _proximityTimer = null;
+        state = state.copyWith(isNear: false);
       }
-      
-      state = state.copyWith(isNear: isNear);
     });
   }
 
-  void _handleNearTrigger() {
+  void _stopSensor() {
+    _sensorSub?.cancel();
+    _sensorSub = null;
+    _proximityTimer?.cancel();
+    _proximityTimer = null;
+  }
+
+  void _onProximityConfirmed() {
     final now = DateTime.now();
-    // Debounce: ignore triggers within 2 seconds to avoid double counts
-    if (_lastTriggerTime == null || now.difference(_lastTriggerTime!) > const Duration(seconds: 2)) {
-      // In a normal prayer, 2 Sujoods = 1 Rak'ah (simplified logic for now)
-      // We count every 2 triggers as 1 Rak'ah, or just count Sujoods?
-      // For now, let's count "Prostrations" and UI can divide by 2 if needed, 
-      // or we increment Rak'ah every 2 "Near" events.
-      
-      // Let's increment rakahs directly every 2 triggers for simplicity in this version
-      // Or just count triggers and let the UI show "Sujoods: X" or "Rak'ahs: X/2"
-      state = state.copyWith(rakahs: state.rakahs + 1);
-      _lastTriggerTime = now;
+
+    // Debounce: ignorar si el último sujud fue hace menos de 800ms
+    if (_lastSujudTime != null &&
+        now.difference(_lastSujudTime!) < _debounce) return;
+
+    _lastSujudTime = now;
+
+    final newSujudCount = state.sujudCount + 1;
+
+    if (newSujudCount >= 2) {
+      // Segundo sujud → completar rak'ah
+      HapticFeedback.mediumImpact();
+      state = state.copyWith(
+        rakahs:     state.rakahs + 1,
+        sujudCount: 0,
+      );
+    } else {
+      // Primer sujud
+      HapticFeedback.lightImpact();
+      state = state.copyWith(sujudCount: newSujudCount);
+    }
+  }
+
+  // ── Incremento manual (fallback) ─────────────────────────────
+
+  void incrementRakahs() {
+    HapticFeedback.mediumImpact();
+    state = state.copyWith(rakahs: state.rakahs + 1);
+  }
+
+  // ── DND ──────────────────────────────────────────────────────
+
+  static const _dndChannel = MethodChannel('com.qiblatime/dnd');
+
+  Future<void> _tryEnableDnd() async {
+    try {
+      final granted = await _dndChannel.invokeMethod<bool>('enableDnd');
+      state = state.copyWith(dndActive: granted ?? false);
+    } on PlatformException {
+      state = state.copyWith(dndActive: false);
+    }
+  }
+
+  Future<void> _tryDisableDnd() async {
+    try {
+      await _dndChannel.invokeMethod('disableDnd');
+    } on PlatformException {
+      // silencioso
     }
   }
 
   @override
   void dispose() {
-    _subscription?.cancel();
+    _stopSensor();
     super.dispose();
   }
 }
-
-final focusProvider = StateNotifierProvider<FocusNotifier, FocusState>((ref) {
-  return FocusNotifier();
-});

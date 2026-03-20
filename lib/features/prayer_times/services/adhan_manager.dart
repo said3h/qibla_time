@@ -1,47 +1,70 @@
+// lib/features/prayer_times/services/adhan_manager.dart
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import '../../../core/services/settings_service.dart';
 import 'notification_service.dart';
 import 'prayer_service.dart';
 
-final adhanManagerProvider = Provider((ref) => AdhanManager(ref));
+final adhanManagerProvider = Provider<AdhanManager>((ref) => AdhanManager(ref));
 
 class AdhanManager {
   final Ref _ref;
-
   AdhanManager(this._ref);
 
+  static const Map<String, int> _prayerIds = {
+    'Fajr':    0,
+    'Dhuhr':   1,
+    'Asr':     2,
+    'Maghrib': 3,
+    'Isha':    4,
+  };
+
   Future<void> scheduleTodayAdhans() async {
+    final settings = SettingsService.instance;
+    final notif    = NotificationService.instance;
+
+    await notif.cancelAll();
+
+    if (!await settings.getNotificationsEnabled()) return;
+
+    // getAdhan() devuelve 'azan1.mp3', 'azan2.mp3', etc.
+    final adhanFile = await settings.getAdhan();
+
     final prayerTimes = await _ref.read(prayerTimesProvider.future);
     if (prayerTimes == null) return;
 
-    final prefs = await SharedPreferences.getInstance();
-    await NotificationService.cancelAll();
-
     final prayers = {
-      'Fajr': prayerTimes.fajr,
-      'Dhuhr': prayerTimes.dhuhr,
-      'Asr': prayerTimes.asr,
+      'Fajr':    prayerTimes.fajr,
+      'Dhuhr':   prayerTimes.dhuhr,
+      'Asr':     prayerTimes.asr,
       'Maghrib': prayerTimes.maghrib,
-      'Isha': prayerTimes.isha,
+      'Isha':    prayerTimes.isha,
     };
 
-    int id = 0;
-    for (var entry in prayers.entries) {
-      final prayerName = entry.key;
-      final prayerTime = entry.value;
+    final now = DateTime.now();
 
-      // Check if user enabled Adhan for this prayer
-      final isEnabled = prefs.getBool('adhan_${prayerName.toLowerCase()}') ?? true;
+    for (final entry in prayers.entries) {
+      final name = entry.key;
+      final time = entry.value;
 
-      if (isEnabled && prayerTime.isAfter(DateTime.now())) {
-        // scheduleAdhan now uses the user's selected adhan from SettingsService
-        await NotificationService.scheduleAdhan(
-          id,
-          'Adhan: $prayerName',
-          prayerTime,
-        );
-      }
-      id++;
+      if (time.isBefore(now)) continue;
+
+      final enabled = await settings.getPrayerNotificationEnabled(
+        name.toLowerCase(),
+      );
+      if (!enabled) continue;
+
+      await notif.scheduleAdhan(
+        id:          _prayerIds[name]!,
+        prayerName:  name,
+        scheduledAt: time,
+        adhanFile:   adhanFile,  // 'azan1.mp3' — NotificationService convierte
+      );
     }
+  }
+
+  Future<void> cancelPrayer(String prayerName) async {
+    final id = _prayerIds[prayerName];
+    if (id != null) await NotificationService.instance.cancel(id);
   }
 }
