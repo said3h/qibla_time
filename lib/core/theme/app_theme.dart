@@ -437,7 +437,7 @@ class AppTheme {
         ),
       ),
       textTheme: _buildTextTheme(tokens),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: tokens.bgSurface,
         elevation: 0,
         shape: RoundedRectangleBorder(
