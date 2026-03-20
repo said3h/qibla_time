@@ -462,7 +462,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           const SizedBox(height: 8),
           ...prayers.map((prayer) {
             final isCurrent = prayer.$1.toLowerCase() == nextPrayerName;
-            final isDone = completed.contains(prayer.$1);
+            final isDone = _isPrayerDone(completed, prayer.$1);
             return Container(
               margin: const EdgeInsets.only(bottom: 6),
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 11),
@@ -692,6 +692,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   bool _isSameDay(DateTime a, DateTime b) {
     return a.year == b.year && a.month == b.month && a.day == b.day;
+  }
+
+  bool _isPrayerDone(List<String> completed, String prayerName) {
+    return completed.contains(prayerName.toLowerCase());
   }
 
   (String, String) _prayerName(Prayer prayer) {

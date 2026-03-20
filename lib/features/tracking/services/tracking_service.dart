@@ -26,6 +26,13 @@ final prayerTrackingProvider =
 
 class PrayerTrackingNotifier extends StateNotifier<TrackingState> {
   static const _prefsKey = 'prayer_tracking_data';
+  static const _validPrayers = {
+    'fajr',
+    'dhuhr',
+    'asr',
+    'maghrib',
+    'isha',
+  };
 
   PrayerTrackingNotifier() : super(TrackingState.empty()) {
     _load();
@@ -41,8 +48,9 @@ class PrayerTrackingNotifier extends StateNotifier<TrackingState> {
     try {
       final Map<String, dynamic> decoded = json.decode(raw);
       final data = decoded.map((date, prayers) {
-        final map = (prayers as Map<String, dynamic>)
-            .map((k, v) => MapEntry(k, v as bool));
+        final map = (prayers as Map<String, dynamic>).map(
+          (k, v) => MapEntry(_normalizePrayerKey(k), v as bool),
+        );
         return MapEntry(date, map);
       });
       state = TrackingState.fromData(data);
@@ -59,7 +67,8 @@ class PrayerTrackingNotifier extends StateNotifier<TrackingState> {
   Future<void> togglePrayer(String prayer, {DateTime? date}) async {
     final key = _dateKey(date ?? DateTime.now());
     final dayData = Map<String, bool>.from(state.data[key] ?? _emptyDay());
-    dayData[prayer] = !(dayData[prayer] ?? false);
+    final normalizedPrayer = _normalizePrayerKey(prayer);
+    dayData[normalizedPrayer] = !(dayData[normalizedPrayer] ?? false);
 
     final newData = Map<String, Map<String, bool>>.from(state.data);
     newData[key] = dayData;
@@ -69,7 +78,7 @@ class PrayerTrackingNotifier extends StateNotifier<TrackingState> {
 
   bool isPrayerDone(String prayer, {DateTime? date}) {
     final key = _dateKey(date ?? DateTime.now());
-    return state.data[key]?[prayer] ?? false;
+    return state.data[key]?[_normalizePrayerKey(prayer)] ?? false;
   }
 
   // ── Helpers ─────────────────────────────────────────────────
@@ -98,7 +107,15 @@ class PrayerTrackingNotifier extends StateNotifier<TrackingState> {
   /// Comprueba si una oración está completada en una fecha
   bool isPrayerCompleted(String prayer, DateTime date) {
     final key = _dateKey(date);
-    return state.data[key]?[prayer] ?? false;
+    return state.data[key]?[_normalizePrayerKey(prayer)] ?? false;
+  }
+
+  static String _normalizePrayerKey(String prayer) {
+    final normalized = prayer.trim().toLowerCase();
+    if (_validPrayers.contains(normalized)) {
+      return normalized;
+    }
+    return normalized;
   }
 }
 
