@@ -34,7 +34,7 @@ dependencies:
   proximity_sensor: ^1.0.1
   
   # Google Fonts para tipografía DM Sans y Amiri (árabe)
-  google_fonts: ^8.0.2
+  google_fonts: 6.3.0
 
 dev_dependencies:
   flutter_test:

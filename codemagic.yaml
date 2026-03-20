@@ -3,7 +3,7 @@ workflows:
     name: Android Build
     max_build_duration: 60
     environment:
-      flutter: 3.24.0
+      flutter: 3.29.0
     scripts:
       - name: Get dependencies
         script: flutter pub get
@@ -16,7 +16,7 @@ workflows:
     name: iOS Build
     max_build_duration: 60
     environment:
-      flutter: 3.24.0
+      flutter: 3.29.0
       xcode: latest
       cocoapods: default
     scripts:
