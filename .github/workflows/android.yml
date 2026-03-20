@@ -16,10 +16,13 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.24.0'
-          channel: 'stable'
+      - name: Install Flutter 3.29.0
+        run: |
+          git clone https://github.com/flutter/flutter.git --branch 3.29.0 --depth 1 $HOME/flutter
+          echo "$HOME/flutter/bin" >> $GITHUB_PATH
+
+      - name: Verify Flutter version
+        run: flutter --version
 
       - name: Get dependencies
         run: flutter pub get
