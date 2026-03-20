@@ -16,10 +16,11 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Install Flutter 3.29.0
-        run: |
-          git clone https://github.com/flutter/flutter.git --branch 3.29.0 --depth 1 $HOME/flutter
-          echo "$HOME/flutter/bin" >> $GITHUB_PATH
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.29.0'
+          channel: 'stable'
+          cache: true
 
       - name: Verify Flutter version
         run: flutter --version
@@ -33,5 +34,5 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: qiblatime-release
+          name: qiblatime-android
           path: build/app/outputs/flutter-apk/app-release.apk

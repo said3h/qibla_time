@@ -11,10 +11,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Flutter 3.29.0
-        run: |
-          git clone https://github.com/flutter/flutter.git --branch 3.29.0 --depth 1 $HOME/flutter
-          echo "$HOME/flutter/bin" >> $GITHUB_PATH
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.29.0'
+          channel: 'stable'
+          cache: true
 
       - name: Verify Flutter version
         run: flutter --version
@@ -26,9 +27,7 @@ jobs:
         run: flutter pub get
 
       - name: Install pods
-        run: |
-          cd ios
-          pod install
+        run: cd ios && pod install
 
       - name: Build iOS (no codesign)
         run: flutter build ios --release --no-codesign
