@@ -1,0 +1,117 @@
+CHECKLIST COMPLETO — Audio Adhan con nombres azan1-6
+=====================================================
+
+─────────────────────────────────────────
+PASO 1 — Archivos en Flutter assets
+─────────────────────────────────────────
+Ruta: assets/audio/
+
+✓ azan1.mp3
+✓ azan2.mp3
+✓ azan3.mp3
+✓ azan4.mp3
+✓ azan5.mp3
+✓ azan6.mp3
+
+En pubspec.yaml:
+
+  flutter:
+    assets:
+      - assets/audio/azan1.mp3
+      - assets/audio/azan2.mp3
+      - assets/audio/azan3.mp3
+      - assets/audio/azan4.mp3
+      - assets/audio/azan5.mp3
+      - assets/audio/azan6.mp3
+
+
+─────────────────────────────────────────
+PASO 2 — Android res/raw/
+─────────────────────────────────────────
+Ruta: android/app/src/main/res/raw/
+
+IMPORTANTE: Android no acepta nombres que empiecen por número.
+Los archivos en raw/ DEBEN llevar el prefijo 'adhan_':
+
+✓ adhan_azan1.mp3    ← NO es azan1.mp3
+✓ adhan_azan2.mp3
+✓ adhan_azan3.mp3
+✓ adhan_azan4.mp3
+✓ adhan_azan5.mp3
+✓ adhan_azan6.mp3
+
+El código en NotificationService hace esta conversión automáticamente:
+  'azan1.mp3'  →  'adhan_azan1'  (para UriAndroidNotificationSound)
+
+
+─────────────────────────────────────────
+PASO 3 — iOS Runner/
+─────────────────────────────────────────
+Ruta: ios/Runner/
+
+iOS NO tiene la restricción de Android, usa los nombres originales:
+
+✓ azan1.mp3
+✓ azan2.mp3
+✓ azan3.mp3
+✓ azan4.mp3
+✓ azan5.mp3
+✓ azan6.mp3
+
+Después de copiarlos:
+  1. open ios/Runner.xcworkspace
+  2. Click derecho en carpeta "Runner" (azul) → Add Files to Runner...
+  3. Selecciona los 6 archivos
+  4. Marca: ✓ Copy items if needed  ✓ Target: Runner
+  5. Add
+
+
+─────────────────────────────────────────
+PASO 4 — AndroidManifest.xml
+─────────────────────────────────────────
+Archivo: android/app/src/main/AndroidManifest.xml
+
+Dentro de <manifest>:
+  <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+  <uses-permission android:name="android.permission.USE_EXACT_ALARM"/>
+  <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+  <uses-permission android:name="android.permission.WAKE_LOCK"/>
+  <uses-permission android:name="android.permission.VIBRATE"/>
+
+Dentro de <application>:
+  <meta-data
+    android:name="com.dexterous.flutterlocalnotifications.default_notification_channel_id"
+    android:value="adhan_channel"/>
+
+
+─────────────────────────────────────────
+PASO 5 — ios/Runner/Info.plist
+─────────────────────────────────────────
+<key>UIBackgroundModes</key>
+<array>
+    <string>audio</string>
+    <string>fetch</string>
+    <string>remote-notification</string>
+</array>
+
+
+─────────────────────────────────────────
+PASO 6 — Rebuild
+─────────────────────────────────────────
+flutter clean
+flutter pub get
+flutter run
+
+
+─────────────────────────────────────────
+RESUMEN: qué archivo va dónde
+─────────────────────────────────────────
+
+Archivo original  │ assets/audio/ │ android/res/raw/  │ ios/Runner/
+──────────────────┼───────────────┼───────────────────┼────────────
+azan1.mp3         │ azan1.mp3     │ adhan_azan1.mp3   │ azan1.mp3
+azan2.mp3         │ azan2.mp3     │ adhan_azan2.mp3   │ azan2.mp3
+azan3.mp3         │ azan3.mp3     │ adhan_azan3.mp3   │ azan3.mp3
+azan4.mp3         │ azan4.mp3     │ adhan_azan4.mp3   │ azan4.mp3
+azan5.mp3         │ azan5.mp3     │ adhan_azan5.mp3   │ azan5.mp3
+azan6.mp3         │ azan6.mp3     │ adhan_azan6.mp3   │ azan6.mp3

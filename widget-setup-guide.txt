@@ -1,0 +1,165 @@
+GUÍA COMPLETA — Widget nativo iOS + Android
+==========================================
+
+
+══════════════════════════════════════════
+ANDROID — 5 pasos
+══════════════════════════════════════════
+
+1. COPIAR ARCHIVOS
+─────────────────
+PrayerWidgetProvider.kt  →  android/app/src/main/kotlin/com/qiblatime/qibla_time/
+prayer_widget.xml        →  android/app/src/main/res/layout/
+widget_background.xml    →  android/app/src/main/res/drawable/
+prayer_widget_info.xml   →  android/app/src/main/res/xml/
+strings.xml              →  android/app/src/main/res/values/
+
+✅ Estos archivos YA ESTÁN CREADOS en el proyecto.
+
+2. VERIFICAR PACKAGE
+────────────────────
+El package en PrayerWidgetProvider.kt ya está configurado como:
+  package com.qiblatime.qibla_time
+
+Este coincide con tu MainActivity.kt. ✅
+
+3. RECEIVER EN AndroidManifest.xml
+──────────────────────────────────
+✅ YA AÑADIDO en AndroidManifest.xml dentro de <application>
+
+4. REBUILD ANDROID
+──────────────────
+  flutter clean
+  flutter pub get
+  flutter build apk
+
+Para probar: mantén pulsado en la pantalla de inicio 
+→ Widgets → QiblaTime → añade el widget
+
+
+══════════════════════════════════════════
+iOS — 8 pasos (requiere Xcode)
+══════════════════════════════════════════
+
+1. ABRIR XCODE
+──────────────
+  open ios/Runner.xcworkspace
+
+2. CREAR WIDGET EXTENSION
+─────────────────────────
+  File → New → Target
+  Selecciona: Widget Extension
+  Product Name: PrayerWidget
+  ¡DESMARCA "Include Configuration Intent"!
+  Finish → Activate (cuando pregunte)
+
+  Esto crea: ios/PrayerWidget/PrayerWidget.swift (y archivos de soporte)
+
+  ✅ Los archivos PrayerWidget.swift e Info.plist YA ESTÁN CREADOS
+  en ios/PrayerWidget/
+
+3. REEMPLAZAR EL SWIFT GENERADO
+────────────────────────────────
+  Si Xcode generó un archivo Swift, reemplázalo con el contenido
+  de ios/PrayerWidget/PrayerWidget.swift
+
+4. CONFIGURAR APP GROUP (CRÍTICO) ⚠️
+────────────────────────────────────
+  Esto permite que Flutter y el widget compartan datos.
+
+  a) Selecciona el target "Runner" (la app principal)
+     → Signing & Capabilities → + Capability → App Groups
+     → Añade: group.com.qiblatime.qibla_time
+
+  b) Selecciona el target "PrayerWidget"
+     → Signing & Capabilities → + Capability → App Groups
+     → Añade el MISMO: group.com.qiblatime.qibla_time
+
+  IMPORTANTE: El ID del grupo debe coincidir EXACTAMENTE con:
+    - PrayerWidget.swift:      appGroupId = "group.com.qiblatime.qibla_time"
+    - widget_sync_service.dart: _appGroupId = 'group.com.qiblatime.qibla_time'
+
+5. AÑADIR Info.plist AL TARGET
+───────────────────────────────
+  Asegúrate que ios/PrayerWidget/Info.plist existe.
+  ✅ YA ESTÁ CREADO
+
+6. VERIFICAR BUNDLE ID DEL WIDGET
+──────────────────────────────────
+  Target PrayerWidget → General → Bundle Identifier
+  Debe ser: com.qiblatime.qibla_time.PrayerWidget
+  (el bundle de la app + ".PrayerWidget")
+
+7. BUILD & RUN EN DISPOSITIVO FÍSICO
+─────────────────────────────────────
+  ⚠️  Los widgets NO funcionan en el simulador de iOS.
+  Conecta tu iPhone y haz Cmd+R.
+
+8. PROBAR EL WIDGET
+────────────────────
+  Mantén pulsado en pantalla de inicio → +
+  Busca "QiblaTime" → añade el widget
+  Abre la app → los datos deberían aparecer en el widget
+
+
+══════════════════════════════════════════
+FLUTTER — main.dart
+══════════════════════════════════════════
+
+En lib/main.dart, después de inicializar los servicios:
+
+  void main() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    
+    // Inicializar servicios
+    await StorageService.init();
+    await NotificationService.init();
+    await WidgetSyncService.instance.initialize();  // ← AÑADIR ESTO
+    
+    runApp(const QiblaTimeApp());
+  }
+
+Y en tu prayer_service.dart o home_screen.dart, cuando se actualicen
+los horarios de oración, llama a:
+
+  await WidgetSyncService.instance.syncNextPrayer(
+    prayerName: 'Asr · عصر',
+    prayerTime: '17:14',
+    countdown: '2h 33min',
+  );
+
+
+══════════════════════════════════════════
+VERIFICACIÓN RÁPIDA
+══════════════════════════════════════════
+
+Android — comprueba que el widget aparece:
+  flutter build apk
+  Mantén pulsado en pantalla de inicio → Widgets → QiblaTime
+
+iOS — los datos llegan si:
+  1. App Group está configurado en ambos targets (Runner y PrayerWidget)
+  2. El appGroupId en Swift y Dart son IDÉNTICOS
+  3. Se llama a WidgetSyncService.instance.syncNextPrayer() al abrir la app
+
+⚠️  iOS: Los widgets NO funcionan en simulador. Usa dispositivo físico.
+
+
+══════════════════════════════════════════
+RESUMEN DE ARCHIVOS CREADOS
+══════════════════════════════════════════
+
+Android:
+  ✅ PrayerWidgetProvider.kt
+  ✅ prayer_widget.xml
+  ✅ widget_background.xml
+  ✅ prayer_widget_info.xml
+  ✅ strings.xml
+  ✅ AndroidManifest.xml (modificado con <receiver>)
+
+iOS:
+  ✅ PrayerWidget.swift
+  ✅ Info.plist
+
+Flutter:
+  ✅ widget_sync_service.dart
