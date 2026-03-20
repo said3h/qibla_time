@@ -53,10 +53,10 @@ final locationProvider = FutureProvider<Position?>((ref) async {
         timeLimit: const Duration(seconds: 5),
       );
       
-      // Save for offline fallback
+      await ref.read(travelModeServiceProvider).recordLocationUpdate(freshPosition, ref: ref);
+      // Save current coordinates after travel-mode comparison so distance uses the previous location.
       await prefs.setDouble('last_lat', freshPosition.latitude);
       await prefs.setDouble('last_lng', freshPosition.longitude);
-      await ref.read(travelModeServiceProvider).recordLocationUpdate(freshPosition, ref: ref);
       await ref.read(prayerCacheServiceProvider).invalidateIfFarFrom(freshPosition);
       ref.invalidate(travelBannerProvider);
       ref.invalidate(recentLocationsProvider);

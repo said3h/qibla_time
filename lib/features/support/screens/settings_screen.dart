@@ -11,9 +11,12 @@ import '../../../core/theme/accessibility_provider.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/theme/theme_provider.dart';
 import '../../hafiz/services/hafiz_service.dart';
+import '../../prayer_times/services/adhan_manager.dart';
 import '../../prayer_times/services/prayer_cache_service.dart';
 import '../../prayer_times/services/prayer_service.dart';
 import '../../prayer_times/services/travel_mode_service.dart';
+import '../../tracking/services/tracking_service.dart';
+import 'adhan_selector_screen.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
@@ -23,6 +26,8 @@ class SettingsScreen extends ConsumerStatefulWidget {
 }
 
 class _SettingsScreenState extends ConsumerState<SettingsScreen> {
+  final SettingsService _settingsService = SettingsService.instance;
+
   bool adhanFajr = true;
   bool adhanDhuhr = true;
   bool adhanAsr = true;
@@ -55,11 +60,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     final prefs = await SharedPreferences.getInstance();
     if (!mounted) return;
     setState(() {
-      adhanFajr = prefs.getBool('adhan_fajr') ?? true;
-      adhanDhuhr = prefs.getBool('adhan_dhuhr') ?? true;
-      adhanAsr = prefs.getBool('adhan_asr') ?? true;
-      adhanMaghrib = prefs.getBool('adhan_maghrib') ?? true;
-      adhanIsha = prefs.getBool('adhan_isha') ?? false;
       travelerMode = prefs.getBool(AppConstants.keyTravelerModeEnabled) ?? true;
       cloudBackupEnabled = prefs.getBool(AppConstants.keyCloudBackupEnabled) ?? false;
       cloudWifiOnly = prefs.getBool(AppConstants.keyCloudWifiOnly) ?? true;
@@ -68,31 +68,38 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       final methodIndex = prefs.getInt(AppConstants.keyCalculationMethod) ?? CalculationMethod.muslim_world_league.index;
       calculationMethod = CalculationMethod.values[methodIndex];
     });
+    adhanFajr = await _settingsService.getPrayerNotificationEnabled('fajr');
+    adhanDhuhr = await _settingsService.getPrayerNotificationEnabled('dhuhr');
+    adhanAsr = await _settingsService.getPrayerNotificationEnabled('asr');
+    adhanMaghrib = await _settingsService.getPrayerNotificationEnabled('maghrib');
+    adhanIsha = await _settingsService.getPrayerNotificationEnabled('isha');
+    if (!mounted) return;
+    setState(() {});
   }
 
   Future<void> _toggleBool(String key, bool value) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(key, value);
+    await _settingsService.savePrayerNotificationEnabled(key, value);
     if (!mounted) return;
     setState(() {
       switch (key) {
-        case 'adhan_fajr':
+        case 'fajr':
           adhanFajr = value;
           break;
-        case 'adhan_dhuhr':
+        case 'dhuhr':
           adhanDhuhr = value;
           break;
-        case 'adhan_asr':
+        case 'asr':
           adhanAsr = value;
           break;
-        case 'adhan_maghrib':
+        case 'maghrib':
           adhanMaghrib = value;
           break;
-        case 'adhan_isha':
+        case 'isha':
           adhanIsha = value;
           break;
       }
     });
+    await ref.read(adhanManagerProvider).scheduleTodayAdhans();
   }
 
   Future<void> _toggleCloudBackup(bool value) async {
@@ -115,6 +122,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt(AppConstants.keyCalculationMethod, method.index);
     ref.invalidate(calculationMethodProvider);
+    ref.invalidate(prayerTimesProvider);
+    await Future.delayed(const Duration(milliseconds: 300));
+    await ref.read(adhanManagerProvider).scheduleTodayAdhans();
     if (!mounted) return;
     setState(() => calculationMethod = method);
   }
@@ -123,6 +133,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('madhab_hanafi', value);
     ref.invalidate(madhabProvider);
+    ref.invalidate(prayerTimesProvider);
+    await Future.delayed(const Duration(milliseconds: 300));
+    await ref.read(adhanManagerProvider).scheduleTodayAdhans();
     if (!mounted) return;
     setState(() => isHanafi = value);
   }
@@ -130,6 +143,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   Future<void> _updateOffset(int newValue) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt('time_offset', newValue);
+    ref.invalidate(timeOffsetProvider);
+    ref.invalidate(prayerTimesProvider);
+    await Future.delayed(const Duration(milliseconds: 300));
+    await ref.read(adhanManagerProvider).scheduleTodayAdhans();
     if (!mounted) return;
     setState(() => timeOffset = newValue);
   }
@@ -193,11 +210,21 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ),
             const SizedBox(height: 14),
             _buildSectionTitle(tokens, 'Notificaciones · Adhan'),
-            _buildToggleTile(tokens, 'Fajr', '6:12 · Adhan Al-Aqsa', adhanFajr, (v) => _toggleBool('adhan_fajr', v)),
-            _buildToggleTile(tokens, 'Dhuhr', '13:45 · Adhan Makkah', adhanDhuhr, (v) => _toggleBool('adhan_dhuhr', v)),
-            _buildToggleTile(tokens, 'Asr', '17:14 · Adhan Makkah', adhanAsr, (v) => _toggleBool('adhan_asr', v)),
-            _buildToggleTile(tokens, 'Maghrib', '19:52 · Adhan Al-Aqsa', adhanMaghrib, (v) => _toggleBool('adhan_maghrib', v)),
-            _buildToggleTile(tokens, 'Isha', '21:28 · Adhan Makkah', adhanIsha, (v) => _toggleBool('adhan_isha', v)),
+            _buildValueTile(
+              tokens,
+              'Sonido del Adhan',
+              'Elegir y previsualizar',
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => const AdhanSelectorScreen()),
+                );
+              },
+            ),
+            _buildToggleTile(tokens, 'Fajr', '6:12 · Adhan Al-Aqsa', adhanFajr, (v) => _toggleBool('fajr', v)),
+            _buildToggleTile(tokens, 'Dhuhr', '13:45 · Adhan Makkah', adhanDhuhr, (v) => _toggleBool('dhuhr', v)),
+            _buildToggleTile(tokens, 'Asr', '17:14 · Adhan Makkah', adhanAsr, (v) => _toggleBool('asr', v)),
+            _buildToggleTile(tokens, 'Maghrib', '19:52 · Adhan Al-Aqsa', adhanMaghrib, (v) => _toggleBool('maghrib', v)),
+            _buildToggleTile(tokens, 'Isha', '21:28 · Adhan Makkah', adhanIsha, (v) => _toggleBool('isha', v)),
             _buildSimpleToggleTile(tokens, 'Vibracion haptica', 'En Tasbih y notificaciones', haptics, (v) => setState(() => haptics = v)),
             const SizedBox(height: 14),
             _buildSectionTitle(tokens, 'Calculo de horarios'),
@@ -615,6 +642,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 await ref.read(cloudSyncServiceProvider).restoreFromJson(ref.read(hafizServiceProvider), controller.text.trim());
                 if (!context.mounted) return;
                 Navigator.pop(context);
+                ref.invalidate(prayerTimesProvider);
+                ref.invalidate(prayerTrackingProvider);
+                ref.invalidate(travelerModeEnabledProvider);
                 ref.invalidate(themeControllerProvider);
                 ref.invalidate(accessibilityControllerProvider);
                 if (!mounted) return;

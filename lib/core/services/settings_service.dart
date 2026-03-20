@@ -38,18 +38,37 @@ class SettingsService {
   // ── Notificaciones por oración ───────────────────────────────
   // Keys: 'prayer_notif_fajr', 'prayer_notif_dhuhr', etc.
 
+  String _prayerNotificationKey(String prayerKey) => 'prayer_notif_$prayerKey';
+  String _legacyPrayerNotificationKey(String prayerKey) => 'adhan_$prayerKey';
+
   Future<void> savePrayerNotificationEnabled(
     String prayerKey,  // 'fajr', 'dhuhr', 'asr', 'maghrib', 'isha'
     bool value,
   ) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('prayer_notif_$prayerKey', value);
+    await prefs.setBool(_prayerNotificationKey(prayerKey), value);
+    await prefs.remove(_legacyPrayerNotificationKey(prayerKey));
   }
 
   Future<bool> getPrayerNotificationEnabled(String prayerKey) async {
     final prefs = await SharedPreferences.getInstance();
+    final key = _prayerNotificationKey(prayerKey);
+    final legacyKey = _legacyPrayerNotificationKey(prayerKey);
+
+    final currentValue = prefs.getBool(key);
+    if (currentValue != null) {
+      return currentValue;
+    }
+
+    final legacyValue = prefs.getBool(legacyKey);
+    if (legacyValue != null) {
+      await prefs.setBool(key, legacyValue);
+      await prefs.remove(legacyKey);
+      return legacyValue;
+    }
+
     // Por defecto todas activadas
-    return prefs.getBool('prayer_notif_$prayerKey') ?? true;
+    return true;
   }
 
   // ── Método de cálculo ────────────────────────────────────────

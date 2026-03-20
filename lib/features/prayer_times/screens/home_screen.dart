@@ -8,6 +8,8 @@ import 'package:share_plus/share_plus.dart';
 import '../../../core/services/connectivity_service.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../hadith/services/hadith_service.dart';
+import '../../calendar/screens/calendar_screen.dart';
+import '../../focus/screens/focus_mode_screen.dart';
 import '../../qibla/screens/qibla_screen.dart';
 import '../../dhikr/screens/dhikr_screen.dart';
 import '../../support/screens/dua_screen.dart';
@@ -639,7 +641,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Widget _buildQuickActions(QiblaTokens tokens) {
     final actions = [
       ('🧭', 'Qibla', const QiblaScreen()),
+      ('📅', 'Calendario', const CalendarScreen()),
       ('📿', 'Tasbih', const DhikrScreen()),
+      ('🛐', 'Focus', const FocusModeScreen()),
       ('📊', 'Stats', const AnalyticsScreen()),
       ('🤲', 'Dua', const DuasScreen()),
       ('⚙️', 'Ajustes', const SettingsScreen()),

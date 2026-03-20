@@ -13,6 +13,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await StorageService.init();
   await NotificationService.instance.initialize();
+  await NotificationService.instance.requestPermission();
   await WidgetSyncService().configure();
   runApp(
     const ProviderScope(
