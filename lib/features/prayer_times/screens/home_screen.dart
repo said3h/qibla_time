@@ -8,20 +8,27 @@ import '../../../core/services/connectivity_service.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../calendar/screens/calendar_screen.dart';
 import '../../dhikr/screens/dhikr_screen.dart';
+import '../../dhikr/services/dhikr_service.dart';
 import '../../focus/screens/focus_mode_screen.dart';
 import '../../hadith/services/hadith_service.dart';
 import '../../qibla/screens/qibla_screen.dart';
+import '../../quran/models/quran_models.dart';
 import '../../quran/screens/quran_screen.dart';
+import '../../quran/services/quran_reading_service.dart';
 import '../../support/screens/dua_screen.dart';
 import '../../support/screens/settings_screen.dart';
 import '../../tracking/models/tracking_models.dart';
 import '../../tracking/screens/analytics_screen.dart';
 import '../../tracking/services/tracking_service.dart';
+import '../domain/entities/home_insight.dart';
 import '../domain/entities/next_prayer_info.dart';
 import '../domain/entities/prayer_name.dart';
 import '../domain/entities/prayer_location_diagnostic.dart';
 import '../domain/entities/prayer_schedule.dart';
+import '../domain/entities/ramadan_status.dart';
 import '../domain/entities/resolved_prayer_schedule.dart';
+import '../domain/usecases/generate_home_insights.dart';
+import '../presentation/providers/ramadan_providers.dart';
 import '../presentation/providers/prayer_times_providers.dart';
 import '../services/adhan_manager.dart';
 import '../services/travel_mode_service.dart';
@@ -35,6 +42,7 @@ class HomeScreen extends ConsumerStatefulWidget {
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   static const _weekdays = ['Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom'];
+  static const _generateHomeInsights = GenerateHomeInsightsUseCase();
 
   bool _hadithExpanded = false;
   int _hadithOffset = 0;
@@ -61,6 +69,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ref.watch(systemNotificationPermissionProvider);
     final prayerNotificationsEnabledAsync =
         ref.watch(prayerNotificationsEnabledProvider);
+    final ramadanStatusAsync = ref.watch(ramadanStatusProvider);
+    final lastReadingAsync = ref.watch(lastReadingProvider);
+    final dhikrSnapshotAsync = ref.watch(dhikrSnapshotProvider);
     final hadithsAsync = ref.watch(allHadithsProvider);
     final favoritesAsync = ref.watch(hadithFavoritesProvider);
     final tracking = ref.watch(prayerTrackingProvider);
@@ -68,6 +79,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final now = DateTime.now();
     final completedPrayers = tracking.completedPrayersFor(now);
     final weeklySummary = tracking.currentWeekSummary;
+    final homeInsights = _generateHomeInsights(
+      tracking: tracking,
+      weeklySummary: weeklySummary,
+      now: now,
+      ramadanStatus: ramadanStatusAsync.valueOrNull,
+      dhikrTodayCount: dhikrSnapshotAsync.valueOrNull?.todayCount,
+      dhikrDailyGoal: dhikrSnapshotAsync.valueOrNull?.dailyGoal,
+    );
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
@@ -114,6 +133,21 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 nextPrayerInfo,
                 completedPrayers,
                 streak,
+              ),
+              _buildHomeInsightCard(tokens, homeInsights),
+              _buildRamadanCard(
+                tokens,
+                prayerScheduleAsync.valueOrNull?.schedule,
+                ramadanStatusAsync.valueOrNull,
+              ),
+              _buildRamadanGoalsCard(
+                context,
+                tokens,
+                prayerScheduleAsync.valueOrNull?.schedule,
+                ramadanStatusAsync.valueOrNull,
+                tracking,
+                lastReadingAsync.valueOrNull,
+                dhikrSnapshotAsync.valueOrNull,
               ),
               _buildNotificationStatusCard(
                 tokens,
@@ -189,10 +223,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             ),
             child: IconButton(
               tooltip: 'Coran',
-              onPressed: () {
-                Navigator.of(context).push(
+              onPressed: () async {
+                await Navigator.of(context).push(
                   MaterialPageRoute(builder: (_) => const QuranScreen()),
                 );
+                ref.invalidate(lastReadingProvider);
               },
               icon: Icon(Icons.menu_book, size: 17, color: tokens.textPrimary),
             ),
@@ -637,6 +672,244 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 
+  Widget _buildRamadanCard(
+    QiblaTokens tokens,
+    PrayerSchedule? schedule,
+    RamadanStatus? ramadanStatus,
+  ) {
+    if (schedule == null || ramadanStatus == null || !ramadanStatus.isEnabled) {
+      return const SizedBox.shrink();
+    }
+
+    final now = DateTime.now();
+    final beforeIftar = now.isBefore(schedule.maghrib);
+    final nextSuhoor = DateTime(
+      now.year,
+      now.month,
+      now.day + 1,
+      schedule.fajr.hour,
+      schedule.fajr.minute,
+    );
+    final targetTime = beforeIftar ? schedule.maghrib : nextSuhoor;
+    final countdownLabel = beforeIftar
+        ? 'Faltan ${_formatRamadanCountdown(targetTime.difference(now))} para Iftar'
+        : 'Faltan ${_formatRamadanCountdown(targetTime.difference(now))} para Suhoor';
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: tokens.primaryBg,
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(color: tokens.primaryBorder),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    'MODO RAMADAN',
+                    style: GoogleFonts.dmSans(
+                      fontSize: 9,
+                      color: tokens.textSecondary,
+                      letterSpacing: 1.4,
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 6,
+                  ),
+                  decoration: BoxDecoration(
+                    color: tokens.bgSurface,
+                    borderRadius: BorderRadius.circular(999),
+                    border: Border.all(color: tokens.border),
+                  ),
+                  child: Text(
+                    ramadanStatus.headerLabel,
+                    style: GoogleFonts.dmSans(
+                      fontSize: 10,
+                      color: tokens.primaryLight,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            Text(
+              countdownLabel,
+              style: GoogleFonts.dmSans(
+                fontSize: 15,
+                fontWeight: FontWeight.w600,
+                color: tokens.textPrimary,
+              ),
+            ),
+            const SizedBox(height: 6),
+            Text(
+              ramadanStatus.blessingMessage,
+              style: GoogleFonts.dmSans(
+                fontSize: 11,
+                height: 1.5,
+                color: tokens.textPrimary,
+              ),
+            ),
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                Expanded(
+                  child: _summaryMetric(
+                    tokens,
+                    _formatTime(schedule.fajr),
+                    'Suhoor hasta',
+                  ),
+                ),
+                Expanded(
+                  child: _summaryMetric(
+                    tokens,
+                    _formatTime(schedule.maghrib),
+                    'Iftar',
+                  ),
+                ),
+                Expanded(
+                  child: _summaryMetric(
+                    tokens,
+                    beforeIftar ? 'Hoy' : 'Noche',
+                    beforeIftar ? 'objetivo actual' : 'proximo foco',
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            Text(
+              ramadanStatus.dailySuggestion,
+              style: GoogleFonts.dmSans(
+                fontSize: 11,
+                height: 1.5,
+                color: tokens.textSecondary,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHomeInsightCard(
+    QiblaTokens tokens,
+    HomeInsightBundle bundle,
+  ) {
+    final primary = bundle.primary;
+    final secondary = bundle.secondary;
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: tokens.bgSurface,
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(color: tokens.border),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Container(
+                  width: 34,
+                  height: 34,
+                  decoration: BoxDecoration(
+                    color: tokens.primaryBg,
+                    shape: BoxShape.circle,
+                    border: Border.all(color: tokens.primaryBorder),
+                  ),
+                  child: Icon(
+                    _insightIcon(primary.kind),
+                    size: 18,
+                    color: tokens.primaryLight,
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'INSIGHT DE HOY',
+                        style: GoogleFonts.dmSans(
+                          fontSize: 9,
+                          color: tokens.textSecondary,
+                          letterSpacing: 1.4,
+                        ),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        primary.title,
+                        style: GoogleFonts.dmSans(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: tokens.textPrimary,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            Text(
+              primary.message,
+              style: GoogleFonts.dmSans(
+                fontSize: 12,
+                height: 1.5,
+                color: tokens.textPrimary,
+              ),
+            ),
+            if (secondary != null) ...[
+              const SizedBox(height: 12),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 10,
+                ),
+                decoration: BoxDecoration(
+                  color: tokens.bgSurface2,
+                  borderRadius: BorderRadius.circular(14),
+                  border: Border.all(color: tokens.border),
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(
+                      _insightIcon(secondary.kind),
+                      size: 16,
+                      color: tokens.textMuted,
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        secondary.message,
+                        style: GoogleFonts.dmSans(
+                          fontSize: 10,
+                          height: 1.45,
+                          color: tokens.textSecondary,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _buildWeeklySummaryCard(QiblaTokens tokens, WeeklySummary summary) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
@@ -723,6 +996,325 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ),
       ],
     );
+  }
+
+  Widget _buildRamadanGoalsCard(
+    BuildContext context,
+    QiblaTokens tokens,
+    PrayerSchedule? schedule,
+    RamadanStatus? ramadanStatus,
+    TrackingState tracking,
+    QuranReadingPoint? lastReading,
+    DhikrSnapshot? dhikrSnapshot,
+  ) {
+    if (schedule == null || ramadanStatus == null || !ramadanStatus.isEnabled) {
+      return const SizedBox.shrink();
+    }
+
+    final now = DateTime.now();
+    final prayerCount = tracking.completedCountFor(now);
+    final quranGoal = _buildQuranGoal(lastReading, now);
+    final dhikrGoal = _buildDhikrGoal(dhikrSnapshot);
+    final fastingGoal = _buildFastingGoal(schedule, now);
+    final items = <_RamadanGoalItem>[
+      _RamadanGoalItem(
+        title: 'Oraciones',
+        description: '$prayerCount/5 completadas hoy',
+        icon: Icons.mosque_outlined,
+        state: prayerCount >= 5
+            ? _RamadanGoalState.completed
+            : prayerCount > 0
+            ? _RamadanGoalState.inProgress
+            : _RamadanGoalState.pending,
+      ),
+      quranGoal,
+      dhikrGoal,
+      fastingGoal,
+    ];
+    final completedCount = items
+        .where((item) => item.state == _RamadanGoalState.completed)
+        .length;
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: tokens.bgSurface,
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(color: tokens.border),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    'OBJETIVOS DE RAMADAN',
+                    style: GoogleFonts.dmSans(
+                      fontSize: 9,
+                      color: tokens.textSecondary,
+                      letterSpacing: 1.4,
+                    ),
+                  ),
+                ),
+                Text(
+                  '$completedCount/4 listos',
+                  style: GoogleFonts.dmSans(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: tokens.primaryLight,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            ...items.map((item) => _buildRamadanGoalRow(context, tokens, item)),
+            const SizedBox(height: 8),
+            Text(
+              completedCount == items.length
+                  ? 'Jornada de Ramadan muy completa. Manten este ritmo con calma.'
+                  : completedCount >= 2
+                  ? 'Vas bien hoy. Un pequeno paso mas puede cerrar tu dia con fuerza.'
+                  : 'Empieza por algo pequeno: una oracion, unas aleyas o unos minutos de dhikr.',
+              style: GoogleFonts.dmSans(
+                fontSize: 11,
+                height: 1.5,
+                color: tokens.textSecondary,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildRamadanGoalRow(
+    BuildContext context,
+    QiblaTokens tokens,
+    _RamadanGoalItem item,
+  ) {
+    final (iconColor, chipLabel, chipBg, chipBorder) = _goalStyle(tokens, item.state);
+
+    return Container(
+      margin: const EdgeInsets.only(bottom: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 11),
+      decoration: BoxDecoration(
+        color: tokens.bgSurface2,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: tokens.border),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 34,
+            height: 34,
+            decoration: BoxDecoration(
+              color: chipBg,
+              shape: BoxShape.circle,
+              border: Border.all(color: chipBorder),
+            ),
+            child: Icon(item.icon, size: 18, color: iconColor),
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  item.title,
+                  style: GoogleFonts.dmSans(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: tokens.textPrimary,
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  item.description,
+                  style: GoogleFonts.dmSans(
+                    fontSize: 10,
+                    height: 1.4,
+                    color: tokens.textSecondary,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          if (item.destination != null)
+            IconButton(
+              tooltip: item.actionLabel ?? 'Abrir',
+              onPressed: () async {
+                await Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => item.destination!),
+                );
+                ref.invalidate(lastReadingProvider);
+                ref.invalidate(dhikrSnapshotProvider);
+              },
+              icon: Icon(Icons.arrow_forward, size: 18, color: tokens.textMuted),
+            ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+            decoration: BoxDecoration(
+              color: chipBg,
+              borderRadius: BorderRadius.circular(999),
+              border: Border.all(color: chipBorder),
+            ),
+            child: Text(
+              chipLabel,
+              style: GoogleFonts.dmSans(
+                fontSize: 10,
+                color: iconColor,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  _RamadanGoalItem _buildQuranGoal(
+    QuranReadingPoint? lastReading,
+    DateTime now,
+  ) {
+    if (lastReading == null) {
+      return const _RamadanGoalItem(
+        title: 'Coran',
+        description: 'Haz una lectura corta hoy y luego podras retomarla facilmente.',
+        icon: Icons.menu_book_outlined,
+        state: _RamadanGoalState.pending,
+        destination: QuranScreen(),
+        actionLabel: 'Abrir Coran',
+      );
+    }
+
+    final daysSince = now
+        .difference(
+          DateTime(
+            lastReading.savedAt.year,
+            lastReading.savedAt.month,
+            lastReading.savedAt.day,
+          ),
+        )
+        .inDays;
+
+    if (daysSince <= 0) {
+      return _RamadanGoalItem(
+        title: 'Coran',
+        description:
+            'Lectura guardada hoy en ${lastReading.surahNameLatin}, aya ${lastReading.ayahNumber}.',
+        icon: Icons.menu_book_outlined,
+        state: _RamadanGoalState.completed,
+        destination: const QuranScreen(),
+        actionLabel: 'Continuar lectura',
+      );
+    }
+
+    if (daysSince <= 3) {
+      return _RamadanGoalItem(
+        title: 'Coran',
+        description:
+            'Retoma ${lastReading.surahNameLatin}, aya ${lastReading.ayahNumber}. Tienes progreso reciente.',
+        icon: Icons.menu_book_outlined,
+        state: _RamadanGoalState.inProgress,
+        destination: const QuranScreen(),
+        actionLabel: 'Continuar lectura',
+      );
+    }
+
+    return _RamadanGoalItem(
+      title: 'Coran',
+      description:
+          'Tu ultimo punto fue ${lastReading.surahNameLatin}, aya ${lastReading.ayahNumber}. Merece la pena retomarlo hoy.',
+      icon: Icons.menu_book_outlined,
+      state: _RamadanGoalState.pending,
+      destination: const QuranScreen(),
+      actionLabel: 'Abrir Coran',
+    );
+  }
+
+  _RamadanGoalItem _buildDhikrGoal(DhikrSnapshot? snapshot) {
+    if (snapshot == null) {
+      return const _RamadanGoalItem(
+        title: 'Dhikr',
+        description: 'Preparando tu progreso diario de dhikr.',
+        icon: Icons.auto_awesome_outlined,
+        state: _RamadanGoalState.pending,
+        destination: DhikrScreen(),
+        actionLabel: 'Abrir Tasbih',
+      );
+    }
+
+    if (snapshot.dailyGoalReached) {
+      return _RamadanGoalItem(
+        title: 'Dhikr',
+        description:
+            '${snapshot.todayCount}/${snapshot.dailyGoal} repeticiones hoy. Meta diaria cumplida.',
+        icon: Icons.auto_awesome_outlined,
+        state: _RamadanGoalState.completed,
+        destination: const DhikrScreen(),
+        actionLabel: 'Seguir',
+      );
+    }
+
+    if (snapshot.todayCount > 0) {
+      return _RamadanGoalItem(
+        title: 'Dhikr',
+        description:
+            '${snapshot.todayCount}/${snapshot.dailyGoal} repeticiones hoy. Ya has empezado.',
+        icon: Icons.auto_awesome_outlined,
+        state: _RamadanGoalState.inProgress,
+        destination: const DhikrScreen(),
+        actionLabel: 'Continuar',
+      );
+    }
+
+    return _RamadanGoalItem(
+      title: 'Dhikr',
+      description:
+          'Tu objetivo de hoy es ${snapshot.dailyGoal}. Unas pocas repeticiones ya suman.',
+      icon: Icons.auto_awesome_outlined,
+      state: _RamadanGoalState.pending,
+      destination: const DhikrScreen(),
+      actionLabel: 'Empezar',
+    );
+  }
+
+  _RamadanGoalItem _buildFastingGoal(
+    PrayerSchedule schedule,
+    DateTime now,
+  ) {
+    if (now.isBefore(schedule.maghrib)) {
+      return _RamadanGoalItem(
+        title: 'Ayuno',
+        description: 'Dia de ayuno en curso hasta las ${_formatTime(schedule.maghrib)}.',
+        icon: Icons.wb_sunny_outlined,
+        state: _RamadanGoalState.inProgress,
+      );
+    }
+
+    return _RamadanGoalItem(
+      title: 'Ayuno',
+      description: 'Ya puedes hacer iftar desde las ${_formatTime(schedule.maghrib)}.',
+      icon: Icons.nightlight_round,
+      state: _RamadanGoalState.completed,
+    );
+  }
+
+  (Color, String, Color, Color) _goalStyle(
+    QiblaTokens tokens,
+    _RamadanGoalState state,
+  ) {
+    switch (state) {
+      case _RamadanGoalState.completed:
+        return (tokens.accent, 'cumplido', tokens.primaryBg, tokens.primaryBorder);
+      case _RamadanGoalState.inProgress:
+        return (tokens.primaryLight, 'en progreso', tokens.activeBg, tokens.activeBorder);
+      case _RamadanGoalState.pending:
+        return (tokens.textMuted, 'pendiente', tokens.bgSurface, tokens.border);
+    }
   }
 
   String _locationDiagnosticTitle(PrayerLocationDiagnostic? diagnostic) {
@@ -1118,10 +1710,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         itemBuilder: (_, index) {
           final action = actions[index];
           return InkWell(
-            onTap: () {
-              Navigator.of(context).push(
+            onTap: () async {
+              await Navigator.of(context).push(
                 MaterialPageRoute(builder: (_) => action.$3 as Widget),
               );
+              ref.invalidate(lastReadingProvider);
+              ref.invalidate(dhikrSnapshotProvider);
             },
             borderRadius: BorderRadius.circular(16),
             child: Container(
@@ -1186,4 +1780,54 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     }
     return 'en ${remaining.inHours}h ${remaining.inMinutes.remainder(60)}min';
   }
+
+  String _formatRamadanCountdown(Duration remaining) {
+    final safe = remaining.isNegative ? Duration.zero : remaining;
+    final hours = safe.inHours;
+    final minutes = safe.inMinutes.remainder(60);
+    return '${hours}h ${minutes.toString().padLeft(2, '0')}min';
+  }
+
+  IconData _insightIcon(HomeInsightKind kind) {
+    switch (kind) {
+      case HomeInsightKind.progress:
+        return Icons.check_circle_outline;
+      case HomeInsightKind.streak:
+        return Icons.local_fire_department_outlined;
+      case HomeInsightKind.improvement:
+        return Icons.trending_up;
+      case HomeInsightKind.prayerPattern:
+        return Icons.insights_outlined;
+      case HomeInsightKind.dhikr:
+        return Icons.auto_awesome_outlined;
+      case HomeInsightKind.ramadan:
+        return Icons.nightlight_round;
+      case HomeInsightKind.guidance:
+        return Icons.lightbulb_outline;
+    }
+  }
+}
+
+enum _RamadanGoalState {
+  pending,
+  inProgress,
+  completed,
+}
+
+class _RamadanGoalItem {
+  const _RamadanGoalItem({
+    required this.title,
+    required this.description,
+    required this.icon,
+    required this.state,
+    this.destination,
+    this.actionLabel,
+  });
+
+  final String title;
+  final String description;
+  final IconData icon;
+  final _RamadanGoalState state;
+  final Widget? destination;
+  final String? actionLabel;
 }

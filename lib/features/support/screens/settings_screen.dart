@@ -14,6 +14,8 @@ import '../../../core/theme/theme_provider.dart';
 import '../../hafiz/services/hafiz_service.dart';
 import '../../prayer_times/domain/entities/prayer_cache_status.dart';
 import '../../prayer_times/domain/entities/prayer_location_diagnostic.dart';
+import '../../prayer_times/domain/entities/ramadan_status.dart';
+import '../../prayer_times/presentation/providers/ramadan_providers.dart';
 import '../../prayer_times/services/adhan_manager.dart';
 import '../../prayer_times/presentation/providers/prayer_times_providers.dart';
 import '../../prayer_times/services/travel_mode_service.dart';
@@ -39,6 +41,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   bool haptics = true;
   bool autoLocation = true;
   bool travelerMode = true;
+  bool ramadanAutomatic = true;
+  bool ramadanForced = false;
   bool cloudBackupEnabled = false;
   bool cloudWifiOnly = true;
   int timeOffset = 0;
@@ -64,6 +68,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     if (!mounted) return;
     setState(() {
       travelerMode = prefs.getBool(AppConstants.keyTravelerModeEnabled) ?? true;
+      ramadanAutomatic =
+          prefs.getBool(AppConstants.keyRamadanModeAutomatic) ?? true;
+      ramadanForced = prefs.getBool(AppConstants.keyRamadanModeForced) ?? false;
       cloudBackupEnabled = prefs.getBool(AppConstants.keyCloudBackupEnabled) ?? false;
       cloudWifiOnly = prefs.getBool(AppConstants.keyCloudWifiOnly) ?? true;
       timeOffset = prefs.getInt('time_offset') ?? 0;
@@ -126,6 +133,24 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     await ref.read(adhanManagerProvider).scheduleTodayAdhans();
   }
 
+  Future<void> _toggleRamadanAutomatic(bool value) async {
+    await _settingsService.saveRamadanModeAutomatic(value);
+    ref.invalidate(ramadanModeAutomaticProvider);
+    ref.invalidate(ramadanStatusProvider);
+    ref.invalidate(isRamadanProvider);
+    if (!mounted) return;
+    setState(() => ramadanAutomatic = value);
+  }
+
+  Future<void> _toggleRamadanForced(bool value) async {
+    await _settingsService.saveRamadanModeForced(value);
+    ref.invalidate(ramadanModeForcedProvider);
+    ref.invalidate(ramadanStatusProvider);
+    ref.invalidate(isRamadanProvider);
+    if (!mounted) return;
+    setState(() => ramadanForced = value);
+  }
+
   Future<void> _setTheme(String theme) async {
     await ref.read(themeControllerProvider.notifier).setTheme(theme);
   }
@@ -175,6 +200,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     final locationLabel = ref.watch(lastLocationLabelProvider).valueOrNull;
     final notificationPermissionGranted =
         ref.watch(systemNotificationPermissionProvider).valueOrNull;
+    final ramadanStatus = ref.watch(ramadanStatusProvider).valueOrNull;
     final prayerNotificationsStatus =
         ref.watch(prayerNotificationsEnabledProvider).valueOrNull ??
         prayerNotificationsEnabled;
@@ -285,6 +311,28 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             _buildValueTile(tokens, 'Madhab (Asr)', isHanafi ? 'Hanafi' : 'Shafi', onTap: () => _setMadhab(!isHanafi)),
             _buildValueTile(tokens, 'Ajuste manual', '±$timeOffset min', trailing: _offsetButtons(tokens)),
             _buildSimpleToggleTile(tokens, 'Ubicacion', 'GPS automatico', autoLocation, (v) => setState(() => autoLocation = v)),
+            const SizedBox(height: 14),
+            _buildSectionTitle(tokens, 'Modo Ramadan'),
+            _buildSimpleToggleTile(
+              tokens,
+              'Modo Ramadan automatico',
+              'Se activa solo cuando el calendario Hijri entra en Ramadan',
+              ramadanAutomatic,
+              _toggleRamadanAutomatic,
+            ),
+            _buildSimpleToggleTile(
+              tokens,
+              'Forzar modo Ramadan',
+              'Util para pruebas o para previsualizar Home fuera de Ramadan',
+              ramadanForced,
+              _toggleRamadanForced,
+            ),
+            if (ramadanStatus != null)
+              _buildValueTile(
+                tokens,
+                'Estado actual',
+                _ramadanStatusLabel(ramadanStatus),
+              ),
             const SizedBox(height: 14),
             
             // ── SECCIÓN TRAVEL MODE ────────────────────────────────────────
@@ -828,6 +876,16 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     if (diff.inDays == 1) return 'Ayer';
     if (diff.inDays < 7) return 'Hace ${diff.inDays} días';
     return '${date.day}/${date.month}/${date.year}';
+  }
+
+  String _ramadanStatusLabel(RamadanStatus status) {
+    if (status.isManualPreview) {
+      return 'Activo manual';
+    }
+    if (status.isEnabled) {
+      return status.headerLabel;
+    }
+    return 'Desactivado';
   }
 
   Widget _buildSettingRow({

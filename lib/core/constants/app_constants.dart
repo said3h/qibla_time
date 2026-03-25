@@ -26,4 +26,6 @@ class AppConstants {
   static const String keyDhikrDailyHistory = 'dhikr_daily_history';
   static const String keyDhikrSessionGoal = 'dhikr_session_goal';
   static const String keyDhikrDailyGoal = 'dhikr_daily_goal';
+  static const String keyRamadanModeAutomatic = 'ramadan_mode_automatic';
+  static const String keyRamadanModeForced = 'ramadan_mode_forced';
 }

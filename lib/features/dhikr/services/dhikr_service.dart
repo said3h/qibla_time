@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/constants/app_constants.dart';
@@ -173,3 +174,13 @@ class DhikrService {
     return '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
   }
 }
+
+final dhikrServiceProvider = Provider<DhikrService>((ref) {
+  return DhikrService();
+});
+
+final dhikrSnapshotProvider = FutureProvider.autoDispose<DhikrSnapshot>((
+  ref,
+) async {
+  return ref.watch(dhikrServiceProvider).loadSnapshot();
+});

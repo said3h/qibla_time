@@ -1,16 +1,15 @@
-// lib/core/services/settings_service.dart
-//
-// Añadido: getPrayerNotificationEnabled / savePrayerNotificationEnabled
-// para controlar cada oración individualmente (como muestra el prototipo)
-
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../constants/app_constants.dart';
 
 class SettingsService {
   SettingsService._();
   static final SettingsService instance = SettingsService._();
 
-  // ── Adhan ────────────────────────────────────────────────────
   static const _keyAdhan = 'selected_adhan';
+  static const _keyNotifications = 'prayer_notifications';
+  static const _keyCalcMethod = 'calculation_method';
+  static const _keyMadhab = 'prayer_madhab';
 
   Future<void> saveAdhan(String fileName) async {
     final prefs = await SharedPreferences.getInstance();
@@ -22,9 +21,6 @@ class SettingsService {
     return prefs.getString(_keyAdhan) ?? 'azan1.mp3';
   }
 
-  // ── Notificaciones globales ───────────────────────────────────
-  static const _keyNotifications = 'prayer_notifications';
-
   Future<void> saveNotificationsEnabled(bool value) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(_keyNotifications, value);
@@ -35,14 +31,11 @@ class SettingsService {
     return prefs.getBool(_keyNotifications) ?? true;
   }
 
-  // ── Notificaciones por oración ───────────────────────────────
-  // Keys: 'prayer_notif_fajr', 'prayer_notif_dhuhr', etc.
-
   String _prayerNotificationKey(String prayerKey) => 'prayer_notif_$prayerKey';
   String _legacyPrayerNotificationKey(String prayerKey) => 'adhan_$prayerKey';
 
   Future<void> savePrayerNotificationEnabled(
-    String prayerKey,  // 'fajr', 'dhuhr', 'asr', 'maghrib', 'isha'
+    String prayerKey,
     bool value,
   ) async {
     final prefs = await SharedPreferences.getInstance();
@@ -67,12 +60,8 @@ class SettingsService {
       return legacyValue;
     }
 
-    // Por defecto todas activadas
     return true;
   }
-
-  // ── Método de cálculo ────────────────────────────────────────
-  static const _keyCalcMethod = 'calculation_method';
 
   Future<void> saveCalculationMethod(int value) async {
     final prefs = await SharedPreferences.getInstance();
@@ -81,11 +70,8 @@ class SettingsService {
 
   Future<int> getCalculationMethod() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getInt(_keyCalcMethod) ?? 1; // 1 = Muslim World League
+    return prefs.getInt(_keyCalcMethod) ?? 1;
   }
-
-  // ── Madhab ───────────────────────────────────────────────────
-  static const _keyMadhab = 'prayer_madhab';
 
   Future<void> saveMadhab(int value) async {
     final prefs = await SharedPreferences.getInstance();
@@ -94,10 +80,29 @@ class SettingsService {
 
   Future<int> getMadhab() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getInt(_keyMadhab) ?? 0; // 0 = Shafi
+    return prefs.getInt(_keyMadhab) ?? 0;
   }
 
-  // ── Reset ─────────────────────────────────────────────────────
+  Future<void> saveRamadanModeAutomatic(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(AppConstants.keyRamadanModeAutomatic, value);
+  }
+
+  Future<bool> getRamadanModeAutomatic() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(AppConstants.keyRamadanModeAutomatic) ?? true;
+  }
+
+  Future<void> saveRamadanModeForced(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(AppConstants.keyRamadanModeForced, value);
+  }
+
+  Future<bool> getRamadanModeForced() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(AppConstants.keyRamadanModeForced) ?? false;
+  }
+
   Future<void> resetAll() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.clear();

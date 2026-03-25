@@ -1,7 +1,11 @@
+import 'dart:async';
+
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../core/services/audio_service.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../hafiz/screens/hafiz_mode_screen.dart';
 import '../models/quran_models.dart';
@@ -408,11 +412,41 @@ class QuranDetailScreen extends ConsumerStatefulWidget {
 
 class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   final ScrollController _scrollController = ScrollController();
+  final AudioService _audioService = AudioService.instance;
+  StreamSubscription<PlayerState>? _playerStateSubscription;
+  StreamSubscription<void>? _playerCompleteSubscription;
   bool _initialJumpDone = false;
   bool _initialReadingSaved = false;
+  int? _activeAyahNumber;
+  bool _isAudioPlaying = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _playerStateSubscription = _audioService.onPlayerStateChanged.listen((
+      state,
+    ) {
+      if (!mounted) return;
+      if (state == PlayerState.playing) {
+        setState(() => _isAudioPlaying = true);
+      } else if (state == PlayerState.paused) {
+        setState(() => _isAudioPlaying = false);
+      }
+    });
+    _playerCompleteSubscription = _audioService.onPlayerComplete.listen((_) {
+      if (!mounted) return;
+      setState(() {
+        _isAudioPlaying = false;
+        _activeAyahNumber = null;
+      });
+    });
+  }
 
   @override
   void dispose() {
+    _playerStateSubscription?.cancel();
+    _playerCompleteSubscription?.cancel();
+    _audioService.stop();
     _scrollController.dispose();
     super.dispose();
   }
@@ -445,6 +479,96 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
         ),
       ),
     );
+  }
+
+  bool _canPlayAyahAudio(SurahAyah ayah, SurahLoadSource source) {
+    if (ayah.audioUrl.isEmpty) return false;
+    return source != SurahLoadSource.placeholder;
+  }
+
+  String _audioStatusLabel(SurahAyah ayah, SurahLoadSource source) {
+    if (!_canPlayAyahAudio(ayah, source)) {
+      return 'Audio no disponible para esta aya.';
+    }
+    switch (source) {
+      case SurahLoadSource.online:
+        return 'Audio disponible para esta aya.';
+      case SurahLoadSource.offline:
+        return 'Audio disponible si tienes conexion.';
+      case SurahLoadSource.placeholder:
+        return 'Audio no disponible para esta aya.';
+    }
+  }
+
+  Future<void> _toggleAyahAudio(
+    SurahAyah ayah,
+    SurahLoadSource source,
+  ) async {
+    if (!_canPlayAyahAudio(ayah, source)) return;
+
+    final sourceKey = 'quran:${widget.summary.number}:${ayah.numberInSurah}';
+    try {
+      if (_activeAyahNumber == ayah.numberInSurah &&
+          _audioService.currentSourceKey == sourceKey) {
+        if (_isAudioPlaying) {
+          await _audioService.pause();
+          if (!mounted) return;
+          setState(() => _isAudioPlaying = false);
+        } else {
+          await _audioService.resume();
+          if (!mounted) return;
+          setState(() => _isAudioPlaying = true);
+        }
+        return;
+      }
+
+      await _audioService.playUrl(
+        ayah.audioUrl,
+        sourceKey: sourceKey,
+      );
+      if (!mounted) return;
+      setState(() {
+        _activeAyahNumber = ayah.numberInSurah;
+        _isAudioPlaying = true;
+      });
+    } catch (_) {
+      if (!mounted) return;
+      setState(() {
+        _activeAyahNumber = null;
+        _isAudioPlaying = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            'No se pudo reproducir el audio ahora mismo. Comprueba tu conexion e intentalo de nuevo.',
+          ),
+        ),
+      );
+    }
+  }
+
+  Future<void> _toggleActiveAudioFromIndicator() async {
+    if (_activeAyahNumber == null) return;
+
+    if (_isAudioPlaying) {
+      await _audioService.pause();
+      if (!mounted) return;
+      setState(() => _isAudioPlaying = false);
+      return;
+    }
+
+    await _audioService.resume();
+    if (!mounted) return;
+    setState(() => _isAudioPlaying = true);
+  }
+
+  Future<void> _stopActiveAudio() async {
+    await _audioService.stop();
+    if (!mounted) return;
+    setState(() {
+      _isAudioPlaying = false;
+      _activeAyahNumber = null;
+    });
   }
 
   @override
@@ -487,12 +611,21 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
             itemCount: detail.ayahs.length + 1,
             itemBuilder: (_, index) {
               if (index == 0) {
-                return _buildTopBanner(tokens, result.source, widget.initialAyah);
+                return Column(
+                  children: [
+                    _buildTopBanner(tokens, result.source, widget.initialAyah),
+                    if (_activeAyahNumber != null)
+                      _buildActiveAudioIndicator(tokens),
+                  ],
+                );
               }
 
               final ayah = detail.ayahs[index - 1];
+              final canPlayAudio = _canPlayAyahAudio(ayah, result.source);
               final isLastRead = lastReading?.surahNumber == widget.summary.number &&
                   lastReading?.ayahNumber == ayah.numberInSurah;
+              final isActiveAudio = _activeAyahNumber == ayah.numberInSurah;
+              final isPlayingAudio = isActiveAudio && _isAudioPlaying;
               final isBookmarked = bookmarks.any(
                 (bookmark) =>
                     bookmark.surahNumber == widget.summary.number &&
@@ -551,6 +684,28 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                             ),
                           const Spacer(),
                           IconButton(
+                            tooltip: canPlayAudio
+                                ? (isPlayingAudio
+                                      ? 'Pausar audio'
+                                      : isActiveAudio
+                                          ? 'Reanudar audio'
+                                          : 'Reproducir audio')
+                                : 'Audio no disponible',
+                            onPressed: canPlayAudio
+                                ? () => _toggleAyahAudio(ayah, result.source)
+                                : null,
+                            icon: Icon(
+                              !canPlayAudio
+                                  ? Icons.volume_off_outlined
+                                  : isPlayingAudio
+                                      ? Icons.pause_circle_outline
+                                      : Icons.play_circle_outline,
+                              color: !canPlayAudio
+                                  ? tokens.textMuted
+                                  : tokens.primary,
+                            ),
+                          ),
+                          IconButton(
                             tooltip: isBookmarked
                                 ? 'Quitar marcador'
                                 : 'Guardar marcador',
@@ -587,7 +742,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                       ),
                       const SizedBox(height: 10),
                       Text(
-                        'Toca esta aya para guardar aqui tu punto de lectura.',
+                        '${_audioStatusLabel(ayah, result.source)} Toca esta aya para guardar aqui tu punto de lectura.',
                         style: GoogleFonts.dmSans(
                           fontSize: 10,
                           color: tokens.textMuted,
@@ -627,9 +782,9 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     }
     final sourceMessage = switch (source) {
       SurahLoadSource.online =>
-        'Contenido cargado online. El audio esta disponible mientras tengas conexion.',
+        'Contenido cargado online. Puedes reproducir el audio de cada aya mientras tengas conexion.',
       SurahLoadSource.offline =>
-        'Texto cargado offline. El audio puede requerir conexion.',
+        'Texto cargado offline. El audio de cada aya puede requerir conexion.',
       SurahLoadSource.placeholder =>
         'Contenido parcial sin conexion. El audio no esta disponible.',
     };
@@ -656,6 +811,78 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                 height: 1.5,
                 color: tokens.textPrimary,
               ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildActiveAudioIndicator(QiblaTokens tokens) {
+    final ayahNumber = _activeAyahNumber;
+    if (ayahNumber == null) {
+      return const SizedBox.shrink();
+    }
+
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: tokens.bgSurface,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: tokens.border),
+      ),
+      child: Row(
+        children: [
+          Icon(
+            _isAudioPlaying
+                ? Icons.volume_up_outlined
+                : Icons.pause_circle_outline,
+            color: tokens.primary,
+            size: 18,
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  _isAudioPlaying
+                      ? 'Reproduciendo aya $ayahNumber'
+                      : 'Aya $ayahNumber en pausa',
+                  style: GoogleFonts.dmSans(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: tokens.textPrimary,
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  'Puedes pausar, reanudar o detener esta recitacion.',
+                  style: GoogleFonts.dmSans(
+                    fontSize: 10,
+                    color: tokens.textSecondary,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          IconButton(
+            tooltip: _isAudioPlaying ? 'Pausar audio' : 'Reanudar audio',
+            onPressed: _toggleActiveAudioFromIndicator,
+            icon: Icon(
+              _isAudioPlaying
+                  ? Icons.pause_circle_outline
+                  : Icons.play_circle_outline,
+              color: tokens.primary,
+            ),
+          ),
+          IconButton(
+            tooltip: 'Detener audio',
+            onPressed: _stopActiveAudio,
+            icon: Icon(
+              Icons.stop_circle_outlined,
+              color: tokens.textSecondary,
             ),
           ),
         ],
