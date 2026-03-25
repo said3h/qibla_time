@@ -20,4 +20,10 @@ class AppConstants {
   static const String keyCloudBackupEnabled = 'cloud_backup_enabled';
   static const String keyCloudWifiOnly = 'cloud_backup_wifi_only';
   static const String keyCloudLastBackup = 'cloud_backup_last_backup';
+  static const String keyOnboardingCompleted = 'onboarding_completed';
+  static const String keyQuranLastReading = 'quran_last_reading';
+  static const String keyQuranBookmarks = 'quran_bookmarks';
+  static const String keyDhikrDailyHistory = 'dhikr_daily_history';
+  static const String keyDhikrSessionGoal = 'dhikr_session_goal';
+  static const String keyDhikrDailyGoal = 'dhikr_daily_goal';
 }

@@ -14,11 +14,14 @@ import '../../qibla/screens/qibla_screen.dart';
 import '../../quran/screens/quran_screen.dart';
 import '../../support/screens/dua_screen.dart';
 import '../../support/screens/settings_screen.dart';
+import '../../tracking/models/tracking_models.dart';
 import '../../tracking/screens/analytics_screen.dart';
 import '../../tracking/services/tracking_service.dart';
 import '../domain/entities/next_prayer_info.dart';
 import '../domain/entities/prayer_name.dart';
+import '../domain/entities/prayer_location_diagnostic.dart';
 import '../domain/entities/prayer_schedule.dart';
+import '../domain/entities/resolved_prayer_schedule.dart';
 import '../presentation/providers/prayer_times_providers.dart';
 import '../services/adhan_manager.dart';
 import '../services/travel_mode_service.dart';
@@ -53,12 +56,18 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final bannerAsync = ref.watch(travelBannerProvider);
     final connectivityAsync = ref.watch(connectivityStatusProvider);
     final locationLabelAsync = ref.watch(lastLocationLabelProvider);
+    final locationDiagnosticAsync = ref.watch(prayerLocationDiagnosticProvider);
+    final systemNotificationPermissionAsync =
+        ref.watch(systemNotificationPermissionProvider);
+    final prayerNotificationsEnabledAsync =
+        ref.watch(prayerNotificationsEnabledProvider);
     final hadithsAsync = ref.watch(allHadithsProvider);
     final favoritesAsync = ref.watch(hadithFavoritesProvider);
-    final streak = ref.read(prayerTrackingProvider.notifier).getStreak();
+    final tracking = ref.watch(prayerTrackingProvider);
+    final streak = tracking.currentStreak;
     final now = DateTime.now();
-    final completedPrayers =
-        ref.read(prayerTrackingProvider.notifier).getCompletedPrayers(now);
+    final completedPrayers = tracking.completedPrayersFor(now);
+    final weeklySummary = tracking.currentWeekSummary;
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
@@ -86,15 +95,32 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               _buildCalendarStrip(tokens),
               prayerScheduleAsync.when(
                 data: (resolvedSchedule) => _buildHeroSection(
-                  resolvedSchedule?.schedule,
+                  resolvedSchedule,
                   nextPrayerInfo,
                   countdownAsync.value,
                   tokens,
                   streak,
+                  locationDiagnosticAsync.valueOrNull,
                 ),
                 loading: () => _buildLoadingHero(tokens),
-                error: (_, __) => _buildFallbackHero(tokens),
+                error: (_, __) => _buildFallbackHero(
+                  tokens,
+                  locationDiagnosticAsync.valueOrNull,
+                ),
               ),
+              _buildDailyProgressCard(
+                tokens,
+                prayerScheduleAsync.valueOrNull,
+                nextPrayerInfo,
+                completedPrayers,
+                streak,
+              ),
+              _buildNotificationStatusCard(
+                tokens,
+                systemNotificationPermissionAsync.valueOrNull,
+                prayerNotificationsEnabledAsync.valueOrNull,
+              ),
+              _buildWeeklySummaryCard(tokens, weeklySummary),
               _buildHadithSection(
                 tokens,
                 hadithsAsync.valueOrNull,
@@ -109,7 +135,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   tokens,
                 ),
                 loading: () => _buildPrayerSkeleton(tokens),
-                error: (_, __) => _buildPrayerFallback(tokens),
+                error: (_, __) => _buildPrayerFallback(
+                  tokens,
+                  locationDiagnosticAsync.valueOrNull,
+                ),
               ),
               _buildQuickActions(tokens),
               const SizedBox(height: 16),
@@ -143,7 +172,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                 ),
                 Text(
-                  '${isOnline ? 'ðŸ“' : 'ðŸ“´'} ${locationLabel ?? 'Ubicacion pendiente'}',
+                  '${isOnline ? 'En linea' : 'Sin red'} · ${locationLabel ?? 'Ubicacion pendiente'}',
                   style: GoogleFonts.dmSans(
                     fontSize: 10,
                     color: tokens.textSecondary,
@@ -282,14 +311,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   Widget _buildHeroSection(
-    PrayerSchedule? prayerSchedule,
+    ResolvedPrayerSchedule? resolvedSchedule,
     NextPrayerInfo? nextPrayerInfo,
     Duration? remaining,
     QiblaTokens tokens,
     int streak,
+    PrayerLocationDiagnostic? locationDiagnostic,
   ) {
+    final prayerSchedule = resolvedSchedule?.schedule;
     if (prayerSchedule == null || nextPrayerInfo == null) {
-      return _buildFallbackHero(tokens);
+      return _buildFallbackHero(tokens, locationDiagnostic);
     }
 
     final hero = tokens.getHero(nextPrayerInfo.prayer.key);
@@ -331,7 +362,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   border: Border.all(color: tokens.primaryBorder),
                 ),
                 child: Text(
-                  'ðŸ”¥ $streak dias',
+                  '$streak dias seguidos',
                   style: GoogleFonts.dmSans(
                     fontSize: 10,
                     color: tokens.primaryLight,
@@ -351,12 +382,30 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ),
           const SizedBox(height: 2),
           Text(
-            'Hoy a las ${_formatTime(nextPrayerInfo.time)} Â· ${_formatRemaining(remaining)}',
+            'Hoy a las ${_formatTime(nextPrayerInfo.time)} · ${_formatRemaining(remaining)}',
             style: GoogleFonts.dmSans(
               fontSize: 12,
               color: tokens.textSecondary,
             ),
           ),
+          if (resolvedSchedule?.fromCache == true) ...[
+            const SizedBox(height: 8),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+              decoration: BoxDecoration(
+                color: tokens.primaryBg,
+                borderRadius: BorderRadius.circular(999),
+                border: Border.all(color: tokens.primaryBorder),
+              ),
+              child: Text(
+                'Usando tu ultima ubicacion guardada',
+                style: GoogleFonts.dmSans(
+                  fontSize: 10,
+                  color: tokens.textPrimary,
+                ),
+              ),
+            ),
+          ],
           const SizedBox(height: 14),
           Row(children: _buildCountdown(tokens, remaining)),
         ],
@@ -390,7 +439,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 
-  Widget _buildFallbackHero(QiblaTokens tokens) {
+  Widget _buildFallbackHero(
+    QiblaTokens tokens,
+    PrayerLocationDiagnostic? diagnostic,
+  ) {
     return Container(
       margin: const EdgeInsets.fromLTRB(16, 0, 16, 12),
       padding: const EdgeInsets.all(20),
@@ -403,7 +455,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Activa la ubicacion para ver tus horarios',
+            _locationDiagnosticTitle(diagnostic),
             style: GoogleFonts.dmSans(
               fontSize: 16,
               fontWeight: FontWeight.w500,
@@ -412,7 +464,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ),
           const SizedBox(height: 6),
           Text(
-            'La pantalla principal sigue visible aunque los horarios aun no esten listos.',
+            _locationDiagnosticBody(diagnostic),
             style: GoogleFonts.dmSans(
               fontSize: 12,
               height: 1.5,
@@ -422,6 +474,292 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ],
       ),
     );
+  }
+
+  Widget _buildDailyProgressCard(
+    QiblaTokens tokens,
+    ResolvedPrayerSchedule? resolvedSchedule,
+    NextPrayerInfo? nextPrayerInfo,
+    List<String> completedPrayers,
+    int streak,
+  ) {
+    final completedCount = completedPrayers.length;
+    final progress = completedCount / 5;
+    final remainingPrayers = resolvedSchedule?.schedule.times.keys
+            .where((prayer) => !completedPrayers.contains(prayer.key))
+            .toList() ??
+        const <PrayerName>[];
+
+    String message;
+    if (completedCount == 5) {
+      message = 'Dia completo. Mantienes tu ritmo con $streak dias seguidos.';
+    } else if (nextPrayerInfo != null &&
+        !completedPrayers.contains(nextPrayerInfo.prayer.key)) {
+      message =
+          'Siguiente foco: ${nextPrayerInfo.prayer.displayName} a las ${_formatTime(nextPrayerInfo.time)}.';
+    } else if (remainingPrayers.isNotEmpty) {
+      message = 'Te faltan ${remainingPrayers.length} oraciones hoy.';
+    } else {
+      message = 'En cuanto tengamos horarios, veras aqui tu progreso de hoy.';
+    }
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: tokens.bgSurface,
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(color: tokens.border),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    'PROGRESO DE HOY',
+                    style: GoogleFonts.dmSans(
+                      fontSize: 9,
+                      color: tokens.textSecondary,
+                      letterSpacing: 1.4,
+                    ),
+                  ),
+                ),
+                Text(
+                  '$completedCount/5',
+                  style: GoogleFonts.dmSans(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: tokens.primaryLight,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Text(
+              message,
+              style: GoogleFonts.dmSans(
+                fontSize: 12,
+                height: 1.5,
+                color: tokens.textPrimary,
+              ),
+            ),
+            const SizedBox(height: 12),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(999),
+              child: LinearProgressIndicator(
+                value: progress,
+                minHeight: 8,
+                color: tokens.primary,
+                backgroundColor: tokens.bgSurface2,
+              ),
+            ),
+            if (remainingPrayers.isNotEmpty) ...[
+              const SizedBox(height: 12),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: remainingPrayers
+                    .map(
+                      (prayer) => Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 6,
+                        ),
+                        decoration: BoxDecoration(
+                          color: tokens.primaryBg,
+                          borderRadius: BorderRadius.circular(999),
+                          border: Border.all(color: tokens.primaryBorder),
+                        ),
+                        child: Text(
+                          prayer.displayName,
+                          style: GoogleFonts.dmSans(
+                            fontSize: 10,
+                            color: tokens.textPrimary,
+                          ),
+                        ),
+                      ),
+                    )
+                    .toList(),
+              ),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNotificationStatusCard(
+    QiblaTokens tokens,
+    bool? systemPermissionGranted,
+    bool? prayerNotificationsEnabled,
+  ) {
+    if (systemPermissionGranted == null || prayerNotificationsEnabled == null) {
+      return const SizedBox.shrink();
+    }
+    if (systemPermissionGranted && prayerNotificationsEnabled) {
+      return const SizedBox.shrink();
+    }
+
+    final text = !systemPermissionGranted
+        ? 'Tus recordatorios de Adhan estan configurados, pero el permiso del sistema sigue pendiente.'
+        : 'Los avisos generales de oracion estan pausados ahora mismo.';
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+      child: Container(
+        padding: const EdgeInsets.all(14),
+        decoration: BoxDecoration(
+          color: tokens.primaryBg,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: tokens.primaryBorder),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(Icons.notifications_off_outlined, color: tokens.primary, size: 18),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Text(
+                text,
+                style: GoogleFonts.dmSans(
+                  fontSize: 11,
+                  height: 1.5,
+                  color: tokens.textPrimary,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildWeeklySummaryCard(QiblaTokens tokens, WeeklySummary summary) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: tokens.bgSurface,
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(color: tokens.border),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    'RESUMEN SEMANAL',
+                    style: GoogleFonts.dmSans(
+                      fontSize: 9,
+                      color: tokens.textSecondary,
+                      letterSpacing: 1.4,
+                    ),
+                  ),
+                ),
+                Text(
+                  '${summary.prayersCompleted}/${summary.maxPossible}',
+                  style: GoogleFonts.dmSans(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: tokens.primaryLight,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            Row(
+              children: [
+                Expanded(child: _summaryMetric(tokens, '${summary.fullDays}', 'dias 5/5')),
+                Expanded(child: _summaryMetric(tokens, '${summary.currentStreak}', 'racha actual')),
+                Expanded(
+                  child: _summaryMetric(
+                    tokens,
+                    summary.strongestDay.shortLabel,
+                    '${summary.strongestDay.completed}/5 mejor dia',
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Text(
+              summary.interpretation,
+              style: GoogleFonts.dmSans(
+                fontSize: 11,
+                height: 1.5,
+                color: tokens.textSecondary,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _summaryMetric(QiblaTokens tokens, String value, String label) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          value,
+          style: GoogleFonts.dmSans(
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+            color: tokens.primaryLight,
+          ),
+        ),
+        const SizedBox(height: 2),
+        Text(
+          label,
+          style: GoogleFonts.dmSans(
+            fontSize: 10,
+            color: tokens.textSecondary,
+          ),
+        ),
+      ],
+    );
+  }
+
+  String _locationDiagnosticTitle(PrayerLocationDiagnostic? diagnostic) {
+    if (diagnostic == null) {
+      return 'Preparando tus horarios';
+    }
+    if (!diagnostic.serviceEnabled) {
+      return 'Activa la ubicacion del dispositivo';
+    }
+    if (diagnostic.permissionStatus ==
+        PrayerLocationPermissionStatus.deniedForever) {
+      return 'Permiso de ubicacion bloqueado';
+    }
+    if (diagnostic.permissionStatus == PrayerLocationPermissionStatus.denied) {
+      return 'Permite la ubicacion para ver tus horarios';
+    }
+    return 'Preparando tus horarios';
+  }
+
+  String _locationDiagnosticBody(PrayerLocationDiagnostic? diagnostic) {
+    if (diagnostic == null) {
+      return 'La pantalla principal sigue visible aunque los horarios aun no esten listos.';
+    }
+    if (!diagnostic.serviceEnabled) {
+      return 'Sin GPS activo no podemos calcular horarios precisos ni orientar la Qibla.';
+    }
+    if (diagnostic.permissionStatus ==
+        PrayerLocationPermissionStatus.deniedForever) {
+      return 'Puedes activar la ubicacion para QiblaTime desde Ajustes del sistema cuando quieras.';
+    }
+    if (diagnostic.permissionStatus == PrayerLocationPermissionStatus.denied) {
+      return 'QiblaTime necesita tu ubicacion para mostrar horarios fiables segun tu ciudad.';
+    }
+    if (diagnostic.hasCachedLocation) {
+      return 'Estamos preparando tus horarios usando la ultima ubicacion guardada.';
+    }
+    return 'La pantalla principal sigue visible aunque los horarios aun no esten listos.';
   }
 
   List<Widget> _buildCountdown(QiblaTokens tokens, Duration? remaining) {
@@ -481,7 +819,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     QiblaTokens tokens,
   ) {
     if (prayerSchedule == null) {
-      return _buildPrayerFallback(tokens);
+      return _buildPrayerFallback(tokens, null);
     }
 
     final prayers = [
@@ -613,7 +951,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 
-  Widget _buildPrayerFallback(QiblaTokens tokens) {
+  Widget _buildPrayerFallback(
+    QiblaTokens tokens,
+    PrayerLocationDiagnostic? diagnostic,
+  ) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Container(
@@ -624,7 +965,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           border: Border.all(color: tokens.border),
         ),
         child: Text(
-          'Los horarios apareceran aqui cuando tengamos ubicacion.',
+          _locationDiagnosticBody(diagnostic),
           style: GoogleFonts.dmSans(fontSize: 12, color: tokens.textSecondary),
         ),
       ),
@@ -737,6 +1078,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
               ],
             ),
+            if (favorites.isEmpty)
+              Text(
+                'Todavia no has guardado hadiths favoritos.',
+                style: GoogleFonts.dmSans(
+                  fontSize: 10,
+                  color: tokens.textMuted,
+                ),
+              ),
           ],
         ),
       ),

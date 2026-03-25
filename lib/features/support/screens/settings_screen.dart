@@ -12,6 +12,8 @@ import '../../../core/theme/accessibility_provider.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/theme/theme_provider.dart';
 import '../../hafiz/services/hafiz_service.dart';
+import '../../prayer_times/domain/entities/prayer_cache_status.dart';
+import '../../prayer_times/domain/entities/prayer_location_diagnostic.dart';
 import '../../prayer_times/services/adhan_manager.dart';
 import '../../prayer_times/presentation/providers/prayer_times_providers.dart';
 import '../../prayer_times/services/travel_mode_service.dart';
@@ -33,6 +35,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   bool adhanAsr = true;
   bool adhanMaghrib = true;
   bool adhanIsha = false;
+  bool prayerNotificationsEnabled = true;
   bool haptics = true;
   bool autoLocation = true;
   bool travelerMode = true;
@@ -73,6 +76,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     adhanAsr = await _settingsService.getPrayerNotificationEnabled('asr');
     adhanMaghrib = await _settingsService.getPrayerNotificationEnabled('maghrib');
     adhanIsha = await _settingsService.getPrayerNotificationEnabled('isha');
+    prayerNotificationsEnabled = await _settingsService.getNotificationsEnabled();
     if (!mounted) return;
     setState(() {});
   }
@@ -112,6 +116,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     await ref.read(cloudSyncServiceProvider).setWifiOnly(value);
     if (!mounted) return;
     setState(() => cloudWifiOnly = value);
+  }
+
+  Future<void> _togglePrayerNotificationsEnabled(bool value) async {
+    await ref.read(prayerNotificationsDataSourceProvider).setNotificationsEnabled(value);
+    ref.invalidate(prayerNotificationsEnabledProvider);
+    if (!mounted) return;
+    setState(() => prayerNotificationsEnabled = value);
+    await ref.read(adhanManagerProvider).scheduleTodayAdhans();
   }
 
   Future<void> _setTheme(String theme) async {
@@ -159,6 +171,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     final cacheStatus = ref.watch(prayerCacheStatusProvider);
     final lastBackup = ref.watch(_lastBackupProvider).valueOrNull;
     final deviceId = ref.watch(_deviceIdProvider).valueOrNull;
+    final locationDiagnostic = ref.watch(prayerLocationDiagnosticProvider).valueOrNull;
+    final locationLabel = ref.watch(lastLocationLabelProvider).valueOrNull;
+    final notificationPermissionGranted =
+        ref.watch(systemNotificationPermissionProvider).valueOrNull;
+    final prayerNotificationsStatus =
+        ref.watch(prayerNotificationsEnabledProvider).valueOrNull ??
+        prayerNotificationsEnabled;
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
@@ -220,6 +239,40 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 );
               },
             ),
+            _buildSimpleToggleTile(
+              tokens,
+              'Notificaciones generales',
+              'Activa o pausa todos los avisos de oracion',
+              prayerNotificationsStatus,
+              _togglePrayerNotificationsEnabled,
+            ),
+            if (notificationPermissionGranted == false)
+              Container(
+                margin: const EdgeInsets.only(bottom: 8),
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: tokens.primaryBg,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: tokens.primaryBorder),
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(Icons.notifications_off_outlined, color: tokens.primary, size: 18),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Text(
+                        'Los avisos de Adhan estan configurados, pero el permiso del sistema sigue pendiente.',
+                        style: GoogleFonts.dmSans(
+                          fontSize: 11,
+                          height: 1.5,
+                          color: tokens.textPrimary,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             _buildToggleTile(tokens, 'Fajr', '6:12 · Adhan Al-Aqsa', adhanFajr, (v) => _toggleBool('fajr', v)),
             _buildToggleTile(tokens, 'Dhuhr', '13:45 · Adhan Makkah', adhanDhuhr, (v) => _toggleBool('dhuhr', v)),
             _buildToggleTile(tokens, 'Asr', '17:14 · Adhan Makkah', adhanAsr, (v) => _toggleBool('asr', v)),
@@ -345,6 +398,16 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               },
             ),
             const SizedBox(height: 14),
+            _buildSectionTitle(tokens, 'Estado del sistema'),
+            _buildSystemStatusCard(
+              tokens,
+              locationLabel: locationLabel,
+              locationDiagnostic: locationDiagnostic,
+              notificationPermissionGranted: notificationPermissionGranted,
+              prayerNotificationsStatus: prayerNotificationsStatus,
+              cacheStatus: cacheStatus,
+            ),
+            const SizedBox(height: 14),
             _buildSectionTitle(tokens, 'Sadaqah · Apoyo'),
             Container(
               margin: const EdgeInsets.only(bottom: 5),
@@ -377,6 +440,24 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             _buildSimpleToggleTile(tokens, 'Solo con WiFi', 'Evita usar datos moviles para sync futuro', cloudWifiOnly, _toggleCloudWifiOnly),
             _buildValueTile(tokens, 'ID anonimo', deviceId ?? 'Generando...'),
             _buildValueTile(tokens, 'Ultimo backup', lastBackup == null ? 'Nunca' : lastBackup.toLocal().toString().substring(0, 16)),
+            if (!cloudBackupEnabled && lastBackup == null)
+              Container(
+                margin: const EdgeInsets.only(bottom: 8),
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: tokens.bgSurface,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: tokens.border),
+                ),
+                child: Text(
+                  'Todavia no has configurado copias de seguridad. Puedes exportar un primer backup manual cuando quieras.',
+                  style: GoogleFonts.dmSans(
+                    fontSize: 11,
+                    height: 1.5,
+                    color: tokens.textSecondary,
+                  ),
+                ),
+              ),
             _buildValueTile(
               tokens,
               'Exportar backup',
@@ -576,6 +657,85 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         title: Text(title, style: GoogleFonts.dmSans(fontSize: 13, color: tokens.textPrimary)),
         trailing: trailing ?? Text(value, style: GoogleFonts.dmSans(fontSize: 12, color: tokens.primary, fontWeight: FontWeight.w500)),
+      ),
+    );
+  }
+
+  Widget _buildSystemStatusCard(
+    QiblaTokens tokens, {
+    required String? locationLabel,
+    required PrayerLocationDiagnostic? locationDiagnostic,
+    required bool? notificationPermissionGranted,
+    required bool prayerNotificationsStatus,
+    required PrayerCacheStatus cacheStatus,
+  }) {
+    final locationValue = locationLabel ??
+        (locationDiagnostic?.lastKnownLocation == null
+            ? 'Sin ubicacion guardada'
+            : '${locationDiagnostic!.lastKnownLocation!.latitude.toStringAsFixed(2)}, ${locationDiagnostic.lastKnownLocation!.longitude.toStringAsFixed(2)}');
+
+    final locationStatus = switch (locationDiagnostic?.permissionStatus) {
+      PrayerLocationPermissionStatus.deniedForever => 'Bloqueado',
+      PrayerLocationPermissionStatus.denied => 'Pendiente',
+      PrayerLocationPermissionStatus.granted => locationDiagnostic?.serviceEnabled == false ? 'GPS apagado' : 'Listo',
+      _ => 'Sin comprobar',
+    };
+
+    final scheduleSource =
+        cacheStatus.entryCount > 0 ? 'Cache preparada' : 'Pendiente';
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: tokens.bgSurface,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: tokens.border),
+      ),
+      child: Column(
+        children: [
+          _diagnosticRow(tokens, 'Metodo', calculationMethod.name.replaceAll('_', ' ').toUpperCase()),
+          _diagnosticRow(tokens, 'Madhab', isHanafi ? 'Hanafi' : 'Shafi'),
+          _diagnosticRow(tokens, 'Offset', '${timeOffset >= 0 ? '+' : ''}$timeOffset min'),
+          _diagnosticRow(tokens, 'Notif. sistema', notificationPermissionGranted == null ? 'Comprobando...' : notificationPermissionGranted ? 'Concedidas' : 'Pendientes'),
+          _diagnosticRow(tokens, 'Notif. app', prayerNotificationsStatus ? 'Activadas' : 'Pausadas'),
+          _diagnosticRow(tokens, 'Ubicacion', locationValue),
+          _diagnosticRow(tokens, 'Estado ubicacion', locationStatus),
+          _diagnosticRow(tokens, 'Fuente horarios', scheduleSource),
+          _diagnosticRow(tokens, 'Cache', '${cacheStatus.entryCount} entradas'),
+        ],
+      ),
+    );
+  }
+
+  Widget _diagnosticRow(QiblaTokens tokens, String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Text(
+              label,
+              style: GoogleFonts.dmSans(
+                fontSize: 11,
+                color: tokens.textSecondary,
+              ),
+            ),
+          ),
+          const SizedBox(width: 12),
+          Flexible(
+            child: Text(
+              value,
+              textAlign: TextAlign.right,
+              style: GoogleFonts.dmSans(
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+                color: tokens.textPrimary,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

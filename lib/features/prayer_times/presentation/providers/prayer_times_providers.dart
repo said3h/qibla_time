@@ -12,6 +12,7 @@ import '../../data/repositories/prayer_times_repository_impl.dart';
 import '../../domain/entities/next_prayer_info.dart';
 import '../../domain/entities/prayer_cache_status.dart';
 import '../../domain/entities/prayer_location.dart';
+import '../../domain/entities/prayer_location_diagnostic.dart';
 import '../../domain/entities/resolved_prayer_schedule.dart';
 import '../../domain/repositories/prayer_notifications_repository.dart';
 import '../../domain/repositories/prayer_times_repository.dart';
@@ -49,6 +50,11 @@ final prayerNotificationsDataSourceProvider =
 final prayerLocationProvider = FutureProvider<PrayerLocation?>((ref) async {
   final accessResult = await ref.watch(prayerLocationDataSourceProvider).getLocation();
   return accessResult?.location;
+});
+
+final prayerLocationDiagnosticProvider =
+    FutureProvider<PrayerLocationDiagnostic>((ref) async {
+  return ref.watch(prayerLocationDataSourceProvider).getDiagnostic();
 });
 
 final prayerCalculationMethodProvider =
@@ -102,6 +108,14 @@ final reschedulePrayerNotificationsUseCaseProvider =
 
 final prayerCacheStatusProvider = Provider<PrayerCacheStatus>((ref) {
   return ref.watch(prayerCacheDataSourceProvider).getStatus();
+});
+
+final prayerNotificationsEnabledProvider = FutureProvider<bool>((ref) async {
+  return ref.watch(prayerNotificationsDataSourceProvider).areNotificationsEnabled();
+});
+
+final systemNotificationPermissionProvider = FutureProvider<bool>((ref) async {
+  return ref.watch(prayerNotificationsDataSourceProvider).isSystemPermissionGranted();
 });
 
 final prayerScheduleProvider = FutureProvider<ResolvedPrayerSchedule?>((ref) async {

@@ -28,6 +28,10 @@ class HafizModeScreen extends ConsumerWidget {
             Text('Memorizacion guiada con repeticiones y repaso', style: GoogleFonts.dmSans(fontSize: 11, color: tokens.textSecondary)),
             const SizedBox(height: 16),
             _buildSummary(tokens, progress),
+            if (progress.isEmpty) ...[
+              const SizedBox(height: 12),
+              _buildEmptyState(tokens),
+            ],
             const SizedBox(height: 16),
             ...surahs.take(20).map((surah) {
               final plan = progress.where((item) => item.surahNumber == surah.number).cast<HafizProgress?>().firstOrNull;
@@ -74,6 +78,56 @@ class HafizModeScreen extends ConsumerWidget {
         children: [
           Expanded(child: _stat(tokens, '${progress.length}', 'planes activos')),
           Expanded(child: _stat(tokens, '$completed', 'suras repasadas')),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildEmptyState(QiblaTokens tokens) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: tokens.bgSurface,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: tokens.border),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Todavia no tienes planes activos',
+            style: GoogleFonts.dmSans(
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+              color: tokens.textPrimary,
+            ),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            'Elige una sura de la lista para crear tu primer plan de memorizacion. Empezar pequeno suele funcionar mejor.',
+            style: GoogleFonts.dmSans(
+              fontSize: 11,
+              height: 1.6,
+              color: tokens.textSecondary,
+            ),
+          ),
+          const SizedBox(height: 10),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            decoration: BoxDecoration(
+              color: tokens.primaryBg,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: tokens.primaryBorder),
+            ),
+            child: Text(
+              'Sugerencia: prueba con una sura corta y 5 repeticiones.',
+              style: GoogleFonts.dmSans(
+                fontSize: 11,
+                color: tokens.textPrimary,
+              ),
+            ),
+          ),
         ],
       ),
     );

@@ -6,6 +6,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theme/app_theme.dart';
+import '../../prayer_times/domain/entities/prayer_location_diagnostic.dart';
+import '../../prayer_times/presentation/providers/prayer_times_providers.dart';
 import '../services/qibla_service.dart';
 
 class QiblaScreen extends ConsumerWidget {
@@ -17,6 +19,7 @@ class QiblaScreen extends ConsumerWidget {
     final compassAsync = ref.watch(compassProvider);
     final bearingAsync = ref.watch(qiblaBearingProvider);
     final distanceAsync = ref.watch(distanceToMeccaProvider);
+    final locationDiagnosticAsync = ref.watch(prayerLocationDiagnosticProvider);
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
@@ -25,13 +28,19 @@ class QiblaScreen extends ConsumerWidget {
           data: (CompassEvent event) {
             final heading = event.heading;
             if (heading == null) {
-              return _buildError(tokens, 'No se pudo leer la brujula.');
+              return _buildError(
+                tokens,
+                'No pudimos leer la brujula. Prueba a mover el telefono en forma de 8 y alejalo de fundas magneticas.',
+              );
             }
 
             return bearingAsync.when(
               data: (bearing) {
                 if (bearing == null) {
-                  return _buildError(tokens, 'Activa la ubicacion para calcular la Qibla.');
+                  return _buildLocationIssue(
+                    tokens,
+                    locationDiagnosticAsync.valueOrNull,
+                  );
                 }
 
                 final dialRotation = -(heading * pi / 180);
@@ -92,11 +101,17 @@ class QiblaScreen extends ConsumerWidget {
                 );
               },
               loading: () => _buildLoading(tokens),
-              error: (_, __) => _buildError(tokens, 'No se pudo calcular el bearing de la Qibla.'),
+              error: (_, __) => _buildError(
+                tokens,
+                'No se pudo calcular la direccion a la Kaaba con esta ubicacion.',
+              ),
             );
           },
           loading: () => _buildLoading(tokens),
-          error: (_, __) => _buildError(tokens, 'No se pudo iniciar la brujula.'),
+          error: (_, __) => _buildError(
+            tokens,
+            'No se pudo iniciar la brujula. Comprueba si tu dispositivo expone el sensor magnetico.',
+          ),
         ),
       ),
     );
@@ -323,13 +338,43 @@ class QiblaScreen extends ConsumerWidget {
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(24),
-        child: Text(
-          text,
-          textAlign: TextAlign.center,
-          style: GoogleFonts.dmSans(fontSize: 14, color: tokens.textSecondary),
+        child: Container(
+          padding: const EdgeInsets.all(18),
+          decoration: BoxDecoration(
+            color: tokens.bgSurface,
+            borderRadius: BorderRadius.circular(18),
+            border: Border.all(color: tokens.border),
+          ),
+          child: Text(
+            text,
+            textAlign: TextAlign.center,
+            style: GoogleFonts.dmSans(fontSize: 14, color: tokens.textSecondary),
+          ),
         ),
       ),
     );
+  }
+
+  Widget _buildLocationIssue(
+    QiblaTokens tokens,
+    PrayerLocationDiagnostic? diagnostic,
+  ) {
+    String text = 'Activa la ubicacion para calcular la direccion de la Qibla.';
+    if (diagnostic != null) {
+      if (!diagnostic.serviceEnabled) {
+        text =
+            'La ubicacion del dispositivo esta desactivada. Activa el GPS para calcular la Qibla con precision.';
+      } else if (diagnostic.permissionStatus ==
+          PrayerLocationPermissionStatus.deniedForever) {
+        text =
+            'El permiso de ubicacion esta bloqueado. Puedes activarlo desde Ajustes del sistema.';
+      } else if (diagnostic.permissionStatus ==
+          PrayerLocationPermissionStatus.denied) {
+        text =
+            'La app necesita permiso de ubicacion para orientar la Qibla correctamente.';
+      }
+    }
+    return _buildError(tokens, text);
   }
 
   String _getDirectionName(double bearing) {

@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../domain/entities/location_access_result.dart';
 import '../../domain/entities/prayer_location.dart';
+import '../../domain/entities/prayer_location_diagnostic.dart';
 
 class PrayerLocationDataSource {
   Future<LocationAccessResult?> getLocation({
@@ -57,6 +58,18 @@ class PrayerLocationDataSource {
     return (await getLocation())?.location;
   }
 
+  Future<PrayerLocationDiagnostic> getDiagnostic() async {
+    final serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    final permission = await Geolocator.checkPermission();
+    final lastKnownLocation = await getLastKnownLocation();
+
+    return PrayerLocationDiagnostic(
+      serviceEnabled: serviceEnabled,
+      permissionStatus: _mapPermission(permission),
+      lastKnownLocation: lastKnownLocation,
+    );
+  }
+
   Future<void> persistLastKnownLocation(PrayerLocation location) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setDouble('last_lat', location.latitude);
@@ -78,5 +91,21 @@ class PrayerLocationDataSource {
       location: PrayerLocation(latitude: lat, longitude: lng),
       source: LocationAccessSource.cache,
     );
+  }
+
+  PrayerLocationPermissionStatus _mapPermission(
+    LocationPermission permission,
+  ) {
+    switch (permission) {
+      case LocationPermission.denied:
+        return PrayerLocationPermissionStatus.denied;
+      case LocationPermission.deniedForever:
+        return PrayerLocationPermissionStatus.deniedForever;
+      case LocationPermission.always:
+      case LocationPermission.whileInUse:
+        return PrayerLocationPermissionStatus.granted;
+      case LocationPermission.unableToDetermine:
+        return PrayerLocationPermissionStatus.unknown;
+    }
   }
 }

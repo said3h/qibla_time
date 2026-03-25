@@ -43,3 +43,60 @@ class SurahDetail {
     required this.ayahs,
   });
 }
+
+enum SurahLoadSource {
+  online,
+  offline,
+  placeholder,
+}
+
+class SurahLoadResult {
+  const SurahLoadResult({
+    required this.detail,
+    required this.source,
+  });
+
+  final SurahDetail detail;
+  final SurahLoadSource source;
+
+  bool get usedFallback => source != SurahLoadSource.online;
+}
+
+class QuranReadingPoint {
+  const QuranReadingPoint({
+    required this.surahNumber,
+    required this.surahNameLatin,
+    required this.surahNameArabic,
+    required this.ayahNumber,
+    required this.savedAt,
+  });
+
+  final int surahNumber;
+  final String surahNameLatin;
+  final String surahNameArabic;
+  final int ayahNumber;
+  final DateTime savedAt;
+
+  factory QuranReadingPoint.fromJson(Map<String, dynamic> json) {
+    return QuranReadingPoint(
+      surahNumber: json['surahNumber'] as int,
+      surahNameLatin: json['surahNameLatin'] as String,
+      surahNameArabic: json['surahNameArabic'] as String,
+      ayahNumber: json['ayahNumber'] as int,
+      savedAt: DateTime.tryParse(json['savedAt'] as String? ?? '') ??
+          DateTime.now(),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'surahNumber': surahNumber,
+      'surahNameLatin': surahNameLatin,
+      'surahNameArabic': surahNameArabic,
+      'ayahNumber': ayahNumber,
+      'savedAt': savedAt.toIso8601String(),
+    };
+  }
+
+  String get shortLabel => '$surahNameLatin · aya $ayahNumber';
+}

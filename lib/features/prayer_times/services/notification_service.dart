@@ -10,6 +10,7 @@
 // por eso añadimos el prefijo 'adhan_' al convertir el nombre.
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
 
@@ -124,5 +125,10 @@ class NotificationService {
             alert: true, badge: true, sound: true) ?? false;
     }
     return false;
+  }
+
+  Future<bool> areNotificationsEnabled() async {
+    final status = await Permission.notification.status;
+    return status.isGranted || status.isLimited || status.isProvisional;
   }
 }

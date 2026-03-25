@@ -131,6 +131,15 @@ class TrackingState {
   factory TrackingState.fromData(Map<String, Map<String, bool>> data) =>
       TrackingState(data: data);
 
+  List<String> completedPrayersFor(DateTime date) {
+    final key = _fmt(date);
+    final dayData = data[key];
+    if (dayData == null) return const [];
+    return dayData.entries.where((entry) => entry.value).map((entry) => entry.key).toList();
+  }
+
+  int completedCountFor(DateTime date) => completedPrayersFor(date).length;
+
   // ── Racha actual ────────────────────────────────────────────
 
   int get currentStreak {
@@ -236,6 +245,36 @@ class TrackingState {
       prayersCompleted: completed,
       fullDays:       fullDays,
       totalDays:      now.day,
+    );
+  }
+
+  WeeklySummary get currentWeekSummary {
+    final days = List.generate(7, (index) {
+      final date = DateTime.now().subtract(Duration(days: 6 - index));
+      return WeeklyDaySummary(
+        date: date,
+        completed: _countForDay(_fmt(date)),
+      );
+    });
+
+    final prayersCompleted = days.fold<int>(
+      0,
+      (sum, day) => sum + day.completed,
+    );
+    final strongestDay = days.reduce(
+      (best, current) => current.completed >= best.completed ? current : best,
+    );
+    final weakestDay = days.reduce(
+      (worst, current) => current.completed <= worst.completed ? current : worst,
+    );
+
+    return WeeklySummary(
+      days: days,
+      prayersCompleted: prayersCompleted,
+      fullDays: days.where((day) => day.completed == 5).length,
+      currentStreak: currentStreak,
+      strongestDay: strongestDay,
+      weakestDay: weakestDay,
     );
   }
 

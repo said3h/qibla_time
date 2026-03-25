@@ -51,4 +51,16 @@ class PrayerNotificationsDataSource {
       );
     }
   }
+
+  Future<bool> areNotificationsEnabled() {
+    return _settingsService.getNotificationsEnabled();
+  }
+
+  Future<void> setNotificationsEnabled(bool value) {
+    return _settingsService.saveNotificationsEnabled(value);
+  }
+
+  Future<bool> isSystemPermissionGranted() {
+    return _notificationService.areNotificationsEnabled();
+  }
 }

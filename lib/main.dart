@@ -4,8 +4,8 @@ import 'core/services/storage_service.dart';
 import 'core/theme/accessibility_provider.dart';
 import 'core/theme/app_theme.dart';
 import 'core/theme/theme_provider.dart';
-import 'core/navigation/main_navigation.dart';
 
+import 'features/onboarding/screens/onboarding_gate.dart';
 import 'features/prayer_times/services/notification_service.dart';
 import 'features/prayer_times/services/widget_sync_service.dart';
 
@@ -13,7 +13,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await StorageService.init();
   await NotificationService.instance.initialize();
-  await NotificationService.instance.requestPermission();
   await WidgetSyncService().configure();
   runApp(
     const ProviderScope(
@@ -56,7 +55,7 @@ class QiblaTimeApp extends ConsumerWidget {
           child: child ?? const SizedBox.shrink(),
         );
       },
-      home: const MainNavigation(),
+      home: const OnboardingGate(),
     );
   }
 }

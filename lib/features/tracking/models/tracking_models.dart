@@ -49,3 +49,63 @@ class MonthlyStats {
     return names[month];
   }
 }
+
+class WeeklyDaySummary {
+  const WeeklyDaySummary({
+    required this.date,
+    required this.completed,
+  });
+
+  final DateTime date;
+  final int completed;
+
+  bool get isToday {
+    final now = DateTime.now();
+    return date.year == now.year &&
+        date.month == now.month &&
+        date.day == now.day;
+  }
+
+  String get shortLabel {
+    const labels = ['Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom'];
+    return labels[date.weekday - 1];
+  }
+}
+
+class WeeklySummary {
+  const WeeklySummary({
+    required this.days,
+    required this.prayersCompleted,
+    required this.fullDays,
+    required this.currentStreak,
+    required this.strongestDay,
+    required this.weakestDay,
+  });
+
+  final List<WeeklyDaySummary> days;
+  final int prayersCompleted;
+  final int fullDays;
+  final int currentStreak;
+  final WeeklyDaySummary strongestDay;
+  final WeeklyDaySummary weakestDay;
+
+  int get maxPossible => days.length * 5;
+
+  double get completionRate =>
+      maxPossible == 0 ? 0.0 : prayersCompleted / maxPossible;
+
+  bool get hasAnyActivity => prayersCompleted > 0;
+
+  String get interpretation {
+    if (!hasAnyActivity) {
+      return 'Empieza marcando tus oraciones y veras aqui tu semana.';
+    }
+    if (completionRate >= 0.85) {
+      return 'Semana muy solida. Has mantenido una constancia excelente.';
+    }
+    if (completionRate >= 0.6) {
+      return 'Buen ritmo esta semana. Un pequeno empujon te acerca al 5/5.';
+    }
+    return 'Cada oracion cuenta. Intenta cerrar fuerte los proximos dias.';
+  }
+}

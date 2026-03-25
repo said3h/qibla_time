@@ -26,6 +26,14 @@ final quranSurahsProvider = Provider<List<SurahSummary>>((ref) {
 final surahDetailProvider = FutureProvider.family<SurahDetail, SurahSummary>(
   (ref, summary) async {
     final service = ref.read(quranServiceProvider);
+    return (await service.getSurahDetail(summary)).detail;
+  },
+);
+
+final surahLoadResultProvider =
+    FutureProvider.family<SurahLoadResult, SurahSummary>(
+  (ref, summary) async {
+    final service = ref.read(quranServiceProvider);
     return service.getSurahDetail(summary);
   },
 );
@@ -41,12 +49,15 @@ class QuranService {
 
   // ── Obtener detalle de una sura ─────────────────────────────
 
-  Future<SurahDetail> getSurahDetail(SurahSummary summary) async {
+  Future<SurahLoadResult> getSurahDetail(SurahSummary summary) async {
     try {
-      return await _fetchFromApi(summary);
+      return SurahLoadResult(
+        detail: await _fetchFromApi(summary),
+        source: SurahLoadSource.online,
+      );
     } catch (_) {
       // API falló → fallback al JSON local
-      return await _fetchFromLocal(summary.number);
+      return _fetchFromLocal(summary.number);
     }
   }
 
@@ -99,31 +110,39 @@ class QuranService {
 
   // ── JSON local (fallback) ───────────────────────────────────
 
-  Future<SurahDetail> _fetchFromLocal(int surahNumber) async {
+  Future<SurahLoadResult> _fetchFromLocal(int surahNumber) async {
     // Cargar y cachear el JSON completo la primera vez
     if (_offlineCache == null) {
       await _loadOfflineCache();
     }
 
     final detail = _offlineCache?[surahNumber];
-    if (detail != null) return detail;
+    if (detail != null) {
+      return SurahLoadResult(
+        detail: detail,
+        source: SurahLoadSource.offline,
+      );
+    }
 
     // Si la sura no está en el JSON local devolvemos un placeholder
-    return SurahDetail(
-      summary: allSurahs.firstWhere(
-        (s) => s.number == surahNumber,
-        orElse: () => allSurahs.first,
-      ),
-      ayahs: [
-        SurahAyah(
-          number: 0,
-          numberInSurah: 0,
-          arabic: 'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ',
-          transliteration: 'Bismi llāhi r-raḥmāni r-raḥīm',
-          translation: 'Contenido no disponible sin conexión a internet.',
-          audioUrl: '',
+    return SurahLoadResult(
+      source: SurahLoadSource.placeholder,
+      detail: SurahDetail(
+        summary: allSurahs.firstWhere(
+          (s) => s.number == surahNumber,
+          orElse: () => allSurahs.first,
         ),
-      ],
+        ayahs: [
+          SurahAyah(
+            number: 0,
+            numberInSurah: 0,
+            arabic: 'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ',
+            transliteration: 'Bismi llahi r-rahmani r-rahim',
+            translation: 'Contenido no disponible sin conexion a internet.',
+            audioUrl: '',
+          ),
+        ],
+      ),
     );
   }
 

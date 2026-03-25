@@ -17,6 +17,87 @@ class AnalyticsScreen extends ConsumerWidget {
     final themeName = ref.watch(themeControllerProvider);
     final tokens = QiblaThemes.fromName(themeName);
 
+    if (tracking.data.isEmpty) {
+      return Scaffold(
+        backgroundColor: tokens.bgPage,
+        appBar: AppBar(
+          backgroundColor: tokens.bgApp,
+          elevation: 0,
+          title: Text(
+            'Estadisticas',
+            style: GoogleFonts.amiri(
+              fontSize: 26,
+              fontWeight: FontWeight.bold,
+              color: tokens.primary,
+            ),
+          ),
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(1),
+            child: Divider(height: 1, color: tokens.border),
+          ),
+        ),
+        body: RefreshIndicator(
+          color: tokens.primary,
+          onRefresh: () async => ref.refresh(prayerTrackingProvider),
+          child: ListView(
+            padding: const EdgeInsets.all(20),
+            children: [
+              Container(
+                padding: const EdgeInsets.all(22),
+                decoration: BoxDecoration(
+                  color: tokens.bgSurface,
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: tokens.border),
+                ),
+                child: Column(
+                  children: [
+                    Icon(Icons.insights_outlined, size: 42, color: tokens.primary),
+                    const SizedBox(height: 14),
+                    Text(
+                      'Todavia no hay datos de oracion',
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.amiri(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: tokens.primary,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      'Marca tus oraciones desde Inicio y aqui veras tu racha, tu progreso semanal y tus dias mas fuertes.',
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.dmSans(
+                        fontSize: 12,
+                        height: 1.6,
+                        color: tokens.textSecondary,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                      decoration: BoxDecoration(
+                        color: tokens.primaryBg,
+                        borderRadius: BorderRadius.circular(14),
+                        border: Border.all(color: tokens.primaryBorder),
+                      ),
+                      child: Text(
+                        'Consejo: empieza marcando una sola oracion hoy para desbloquear tus estadisticas.',
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.dmSans(
+                          fontSize: 11,
+                          color: tokens.textPrimary,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
     return Scaffold(
       backgroundColor: tokens.bgPage,
       appBar: AppBar(
