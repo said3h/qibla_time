@@ -1,163 +1,106 @@
-import 'dart:async';
-import 'dart:convert';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../core/constants/app_constants.dart';
-import 'notification_service.dart';
-import 'prayer_service.dart';
-import 'adhan_manager.dart';
-
-class RecentLocation {
-  const RecentLocation({
-    required this.label,
-    required this.latitude,
-    required this.longitude,
-    required this.timezone,
-    required this.timestamp,
-  });
-
-  final String label;
-  final double latitude;
-  final double longitude;
-  final String timezone;
-  final DateTime timestamp;
-
-  Map<String, dynamic> toJson() => {
-        'label': label,
-        'latitude': latitude,
-        'longitude': longitude,
-        'timezone': timezone,
-        'timestamp': timestamp.toIso8601String(),
-      };
-
-  factory RecentLocation.fromJson(Map<String, dynamic> json) {
-    return RecentLocation(
-      label: json['label'] as String? ?? 'Ubicacion desconocida',
-      latitude: (json['latitude'] as num?)?.toDouble() ?? 0,
-      longitude: (json['longitude'] as num?)?.toDouble() ?? 0,
-      timezone: json['timezone'] as String? ?? '',
-      timestamp: DateTime.tryParse(json['timestamp'] as String? ?? '') ?? DateTime.now(),
-    );
-  }
-}
+import '../data/datasources/travel_location_label_datasource.dart';
+import '../data/datasources/travel_mode_datasource.dart';
+import '../data/datasources/travel_mode_notification_datasource.dart';
+import '../domain/entities/prayer_location.dart';
+import '../domain/entities/recent_location.dart';
+import '../domain/entities/travel_mode_update_result.dart';
+import '../domain/usecases/detect_travel_mode_change.dart';
 
 class TravelModeService {
-  Future<bool> isEnabled() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getBool(AppConstants.keyTravelerModeEnabled) ?? true;
+  TravelModeService({
+    TravelModeDataSource? dataSource,
+    TravelLocationLabelDataSource? labelDataSource,
+    TravelModeNotificationDataSource? notificationDataSource,
+    DetectTravelModeChangeUseCase? detectTravelModeChangeUseCase,
+  })  : _dataSource = dataSource ?? TravelModeDataSource(),
+        _labelDataSource = labelDataSource ?? TravelLocationLabelDataSource(),
+        _notificationDataSource =
+            notificationDataSource ?? TravelModeNotificationDataSource(),
+        _detectTravelModeChangeUseCase =
+            detectTravelModeChangeUseCase ??
+            const DetectTravelModeChangeUseCase();
+
+  final TravelModeDataSource _dataSource;
+  final TravelLocationLabelDataSource _labelDataSource;
+  final TravelModeNotificationDataSource _notificationDataSource;
+  final DetectTravelModeChangeUseCase _detectTravelModeChangeUseCase;
+
+  Future<bool> isEnabled() {
+    return _dataSource.isEnabled();
   }
 
-  Future<void> setEnabled(bool value) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(AppConstants.keyTravelerModeEnabled, value);
+  Future<void> setEnabled(bool value) {
+    return _dataSource.setEnabled(value);
   }
 
-  Future<void> recordLocationUpdate(Position position, {dynamic ref}) async {
-    final prefs = await SharedPreferences.getInstance();
+  Future<TravelModeUpdateResult> recordLocationUpdateFromLocation(
+    PrayerLocation currentLocation,
+  ) async {
     final timezone = DateTime.now().timeZoneName;
-    final label = await _resolveLocationLabel(position);
+    final label = await _labelDataSource.resolveLabel(currentLocation);
+    final state = await _dataSource.getState();
 
-    final previousLat = prefs.getDouble('last_lat');
-    final previousLng = prefs.getDouble('last_lng');
-    final previousTimezone = prefs.getString(AppConstants.keyTravelerLastTimezone);
-    final enabled = await isEnabled();
+    final detection = _detectTravelModeChangeUseCase.call(
+      enabled: state.enabled,
+      currentLocation: currentLocation,
+      currentTimezone: timezone,
+      label: label,
+      previousLocation: state.previousLocation,
+      previousTimezone: state.previousTimezone,
+    );
 
-    if (previousLat != null && previousLng != null) {
-      final distance = Geolocator.distanceBetween(
-        previousLat,
-        previousLng,
-        position.latitude,
-        position.longitude,
-      );
-      if (enabled && (distance > 50000 || previousTimezone != timezone)) {
-        final banner = 'Nueva ubicación detectada: $label · ${(distance / 1000).round()} km';
-        await prefs.setString(AppConstants.keyTravelerPendingBanner, banner);
-        await NotificationService.instance.showInstant(
-          title: 'QiblaTime — Nueva ubicación',
-          body: '$label · Horarios actualizados',
-        );
-
-        // ← NUEVO: Reprogramar Adhans con la nueva ubicación
-        if (ref != null) {
-          ref.invalidate(prayerTimesProvider);
-          await Future.delayed(const Duration(milliseconds: 500));
-          await ref.read(adhanManagerProvider).scheduleTodayAdhans();
-
-          // Invalidar providers de UI
-          ref.invalidate(travelBannerProvider);
-          ref.invalidate(recentLocationsProvider);
-          ref.invalidate(lastLocationLabelProvider);
-        }
-      }
+    if (detection.pendingBanner != null) {
+      await _dataSource.setPendingBanner(detection.pendingBanner!);
+      await _notificationDataSource.showTravelDetected(label);
     }
 
-    await prefs.setString(AppConstants.keyTravelerLastLocationLabel, label);
-    await prefs.setString(AppConstants.keyTravelerLastTimezone, timezone);
-    await _storeRecentLocation(
+    await _dataSource.saveCurrentContext(
+      label: label,
+      timezone: timezone,
+    );
+    await _dataSource.storeRecentLocation(
       RecentLocation(
         label: label,
-        latitude: position.latitude,
-        longitude: position.longitude,
+        latitude: currentLocation.latitude,
+        longitude: currentLocation.longitude,
         timezone: timezone,
         timestamp: DateTime.now(),
       ),
     );
+
+    return TravelModeUpdateResult(
+      label: label,
+      travelDetected: detection.travelDetected,
+      pendingBanner: detection.pendingBanner,
+    );
   }
 
-  Future<String?> getPendingBanner() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString(AppConstants.keyTravelerPendingBanner);
+  Future<TravelModeUpdateResult> recordLocationUpdate(Position position) async {
+    return recordLocationUpdateFromLocation(
+      PrayerLocation(
+        latitude: position.latitude,
+        longitude: position.longitude,
+      ),
+    );
   }
 
-  Future<void> clearPendingBanner() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.remove(AppConstants.keyTravelerPendingBanner);
+  Future<String?> getPendingBanner() {
+    return _dataSource.getPendingBanner();
   }
 
-  Future<String?> getLastLocationLabel() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString(AppConstants.keyTravelerLastLocationLabel);
+  Future<void> clearPendingBanner() {
+    return _dataSource.clearPendingBanner();
   }
 
-  Future<List<RecentLocation>> getRecentLocations() async {
-    final prefs = await SharedPreferences.getInstance();
-    final raw = prefs.getStringList(AppConstants.keyTravelerRecentLocations) ?? [];
-    return raw
-        .map((item) => RecentLocation.fromJson(jsonDecode(item) as Map<String, dynamic>))
-        .toList();
+  Future<String?> getLastLocationLabel() {
+    return _dataSource.getLastLocationLabel();
   }
 
-  Future<void> _storeRecentLocation(RecentLocation location) async {
-    final prefs = await SharedPreferences.getInstance();
-    final current = await getRecentLocations();
-    final updated = [location, ...current.where((item) => item.label != location.label)]
-        .take(5)
-        .map((item) => jsonEncode(item.toJson()))
-        .toList();
-    await prefs.setStringList(AppConstants.keyTravelerRecentLocations, updated);
-  }
-
-  Future<String> _resolveLocationLabel(Position position) async {
-    try {
-      final placemarks = await placemarkFromCoordinates(
-        position.latitude,
-        position.longitude,
-      );
-      if (placemarks.isNotEmpty) {
-        final place = placemarks.first;
-        final locality = place.locality?.isNotEmpty == true
-            ? place.locality
-            : place.subAdministrativeArea;
-        final country = place.country?.isNotEmpty == true ? place.country : null;
-        final parts = [if (locality != null) locality, if (country != null) country];
-        if (parts.isNotEmpty) return parts.join(', ');
-      }
-    } catch (_) {}
-    return '${position.latitude.toStringAsFixed(2)}, ${position.longitude.toStringAsFixed(2)}';
+  Future<List<RecentLocation>> getRecentLocations() {
+    return _dataSource.getRecentLocations();
   }
 }
 

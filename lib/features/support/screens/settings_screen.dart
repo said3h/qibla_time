@@ -6,14 +6,14 @@ import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/services/cloud_sync_service.dart';
+import '../../../core/services/settings_service.dart';
 import '../../../core/constants/app_constants.dart';
 import '../../../core/theme/accessibility_provider.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/theme/theme_provider.dart';
 import '../../hafiz/services/hafiz_service.dart';
 import '../../prayer_times/services/adhan_manager.dart';
-import '../../prayer_times/services/prayer_cache_service.dart';
-import '../../prayer_times/services/prayer_service.dart';
+import '../../prayer_times/presentation/providers/prayer_times_providers.dart';
 import '../../prayer_times/services/travel_mode_service.dart';
 import '../../tracking/services/tracking_service.dart';
 import 'adhan_selector_screen.dart';
@@ -121,8 +121,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   Future<void> _setCalculationMethod(CalculationMethod method) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt(AppConstants.keyCalculationMethod, method.index);
-    ref.invalidate(calculationMethodProvider);
-    ref.invalidate(prayerTimesProvider);
+    ref.invalidate(prayerCalculationMethodProvider);
+    ref.invalidate(prayerScheduleProvider);
     await Future.delayed(const Duration(milliseconds: 300));
     await ref.read(adhanManagerProvider).scheduleTodayAdhans();
     if (!mounted) return;
@@ -132,8 +132,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   Future<void> _setMadhab(bool value) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('madhab_hanafi', value);
-    ref.invalidate(madhabProvider);
-    ref.invalidate(prayerTimesProvider);
+    ref.invalidate(prayerMadhabProvider);
+    ref.invalidate(prayerScheduleProvider);
     await Future.delayed(const Duration(milliseconds: 300));
     await ref.read(adhanManagerProvider).scheduleTodayAdhans();
     if (!mounted) return;
@@ -143,8 +143,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   Future<void> _updateOffset(int newValue) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt('time_offset', newValue);
-    ref.invalidate(timeOffsetProvider);
-    ref.invalidate(prayerTimesProvider);
+    ref.invalidate(prayerTimeOffsetProvider);
+    ref.invalidate(prayerScheduleProvider);
     await Future.delayed(const Duration(milliseconds: 300));
     await ref.read(adhanManagerProvider).scheduleTodayAdhans();
     if (!mounted) return;
@@ -340,7 +340,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               'Limpiar cache',
               'Borrar',
               onTap: () async {
-                await ref.read(prayerCacheServiceProvider).clear();
+                await ref.read(prayerCacheDataSourceProvider).clear();
                 ref.invalidate(prayerCacheStatusProvider);
               },
             ),
@@ -642,7 +642,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 await ref.read(cloudSyncServiceProvider).restoreFromJson(ref.read(hafizServiceProvider), controller.text.trim());
                 if (!context.mounted) return;
                 Navigator.pop(context);
-                ref.invalidate(prayerTimesProvider);
+                ref.invalidate(prayerScheduleProvider);
                 ref.invalidate(prayerTrackingProvider);
                 ref.invalidate(travelerModeEnabledProvider);
                 ref.invalidate(themeControllerProvider);
