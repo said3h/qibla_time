@@ -67,4 +67,5 @@ flutter:
         - asset: assets/fonts/AmiriQuran.ttf
 
 dependency_overrides:
+  path_provider_android: ^2.2.23
   win32: ^5.5.0
