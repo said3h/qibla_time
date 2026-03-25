@@ -1,3 +1,4 @@
+import '../../domain/entities/prayer_name.dart';
 import '../../domain/entities/prayer_schedule.dart';
 import '../../domain/usecases/get_next_prayer_info.dart';
 import '../../services/widget_sync_service.dart';
