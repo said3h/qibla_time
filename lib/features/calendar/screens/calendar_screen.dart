@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hijri/hijri_calendar.dart';
 import 'package:intl/intl.dart';
+
 import '../../../core/theme/app_theme.dart';
 
 class CalendarScreen extends StatefulWidget {
@@ -30,31 +31,46 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final tokens = QiblaThemes.current;
+
     return Scaffold(
-      backgroundColor: AppTheme.backgroundWhite,
+      backgroundColor: tokens.bgPage,
       appBar: AppBar(
-         title: const Text('Islamic Calendar', style: TextStyle(fontWeight: FontWeight.bold)),
+        backgroundColor: tokens.bgApp,
+        foregroundColor: tokens.textPrimary,
+        elevation: 0,
+        title: Text(
+          'Islamic Calendar',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: tokens.textPrimary,
+          ),
+        ),
       ),
       body: ListView(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16),
         children: [
-          _buildHijriBanner(),
+          _buildHijriBanner(tokens),
           const SizedBox(height: 24),
-          _buildGregorianDatePicker(),
+          _buildGregorianDatePicker(tokens),
           const SizedBox(height: 32),
           Text(
             'Important Events (${currentHijri.hYear} AH)',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppTheme.primaryGreen),
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: tokens.primary,
+            ),
           ),
           const SizedBox(height: 16),
-          ..._buildUpcomingEvents(),
+          ..._buildUpcomingEvents(tokens),
         ],
       ),
     );
   }
 
-  List<Widget> _buildUpcomingEvents() {
-    final List<Map<String, dynamic>> events = [
+  List<Widget> _buildUpcomingEvents(QiblaTokens tokens) {
+    final events = [
       {'name': 'Islamic New Year', 'day': 1, 'month': 1},
       {'name': 'Ashura', 'day': 10, 'month': 1},
       {'name': 'Ramadan Begins', 'day': 1, 'month': 9},
@@ -66,34 +82,42 @@ class _CalendarScreenState extends State<CalendarScreen> {
     return events.map((event) {
       final hCalendar = HijriCalendar();
       hCalendar.hYear = currentHijri.hYear;
-      hCalendar.hMonth = event['month'];
-      hCalendar.hDay = event['day'];
-      
-      final gregorianDate = hCalendar.hijriToGregorian(hCalendar.hYear, hCalendar.hMonth, hCalendar.hDay);
-      final isCurrent = currentHijri.hMonth == event['month'];
-      
+      hCalendar.hMonth = event['month'] as int;
+      hCalendar.hDay = event['day'] as int;
+
+      final gregorianDate = hCalendar.hijriToGregorian(
+        hCalendar.hYear,
+        hCalendar.hMonth,
+        hCalendar.hDay,
+      );
+      final isCurrentMonth = currentHijri.hMonth == event['month'];
+
       return _buildEventItem(
-        event['name'], 
-        '${event['day']} ${hCalendar.toFormat("MMMM")}', 
+        tokens,
+        event['name'] as String,
+        '${event['day']} ${hCalendar.toFormat("MMMM")}',
         DateFormat('EEEE, d MMM yyyy').format(gregorianDate),
-        isCurrent
+        isCurrentMonth,
       );
     }).toList();
   }
 
-  Widget _buildHijriBanner() {
+  Widget _buildHijriBanner(QiblaTokens tokens) {
+    final bannerText = _foregroundFor(tokens.primary);
+    final bannerAccent = _foregroundFor(tokens.accent);
+
     return Container(
-      padding: const EdgeInsets.all(24.0),
+      padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [AppTheme.primaryGreen, Color(0xFF006430)],
+          colors: [tokens.primary, tokens.accent],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(20.0),
+        borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: AppTheme.primaryGreen.withOpacity(0.3),
+            color: tokens.primary.withOpacity(0.22),
             blurRadius: 15,
             offset: const Offset(0, 8),
           ),
@@ -101,31 +125,48 @@ class _CalendarScreenState extends State<CalendarScreen> {
       ),
       child: Column(
         children: [
-          const Text(
+          Text(
             'TODAY',
-            style: TextStyle(color: Colors.white70, fontSize: 12, letterSpacing: 2, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              color: bannerText.withOpacity(0.7),
+              fontSize: 12,
+              letterSpacing: 2,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           const SizedBox(height: 12),
           Text(
             '${currentHijri.hDay} ${currentHijri.toFormat("MMMM")}',
-            style: TextStyle(color: AppTheme.accentGold, fontSize: 28, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              color: bannerAccent,
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           Text(
             '${currentHijri.hYear} AH',
-            style: const TextStyle(color: Colors.white, fontSize: 18),
+            style: TextStyle(
+              color: bannerText,
+              fontSize: 18,
+            ),
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 16.0),
-            child: Divider(color: Colors.white24, thickness: 1),
+          Divider(
+            color: bannerText.withOpacity(0.2),
+            thickness: 1,
+            height: 32,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.calendar_month, color: Colors.white70, size: 18),
+              Icon(Icons.calendar_month, color: bannerText.withOpacity(0.75), size: 18),
               const SizedBox(width: 8),
               Text(
                 DateFormat('EEEE, d MMMM yyyy').format(selectedDate),
-                style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w500),
+                style: TextStyle(
+                  color: bannerText,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ],
           ),
@@ -134,25 +175,40 @@ class _CalendarScreenState extends State<CalendarScreen> {
     );
   }
 
-  Widget _buildGregorianDatePicker() {
+  Widget _buildGregorianDatePicker(QiblaTokens tokens) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           'Check specific date',
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppTheme.textDark),
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: tokens.textPrimary,
+          ),
         ),
         const SizedBox(height: 12),
         InkWell(
           onTap: () async {
-            final DateTime? picked = await showDatePicker(
+            final picked = await showDatePicker(
               context: context,
               initialDate: selectedDate,
               firstDate: DateTime(2000),
               lastDate: DateTime(2100),
               builder: (context, child) => Theme(
                 data: Theme.of(context).copyWith(
-                  colorScheme: ColorScheme.light(primary: AppTheme.primaryGreen),
+                  colorScheme: ColorScheme(
+                    brightness: ThemeData.estimateBrightnessForColor(tokens.bgPage),
+                    primary: tokens.primary,
+                    onPrimary: _foregroundFor(tokens.primary),
+                    secondary: tokens.accent,
+                    onSecondary: _foregroundFor(tokens.accent),
+                    error: tokens.danger,
+                    onError: _foregroundFor(tokens.danger),
+                    surface: tokens.bgSurface,
+                    onSurface: tokens.textPrimary,
+                  ),
+                  dialogBackgroundColor: tokens.bgSurface,
                 ),
                 child: child!,
               ),
@@ -164,11 +220,15 @@ class _CalendarScreenState extends State<CalendarScreen> {
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: tokens.bgSurface,
               borderRadius: BorderRadius.circular(15),
-              border: Border.all(color: Colors.grey.shade200),
+              border: Border.all(color: tokens.borderMed),
               boxShadow: [
-                BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 10, offset: const Offset(0, 4)),
+                BoxShadow(
+                  color: tokens.border.withOpacity(0.2),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
               ],
             ),
             child: Row(
@@ -176,9 +236,13 @@ class _CalendarScreenState extends State<CalendarScreen> {
               children: [
                 Text(
                   DateFormat('MMMM d, yyyy').format(selectedDate),
-                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: tokens.textPrimary,
+                  ),
                 ),
-                Icon(Icons.event, color: AppTheme.primaryGreen),
+                Icon(Icons.event, color: tokens.primary),
               ],
             ),
           ),
@@ -187,34 +251,75 @@ class _CalendarScreenState extends State<CalendarScreen> {
     );
   }
 
-  Widget _buildEventItem(String eventName, String hijriDateString, String gregorianDateString, bool isCurrentMonth) {
+  Widget _buildEventItem(
+    QiblaTokens tokens,
+    String eventName,
+    String hijriDateString,
+    String gregorianDateString,
+    bool isCurrentMonth,
+  ) {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
-        color: isCurrentMonth ? AppTheme.primaryGreen.withOpacity(0.05) : Colors.white,
+        color: isCurrentMonth ? tokens.primaryBg : tokens.bgSurface,
         borderRadius: BorderRadius.circular(15),
-        border: Border.all(color: isCurrentMonth ? AppTheme.primaryGreen.withOpacity(0.1) : Colors.grey.shade100),
+        border: Border.all(
+          color: isCurrentMonth ? tokens.primaryBorder : tokens.border,
+        ),
       ),
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-        title: Text(eventName, style: TextStyle(fontWeight: FontWeight.bold, color: AppTheme.textDark)),
+        title: Text(
+          eventName,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: tokens.textPrimary,
+          ),
+        ),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 4),
-            Text(hijriDateString, style: TextStyle(color: AppTheme.primaryGreen, fontWeight: FontWeight.w600, fontSize: 13)),
-            Text(gregorianDateString, style: TextStyle(color: AppTheme.textLight, fontSize: 12)),
+            Text(
+              hijriDateString,
+              style: TextStyle(
+                color: tokens.primary,
+                fontWeight: FontWeight.w600,
+                fontSize: 13,
+              ),
+            ),
+            Text(
+              gregorianDateString,
+              style: TextStyle(
+                color: tokens.textSecondary,
+                fontSize: 12,
+              ),
+            ),
           ],
         ),
-        trailing: isCurrentMonth 
+        trailing: isCurrentMonth
             ? Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                decoration: BoxDecoration(color: AppTheme.primaryGreen, borderRadius: BorderRadius.circular(20)),
-                child: const Text('THIS MONTH', style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold)),
+                decoration: BoxDecoration(
+                  color: tokens.primary,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Text(
+                  'THIS MONTH',
+                  style: TextStyle(
+                    color: _foregroundFor(tokens.primary),
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               )
             : null,
       ),
     );
   }
-}
 
+  Color _foregroundFor(Color background) {
+    final brightness = ThemeData.estimateBrightnessForColor(background);
+    return brightness == Brightness.dark ? Colors.white : Colors.black;
+  }
+}

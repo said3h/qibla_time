@@ -30,44 +30,64 @@ class _MainNavigationState extends State<MainNavigation> {
 
     return Scaffold(
       body: _screens[_currentIndex],
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: _currentIndex,
-        onDestinationSelected: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        height: 78,
-        labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
-        backgroundColor: tokens.bgApp,
-        indicatorColor: tokens.primaryBg,
-        destinations: [
-          NavigationDestination(
-            icon: const Icon(Icons.home_outlined),
-            selectedIcon: Icon(Icons.home_rounded, color: tokens.primary),
-            label: 'Inicio',
-          ),
-          NavigationDestination(
-            icon: const Icon(Icons.explore_outlined),
-            selectedIcon: Icon(Icons.explore, color: tokens.primary),
-            label: 'Qibla',
-          ),
-          NavigationDestination(
-            icon: const Icon(Icons.auto_awesome_outlined),
-            selectedIcon: Icon(Icons.auto_awesome, color: tokens.primary),
-            label: 'Tasbih',
-          ),
-          NavigationDestination(
-            icon: const Icon(Icons.volunteer_activism_outlined),
-            selectedIcon: Icon(Icons.volunteer_activism, color: tokens.primary),
-            label: 'Dua',
-          ),
-          NavigationDestination(
-            icon: const Icon(Icons.menu_book_outlined),
-            selectedIcon: Icon(Icons.menu_book, color: tokens.primary),
-            label: 'Coran',
-          ),
-        ],
+      bottomNavigationBar: NavigationBarTheme(
+        data: NavigationBarThemeData(
+          backgroundColor: tokens.bgApp,
+          indicatorColor: tokens.primaryBg,
+          surfaceTintColor: Colors.transparent,
+          shadowColor: Colors.transparent,
+          iconTheme: MaterialStateProperty.resolveWith((states) {
+            final selected = states.contains(MaterialState.selected);
+            return IconThemeData(
+              color: selected ? tokens.primary : tokens.textMuted,
+            );
+          }),
+          labelTextStyle: MaterialStateProperty.resolveWith((states) {
+            final selected = states.contains(MaterialState.selected);
+            return TextStyle(
+              color: selected ? tokens.primary : tokens.textSecondary,
+              fontSize: 12,
+              fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
+            );
+          }),
+        ),
+        child: NavigationBar(
+          selectedIndex: _currentIndex,
+          onDestinationSelected: (index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+          height: 78,
+          labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
+          destinations: const [
+            NavigationDestination(
+              icon: Icon(Icons.home_outlined),
+              selectedIcon: Icon(Icons.home_rounded),
+              label: 'Inicio',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.explore_outlined),
+              selectedIcon: Icon(Icons.explore),
+              label: 'Qibla',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.auto_awesome_outlined),
+              selectedIcon: Icon(Icons.auto_awesome),
+              label: 'Tasbih',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.volunteer_activism_outlined),
+              selectedIcon: Icon(Icons.volunteer_activism),
+              label: 'Dua',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.menu_book_outlined),
+              selectedIcon: Icon(Icons.menu_book),
+              label: 'Coran',
+            ),
+          ],
+        ),
       ),
     );
   }

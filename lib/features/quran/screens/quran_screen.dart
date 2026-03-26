@@ -43,7 +43,7 @@ class QuranScreen extends ConsumerWidget {
                         ),
                       ),
                       Text(
-                        '114 suras · lectura continua',
+                        '114 suras - lectura continua',
                         style: GoogleFonts.dmSans(
                           fontSize: 10,
                           color: tokens.textSecondary,
@@ -360,7 +360,7 @@ class _SurahTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '${surah.revelationType} · ${surah.ayahCount} ayas',
+              '${surah.revelationType} - ${surah.ayahCount} ayas',
               style: GoogleFonts.dmSans(
                 fontSize: 11,
                 color: tokens.textSecondary,
@@ -396,6 +396,12 @@ class _SurahTile extends StatelessWidget {
   }
 }
 
+enum _QuranPlaybackMode {
+  none,
+  ayah,
+  surah,
+}
+
 class QuranDetailScreen extends ConsumerStatefulWidget {
   const QuranDetailScreen({
     super.key,
@@ -419,6 +425,9 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   bool _initialReadingSaved = false;
   int? _activeAyahNumber;
   bool _isAudioPlaying = false;
+  _QuranPlaybackMode _playbackMode = _QuranPlaybackMode.none;
+  List<SurahAyah> _surahQueue = const [];
+  int _surahQueueIndex = -1;
 
   @override
   void initState() {
@@ -433,11 +442,20 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
         setState(() => _isAudioPlaying = false);
       }
     });
-    _playerCompleteSubscription = _audioService.onPlayerComplete.listen((_) {
+    _playerCompleteSubscription = _audioService.onPlayerComplete.listen((_) async {
       if (!mounted) return;
+      if (_playbackMode == _QuranPlaybackMode.surah &&
+          _surahQueue.isNotEmpty &&
+          _surahQueueIndex + 1 < _surahQueue.length) {
+        await _playSurahQueueIndex(_surahQueueIndex + 1);
+        return;
+      }
       setState(() {
         _isAudioPlaying = false;
         _activeAyahNumber = null;
+        _playbackMode = _QuranPlaybackMode.none;
+        _surahQueue = const [];
+        _surahQueueIndex = -1;
       });
     });
   }
@@ -486,6 +504,20 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     return source != SurahLoadSource.placeholder;
   }
 
+  bool _canPlaySurahAudio(SurahDetail detail, SurahLoadSource source) {
+    if (source == SurahLoadSource.placeholder) return false;
+    return detail.ayahs.any((ayah) => _canPlayAyahAudio(ayah, source));
+  }
+
+  List<SurahAyah> _surahQueueFor(
+    SurahDetail detail,
+    SurahLoadSource source,
+  ) {
+    return detail.ayahs
+        .where((ayah) => _canPlayAyahAudio(ayah, source))
+        .toList();
+  }
+
   String _audioStatusLabel(SurahAyah ayah, SurahLoadSource source) {
     if (!_canPlayAyahAudio(ayah, source)) {
       return 'Audio no disponible para esta aya.';
@@ -497,6 +529,30 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
         return 'Audio disponible si tienes conexion.';
       case SurahLoadSource.placeholder:
         return 'Audio no disponible para esta aya.';
+    }
+  }
+
+  String _surahAudioStatusLabel(
+    SurahDetail detail,
+    SurahLoadSource source,
+  ) {
+    final availableCount = _surahQueueFor(detail, source).length;
+    if (availableCount == 0) {
+      return 'La recitacion completa no esta disponible para esta sura.';
+    }
+
+    final missingCount = detail.ayahs.length - availableCount;
+    final availabilityNote = missingCount > 0
+        ? ' Se omitiran $missingCount aya${missingCount == 1 ? '' : 's'} sin audio.'
+        : '';
+
+    switch (source) {
+      case SurahLoadSource.online:
+        return 'Puedes escuchar la sura completa en reproduccion continua.$availabilityNote';
+      case SurahLoadSource.offline:
+        return 'La sura puede sonar completa si tienes conexion.$availabilityNote';
+      case SurahLoadSource.placeholder:
+        return 'La recitacion completa no esta disponible para esta sura.';
     }
   }
 
@@ -528,6 +584,9 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       );
       if (!mounted) return;
       setState(() {
+        _playbackMode = _QuranPlaybackMode.ayah;
+        _surahQueue = const [];
+        _surahQueueIndex = -1;
         _activeAyahNumber = ayah.numberInSurah;
         _isAudioPlaying = true;
       });
@@ -541,6 +600,66 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
         const SnackBar(
           content: Text(
             'No se pudo reproducir el audio ahora mismo. Comprueba tu conexion e intentalo de nuevo.',
+          ),
+        ),
+      );
+    }
+  }
+
+  Future<void> _playSurahQueueIndex(int index) async {
+    if (index < 0 || index >= _surahQueue.length) return;
+    final ayah = _surahQueue[index];
+    final sourceKey = 'quran:surah:${widget.summary.number}:${ayah.numberInSurah}';
+
+    await _audioService.playUrl(
+      ayah.audioUrl,
+      sourceKey: sourceKey,
+    );
+    if (!mounted) return;
+    setState(() {
+      _playbackMode = _QuranPlaybackMode.surah;
+      _surahQueueIndex = index;
+      _activeAyahNumber = ayah.numberInSurah;
+      _isAudioPlaying = true;
+    });
+  }
+
+  Future<void> _toggleSurahAudio(
+    SurahDetail detail,
+    SurahLoadSource source,
+  ) async {
+    final queue = _surahQueueFor(detail, source);
+    if (queue.isEmpty) return;
+
+    try {
+      if (_playbackMode == _QuranPlaybackMode.surah && _surahQueue.isNotEmpty) {
+        if (_isAudioPlaying) {
+          await _audioService.pause();
+          if (!mounted) return;
+          setState(() => _isAudioPlaying = false);
+        } else {
+          await _audioService.resume();
+          if (!mounted) return;
+          setState(() => _isAudioPlaying = true);
+        }
+        return;
+      }
+
+      _surahQueue = queue;
+      await _playSurahQueueIndex(0);
+    } catch (_) {
+      if (!mounted) return;
+      setState(() {
+        _playbackMode = _QuranPlaybackMode.none;
+        _surahQueue = const [];
+        _surahQueueIndex = -1;
+        _activeAyahNumber = null;
+        _isAudioPlaying = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            'No se pudo iniciar la recitacion completa ahora mismo.',
           ),
         ),
       );
@@ -566,6 +685,9 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     await _audioService.stop();
     if (!mounted) return;
     setState(() {
+      _playbackMode = _QuranPlaybackMode.none;
+      _surahQueue = const [];
+      _surahQueueIndex = -1;
       _isAudioPlaying = false;
       _activeAyahNumber = null;
     });
@@ -614,6 +736,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                 return Column(
                   children: [
                     _buildTopBanner(tokens, result.source, widget.initialAyah),
+                    _buildSurahAudioCard(tokens, detail, result.source),
                     if (_activeAyahNumber != null)
                       _buildActiveAudioIndicator(tokens),
                   ],
@@ -818,6 +941,92 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     );
   }
 
+  Widget _buildSurahAudioCard(
+    QiblaTokens tokens,
+    SurahDetail detail,
+    SurahLoadSource source,
+  ) {
+    final canPlaySurah = _canPlaySurahAudio(detail, source);
+    final availableAyahs = _surahQueueFor(detail, source).length;
+    final isSurahPlayback = _playbackMode == _QuranPlaybackMode.surah;
+
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: tokens.bgSurface,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(
+          color: isSurahPlayback ? tokens.primaryBorder : tokens.border,
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.queue_music, color: tokens.primary, size: 18),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  'ESCUCHAR SURA',
+                  style: GoogleFonts.dmSans(
+                    fontSize: 10,
+                    letterSpacing: 1.2,
+                    fontWeight: FontWeight.w700,
+                    color: tokens.textPrimary,
+                  ),
+                ),
+              ),
+              Text(
+                '$availableAyahs/${detail.ayahs.length} ayas',
+                style: GoogleFonts.dmSans(
+                  fontSize: 10,
+                  color: tokens.textSecondary,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Text(
+            _surahAudioStatusLabel(detail, source),
+            style: GoogleFonts.dmSans(
+              fontSize: 11,
+              height: 1.5,
+              color: tokens.textSecondary,
+            ),
+          ),
+          const SizedBox(height: 10),
+          Row(
+            children: [
+              FilledButton.icon(
+                onPressed: canPlaySurah
+                    ? () => _toggleSurahAudio(detail, source)
+                    : null,
+                icon: Icon(
+                  isSurahPlayback && _isAudioPlaying
+                      ? Icons.pause_circle_outline
+                      : Icons.play_circle_outline,
+                ),
+                label: Text(
+                  isSurahPlayback
+                      ? (_isAudioPlaying ? 'Pausar sura' : 'Reanudar sura')
+                      : 'Escuchar sura',
+                ),
+              ),
+              const SizedBox(width: 8),
+              OutlinedButton.icon(
+                onPressed: _activeAyahNumber != null ? _stopActiveAudio : null,
+                icon: const Icon(Icons.stop_circle_outlined),
+                label: const Text('Detener'),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildActiveAudioIndicator(QiblaTokens tokens) {
     final ayahNumber = _activeAyahNumber;
     if (ayahNumber == null) {
@@ -847,9 +1056,13 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  _isAudioPlaying
-                      ? 'Reproduciendo aya $ayahNumber'
-                      : 'Aya $ayahNumber en pausa',
+                  _playbackMode == _QuranPlaybackMode.surah
+                      ? (_isAudioPlaying
+                          ? 'Reproduciendo la sura - aya $ayahNumber'
+                          : 'Sura en pausa - aya $ayahNumber')
+                      : (_isAudioPlaying
+                          ? 'Reproduciendo aya $ayahNumber'
+                          : 'Aya $ayahNumber en pausa'),
                   style: GoogleFonts.dmSans(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
@@ -858,7 +1071,9 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  'Puedes pausar, reanudar o detener esta recitacion.',
+                  _playbackMode == _QuranPlaybackMode.surah
+                      ? 'La sura seguira automaticamente con la siguiente aya.'
+                      : 'Puedes pausar, reanudar o detener esta recitacion.',
                   style: GoogleFonts.dmSans(
                     fontSize: 10,
                     color: tokens.textSecondary,

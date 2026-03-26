@@ -1,143 +1,330 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theme/app_theme.dart';
+import '../models/dua_model.dart';
+import '../services/dua_service.dart';
 
-class DuaItem {
-  const DuaItem({
-    required this.categoryId,
-    required this.categoryLabel,
-    required this.arabic,
-    required this.transliteration,
-    required this.translation,
-    required this.favorite,
-  });
-
-  final String categoryId;
-  final String categoryLabel;
-  final String arabic;
-  final String transliteration;
-  final String translation;
-  final bool favorite;
-}
-
-class DuasScreen extends StatefulWidget {
+class DuasScreen extends ConsumerStatefulWidget {
   const DuasScreen({super.key});
 
   @override
-  State<DuasScreen> createState() => _DuasScreenState();
+  ConsumerState<DuasScreen> createState() => _DuasScreenState();
 }
 
-class _DuasScreenState extends State<DuasScreen> {
+class _DuasScreenState extends ConsumerState<DuasScreen> {
   String _selectedCategory = 'morning';
 
-  static const _categories = [
-    ('morning', '🌅', 'Manana', '12 adhkar'),
-    ('evening', '🌇', 'Tarde', '12 adhkar'),
-    ('sleep', '🌙', 'Dormir', '8 adhkar'),
-    ('travel', '✈️', 'Viaje', '6 duas'),
-    ('food', '🍽️', 'Comida', '4 duas'),
-    ('sickness', '💊', 'Enfermedad', '5 duas'),
+  static const _categoryOrder = [
+    'morning',
+    'night',
+    'sleep',
+    'travel',
+    'food',
+    'sickness',
+    'protection',
+    'repentance',
+    'mosque',
+    'rain',
+    'stress',
+    'gratitude',
   ];
 
-  static const _duas = [
-    DuaItem(categoryId: 'morning', categoryLabel: '🌅 Al despertar', arabic: 'الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا', transliteration: 'Al-hamdu lillahi alladhi ahyana bada ma amatana', translation: 'Alabado sea Allah quien nos devolvio la vida despues del sueno.', favorite: true),
-    DuaItem(categoryId: 'morning', categoryLabel: '☀️ Dhikr de la manana', arabic: 'أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ', transliteration: 'Asbahna wa asbahal mulku lillah', translation: 'Hemos amanecido y el reino pertenece a Allah.', favorite: false),
-    DuaItem(categoryId: 'evening', categoryLabel: '🌇 Al caer la tarde', arabic: 'أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ', transliteration: 'Amsayna wa amsal mulku lillah', translation: 'Hemos llegado a la tarde y el reino pertenece a Allah.', favorite: true),
-    DuaItem(categoryId: 'sleep', categoryLabel: '🌙 Antes de dormir', arabic: 'بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا', transliteration: 'Bismika Allahumma amutu wa ahya', translation: 'En Tu nombre, oh Allah, muero y vivo.', favorite: false),
-    DuaItem(categoryId: 'travel', categoryLabel: '✈️ Al viajar', arabic: 'سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَٰذَا', transliteration: 'Subhana alladhi sakhkhara lana hadha', translation: 'Glorificado sea Quien puso esto a nuestro servicio.', favorite: false),
-    DuaItem(categoryId: 'travel', categoryLabel: '🚗 Al salir de casa', arabic: 'بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ', transliteration: 'Bismi llah tawakkaltu ala llah', translation: 'En el nombre de Allah, me encomiendo a Allah.', favorite: true),
-    DuaItem(categoryId: 'food', categoryLabel: '🍽️ Antes de comer', arabic: 'بِسْمِ اللَّهِ', transliteration: 'Bismi llah', translation: 'En el nombre de Allah.', favorite: false),
-    DuaItem(categoryId: 'food', categoryLabel: '🙏 Despues de comer', arabic: 'الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنِي هَٰذَا', transliteration: 'Al-hamdu lillahi alladhi atamani hadha', translation: 'Alabado sea Allah, que me alimento con esto.', favorite: false),
-    DuaItem(categoryId: 'sickness', categoryLabel: '💊 En enfermedad', arabic: 'اللَّهُمَّ رَبَّ النَّاسِ أَذْهِبِ الْبَأْسَ', transliteration: 'Allahumma rabb an-nas adhhib al-bas', translation: 'Oh Allah, Senor de la humanidad, aleja el dano.', favorite: true),
-    DuaItem(categoryId: 'sickness', categoryLabel: '🤍 Para pedir perdon', arabic: 'اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي', transliteration: 'Allahumma innaka afuwwun tuhibb al-afwa fa fu anni', translation: 'Oh Allah, Tu eres Indulgente y amas perdonar, asi que perdoname.', favorite: true),
-  ];
+  static const _categoryMeta = <String, ({IconData icon, String label, String hint})>{
+    'morning': (
+      icon: Icons.wb_sunny_outlined,
+      label: 'Manana',
+      hint: 'Inicio del dia',
+    ),
+    'night': (
+      icon: Icons.nights_stay_outlined,
+      label: 'Noche',
+      hint: 'Cierre del dia',
+    ),
+    'sleep': (
+      icon: Icons.bedtime_outlined,
+      label: 'Sueno',
+      hint: 'Antes de dormir',
+    ),
+    'travel': (
+      icon: Icons.connecting_airports_outlined,
+      label: 'Viaje',
+      hint: 'Salida y trayecto',
+    ),
+    'food': (
+      icon: Icons.restaurant_outlined,
+      label: 'Comida',
+      hint: 'Antes y despues',
+    ),
+    'sickness': (
+      icon: Icons.local_hospital_outlined,
+      label: 'Enfermedad',
+      hint: 'Curacion y visita',
+    ),
+    'protection': (
+      icon: Icons.shield_outlined,
+      label: 'Proteccion',
+      hint: 'Refugio y cuidado',
+    ),
+    'repentance': (
+      icon: Icons.refresh_outlined,
+      label: 'Arrepentimiento',
+      hint: 'Perdon y vuelta',
+    ),
+    'mosque': (
+      icon: Icons.mosque_outlined,
+      label: 'Mezquita',
+      hint: 'Entrar y salir',
+    ),
+    'rain': (
+      icon: Icons.water_drop_outlined,
+      label: 'Lluvia',
+      hint: 'Durante la lluvia',
+    ),
+    'stress': (
+      icon: Icons.self_improvement_outlined,
+      label: 'Dificultad',
+      hint: 'Tristeza y carga',
+    ),
+    'gratitude': (
+      icon: Icons.favorite_border_outlined,
+      label: 'Gratitud',
+      hint: 'Agradecimiento',
+    ),
+  };
 
   @override
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
-    final filtered = _duas.where((item) => item.categoryId == _selectedCategory).toList();
-    final favorites = _duas.where((item) => item.favorite).toList();
+    final duasAsync = ref.watch(allDuasProvider);
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
       body: SafeArea(
-        child: ListView(
-          padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
-          children: [
-            Text('Dua & Adhkar', style: GoogleFonts.amiri(fontSize: 26, color: tokens.primary, fontWeight: FontWeight.bold)),
-            Text('الأدعية والأذكار', style: GoogleFonts.dmSans(fontSize: 10, color: tokens.textSecondary)),
-            const SizedBox(height: 16),
-            Text('CATEGORIAS', style: GoogleFonts.dmSans(fontSize: 9, letterSpacing: 1.4, color: tokens.textSecondary)),
-            const SizedBox(height: 10),
-            GridView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: _categories.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 8,
-                mainAxisSpacing: 8,
-                childAspectRatio: 1.55,
+        child: duasAsync.when(
+          data: (duas) => _buildLoadedState(context, tokens, duas),
+          loading: () => Center(
+            child: CircularProgressIndicator(color: tokens.primary),
+          ),
+          error: (_, __) => ListView(
+            padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
+            children: [
+              Text(
+                'Dua & Adhkar',
+                style: GoogleFonts.amiri(
+                  fontSize: 26,
+                  color: tokens.primary,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              itemBuilder: (_, index) {
-                final category = _categories[index];
-                final selected = category.$1 == _selectedCategory;
-                return InkWell(
-                  onTap: () => setState(() => _selectedCategory = category.$1),
-                  borderRadius: BorderRadius.circular(16),
-                  child: Container(
-                    padding: const EdgeInsets.all(14),
-                    decoration: BoxDecoration(
-                      color: selected ? tokens.activeBg : tokens.bgSurface,
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: selected ? tokens.activeBorder : tokens.border),
-                    ),
-                    child: Row(
-                      children: [
-                        Text(category.$2, style: const TextStyle(fontSize: 24)),
-                        const SizedBox(width: 10),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(category.$3, style: GoogleFonts.dmSans(fontSize: 12, color: tokens.textPrimary, fontWeight: FontWeight.w500)),
-                              Text(category.$4, style: GoogleFonts.dmSans(fontSize: 10, color: tokens.textSecondary)),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+              const SizedBox(height: 16),
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: tokens.bgSurface,
+                  borderRadius: BorderRadius.circular(18),
+                  border: Border.all(color: tokens.border),
+                ),
+                child: Text(
+                  'No pudimos cargar el contenido de Dua ahora mismo.',
+                  style: GoogleFonts.dmSans(
+                    fontSize: 12,
+                    color: tokens.textPrimary,
                   ),
-                );
-              },
-            ),
-            const SizedBox(height: 16),
-            Text('SELECCIONADA', style: GoogleFonts.dmSans(fontSize: 9, letterSpacing: 1.4, color: tokens.textSecondary)),
-            const SizedBox(height: 10),
-            ...filtered.map((dua) => _DuaCard(dua: dua)),
-            const SizedBox(height: 14),
-            Text('FAVORITOS', style: GoogleFonts.dmSans(fontSize: 9, letterSpacing: 1.4, color: tokens.textSecondary)),
-            const SizedBox(height: 10),
-            ...favorites.map((dua) => _DuaCard(dua: dua)),
-          ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
+    );
+  }
+
+  Widget _buildLoadedState(
+    BuildContext context,
+    QiblaTokens tokens,
+    List<Dua> duas,
+  ) {
+    final grouped = <String, List<Dua>>{};
+    for (final dua in duas) {
+      grouped.putIfAbsent(dua.category, () => <Dua>[]).add(dua);
+    }
+
+    final categoryKeys = _categoryOrder
+        .where(grouped.containsKey)
+        .followedBy(grouped.keys.where((key) => !_categoryOrder.contains(key)))
+        .toList();
+
+    final effectiveCategory = categoryKeys.contains(_selectedCategory)
+        ? _selectedCategory
+        : (categoryKeys.isNotEmpty ? categoryKeys.first : '');
+
+    final selected = grouped[effectiveCategory] ?? const <Dua>[];
+    final featured = duas.where((dua) => dua.isFeatured).toList();
+
+    return ListView(
+      padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
+      children: [
+        Text(
+          'Dua & Adhkar',
+          style: GoogleFonts.amiri(
+            fontSize: 26,
+            color: tokens.primary,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Text(
+          'الادعية والاذكار',
+          style: GoogleFonts.dmSans(
+            fontSize: 10,
+            color: tokens.textSecondary,
+          ),
+        ),
+        const SizedBox(height: 10),
+        Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: tokens.primaryBg,
+            borderRadius: BorderRadius.circular(18),
+            border: Border.all(color: tokens.primaryBorder),
+          ),
+          child: Text(
+            'Coleccion ampliada con duas y adhkar para el dia a dia. Elige una categoria y tendras arabe, transliteracion, traduccion y referencia cuando este disponible.',
+            style: GoogleFonts.dmSans(
+              fontSize: 12,
+              height: 1.6,
+              color: tokens.textPrimary,
+            ),
+          ),
+        ),
+        const SizedBox(height: 16),
+        Text(
+          'CATEGORIAS',
+          style: GoogleFonts.dmSans(
+            fontSize: 9,
+            letterSpacing: 1.4,
+            color: tokens.textSecondary,
+          ),
+        ),
+        const SizedBox(height: 10),
+        GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: categoryKeys.length,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 8,
+            mainAxisSpacing: 8,
+            childAspectRatio: 1.65,
+          ),
+          itemBuilder: (_, index) {
+            final key = categoryKeys[index];
+            final meta = _categoryMeta[key] ??
+                (
+                  icon: Icons.auto_awesome_outlined,
+                  label: key,
+                  hint: 'Categoria',
+                );
+            final selectedCategory = key == effectiveCategory;
+            final count = grouped[key]?.length ?? 0;
+
+            return InkWell(
+              onTap: () => setState(() => _selectedCategory = key),
+              borderRadius: BorderRadius.circular(16),
+              child: Container(
+                padding: const EdgeInsets.all(14),
+                decoration: BoxDecoration(
+                  color: selectedCategory ? tokens.activeBg : tokens.bgSurface,
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(
+                    color: selectedCategory
+                        ? tokens.activeBorder
+                        : tokens.border,
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    Icon(meta.icon, size: 22, color: tokens.primary),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            meta.label,
+                            style: GoogleFonts.dmSans(
+                              fontSize: 12,
+                              color: tokens.textPrimary,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Text(
+                            '$count adhkar',
+                            style: GoogleFonts.dmSans(
+                              fontSize: 10,
+                              color: tokens.textSecondary,
+                            ),
+                          ),
+                          Text(
+                            meta.hint,
+                            style: GoogleFonts.dmSans(
+                              fontSize: 10,
+                              color: tokens.textMuted,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
+        const SizedBox(height: 16),
+        Text(
+          'SELECCIONADA',
+          style: GoogleFonts.dmSans(
+            fontSize: 9,
+            letterSpacing: 1.4,
+            color: tokens.textSecondary,
+          ),
+        ),
+        const SizedBox(height: 10),
+        ...selected.map((dua) => _DuaCard(dua: dua)),
+        const SizedBox(height: 12),
+        Text(
+          'DESTACADAS',
+          style: GoogleFonts.dmSans(
+            fontSize: 9,
+            letterSpacing: 1.4,
+            color: tokens.textSecondary,
+          ),
+        ),
+        const SizedBox(height: 10),
+        ...featured.take(6).map((dua) => _DuaCard(dua: dua, compact: true)),
+      ],
     );
   }
 }
 
 class _DuaCard extends StatelessWidget {
-  const _DuaCard({required this.dua});
+  const _DuaCard({
+    required this.dua,
+    this.compact = false,
+  });
 
-  final DuaItem dua;
+  final Dua dua;
+  final bool compact;
 
   @override
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
+
     return Container(
-      margin: const EdgeInsets.only(bottom: 8),
+      margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: tokens.bgSurface,
@@ -148,19 +335,72 @@ class _DuaCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
-                child: Text(dua.categoryLabel, style: GoogleFonts.dmSans(fontSize: 10, color: tokens.primary, letterSpacing: 1.0)),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      dua.title.toUpperCase(),
+                      style: GoogleFonts.dmSans(
+                        fontSize: 10,
+                        color: tokens.primary,
+                        letterSpacing: 1.0,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    if ((dua.reference ?? '').isNotEmpty) ...[
+                      const SizedBox(height: 4),
+                      Text(
+                        dua.reference!,
+                        style: GoogleFonts.dmSans(
+                          fontSize: 10,
+                          color: tokens.textSecondary,
+                        ),
+                      ),
+                    ],
+                  ],
+                ),
               ),
-              Text(dua.favorite ? '❤️' : '🤍', style: const TextStyle(fontSize: 16)),
+              Icon(
+                dua.isFeatured
+                    ? Icons.favorite_rounded
+                    : Icons.bookmark_border_rounded,
+                size: 18,
+                color: dua.isFeatured ? tokens.primary : tokens.textMuted,
+              ),
             ],
           ),
-          const SizedBox(height: 10),
-          Text(dua.arabic, textAlign: TextAlign.right, style: GoogleFonts.amiri(fontSize: 18, color: tokens.textPrimary, height: 1.9)),
+          const SizedBox(height: 12),
+          Text(
+            dua.arabicText,
+            textAlign: TextAlign.right,
+            style: GoogleFonts.amiri(
+              fontSize: compact ? 17 : 19,
+              color: tokens.textPrimary,
+              height: 1.9,
+            ),
+          ),
           const SizedBox(height: 8),
-          Text(dua.transliteration, style: GoogleFonts.dmSans(fontSize: 11, color: tokens.textSecondary, fontStyle: FontStyle.italic, height: 1.6)),
-          const SizedBox(height: 6),
-          Text(dua.translation, style: GoogleFonts.dmSans(fontSize: 12, color: tokens.textPrimary, height: 1.7)),
+          Text(
+            dua.transliteration,
+            style: GoogleFonts.dmSans(
+              fontSize: 11,
+              color: tokens.textSecondary,
+              fontStyle: FontStyle.italic,
+              height: 1.6,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            dua.translation,
+            style: GoogleFonts.dmSans(
+              fontSize: 12,
+              color: tokens.textPrimary,
+              height: 1.7,
+            ),
+          ),
         ],
       ),
     );

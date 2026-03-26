@@ -1,50 +1,39 @@
-import '../models/dua_model.dart';
+import 'dart:convert';
+
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final duaServiceProvider = Provider((ref) => DuaService());
+import '../models/dua_model.dart';
+
+final duaServiceProvider = Provider<DuaService>((ref) => DuaService());
+
+final allDuasProvider = FutureProvider<List<Dua>>((ref) async {
+  return ref.watch(duaServiceProvider).loadAll();
+});
 
 class DuaService {
-  final List<Dua> _duas = [
-    // Morning/Evening
-    const Dua(
-      title: 'Morning Remembrance (Alhamdulillah)',
-      arabicText: 'الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ',
-      transliteration: 'Alhamdu lillahil-ladhi ahyana ba\'da ma amatana wa ilayhin-nushur',
-      translation: 'All praise is for Allah who gave us life after causing us to die, and to Him is the resurrection.',
-      category: 'Daily',
-      reference: 'Sahih al-Bukhari 6324',
-    ),
-    const Dua(
-      title: 'Dua for Knowledge',
-      arabicText: 'رَّبِّ زِدْنِي عِلْمًا',
-      transliteration: 'Rabbi zidni \'ilma',
-      translation: 'O my Lord, increase me in knowledge.',
-      category: 'Daily',
-      reference: 'Quran 20:114',
-    ),
-    const Dua(
-      title: 'Dua for Traveling',
-      arabicText: 'سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ',
-      transliteration: 'Subhanal-ladhi sakh-khara lana hadha wa ma kunna lahu muqrinina wa inna ila Rabbina lamunqalibun',
-      translation: 'Glory is to Him Who has provided this for us, and we could never have had it by our efforts. Surely, unto our Lord we are returning.',
-      category: 'Special',
-      reference: 'Quran 43:13-14',
-    ),
-    const Dua(
-      title: 'Dua for Parents',
-      arabicText: 'رَّبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا',
-      transliteration: 'Rabbi irhamhuma kama rabbayani saghira',
-      translation: 'My Lord, have mercy upon them as they brought me up [when I was] small.',
-      category: 'Special',
-      reference: 'Quran 17:24',
-    ),
-  ];
+  List<Dua>? _cache;
 
-  List<Dua> getByCategory(String category) {
-    return _duas.where((dua) => dua.category == category).toList();
+  Future<List<Dua>> loadAll() async {
+    if (_cache != null) return _cache!;
+
+    final raw = await rootBundle.loadString('assets/data/duas.json');
+    final decoded = jsonDecode(raw) as List<dynamic>;
+    _cache = decoded
+        .map((item) => Dua.fromJson(item as Map<String, dynamic>))
+        .toList();
+    return _cache!;
   }
 
-  List<String> getCategories() {
-    return _duas.map((dua) => dua.category).toSet().toList();
+  Future<List<Dua>> getByCategory(String category) async {
+    final duas = await loadAll();
+    return duas.where((dua) => dua.category == category).toList();
+  }
+
+  Future<List<String>> getCategories() async {
+    final duas = await loadAll();
+    final categories = duas.map((dua) => dua.category).toSet().toList()
+      ..sort();
+    return categories;
   }
 }

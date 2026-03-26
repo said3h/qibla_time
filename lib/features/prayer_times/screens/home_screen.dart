@@ -11,6 +11,7 @@ import '../../dhikr/screens/dhikr_screen.dart';
 import '../../dhikr/services/dhikr_service.dart';
 import '../../focus/screens/focus_mode_screen.dart';
 import '../../hadith/services/hadith_service.dart';
+import '../../hadith/services/hadith_share_service.dart';
 import '../../qibla/screens/qibla_screen.dart';
 import '../../quran/models/quran_models.dart';
 import '../../quran/screens/quran_screen.dart';
@@ -46,13 +47,21 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   bool _hadithExpanded = false;
   int _hadithOffset = 0;
+  late final ScrollController _calendarController;
 
   @override
   void initState() {
     super.initState();
+    _calendarController = ScrollController(initialScrollOffset: 6 * 62.0);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(adhanManagerProvider).scheduleTodayAdhans();
     });
+  }
+
+  @override
+  void dispose() {
+    _calendarController.dispose();
+    super.dispose();
   }
 
   @override
@@ -206,7 +215,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                 ),
                 Text(
-                  '${isOnline ? 'En linea' : 'Sin red'} · ${locationLabel ?? 'Ubicacion pendiente'}',
+                  '${isOnline ? 'En linea' : 'Sin red'} - ${locationLabel ?? 'Ubicacion pendiente'}',
                   style: GoogleFonts.dmSans(
                     fontSize: 10,
                     color: tokens.textSecondary,
@@ -222,14 +231,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               border: Border.all(color: tokens.border),
             ),
             child: IconButton(
-              tooltip: 'Coran',
+              tooltip: 'Ajustes',
               onPressed: () async {
                 await Navigator.of(context).push(
-                  MaterialPageRoute(builder: (_) => const QuranScreen()),
+                  MaterialPageRoute(builder: (_) => const SettingsScreen()),
                 );
-                ref.invalidate(lastReadingProvider);
               },
-              icon: Icon(Icons.menu_book, size: 17, color: tokens.textPrimary),
+              icon: Icon(Icons.tune, size: 18, color: tokens.textPrimary),
             ),
           ),
         ],
@@ -276,24 +284,26 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Widget _buildCalendarStrip(QiblaTokens tokens) {
     final today = DateTime.now();
     final dates =
-        List.generate(7, (index) => today.subtract(Duration(days: 3 - index)));
+        List.generate(15, (index) => today.subtract(Duration(days: 6 - index)));
 
     return SizedBox(
-      height: 68,
+      height: 82,
       child: ListView.separated(
+        controller: _calendarController,
         padding: const EdgeInsets.symmetric(horizontal: 16),
         scrollDirection: Axis.horizontal,
+        physics: const BouncingScrollPhysics(),
         itemCount: dates.length,
-        separatorBuilder: (_, __) => const SizedBox(width: 6),
+        separatorBuilder: (_, __) => const SizedBox(width: 8),
         itemBuilder: (_, index) {
           final date = dates[index];
           final hijri = HijriCalendar.fromDate(date);
           final isToday = _isSameDay(date, today);
-          final hasEvent = index == 3 || index == 4;
+          final hasEvent = hijri.hDay == 1 || hijri.hDay == 15;
 
           return Container(
-            width: 46,
-            padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 4),
+            width: 54,
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 6),
             decoration: BoxDecoration(
               color: isToday ? tokens.primaryBg : tokens.bgSurface,
               borderRadius: BorderRadius.circular(14),
@@ -322,7 +332,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 Text(
                   '${hijri.hDay} ${hijri.getShortMonthName()}',
                   style: GoogleFonts.dmSans(
-                    fontSize: 7,
+                    fontSize: 8,
                     color: tokens.textMuted,
                   ),
                   overflow: TextOverflow.ellipsis,
@@ -408,7 +418,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ),
           const SizedBox(height: 6),
           Text(
-            '${names.$1} Â· ${names.$2}',
+            '${names.$1} - ${names.$2}',
             style: GoogleFonts.amiri(
               fontSize: 32,
               color: tokens.primaryLight,
@@ -417,7 +427,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ),
           const SizedBox(height: 2),
           Text(
-            'Hoy a las ${_formatTime(nextPrayerInfo.time)} · ${_formatRemaining(remaining)}',
+            'Hoy a las ${_formatTime(nextPrayerInfo.time)} - ${_formatRemaining(remaining)}',
             style: GoogleFonts.dmSans(
               fontSize: 12,
               color: tokens.textSecondary,
@@ -1415,11 +1425,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     }
 
     final prayers = [
-      (PrayerName.fajr, 'Fajr', 'ÙØ¬Ø±', prayerSchedule.fajr),
-      (PrayerName.dhuhr, 'Dhuhr', 'Ø¸Ù‡Ø±', prayerSchedule.dhuhr),
-      (PrayerName.asr, 'Asr', 'Ø¹ØµØ±', prayerSchedule.asr),
-      (PrayerName.maghrib, 'Maghrib', 'Ù…ØºØ±Ø¨', prayerSchedule.maghrib),
-      (PrayerName.isha, 'Isha', 'Ø¹Ø´Ø§Ø¡', prayerSchedule.isha),
+      (PrayerName.fajr, 'Fajr', 'فجر', prayerSchedule.fajr),
+      (PrayerName.dhuhr, 'Dhuhr', 'ظهر', prayerSchedule.dhuhr),
+      (PrayerName.asr, 'Asr', 'عصر', prayerSchedule.asr),
+      (PrayerName.maghrib, 'Maghrib', 'مغرب', prayerSchedule.maghrib),
+      (PrayerName.isha, 'Isha', 'عشاء', prayerSchedule.isha),
     ];
     final nextPrayerName = nextPrayerInfo?.prayer.key;
 
@@ -1629,7 +1639,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             ),
             const SizedBox(height: 6),
             Text(
-              '${hadith.reference} Â· ${hadith.category}',
+              '${hadith.reference} - ${hadith.category}',
               style: GoogleFonts.dmSans(
                 fontSize: 10,
                 color: tokens.textSecondary,
@@ -1643,13 +1653,44 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       setState(() => _hadithExpanded = !_hadithExpanded),
                   child: Text(_hadithExpanded ? 'Ver menos' : 'Ver mas'),
                 ),
-                TextButton(
-                  onPressed: () async {
-                    await Share.share(
-                      '${hadith.translation}\n\n${hadith.reference}',
-                    );
+                PopupMenuButton<String>(
+                  onSelected: (value) async {
+                    if (value == 'text') {
+                      await Share.share(
+                        '${hadith.translation}\n\n${hadith.reference}',
+                      );
+                      return;
+                    }
+
+                    try {
+                      await ref
+                          .read(hadithShareServiceProvider)
+                          .shareHadithAsImage(hadith, tokens);
+                    } catch (_) {
+                      if (!mounted) return;
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text(
+                            'No se pudo generar la imagen del hadith ahora mismo.',
+                          ),
+                        ),
+                      );
+                    }
                   },
-                  child: const Text('Compartir'),
+                  itemBuilder: (_) => const [
+                    PopupMenuItem<String>(
+                      value: 'text',
+                      child: Text('Compartir texto'),
+                    ),
+                    PopupMenuItem<String>(
+                      value: 'image',
+                      child: Text('Compartir PNG'),
+                    ),
+                  ],
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    child: Text('Compartir'),
+                  ),
                 ),
                 TextButton(
                   onPressed: () async {
@@ -1686,13 +1727,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   Widget _buildQuickActions(QiblaTokens tokens) {
     final actions = [
-      ('ðŸ§­', 'Qibla', const QiblaScreen()),
-      ('ðŸ“…', 'Calendario', const CalendarScreen()),
-      ('ðŸ“¿', 'Tasbih', const DhikrScreen()),
-      ('ðŸ›', 'Focus', const FocusModeScreen()),
-      ('ðŸ“Š', 'Stats', const AnalyticsScreen()),
-      ('ðŸ¤²', 'Dua', const DuasScreen()),
-      ('âš™ï¸', 'Ajustes', const SettingsScreen()),
+      (Icons.explore_outlined, 'Qibla', const QiblaScreen()),
+      (Icons.menu_book_outlined, 'Coran', const QuranScreen()),
+      (Icons.calendar_month_outlined, 'Calendario', const CalendarScreen()),
+      (Icons.auto_awesome_outlined, 'Tasbih', const DhikrScreen()),
+      (Icons.self_improvement_outlined, 'Focus', const FocusModeScreen()),
+      (Icons.insights_outlined, 'Stats', const AnalyticsScreen()),
+      (Icons.volunteer_activism_outlined, 'Dua', const DuasScreen()),
     ];
 
     return Padding(
@@ -1727,7 +1768,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(action.$1, style: const TextStyle(fontSize: 22)),
+                  Icon(action.$1 as IconData, size: 22, color: tokens.primary),
                   const SizedBox(height: 6),
                   Text(
                     action.$2,
@@ -1756,15 +1797,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   (String, String) _prayerName(PrayerName prayer) {
     switch (prayer) {
       case PrayerName.fajr:
-        return ('Fajr', 'ÙØ¬Ø±');
+        return ('Fajr', 'فجر');
       case PrayerName.dhuhr:
-        return ('Dhuhr', 'Ø¸Ù‡Ø±');
+        return ('Dhuhr', 'ظهر');
       case PrayerName.asr:
-        return ('Asr', 'Ø¹ØµØ±');
+        return ('Asr', 'عصر');
       case PrayerName.maghrib:
-        return ('Maghrib', 'Ù…ØºØ±Ø¨');
+        return ('Maghrib', 'مغرب');
       case PrayerName.isha:
-        return ('Isha', 'Ø¹Ø´Ø§Ø¡');
+        return ('Isha', 'عشاء');
     }
   }
 

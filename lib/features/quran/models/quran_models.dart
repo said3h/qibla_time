@@ -98,5 +98,5 @@ class QuranReadingPoint {
     };
   }
 
-  String get shortLabel => '$surahNameLatin · aya $ayahNumber';
+  String get shortLabel => '$surahNameLatin - aya $ayahNumber';
 }
