@@ -120,21 +120,21 @@ class AnalyticsShareService {
     _drawStatCard(
       canvas,
       tokens: tokens,
-      rect: const Rect.fromLTWH(92, statsTop, 280, 172),
+      rect: Rect.fromLTWH(92, statsTop, 280, 172),
       value: '${summary.prayersCompleted}/${summary.maxPossible}',
       label: 'oraciones esta semana',
     );
     _drawStatCard(
       canvas,
       tokens: tokens,
-      rect: const Rect.fromLTWH(400, statsTop, 280, 172),
+      rect: Rect.fromLTWH(400, statsTop, 280, 172),
       value: summary.strongestDay.shortLabel,
       label: '${summary.strongestDay.completed}/5 mejor dia',
     );
     _drawStatCard(
       canvas,
       tokens: tokens,
-      rect: const Rect.fromLTWH(708, statsTop, 280, 172),
+      rect: Rect.fromLTWH(708, statsTop, 280, 172),
       value: '${summary.fullDays}',
       label: 'dias completos',
     );
