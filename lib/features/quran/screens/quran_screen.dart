@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math' as math;
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
@@ -686,6 +687,7 @@ class QuranDetailScreen extends ConsumerStatefulWidget {
 class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   final ScrollController _scrollController = ScrollController();
   final AudioService _audioService = AudioService.instance;
+  final Map<int, GlobalKey> _ayahKeys = {};
   StreamSubscription<PlayerState>? _playerStateSubscription;
   StreamSubscription<void>? _playerCompleteSubscription;
   bool _initialJumpDone = false;
@@ -768,6 +770,38 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
         ),
       ),
     );
+  }
+
+  GlobalKey _ayahKeyFor(int ayahNumber) {
+    return _ayahKeys.putIfAbsent(
+      ayahNumber,
+      () => GlobalKey(debugLabel: 'ayah-$ayahNumber'),
+    );
+  }
+
+  Future<void> _jumpToInitialAyah(SurahDetail detail) async {
+    if (widget.initialAyah <= 1 || !_scrollController.hasClients) return;
+
+    final targetIndex = detail.ayahs.indexWhere(
+      (ayah) => ayah.numberInSurah == widget.initialAyah,
+    );
+    if (targetIndex < 0) return;
+
+    final maxExtent = _scrollController.position.maxScrollExtent;
+    final denominator = math.max(detail.ayahs.length - 1, 1);
+    final roughOffset = maxExtent * (targetIndex / denominator);
+    _scrollController.jumpTo(roughOffset.clamp(0.0, maxExtent));
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final targetContext = _ayahKeyFor(widget.initialAyah).currentContext;
+      if (targetContext == null) return;
+      Scrollable.ensureVisible(
+        targetContext,
+        duration: const Duration(milliseconds: 280),
+        curve: Curves.easeOut,
+        alignment: 0.08,
+      );
+    });
   }
 
   void _ensureDownloadStateLoaded(SurahDetail detail) {
@@ -1104,17 +1138,19 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     final ayah = _surahQueue[index];
     final sourceKey = 'quran:surah:${widget.summary.number}:${ayah.numberInSurah}';
 
+    if (mounted) {
+      setState(() {
+        _playbackMode = _QuranPlaybackMode.surah;
+        _surahQueueIndex = index;
+        _activeAyahNumber = ayah.numberInSurah;
+        _isAudioPlaying = true;
+      });
+    }
+
     await _playResolvedAyahAudio(
       ayah,
       sourceKey: sourceKey,
     );
-    if (!mounted) return;
-    setState(() {
-      _playbackMode = _QuranPlaybackMode.surah;
-      _surahQueueIndex = index;
-      _activeAyahNumber = ayah.numberInSurah;
-      _isAudioPlaying = true;
-    });
   }
 
   Future<void> _toggleSurahAudio(
@@ -1211,13 +1247,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
           if (!_initialJumpDone && widget.initialAyah > 1) {
             _initialJumpDone = true;
             WidgetsBinding.instance.addPostFrameCallback((_) async {
-              final targetOffset = (widget.initialAyah - 1) * 220.0;
-              final maxExtent = _scrollController.position.maxScrollExtent;
-              await _scrollController.animateTo(
-                targetOffset.clamp(0.0, maxExtent),
-                duration: const Duration(milliseconds: 350),
-                curve: Curves.easeOut,
-              );
+              await _jumpToInitialAyah(detail);
             });
           }
 
@@ -1253,13 +1283,24 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                 onTap: () => _saveReading(ayah.numberInSurah),
                 borderRadius: BorderRadius.circular(16),
                 child: Container(
+                  key: _ayahKeyFor(ayah.numberInSurah),
                   margin: const EdgeInsets.only(bottom: 10),
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: isLastRead ? tokens.activeBg : tokens.bgSurface,
+                    color: isPlayingAudio
+                        ? tokens.primaryBg
+                        : isActiveAudio
+                            ? tokens.activeBg
+                            : isLastRead
+                                ? tokens.activeBg
+                                : tokens.bgSurface,
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(
-                      color: isLastRead ? tokens.activeBorder : tokens.border,
+                      color: isPlayingAudio
+                          ? tokens.primaryBorder
+                          : isActiveAudio || isLastRead
+                              ? tokens.activeBorder
+                              : tokens.border,
                     ),
                   ),
                   child: Column(
