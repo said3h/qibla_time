@@ -132,6 +132,11 @@ class TrackingState {
 
   int completedCountFor(DateTime date) => completedPrayersFor(date).length;
 
+  int get totalPrayersCompleted => data.values
+      .fold<int>(0, (sum, prayers) => sum + prayers.values.where((value) => value).length);
+
+  bool get hasAnyCompletedPrayer => totalPrayersCompleted > 0;
+
   int get currentStreak {
     var streak = 0;
     var day = DateTime.now();

@@ -2,6 +2,7 @@
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../tracking/services/weekly_summary_notification_service.dart';
 import '../presentation/providers/prayer_times_providers.dart';
 import 'notification_service.dart';
 
@@ -16,12 +17,18 @@ class AdhanManager {
     final resolvedSchedule = await _ref.read(getPrayerScheduleUseCaseProvider).call();
     if (resolvedSchedule == null) {
       await NotificationService.instance.cancelAll();
+      await _ref
+          .read(weeklySummaryNotificationServiceProvider)
+          .scheduleWeeklySummaryNotification();
       return;
     }
 
     await _ref
         .read(reschedulePrayerNotificationsUseCaseProvider)
         .call(resolvedSchedule.schedule);
+    await _ref
+        .read(weeklySummaryNotificationServiceProvider)
+        .scheduleWeeklySummaryNotification();
   }
 
   Future<void> cancelPrayer(String prayerName) async {

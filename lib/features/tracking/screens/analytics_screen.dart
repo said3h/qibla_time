@@ -1,12 +1,16 @@
-// lib/features/tracking/screens/analytics_screen.dart
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../services/tracking_service.dart';
-import '../models/tracking_models.dart';
+
 import '../../../core/theme/app_theme.dart';
 import '../../../core/theme/theme_provider.dart';
+import '../models/achievement.dart';
+import '../models/tracking_models.dart';
+import '../services/achievement_service.dart';
+import '../services/analytics_share_service.dart';
+import '../services/tracking_service.dart';
+
+enum _AnalyticsShareAction { image, text }
 
 class AnalyticsScreen extends ConsumerWidget {
   const AnalyticsScreen({super.key});
@@ -14,89 +18,9 @@ class AnalyticsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final tracking = ref.watch(prayerTrackingProvider);
+    final achievements = ref.watch(achievementsProvider);
     final themeName = ref.watch(themeControllerProvider);
     final tokens = QiblaThemes.fromName(themeName);
-
-    if (tracking.data.isEmpty) {
-      return Scaffold(
-        backgroundColor: tokens.bgPage,
-        appBar: AppBar(
-          backgroundColor: tokens.bgApp,
-          elevation: 0,
-          title: Text(
-            'Estadisticas',
-            style: GoogleFonts.amiri(
-              fontSize: 26,
-              fontWeight: FontWeight.bold,
-              color: tokens.primary,
-            ),
-          ),
-          bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(1),
-            child: Divider(height: 1, color: tokens.border),
-          ),
-        ),
-        body: RefreshIndicator(
-          color: tokens.primary,
-          onRefresh: () async => ref.refresh(prayerTrackingProvider),
-          child: ListView(
-            padding: const EdgeInsets.all(20),
-            children: [
-              Container(
-                padding: const EdgeInsets.all(22),
-                decoration: BoxDecoration(
-                  color: tokens.bgSurface,
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: tokens.border),
-                ),
-                child: Column(
-                  children: [
-                    Icon(Icons.insights_outlined, size: 42, color: tokens.primary),
-                    const SizedBox(height: 14),
-                    Text(
-                      'Todavia no hay datos de oracion',
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.amiri(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: tokens.primary,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      'Marca tus oraciones desde Inicio y aqui veras tu racha, tu progreso semanal y tus dias mas fuertes.',
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.dmSans(
-                        fontSize: 12,
-                        height: 1.6,
-                        color: tokens.textSecondary,
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-                      decoration: BoxDecoration(
-                        color: tokens.primaryBg,
-                        borderRadius: BorderRadius.circular(14),
-                        border: Border.all(color: tokens.primaryBorder),
-                      ),
-                      child: Text(
-                        'Consejo: empieza marcando una sola oracion hoy para desbloquear tus estadisticas.',
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.dmSans(
-                          fontSize: 11,
-                          color: tokens.textPrimary,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
-    }
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
@@ -104,13 +28,51 @@ class AnalyticsScreen extends ConsumerWidget {
         backgroundColor: tokens.bgApp,
         elevation: 0,
         title: Text(
-          'Estadísticas',
+          'Estadisticas',
           style: GoogleFonts.amiri(
             fontSize: 26,
             fontWeight: FontWeight.bold,
             color: tokens.primary,
           ),
         ),
+        actions: tracking.hasAnyCompletedPrayer
+            ? [
+                PopupMenuButton<_AnalyticsShareAction>(
+                  tooltip: 'Compartir progreso',
+                  icon: Icon(Icons.ios_share_rounded, color: tokens.primary),
+                  color: tokens.bgSurface,
+                  onSelected: (action) => _handleShareAction(
+                    context,
+                    ref,
+                    tracking,
+                    tokens,
+                    action,
+                  ),
+                  itemBuilder: (_) => [
+                    PopupMenuItem(
+                      value: _AnalyticsShareAction.image,
+                      child: Text(
+                        'Compartir imagen',
+                        style: GoogleFonts.dmSans(
+                          fontSize: 13,
+                          color: tokens.textPrimary,
+                        ),
+                      ),
+                    ),
+                    PopupMenuItem(
+                      value: _AnalyticsShareAction.text,
+                      child: Text(
+                        'Compartir texto',
+                        style: GoogleFonts.dmSans(
+                          fontSize: 13,
+                          color: tokens.textPrimary,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ]
+            : null,
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1),
           child: Divider(height: 1, color: tokens.border),
@@ -118,69 +80,301 @@ class AnalyticsScreen extends ConsumerWidget {
       ),
       body: RefreshIndicator(
         color: tokens.primary,
-        onRefresh: () async => ref.refresh(prayerTrackingProvider),
-        child: ListView(
-          padding: const EdgeInsets.all(20),
-          children: [
-            // ── 1. RACHA ──────────────────────────────────────
-            _StreakCard(tracking: tracking, tokens: tokens),
-            const SizedBox(height: 16),
-
-            // ── 2. HEATMAP ────────────────────────────────────
-            _HeatmapCard(tracking: tracking, tokens: tokens),
-            const SizedBox(height: 16),
-
-            // ── 3. PROGRESO POR ORACIÓN ───────────────────────
-            _PrayerProgressCard(tracking: tracking, tokens: tokens),
-            const SizedBox(height: 16),
-
-            // ── 4. TOTALES DEL MES ────────────────────────────
-            _MonthlyTotalsCard(tracking: tracking, tokens: tokens),
-            const SizedBox(height: 32),
-          ],
-        ),
+        onRefresh: () async {
+          ref.invalidate(prayerTrackingProvider);
+          ref.invalidate(achievementsProvider);
+        },
+        child: !tracking.hasAnyCompletedPrayer
+            ? _EmptyAnalyticsState(tokens: tokens)
+            : ListView(
+                padding: const EdgeInsets.all(20),
+                children: [
+                  _WeeklySummaryCard(
+                    summary: tracking.currentWeekSummary,
+                    tokens: tokens,
+                  ),
+                  const SizedBox(height: 16),
+                  _StreakCard(tracking: tracking, tokens: tokens),
+                  const SizedBox(height: 16),
+                  _AchievementsCard(
+                    achievements: achievements,
+                    tokens: tokens,
+                  ),
+                  const SizedBox(height: 16),
+                  _HeatmapCard(tracking: tracking, tokens: tokens),
+                  const SizedBox(height: 16),
+                  _PrayerProgressCard(tracking: tracking, tokens: tokens),
+                  const SizedBox(height: 16),
+                  _MonthlyTotalsCard(tracking: tracking, tokens: tokens),
+                  const SizedBox(height: 32),
+                ],
+              ),
       ),
+    );
+  }
+
+  Future<void> _handleShareAction(
+    BuildContext context,
+    WidgetRef ref,
+    TrackingState tracking,
+    QiblaTokens tokens,
+    _AnalyticsShareAction action,
+  ) async {
+    try {
+      final service = ref.read(analyticsShareServiceProvider);
+      switch (action) {
+        case _AnalyticsShareAction.image:
+          await service.shareWeeklyProgressAsImage(tracking, tokens);
+          break;
+        case _AnalyticsShareAction.text:
+          await service.shareWeeklyProgressAsText(tracking);
+          break;
+      }
+    } catch (_) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'No se pudo compartir tu progreso ahora mismo.',
+              style: GoogleFonts.dmSans(),
+            ),
+          ),
+        );
+      }
+    }
+  }
+}
+
+class _EmptyAnalyticsState extends StatelessWidget {
+  const _EmptyAnalyticsState({required this.tokens});
+
+  final QiblaTokens tokens;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      padding: const EdgeInsets.all(20),
+      children: [
+        Container(
+          padding: const EdgeInsets.all(22),
+          decoration: BoxDecoration(
+            color: tokens.bgSurface,
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: tokens.border),
+          ),
+          child: Column(
+            children: [
+              Icon(Icons.insights_outlined, size: 42, color: tokens.primary),
+              const SizedBox(height: 14),
+              Text(
+                'Todavia no hay datos de oracion',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.amiri(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: tokens.primary,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Marca tus oraciones desde Inicio y aqui veras tu racha, tu progreso semanal y tus dias mas fuertes.',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.dmSans(
+                  fontSize: 12,
+                  height: 1.6,
+                  color: tokens.textSecondary,
+                ),
+              ),
+              const SizedBox(height: 16),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 14,
+                  vertical: 10,
+                ),
+                decoration: BoxDecoration(
+                  color: tokens.primaryBg,
+                  borderRadius: BorderRadius.circular(14),
+                  border: Border.all(color: tokens.primaryBorder),
+                ),
+                child: Text(
+                  'Consejo: empieza marcando una sola oracion hoy para desbloquear tus estadisticas.',
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.dmSans(
+                    fontSize: 11,
+                    color: tokens.textPrimary,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
 
-// ══════════════════════════════════════════════════════════════
-// 1. TARJETA DE RACHA
-// ══════════════════════════════════════════════════════════════
+class _WeeklySummaryCard extends StatelessWidget {
+  const _WeeklySummaryCard({
+    required this.summary,
+    required this.tokens,
+  });
 
-class _StreakCard extends StatelessWidget {
-  final TrackingState tracking;
-  final QiblaTokens   tokens;
-
-  const _StreakCard({required this.tracking, required this.tokens});
+  final WeeklySummary summary;
+  final QiblaTokens tokens;
 
   @override
   Widget build(BuildContext context) {
-    final streak = tracking.currentStreak;
-    final best   = tracking.bestStreak;
-
     return _Card(
       tokens: tokens,
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Llama de racha
+          _SectionTitle(title: 'Resumen semanal', tokens: tokens),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              Expanded(
+                child: _SummaryStat(
+                  label: 'Esta semana',
+                  value: '${summary.prayersCompleted}/${summary.maxPossible}',
+                  helper: 'oraciones',
+                  tokens: tokens,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: _SummaryStat(
+                  label: 'Dias 5/5',
+                  value: '${summary.fullDays}',
+                  helper: 'dias completos',
+                  tokens: tokens,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: _SummaryStat(
+                  label: 'Mejor dia',
+                  value: summary.strongestDay.shortLabel,
+                  helper: '${summary.strongestDay.completed}/5',
+                  tokens: tokens,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
           Container(
-            width: 56, height: 56,
+            padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(
               color: tokens.primaryBg,
               borderRadius: BorderRadius.circular(16),
               border: Border.all(color: tokens.primaryBorder),
             ),
-            child: Center(
-              child: Text(
-                streak > 0 ? '🔥' : '💤',
-                style: const TextStyle(fontSize: 28),
+            child: Text(
+              summary.interpretation,
+              style: GoogleFonts.dmSans(
+                fontSize: 13,
+                height: 1.5,
+                color: tokens.textPrimary,
               ),
             ),
           ),
-          const SizedBox(width: 16),
+        ],
+      ),
+    );
+  }
+}
 
-          // Números
+class _SummaryStat extends StatelessWidget {
+  const _SummaryStat({
+    required this.label,
+    required this.value,
+    required this.helper,
+    required this.tokens,
+  });
+
+  final String label;
+  final String value;
+  final String helper;
+  final QiblaTokens tokens;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: tokens.bgSurface2,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: tokens.border),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label,
+            style: GoogleFonts.dmSans(
+              fontSize: 10,
+              fontWeight: FontWeight.w600,
+              color: tokens.textSecondary,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            value,
+            style: GoogleFonts.dmSans(
+              fontSize: 22,
+              fontWeight: FontWeight.w700,
+              color: tokens.primaryLight,
+            ),
+          ),
+          const SizedBox(height: 2),
+          Text(
+            helper,
+            style: GoogleFonts.dmSans(
+              fontSize: 11,
+              color: tokens.textMuted,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _StreakCard extends StatelessWidget {
+  const _StreakCard({
+    required this.tracking,
+    required this.tokens,
+  });
+
+  final TrackingState tracking;
+  final QiblaTokens tokens;
+
+  @override
+  Widget build(BuildContext context) {
+    final streak = tracking.currentStreak;
+    final best = tracking.bestStreak;
+
+    return _Card(
+      tokens: tokens,
+      child: Row(
+        children: [
+          Container(
+            width: 56,
+            height: 56,
+            decoration: BoxDecoration(
+              color: tokens.primaryBg,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: tokens.primaryBorder),
+            ),
+            child: Icon(
+              streak > 0
+                  ? Icons.local_fire_department_rounded
+                  : Icons.bedtime_outlined,
+              color: tokens.primaryLight,
+              size: 28,
+            ),
+          ),
+          const SizedBox(width: 16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -188,7 +382,7 @@ class _StreakCard extends StatelessWidget {
                 Text(
                   streak == 0
                       ? 'Sin racha activa'
-                      : '$streak ${streak == 1 ? 'día' : 'días'} seguidos',
+                      : '$streak ${streak == 1 ? 'dia' : 'dias'} seguidos',
                   style: GoogleFonts.amiri(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
@@ -198,8 +392,8 @@ class _StreakCard extends StatelessWidget {
                 const SizedBox(height: 2),
                 Text(
                   streak == 0
-                      ? 'Reza hoy las 5 oraciones para empezar'
-                      : 'Mejor racha: $best días',
+                      ? 'Completa hoy tus 5 oraciones para empezar.'
+                      : 'Tu mejor racha es de $best dias.',
                   style: GoogleFonts.dmSans(
                     fontSize: 12,
                     color: tokens.textSecondary,
@@ -208,8 +402,6 @@ class _StreakCard extends StatelessWidget {
               ],
             ),
           ),
-
-          // Mejor racha badge
           if (streak == best && best > 0)
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
@@ -219,11 +411,11 @@ class _StreakCard extends StatelessWidget {
                 border: Border.all(color: tokens.primaryBorder),
               ),
               child: Text(
-                '⭐ Récord',
+                'Record',
                 style: GoogleFonts.dmSans(
                   fontSize: 10,
+                  fontWeight: FontWeight.w600,
                   color: tokens.primaryLight,
-                  fontWeight: FontWeight.w500,
                 ),
               ),
             ),
@@ -233,15 +425,179 @@ class _StreakCard extends StatelessWidget {
   }
 }
 
-// ══════════════════════════════════════════════════════════════
-// 2. HEATMAP DE 30 DÍAS
-// ══════════════════════════════════════════════════════════════
+class _AchievementsCard extends StatelessWidget {
+  const _AchievementsCard({
+    required this.achievements,
+    required this.tokens,
+  });
+
+  final AsyncValue<List<Achievement>> achievements;
+  final QiblaTokens tokens;
+
+  @override
+  Widget build(BuildContext context) {
+    return _Card(
+      tokens: tokens,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _SectionTitle(title: 'Logros', tokens: tokens),
+          const SizedBox(height: 14),
+          achievements.when(
+            data: (items) {
+              if (items.isEmpty) {
+                return Text(
+                  'Tus logros apareceran aqui a medida que avances.',
+                  style: GoogleFonts.dmSans(
+                    fontSize: 13,
+                    color: tokens.textSecondary,
+                  ),
+                );
+              }
+              return Column(
+                children: items
+                    .map(
+                      (achievement) => Padding(
+                        padding: const EdgeInsets.only(bottom: 12),
+                        child: _AchievementTile(
+                          achievement: achievement,
+                          tokens: tokens,
+                        ),
+                      ),
+                    )
+                    .toList(),
+              );
+            },
+            loading: () => Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Center(
+                child: SizedBox(
+                  width: 24,
+                  height: 24,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    color: tokens.primary,
+                  ),
+                ),
+              ),
+            ),
+            error: (_, __) => Text(
+              'No se pudieron cargar los logros ahora mismo.',
+              style: GoogleFonts.dmSans(
+                fontSize: 13,
+                color: tokens.textSecondary,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _AchievementTile extends StatelessWidget {
+  const _AchievementTile({
+    required this.achievement,
+    required this.tokens,
+  });
+
+  final Achievement achievement;
+  final QiblaTokens tokens;
+
+  @override
+  Widget build(BuildContext context) {
+    final isUnlocked = achievement.isUnlocked;
+    final surfaceColor = isUnlocked ? tokens.primaryBg : tokens.bgSurface2;
+    final borderColor = isUnlocked ? tokens.primaryBorder : tokens.border;
+    final iconColor = isUnlocked ? tokens.primaryLight : tokens.textSecondary;
+
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: surfaceColor,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: borderColor),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 42,
+            height: 42,
+            decoration: BoxDecoration(
+              color: isUnlocked ? tokens.activeBg : tokens.bgSurface,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Icon(achievement.icon, color: iconColor, size: 22),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        achievement.title,
+                        style: GoogleFonts.dmSans(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w700,
+                          color: tokens.textPrimary,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Text(
+                      achievement.progressLabel,
+                      style: GoogleFonts.dmSans(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w600,
+                        color: isUnlocked
+                            ? tokens.primary
+                            : tokens.textSecondary,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  achievement.description,
+                  style: GoogleFonts.dmSans(
+                    fontSize: 12,
+                    height: 1.5,
+                    color: tokens.textSecondary,
+                  ),
+                ),
+                if (!isUnlocked) ...[
+                  const SizedBox(height: 10),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: LinearProgressIndicator(
+                      value: achievement.progressRatio,
+                      minHeight: 6,
+                      backgroundColor: tokens.bgSurface,
+                      valueColor: AlwaysStoppedAnimation<Color>(tokens.primary),
+                    ),
+                  ),
+                ],
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
 
 class _HeatmapCard extends StatelessWidget {
-  final TrackingState tracking;
-  final QiblaTokens   tokens;
+  const _HeatmapCard({
+    required this.tracking,
+    required this.tokens,
+  });
 
-  const _HeatmapCard({required this.tracking, required this.tokens});
+  final TrackingState tracking;
+  final QiblaTokens tokens;
 
   @override
   Widget build(BuildContext context) {
@@ -252,10 +608,8 @@ class _HeatmapCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _SectionTitle(title: 'Últimos 30 días', tokens: tokens),
+          _SectionTitle(title: 'Ultimos 30 dias', tokens: tokens),
           const SizedBox(height: 14),
-
-          // Grid 6 filas × 5 columnas = 30 días
           GridView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
@@ -265,29 +619,33 @@ class _HeatmapCard extends StatelessWidget {
               mainAxisSpacing: 5,
             ),
             itemCount: days.length,
-            itemBuilder: (_, i) => _HeatCell(day: days[i], tokens: tokens),
+            itemBuilder: (_, index) => _HeatCell(day: days[index], tokens: tokens),
           ),
-
           const SizedBox(height: 12),
-
-          // Leyenda
           Row(
             children: [
               Text(
                 'Menos',
                 style: GoogleFonts.dmSans(
-                  fontSize: 10, color: tokens.textMuted),
+                  fontSize: 10,
+                  color: tokens.textMuted,
+                ),
               ),
               const SizedBox(width: 6),
-              ...List.generate(5, (i) => Padding(
-                padding: const EdgeInsets.only(right: 3),
-                child: _legendCell(i, tokens),
-              )),
+              ...List.generate(
+                5,
+                (index) => Padding(
+                  padding: const EdgeInsets.only(right: 3),
+                  child: _legendCell(index),
+                ),
+              ),
               const SizedBox(width: 6),
               Text(
-                'Más',
+                'Mas',
                 style: GoogleFonts.dmSans(
-                  fontSize: 10, color: tokens.textMuted),
+                  fontSize: 10,
+                  color: tokens.textMuted,
+                ),
               ),
             ],
           ),
@@ -296,42 +654,49 @@ class _HeatmapCard extends StatelessWidget {
     );
   }
 
-  Widget _legendCell(int level, QiblaTokens tokens) {
+  Widget _legendCell(int level) {
     return Container(
-      width: 12, height: 12,
+      width: 12,
+      height: 12,
       decoration: BoxDecoration(
-        color: _heatColor(level, tokens),
+        color: _heatColor(level),
         borderRadius: BorderRadius.circular(2),
       ),
     );
   }
 
-  static Color _heatColor(int level, QiblaTokens tokens) {
+  Color _heatColor(int level) {
     switch (level) {
-      case 0: return tokens.bgSurface2;
-      case 1: return tokens.primary.withOpacity(0.20);
-      case 2: return tokens.primary.withOpacity(0.40);
-      case 3: return tokens.primary.withOpacity(0.65);
-      default: return tokens.primary;
+      case 0:
+        return tokens.bgSurface2;
+      case 1:
+        return tokens.primary.withOpacity(0.20);
+      case 2:
+        return tokens.primary.withOpacity(0.40);
+      case 3:
+        return tokens.primary.withOpacity(0.65);
+      default:
+        return tokens.primary;
     }
   }
 }
 
 class _HeatCell extends StatelessWidget {
-  final HeatmapDay  day;
-  final QiblaTokens tokens;
+  const _HeatCell({
+    required this.day,
+    required this.tokens,
+  });
 
-  const _HeatCell({required this.day, required this.tokens});
+  final HeatmapDay day;
+  final QiblaTokens tokens;
 
   @override
   Widget build(BuildContext context) {
-    final color = _color();
-
     return Tooltip(
-      message: '${_dayLabel()}: ${day.completed}/5',
+      message: '${day.date.day}/${day.date.month}: ${day.completed}/5',
       child: Container(
         decoration: BoxDecoration(
-          color: color,
+          color: _color(),
           borderRadius: BorderRadius.circular(3),
           border: day.isToday
               ? Border.all(color: tokens.primary, width: 1.5)
@@ -346,30 +711,25 @@ class _HeatCell extends StatelessWidget {
     if (day.completed <= 1) return tokens.primary.withOpacity(0.20);
     if (day.completed <= 2) return tokens.primary.withOpacity(0.40);
     if (day.completed <= 4) return tokens.primary.withOpacity(0.65);
-    return tokens.primary; // 5/5 = color completo
-  }
-
-  String _dayLabel() {
-    return '${day.date.day}/${day.date.month}';
+    return tokens.primary;
   }
 }
 
-// ══════════════════════════════════════════════════════════════
-// 3. PROGRESO POR ORACIÓN
-// ══════════════════════════════════════════════════════════════
-
 class _PrayerProgressCard extends StatelessWidget {
-  final TrackingState tracking;
-  final QiblaTokens   tokens;
+  const _PrayerProgressCard({
+    required this.tracking,
+    required this.tokens,
+  });
 
-  const _PrayerProgressCard({required this.tracking, required this.tokens});
+  final TrackingState tracking;
+  final QiblaTokens tokens;
 
   static const _prayers = [
-    ('fajr',    'Fajr',    'فجر'),
-    ('dhuhr',   'Dhuhr',   'ظهر'),
-    ('asr',     'Asr',     'عصر'),
+    ('fajr', 'Fajr', 'فجر'),
+    ('dhuhr', 'Dhuhr', 'ظهر'),
+    ('asr', 'Asr', 'عصر'),
     ('maghrib', 'Maghrib', 'مغرب'),
-    ('isha',    'Isha',    'عشاء'),
+    ('isha', 'Isha', 'عشاء'),
   ];
 
   @override
@@ -381,17 +741,19 @@ class _PrayerProgressCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _SectionTitle(title: 'Por oración — últimos 30 días', tokens: tokens),
+          _SectionTitle(title: 'Por oracion - ultimos 30 dias', tokens: tokens),
           const SizedBox(height: 14),
-          ..._prayers.map((p) => Padding(
-            padding: const EdgeInsets.only(bottom: 12),
-            child: _PrayerBar(
-              name:       p.$2,
-              arabic:     p.$3,
-              ratio:      completion[p.$1] ?? 0.0,
-              tokens:     tokens,
+          ..._prayers.map(
+            (prayer) => Padding(
+              padding: const EdgeInsets.only(bottom: 12),
+              child: _PrayerBar(
+                name: prayer.$2,
+                arabic: prayer.$3,
+                ratio: completion[prayer.$1] ?? 0,
+                tokens: tokens,
+              ),
             ),
-          )),
+          ),
         ],
       ),
     );
@@ -399,11 +761,6 @@ class _PrayerProgressCard extends StatelessWidget {
 }
 
 class _PrayerBar extends StatelessWidget {
-  final String      name;
-  final String      arabic;
-  final double      ratio;    // 0.0 - 1.0
-  final QiblaTokens tokens;
-
   const _PrayerBar({
     required this.name,
     required this.arabic,
@@ -411,15 +768,19 @@ class _PrayerBar extends StatelessWidget {
     required this.tokens,
   });
 
+  final String name;
+  final String arabic;
+  final double ratio;
+  final QiblaTokens tokens;
+
   @override
   Widget build(BuildContext context) {
-    final pct = (ratio * 100).round();
+    final percentage = (ratio * 100).round();
 
     return Column(
       children: [
         Row(
           children: [
-            // Nombre
             SizedBox(
               width: 64,
               child: Text(
@@ -430,7 +791,6 @@ class _PrayerBar extends StatelessWidget {
                 ),
               ),
             ),
-            // Árabe
             Text(
               arabic,
               style: GoogleFonts.amiri(
@@ -439,19 +799,17 @@ class _PrayerBar extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            // Porcentaje
             Text(
-              '$pct%',
+              '$percentage%',
               style: GoogleFonts.dmSans(
                 fontSize: 13,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w600,
                 color: _barColor(),
               ),
             ),
           ],
         ),
         const SizedBox(height: 5),
-        // Barra de progreso
         ClipRRect(
           borderRadius: BorderRadius.circular(4),
           child: LinearProgressIndicator(
@@ -472,20 +830,19 @@ class _PrayerBar extends StatelessWidget {
   }
 }
 
-// ══════════════════════════════════════════════════════════════
-// 4. TOTALES DEL MES
-// ══════════════════════════════════════════════════════════════
-
 class _MonthlyTotalsCard extends StatelessWidget {
-  final TrackingState tracking;
-  final QiblaTokens   tokens;
+  const _MonthlyTotalsCard({
+    required this.tracking,
+    required this.tokens,
+  });
 
-  const _MonthlyTotalsCard({required this.tracking, required this.tokens});
+  final TrackingState tracking;
+  final QiblaTokens tokens;
 
   @override
   Widget build(BuildContext context) {
     final stats = tracking.currentMonthStats;
-    final pct   = (stats.completionRate * 100).round();
+    final completionPercentage = (stats.completionRate * 100).round();
 
     return _Card(
       tokens: tokens,
@@ -494,12 +851,11 @@ class _MonthlyTotalsCard extends StatelessWidget {
         children: [
           _SectionTitle(title: stats.monthName, tokens: tokens),
           const SizedBox(height: 16),
-
           Row(
             children: [
-              // Círculo de progreso
               SizedBox(
-                width: 80, height: 80,
+                width: 80,
+                height: 80,
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
@@ -507,13 +863,13 @@ class _MonthlyTotalsCard extends StatelessWidget {
                       value: stats.completionRate,
                       strokeWidth: 7,
                       backgroundColor: tokens.bgSurface2,
-                      valueColor: AlwaysStoppedAnimation(tokens.primary),
+                      valueColor: AlwaysStoppedAnimation<Color>(tokens.primary),
                     ),
                     Text(
-                      '$pct%',
+                      '$completionPercentage%',
                       style: GoogleFonts.dmSans(
                         fontSize: 16,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w700,
                         color: tokens.primaryLight,
                       ),
                     ),
@@ -521,26 +877,24 @@ class _MonthlyTotalsCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 24),
-
-              // Stats en columna
               Expanded(
                 child: Column(
                   children: [
                     _StatRow(
                       label: 'Oraciones completadas',
-                      value: '${stats.prayersCompleted} / ${stats.maxPossible}',
+                      value: '${stats.prayersCompleted}/${stats.maxPossible}',
                       tokens: tokens,
                     ),
                     const SizedBox(height: 10),
                     _StatRow(
-                      label: 'Días completos (5/5)',
-                      value: '${stats.fullDays} días',
+                      label: 'Dias completos',
+                      value: '${stats.fullDays} dias',
                       tokens: tokens,
                     ),
                     const SizedBox(height: 10),
                     _StatRow(
                       label: 'Mejor racha',
-                      value: '${tracking.bestStreak} días',
+                      value: '${tracking.bestStreak} dias',
                       tokens: tokens,
                     ),
                   ],
@@ -555,30 +909,36 @@ class _MonthlyTotalsCard extends StatelessWidget {
 }
 
 class _StatRow extends StatelessWidget {
-  final String      label;
-  final String      value;
-  final QiblaTokens tokens;
-
   const _StatRow({
     required this.label,
     required this.value,
     required this.tokens,
   });
 
+  final String label;
+  final String value;
+  final QiblaTokens tokens;
+
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          label,
-          style: GoogleFonts.dmSans(fontSize: 11, color: tokens.textSecondary),
+        Flexible(
+          child: Text(
+            label,
+            style: GoogleFonts.dmSans(
+              fontSize: 11,
+              color: tokens.textSecondary,
+            ),
+          ),
         ),
+        const SizedBox(width: 12),
         Text(
           value,
           style: GoogleFonts.dmSans(
             fontSize: 12,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w600,
             color: tokens.textPrimary,
           ),
         ),
@@ -587,15 +947,14 @@ class _StatRow extends StatelessWidget {
   }
 }
 
-// ══════════════════════════════════════════════════════════════
-// WIDGETS DE APOYO
-// ══════════════════════════════════════════════════════════════
-
 class _Card extends StatelessWidget {
-  final Widget      child;
-  final QiblaTokens tokens;
+  const _Card({
+    required this.child,
+    required this.tokens,
+  });
 
-  const _Card({required this.child, required this.tokens});
+  final Widget child;
+  final QiblaTokens tokens;
 
   @override
   Widget build(BuildContext context) {
@@ -613,10 +972,13 @@ class _Card extends StatelessWidget {
 }
 
 class _SectionTitle extends StatelessWidget {
-  final String      title;
-  final QiblaTokens tokens;
+  const _SectionTitle({
+    required this.title,
+    required this.tokens,
+  });
 
-  const _SectionTitle({required this.title, required this.tokens});
+  final String title;
+  final QiblaTokens tokens;
 
   @override
   Widget build(BuildContext context) {
@@ -624,7 +986,7 @@ class _SectionTitle extends StatelessWidget {
       title.toUpperCase(),
       style: GoogleFonts.dmSans(
         fontSize: 10,
-        fontWeight: FontWeight.w500,
+        fontWeight: FontWeight.w600,
         color: tokens.textSecondary,
         letterSpacing: 1.4,
       ),
