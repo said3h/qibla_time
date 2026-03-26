@@ -19,6 +19,7 @@ import '../../prayer_times/presentation/providers/ramadan_providers.dart';
 import '../../prayer_times/services/adhan_manager.dart';
 import '../../prayer_times/presentation/providers/prayer_times_providers.dart';
 import '../../prayer_times/services/travel_mode_service.dart';
+import '../../quran/screens/downloaded_surahs_screen.dart';
 import '../../tracking/services/tracking_service.dart';
 import 'adhan_selector_screen.dart';
 
@@ -336,6 +337,20 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             const SizedBox(height: 14),
             
             // ── SECCIÓN TRAVEL MODE ────────────────────────────────────────
+            _buildSectionTitle(tokens, 'Coran offline'),
+            _buildValueTile(
+              tokens,
+              'Ver suras descargadas',
+              'Abrir lista',
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => const DownloadedSurahsScreen(),
+                  ),
+                );
+              },
+            ),
+            const SizedBox(height: 14),
             _buildSectionTitle(tokens, 'Modo viajero'),
 
             // Toggle principal

@@ -10,6 +10,7 @@ import '../../calendar/screens/calendar_screen.dart';
 import '../../dhikr/screens/dhikr_screen.dart';
 import '../../dhikr/services/dhikr_service.dart';
 import '../../focus/screens/focus_mode_screen.dart';
+import '../../hadith/screens/hadith_library_screen.dart';
 import '../../hadith/services/hadith_service.dart';
 import '../../hadith/services/hadith_share_service.dart';
 import '../../qibla/screens/qibla_screen.dart';
@@ -1668,6 +1669,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   onPressed: () =>
                       setState(() => _hadithExpanded = !_hadithExpanded),
                   child: Text(_hadithExpanded ? 'Ver menos' : 'Ver mas'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => const HadithLibraryScreen(),
+                      ),
+                    );
+                  },
+                  child: const Text('Explorar temas'),
                 ),
                 PopupMenuButton<String>(
                   onSelected: (value) async {

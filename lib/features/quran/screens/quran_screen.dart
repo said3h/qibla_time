@@ -9,6 +9,7 @@ import '../../../core/services/audio_service.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../hafiz/screens/hafiz_mode_screen.dart';
 import '../models/quran_models.dart';
+import 'allah_names_screen.dart';
 import '../services/quran_audio_download_service.dart';
 import '../services/quran_reading_service.dart';
 import '../services/quran_service.dart';
@@ -22,6 +23,11 @@ class QuranScreen extends ConsumerWidget {
     final surahs = ref.watch(quranSurahsProvider);
     final lastReading = ref.watch(lastReadingProvider).valueOrNull;
     final bookmarks = ref.watch(quranBookmarksProvider).valueOrNull ?? const [];
+    final downloadedSurahs =
+        ref.watch(downloadedSurahNumbersProvider).valueOrNull ?? const <int>[];
+    final favoriteDownloadedSurahs =
+        ref.watch(favoriteDownloadedSurahsProvider).valueOrNull ??
+            const <int>{};
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
@@ -66,6 +72,27 @@ class QuranScreen extends ConsumerWidget {
                 ),
               ],
             ),
+            const SizedBox(height: 12),
+            _QuranUtilityRow(
+              onProtectionTap: () {
+                final baqarah = _summaryFor(surahs, 2);
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => QuranDetailScreen(
+                      summary: baqarah,
+                      initialAyah: 255,
+                    ),
+                  ),
+                );
+              },
+              onAllahNamesTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => const AllahNamesScreen(),
+                  ),
+                );
+              },
+            ),
             if (lastReading == null && bookmarks.isEmpty) ...[
               const SizedBox(height: 16),
               const _ReadingHintCard(),
@@ -102,12 +129,38 @@ class QuranScreen extends ConsumerWidget {
                 },
               ),
             ],
+            const SizedBox(height: 12),
+            _DailyProtectionCard(
+              onOpenAyatAlKursi: () {
+                final summary = _summaryFor(surahs, 2);
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => QuranDetailScreen(
+                      summary: summary,
+                      initialAyah: 255,
+                    ),
+                  ),
+                );
+              },
+              onOpenSurah: (surahNumber) {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => QuranDetailScreen(
+                      summary: _summaryFor(surahs, surahNumber),
+                    ),
+                  ),
+                );
+              },
+            ),
             const SizedBox(height: 16),
             ...surahs.map(
               (surah) => _SurahTile(
                 surah: surah,
                 lastReading: lastReading,
                 bookmarks: bookmarks,
+                isDownloaded: downloadedSurahs.contains(surah.number),
+                isDownloadedFavorite:
+                    favoriteDownloadedSurahs.contains(surah.number),
               ),
             ),
           ],
@@ -120,6 +173,205 @@ class QuranScreen extends ConsumerWidget {
     return surahs.firstWhere(
       (surah) => surah.number == surahNumber,
       orElse: () => surahs.first,
+    );
+  }
+}
+
+class _QuranUtilityRow extends StatelessWidget {
+  const _QuranUtilityRow({
+    required this.onProtectionTap,
+    required this.onAllahNamesTap,
+  });
+
+  final VoidCallback onProtectionTap;
+  final VoidCallback onAllahNamesTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      spacing: 8,
+      runSpacing: 8,
+      children: [
+        OutlinedButton.icon(
+          onPressed: onProtectionTap,
+          icon: const Icon(Icons.shield_moon_outlined),
+          label: const Text('Ayat al-Kursi'),
+        ),
+        OutlinedButton.icon(
+          onPressed: onAllahNamesTap,
+          icon: const Icon(Icons.auto_awesome_outlined),
+          label: const Text('99 nombres'),
+        ),
+      ],
+    );
+  }
+}
+
+class _DailyProtectionCard extends StatefulWidget {
+  const _DailyProtectionCard({
+    required this.onOpenAyatAlKursi,
+    required this.onOpenSurah,
+  });
+
+  final VoidCallback onOpenAyatAlKursi;
+  final ValueChanged<int> onOpenSurah;
+
+  @override
+  State<_DailyProtectionCard> createState() => _DailyProtectionCardState();
+}
+
+class _DailyProtectionCardState extends State<_DailyProtectionCard> {
+  final Map<String, int> _repeatCounts = {
+    'kursi': 0,
+    'ikhlas': 0,
+    'falaq': 0,
+    'nas': 0,
+  };
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = QiblaThemes.current;
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: tokens.bgSurface,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: tokens.border),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'PROTECCION DIARIA',
+            style: GoogleFonts.dmSans(
+              fontSize: 10,
+              fontWeight: FontWeight.w700,
+              letterSpacing: 1.3,
+              color: tokens.textSecondary,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Acceso rapido a Ayat al-Kursi y las suras de proteccion. Puedes abrirlas para leer o escuchar y marcar tu repeticion 3 veces.',
+            style: GoogleFonts.dmSans(
+              fontSize: 12,
+              height: 1.6,
+              color: tokens.textPrimary,
+            ),
+          ),
+          const SizedBox(height: 14),
+          _ProtectionTile(
+            title: 'Ayat al-Kursi',
+            helper: 'Al-Baqarah 2:255',
+            count: _repeatCounts['kursi'] ?? 0,
+            onIncrement: () => _increment('kursi'),
+            onOpen: widget.onOpenAyatAlKursi,
+          ),
+          const SizedBox(height: 10),
+          _ProtectionTile(
+            title: 'Al-Ikhlas',
+            helper: 'Sura 112',
+            count: _repeatCounts['ikhlas'] ?? 0,
+            onIncrement: () => _increment('ikhlas'),
+            onOpen: () => widget.onOpenSurah(112),
+          ),
+          const SizedBox(height: 10),
+          _ProtectionTile(
+            title: 'Al-Falaq',
+            helper: 'Sura 113',
+            count: _repeatCounts['falaq'] ?? 0,
+            onIncrement: () => _increment('falaq'),
+            onOpen: () => widget.onOpenSurah(113),
+          ),
+          const SizedBox(height: 10),
+          _ProtectionTile(
+            title: 'An-Nas',
+            helper: 'Sura 114',
+            count: _repeatCounts['nas'] ?? 0,
+            onIncrement: () => _increment('nas'),
+            onOpen: () => widget.onOpenSurah(114),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _increment(String key) {
+    setState(() {
+      final current = _repeatCounts[key] ?? 0;
+      _repeatCounts[key] = current >= 3 ? 0 : current + 1;
+    });
+  }
+}
+
+class _ProtectionTile extends StatelessWidget {
+  const _ProtectionTile({
+    required this.title,
+    required this.helper,
+    required this.count,
+    required this.onIncrement,
+    required this.onOpen,
+  });
+
+  final String title;
+  final String helper;
+  final int count;
+  final VoidCallback onIncrement;
+  final VoidCallback onOpen;
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = QiblaThemes.current;
+    final isComplete = count >= 3;
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: isComplete ? tokens.primaryBg : tokens.bgSurface2,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(
+          color: isComplete ? tokens.primaryBorder : tokens.border,
+        ),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: GoogleFonts.dmSans(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w700,
+                    color: tokens.textPrimary,
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  '$helper - ${count}/3 repeticiones',
+                  style: GoogleFonts.dmSans(
+                    fontSize: 11,
+                    color: tokens.textSecondary,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          IconButton(
+            onPressed: onIncrement,
+            icon: Icon(
+              isComplete ? Icons.check_circle_outline : Icons.repeat_rounded,
+              color: tokens.primary,
+            ),
+            tooltip: isComplete ? 'Completo' : '+1 repeticion',
+          ),
+          OutlinedButton.icon(
+            onPressed: onOpen,
+            icon: const Icon(Icons.play_circle_outline),
+            label: const Text('Abrir'),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -310,11 +562,15 @@ class _SurahTile extends StatelessWidget {
     required this.surah,
     required this.lastReading,
     required this.bookmarks,
+    required this.isDownloaded,
+    required this.isDownloadedFavorite,
   });
 
   final SurahSummary surah;
   final QuranReadingPoint? lastReading;
   final List<QuranReadingPoint> bookmarks;
+  final bool isDownloaded;
+  final bool isDownloadedFavorite;
 
   @override
   Widget build(BuildContext context) {
@@ -383,6 +639,16 @@ class _SurahTile extends StatelessWidget {
                   color: tokens.textMuted,
                 ),
               ),
+            if (isDownloaded)
+              Text(
+                isDownloadedFavorite
+                    ? 'Audio descargado - favorita offline'
+                    : 'Audio descargado',
+                style: GoogleFonts.dmSans(
+                  fontSize: 10,
+                  color: tokens.primary,
+                ),
+              ),
           ],
         ),
         trailing: Text(
@@ -432,6 +698,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   SurahAudioDownloadState? _downloadState;
   bool _isCheckingDownloadState = true;
   bool _hasRequestedDownloadState = false;
+  bool _isDownloadedFavorite = false;
 
   @override
   void initState() {
@@ -517,9 +784,12 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
 
     try {
       final state = await service.getDownloadState(detail);
+      final isFavorite =
+          await service.isFavoriteDownloadedSurah(detail.summary.number);
       if (!mounted) return;
       setState(() {
         _downloadState = state;
+        _isDownloadedFavorite = isFavorite;
         _isCheckingDownloadState = false;
         _hasRequestedDownloadState = true;
       });
@@ -534,6 +804,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
           errorMessage:
               'No se pudo comprobar la descarga local en este dispositivo.',
         );
+        _isDownloadedFavorite = false;
         _isCheckingDownloadState = false;
         _hasRequestedDownloadState = true;
       });
@@ -570,6 +841,8 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
         },
       );
       await _refreshDownloadState(detail);
+      ref.invalidate(downloadedSurahNumbersProvider);
+      ref.invalidate(favoriteDownloadedSurahsProvider);
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -642,10 +915,31 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
         .read(quranAudioDownloadServiceProvider)
         .removeSurahDownload(widget.summary.number);
     await _refreshDownloadState(detail);
+    ref.invalidate(downloadedSurahNumbersProvider);
+    ref.invalidate(favoriteDownloadedSurahsProvider);
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('La descarga local se ha quitado de esta sura.'),
+      ),
+    );
+  }
+
+  Future<void> _toggleDownloadedFavorite() async {
+    final service = ref.read(quranAudioDownloadServiceProvider);
+    final isFavorite = await service.toggleDownloadedSurahFavorite(
+      widget.summary.number,
+    );
+    ref.invalidate(favoriteDownloadedSurahsProvider);
+    if (!mounted) return;
+    setState(() => _isDownloadedFavorite = isFavorite);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          isFavorite
+              ? 'Sura guardada entre tus descargadas favoritas.'
+              : 'Sura quitada de tus descargadas favoritas.',
+        ),
       ),
     );
   }
@@ -1259,6 +1553,20 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                               : 'Descargar audio',
                 ),
               ),
+              if (isDownloaded)
+                OutlinedButton.icon(
+                  onPressed: _toggleDownloadedFavorite,
+                  icon: Icon(
+                    _isDownloadedFavorite
+                        ? Icons.star_rounded
+                        : Icons.star_border_rounded,
+                  ),
+                  label: Text(
+                    _isDownloadedFavorite
+                        ? 'Favorita descargada'
+                        : 'Marcar favorita',
+                  ),
+                ),
             ],
           ),
         ],

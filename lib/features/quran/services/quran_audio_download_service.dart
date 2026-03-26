@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../core/constants/app_constants.dart';
 import '../models/quran_models.dart';
 
 final quranAudioDownloadServiceProvider =
@@ -11,6 +13,16 @@ final quranAudioDownloadServiceProvider =
   final client = http.Client();
   ref.onDispose(client.close);
   return QuranAudioDownloadService(client: client);
+});
+
+final downloadedSurahNumbersProvider = FutureProvider<List<int>>((ref) async {
+  return ref.watch(quranAudioDownloadServiceProvider).getDownloadedSurahNumbers();
+});
+
+final favoriteDownloadedSurahsProvider = FutureProvider<Set<int>>((ref) async {
+  return ref
+      .watch(quranAudioDownloadServiceProvider)
+      .getFavoriteDownloadedSurahs();
 });
 
 class QuranAudioDownloadService {
@@ -83,6 +95,7 @@ class QuranAudioDownloadService {
     if (await directory.exists()) {
       await directory.delete(recursive: true);
     }
+    await setDownloadedSurahFavorite(surahNumber, isFavorite: false);
   }
 
   Future<String?> getDownloadedAyahPath(int surahNumber, SurahAyah ayah) async {
@@ -91,6 +104,70 @@ class QuranAudioDownloadService {
       return file.path;
     }
     return null;
+  }
+
+  Future<List<int>> getDownloadedSurahNumbers() async {
+    final baseDirectory = await _baseDirectory();
+    if (!await baseDirectory.exists()) {
+      return const [];
+    }
+
+    final surahNumbers = <int>[];
+    await for (final entity in baseDirectory.list()) {
+      if (entity is! Directory) continue;
+      final folderName = entity.path.split(Platform.pathSeparator).last;
+      if (!folderName.startsWith('surah_')) continue;
+
+      final parsed = int.tryParse(folderName.replaceFirst('surah_', ''));
+      if (parsed == null) continue;
+      final hasFiles = await entity
+          .list()
+          .any((child) => child is File && child.path.endsWith('.mp3'));
+      if (hasFiles) {
+        surahNumbers.add(parsed);
+      }
+    }
+
+    surahNumbers.sort();
+    return surahNumbers;
+  }
+
+  Future<Set<int>> getFavoriteDownloadedSurahs() async {
+    final prefs = await SharedPreferences.getInstance();
+    final raw = prefs.getStringList(AppConstants.keyQuranDownloadedFavorites) ??
+        const <String>[];
+    return raw.map(int.tryParse).whereType<int>().toSet();
+  }
+
+  Future<bool> isFavoriteDownloadedSurah(int surahNumber) async {
+    final favorites = await getFavoriteDownloadedSurahs();
+    return favorites.contains(surahNumber);
+  }
+
+  Future<void> setDownloadedSurahFavorite(
+    int surahNumber, {
+    required bool isFavorite,
+  }) async {
+    final prefs = await SharedPreferences.getInstance();
+    final favorites = await getFavoriteDownloadedSurahs();
+    if (isFavorite) {
+      favorites.add(surahNumber);
+    } else {
+      favorites.remove(surahNumber);
+    }
+    await prefs.setStringList(
+      AppConstants.keyQuranDownloadedFavorites,
+      favorites.map((item) => '$item').toList(),
+    );
+  }
+
+  Future<bool> toggleDownloadedSurahFavorite(int surahNumber) async {
+    final isFavorite = await isFavoriteDownloadedSurah(surahNumber);
+    await setDownloadedSurahFavorite(
+      surahNumber,
+      isFavorite: !isFavorite,
+    );
+    return !isFavorite;
   }
 
   List<SurahAyah> _downloadableAyahs(SurahDetail detail) {

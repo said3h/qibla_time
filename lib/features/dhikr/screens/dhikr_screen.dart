@@ -7,8 +7,25 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../core/theme/app_theme.dart';
 import '../services/dhikr_service.dart';
 
+class DhikrPhrase {
+  const DhikrPhrase({
+    required this.arabic,
+    required this.transliteration,
+    required this.meaning,
+  });
+
+  final String arabic;
+  final String transliteration;
+  final String meaning;
+}
+
 class DhikrScreen extends StatefulWidget {
-  const DhikrScreen({super.key});
+  const DhikrScreen({
+    super.key,
+    this.initialPhrase,
+  });
+
+  final DhikrPhrase? initialPhrase;
 
   @override
   State<DhikrScreen> createState() => _DhikrScreenState();
@@ -45,6 +62,23 @@ class _DhikrScreenState extends State<DhikrScreen> {
   int _count = 0;
   int _currentPhraseIndex = 0;
 
+  List<({String arabic, String transliteration, String meaning})>
+      get _activePhrases {
+    final initialPhrase = widget.initialPhrase;
+    if (initialPhrase == null) return _phrases;
+
+    return [
+      (
+        arabic: initialPhrase.arabic,
+        transliteration: initialPhrase.transliteration,
+        meaning: initialPhrase.meaning,
+      ),
+      ..._phrases.where(
+        (phrase) => phrase.transliteration != initialPhrase.transliteration,
+      ),
+    ];
+  }
+
   @override
   void initState() {
     super.initState();
@@ -76,7 +110,8 @@ class _DhikrScreenState extends State<DhikrScreen> {
       _snapshot = optimistic;
       _count = completesSession ? 0 : nextCount;
       if (completesSession) {
-        _currentPhraseIndex = (_currentPhraseIndex + 1) % _phrases.length;
+        _currentPhraseIndex =
+            (_currentPhraseIndex + 1) % _activePhrases.length;
       }
     });
 
@@ -322,7 +357,7 @@ class _DhikrScreenState extends State<DhikrScreen> {
     }
 
     final snapshot = _snapshot!;
-    final phrase = _phrases[_currentPhraseIndex];
+    final phrase = _activePhrases[_currentPhraseIndex];
     final sessionProgress = snapshot.sessionGoal <= 0
         ? 0.0
         : (_count / snapshot.sessionGoal).clamp(0.0, 1.0);
@@ -451,7 +486,7 @@ class _DhikrScreenState extends State<DhikrScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
-                _phrases.length,
+                _activePhrases.length,
                 (index) => Container(
                   width: 9,
                   height: 9,
@@ -467,7 +502,7 @@ class _DhikrScreenState extends State<DhikrScreen> {
             ),
             const SizedBox(height: 12),
             Text(
-              'Hoy: ${snapshot.todayCount} · Ciclo ${_currentPhraseIndex + 1}/${_phrases.length}',
+              'Hoy: ${snapshot.todayCount} · Ciclo ${_currentPhraseIndex + 1}/${_activePhrases.length}',
               textAlign: TextAlign.center,
               style: GoogleFonts.dmSans(
                 fontSize: 11,
