@@ -692,18 +692,26 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     }
 
     final now = DateTime.now();
+    final imsakTime = schedule.fajr;
+    final beforeImsak = now.isBefore(imsakTime);
     final beforeIftar = now.isBefore(schedule.maghrib);
-    final nextSuhoor = DateTime(
+    final nextImsak = DateTime(
       now.year,
       now.month,
       now.day + 1,
-      schedule.fajr.hour,
-      schedule.fajr.minute,
+      imsakTime.hour,
+      imsakTime.minute,
     );
-    final targetTime = beforeIftar ? schedule.maghrib : nextSuhoor;
-    final countdownLabel = beforeIftar
+    final targetTime = beforeImsak
+        ? imsakTime
+        : beforeIftar
+            ? schedule.maghrib
+            : nextImsak;
+    final countdownLabel = beforeImsak
+        ? 'Faltan ${_formatRamadanCountdown(targetTime.difference(now))} para Imsak'
+        : beforeIftar
         ? 'Faltan ${_formatRamadanCountdown(targetTime.difference(now))} para Iftar'
-        : 'Faltan ${_formatRamadanCountdown(targetTime.difference(now))} para Suhoor';
+        : 'Faltan ${_formatRamadanCountdown(targetTime.difference(now))} para Imsak de manana';
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
@@ -773,8 +781,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 Expanded(
                   child: _summaryMetric(
                     tokens,
-                    _formatTime(schedule.fajr),
-                    'Suhoor hasta',
+                    _formatTime(imsakTime),
+                    'Imsak',
                   ),
                 ),
                 Expanded(
@@ -787,8 +795,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 Expanded(
                   child: _summaryMetric(
                     tokens,
-                    beforeIftar ? 'Hoy' : 'Noche',
-                    beforeIftar ? 'objetivo actual' : 'proximo foco',
+                    beforeImsak
+                        ? 'Suhoor'
+                        : beforeIftar
+                            ? 'Ayuno'
+                            : 'Noche',
+                    beforeImsak
+                        ? 'cierre cercano'
+                        : beforeIftar
+                            ? 'hasta iftar'
+                            : 'proximo foco',
                   ),
                 ),
               ],

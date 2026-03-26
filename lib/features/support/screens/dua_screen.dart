@@ -15,6 +15,8 @@ class DuasScreen extends ConsumerStatefulWidget {
 
 class _DuasScreenState extends ConsumerState<DuasScreen> {
   String _selectedCategory = 'morning';
+  late final TextEditingController _searchController;
+  String _searchQuery = '';
 
   static const _categoryOrder = [
     'morning',
@@ -95,6 +97,18 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
   };
 
   @override
+  void initState() {
+    super.initState();
+    _searchController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
     final duasAsync = ref.watch(allDuasProvider);
@@ -146,8 +160,12 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
     QiblaTokens tokens,
     List<Dua> duas,
   ) {
+    final normalizedQuery = _searchQuery.trim().toLowerCase();
+    final visibleDuas = normalizedQuery.isEmpty
+        ? duas
+        : duas.where((dua) => _matchesSearch(dua, normalizedQuery)).toList();
     final grouped = <String, List<Dua>>{};
-    for (final dua in duas) {
+    for (final dua in visibleDuas) {
       grouped.putIfAbsent(dua.category, () => <Dua>[]).add(dua);
     }
 
@@ -198,7 +216,109 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
             ),
           ),
         ),
+        const SizedBox(height: 12),
+        TextField(
+          controller: _searchController,
+          onChanged: (value) => setState(() => _searchQuery = value),
+          style: GoogleFonts.dmSans(
+            fontSize: 13,
+            color: tokens.textPrimary,
+          ),
+          decoration: InputDecoration(
+            hintText: 'Buscar dua o adhkar',
+            hintStyle: GoogleFonts.dmSans(
+              fontSize: 13,
+              color: tokens.textMuted,
+            ),
+            prefixIcon: Icon(Icons.search, color: tokens.textSecondary, size: 20),
+            suffixIcon: _searchQuery.isEmpty
+                ? null
+                : IconButton(
+                    tooltip: 'Limpiar busqueda',
+                    onPressed: () {
+                      _searchController.clear();
+                      setState(() => _searchQuery = '');
+                    },
+                    icon: Icon(Icons.close, color: tokens.textSecondary, size: 18),
+                  ),
+            filled: true,
+            fillColor: tokens.bgSurface,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16),
+              borderSide: BorderSide(color: tokens.border),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16),
+              borderSide: BorderSide(color: tokens.border),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16),
+              borderSide: BorderSide(color: tokens.primaryBorder),
+            ),
+          ),
+        ),
         const SizedBox(height: 16),
+        if (normalizedQuery.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 12),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+              decoration: BoxDecoration(
+                color: tokens.bgSurface,
+                borderRadius: BorderRadius.circular(14),
+                border: Border.all(color: tokens.border),
+              ),
+              child: Row(
+                children: [
+                  Icon(Icons.search, size: 16, color: tokens.primary),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      visibleDuas.isEmpty
+                          ? 'No encontramos resultados para "$_searchQuery".'
+                          : '${visibleDuas.length} resultado${visibleDuas.length == 1 ? '' : 's'} para "$_searchQuery".',
+                      style: GoogleFonts.dmSans(
+                        fontSize: 11,
+                        color: tokens.textPrimary,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        if (visibleDuas.isEmpty)
+          Container(
+            padding: const EdgeInsets.all(18),
+            decoration: BoxDecoration(
+              color: tokens.bgSurface,
+              borderRadius: BorderRadius.circular(18),
+              border: Border.all(color: tokens.border),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Sin resultados',
+                  style: GoogleFonts.dmSans(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: tokens.textPrimary,
+                  ),
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  'Prueba con palabras como lluvia, viaje, proteccion, sueno o gratitud.',
+                  style: GoogleFonts.dmSans(
+                    fontSize: 11,
+                    height: 1.6,
+                    color: tokens.textSecondary,
+                  ),
+                ),
+              ],
+            ),
+          )
+        else ...[
         Text(
           'CATEGORIAS',
           style: GoogleFonts.dmSans(
@@ -294,19 +414,33 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
         ),
         const SizedBox(height: 10),
         ...selected.map((dua) => _DuaCard(dua: dua)),
-        const SizedBox(height: 12),
-        Text(
-          'DESTACADAS',
-          style: GoogleFonts.dmSans(
-            fontSize: 9,
-            letterSpacing: 1.4,
-            color: tokens.textSecondary,
+        if (normalizedQuery.isEmpty) ...[
+          const SizedBox(height: 12),
+          Text(
+            'DESTACADAS',
+            style: GoogleFonts.dmSans(
+              fontSize: 9,
+              letterSpacing: 1.4,
+              color: tokens.textSecondary,
+            ),
           ),
-        ),
-        const SizedBox(height: 10),
-        ...featured.take(6).map((dua) => _DuaCard(dua: dua, compact: true)),
+          const SizedBox(height: 10),
+          ...featured.take(6).map((dua) => _DuaCard(dua: dua, compact: true)),
+        ],
+        ],
       ],
     );
+  }
+
+  bool _matchesSearch(Dua dua, String query) {
+    return [
+      dua.title,
+      dua.arabicText,
+      dua.transliteration,
+      dua.translation,
+      dua.category,
+      dua.reference ?? '',
+    ].any((field) => field.toLowerCase().contains(query));
   }
 }
 

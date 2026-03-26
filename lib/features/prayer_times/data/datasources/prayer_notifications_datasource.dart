@@ -1,6 +1,7 @@
 import '../../../../core/services/settings_service.dart';
 import '../../domain/entities/prayer_name.dart';
 import '../../domain/entities/prayer_schedule.dart';
+import '../../domain/entities/ramadan_status.dart';
 import '../../services/notification_service.dart';
 
 class PrayerNotificationsDataSource {
@@ -20,6 +21,13 @@ class PrayerNotificationsDataSource {
     PrayerName.maghrib: 3,
     PrayerName.isha: 4,
   };
+
+  static const int _ramadanImsakReminderId = 100;
+  static const int _ramadanIftarReminderId = 101;
+  static const int _jumuahReminderId = 102;
+  static const Duration _imsakReminderLead = Duration(minutes: 15);
+  static const Duration _iftarReminderLead = Duration(minutes: 15);
+  static const Duration _jumuahReminderLead = Duration(minutes: 45);
 
   Future<void> rescheduleToday(PrayerSchedule schedule) async {
     await _notificationService.cancelAll();
@@ -50,6 +58,9 @@ class PrayerNotificationsDataSource {
         adhanFile: adhanFile,
       );
     }
+
+    await _scheduleRamadanReminders(schedule, now: now);
+    await _scheduleJumuahReminder(schedule, now: now);
   }
 
   Future<bool> areNotificationsEnabled() {
@@ -62,5 +73,67 @@ class PrayerNotificationsDataSource {
 
   Future<bool> isSystemPermissionGranted() {
     return _notificationService.areNotificationsEnabled();
+  }
+
+  Future<void> _scheduleRamadanReminders(
+    PrayerSchedule schedule, {
+    required DateTime now,
+  }) async {
+    final ramadanStatus = RamadanStatus.fromDate(
+      now,
+      automaticEnabled: await _settingsService.getRamadanModeAutomatic(),
+      forced: await _settingsService.getRamadanModeForced(),
+    );
+
+    if (!ramadanStatus.isEnabled) {
+      return;
+    }
+
+    final imsakReminderAt = schedule.fajr.subtract(_imsakReminderLead);
+    if (imsakReminderAt.isAfter(now)) {
+      await _notificationService.scheduleReminder(
+        id: _ramadanImsakReminderId,
+        title: 'Imsak se acerca',
+        body:
+            'Faltan 15 minutos para Imsak. Si aun vas a hacer suhoor, es buen momento para cerrar.',
+        scheduledAt: imsakReminderAt,
+      );
+    }
+
+    final iftarReminderAt = schedule.maghrib.subtract(_iftarReminderLead);
+    if (iftarReminderAt.isAfter(now)) {
+      await _notificationService.scheduleReminder(
+        id: _ramadanIftarReminderId,
+        title: 'Iftar se acerca',
+        body:
+            'Faltan 15 minutos para Iftar. Que Allah acepte tu ayuno de hoy.',
+        scheduledAt: iftarReminderAt,
+      );
+    }
+  }
+
+  Future<void> _scheduleJumuahReminder(
+    PrayerSchedule schedule, {
+    required DateTime now,
+  }) async {
+    if (now.weekday != DateTime.friday) {
+      return;
+    }
+
+    var reminderTime = schedule.dhuhr.subtract(_jumuahReminderLead);
+    if (!reminderTime.isAfter(now)) {
+      reminderTime = schedule.dhuhr.subtract(const Duration(minutes: 15));
+    }
+    if (!reminderTime.isAfter(now)) {
+      return;
+    }
+
+    await _notificationService.scheduleReminder(
+      id: _jumuahReminderId,
+      title: 'Jumu\'ah hoy',
+      body:
+          'Preparate para Jumu\'ah antes de Dhuhr y reserva un momento para ir con calma a la mezquita.',
+      scheduledAt: reminderTime,
+    );
   }
 }

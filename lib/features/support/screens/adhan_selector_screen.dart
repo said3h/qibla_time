@@ -1,12 +1,14 @@
 import 'dart:async';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 import '../../../core/models/adhan_model.dart';
 import '../../../core/services/audio_service.dart';
 import '../../../core/services/settings_service.dart';
 import '../../../core/theme/app_theme.dart';
 
-/// Pantalla para seleccionar y previsualizar el Adhan
 class AdhanSelectorScreen extends StatefulWidget {
   const AdhanSelectorScreen({super.key});
 
@@ -19,11 +21,14 @@ class _AdhanSelectorScreenState extends State<AdhanSelectorScreen> {
   final SettingsService _settingsService = SettingsService.instance;
 
   String _selectedAdhan = 'azan1.mp3';
-  String? _playingAdhan;
+  String? _activeAdhan;
+  bool _isPreviewPlaying = false;
   Duration _position = Duration.zero;
   Duration _duration = Duration.zero;
   StreamSubscription<Duration>? _positionSubscription;
   StreamSubscription<Duration?>? _durationSubscription;
+  StreamSubscription<PlayerState>? _playerStateSubscription;
+  StreamSubscription<void>? _playerCompleteSubscription;
 
   @override
   void initState() {
@@ -34,29 +39,42 @@ class _AdhanSelectorScreenState extends State<AdhanSelectorScreen> {
 
   void _setupAudioListeners() {
     _positionSubscription = _audioService.onPositionChanged.listen((pos) {
-      if (mounted) {
-        setState(() {
-          _position = pos;
-        });
-      }
+      if (!mounted) return;
+      setState(() {
+        _position = pos;
+      });
     });
 
     _durationSubscription = _audioService.onDurationChanged.listen((dur) {
-      if (mounted && dur != null) {
-        setState(() {
-          _duration = dur;
-        });
-      }
+      if (!mounted || dur == null) return;
+      setState(() {
+        _duration = dur;
+      });
+    });
+
+    _playerStateSubscription = _audioService.onPlayerStateChanged.listen((state) {
+      if (!mounted) return;
+      setState(() {
+        _isPreviewPlaying = state == PlayerState.playing;
+      });
+    });
+
+    _playerCompleteSubscription = _audioService.onPlayerComplete.listen((_) {
+      if (!mounted) return;
+      setState(() {
+        _isPreviewPlaying = false;
+        _activeAdhan = null;
+        _position = Duration.zero;
+      });
     });
   }
 
   Future<void> _loadSelectedAdhan() async {
     final saved = await _settingsService.getAdhan();
-    if (mounted) {
-      setState(() {
-        _selectedAdhan = saved;
-      });
-    }
+    if (!mounted) return;
+    setState(() {
+      _selectedAdhan = saved;
+    });
   }
 
   Future<void> _selectAdhan(String file) async {
@@ -68,7 +86,6 @@ class _AdhanSelectorScreenState extends State<AdhanSelectorScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Adhan guardado: ${_getAdhanName(file)}'),
-        backgroundColor: AppTheme.primaryGreen,
         behavior: SnackBarBehavior.floating,
       ),
     );
@@ -82,55 +99,64 @@ class _AdhanSelectorScreenState extends State<AdhanSelectorScreen> {
     return adhan.name;
   }
 
-  Future<void> _playPreview(String file) async {
+  String _secondaryText(AdhanModel adhan, bool isActive, bool isPlaying) {
+    if (isPlaying) return 'Reproduciendo...';
+    if (isActive) return 'Vista previa en pausa';
+    if (adhan.description != null && adhan.description!.trim().isNotEmpty) {
+      return adhan.description!;
+    }
+    return 'Vista previa';
+  }
+
+  Future<void> _togglePreview(String file) async {
     try {
-      if (_playingAdhan == file) {
-        // Ya está reproduciendo este, lo pausamos/reproducimos
-        final isPlaying = _audioService.isPlaying;
-        if (isPlaying) {
+      if (_activeAdhan == file) {
+        if (_isPreviewPlaying) {
           await _audioService.pause();
+          if (!mounted) return;
           setState(() {
-            _playingAdhan = null;
+            _isPreviewPlaying = false;
           });
         } else {
           await _audioService.resume();
+          if (!mounted) return;
           setState(() {
-            _playingAdhan = file;
+            _isPreviewPlaying = true;
           });
         }
-      } else {
-        // Reproducir nuevo
-        setState(() {
-          _playingAdhan = file;
-          _position = Duration.zero;
-          _duration = Duration.zero;
-        });
-        await _audioService.play(file);
+        return;
+      }
 
-        // Obtener duración
-        final dur = await _audioService.duration;
-        if (mounted && dur != null) {
-          setState(() {
-            _duration = dur;
-          });
-        }
-      }
+      setState(() {
+        _activeAdhan = file;
+        _isPreviewPlaying = true;
+        _position = Duration.zero;
+        _duration = Duration.zero;
+      });
+      await _audioService.play(file, sourceKey: 'adhan:$file');
+
+      final dur = await _audioService.duration;
+      if (!mounted || dur == null) return;
+      setState(() {
+        _duration = dur;
+      });
     } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Error al reproducir: $e'),
-            backgroundColor: Colors.red,
-          ),
-        );
-        setState(() {
-          _playingAdhan = null;
-        });
-      }
+      if (!mounted) return;
+      setState(() {
+        _activeAdhan = null;
+        _isPreviewPlaying = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('No se pudo reproducir la vista previa: $e'),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
     }
   }
 
   void _seekTo(double value) {
+    if (_duration.inMilliseconds <= 0) return;
     final position = _duration.inMilliseconds * value;
     _audioService.seek(Duration(milliseconds: position.toInt()));
   }
@@ -145,32 +171,30 @@ class _AdhanSelectorScreenState extends State<AdhanSelectorScreen> {
   void dispose() {
     _positionSubscription?.cancel();
     _durationSubscription?.cancel();
-    _audioService.dispose();
+    _playerStateSubscription?.cancel();
+    _playerCompleteSubscription?.cancel();
+    _audioService.stop();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final tokens = QiblaThemes.current;
+
     return Scaffold(
-      backgroundColor: AppTheme.backgroundWhite,
+      backgroundColor: tokens.bgPage,
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Seleccionar Adhan',
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: GoogleFonts.dmSans(fontWeight: FontWeight.w700),
         ),
-        backgroundColor: AppTheme.backgroundWhite,
+        backgroundColor: tokens.bgApp,
         elevation: 0,
-        iconTheme: IconThemeData(color: AppTheme.primaryGreen),
       ),
       body: Column(
         children: [
-          // Header informativo
-          _buildHeader(),
-
-          // Barra de reproducción fija
-          if (_playingAdhan != null) _buildPlayerBar(),
-
-          // Lista de adhans
+          _buildHeader(tokens),
+          if (_activeAdhan != null) _buildPlayerBar(tokens),
           Expanded(
             child: ListView.builder(
               padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -178,9 +202,14 @@ class _AdhanSelectorScreenState extends State<AdhanSelectorScreen> {
               itemBuilder: (context, index) {
                 final adhan = AdhanModel.availableAdhans[index];
                 final isSelected = adhan.file == _selectedAdhan;
-                final isPlaying = _playingAdhan == adhan.file;
+                final isActive = _activeAdhan == adhan.file;
 
-                return _buildAdhanTile(adhan, isSelected, isPlaying);
+                return _buildAdhanTile(
+                  tokens,
+                  adhan,
+                  isSelected,
+                  isActive,
+                );
               },
             ),
           ),
@@ -189,50 +218,47 @@ class _AdhanSelectorScreenState extends State<AdhanSelectorScreen> {
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(QiblaTokens tokens) {
     return Container(
       margin: const EdgeInsets.all(16),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            AppTheme.primaryGreen,
-            AppTheme.primaryGreen.withOpacity(0.7),
-          ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
+        color: tokens.bgSurface,
         borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: AppTheme.primaryGreen.withOpacity(0.3),
-            blurRadius: 15,
-            offset: const Offset(0, 8),
-          ),
-        ],
+        border: Border.all(color: tokens.primaryBorder),
       ),
       child: Column(
         children: [
-          const Icon(
-            Icons.music_note,
-            color: Colors.white,
-            size: 48,
+          Container(
+            width: 56,
+            height: 56,
+            decoration: BoxDecoration(
+              color: tokens.primaryBg,
+              shape: BoxShape.circle,
+              border: Border.all(color: tokens.primaryBorder),
+            ),
+            child: Icon(
+              Icons.record_voice_over,
+              color: tokens.primary,
+              size: 28,
+            ),
           ),
           const SizedBox(height: 12),
-          const Text(
-            'Elige tu Adhan favorito',
-            style: TextStyle(
-              color: Colors.white,
+          Text(
+            'Elige el Adhan para tus avisos',
+            style: GoogleFonts.dmSans(
+              color: tokens.textPrimary,
               fontSize: 18,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w700,
             ),
           ),
           const SizedBox(height: 8),
           Text(
-            'Puedes previsualizar cada uno antes de seleccionar',
-            style: TextStyle(
-              color: Colors.white.withOpacity(0.9),
+            'Puedes escuchar una vista previa breve antes de seleccionarlo.',
+            style: GoogleFonts.dmSans(
+              color: tokens.textSecondary,
               fontSize: 14,
+              height: 1.5,
             ),
             textAlign: TextAlign.center,
           ),
@@ -241,45 +267,39 @@ class _AdhanSelectorScreenState extends State<AdhanSelectorScreen> {
     );
   }
 
-  Widget _buildPlayerBar() {
+  Widget _buildPlayerBar(QiblaTokens tokens) {
     final currentAdhan = AdhanModel.availableAdhans.firstWhere(
-      (a) => a.file == _playingAdhan,
-      orElse: () => AdhanModel(name: 'Adhan', file: _playingAdhan!),
+      (a) => a.file == _activeAdhan,
+      orElse: () => AdhanModel(name: 'Adhan', file: _activeAdhan!),
     );
+
+    final sliderValue = _duration.inMilliseconds > 0
+        ? (_position.inMilliseconds / _duration.inMilliseconds).clamp(0.0, 1.0)
+        : 0.0;
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppTheme.primaryGreen.withOpacity(0.1),
+        color: tokens.activeBg,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: AppTheme.primaryGreen,
-          width: 2,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: AppTheme.primaryGreen.withOpacity(0.2),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
+        border: Border.all(color: tokens.activeBorder),
       ),
       child: Column(
         children: [
-          // Nombre del Adhan reproduciendo
           Row(
             children: [
               Container(
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: AppTheme.accentGold,
+                  color: tokens.primaryBg,
                   shape: BoxShape.circle,
+                  border: Border.all(color: tokens.primaryBorder),
                 ),
-                child: const Icon(
-                  Icons.equalizer,
-                  color: Colors.white,
+                child: Icon(
+                  _isPreviewPlaying ? Icons.pause : Icons.record_voice_over,
+                  color: tokens.primary,
                   size: 20,
                 ),
               ),
@@ -290,82 +310,70 @@ class _AdhanSelectorScreenState extends State<AdhanSelectorScreen> {
                   children: [
                     Text(
                       currentAdhan.name,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                        color: AppTheme.primaryGreen,
+                      style: GoogleFonts.dmSans(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 15,
+                        color: tokens.textPrimary,
                       ),
                     ),
+                    const SizedBox(height: 2),
                     Text(
-                      'Reproduciendo...',
-                      style: TextStyle(
+                      _isPreviewPlaying ? 'Reproduciendo...' : 'Vista previa en pausa',
+                      style: GoogleFonts.dmSans(
                         fontSize: 12,
-                        color: Colors.grey.shade600,
+                        color: tokens.textSecondary,
                       ),
                     ),
                   ],
+                ),
+              ),
+              Container(
+                width: 8,
+                height: 8,
+                decoration: BoxDecoration(
+                  color: _isPreviewPlaying ? tokens.primary : tokens.textMuted,
+                  shape: BoxShape.circle,
                 ),
               ),
             ],
           ),
           const SizedBox(height: 12),
-          // Slider de progreso
           SliderTheme(
             data: SliderThemeData(
-              activeTrackColor: AppTheme.primaryGreen,
-              inactiveTrackColor: AppTheme.primaryGreen.withOpacity(0.3),
-              thumbColor: AppTheme.accentGold,
-              overlayColor: AppTheme.accentGold.withOpacity(0.2),
+              activeTrackColor: tokens.primary,
+              inactiveTrackColor: tokens.primaryBg,
+              thumbColor: tokens.primaryLight,
+              overlayColor: tokens.primaryBg,
               trackHeight: 4,
               thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 6),
             ),
             child: Slider(
-              value: _duration.inMilliseconds > 0
-                  ? _position.inMilliseconds / _duration.inMilliseconds
-                  : 0,
+              value: sliderValue,
               onChanged: _seekTo,
             ),
           ),
-          // Tiempo y controles
           Row(
             children: [
               Text(
                 _formatDuration(_position),
-                style: TextStyle(
+                style: GoogleFonts.dmSans(
                   fontSize: 12,
-                  color: Colors.grey.shade600,
+                  color: tokens.textSecondary,
                   fontWeight: FontWeight.w500,
                 ),
               ),
               const Spacer(),
-              // Botón Play/Pause
-              Container(
-                decoration: BoxDecoration(
-                  color: AppTheme.primaryGreen,
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppTheme.primaryGreen.withOpacity(0.4),
-                      blurRadius: 8,
-                      offset: const Offset(0, 2),
-                    ),
-                  ],
-                ),
-                child: IconButton(
-                  icon: Icon(
-                    _audioService.isPlaying ? Icons.pause : Icons.play_arrow,
-                    color: Colors.white,
-                    size: 28,
-                  ),
-                  onPressed: () => _playPreview(_playingAdhan!),
-                ),
+              FilledButton.icon(
+                onPressed: _activeAdhan == null ? null : () => _togglePreview(_activeAdhan!),
+                icon: Icon(_isPreviewPlaying ? Icons.pause : Icons.record_voice_over),
+                label: Text(_isPreviewPlaying ? 'Pausar' : 'Reanudar'),
               ),
               const Spacer(),
               Text(
                 _formatDuration(_duration),
-                style: TextStyle(
+                style: GoogleFonts.dmSans(
                   fontSize: 12,
-                  color: Colors.grey.shade600,
+                  color: tokens.textSecondary,
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -376,92 +384,110 @@ class _AdhanSelectorScreenState extends State<AdhanSelectorScreen> {
     );
   }
 
-  Widget _buildAdhanTile(AdhanModel adhan, bool isSelected, bool isPlaying) {
+  Widget _buildAdhanTile(
+    QiblaTokens tokens,
+    AdhanModel adhan,
+    bool isSelected,
+    bool isActive,
+  ) {
+    final isPlaying = isActive && _isPreviewPlaying;
+    final hasHighlight = isSelected || isActive;
+    final subtitleText = _secondaryText(adhan, isActive, isPlaying);
+
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
-        color: isSelected
-            ? AppTheme.primaryGreen.withOpacity(0.1)
-            : Colors.white,
+        color: isActive
+            ? tokens.activeBg
+            : isSelected
+                ? tokens.primaryBg
+                : tokens.bgSurface,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: isSelected
-              ? AppTheme.primaryGreen
-              : Colors.grey.shade200,
-          width: isSelected ? 2 : 1,
+          color: isActive
+              ? tokens.activeBorder
+              : isSelected
+                  ? tokens.primaryBorder
+                  : tokens.border,
+          width: hasHighlight ? 2 : 1,
         ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
       ),
       child: ListTile(
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 20,
-          vertical: 8,
-        ),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
         leading: Container(
-          width: 50,
-          height: 50,
+          width: 48,
+          height: 48,
           decoration: BoxDecoration(
-            color: isPlaying
-                ? AppTheme.accentGold
-                : isSelected
-                    ? AppTheme.primaryGreen
-                    : Colors.grey.shade100,
+            color: isActive ? tokens.primaryBg : tokens.bgSurface2,
             shape: BoxShape.circle,
+            border: Border.all(
+              color: isActive ? tokens.primaryBorder : tokens.border,
+            ),
           ),
           child: Icon(
-            isPlaying ? Icons.equalizer : Icons.music_note,
-            color: isPlaying
-                ? Colors.white
-                : isSelected
-                    ? Colors.white
-                    : Colors.grey.shade600,
+            isPlaying ? Icons.pause : Icons.record_voice_over,
+            color: isActive ? tokens.primary : tokens.textSecondary,
           ),
         ),
-        title: Text(
-          adhan.name,
-          style: TextStyle(
-            fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
-            color: isSelected ? AppTheme.primaryGreen : AppTheme.textDark,
-          ),
-        ),
-        subtitle: adhan.description != null
-            ? Text(
-                adhan.description!,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.grey.shade600,
-                ),
-              )
-            : null,
-        trailing: Row(
-          mainAxisSize: MainAxisSize.min,
+        title: Row(
           children: [
-            // Botón de preview
-            IconButton(
-              icon: Icon(
-                isPlaying && _audioService.isPlaying
-                    ? Icons.pause_circle
-                    : Icons.play_circle,
-                size: 32,
+            Expanded(
+              child: Text(
+                adhan.name,
+                style: GoogleFonts.dmSans(
+                  fontWeight: hasHighlight ? FontWeight.w700 : FontWeight.w600,
+                  color: tokens.textPrimary,
+                  fontSize: 15,
+                ),
               ),
-              color: isPlaying
-                  ? AppTheme.accentGold
-                  : AppTheme.primaryGreen,
-              onPressed: () => _playPreview(adhan.file),
             ),
-            // Checkbox de selección
             if (isSelected)
               Icon(
                 Icons.check_circle,
-                color: AppTheme.primaryGreen,
+                color: tokens.primary,
+                size: 18,
               ),
           ],
+        ),
+        subtitle: Padding(
+          padding: const EdgeInsets.only(top: 4),
+          child: Row(
+            children: [
+              if (isActive) ...[
+                Container(
+                  width: 6,
+                  height: 6,
+                  decoration: BoxDecoration(
+                    color: isPlaying ? tokens.primary : tokens.textMuted,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+                const SizedBox(width: 8),
+              ],
+              Expanded(
+                child: Text(
+                  subtitleText,
+                  style: GoogleFonts.dmSans(
+                    fontSize: 12,
+                    color: isActive ? tokens.textPrimary : tokens.textSecondary,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        trailing: IconButton(
+          tooltip: isPlaying
+              ? 'Pausar vista previa'
+              : isActive
+                  ? 'Reanudar vista previa'
+                  : 'Escuchar vista previa',
+          icon: Icon(
+            isPlaying ? Icons.pause : Icons.record_voice_over,
+            size: 28,
+          ),
+          color: isActive ? tokens.primary : tokens.textSecondary,
+          onPressed: () => _togglePreview(adhan.file),
         ),
         onTap: () => _selectAdhan(adhan.file),
       ),

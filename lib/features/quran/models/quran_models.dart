@@ -62,6 +62,53 @@ class SurahLoadResult {
   bool get usedFallback => source != SurahLoadSource.online;
 }
 
+enum SurahAudioDownloadStatus {
+  notDownloaded,
+  downloading,
+  downloaded,
+  error,
+}
+
+class SurahAudioDownloadState {
+  const SurahAudioDownloadState({
+    required this.status,
+    required this.availableAyahs,
+    required this.downloadedAyahs,
+    this.errorMessage,
+  });
+
+  final SurahAudioDownloadStatus status;
+  final int availableAyahs;
+  final int downloadedAyahs;
+  final String? errorMessage;
+
+  bool get hasAudio => availableAyahs > 0;
+  bool get isDownloaded => status == SurahAudioDownloadStatus.downloaded;
+  bool get isDownloading => status == SurahAudioDownloadStatus.downloading;
+  bool get hasPartialDownload =>
+      downloadedAyahs > 0 && downloadedAyahs < availableAyahs;
+
+  double get progress =>
+      availableAyahs == 0 ? 0 : downloadedAyahs / availableAyahs;
+
+  SurahAudioDownloadState copyWith({
+    SurahAudioDownloadStatus? status,
+    int? availableAyahs,
+    int? downloadedAyahs,
+    String? errorMessage,
+    bool clearErrorMessage = false,
+  }) {
+    return SurahAudioDownloadState(
+      status: status ?? this.status,
+      availableAyahs: availableAyahs ?? this.availableAyahs,
+      downloadedAyahs: downloadedAyahs ?? this.downloadedAyahs,
+      errorMessage: clearErrorMessage
+          ? null
+          : errorMessage ?? this.errorMessage,
+    );
+  }
+}
+
 class QuranReadingPoint {
   const QuranReadingPoint({
     required this.surahNumber,

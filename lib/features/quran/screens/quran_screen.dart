@@ -9,6 +9,7 @@ import '../../../core/services/audio_service.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../hafiz/screens/hafiz_mode_screen.dart';
 import '../models/quran_models.dart';
+import '../services/quran_audio_download_service.dart';
 import '../services/quran_reading_service.dart';
 import '../services/quran_service.dart';
 
@@ -428,6 +429,9 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   _QuranPlaybackMode _playbackMode = _QuranPlaybackMode.none;
   List<SurahAyah> _surahQueue = const [];
   int _surahQueueIndex = -1;
+  SurahAudioDownloadState? _downloadState;
+  bool _isCheckingDownloadState = true;
+  bool _hasRequestedDownloadState = false;
 
   @override
   void initState() {
@@ -499,6 +503,181 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     );
   }
 
+  void _ensureDownloadStateLoaded(SurahDetail detail) {
+    if (_hasRequestedDownloadState) return;
+    _hasRequestedDownloadState = true;
+    unawaited(_refreshDownloadState(detail));
+  }
+
+  Future<void> _refreshDownloadState(SurahDetail detail) async {
+    final service = ref.read(quranAudioDownloadServiceProvider);
+    if (mounted) {
+      setState(() => _isCheckingDownloadState = true);
+    }
+
+    try {
+      final state = await service.getDownloadState(detail);
+      if (!mounted) return;
+      setState(() {
+        _downloadState = state;
+        _isCheckingDownloadState = false;
+        _hasRequestedDownloadState = true;
+      });
+    } catch (_) {
+      if (!mounted) return;
+      setState(() {
+        _downloadState = SurahAudioDownloadState(
+          status: SurahAudioDownloadStatus.error,
+          availableAyahs:
+              detail.ayahs.where((ayah) => ayah.audioUrl.isNotEmpty).length,
+          downloadedAyahs: 0,
+          errorMessage:
+              'No se pudo comprobar la descarga local en este dispositivo.',
+        );
+        _isCheckingDownloadState = false;
+        _hasRequestedDownloadState = true;
+      });
+    }
+  }
+
+  Future<void> _downloadSurahAudio(SurahDetail detail) async {
+    final service = ref.read(quranAudioDownloadServiceProvider);
+    final availableAyahs =
+        detail.ayahs.where((ayah) => ayah.audioUrl.isNotEmpty).length;
+    if (availableAyahs == 0) return;
+
+    setState(() {
+      _downloadState = SurahAudioDownloadState(
+        status: SurahAudioDownloadStatus.downloading,
+        availableAyahs: availableAyahs,
+        downloadedAyahs: 0,
+      );
+      _isCheckingDownloadState = false;
+    });
+
+    try {
+      await service.downloadSurahAudio(
+        detail,
+        onProgress: (downloadedAyahs, totalAyahs) {
+          if (!mounted) return;
+          setState(() {
+            _downloadState = SurahAudioDownloadState(
+              status: SurahAudioDownloadStatus.downloading,
+              availableAyahs: totalAyahs,
+              downloadedAyahs: downloadedAyahs,
+            );
+          });
+        },
+      );
+      await _refreshDownloadState(detail);
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Audio descargado para escuchar esta sura sin conexion.'),
+        ),
+      );
+    } catch (_) {
+      if (!mounted) return;
+      setState(() {
+        _downloadState = (_downloadState ??
+                SurahAudioDownloadState(
+                  status: SurahAudioDownloadStatus.notDownloaded,
+                  availableAyahs: availableAyahs,
+                  downloadedAyahs: 0,
+                ))
+            .copyWith(
+              status: SurahAudioDownloadStatus.error,
+              errorMessage:
+                  'No se pudo completar la descarga. Comprueba tu conexion e intentalo de nuevo.',
+            );
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            'No se pudo completar la descarga del audio ahora mismo.',
+          ),
+        ),
+      );
+    }
+  }
+
+  Future<void> _showDownloadedAudioOptions(
+    SurahDetail detail,
+    SurahLoadSource source,
+  ) async {
+    final action = await showModalBottomSheet<String>(
+      context: context,
+      builder: (sheetContext) {
+        final tokens = QiblaThemes.current;
+        return SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                leading: const Icon(Icons.play_circle_outline),
+                title: const Text('Reproducir'),
+                subtitle: const Text('Escuchar la sura usando el audio guardado.'),
+                onTap: () => Navigator.of(sheetContext).pop('play'),
+              ),
+              ListTile(
+                leading: Icon(Icons.cloud_off_outlined, color: tokens.textSecondary),
+                title: const Text('Quitar descarga'),
+                subtitle: const Text('Liberar espacio y volver a usar audio online.'),
+                onTap: () => Navigator.of(sheetContext).pop('remove'),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+
+    if (!mounted || action == null) return;
+    if (action == 'play') {
+      await _toggleSurahAudio(detail, source);
+      return;
+    }
+
+    await _stopActiveAudio();
+    await ref
+        .read(quranAudioDownloadServiceProvider)
+        .removeSurahDownload(widget.summary.number);
+    await _refreshDownloadState(detail);
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('La descarga local se ha quitado de esta sura.'),
+      ),
+    );
+  }
+
+  Future<void> _playResolvedAyahAudio(
+    SurahAyah ayah, {
+    required String sourceKey,
+  }) async {
+    final downloadService = ref.read(quranAudioDownloadServiceProvider);
+    final localPath = await downloadService.getDownloadedAyahPath(
+      widget.summary.number,
+      ayah,
+    );
+    if (localPath != null) {
+      try {
+        await _audioService.play(
+          localPath,
+          isLocalFile: true,
+          sourceKey: sourceKey,
+        );
+        return;
+      } catch (_) {
+        // Si el archivo local falla, hacemos fallback directo a la URL remota.
+      }
+    }
+
+    await _audioService.playUrl(
+      ayah.audioUrl,
+      sourceKey: sourceKey,
+    );
+  }
+
   bool _canPlayAyahAudio(SurahAyah ayah, SurahLoadSource source) {
     if (ayah.audioUrl.isEmpty) return false;
     return source != SurahLoadSource.placeholder;
@@ -522,6 +701,9 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     if (!_canPlayAyahAudio(ayah, source)) {
       return 'Audio no disponible para esta aya.';
     }
+    if (_downloadState?.isDownloaded == true) {
+      return 'Audio descargado en este dispositivo.';
+    }
     switch (source) {
       case SurahLoadSource.online:
         return 'Audio disponible para esta aya.';
@@ -541,16 +723,33 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       return 'La recitacion completa no esta disponible para esta sura.';
     }
 
+    final downloadState = _downloadState;
+    if (downloadState?.isDownloading == true) {
+      return 'Descargando audio para escuchar la sura sin conexion. ${downloadState!.downloadedAyahs}/${downloadState.availableAyahs} ayas listas.';
+    }
+    if (downloadState?.isDownloaded == true) {
+      return 'Audio descargado en este dispositivo. Esta sura puede reproducirse sin conexion.';
+    }
+    if (downloadState?.status == SurahAudioDownloadStatus.error) {
+      return downloadState?.errorMessage ??
+          'No se pudo completar la descarga del audio.';
+    }
+
     final missingCount = detail.ayahs.length - availableCount;
     final availabilityNote = missingCount > 0
         ? ' Se omitiran $missingCount aya${missingCount == 1 ? '' : 's'} sin audio.'
         : '';
 
+    final downloadNote =
+        downloadState?.hasPartialDownload == true
+            ? ' Ya hay ${downloadState!.downloadedAyahs}/${downloadState.availableAyahs} ayas guardadas localmente.'
+            : ' Puedes descargarla para escucharla sin conexion.';
+
     switch (source) {
       case SurahLoadSource.online:
-        return 'Puedes escuchar la sura completa en reproduccion continua.$availabilityNote';
+        return 'Puedes escuchar la sura completa en reproduccion continua.$availabilityNote$downloadNote';
       case SurahLoadSource.offline:
-        return 'La sura puede sonar completa si tienes conexion.$availabilityNote';
+        return 'La sura puede sonar completa si tienes conexion.$availabilityNote$downloadNote';
       case SurahLoadSource.placeholder:
         return 'La recitacion completa no esta disponible para esta sura.';
     }
@@ -578,8 +777,8 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
         return;
       }
 
-      await _audioService.playUrl(
-        ayah.audioUrl,
+      await _playResolvedAyahAudio(
+        ayah,
         sourceKey: sourceKey,
       );
       if (!mounted) return;
@@ -611,8 +810,8 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     final ayah = _surahQueue[index];
     final sourceKey = 'quran:surah:${widget.summary.number}:${ayah.numberInSurah}';
 
-    await _audioService.playUrl(
-      ayah.audioUrl,
+    await _playResolvedAyahAudio(
+      ayah,
       sourceKey: sourceKey,
     );
     if (!mounted) return;
@@ -708,6 +907,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       body: detailAsync.when(
         data: (result) {
           final detail = result.detail;
+          _ensureDownloadStateLoaded(detail);
           if (!_initialReadingSaved) {
             _initialReadingSaved = true;
             WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -949,6 +1149,11 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     final canPlaySurah = _canPlaySurahAudio(detail, source);
     final availableAyahs = _surahQueueFor(detail, source).length;
     final isSurahPlayback = _playbackMode == _QuranPlaybackMode.surah;
+    final downloadState = _downloadState;
+    final isDownloading = downloadState?.isDownloading == true;
+    final isDownloaded = downloadState?.isDownloaded == true;
+    final canDownload = availableAyahs > 0;
+    final isCheckingDownloadState = _isCheckingDownloadState && downloadState == null;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
@@ -997,7 +1202,9 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
             ),
           ),
           const SizedBox(height: 10),
-          Row(
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
             children: [
               FilledButton.icon(
                 onPressed: canPlaySurah
@@ -1014,11 +1221,43 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                       : 'Escuchar sura',
                 ),
               ),
-              const SizedBox(width: 8),
               OutlinedButton.icon(
                 onPressed: _activeAyahNumber != null ? _stopActiveAudio : null,
                 icon: const Icon(Icons.stop_circle_outlined),
                 label: const Text('Detener'),
+              ),
+              OutlinedButton.icon(
+                onPressed: !canDownload
+                    ? null
+                    : isCheckingDownloadState
+                        ? null
+                        : isDownloading
+                        ? null
+                        : isDownloaded
+                            ? () => _showDownloadedAudioOptions(detail, source)
+                            : () => _downloadSurahAudio(detail),
+                icon: Icon(
+                  !canDownload
+                      ? Icons.volume_off_outlined
+                      : isCheckingDownloadState
+                          ? Icons.cloud_queue_outlined
+                      : isDownloading
+                          ? Icons.downloading_outlined
+                          : isDownloaded
+                              ? Icons.download_done_outlined
+                              : Icons.download_outlined,
+                ),
+                label: Text(
+                  !canDownload
+                      ? 'Audio no disponible'
+                      : isCheckingDownloadState
+                          ? 'Comprobando audio'
+                      : isDownloading
+                          ? 'Descargando ${downloadState?.downloadedAyahs ?? 0}/${downloadState?.availableAyahs ?? availableAyahs}'
+                          : isDownloaded
+                              ? 'Descargado'
+                              : 'Descargar audio',
+                ),
               ),
             ],
           ),

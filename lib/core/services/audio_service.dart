@@ -47,13 +47,17 @@ class AudioService {
     await _ensurePlayer().play(AssetSource('audio/$fileName'));
   }
 
-  Future<void> play(String fileName, {bool isLocalFile = false}) async {
+  Future<void> play(
+    String fileName, {
+    bool isLocalFile = false,
+    String? sourceKey,
+  }) async {
     await stop();
     if (isLocalFile) {
-      _currentSourceKey = 'file:$fileName';
+      _currentSourceKey = sourceKey ?? 'file:$fileName';
       await _ensurePlayer().play(DeviceFileSource(fileName));
     } else {
-      _currentSourceKey = 'asset:$fileName';
+      _currentSourceKey = sourceKey ?? 'asset:$fileName';
       await _ensurePlayer().play(AssetSource('audio/$fileName'));
     }
   }
