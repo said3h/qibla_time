@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math' as math;
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
@@ -670,6 +669,18 @@ enum _QuranPlaybackMode {
   surah,
 }
 
+class _QueuedAyahAudio {
+  const _QueuedAyahAudio({
+    required this.ayah,
+    required this.pathOrUrl,
+    required this.isLocalFile,
+  });
+
+  final SurahAyah ayah;
+  final String pathOrUrl;
+  final bool isLocalFile;
+}
+
 class QuranDetailScreen extends ConsumerStatefulWidget {
   const QuranDetailScreen({
     super.key,
@@ -696,6 +707,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   bool _isAudioPlaying = false;
   _QuranPlaybackMode _playbackMode = _QuranPlaybackMode.none;
   List<SurahAyah> _surahQueue = const [];
+  final Map<int, _QueuedAyahAudio> _resolvedSurahQueue = {};
   int _surahQueueIndex = -1;
   SurahAudioDownloadState? _downloadState;
   bool _isCheckingDownloadState = true;
@@ -720,9 +732,10 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       if (_playbackMode == _QuranPlaybackMode.surah &&
           _surahQueue.isNotEmpty &&
           _surahQueueIndex + 1 < _surahQueue.length) {
-        await _playSurahQueueIndex(_surahQueueIndex + 1);
+        unawaited(_playSurahQueueIndex(_surahQueueIndex + 1));
         return;
       }
+      _resolvedSurahQueue.clear();
       setState(() {
         _isAudioPlaying = false;
         _activeAyahNumber = null;
@@ -782,26 +795,86 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   Future<void> _jumpToInitialAyah(SurahDetail detail) async {
     if (widget.initialAyah <= 1 || !_scrollController.hasClients) return;
 
-    final targetIndex = detail.ayahs.indexWhere(
-      (ayah) => ayah.numberInSurah == widget.initialAyah,
+    final targetAyah = detail.ayahs.cast<SurahAyah?>().firstWhere(
+      (ayah) => ayah?.numberInSurah == widget.initialAyah,
+      orElse: () => null,
     );
-    if (targetIndex < 0) return;
+    if (targetAyah == null) return;
 
-    final maxExtent = _scrollController.position.maxScrollExtent;
-    final denominator = math.max(detail.ayahs.length - 1, 1);
-    final roughOffset = maxExtent * (targetIndex / denominator);
-    _scrollController.jumpTo(roughOffset.clamp(0.0, maxExtent));
+    final targetContext = _ayahKeyFor(targetAyah.numberInSurah).currentContext;
+    if (targetContext == null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+        unawaited(_jumpToInitialAyah(detail));
+      });
+      return;
+    }
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final targetContext = _ayahKeyFor(widget.initialAyah).currentContext;
-      if (targetContext == null) return;
-      Scrollable.ensureVisible(
-        targetContext,
-        duration: const Duration(milliseconds: 280),
-        curve: Curves.easeOut,
-        alignment: 0.08,
+    await Scrollable.ensureVisible(
+      targetContext,
+      duration: const Duration(milliseconds: 280),
+      curve: Curves.easeOut,
+      alignment: 0.08,
+    );
+  }
+
+  Future<_QueuedAyahAudio?> _resolveAyahAudioSource(SurahAyah ayah) async {
+    if (ayah.audioUrl.isEmpty) return null;
+
+    final downloadService = ref.read(quranAudioDownloadServiceProvider);
+    final localPath = await downloadService.getDownloadedAyahPath(
+      widget.summary.number,
+      ayah,
+    );
+    if (localPath != null) {
+      return _QueuedAyahAudio(
+        ayah: ayah,
+        pathOrUrl: localPath,
+        isLocalFile: true,
       );
-    });
+    }
+
+    return _QueuedAyahAudio(
+      ayah: ayah,
+      pathOrUrl: ayah.audioUrl,
+      isLocalFile: false,
+    );
+  }
+
+  Future<_QueuedAyahAudio?> _primeSurahQueueAudio(int index) async {
+    if (index < 0 || index >= _surahQueue.length) return null;
+
+    final ayah = _surahQueue[index];
+    final cached = _resolvedSurahQueue[ayah.numberInSurah];
+    if (cached != null) return cached;
+
+    final resolved = await _resolveAyahAudioSource(ayah);
+    if (resolved != null) {
+      _resolvedSurahQueue[ayah.numberInSurah] = resolved;
+    }
+    return resolved;
+  }
+
+  Future<void> _playQueuedAyahAudio(
+    _QueuedAyahAudio queuedAyah, {
+    required String sourceKey,
+    bool stopFirst = true,
+  }) async {
+    if (queuedAyah.isLocalFile) {
+      await _audioService.play(
+        queuedAyah.pathOrUrl,
+        isLocalFile: true,
+        sourceKey: sourceKey,
+        stopFirst: stopFirst,
+      );
+      return;
+    }
+
+    await _audioService.playUrl(
+      queuedAyah.pathOrUrl,
+      sourceKey: sourceKey,
+      stopFirst: stopFirst,
+    );
   }
 
   void _ensureDownloadStateLoaded(SurahDetail detail) {
@@ -981,28 +1054,16 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   Future<void> _playResolvedAyahAudio(
     SurahAyah ayah, {
     required String sourceKey,
+    bool stopFirst = true,
   }) async {
-    final downloadService = ref.read(quranAudioDownloadServiceProvider);
-    final localPath = await downloadService.getDownloadedAyahPath(
-      widget.summary.number,
-      ayah,
-    );
-    if (localPath != null) {
-      try {
-        await _audioService.play(
-          localPath,
-          isLocalFile: true,
-          sourceKey: sourceKey,
-        );
-        return;
-      } catch (_) {
-        // Si el archivo local falla, hacemos fallback directo a la URL remota.
-      }
+    final resolved = await _resolveAyahAudioSource(ayah);
+    if (resolved == null) {
+      throw StateError('Audio not available for ayah ${ayah.numberInSurah}');
     }
-
-    await _audioService.playUrl(
-      ayah.audioUrl,
+    await _playQueuedAyahAudio(
+      resolved,
       sourceKey: sourceKey,
+      stopFirst: stopFirst,
     );
   }
 
@@ -1110,6 +1171,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
         sourceKey: sourceKey,
       );
       if (!mounted) return;
+      _resolvedSurahQueue.clear();
       setState(() {
         _playbackMode = _QuranPlaybackMode.ayah;
         _surahQueue = const [];
@@ -1119,6 +1181,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       });
     } catch (_) {
       if (!mounted) return;
+      _resolvedSurahQueue.clear();
       setState(() {
         _activeAyahNumber = null;
         _isAudioPlaying = false;
@@ -1147,9 +1210,14 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       });
     }
 
-    await _playResolvedAyahAudio(
-      ayah,
+    final resolved = await _primeSurahQueueAudio(index);
+    if (resolved == null) return;
+    unawaited(_primeSurahQueueAudio(index + 1));
+
+    await _playQueuedAyahAudio(
+      resolved,
       sourceKey: sourceKey,
+      stopFirst: index == 0,
     );
   }
 
@@ -1174,10 +1242,13 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
         return;
       }
 
+      _resolvedSurahQueue.clear();
       _surahQueue = queue;
+      await _primeSurahQueueAudio(0);
       await _playSurahQueueIndex(0);
     } catch (_) {
       if (!mounted) return;
+      _resolvedSurahQueue.clear();
       setState(() {
         _playbackMode = _QuranPlaybackMode.none;
         _surahQueue = const [];
@@ -1213,6 +1284,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   Future<void> _stopActiveAudio() async {
     await _audioService.stop();
     if (!mounted) return;
+    _resolvedSurahQueue.clear();
     setState(() {
       _playbackMode = _QuranPlaybackMode.none;
       _surahQueue = const [];
@@ -1251,25 +1323,18 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
             });
           }
 
-          return ListView.builder(
+          return ListView(
             controller: _scrollController,
             padding: const EdgeInsets.all(16),
-            itemCount: detail.ayahs.length + 1,
-            itemBuilder: (_, index) {
-              if (index == 0) {
-                return Column(
-                  children: [
-                    _buildTopBanner(tokens, result.source, widget.initialAyah),
-                    _buildSurahAudioCard(tokens, detail, result.source),
-                    if (_activeAyahNumber != null)
-                      _buildActiveAudioIndicator(tokens),
-                  ],
-                );
-              }
-
-              final ayah = detail.ayahs[index - 1];
+            children: [
+              _buildTopBanner(tokens, result.source, widget.initialAyah),
+              _buildSurahAudioCard(tokens, detail, result.source),
+              if (_activeAyahNumber != null)
+                _buildActiveAudioIndicator(tokens),
+              ...detail.ayahs.map((ayah) {
               final canPlayAudio = _canPlayAyahAudio(ayah, result.source);
-              final isLastRead = lastReading?.surahNumber == widget.summary.number &&
+              final isLastRead =
+                  lastReading?.surahNumber == widget.summary.number &&
                   lastReading?.ayahNumber == ayah.numberInSurah;
               final isActiveAudio = _activeAyahNumber == ayah.numberInSurah;
               final isPlayingAudio = isActiveAudio && _isAudioPlaying;
@@ -1410,7 +1475,8 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                   ),
                 ),
               );
-            },
+              }),
+            ],
           );
         },
         loading: () => Center(child: CircularProgressIndicator(color: tokens.primary)),

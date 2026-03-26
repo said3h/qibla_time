@@ -8,11 +8,28 @@ import 'package:audioplayers/audioplayers.dart';
 class AudioService {
   AudioService._();
   static final AudioService instance = AudioService._();
+  static final AudioContext _defaultAudioContext = AudioContext(
+    iOS: AudioContextIOS(
+      category: AVAudioSessionCategory.playback,
+    ),
+  );
 
   AudioPlayer? _player;
   String? _currentSourceKey;
+  bool _isConfigured = false;
 
   AudioPlayer _ensurePlayer() => _player ??= AudioPlayer();
+
+  Future<AudioPlayer> _configuredPlayer() async {
+    final player = _ensurePlayer();
+    if (_isConfigured) return player;
+
+    await player.setPlayerMode(PlayerMode.mediaPlayer);
+    await player.setReleaseMode(ReleaseMode.stop);
+    await player.setAudioContext(_defaultAudioContext);
+    _isConfigured = true;
+    return player;
+  }
 
   String? get currentSourceKey => _currentSourceKey;
 
@@ -44,28 +61,56 @@ class AudioService {
   Future<void> playAdhan(String fileName) async {
     await stop();
     _currentSourceKey = 'asset:$fileName';
-    await _ensurePlayer().play(AssetSource('audio/$fileName'));
+    final player = await _configuredPlayer();
+    await player.play(
+      AssetSource('audio/$fileName'),
+      mode: PlayerMode.mediaPlayer,
+      ctx: _defaultAudioContext,
+    );
   }
 
   Future<void> play(
     String fileName, {
     bool isLocalFile = false,
     String? sourceKey,
+    bool stopFirst = true,
   }) async {
-    await stop();
+    final player = await _configuredPlayer();
+    if (stopFirst) {
+      await stop();
+    }
     if (isLocalFile) {
       _currentSourceKey = sourceKey ?? 'file:$fileName';
-      await _ensurePlayer().play(DeviceFileSource(fileName));
+      await player.play(
+        DeviceFileSource(fileName),
+        mode: PlayerMode.mediaPlayer,
+        ctx: _defaultAudioContext,
+      );
     } else {
       _currentSourceKey = sourceKey ?? 'asset:$fileName';
-      await _ensurePlayer().play(AssetSource('audio/$fileName'));
+      await player.play(
+        AssetSource('audio/$fileName'),
+        mode: PlayerMode.mediaPlayer,
+        ctx: _defaultAudioContext,
+      );
     }
   }
 
-  Future<void> playUrl(String url, {String? sourceKey}) async {
-    await stop();
+  Future<void> playUrl(
+    String url, {
+    String? sourceKey,
+    bool stopFirst = true,
+  }) async {
+    final player = await _configuredPlayer();
+    if (stopFirst) {
+      await stop();
+    }
     _currentSourceKey = sourceKey ?? 'url:$url';
-    await _ensurePlayer().play(UrlSource(url));
+    await player.play(
+      UrlSource(url),
+      mode: PlayerMode.mediaPlayer,
+      ctx: _defaultAudioContext,
+    );
   }
 
   Future<void> stop() async {
@@ -102,6 +147,7 @@ class AudioService {
     final player = _player;
     _player = null;
     _currentSourceKey = null;
+    _isConfigured = false;
     await player?.dispose();
   }
 }
