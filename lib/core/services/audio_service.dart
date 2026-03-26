@@ -76,24 +76,33 @@ class AudioService {
     bool stopFirst = true,
   }) async {
     final player = await _configuredPlayer();
+    _currentSourceKey =
+        sourceKey ?? (isLocalFile ? 'file:$fileName' : 'asset:$fileName');
     if (stopFirst) {
       await stop();
+      _currentSourceKey =
+          sourceKey ?? (isLocalFile ? 'file:$fileName' : 'asset:$fileName');
+      if (isLocalFile) {
+        await player.play(
+          DeviceFileSource(fileName),
+          mode: PlayerMode.mediaPlayer,
+          ctx: _defaultAudioContext,
+        );
+      } else {
+        await player.play(
+          AssetSource('audio/$fileName'),
+          mode: PlayerMode.mediaPlayer,
+          ctx: _defaultAudioContext,
+        );
+      }
+      return;
     }
     if (isLocalFile) {
-      _currentSourceKey = sourceKey ?? 'file:$fileName';
-      await player.play(
-        DeviceFileSource(fileName),
-        mode: PlayerMode.mediaPlayer,
-        ctx: _defaultAudioContext,
-      );
+      await player.setSourceDeviceFile(fileName);
     } else {
-      _currentSourceKey = sourceKey ?? 'asset:$fileName';
-      await player.play(
-        AssetSource('audio/$fileName'),
-        mode: PlayerMode.mediaPlayer,
-        ctx: _defaultAudioContext,
-      );
+      await player.setSource(AssetSource('audio/$fileName'));
     }
+    await player.resume();
   }
 
   Future<void> playUrl(
@@ -102,15 +111,19 @@ class AudioService {
     bool stopFirst = true,
   }) async {
     final player = await _configuredPlayer();
+    _currentSourceKey = sourceKey ?? 'url:$url';
     if (stopFirst) {
       await stop();
+      _currentSourceKey = sourceKey ?? 'url:$url';
+      await player.play(
+        UrlSource(url),
+        mode: PlayerMode.mediaPlayer,
+        ctx: _defaultAudioContext,
+      );
+      return;
     }
-    _currentSourceKey = sourceKey ?? 'url:$url';
-    await player.play(
-      UrlSource(url),
-      mode: PlayerMode.mediaPlayer,
-      ctx: _defaultAudioContext,
-    );
+    await player.setSourceUrl(url);
+    await player.resume();
   }
 
   Future<void> stop() async {

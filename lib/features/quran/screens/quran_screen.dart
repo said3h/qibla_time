@@ -4,6 +4,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../../../core/services/audio_service.dart';
 import '../../../core/theme/app_theme.dart';
@@ -696,9 +697,8 @@ class QuranDetailScreen extends ConsumerStatefulWidget {
 }
 
 class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
-  final ScrollController _scrollController = ScrollController();
+  final ItemScrollController _itemScrollController = ItemScrollController();
   final AudioService _audioService = AudioService.instance;
-  final Map<int, GlobalKey> _ayahKeys = {};
   StreamSubscription<PlayerState>? _playerStateSubscription;
   StreamSubscription<void>? _playerCompleteSubscription;
   bool _initialJumpDone = false;
@@ -751,7 +751,6 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     _playerStateSubscription?.cancel();
     _playerCompleteSubscription?.cancel();
     _audioService.stop();
-    _scrollController.dispose();
     super.dispose();
   }
 
@@ -785,24 +784,15 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     );
   }
 
-  GlobalKey _ayahKeyFor(int ayahNumber) {
-    return _ayahKeys.putIfAbsent(
-      ayahNumber,
-      () => GlobalKey(debugLabel: 'ayah-$ayahNumber'),
-    );
-  }
-
   Future<void> _jumpToInitialAyah(SurahDetail detail) async {
-    if (widget.initialAyah <= 1 || !_scrollController.hasClients) return;
+    if (widget.initialAyah <= 1) return;
 
-    final targetAyah = detail.ayahs.cast<SurahAyah?>().firstWhere(
-      (ayah) => ayah?.numberInSurah == widget.initialAyah,
-      orElse: () => null,
+    final targetIndex = detail.ayahs.indexWhere(
+      (ayah) => ayah.numberInSurah == widget.initialAyah,
     );
-    if (targetAyah == null) return;
+    if (targetIndex < 0) return;
 
-    final targetContext = _ayahKeyFor(targetAyah.numberInSurah).currentContext;
-    if (targetContext == null) {
+    if (!_itemScrollController.isAttached) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (!mounted) return;
         unawaited(_jumpToInitialAyah(detail));
@@ -810,8 +800,8 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       return;
     }
 
-    await Scrollable.ensureVisible(
-      targetContext,
+    await _itemScrollController.scrollTo(
+      index: targetIndex + 1,
       duration: const Duration(milliseconds: 280),
       curve: Curves.easeOut,
       alignment: 0.08,
@@ -1323,15 +1313,23 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
             });
           }
 
-          return ListView(
-            controller: _scrollController,
+          return ScrollablePositionedList.builder(
+            itemScrollController: _itemScrollController,
             padding: const EdgeInsets.all(16),
-            children: [
-              _buildTopBanner(tokens, result.source, widget.initialAyah),
-              _buildSurahAudioCard(tokens, detail, result.source),
-              if (_activeAyahNumber != null)
-                _buildActiveAudioIndicator(tokens),
-              ...detail.ayahs.map((ayah) {
+            itemCount: detail.ayahs.length + 1,
+            itemBuilder: (_, index) {
+              if (index == 0) {
+                return Column(
+                  children: [
+                    _buildTopBanner(tokens, result.source, widget.initialAyah),
+                    _buildSurahAudioCard(tokens, detail, result.source),
+                    if (_activeAyahNumber != null)
+                      _buildActiveAudioIndicator(tokens),
+                  ],
+                );
+              }
+
+              final ayah = detail.ayahs[index - 1];
               final canPlayAudio = _canPlayAyahAudio(ayah, result.source);
               final isLastRead =
                   lastReading?.surahNumber == widget.summary.number &&
@@ -1348,7 +1346,6 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                 onTap: () => _saveReading(ayah.numberInSurah),
                 borderRadius: BorderRadius.circular(16),
                 child: Container(
-                  key: _ayahKeyFor(ayah.numberInSurah),
                   margin: const EdgeInsets.only(bottom: 10),
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
@@ -1475,8 +1472,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                   ),
                 ),
               );
-              }),
-            ],
+            },
           );
         },
         loading: () => Center(child: CircularProgressIndicator(color: tokens.primary)),
