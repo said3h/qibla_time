@@ -67,8 +67,8 @@ class _MainNavigationState extends State<MainNavigation> {
                 label: 'Qibla',
               ),
               NavigationDestination(
-                icon: Icon(Icons.auto_awesome_outlined),
-                selectedIcon: Icon(Icons.auto_awesome),
+                icon: Icon(Icons.scatter_plot_outlined),
+                selectedIcon: Icon(Icons.scatter_plot),
                 label: 'Tasbih',
               ),
               NavigationDestination(

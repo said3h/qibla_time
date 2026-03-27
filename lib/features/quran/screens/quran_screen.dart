@@ -9,6 +9,7 @@ import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import '../../../core/services/audio_service.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../hafiz/screens/hafiz_mode_screen.dart';
+import '../../quran_share/services/ayah_share_service.dart';
 import '../models/quran_models.dart';
 import 'allah_names_screen.dart';
 import '../services/quran_audio_download_service.dart';
@@ -670,6 +671,11 @@ enum _QuranPlaybackMode {
   surah,
 }
 
+enum _AyahShareAction {
+  text,
+  image,
+}
+
 class _QueuedAyahAudio {
   const _QueuedAyahAudio({
     required this.ayah,
@@ -782,6 +788,82 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> _showAyahShareOptions(SurahAyah ayah) async {
+    final action = await showModalBottomSheet<_AyahShareAction>(
+      context: context,
+      builder: (sheetContext) {
+        final tokens = QiblaThemes.current;
+        return SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 18, 20, 8),
+                child: Text(
+                  'Compartir aya ${ayah.numberInSurah}',
+                  style: GoogleFonts.dmSans(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                    color: tokens.textPrimary,
+                  ),
+                ),
+              ),
+              ListTile(
+                leading: const Icon(Icons.short_text_outlined),
+                title: const Text('Compartir texto'),
+                subtitle: Text(
+                  'Compartir el arabe, la traduccion y la referencia.',
+                  style: GoogleFonts.dmSans(fontSize: 12),
+                ),
+                onTap: () => Navigator.of(sheetContext).pop(_AyahShareAction.text),
+              ),
+              ListTile(
+                leading: const Icon(Icons.image_outlined),
+                title: const Text('Compartir imagen'),
+                subtitle: Text(
+                  'Generar una card PNG con la aya.',
+                  style: GoogleFonts.dmSans(fontSize: 12),
+                ),
+                onTap: () =>
+                    Navigator.of(sheetContext).pop(_AyahShareAction.image),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+
+    if (!mounted || action == null) return;
+
+    switch (action) {
+      case _AyahShareAction.text:
+        await ref.read(ayahShareServiceProvider).shareAyahAsText(
+              widget.summary,
+              ayah,
+            );
+        return;
+      case _AyahShareAction.image:
+        try {
+          await ref.read(ayahShareServiceProvider).shareAyahAsImage(
+                widget.summary,
+                ayah,
+                QiblaThemes.current,
+              );
+        } catch (_) {
+          if (!mounted) return;
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text(
+                'No se pudo generar la imagen de esta aya ahora mismo.',
+              ),
+            ),
+          );
+        }
+        return;
+    }
   }
 
   Future<void> _jumpToInitialAyah(SurahDetail detail) async {
@@ -1372,6 +1454,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
 
               return InkWell(
                 onTap: () => _saveReading(ayah.numberInSurah),
+                onLongPress: () => _showAyahShareOptions(ayah),
                 borderRadius: BorderRadius.circular(16),
                 child: Container(
                   margin: const EdgeInsets.only(bottom: 10),
@@ -1490,7 +1573,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                       ),
                       const SizedBox(height: 10),
                       Text(
-                        '${_audioStatusLabel(ayah, result.source)} Toca esta aya para guardar aqui tu punto de lectura.',
+                        '${_audioStatusLabel(ayah, result.source)} Toca esta aya para guardar aqui tu punto de lectura. Manten pulsado para compartirla.',
                         style: GoogleFonts.dmSans(
                           fontSize: 10,
                           color: tokens.textMuted,

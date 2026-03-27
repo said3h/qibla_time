@@ -167,6 +167,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   locationDiagnosticAsync.valueOrNull,
                 ),
               ),
+              _buildHadithSection(
+                tokens,
+                hadithsAsync.valueOrNull,
+                favoritesAsync.valueOrNull ?? const <int>{},
+              ),
               _buildRamadanCard(
                 tokens,
                 prayerScheduleAsync.valueOrNull?.schedule,
@@ -182,11 +187,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 dhikrSnapshotAsync.valueOrNull,
               ),
               _buildQuickActions(tokens),
-              _buildHadithSection(
-                tokens,
-                hadithsAsync.valueOrNull,
-                favoritesAsync.valueOrNull ?? const <int>{},
-              ),
               _buildDailyProgressCard(
                 tokens,
                 prayerScheduleAsync.valueOrNull,
@@ -1951,8 +1951,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       (Icons.explore_outlined, 'Qibla', const QiblaScreen()),
       (Icons.menu_book_outlined, 'Coran', const QuranScreen()),
       (Icons.calendar_month_outlined, 'Calendario', const CalendarScreen()),
-      (Icons.auto_awesome_outlined, 'Tasbih', const DhikrScreen()),
-      (Icons.self_improvement_outlined, 'Focus', const FocusModeScreen()),
+      (Icons.scatter_plot_outlined, 'Tasbih', const DhikrScreen()),
+      (Icons.self_improvement_outlined, 'Rak\'ah', const FocusModeScreen()),
       (Icons.insights_outlined, 'Stats', const AnalyticsScreen()),
       (Icons.volunteer_activism_outlined, 'Dua', const DuasScreen()),
     ];

@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../models/hadith_share_data.dart';
-import '../models/hadith_share_theme.dart';
+import '../models/ayah_share_data.dart';
+import '../models/ayah_share_theme.dart';
 
-class HadithShareCard extends StatelessWidget {
-  const HadithShareCard({
+class AyahShareCard extends StatelessWidget {
+  const AyahShareCard({
     super.key,
     required this.data,
     required this.theme,
   });
 
-  final HadithShareData data;
-  final HadithShareThemeData theme;
+  final AyahShareData data;
+  final AyahShareThemeData theme;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class HadithShareCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(999),
               ),
               child: Text(
-                'HADITH',
+                'QURAN',
                 style: GoogleFonts.dmSans(
                   fontSize: 20,
                   fontWeight: FontWeight.w700,
@@ -60,9 +60,9 @@ class HadithShareCard extends StatelessWidget {
                 child: Directionality(
                   textDirection: TextDirection.rtl,
                   child: Text(
-                    data.arabicText!.trim(),
+                    data.arabicText.trim(),
                     textAlign: TextAlign.right,
-                    maxLines: 8,
+                    maxLines: 10,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontFamily: resolvedTheme.arabicFontFamily,
@@ -75,24 +75,25 @@ class HadithShareCard extends StatelessWidget {
                 ),
               ),
               SizedBox(height: resolvedTheme.sectionSpacing),
-            ] else
-              SizedBox(height: resolvedTheme.sectionSpacing * 0.7),
-            SizedBox(
-              width: double.infinity,
-              child: Text(
-                data.translation.trim(),
-                textAlign: TextAlign.left,
-                maxLines: data.hasArabicText ? 13 : 16,
-                overflow: TextOverflow.ellipsis,
-                style: GoogleFonts.dmSans(
-                  fontSize: resolvedTheme.translationFontSize,
-                  height: resolvedTheme.translationLineHeight,
-                  fontWeight: FontWeight.w500,
-                  color: resolvedTheme.primaryTextColor,
+            ],
+            if (data.hasTranslation) ...[
+              SizedBox(
+                width: double.infinity,
+                child: Text(
+                  data.translation!.trim(),
+                  textAlign: TextAlign.left,
+                  maxLines: data.hasArabicText ? 12 : 16,
+                  overflow: TextOverflow.ellipsis,
+                  style: GoogleFonts.dmSans(
+                    fontSize: resolvedTheme.translationFontSize,
+                    height: resolvedTheme.translationLineHeight,
+                    fontWeight: FontWeight.w500,
+                    color: resolvedTheme.primaryTextColor,
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: resolvedTheme.sectionSpacing),
+              SizedBox(height: resolvedTheme.sectionSpacing),
+            ],
             Container(
               width: double.infinity,
               height: 1,
@@ -102,7 +103,7 @@ class HadithShareCard extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: Text(
-                data.reference.trim(),
+                data.referenceLabel,
                 textAlign: TextAlign.left,
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../models/hadith_share_data.dart';
-import '../models/hadith_share_theme.dart';
-import 'hadith_share_card.dart';
+import '../models/ayah_share_data.dart';
+import '../models/ayah_share_theme.dart';
+import 'ayah_share_card.dart';
 
-class HadithSharePreview extends StatelessWidget {
-  const HadithSharePreview({
+class AyahSharePreview extends StatelessWidget {
+  const AyahSharePreview({
     super.key,
     required this.data,
     required this.theme,
@@ -13,20 +13,21 @@ class HadithSharePreview extends StatelessWidget {
   });
 
   static const EdgeInsets _cardOnlyPadding = EdgeInsets.fromLTRB(
-    64,
-    64,
-    64,
-    84,
+    60,
+    60,
+    60,
+    80,
   );
 
-  final HadithShareData data;
-  final HadithShareThemeData theme;
+  final AyahShareData data;
+  final AyahShareThemeData theme;
   final bool cardOnly;
 
   @override
   Widget build(BuildContext context) {
     final maxCardWidth = theme.canvasSize.width - theme.canvasPadding.horizontal;
-    final maxCardHeight = theme.canvasSize.height - theme.canvasPadding.vertical;
+    final maxCardHeight =
+        theme.canvasSize.height - theme.canvasPadding.vertical;
     final targetCardWidth = theme.canvasSize.width * theme.cardWidthFactor;
     final cardWidth =
         targetCardWidth < maxCardWidth ? targetCardWidth : maxCardWidth;
@@ -34,7 +35,7 @@ class HadithSharePreview extends StatelessWidget {
       width: cardWidth,
       child: ConstrainedBox(
         constraints: BoxConstraints(maxHeight: maxCardHeight),
-        child: HadithShareCard(
+        child: AyahShareCard(
           data: data,
           theme: theme,
         ),

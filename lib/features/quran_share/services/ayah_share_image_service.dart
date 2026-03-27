@@ -7,23 +7,23 @@ import 'package:flutter/rendering.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../../../core/theme/app_theme.dart';
-import '../models/hadith_share_data.dart';
-import '../models/hadith_share_theme.dart';
-import '../widgets/hadith_share_preview.dart';
+import '../models/ayah_share_data.dart';
+import '../models/ayah_share_theme.dart';
+import '../widgets/ayah_share_preview.dart';
 
-enum HadithShareExportMode {
+enum AyahShareExportMode {
   storyCanvas,
   cardOnly,
 }
 
-class HadithShareImageService {
+class AyahShareImageService {
   static const int _alphaCropThreshold = 8;
 
   static Future<Uint8List> capturePng({
-    required HadithShareData data,
-    HadithShareThemeData? theme,
+    required AyahShareData data,
+    AyahShareThemeData? theme,
     bool transparentBackground = true,
-    HadithShareExportMode mode = HadithShareExportMode.storyCanvas,
+    AyahShareExportMode mode = AyahShareExportMode.storyCanvas,
     double pixelRatio = 1.0,
   }) async {
     if (pixelRatio <= 0) {
@@ -37,7 +37,7 @@ class HadithShareImageService {
     WidgetsFlutterBinding.ensureInitialized();
 
     final baseTheme = theme ??
-        HadithShareThemeData.fromTokens(
+        AyahShareThemeData.fromTokens(
           QiblaThemes.current,
           transparentBackground: transparentBackground,
         );
@@ -76,10 +76,10 @@ class HadithShareImageService {
         ),
         child: Material(
           type: MaterialType.transparency,
-          child: HadithSharePreview(
+          child: AyahSharePreview(
             data: data,
             theme: captureTheme,
-            cardOnly: mode == HadithShareExportMode.cardOnly,
+            cardOnly: mode == AyahShareExportMode.cardOnly,
           ),
         ),
       ),
@@ -113,10 +113,10 @@ class HadithShareImageService {
   }
 
   static Future<File> savePng({
-    required HadithShareData data,
-    HadithShareThemeData? theme,
+    required AyahShareData data,
+    AyahShareThemeData? theme,
     bool transparentBackground = true,
-    HadithShareExportMode mode = HadithShareExportMode.storyCanvas,
+    AyahShareExportMode mode = AyahShareExportMode.storyCanvas,
     String? fileName,
     Directory? directory,
   }) async {
@@ -128,10 +128,10 @@ class HadithShareImageService {
     );
     final targetDirectory = directory ?? await getTemporaryDirectory();
     await targetDirectory.create(recursive: true);
-    final sanitizedName = (fileName ?? 'hadith_share_card')
+    final sanitizedName = (fileName ?? 'ayah_share_card')
         .replaceAll(RegExp(r'[^a-zA-Z0-9_-]'), '_');
     final resolvedFileName =
-        sanitizedName.trim().isEmpty ? 'hadith_share_card' : sanitizedName;
+        sanitizedName.trim().isEmpty ? 'ayah_share_card' : sanitizedName;
     final file = File('${targetDirectory.path}/$resolvedFileName.png');
     await file.writeAsBytes(bytes, flush: true);
     return file;
@@ -146,15 +146,15 @@ class HadithShareImageService {
       return dispatcher.views.first;
     }
     throw StateError(
-      'Could not access a FlutterView for off-screen hadith rendering.',
+      'Could not access a FlutterView for off-screen ayah rendering.',
     );
   }
 
   static Future<Uint8List> _encodePngForMode(
     ui.Image image,
-    HadithShareExportMode mode,
+    AyahShareExportMode mode,
   ) async {
-    if (mode != HadithShareExportMode.cardOnly) {
+    if (mode != AyahShareExportMode.cardOnly) {
       return _pngBytes(image);
     }
 
@@ -179,7 +179,7 @@ class HadithShareImageService {
   static Future<Uint8List> _pngBytes(ui.Image image) async {
     final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
     if (byteData == null) {
-      throw StateError('Could not generate the hadith share image.');
+      throw StateError('Could not generate the ayah share image.');
     }
     return byteData.buffer.asUint8List();
   }
