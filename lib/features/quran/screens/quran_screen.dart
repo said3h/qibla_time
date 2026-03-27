@@ -1,10 +1,13 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:cross_file/cross_file.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
+import 'package:path_provider/path_provider.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -729,6 +732,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   _QuranPlaybackMode _playbackMode = _QuranPlaybackMode.none;
   List<SurahAyah> _surahQueue = const [];
   final Map<int, _QueuedAyahAudio> _resolvedSurahQueue = {};
+  final Map<int, Future<void>> _prefetchingAyahTasks = {};
   int _surahQueueIndex = -1;
   SurahAudioDownloadState? _downloadState;
   bool _isCheckingDownloadState = true;
@@ -748,7 +752,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
         setState(() => _isAudioPlaying = false);
       }
     });
-    _playerCompleteSubscription = _audioService.onPlayerComplete.listen((_) async {
+    _playerCompleteSubscription = _audioService.onPlayerComplete.listen((_) {
       if (!mounted) return;
       if (_playbackMode == _QuranPlaybackMode.surah &&
           _surahQueue.isNotEmpty &&
@@ -757,6 +761,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
         return;
       }
       _resolvedSurahQueue.clear();
+      _prefetchingAyahTasks.clear();
       setState(() {
         _isAudioPlaying = false;
         _activeAyahNumber = null;
@@ -771,6 +776,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   void dispose() {
     _playerStateSubscription?.cancel();
     _playerCompleteSubscription?.cancel();
+    _prefetchingAyahTasks.clear();
     _audioService.stop();
     super.dispose();
   }
@@ -1028,13 +1034,83 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     }
 
     await _primeSurahQueueAudio(0);
-    unawaited(_primeRemainingSurahQueue(startIndex: 1));
+    unawaited(_prefetchUpcomingAyahsForPlayback(0));
   }
 
-  Future<void> _primeRemainingSurahQueue({int startIndex = 0}) async {
-    for (var index = startIndex; index < _surahQueue.length; index++) {
-      await _primeSurahQueueAudio(index);
+  Future<void> _prefetchUpcomingAyahsForPlayback(int currentIndex) async {
+    final lastIndexToPrefetch = currentIndex + 2;
+    for (var index = currentIndex + 1;
+        index < _surahQueue.length && index <= lastIndexToPrefetch;
+        index++) {
+      await _prefetchAyahForGaplessPlayback(index);
     }
+  }
+
+  Future<void> _prefetchAyahForGaplessPlayback(int index) async {
+    if (index < 0 || index >= _surahQueue.length) return;
+
+    final ayah = _surahQueue[index];
+    final cached = _resolvedSurahQueue[ayah.numberInSurah];
+    if (cached != null && cached.isLocalFile) {
+      return;
+    }
+    final existingTask = _prefetchingAyahTasks[ayah.numberInSurah];
+    if (existingTask != null) {
+      await existingTask;
+      return;
+    }
+
+    final task = () async {
+      try {
+        final resolved = await _primeSurahQueueAudio(index);
+        if (resolved == null || resolved.isLocalFile) {
+          return;
+        }
+
+        final uri = Uri.tryParse(resolved.pathOrUrl);
+        if (uri == null || !uri.hasScheme) {
+          return;
+        }
+
+        final prefetchedFile = await _prefetchedAyahFile(ayah);
+        if (!await prefetchedFile.exists()) {
+          final response = await http.get(uri);
+          if (response.statusCode < 200 ||
+              response.statusCode >= 300 ||
+              response.bodyBytes.isEmpty) {
+            return;
+          }
+
+          await prefetchedFile.parent.create(recursive: true);
+          await prefetchedFile.writeAsBytes(response.bodyBytes, flush: true);
+        }
+
+        _resolvedSurahQueue[ayah.numberInSurah] = _QueuedAyahAudio(
+          ayah: ayah,
+          pathOrUrl: prefetchedFile.path,
+          isLocalFile: true,
+        );
+      } catch (_) {
+        // Fall back to the original URL if prefetch fails.
+      }
+    }();
+
+    _prefetchingAyahTasks[ayah.numberInSurah] = task;
+    try {
+      await task;
+    } finally {
+      _prefetchingAyahTasks.remove(ayah.numberInSurah);
+    }
+  }
+
+  Future<File> _prefetchedAyahFile(SurahAyah ayah) async {
+    final tempDirectory = await getTemporaryDirectory();
+    final prefetchDirectory = Directory(
+      '${tempDirectory.path}${Platform.pathSeparator}quran_audio_prefetch${Platform.pathSeparator}surah_${widget.summary.number.toString().padLeft(3, '0')}',
+    );
+    return File(
+      '${prefetchDirectory.path}${Platform.pathSeparator}ayah_${ayah.numberInSurah.toString().padLeft(3, '0')}.mp3',
+    );
   }
 
   Future<void> _playQueuedAyahAudio(
@@ -1354,6 +1430,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       );
       if (!mounted) return;
       _resolvedSurahQueue.clear();
+      _prefetchingAyahTasks.clear();
       setState(() {
         _playbackMode = _QuranPlaybackMode.ayah;
         _surahQueue = const [];
@@ -1364,6 +1441,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     } catch (_) {
       if (!mounted) return;
       _resolvedSurahQueue.clear();
+      _prefetchingAyahTasks.clear();
       setState(() {
         _activeAyahNumber = null;
         _isAudioPlaying = false;
@@ -1392,6 +1470,15 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       });
     }
 
+    final prefetchTask = _prefetchingAyahTasks[ayah.numberInSurah];
+    if (prefetchTask != null) {
+      try {
+        await prefetchTask.timeout(const Duration(milliseconds: 180));
+      } catch (_) {
+        // Fall back to the currently resolved source if prefetch is still running.
+      }
+    }
+
     final resolved = await _primeSurahQueueAudio(index);
     if (resolved == null) return;
 
@@ -1400,6 +1487,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       sourceKey: sourceKey,
       stopFirst: index == 0,
     );
+    unawaited(_prefetchUpcomingAyahsForPlayback(index));
   }
 
   Future<void> _toggleSurahAudio(
@@ -1424,12 +1512,14 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       }
 
       _resolvedSurahQueue.clear();
+      _prefetchingAyahTasks.clear();
       _surahQueue = queue;
       await _primeSurahQueueForPlayback();
       await _playSurahQueueIndex(0);
     } catch (_) {
       if (!mounted) return;
       _resolvedSurahQueue.clear();
+      _prefetchingAyahTasks.clear();
       setState(() {
         _playbackMode = _QuranPlaybackMode.none;
         _surahQueue = const [];
@@ -1466,6 +1556,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     await _audioService.stop();
     if (!mounted) return;
     _resolvedSurahQueue.clear();
+    _prefetchingAyahTasks.clear();
     setState(() {
       _playbackMode = _QuranPlaybackMode.none;
       _surahQueue = const [];
