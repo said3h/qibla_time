@@ -845,6 +845,35 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     return resolved;
   }
 
+  Future<void> _primeSurahQueueForPlayback() async {
+    if (_surahQueue.isEmpty) return;
+
+    if (_downloadState?.isDownloaded == true) {
+      final paths = await ref
+          .read(quranAudioDownloadServiceProvider)
+          .getKnownDownloadedAyahPaths(widget.summary.number, _surahQueue);
+      for (final ayah in _surahQueue) {
+        final localPath = paths[ayah.numberInSurah];
+        if (localPath == null) continue;
+        _resolvedSurahQueue[ayah.numberInSurah] = _QueuedAyahAudio(
+          ayah: ayah,
+          pathOrUrl: localPath,
+          isLocalFile: true,
+        );
+      }
+      return;
+    }
+
+    await _primeSurahQueueAudio(0);
+    unawaited(_primeRemainingSurahQueue(startIndex: 1));
+  }
+
+  Future<void> _primeRemainingSurahQueue({int startIndex = 0}) async {
+    for (var index = startIndex; index < _surahQueue.length; index++) {
+      await _primeSurahQueueAudio(index);
+    }
+  }
+
   Future<void> _playQueuedAyahAudio(
     _QueuedAyahAudio queuedAyah, {
     required String sourceKey,
@@ -1202,7 +1231,6 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
 
     final resolved = await _primeSurahQueueAudio(index);
     if (resolved == null) return;
-    unawaited(_primeSurahQueueAudio(index + 1));
 
     await _playQueuedAyahAudio(
       resolved,
@@ -1234,7 +1262,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
 
       _resolvedSurahQueue.clear();
       _surahQueue = queue;
-      await _primeSurahQueueAudio(0);
+      await _primeSurahQueueForPlayback();
       await _playSurahQueueIndex(0);
     } catch (_) {
       if (!mounted) return;

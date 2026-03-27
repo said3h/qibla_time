@@ -44,11 +44,22 @@ class PrayerTimesRepositoryImpl implements PrayerTimesRepository {
 
   @override
   Future<ResolvedPrayerSchedule?> getCurrentSchedule() async {
+    return _getScheduleFor(DateTime.now(), syncWidget: true);
+  }
+
+  @override
+  Future<ResolvedPrayerSchedule?> getScheduleForDate(DateTime date) async {
+    return _getScheduleFor(date, syncWidget: false);
+  }
+
+  Future<ResolvedPrayerSchedule?> _getScheduleFor(
+    DateTime reference, {
+    required bool syncWidget,
+  }) async {
     final location = await _locationDataSource.getCurrentLocation();
     if (location == null) {
       return null;
     }
-    final reference = DateTime.now();
     await _locationDataSource.persistLastKnownLocation(location);
 
     final settings = await _settingsDataSource.getSettings();
@@ -60,7 +71,9 @@ class PrayerTimesRepositoryImpl implements PrayerTimesRepository {
     );
 
     if (source == PrayerScheduleSource.cache && cachedSchedule != null) {
-      await _widgetDataSource.sync(cachedSchedule.schedule);
+      if (syncWidget) {
+        await _widgetDataSource.sync(cachedSchedule.schedule);
+      }
       return ResolvedPrayerSchedule(
         location: location,
         settings: settings,
@@ -75,7 +88,9 @@ class PrayerTimesRepositoryImpl implements PrayerTimesRepository {
       now: reference,
     );
     await _cacheDataSource.save(location: location, schedule: calculated);
-    await _widgetDataSource.sync(calculated);
+    if (syncWidget) {
+      await _widgetDataSource.sync(calculated);
+    }
     return ResolvedPrayerSchedule(
       location: location,
       settings: settings,

@@ -122,6 +122,14 @@ final prayerScheduleProvider = FutureProvider<ResolvedPrayerSchedule?>((ref) asy
   return ref.watch(getPrayerScheduleUseCaseProvider).call();
 });
 
+final prayerScheduleForDateProvider =
+    FutureProvider.family<ResolvedPrayerSchedule?, DateTime>((ref, date) async {
+      final normalizedDate = DateTime(date.year, date.month, date.day);
+      return ref
+          .watch(prayerTimesRepositoryProvider)
+          .getScheduleForDate(normalizedDate);
+    });
+
 final nextPrayerInfoProvider = Provider<NextPrayerInfo?>((ref) {
   final resolvedSchedule = ref.watch(prayerScheduleProvider).valueOrNull;
   if (resolvedSchedule == null) {

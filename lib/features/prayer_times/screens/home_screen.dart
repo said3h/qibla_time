@@ -10,6 +10,7 @@ import '../../calendar/screens/calendar_screen.dart';
 import '../../dhikr/screens/dhikr_screen.dart';
 import '../../dhikr/services/dhikr_service.dart';
 import '../../focus/screens/focus_mode_screen.dart';
+import '../../hadith/models/hadith.dart';
 import '../../hadith/screens/hadith_library_screen.dart';
 import '../../hadith/services/hadith_service.dart';
 import '../../hadith/services/hadith_share_service.dart';
@@ -48,11 +49,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   bool _hadithExpanded = false;
   int _hadithOffset = 0;
+  late DateTime _selectedDate;
   late final ScrollController _calendarController;
 
   @override
   void initState() {
     super.initState();
+    _selectedDate = _dateOnly(DateTime.now());
     _calendarController = ScrollController(initialScrollOffset: 6 * 62.0);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(adhanManagerProvider).scheduleTodayAdhans();
@@ -68,7 +71,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
+    final today = _dateOnly(DateTime.now());
+    final isSelectedToday = _isSameDay(_selectedDate, today);
     final prayerScheduleAsync = ref.watch(prayerScheduleProvider);
+    final selectedPrayerScheduleAsync = isSelectedToday
+        ? prayerScheduleAsync
+        : ref.watch(prayerScheduleForDateProvider(_selectedDate));
     final nextPrayerInfo = ref.watch(nextPrayerInfoProvider);
     final countdownAsync = ref.watch(prayerCountdownProvider);
     final bannerAsync = ref.watch(travelBannerProvider);
@@ -88,7 +96,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final streak = tracking.currentStreak;
     final now = DateTime.now();
     final completedPrayers = tracking.completedPrayersFor(now);
+    final selectedCompletedPrayers = tracking.completedPrayersFor(_selectedDate);
     final weeklySummary = tracking.currentWeekSummary;
+    final selectedNextPrayerInfo = isSelectedToday ? nextPrayerInfo : null;
+    final selectedCountdown = isSelectedToday ? countdownAsync.value : null;
     final homeInsights = _generateHomeInsights(
       tracking: tracking,
       weeklySummary: weeklySummary,
@@ -102,7 +113,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       backgroundColor: tokens.bgPage,
       body: SafeArea(
         child: RefreshIndicator(
-          onRefresh: () async => ref.refresh(prayerScheduleProvider),
+          onRefresh: () async {
+            ref.invalidate(prayerScheduleProvider);
+            ref.invalidate(nextPrayerInfoProvider);
+            ref.invalidate(prayerCountdownProvider);
+            ref.invalidate(prayerScheduleForDateProvider(_selectedDate));
+          },
           color: tokens.primary,
           backgroundColor: tokens.bgSurface,
           child: ListView(
@@ -122,14 +138,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 error: (_, __) => const SizedBox.shrink(),
               ),
               _buildCalendarStrip(tokens),
-              prayerScheduleAsync.when(
+              selectedPrayerScheduleAsync.when(
                 data: (resolvedSchedule) => _buildHeroSection(
                   resolvedSchedule,
-                  nextPrayerInfo,
-                  countdownAsync.value,
+                  selectedNextPrayerInfo,
+                  selectedCountdown,
                   tokens,
                   streak,
                   locationDiagnosticAsync.valueOrNull,
+                  _selectedDate,
                 ),
                 loading: () => _buildLoadingHero(tokens),
                 error: (_, __) => _buildFallbackHero(
@@ -137,14 +154,20 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   locationDiagnosticAsync.valueOrNull,
                 ),
               ),
-              _buildDailyProgressCard(
-                tokens,
-                prayerScheduleAsync.valueOrNull,
-                nextPrayerInfo,
-                completedPrayers,
-                streak,
+              selectedPrayerScheduleAsync.when(
+                data: (resolvedSchedule) => _buildPrayerSection(
+                  resolvedSchedule?.schedule,
+                  selectedNextPrayerInfo,
+                  selectedCompletedPrayers,
+                  _selectedDate,
+                  tokens,
+                ),
+                loading: () => _buildPrayerSkeleton(tokens),
+                error: (_, __) => _buildPrayerFallback(
+                  tokens,
+                  locationDiagnosticAsync.valueOrNull,
+                ),
               ),
-              _buildHomeInsightCard(tokens, homeInsights),
               _buildRamadanCard(
                 tokens,
                 prayerScheduleAsync.valueOrNull?.schedule,
@@ -159,32 +182,26 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 lastReadingAsync.valueOrNull,
                 dhikrSnapshotAsync.valueOrNull,
               ),
-              _buildNotificationStatusCard(
-                tokens,
-                systemNotificationPermissionAsync.valueOrNull,
-                prayerNotificationsEnabledAsync.valueOrNull,
-              ),
-              _buildWeeklySummaryCard(tokens, weeklySummary),
+              _buildQuickActions(tokens),
               _buildHadithSection(
                 tokens,
                 hadithsAsync.valueOrNull,
                 favoritesAsync.valueOrNull ?? const <int>{},
               ),
-              prayerScheduleAsync.when(
-                data: (resolvedSchedule) => _buildPrayerSection(
-                  resolvedSchedule?.schedule,
-                  nextPrayerInfo,
-                  completedPrayers,
-                  now,
-                  tokens,
-                ),
-                loading: () => _buildPrayerSkeleton(tokens),
-                error: (_, __) => _buildPrayerFallback(
-                  tokens,
-                  locationDiagnosticAsync.valueOrNull,
-                ),
+              _buildDailyProgressCard(
+                tokens,
+                prayerScheduleAsync.valueOrNull,
+                nextPrayerInfo,
+                completedPrayers,
+                streak,
               ),
-              _buildQuickActions(tokens),
+              _buildHomeInsightCard(tokens, homeInsights),
+              _buildWeeklySummaryCard(tokens, weeklySummary),
+              _buildNotificationStatusCard(
+                tokens,
+                systemNotificationPermissionAsync.valueOrNull,
+                prayerNotificationsEnabledAsync.valueOrNull,
+              ),
               const SizedBox(height: 16),
             ],
           ),
@@ -283,7 +300,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   Widget _buildCalendarStrip(QiblaTokens tokens) {
-    final today = DateTime.now();
+    final today = _dateOnly(DateTime.now());
     final dates =
         List.generate(15, (index) => today.subtract(Duration(days: 6 - index)));
 
@@ -300,55 +317,85 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           final date = dates[index];
           final hijri = HijriCalendar.fromDate(date);
           final isToday = _isSameDay(date, today);
+          final isSelected = _isSameDay(date, _selectedDate);
           final hasEvent = hijri.hDay == 1 || hijri.hDay == 15;
 
-          return Container(
-            width: 54,
-            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 6),
-            decoration: BoxDecoration(
-              color: isToday ? tokens.primaryBg : tokens.bgSurface,
-              borderRadius: BorderRadius.circular(14),
-              border: Border.all(
-                color: isToday ? tokens.activeBorder : tokens.border,
+          return InkWell(
+            onTap: () {
+              setState(() {
+                _selectedDate = _dateOnly(date);
+              });
+            },
+            borderRadius: BorderRadius.circular(14),
+            child: Container(
+              width: 58,
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 6),
+              decoration: BoxDecoration(
+                color: isSelected
+                    ? tokens.activeBg
+                    : isToday
+                        ? tokens.primaryBg
+                        : tokens.bgSurface,
+                borderRadius: BorderRadius.circular(14),
+                border: Border.all(
+                  color: isSelected
+                      ? tokens.activeBorder
+                      : isToday
+                          ? tokens.primaryBorder
+                          : tokens.border,
+                  width: isSelected ? 1.5 : 1,
+                ),
               ),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  _weekdays[date.weekday - 1],
-                  style: GoogleFonts.dmSans(
-                    fontSize: 9,
-                    color: tokens.textSecondary,
-                  ),
-                ),
-                Text(
-                  '${date.day}',
-                  style: GoogleFonts.dmSans(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500,
-                    color: tokens.textPrimary,
-                  ),
-                ),
-                Text(
-                  '${hijri.hDay} ${hijri.getShortMonthName()}',
-                  style: GoogleFonts.dmSans(
-                    fontSize: 8,
-                    color: tokens.textMuted,
-                  ),
-                  overflow: TextOverflow.ellipsis,
-                ),
-                if (hasEvent)
-                  Container(
-                    width: 4,
-                    height: 4,
-                    margin: const EdgeInsets.only(top: 3),
-                    decoration: BoxDecoration(
-                      color: tokens.primary,
-                      shape: BoxShape.circle,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    _weekdays[date.weekday - 1],
+                    style: GoogleFonts.dmSans(
+                      fontSize: 9,
+                      fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+                      color: isSelected ? tokens.primaryLight : tokens.textSecondary,
                     ),
                   ),
-              ],
+                  Text(
+                    '${date.day}',
+                    style: GoogleFonts.dmSans(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      color: tokens.textPrimary,
+                    ),
+                  ),
+                  Text(
+                    '${hijri.hDay} ${hijri.getShortMonthName()}',
+                    style: GoogleFonts.dmSans(
+                      fontSize: 8,
+                      color: isSelected ? tokens.primary : tokens.textMuted,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 3),
+                  if (isSelected)
+                    Container(
+                      width: 16,
+                      height: 4,
+                      decoration: BoxDecoration(
+                        color: tokens.primary,
+                        borderRadius: BorderRadius.circular(999),
+                      ),
+                    )
+                  else if (hasEvent)
+                    Container(
+                      width: 4,
+                      height: 4,
+                      decoration: BoxDecoration(
+                        color: tokens.primary,
+                        shape: BoxShape.circle,
+                      ),
+                    )
+                  else
+                    const SizedBox(height: 4),
+                ],
+              ),
             ),
           );
         },
@@ -363,10 +410,22 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     QiblaTokens tokens,
     int streak,
     PrayerLocationDiagnostic? locationDiagnostic,
+    DateTime selectedDate,
   ) {
     final prayerSchedule = resolvedSchedule?.schedule;
-    if (prayerSchedule == null || nextPrayerInfo == null) {
+    if (prayerSchedule == null) {
       return _buildFallbackHero(tokens, locationDiagnostic);
+    }
+
+    final isToday = _isSameDay(selectedDate, _dateOnly(DateTime.now()));
+    if (!isToday || nextPrayerInfo == null) {
+      return _buildSelectedDateHero(
+        tokens,
+        prayerSchedule,
+        selectedDate,
+        streak,
+        resolvedSchedule?.fromCache == true,
+      );
     }
 
     final hero = tokens.getHero(nextPrayerInfo.prayer.key);
@@ -454,6 +513,120 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ],
           const SizedBox(height: 14),
           Row(children: _buildCountdown(tokens, remaining)),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSelectedDateHero(
+    QiblaTokens tokens,
+    PrayerSchedule prayerSchedule,
+    DateTime selectedDate,
+    int streak,
+    bool fromCache,
+  ) {
+    final isToday = _isSameDay(selectedDate, _dateOnly(DateTime.now()));
+    return Container(
+      margin: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: tokens.bgSurface,
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: tokens.border),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [tokens.bgSurface, tokens.bgSurface2],
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  isToday
+                      ? 'HORARIOS DE HOY'
+                      : 'HORARIOS DEL ${_formatHeroDate(selectedDate).toUpperCase()}',
+                  style: GoogleFonts.dmSans(
+                    fontSize: 9,
+                    color: tokens.textSecondary,
+                    letterSpacing: 1.5,
+                  ),
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: tokens.primaryBg,
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: tokens.primaryBorder),
+                ),
+                child: Text(
+                  '$streak dias seguidos',
+                  style: GoogleFonts.dmSans(
+                    fontSize: 10,
+                    color: tokens.primaryLight,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Text(
+            _formatHeroDate(selectedDate),
+            style: GoogleFonts.amiri(
+              fontSize: 28,
+              color: tokens.primaryLight,
+              height: 1.1,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            'Fajr ${_formatTime(prayerSchedule.fajr)} - Dhuhr ${_formatTime(prayerSchedule.dhuhr)} - Maghrib ${_formatTime(prayerSchedule.maghrib)} - Isha ${_formatTime(prayerSchedule.isha)}',
+            style: GoogleFonts.dmSans(
+              fontSize: 12,
+              height: 1.5,
+              color: tokens.textSecondary,
+            ),
+          ),
+          if (fromCache) ...[
+            const SizedBox(height: 8),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+              decoration: BoxDecoration(
+                color: tokens.primaryBg,
+                borderRadius: BorderRadius.circular(999),
+                border: Border.all(color: tokens.primaryBorder),
+              ),
+              child: Text(
+                'Usando tu ultima ubicacion guardada',
+                style: GoogleFonts.dmSans(
+                  fontSize: 10,
+                  color: tokens.textPrimary,
+                ),
+              ),
+            ),
+          ],
+          const SizedBox(height: 14),
+          Row(
+            children: [
+              Expanded(
+                child: _summaryMetric(tokens, _formatTime(prayerSchedule.fajr), 'Fajr'),
+              ),
+              Expanded(
+                child: _summaryMetric(
+                  tokens,
+                  _formatTime(prayerSchedule.maghrib),
+                  'Maghrib',
+                ),
+              ),
+              Expanded(
+                child: _summaryMetric(tokens, _formatTime(prayerSchedule.isha), 'Isha'),
+              ),
+            ],
+          ),
         ],
       ),
     );
@@ -1449,6 +1622,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       (PrayerName.isha, 'Isha', 'عشاء', prayerSchedule.isha),
     ];
     final nextPrayerName = nextPrayerInfo?.prayer.key;
+    final isToday = _isSameDay(date, _dateOnly(DateTime.now()));
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -1459,7 +1633,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             children: [
               Expanded(
                 child: Text(
-                  'Oraciones de hoy'.toUpperCase(),
+                  (isToday
+                          ? 'Oraciones de hoy'
+                          : 'Horarios de ${_formatCompactDate(date)}')
+                      .toUpperCase(),
                   style: GoogleFonts.dmSans(
                     fontSize: 9,
                     color: tokens.textSecondary,
@@ -1593,7 +1770,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   Widget _buildHadithSection(
     QiblaTokens tokens,
-    List<dynamic>? hadiths,
+    List<Hadith>? hadiths,
     Set<int> favorites,
   ) {
     if (hadiths == null || hadiths.isEmpty) {
@@ -1664,71 +1841,89 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             ),
             const SizedBox(height: 10),
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TextButton(
-                  onPressed: () =>
-                      setState(() => _hadithExpanded = !_hadithExpanded),
-                  child: Text(_hadithExpanded ? 'Ver menos' : 'Ver mas'),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (_) => const HadithLibraryScreen(),
+                Expanded(
+                  child: Wrap(
+                    spacing: 4,
+                    runSpacing: 4,
+                    children: [
+                      TextButton(
+                        onPressed: () =>
+                            setState(() => _hadithExpanded = !_hadithExpanded),
+                        child: Text(_hadithExpanded ? 'Ver menos' : 'Ver mas'),
                       ),
-                    );
-                  },
-                  child: const Text('Explorar temas'),
-                ),
-                PopupMenuButton<String>(
-                  onSelected: (value) async {
-                    if (value == 'text') {
-                      await Share.share(
-                        '${hadith.translation}\n\n${hadith.reference}',
-                      );
-                      return;
-                    }
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => const HadithLibraryScreen(),
+                            ),
+                          );
+                        },
+                        child: const Text('Explorar temas'),
+                      ),
+                      PopupMenuButton<String>(
+                        onSelected: (value) async {
+                          if (value == 'text') {
+                            await Share.share(
+                              '${hadith.translation}\n\n${hadith.reference}',
+                            );
+                            return;
+                          }
 
-                    try {
-                      await ref
-                          .read(hadithShareServiceProvider)
-                          .shareHadithAsImage(hadith, tokens);
-                    } catch (_) {
-                      if (!mounted) return;
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text(
-                            'No se pudo generar la imagen del hadith ahora mismo.',
+                          try {
+                            await ref
+                                .read(hadithShareServiceProvider)
+                                .shareHadithAsImage(hadith, tokens);
+                          } catch (_) {
+                            if (!mounted) return;
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text(
+                                  'No se pudo generar la imagen del hadith ahora mismo.',
+                                ),
+                              ),
+                            );
+                          }
+                        },
+                        itemBuilder: (_) => const [
+                          PopupMenuItem<String>(
+                            value: 'text',
+                            child: Text('Compartir texto'),
+                          ),
+                          PopupMenuItem<String>(
+                            value: 'image',
+                            child: Text('Compartir imagen'),
+                          ),
+                        ],
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 10,
+                          ),
+                          child: Text(
+                            'Compartir',
+                            style: GoogleFonts.dmSans(
+                              fontSize: 12,
+                              color: tokens.primary,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ),
-                      );
-                    }
-                  },
-                  itemBuilder: (_) => const [
-                    PopupMenuItem<String>(
-                      value: 'text',
-                      child: Text('Compartir texto'),
-                    ),
-                    PopupMenuItem<String>(
-                      value: 'image',
-                      child: Text('Compartir PNG'),
-                    ),
-                  ],
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    child: Text('Compartir'),
+                      ),
+                      TextButton(
+                        onPressed: () async {
+                          await ref
+                              .read(hadithServiceProvider)
+                              .toggleFavorite(hadith.id);
+                          ref.invalidate(hadithFavoritesProvider);
+                        },
+                        child: Text(isFavorite ? 'Favorito' : 'Guardar'),
+                      ),
+                    ],
                   ),
                 ),
-                TextButton(
-                  onPressed: () async {
-                    await ref
-                        .read(hadithServiceProvider)
-                        .toggleFavorite(hadith.id);
-                    ref.invalidate(hadithFavoritesProvider);
-                  },
-                  child: Text(isFavorite ? 'Favorito' : 'Guardar'),
-                ),
-                const Spacer(),
                 IconButton(
                   tooltip: 'Siguiente',
                   onPressed: () => setState(
@@ -1817,6 +2012,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     return a.year == b.year && a.month == b.month && a.day == b.day;
   }
 
+  DateTime _dateOnly(DateTime date) {
+    return DateTime(date.year, date.month, date.day);
+  }
+
   bool _isPrayerDone(List<String> completed, String prayerName) {
     return completed.contains(prayerName.toLowerCase());
   }
@@ -1840,6 +2039,37 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final hour = dateTime.hour.toString().padLeft(2, '0');
     final minute = dateTime.minute.toString().padLeft(2, '0');
     return '$hour:$minute';
+  }
+
+  String _formatCompactDate(DateTime date) {
+    const months = [
+      'ene',
+      'feb',
+      'mar',
+      'abr',
+      'may',
+      'jun',
+      'jul',
+      'ago',
+      'sep',
+      'oct',
+      'nov',
+      'dic',
+    ];
+    return '${date.day} ${months[date.month - 1]}';
+  }
+
+  String _formatHeroDate(DateTime date) {
+    const weekdays = [
+      'Lunes',
+      'Martes',
+      'Miercoles',
+      'Jueves',
+      'Viernes',
+      'Sabado',
+      'Domingo',
+    ];
+    return '${weekdays[date.weekday - 1]} ${date.day}/${date.month}';
   }
 
   String _formatRemaining(Duration? remaining) {

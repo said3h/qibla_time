@@ -106,6 +106,18 @@ class QuranAudioDownloadService {
     return null;
   }
 
+  Future<Map<int, String>> getKnownDownloadedAyahPaths(
+    int surahNumber,
+    Iterable<SurahAyah> ayahs,
+  ) async {
+    final surahDirectory = await _surahDirectory(surahNumber);
+    return {
+      for (final ayah in ayahs)
+        ayah.numberInSurah:
+            '${surahDirectory.path}${Platform.pathSeparator}ayah_${ayah.numberInSurah.toString().padLeft(3, '0')}.mp3',
+    };
+  }
+
   Future<List<int>> getDownloadedSurahNumbers() async {
     final baseDirectory = await _baseDirectory();
     if (!await baseDirectory.exists()) {
