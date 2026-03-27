@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:share_plus/share_plus.dart';
 
 import '../../../core/theme/app_theme.dart';
 import '../models/hadith.dart';
@@ -163,7 +162,7 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
   }
 
   Future<void> _shareText(Hadith hadith) async {
-    await Share.share('${hadith.translation}\n\n${hadith.reference}');
+    await ref.read(hadithShareServiceProvider).shareHadithAsText(hadith);
   }
 
   Future<void> _shareImage(Hadith hadith) async {

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hijri/hijri_calendar.dart';
-import 'package:share_plus/share_plus.dart';
 
 import '../../../core/services/connectivity_service.dart';
 import '../../../core/theme/app_theme.dart';
@@ -1866,9 +1865,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       PopupMenuButton<String>(
                         onSelected: (value) async {
                           if (value == 'text') {
-                            await Share.share(
-                              '${hadith.translation}\n\n${hadith.reference}',
-                            );
+                            await ref
+                                .read(hadithShareServiceProvider)
+                                .shareHadithAsText(hadith);
                             return;
                           }
 

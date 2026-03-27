@@ -9,10 +9,19 @@ class HadithSharePreview extends StatelessWidget {
     super.key,
     required this.data,
     required this.theme,
+    this.cardOnly = false,
   });
+
+  static const EdgeInsets _cardOnlyPadding = EdgeInsets.fromLTRB(
+    72,
+    72,
+    72,
+    96,
+  );
 
   final HadithShareData data;
   final HadithShareThemeData theme;
+  final bool cardOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +30,26 @@ class HadithSharePreview extends StatelessWidget {
     final targetCardWidth = theme.canvasSize.width * theme.cardWidthFactor;
     final cardWidth =
         targetCardWidth < maxCardWidth ? targetCardWidth : maxCardWidth;
+    final card = SizedBox(
+      width: cardWidth,
+      child: ConstrainedBox(
+        constraints: BoxConstraints(maxHeight: maxCardHeight),
+        child: HadithShareCard(
+          data: data,
+          theme: theme,
+        ),
+      ),
+    );
+
+    if (cardOnly) {
+      return ColoredBox(
+        color: theme.canvasBackgroundColor,
+        child: Padding(
+          padding: _cardOnlyPadding,
+          child: card,
+        ),
+      );
+    }
 
     return ColoredBox(
       color: theme.canvasBackgroundColor,
@@ -30,16 +59,7 @@ class HadithSharePreview extends StatelessWidget {
         child: Center(
           child: Padding(
             padding: theme.canvasPadding,
-            child: SizedBox(
-              width: cardWidth,
-              child: ConstrainedBox(
-                constraints: BoxConstraints(maxHeight: maxCardHeight),
-                child: HadithShareCard(
-                  data: data,
-                  theme: theme,
-                ),
-              ),
-            ),
+            child: card,
           ),
         ),
       ),

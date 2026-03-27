@@ -13,6 +13,25 @@ final hadithShareServiceProvider = Provider<HadithShareService>((ref) {
 });
 
 class HadithShareService {
+  String buildShareText(Hadith hadith) {
+    final arabic = hadith.arabic.trim();
+    final translation = hadith.translation.trim();
+    final reference = hadith.reference.trim();
+
+    final sections = <String>[
+      if (arabic.isNotEmpty) arabic,
+      if (translation.isNotEmpty) translation,
+      if (reference.isNotEmpty) '\u2014 $reference',
+      'Qibla',
+    ];
+
+    return sections.join('\n\n');
+  }
+
+  Future<void> shareHadithAsText(Hadith hadith) async {
+    await Share.share(buildShareText(hadith));
+  }
+
   Future<void> shareHadithAsImage(
     Hadith hadith,
     QiblaTokens tokens,
@@ -29,6 +48,7 @@ class HadithShareService {
         transparentBackground: true,
       ),
       transparentBackground: true,
+      mode: HadithShareExportMode.cardOnly,
       fileName: 'hadith_${hadith.id}',
     );
 
