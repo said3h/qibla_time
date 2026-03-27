@@ -502,7 +502,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 border: Border.all(color: tokens.primaryBorder),
               ),
               child: Text(
-                'Usando tu ultima ubicacion guardada',
+                'Usando tu última ubicación guardada',
                 style: GoogleFonts.dmSans(
                   fontSize: 10,
                   color: tokens.textPrimary,
@@ -600,7 +600,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 border: Border.all(color: tokens.primaryBorder),
               ),
               child: Text(
-                'Usando tu ultima ubicacion guardada',
+                'Usando tu última ubicación guardada',
                 style: GoogleFonts.dmSans(
                   fontSize: 10,
                   color: tokens.textPrimary,
@@ -1275,8 +1275,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               completedCount == items.length
                   ? 'Jornada de Ramadan muy completa. Manten este ritmo con calma.'
                   : completedCount >= 2
-                  ? 'Vas bien hoy. Un pequeno paso mas puede cerrar tu dia con fuerza.'
-                  : 'Empieza por algo pequeno: una oracion, unas aleyas o unos minutos de dhikr.',
+                  ? 'Vas bien hoy. Un pequeño paso más puede cerrar tu día con fuerza.'
+                  : 'Empieza por algo pequeño: una oración, unas aleyas o unos minutos de dhikr.',
               style: GoogleFonts.dmSans(
                 fontSize: 11,
                 height: 1.5,
@@ -1380,12 +1380,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   ) {
     if (lastReading == null) {
       return const _RamadanGoalItem(
-        title: 'Coran',
-        description: 'Haz una lectura corta hoy y luego podras retomarla facilmente.',
+        title: 'Corán',
+        description: 'Haz una lectura corta hoy y luego podrás retomarla fácilmente.',
         icon: Icons.menu_book_outlined,
         state: _RamadanGoalState.pending,
         destination: QuranScreen(),
-        actionLabel: 'Abrir Coran',
+        actionLabel: 'Abrir Corán',
       );
     }
 
@@ -1401,9 +1401,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     if (daysSince <= 0) {
       return _RamadanGoalItem(
-        title: 'Coran',
+        title: 'Corán',
         description:
-            'Lectura guardada hoy en ${lastReading.surahNameLatin}, aya ${lastReading.ayahNumber}.',
+            'Lectura guardada hoy en ${lastReading.surahNameLatin}, aleya ${lastReading.ayahNumber}.',
         icon: Icons.menu_book_outlined,
         state: _RamadanGoalState.completed,
         destination: const QuranScreen(),
@@ -1413,9 +1413,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     if (daysSince <= 3) {
       return _RamadanGoalItem(
-        title: 'Coran',
+        title: 'Corán',
         description:
-            'Retoma ${lastReading.surahNameLatin}, aya ${lastReading.ayahNumber}. Tienes progreso reciente.',
+            'Retoma ${lastReading.surahNameLatin}, aleya ${lastReading.ayahNumber}. Tienes progreso reciente.',
         icon: Icons.menu_book_outlined,
         state: _RamadanGoalState.inProgress,
         destination: const QuranScreen(),
@@ -1424,13 +1424,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     }
 
     return _RamadanGoalItem(
-      title: 'Coran',
+      title: 'Corán',
       description:
-          'Tu ultimo punto fue ${lastReading.surahNameLatin}, aya ${lastReading.ayahNumber}. Merece la pena retomarlo hoy.',
+          'Tu último punto fue ${lastReading.surahNameLatin}, aleya ${lastReading.ayahNumber}. Merece la pena retomarlo hoy.',
       icon: Icons.menu_book_outlined,
       state: _RamadanGoalState.pending,
       destination: const QuranScreen(),
-      actionLabel: 'Abrir Coran',
+      actionLabel: 'Abrir Corán',
     );
   }
 
@@ -1548,7 +1548,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       return 'QiblaTime necesita tu ubicacion para mostrar horarios fiables segun tu ciudad.';
     }
     if (diagnostic.hasCachedLocation) {
-      return 'Estamos preparando tus horarios usando la ultima ubicacion guardada.';
+      return 'Estamos preparando tus horarios usando la última ubicación guardada.';
     }
     return 'La pantalla principal sigue visible aunque los horarios aun no esten listos.';
   }
@@ -1934,7 +1934,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             ),
             if (favorites.isEmpty)
               Text(
-                'Todavia no has guardado hadiths favoritos.',
+                'Todavía no has guardado hadiths favoritos.',
                 style: GoogleFonts.dmSans(
                   fontSize: 10,
                   color: tokens.textMuted,
@@ -1949,11 +1949,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Widget _buildQuickActions(QiblaTokens tokens) {
     final actions = [
       (Icons.explore_outlined, 'Qibla', const QiblaScreen()),
-      (Icons.menu_book_outlined, 'Coran', const QuranScreen()),
+      (Icons.menu_book_outlined, 'Corán', const QuranScreen()),
       (Icons.calendar_month_outlined, 'Calendario', const CalendarScreen()),
       (Icons.scatter_plot_outlined, 'Tasbih', const DhikrScreen()),
       (Icons.self_improvement_outlined, 'Rak\'ah', const FocusModeScreen()),
-      (Icons.insights_outlined, 'Stats', const AnalyticsScreen()),
+      (Icons.insights_outlined, 'Análisis', const AnalyticsScreen()),
       (Icons.volunteer_activism_outlined, 'Dua', const DuasScreen()),
     ];
 

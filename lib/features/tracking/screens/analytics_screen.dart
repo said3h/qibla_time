@@ -167,7 +167,7 @@ class _EmptyAnalyticsState extends StatelessWidget {
               Icon(Icons.insights_outlined, size: 42, color: tokens.primary),
               const SizedBox(height: 14),
               Text(
-                'Todavia no hay datos de oracion',
+                'Todavía no hay datos de oración',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.amiri(
                   fontSize: 24,
@@ -177,7 +177,7 @@ class _EmptyAnalyticsState extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                'Marca tus oraciones desde Inicio y aqui veras tu racha, tu progreso semanal y tus dias mas fuertes.',
+                'Marca tus oraciones desde Inicio y aquí verás tu racha, tu progreso semanal y tus días más fuertes.',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.dmSans(
                   fontSize: 12,

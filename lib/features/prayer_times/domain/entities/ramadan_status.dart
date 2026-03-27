@@ -47,18 +47,18 @@ class RamadanStatus {
   bool get isManualPreview => forced && !detectedByDate;
 
   String get headerLabel =>
-      detectedByDate ? 'Ramadan dia $hijriDay' : 'Modo Ramadan manual';
+      detectedByDate ? 'Ramadán día $hijriDay' : 'Modo Ramadán manual';
 
   String get blessingMessage => detectedByDate
       ? 'Que Allah acepte tu ayuno y tus obras de hoy.'
-      : 'Vista especial de Ramadan activada manualmente para pruebas.';
+      : 'Vista especial de Ramadán activada manualmente para pruebas.';
 
   String get dailySuggestion {
     const suggestions = [
       'Recuerda aumentar el dhikr hoy.',
-      'Intenta leer un poco mas de Coran hoy.',
-      'Aprovecha este dia para hacer dua con calma.',
-      'Una pequena sadaqah tambien cuenta durante Ramadan.',
+      'Intenta leer un poco más de Corán hoy.',
+      'Aprovecha este día para hacer dua con calma.',
+      'Una pequeña sadaqah también cuenta durante Ramadán.',
     ];
 
     final index = (hijriDay - 1).abs() % suggestions.length;

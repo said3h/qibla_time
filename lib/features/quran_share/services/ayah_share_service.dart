@@ -62,7 +62,7 @@ class AyahShareService {
 
     await Share.shareXFiles(
       [XFile(file.path)],
-      text: 'Aya ${ayah.numberInSurah} de ${summary.nameLatin}',
+      text: 'Aleya ${ayah.numberInSurah} de ${summary.nameLatin}',
     );
   }
 }

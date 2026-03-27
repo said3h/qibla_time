@@ -13,10 +13,10 @@ class HadithSharePreview extends StatelessWidget {
   });
 
   static const EdgeInsets _cardOnlyPadding = EdgeInsets.fromLTRB(
-    64,
-    64,
-    64,
-    84,
+    52,
+    52,
+    52,
+    68,
   );
 
   final HadithShareData data;
@@ -42,12 +42,9 @@ class HadithSharePreview extends StatelessWidget {
     );
 
     if (cardOnly) {
-      return ColoredBox(
-        color: theme.canvasBackgroundColor,
-        child: Padding(
-          padding: _cardOnlyPadding,
-          child: card,
-        ),
+      return Padding(
+        padding: _cardOnlyPadding,
+        child: card,
       );
     }
 

@@ -208,7 +208,7 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
             border: Border.all(color: tokens.primaryBorder),
           ),
           child: Text(
-            'Coleccion ampliada con duas y adhkar para el dia a dia. Elige una categoria y tendras arabe, transliteracion, traduccion y referencia cuando este disponible.',
+            'Colección ampliada con duas y adhkar para el día a día. Elige una categoría y tendrás árabe, transliteración, traducción y referencia cuando esté disponible.',
             style: GoogleFonts.dmSans(
               fontSize: 12,
               height: 1.6,
@@ -234,7 +234,7 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
             suffixIcon: _searchQuery.isEmpty
                 ? null
                 : IconButton(
-                    tooltip: 'Limpiar busqueda',
+                    tooltip: 'Limpiar búsqueda',
                     onPressed: () {
                       _searchController.clear();
                       setState(() => _searchQuery = '');
@@ -308,7 +308,7 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
                 ),
                 const SizedBox(height: 6),
                 Text(
-                  'Prueba con palabras como lluvia, viaje, proteccion, sueno o gratitud.',
+                  'Prueba con palabras como lluvia, viaje, protección, sueño o gratitud.',
                   style: GoogleFonts.dmSans(
                     fontSize: 11,
                     height: 1.6,

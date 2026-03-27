@@ -138,7 +138,7 @@ class QuranService {
             numberInSurah: 0,
             arabic: 'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ',
             transliteration: 'Bismi llahi r-rahmani r-rahim',
-            translation: 'Contenido no disponible sin conexion a internet.',
+            translation: 'Contenido no disponible sin conexión a internet.',
             audioUrl: '',
           ),
         ],

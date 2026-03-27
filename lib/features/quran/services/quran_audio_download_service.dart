@@ -78,7 +78,7 @@ class QuranAudioDownloadService {
       final response = await _client.get(Uri.parse(ayah.audioUrl));
       if (response.statusCode != 200) {
         throw HttpException(
-          'No se pudo descargar el audio de la aya ${ayah.numberInSurah}.',
+          'No se pudo descargar el audio de la aleya ${ayah.numberInSurah}.',
         );
       }
 

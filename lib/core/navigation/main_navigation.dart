@@ -79,7 +79,7 @@ class _MainNavigationState extends State<MainNavigation> {
               NavigationDestination(
                 icon: Icon(Icons.menu_book_outlined),
                 selectedIcon: Icon(Icons.menu_book),
-                label: 'Coran',
+                label: 'Corán',
               ),
             ],
           ),

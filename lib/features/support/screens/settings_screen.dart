@@ -337,7 +337,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             const SizedBox(height: 14),
             
             // ── SECCIÓN TRAVEL MODE ────────────────────────────────────────
-            _buildSectionTitle(tokens, 'Coran offline'),
+            _buildSectionTitle(tokens, 'Corán offline'),
             _buildValueTile(
               tokens,
               'Ver suras descargadas',
@@ -513,7 +513,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   border: Border.all(color: tokens.border),
                 ),
                 child: Text(
-                  'Todavia no has configurado copias de seguridad. Puedes exportar un primer backup manual cuando quieras.',
+                  'Todavía no has configurado copias de seguridad. Puedes exportar un primer backup manual cuando quieras.',
                   style: GoogleFonts.dmSans(
                     fontSize: 11,
                     height: 1.5,

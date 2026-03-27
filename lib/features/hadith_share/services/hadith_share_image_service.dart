@@ -17,7 +17,7 @@ enum HadithShareExportMode {
 }
 
 class HadithShareImageService {
-  static const int _alphaCropThreshold = 8;
+  static const int _alphaCropThreshold = 2;
 
   static Future<Uint8List> capturePng({
     required HadithShareData data,

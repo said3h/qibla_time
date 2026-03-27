@@ -434,7 +434,7 @@ class _EmptyCategoryState extends StatelessWidget {
         border: Border.all(color: tokens.border),
       ),
       child: Text(
-        'No hay hadiths disponibles en la categoria $category todavia.',
+        'No hay hadiths disponibles en la categoría $category todavía.',
         style: GoogleFonts.dmSans(
           fontSize: 12,
           height: 1.6,

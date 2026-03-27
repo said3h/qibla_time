@@ -65,8 +65,8 @@ class GenerateHomeInsightsUseCase {
           kind: HomeInsightKind.guidance,
           title: 'Empieza hoy',
           message: activeDays == 0
-              ? 'Marca tus primeras oraciones y la app empezara a mostrar patrones utiles.'
-              : 'Sigue marcando tus oraciones y veras insights mas precisos en Home.',
+              ? 'Marca tus primeras oraciones y la app empezará a mostrar patrones útiles.'
+              : 'Sigue marcando tus oraciones y verás insights más precisos en Inicio.',
         ),
       );
     }
@@ -91,7 +91,7 @@ class GenerateHomeInsightsUseCase {
       return const HomeInsight(
         kind: HomeInsightKind.progress,
         title: 'Casi completas hoy',
-        message: 'Te falta 1 oracion para cerrar el 5/5 de hoy.',
+        message: 'Te falta 1 oración para cerrar el 5/5 de hoy.',
       );
     }
     if (prayerCountToday > 0 && prayerCountToday < 4) {
@@ -104,8 +104,8 @@ class GenerateHomeInsightsUseCase {
     if (prayerCountToday == 0 && now.hour >= 12) {
       return const HomeInsight(
         kind: HomeInsightKind.progress,
-        title: 'Todavia puedes empezar',
-        message: 'Aun no has marcado oraciones hoy. Empezar por la siguiente ya cambia el dia.',
+        title: 'Todavía puedes empezar',
+        message: 'Aún no has marcado oraciones hoy. Empezar por la siguiente ya cambia el día.',
       );
     }
     return null;
@@ -116,7 +116,7 @@ class GenerateHomeInsightsUseCase {
       return HomeInsight(
         kind: HomeInsightKind.streak,
         title: 'Racha en marcha',
-        message: 'Llevas una racha de $streak dias completos. Protegela hoy.',
+        message: 'Llevas una racha de $streak días completos. Protégela hoy.',
       );
     }
     return null;
@@ -143,7 +143,7 @@ class GenerateHomeInsightsUseCase {
       return HomeInsight(
         kind: HomeInsightKind.improvement,
         title: 'Vas mejor que la semana pasada',
-        message: 'Has sumado $delta oraciones mas que en los 7 dias anteriores.',
+        message: 'Has sumado $delta oraciones más que en los 7 días anteriores.',
       );
     }
     return null;
@@ -171,8 +171,8 @@ class GenerateHomeInsightsUseCase {
       final prayer = _prayerLabel(strongest.key);
       return HomeInsight(
         kind: HomeInsightKind.prayerPattern,
-        title: 'Tu oracion mas constante',
-        message: '$prayer es la que mejor estas manteniendo este ultimo tramo.',
+        title: 'Tu oración más constante',
+        message: '$prayer es la que mejor estás manteniendo este último tramo.',
       );
     }
 
@@ -181,7 +181,7 @@ class GenerateHomeInsightsUseCase {
       return HomeInsight(
         kind: HomeInsightKind.prayerPattern,
         title: 'Punto a reforzar',
-        message: '$prayer es la oracion que mas te cuesta ahora mismo. Un pequeno foco ahi puede mover toda la semana.',
+        message: '$prayer es la oración que más te cuesta ahora mismo. Un pequeño foco ahí puede mover toda la semana.',
       );
     }
 
@@ -199,7 +199,7 @@ class GenerateHomeInsightsUseCase {
     if (todayCount >= dailyGoal) {
       return HomeInsight(
         kind: HomeInsightKind.dhikr,
-        title: 'Dhikr del dia cumplido',
+        title: 'Dhikr del día cumplido',
         message: 'Ya alcanzaste tu meta diaria de dhikr con $todayCount repeticiones.',
       );
     }

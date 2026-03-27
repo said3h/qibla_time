@@ -239,7 +239,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return _StepScaffold(
       title: 'Bienvenido a QiblaTime',
       subtitle:
-          'Horarios, Qibla, Coran y recordatorios en una app ligera para tu rutina diaria.',
+          'Horarios, Qibla, Corán y recordatorios en una app ligera para tu rutina diaria.',
       child: Column(
         children: [
           _FeatureCard(
@@ -252,14 +252,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           _FeatureCard(
             icon: Icons.explore_rounded,
             title: 'Qibla y practica diaria',
-            body: 'Brújula, tasbih, tracking y mas en el mismo flujo.',
+            body: 'Brújula, tasbih, tracking y más en el mismo flujo.',
             tokens: tokens,
           ),
           const SizedBox(height: 10),
           _FeatureCard(
             icon: Icons.notifications_active_outlined,
-            title: 'Recordatorios utiles',
-            body: 'Notificaciones de Adhan y ajustes listos desde el primer dia.',
+            title: 'Recordatorios útiles',
+            body: 'Notificaciones de adhan y ajustes listos desde el primer día.',
             tokens: tokens,
           ),
         ],
@@ -280,14 +280,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         children: [
           _PermissionCard(
             icon: Icons.place_outlined,
-            title: 'Ubicacion',
+            title: 'Ubicación',
             body: locationReady
                 ? 'Lista para calcular horarios y Qibla.'
                 : _locationPermission == LocationPermission.deniedForever
-                    ? 'El permiso esta bloqueado. Puedes activarlo luego desde Ajustes del sistema.'
+                    ? 'El permiso está bloqueado. Puedes activarlo luego desde Ajustes del sistema.'
                     : !_locationServiceEnabled
-                        ? 'El GPS del dispositivo esta desactivado. Puedes seguir y activarlo despues.'
-                        : 'Necesaria para horarios precisos y direccion a La Meca.',
+                        ? 'El GPS del dispositivo está desactivado. Puedes seguir y activarlo después.'
+                        : 'Necesaria para horarios precisos y dirección a La Meca.',
             status: locationReady
                 ? 'Concedido'
                 : _locationPermission == LocationPermission.deniedForever
@@ -305,7 +305,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             title: 'Notificaciones',
             body: _notificationsGranted
                 ? 'Listas para recordarte las oraciones.'
-                : 'Asi puedes recibir tus avisos de Adhan y resumenes futuros.',
+                : 'Así puedes recibir tus avisos de adhan y resúmenes futuros.',
             status: _notificationsGranted ? 'Concedido' : 'Pendiente',
             actionLabel: 'Activar',
             action: _requestNotifications,
@@ -320,15 +320,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   Widget _buildMethod(QiblaTokens tokens) {
     return _StepScaffold(
-      title: 'Metodo de calculo',
+      title: 'Método de cálculo',
       subtitle:
-          'Puedes cambiarlo mas tarde, pero esto deja los horarios bien configurados desde hoy.',
+          'Puedes cambiarlo más tarde, pero esto deja los horarios bien configurados desde hoy.',
       child: Column(
         children: _recommendedMethods.map((method) {
           final selected = method == _method;
           return _SelectableTile(
             title: _methodLabel(method),
-            subtitle: selected ? 'Seleccionado ahora mismo' : 'Toque para usar este metodo',
+            subtitle: selected ? 'Seleccionado ahora mismo' : 'Toca para usar este método',
             selected: selected,
             tokens: tokens,
             onTap: () => _persistMethod(method),
@@ -342,19 +342,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return _StepScaffold(
       title: 'Madhab para Asr',
       subtitle:
-          'Solo afecta al calculo de la oracion de Asr. Si dudas, puedes dejar Shafi y cambiarlo despues.',
+          'Solo afecta al cálculo de la oración de Asr. Si dudas, puedes dejar Shafi y cambiarlo después.',
       child: Column(
         children: [
           _SelectableTile(
             title: 'Shafi / Maliki / Hanbali',
-            subtitle: 'La opcion mas comun para empezar',
+            subtitle: 'La opción más común para empezar',
             selected: !_isHanafi,
             tokens: tokens,
             onTap: () => _persistMadhab(false),
           ),
           _SelectableTile(
             title: 'Hanafi',
-            subtitle: 'Usa el calculo Hanafi para Asr',
+            subtitle: 'Usa el cálculo hanafí para Asr',
             selected: _isHanafi,
             tokens: tokens,
             onTap: () => _persistMadhab(true),

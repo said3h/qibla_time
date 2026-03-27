@@ -51,7 +51,7 @@ class _DhikrScreenState extends State<DhikrScreen> {
     (
       arabic: 'اللّٰهُ أَكْبَر',
       transliteration: 'Allahu Akbar',
-      meaning: 'Allah es el mas Grande',
+      meaning: 'Allah es el más Grande',
     ),
   ];
 
@@ -140,7 +140,7 @@ class _DhikrScreenState extends State<DhikrScreen> {
       _count = 0;
       _currentPhraseIndex = 0;
     });
-    _showMessage('Sesion reiniciada. Tu historial diario sigue guardado.');
+    _showMessage('Sesión reiniciada. Tu historial diario sigue guardado.');
   }
 
   Future<void> _pickGoal({required bool daily}) async {
@@ -150,10 +150,10 @@ class _DhikrScreenState extends State<DhikrScreen> {
     final tokens = QiblaThemes.current;
     final currentValue = daily ? snapshot.dailyGoal : snapshot.sessionGoal;
     final presets = daily ? _dailyGoalPresets : _sessionGoalPresets;
-    final title = daily ? 'Meta diaria' : 'Meta por sesion';
+    final title = daily ? 'Meta diaria' : 'Meta por sesión';
     final helper = daily
-        ? 'Cuantas repeticiones quieres completar a lo largo del dia.'
-        : 'Cuantas repeticiones quieres por ciclo antes de pasar al siguiente dhikr.';
+        ? 'Cuántas repeticiones quieres completar a lo largo del día.'
+        : 'Cuántas repeticiones quieres por ciclo antes de pasar al siguiente dhikr.';
 
     final selected = await showModalBottomSheet<int>(
       context: context,
@@ -236,7 +236,7 @@ class _DhikrScreenState extends State<DhikrScreen> {
     _showMessage(
       daily
           ? 'Meta diaria ajustada a $selected repeticiones.'
-          : 'Meta por sesion ajustada a $selected repeticiones.',
+          : 'Meta por sesión ajustada a $selected repeticiones.',
     );
   }
 
@@ -256,7 +256,7 @@ class _DhikrScreenState extends State<DhikrScreen> {
             keyboardType: TextInputType.number,
             autofocus: true,
             decoration: const InputDecoration(
-              labelText: 'Numero de repeticiones',
+              labelText: 'Número de repeticiones',
               hintText: 'Ejemplo: 150',
             ),
           ),
@@ -328,7 +328,7 @@ class _DhikrScreenState extends State<DhikrScreen> {
       return 'Ya casi completas tu objetivo diario.';
     }
     if (progress >= 0.4) {
-      return 'Buen ritmo. Cada repeticion cuenta.';
+      return 'Buen ritmo. Cada repetición cuenta.';
     }
     if (_count == 0) {
       return 'Ciclo completado. Puedes seguir con el siguiente dhikr.';
@@ -861,7 +861,7 @@ class _HistoryCard extends StatelessWidget {
           const SizedBox(height: 10),
           Text(
             snapshot.todayCount == 0
-                ? 'Todavia no hay repeticiones hoy. El primer toque ya empezara tu registro diario.'
+                ? 'Todavía no hay repeticiones hoy. El primer toque ya empezará tu registro diario.'
                 : 'Tu historial diario se guarda automaticamente para que puedas seguir tu constancia.',
             style: GoogleFonts.dmSans(
               fontSize: 11,

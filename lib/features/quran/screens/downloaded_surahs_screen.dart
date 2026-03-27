@@ -41,7 +41,7 @@ class DownloadedSurahsScreen extends ConsumerWidget {
               child: Padding(
                 padding: const EdgeInsets.all(24),
                 child: Text(
-                  'Todavia no has descargado audio de ninguna sura.',
+                  'Todavía no has descargado audio de ninguna sura.',
                   textAlign: TextAlign.center,
                   style: GoogleFonts.dmSans(color: tokens.textSecondary),
                 ),

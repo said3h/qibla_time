@@ -67,7 +67,7 @@ class SupportTab extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              '• Mantenimiento de servidores de oración.\n• Actualización de la biblioteca de Duas.\n• Desarrollo de nuevas funciones offline.\n• Sin publicidad intrusiva, NUNCA.',
+              '• Mantenimiento de servidores de oración.\n• Actualización de la biblioteca de duas.\n• Desarrollo de nuevas funciones offline.\n• Sin publicidad intrusiva, NUNCA.',
               style: TextStyle(color: AppTheme.textLight, height: 1.8),
             ),
           ],

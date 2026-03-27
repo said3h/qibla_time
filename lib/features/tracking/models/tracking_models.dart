@@ -104,7 +104,7 @@ class WeeklySummary {
       return 'Semana muy solida. Has mantenido una constancia excelente.';
     }
     if (completionRate >= 0.6) {
-      return 'Buen ritmo esta semana. Un pequeno empujon te acerca al 5/5.';
+      return 'Buen ritmo esta semana. Un pequeño empujón te acerca al 5/5.';
     }
     return 'Cada oracion cuenta. Intenta cerrar fuerte los proximos dias.';
   }
