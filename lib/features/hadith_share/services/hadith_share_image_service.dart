@@ -101,7 +101,7 @@ class HadithShareImageService {
         ..flushPaint();
 
       image = await repaintBoundary.toImage(pixelRatio: pixelRatio);
-      return _encodePngForMode(image, mode);
+      return await _encodePngForMode(image, mode);
     } finally {
       image?.dispose();
       renderView.child = null;
@@ -156,15 +156,21 @@ class HadithShareImageService {
       return _pngBytes(image);
     }
 
-    final croppedImage = await _cropToVisibleBounds(image);
-    if (identical(croppedImage, image)) {
-      return _pngBytes(image);
-    }
-
     try {
-      return _pngBytes(croppedImage);
-    } finally {
-      croppedImage.dispose();
+      final croppedImage = await _cropToVisibleBounds(image);
+      if (identical(croppedImage, image)) {
+        return _pngBytes(image);
+      }
+
+      try {
+        return _pngBytes(croppedImage);
+      } catch (_) {
+        return _pngBytes(image);
+      } finally {
+        croppedImage.dispose();
+      }
+    } catch (_) {
+      return _pngBytes(image);
     }
   }
 
@@ -177,61 +183,65 @@ class HadithShareImageService {
   }
 
   static Future<ui.Image> _cropToVisibleBounds(ui.Image image) async {
-    final rgbaData = await image.toByteData(format: ui.ImageByteFormat.rawRgba);
-    if (rgbaData == null) {
-      return image;
-    }
-
-    final bytes = rgbaData.buffer.asUint8List();
-    final width = image.width;
-    final height = image.height;
-
-    int? left;
-    int? top;
-    int? right;
-    int? bottom;
-
-    for (var y = 0; y < height; y++) {
-      for (var x = 0; x < width; x++) {
-        final alpha = bytes[((y * width) + x) * 4 + 3];
-        if (alpha == 0) {
-          continue;
-        }
-
-        left = left == null || x < left ? x : left;
-        right = right == null || x > right ? x : right;
-        top = top == null || y < top ? y : top;
-        bottom = bottom == null || y > bottom ? y : bottom;
+    try {
+      final rgbaData = await image.toByteData(format: ui.ImageByteFormat.rawRgba);
+      if (rgbaData == null) {
+        return image;
       }
-    }
 
-    if (left == null || top == null || right == null || bottom == null) {
+      final bytes = rgbaData.buffer.asUint8List();
+      final width = image.width;
+      final height = image.height;
+
+      int? left;
+      int? top;
+      int? right;
+      int? bottom;
+
+      for (var y = 0; y < height; y++) {
+        for (var x = 0; x < width; x++) {
+          final alpha = bytes[((y * width) + x) * 4 + 3];
+          if (alpha == 0) {
+            continue;
+          }
+
+          left = left == null || x < left ? x : left;
+          right = right == null || x > right ? x : right;
+          top = top == null || y < top ? y : top;
+          bottom = bottom == null || y > bottom ? y : bottom;
+        }
+      }
+
+      if (left == null || top == null || right == null || bottom == null) {
+        return image;
+      }
+
+      final cropWidth = right - left + 1;
+      final cropHeight = bottom - top + 1;
+      if (cropWidth == width && cropHeight == height) {
+        return image;
+      }
+
+      final recorder = ui.PictureRecorder();
+      final canvas = Canvas(recorder);
+      final src = Rect.fromLTWH(
+        left.toDouble(),
+        top.toDouble(),
+        cropWidth.toDouble(),
+        cropHeight.toDouble(),
+      );
+      final dst = Rect.fromLTWH(
+        0,
+        0,
+        cropWidth.toDouble(),
+        cropHeight.toDouble(),
+      );
+
+      canvas.drawImageRect(image, src, dst, Paint());
+      final picture = recorder.endRecording();
+      return picture.toImage(cropWidth, cropHeight);
+    } catch (_) {
       return image;
     }
-
-    final cropWidth = right - left + 1;
-    final cropHeight = bottom - top + 1;
-    if (cropWidth == width && cropHeight == height) {
-      return image;
-    }
-
-    final recorder = ui.PictureRecorder();
-    final canvas = Canvas(recorder);
-    final src = Rect.fromLTWH(
-      left.toDouble(),
-      top.toDouble(),
-      cropWidth.toDouble(),
-      cropHeight.toDouble(),
-    );
-    final dst = Rect.fromLTWH(
-      0,
-      0,
-      cropWidth.toDouble(),
-      cropHeight.toDouble(),
-    );
-
-    canvas.drawImageRect(image, src, dst, Paint());
-    final picture = recorder.endRecording();
-    return picture.toImage(cropWidth, cropHeight);
   }
 }
