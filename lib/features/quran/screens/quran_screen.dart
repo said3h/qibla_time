@@ -1,15 +1,18 @@
 import 'dart:async';
 
 import 'package:audioplayers/audioplayers.dart';
+import 'package:cross_file/cross_file.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../core/services/audio_service.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../hafiz/screens/hafiz_mode_screen.dart';
 import '../../quran_share/services/ayah_share_service.dart';
+import '../../quran_share/services/ayah_share_video_service.dart';
 import '../models/quran_models.dart';
 import 'allah_names_screen.dart';
 import '../services/quran_audio_download_service.dart';
@@ -685,6 +688,7 @@ enum _QuranPlaybackMode {
 enum _AyahShareAction {
   text,
   image,
+  video,
 }
 
 class _QueuedAyahAudio {
@@ -841,6 +845,16 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                 onTap: () =>
                     Navigator.of(sheetContext).pop(_AyahShareAction.image),
               ),
+              ListTile(
+                leading: const Icon(Icons.movie_outlined),
+                title: const Text('Compartir video'),
+                subtitle: Text(
+                  'Generar un MP4 con la tarjeta y la recitación.',
+                  style: GoogleFonts.dmSans(fontSize: 12),
+                ),
+                onTap: () =>
+                    Navigator.of(sheetContext).pop(_AyahShareAction.video),
+              ),
             ],
           ),
         );
@@ -874,6 +888,62 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
           );
         }
         return;
+      case _AyahShareAction.video:
+        await _shareAyahAsVideo(ayah);
+        return;
+    }
+  }
+
+  Future<void> _shareAyahAsVideo(SurahAyah ayah) async {
+    final videoService = ref.read(ayahShareVideoServiceProvider);
+    final messenger = ScaffoldMessenger.of(context);
+
+    try {
+      final draft = await videoService.prepareDraft(
+        summary: widget.summary,
+        ayah: ayah,
+      );
+      if (!mounted) return;
+
+      if (draft == null) {
+        messenger.hideCurrentSnackBar();
+        messenger.showSnackBar(
+          const SnackBar(
+            content: Text(
+              'No hay audio disponible para generar el video de esta aleya.',
+            ),
+          ),
+        );
+        return;
+      }
+
+      messenger.hideCurrentSnackBar();
+      messenger.showSnackBar(
+        const SnackBar(
+          duration: Duration(seconds: 45),
+          content: Text('Generando video de la aleya...'),
+        ),
+      );
+
+      final file = await videoService.exportVideo(draft);
+      if (!mounted) return;
+
+      messenger.hideCurrentSnackBar();
+      await Share.shareXFiles(
+        [XFile(file.path)],
+        text: 'Aleya ${ayah.numberInSurah} de ${widget.summary.nameLatin}',
+      );
+    } catch (_) {
+      if (!mounted) return;
+
+      messenger.hideCurrentSnackBar();
+      messenger.showSnackBar(
+        const SnackBar(
+          content: Text(
+            'No se pudo generar el video de esta aleya ahora mismo.',
+          ),
+        ),
+      );
     }
   }
 
