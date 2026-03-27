@@ -44,7 +44,8 @@ class HadithShareImageService {
     final renderView = RenderView(
       view: view,
       configuration: ViewConfiguration(
-        size: captureTheme.canvasSize,
+        logicalConstraints: BoxConstraints.tight(captureTheme.canvasSize),
+        physicalConstraints: BoxConstraints.tight(captureTheme.canvasSize),
         devicePixelRatio: 1.0,
       ),
       child: RenderPositionedBox(
