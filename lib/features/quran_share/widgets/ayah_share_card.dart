@@ -102,6 +102,26 @@ class AyahShareCard extends StatelessWidget {
             SizedBox(height: resolvedTheme.contentSpacing),
             SizedBox(
               width: double.infinity,
+              child: Directionality(
+                textDirection: TextDirection.rtl,
+                child: Text(
+                  data.arabicReferenceLabel,
+                  textAlign: TextAlign.right,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontFamily: resolvedTheme.arabicFontFamily,
+                    fontSize: resolvedTheme.referenceFontSize * 1.02,
+                    height: resolvedTheme.referenceLineHeight,
+                    fontWeight: FontWeight.w600,
+                    color: resolvedTheme.secondaryTextColor,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: resolvedTheme.contentSpacing * 0.55),
+            SizedBox(
+              width: double.infinity,
               child: Text(
                 data.referenceLabel,
                 textAlign: TextAlign.left,
@@ -120,7 +140,7 @@ class AyahShareCard extends StatelessWidget {
               width: double.infinity,
               child: Text(
                 data.branding.trim(),
-                textAlign: TextAlign.left,
+                textAlign: TextAlign.center,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: GoogleFonts.dmSans(

@@ -19,6 +19,7 @@ import '../../quran_share/services/ayah_share_video_service.dart';
 import '../models/quran_models.dart';
 import 'allah_names_screen.dart';
 import '../services/quran_audio_download_service.dart';
+import '../services/quran_mini_player_service.dart';
 import '../services/quran_reading_service.dart';
 import '../services/quran_service.dart';
 
@@ -777,7 +778,6 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     _playerStateSubscription?.cancel();
     _playerCompleteSubscription?.cancel();
     _prefetchingAyahTasks.clear();
-    _audioService.stop();
     super.dispose();
   }
 
@@ -1429,6 +1429,12 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
         sourceKey: sourceKey,
       );
       if (!mounted) return;
+      ref.read(quranMiniPlayerControllerProvider.notifier).setSession(
+            surahName: widget.summary.nameLatin,
+            surahNumber: widget.summary.number,
+            ayahNumber: ayah.numberInSurah,
+            isPlaying: true,
+          );
       _resolvedSurahQueue.clear();
       _prefetchingAyahTasks.clear();
       setState(() {
@@ -1440,6 +1446,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       });
     } catch (_) {
       if (!mounted) return;
+      ref.read(quranMiniPlayerControllerProvider.notifier).clear();
       _resolvedSurahQueue.clear();
       _prefetchingAyahTasks.clear();
       setState(() {
@@ -1462,6 +1469,12 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     final sourceKey = 'quran:surah:${widget.summary.number}:${ayah.numberInSurah}';
 
     if (mounted) {
+      ref.read(quranMiniPlayerControllerProvider.notifier).setSession(
+            surahName: widget.summary.nameLatin,
+            surahNumber: widget.summary.number,
+            ayahNumber: ayah.numberInSurah,
+            isPlaying: true,
+          );
       setState(() {
         _playbackMode = _QuranPlaybackMode.surah;
         _surahQueueIndex = index;
@@ -1518,6 +1531,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       await _playSurahQueueIndex(0);
     } catch (_) {
       if (!mounted) return;
+      ref.read(quranMiniPlayerControllerProvider.notifier).clear();
       _resolvedSurahQueue.clear();
       _prefetchingAyahTasks.clear();
       setState(() {
@@ -1555,6 +1569,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   Future<void> _stopActiveAudio() async {
     await _audioService.stop();
     if (!mounted) return;
+    ref.read(quranMiniPlayerControllerProvider.notifier).clear();
     _resolvedSurahQueue.clear();
     _prefetchingAyahTasks.clear();
     setState(() {

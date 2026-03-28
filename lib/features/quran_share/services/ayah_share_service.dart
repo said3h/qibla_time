@@ -24,7 +24,7 @@ class AyahShareService {
       if (arabic.isNotEmpty) arabic,
       if (translation.isNotEmpty) translation,
       '\u2014 ${summary.nameLatin} (${summary.number}:${ayah.numberInSurah})',
-      'Qibla',
+      'App: Qibla Time',
     ];
 
     return sections.join('\n\n');
@@ -46,10 +46,11 @@ class AyahShareService {
       data: AyahShareData(
         surahNumber: summary.number,
         surahNameLatin: summary.nameLatin,
+        surahNameArabic: summary.nameArabic,
         ayahNumber: ayah.numberInSurah,
         arabicText: ayah.arabic,
         translation: ayah.translation,
-        branding: 'Qibla',
+        branding: 'App: Qibla Time',
       ),
       theme: AyahShareThemeData.fromTokens(
         tokens,

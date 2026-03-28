@@ -22,6 +22,7 @@ class AyahShareVideoDraft {
   const AyahShareVideoDraft({
     required this.surahNumber,
     required this.surahNameLatin,
+    required this.surahNameArabic,
     required this.ayahNumber,
     required this.arabicText,
     required this.translation,
@@ -31,6 +32,7 @@ class AyahShareVideoDraft {
 
   final int surahNumber;
   final String surahNameLatin;
+  final String surahNameArabic;
   final int ayahNumber;
   final String arabicText;
   final String translation;
@@ -64,6 +66,7 @@ class AyahShareVideoService {
     return AyahShareVideoDraft(
       surahNumber: summary.number,
       surahNameLatin: summary.nameLatin,
+      surahNameArabic: summary.nameArabic,
       ayahNumber: ayah.numberInSurah,
       arabicText: ayah.arabic,
       translation: ayah.translation,
@@ -83,10 +86,11 @@ class AyahShareVideoService {
       data: AyahShareData(
         surahNumber: draft.surahNumber,
         surahNameLatin: draft.surahNameLatin,
+        surahNameArabic: draft.surahNameArabic,
         ayahNumber: draft.ayahNumber,
         arabicText: draft.arabicText,
         translation: draft.translation,
-        branding: 'Qibla',
+        branding: 'App: Qibla Time',
       ),
       theme: AyahShareThemeData.fromTokens(
         QiblaThemes.current,
