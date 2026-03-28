@@ -67,7 +67,7 @@ class WeeklyDaySummary {
   }
 
   String get shortLabel {
-    const labels = ['Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom'];
+    const labels = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
     return labels[date.weekday - 1];
   }
 }
@@ -98,15 +98,15 @@ class WeeklySummary {
 
   String get interpretation {
     if (!hasAnyActivity) {
-      return 'Empieza marcando tus oraciones y veras aqui tu semana.';
+      return 'Empieza marcando tus oraciones y verás aquí tu semana.';
     }
     if (completionRate >= 0.85) {
-      return 'Semana muy solida. Has mantenido una constancia excelente.';
+      return 'Semana muy sólida. Has mantenido una constancia excelente.';
     }
     if (completionRate >= 0.6) {
       return 'Buen ritmo esta semana. Un pequeño empujón te acerca al 5/5.';
     }
-    return 'Cada oracion cuenta. Intenta cerrar fuerte los proximos dias.';
+    return 'Cada oración cuenta. Intenta cerrar fuerte los próximos días.';
   }
 }
 

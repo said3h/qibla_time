@@ -22,7 +22,7 @@ class HadithShareService {
       if (arabic.isNotEmpty) arabic,
       if (translation.isNotEmpty) translation,
       if (reference.isNotEmpty) '\u2014 $reference',
-      'Qibla',
+      'App: Qibla Time',
     ];
 
     return sections.join('\n\n');
@@ -41,7 +41,7 @@ class HadithShareService {
         arabicText: hadith.arabic,
         translation: hadith.translation,
         reference: hadith.reference,
-        branding: 'Qibla',
+        branding: 'App: Qibla Time',
       ),
       theme: HadithShareThemeData.fromTokens(
         tokens,
@@ -54,7 +54,7 @@ class HadithShareService {
 
     await Share.shareXFiles(
       [XFile(file.path)],
-      text: 'Hadith diario de Qibla',
+      text: 'Hadith diario de Qibla Time',
     );
   }
 }

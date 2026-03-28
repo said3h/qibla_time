@@ -321,7 +321,7 @@ class _DhikrScreenState extends State<DhikrScreen> {
       return 'Empieza con unas repeticiones y guardaremos tu avance de hoy.';
     }
     if (snapshot.dailyGoalReached) {
-      return 'Meta diaria completada. Si quieres, continua con calma.';
+      return 'Meta diaria completada. Si quieres, continúa con calma.';
     }
     final progress = snapshot.todayCount / snapshot.dailyGoal;
     if (progress >= 0.75) {
@@ -396,7 +396,7 @@ class _DhikrScreenState extends State<DhikrScreen> {
                   ),
                 ),
                 IconButton(
-                  tooltip: 'Reiniciar sesion',
+                  tooltip: 'Reiniciar sesión',
                   onPressed: _resetSession,
                   icon: Icon(Icons.refresh, color: tokens.primary),
                 ),
@@ -585,7 +585,7 @@ class _DhikrScreenState extends State<DhikrScreen> {
                   foregroundColor: tokens.textSecondary,
                 ),
                 icon: const Icon(Icons.refresh_rounded),
-                label: const Text('Reiniciar sesion'),
+                label: const Text('Reiniciar sesión'),
               ),
             ),
           ],
@@ -634,7 +634,7 @@ class _GoalCard extends StatelessWidget {
             children: [
               Expanded(
                 child: _GoalTile(
-                  label: 'Por sesion',
+                  label: 'Por sesión',
                   value: '$sessionGoal',
                   onTap: onSessionTap,
                 ),
@@ -804,7 +804,7 @@ class _HistoryCard extends StatelessWidget {
               ),
               Expanded(
                 child: _HistoryStat(
-                  label: '7 dias',
+                  label: '7 días',
                   value: '${snapshot.rollingWeekCount}',
                 ),
               ),
@@ -862,7 +862,7 @@ class _HistoryCard extends StatelessWidget {
           Text(
             snapshot.todayCount == 0
                 ? 'Todavía no hay repeticiones hoy. El primer toque ya empezará tu registro diario.'
-                : 'Tu historial diario se guarda automaticamente para que puedas seguir tu constancia.',
+                : 'Tu historial diario se guarda automáticamente para que puedas seguir tu constancia.',
             style: GoogleFonts.dmSans(
               fontSize: 11,
               height: 1.5,

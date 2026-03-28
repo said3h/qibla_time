@@ -17,7 +17,7 @@ class SupportScreen extends StatelessWidget {
     return Scaffold(
        backgroundColor: AppTheme.backgroundWhite,
        appBar: AppBar(
-         title: const Text('Support QiblaTime', style: TextStyle(fontWeight: FontWeight.bold)),
+         title: const Text('Apoya Qibla Time', style: TextStyle(fontWeight: FontWeight.bold)),
        ),
        body: ListView(
          padding: const EdgeInsets.all(24.0),
@@ -25,51 +25,51 @@ class SupportScreen extends StatelessWidget {
            const Icon(Icons.favorite, color: Colors.red, size: 80),
            const SizedBox(height: 24),
             Text(
-              'JazakAllah Khair!',
+              'Jazak Allahu khayran',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: AppTheme.primaryGreen),
             ),
            const SizedBox(height: 16),
             Text(
-              'QiblaTime is completely free and contains absolutely zero intrusive ads.\n\nDeveloping and maintaining accurate astronomical algorithms and testing on multiple devices takes considerable time and effort.',
+              'Qibla Time es completamente gratuita y no tiene anuncios intrusivos.\n\nDesarrollar y mantener algoritmos astronómicos precisos, además de probar la app en varios dispositivos, requiere tiempo y dedicación.',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 16, color: AppTheme.textDark, height: 1.5),
             ),
            const SizedBox(height: 48),
             Text(
-              'How you can help:',
+              'Cómo puedes ayudar:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppTheme.textDark),
             ),
            const SizedBox(height: 16),
            _buildSupportCard(
              icon: Icons.star_rate,
-             title: 'Rate the App',
-             description: 'Leave a 5-star review on the App Store / Play Store. It helps others find us!',
+             title: 'Valora la app',
+             description: 'Deja una reseña de 5 estrellas en App Store o Play Store. Ayuda a que más personas nos encuentren.',
              onTap: () {
                // Usually requires the specific App ID
-               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('App store link coming soon!')));
+               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('El enlace a la tienda estará disponible próximamente.')));
              },
            ),
            _buildSupportCard(
              icon: Icons.share,
-             title: 'Share with Friends',
-             description: 'Recommend QiblaTime to your family and friends.',
+             title: 'Compártela con tus amigos',
+             description: 'Recomienda Qibla Time a tu familia y a tus amistades.',
              onTap: () {
                 // Implementing this would use the `share_plus` package
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Sharing feature coming soon!')));
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('La opción para compartir estará disponible próximamente.')));
              },
            ),
            _buildSupportCard(
              icon: Icons.coffee,
-             title: 'Sadaqah (Make a Donation)',
-             description: 'Support development costs directly.',
+             title: 'Sadaqah (haz una donación)',
+             description: 'Ayuda directamente a cubrir los costes de desarrollo.',
              onTap: () => _launchUrl('https://example.com/donate'), // Placeholder for real donation link (e.g., BuyMeACoffee or similar platform)
            ),
            const SizedBox(height: 24),
            const Divider(),
            const SizedBox(height: 16),
             Text(
-              '"Charity does not decrease wealth."\n— Prophet Muhammad (PBUH)',
+              '"La caridad no disminuye la riqueza."\n— Profeta Muhammad (la paz y las bendiciones sean con él)',
               textAlign: TextAlign.center,
               style: TextStyle(fontStyle: FontStyle.italic, color: AppTheme.textLight),
            )

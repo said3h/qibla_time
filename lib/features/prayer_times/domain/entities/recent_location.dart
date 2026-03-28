@@ -23,7 +23,7 @@ class RecentLocation {
 
   factory RecentLocation.fromJson(Map<String, dynamic> json) {
     return RecentLocation(
-      label: json['label'] as String? ?? 'Ubicacion desconocida',
+      label: json['label'] as String? ?? 'Ubicación desconocida',
       latitude: (json['latitude'] as num?)?.toDouble() ?? 0,
       longitude: (json['longitude'] as num?)?.toDouble() ?? 0,
       timezone: json['timezone'] as String? ?? '',

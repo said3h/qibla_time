@@ -43,7 +43,7 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
-  static const _weekdays = ['Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom'];
+  static const _weekdays = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
   static const _generateHomeInsights = GenerateHomeInsightsUseCase();
 
   bool _hadithExpanded = false;
@@ -224,7 +224,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'QiblaTime',
+                  'Qibla Time',
                   style: GoogleFonts.amiri(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -232,7 +232,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                 ),
                 Text(
-                  '${isOnline ? 'En linea' : 'Sin red'} - ${locationLabel ?? 'Ubicacion pendiente'}',
+                  '${isOnline ? 'En línea' : 'Sin red'} - ${locationLabel ?? 'Ubicación pendiente'}',
                   style: GoogleFonts.dmSans(
                     fontSize: 10,
                     color: tokens.textSecondary,
@@ -450,7 +450,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             children: [
               Expanded(
                 child: Text(
-                  'Proxima oracion'.toUpperCase(),
+                  'Próxima oración'.toUpperCase(),
                   style: GoogleFonts.dmSans(
                     fontSize: 9,
                     color: hero.label,
@@ -466,7 +466,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   border: Border.all(color: tokens.primaryBorder),
                 ),
                 child: Text(
-                  '$streak dias seguidos',
+                  '$streak días seguidos',
                   style: GoogleFonts.dmSans(
                     fontSize: 10,
                     color: tokens.primaryLight,
@@ -563,7 +563,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   border: Border.all(color: tokens.primaryBorder),
                 ),
                 child: Text(
-                  '$streak dias seguidos',
+                  '$streak días seguidos',
                   style: GoogleFonts.dmSans(
                     fontSize: 10,
                     color: tokens.primaryLight,
@@ -710,7 +710,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     String message;
     if (completedCount == 5) {
-      message = 'Dia completo. Mantienes tu ritmo con $streak dias seguidos.';
+      message = 'Día completo. Mantienes tu ritmo con $streak días seguidos.';
     } else if (nextPrayerInfo != null &&
         !completedPrayers.contains(nextPrayerInfo.prayer.key)) {
       message =
@@ -718,7 +718,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     } else if (remainingPrayers.isNotEmpty) {
       message = 'Te faltan ${remainingPrayers.length} oraciones hoy.';
     } else {
-      message = 'En cuanto tengamos horarios, veras aqui tu progreso de hoy.';
+      message = 'En cuanto tengamos horarios, verás aquí tu progreso de hoy.';
     }
 
     return Padding(
@@ -823,7 +823,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     final text = !systemPermissionGranted
         ? 'Tus recordatorios de Adhan estan configurados, pero el permiso del sistema sigue pendiente.'
-        : 'Los avisos generales de oracion estan pausados ahora mismo.';
+        : 'Los avisos generales de oración están pausados ahora mismo.';
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
@@ -884,7 +884,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ? 'Faltan ${_formatRamadanCountdown(targetTime.difference(now))} para Imsak'
         : beforeIftar
         ? 'Faltan ${_formatRamadanCountdown(targetTime.difference(now))} para Iftar'
-        : 'Faltan ${_formatRamadanCountdown(targetTime.difference(now))} para Imsak de manana';
+        : 'Faltan ${_formatRamadanCountdown(targetTime.difference(now))} para Imsak de mañana';
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
@@ -1147,13 +1147,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             const SizedBox(height: 10),
             Row(
               children: [
-                Expanded(child: _summaryMetric(tokens, '${summary.fullDays}', 'dias 5/5')),
+                Expanded(child: _summaryMetric(tokens, '${summary.fullDays}', 'días 5/5')),
                 Expanded(child: _summaryMetric(tokens, '${summary.currentStreak}', 'racha actual')),
                 Expanded(
                   child: _summaryMetric(
                     tokens,
                     summary.strongestDay.shortLabel,
-                    '${summary.strongestDay.completed}/5 mejor dia',
+                    '${summary.strongestDay.completed}/5 mejor día',
                   ),
                 ),
               ],
@@ -1273,7 +1273,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             const SizedBox(height: 8),
             Text(
               completedCount == items.length
-                  ? 'Jornada de Ramadan muy completa. Manten este ritmo con calma.'
+                  ? 'Jornada de Ramadán muy completa. Mantén este ritmo con calma.'
                   : completedCount >= 2
                   ? 'Vas bien hoy. Un pequeño paso más puede cerrar tu día con fuerza.'
                   : 'Empieza por algo pequeño: una oración, unas aleyas o unos minutos de dhikr.',
@@ -1521,14 +1521,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       return 'Preparando tus horarios';
     }
     if (!diagnostic.serviceEnabled) {
-      return 'Activa la ubicacion del dispositivo';
+      return 'Activa la ubicación del dispositivo';
     }
     if (diagnostic.permissionStatus ==
         PrayerLocationPermissionStatus.deniedForever) {
-      return 'Permiso de ubicacion bloqueado';
+      return 'Permiso de ubicación bloqueado';
     }
     if (diagnostic.permissionStatus == PrayerLocationPermissionStatus.denied) {
-      return 'Permite la ubicacion para ver tus horarios';
+      return 'Permite la ubicación para ver tus horarios';
     }
     return 'Preparando tus horarios';
   }
@@ -1542,10 +1542,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     }
     if (diagnostic.permissionStatus ==
         PrayerLocationPermissionStatus.deniedForever) {
-      return 'Puedes activar la ubicacion para QiblaTime desde Ajustes del sistema cuando quieras.';
+      return 'Puedes activar la ubicación para Qibla Time desde los ajustes del sistema cuando quieras.';
     }
     if (diagnostic.permissionStatus == PrayerLocationPermissionStatus.denied) {
-      return 'QiblaTime necesita tu ubicacion para mostrar horarios fiables segun tu ciudad.';
+      return 'Qibla Time necesita tu ubicación para mostrar horarios fiables según tu ciudad.';
     }
     if (diagnostic.hasCachedLocation) {
       return 'Estamos preparando tus horarios usando la última ubicación guardada.';
@@ -1850,7 +1850,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       TextButton(
                         onPressed: () =>
                             setState(() => _hadithExpanded = !_hadithExpanded),
-                        child: Text(_hadithExpanded ? 'Ver menos' : 'Ver mas'),
+                        child: Text(_hadithExpanded ? 'Ver menos' : 'Ver más'),
                       ),
                       TextButton(
                         onPressed: () {
@@ -2062,10 +2062,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     const weekdays = [
       'Lunes',
       'Martes',
-      'Miercoles',
+      'Miércoles',
       'Jueves',
       'Viernes',
-      'Sabado',
+      'Sábado',
       'Domingo',
     ];
     return '${weekdays[date.weekday - 1]} ${date.day}/${date.month}';
@@ -2073,7 +2073,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   String _formatRemaining(Duration? remaining) {
     if (remaining == null) {
-      return 'sin cuenta atras';
+      return 'sin cuenta atrás';
     }
     return 'en ${remaining.inHours}h ${remaining.inMinutes.remainder(60)}min';
   }

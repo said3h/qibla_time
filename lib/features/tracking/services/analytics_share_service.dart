@@ -39,10 +39,10 @@ class AnalyticsShareService {
   }
 
   String _shareText(WeeklySummary summary, TrackingState tracking) {
-    return 'Mi progreso en QiblaTime\n'
-        'Racha actual: ${tracking.currentStreak} dias\n'
+    return 'Mi progreso en Qibla Time\n'
+        'Racha actual: ${tracking.currentStreak} días\n'
         'Esta semana: ${summary.prayersCompleted}/${summary.maxPossible} oraciones\n'
-        'Mejor dia: ${summary.strongestDay.shortLabel}\n'
+        'Mejor día: ${summary.strongestDay.shortLabel}\n'
         '${summary.interpretation}';
   }
 
@@ -107,7 +107,7 @@ class AnalyticsShareService {
 
     _paintText(
       canvas,
-      text: tracking.currentStreak == 1 ? 'dia seguido' : 'dias seguidos',
+      text: tracking.currentStreak == 1 ? 'día seguido' : 'días seguidos',
       style: GoogleFonts.dmSans(
         fontSize: 28,
         color: tokens.textSecondary,
@@ -129,14 +129,14 @@ class AnalyticsShareService {
       tokens: tokens,
       rect: Rect.fromLTWH(400, statsTop, 280, 172),
       value: summary.strongestDay.shortLabel,
-      label: '${summary.strongestDay.completed}/5 mejor dia',
+      label: '${summary.strongestDay.completed}/5 mejor día',
     );
     _drawStatCard(
       canvas,
       tokens: tokens,
       rect: Rect.fromLTWH(708, statsTop, 280, 172),
       value: '${summary.fullDays}',
-      label: 'dias completos',
+      label: 'días completos',
     );
 
     _paintText(
@@ -154,7 +154,7 @@ class AnalyticsShareService {
 
     _paintText(
       canvas,
-      text: 'QiblaTime',
+      text: 'Qibla Time',
       style: GoogleFonts.amiri(
         fontSize: 34,
         fontWeight: FontWeight.bold,
@@ -179,7 +179,7 @@ class AnalyticsShareService {
     final image = await picture.toImage(width.toInt(), height.toInt());
     final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
     if (byteData == null) {
-      throw StateError('No se pudo generar la imagen de estadisticas.');
+      throw StateError('No se pudo generar la imagen de estadísticas.');
     }
     return byteData.buffer.asUint8List();
   }

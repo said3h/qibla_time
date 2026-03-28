@@ -28,7 +28,7 @@ class AnalyticsScreen extends ConsumerWidget {
         backgroundColor: tokens.bgApp,
         elevation: 0,
         title: Text(
-          'Estadisticas',
+          'Estadísticas',
           style: GoogleFonts.amiri(
             fontSize: 26,
             fontWeight: FontWeight.bold,
@@ -197,7 +197,7 @@ class _EmptyAnalyticsState extends StatelessWidget {
                   border: Border.all(color: tokens.primaryBorder),
                 ),
                 child: Text(
-                  'Consejo: empieza marcando una sola oracion hoy para desbloquear tus estadisticas.',
+                  'Consejo: empieza marcando una sola oración hoy para desbloquear tus estadísticas.',
                   textAlign: TextAlign.center,
                   style: GoogleFonts.dmSans(
                     fontSize: 11,
@@ -244,16 +244,16 @@ class _WeeklySummaryCard extends StatelessWidget {
               const SizedBox(width: 12),
               Expanded(
                 child: _SummaryStat(
-                  label: 'Dias 5/5',
+                  label: 'Días 5/5',
                   value: '${summary.fullDays}',
-                  helper: 'dias completos',
+                  helper: 'días completos',
                   tokens: tokens,
                 ),
               ),
               const SizedBox(width: 12),
               Expanded(
                 child: _SummaryStat(
-                  label: 'Mejor dia',
+                  label: 'Mejor día',
                   value: summary.strongestDay.shortLabel,
                   helper: '${summary.strongestDay.completed}/5',
                   tokens: tokens,
@@ -382,7 +382,7 @@ class _StreakCard extends StatelessWidget {
                 Text(
                   streak == 0
                       ? 'Sin racha activa'
-                      : '$streak ${streak == 1 ? 'dia' : 'dias'} seguidos',
+                      : '$streak ${streak == 1 ? 'día' : 'días'} seguidos',
                   style: GoogleFonts.amiri(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
@@ -393,7 +393,7 @@ class _StreakCard extends StatelessWidget {
                 Text(
                   streak == 0
                       ? 'Completa hoy tus 5 oraciones para empezar.'
-                      : 'Tu mejor racha es de $best dias.',
+                      : 'Tu mejor racha es de $best días.',
                   style: GoogleFonts.dmSans(
                     fontSize: 12,
                     color: tokens.textSecondary,
@@ -447,7 +447,7 @@ class _AchievementsCard extends StatelessWidget {
             data: (items) {
               if (items.isEmpty) {
                 return Text(
-                  'Tus logros apareceran aqui a medida que avances.',
+                  'Tus logros aparecerán aquí a medida que avances.',
                   style: GoogleFonts.dmSans(
                     fontSize: 13,
                     color: tokens.textSecondary,
@@ -608,7 +608,7 @@ class _HeatmapCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _SectionTitle(title: 'Ultimos 30 dias', tokens: tokens),
+          _SectionTitle(title: 'Últimos 30 días', tokens: tokens),
           const SizedBox(height: 14),
           GridView.builder(
             shrinkWrap: true,
@@ -641,7 +641,7 @@ class _HeatmapCard extends StatelessWidget {
               ),
               const SizedBox(width: 6),
               Text(
-                'Mas',
+                'Más',
                 style: GoogleFonts.dmSans(
                   fontSize: 10,
                   color: tokens.textMuted,
@@ -741,7 +741,7 @@ class _PrayerProgressCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _SectionTitle(title: 'Por oracion - ultimos 30 dias', tokens: tokens),
+          _SectionTitle(title: 'Por oración - últimos 30 días', tokens: tokens),
           const SizedBox(height: 14),
           ..._prayers.map(
             (prayer) => Padding(
@@ -887,14 +887,14 @@ class _MonthlyTotalsCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     _StatRow(
-                      label: 'Dias completos',
-                      value: '${stats.fullDays} dias',
+                      label: 'Días completos',
+                      value: '${stats.fullDays} días',
                       tokens: tokens,
                     ),
                     const SizedBox(height: 10),
                     _StatRow(
                       label: 'Mejor racha',
-                      value: '${tracking.bestStreak} dias',
+                      value: '${tracking.bestStreak} días',
                       tokens: tokens,
                     ),
                   ],

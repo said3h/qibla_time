@@ -36,17 +36,17 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
   static const _categoryMeta = <String, ({IconData icon, String label, String hint})>{
     'morning': (
       icon: Icons.wb_sunny_outlined,
-      label: 'Manana',
-      hint: 'Inicio del dia',
+      label: 'Mañana',
+      hint: 'Inicio del día',
     ),
     'night': (
       icon: Icons.nights_stay_outlined,
       label: 'Noche',
-      hint: 'Cierre del dia',
+      hint: 'Cierre del día',
     ),
     'sleep': (
       icon: Icons.bedtime_outlined,
-      label: 'Sueno',
+      label: 'Sueño',
       hint: 'Antes de dormir',
     ),
     'travel': (
@@ -57,22 +57,22 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
     'food': (
       icon: Icons.restaurant_outlined,
       label: 'Comida',
-      hint: 'Antes y despues',
+      hint: 'Antes y después',
     ),
     'sickness': (
       icon: Icons.local_hospital_outlined,
       label: 'Enfermedad',
-      hint: 'Curacion y visita',
+      hint: 'Curación y visita',
     ),
     'protection': (
       icon: Icons.shield_outlined,
-      label: 'Proteccion',
+      label: 'Protección',
       hint: 'Refugio y cuidado',
     ),
     'repentance': (
       icon: Icons.refresh_outlined,
       label: 'Arrepentimiento',
-      hint: 'Perdon y vuelta',
+      hint: 'Perdón y vuelta',
     ),
     'mosque': (
       icon: Icons.mosque_outlined,
@@ -125,7 +125,7 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
             padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
             children: [
               Text(
-                'Dua & Adhkar',
+                'Dua y adhkar',
                 style: GoogleFonts.amiri(
                   fontSize: 26,
                   color: tokens.primary,
@@ -185,7 +185,7 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
       padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
       children: [
         Text(
-          'Dua & Adhkar',
+          'Dua y adhkar',
           style: GoogleFonts.amiri(
             fontSize: 26,
             color: tokens.primary,
@@ -344,7 +344,7 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
                 (
                   icon: Icons.auto_awesome_outlined,
                   label: key,
-                  hint: 'Categoria',
+                  hint: 'Categoría',
                 );
             final selectedCategory = key == effectiveCategory;
             final count = grouped[key]?.length ?? 0;

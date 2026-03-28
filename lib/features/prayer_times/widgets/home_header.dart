@@ -32,7 +32,7 @@ class HomeHeader extends StatelessWidget {
               children: [
                 // QiblaTime logo
                 Text(
-                  'QiblaTime',
+                  'Qibla Time',
                   style: GoogleFonts.amiri(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,

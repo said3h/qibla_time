@@ -66,7 +66,7 @@ class GenerateHomeInsightsUseCase {
           title: 'Empieza hoy',
           message: activeDays == 0
               ? 'Marca tus primeras oraciones y la app empezará a mostrar patrones útiles.'
-              : 'Sigue marcando tus oraciones y verás insights más precisos en Inicio.',
+              : 'Sigue marcando tus oraciones y verás patrones más precisos en Inicio.',
         ),
       );
     }
@@ -227,8 +227,8 @@ class GenerateHomeInsightsUseCase {
     if (weeklySummary.completionRate >= 0.7) {
       return const HomeInsight(
         kind: HomeInsightKind.ramadan,
-        title: 'Buena constancia en Ramadan',
-        message: 'Durante Ramadan estas manteniendo un ritmo solido en tus oraciones.',
+        title: 'Buena constancia en Ramadán',
+        message: 'Durante Ramadán estás manteniendo un ritmo sólido en tus oraciones.',
       );
     }
 
@@ -236,14 +236,14 @@ class GenerateHomeInsightsUseCase {
       return const HomeInsight(
         kind: HomeInsightKind.ramadan,
         title: 'Aprovecha el impulso de hoy',
-        message: 'Ramadan es un buen momento para cerrar fuerte el resto del dia.',
+        message: 'Ramadán es un buen momento para cerrar fuerte el resto del día.',
       );
     }
 
     return HomeInsight(
       kind: HomeInsightKind.ramadan,
       title: ramadanStatus.headerLabel,
-      message: 'Las pequenas constancias de hoy pueden pesar mucho durante Ramadan.',
+      message: 'Las pequeñas constancias de hoy pueden pesar mucho durante Ramadán.',
     );
   }
 

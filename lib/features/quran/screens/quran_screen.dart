@@ -1182,7 +1182,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
 
     switch (source) {
       case SurahLoadSource.online:
-        return 'Puedes escuchar la sura completa en reproduccion continua.$availabilityNote$downloadNote';
+        return 'Puedes escuchar la sura completa en reproducción continua.$availabilityNote$downloadNote';
       case SurahLoadSource.offline:
         return 'La sura puede sonar completa si tienes conexión.$availabilityNote$downloadNote';
       case SurahLoadSource.placeholder:
@@ -1247,7 +1247,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text(
-            'No se pudo iniciar la recitacion completa ahora mismo.',
+            'No se pudo iniciar la recitación completa ahora mismo.',
           ),
         ),
       );
@@ -1376,7 +1376,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                                 border: Border.all(color: tokens.primaryBorder),
                               ),
                               child: Text(
-                                'Ultima lectura',
+                                'Última lectura',
                                 style: GoogleFonts.dmSans(
                                   fontSize: 10,
                                   color: tokens.primaryLight,

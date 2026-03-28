@@ -37,7 +37,7 @@ class NotificationService {
       android: AndroidNotificationDetails(
         'adhan_channel',
         'Adhan',
-        channelDescription: 'Notificaciones de tiempo de oracion',
+        channelDescription: 'Notificaciones de horario de oración',
         importance: Importance.max,
         priority: Priority.high,
         sound: UriAndroidNotificationSound(androidSound),
@@ -54,8 +54,8 @@ class NotificationService {
 
     await _plugin.zonedSchedule(
       id,
-      'QiblaTime - $prayerName',
-      'Es la hora de la oracion',
+      'Qibla Time - $prayerName',
+      'Es la hora de la oración',
       tz.TZDateTime.from(scheduledAt, tz.local),
       details,
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
@@ -73,8 +73,8 @@ class NotificationService {
     final details = NotificationDetails(
       android: const AndroidNotificationDetails(
         'qiblatime_reminders',
-        'QiblaTime Reminders',
-        channelDescription: 'Recordatorios contextuales de Ramadan y Jumu\'ah',
+        'Qibla Time - Recordatorios',
+        channelDescription: 'Recordatorios contextuales de Ramadán y Yumu\'ah',
         importance: Importance.high,
         priority: Priority.high,
         playSound: true,

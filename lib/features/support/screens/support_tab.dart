@@ -21,20 +21,20 @@ class SupportTab extends StatelessWidget {
             const Icon(Icons.favorite_rounded, color: Colors.redAccent, size: 64),
             const SizedBox(height: 24),
             Text(
-              'Apoya el Desarrollo',
+              'Apoya el desarrollo',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppTheme.primaryGreen),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 16),
             Text(
-              'QiblaTime es y siempre será gratuita para la Ummah. Tu apoyo nos ayuda a cubrir los costes de servidores y APIs, y a seguir añadiendo funciones premium.',
+              'Qibla Time es y siempre será gratuita para la ummah. Tu apoyo nos ayuda a cubrir los costes de servidores y API, y a seguir añadiendo funciones útiles.',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 16, color: AppTheme.textLight, height: 1.5),
             ),
             const SizedBox(height: 32),
             _buildSupportOption(
               context,
-              'Ver un Anuncio Voluntario',
+              'Ver un anuncio voluntario',
               'Una forma rápida y gratuita de ayudarnos.',
               Icons.play_circle_outline,
               Colors.orange,
@@ -43,7 +43,7 @@ class SupportTab extends StatelessWidget {
             const SizedBox(height: 16),
             _buildSupportOption(
               context,
-              'Sadaqah Única',
+              'Sadaqah única',
               'Haz una pequeña donación para el mantenimiento.',
               Icons.volunteer_activism,
               AppTheme.primaryGreen,
@@ -52,7 +52,7 @@ class SupportTab extends StatelessWidget {
             const SizedBox(height: 16),
             _buildSupportOption(
               context,
-              'Suscripción Mensual',
+              'Suscripción mensual',
               'Apoyo continuo para el crecimiento del proyecto.',
               Icons.auto_awesome,
               AppTheme.accentGold,
@@ -67,7 +67,7 @@ class SupportTab extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              '• Mantenimiento de servidores de oración.\n• Actualización de la biblioteca de duas.\n• Desarrollo de nuevas funciones offline.\n• Sin publicidad intrusiva, NUNCA.',
+              '• Mantenimiento de servidores de oración.\n• Actualización de la biblioteca de duas.\n• Desarrollo de nuevas funciones offline.\n• Sin publicidad intrusiva, nunca.',
               style: TextStyle(color: AppTheme.textLight, height: 1.8),
             ),
           ],
@@ -120,7 +120,7 @@ class SupportTab extends StatelessWidget {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Gracias'),
-        content: const Text('Has apoyado a QiblaTime viendo este "espacio" publicitario. ¡Que Allah te recompense!'),
+        content: const Text('Has apoyado a Qibla Time viendo este "espacio" publicitario. ¡Que Allah te recompense!'),
         actions: [
           TextButton(onPressed: () => Navigator.pop(context), child: const Text('OK')),
         ],
@@ -133,7 +133,7 @@ class SupportTab extends StatelessWidget {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Próximamente'),
-        content: const Text('Estamos configurando la pasarela de pagos segura para donaciones de Sadaqah. ¡Gracias por tu intención!'),
+        content: const Text('Estamos configurando una pasarela de pago segura para donaciones de sadaqah. ¡Gracias por tu intención!'),
         actions: [
           TextButton(onPressed: () => Navigator.pop(context), child: const Text('OK')),
         ],

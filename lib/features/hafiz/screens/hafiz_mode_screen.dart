@@ -24,8 +24,8 @@ class HafizModeScreen extends ConsumerWidget {
         child: ListView(
           padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
           children: [
-            Text('Hafiz Mode', style: GoogleFonts.amiri(fontSize: 26, fontWeight: FontWeight.bold, color: tokens.primary)),
-            Text('Memorizacion guiada con repeticiones y repaso', style: GoogleFonts.dmSans(fontSize: 11, color: tokens.textSecondary)),
+            Text('Hafiz', style: GoogleFonts.amiri(fontSize: 26, fontWeight: FontWeight.bold, color: tokens.primary)),
+            Text('Memorización guiada con repeticiones y repaso', style: GoogleFonts.dmSans(fontSize: 11, color: tokens.textSecondary)),
             const SizedBox(height: 16),
             _buildSummary(tokens, progress),
             if (progress.isEmpty) ...[
@@ -265,7 +265,7 @@ class _HafizPracticeScreenState extends ConsumerState<HafizPracticeScreen> {
                               if (!mounted) return;
                               ScaffoldMessenger.of(this.context).showSnackBar(const SnackBar(content: Text('Repetición registrada')));
                             },
-                      child: const Text('Registrar repeticion'),
+                      child: const Text('Registrar repetición'),
                     ),
                   ],
                 ),

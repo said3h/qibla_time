@@ -25,7 +25,7 @@ class WeeklySummaryNotificationService {
       id: _notificationId,
       title: 'Resumen semanal listo',
       body:
-          'Esta semana rezaste ${summary.prayersCompleted}/${summary.maxPossible} oraciones. Tu mejor dia fue ${summary.strongestDay.shortLabel}.',
+          'Esta semana rezaste ${summary.prayersCompleted}/${summary.maxPossible} oraciones. Tu mejor día fue ${summary.strongestDay.shortLabel}.',
       scheduledAt: scheduledAt,
     );
   }

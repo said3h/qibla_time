@@ -216,7 +216,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   Expanded(
                     child: OutlinedButton(
                       onPressed: _step == 0 || _busy ? null : _back,
-                      child: const Text('Atras'),
+                      child: const Text('Atrás'),
                     ),
                   ),
                   const SizedBox(width: 10),
@@ -237,7 +237,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   Widget _buildWelcome(QiblaTokens tokens) {
     return _StepScaffold(
-      title: 'Bienvenido a QiblaTime',
+      title: 'Bienvenido a Qibla Time',
       subtitle:
           'Horarios, Qibla, Corán y recordatorios en una app ligera para tu rutina diaria.',
       child: Column(
@@ -245,13 +245,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           _FeatureCard(
             icon: Icons.access_time_rounded,
             title: 'Horarios fiables',
-            body: 'Calculados segun tu ubicacion y metodo preferido.',
+            body: 'Calculados según tu ubicación y tu método preferido.',
             tokens: tokens,
           ),
           const SizedBox(height: 10),
           _FeatureCard(
             icon: Icons.explore_rounded,
-            title: 'Qibla y practica diaria',
+            title: 'Qibla y práctica diaria',
             body: 'Brújula, tasbih, tracking y más en el mismo flujo.',
             tokens: tokens,
           ),
@@ -368,7 +368,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return _StepScaffold(
       title: 'Adhan y avisos',
       subtitle:
-          'QiblaTime puede avisarte de cada oracion y usar un Adhan suave por defecto. Luego podras elegir otro sonido.',
+          'Qibla Time puede avisarte de cada oración y usar un adhan suave por defecto. Después podrás elegir otro sonido.',
       child: Column(
         children: [
           Container(
@@ -386,7 +386,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Notificaciones de oracion',
+                        'Notificaciones de oración',
                         style: GoogleFonts.dmSans(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
@@ -426,7 +426,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Prueba rapida del Adhan',
+                  'Prueba rápida del adhan',
                   style: GoogleFonts.dmSans(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
@@ -459,7 +459,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return _StepScaffold(
       title: 'Todo listo',
       subtitle:
-          'Ya puedes empezar con tus horarios, tu Qibla y el seguimiento diario. Todo esto se puede ajustar despues.',
+          'Ya puedes empezar con tus horarios, tu Qibla y el seguimiento diario. Todo esto se puede ajustar después.',
       child: Container(
         width: double.infinity,
         padding: const EdgeInsets.all(18),
@@ -471,11 +471,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _summaryRow(tokens, 'Metodo', _methodLabel(_method)),
+            _summaryRow(tokens, 'Método', _methodLabel(_method)),
             _summaryRow(tokens, 'Madhab', _isHanafi ? 'Hanafi' : 'Shafi'),
             _summaryRow(
               tokens,
-              'Ubicacion',
+              'Ubicación',
               _locationPermission == LocationPermission.deniedForever
                   ? 'Bloqueada por ahora'
                   : _locationServiceEnabled
@@ -527,7 +527,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       case CalculationMethod.muslim_world_league:
         return 'Muslim World League';
       case CalculationMethod.north_america:
-        return 'ISNA / Norteamerica';
+        return 'ISNA / Norteamérica';
       case CalculationMethod.umm_al_qura:
         return 'Umm al-Qura';
       case CalculationMethod.egyptian:

@@ -40,7 +40,7 @@ class QiblaTimeApp extends ConsumerWidget {
     QiblaThemes.currentName = themeName;
 
     return MaterialApp(
-      title: 'QiblaTime',
+      title: 'Qibla Time',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.buildTheme(tokens),
       builder: (context, child) {

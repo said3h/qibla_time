@@ -30,7 +30,7 @@ class DetectTravelModeChangeUseCase {
       travelDetected: true,
       distanceKmRounded: distanceKm.round(),
       pendingBanner:
-          'Nueva ubicacion detectada: $label - ${distanceKm.round()} km',
+          'Nueva ubicación detectada: $label - ${distanceKm.round()} km',
     );
   }
 

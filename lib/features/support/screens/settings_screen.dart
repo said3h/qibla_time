@@ -232,7 +232,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Tamano de texto', style: GoogleFonts.dmSans(fontSize: 13, color: tokens.textPrimary)),
+                  Text('Tamaño de texto', style: GoogleFonts.dmSans(fontSize: 13, color: tokens.textPrimary)),
                   const SizedBox(height: 4),
                   Text('Escala actual: ${accessibility.fontScale.toStringAsFixed(1)}x', style: GoogleFonts.dmSans(fontSize: 10, color: tokens.textSecondary)),
                   Slider(
@@ -251,14 +251,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             _buildValueTile(
               tokens,
               'Restablecer accesibilidad',
-              'Reset',
+              'Restablecer',
               onTap: () => ref.read(accessibilityControllerProvider.notifier).reset(),
             ),
             const SizedBox(height: 14),
-            _buildSectionTitle(tokens, 'Notificaciones · Adhan'),
+            _buildSectionTitle(tokens, 'Notificaciones · adhan'),
             _buildValueTile(
               tokens,
-              'Sonido del Adhan',
+              'Sonido del adhan',
               'Elegir y previsualizar',
               onTap: () {
                 Navigator.of(context).push(
@@ -269,7 +269,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             _buildSimpleToggleTile(
               tokens,
               'Notificaciones generales',
-              'Activa o pausa todos los avisos de oracion',
+              'Activa o pausa todos los avisos de oración',
               prayerNotificationsStatus,
               _togglePrayerNotificationsEnabled,
             ),
@@ -289,7 +289,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     const SizedBox(width: 10),
                     Expanded(
                       child: Text(
-                        'Los avisos de Adhan estan configurados, pero el permiso del sistema sigue pendiente.',
+                        'Los avisos de adhan están configurados, pero el permiso del sistema sigue pendiente.',
                         style: GoogleFonts.dmSans(
                           fontSize: 11,
                           height: 1.5,
@@ -305,26 +305,26 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             _buildToggleTile(tokens, 'Asr', '17:14 · Adhan Makkah', adhanAsr, (v) => _toggleBool('asr', v)),
             _buildToggleTile(tokens, 'Maghrib', '19:52 · Adhan Al-Aqsa', adhanMaghrib, (v) => _toggleBool('maghrib', v)),
             _buildToggleTile(tokens, 'Isha', '21:28 · Adhan Makkah', adhanIsha, (v) => _toggleBool('isha', v)),
-            _buildSimpleToggleTile(tokens, 'Vibracion haptica', 'En Tasbih y notificaciones', haptics, (v) => setState(() => haptics = v)),
+            _buildSimpleToggleTile(tokens, 'Vibración háptica', 'En Tasbih y notificaciones', haptics, (v) => setState(() => haptics = v)),
             const SizedBox(height: 14),
-            _buildSectionTitle(tokens, 'Calculo de horarios'),
-            _buildValueTile(tokens, 'Metodo', calculationMethod.name.replaceAll('_', ' ').toUpperCase(), onTap: _showMethodSheet),
-            _buildValueTile(tokens, 'Madhab (Asr)', isHanafi ? 'Hanafi' : 'Shafi', onTap: () => _setMadhab(!isHanafi)),
+            _buildSectionTitle(tokens, 'Cálculo de horarios'),
+            _buildValueTile(tokens, 'Método', calculationMethod.name.replaceAll('_', ' ').toUpperCase(), onTap: _showMethodSheet),
+            _buildValueTile(tokens, 'Madhab (Asr)', isHanafi ? 'Hanafi' : 'Shafi\'i', onTap: () => _setMadhab(!isHanafi)),
             _buildValueTile(tokens, 'Ajuste manual', '±$timeOffset min', trailing: _offsetButtons(tokens)),
-            _buildSimpleToggleTile(tokens, 'Ubicacion', 'GPS automatico', autoLocation, (v) => setState(() => autoLocation = v)),
+            _buildSimpleToggleTile(tokens, 'Ubicación', 'GPS automático', autoLocation, (v) => setState(() => autoLocation = v)),
             const SizedBox(height: 14),
-            _buildSectionTitle(tokens, 'Modo Ramadan'),
+            _buildSectionTitle(tokens, 'Modo Ramadán'),
             _buildSimpleToggleTile(
               tokens,
-              'Modo Ramadan automatico',
-              'Se activa solo cuando el calendario Hijri entra en Ramadan',
+              'Modo Ramadán automático',
+              'Se activa solo cuando el calendario islámico entra en Ramadán',
               ramadanAutomatic,
               _toggleRamadanAutomatic,
             ),
             _buildSimpleToggleTile(
               tokens,
-              'Forzar modo Ramadan',
-              'Util para pruebas o para previsualizar Home fuera de Ramadan',
+              'Forzar modo Ramadán',
+              'Útil para pruebas o para previsualizar Inicio fuera de Ramadán',
               ramadanForced,
               _toggleRamadanForced,
             ),
@@ -360,7 +360,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 return enabledAsync.when(
                   data: (enabled) => _buildSimpleToggleTile(
                     tokens,
-                    'Modo Viajero',
+                    'Modo viajero',
                     'Detecta automáticamente cambios de ciudad (>50 km)',
                     enabled,
                     (value) async {
@@ -368,7 +368,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       ref.invalidate(travelerModeEnabledProvider);
                     },
                   ),
-                  loading: () => _buildSimpleToggleTile(tokens, 'Modo Viajero', 'Cargando...', false, (_) {}),
+                  loading: () => _buildSimpleToggleTile(tokens, 'Modo viajero', 'Cargando...', false, (_) {}),
                   error: (_, __) => const SizedBox.shrink(),
                 );
               },
@@ -448,12 +448,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               },
             ),
             
-            _buildSectionTitle(tokens, 'Cache inteligente'),
-            _buildValueTile(tokens, 'Cache valido hasta', cacheStatus.validUntil?.toLocal().toString().substring(0, 16) ?? 'Sin cache'),
-            _buildValueTile(tokens, 'Entradas cacheadas', '${cacheStatus.entryCount}'),
+            _buildSectionTitle(tokens, 'Caché inteligente'),
+            _buildValueTile(tokens, 'Caché válida hasta', cacheStatus.validUntil?.toLocal().toString().substring(0, 16) ?? 'Sin caché'),
+            _buildValueTile(tokens, 'Entradas en caché', '${cacheStatus.entryCount}'),
             _buildValueTile(
               tokens,
-              'Limpiar cache',
+              'Limpiar caché',
               'Borrar',
               onTap: () async {
                 await ref.read(prayerCacheDataSourceProvider).clear();
@@ -489,20 +489,20 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('Apoya el desarrollo', style: GoogleFonts.dmSans(fontSize: 13, color: tokens.primaryLight, fontWeight: FontWeight.w500)),
-                        Text('Cada donacion es una Sadaqah Jariya', style: GoogleFonts.dmSans(fontSize: 10, color: tokens.textSecondary)),
+                        Text('Cada donación puede ser una sadaqah jariyah', style: GoogleFonts.dmSans(fontSize: 10, color: tokens.textSecondary)),
                       ],
                     ),
                   ),
                 ],
               ),
             ),
-            _buildValueTile(tokens, 'Sadaqah tracker', '→'),
+            _buildValueTile(tokens, 'Seguimiento de sadaqah', '→'),
             const SizedBox(height: 14),
-            _buildSectionTitle(tokens, 'Cloud backup beta'),
-            _buildSimpleToggleTile(tokens, 'Backup automatico', 'Prepara snapshots anonimos de tus datos', cloudBackupEnabled, _toggleCloudBackup),
-            _buildSimpleToggleTile(tokens, 'Solo con WiFi', 'Evita usar datos moviles para sync futuro', cloudWifiOnly, _toggleCloudWifiOnly),
-            _buildValueTile(tokens, 'ID anonimo', deviceId ?? 'Generando...'),
-            _buildValueTile(tokens, 'Ultimo backup', lastBackup == null ? 'Nunca' : lastBackup.toLocal().toString().substring(0, 16)),
+            _buildSectionTitle(tokens, 'Copia de seguridad en la nube (beta)'),
+            _buildSimpleToggleTile(tokens, 'Copia automática', 'Prepara copias anónimas de tus datos', cloudBackupEnabled, _toggleCloudBackup),
+            _buildSimpleToggleTile(tokens, 'Solo con Wi-Fi', 'Evita usar datos móviles en futuras sincronizaciones', cloudWifiOnly, _toggleCloudWifiOnly),
+            _buildValueTile(tokens, 'ID anónimo', deviceId ?? 'Generando...'),
+            _buildValueTile(tokens, 'Última copia', lastBackup == null ? 'Nunca' : lastBackup.toLocal().toString().substring(0, 16)),
             if (!cloudBackupEnabled && lastBackup == null)
               Container(
                 margin: const EdgeInsets.only(bottom: 8),
@@ -513,7 +513,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   border: Border.all(color: tokens.border),
                 ),
                 child: Text(
-                  'Todavía no has configurado copias de seguridad. Puedes exportar un primer backup manual cuando quieras.',
+                  'Todavía no has configurado copias de seguridad. Puedes exportar una primera copia manual cuando quieras.',
                   style: GoogleFonts.dmSans(
                     fontSize: 11,
                     height: 1.5,
@@ -523,7 +523,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               ),
             _buildValueTile(
               tokens,
-              'Exportar backup',
+              'Exportar copia',
               'Compartir',
               onTap: () async {
                 final snapshot = await ref.read(cloudSyncServiceProvider).createBackupSnapshot(ref.read(hafizServiceProvider));
@@ -534,7 +534,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ),
             _buildValueTile(
               tokens,
-              'Restaurar backup',
+              'Restaurar copia',
               'Importar JSON',
               onTap: _showRestoreDialog,
             ),
@@ -547,13 +547,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 border: Border.all(color: tokens.primaryBorder),
               ),
               child: Text(
-                'Base del sync en nube lista. Cuando el backend quede definido, este mismo formato anonimo servira para restaurar entre dispositivos.',
+                'La base de la sincronización en la nube ya está lista. Cuando el backend quede definido, este mismo formato anónimo servirá para restaurar entre dispositivos.',
                 style: GoogleFonts.dmSans(fontSize: 10, height: 1.6, color: tokens.textPrimary),
               ),
             ),
             _buildSectionTitle(tokens, 'Acerca de'),
-            _buildValueTile(tokens, 'Version', '3.0.0'),
-            _buildValueTile(tokens, 'Licencias open source', '→'),
+            _buildValueTile(tokens, 'Versión', '3.0.0'),
+            _buildValueTile(tokens, 'Licencias de código abierto', '→'),
           ],
         ),
       ),
@@ -734,7 +734,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   }) {
     final locationValue = locationLabel ??
         (locationDiagnostic?.lastKnownLocation == null
-            ? 'Sin ubicacion guardada'
+            ? 'Sin ubicación guardada'
             : '${locationDiagnostic!.lastKnownLocation!.latitude.toStringAsFixed(2)}, ${locationDiagnostic.lastKnownLocation!.longitude.toStringAsFixed(2)}');
 
     final locationStatus = switch (locationDiagnostic?.permissionStatus) {
@@ -745,7 +745,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     };
 
     final scheduleSource =
-        cacheStatus.entryCount > 0 ? 'Cache preparada' : 'Pendiente';
+        cacheStatus.entryCount > 0 ? 'Caché preparada' : 'Pendiente';
 
     return Container(
       width: double.infinity,
@@ -757,15 +757,15 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       ),
       child: Column(
         children: [
-          _diagnosticRow(tokens, 'Metodo', calculationMethod.name.replaceAll('_', ' ').toUpperCase()),
-          _diagnosticRow(tokens, 'Madhab', isHanafi ? 'Hanafi' : 'Shafi'),
+          _diagnosticRow(tokens, 'Método', calculationMethod.name.replaceAll('_', ' ').toUpperCase()),
+          _diagnosticRow(tokens, 'Madhab', isHanafi ? 'Hanafi' : 'Shafi\'i'),
           _diagnosticRow(tokens, 'Offset', '${timeOffset >= 0 ? '+' : ''}$timeOffset min'),
           _diagnosticRow(tokens, 'Notif. sistema', notificationPermissionGranted == null ? 'Comprobando...' : notificationPermissionGranted ? 'Concedidas' : 'Pendientes'),
           _diagnosticRow(tokens, 'Notif. app', prayerNotificationsStatus ? 'Activadas' : 'Pausadas'),
-          _diagnosticRow(tokens, 'Ubicacion', locationValue),
-          _diagnosticRow(tokens, 'Estado ubicacion', locationStatus),
+          _diagnosticRow(tokens, 'Ubicación', locationValue),
+          _diagnosticRow(tokens, 'Estado de la ubicación', locationStatus),
           _diagnosticRow(tokens, 'Fuente horarios', scheduleSource),
-          _diagnosticRow(tokens, 'Cache', '${cacheStatus.entryCount} entradas'),
+          _diagnosticRow(tokens, 'Caché', '${cacheStatus.entryCount} entradas'),
         ],
       ),
     );
@@ -850,13 +850,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       builder: (context) {
         return AlertDialog(
           backgroundColor: tokens.bgSurface,
-          title: Text('Restaurar backup', style: GoogleFonts.dmSans(color: tokens.textPrimary, fontWeight: FontWeight.w600)),
+          title: Text('Restaurar copia', style: GoogleFonts.dmSans(color: tokens.textPrimary, fontWeight: FontWeight.w600)),
           content: TextField(
             controller: controller,
             minLines: 8,
             maxLines: 12,
             style: GoogleFonts.dmSans(color: tokens.textPrimary),
-            decoration: const InputDecoration(hintText: 'Pega aqui el JSON exportado'),
+            decoration: const InputDecoration(hintText: 'Pega aquí el JSON exportado'),
           ),
           actions: [
             TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancelar')),
@@ -872,7 +872,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 ref.invalidate(accessibilityControllerProvider);
                 if (!mounted) return;
                 _loadSettings();
-                ScaffoldMessenger.of(this.context).showSnackBar(const SnackBar(content: Text('Backup restaurado')));
+                ScaffoldMessenger.of(this.context).showSnackBar(const SnackBar(content: Text('Copia restaurada')));
               },
               child: const Text('Restaurar'),
             ),

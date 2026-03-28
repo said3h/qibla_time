@@ -30,7 +30,7 @@ class QiblaScreen extends ConsumerWidget {
             if (heading == null) {
               return _buildError(
                 tokens,
-                'No pudimos leer la brujula. Prueba a mover el telefono en forma de 8 y alejalo de fundas magneticas.',
+                'No pudimos leer la brújula. Prueba a mover el teléfono en forma de 8 y aléjalo de fundas magnéticas.',
               );
             }
 
@@ -76,7 +76,7 @@ class QiblaScreen extends ConsumerWidget {
                           border: Border.all(color: tokens.border),
                         ),
                         child: Text(
-                          '🧭 ${_getDirectionName(bearing)} · Direccion a la Kaaba',
+                          'Qibla · ${_getDirectionName(bearing)} · Dirección a la Kaaba',
                           style: GoogleFonts.dmSans(
                             fontSize: 12,
                             color: tokens.textSecondary,
@@ -87,7 +87,7 @@ class QiblaScreen extends ConsumerWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Text(
-                          'Manten el dispositivo plano y alejado de imanes para mayor precision.',
+                          'Mantén el dispositivo plano y alejado de imanes para mayor precisión.',
                           textAlign: TextAlign.center,
                           style: GoogleFonts.dmSans(
                             fontSize: 11,
@@ -103,14 +103,14 @@ class QiblaScreen extends ConsumerWidget {
               loading: () => _buildLoading(tokens),
               error: (_, __) => _buildError(
                 tokens,
-                'No se pudo calcular la direccion a la Kaaba con esta ubicacion.',
+                'No se pudo calcular la dirección a la Kaaba con esta ubicación.',
               ),
             );
           },
           loading: () => _buildLoading(tokens),
           error: (_, __) => _buildError(
             tokens,
-            'No se pudo iniciar la brujula. Comprueba si tu dispositivo expone el sensor magnetico.',
+            'No se pudo iniciar la brújula. Comprueba si tu dispositivo dispone de sensor magnético.',
           ),
         ),
       ),
@@ -133,7 +133,7 @@ class QiblaScreen extends ConsumerWidget {
                 ),
               ),
               Text(
-                'القبلة · Direccion a la Kaaba',
+                'القبلة · Dirección a la Kaaba',
                 style: GoogleFonts.dmSans(
                   fontSize: 11,
                   color: tokens.textSecondary,
@@ -164,7 +164,7 @@ class QiblaScreen extends ConsumerWidget {
         children: [
           _buildStat(tokens, Icons.place_outlined, distance == null ? '--' : distance.toStringAsFixed(0), 'km', 'Distancia'),
           Container(width: 1, height: 40, color: tokens.primaryBorder),
-          _buildStat(tokens, Icons.my_location, '±3', 'm', 'Precision', valueColor: tokens.accent),
+          _buildStat(tokens, Icons.my_location, '±3', 'm', 'Precisión', valueColor: tokens.accent),
         ],
       ),
     );
@@ -326,7 +326,7 @@ class QiblaScreen extends ConsumerWidget {
           CircularProgressIndicator(color: tokens.primary),
           const SizedBox(height: 14),
           Text(
-            'Inicializando brujula...',
+            'Inicializando brújula...',
             style: GoogleFonts.dmSans(color: tokens.textSecondary),
           ),
         ],
@@ -359,19 +359,19 @@ class QiblaScreen extends ConsumerWidget {
     QiblaTokens tokens,
     PrayerLocationDiagnostic? diagnostic,
   ) {
-    String text = 'Activa la ubicacion para calcular la direccion de la Qibla.';
+    String text = 'Activa la ubicación para calcular la dirección de la Qibla.';
     if (diagnostic != null) {
       if (!diagnostic.serviceEnabled) {
         text =
-            'La ubicacion del dispositivo esta desactivada. Activa el GPS para calcular la Qibla con precision.';
+            'La ubicación del dispositivo está desactivada. Activa el GPS para calcular la Qibla con precisión.';
       } else if (diagnostic.permissionStatus ==
           PrayerLocationPermissionStatus.deniedForever) {
         text =
-            'El permiso de ubicacion esta bloqueado. Puedes activarlo desde Ajustes del sistema.';
+            'El permiso de ubicación está bloqueado. Puedes activarlo desde los ajustes del sistema.';
       } else if (diagnostic.permissionStatus ==
           PrayerLocationPermissionStatus.denied) {
         text =
-            'La app necesita permiso de ubicacion para orientar la Qibla correctamente.';
+            'La app necesita permiso de ubicación para orientar la Qibla correctamente.';
       }
     }
     return _buildError(tokens, text);
@@ -402,7 +402,7 @@ class QiblaScreen extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Como usar la brujula',
+                  'Cómo usar la brújula',
                   style: GoogleFonts.amiri(
                     fontSize: 24,
                     color: tokens.primary,
@@ -410,9 +410,9 @@ class QiblaScreen extends ConsumerWidget {
                   ),
                 ),
                 const SizedBox(height: 16),
-                _infoRow(tokens, '📱', 'Manten el dispositivo plano', 'Evita inclinaciones para mayor precision'),
-                _infoRow(tokens, '🚫', 'Aleja imanes y metal', 'Los campos magneticos afectan la lectura'),
-                _infoRow(tokens, '🔄', 'Calibra si es necesario', 'Mueve el telefono en forma de 8'),
+                _infoRow(tokens, '📱', 'Mantén el dispositivo plano', 'Evita inclinaciones para ganar precisión'),
+                _infoRow(tokens, '🚫', 'Aleja imanes y metal', 'Los campos magnéticos afectan a la lectura'),
+                _infoRow(tokens, '🔄', 'Calibra si es necesario', 'Mueve el teléfono en forma de 8'),
                 const SizedBox(height: 16),
                 SizedBox(
                   width: double.infinity,

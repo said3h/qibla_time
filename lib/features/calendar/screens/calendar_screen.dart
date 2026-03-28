@@ -40,7 +40,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
         foregroundColor: tokens.textPrimary,
         elevation: 0,
         title: Text(
-          'Islamic Calendar',
+          'Calendario islámico',
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: tokens.textPrimary,
@@ -55,7 +55,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
           _buildGregorianDatePicker(tokens),
           const SizedBox(height: 32),
           Text(
-            'Important Events (${currentHijri.hYear} AH)',
+            'Fechas importantes (${currentHijri.hYear} AH)',
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -71,11 +71,11 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
   List<Widget> _buildUpcomingEvents(QiblaTokens tokens) {
     final events = [
-      {'name': 'Islamic New Year', 'day': 1, 'month': 1},
+      {'name': 'Año nuevo islámico', 'day': 1, 'month': 1},
       {'name': 'Ashura', 'day': 10, 'month': 1},
-      {'name': 'Ramadan Begins', 'day': 1, 'month': 9},
+      {'name': 'Inicio de Ramadán', 'day': 1, 'month': 9},
       {'name': 'Eid al-Fitr', 'day': 1, 'month': 10},
-      {'name': 'Day of Arafah', 'day': 9, 'month': 12},
+      {'name': 'Día de Arafah', 'day': 9, 'month': 12},
       {'name': 'Eid al-Adha', 'day': 10, 'month': 12},
     ];
 

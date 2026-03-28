@@ -48,7 +48,7 @@ class _OnboardingGateState extends State<OnboardingGate> {
                   CircularProgressIndicator(color: tokens.primary),
                   const SizedBox(height: 16),
                   Text(
-                    'Preparando QiblaTime',
+                    'Preparando Qibla Time',
                     style: GoogleFonts.dmSans(
                       color: tokens.textSecondary,
                       fontSize: 13,
