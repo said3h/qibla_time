@@ -9,13 +9,13 @@ import '../../calendar/screens/calendar_screen.dart';
 import '../../dhikr/screens/dhikr_screen.dart';
 import '../../dhikr/services/dhikr_service.dart';
 import '../../focus/screens/focus_mode_screen.dart';
+import '../../hadith/screens/hadith_library_screen.dart';
 import '../../hadith/widgets/daily_hadith_widget.dart';
+import '../../library/screens/islamic_books_screen.dart';
 import '../../library/widgets/daily_book_widget.dart';
-import '../../qibla/screens/qibla_screen.dart';
 import '../../quran/models/quran_models.dart';
 import '../../quran/screens/quran_screen.dart';
 import '../../quran/services/quran_reading_service.dart';
-import '../../support/screens/dua_screen.dart';
 import '../../support/screens/settings_screen.dart';
 import '../../tracking/models/tracking_models.dart';
 import '../../tracking/screens/analytics_screen.dart';
@@ -1762,13 +1762,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   Widget _buildQuickActions(QiblaTokens tokens) {
     final actions = [
-      (Icons.explore_outlined, 'Qibla', const QiblaScreen()),
+      (Icons.auto_stories_outlined, 'Hadices', const HadithLibraryScreen()),
+      (Icons.library_books_outlined, 'Libros', const IslamicBooksScreen()),
       (Icons.menu_book_outlined, 'Corán', const QuranScreen()),
       (Icons.calendar_month_outlined, 'Calendario', const CalendarScreen()),
       (Icons.scatter_plot_outlined, 'Tasbih', const DhikrScreen()),
       (Icons.self_improvement_outlined, 'Rak\'ah', const FocusModeScreen()),
       (Icons.insights_outlined, 'Análisis', const AnalyticsScreen()),
-      (Icons.volunteer_activism_outlined, 'Dua', const DuasScreen()),
     ];
 
     return Padding(
