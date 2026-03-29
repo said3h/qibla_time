@@ -78,29 +78,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final connectivityAsync = ref.watch(connectivityStatusProvider);
     final locationLabelAsync = ref.watch(lastLocationLabelProvider);
     final locationDiagnosticAsync = ref.watch(prayerLocationDiagnosticProvider);
-    final systemNotificationPermissionAsync =
-        ref.watch(systemNotificationPermissionProvider);
-    final prayerNotificationsEnabledAsync =
-        ref.watch(prayerNotificationsEnabledProvider);
     final ramadanStatusAsync = ref.watch(ramadanStatusProvider);
     final lastReadingAsync = ref.watch(lastReadingProvider);
     final dhikrSnapshotAsync = ref.watch(dhikrSnapshotProvider);
     final tracking = ref.watch(prayerTrackingProvider);
     final streak = tracking.currentStreak;
-    final now = DateTime.now();
-    final completedPrayers = tracking.completedPrayersFor(now);
     final selectedCompletedPrayers = tracking.completedPrayersFor(_selectedDate);
-    final weeklySummary = tracking.currentWeekSummary;
     final selectedNextPrayerInfo = isSelectedToday ? nextPrayerInfo : null;
     final selectedCountdown = isSelectedToday ? countdownAsync.value : null;
-    final homeInsights = _generateHomeInsights(
-      tracking: tracking,
-      weeklySummary: weeklySummary,
-      now: now,
-      ramadanStatus: ramadanStatusAsync.valueOrNull,
-      dhikrTodayCount: dhikrSnapshotAsync.valueOrNull?.todayCount,
-      dhikrDailyGoal: dhikrSnapshotAsync.valueOrNull?.dailyGoal,
-    );
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
@@ -180,20 +165,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 dhikrSnapshotAsync.valueOrNull,
               ),
               _buildQuickActions(tokens),
-              _buildDailyProgressCard(
-                tokens,
-                prayerScheduleAsync.valueOrNull,
-                nextPrayerInfo,
-                completedPrayers,
-                streak,
-              ),
-              _buildHomeInsightCard(tokens, homeInsights),
-              _buildWeeklySummaryCard(tokens, weeklySummary),
-              _buildNotificationStatusCard(
-                tokens,
-                systemNotificationPermissionAsync.valueOrNull,
-                prayerNotificationsEnabledAsync.valueOrNull,
-              ),
               const SizedBox(height: 16),
             ],
           ),
