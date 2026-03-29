@@ -3,7 +3,7 @@ import 'package:home_widget/home_widget.dart';
 
 import '../services/hadith_service.dart';
 
-/// Servicio para sincronizar el hadiz del dÃ­a con el widget de Home Screen
+/// Servicio para sincronizar el hadiz del día con el widget de Home Screen
 class HadithWidgetService {
   static const appGroupId = 'group.com.qiblatime.shared';
   static const iOSWidgetName = 'QiblaTimeHadithWidget';
@@ -14,7 +14,7 @@ class HadithWidgetService {
     await HomeWidget.setAppGroupId(appGroupId);
   }
 
-  /// Sincroniza el hadiz del dÃ­a con el widget
+  /// Sincroniza el hadiz del día con el widget
   Future<void> syncDailyHadith(HadithSnapshot snapshot) async {
     await Future.wait([
       HomeWidget.saveWidgetData<String>('hadith_arabic', snapshot.arabic),
@@ -29,7 +29,7 @@ class HadithWidgetService {
     );
   }
 
-  /// Obtiene el snapshot del hadiz del dÃ­a para el widget
+  /// Obtiene el snapshot del hadiz del día para el widget
   static Future<HadithSnapshot?> getDailyHadithSnapshot(
     HadithService hadithService,
   ) async {
@@ -95,7 +95,7 @@ final hadithWidgetServiceProvider = Provider<HadithWidgetService>((ref) {
   return HadithWidgetService();
 });
 
-/// Provider que obtiene el snapshot del hadiz del dÃ­a
+/// Provider que obtiene el snapshot del hadiz del día
 final dailyHadithSnapshotProvider = FutureProvider<HadithSnapshot?>((ref) async {
   final hadithService = ref.read(hadithServiceProvider);
   return HadithWidgetService.getDailyHadithSnapshot(hadithService);

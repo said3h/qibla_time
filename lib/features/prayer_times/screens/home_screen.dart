@@ -41,7 +41,7 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
-  static const _weekdays = ['Lun', 'Mar', 'MiÃ©', 'Jue', 'Vie', 'SÃ¡b', 'Dom'];
+  static const _weekdays = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
   static const _generateHomeInsights = GenerateHomeInsightsUseCase();
 
   late DateTime _selectedDate;
@@ -161,9 +161,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   locationDiagnosticAsync.valueOrNull,
                 ),
               ),
-              // Hadiz del dÃ­a - Widget mejorado con 1,954 hadices
+              // Hadiz del día - Widget mejorado con 1,954 hadices
               const DailyHadithWidget(),
-              // Libro del dÃ­a - IslamHouse
+              // Libro del día - IslamHouse
               const DailyBookWidget(),
               _buildRamadanCard(
                 tokens,
@@ -225,7 +225,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                 ),
                 Text(
-                  '${isOnline ? 'En lÃ­nea' : 'Sin red'} - ${locationLabel ?? 'UbicaciÃ³n pendiente'}',
+                  '${isOnline ? 'En línea' : 'Sin red'} - ${locationLabel ?? 'Ubicación pendiente'}',
                   style: GoogleFonts.dmSans(
                     fontSize: 10,
                     color: tokens.textSecondary,
@@ -443,7 +443,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             children: [
               Expanded(
                 child: Text(
-                  'PrÃ³xima oraciÃ³n'.toUpperCase(),
+                  'Próxima oración'.toUpperCase(),
                   style: GoogleFonts.dmSans(
                     fontSize: 9,
                     color: hero.label,
@@ -459,7 +459,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   border: Border.all(color: tokens.primaryBorder),
                 ),
                 child: Text(
-                  '$streak dÃ­as seguidos',
+                  '$streak días seguidos',
                   style: GoogleFonts.dmSans(
                     fontSize: 10,
                     color: tokens.primaryLight,
@@ -495,7 +495,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 border: Border.all(color: tokens.primaryBorder),
               ),
               child: Text(
-                'Usando tu Ãºltima ubicaciÃ³n guardada',
+                'Usando tu última ubicación guardada',
                 style: GoogleFonts.dmSans(
                   fontSize: 10,
                   color: tokens.textPrimary,
@@ -556,7 +556,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   border: Border.all(color: tokens.primaryBorder),
                 ),
                 child: Text(
-                  '$streak dÃ­as seguidos',
+                  '$streak días seguidos',
                   style: GoogleFonts.dmSans(
                     fontSize: 10,
                     color: tokens.primaryLight,
@@ -593,7 +593,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 border: Border.all(color: tokens.primaryBorder),
               ),
               child: Text(
-                'Usando tu Ãºltima ubicaciÃ³n guardada',
+                'Usando tu última ubicación guardada',
                 style: GoogleFonts.dmSans(
                   fontSize: 10,
                   color: tokens.textPrimary,
@@ -703,7 +703,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     String message;
     if (completedCount == 5) {
-      message = 'DÃ­a completo. Mantienes tu ritmo con $streak dÃ­as seguidos.';
+      message = 'Día completo. Mantienes tu ritmo con $streak días seguidos.';
     } else if (nextPrayerInfo != null &&
         !completedPrayers.contains(nextPrayerInfo.prayer.key)) {
       message =
@@ -711,7 +711,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     } else if (remainingPrayers.isNotEmpty) {
       message = 'Te faltan ${remainingPrayers.length} oraciones hoy.';
     } else {
-      message = 'En cuanto tengamos horarios, verÃ¡s aquÃ­ tu progreso de hoy.';
+      message = 'En cuanto tengamos horarios, verás aquí tu progreso de hoy.';
     }
 
     return Padding(
@@ -816,7 +816,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     final text = !systemPermissionGranted
         ? 'Tus recordatorios de Adhan estan configurados, pero el permiso del sistema sigue pendiente.'
-        : 'Los avisos generales de oraciÃ³n estÃ¡n pausados ahora mismo.';
+        : 'Los avisos generales de oración están pausados ahora mismo.';
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
@@ -877,7 +877,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ? 'Faltan ${_formatRamadanCountdown(targetTime.difference(now))} para Imsak'
         : beforeIftar
         ? 'Faltan ${_formatRamadanCountdown(targetTime.difference(now))} para Iftar'
-        : 'Faltan ${_formatRamadanCountdown(targetTime.difference(now))} para Imsak de maÃ±ana';
+        : 'Faltan ${_formatRamadanCountdown(targetTime.difference(now))} para Imsak de mañana';
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
@@ -1140,13 +1140,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             const SizedBox(height: 10),
             Row(
               children: [
-                Expanded(child: _summaryMetric(tokens, '${summary.fullDays}', 'dÃ­as 5/5')),
+                Expanded(child: _summaryMetric(tokens, '${summary.fullDays}', 'días 5/5')),
                 Expanded(child: _summaryMetric(tokens, '${summary.currentStreak}', 'racha actual')),
                 Expanded(
                   child: _summaryMetric(
                     tokens,
                     summary.strongestDay.shortLabel,
-                    '${summary.strongestDay.completed}/5 mejor dÃ­a',
+                    '${summary.strongestDay.completed}/5 mejor día',
                   ),
                 ),
               ],
@@ -1266,10 +1266,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             const SizedBox(height: 8),
             Text(
               completedCount == items.length
-                  ? 'Jornada de RamadÃ¡n muy completa. MantÃ©n este ritmo con calma.'
+                  ? 'Jornada de Ramadán muy completa. Mantén este ritmo con calma.'
                   : completedCount >= 2
-                  ? 'Vas bien hoy. Un pequeÃ±o paso mÃ¡s puede cerrar tu dÃ­a con fuerza.'
-                  : 'Empieza por algo pequeÃ±o: una oraciÃ³n, unas aleyas o unos minutos de dhikr.',
+                  ? 'Vas bien hoy. Un pequeño paso más puede cerrar tu día con fuerza.'
+                  : 'Empieza por algo pequeño: una oración, unas aleyas o unos minutos de dhikr.',
               style: GoogleFonts.dmSans(
                 fontSize: 11,
                 height: 1.5,
@@ -1373,12 +1373,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   ) {
     if (lastReading == null) {
       return const _RamadanGoalItem(
-        title: 'CorÃ¡n',
-        description: 'Haz una lectura corta hoy y luego podrÃ¡s retomarla fÃ¡cilmente.',
+        title: 'Corán',
+        description: 'Haz una lectura corta hoy y luego podrás retomarla fácilmente.',
         icon: Icons.menu_book_outlined,
         state: _RamadanGoalState.pending,
         destination: QuranScreen(),
-        actionLabel: 'Abrir CorÃ¡n',
+        actionLabel: 'Abrir Corán',
       );
     }
 
@@ -1394,7 +1394,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     if (daysSince <= 0) {
       return _RamadanGoalItem(
-        title: 'CorÃ¡n',
+        title: 'Corán',
         description:
             'Lectura guardada hoy en ${lastReading.surahNameLatin}, aleya ${lastReading.ayahNumber}.',
         icon: Icons.menu_book_outlined,
@@ -1406,7 +1406,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     if (daysSince <= 3) {
       return _RamadanGoalItem(
-        title: 'CorÃ¡n',
+        title: 'Corán',
         description:
             'Retoma ${lastReading.surahNameLatin}, aleya ${lastReading.ayahNumber}. Tienes progreso reciente.',
         icon: Icons.menu_book_outlined,
@@ -1417,13 +1417,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     }
 
     return _RamadanGoalItem(
-      title: 'CorÃ¡n',
+      title: 'Corán',
       description:
-          'Tu Ãºltimo punto fue ${lastReading.surahNameLatin}, aleya ${lastReading.ayahNumber}. Merece la pena retomarlo hoy.',
+          'Tu último punto fue ${lastReading.surahNameLatin}, aleya ${lastReading.ayahNumber}. Merece la pena retomarlo hoy.',
       icon: Icons.menu_book_outlined,
       state: _RamadanGoalState.pending,
       destination: const QuranScreen(),
-      actionLabel: 'Abrir CorÃ¡n',
+      actionLabel: 'Abrir Corán',
     );
   }
 
@@ -1514,14 +1514,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       return 'Preparando tus horarios';
     }
     if (!diagnostic.serviceEnabled) {
-      return 'Activa la ubicaciÃ³n del dispositivo';
+      return 'Activa la ubicación del dispositivo';
     }
     if (diagnostic.permissionStatus ==
         PrayerLocationPermissionStatus.deniedForever) {
-      return 'Permiso de ubicaciÃ³n bloqueado';
+      return 'Permiso de ubicación bloqueado';
     }
     if (diagnostic.permissionStatus == PrayerLocationPermissionStatus.denied) {
-      return 'Permite la ubicaciÃ³n para ver tus horarios';
+      return 'Permite la ubicación para ver tus horarios';
     }
     return 'Preparando tus horarios';
   }
@@ -1535,13 +1535,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     }
     if (diagnostic.permissionStatus ==
         PrayerLocationPermissionStatus.deniedForever) {
-      return 'Puedes activar la ubicaciÃ³n para Qibla Time desde los ajustes del sistema cuando quieras.';
+      return 'Puedes activar la ubicación para Qibla Time desde los ajustes del sistema cuando quieras.';
     }
     if (diagnostic.permissionStatus == PrayerLocationPermissionStatus.denied) {
-      return 'Qibla Time necesita tu ubicaciÃ³n para mostrar horarios fiables segÃºn tu ciudad.';
+      return 'Qibla Time necesita tu ubicación para mostrar horarios fiables según tu ciudad.';
     }
     if (diagnostic.hasCachedLocation) {
-      return 'Estamos preparando tus horarios usando la Ãºltima ubicaciÃ³n guardada.';
+      return 'Estamos preparando tus horarios usando la última ubicación guardada.';
     }
     return 'La pantalla principal sigue visible aunque los horarios aun no esten listos.';
   }
@@ -1607,11 +1607,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     }
 
     final prayers = [
-      (PrayerName.fajr, 'Fajr', 'ÙØ¬Ø±', prayerSchedule.fajr),
-      (PrayerName.dhuhr, 'Dhuhr', 'Ø¸Ù‡Ø±', prayerSchedule.dhuhr),
-      (PrayerName.asr, 'Asr', 'Ø¹ØµØ±', prayerSchedule.asr),
-      (PrayerName.maghrib, 'Maghrib', 'Ù…ØºØ±Ø¨', prayerSchedule.maghrib),
-      (PrayerName.isha, 'Isha', 'Ø¹Ø´Ø§Ø¡', prayerSchedule.isha),
+      (PrayerName.fajr, 'Fajr', 'فجر', prayerSchedule.fajr),
+      (PrayerName.dhuhr, 'Dhuhr', 'ظهر', prayerSchedule.dhuhr),
+      (PrayerName.asr, 'Asr', 'عصر', prayerSchedule.asr),
+      (PrayerName.maghrib, 'Maghrib', 'مغرب', prayerSchedule.maghrib),
+      (PrayerName.isha, 'Isha', 'عشاء', prayerSchedule.isha),
     ];
     final nextPrayerName = nextPrayerInfo?.prayer.key;
     final isToday = _isSameDay(date, _dateOnly(DateTime.now()));
@@ -1763,11 +1763,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Widget _buildQuickActions(QiblaTokens tokens) {
     final actions = [
       (Icons.explore_outlined, 'Qibla', const QiblaScreen()),
-      (Icons.menu_book_outlined, 'CorÃ¡n', const QuranScreen()),
+      (Icons.menu_book_outlined, 'Corán', const QuranScreen()),
       (Icons.calendar_month_outlined, 'Calendario', const CalendarScreen()),
       (Icons.scatter_plot_outlined, 'Tasbih', const DhikrScreen()),
       (Icons.self_improvement_outlined, 'Rak\'ah', const FocusModeScreen()),
-      (Icons.insights_outlined, 'AnÃ¡lisis', const AnalyticsScreen()),
+      (Icons.insights_outlined, 'Análisis', const AnalyticsScreen()),
       (Icons.volunteer_activism_outlined, 'Dua', const DuasScreen()),
     ];
 
@@ -1836,15 +1836,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   (String, String) _prayerName(PrayerName prayer) {
     switch (prayer) {
       case PrayerName.fajr:
-        return ('Fajr', 'ÙØ¬Ø±');
+        return ('Fajr', 'فجر');
       case PrayerName.dhuhr:
-        return ('Dhuhr', 'Ø¸Ù‡Ø±');
+        return ('Dhuhr', 'ظهر');
       case PrayerName.asr:
-        return ('Asr', 'Ø¹ØµØ±');
+        return ('Asr', 'عصر');
       case PrayerName.maghrib:
-        return ('Maghrib', 'Ù…ØºØ±Ø¨');
+        return ('Maghrib', 'مغرب');
       case PrayerName.isha:
-        return ('Isha', 'Ø¹Ø´Ø§Ø¡');
+        return ('Isha', 'عشاء');
     }
   }
 
@@ -1876,10 +1876,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     const weekdays = [
       'Lunes',
       'Martes',
-      'MiÃ©rcoles',
+      'Miércoles',
       'Jueves',
       'Viernes',
-      'SÃ¡bado',
+      'Sábado',
       'Domingo',
     ];
     return '${weekdays[date.weekday - 1]} ${date.day}/${date.month}';
@@ -1887,7 +1887,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   String _formatRemaining(Duration? remaining) {
     if (remaining == null) {
-      return 'sin cuenta atrÃ¡s';
+      return 'sin cuenta atrás';
     }
     return 'en ${remaining.inHours}h ${remaining.inMinutes.remainder(60)}min';
   }

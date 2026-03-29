@@ -8,7 +8,7 @@ import '../models/book_model.dart';
 import '../services/islamhouse_book_service.dart';
 import '../screens/islamic_books_screen.dart';
 
-/// Widget para mostrar el libro del dÃ­a de IslamHouse
+/// Widget para mostrar el libro del día de IslamHouse
 class DailyBookWidget extends ConsumerWidget {
   const DailyBookWidget({super.key});
 
@@ -58,7 +58,7 @@ class DailyBookWidget extends ConsumerWidget {
                         const Icon(Icons.auto_stories, size: 14, color: Colors.amber),
                         const SizedBox(width: 6),
                         Text(
-                          'LIBRO DEL DÃA',
+                          'LIBRO DEL DÍA',
                           style: GoogleFonts.dmSans(
                             fontSize: 9,
                             fontWeight: FontWeight.w700,
@@ -82,7 +82,7 @@ class DailyBookWidget extends ConsumerWidget {
               ),
               const SizedBox(height: 14),
 
-              // TÃ­tulo y autor
+              // Título y autor
               Text(
                 book.title,
                 style: GoogleFonts.amiri(
@@ -101,7 +101,7 @@ class DailyBookWidget extends ConsumerWidget {
               ),
               const SizedBox(height: 12),
 
-              // DescripciÃ³n corta
+              // Descripción corta
               if (book.description.isNotEmpty)
                 Text(
                   book.description.length > 120
@@ -123,7 +123,7 @@ class DailyBookWidget extends ConsumerWidget {
                 children: [
                   _InfoChip(
                     icon: Icons.description,
-                    label: '${book.pages} pÃ¡gs',
+                    label: '${book.pages} págs',
                   ),
                   const SizedBox(width: 8),
                   _InfoChip(
@@ -140,10 +140,10 @@ class DailyBookWidget extends ConsumerWidget {
 
               const SizedBox(height: 14),
 
-              // Botones de acciÃ³n
+              // Botones de acción
               Row(
                 children: [
-                  // BotÃ³n leer
+                  // Botón leer
                   Expanded(
                     child: ElevatedButton.icon(
                       onPressed: () => _launchUrl(book.readUrl),
@@ -160,7 +160,7 @@ class DailyBookWidget extends ConsumerWidget {
                     ),
                   ),
                   const SizedBox(width: 8),
-                  // BotÃ³n biblioteca
+                  // Botón biblioteca
                   IconButton.filled(
                     onPressed: () => _openLibrary(context),
                     icon: const Icon(Icons.library_books, size: 18),
@@ -196,7 +196,7 @@ class DailyBookWidget extends ConsumerWidget {
   }
 }
 
-// â”€â”€ Widgets Auxiliares â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Widgets Auxiliares ──────────────────────────────────────────
 
 class _InfoChip extends StatelessWidget {
   const _InfoChip({

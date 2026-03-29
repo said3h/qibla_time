@@ -51,8 +51,8 @@ class QuranVerseService {
     } catch (e) {
       // Offline Fallback: Ayat al-Kursi
       return QuranVerse(
-        arabicText: 'Ù±Ù„Ù„Ù‘ÙŽÙ‡Ù Ù„ÙŽØ§Ù“ Ø¥ÙÙ„ÙŽÙ°Ù‡ÙŽ Ø¥ÙÙ„Ù‘ÙŽØ§ Ù‡ÙÙˆÙŽ Ù±Ù„Ù’Ø­ÙŽÙ‰Ù‘Ù Ù±Ù„Ù’Ù‚ÙŽÙŠÙ‘ÙÙˆÙ…Ù Ûš Ù„ÙŽØ§ ØªÙŽØ£Ù’Ø®ÙØ°ÙÙ‡ÙÛ¥ Ø³ÙÙ†ÙŽØ©ÙŒ ÙˆÙŽÙ„ÙŽØ§ Ù†ÙŽÙˆÙ’Ù…ÙŒ',
-        translationText: 'Allah! No hay mÃ¡s dios que Ã‰l, el Viviente, el Subsistente por SÃ­ mismo. Ni la somnolencia ni el sueÃ±o se apoderan de Ã‰l.',
+        arabicText: 'ٱللَّهُ لَآ إِلَٰهَ إِلَّا هُوَ ٱلْحَىُّ ٱلْقَيُّومُ ۚ لَا تَأْخُذُهُۥ سِنَةٌ وَلَا نَوْمٌ',
+        translationText: 'Allah! No hay más dios que Él, el Viviente, el Subsistente por Sí mismo. Ni la somnolencia ni el sueño se apoderan de Él.',
         transliterationText: 'Allahu la ilaha illa huwal hayyul qayyum...',
         reference: 'Al-Baqara [2:255]',
         audioUrl: '',

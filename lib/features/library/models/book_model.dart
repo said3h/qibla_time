@@ -37,7 +37,7 @@ class IslamHouseBook {
   factory IslamHouseBook.fromJson(Map<String, dynamic> json) {
     return IslamHouseBook(
       id: json['id'] as int? ?? 0,
-      title: json['title'] as String? ?? 'Sin tÃ­tulo',
+      title: json['title'] as String? ?? 'Sin título',
       titleArabic: json['title_arabic'] as String? ?? '',
       description: json['description'] as String? ?? '',
       author: json['author'] as String? ?? 'Desconocido',
@@ -74,7 +74,7 @@ class IslamHouseBook {
     };
   }
 
-  /// Obtiene el libro del dÃ­a basado en la fecha
+  /// Obtiene el libro del día basado en la fecha
   static IslamHouseBook getBookOfDay(List<IslamHouseBook> books) {
     if (books.isEmpty) {
       return _placeholder();
@@ -88,8 +88,8 @@ class IslamHouseBook {
   static IslamHouseBook _placeholder() {
     return const IslamHouseBook(
       id: 0,
-      title: 'Libro del DÃ­a',
-      titleArabic: 'ÙƒØªØ§Ø¨ Ø§Ù„ÙŠÙˆÙ…',
+      title: 'Libro del Día',
+      titleArabic: 'كتاب اليوم',
       description: 'Un libro recomendado para leer hoy',
       author: 'Varios autores',
       category: 'General',
@@ -105,26 +105,26 @@ class IslamHouseBook {
     );
   }
 
-  /// CategorÃ­as principales disponibles
+  /// Categorías principales disponibles
   static const List<String> mainCategories = [
-    'El Noble CorÃ¡n',
+    'El Noble Corán',
     'La Sunnah del Profeta',
-    'Creencia IslÃ¡mica',
-    'Jurisprudencia IslÃ¡mica',
+    'Creencia Islámica',
+    'Jurisprudencia Islámica',
     'Virtudes',
     'Pecados Mayores',
-    'Idioma Ãrabe',
+    'Idioma Árabe',
     'Llamada al Islam',
     'Historia',
-    'Cultura IslÃ¡mica',
-    'SermÃ³nes',
-    'Lecciones AcadÃ©micas',
-    'BiografÃ­a ProfÃ©tica',
+    'Cultura Islámica',
+    'Sermónes',
+    'Lecciones Académicas',
+    'Biografía Profética',
     'Presentando el Islam',
   ];
 }
 
-/// CategorÃ­a de libros
+/// Categoría de libros
 class IslamHouseCategory {
   const IslamHouseCategory({
     required this.id,

@@ -9,17 +9,17 @@ import '../../../core/constants/app_constants.dart';
 import '../../../core/services/storage_service.dart';
 import '../models/hadith.dart';
 
-/// Servicio para gestionar los hadices en espaÃƒÂ±ol
+/// Servicio para gestionar los hadices en español
 /// Fuente: HadeethEnc.com - 1,954 hadices autenticados
 class HadithService {
   Box get _box => Hive.box(StorageService.hadithBox);
 
-  // Cache en memoria para evitar cargar mÃƒÂºltiples veces
+  // Cache en memoria para evitar cargar múltiples veces
   List<Hadith>? _allHadithsCache;
 
   /// Carga todos los hadices desde assets/hadiths/hadiths_complete.json
   Future<List<Hadith>> loadAll() async {
-    // Usar cache si ya estÃƒÂ¡ cargado
+    // Usar cache si ya está cargado
     if (_allHadithsCache != null) {
       return _allHadithsCache!;
     }
@@ -42,8 +42,8 @@ class HadithService {
     }
   }
 
-  /// Obtiene el hadiz del dÃƒÂ­a basado en la fecha actual
-  /// Usa un seed consistente para que todos los usuarios vean el mismo hadiz en el mismo dÃƒÂ­a
+  /// Obtiene el hadiz del día basado en la fecha actual
+  /// Usa un seed consistente para que todos los usuarios vean el mismo hadiz en el mismo día
   Future<Hadith?> getHadithOfDay() async {
     final hadiths = await loadAll();
     if (hadiths.isEmpty) return null;
@@ -52,19 +52,19 @@ class HadithService {
     return hadiths[seed % hadiths.length];
   }
 
-  /// Obtiene un hadiz especÃƒÂ­fico por su ID
+  /// Obtiene un hadiz específico por su ID
   Future<Hadith?> getHadithById(int id) async {
     final hadiths = await loadAll();
     return hadiths.firstWhere((h) => h.id == id, orElse: () => throw Exception('Hadith not found'));
   }
 
-  /// Obtiene hadices de una colecciÃƒÂ³n especÃƒÂ­fica
+  /// Obtiene hadices de una colección específica
   Future<List<Hadith>> getHadithsByCollection(String collection) async {
     final all = await loadAll();
     return all.where((h) => _extractCollection(h.reference).toLowerCase() == collection.toLowerCase()).toList();
   }
 
-  /// Busca hadices por texto en espaÃƒÂ±ol o ÃƒÂ¡rabe
+  /// Busca hadices por texto en español o árabe
   Future<List<Hadith>> searchHadiths(String query) async {
     if (query.trim().isEmpty) {
       return [];
@@ -94,7 +94,7 @@ class HadithService {
     return collections;
   }
 
-  /// Extrae el nombre de la colecciÃƒÂ³n de la referencia
+  /// Extrae el nombre de la colección de la referencia
   String _extractCollection(String reference) {
     final refLower = reference.toLowerCase();
     if (refLower.contains('bujari') || refLower.contains('bukhari')) return 'Bukhari';
@@ -122,7 +122,7 @@ class HadithService {
     return grades;
   }
 
-  /// Obtiene hadices aleatorios (ÃƒÂºtil para widgets, notificaciones, etc.)
+  /// Obtiene hadices aleatorios (útil para widgets, notificaciones, etc.)
   Future<List<Hadith>> getRandomHadiths({int count = 1}) async {
     final all = await loadAll();
     if (all.isEmpty) return [];
@@ -142,7 +142,7 @@ class HadithService {
     return selected;
   }
 
-  // Ã¢â€â‚¬Ã¢â€â‚¬ Sistema de Favoritos Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
+  // ── Sistema de Favoritos ─────────────────────────────────────
 
   Future<Set<int>> getFavorites() async {
     final stored = _box.get(AppConstants.keyHadithFavorites, defaultValue: <dynamic>[]);

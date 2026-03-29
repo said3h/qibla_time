@@ -7,14 +7,14 @@ import '../../hadith/services/hadith_service.dart';
 import 'notification_service.dart';
 import '../services/quran_service.dart';
 
-/// Servicio para notificaciones diarias inspiracionales (CorÃ¡n + Hadiz)
+/// Servicio para notificaciones diarias inspiracionales (Corán + Hadiz)
 class DailyInspirationNotificationService {
   final FlutterLocalNotificationsPlugin _plugin;
   final HadithService _hadithService;
 
   static const String _channelId = 'daily_inspiration';
-  static const String _channelName = 'ReflexiÃ³n Diaria';
-  static const String _channelDesc = 'VersÃ­culo del CorÃ¡n y Hadiz del dÃ­a';
+  static const String _channelName = 'Reflexión Diaria';
+  static const String _channelDesc = 'Versículo del Corán y Hadiz del día';
   static const String _prefsKey = 'daily_inspiration_enabled';
   static const String _prefsHourKey = 'daily_inspiration_hour';
 
@@ -40,7 +40,7 @@ class DailyInspirationNotificationService {
         ));
   }
 
-  /// Verifica si las notificaciones diarias estÃ¡n habilitadas
+  /// Verifica si las notificaciones diarias están habilitadas
   Future<bool> isEnabled() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getBool(_prefsKey) ?? false;
@@ -58,20 +58,20 @@ class DailyInspirationNotificationService {
     }
   }
 
-  /// Obtiene la hora configurada para la notificaciÃ³n
+  /// Obtiene la hora configurada para la notificación
   Future<int> getNotificationHour() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getInt(_prefsHourKey) ?? 8; // Default: 8 AM
   }
 
-  /// Configura la hora para la notificaciÃ³n
+  /// Configura la hora para la notificación
   Future<void> setNotificationHour(int hour) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt(_prefsHourKey, hour);
     await scheduleDailyNotification();
   }
 
-  /// Programa la notificaciÃ³n diaria
+  /// Programa la notificación diaria
   Future<void> scheduleDailyNotification() async {
     if (!await isEnabled()) return;
 
@@ -86,7 +86,7 @@ class DailyInspirationNotificationService {
       0,
     );
 
-    // Si ya pasÃ³ la hora hoy, programar para maÃ±ana
+    // Si ya pasó la hora hoy, programar para mañana
     if (scheduledDate.isBefore(now)) {
       scheduledDate = scheduledDate.add(const Duration(days: 1));
     }
@@ -94,7 +94,7 @@ class DailyInspirationNotificationService {
     final content = await _generateNotificationContent();
 
     await _plugin.zonedSchedule(
-      10001, // ID Ãºnico para notificaciÃ³n diaria
+      10001, // ID único para notificación diaria
       content.title,
       content.body,
       scheduledDate,
@@ -106,26 +106,26 @@ class DailyInspirationNotificationService {
     );
   }
 
-  /// Cancela la notificaciÃ³n diaria
+  /// Cancela la notificación diaria
   Future<void> cancelDailyNotification() async {
     await _plugin.cancel(10001);
   }
 
-  /// Genera el contenido de la notificaciÃ³n
+  /// Genera el contenido de la notificación
   Future<NotificationContent> _generateNotificationContent() async {
     try {
-      // Obtener hadiz del dÃ­a
+      // Obtener hadiz del día
       final hadith = await _hadithService.getHadithOfDay();
 
-      // Obtener versÃ­culo del dÃ­a (llamada estÃ¡tica)
+      // Obtener versículo del día (llamada estática)
       final quranVerse = await QuranVerseService.getDailyVerse('es');
 
-      // Construir tÃ­tulo
-      final title = 'ReflexiÃ³n del DÃ­a';
+      // Construir título
+      final title = 'Reflexión del Día';
 
-      // Construir cuerpo con hadiz o versÃ­culo (alternar)
+      // Construir cuerpo con hadiz o versículo (alternar)
       final now = DateTime.now();
-      final useHadith = now.day % 2 == 0; // Alternar dÃ­as
+      final useHadith = now.day % 2 == 0; // Alternar días
 
       String body;
       if (useHadith && hadith != null) {
@@ -133,15 +133,15 @@ class DailyInspirationNotificationService {
         body = translation.length > 150
             ? '${translation.substring(0, 147)}...'
             : translation;
-        body += ' â€” ${hadith.reference}';
+        body += ' — ${hadith.reference}';
       } else if (quranVerse != null) {
         final translation = quranVerse.translationText;
         body = translation.length > 150
             ? '${translation.substring(0, 147)}...'
             : translation;
-        body += ' â€” ${quranVerse.reference}';
+        body += ' — ${quranVerse.reference}';
       } else {
-        body = 'Tu reflexiÃ³n espiritual diaria de Qibla Time';
+        body = 'Tu reflexión espiritual diaria de Qibla Time';
       }
 
       return NotificationContent(
@@ -152,14 +152,14 @@ class DailyInspirationNotificationService {
     } catch (e) {
       // Fallback en caso de error
       return NotificationContent(
-        title: 'Qibla Time - ReflexiÃ³n Diaria',
+        title: 'Qibla Time - Reflexión Diaria',
         body: 'Tu recordatorio espiritual de hoy',
         isHadith: true,
       );
     }
   }
 
-  /// ConfiguraciÃ³n de notificaciÃ³n
+  /// Configuración de notificación
   NotificationDetails _notificationDetails() {
     return const NotificationDetails(
       android: AndroidNotificationDetails(
@@ -182,7 +182,7 @@ class DailyInspirationNotificationService {
     );
   }
 
-  /// EnvÃ­a una notificaciÃ³n inmediata (para testing)
+  /// Envía una notificación inmediata (para testing)
   Future<void> sendTestNotification() async {
     final content = await _generateNotificationContent();
 
@@ -195,7 +195,7 @@ class DailyInspirationNotificationService {
   }
 }
 
-/// Contenido de notificaciÃ³n
+/// Contenido de notificación
 class NotificationContent {
   const NotificationContent({
     required this.title,
@@ -208,7 +208,7 @@ class NotificationContent {
   final bool isHadith;
 }
 
-// â”€â”€ Providers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Providers ──────────────────────────────────────────────────
 
 final dailyInspirationNotificationServiceProvider =
     Provider<DailyInspirationNotificationService>((ref) {
@@ -218,7 +218,7 @@ final dailyInspirationNotificationServiceProvider =
   );
 });
 
-/// Provider que indica si las notificaciones diarias estÃ¡n habilitadas
+/// Provider que indica si las notificaciones diarias están habilitadas
 final dailyInspirationEnabledProvider = FutureProvider<bool>((ref) async {
   return ref.read(dailyInspirationNotificationServiceProvider).isEnabled();
 });

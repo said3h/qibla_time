@@ -19,7 +19,7 @@ class HadithOfflineService {
     'general': 'Otros Hadices',
   };
 
-  /// Verifica si una colecciÃ³n estÃ¡ disponible offline
+  /// Verifica si una colección está disponible offline
   Future<bool> isCollectionDownloaded(String collectionKey) async {
     final prefs = await SharedPreferences.getInstance();
     final downloaded = prefs.getStringList(_prefsKeyCollections) ?? [];
@@ -32,7 +32,7 @@ class HadithOfflineService {
     return prefs.getStringList(_prefsKeyCollections) ?? [];
   }
 
-  /// Marca una colecciÃ³n como descargada (ya que los hadices ya estÃ¡n en assets)
+  /// Marca una colección como descargada (ya que los hadices ya están en assets)
   Future<void> markCollectionAsDownloaded(String collectionKey) async {
     final prefs = await SharedPreferences.getInstance();
     final downloaded = prefs.getStringList(_prefsKeyCollections) ?? [];
@@ -55,7 +55,7 @@ class HadithOfflineService {
     );
   }
 
-  /// Elimina una colecciÃ³n de descargadas (solo marca, los archivos permanecen)
+  /// Elimina una colección de descargadas (solo marca, los archivos permanecen)
   Future<void> removeCollection(String collectionKey) async {
     final prefs = await SharedPreferences.getInstance();
     final downloaded = prefs.getStringList(_prefsKeyCollections) ?? [];
@@ -63,7 +63,7 @@ class HadithOfflineService {
     await prefs.setStringList(_prefsKeyCollections, downloaded);
   }
 
-  /// Obtiene el estado de sincronizaciÃ³n
+  /// Obtiene el estado de sincronización
   Future<HadithOfflineStatus> getStatus() async {
     final prefs = await SharedPreferences.getInstance();
     final downloaded = prefs.getStringList(_prefsKeyCollections) ?? [];
@@ -94,7 +94,7 @@ class HadithOfflineService {
     }
   }
 
-  /// Verifica si todos los hadices estÃ¡n disponibles offline
+  /// Verifica si todos los hadices están disponibles offline
   Future<bool> isAllHadithsAvailable() async {
     final status = await getStatus();
     return status.isFullyOffline;
@@ -122,7 +122,7 @@ class HadithOfflineStatus {
     final now = DateTime.now();
     final diff = now.difference(lastSync!);
 
-    if (diff.inDays > 0) return 'Hace ${diff.inDays} dÃ­as';
+    if (diff.inDays > 0) return 'Hace ${diff.inDays} días';
     if (diff.inHours > 0) return 'Hace ${diff.inHours} horas';
     if (diff.inMinutes > 0) return 'Hace ${diff.inMinutes} minutos';
     return 'Ahora mismo';

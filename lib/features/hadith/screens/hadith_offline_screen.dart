@@ -60,7 +60,7 @@ class _HadithOfflineScreenState extends ConsumerState<HadithOfflineScreen> {
                 _buildStatusCard(tokens),
                 const SizedBox(height: 16),
 
-                // InformaciÃ³n
+                // Información
                 _buildInfoCard(tokens),
                 const SizedBox(height: 16),
 
@@ -82,7 +82,7 @@ class _HadithOfflineScreenState extends ConsumerState<HadithOfflineScreen> {
 
                 const SizedBox(height: 32),
 
-                // BotÃ³n de sincronizar todo
+                // Botón de sincronizar todo
                 if (!_status!.isFullyOffline)
                   SizedBox(
                     width: double.infinity,
@@ -137,7 +137,7 @@ class _HadithOfflineScreenState extends ConsumerState<HadithOfflineScreen> {
                     Text(
                       _status!.isFullyOffline
                           ? 'Todo Disponible Offline'
-                          : 'SincronizaciÃ³n Parcial',
+                          : 'Sincronización Parcial',
                       style: GoogleFonts.dmSans(
                         fontSize: 14,
                         fontWeight: FontWeight.w700,
@@ -145,7 +145,7 @@ class _HadithOfflineScreenState extends ConsumerState<HadithOfflineScreen> {
                       ),
                     ),
                     Text(
-                      'Ãšltima sync: ${_status!.lastSyncLabel}',
+                      'Última sync: ${_status!.lastSyncLabel}',
                       style: GoogleFonts.dmSans(
                         fontSize: 10,
                         color: tokens.textSecondary,
@@ -201,7 +201,7 @@ class _HadithOfflineScreenState extends ConsumerState<HadithOfflineScreen> {
           const SizedBox(width: 12),
           Expanded(
             child: Text(
-              'Todos los hadices ya estÃ¡n en tu dispositivo. Esta pantalla muestra el estado de sincronizaciÃ³n.',
+              'Todos los hadices ya están en tu dispositivo. Esta pantalla muestra el estado de sincronización.',
               style: GoogleFonts.dmSans(
                 fontSize: 11,
                 height: 1.5,
@@ -288,7 +288,7 @@ class _HadithOfflineScreenState extends ConsumerState<HadithOfflineScreen> {
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        content: Text('âœ“ Todos los hadices disponibles offline'),
+        content: Text('✓ Todos los hadices disponibles offline'),
         backgroundColor: Colors.green,
       ),
     );
@@ -300,7 +300,7 @@ class _HadithOfflineScreenState extends ConsumerState<HadithOfflineScreen> {
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('ColecciÃ³n eliminada de offline'),
+        content: Text('Colección eliminada de offline'),
         duration: const Duration(seconds: 2),
       ),
     );

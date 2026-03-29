@@ -38,7 +38,7 @@ class HadithHourlyReminderService {
         ));
   }
 
-  /// Verifica si los recordatorios hourly estÃ¡n habilitados
+  /// Verifica si los recordatorios hourly están habilitados
   Future<bool> isEnabled() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getBool(_prefsKey) ?? false;
@@ -92,14 +92,14 @@ class HadithHourlyReminderService {
     }
   }
 
-  /// Programa un recordatorio para una hora especÃ­fica
+  /// Programa un recordatorio para una hora específica
   Future<void> _scheduleReminderForHour(int hour) async {
-    // Nota: programar notificaciones hourly exactas requiere configuraciÃ³n especial
-    // Esta es una implementaciÃ³n simplificada
+    // Nota: programar notificaciones hourly exactas requiere configuración especial
+    // Esta es una implementación simplificada
     final now = tz.TZDateTime.now(tz.local);
     var scheduledDate = tz.TZDateTime(tz.local, now.year, now.month, now.day, hour, 0);
 
-    // Si ya pasÃ³ hoy, programar para maÃ±ana
+    // Si ya pasó hoy, programar para mañana
     if (scheduledDate.isBefore(now)) {
       scheduledDate = scheduledDate.add(const Duration(days: 1));
     }
@@ -107,12 +107,12 @@ class HadithHourlyReminderService {
     final hadith = await _hadithService.getRandomHadiths(count: 1);
     final hadithText = hadith.isNotEmpty
         ? hadith.first.translation
-        : 'Recordatorio: Lee un hadiz del Profeta ï·º';
+        : 'Recordatorio: Lee un hadiz del Profeta ﷺ';
 
-    // Usar notificaciÃ³n periÃ³dica diaria a la hora especificada
+    // Usar notificación periódica diaria a la hora especificada
     await _plugin.zonedSchedule(
       20000 + hour,
-      'ðŸ“– Hadiz del Momento',
+      '📖 Hadiz del Momento',
       hadithText.length > 150 ? '${hadithText.substring(0, 147)}...' : hadithText,
       scheduledDate,
       _notificationDetails(),
@@ -133,7 +133,7 @@ class HadithHourlyReminderService {
     }
   }
 
-  /// ConfiguraciÃ³n de notificaciÃ³n
+  /// Configuración de notificación
   NotificationDetails _notificationDetails() {
     return const NotificationDetails(
       android: AndroidNotificationDetails(
@@ -156,14 +156,14 @@ class HadithHourlyReminderService {
     );
   }
 
-  /// EnvÃ­a una notificaciÃ³n inmediata (para testing)
+  /// Envía una notificación inmediata (para testing)
   Future<void> sendTestNotification() async {
     final hadith = await _hadithService.getRandomHadiths(count: 1);
     final hadithText = hadith.isNotEmpty ? hadith.first.translation : 'Test de recordatorio de hadiz';
 
     await _plugin.show(
       20999,
-      'ðŸ“– Recordatorio de Hadiz',
+      '📖 Recordatorio de Hadiz',
       hadithText,
       _notificationDetails(),
     );

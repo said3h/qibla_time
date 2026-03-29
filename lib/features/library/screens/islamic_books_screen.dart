@@ -47,7 +47,7 @@ class _IslamicBooksScreenState extends ConsumerState<IslamicBooksScreen>
       backgroundColor: tokens.bgPage,
       appBar: AppBar(
         title: Text(
-          'Biblioteca IslÃ¡mica',
+          'Biblioteca Islámica',
           style: GoogleFonts.amiri(
             fontSize: 22,
             fontWeight: FontWeight.bold,
@@ -69,7 +69,7 @@ class _IslamicBooksScreenState extends ConsumerState<IslamicBooksScreen>
           tabs: const [
             Tab(icon: Icon(Icons.library_books), text: 'Libros'),
             Tab(icon: Icon(Icons.star), text: 'Destacados'),
-            Tab(icon: Icon(Icons.folder), text: 'CategorÃ­as'),
+            Tab(icon: Icon(Icons.folder), text: 'Categorías'),
           ],
         ),
       ),
@@ -89,7 +89,7 @@ class _IslamicBooksScreenState extends ConsumerState<IslamicBooksScreen>
 
     return Column(
       children: [
-        // Barra de bÃºsqueda
+        // Barra de búsqueda
         Padding(
           padding: const EdgeInsets.all(16),
           child: TextField(
@@ -254,14 +254,14 @@ class _IslamicBooksScreenState extends ConsumerState<IslamicBooksScreen>
   List<IslamHouseBook> _filterBooks(List<IslamHouseBook> books) {
     var filtered = books;
 
-    // Filtro por categorÃ­a
+    // Filtro por categoría
     if (_selectedCategory != 'Todos') {
       filtered = filtered
           .where((b) => b.category.contains(_selectedCategory))
           .toList();
     }
 
-    // Filtro por bÃºsqueda
+    // Filtro por búsqueda
     if (_searchController.text.isNotEmpty) {
       final query = _searchController.text.toLowerCase();
       filtered = filtered
@@ -279,23 +279,23 @@ class _IslamicBooksScreenState extends ConsumerState<IslamicBooksScreen>
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        title: const Text('Biblioteca IslÃ¡mica'),
+        title: const Text('Biblioteca Islámica'),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Esta biblioteca contiene libros islÃ¡micos en espaÃ±ol proporcionados por IslamHouse.com'),
+            const Text('Esta biblioteca contiene libros islámicos en español proporcionados por IslamHouse.com'),
             const SizedBox(height: 16),
             Text(
-              'â€¢ 1,564+ libros disponibles',
+              '• 1,564+ libros disponibles',
               style: GoogleFonts.dmSans(fontSize: 12),
             ),
             Text(
-              'â€¢ Contenido verificado',
+              '• Contenido verificado',
               style: GoogleFonts.dmSans(fontSize: 12),
             ),
             Text(
-              'â€¢ MÃºltiples categorÃ­as',
+              '• Múltiples categorías',
               style: GoogleFonts.dmSans(fontSize: 12),
             ),
           ],
@@ -317,7 +317,7 @@ class _IslamicBooksScreenState extends ConsumerState<IslamicBooksScreen>
   }
 }
 
-// â”€â”€ Widgets de Libros â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Widgets de Libros ──────────────────────────────────────────
 
 class _BookCard extends StatelessWidget {
   const _BookCard({required this.book});
@@ -531,7 +531,7 @@ class _BookListCard extends StatelessWidget {
                       Icon(Icons.description, size: 12, color: tokens.textSecondary),
                       const SizedBox(width: 4),
                       Text(
-                        '${book.pages} pÃ¡gs',
+                        '${book.pages} págs',
                         style: GoogleFonts.dmSans(
                           fontSize: 10,
                           color: tokens.textSecondary,
@@ -657,7 +657,7 @@ class _BookDetailSheet extends StatelessWidget {
           // Info
           Row(
             children: [
-              _InfoChip(icon: Icons.description, label: '${book.pages} pÃ¡gs'),
+              _InfoChip(icon: Icons.description, label: '${book.pages} págs'),
               const SizedBox(width: 8),
               _InfoChip(icon: Icons.storage, label: book.size),
               const SizedBox(width: 8),
@@ -668,7 +668,7 @@ class _BookDetailSheet extends StatelessWidget {
 
           // Description
           Text(
-            'DescripciÃ³n',
+            'Descripción',
             style: GoogleFonts.dmSans(
               fontSize: 14,
               fontWeight: FontWeight.w600,

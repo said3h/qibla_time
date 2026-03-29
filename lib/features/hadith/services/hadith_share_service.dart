@@ -25,7 +25,7 @@ class HadithShareService {
     final sections = <String>[
       if (arabic.isNotEmpty) arabic,
       if (translation.isNotEmpty) translation,
-      if (reference.isNotEmpty) 'â€” $reference',
+      if (reference.isNotEmpty) '— $reference',
       if (grade.isNotEmpty) 'Grado: $grade',
       '',
       'Compartido desde Qibla Time',
@@ -38,11 +38,11 @@ class HadithShareService {
   Future<void> shareHadithAsText(Hadith hadith) async {
     await Share.share(
       buildShareText(hadith),
-      subject: 'Hadiz del dÃ­a - Qibla Time',
+      subject: 'Hadiz del día - Qibla Time',
     );
   }
 
-  /// Comparte el hadiz como imagen con diseÃ±o mejorado
+  /// Comparte el hadiz como imagen con diseño mejorado
   Future<void> shareHadithAsImage(
     Hadith hadith,
     QiblaTokens tokens, {
@@ -76,7 +76,7 @@ class HadithShareService {
     }
   }
 
-  /// Comparte el hadiz como imagen con diseÃ±o islÃ¡mico decorativo
+  /// Comparte el hadiz como imagen con diseño islámico decorativo
   Future<void> shareHadithAsDecoratedImage(
     Hadith hadith,
     QiblaTokens tokens,
@@ -150,7 +150,7 @@ class HadithShareService {
     }
   }
 
-  /// Obtiene opciones de diseÃ±o disponibles para compartir
+  /// Obtiene opciones de diseño disponibles para compartir
   List<ShareDesignOption> getAvailableDesigns() {
     return [
       ShareDesignOption(
@@ -161,18 +161,18 @@ class HadithShareService {
       ShareDesignOption(
         id: 'card',
         name: 'Tarjeta',
-        description: 'Tarjeta con diseÃ±o islÃ¡mico',
+        description: 'Tarjeta con diseño islámico',
       ),
       ShareDesignOption(
         id: 'decorated',
         name: 'Decorado',
-        description: 'Imagen completa con decoraciÃ³n',
+        description: 'Imagen completa con decoración',
       ),
     ];
   }
 }
 
-/// OpciÃ³n de diseÃ±o para compartir
+/// Opción de diseño para compartir
 class ShareDesignOption {
   const ShareDesignOption({
     required this.id,

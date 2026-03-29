@@ -60,11 +60,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   int hadithFavoritesCount = 0;
 
   static const _themes = [
-    ('dark', 'Oscuro', 'Cielo antes del Fajr', 'Ã°Å¸Å’â„¢'),
-    ('light', 'Claro', 'Para uso en exteriores', 'Ã¢Ëœâ‚¬Ã¯Â¸Â'),
-    ('amoled', 'AMOLED', 'Negro puro, ahorra bateria', 'Ã¢Å¡Â«'),
-    ('deuteranopia', 'Deuteranopia', 'Sin rojo/verde', 'Ã°Å¸â€˜Â'),
-    ('monochrome', 'Monocromia', 'Acromatopsia y baja vision', 'Ã¢Â¬Å“'),
+    ('dark', 'Oscuro', 'Cielo antes del Fajr', '🌙'),
+    ('light', 'Claro', 'Para uso en exteriores', '☀️'),
+    ('amoled', 'AMOLED', 'Negro puro, ahorra bateria', '⚫'),
+    ('deuteranopia', 'Deuteranopia', 'Sin rojo/verde', '👁'),
+    ('monochrome', 'Monocromia', 'Acromatopsia y baja vision', '⬜'),
   ];
 
   @override
@@ -95,7 +95,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     adhanIsha = await _settingsService.getPrayerNotificationEnabled('isha');
     prayerNotificationsEnabled = await _settingsService.getNotificationsEnabled();
 
-    // Cargar configuraciÃƒÂ³n de hadices
+    // Cargar configuración de hadices
     final inspirationService = ref.read(
       dailyInspirationNotificationServiceProvider,
     );
@@ -171,7 +171,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     setState(() => ramadanForced = value);
   }
 
-  // Ã¢â€â‚¬Ã¢â€â‚¬ Funciones para Hadices Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
+  // ── Funciones para Hadices ────────────────────────────────────────
 
   Future<void> _toggleDailyInspiration(bool value) async {
     final inspirationService = ref.read(
@@ -186,8 +186,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       SnackBar(
         content: Text(
           value
-              ? 'NotificaciÃƒÂ³n diaria activada'
-              : 'NotificaciÃƒÂ³n diaria desactivada',
+              ? 'Notificación diaria activada'
+              : 'Notificación diaria desactivada',
         ),
         duration: const Duration(seconds: 2),
       ),
@@ -290,7 +290,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
           children: [
             Text('Ajustes', style: GoogleFonts.amiri(fontSize: 26, color: tokens.primary, fontWeight: FontWeight.bold)),
-            Text('Ã˜Â§Ã™â€žÃ˜Â¥Ã˜Â¹Ã˜Â¯Ã˜Â§Ã˜Â¯Ã˜Â§Ã˜Âª', style: GoogleFonts.dmSans(fontSize: 10, color: tokens.textSecondary)),
+            Text('الإعدادات', style: GoogleFonts.dmSans(fontSize: 10, color: tokens.textSecondary)),
             const SizedBox(height: 16),
             _buildProfileCard(tokens),
             const SizedBox(height: 16),
@@ -309,7 +309,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('TamaÃƒÂ±o de texto', style: GoogleFonts.dmSans(fontSize: 13, color: tokens.textPrimary)),
+                  Text('Tamaño de texto', style: GoogleFonts.dmSans(fontSize: 13, color: tokens.textPrimary)),
                   const SizedBox(height: 4),
                   Text('Escala actual: ${accessibility.fontScale.toStringAsFixed(1)}x', style: GoogleFonts.dmSans(fontSize: 10, color: tokens.textSecondary)),
                   Slider(
@@ -332,7 +332,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               onTap: () => ref.read(accessibilityControllerProvider.notifier).reset(),
             ),
             const SizedBox(height: 14),
-            _buildSectionTitle(tokens, 'Notificaciones Ã‚Â· adhan'),
+            _buildSectionTitle(tokens, 'Notificaciones · adhan'),
             _buildValueTile(
               tokens,
               'Sonido del adhan',
@@ -346,7 +346,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             _buildSimpleToggleTile(
               tokens,
               'Notificaciones generales',
-              'Activa o pausa todos los avisos de oraciÃƒÂ³n',
+              'Activa o pausa todos los avisos de oración',
               prayerNotificationsStatus,
               _togglePrayerNotificationsEnabled,
             ),
@@ -366,7 +366,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     const SizedBox(width: 10),
                     Expanded(
                       child: Text(
-                        'Los avisos de adhan estÃƒÂ¡n configurados, pero el permiso del sistema sigue pendiente.',
+                        'Los avisos de adhan están configurados, pero el permiso del sistema sigue pendiente.',
                         style: GoogleFonts.dmSans(
                           fontSize: 11,
                           height: 1.5,
@@ -377,31 +377,31 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   ],
                 ),
               ),
-            _buildToggleTile(tokens, 'Fajr', '6:12 Ã‚Â· Adhan Al-Aqsa', adhanFajr, (v) => _toggleBool('fajr', v)),
-            _buildToggleTile(tokens, 'Dhuhr', '13:45 Ã‚Â· Adhan Makkah', adhanDhuhr, (v) => _toggleBool('dhuhr', v)),
-            _buildToggleTile(tokens, 'Asr', '17:14 Ã‚Â· Adhan Makkah', adhanAsr, (v) => _toggleBool('asr', v)),
-            _buildToggleTile(tokens, 'Maghrib', '19:52 Ã‚Â· Adhan Al-Aqsa', adhanMaghrib, (v) => _toggleBool('maghrib', v)),
-            _buildToggleTile(tokens, 'Isha', '21:28 Ã‚Â· Adhan Makkah', adhanIsha, (v) => _toggleBool('isha', v)),
-            _buildSimpleToggleTile(tokens, 'VibraciÃƒÂ³n hÃƒÂ¡ptica', 'En Tasbih y notificaciones', haptics, (v) => setState(() => haptics = v)),
+            _buildToggleTile(tokens, 'Fajr', '6:12 · Adhan Al-Aqsa', adhanFajr, (v) => _toggleBool('fajr', v)),
+            _buildToggleTile(tokens, 'Dhuhr', '13:45 · Adhan Makkah', adhanDhuhr, (v) => _toggleBool('dhuhr', v)),
+            _buildToggleTile(tokens, 'Asr', '17:14 · Adhan Makkah', adhanAsr, (v) => _toggleBool('asr', v)),
+            _buildToggleTile(tokens, 'Maghrib', '19:52 · Adhan Al-Aqsa', adhanMaghrib, (v) => _toggleBool('maghrib', v)),
+            _buildToggleTile(tokens, 'Isha', '21:28 · Adhan Makkah', adhanIsha, (v) => _toggleBool('isha', v)),
+            _buildSimpleToggleTile(tokens, 'Vibración háptica', 'En Tasbih y notificaciones', haptics, (v) => setState(() => haptics = v)),
             const SizedBox(height: 14),
-            _buildSectionTitle(tokens, 'CÃƒÂ¡lculo de horarios'),
-            _buildValueTile(tokens, 'MÃƒÂ©todo', calculationMethod.name.replaceAll('_', ' ').toUpperCase(), onTap: _showMethodSheet),
+            _buildSectionTitle(tokens, 'Cálculo de horarios'),
+            _buildValueTile(tokens, 'Método', calculationMethod.name.replaceAll('_', ' ').toUpperCase(), onTap: _showMethodSheet),
             _buildValueTile(tokens, 'Madhab (Asr)', isHanafi ? 'Hanafi' : 'Shafi\'i', onTap: () => _setMadhab(!isHanafi)),
-            _buildValueTile(tokens, 'Ajuste manual', 'Ã‚Â±$timeOffset min', trailing: _offsetButtons(tokens)),
-            _buildSimpleToggleTile(tokens, 'UbicaciÃƒÂ³n', 'GPS automÃƒÂ¡tico', autoLocation, (v) => setState(() => autoLocation = v)),
+            _buildValueTile(tokens, 'Ajuste manual', '±$timeOffset min', trailing: _offsetButtons(tokens)),
+            _buildSimpleToggleTile(tokens, 'Ubicación', 'GPS automático', autoLocation, (v) => setState(() => autoLocation = v)),
             const SizedBox(height: 14),
-            _buildSectionTitle(tokens, 'Modo RamadÃƒÂ¡n'),
+            _buildSectionTitle(tokens, 'Modo Ramadán'),
             _buildSimpleToggleTile(
               tokens,
-              'Modo RamadÃƒÂ¡n automÃƒÂ¡tico',
-              'Se activa solo cuando el calendario islÃƒÂ¡mico entra en RamadÃƒÂ¡n',
+              'Modo Ramadán automático',
+              'Se activa solo cuando el calendario islámico entra en Ramadán',
               ramadanAutomatic,
               _toggleRamadanAutomatic,
             ),
             _buildSimpleToggleTile(
               tokens,
-              'Forzar modo RamadÃƒÂ¡n',
-              'ÃƒÅ¡til para pruebas o para previsualizar Inicio fuera de RamadÃƒÂ¡n',
+              'Forzar modo Ramadán',
+              'Útil para pruebas o para previsualizar Inicio fuera de Ramadán',
               ramadanForced,
               _toggleRamadanForced,
             ),
@@ -413,8 +413,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               ),
             const SizedBox(height: 14),
 
-            // Ã¢â€â‚¬Ã¢â€â‚¬ SECCIÃƒâ€œN CORÃƒÂN OFFLINE Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
-            _buildSectionTitle(tokens, 'CorÃƒÂ¡n offline'),
+            // ── SECCIÓN CORÁN OFFLINE ────────────────────────────────────────
+            _buildSectionTitle(tokens, 'Corán offline'),
             _buildValueTile(
               tokens,
               'Ver suras descargadas',
@@ -429,7 +429,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ),
             const SizedBox(height: 14),
 
-            // Ã¢â€â‚¬Ã¢â€â‚¬ SECCIÃƒâ€œN HADICES Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
+            // ── SECCIÓN HADICES ────────────────────────────────────────
             _buildSectionTitle(tokens, 'Hadices'),
             _buildValueTile(
               tokens,
@@ -455,14 +455,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ),
             _buildSimpleToggleTile(
               tokens,
-              'NotificaciÃƒÂ³n diaria',
-              'Recibe un hadiz o versÃƒÂ­culo cada dÃƒÂ­a',
+              'Notificación diaria',
+              'Recibe un hadiz o versículo cada día',
               dailyInspirationEnabled,
               (v) => _toggleDailyInspiration(v),
             ),
             _buildValueTile(
               tokens,
-              'Hora de notificaciÃƒÂ³n',
+              'Hora de notificación',
               '${dailyInspirationHour}:00',
               onTap: () => _selectNotificationHour(tokens),
             ),
@@ -480,7 +480,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ),
             const SizedBox(height: 14),
 
-            // Ã¢â€â‚¬Ã¢â€â‚¬ SECCIÃƒâ€œN TRAVEL MODE Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
+            // ── SECCIÓN TRAVEL MODE ────────────────────────────────────────
             _buildSectionTitle(tokens, 'Modo viajero'),
 
             // Toggle principal
@@ -491,7 +491,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   data: (enabled) => _buildSimpleToggleTile(
                     tokens,
                     'Modo viajero',
-                    'Detecta automÃƒÂ¡ticamente cambios de ciudad (>50 km)',
+                    'Detecta automáticamente cambios de ciudad (>50 km)',
                     enabled,
                     (value) async {
                       await ref.read(travelModeServiceProvider).setEnabled(value);
@@ -578,12 +578,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               },
             ),
 
-            _buildSectionTitle(tokens, 'CachÃƒÂ© inteligente'),
-            _buildValueTile(tokens, 'CachÃƒÂ© vÃƒÂ¡lida hasta', cacheStatus.validUntil?.toLocal().toString().substring(0, 16) ?? 'Sin cachÃƒÂ©'),
-            _buildValueTile(tokens, 'Entradas en cachÃƒÂ©', '${cacheStatus.entryCount}'),
+            _buildSectionTitle(tokens, 'Caché inteligente'),
+            _buildValueTile(tokens, 'Caché válida hasta', cacheStatus.validUntil?.toLocal().toString().substring(0, 16) ?? 'Sin caché'),
+            _buildValueTile(tokens, 'Entradas en caché', '${cacheStatus.entryCount}'),
             _buildValueTile(
               tokens,
-              'Limpiar cachÃƒÂ©',
+              'Limpiar caché',
               'Borrar',
               onTap: () async {
                 await ref.read(prayerCacheDataSourceProvider).clear();
@@ -601,7 +601,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               cacheStatus: cacheStatus,
             ),
             const SizedBox(height: 14),
-            _buildSectionTitle(tokens, 'Sadaqah Ã‚Â· Apoyo'),
+            _buildSectionTitle(tokens, 'Sadaqah · Apoyo'),
             Container(
               margin: const EdgeInsets.only(bottom: 5),
               padding: const EdgeInsets.all(14),
@@ -612,27 +612,27 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               ),
               child: Row(
                 children: [
-                  const Text('Ã°Å¸â€™â€º', style: TextStyle(fontSize: 28)),
+                  const Text('💛', style: TextStyle(fontSize: 28)),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('Apoya el desarrollo', style: GoogleFonts.dmSans(fontSize: 13, color: tokens.primaryLight, fontWeight: FontWeight.w500)),
-                        Text('Cada donaciÃƒÂ³n puede ser una sadaqah jariyah', style: GoogleFonts.dmSans(fontSize: 10, color: tokens.textSecondary)),
+                        Text('Cada donación puede ser una sadaqah jariyah', style: GoogleFonts.dmSans(fontSize: 10, color: tokens.textSecondary)),
                       ],
                     ),
                   ),
                 ],
               ),
             ),
-            _buildValueTile(tokens, 'Seguimiento de sadaqah', 'Ã¢â€ â€™'),
+            _buildValueTile(tokens, 'Seguimiento de sadaqah', '→'),
             const SizedBox(height: 14),
             _buildSectionTitle(tokens, 'Copia de seguridad en la nube (beta)'),
-            _buildSimpleToggleTile(tokens, 'Copia automÃƒÂ¡tica', 'Prepara copias anÃƒÂ³nimas de tus datos', cloudBackupEnabled, _toggleCloudBackup),
-            _buildSimpleToggleTile(tokens, 'Solo con Wi-Fi', 'Evita usar datos mÃƒÂ³viles en futuras sincronizaciones', cloudWifiOnly, _toggleCloudWifiOnly),
-            _buildValueTile(tokens, 'ID anÃƒÂ³nimo', deviceId ?? 'Generando...'),
-            _buildValueTile(tokens, 'ÃƒÅ¡ltima copia', lastBackup == null ? 'Nunca' : lastBackup.toLocal().toString().substring(0, 16)),
+            _buildSimpleToggleTile(tokens, 'Copia automática', 'Prepara copias anónimas de tus datos', cloudBackupEnabled, _toggleCloudBackup),
+            _buildSimpleToggleTile(tokens, 'Solo con Wi-Fi', 'Evita usar datos móviles en futuras sincronizaciones', cloudWifiOnly, _toggleCloudWifiOnly),
+            _buildValueTile(tokens, 'ID anónimo', deviceId ?? 'Generando...'),
+            _buildValueTile(tokens, 'Última copia', lastBackup == null ? 'Nunca' : lastBackup.toLocal().toString().substring(0, 16)),
             if (!cloudBackupEnabled && lastBackup == null)
               Container(
                 margin: const EdgeInsets.only(bottom: 8),
@@ -643,7 +643,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   border: Border.all(color: tokens.border),
                 ),
                 child: Text(
-                  'TodavÃƒÂ­a no has configurado copias de seguridad. Puedes exportar una primera copia manual cuando quieras.',
+                  'Todavía no has configurado copias de seguridad. Puedes exportar una primera copia manual cuando quieras.',
                   style: GoogleFonts.dmSans(
                     fontSize: 11,
                     height: 1.5,
@@ -677,13 +677,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 border: Border.all(color: tokens.primaryBorder),
               ),
               child: Text(
-                'La base de la sincronizaciÃƒÂ³n en la nube ya estÃƒÂ¡ lista. Cuando el backend quede definido, este mismo formato anÃƒÂ³nimo servirÃƒÂ¡ para restaurar entre dispositivos.',
+                'La base de la sincronización en la nube ya está lista. Cuando el backend quede definido, este mismo formato anónimo servirá para restaurar entre dispositivos.',
                 style: GoogleFonts.dmSans(fontSize: 10, height: 1.6, color: tokens.textPrimary),
               ),
             ),
             _buildSectionTitle(tokens, 'Acerca de'),
-            _buildValueTile(tokens, 'VersiÃƒÂ³n', '3.0.0'),
-            _buildValueTile(tokens, 'Licencias de cÃƒÂ³digo abierto', 'Ã¢â€ â€™'),
+            _buildValueTile(tokens, 'Versión', '3.0.0'),
+            _buildValueTile(tokens, 'Licencias de código abierto', '→'),
           ],
         ),
       ),
@@ -708,7 +708,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               color: tokens.primaryBg,
               border: Border.all(color: tokens.primaryBorder, width: 2),
             ),
-            child: const Center(child: Text('Ã°Å¸â€¢Å’', style: TextStyle(fontSize: 24))),
+            child: const Center(child: Text('🕌', style: TextStyle(fontSize: 24))),
           ),
           const SizedBox(width: 14),
           Expanded(
@@ -864,7 +864,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   }) {
     final locationValue = locationLabel ??
         (locationDiagnostic?.lastKnownLocation == null
-            ? 'Sin ubicaciÃƒÂ³n guardada'
+            ? 'Sin ubicación guardada'
             : '${locationDiagnostic!.lastKnownLocation!.latitude.toStringAsFixed(2)}, ${locationDiagnostic.lastKnownLocation!.longitude.toStringAsFixed(2)}');
 
     final locationStatus = switch (locationDiagnostic?.permissionStatus) {
@@ -875,7 +875,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     };
 
     final scheduleSource =
-        cacheStatus.entryCount > 0 ? 'CachÃƒÂ© preparada' : 'Pendiente';
+        cacheStatus.entryCount > 0 ? 'Caché preparada' : 'Pendiente';
 
     return Container(
       width: double.infinity,
@@ -887,15 +887,15 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       ),
       child: Column(
         children: [
-          _diagnosticRow(tokens, 'MÃƒÂ©todo', calculationMethod.name.replaceAll('_', ' ').toUpperCase()),
+          _diagnosticRow(tokens, 'Método', calculationMethod.name.replaceAll('_', ' ').toUpperCase()),
           _diagnosticRow(tokens, 'Madhab', isHanafi ? 'Hanafi' : 'Shafi\'i'),
           _diagnosticRow(tokens, 'Offset', '${timeOffset >= 0 ? '+' : ''}$timeOffset min'),
           _diagnosticRow(tokens, 'Notif. sistema', notificationPermissionGranted == null ? 'Comprobando...' : notificationPermissionGranted ? 'Concedidas' : 'Pendientes'),
           _diagnosticRow(tokens, 'Notif. app', prayerNotificationsStatus ? 'Activadas' : 'Pausadas'),
-          _diagnosticRow(tokens, 'UbicaciÃƒÂ³n', locationValue),
-          _diagnosticRow(tokens, 'Estado de la ubicaciÃƒÂ³n', locationStatus),
+          _diagnosticRow(tokens, 'Ubicación', locationValue),
+          _diagnosticRow(tokens, 'Estado de la ubicación', locationStatus),
           _diagnosticRow(tokens, 'Fuente horarios', scheduleSource),
-          _diagnosticRow(tokens, 'CachÃƒÂ©', '${cacheStatus.entryCount} entradas'),
+          _diagnosticRow(tokens, 'Caché', '${cacheStatus.entryCount} entradas'),
         ],
       ),
     );
@@ -938,7 +938,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       mainAxisSize: MainAxisSize.min,
       children: [
         IconButton(onPressed: () => _updateOffset(timeOffset - 1), icon: Icon(Icons.remove_circle_outline, color: tokens.textSecondary)),
-        Text('Ã‚Â±$timeOffset', style: GoogleFonts.dmSans(fontSize: 12, color: tokens.primary, fontWeight: FontWeight.w500)),
+        Text('±$timeOffset', style: GoogleFonts.dmSans(fontSize: 12, color: tokens.primary, fontWeight: FontWeight.w500)),
         IconButton(onPressed: () => _updateOffset(timeOffset + 1), icon: Icon(Icons.add_circle_outline, color: tokens.primary)),
       ],
     );
@@ -986,7 +986,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             minLines: 8,
             maxLines: 12,
             style: GoogleFonts.dmSans(color: tokens.textPrimary),
-            decoration: const InputDecoration(hintText: 'Pega aquÃƒÂ­ el JSON exportado'),
+            decoration: const InputDecoration(hintText: 'Pega aquí el JSON exportado'),
           ),
           actions: [
             TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancelar')),
@@ -1012,14 +1012,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     );
   }
 
-  // Ã¢â€â‚¬Ã¢â€â‚¬ HELPERS PARA TRAVEL MODE Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
+  // ── HELPERS PARA TRAVEL MODE ────────────────────────────────────
 
   String _formatDate(DateTime date) {
     final now = DateTime.now();
     final diff = now.difference(date);
     if (diff.inDays == 0) return 'Hoy';
     if (diff.inDays == 1) return 'Ayer';
-    if (diff.inDays < 7) return 'Hace ${diff.inDays} dÃƒÂ­as';
+    if (diff.inDays < 7) return 'Hace ${diff.inDays} días';
     return '${date.day}/${date.month}/${date.year}';
   }
 

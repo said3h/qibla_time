@@ -6,19 +6,19 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../models/book_model.dart';
 
 /// Servicio para acceder a la API de IslamHouse
-/// DocumentaciÃ³n: https://api3.islamhouse.com/v3
+/// Documentación: https://api3.islamhouse.com/v3
 class IslamHouseBookService {
   static const String _baseUrl = 'https://api3.islamhouse.com/v3';
-  static const String _apiKey = ''; // API key opcional, IslamHouse permite acceso pÃºblico
+  static const String _apiKey = ''; // API key opcional, IslamHouse permite acceso público
 
   final String _languageCode;
 
   IslamHouseBookService({String languageCode = 'es'})
       : _languageCode = languageCode;
 
-  // â”€â”€ Endpoints â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Endpoints ──────────────────────────────────────────────
 
-  /// Obtiene lista de libros en espaÃ±ol
+  /// Obtiene lista de libros en español
   Future<List<IslamHouseBook>> getBooks({
     int page = 1,
     int limit = 20,
@@ -58,7 +58,7 @@ class IslamHouseBookService {
     }
   }
 
-  /// Obtiene un libro especÃ­fico por ID
+  /// Obtiene un libro específico por ID
   Future<IslamHouseBook?> getBookById(int id) async {
     try {
       final uri = Uri.parse('$_baseUrl/books/$id');
@@ -76,7 +76,7 @@ class IslamHouseBookService {
     return null;
   }
 
-  /// Obtiene categorÃ­as disponibles
+  /// Obtiene categorías disponibles
   Future<List<IslamHouseCategory>> getCategories() async {
     try {
       final uri = Uri.parse('$_baseUrl/categories?lang=$_languageCode');
@@ -93,7 +93,7 @@ class IslamHouseBookService {
             .toList();
       }
     } catch (e) {
-      // Retornar categorÃ­as por defecto
+      // Retornar categorías por defecto
       return _getDefaultCategories();
     }
     return [];
@@ -130,7 +130,7 @@ class IslamHouseBookService {
     return [];
   }
 
-  /// Obtiene libros mÃ¡s descargados
+  /// Obtiene libros más descargados
   Future<List<IslamHouseBook>> getMostDownloaded({int limit = 10}) async {
     try {
       final uri = Uri.parse('$_baseUrl/books/popular?lang=$_languageCode&limit=$limit');
@@ -176,7 +176,7 @@ class IslamHouseBookService {
     return [];
   }
 
-  // â”€â”€ Cache â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Cache ──────────────────────────────────────────────
 
   static const String _cacheKey = 'islamhouse_books_cache';
   static const String _cacheTimestampKey = 'islamhouse_books_cache_timestamp';
@@ -207,7 +207,7 @@ class IslamHouseBookService {
     }
   }
 
-  /// Verifica si el cache es vÃ¡lido (menos de 24 horas)
+  /// Verifica si el cache es válido (menos de 24 horas)
   Future<bool> isCacheValid() async {
     try {
       final prefs = await SharedPreferences.getInstance();
@@ -231,9 +231,9 @@ class IslamHouseBookService {
     await prefs.remove(_cacheTimestampKey);
   }
 
-  // â”€â”€ Utilidades â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Utilidades ──────────────────────────────────────────────
 
-  /// CategorÃ­as por defecto (fallback)
+  /// Categorías por defecto (fallback)
   List<IslamHouseCategory> _getDefaultCategories() {
     return IslamHouseBook.mainCategories.map((name) => IslamHouseCategory(
       id: name.hashCode,
@@ -245,7 +245,7 @@ class IslamHouseBookService {
   }
 }
 
-// â”€â”€ Providers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Providers ──────────────────────────────────────────────
 
 final islamHouseBookServiceProvider = Provider<IslamHouseBookService>((ref) {
   return IslamHouseBookService(languageCode: 'es');

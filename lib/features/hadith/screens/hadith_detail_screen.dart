@@ -9,7 +9,7 @@ import '../../hadith/screens/hadith_library_screen.dart';
 import '../../hadith/services/hadith_service.dart';
 import '../../hadith/services/hadith_share_service.dart';
 
-/// Pantalla de detalle de un hadiz especÃ­fico
+/// Pantalla de detalle de un hadiz específico
 /// Muestra texto completo, referencias, y opciones avanzadas
 class HadithDetailScreen extends ConsumerStatefulWidget {
   const HadithDetailScreen({
@@ -60,7 +60,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
           ),
         ),
         actions: [
-          // BotÃ³n de favorito
+          // Botón de favorito
           IconButton(
             icon: Icon(
               _isFavorite ? Icons.favorite : Icons.favorite_border,
@@ -68,7 +68,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
             ),
             onPressed: _toggleFavorite,
           ),
-          // MenÃº de compartir
+          // Menú de compartir
           PopupMenuButton<String>(
             onSelected: _handleMenuAction,
             itemBuilder: (_) => [
@@ -82,26 +82,26 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          // Header con colecciÃ³n y grado
+          // Header con colección y grado
           _buildHeader(tokens, hadith),
           const SizedBox(height: 20),
 
-          // Texto en Ã¡rabe
+          // Texto en árabe
           if (_showArabic) ...[
             _buildSection(
               tokens: tokens,
-              title: 'Texto en Ãrabe',
+              title: 'Texto en Árabe',
               icon: Icons.text_fields,
               child: _buildArabicText(tokens, hadith.arabic),
             ),
             const SizedBox(height: 16),
           ],
 
-          // TraducciÃ³n
+          // Traducción
           if (_showTranslation) ...[
             _buildSection(
               tokens: tokens,
-              title: 'TraducciÃ³n al EspaÃ±ol',
+              title: 'Traducción al Español',
               icon: Icons.translate,
               child: _buildTranslationText(tokens, hadith.translation),
             ),
@@ -112,15 +112,15 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
           _buildReferenceCard(tokens, hadith),
           const SizedBox(height: 16),
 
-          // CategorÃ­a
+          // Categoría
           _buildCategoryCard(tokens, hadith.category),
           const SizedBox(height: 16),
 
-          // Acciones rÃ¡pidas
+          // Acciones rápidas
           _buildQuickActions(tokens, hadith),
           const SizedBox(height: 24),
 
-          // InformaciÃ³n adicional
+          // Información adicional
           _buildInfoCard(tokens),
           const SizedBox(height: 16),
 
@@ -333,7 +333,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
               Icon(Icons.label_outline, size: 18, color: tokens.primary),
               const SizedBox(width: 8),
               Text(
-                'CategorÃ­a / Tema',
+                'Categoría / Tema',
                 style: GoogleFonts.dmSans(
                   fontSize: 12,
                   fontWeight: FontWeight.w700,
@@ -344,7 +344,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
           ),
           const SizedBox(height: 10),
           Text(
-            category.isNotEmpty ? category : 'Sin categorÃ­a especÃ­fica',
+            category.isNotEmpty ? category : 'Sin categoría específica',
             style: GoogleFonts.dmSans(
               fontSize: 13,
               height: 1.6,
@@ -409,7 +409,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
               Icon(Icons.info_outline, size: 16, color: tokens.primary),
               const SizedBox(width: 8),
               Text(
-                'InformaciÃ³n',
+                'Información',
                 style: GoogleFonts.dmSans(
                   fontSize: 11,
                   fontWeight: FontWeight.w700,
@@ -420,7 +420,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
           ),
           const SizedBox(height: 8),
           Text(
-            'Este hadiz forma parte de la colecciÃ³n completa de 1,954 hadices en espaÃ±ol con tildes correctas. Fuente: HadeethEnc.com',
+            'Este hadiz forma parte de la colección completa de 1,954 hadices en español con tildes correctas. Fuente: HadeethEnc.com',
             style: GoogleFonts.dmSans(
               fontSize: 10,
               height: 1.6,
@@ -442,7 +442,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
               _showArabic ? Icons.visibility : Icons.visibility_off,
               size: 16,
             ),
-            label: Text(_showArabic ? 'Ocultar Ãrabe' : 'Mostrar Ãrabe'),
+            label: Text(_showArabic ? 'Ocultar Árabe' : 'Mostrar Árabe'),
             style: OutlinedButton.styleFrom(
               foregroundColor: tokens.textPrimary,
               padding: const EdgeInsets.symmetric(vertical: 12),
@@ -457,7 +457,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
               _showTranslation ? Icons.visibility : Icons.visibility_off,
               size: 16,
             ),
-            label: Text(_showTranslation ? 'Ocultar EspaÃ±ol' : 'Mostrar EspaÃ±ol'),
+            label: Text(_showTranslation ? 'Ocultar Español' : 'Mostrar Español'),
             style: OutlinedButton.styleFrom(
               foregroundColor: tokens.textPrimary,
               padding: const EdgeInsets.symmetric(vertical: 12),
@@ -508,7 +508,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
     );
   }
 
-  // â”€â”€ Acciones â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Acciones ──────────────────────────────────────────────
 
   Future<void> _toggleFavorite() async {
     await ref.read(hadithServiceProvider).toggleFavorite(widget.hadith.id);
@@ -525,7 +525,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
   }
 
   Future<void> _copyToClipboard(Hadith hadith) async {
-    final text = '${hadith.arabic}\n\n${hadith.translation}\n\nâ€” ${hadith.reference}';
+    final text = '${hadith.arabic}\n\n${hadith.translation}\n\n— ${hadith.reference}';
     await Clipboard.setData(ClipboardData(text: text));
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
@@ -583,7 +583,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
     );
   }
 
-  // â”€â”€ Utilidades â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Utilidades ──────────────────────────────────────────────
 
   Color _getCollectionColor(String reference) {
     final refLower = reference.toLowerCase();
@@ -619,7 +619,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
   }
 }
 
-// â”€â”€ Widget de AcciÃ³n RÃ¡pida â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Widget de Acción Rápida ───────────────────────────────────
 
 class _QuickActionButton extends StatelessWidget {
   const _QuickActionButton({

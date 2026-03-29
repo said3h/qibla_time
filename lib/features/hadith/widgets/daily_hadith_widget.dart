@@ -1,5 +1,5 @@
-// Widget para mostrar el Hadiz del DÃ­a en el home
-// Muestra Ã¡rabe + traducciÃ³n + referencia con diseÃ±o atractivo
+// Widget para mostrar el Hadiz del Día en el home
+// Muestra árabe + traducción + referencia con diseño atractivo
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -56,7 +56,7 @@ class DailyHadithWidget extends ConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Header con tÃ­tulo y colecciÃ³n
+                  // Header con título y colección
                   Row(
                     children: [
                       Container(
@@ -78,7 +78,7 @@ class DailyHadithWidget extends ConsumerWidget {
                             ),
                             const SizedBox(width: 6),
                             Text(
-                              'HADIZ DEL DÃA',
+                              'HADIZ DEL DÍA',
                               style: GoogleFonts.dmSans(
                                 fontSize: 9,
                                 fontWeight: FontWeight.w700,
@@ -90,7 +90,7 @@ class DailyHadithWidget extends ConsumerWidget {
                         ),
                       ),
                       const Spacer(),
-                      // ColecciÃ³n
+                      // Colección
                       Container(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 8,
@@ -115,7 +115,7 @@ class DailyHadithWidget extends ConsumerWidget {
 
                   const SizedBox(height: 14),
 
-                  // Texto en Ã¡rabe
+                  // Texto en árabe
                   Text(
                     snapshot.arabic,
                     textAlign: TextAlign.right,
@@ -128,7 +128,7 @@ class DailyHadithWidget extends ConsumerWidget {
 
                   const SizedBox(height: 12),
 
-                  // TraducciÃ³n al espaÃ±ol
+                  // Traducción al español
                   Text(
                     snapshot.translation,
                     style: GoogleFonts.dmSans(
@@ -176,7 +176,7 @@ class DailyHadithWidget extends ConsumerWidget {
 
                   const SizedBox(height: 12),
 
-                  // Botones de acciÃ³n
+                  // Botones de acción
                   Row(
                     children: [
                       Expanded(
@@ -242,7 +242,7 @@ class DailyHadithWidget extends ConsumerWidget {
                         ),
                       ),
                       const SizedBox(width: 8),
-                      // BotÃ³n favoritos
+                      // Botón favoritos
                       IconButton.filled(
                         onPressed: () => _toggleFavorite(ref, hadith.id),
                         icon: Icon(
@@ -259,7 +259,7 @@ class DailyHadithWidget extends ConsumerWidget {
                               : tokens.textPrimary,
                         ),
                       ),
-                      // BotÃ³n ver mÃ¡s
+                      // Botón ver más
                       IconButton.filled(
                         onPressed: () => _openHadithLibrary(context),
                         icon: const Icon(Icons.open_in_new, size: 18),
@@ -323,7 +323,7 @@ class DailyHadithWidget extends ConsumerWidget {
   }
 }
 
-// â”€â”€ Widget de carga â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Widget de carga ────────────────────────────────────────────
 
 class _LoadingHadithWidget extends StatelessWidget {
   @override

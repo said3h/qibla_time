@@ -2,15 +2,15 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// Servicio para reproducir audio de hadices
-/// NOTA: Los hadices no tienen audio oficial disponible como el CorÃ¡n.
-/// Este servicio es un placeholder para futura implementaciÃ³n.
+/// NOTA: Los hadices no tienen audio oficial disponible como el Corán.
+/// Este servicio es un placeholder para futura implementación.
 class HadithAudioService {
   final AudioPlayer _player = AudioPlayer();
 
   bool _isPlaying = false;
   String? _currentHadithId;
 
-  /// Verifica si el audio estÃ¡ disponible para un hadiz
+  /// Verifica si el audio está disponible para un hadiz
   /// Actualmente retorna false ya que no hay audio oficial de hadices
   bool isAudioAvailable(String hadithId) {
     // TODO: Implementar cuando haya audio disponible
@@ -25,8 +25,8 @@ class HadithAudioService {
   Future<void> playHadith(String hadithId, {String? arabicText}) async {
     if (!isAudioAvailable(hadithId)) {
       throw UnsupportedError(
-        'El audio de hadices no estÃ¡ disponible actualmente. '
-        'Los hadices no tienen recitaciÃ³n oficial como el CorÃ¡n.',
+        'El audio de hadices no está disponible actualmente. '
+        'Los hadices no tienen recitación oficial como el Corán.',
       );
     }
 
@@ -45,19 +45,19 @@ class HadithAudioService {
     }
   }
 
-  /// Pausa la reproducciÃ³n
+  /// Pausa la reproducción
   Future<void> pause() async {
     await _player.pause();
     _isPlaying = false;
   }
 
-  /// Reanuda la reproducciÃ³n
+  /// Reanuda la reproducción
   Future<void> resume() async {
     await _player.resume();
     _isPlaying = true;
   }
 
-  /// Detiene la reproducciÃ³n
+  /// Detiene la reproducción
   Future<void> stop() async {
     await _player.stop();
     _isPlaying = false;
@@ -86,7 +86,7 @@ class HadithAudioService {
   }
 }
 
-// â”€â”€ Providers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Providers ──────────────────────────────────────────────────
 
 final hadithAudioServiceProvider = Provider<HadithAudioService>((ref) {
   return HadithAudioService();

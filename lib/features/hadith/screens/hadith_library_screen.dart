@@ -95,7 +95,7 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
       ),
       body: Column(
         children: [
-          // Barra de bÃƒÂºsqueda
+          // Barra de búsqueda
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
             child: TextField(
@@ -143,7 +143,7 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
                     children: [
                       Expanded(
                         child: _FilterDropdown(
-                          label: 'ColecciÃƒÂ³n',
+                          label: 'Colección',
                           value: _selectedCollection,
                           items: ['Todas', ...collections.keys],
                           onChanged: (v) => setState(() => _selectedCollection = v ?? 'Todas'),
@@ -174,21 +174,21 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
               data: (hadiths) {
                 final favorites = favoritesAsync.valueOrNull ?? const <int>{};
 
-                // Determinar quÃƒÂ© hadices mostrar
+                // Determinar qué hadices mostrar
                 List<Hadith> displayHadiths;
 
                 if (_isSearching) {
-                  // Mostrando resultados de bÃƒÂºsqueda
+                  // Mostrando resultados de búsqueda
                   displayHadiths = _applyFilters(_searchResults);
                 } else if (_searchResults.isNotEmpty && _searchController.text.isEmpty) {
-                  // BÃƒÂºsqueda previa, volver a todos
+                  // Búsqueda previa, volver a todos
                   displayHadiths = _applyFilters(hadiths);
                 } else {
                   // Vista normal con filtros
                   displayHadiths = _applyFilters(hadiths);
                 }
 
-                // Ordenar: hadiz del dÃƒÂ­a primero si existe
+                // Ordenar: hadiz del día primero si existe
                 final dailyHadith = dailyHadithAsync.valueOrNull;
                 if (dailyHadith != null && displayHadiths.any((h) => h.id == dailyHadith.id)) {
                   displayHadiths.removeWhere((h) => h.id == dailyHadith.id);
@@ -198,7 +198,7 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
                 return ListView(
                   padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
                   children: [
-                    // Hadiz del dÃƒÂ­a destacado
+                    // Hadiz del día destacado
                     if (dailyHadith != null && !_isSearching)
                       _FeaturedHadithCard(
                         hadith: dailyHadith,
@@ -276,7 +276,7 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
   List<Hadith> _applyFilters(List<Hadith> hadiths) {
     var filtered = hadiths;
 
-    // Filtro por colecciÃƒÂ³n
+    // Filtro por colección
     if (_selectedCollection != 'Todas') {
       filtered = filtered
           .where((h) => _extractCollection(h.reference) == _selectedCollection)
@@ -332,7 +332,7 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
   }
 }
 
-// Ã¢â€â‚¬Ã¢â€â‚¬ Widgets Auxiliares Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
+// ── Widgets Auxiliares ──────────────────────────────────────────
 
 class _FilterDropdown extends StatelessWidget {
   const _FilterDropdown({
@@ -744,8 +744,8 @@ class _EmptyState extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             isSearch
-                ? 'Intenta con otros tÃƒÂ©rminos o quita los filtros'
-                : 'Los hadices se cargarÃƒÂ¡n pronto',
+                ? 'Intenta con otros términos o quita los filtros'
+                : 'Los hadices se cargarán pronto',
             textAlign: TextAlign.center,
             style: GoogleFonts.dmSans(
               fontSize: 12,
@@ -758,7 +758,7 @@ class _EmptyState extends StatelessWidget {
   }
 }
 
-// Ã¢â€â‚¬Ã¢â€â‚¬ Debouncer para bÃƒÂºsqueda Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
+// ── Debouncer para búsqueda ─────────────────────────────────────
 
 class Debouncer {
   Debouncer({required this.delay});
@@ -771,7 +771,7 @@ class Debouncer {
   }
 }
 
-// Ã¢â€â‚¬Ã¢â€â‚¬ Providers adicionales Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
+// ── Providers adicionales ───────────────────────────────────────
 
 final hadithCollectionsProvider = FutureProvider<Map<String, int>>((ref) async {
   return ref.read(hadithServiceProvider).getCollections();
