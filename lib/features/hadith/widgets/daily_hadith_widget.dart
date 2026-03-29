@@ -308,13 +308,23 @@ class DailyHadithWidget extends ConsumerWidget {
                               : tokens.textPrimary,
                         ),
                       ),
-                      // Botón ver más
-                      IconButton.filled(
-                        onPressed: () => _openHadithLibrary(context),
-                        icon: const Icon(Icons.open_in_new, size: 18),
-                        style: IconButton.styleFrom(
-                          backgroundColor: tokens.primary,
-                          foregroundColor: Colors.white,
+                      // Botón Hadices
+                      SizedBox(
+                        height: 40,
+                        child: FilledButton.icon(
+                          onPressed: () => _openHadithLibrary(context),
+                          icon: const Icon(
+                            Icons.auto_stories_outlined,
+                            size: 18,
+                          ),
+                          label: const Text('Hadices'),
+                          style: FilledButton.styleFrom(
+                            backgroundColor: tokens.primary,
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                            ),
+                          ),
                         ),
                       ),
                     ],
