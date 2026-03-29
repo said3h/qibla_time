@@ -559,61 +559,65 @@ class _HadithCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-          Row(
-            children: [
-              Expanded(
-                child: Text(
-                  hadith.reference,
-                  style: GoogleFonts.dmSans(
-                    fontSize: 10,
-                    color: tokens.textSecondary,
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    hadith.reference,
+                    style: GoogleFonts.dmSans(
+                      fontSize: 10,
+                      color: tokens.textSecondary,
+                    ),
                   ),
                 ),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                decoration: BoxDecoration(
-                  color: _getGradeColor(hadith.grade).withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                child: Text(
-                  hadith.grade,
-                  style: GoogleFonts.dmSans(
-                    fontSize: 9,
-                    fontWeight: FontWeight.w600,
-                    color: _getGradeColor(hadith.grade),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 6,
+                    vertical: 2,
+                  ),
+                  decoration: BoxDecoration(
+                    color: _getGradeColor(hadith.grade).withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: Text(
+                    hadith.grade,
+                    style: GoogleFonts.dmSans(
+                      fontSize: 9,
+                      fontWeight: FontWeight.w600,
+                      color: _getGradeColor(hadith.grade),
+                    ),
                   ),
                 ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            Text(
+              hadith.arabic,
+              textAlign: TextAlign.right,
+              style: GoogleFonts.amiri(
+                fontSize: 19,
+                height: 1.7,
+                color: tokens.textPrimary,
               ),
-            ],
-          ),
-          const SizedBox(height: 10),
-          Text(
-            hadith.arabic,
-            textAlign: TextAlign.right,
-            style: GoogleFonts.amiri(
-              fontSize: 19,
-              height: 1.7,
-              color: tokens.textPrimary,
             ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            hadith.translation,
-            style: GoogleFonts.dmSans(
-              fontSize: 12,
-              height: 1.6,
-              color: tokens.textPrimary,
+            const SizedBox(height: 8),
+            Text(
+              hadith.translation,
+              style: GoogleFonts.dmSans(
+                fontSize: 12,
+                height: 1.6,
+                color: tokens.textPrimary,
+              ),
             ),
-          ),
-          const SizedBox(height: 10),
-          _HadithActions(
-            isFavorite: isFavorite,
-            onToggleFavorite: onToggleFavorite,
-            onShareText: onShareText,
-            onShareImage: onShareImage,
-          ),
-        ],
+            const SizedBox(height: 10),
+            _HadithActions(
+              isFavorite: isFavorite,
+              onToggleFavorite: onToggleFavorite,
+              onShareText: onShareText,
+              onShareImage: onShareImage,
+            ),
+          ],
+        ),
       ),
     );
   }
