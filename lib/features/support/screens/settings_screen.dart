@@ -23,7 +23,6 @@ import '../../prayer_times/services/daily_inspiration_notification_service.dart'
 import '../../prayer_times/presentation/providers/prayer_times_providers.dart';
 import '../../prayer_times/services/travel_mode_service.dart';
 import '../../quran/screens/downloaded_surahs_screen.dart';
-import '../../library/screens/islamic_books_screen.dart';
 import '../../tracking/services/tracking_service.dart';
 import 'adhan_selector_screen.dart';
 
@@ -431,28 +430,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
             // ── SECCIÓN HADICES ────────────────────────────────────────
             _buildSectionTitle(tokens, 'Hadices'),
-            _buildValueTile(
-              tokens,
-              'Biblioteca de hadices',
-              '1,954 hadices disponibles',
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => const HadithLibraryScreen(),
-                  ),
-                );
-              },
-            ),
-            _buildValueTile(
-              tokens,
-              'Biblioteca de libros',
-              '1,564 libros de IslamHouse',
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (_) => const IslamicBooksScreen()),
-                );
-              },
-            ),
             _buildSimpleToggleTile(
               tokens,
               'Notificación diaria',
