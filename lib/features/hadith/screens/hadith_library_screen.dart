@@ -11,6 +11,7 @@ import '../services/hadith_service.dart';
 import '../services/hadith_share_service.dart';
 import '../widgets/hadith_share_preview_sheet.dart';
 import 'hadith_detail_screen.dart';
+import 'hadith_offline_screen.dart';
 
 class HadithLibraryScreen extends ConsumerStatefulWidget {
   const HadithLibraryScreen({super.key});
@@ -92,6 +93,17 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
             icon: Icon(_showFilters ? Icons.filter_alt : Icons.filter_alt_outlined),
             onPressed: () => setState(() => _showFilters = !_showFilters),
             tooltip: 'Filtros',
+          ),
+          IconButton(
+            icon: const Icon(Icons.offline_pin_outlined),
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => const HadithOfflineScreen(),
+                ),
+              );
+            },
+            tooltip: 'Hadices offline',
           ),
         ],
       ),

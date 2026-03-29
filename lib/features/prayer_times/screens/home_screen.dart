@@ -108,14 +108,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 locationLabelAsync.valueOrNull,
                 connectivityAsync.valueOrNull ?? true,
               ),
-              bannerAsync.when(
-                data: (banner) => banner == null
-                    ? const SizedBox.shrink()
-                    : _buildTravelBanner(tokens, banner),
-                loading: () => const SizedBox.shrink(),
-                error: (_, __) => const SizedBox.shrink(),
-              ),
-              _buildCalendarStrip(tokens),
               selectedPrayerScheduleAsync.when(
                 data: (resolvedSchedule) => _buildHeroSection(
                   resolvedSchedule,
@@ -146,6 +138,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   locationDiagnosticAsync.valueOrNull,
                 ),
               ),
+              bannerAsync.when(
+                data: (banner) => banner == null
+                    ? const SizedBox.shrink()
+                    : _buildTravelBanner(tokens, banner),
+                loading: () => const SizedBox.shrink(),
+                error: (_, __) => const SizedBox.shrink(),
+              ),
+              _buildCalendarStrip(tokens),
               // Hadiz del día - Widget mejorado con 1,954 hadices
               const DailyHadithWidget(),
               // Libro del día - IslamHouse
@@ -654,121 +654,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildDailyProgressCard(
-    QiblaTokens tokens,
-    ResolvedPrayerSchedule? resolvedSchedule,
-    NextPrayerInfo? nextPrayerInfo,
-    List<String> completedPrayers,
-    int streak,
-  ) {
-    final completedCount = completedPrayers.length;
-    final progress = completedCount / 5;
-    final remainingPrayers = resolvedSchedule?.schedule.times.keys
-            .where((prayer) => !completedPrayers.contains(prayer.key))
-            .toList() ??
-        const <PrayerName>[];
-
-    String message;
-    if (completedCount == 5) {
-      message = 'Día completo. Mantienes tu ritmo con $streak días seguidos.';
-    } else if (nextPrayerInfo != null &&
-        !completedPrayers.contains(nextPrayerInfo.prayer.key)) {
-      message =
-          'Siguiente foco: ${nextPrayerInfo.prayer.displayName} a las ${_formatTime(nextPrayerInfo.time)}.';
-    } else if (remainingPrayers.isNotEmpty) {
-      message = 'Te faltan ${remainingPrayers.length} oraciones hoy.';
-    } else {
-      message = 'En cuanto tengamos horarios, verás aquí tu progreso de hoy.';
-    }
-
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: tokens.bgSurface,
-          borderRadius: BorderRadius.circular(18),
-          border: Border.all(color: tokens.border),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    'PROGRESO DE HOY',
-                    style: GoogleFonts.dmSans(
-                      fontSize: 9,
-                      color: tokens.textSecondary,
-                      letterSpacing: 1.4,
-                    ),
-                  ),
-                ),
-                Text(
-                  '$completedCount/5',
-                  style: GoogleFonts.dmSans(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                    color: tokens.primaryLight,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 8),
-            Text(
-              message,
-              style: GoogleFonts.dmSans(
-                fontSize: 12,
-                height: 1.5,
-                color: tokens.textPrimary,
-              ),
-            ),
-            const SizedBox(height: 12),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(999),
-              child: LinearProgressIndicator(
-                value: progress,
-                minHeight: 8,
-                color: tokens.primary,
-                backgroundColor: tokens.bgSurface2,
-              ),
-            ),
-            if (remainingPrayers.isNotEmpty) ...[
-              const SizedBox(height: 12),
-              Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: remainingPrayers
-                    .map(
-                      (prayer) => Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 6,
-                        ),
-                        decoration: BoxDecoration(
-                          color: tokens.primaryBg,
-                          borderRadius: BorderRadius.circular(999),
-                          border: Border.all(color: tokens.primaryBorder),
-                        ),
-                        child: Text(
-                          prayer.displayName,
-                          style: GoogleFonts.dmSans(
-                            fontSize: 10,
-                            color: tokens.textPrimary,
-                          ),
-                        ),
-                      ),
-                    )
-                    .toList(),
-              ),
-            ],
-          ],
-        ),
       ),
     );
   }
@@ -1499,7 +1384,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   String _locationDiagnosticBody(PrayerLocationDiagnostic? diagnostic) {
     if (diagnostic == null) {
-      return 'La pantalla principal sigue visible aunque los horarios aun no esten listos.';
+      return 'La pantalla principal sigue visible aunque los horarios aún no estén listos.';
     }
     if (!diagnostic.serviceEnabled) {
       return 'Sin GPS activo no podemos calcular horarios precisos ni orientar la Qibla.';
@@ -1514,7 +1399,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     if (diagnostic.hasCachedLocation) {
       return 'Estamos preparando tus horarios usando la última ubicación guardada.';
     }
-    return 'La pantalla principal sigue visible aunque los horarios aun no esten listos.';
+    return 'La pantalla principal sigue visible aunque los horarios aún no estén listos.';
   }
 
   List<Widget> _buildCountdown(QiblaTokens tokens, Duration? remaining) {
@@ -1737,8 +1622,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       (Icons.library_books_outlined, 'Libros', const IslamicBooksScreen()),
       (Icons.menu_book_outlined, 'Corán', const QuranScreen()),
       (Icons.calendar_month_outlined, 'Calendario', const CalendarScreen()),
-      (Icons.scatter_plot_outlined, 'Tasbih', const DhikrScreen()),
-      (Icons.self_improvement_outlined, 'Rak\'ah', const FocusModeScreen()),
       (Icons.insights_outlined, 'Análisis', const AnalyticsScreen()),
     ];
 

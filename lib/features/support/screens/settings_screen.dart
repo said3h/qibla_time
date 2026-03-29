@@ -12,7 +12,6 @@ import '../../../core/theme/accessibility_provider.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/theme/theme_provider.dart';
 import '../../hafiz/services/hafiz_service.dart';
-import '../../hadith/screens/hadith_library_screen.dart';
 import '../../hadith/services/hadith_service.dart';
 import '../../prayer_times/domain/entities/prayer_cache_status.dart';
 import '../../prayer_times/domain/entities/prayer_location_diagnostic.dart';
@@ -22,7 +21,6 @@ import '../../prayer_times/services/adhan_manager.dart';
 import '../../prayer_times/services/daily_inspiration_notification_service.dart';
 import '../../prayer_times/presentation/providers/prayer_times_providers.dart';
 import '../../prayer_times/services/travel_mode_service.dart';
-import '../../quran/screens/downloaded_surahs_screen.dart';
 import '../../tracking/services/tracking_service.dart';
 import 'adhan_selector_screen.dart';
 import 'support_screen.dart';
@@ -413,22 +411,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               ),
             const SizedBox(height: 14),
 
-            // ── SECCIÓN CORÁN OFFLINE ────────────────────────────────────────
-            _buildSectionTitle(tokens, 'Corán offline'),
-            _buildValueTile(
-              tokens,
-              'Ver suras descargadas',
-              'Abrir lista',
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => const DownloadedSurahsScreen(),
-                  ),
-                );
-              },
-            ),
-            const SizedBox(height: 14),
-
             // ── SECCIÓN HADICES ────────────────────────────────────────
             _buildSectionTitle(tokens, 'Hadices'),
             _buildSimpleToggleTile(
@@ -443,18 +425,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               'Hora de notificación',
               '${dailyInspirationHour}:00',
               onTap: () => _selectNotificationHour(tokens),
-            ),
-            _buildValueTile(
-              tokens,
-              'Biblioteca de hadices',
-              '${hadithFavoritesCount} guardados',
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => const HadithLibraryScreen(),
-                  ),
-                );
-              },
             ),
             const SizedBox(height: 14),
 
@@ -606,7 +576,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ),
             _buildValueTile(
               tokens,
-              'Informacion de apoyo',
+              'Información de apoyo',
               'Abrir',
               onTap: () {
                 Navigator.of(context).push(
@@ -704,7 +674,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Abdullah Garcia', style: GoogleFonts.dmSans(fontSize: 15, color: tokens.textPrimary, fontWeight: FontWeight.w500)),
+                Text('Usuario', style: GoogleFonts.dmSans(fontSize: 15, color: tokens.textPrimary, fontWeight: FontWeight.w500)),
                 const SizedBox(height: 4),
                 Row(
                   children: [

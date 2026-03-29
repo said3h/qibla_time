@@ -18,6 +18,7 @@ import '../services/quran_audio_download_service.dart';
 import '../services/quran_mini_player_service.dart';
 import '../services/quran_reading_service.dart';
 import '../services/quran_service.dart';
+import 'downloaded_surahs_screen.dart';
 
 class QuranScreen extends ConsumerWidget {
   const QuranScreen({super.key});
@@ -206,6 +207,17 @@ class _QuranUtilityRow extends StatelessWidget {
           onPressed: onAllahNamesTap,
           icon: const Icon(Icons.auto_awesome_outlined),
           label: const Text('99 nombres'),
+        ),
+        OutlinedButton.icon(
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => const DownloadedSurahsScreen(),
+              ),
+            );
+          },
+          icon: const Icon(Icons.download_done),
+          label: const Text('Descargadas'),
         ),
       ],
     );
