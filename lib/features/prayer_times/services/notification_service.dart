@@ -10,6 +10,8 @@ class NotificationService {
   final FlutterLocalNotificationsPlugin _plugin =
       FlutterLocalNotificationsPlugin();
 
+  FlutterLocalNotificationsPlugin get plugin => _plugin;
+
   Future<void> initialize() async {
     tz.initializeTimeZones();
 
@@ -37,7 +39,7 @@ class NotificationService {
       android: AndroidNotificationDetails(
         'adhan_channel',
         'Adhan',
-        channelDescription: 'Notificaciones de horario de oración',
+        channelDescription: 'Notificaciones de horario de oraciÃ³n',
         importance: Importance.max,
         priority: Priority.high,
         sound: UriAndroidNotificationSound(androidSound),
@@ -55,7 +57,7 @@ class NotificationService {
     await _plugin.zonedSchedule(
       id,
       'Qibla Time - $prayerName',
-      'Es la hora de la oración',
+      'Es la hora de la oraciÃ³n',
       tz.TZDateTime.from(scheduledAt, tz.local),
       details,
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
@@ -74,7 +76,7 @@ class NotificationService {
       android: const AndroidNotificationDetails(
         'qiblatime_reminders',
         'Qibla Time - Recordatorios',
-        channelDescription: 'Recordatorios contextuales de Ramadán y Yumu\'ah',
+        channelDescription: 'Recordatorios contextuales de RamadÃ¡n y Yumu\'ah',
         importance: Importance.high,
         priority: Priority.high,
         playSound: true,

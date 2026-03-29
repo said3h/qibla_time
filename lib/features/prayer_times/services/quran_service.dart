@@ -25,17 +25,17 @@ class QuranVerseService {
     final now = DateTime.now();
     final dayOfYear = now.difference(DateTime(now.year, 1, 1)).inDays;
     // There are 6236 verses in the Quran
-    final verseNumber = (dayOfYear * 7) % 6236 + 1; 
+    final verseNumber = (dayOfYear * 7) % 6236 + 1;
 
     // Fetch Arabic original
     try {
-      final arabicResponse = await http.get(Uri.parse('https://api.alquran.cloud/v1/ayah/$verseNumber/editions/quran-uthmani,es.asad,en.transliteration'));
-      
+      final arabicResponse = await http.get(Uri.parse('https://api.alquran.cloud/v1/ayah/$verseNumber/editions/quran-uthmani,es.garcia,en.transliteration'));
+
       if (arabicResponse.statusCode == 200) {
         final data = json.decode(arabicResponse.body)['data'];
-        
+
         // data[0] is Arabic (quran-uthmani)
-        // data[1] is Spanish (es.asad) - we can make this dynamic later
+        // data[1] is Spanish (es.garcia) - translation with proper accents
         // data[2] is Transliteration (en.transliteration)
 
         return QuranVerse(
@@ -51,8 +51,8 @@ class QuranVerseService {
     } catch (e) {
       // Offline Fallback: Ayat al-Kursi
       return QuranVerse(
-        arabicText: 'ٱللَّهُ لَآ إِلَٰهَ إِلَّا هُوَ ٱلْحَىُّ ٱلْقَيُّومُ ۚ لَا تَأْخُذُهُۥ سِنَةٌ وَلَا نَوْمٌ',
-        translationText: 'Allah! No hay más dios que Él, el Viviente, el Subsistente por Sí mismo. Ni la somnolencia ni el sueño se apoderan de Él.',
+        arabicText: 'Ù±Ù„Ù„Ù‘ÙŽÙ‡Ù Ù„ÙŽØ§Ù“ Ø¥ÙÙ„ÙŽÙ°Ù‡ÙŽ Ø¥ÙÙ„Ù‘ÙŽØ§ Ù‡ÙÙˆÙŽ Ù±Ù„Ù’Ø­ÙŽÙ‰Ù‘Ù Ù±Ù„Ù’Ù‚ÙŽÙŠÙ‘ÙÙˆÙ…Ù Ûš Ù„ÙŽØ§ ØªÙŽØ£Ù’Ø®ÙØ°ÙÙ‡ÙÛ¥ Ø³ÙÙ†ÙŽØ©ÙŒ ÙˆÙŽÙ„ÙŽØ§ Ù†ÙŽÙˆÙ’Ù…ÙŒ',
+        translationText: 'Allah! No hay mÃ¡s dios que Ã‰l, el Viviente, el Subsistente por SÃ­ mismo. Ni la somnolencia ni el sueÃ±o se apoderan de Ã‰l.',
         transliterationText: 'Allahu la ilaha illa huwal hayyul qayyum...',
         reference: 'Al-Baqara [2:255]',
         audioUrl: '',

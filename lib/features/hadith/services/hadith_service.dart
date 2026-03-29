@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,17 +9,41 @@ import '../../../core/constants/app_constants.dart';
 import '../../../core/services/storage_service.dart';
 import '../models/hadith.dart';
 
+/// Servicio para gestionar los hadices en espaÃƒÂ±ol
+/// Fuente: HadeethEnc.com - 1,954 hadices autenticados
 class HadithService {
   Box get _box => Hive.box(StorageService.hadithBox);
 
+  // Cache en memoria para evitar cargar mÃƒÂºltiples veces
+  List<Hadith>? _allHadithsCache;
+
+  /// Carga todos los hadices desde assets/hadiths/hadiths_complete.json
   Future<List<Hadith>> loadAll() async {
-    final raw = await rootBundle.loadString('assets/hadiths/daily_hadiths.json');
-    final decoded = jsonDecode(raw) as List<dynamic>;
-    return decoded
-        .map((item) => Hadith.fromJson(item as Map<String, dynamic>))
-        .toList();
+    // Usar cache si ya estÃƒÂ¡ cargado
+    if (_allHadithsCache != null) {
+      return _allHadithsCache!;
+    }
+
+    try {
+      final raw = await rootBundle.loadString('assets/hadiths/hadiths_complete.json');
+      final decoded = jsonDecode(raw) as List<dynamic>;
+      _allHadithsCache = decoded
+          .map((item) => Hadith.fromJson(item as Map<String, dynamic>))
+          .toList();
+      return _allHadithsCache!;
+    } catch (e) {
+      // Fallback al archivo antiguo si hay error
+      final raw = await rootBundle.loadString('assets/hadiths/daily_hadiths.json');
+      final decoded = jsonDecode(raw) as List<dynamic>;
+      _allHadithsCache = decoded
+          .map((item) => Hadith.fromJson(item as Map<String, dynamic>))
+          .toList();
+      return _allHadithsCache!;
+    }
   }
 
+  /// Obtiene el hadiz del dÃƒÂ­a basado en la fecha actual
+  /// Usa un seed consistente para que todos los usuarios vean el mismo hadiz en el mismo dÃƒÂ­a
   Future<Hadith?> getHadithOfDay() async {
     final hadiths = await loadAll();
     if (hadiths.isEmpty) return null;
@@ -26,6 +51,98 @@ class HadithService {
     final seed = now.year * 10000 + now.month * 100 + now.day;
     return hadiths[seed % hadiths.length];
   }
+
+  /// Obtiene un hadiz especÃƒÂ­fico por su ID
+  Future<Hadith?> getHadithById(int id) async {
+    final hadiths = await loadAll();
+    return hadiths.firstWhere((h) => h.id == id, orElse: () => throw Exception('Hadith not found'));
+  }
+
+  /// Obtiene hadices de una colecciÃƒÂ³n especÃƒÂ­fica
+  Future<List<Hadith>> getHadithsByCollection(String collection) async {
+    final all = await loadAll();
+    return all.where((h) => _extractCollection(h.reference).toLowerCase() == collection.toLowerCase()).toList();
+  }
+
+  /// Busca hadices por texto en espaÃƒÂ±ol o ÃƒÂ¡rabe
+  Future<List<Hadith>> searchHadiths(String query) async {
+    if (query.trim().isEmpty) {
+      return [];
+    }
+
+    final all = await loadAll();
+    final queryLower = query.toLowerCase();
+
+    return all.where((h) =>
+      h.translation.toLowerCase().contains(queryLower) ||
+      h.arabic.contains(query) ||
+      h.category.toLowerCase().contains(queryLower) ||
+      h.reference.toLowerCase().contains(queryLower)
+    ).toList();
+  }
+
+  /// Obtiene todas las colecciones disponibles con su conteo
+  Future<Map<String, int>> getCollections() async {
+    final all = await loadAll();
+    final Map<String, int> collections = {};
+
+    for (final hadith in all) {
+      final collection = _extractCollection(hadith.reference);
+      collections[collection] = (collections[collection] ?? 0) + 1;
+    }
+
+    return collections;
+  }
+
+  /// Extrae el nombre de la colecciÃƒÂ³n de la referencia
+  String _extractCollection(String reference) {
+    final refLower = reference.toLowerCase();
+    if (refLower.contains('bujari') || refLower.contains('bukhari')) return 'Bukhari';
+    if (refLower.contains('muslim')) return 'Muslim';
+    if (refLower.contains('tirmidhi')) return 'Tirmidhi';
+    if (refLower.contains('abu dawud') || refLower.contains('abudawud')) return 'Abu Dawud';
+    if (refLower.contains('nasai')) return 'Nasai';
+    if (refLower.contains('ibn majah') || refLower.contains('ibnmajah')) return 'Ibn Majah';
+    if (refLower.contains('malik') || refLower.contains('muwatta')) return 'Malik';
+    if (refLower.contains('ahmad')) return 'Ahmad';
+    return 'Otros';
+  }
+
+  /// Obtiene hadices por grado de autenticidad
+  Future<List<Hadith>> getHadithsByGrade(String grade) async {
+    final all = await loadAll();
+    return all.where((h) => h.grade.toLowerCase() == grade.toLowerCase()).toList();
+  }
+
+  /// Obtiene los grados de autenticidad disponibles
+  Future<List<String>> getAvailableGrades() async {
+    final all = await loadAll();
+    final grades = all.map((h) => h.grade).toSet().toList();
+    grades.sort();
+    return grades;
+  }
+
+  /// Obtiene hadices aleatorios (ÃƒÂºtil para widgets, notificaciones, etc.)
+  Future<List<Hadith>> getRandomHadiths({int count = 1}) async {
+    final all = await loadAll();
+    if (all.isEmpty) return [];
+
+    final random = Random();
+    final selected = <Hadith>[];
+    final usedIndices = <int>{};
+
+    while (selected.length < count && selected.length < all.length) {
+      final index = random.nextInt(all.length);
+      if (!usedIndices.contains(index)) {
+        usedIndices.add(index);
+        selected.add(all[index]);
+      }
+    }
+
+    return selected;
+  }
+
+  // Ã¢â€â‚¬Ã¢â€â‚¬ Sistema de Favoritos Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
 
   Future<Set<int>> getFavorites() async {
     final stored = _box.get(AppConstants.keyHadithFavorites, defaultValue: <dynamic>[]);
@@ -40,6 +157,19 @@ class HadithService {
       favorites.add(hadithId);
     }
     await _box.put(AppConstants.keyHadithFavorites, favorites.toList());
+  }
+
+  Future<bool> isFavorite(int hadithId) async {
+    final favorites = await getFavorites();
+    return favorites.contains(hadithId);
+  }
+
+  Future<List<Hadith>> getFavoriteHadiths() async {
+    final favorites = await getFavorites();
+    if (favorites.isEmpty) return [];
+
+    final all = await loadAll();
+    return all.where((h) => favorites.contains(h.id)).toList();
   }
 }
 

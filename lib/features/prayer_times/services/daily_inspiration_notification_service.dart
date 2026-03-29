@@ -1,0 +1,224 @@
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:timezone/timezone.dart' as tz;
+
+import '../../hadith/services/hadith_service.dart';
+import 'notification_service.dart';
+import '../services/quran_service.dart';
+
+/// Servicio para notificaciones diarias inspiracionales (CorÃ¡n + Hadiz)
+class DailyInspirationNotificationService {
+  final FlutterLocalNotificationsPlugin _plugin;
+  final HadithService _hadithService;
+
+  static const String _channelId = 'daily_inspiration';
+  static const String _channelName = 'ReflexiÃ³n Diaria';
+  static const String _channelDesc = 'VersÃ­culo del CorÃ¡n y Hadiz del dÃ­a';
+  static const String _prefsKey = 'daily_inspiration_enabled';
+  static const String _prefsHourKey = 'daily_inspiration_hour';
+
+  DailyInspirationNotificationService({
+    required FlutterLocalNotificationsPlugin plugin,
+    required HadithService hadithService,
+  })  : _plugin = plugin,
+        _hadithService = hadithService;
+
+  /// Inicializa el canal de notificaciones
+  Future<void> initializeChannel() async {
+    await _plugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(const AndroidNotificationChannel(
+          _channelId,
+          _channelName,
+          description: _channelDesc,
+          importance: Importance.defaultImportance,
+          playSound: false,
+          enableVibration: false,
+          showBadge: false,
+        ));
+  }
+
+  /// Verifica si las notificaciones diarias estÃ¡n habilitadas
+  Future<bool> isEnabled() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(_prefsKey) ?? false;
+  }
+
+  /// Habilita o deshabilita las notificaciones diarias
+  Future<void> setEnabled(bool enabled) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_prefsKey, enabled);
+
+    if (enabled) {
+      await scheduleDailyNotification();
+    } else {
+      await cancelDailyNotification();
+    }
+  }
+
+  /// Obtiene la hora configurada para la notificaciÃ³n
+  Future<int> getNotificationHour() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getInt(_prefsHourKey) ?? 8; // Default: 8 AM
+  }
+
+  /// Configura la hora para la notificaciÃ³n
+  Future<void> setNotificationHour(int hour) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt(_prefsHourKey, hour);
+    await scheduleDailyNotification();
+  }
+
+  /// Programa la notificaciÃ³n diaria
+  Future<void> scheduleDailyNotification() async {
+    if (!await isEnabled()) return;
+
+    final hour = await getNotificationHour();
+    final now = tz.TZDateTime.now(tz.local);
+    var scheduledDate = tz.TZDateTime(
+      tz.local,
+      now.year,
+      now.month,
+      now.day,
+      hour,
+      0,
+    );
+
+    // Si ya pasÃ³ la hora hoy, programar para maÃ±ana
+    if (scheduledDate.isBefore(now)) {
+      scheduledDate = scheduledDate.add(const Duration(days: 1));
+    }
+
+    final content = await _generateNotificationContent();
+
+    await _plugin.zonedSchedule(
+      10001, // ID Ãºnico para notificaciÃ³n diaria
+      content.title,
+      content.body,
+      scheduledDate,
+      _notificationDetails(),
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+      uiLocalNotificationDateInterpretation:
+          UILocalNotificationDateInterpretation.absoluteTime,
+      matchDateTimeComponents: DateTimeComponents.time,
+    );
+  }
+
+  /// Cancela la notificaciÃ³n diaria
+  Future<void> cancelDailyNotification() async {
+    await _plugin.cancel(10001);
+  }
+
+  /// Genera el contenido de la notificaciÃ³n
+  Future<NotificationContent> _generateNotificationContent() async {
+    try {
+      // Obtener hadiz del dÃ­a
+      final hadith = await _hadithService.getHadithOfDay();
+
+      // Obtener versÃ­culo del dÃ­a (llamada estÃ¡tica)
+      final quranVerse = await QuranVerseService.getDailyVerse('es');
+
+      // Construir tÃ­tulo
+      final title = 'ReflexiÃ³n del DÃ­a';
+
+      // Construir cuerpo con hadiz o versÃ­culo (alternar)
+      final now = DateTime.now();
+      final useHadith = now.day % 2 == 0; // Alternar dÃ­as
+
+      String body;
+      if (useHadith && hadith != null) {
+        final translation = hadith.translation;
+        body = translation.length > 150
+            ? '${translation.substring(0, 147)}...'
+            : translation;
+        body += ' â€” ${hadith.reference}';
+      } else if (quranVerse != null) {
+        final translation = quranVerse.translationText;
+        body = translation.length > 150
+            ? '${translation.substring(0, 147)}...'
+            : translation;
+        body += ' â€” ${quranVerse.reference}';
+      } else {
+        body = 'Tu reflexiÃ³n espiritual diaria de Qibla Time';
+      }
+
+      return NotificationContent(
+        title: title,
+        body: body,
+        isHadith: useHadith,
+      );
+    } catch (e) {
+      // Fallback en caso de error
+      return NotificationContent(
+        title: 'Qibla Time - ReflexiÃ³n Diaria',
+        body: 'Tu recordatorio espiritual de hoy',
+        isHadith: true,
+      );
+    }
+  }
+
+  /// ConfiguraciÃ³n de notificaciÃ³n
+  NotificationDetails _notificationDetails() {
+    return const NotificationDetails(
+      android: AndroidNotificationDetails(
+        _channelId,
+        _channelName,
+        channelDescription: _channelDesc,
+        importance: Importance.defaultImportance,
+        priority: Priority.defaultPriority,
+        playSound: false,
+        enableVibration: false,
+        showWhen: true,
+        icon: '@mipmap/ic_launcher',
+      ),
+      iOS: DarwinNotificationDetails(
+        presentAlert: true,
+        presentBadge: true,
+        presentSound: false,
+        interruptionLevel: InterruptionLevel.passive,
+      ),
+    );
+  }
+
+  /// EnvÃ­a una notificaciÃ³n inmediata (para testing)
+  Future<void> sendTestNotification() async {
+    final content = await _generateNotificationContent();
+
+    await _plugin.show(
+      10002,
+      content.title,
+      content.body,
+      _notificationDetails(),
+    );
+  }
+}
+
+/// Contenido de notificaciÃ³n
+class NotificationContent {
+  const NotificationContent({
+    required this.title,
+    required this.body,
+    required this.isHadith,
+  });
+
+  final String title;
+  final String body;
+  final bool isHadith;
+}
+
+// â”€â”€ Providers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+final dailyInspirationNotificationServiceProvider =
+    Provider<DailyInspirationNotificationService>((ref) {
+  return DailyInspirationNotificationService(
+    plugin: NotificationService.instance.plugin,
+    hadithService: ref.read(hadithServiceProvider),
+  );
+});
+
+/// Provider que indica si las notificaciones diarias estÃ¡n habilitadas
+final dailyInspirationEnabledProvider = FutureProvider<bool>((ref) async {
+  return ref.read(dailyInspirationNotificationServiceProvider).isEnabled();
+});

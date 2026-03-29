@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theme/app_theme.dart';
 import '../../../core/theme/theme_provider.dart';
+import '../../hadith/services/hadith_service.dart';
 import '../models/achievement.dart';
 import '../models/tracking_models.dart';
 import '../services/achievement_service.dart';
@@ -28,7 +29,7 @@ class AnalyticsScreen extends ConsumerWidget {
         backgroundColor: tokens.bgApp,
         elevation: 0,
         title: Text(
-          'Estadísticas',
+          'EstadÃ­sticas',
           style: GoogleFonts.amiri(
             fontSize: 26,
             fontWeight: FontWeight.bold,
@@ -95,6 +96,9 @@ class AnalyticsScreen extends ConsumerWidget {
                   ),
                   const SizedBox(height: 16),
                   _StreakCard(tracking: tracking, tokens: tokens),
+                  const SizedBox(height: 16),
+                  // Hadices Stats - NUEVO
+                  const _HadithStatsCard(),
                   const SizedBox(height: 16),
                   _AchievementsCard(
                     achievements: achievements,
@@ -167,7 +171,7 @@ class _EmptyAnalyticsState extends StatelessWidget {
               Icon(Icons.insights_outlined, size: 42, color: tokens.primary),
               const SizedBox(height: 14),
               Text(
-                'Todavía no hay datos de oración',
+                'TodavÃ­a no hay datos de oraciÃ³n',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.amiri(
                   fontSize: 24,
@@ -177,7 +181,7 @@ class _EmptyAnalyticsState extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                'Marca tus oraciones desde Inicio y aquí verás tu racha, tu progreso semanal y tus días más fuertes.',
+                'Marca tus oraciones desde Inicio y aquÃ­ verÃ¡s tu racha, tu progreso semanal y tus dÃ­as mÃ¡s fuertes.',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.dmSans(
                   fontSize: 12,
@@ -197,7 +201,7 @@ class _EmptyAnalyticsState extends StatelessWidget {
                   border: Border.all(color: tokens.primaryBorder),
                 ),
                 child: Text(
-                  'Consejo: empieza marcando una sola oración hoy para desbloquear tus estadísticas.',
+                  'Consejo: empieza marcando una sola oraciÃ³n hoy para desbloquear tus estadÃ­sticas.',
                   textAlign: TextAlign.center,
                   style: GoogleFonts.dmSans(
                     fontSize: 11,
@@ -244,16 +248,16 @@ class _WeeklySummaryCard extends StatelessWidget {
               const SizedBox(width: 12),
               Expanded(
                 child: _SummaryStat(
-                  label: 'Días 5/5',
+                  label: 'DÃ­as 5/5',
                   value: '${summary.fullDays}',
-                  helper: 'días completos',
+                  helper: 'dÃ­as completos',
                   tokens: tokens,
                 ),
               ),
               const SizedBox(width: 12),
               Expanded(
                 child: _SummaryStat(
-                  label: 'Mejor día',
+                  label: 'Mejor dÃ­a',
                   value: summary.strongestDay.shortLabel,
                   helper: '${summary.strongestDay.completed}/5',
                   tokens: tokens,
@@ -382,7 +386,7 @@ class _StreakCard extends StatelessWidget {
                 Text(
                   streak == 0
                       ? 'Sin racha activa'
-                      : '$streak ${streak == 1 ? 'día' : 'días'} seguidos',
+                      : '$streak ${streak == 1 ? 'dÃ­a' : 'dÃ­as'} seguidos',
                   style: GoogleFonts.amiri(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
@@ -393,7 +397,7 @@ class _StreakCard extends StatelessWidget {
                 Text(
                   streak == 0
                       ? 'Completa hoy tus 5 oraciones para empezar.'
-                      : 'Tu mejor racha es de $best días.',
+                      : 'Tu mejor racha es de $best dÃ­as.',
                   style: GoogleFonts.dmSans(
                     fontSize: 12,
                     color: tokens.textSecondary,
@@ -447,7 +451,7 @@ class _AchievementsCard extends StatelessWidget {
             data: (items) {
               if (items.isEmpty) {
                 return Text(
-                  'Tus logros aparecerán aquí a medida que avances.',
+                  'Tus logros aparecerÃ¡n aquÃ­ a medida que avances.',
                   style: GoogleFonts.dmSans(
                     fontSize: 13,
                     color: tokens.textSecondary,
@@ -608,7 +612,7 @@ class _HeatmapCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _SectionTitle(title: 'Últimos 30 días', tokens: tokens),
+          _SectionTitle(title: 'Ãšltimos 30 dÃ­as', tokens: tokens),
           const SizedBox(height: 14),
           GridView.builder(
             shrinkWrap: true,
@@ -641,7 +645,7 @@ class _HeatmapCard extends StatelessWidget {
               ),
               const SizedBox(width: 6),
               Text(
-                'Más',
+                'MÃ¡s',
                 style: GoogleFonts.dmSans(
                   fontSize: 10,
                   color: tokens.textMuted,
@@ -725,11 +729,11 @@ class _PrayerProgressCard extends StatelessWidget {
   final QiblaTokens tokens;
 
   static const _prayers = [
-    ('fajr', 'Fajr', 'فجر'),
-    ('dhuhr', 'Dhuhr', 'ظهر'),
-    ('asr', 'Asr', 'عصر'),
-    ('maghrib', 'Maghrib', 'مغرب'),
-    ('isha', 'Isha', 'عشاء'),
+    ('fajr', 'Fajr', 'ÙØ¬Ø±'),
+    ('dhuhr', 'Dhuhr', 'Ø¸Ù‡Ø±'),
+    ('asr', 'Asr', 'Ø¹ØµØ±'),
+    ('maghrib', 'Maghrib', 'Ù…ØºØ±Ø¨'),
+    ('isha', 'Isha', 'Ø¹Ø´Ø§Ø¡'),
   ];
 
   @override
@@ -741,7 +745,7 @@ class _PrayerProgressCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _SectionTitle(title: 'Por oración - últimos 30 días', tokens: tokens),
+          _SectionTitle(title: 'Por oraciÃ³n - Ãºltimos 30 dÃ­as', tokens: tokens),
           const SizedBox(height: 14),
           ..._prayers.map(
             (prayer) => Padding(
@@ -887,14 +891,14 @@ class _MonthlyTotalsCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     _StatRow(
-                      label: 'Días completos',
-                      value: '${stats.fullDays} días',
+                      label: 'DÃ­as completos',
+                      value: '${stats.fullDays} dÃ­as',
                       tokens: tokens,
                     ),
                     const SizedBox(height: 10),
                     _StatRow(
                       label: 'Mejor racha',
-                      value: '${tracking.bestStreak} días',
+                      value: '${tracking.bestStreak} dÃ­as',
                       tokens: tokens,
                     ),
                   ],
@@ -989,6 +993,222 @@ class _SectionTitle extends StatelessWidget {
         fontWeight: FontWeight.w600,
         color: tokens.textSecondary,
         letterSpacing: 1.4,
+      ),
+    );
+  }
+}
+
+// â”€â”€ Tarjeta de EstadÃ­sticas de Hadices â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+class _HadithStatsCard extends ConsumerWidget {
+  const _HadithStatsCard();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final tokens = QiblaThemes.current;
+    final favoritesAsync = ref.watch(hadithFavoritesProvider);
+    final hadithsAsync = ref.watch(allHadithsProvider);
+
+    return favoritesAsync.when(
+      data: (favorites) => hadithsAsync.when(
+        data: (hadiths) {
+          final totalHadiths = hadiths.length;
+          final favoritesCount = favorites.length;
+          final collectionsCount = hadiths
+              .map((hadith) => _extractCollection(hadith.reference))
+              .toSet()
+              .length;
+          final gradesCount = hadiths
+              .map((hadith) => hadith.grade.trim())
+              .where((grade) => grade.isNotEmpty)
+              .toSet()
+              .length;
+          final favoritesRatio = totalHadiths == 0
+              ? 0.0
+              : favoritesCount / totalHadiths;
+
+          return _Card(
+            tokens: tokens,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _SectionTitle(title: 'Hadices', tokens: tokens),
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    Expanded(
+                      child: _StatItem(
+                        label: 'Total',
+                        value: totalHadiths.toString(),
+                        icon: Icons.auto_stories,
+                        color: Colors.green,
+                        tokens: tokens,
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: _StatItem(
+                        label: 'Favoritos',
+                        value: favoritesCount.toString(),
+                        icon: Icons.favorite,
+                        color: Colors.red,
+                        tokens: tokens,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                Row(
+                  children: [
+                    Expanded(
+                      child: _StatItem(
+                        label: 'Colecciones',
+                        value: collectionsCount.toString(),
+                        icon: Icons.folder,
+                        color: Colors.orange,
+                        tokens: tokens,
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: _StatItem(
+                        label: 'Grados',
+                        value: gradesCount.toString(),
+                        icon: Icons.verified,
+                        color: Colors.blue,
+                        tokens: tokens,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Favoritos guardados',
+                          style: GoogleFonts.dmSans(
+                            fontSize: 11,
+                            color: tokens.textPrimary,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        Text(
+                          '${(favoritesRatio * 100).toStringAsFixed(1)}%',
+                          style: GoogleFonts.dmSans(
+                            fontSize: 11,
+                            color: tokens.primary,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 6),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(4),
+                      child: LinearProgressIndicator(
+                        value: favoritesRatio,
+                        backgroundColor: tokens.border,
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          tokens.primary,
+                        ),
+                        minHeight: 6,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
+        },
+        loading: () => _Card(
+          tokens: tokens,
+          child: Center(
+            child: CircularProgressIndicator(color: tokens.primary),
+          ),
+        ),
+        error: (_, __) => const SizedBox.shrink(),
+      ),
+      loading: () => _Card(
+        tokens: tokens,
+        child: Center(
+          child: CircularProgressIndicator(color: tokens.primary),
+        ),
+      ),
+      error: (_, __) => const SizedBox.shrink(),
+    );
+  }
+
+  String _extractCollection(String reference) {
+    final refLower = reference.toLowerCase();
+    if (refLower.contains('bujari') || refLower.contains('bukhari')) {
+      return 'Bukhari';
+    }
+    if (refLower.contains('muslim')) return 'Muslim';
+    if (refLower.contains('tirmidhi')) return 'Tirmidhi';
+    if (refLower.contains('abu dawud') || refLower.contains('abudawud')) {
+      return 'Abu Dawud';
+    }
+    if (refLower.contains('nasai')) return 'Nasai';
+    if (refLower.contains('ibn majah') || refLower.contains('ibnmajah')) {
+      return 'Ibn Majah';
+    }
+    if (refLower.contains('malik') || refLower.contains('muwatta')) {
+      return 'Malik';
+    }
+    if (refLower.contains('ahmad')) return 'Ahmad';
+    return 'Otros';
+  }
+}
+
+class _StatItem extends StatelessWidget {
+  const _StatItem({
+    required this.label,
+    required this.value,
+    required this.icon,
+    required this.color,
+    required this.tokens,
+  });
+
+  final String label;
+  final String value;
+  final IconData icon;
+  final Color color;
+  final QiblaTokens tokens;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: color.withOpacity(0.3)),
+      ),
+      child: Column(
+        children: [
+          Icon(icon, size: 20, color: color),
+          const SizedBox(height: 6),
+          Text(
+            value,
+            style: GoogleFonts.dmSans(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: color,
+            ),
+          ),
+          Text(
+            label,
+            textAlign: TextAlign.center,
+            style: GoogleFonts.dmSans(
+              fontSize: 9,
+              color: tokens.textSecondary,
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
 generate_quran_offline.py
-─────────────────────────
-Descarga el Corán completo (114 suras) desde api.alquran.cloud
-y genera assets/data/quran_offline.json con árabe + español + transliteración.
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+Descarga el CorÃ¡n completo (114 suras) desde api.alquran.cloud
+y genera assets/data/quran_offline.json con Ã¡rabe + espaÃ±ol + transliteraciÃ³n.
 
 USO:
     pip install requests
@@ -13,7 +13,7 @@ El archivo resultante va en:
     assets/data/quran_offline.json
 
 Tiempo estimado: 3-6 minutos (342 peticiones en paralelo).
-Tamaño esperado: ~9-11 MB.
+TamaÃ±o esperado: ~9-11 MB.
 """
 
 import json
@@ -24,9 +24,9 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 BASE_URL = "https://api.alquran.cloud/v1"
 
 # Ediciones que usamos
-ARABIC_EDITION      = "ar.alafasy"       # árabe con recitación
-SPANISH_EDITION     = "es.asad"          # traducción española
-TRANSLIT_EDITION    = "en.transliteration"  # transliteración
+ARABIC_EDITION      = "ar.alafasy"       # Ã¡rabe con recitaciÃ³n
+SPANISH_EDITION     = "es.garcia"        # traducciÃ³n espaÃ±ola con tildes (Isa GarcÃ­a)
+TRANSLIT_EDITION    = "en.transliteration"  # transliteraciÃ³n
 
 OUTPUT_FILE = "assets/data/quran_offline.json"
 
@@ -43,14 +43,14 @@ def fetch_surah(number: int) -> dict | None:
             time.sleep(1)
         except Exception as e:
             if attempt == 2:
-                print(f"  ✗ Sura {number} falló después de 3 intentos: {e}")
+                print(f"  âœ— Sura {number} fallÃ³ despuÃ©s de 3 intentos: {e}")
             time.sleep(2)
 
     return None
 
 
 def parse_surah(raw: dict, number: int) -> dict | None:
-    """Extrae árabe, español y transliteración de la respuesta de la API."""
+    """Extrae Ã¡rabe, espaÃ±ol y transliteraciÃ³n de la respuesta de la API."""
     try:
         editions = raw["data"]  # lista de 3 ediciones
 
@@ -76,20 +76,20 @@ def parse_surah(raw: dict, number: int) -> dict | None:
         return {"ayahs": ayahs}
 
     except Exception as e:
-        print(f"  ✗ Error parseando sura {number}: {e}")
+        print(f"  âœ— Error parseando sura {number}: {e}")
         return None
 
 
 def main():
-    print("QiblaTime — Generando quran_offline.json")
+    print("QiblaTime â€” Generando quran_offline.json")
     print("=" * 50)
-    print(f"Descargando 114 suras con árabe + español + transliteración...")
+    print(f"Descargando 114 suras con Ã¡rabe + espaÃ±ol + transliteraciÃ³n...")
     print()
 
     result = {"surahs": {}}
     failed = []
 
-    # Descarga en paralelo con máximo 5 conexiones simultáneas
+    # Descarga en paralelo con mÃ¡ximo 5 conexiones simultÃ¡neas
     # (la API tiene rate limiting, no subas de 5)
     with ThreadPoolExecutor(max_workers=5) as executor:
         futures = {
@@ -107,16 +107,16 @@ def main():
                 if parsed:
                     result["surahs"][str(number)] = parsed
                     completed += 1
-                    print(f"  ✓ Sura {number:3d}/114", end="\r")
+                    print(f"  âœ“ Sura {number:3d}/114", end="\r")
                 else:
                     failed.append(number)
             else:
                 failed.append(number)
 
-    print(f"\n  ✓ Completadas: {completed}/114")
+    print(f"\n  âœ“ Completadas: {completed}/114")
 
     if failed:
-        print(f"  ✗ Fallidas:    {failed}")
+        print(f"  âœ— Fallidas:    {failed}")
         print("    Vuelve a ejecutar el script para reintentar las fallidas.")
 
     # Guardar
@@ -127,11 +127,11 @@ def main():
         json.dump(result, f, ensure_ascii=False, separators=(",", ":"))
 
     size_mb = os.path.getsize(OUTPUT_FILE) / (1024 * 1024)
-    print(f"\n  ✅ Guardado en: {OUTPUT_FILE}")
-    print(f"  📦 Tamaño:      {size_mb:.1f} MB")
+    print(f"\n  âœ… Guardado en: {OUTPUT_FILE}")
+    print(f"  ðŸ“¦ TamaÃ±o:      {size_mb:.1f} MB")
     print()
     print("Siguiente paso:")
-    print("  Añade a pubspec.yaml:")
+    print("  AÃ±ade a pubspec.yaml:")
     print("    assets:")
     print("      - assets/data/quran_offline.json")
     print()
