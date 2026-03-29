@@ -294,16 +294,7 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
   }
 
   String _extractCollection(String reference) {
-    final refLower = reference.toLowerCase();
-    if (refLower.contains('bujari') || refLower.contains('bukhari')) return 'Bukhari';
-    if (refLower.contains('muslim')) return 'Muslim';
-    if (refLower.contains('tirmidhi')) return 'Tirmidhi';
-    if (refLower.contains('abu dawud') || refLower.contains('abudawud')) return 'Abu Dawud';
-    if (refLower.contains('nasai')) return 'Nasai';
-    if (refLower.contains('ibn majah') || refLower.contains('ibnmajah')) return 'Ibn Majah';
-    if (refLower.contains('malik') || refLower.contains('muwatta')) return 'Malik';
-    if (refLower.contains('ahmad')) return 'Ahmad';
-    return 'Otros';
+    return _extractHadithCollection(reference);
   }
 
   Future<void> _toggleFavorite(int hadithId) async {
@@ -428,18 +419,37 @@ class _FeaturedHadithCard extends StatelessWidget {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
                 decoration: BoxDecoration(
                   color: tokens.primary.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Text(
-                  _extractCollection(hadith.reference),
-                  style: GoogleFonts.dmSans(
-                    fontSize: 10,
-                    fontWeight: FontWeight.w600,
-                    color: tokens.primary,
-                  ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      _extractCollection(hadith.reference),
+                      style: GoogleFonts.dmSans(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w600,
+                        color: tokens.primary,
+                      ),
+                    ),
+                    if (_getArabicCollectionLabel(_extractCollection(hadith.reference)) !=
+                        null)
+                      Text(
+                        _getArabicCollectionLabel(
+                          _extractCollection(hadith.reference),
+                        )!,
+                        textAlign: TextAlign.right,
+                        style: GoogleFonts.amiri(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w700,
+                          color: tokens.primary,
+                        ),
+                      ),
+                  ],
                 ),
               ),
             ],
@@ -465,28 +475,67 @@ class _FeaturedHadithCard extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                hadith.reference,
-                style: GoogleFonts.dmSans(
-                  fontSize: 10,
-                  color: tokens.textSecondary,
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      hadith.reference,
+                      style: GoogleFonts.dmSans(
+                        fontSize: 10,
+                        color: tokens.textSecondary,
+                      ),
+                    ),
+                    if (_getArabicReferenceLabel(hadith.reference) != null) ...[
+                      const SizedBox(height: 4),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Text(
+                          _getArabicReferenceLabel(hadith.reference)!,
+                          textAlign: TextAlign.right,
+                          style: GoogleFonts.amiri(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w700,
+                            color: tokens.textMuted,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ],
                 ),
               ),
               const SizedBox(width: 8),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
                   color: _getGradeColor(hadith.grade).withOpacity(0.1),
                   borderRadius: BorderRadius.circular(4),
                 ),
-                child: Text(
-                  hadith.grade,
-                  style: GoogleFonts.dmSans(
-                    fontSize: 9,
-                    fontWeight: FontWeight.w600,
-                    color: _getGradeColor(hadith.grade),
-                  ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      hadith.grade,
+                      style: GoogleFonts.dmSans(
+                        fontSize: 9,
+                        fontWeight: FontWeight.w600,
+                        color: _getGradeColor(hadith.grade),
+                      ),
+                    ),
+                    if (_getArabicGradeLabel(hadith.grade) != null)
+                      Text(
+                        _getArabicGradeLabel(hadith.grade)!,
+                        textAlign: TextAlign.right,
+                        style: GoogleFonts.amiri(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w700,
+                          color: _getGradeColor(hadith.grade),
+                        ),
+                      ),
+                  ],
                 ),
               ),
             ],
@@ -510,16 +559,7 @@ class _FeaturedHadithCard extends StatelessWidget {
   }
 
   String _extractCollection(String reference) {
-    final refLower = reference.toLowerCase();
-    if (refLower.contains('bujari') || refLower.contains('bukhari')) return 'Bukhari';
-    if (refLower.contains('muslim')) return 'Muslim';
-    if (refLower.contains('tirmidhi')) return 'Tirmidhi';
-    if (refLower.contains('abu dawud') || refLower.contains('abudawud')) return 'Abu Dawud';
-    if (refLower.contains('nasai')) return 'Nasai';
-    if (refLower.contains('ibn majah') || refLower.contains('ibnmajah')) return 'Ibn Majah';
-    if (refLower.contains('malik') || refLower.contains('muwatta')) return 'Malik';
-    if (refLower.contains('ahmad')) return 'Ahmad';
-    return 'Otros';
+    return _extractHadithCollection(reference);
   }
 }
 
@@ -560,32 +600,70 @@ class _HadithCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
-                  child: Text(
-                    hadith.reference,
-                    style: GoogleFonts.dmSans(
-                      fontSize: 10,
-                      color: tokens.textSecondary,
-                    ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        hadith.reference,
+                        style: GoogleFonts.dmSans(
+                          fontSize: 10,
+                          color: tokens.textSecondary,
+                        ),
+                      ),
+                      if (_getArabicReferenceLabel(hadith.reference) != null) ...[
+                        const SizedBox(height: 4),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: Text(
+                            _getArabicReferenceLabel(hadith.reference)!,
+                            textAlign: TextAlign.right,
+                            style: GoogleFonts.amiri(
+                              fontSize: 11,
+                              fontWeight: FontWeight.w700,
+                              color: tokens.textMuted,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ],
                   ),
                 ),
+                const SizedBox(width: 8),
                 Container(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 6,
-                    vertical: 2,
+                    horizontal: 8,
+                    vertical: 4,
                   ),
                   decoration: BoxDecoration(
                     color: _getGradeColor(hadith.grade).withOpacity(0.1),
                     borderRadius: BorderRadius.circular(4),
                   ),
-                  child: Text(
-                    hadith.grade,
-                    style: GoogleFonts.dmSans(
-                      fontSize: 9,
-                      fontWeight: FontWeight.w600,
-                      color: _getGradeColor(hadith.grade),
-                    ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        hadith.grade,
+                        style: GoogleFonts.dmSans(
+                          fontSize: 9,
+                          fontWeight: FontWeight.w600,
+                          color: _getGradeColor(hadith.grade),
+                        ),
+                      ),
+                      if (_getArabicGradeLabel(hadith.grade) != null)
+                        Text(
+                          _getArabicGradeLabel(hadith.grade)!,
+                          textAlign: TextAlign.right,
+                          style: GoogleFonts.amiri(
+                            fontSize: 10,
+                            fontWeight: FontWeight.w700,
+                            color: _getGradeColor(hadith.grade),
+                          ),
+                        ),
+                    ],
                   ),
                 ),
               ],
@@ -780,3 +858,90 @@ final hadithCollectionsProvider = FutureProvider<Map<String, int>>((ref) async {
 final hadithGradesProvider = FutureProvider<List<String>>((ref) async {
   return ref.read(hadithServiceProvider).getAvailableGrades();
 });
+
+String _extractHadithCollection(String reference) {
+  final refLower = reference.toLowerCase();
+  if (refLower.contains('bujari') || refLower.contains('bukhari')) {
+    return 'Bukhari';
+  }
+  if (refLower.contains('muslim')) return 'Muslim';
+  if (refLower.contains('tirmidhi')) return 'Tirmidhi';
+  if (refLower.contains('abu dawud') || refLower.contains('abudawud')) {
+    return 'Abu Dawud';
+  }
+  if (refLower.contains('nasai')) return 'Nasai';
+  if (refLower.contains('ibn majah') || refLower.contains('ibnmajah')) {
+    return 'Ibn Majah';
+  }
+  if (refLower.contains('malik') || refLower.contains('muwatta')) {
+    return 'Malik';
+  }
+  if (refLower.contains('ahmad')) return 'Ahmad';
+  return 'Otros';
+}
+
+String? _getArabicCollectionLabel(String collection) {
+  switch (collection.trim().toLowerCase()) {
+    case 'bukhari':
+      return 'البخاري';
+    case 'muslim':
+      return 'مسلم';
+    case 'tirmidhi':
+      return 'الترمذي';
+    case 'abu dawud':
+      return 'أبو داود';
+    case 'nasai':
+      return 'النسائي';
+    case 'ibn majah':
+      return 'ابن ماجه';
+    case 'malik':
+      return 'مالك';
+    case 'ahmad':
+      return 'أحمد';
+    default:
+      return null;
+  }
+}
+
+String? _getArabicReferenceLabel(String reference) {
+  final refLower = reference.toLowerCase();
+  if (refLower.contains('bujari') || refLower.contains('bukhari')) {
+    return 'رواه البخاري';
+  }
+  if (refLower.contains('muslim')) {
+    return 'رواه مسلم';
+  }
+  if (refLower.contains('tirmidhi')) {
+    return 'رواه الترمذي';
+  }
+  if (refLower.contains('abu dawud') || refLower.contains('abudawud')) {
+    return 'رواه أبو داود';
+  }
+  if (refLower.contains('nasai')) {
+    return 'رواه النسائي';
+  }
+  if (refLower.contains('ibn majah') || refLower.contains('ibnmajah')) {
+    return 'رواه ابن ماجه';
+  }
+  if (refLower.contains('malik') || refLower.contains('muwatta')) {
+    return 'رواه مالك';
+  }
+  if (refLower.contains('ahmad')) {
+    return 'رواه أحمد';
+  }
+  return null;
+}
+
+String? _getArabicGradeLabel(String grade) {
+  switch (grade.trim().toLowerCase()) {
+    case 'sahih':
+      return 'صحيح';
+    case 'hasan':
+      return 'حسن';
+    case 'da\'if':
+    case 'daif':
+      return 'ضعيف';
+    default:
+      return null;
+  }
+}

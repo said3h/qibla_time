@@ -33,68 +33,81 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
     'gratitude',
   ];
 
-  static const _categoryMeta = <String, ({IconData icon, String label, String hint})>{
-    'morning': (
-      icon: Icons.wb_sunny_outlined,
-      label: 'Mañana',
-      hint: 'Inicio del día',
-    ),
-    'night': (
-      icon: Icons.nights_stay_outlined,
-      label: 'Noche',
-      hint: 'Cierre del día',
-    ),
-    'sleep': (
-      icon: Icons.bedtime_outlined,
-      label: 'Sueño',
-      hint: 'Antes de dormir',
-    ),
-    'travel': (
-      icon: Icons.connecting_airports_outlined,
-      label: 'Viaje',
-      hint: 'Salida y trayecto',
-    ),
-    'food': (
-      icon: Icons.restaurant_outlined,
-      label: 'Comida',
-      hint: 'Antes y después',
-    ),
-    'sickness': (
-      icon: Icons.local_hospital_outlined,
-      label: 'Enfermedad',
-      hint: 'Curación y visita',
-    ),
-    'protection': (
-      icon: Icons.shield_outlined,
-      label: 'Protección',
-      hint: 'Refugio y cuidado',
-    ),
-    'repentance': (
-      icon: Icons.refresh_outlined,
-      label: 'Arrepentimiento',
-      hint: 'Perdón y vuelta',
-    ),
-    'mosque': (
-      icon: Icons.mosque_outlined,
-      label: 'Mezquita',
-      hint: 'Entrar y salir',
-    ),
-    'rain': (
-      icon: Icons.water_drop_outlined,
-      label: 'Lluvia',
-      hint: 'Durante la lluvia',
-    ),
-    'stress': (
-      icon: Icons.self_improvement_outlined,
-      label: 'Dificultad',
-      hint: 'Tristeza y carga',
-    ),
-    'gratitude': (
-      icon: Icons.favorite_border_outlined,
-      label: 'Gratitud',
-      hint: 'Agradecimiento',
-    ),
-  };
+  static const _categoryMeta =
+      <String, ({IconData icon, String label, String hint, String arabicLabel})>{
+        'morning': (
+          icon: Icons.wb_sunny_outlined,
+          label: 'Mañana',
+          hint: 'Inicio del día',
+          arabicLabel: 'الصباح',
+        ),
+        'night': (
+          icon: Icons.nights_stay_outlined,
+          label: 'Noche',
+          hint: 'Cierre del día',
+          arabicLabel: 'المساء',
+        ),
+        'sleep': (
+          icon: Icons.bedtime_outlined,
+          label: 'Sueño',
+          hint: 'Antes de dormir',
+          arabicLabel: 'النوم',
+        ),
+        'travel': (
+          icon: Icons.connecting_airports_outlined,
+          label: 'Viaje',
+          hint: 'Salida y trayecto',
+          arabicLabel: 'السفر',
+        ),
+        'food': (
+          icon: Icons.restaurant_outlined,
+          label: 'Comida',
+          hint: 'Antes y después',
+          arabicLabel: 'الطعام',
+        ),
+        'sickness': (
+          icon: Icons.local_hospital_outlined,
+          label: 'Enfermedad',
+          hint: 'Curación y visita',
+          arabicLabel: 'المرض',
+        ),
+        'protection': (
+          icon: Icons.shield_outlined,
+          label: 'Protección',
+          hint: 'Refugio y cuidado',
+          arabicLabel: 'التحصين',
+        ),
+        'repentance': (
+          icon: Icons.refresh_outlined,
+          label: 'Arrepentimiento',
+          hint: 'Perdón y vuelta',
+          arabicLabel: 'التوبة',
+        ),
+        'mosque': (
+          icon: Icons.mosque_outlined,
+          label: 'Mezquita',
+          hint: 'Entrar y salir',
+          arabicLabel: 'المسجد',
+        ),
+        'rain': (
+          icon: Icons.water_drop_outlined,
+          label: 'Lluvia',
+          hint: 'Durante la lluvia',
+          arabicLabel: 'المطر',
+        ),
+        'stress': (
+          icon: Icons.self_improvement_outlined,
+          label: 'Dificultad',
+          hint: 'Tristeza y carga',
+          arabicLabel: 'الكرب',
+        ),
+        'gratitude': (
+          icon: Icons.favorite_border_outlined,
+          label: 'Gratitud',
+          hint: 'Agradecimiento',
+          arabicLabel: 'الشكر',
+        ),
+      };
 
   @override
   void initState() {
@@ -319,105 +332,8 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
             ),
           )
         else ...[
-        Text(
-          'CATEGORIAS',
-          style: GoogleFonts.dmSans(
-            fontSize: 9,
-            letterSpacing: 1.4,
-            color: tokens.textSecondary,
-          ),
-        ),
-        const SizedBox(height: 10),
-        GridView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: categoryKeys.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: 8,
-            mainAxisSpacing: 8,
-            childAspectRatio: 1.65,
-          ),
-          itemBuilder: (_, index) {
-            final key = categoryKeys[index];
-            final meta = _categoryMeta[key] ??
-                (
-                  icon: Icons.auto_awesome_outlined,
-                  label: key,
-                  hint: 'Categoría',
-                );
-            final selectedCategory = key == effectiveCategory;
-            final count = grouped[key]?.length ?? 0;
-
-            return InkWell(
-              onTap: () => setState(() => _selectedCategory = key),
-              borderRadius: BorderRadius.circular(16),
-              child: Container(
-                padding: const EdgeInsets.all(14),
-                decoration: BoxDecoration(
-                  color: selectedCategory ? tokens.activeBg : tokens.bgSurface,
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(
-                    color: selectedCategory
-                        ? tokens.activeBorder
-                        : tokens.border,
-                  ),
-                ),
-                child: Row(
-                  children: [
-                    Icon(meta.icon, size: 22, color: tokens.primary),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            meta.label,
-                            style: GoogleFonts.dmSans(
-                              fontSize: 12,
-                              color: tokens.textPrimary,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          Text(
-                            '$count adhkar',
-                            style: GoogleFonts.dmSans(
-                              fontSize: 10,
-                              color: tokens.textSecondary,
-                            ),
-                          ),
-                          Text(
-                            meta.hint,
-                            style: GoogleFonts.dmSans(
-                              fontSize: 10,
-                              color: tokens.textMuted,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-        ),
-        const SizedBox(height: 16),
-        Text(
-          'SELECCIONADA',
-          style: GoogleFonts.dmSans(
-            fontSize: 9,
-            letterSpacing: 1.4,
-            color: tokens.textSecondary,
-          ),
-        ),
-        const SizedBox(height: 10),
-        ...selected.map((dua) => _DuaCard(dua: dua)),
-        if (normalizedQuery.isEmpty) ...[
-          const SizedBox(height: 12),
           Text(
-            'DESTACADAS',
+            'CATEGORÍAS',
             style: GoogleFonts.dmSans(
               fontSize: 9,
               letterSpacing: 1.4,
@@ -425,8 +341,111 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
             ),
           ),
           const SizedBox(height: 10),
-          ...featured.take(6).map((dua) => _DuaCard(dua: dua, compact: true)),
-        ],
+          GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: categoryKeys.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 8,
+              mainAxisSpacing: 8,
+              childAspectRatio: 1.65,
+            ),
+            itemBuilder: (_, index) {
+              final key = categoryKeys[index];
+              final meta = _categoryMeta[key] ??
+                  (
+                    icon: Icons.auto_awesome_outlined,
+                    label: key,
+                    hint: 'Categoría',
+                    arabicLabel: 'قسم',
+                  );
+              final selectedCategory = key == effectiveCategory;
+              final count = grouped[key]?.length ?? 0;
+
+              return InkWell(
+                onTap: () => setState(() => _selectedCategory = key),
+                borderRadius: BorderRadius.circular(16),
+                child: Container(
+                  padding: const EdgeInsets.all(14),
+                  decoration: BoxDecoration(
+                    color: selectedCategory ? tokens.activeBg : tokens.bgSurface,
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(
+                      color: selectedCategory
+                          ? tokens.activeBorder
+                          : tokens.border,
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(meta.icon, size: 22, color: tokens.primary),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              meta.label,
+                              style: GoogleFonts.dmSans(
+                                fontSize: 12,
+                                color: tokens.textPrimary,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: Text(
+                                meta.arabicLabel,
+                                textAlign: TextAlign.right,
+                                style: GoogleFonts.amiri(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w700,
+                                  color: tokens.textSecondary,
+                                ),
+                              ),
+                            ),
+                            Text(
+                              '$count adhkar · ${meta.hint}',
+                              style: GoogleFonts.dmSans(
+                                fontSize: 10,
+                                color: tokens.textSecondary,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'SELECCIONADA',
+            style: GoogleFonts.dmSans(
+              fontSize: 9,
+              letterSpacing: 1.4,
+              color: tokens.textSecondary,
+            ),
+          ),
+          const SizedBox(height: 10),
+          ...selected.map((dua) => _DuaCard(dua: dua)),
+          if (normalizedQuery.isEmpty) ...[
+            const SizedBox(height: 12),
+            Text(
+              'DESTACADAS',
+              style: GoogleFonts.dmSans(
+                fontSize: 9,
+                letterSpacing: 1.4,
+                color: tokens.textSecondary,
+              ),
+            ),
+            const SizedBox(height: 10),
+            ...featured.take(6).map((dua) => _DuaCard(dua: dua, compact: true)),
+          ],
         ],
       ],
     );
@@ -456,6 +475,7 @@ class _DuaCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
+    final meta = _DuasScreenState._categoryMeta[dua.category];
 
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
@@ -486,23 +506,84 @@ class _DuaCard extends StatelessWidget {
                     ),
                     if ((dua.reference ?? '').isNotEmpty) ...[
                       const SizedBox(height: 4),
-                      Text(
-                        dua.reference!,
-                        style: GoogleFonts.dmSans(
-                          fontSize: 10,
-                          color: tokens.textSecondary,
-                        ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              dua.reference!,
+                              style: GoogleFonts.dmSans(
+                                fontSize: 10,
+                                color: tokens.textSecondary,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            'المصدر',
+                            textAlign: TextAlign.right,
+                            style: GoogleFonts.amiri(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w700,
+                              color: tokens.textMuted,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ],
                 ),
               ),
-              Icon(
-                dua.isFeatured
-                    ? Icons.favorite_rounded
-                    : Icons.bookmark_border_rounded,
-                size: 18,
-                color: dua.isFeatured ? tokens.primary : tokens.textMuted,
+              const SizedBox(width: 12),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  if (meta != null)
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 6,
+                      ),
+                      decoration: BoxDecoration(
+                        color: tokens.primary.withOpacity(0.08),
+                        borderRadius: BorderRadius.circular(999),
+                        border: Border.all(
+                          color: tokens.primary.withOpacity(0.16),
+                        ),
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            meta.label,
+                            style: GoogleFonts.dmSans(
+                              fontSize: 9,
+                              fontWeight: FontWeight.w600,
+                              color: tokens.primary,
+                            ),
+                          ),
+                          Text(
+                            meta.arabicLabel,
+                            textAlign: TextAlign.right,
+                            style: GoogleFonts.amiri(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w700,
+                              color: tokens.primary,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  const SizedBox(height: 8),
+                  Icon(
+                    dua.isFeatured
+                        ? Icons.favorite_rounded
+                        : Icons.bookmark_border_rounded,
+                    size: 18,
+                    color: dua.isFeatured ? tokens.primary : tokens.textMuted,
+                  ),
+                ],
               ),
             ],
           ),

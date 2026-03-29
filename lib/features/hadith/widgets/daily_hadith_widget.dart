@@ -94,20 +94,36 @@ class DailyHadithWidget extends ConsumerWidget {
                       Container(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 8,
-                          vertical: 4,
+                          vertical: 6,
                         ),
                         decoration: BoxDecoration(
                           color: _getCollectionColor(snapshot.collection)
                               .withOpacity(0.1),
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        child: Text(
-                          snapshot.collection,
-                          style: GoogleFonts.dmSans(
-                            fontSize: 9,
-                            fontWeight: FontWeight.w600,
-                            color: _getCollectionColor(snapshot.collection),
-                          ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(
+                              snapshot.collection,
+                              style: GoogleFonts.dmSans(
+                                fontSize: 9,
+                                fontWeight: FontWeight.w600,
+                                color: _getCollectionColor(snapshot.collection),
+                              ),
+                            ),
+                            if (_getArabicCollectionLabel(snapshot.collection) != null)
+                              Text(
+                                _getArabicCollectionLabel(snapshot.collection)!,
+                                textAlign: TextAlign.right,
+                                style: GoogleFonts.amiri(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w700,
+                                  color: _getCollectionColor(snapshot.collection),
+                                ),
+                              ),
+                          ],
                         ),
                       ),
                     ],
@@ -142,33 +158,71 @@ class DailyHadithWidget extends ConsumerWidget {
 
                   // Referencia y grado de autenticidad
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
-                        child: Text(
-                          snapshot.reference,
-                          style: GoogleFonts.dmSans(
-                            fontSize: 9,
-                            color: tokens.textSecondary,
-                          ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              snapshot.reference,
+                              style: GoogleFonts.dmSans(
+                                fontSize: 9,
+                                color: tokens.textSecondary,
+                              ),
+                            ),
+                            if (_getArabicReferenceLabel(snapshot.reference) != null) ...[
+                              const SizedBox(height: 4),
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: Text(
+                                  _getArabicReferenceLabel(snapshot.reference)!,
+                                  textAlign: TextAlign.right,
+                                  style: GoogleFonts.amiri(
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w700,
+                                    color: tokens.textMuted,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ],
                         ),
                       ),
+                      const SizedBox(width: 10),
                       Container(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 6,
-                          vertical: 3,
+                          horizontal: 8,
+                          vertical: 5,
                         ),
                         decoration: BoxDecoration(
                           color: _getGradeColor(snapshot.grade)
                               .withOpacity(0.15),
                           borderRadius: BorderRadius.circular(6),
                         ),
-                        child: Text(
-                          snapshot.grade,
-                          style: GoogleFonts.dmSans(
-                            fontSize: 8,
-                            fontWeight: FontWeight.w600,
-                            color: _getGradeColor(snapshot.grade),
-                          ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(
+                              snapshot.grade,
+                              style: GoogleFonts.dmSans(
+                                fontSize: 8,
+                                fontWeight: FontWeight.w600,
+                                color: _getGradeColor(snapshot.grade),
+                              ),
+                            ),
+                            if (_getArabicGradeLabel(snapshot.grade) != null)
+                              Text(
+                                _getArabicGradeLabel(snapshot.grade)!,
+                                textAlign: TextAlign.right,
+                                style: GoogleFonts.amiri(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w700,
+                                  color: _getGradeColor(snapshot.grade),
+                                ),
+                              ),
+                          ],
                         ),
                       ),
                     ],
@@ -320,6 +374,72 @@ class DailyHadithWidget extends ConsumerWidget {
     if (grade == 'Hasan') return Colors.orange;
     if (grade == 'Da\'if') return Colors.red;
     return Colors.grey;
+  }
+
+  String? _getArabicCollectionLabel(String collection) {
+    switch (collection.trim().toLowerCase()) {
+      case 'bukhari':
+        return 'البخاري';
+      case 'muslim':
+        return 'مسلم';
+      case 'tirmidhi':
+        return 'الترمذي';
+      case 'abu dawud':
+        return 'أبو داود';
+      case 'nasai':
+        return 'النسائي';
+      case 'ibn majah':
+        return 'ابن ماجه';
+      case 'malik':
+        return 'مالك';
+      case 'ahmad':
+        return 'أحمد';
+      default:
+        return null;
+    }
+  }
+
+  String? _getArabicReferenceLabel(String reference) {
+    final refLower = reference.toLowerCase();
+    if (refLower.contains('bujari') || refLower.contains('bukhari')) {
+      return 'رواه البخاري';
+    }
+    if (refLower.contains('muslim')) {
+      return 'رواه مسلم';
+    }
+    if (refLower.contains('tirmidhi')) {
+      return 'رواه الترمذي';
+    }
+    if (refLower.contains('abu dawud') || refLower.contains('abudawud')) {
+      return 'رواه أبو داود';
+    }
+    if (refLower.contains('nasai')) {
+      return 'رواه النسائي';
+    }
+    if (refLower.contains('ibn majah') || refLower.contains('ibnmajah')) {
+      return 'رواه ابن ماجه';
+    }
+    if (refLower.contains('malik') || refLower.contains('muwatta')) {
+      return 'رواه مالك';
+    }
+    if (refLower.contains('ahmad')) {
+      return 'رواه أحمد';
+    }
+    return null;
+  }
+
+  String? _getArabicGradeLabel(String grade) {
+    switch (grade.trim().toLowerCase()) {
+      case 'sahih':
+        return 'صحيح';
+      case 'hasan':
+        return 'حسن';
+      case 'da\'if':
+      case 'daif':
+        return 'ضعيف';
+      default:
+        return null;
+    }
   }
 }
 

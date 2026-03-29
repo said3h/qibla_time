@@ -159,40 +159,80 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
                   color: _getCollectionColor(hadith.reference).withOpacity(0.15),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Row(
+                child: Column(
                   mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Icon(
-                      Icons.auto_stories,
-                      size: 14,
-                      color: _getCollectionColor(hadith.reference),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.auto_stories,
+                          size: 14,
+                          color: _getCollectionColor(hadith.reference),
+                        ),
+                        const SizedBox(width: 6),
+                        Text(
+                          _extractCollection(hadith.reference),
+                          style: GoogleFonts.dmSans(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w700,
+                            color: _getCollectionColor(hadith.reference),
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(width: 6),
-                    Text(
-                      _extractCollection(hadith.reference),
-                      style: GoogleFonts.dmSans(
-                        fontSize: 11,
-                        fontWeight: FontWeight.w700,
-                        color: _getCollectionColor(hadith.reference),
+                    if (_getArabicCollectionLabel(
+                          _extractCollection(hadith.reference),
+                        ) !=
+                        null)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 4),
+                        child: Text(
+                          _getArabicCollectionLabel(
+                            _extractCollection(hadith.reference),
+                          )!,
+                          textAlign: TextAlign.right,
+                          style: GoogleFonts.amiri(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w700,
+                            color: _getCollectionColor(hadith.reference),
+                          ),
+                        ),
                       ),
-                    ),
                   ],
                 ),
               ),
               const Spacer(),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
                 decoration: BoxDecoration(
                   color: _getGradeColor(hadith.grade).withOpacity(0.15),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Text(
-                  hadith.grade,
-                  style: GoogleFonts.dmSans(
-                    fontSize: 10,
-                    fontWeight: FontWeight.w700,
-                    color: _getGradeColor(hadith.grade),
-                  ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      hadith.grade,
+                      style: GoogleFonts.dmSans(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w700,
+                        color: _getGradeColor(hadith.grade),
+                      ),
+                    ),
+                    if (_getArabicGradeLabel(hadith.grade) != null)
+                      Text(
+                        _getArabicGradeLabel(hadith.grade)!,
+                        textAlign: TextAlign.right,
+                        style: GoogleFonts.amiri(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w700,
+                          color: _getGradeColor(hadith.grade),
+                        ),
+                      ),
+                  ],
                 ),
               ),
             ],
@@ -296,6 +336,21 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
             ],
           ),
           const SizedBox(height: 10),
+          if (_getArabicReferenceLabel(hadith.reference) != null) ...[
+            Align(
+              alignment: Alignment.centerRight,
+              child: Text(
+                _getArabicReferenceLabel(hadith.reference)!,
+                textAlign: TextAlign.right,
+                style: GoogleFonts.amiri(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w700,
+                  color: tokens.textMuted,
+                ),
+              ),
+            ),
+            const SizedBox(height: 8),
+          ],
           Text(
             hadith.reference,
             style: GoogleFonts.dmSans(
@@ -305,12 +360,29 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
             ),
           ),
           const SizedBox(height: 8),
-          Text(
-            'Grado: ${hadith.grade}',
-            style: GoogleFonts.dmSans(
-              fontSize: 11,
-              color: tokens.textSecondary,
-            ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Text(
+                  'Grado: ${hadith.grade}',
+                  style: GoogleFonts.dmSans(
+                    fontSize: 11,
+                    color: tokens.textSecondary,
+                  ),
+                ),
+              ),
+              if (_getArabicGradeLabel(hadith.grade) != null)
+                Text(
+                  _getArabicGradeLabel(hadith.grade)!,
+                  textAlign: TextAlign.right,
+                  style: GoogleFonts.amiri(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w700,
+                    color: _getGradeColor(hadith.grade),
+                  ),
+                ),
+            ],
           ),
         ],
       ),
@@ -351,6 +423,21 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
               color: tokens.textPrimary,
             ),
           ),
+          if (_getArabicCategoryLabel(category) != null) ...[
+            const SizedBox(height: 8),
+            Align(
+              alignment: Alignment.centerRight,
+              child: Text(
+                _getArabicCategoryLabel(category)!,
+                textAlign: TextAlign.right,
+                style: GoogleFonts.amiri(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w700,
+                  color: tokens.textMuted,
+                ),
+              ),
+            ),
+          ],
         ],
       ),
     );
@@ -616,6 +703,154 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
     if (refLower.contains('malik') || refLower.contains('muwatta')) return 'Malik';
     if (refLower.contains('ahmad')) return 'Ahmad';
     return 'Otros';
+  }
+
+  String? _getArabicCollectionLabel(String collection) {
+    switch (collection.trim().toLowerCase()) {
+      case 'bukhari':
+        return 'البخاري';
+      case 'muslim':
+        return 'مسلم';
+      case 'tirmidhi':
+        return 'الترمذي';
+      case 'abu dawud':
+        return 'أبو داود';
+      case 'nasai':
+        return 'النسائي';
+      case 'ibn majah':
+        return 'ابن ماجه';
+      case 'malik':
+        return 'مالك';
+      case 'ahmad':
+        return 'أحمد';
+      default:
+        return null;
+    }
+  }
+
+  String? _getArabicReferenceLabel(String reference) {
+    final refLower = reference.toLowerCase();
+    if (refLower.contains('bujari') || refLower.contains('bukhari')) {
+      return 'رواه البخاري';
+    }
+    if (refLower.contains('muslim')) {
+      return 'رواه مسلم';
+    }
+    if (refLower.contains('tirmidhi')) {
+      return 'رواه الترمذي';
+    }
+    if (refLower.contains('abu dawud') || refLower.contains('abudawud')) {
+      return 'رواه أبو داود';
+    }
+    if (refLower.contains('nasai')) {
+      return 'رواه النسائي';
+    }
+    if (refLower.contains('ibn majah') || refLower.contains('ibnmajah')) {
+      return 'رواه ابن ماجه';
+    }
+    if (refLower.contains('malik') || refLower.contains('muwatta')) {
+      return 'رواه مالك';
+    }
+    if (refLower.contains('ahmad')) {
+      return 'رواه أحمد';
+    }
+    return null;
+  }
+
+  String? _getArabicGradeLabel(String grade) {
+    switch (grade.trim().toLowerCase()) {
+      case 'sahih':
+        return 'صحيح';
+      case 'hasan':
+        return 'حسن';
+      case 'da\'if':
+      case 'daif':
+        return 'ضعيف';
+      default:
+        return null;
+    }
+  }
+
+  String? _getArabicCategoryLabel(String category) {
+    switch (category.trim().toLowerCase()) {
+      case 'adab':
+        return 'الأدب';
+      case 'amor de alá':
+      case 'amor de ala':
+        return 'محبة الله';
+      case 'autorreflexión':
+      case 'autorreflexion':
+        return 'محاسبة النفس';
+      case 'ayuno':
+        return 'الصيام';
+      case 'carácter':
+      case 'caracter':
+        return 'حسن الخلق';
+      case 'caridad':
+        return 'الصدقة';
+      case 'compasión':
+      case 'compasion':
+        return 'الرحمة';
+      case 'conocimiento':
+        return 'العلم';
+      case 'constancia':
+        return 'الثبات';
+      case 'corazón':
+      case 'corazon':
+        return 'القلب';
+      case 'dhikr':
+        return 'الذكر';
+      case 'dua':
+        return 'الدعاء';
+      case 'familia':
+        return 'الأسرة';
+      case 'fraternidad':
+        return 'الأخوة';
+      case 'gratitud':
+        return 'الشكر';
+      case 'haya':
+        return 'الحياء';
+      case 'honestidad':
+        return 'الأمانة';
+      case 'ihsan':
+        return 'الإحسان';
+      case 'intenciones':
+        return 'النيات';
+      case 'istighfar':
+        return 'الاستغفار';
+      case 'justicia':
+        return 'العدل';
+      case 'lengua':
+        return 'اللسان';
+      case 'mezquita':
+        return 'المسجد';
+      case 'misericordia':
+        return 'الرحمة';
+      case 'paciencia':
+        return 'الصبر';
+      case 'purificación':
+      case 'purificacion':
+        return 'الطهارة';
+      case 'quran':
+        return 'القرآن';
+      case 'rizq':
+      case 'sustento':
+        return 'الرزق';
+      case 'salah':
+        return 'الصلاة';
+      case 'seguridad':
+        return 'الأمان';
+      case 'servicio':
+        return 'خدمة الناس';
+      case 'sinceridad':
+        return 'الإخلاص';
+      case 'taqwa':
+        return 'التقوى';
+      case 'zuhd':
+        return 'الزهد';
+      default:
+        return null;
+    }
   }
 }
 
