@@ -26,7 +26,10 @@ class DailyHadithWidget extends ConsumerWidget {
     return hadithSnapshotAsync.when(
       data: (snapshot) {
         if (snapshot == null) {
-          return const SizedBox.shrink();
+          return _HadithUnavailableWidget(
+            tokens: tokens,
+            onOpenLibrary: () => _openHadithLibrary(context),
+          );
         }
 
         final hadithService = ref.read(hadithServiceProvider);
@@ -35,8 +38,17 @@ class DailyHadithWidget extends ConsumerWidget {
         return FutureBuilder<Hadith?>(
           future: hadithService.getHadithOfDay(),
           builder: (context, hadithSnapshot) {
+            if (hadithSnapshot.connectionState == ConnectionState.waiting) {
+              return _LoadingHadithWidget();
+            }
+
             final hadith = hadithSnapshot.data;
-            if (hadith == null) return const SizedBox.shrink();
+            if (hadith == null) {
+              return _HadithUnavailableWidget(
+                tokens: tokens,
+                onOpenLibrary: () => _openHadithLibrary(context),
+              );
+            }
 
             final isFavorite = favoritesAsync.valueOrNull?.contains(hadith.id) ?? false;
             final arabicReference = ReligiousReferenceFormatter
@@ -336,7 +348,10 @@ class DailyHadithWidget extends ConsumerWidget {
         );
       },
       loading: () => _LoadingHadithWidget(),
-      error: (_, __) => const SizedBox.shrink(),
+      error: (_, __) => _HadithUnavailableWidget(
+        tokens: tokens,
+        onOpenLibrary: () => _openHadithLibrary(context),
+      ),
     );
   }
 
@@ -529,6 +544,50 @@ class _LoadingHadithWidget extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _HadithUnavailableWidget extends StatelessWidget {
+  const _HadithUnavailableWidget({
+    required this.tokens,
+    required this.onOpenLibrary,
+  });
+
+  final QiblaTokens tokens;
+  final VoidCallback onOpenLibrary;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(16, 12, 16, 8),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: tokens.bgSurface,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: tokens.border),
+      ),
+      child: Row(
+        children: [
+          Icon(Icons.auto_stories_outlined, color: tokens.primary, size: 20),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Text(
+              'El hadiz del dia no pudo cargarse ahora mismo.',
+              style: GoogleFonts.dmSans(
+                fontSize: 12,
+                height: 1.5,
+                color: tokens.textPrimary,
+              ),
+            ),
+          ),
+          const SizedBox(width: 12),
+          TextButton(
+            onPressed: onOpenLibrary,
+            child: const Text('Abrir'),
           ),
         ],
       ),

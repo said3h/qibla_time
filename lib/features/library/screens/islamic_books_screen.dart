@@ -191,6 +191,13 @@ class _IslamicBooksScreenState extends ConsumerState<IslamicBooksScreen>
 
     return categoriesAsync.when(
       data: (categories) {
+        if (categories.isEmpty) {
+          return const _EmptyState(
+            message: 'No hay categorias disponibles',
+            icon: Icons.folder_off_outlined,
+          );
+        }
+
         final allCategories = ['Todos', ...categories.map((c) => c.name)];
 
         return ListView.builder(
@@ -611,16 +618,19 @@ class _BookDetailSheet extends StatelessWidget {
               color: tokens.textPrimary,
             ),
           ),
-          const SizedBox(height: 8),
-          Text(
-            book.titleArabic,
-            style: GoogleFonts.amiri(
-              fontSize: 18,
-              color: tokens.textSecondary,
+          if (book.titleArabic.isNotEmpty) ...[
+            const SizedBox(height: 8),
+            Text(
+              book.titleArabic,
+              style: GoogleFonts.amiri(
+                fontSize: 18,
+                color: tokens.textSecondary,
+              ),
+              textAlign: TextAlign.right,
             ),
-            textAlign: TextAlign.right,
-          ),
-          const SizedBox(height: 16),
+            const SizedBox(height: 16),
+          ] else
+            const SizedBox(height: 16),
 
           // Author
           Row(

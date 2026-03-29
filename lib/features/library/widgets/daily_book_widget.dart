@@ -20,7 +20,10 @@ class DailyBookWidget extends ConsumerWidget {
     return featuredAsync.when(
       data: (books) {
         if (books.isEmpty) {
-          return const SizedBox.shrink();
+          return _BooksUnavailableWidget(
+            tokens: tokens,
+            onOpenLibrary: () => _openLibrary(context),
+          );
         }
 
         final book = IslamHouseBook.getBookOfDay(books);
@@ -177,7 +180,10 @@ class DailyBookWidget extends ConsumerWidget {
         );
       },
       loading: () => _LoadingBookWidget(tokens: tokens),
-      error: (_, __) => const SizedBox.shrink(),
+      error: (_, __) => _BooksUnavailableWidget(
+        tokens: tokens,
+        onOpenLibrary: () => _openLibrary(context),
+      ),
     );
   }
 
@@ -353,6 +359,50 @@ class _LoadingBookWidget extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _BooksUnavailableWidget extends StatelessWidget {
+  const _BooksUnavailableWidget({
+    required this.tokens,
+    required this.onOpenLibrary,
+  });
+
+  final QiblaTokens tokens;
+  final VoidCallback onOpenLibrary;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(16, 8, 16, 12),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: tokens.bgSurface,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: tokens.border),
+      ),
+      child: Row(
+        children: [
+          Icon(Icons.library_books_outlined, color: tokens.primary, size: 20),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Text(
+              'La biblioteca de libros no pudo cargar contenido ahora mismo.',
+              style: GoogleFonts.dmSans(
+                fontSize: 12,
+                height: 1.5,
+                color: tokens.textPrimary,
+              ),
+            ),
+          ),
+          const SizedBox(width: 12),
+          TextButton(
+            onPressed: onOpenLibrary,
+            child: const Text('Abrir'),
           ),
         ],
       ),

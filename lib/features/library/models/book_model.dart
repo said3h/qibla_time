@@ -35,22 +35,84 @@ class IslamHouseBook {
   final int downloads;
 
   factory IslamHouseBook.fromJson(Map<String, dynamic> json) {
+    final attachments = (json['attachments'] as List? ?? const [])
+        .whereType<Map>()
+        .map((item) => Map<String, dynamic>.from(item))
+        .toList();
+    final firstAttachment = attachments.isNotEmpty ? attachments.first : null;
+    final preparedBy = (json['prepared_by'] as List? ?? const [])
+        .whereType<Map>()
+        .map((item) => Map<String, dynamic>.from(item))
+        .toList();
+    final firstPreparer = preparedBy.isNotEmpty ? preparedBy.first : null;
+    final title = _firstNonEmpty([
+      json['title'],
+      json['description'],
+      'Sin titulo',
+    ]);
+    final titleArabic = _firstNonEmpty([
+      json['title_arabic'],
+      (json['source_language'] == 'ar' || json['translation_language'] == 'ar')
+          ? title
+          : null,
+    ]);
+    final description = _firstNonEmpty([
+      json['full_description'],
+      json['description'],
+    ]);
+    final author = _firstNonEmpty([
+      json['author'],
+      firstPreparer?['title'],
+      firstPreparer?['description'],
+      'IslamHouse',
+    ]);
+    final downloadUrl = _firstNonEmpty([
+      json['download_url'],
+      firstAttachment?['url'],
+    ]);
+    final readUrl = _firstNonEmpty([
+      json['read_url'],
+      downloadUrl,
+      json['api_url'],
+    ]);
+
     return IslamHouseBook(
       id: json['id'] as int? ?? 0,
-      title: json['title'] as String? ?? 'Sin título',
-      titleArabic: json['title_arabic'] as String? ?? '',
-      description: json['description'] as String? ?? '',
-      author: json['author'] as String? ?? 'Desconocido',
-      category: json['category'] as String? ?? 'General',
-      language: json['language'] as String? ?? 'es',
-      downloadUrl: json['download_url'] as String? ?? '',
-      readUrl: json['read_url'] as String? ?? '',
-      coverUrl: json['cover_url'] as String? ?? '',
-      format: json['format'] as String? ?? 'PDF',
-      size: json['size'] as String? ?? '0 MB',
+      title: title,
+      titleArabic: titleArabic,
+      description: description,
+      author: author,
+      category: _firstNonEmpty([
+        json['category'],
+        json['type'] == 'books' ? 'Libros' : null,
+        'General',
+      ]),
+      language: _firstNonEmpty([
+        json['language'],
+        json['translated_language'],
+        json['translation_language'],
+        json['source_language'],
+        'es',
+      ]),
+      downloadUrl: downloadUrl,
+      readUrl: readUrl,
+      coverUrl: _firstNonEmpty([
+        json['cover_url'],
+        json['image'],
+      ]),
+      format: _firstNonEmpty([
+        json['format'],
+        firstAttachment?['extension_type'],
+        'PDF',
+      ]),
+      size: _firstNonEmpty([
+        json['size'],
+        firstAttachment?['size'],
+        '0 MB',
+      ]),
       pages: json['pages'] as int? ?? 0,
       rating: (json['rating'] as num?)?.toDouble() ?? 0.0,
-      downloads: json['downloads'] as int? ?? 0,
+      downloads: json['downloads'] as int? ?? json['hits'] as int? ?? 0,
     );
   }
 
@@ -74,7 +136,7 @@ class IslamHouseBook {
     };
   }
 
-  /// Obtiene el libro del día basado en la fecha
+  /// Obtiene el libro del dia basado en la fecha.
   static IslamHouseBook getBookOfDay(List<IslamHouseBook> books) {
     if (books.isEmpty) {
       return _placeholder();
@@ -84,15 +146,15 @@ class IslamHouseBook {
     return books[seed % books.length];
   }
 
-  /// Libro placeholder cuando no hay datos
+  /// Libro placeholder cuando no hay datos.
   static IslamHouseBook _placeholder() {
     return const IslamHouseBook(
       id: 0,
-      title: 'Libro del Día',
-      titleArabic: 'كتاب اليوم',
+      title: 'Libro del dia',
+      titleArabic: '',
       description: 'Un libro recomendado para leer hoy',
-      author: 'Varios autores',
-      category: 'General',
+      author: 'IslamHouse',
+      category: 'Libros',
       language: 'es',
       downloadUrl: '',
       readUrl: 'https://islamhouse.com/es/',
@@ -105,26 +167,36 @@ class IslamHouseBook {
     );
   }
 
-  /// Categorías principales disponibles
+  /// Categorias principales disponibles.
   static const List<String> mainCategories = [
-    'El Noble Corán',
+    'El Noble Coran',
     'La Sunnah del Profeta',
-    'Creencia Islámica',
-    'Jurisprudencia Islámica',
+    'Creencia Islamica',
+    'Jurisprudencia Islamica',
     'Virtudes',
     'Pecados Mayores',
-    'Idioma Árabe',
+    'Idioma Arabe',
     'Llamada al Islam',
     'Historia',
-    'Cultura Islámica',
-    'Sermónes',
-    'Lecciones Académicas',
-    'Biografía Profética',
+    'Cultura Islamica',
+    'Sermones',
+    'Lecciones Academicas',
+    'Biografia Profetica',
     'Presentando el Islam',
   ];
+
+  static String _firstNonEmpty(List<Object?> values) {
+    for (final value in values) {
+      final normalized = value?.toString().trim() ?? '';
+      if (normalized.isNotEmpty && normalized.toLowerCase() != 'null') {
+        return normalized;
+      }
+    }
+    return '';
+  }
 }
 
-/// Categoría de libros
+/// Categoria de libros
 class IslamHouseCategory {
   const IslamHouseCategory({
     required this.id,

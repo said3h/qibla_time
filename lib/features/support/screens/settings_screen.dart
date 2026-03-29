@@ -25,6 +25,7 @@ import '../../prayer_times/services/travel_mode_service.dart';
 import '../../quran/screens/downloaded_surahs_screen.dart';
 import '../../tracking/services/tracking_service.dart';
 import 'adhan_selector_screen.dart';
+import 'support_screen.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
@@ -445,7 +446,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ),
             _buildValueTile(
               tokens,
-              'Gestionar favoritos',
+              'Biblioteca de hadices',
               '${hadithFavoritesCount} guardados',
               onTap: () {
                 Navigator.of(context).push(
@@ -603,7 +604,18 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 ],
               ),
             ),
-            _buildValueTile(tokens, 'Seguimiento de sadaqah', '→'),
+            _buildValueTile(
+              tokens,
+              'Informacion de apoyo',
+              'Abrir',
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => const SupportScreen(),
+                  ),
+                );
+              },
+            ),
             const SizedBox(height: 14),
             _buildSectionTitle(tokens, 'Copia de seguridad en la nube (beta)'),
             _buildSimpleToggleTile(tokens, 'Copia automática', 'Prepara copias anónimas de tus datos', cloudBackupEnabled, _toggleCloudBackup),
