@@ -202,11 +202,18 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         title: const Text('Seleccionar hora'),
         content: SizedBox(
           width: double.maxFinite,
-          child: List.generate(24, (index) => ListTile(
-            title: Text('${index}:00'),
-            selected: index == dailyInspirationHour,
-            onTap: () => Navigator.of(context).pop(index),
-          )),
+          height: 360,
+          child: ListView(
+            shrinkWrap: true,
+            children: List.generate(
+              24,
+              (index) => ListTile(
+                title: Text('${index}:00'),
+                selected: index == dailyInspirationHour,
+                onTap: () => Navigator.of(context).pop(index),
+              ),
+            ),
+          ),
         ),
       ),
     );
