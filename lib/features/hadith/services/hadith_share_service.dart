@@ -42,10 +42,23 @@ class HadithShareService {
     Hadith hadith,
     QiblaTokens tokens, {
     HadithShareExportMode mode = HadithShareExportMode.cardOnly,
+    bool includeArabic = true,
+    bool includeTranslation = true,
   }) async {
+    if (!includeArabic && !includeTranslation) {
+      throw ArgumentError(
+        'At least one of includeArabic or includeTranslation must be true.',
+      );
+    }
+
     final transparentBackground = mode == HadithShareExportMode.cardOnly;
+    final shareData = _buildShareData(
+      hadith,
+      includeArabic: includeArabic,
+      includeTranslation: includeTranslation,
+    );
     final file = await HadithShareImageService.savePng(
-      data: _buildShareData(hadith),
+      data: shareData,
       theme: HadithShareThemeData.fromTokens(
         tokens,
         transparentBackground: transparentBackground,
@@ -57,15 +70,25 @@ class HadithShareService {
 
     await Share.shareXFiles(
       [XFile(file.path)],
-      text: buildShareText(hadith),
+      text: [
+        if (shareData.hasArabicText) shareData.arabicText!.trim(),
+        if (shareData.hasTranslation) shareData.translation.trim(),
+        if (shareData.reference.trim().isNotEmpty)
+          '— ${shareData.reference.trim()}',
+        shareData.branding.trim(),
+      ].join('\n\n'),
       subject: 'Hadiz compartido desde Qibla Time',
     );
   }
 
-  HadithShareData _buildShareData(Hadith hadith) {
+  HadithShareData _buildShareData(
+    Hadith hadith, {
+    bool includeArabic = true,
+    bool includeTranslation = true,
+  }) {
     return HadithShareData(
-      arabicText: hadith.arabic,
-      translation: hadith.translation,
+      arabicText: includeArabic ? hadith.arabic : null,
+      translation: includeTranslation ? hadith.translation : '',
       reference: hadith.reference,
       branding: 'App: Qibla Time',
     );

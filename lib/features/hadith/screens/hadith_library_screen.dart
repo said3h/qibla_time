@@ -9,6 +9,7 @@ import '../../../core/utils/religious_reference_formatter.dart';
 import '../models/hadith.dart';
 import '../services/hadith_service.dart';
 import '../services/hadith_share_service.dart';
+import '../widgets/hadith_share_preview_sheet.dart';
 import 'hadith_detail_screen.dart';
 
 class HadithLibraryScreen extends ConsumerStatefulWidget {
@@ -308,19 +309,12 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
   }
 
   Future<void> _shareImage(Hadith hadith) async {
-    try {
-      await ref.read(hadithShareServiceProvider).shareHadithAsImage(
-            hadith,
-            QiblaThemes.current,
-          );
-    } catch (_) {
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('No se pudo generar la imagen del hadith ahora mismo.'),
-        ),
-      );
-    }
+    await showHadithSharePreviewSheet(
+      context: context,
+      hadith: hadith,
+      shareService: ref.read(hadithShareServiceProvider),
+      tokens: QiblaThemes.current,
+    );
   }
 }
 

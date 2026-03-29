@@ -11,6 +11,7 @@ import '../../hadith/models/hadith.dart';
 import '../../hadith/screens/hadith_library_screen.dart';
 import '../../hadith/services/hadith_service.dart';
 import '../../hadith/services/hadith_share_service.dart';
+import 'hadith_share_preview_sheet.dart';
 import '../widgets/hadith_widget_service.dart';
 
 class DailyHadithWidget extends ConsumerWidget {
@@ -244,21 +245,12 @@ class DailyHadithWidget extends ConsumerWidget {
                               return;
                             }
 
-                            try {
-                              await hadithShareService.shareHadithAsImage(
-                                hadith,
-                                tokens,
-                              );
-                            } catch (_) {
-                              if (!context.mounted) return;
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text(
-                                    'No se pudo generar la imagen del hadiz ahora mismo.',
-                                  ),
-                                ),
-                              );
-                            }
+                            await showHadithSharePreviewSheet(
+                              context: context,
+                              hadith: hadith,
+                              shareService: hadithShareService,
+                              tokens: tokens,
+                            );
                           },
                           itemBuilder: (_) => const [
                             PopupMenuItem<String>(

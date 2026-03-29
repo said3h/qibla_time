@@ -9,6 +9,7 @@ import '../../hadith/models/hadith.dart';
 import '../../hadith/screens/hadith_library_screen.dart';
 import '../../hadith/services/hadith_service.dart';
 import '../../hadith/services/hadith_share_service.dart';
+import '../widgets/hadith_share_preview_sheet.dart';
 
 /// Pantalla de detalle de un hadiz específico
 /// Muestra texto completo, referencias, y opciones avanzadas
@@ -466,7 +467,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
           icon: Icons.share_outlined,
           label: 'Compartir',
           color: Colors.green,
-          onTap: () => _shareHadith(hadith, tokens),
+          onTap: _openShareImagePreview,
         ),
         _QuickActionButton(
           icon: _isFavorite ? Icons.favorite : Icons.favorite_border,
@@ -571,7 +572,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
           children: [
             Expanded(
               child: ElevatedButton.icon(
-                onPressed: () => _shareHadith(widget.hadith, tokens),
+                onPressed: _openShareImagePreview,
                 icon: const Icon(Icons.share),
                 label: const Text('Compartir'),
                 style: ElevatedButton.styleFrom(
@@ -627,10 +628,10 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
     );
   }
 
-  Future<void> _shareHadith(Hadith hadith, QiblaTokens tokens) async {
+  Future<void> _shareHadith(Hadith hadith) async {
     try {
       await ref.read(hadithShareServiceProvider).shareHadithAsText(hadith);
-    } catch (e) {
+    } catch (_) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('No se pudo compartir el hadiz')),
@@ -647,19 +648,18 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
         await ref.read(hadithShareServiceProvider).shareHadithAsText(widget.hadith);
         break;
       case 'share_image':
-        try {
-          await ref.read(hadithShareServiceProvider).shareHadithAsImage(
-                widget.hadith,
-                QiblaThemes.current,
-              );
-        } catch (_) {
-          if (!mounted) return;
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('No se pudo generar la imagen')),
-          );
-        }
+        await _openShareImagePreview();
         break;
     }
+  }
+
+  Future<void> _openShareImagePreview() {
+    return showHadithSharePreviewSheet(
+      context: context,
+      hadith: widget.hadith,
+      shareService: ref.read(hadithShareServiceProvider),
+      tokens: QiblaThemes.current,
+    );
   }
 
   void _openLibrary() {
