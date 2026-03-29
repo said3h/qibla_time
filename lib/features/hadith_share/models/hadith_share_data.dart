@@ -3,7 +3,7 @@ class HadithShareData {
     this.arabicText,
     required this.translation,
     required this.reference,
-    this.branding = 'Qibla',
+    this.branding = 'App: Qibla Time',
   });
 
   final String? arabicText;
@@ -12,4 +12,5 @@ class HadithShareData {
   final String branding;
 
   bool get hasArabicText => (arabicText ?? '').trim().isNotEmpty;
+  bool get hasTranslation => translation.trim().isNotEmpty;
 }

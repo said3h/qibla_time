@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -20,18 +18,15 @@ class HadithShareService {
     final arabic = hadith.arabic.trim();
     final translation = hadith.translation.trim();
     final reference = hadith.reference.trim();
-    final grade = hadith.grade.trim();
 
     final sections = <String>[
       if (arabic.isNotEmpty) arabic,
       if (translation.isNotEmpty) translation,
       if (reference.isNotEmpty) '— $reference',
-      if (grade.isNotEmpty) 'Grado: $grade',
-      '',
-      'Compartido desde Qibla Time',
+      'App: Qibla Time',
     ];
 
-    return sections.join('\n');
+    return sections.join('\n\n');
   }
 
   /// Comparte el hadiz como texto
@@ -42,145 +37,37 @@ class HadithShareService {
     );
   }
 
-  /// Comparte el hadiz como imagen con diseño mejorado
+  /// Comparte el hadiz como imagen
   Future<void> shareHadithAsImage(
     Hadith hadith,
     QiblaTokens tokens, {
-    bool withDecoration = true,
+    HadithShareExportMode mode = HadithShareExportMode.cardOnly,
   }) async {
-    try {
-      final file = await HadithShareImageService.savePng(
-        data: HadithShareData(
-          arabicText: hadith.arabic,
-          translation: hadith.translation,
-          reference: hadith.reference,
-          branding: 'Qibla Time',
-        ),
-        theme: HadithShareThemeData.fromTokens(
-          tokens,
-          transparentBackground: !withDecoration,
-        ),
-        transparentBackground: !withDecoration,
-        mode: HadithShareExportMode.cardOnly,
-        fileName: 'hadith_${hadith.id}_${DateTime.now().millisecondsSinceEpoch}',
-      );
-
-      await Share.shareXFiles(
-        [XFile(file.path)],
-        text: buildShareText(hadith),
-        subject: 'Hadiz compartido desde Qibla Time',
-      );
-    } catch (e) {
-      // Fallback: compartir solo texto si falla la imagen
-      await shareHadithAsText(hadith);
-    }
-  }
-
-  /// Comparte el hadiz como imagen con diseño islámico decorativo
-  Future<void> shareHadithAsDecoratedImage(
-    Hadith hadith,
-    QiblaTokens tokens,
-  ) async {
-    try {
-      // Crear imagen con fondo decorativo
-      final file = await HadithShareImageService.savePng(
-        data: HadithShareData(
-          arabicText: hadith.arabic,
-          translation: hadith.translation,
-          reference: hadith.reference,
-          branding: 'Qibla Time',
-        ),
-        theme: HadithShareThemeData.fromTokens(
-          tokens,
-          transparentBackground: false,
-        ),
-        transparentBackground: false,
-        mode: HadithShareExportMode.cardOnly,
-        fileName: 'hadith_decorated_${hadith.id}',
-      );
-
-      await Share.shareXFiles(
-        [XFile(file.path)],
-        text: buildShareText(hadith),
-        subject: 'Hadiz compartido desde Qibla Time',
-      );
-    } catch (e) {
-      // Fallback a imagen simple
-      await shareHadithAsImage(hadith, tokens);
-    }
-  }
-
-  /// Guarda el hadiz como imagen en el dispositivo
-  Future<File?> saveHadithAsImage(
-    Hadith hadith,
-    QiblaTokens tokens, {
-    String? directory,
-  }) async {
-    try {
-      final file = await HadithShareImageService.savePng(
-        data: HadithShareData(
-          arabicText: hadith.arabic,
-          translation: hadith.translation,
-          reference: hadith.reference,
-          branding: 'Qibla Time',
-        ),
-        theme: HadithShareThemeData.fromTokens(
-          tokens,
-          transparentBackground: false,
-        ),
-        transparentBackground: false,
-        mode: HadithShareExportMode.cardOnly,
-        fileName: 'hadith_${hadith.id}_${DateTime.now().millisecondsSinceEpoch}',
-      );
-
-      // Mover a directorio especificado si se proporciona
-      if (directory != null) {
-        final savedDir = Directory(directory);
-        if (!await savedDir.exists()) {
-          await savedDir.create(recursive: true);
-        }
-        final newPath = '$directory/hadith_${hadith.id}.png';
-        await File(file.path).copy(newPath);
-        return File(newPath);
-      }
-
-      return File(file.path);
-    } catch (e) {
-      return null;
-    }
-  }
-
-  /// Obtiene opciones de diseño disponibles para compartir
-  List<ShareDesignOption> getAvailableDesigns() {
-    return [
-      ShareDesignOption(
-        id: 'simple',
-        name: 'Simple',
-        description: 'Solo el texto del hadiz',
+    final transparentBackground = mode == HadithShareExportMode.cardOnly;
+    final file = await HadithShareImageService.savePng(
+      data: _buildShareData(hadith),
+      theme: HadithShareThemeData.fromTokens(
+        tokens,
+        transparentBackground: transparentBackground,
       ),
-      ShareDesignOption(
-        id: 'card',
-        name: 'Tarjeta',
-        description: 'Tarjeta con diseño islámico',
-      ),
-      ShareDesignOption(
-        id: 'decorated',
-        name: 'Decorado',
-        description: 'Imagen completa con decoración',
-      ),
-    ];
+      transparentBackground: transparentBackground,
+      mode: mode,
+      fileName: 'hadith_${hadith.id}_${DateTime.now().millisecondsSinceEpoch}',
+    );
+
+    await Share.shareXFiles(
+      [XFile(file.path)],
+      text: buildShareText(hadith),
+      subject: 'Hadiz compartido desde Qibla Time',
+    );
   }
-}
 
-/// Opción de diseño para compartir
-class ShareDesignOption {
-  const ShareDesignOption({
-    required this.id,
-    required this.name,
-    required this.description,
-  });
-
-  final String id;
-  final String name;
-  final String description;
+  HadithShareData _buildShareData(Hadith hadith) {
+    return HadithShareData(
+      arabicText: hadith.arabic,
+      translation: hadith.translation,
+      reference: hadith.reference,
+      branding: 'App: Qibla Time',
+    );
+  }
 }

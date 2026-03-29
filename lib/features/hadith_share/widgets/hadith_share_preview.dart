@@ -42,9 +42,12 @@ class HadithSharePreview extends StatelessWidget {
     );
 
     if (cardOnly) {
-      return Padding(
-        padding: _cardOnlyPadding,
-        child: card,
+      return ColoredBox(
+        color: theme.canvasBackgroundColor,
+        child: Padding(
+          padding: _cardOnlyPadding,
+          child: card,
+        ),
       );
     }
 

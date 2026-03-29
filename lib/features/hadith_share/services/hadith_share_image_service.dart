@@ -119,19 +119,24 @@ class HadithShareImageService {
     HadithShareExportMode mode = HadithShareExportMode.storyCanvas,
     String? fileName,
     Directory? directory,
+    double pixelRatio = 1.0,
   }) async {
     final bytes = await capturePng(
       data: data,
       theme: theme,
       transparentBackground: transparentBackground,
       mode: mode,
+      pixelRatio: pixelRatio,
     );
     final targetDirectory = directory ?? await getTemporaryDirectory();
     await targetDirectory.create(recursive: true);
     final sanitizedName = (fileName ?? 'hadith_share_card')
-        .replaceAll(RegExp(r'[^a-zA-Z0-9_-]'), '_');
+        .trim()
+        .replaceAll(RegExp(r'[^a-zA-Z0-9_-]+'), '_')
+        .replaceAll(RegExp(r'_+'), '_')
+        .replaceAll(RegExp(r'^_+|_+$'), '');
     final resolvedFileName =
-        sanitizedName.trim().isEmpty ? 'hadith_share_card' : sanitizedName;
+        sanitizedName.isEmpty ? 'hadith_share_card' : sanitizedName;
     final file = File('${targetDirectory.path}/$resolvedFileName.png');
     await file.writeAsBytes(bytes, flush: true);
     return file;
