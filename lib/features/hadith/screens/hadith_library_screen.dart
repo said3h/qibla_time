@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theme/app_theme.dart';
+import '../../../core/utils/religious_reference_formatter.dart';
 import '../models/hadith.dart';
 import '../services/hadith_service.dart';
 import '../services/hadith_share_service.dart';
@@ -395,6 +396,9 @@ class _FeaturedHadithCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
+    final arabicReference = ReligiousReferenceFormatter.buildArabicReference(
+      hadith.reference,
+    );
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -488,12 +492,12 @@ class _FeaturedHadithCard extends StatelessWidget {
                         color: tokens.textSecondary,
                       ),
                     ),
-                    if (_getArabicReferenceLabel(hadith.reference) != null) ...[
+                    if (arabicReference != null) ...[
                       const SizedBox(height: 4),
                       Align(
                         alignment: Alignment.centerRight,
                         child: Text(
-                          _getArabicReferenceLabel(hadith.reference)!,
+                          arabicReference,
                           textAlign: TextAlign.right,
                           style: GoogleFonts.amiri(
                             fontSize: 11,
@@ -581,6 +585,9 @@ class _HadithCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
+    final arabicReference = ReligiousReferenceFormatter.buildArabicReference(
+      hadith.reference,
+    );
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(
@@ -613,12 +620,12 @@ class _HadithCard extends StatelessWidget {
                           color: tokens.textSecondary,
                         ),
                       ),
-                      if (_getArabicReferenceLabel(hadith.reference) != null) ...[
+                      if (arabicReference != null) ...[
                         const SizedBox(height: 4),
                         Align(
                           alignment: Alignment.centerRight,
                           child: Text(
-                            _getArabicReferenceLabel(hadith.reference)!,
+                            arabicReference,
                             textAlign: TextAlign.right,
                             style: GoogleFonts.amiri(
                               fontSize: 11,
@@ -901,35 +908,6 @@ String? _getArabicCollectionLabel(String collection) {
     default:
       return null;
   }
-}
-
-String? _getArabicReferenceLabel(String reference) {
-  final refLower = reference.toLowerCase();
-  if (refLower.contains('bujari') || refLower.contains('bukhari')) {
-    return 'رواه البخاري';
-  }
-  if (refLower.contains('muslim')) {
-    return 'رواه مسلم';
-  }
-  if (refLower.contains('tirmidhi')) {
-    return 'رواه الترمذي';
-  }
-  if (refLower.contains('abu dawud') || refLower.contains('abudawud')) {
-    return 'رواه أبو داود';
-  }
-  if (refLower.contains('nasai')) {
-    return 'رواه النسائي';
-  }
-  if (refLower.contains('ibn majah') || refLower.contains('ibnmajah')) {
-    return 'رواه ابن ماجه';
-  }
-  if (refLower.contains('malik') || refLower.contains('muwatta')) {
-    return 'رواه مالك';
-  }
-  if (refLower.contains('ahmad')) {
-    return 'رواه أحمد';
-  }
-  return null;
 }
 
 String? _getArabicGradeLabel(String grade) {

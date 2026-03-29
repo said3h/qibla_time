@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theme/app_theme.dart';
+import '../../../core/utils/religious_reference_formatter.dart';
 import '../../hadith/models/hadith.dart';
 import '../../hadith/screens/hadith_library_screen.dart';
 import '../../hadith/services/hadith_service.dart';
@@ -37,6 +38,8 @@ class DailyHadithWidget extends ConsumerWidget {
             if (hadith == null) return const SizedBox.shrink();
 
             final isFavorite = favoritesAsync.valueOrNull?.contains(hadith.id) ?? false;
+            final arabicReference = ReligiousReferenceFormatter
+                .buildArabicReference(snapshot.reference);
 
             return Container(
               margin: const EdgeInsets.fromLTRB(16, 12, 16, 8),
@@ -171,12 +174,12 @@ class DailyHadithWidget extends ConsumerWidget {
                                 color: tokens.textSecondary,
                               ),
                             ),
-                            if (_getArabicReferenceLabel(snapshot.reference) != null) ...[
+                            if (arabicReference != null) ...[
                               const SizedBox(height: 4),
                               Align(
                                 alignment: Alignment.centerRight,
                                 child: Text(
-                                  _getArabicReferenceLabel(snapshot.reference)!,
+                                  arabicReference,
                                   textAlign: TextAlign.right,
                                   style: GoogleFonts.amiri(
                                     fontSize: 11,
@@ -397,35 +400,6 @@ class DailyHadithWidget extends ConsumerWidget {
       default:
         return null;
     }
-  }
-
-  String? _getArabicReferenceLabel(String reference) {
-    final refLower = reference.toLowerCase();
-    if (refLower.contains('bujari') || refLower.contains('bukhari')) {
-      return 'رواه البخاري';
-    }
-    if (refLower.contains('muslim')) {
-      return 'رواه مسلم';
-    }
-    if (refLower.contains('tirmidhi')) {
-      return 'رواه الترمذي';
-    }
-    if (refLower.contains('abu dawud') || refLower.contains('abudawud')) {
-      return 'رواه أبو داود';
-    }
-    if (refLower.contains('nasai')) {
-      return 'رواه النسائي';
-    }
-    if (refLower.contains('ibn majah') || refLower.contains('ibnmajah')) {
-      return 'رواه ابن ماجه';
-    }
-    if (refLower.contains('malik') || refLower.contains('muwatta')) {
-      return 'رواه مالك';
-    }
-    if (refLower.contains('ahmad')) {
-      return 'رواه أحمد';
-    }
-    return null;
   }
 
   String? _getArabicGradeLabel(String grade) {

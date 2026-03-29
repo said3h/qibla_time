@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theme/app_theme.dart';
+import '../../../core/utils/religious_reference_formatter.dart';
 import '../models/dua_model.dart';
 import '../services/dua_service.dart';
 
@@ -476,6 +477,9 @@ class _DuaCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
     final meta = _DuasScreenState._categoryMeta[dua.category];
+    final arabicReference = (dua.reference ?? '').isEmpty
+        ? null
+        : ReligiousReferenceFormatter.buildArabicReference(dua.reference!);
 
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
@@ -506,28 +510,31 @@ class _DuaCard extends StatelessWidget {
                     ),
                     if ((dua.reference ?? '').isNotEmpty) ...[
                       const SizedBox(height: 4),
-                      Row(
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Expanded(
-                            child: Text(
-                              dua.reference!,
-                              style: GoogleFonts.dmSans(
-                                fontSize: 10,
-                                color: tokens.textSecondary,
+                          Text(
+                            dua.reference!,
+                            style: GoogleFonts.dmSans(
+                              fontSize: 10,
+                              color: tokens.textSecondary,
+                            ),
+                          ),
+                          if (arabicReference != null) ...[
+                            const SizedBox(height: 4),
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: Text(
+                                arabicReference,
+                                textAlign: TextAlign.right,
+                                style: GoogleFonts.amiri(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w700,
+                                  color: tokens.textMuted,
+                                ),
                               ),
                             ),
-                          ),
-                          const SizedBox(width: 8),
-                          Text(
-                            'المصدر',
-                            textAlign: TextAlign.right,
-                            style: GoogleFonts.amiri(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w700,
-                              color: tokens.textMuted,
-                            ),
-                          ),
+                          ],
                         ],
                       ),
                     ],
