@@ -108,20 +108,24 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 locationLabelAsync.valueOrNull,
                 connectivityAsync.valueOrNull ?? true,
               ),
-              selectedPrayerScheduleAsync.when(
-                data: (resolvedSchedule) => _buildHeroSection(
-                  resolvedSchedule,
-                  selectedNextPrayerInfo,
-                  selectedCountdown,
-                  tokens,
-                  streak,
-                  locationDiagnosticAsync.valueOrNull,
-                  _selectedDate,
-                ),
-                loading: () => _buildLoadingHero(tokens),
-                error: (_, __) => _buildFallbackHero(
-                  tokens,
-                  locationDiagnosticAsync.valueOrNull,
+              _buildCalendarStrip(tokens),
+              SizedBox(
+                height: 220,
+                child: selectedPrayerScheduleAsync.when(
+                  data: (resolvedSchedule) => _buildHeroSection(
+                    resolvedSchedule,
+                    selectedNextPrayerInfo,
+                    selectedCountdown,
+                    tokens,
+                    streak,
+                    locationDiagnosticAsync.valueOrNull,
+                    _selectedDate,
+                  ),
+                  loading: () => _buildLoadingHero(tokens),
+                  error: (_, __) => _buildFallbackHero(
+                    tokens,
+                    locationDiagnosticAsync.valueOrNull,
+                  ),
                 ),
               ),
               selectedPrayerScheduleAsync.when(
@@ -145,7 +149,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 loading: () => const SizedBox.shrink(),
                 error: (_, __) => const SizedBox.shrink(),
               ),
-              _buildCalendarStrip(tokens),
               // Hadiz del día - Widget mejorado con 1,954 hadices
               const DailyHadithWidget(),
               // Libro del día - IslamHouse
