@@ -254,6 +254,7 @@ class QuranMiniPlayerController extends StateNotifier<QuranMiniPlayerState> {
           isLocalFile: true,
         );
       }
+      unawaited(_prefetchUpcomingAyahsForPlayback(surahNumber, 0));
       return;
     }
 
@@ -265,7 +266,8 @@ class QuranMiniPlayerController extends StateNotifier<QuranMiniPlayerState> {
     int surahNumber,
     int currentIndex,
   ) async {
-    final lastIndexToPrefetch = currentIndex + 2;
+    const prefetchCount = 5;
+    final lastIndexToPrefetch = currentIndex + prefetchCount;
     for (var index = currentIndex + 1;
         index < _surahQueue.length && index <= lastIndexToPrefetch;
         index++) {
