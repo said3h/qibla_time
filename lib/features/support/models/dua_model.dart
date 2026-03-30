@@ -7,6 +7,10 @@ class Dua {
   final String category;
   final String? reference;
   final bool isFeatured;
+  final String? source;
+  final int? count;
+  final List<String>? tags;
+  final List<String>? times;
 
   const Dua({
     required this.id,
@@ -17,6 +21,10 @@ class Dua {
     required this.category,
     this.reference,
     this.isFeatured = false,
+    this.source,
+    this.count,
+    this.tags,
+    this.times,
   });
 
   factory Dua.fromJson(Map<String, dynamic> json) {
@@ -29,6 +37,10 @@ class Dua {
       category: json['category'] as String,
       reference: json['reference'] as String?,
       isFeatured: json['isFeatured'] as bool? ?? false,
+      source: json['source'] as String?,
+      count: json['count'] as int?,
+      tags: (json['tags'] as List<dynamic>?)?.cast<String>(),
+      times: (json['times'] as List<dynamic>?)?.cast<String>(),
     );
   }
 }

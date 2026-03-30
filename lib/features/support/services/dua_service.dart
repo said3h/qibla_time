@@ -17,7 +17,7 @@ class DuaService {
   Future<List<Dua>> loadAll() async {
     if (_cache != null) return _cache!;
 
-    final raw = await rootBundle.loadString('assets/data/duas.json');
+    final raw = await rootBundle.loadString('assets/data/duas_hisnul.json');
     final decoded = jsonDecode(raw) as List<dynamic>;
     _cache = decoded
         .map((item) => Dua.fromJson(item as Map<String, dynamic>))

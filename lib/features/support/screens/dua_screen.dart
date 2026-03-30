@@ -6,6 +6,7 @@ import '../../../core/theme/app_theme.dart';
 import '../../../core/utils/religious_reference_formatter.dart';
 import '../models/dua_model.dart';
 import '../services/dua_service.dart';
+import 'dua_category_detail_screen.dart';
 
 class DuasScreen extends ConsumerStatefulWidget {
   const DuasScreen({super.key});
@@ -15,15 +16,16 @@ class DuasScreen extends ConsumerStatefulWidget {
 }
 
 class _DuasScreenState extends ConsumerState<DuasScreen> {
-  String _selectedCategory = 'morning';
   late final TextEditingController _searchController;
   String _searchQuery = '';
-  final ScrollController _scrollController = ScrollController();
 
   static const _categoryOrder = [
     'morning',
     'night',
     'sleep',
+    'wudu',
+    'after_prayer',
+    'zikr',
     'travel',
     'food',
     'sickness',
@@ -33,6 +35,8 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
     'rain',
     'stress',
     'gratitude',
+    'parents',
+    'hajj',
   ];
 
   static const _categoryMeta =
@@ -109,6 +113,36 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
           hint: 'Agradecimiento',
           arabicLabel: 'الشكر',
         ),
+        'wudu': (
+          icon: Icons.water_outlined,
+          label: 'Ablución',
+          hint: 'Wudu y pureza',
+          arabicLabel: 'الوضوء',
+        ),
+        'after_prayer': (
+          icon: Icons.access_time_outlined,
+          label: 'Después de orar',
+          hint: 'Tras cada oración',
+          arabicLabel: 'بعد الصلاة',
+        ),
+        'zikr': (
+          icon: Icons.auto_awesome_outlined,
+          label: 'Dhikr',
+          hint: 'Alabanza y recuerdo',
+          arabicLabel: 'الذكر',
+        ),
+        'parents': (
+          icon: Icons.family_restroom_outlined,
+          label: 'Familia',
+          hint: 'Padres e hijos',
+          arabicLabel: 'العائلة',
+        ),
+        'hajj': (
+          icon: Icons.route_outlined,
+          label: 'Hajj y Umrah',
+          hint: 'Peregrinación',
+          arabicLabel: 'الحج',
+        ),
       };
 
   @override
@@ -120,7 +154,6 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
   @override
   void dispose() {
     _searchController.dispose();
-    _scrollController.dispose();
     super.dispose();
   }
 
@@ -190,15 +223,9 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
         .followedBy(grouped.keys.where((key) => !_categoryOrder.contains(key)))
         .toList();
 
-    final effectiveCategory = categoryKeys.contains(_selectedCategory)
-        ? _selectedCategory
-        : (categoryKeys.isNotEmpty ? categoryKeys.first : '');
-
-    final selected = grouped[effectiveCategory] ?? const <Dua>[];
     final featured = duas.where((dua) => dua.isFeatured).toList();
 
     return ListView(
-      controller: _scrollController,
       padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
       children: [
         Text(
@@ -225,7 +252,7 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
             border: Border.all(color: tokens.primaryBorder),
           ),
           child: Text(
-            'Colección ampliada con duas y adhkar para el día a día. Elige una categoría y tendrás árabe, transliteración, traducción y referencia cuando esté disponible.',
+            'Colección ampliada con duas y adhkar para el día a día. Toca una categoría para ver todas las duas disponibles.',
             style: GoogleFonts.dmSans(
               fontSize: 12,
               height: 1.6,
@@ -364,33 +391,27 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
                     hint: 'Categoría',
                     arabicLabel: 'قسم',
                   );
-              final selectedCategory = key == effectiveCategory;
               final count = grouped[key]?.length ?? 0;
 
               return InkWell(
                 onTap: () {
-                  setState(() => _selectedCategory = key);
-                  Future.delayed(const Duration(milliseconds: 100), () {
-                    if (_scrollController.hasClients) {
-                      _scrollController.animateTo(
-                        450,
-                        duration: const Duration(milliseconds: 300),
-                        curve: Curves.easeInOut,
-                      );
-                    }
-                  });
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => DuaCategoryDetailScreen(
+                        categoryKey: key,
+                        categoryLabel: meta.label,
+                        categoryArabicLabel: meta.arabicLabel,
+                      ),
+                    ),
+                  );
                 },
                 borderRadius: BorderRadius.circular(16),
                 child: Container(
                   padding: const EdgeInsets.all(14),
                   decoration: BoxDecoration(
-                    color: selectedCategory ? tokens.activeBg : tokens.bgSurface,
+                    color: tokens.bgSurface,
                     borderRadius: BorderRadius.circular(16),
-                    border: Border.all(
-                      color: selectedCategory
-                          ? tokens.activeBorder
-                          : tokens.border,
-                    ),
+                    border: Border.all(color: tokens.border),
                   ),
                   child: Row(
                     children: [
@@ -437,19 +458,8 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
               );
             },
           ),
-          const SizedBox(height: 16),
-          Text(
-            'SELECCIONADA',
-            style: GoogleFonts.dmSans(
-              fontSize: 9,
-              letterSpacing: 1.4,
-              color: tokens.textSecondary,
-            ),
-          ),
-          const SizedBox(height: 10),
-          ...selected.map((dua) => _DuaCard(dua: dua)),
           if (normalizedQuery.isEmpty) ...[
-            const SizedBox(height: 12),
+            const SizedBox(height: 16),
             Text(
               'DESTACADAS',
               style: GoogleFonts.dmSans(
@@ -467,6 +477,7 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
   }
 
   bool _matchesSearch(Dua dua, String query) {
+    final tagString = dua.tags?.join(' ') ?? '';
     return [
       dua.title,
       dua.arabicText,
@@ -474,6 +485,7 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
       dua.translation,
       dua.category,
       dua.reference ?? '',
+      tagString,
     ].any((field) => field.toLowerCase().contains(query));
   }
 }
