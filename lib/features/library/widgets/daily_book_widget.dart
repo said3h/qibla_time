@@ -27,6 +27,24 @@ class DailyBookWidget extends ConsumerWidget {
         }
 
         final book = IslamHouseBook.getBookOfDay(books);
+        final accentColor = _bookAccent(tokens, book.title);
+        final accentForeground = _foregroundFor(accentColor);
+        final cardTopColor = _blend(
+          accentColor,
+          tokens.bgSurface,
+          _isLightTheme(tokens) ? 0.12 : 0.18,
+        );
+        final cardBottomColor = _blend(
+          accentColor,
+          tokens.bgSurface,
+          _isLightTheme(tokens) ? 0.04 : 0.08,
+        );
+        final chipBackgroundColor = _blend(
+          accentColor,
+          tokens.bgSurface2,
+          _isLightTheme(tokens) ? 0.1 : 0.18,
+        );
+        final chipForegroundColor = _accentForeground(tokens, accentColor);
 
         return Container(
           margin: const EdgeInsets.fromLTRB(16, 8, 16, 12),
@@ -34,14 +52,20 @@ class DailyBookWidget extends ConsumerWidget {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Colors.amber.withOpacity(0.15),
-                Colors.amber.withOpacity(0.05),
+                cardTopColor,
+                cardBottomColor,
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: Colors.amber.withOpacity(0.3)),
+            border: Border.all(
+              color: _blend(
+                accentColor,
+                tokens.borderMed,
+                _isLightTheme(tokens) ? 0.16 : 0.24,
+              ),
+            ),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,13 +76,24 @@ class DailyBookWidget extends ConsumerWidget {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                     decoration: BoxDecoration(
-                      color: Colors.amber.withOpacity(0.2),
+                      color: chipBackgroundColor,
                       borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                        color: _blend(
+                          accentColor,
+                          tokens.borderMed,
+                          _isLightTheme(tokens) ? 0.14 : 0.2,
+                        ),
+                      ),
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Icon(Icons.auto_stories, size: 14, color: Colors.amber),
+                        Icon(
+                          Icons.auto_stories,
+                          size: 14,
+                          color: chipForegroundColor,
+                        ),
                         const SizedBox(width: 6),
                         Text(
                           'LIBRO DEL DÍA',
@@ -66,7 +101,7 @@ class DailyBookWidget extends ConsumerWidget {
                             fontSize: 9,
                             fontWeight: FontWeight.w700,
                             letterSpacing: 0.8,
-                            color: Colors.amber,
+                            color: chipForegroundColor,
                           ),
                         ),
                       ],
@@ -127,16 +162,22 @@ class DailyBookWidget extends ConsumerWidget {
                   _InfoChip(
                     icon: Icons.description,
                     label: '${book.pages} págs',
+                    accent: accentColor,
+                    tokens: tokens,
                   ),
                   const SizedBox(width: 8),
                   _InfoChip(
                     icon: Icons.storage,
                     label: book.size,
+                    accent: accentColor,
+                    tokens: tokens,
                   ),
                   const SizedBox(width: 8),
                   _InfoChip(
                     icon: Icons.star,
                     label: book.rating.toStringAsFixed(1),
+                    accent: accentColor,
+                    tokens: tokens,
                   ),
                 ],
               ),
@@ -153,8 +194,8 @@ class DailyBookWidget extends ConsumerWidget {
                       icon: const Icon(Icons.read_more, size: 16),
                       label: const Text('Leer'),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.amber,
-                        foregroundColor: Colors.white,
+                        backgroundColor: accentColor,
+                        foregroundColor: accentForeground,
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -192,6 +233,39 @@ class DailyBookWidget extends ConsumerWidget {
       MaterialPageRoute(builder: (_) => const IslamicBooksScreen()),
     );
   }
+
+  Color _bookAccent(QiblaTokens tokens, String title) {
+    final palette = <Color>[
+      tokens.primary,
+      tokens.accent,
+      tokens.primaryLight,
+      _blend(tokens.primary, tokens.accent, 0.55),
+    ];
+    final index = title.trim().isEmpty
+        ? 0
+        : title.trim().hashCode.abs() % palette.length;
+    return palette[index];
+  }
+
+  bool _isLightTheme(QiblaTokens tokens) {
+    return ThemeData.estimateBrightnessForColor(tokens.bgPage) ==
+        Brightness.light;
+  }
+
+  Color _blend(Color foreground, Color background, double opacity) {
+    return Color.alphaBlend(foreground.withOpacity(opacity), background);
+  }
+
+  Color _foregroundFor(Color background) {
+    final brightness = ThemeData.estimateBrightnessForColor(background);
+    return brightness == Brightness.dark ? Colors.white : Colors.black;
+  }
+
+  Color _accentForeground(QiblaTokens tokens, Color accent) {
+    return _isLightTheme(tokens)
+        ? Color.alphaBlend(Colors.black.withOpacity(0.28), accent)
+        : Color.alphaBlend(Colors.white.withOpacity(0.14), accent);
+  }
 }
 
 // ── Widgets Auxiliares ──────────────────────────────────────────
@@ -200,30 +274,45 @@ class _InfoChip extends StatelessWidget {
   const _InfoChip({
     required this.icon,
     required this.label,
+    required this.accent,
+    required this.tokens,
   });
 
   final IconData icon;
   final String label;
+  final Color accent;
+  final QiblaTokens tokens;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.5),
+        color: Color.alphaBlend(
+          accent.withOpacity(
+            ThemeData.estimateBrightnessForColor(tokens.bgPage) ==
+                    Brightness.light
+                ? 0.1
+                : 0.18,
+          ),
+          tokens.bgSurface2,
+        ),
         borderRadius: BorderRadius.circular(6),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 10, color: Colors.amber[700]),
+          Icon(icon, size: 10, color: accent),
           const SizedBox(width: 4),
           Text(
             label,
             style: GoogleFonts.dmSans(
               fontSize: 9,
               fontWeight: FontWeight.w600,
-              color: Colors.amber[800],
+              color: ThemeData.estimateBrightnessForColor(tokens.bgPage) ==
+                      Brightness.light
+                  ? Color.alphaBlend(Colors.black.withOpacity(0.28), accent)
+                  : Color.alphaBlend(Colors.white.withOpacity(0.14), accent),
             ),
           ),
         ],

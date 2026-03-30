@@ -7,6 +7,7 @@ import '../../features/qibla/screens/qibla_screen.dart';
 import '../../features/quran/screens/quran_screen.dart';
 import '../../features/quran/services/quran_mini_player_service.dart';
 import '../../features/support/screens/dua_screen.dart';
+import '../theme/theme_provider.dart';
 
 class MainNavigation extends ConsumerStatefulWidget {
   const MainNavigation({super.key});
@@ -18,16 +19,9 @@ class MainNavigation extends ConsumerStatefulWidget {
 class _MainNavigationState extends ConsumerState<MainNavigation> {
   int _currentIndex = 0;
 
-  final List<Widget> _screens = [
-    const HomeScreen(),
-    const QiblaScreen(),
-    const DhikrScreen(),
-    const DuasScreen(),
-    const QuranScreen(),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final themeName = ref.watch(themeControllerProvider);
     final theme = Theme.of(context);
     final miniPlayerState = ref.watch(quranMiniPlayerControllerProvider);
     final navigationBarTheme = theme.navigationBarTheme;
@@ -38,7 +32,10 @@ class _MainNavigationState extends ConsumerState<MainNavigation> {
         theme.colorScheme.primary.withOpacity(0.12);
 
     return Scaffold(
-      body: _screens[_currentIndex],
+      body: KeyedSubtree(
+        key: ValueKey('$_currentIndex-$themeName'),
+        child: _buildScreenForIndex(_currentIndex),
+      ),
       bottomNavigationBar: Material(
         color: navigationBackground,
         child: Column(
@@ -104,6 +101,23 @@ class _MainNavigationState extends ConsumerState<MainNavigation> {
         ),
       ),
     );
+  }
+
+  Widget _buildScreenForIndex(int index) {
+    switch (index) {
+      case 0:
+        return const HomeScreen();
+      case 1:
+        return const QiblaScreen();
+      case 2:
+        return const DhikrScreen();
+      case 3:
+        return const DuasScreen();
+      case 4:
+        return const QuranScreen();
+      default:
+        return const HomeScreen();
+    }
   }
 }
 
