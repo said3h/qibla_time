@@ -391,15 +391,6 @@ class QuranMiniPlayerController extends StateNotifier<QuranMiniPlayerState> {
 
     _surahQueueIndex = index;
 
-    final prefetchTask = _prefetchingAyahTasks[ayah.numberInSurah];
-    if (prefetchTask != null) {
-      try {
-        await prefetchTask.timeout(const Duration(milliseconds: 180));
-      } catch (_) {
-        // Fall back to the currently resolved source if prefetch is still running.
-      }
-    }
-
     final resolved = await _primeSurahQueueAudio(summary.number, index);
     if (resolved == null) {
       throw StateError('Audio not available for ayah ${ayah.numberInSurah}');
@@ -408,7 +399,7 @@ class QuranMiniPlayerController extends StateNotifier<QuranMiniPlayerState> {
     await _playQueuedAyahAudio(
       resolved,
       sourceKey: sourceKey,
-      stopFirst: index == 0,
+      stopFirst: false,
     );
     state = QuranMiniPlayerState(
       surahName: summary.nameLatin,
