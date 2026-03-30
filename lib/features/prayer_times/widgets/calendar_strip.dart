@@ -4,7 +4,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hijri/hijri_calendar.dart';
+
 import '../../../core/theme/app_theme.dart';
+import '../../../core/utils/spanish_date_labels.dart';
 
 class CalendarStrip extends StatelessWidget {
   final DateTime selectedDate;
@@ -44,8 +46,7 @@ class CalendarStrip extends StatelessWidget {
 
   Widget _buildDayCard(DateTime date, bool isToday, bool isSelected) {
     final hijriDate = HijriCalendar.fromDate(date);
-    final dayNames = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
-    final dayName = dayNames[date.weekday - 1];
+    final dayName = SpanishDateLabels.shortWeekday(date);
     
     return GestureDetector(
       onTap: () => onDateSelected(date),

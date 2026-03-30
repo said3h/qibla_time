@@ -3,7 +3,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import '../../../core/theme/app_theme.dart';
+import '../../../core/utils/spanish_date_labels.dart';
 
 class HomeHeader extends StatelessWidget {
   final DateTime currentDate;
@@ -91,12 +93,6 @@ class HomeHeader extends StatelessWidget {
   }
 
   String _formatDate(DateTime date) {
-    const months = [
-      'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
-      'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'
-    ];
-    const days = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
-    
-    return '${days[date.weekday % 7]}, ${date.day} ${months[date.month - 1]} ${date.year}';
+    return '${SpanishDateLabels.shortWeekday(date)}, ${date.day} ${SpanishDateLabels.shortMonth(date)} ${date.year}';
   }
 }

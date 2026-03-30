@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theme/app_theme.dart';
+import '../../../core/utils/spanish_date_labels.dart';
 import '../services/dhikr_service.dart';
 
 class DhikrPhrase {
@@ -337,8 +338,7 @@ class _DhikrScreenState extends State<DhikrScreen> {
   }
 
   String _dayLabel(DateTime date) {
-    const labels = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
-    return labels[date.weekday - 1];
+    return SpanishDateLabels.shortWeekday(date);
   }
 
   @override

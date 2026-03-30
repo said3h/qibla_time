@@ -1,5 +1,7 @@
 // lib/features/tracking/models/tracking_models.dart
 
+import '../../../core/utils/spanish_date_labels.dart';
+
 class HeatmapDay {
   final DateTime date;
   final int completed; // 0-5 oraciones completadas
@@ -67,8 +69,7 @@ class WeeklyDaySummary {
   }
 
   String get shortLabel {
-    const labels = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
-    return labels[date.weekday - 1];
+    return SpanishDateLabels.shortWeekday(date);
   }
 }
 

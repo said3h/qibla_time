@@ -570,72 +570,43 @@ class _DuaCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 12),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  if (meta != null)
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 6,
-                      ),
-                      decoration: BoxDecoration(
-                        color: tokens.primary.withOpacity(0.08),
-                        borderRadius: BorderRadius.circular(999),
-                        border: Border.all(
-                          color: tokens.primary.withOpacity(0.16),
+              if (meta != null)
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 6,
+                  ),
+                  decoration: BoxDecoration(
+                    color: tokens.primary.withOpacity(0.08),
+                    borderRadius: BorderRadius.circular(999),
+                    border: Border.all(
+                      color: tokens.primary.withOpacity(0.16),
+                    ),
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        meta.label,
+                        style: GoogleFonts.dmSans(
+                          fontSize: 9,
+                          fontWeight: FontWeight.w600,
+                          color: tokens.primary,
                         ),
                       ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text(
-                            meta.label,
-                            style: GoogleFonts.dmSans(
-                              fontSize: 9,
-                              fontWeight: FontWeight.w600,
-                              color: tokens.primary,
-                            ),
-                          ),
-                          Text(
-                            meta.arabicLabel,
-                            textAlign: TextAlign.right,
-                            style: GoogleFonts.amiri(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w700,
-                              color: tokens.primary,
-                            ),
-                          ),
-                        ],
+                      Text(
+                        meta.arabicLabel,
+                        textAlign: TextAlign.right,
+                        style: GoogleFonts.amiri(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w700,
+                          color: tokens.primary,
+                        ),
                       ),
-                    ),
-                  const SizedBox(height: 8),
-                  Icon(
-                    dua.isFeatured
-                        ? Icons.favorite_rounded
-                        : Icons.bookmark_border_rounded,
-                    size: 18,
-                    color: dua.isFeatured ? tokens.primary : tokens.textMuted,
+                    ],
                   ),
-                  const SizedBox(height: 4),
-                  IconButton(
-                    tooltip: 'Compartir',
-                    onPressed: () => shareDua(context, dua),
-                    visualDensity: VisualDensity.compact,
-                    padding: EdgeInsets.zero,
-                    constraints: const BoxConstraints(
-                      minWidth: 28,
-                      minHeight: 28,
-                    ),
-                    icon: Icon(
-                      Icons.share_outlined,
-                      size: 18,
-                      color: tokens.primary,
-                    ),
-                  ),
-                ],
-              ),
+                ),
             ],
           ),
           const SizedBox(height: 12),
@@ -668,6 +639,34 @@ class _DuaCard extends StatelessWidget {
               color: tokens.textPrimary,
               height: 1.7,
             ),
+          ),
+          const SizedBox(height: 10),
+          Row(
+            children: [
+              Icon(
+                dua.isFeatured
+                    ? Icons.favorite_rounded
+                    : Icons.bookmark_border_rounded,
+                size: 18,
+                color: dua.isFeatured ? tokens.primary : tokens.textMuted,
+              ),
+              const Spacer(),
+              IconButton(
+                tooltip: 'Compartir',
+                onPressed: () => shareDua(context, dua),
+                visualDensity: VisualDensity.compact,
+                padding: EdgeInsets.zero,
+                constraints: const BoxConstraints(
+                  minWidth: 28,
+                  minHeight: 28,
+                ),
+                icon: Icon(
+                  Icons.share_outlined,
+                  size: 18,
+                  color: tokens.primary,
+                ),
+              ),
+            ],
           ),
         ],
       ),

@@ -27,83 +27,117 @@ class DuaCategoryDetailScreen extends ConsumerWidget {
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
-      appBar: AppBar(
-        backgroundColor: tokens.bgPage,
-        elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: tokens.textPrimary),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              categoryLabel,
-              style: GoogleFonts.amiri(
-                fontSize: 20,
-                color: tokens.primary,
-                fontWeight: FontWeight.bold,
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.arrow_back_ios_new_rounded),
+                  color: tokens.textPrimary,
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+              ],
+            ),
+            const SizedBox(height: 4),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Text(
+                categoryLabel,
+                textAlign: TextAlign.center,
+                style: GoogleFonts.dmSerifDisplay(
+                  fontSize: 26,
+                  fontWeight: FontWeight.w500,
+                  color: tokens.primary,
+                  height: 1.2,
+                ),
               ),
             ),
-            Text(
-              categoryArabicLabel,
-              style: GoogleFonts.amiri(
-                fontSize: 14,
-                color: tokens.textSecondary,
+            const SizedBox(height: 6),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: SizedBox(
+                width: double.infinity,
+                child: Directionality(
+                  textDirection: TextDirection.rtl,
+                  child: Text(
+                    categoryArabicLabel,
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.amiri(
+                      fontSize: 18,
+                      height: 1.6,
+                      color: tokens.textSecondary,
+                    ),
+                  ),
+                ),
               ),
             ),
-          ],
-        ),
-      ),
-      body: duasAsync.when(
-        data: (duas) {
-          final categoryDuas = duas.where((d) => d.category == categoryKey).toList();
-          
-          if (categoryDuas.isEmpty) {
-            return Center(
-              child: Padding(
-                padding: const EdgeInsets.all(24),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.bookmark_border, size: 48, color: tokens.textMuted),
-                    const SizedBox(height: 16),
-                    Text(
-                      'No hay duas en esta categoría',
+            const SizedBox(height: 12),
+            Container(
+              width: 40,
+              height: 3,
+              decoration: BoxDecoration(
+                color: tokens.primary.withOpacity(0.6),
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+            const SizedBox(height: 12),
+            Expanded(
+              child: duasAsync.when(
+                data: (duas) {
+                  final categoryDuas = duas.where((d) => d.category == categoryKey).toList();
+
+                  if (categoryDuas.isEmpty) {
+                    return Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(24),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.bookmark_border, size: 48, color: tokens.textMuted),
+                            const SizedBox(height: 16),
+                            Text(
+                              'No hay duas en esta categoría',
+                              style: GoogleFonts.dmSans(
+                                fontSize: 14,
+                                color: tokens.textPrimary,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  }
+
+                  return ListView.builder(
+                    padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
+                    itemCount: categoryDuas.length,
+                    itemBuilder: (context, index) {
+                      final dua = categoryDuas[index];
+                      return _DuaCard(dua: dua);
+                    },
+                  );
+                },
+                loading: () => Center(
+                  child: CircularProgressIndicator(color: tokens.primary),
+                ),
+                error: (_, __) => Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(24),
+                    child: Text(
+                      'Error al cargar las duas',
                       style: GoogleFonts.dmSans(
                         fontSize: 14,
                         color: tokens.textPrimary,
                       ),
                     ),
-                  ],
+                  ),
                 ),
               ),
-            );
-          }
-
-          return ListView.builder(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-            itemCount: categoryDuas.length,
-            itemBuilder: (context, index) {
-              final dua = categoryDuas[index];
-              return _DuaCard(dua: dua);
-            },
-          );
-        },
-        loading: () => Center(
-          child: CircularProgressIndicator(color: tokens.primary),
-        ),
-        error: (_, __) => Center(
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: Text(
-              'Error al cargar las duas',
-              style: GoogleFonts.dmSans(
-                fontSize: 14,
-                color: tokens.textPrimary,
-              ),
             ),
-          ),
+          ],
         ),
       ),
     );
@@ -205,48 +239,6 @@ class _DuaCard extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(width: 8),
-              if (dua.count != null && dua.count! > 1)
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: tokens.primaryBg,
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: tokens.primaryBorder),
-                  ),
-                  child: Text(
-                    '${dua.count} veces',
-                    style: GoogleFonts.dmSans(
-                      fontSize: 9,
-                      color: tokens.primary,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                )
-              else
-                Icon(
-                  dua.isFeatured
-                      ? Icons.favorite_rounded
-                      : Icons.bookmark_border_rounded,
-                  size: 18,
-                  color: dua.isFeatured ? tokens.primary : tokens.textMuted,
-                ),
-              const SizedBox(height: 4),
-              IconButton(
-                tooltip: 'Compartir',
-                onPressed: () => shareDua(context, dua),
-                visualDensity: VisualDensity.compact,
-                padding: EdgeInsets.zero,
-                constraints: const BoxConstraints(
-                  minWidth: 28,
-                  minHeight: 28,
-                ),
-                icon: Icon(
-                  Icons.share_outlined,
-                  size: 18,
-                  color: tokens.primary,
-                ),
-              ),
             ],
           ),
           const SizedBox(height: 12),
@@ -279,6 +271,55 @@ class _DuaCard extends StatelessWidget {
               color: tokens.textPrimary,
               height: 1.7,
             ),
+          ),
+          const SizedBox(height: 10),
+          Row(
+            children: [
+              if (dua.count != null && dua.count! > 1)
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
+                  decoration: BoxDecoration(
+                    color: tokens.primaryBg,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: tokens.primaryBorder),
+                  ),
+                  child: Text(
+                    '${dua.count} veces',
+                    style: GoogleFonts.dmSans(
+                      fontSize: 9,
+                      color: tokens.primary,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                )
+              else
+                Icon(
+                  dua.isFeatured
+                      ? Icons.favorite_rounded
+                      : Icons.bookmark_border_rounded,
+                  size: 18,
+                  color: dua.isFeatured ? tokens.primary : tokens.textMuted,
+                ),
+              const Spacer(),
+              IconButton(
+                tooltip: 'Compartir',
+                onPressed: () => shareDua(context, dua),
+                visualDensity: VisualDensity.compact,
+                padding: EdgeInsets.zero,
+                constraints: const BoxConstraints(
+                  minWidth: 28,
+                  minHeight: 28,
+                ),
+                icon: Icon(
+                  Icons.share_outlined,
+                  size: 18,
+                  color: tokens.primary,
+                ),
+              ),
+            ],
           ),
         ],
       ),
