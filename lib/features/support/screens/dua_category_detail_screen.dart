@@ -8,7 +8,7 @@ import '../models/dua_model.dart';
 import '../services/dua_service.dart';
 import '../utils/dua_share_helper.dart';
 
-class DuaCategoryDetailScreen extends ConsumerWidget {
+class DuaCategoryDetailScreen extends ConsumerStatefulWidget {
   final String categoryKey;
   final String categoryLabel;
   final String categoryArabicLabel;
@@ -21,7 +21,62 @@ class DuaCategoryDetailScreen extends ConsumerWidget {
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<DuaCategoryDetailScreen> createState() =>
+      _DuaCategoryDetailScreenState();
+}
+
+class _DuaCategoryDetailScreenState extends ConsumerState<DuaCategoryDetailScreen>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _entranceController;
+  late final Animation<double> _headerOpacity;
+  late final Animation<Offset> _headerOffset;
+  late final Animation<double> _contentOpacity;
+  late final Animation<Offset> _contentOffset;
+
+  @override
+  void initState() {
+    super.initState();
+    _entranceController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 280),
+    );
+    _headerOpacity = CurvedAnimation(
+      parent: _entranceController,
+      curve: const Interval(0.0, 0.75, curve: Curves.easeOutCubic),
+    );
+    _headerOffset = Tween<Offset>(
+      begin: const Offset(0, 0.035),
+      end: Offset.zero,
+    ).animate(
+      CurvedAnimation(
+        parent: _entranceController,
+        curve: const Interval(0.0, 0.75, curve: Curves.easeOutCubic),
+      ),
+    );
+    _contentOpacity = CurvedAnimation(
+      parent: _entranceController,
+      curve: const Interval(0.15, 1.0, curve: Curves.easeOutCubic),
+    );
+    _contentOffset = Tween<Offset>(
+      begin: const Offset(0, 0.05),
+      end: Offset.zero,
+    ).animate(
+      CurvedAnimation(
+        parent: _entranceController,
+        curve: const Interval(0.15, 1.0, curve: Curves.easeOutCubic),
+      ),
+    );
+    _entranceController.forward();
+  }
+
+  @override
+  void dispose() {
+    _entranceController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
     final duasAsync = ref.watch(allDuasProvider);
 
@@ -31,106 +86,129 @@ class DuaCategoryDetailScreen extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(height: 8),
-            Row(
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.arrow_back_ios_new_rounded),
-                  color: tokens.textPrimary,
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
-              ],
-            ),
-            const SizedBox(height: 4),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Text(
-                categoryLabel,
-                textAlign: TextAlign.center,
-                style: GoogleFonts.dmSerifDisplay(
-                  fontSize: 26,
-                  fontWeight: FontWeight.w500,
-                  color: tokens.primary,
-                  height: 1.2,
-                ),
-              ),
-            ),
-            const SizedBox(height: 6),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: SizedBox(
-                width: double.infinity,
-                child: Directionality(
-                  textDirection: TextDirection.rtl,
-                  child: Text(
-                    categoryArabicLabel,
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.amiri(
-                      fontSize: 18,
-                      height: 1.6,
-                      color: tokens.textSecondary,
+            FadeTransition(
+              opacity: _headerOpacity,
+              child: SlideTransition(
+                position: _headerOffset,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const SizedBox(height: 8),
+                    Row(
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.arrow_back_ios_new_rounded),
+                          color: tokens.textPrimary,
+                          onPressed: () => Navigator.of(context).pop(),
+                        ),
+                      ],
                     ),
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 12),
-            Container(
-              width: 40,
-              height: 3,
-              decoration: BoxDecoration(
-                color: tokens.primary.withOpacity(0.6),
-                borderRadius: BorderRadius.circular(2),
-              ),
-            ),
-            const SizedBox(height: 12),
-            Expanded(
-              child: duasAsync.when(
-                data: (duas) {
-                  final categoryDuas = duas.where((d) => d.category == categoryKey).toList();
-
-                  if (categoryDuas.isEmpty) {
-                    return Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(24),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.bookmark_border, size: 48, color: tokens.textMuted),
-                            const SizedBox(height: 16),
-                            Text(
-                              'No hay duas en esta categoría',
-                              style: GoogleFonts.dmSans(
-                                fontSize: 14,
-                                color: tokens.textPrimary,
-                              ),
-                            ),
-                          ],
+                    const SizedBox(height: 4),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      child: Text(
+                        widget.categoryLabel,
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.dmSerifDisplay(
+                          fontSize: 26,
+                          fontWeight: FontWeight.w500,
+                          color: tokens.primary,
+                          height: 1.2,
                         ),
                       ),
-                    );
-                  }
-
-                  return ListView.builder(
-                    padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
-                    itemCount: categoryDuas.length,
-                    itemBuilder: (context, index) {
-                      final dua = categoryDuas[index];
-                      return _DuaCard(dua: dua);
-                    },
-                  );
-                },
-                loading: () => Center(
-                  child: CircularProgressIndicator(color: tokens.primary),
+                    ),
+                    const SizedBox(height: 6),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: Directionality(
+                          textDirection: TextDirection.rtl,
+                          child: Text(
+                            widget.categoryArabicLabel,
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.amiri(
+                              fontSize: 18,
+                              height: 1.6,
+                              color: tokens.textSecondary,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    Container(
+                      width: 40,
+                      height: 3,
+                      decoration: BoxDecoration(
+                        color: tokens.primary.withOpacity(0.6),
+                        borderRadius: BorderRadius.circular(2),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                  ],
                 ),
-                error: (_, __) => Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(24),
-                    child: Text(
-                      'Error al cargar las duas',
-                      style: GoogleFonts.dmSans(
-                        fontSize: 14,
-                        color: tokens.textPrimary,
+              ),
+            ),
+            Expanded(
+              child: FadeTransition(
+                opacity: _contentOpacity,
+                child: SlideTransition(
+                  position: _contentOffset,
+                  child: duasAsync.when(
+                    data: (duas) {
+                      final categoryDuas = duas
+                          .where((d) => d.category == widget.categoryKey)
+                          .toList();
+
+                      if (categoryDuas.isEmpty) {
+                        return Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(24),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.bookmark_border,
+                                  size: 48,
+                                  color: tokens.textMuted,
+                                ),
+                                const SizedBox(height: 16),
+                                Text(
+                                  'No hay duas en esta categoría',
+                                  style: GoogleFonts.dmSans(
+                                    fontSize: 14,
+                                    color: tokens.textPrimary,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      }
+
+                      return ListView.builder(
+                        padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
+                        itemCount: categoryDuas.length,
+                        itemBuilder: (context, index) {
+                          final dua = categoryDuas[index];
+                          return _DuaCard(dua: dua);
+                        },
+                      );
+                    },
+                    loading: () => Center(
+                      child: CircularProgressIndicator(color: tokens.primary),
+                    ),
+                    error: (_, __) => Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(24),
+                        child: Text(
+                          'Error al cargar las duas',
+                          style: GoogleFonts.dmSans(
+                            fontSize: 14,
+                            color: tokens.textPrimary,
+                          ),
+                        ),
                       ),
                     ),
                   ),
