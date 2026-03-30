@@ -399,7 +399,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             _buildSimpleToggleTile(
               tokens,
               'Forzar modo Ramadán',
-              'Útil para pruebas o para previsualizar Inicio fuera de Ramadán',
+              'Activar vista de Ramadán manualmente',
               ramadanForced,
               _toggleRamadanForced,
             ),
@@ -463,7 +463,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     if (locations.isEmpty) {
                       return _buildSettingRow(
                         label: 'Ubicaciones recientes',
-                        subtitle: 'Sin historial de viajes',
+                        subtitle: 'Sin viajes recientes',
                         trailing: Icon(Icons.history, color: tokens.textMuted, size: 18),
                         tokens: tokens,
                       );

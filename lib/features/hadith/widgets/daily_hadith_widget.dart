@@ -576,7 +576,7 @@ class _HadithUnavailableWidget extends StatelessWidget {
           const SizedBox(width: 12),
           Expanded(
             child: Text(
-              'El hadiz del día no pudo cargarse ahora mismo.',
+              'Hadiz del día no disponible',
               style: GoogleFonts.dmSans(
                 fontSize: 12,
                 height: 1.5,

@@ -391,7 +391,7 @@ class _BooksUnavailableWidget extends StatelessWidget {
           const SizedBox(width: 12),
           Expanded(
             child: Text(
-              'La biblioteca de libros no pudo cargar contenido ahora mismo.',
+              'Biblioteca no disponible',
               style: GoogleFonts.dmSans(
                 fontSize: 12,
                 height: 1.5,

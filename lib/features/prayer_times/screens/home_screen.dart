@@ -138,6 +138,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   locationDiagnosticAsync.valueOrNull,
                 ),
               ),
+              const SizedBox(height: 16),
               bannerAsync.when(
                 data: (banner) => banner == null
                     ? const SizedBox.shrink()
@@ -145,16 +146,20 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 loading: () => const SizedBox.shrink(),
                 error: (_, __) => const SizedBox.shrink(),
               ),
+              const SizedBox(height: 12),
               _buildCalendarStrip(tokens),
+              const SizedBox(height: 12),
               // Hadiz del día - Widget mejorado con 1,954 hadices
               const DailyHadithWidget(),
               // Libro del día - IslamHouse
               const DailyBookWidget(),
+              const SizedBox(height: 12),
               _buildRamadanCard(
                 tokens,
                 prayerScheduleAsync.valueOrNull?.schedule,
                 ramadanStatusAsync.valueOrNull,
               ),
+              const SizedBox(height: 12),
               _buildRamadanGoalsCard(
                 context,
                 tokens,
@@ -196,7 +201,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                 ),
                 Text(
-                  '${isOnline ? 'En línea' : 'Sin red'} - ${locationLabel ?? 'Ubicación pendiente'}',
+                  '${isOnline ? 'En línea' : 'Sin red'} - ${locationLabel ?? 'Ubicación no disponible'}',
                   style: GoogleFonts.dmSans(
                     fontSize: 10,
                     color: tokens.textSecondary,
@@ -1626,7 +1631,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     ];
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 10, 16, 8),
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
       child: GridView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
