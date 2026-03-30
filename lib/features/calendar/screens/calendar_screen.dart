@@ -96,7 +96,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
         tokens,
         event['name'] as String,
         '${event['day']} ${hCalendar.toFormat("MMMM")}',
-        DateFormat('EEEE, d MMM yyyy').format(gregorianDate),
+        DateFormat('EEEE, d MMM yyyy', 'es').format(gregorianDate),
         isCurrentMonth,
       );
     }).toList();
@@ -105,6 +105,13 @@ class _CalendarScreenState extends State<CalendarScreen> {
   Widget _buildHijriBanner(QiblaTokens tokens) {
     final bannerText = _foregroundFor(tokens.primary);
     final bannerAccent = _foregroundFor(tokens.accent);
+    final today = _dateOnly(DateTime.now());
+    final isToday = _isSameDay(selectedDate, today);
+    final todayLabel = DateFormat('EEEE, d MMMM yyyy', 'es').format(today);
+    final selectedLabel = DateFormat(
+      'EEEE, d MMMM yyyy',
+      'es',
+    ).format(selectedDate);
 
     return Container(
       padding: const EdgeInsets.all(24),
@@ -126,7 +133,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
       child: Column(
         children: [
           Text(
-            'TODAY',
+            isToday ? 'HOY' : 'FECHA SELECCIONADA',
             style: TextStyle(
               color: bannerText.withOpacity(0.7),
               fontSize: 12,
@@ -161,7 +168,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
               Icon(Icons.calendar_month, color: bannerText.withOpacity(0.75), size: 18),
               const SizedBox(width: 8),
               Text(
-                DateFormat('EEEE, d MMMM yyyy').format(selectedDate),
+                selectedLabel,
                 style: TextStyle(
                   color: bannerText,
                   fontSize: 14,
@@ -170,6 +177,17 @@ class _CalendarScreenState extends State<CalendarScreen> {
               ),
             ],
           ),
+          if (!isToday) ...[
+            const SizedBox(height: 10),
+            Text(
+              'Hoy: $todayLabel',
+              style: TextStyle(
+                color: bannerText.withOpacity(0.78),
+                fontSize: 12,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
         ],
       ),
     );
@@ -180,7 +198,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Check specific date',
+          'Selecciona una fecha',
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
@@ -235,7 +253,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  DateFormat('MMMM d, yyyy').format(selectedDate),
+                  DateFormat('d MMMM yyyy', 'es').format(selectedDate),
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -305,7 +323,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
-                  'THIS MONTH',
+                  'ESTE MES',
                   style: TextStyle(
                     color: _foregroundFor(tokens.primary),
                     fontSize: 10,
@@ -321,5 +339,13 @@ class _CalendarScreenState extends State<CalendarScreen> {
   Color _foregroundFor(Color background) {
     final brightness = ThemeData.estimateBrightnessForColor(background);
     return brightness == Brightness.dark ? Colors.white : Colors.black;
+  }
+
+  DateTime _dateOnly(DateTime date) {
+    return DateTime(date.year, date.month, date.day);
+  }
+
+  bool _isSameDay(DateTime a, DateTime b) {
+    return a.year == b.year && a.month == b.month && a.day == b.day;
   }
 }

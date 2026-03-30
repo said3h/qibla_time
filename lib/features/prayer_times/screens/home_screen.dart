@@ -42,6 +42,7 @@ class HomeScreen extends ConsumerStatefulWidget {
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   static const _weekdays = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
+  static const _weekdaysArabic = ['اثن', 'ثلا', 'أرب', 'خمي', 'جمع', 'سبت', 'أحد'];
   static const _generateHomeInsights = GenerateHomeInsightsUseCase();
 
   late DateTime _selectedDate;
@@ -109,28 +110,23 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 connectivityAsync.valueOrNull ?? true,
               ),
               _buildCalendarStrip(tokens),
+              const SizedBox(height: 12),
               Padding(
-                padding: const EdgeInsets.only(bottom: 12),
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(
-                    minHeight: 200,
-                    maxHeight: 260,
+                padding: const EdgeInsets.only(bottom: 14),
+                child: selectedPrayerScheduleAsync.when(
+                  data: (resolvedSchedule) => _buildHeroSection(
+                    resolvedSchedule,
+                    selectedNextPrayerInfo,
+                    selectedCountdown,
+                    tokens,
+                    streak,
+                    locationDiagnosticAsync.valueOrNull,
+                    _selectedDate,
                   ),
-                  child: selectedPrayerScheduleAsync.when(
-                    data: (resolvedSchedule) => _buildHeroSection(
-                      resolvedSchedule,
-                      selectedNextPrayerInfo,
-                      selectedCountdown,
-                      tokens,
-                      streak,
-                      locationDiagnosticAsync.valueOrNull,
-                      _selectedDate,
-                    ),
-                    loading: () => _buildLoadingHero(tokens),
-                    error: (_, __) => _buildFallbackHero(
-                      tokens,
-                      locationDiagnosticAsync.valueOrNull,
-                    ),
+                  loading: () => _buildLoadingHero(tokens),
+                  error: (_, __) => _buildFallbackHero(
+                    tokens,
+                    locationDiagnosticAsync.valueOrNull,
                   ),
                 ),
               ),
@@ -277,7 +273,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         List.generate(15, (index) => today.subtract(Duration(days: 6 - index)));
 
     return SizedBox(
-      height: 82,
+      height: 94,
       child: ListView.separated(
         controller: _calendarController,
         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -300,7 +296,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             },
             borderRadius: BorderRadius.circular(14),
             child: Container(
-              width: 58,
+              width: 64,
               padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 6),
               decoration: BoxDecoration(
                 color: isSelected
@@ -329,6 +325,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       color: isSelected ? tokens.primaryLight : tokens.textSecondary,
                     ),
                   ),
+                  Text(
+                    _weekdaysArabic[date.weekday - 1],
+                    style: GoogleFonts.amiri(
+                      fontSize: 9,
+                      fontWeight: FontWeight.w700,
+                      color: isSelected ? tokens.primary : tokens.textMuted,
+                      height: 1.0,
+                    ),
+                  ),
+                  const SizedBox(height: 2),
                   Text(
                     '${date.day}',
                     style: GoogleFonts.dmSans(
@@ -393,9 +399,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     if (!isToday || nextPrayerInfo == null) {
       return _buildSelectedDateHero(
         tokens,
-        prayerSchedule,
         selectedDate,
-        streak,
         resolvedSchedule?.fromCache == true,
       );
     }
@@ -407,7 +411,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         : 'Hoy a las ${_formatTime(nextPrayerInfo.time)} - ${_formatRemaining(remaining)}';
 
     return Container(
-      margin: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+      margin: const EdgeInsets.fromLTRB(16, 0, 16, 0),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: hero.bg,
@@ -442,7 +446,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   border: Border.all(color: tokens.primaryBorder),
                 ),
                 child: Text(
-                  '$streak días seguidos',
+                  isToday ? 'Hoy' : 'Consulta abajo',
                   style: GoogleFonts.dmSans(
                     fontSize: 10,
                     color: tokens.primaryLight,
@@ -487,7 +491,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             ),
           ],
           const SizedBox(height: 14),
-          Row(children: _buildCountdown(tokens, remaining)),
+          _buildCountdown(tokens, remaining),
         ],
       ),
     );
@@ -495,14 +499,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   Widget _buildSelectedDateHero(
     QiblaTokens tokens,
-    PrayerSchedule prayerSchedule,
     DateTime selectedDate,
-    int streak,
     bool fromCache,
   ) {
     final isToday = _isSameDay(selectedDate, _dateOnly(DateTime.now()));
+    final hijri = HijriCalendar.fromDate(selectedDate);
     return Container(
-      margin: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+      margin: const EdgeInsets.fromLTRB(16, 0, 16, 0),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: tokens.bgSurface,
@@ -522,8 +525,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               Expanded(
                 child: Text(
                   isToday
-                      ? 'HORARIOS DE HOY'
-                      : 'HORARIOS DEL ${_formatHeroDate(selectedDate).toUpperCase()}',
+                      ? 'HOY'
+                      : 'FECHA SELECCIONADA',
                   style: GoogleFonts.dmSans(
                     fontSize: 9,
                     color: tokens.textSecondary,
@@ -539,7 +542,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   border: Border.all(color: tokens.primaryBorder),
                 ),
                 child: Text(
-                  '$streak días seguidos',
+                  isToday ? 'Hoy' : 'Consulta abajo',
                   style: GoogleFonts.dmSans(
                     fontSize: 10,
                     color: tokens.primaryLight,
@@ -550,20 +553,30 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ),
           const SizedBox(height: 8),
           Text(
-            _formatHeroDate(selectedDate),
+            _formatHeroDateLong(selectedDate),
             style: GoogleFonts.amiri(
-              fontSize: 28,
+              fontSize: 26,
               color: tokens.primaryLight,
               height: 1.1,
             ),
           ),
           const SizedBox(height: 4),
           Text(
-            'Fajr ${_formatTime(prayerSchedule.fajr)} - Dhuhr ${_formatTime(prayerSchedule.dhuhr)} - Maghrib ${_formatTime(prayerSchedule.maghrib)} - Isha ${_formatTime(prayerSchedule.isha)}',
+            '${hijri.hDay} ${hijri.toFormat("MMMM")} ${hijri.hYear} AH',
+            style: GoogleFonts.dmSans(
+              fontSize: 12,
+              color: tokens.textSecondary,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            isToday
+                ? 'Consulta abajo los horarios completos de hoy.'
+                : 'Consulta abajo los horarios completos del día seleccionado.',
             style: GoogleFonts.dmSans(
               fontSize: 12,
               height: 1.5,
-              color: tokens.textSecondary,
+              color: tokens.textPrimary,
             ),
           ),
           if (fromCache) ...[
@@ -584,24 +597,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               ),
             ),
           ],
-          const SizedBox(height: 14),
-          Row(
-            children: [
-              Expanded(
-                child: _summaryMetric(tokens, _formatTime(prayerSchedule.fajr), 'Fajr'),
-              ),
-              Expanded(
-                child: _summaryMetric(
-                  tokens,
-                  _formatTime(prayerSchedule.maghrib),
-                  'Maghrib',
-                ),
-              ),
-              Expanded(
-                child: _summaryMetric(tokens, _formatTime(prayerSchedule.isha), 'Isha'),
-              ),
-            ],
-          ),
         ],
       ),
     );
@@ -609,7 +604,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   Widget _buildLoadingHero(QiblaTokens tokens) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+      margin: const EdgeInsets.fromLTRB(16, 0, 16, 0),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: tokens.bgSurface,
@@ -638,7 +633,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     PrayerLocationDiagnostic? diagnostic,
   ) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+      margin: const EdgeInsets.fromLTRB(16, 0, 16, 0),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: tokens.bgSurface,
@@ -1414,75 +1409,66 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     return 'La pantalla principal sigue visible aunque los horarios aún no estén listos.';
   }
 
-  List<Widget> _buildCountdown(QiblaTokens tokens, Duration? remaining) {
+  Widget _buildCountdown(QiblaTokens tokens, Duration? remaining) {
     if (remaining == null) {
-      return [
-        Expanded(
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-            decoration: BoxDecoration(
-              color: Colors.black.withOpacity(0.18),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Text(
-              'Cuenta atras no disponible',
-              style: GoogleFonts.dmSans(
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
-                color: tokens.textPrimary,
-              ),
-            ),
+      return Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+        decoration: BoxDecoration(
+          color: Colors.black.withOpacity(0.18),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Text(
+          'Cuenta atras no disponible',
+          style: GoogleFonts.dmSans(
+            fontSize: 12,
+            fontWeight: FontWeight.w500,
+            color: tokens.textPrimary,
           ),
         ),
-      ];
+      );
     }
 
-    final hours = (remaining?.inHours ?? 0).toString().padLeft(2, '0');
-    final minutes =
-        ((remaining?.inMinutes ?? 0) % 60).toString().padLeft(2, '0');
-    final seconds =
-        ((remaining?.inSeconds ?? 0) % 60).toString().padLeft(2, '0');
+    final hours = remaining.inHours.toString().padLeft(2, '0');
+    final minutes = (remaining.inMinutes % 60).toString().padLeft(2, '0');
+    final seconds = (remaining.inSeconds % 60).toString().padLeft(2, '0');
     final items = [(hours, 'horas'), (minutes, 'min'), (seconds, 'seg')];
 
-    return [
-      for (var i = 0; i < items.length; i++) ...[
-        Container(
-          constraints: const BoxConstraints(minWidth: 54),
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-          decoration: BoxDecoration(
-            color: Colors.black.withOpacity(0.25),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Column(
-            children: [
-              Text(
-                items[i].$1,
-                style: GoogleFonts.dmSans(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w500,
-                  color: tokens.textPrimary,
-                ),
+    return Row(
+      children: [
+        for (var i = 0; i < items.length; i++) ...[
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              decoration: BoxDecoration(
+                color: Colors.black.withOpacity(0.25),
+                borderRadius: BorderRadius.circular(12),
               ),
-              Text(
-                items[i].$2,
-                style: GoogleFonts.dmSans(
-                  fontSize: 7,
-                  color: tokens.textSecondary,
-                ),
+              child: Column(
+                children: [
+                  Text(
+                    items[i].$1,
+                    style: GoogleFonts.dmSans(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w500,
+                      color: tokens.textPrimary,
+                    ),
+                  ),
+                  Text(
+                    items[i].$2,
+                    style: GoogleFonts.dmSans(
+                      fontSize: 8,
+                      color: tokens.textSecondary,
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
-        if (i != items.length - 1)
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
-            child: Text(
-              ':',
-              style: TextStyle(fontSize: 20, color: tokens.primary),
             ),
           ),
+          if (i != items.length - 1) const SizedBox(width: 8),
+        ],
       ],
-    ];
+    );
   }
 
   Widget _buildPrayerSection(
@@ -1771,6 +1757,33 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       'Domingo',
     ];
     return '${weekdays[date.weekday - 1]} ${date.day}/${date.month}';
+  }
+
+  String _formatHeroDateLong(DateTime date) {
+    const weekdays = [
+      'Lunes',
+      'Martes',
+      'Miércoles',
+      'Jueves',
+      'Viernes',
+      'Sábado',
+      'Domingo',
+    ];
+    const months = [
+      'enero',
+      'febrero',
+      'marzo',
+      'abril',
+      'mayo',
+      'junio',
+      'julio',
+      'agosto',
+      'septiembre',
+      'octubre',
+      'noviembre',
+      'diciembre',
+    ];
+    return '${weekdays[date.weekday - 1]}, ${date.day} de ${months[date.month - 1]}';
   }
 
   String _formatRemaining(Duration? remaining) {
