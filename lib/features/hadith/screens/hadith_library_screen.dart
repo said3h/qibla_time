@@ -175,11 +175,19 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
                     ],
                   ),
                 ),
-                loading: () => const SizedBox.shrink(),
-                error: (_, __) => const SizedBox.shrink(),
+                loading: () => const _FilterStatusBanner(
+                  message: 'Cargando filtros...',
+                ),
+                error: (_, __) => const _FilterStatusBanner(
+                  message: 'No se pudieron cargar los filtros.',
+                ),
               ),
-              loading: () => const SizedBox.shrink(),
-              error: (_, __) => const SizedBox.shrink(),
+              loading: () => const _FilterStatusBanner(
+                message: 'Cargando filtros...',
+              ),
+              error: (_, __) => const _FilterStatusBanner(
+                message: 'No se pudieron cargar los filtros.',
+              ),
             ),
 
           // Contenido principal
@@ -380,6 +388,50 @@ class _FilterDropdown extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _FilterStatusBanner extends StatelessWidget {
+  const _FilterStatusBanner({
+    required this.message,
+  });
+
+  final String message;
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = QiblaThemes.current;
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        decoration: BoxDecoration(
+          color: tokens.bgSurface,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: tokens.border),
+        ),
+        child: Row(
+          children: [
+            Icon(
+              Icons.tune_rounded,
+              size: 16,
+              color: tokens.primary,
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Text(
+                message,
+                style: GoogleFonts.dmSans(
+                  fontSize: 11,
+                  height: 1.4,
+                  color: tokens.textSecondary,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

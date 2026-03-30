@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../core/theme/app_theme.dart';
 import '../services/hadith_offline_service.dart';
 
-/// Pantalla para gestionar la disponibilidad offline de hadices
+/// Pantalla informativa sobre la disponibilidad offline de hadices
 class HadithOfflineScreen extends ConsumerStatefulWidget {
   const HadithOfflineScreen({super.key});
 
@@ -77,26 +77,8 @@ class _HadithOfflineScreenState extends ConsumerState<HadithOfflineScreen> {
                 const SizedBox(height: 8),
 
                 ...HadithOfflineService.availableCollections.entries.map(
-                  (entry) => _buildCollectionTile(tokens, entry.key, entry.value),
+                  (entry) => _buildCollectionTile(tokens, entry.value),
                 ),
-
-                const SizedBox(height: 32),
-
-                // Botón de sincronizar todo
-                if (!_status!.isFullyOffline)
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton.icon(
-                      onPressed: _syncAll,
-                      icon: const Icon(Icons.download),
-                      label: const Text('Sincronizar Todo'),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: tokens.primary,
-                        foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                      ),
-                    ),
-                  ),
               ],
             ),
     );
@@ -135,9 +117,7 @@ class _HadithOfflineScreenState extends ConsumerState<HadithOfflineScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      _status!.isFullyOffline
-                          ? 'Todo Disponible Offline'
-                          : 'Sincronización Parcial',
+                      'Hadices incluidos en la app',
                       style: GoogleFonts.dmSans(
                         fontSize: 14,
                         fontWeight: FontWeight.w700,
@@ -145,7 +125,7 @@ class _HadithOfflineScreenState extends ConsumerState<HadithOfflineScreen> {
                       ),
                     ),
                     Text(
-                      'Última sync: ${_status!.lastSyncLabel}',
+                      'Se leen desde archivos locales sin descarga adicional.',
                       style: GoogleFonts.dmSans(
                         fontSize: 10,
                         color: tokens.textSecondary,
@@ -155,7 +135,7 @@ class _HadithOfflineScreenState extends ConsumerState<HadithOfflineScreen> {
                 ),
               ),
               Text(
-                '${_status!.downloadedCount}/${_status!.totalCollections}',
+                '${_status!.totalCollections}',
                 style: GoogleFonts.dmSans(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -176,7 +156,7 @@ class _HadithOfflineScreenState extends ConsumerState<HadithOfflineScreen> {
           ),
           const SizedBox(height: 8),
           Text(
-            '${progress.toStringAsFixed(0)}% completado',
+            '${progress.toStringAsFixed(0)}% disponible sin conexión',
             style: GoogleFonts.dmSans(
               fontSize: 11,
               color: tokens.textSecondary,
@@ -201,7 +181,7 @@ class _HadithOfflineScreenState extends ConsumerState<HadithOfflineScreen> {
           const SizedBox(width: 12),
           Expanded(
             child: Text(
-              'Todos los hadices ya están en tu dispositivo. Esta pantalla muestra el estado de sincronización.',
+              'Los hadices ya vienen incluidos en la app y permanecen disponibles sin conexión. No hace falta sincronizar ni eliminar colecciones para usarlos.',
               style: GoogleFonts.dmSans(
                 fontSize: 11,
                 height: 1.5,
@@ -216,34 +196,27 @@ class _HadithOfflineScreenState extends ConsumerState<HadithOfflineScreen> {
 
   Widget _buildCollectionTile(
     QiblaTokens tokens,
-    String key,
     String name,
   ) {
-    final isDownloaded = _status!.downloadedCollections.contains(key);
-
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: tokens.bgSurface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: isDownloaded ? tokens.primary.withOpacity(0.3) : tokens.border,
-        ),
+        border: Border.all(color: tokens.primary.withOpacity(0.3)),
       ),
       child: Row(
         children: [
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: isDownloaded
-                  ? Colors.green.withOpacity(0.1)
-                  : tokens.border.withOpacity(0.3),
+              color: Colors.green.withOpacity(0.1),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Icon(
-              isDownloaded ? Icons.check_circle : Icons.cloud_download_outlined,
-              color: isDownloaded ? Colors.green : tokens.textSecondary,
+              Icons.check_circle,
+              color: Colors.green,
               size: 20,
             ),
           ),
@@ -261,47 +234,16 @@ class _HadithOfflineScreenState extends ConsumerState<HadithOfflineScreen> {
                   ),
                 ),
                 Text(
-                  isDownloaded ? 'Disponible offline' : 'No sincronizado',
+                  'Disponible sin conexión',
                   style: GoogleFonts.dmSans(
                     fontSize: 10,
-                    color: isDownloaded ? Colors.green : tokens.textSecondary,
+                    color: Colors.green,
                   ),
                 ),
               ],
             ),
           ),
-          if (isDownloaded)
-            IconButton(
-              icon: const Icon(Icons.delete_outline, size: 20),
-              color: Colors.red,
-              onPressed: () => _removeCollection(key),
-              tooltip: 'Eliminar de offline',
-            ),
         ],
-      ),
-    );
-  }
-
-  Future<void> _syncAll() async {
-    await _offlineService.markAllCollectionsAsDownloaded();
-    await _loadStatus();
-    if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('✓ Todos los hadices disponibles offline'),
-        backgroundColor: Colors.green,
-      ),
-    );
-  }
-
-  Future<void> _removeCollection(String key) async {
-    await _offlineService.removeCollection(key);
-    await _loadStatus();
-    if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Colección eliminada de offline'),
-        duration: const Duration(seconds: 2),
       ),
     );
   }

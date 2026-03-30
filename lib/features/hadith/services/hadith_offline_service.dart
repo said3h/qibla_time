@@ -1,14 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 /// Servicio para gestionar la disponibilidad offline de hadices
 class HadithOfflineService {
-  static const String _prefsKeyCollections = 'hadith_downloaded_collections';
-  static const String _prefsKeyLastSync = 'hadith_last_sync';
-
-  /// Colecciones disponibles para descarga
+  /// Colecciones incluidas dentro de la app.
   static const Map<String, String> availableCollections = {
     'bukhari': 'Sahih Al-Bujari',
     'muslim': 'Sahih Muslim',
@@ -19,66 +15,32 @@ class HadithOfflineService {
     'general': 'Otros Hadices',
   };
 
-  /// Verifica si una colección está disponible offline
+  /// Todas las colecciones están disponibles offline de forma permanente.
   Future<bool> isCollectionDownloaded(String collectionKey) async {
-    final prefs = await SharedPreferences.getInstance();
-    final downloaded = prefs.getStringList(_prefsKeyCollections) ?? [];
-    return downloaded.contains(collectionKey);
+    return availableCollections.containsKey(collectionKey);
   }
 
-  /// Obtiene todas las colecciones descargadas
+  /// Devuelve todas las colecciones incluidas en assets.
   Future<List<String>> getDownloadedCollections() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getStringList(_prefsKeyCollections) ?? [];
+    return availableCollections.keys.toList();
   }
 
-  /// Marca una colección como descargada (ya que los hadices ya están en assets)
-  Future<void> markCollectionAsDownloaded(String collectionKey) async {
-    final prefs = await SharedPreferences.getInstance();
-    final downloaded = prefs.getStringList(_prefsKeyCollections) ?? [];
-    if (!downloaded.contains(collectionKey)) {
-      downloaded.add(collectionKey);
-      await prefs.setStringList(_prefsKeyCollections, downloaded);
-    }
-  }
+  /// No-op: los hadices ya vienen incluidos offline dentro de la app.
+  Future<void> markCollectionAsDownloaded(String collectionKey) async {}
 
-  /// Marca todas las colecciones como descargadas
-  Future<void> markAllCollectionsAsDownloaded() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setStringList(
-      _prefsKeyCollections,
-      availableCollections.keys.toList(),
-    );
-    await prefs.setString(
-      _prefsKeyLastSync,
-      DateTime.now().toIso8601String(),
-    );
-  }
+  /// No-op: no existe sincronización real para hadices.
+  Future<void> markAllCollectionsAsDownloaded() async {}
 
-  /// Elimina una colección de descargadas (solo marca, los archivos permanecen)
-  Future<void> removeCollection(String collectionKey) async {
-    final prefs = await SharedPreferences.getInstance();
-    final downloaded = prefs.getStringList(_prefsKeyCollections) ?? [];
-    downloaded.remove(collectionKey);
-    await prefs.setStringList(_prefsKeyCollections, downloaded);
-  }
+  /// No-op: no se elimina contenido real, ya que las colecciones están en assets.
+  Future<void> removeCollection(String collectionKey) async {}
 
-  /// Obtiene el estado de sincronización
+  /// Obtiene el estado real de disponibilidad offline.
   Future<HadithOfflineStatus> getStatus() async {
-    final prefs = await SharedPreferences.getInstance();
-    final downloaded = prefs.getStringList(_prefsKeyCollections) ?? [];
-    final lastSyncString = prefs.getString(_prefsKeyLastSync);
-
-    DateTime? lastSync;
-    if (lastSyncString != null) {
-      lastSync = DateTime.tryParse(lastSyncString);
-    }
-
     return HadithOfflineStatus(
-      downloadedCollections: downloaded,
+      downloadedCollections: await getDownloadedCollections(),
       totalCollections: availableCollections.keys.length,
-      lastSync: lastSync,
-      isFullyOffline: downloaded.length == availableCollections.keys.length,
+      lastSync: null,
+      isFullyOffline: true,
     );
   }
 
@@ -96,8 +58,7 @@ class HadithOfflineService {
 
   /// Verifica si todos los hadices están disponibles offline
   Future<bool> isAllHadithsAvailable() async {
-    final status = await getStatus();
-    return status.isFullyOffline;
+    return true;
   }
 }
 
@@ -118,7 +79,7 @@ class HadithOfflineStatus {
   int get downloadedCount => downloadedCollections.length;
   double get downloadProgress => downloadedCount / totalCollections;
   String get lastSyncLabel {
-    if (lastSync == null) return 'Nunca';
+    if (lastSync == null) return 'Incluidos en la app';
     final now = DateTime.now();
     final diff = now.difference(lastSync!);
 

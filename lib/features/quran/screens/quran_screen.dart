@@ -734,6 +734,16 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       _miniPlayerState.isVisible &&
       _miniPlayerState.surahNumber == widget.summary.number;
 
+  bool get _hasActiveSurahSessionForCurrentScreen {
+    final currentSourceKey = _audioService.currentSourceKey ?? '';
+    return _miniPlayerState.isVisible &&
+        _miniPlayerState.playbackMode == QuranMiniPlaybackMode.surah &&
+        _miniPlayerState.surahNumber == widget.summary.number &&
+        currentSourceKey.startsWith(
+          'quran:surah:${widget.summary.number}:',
+        );
+  }
+
   int? get _activeAyahNumber =>
       _hasCurrentSurahPlayback ? _miniPlayerState.ayahNumber : null;
 
@@ -1243,7 +1253,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
 
     final controller = ref.read(quranMiniPlayerControllerProvider.notifier);
     try {
-      if (_playbackMode == _QuranPlaybackMode.surah) {
+      if (_hasActiveSurahSessionForCurrentScreen) {
         await controller.togglePlayPause();
         return;
       }
@@ -1538,7 +1548,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   ) {
     final canPlaySurah = _canPlaySurahAudio(detail, source);
     final availableAyahs = _surahQueueFor(detail, source).length;
-    final isSurahPlayback = _playbackMode == _QuranPlaybackMode.surah;
+    final isSurahPlayback = _hasActiveSurahSessionForCurrentScreen;
     final downloadState = _downloadState;
     final isDownloading = downloadState?.isDownloading == true;
     final isDownloaded = downloadState?.isDownloaded == true;

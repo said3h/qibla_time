@@ -975,6 +975,44 @@ class _Card extends StatelessWidget {
   }
 }
 
+class _CompactAnalyticsErrorCard extends StatelessWidget {
+  const _CompactAnalyticsErrorCard({
+    required this.tokens,
+    required this.message,
+  });
+
+  final QiblaTokens tokens;
+  final String message;
+
+  @override
+  Widget build(BuildContext context) {
+    return _Card(
+      tokens: tokens,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(
+            Icons.info_outline_rounded,
+            size: 18,
+            color: tokens.primary,
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              message,
+              style: GoogleFonts.dmSans(
+                fontSize: 12,
+                height: 1.5,
+                color: tokens.textSecondary,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class _SectionTitle extends StatelessWidget {
   const _SectionTitle({
     required this.title,
@@ -1130,7 +1168,10 @@ class _HadithStatsCard extends ConsumerWidget {
             child: CircularProgressIndicator(color: tokens.primary),
           ),
         ),
-        error: (_, __) => const SizedBox.shrink(),
+        error: (_, __) => _CompactAnalyticsErrorCard(
+          tokens: tokens,
+          message: 'No se pudieron cargar las estadísticas de hadices.',
+        ),
       ),
       loading: () => _Card(
         tokens: tokens,
@@ -1138,7 +1179,10 @@ class _HadithStatsCard extends ConsumerWidget {
           child: CircularProgressIndicator(color: tokens.primary),
         ),
       ),
-      error: (_, __) => const SizedBox.shrink(),
+      error: (_, __) => _CompactAnalyticsErrorCard(
+        tokens: tokens,
+        message: 'No se pudieron cargar las estadísticas de hadices.',
+      ),
     );
   }
 

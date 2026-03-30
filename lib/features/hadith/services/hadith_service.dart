@@ -55,7 +55,12 @@ class HadithService {
   /// Obtiene un hadiz específico por su ID
   Future<Hadith?> getHadithById(int id) async {
     final hadiths = await loadAll();
-    return hadiths.firstWhere((h) => h.id == id, orElse: () => throw Exception('Hadith not found'));
+    for (final hadith in hadiths) {
+      if (hadith.id == id) {
+        return hadith;
+      }
+    }
+    return null;
   }
 
   /// Obtiene hadices de una colección específica

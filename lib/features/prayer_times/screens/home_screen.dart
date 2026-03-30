@@ -402,6 +402,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     final hero = tokens.getHero(nextPrayerInfo.prayer.key);
     final names = _prayerName(nextPrayerInfo.prayer);
+    final nextPrayerSubtitle = remaining == null
+        ? 'Hoy a las ${_formatTime(nextPrayerInfo.time)}'
+        : 'Hoy a las ${_formatTime(nextPrayerInfo.time)} - ${_formatRemaining(remaining)}';
 
     return Container(
       margin: const EdgeInsets.fromLTRB(16, 0, 16, 12),
@@ -459,7 +462,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ),
           const SizedBox(height: 2),
           Text(
-            'Hoy a las ${_formatTime(nextPrayerInfo.time)} - ${_formatRemaining(remaining)}',
+            nextPrayerSubtitle,
             style: GoogleFonts.dmSans(
               fontSize: 12,
               color: tokens.textSecondary,
@@ -1412,6 +1415,28 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   List<Widget> _buildCountdown(QiblaTokens tokens, Duration? remaining) {
+    if (remaining == null) {
+      return [
+        Expanded(
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+            decoration: BoxDecoration(
+              color: Colors.black.withOpacity(0.18),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Text(
+              'Cuenta atras no disponible',
+              style: GoogleFonts.dmSans(
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+                color: tokens.textPrimary,
+              ),
+            ),
+          ),
+        ),
+      ];
+    }
+
     final hours = (remaining?.inHours ?? 0).toString().padLeft(2, '0');
     final minutes =
         ((remaining?.inMinutes ?? 0) % 60).toString().padLeft(2, '0');

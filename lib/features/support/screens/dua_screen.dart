@@ -506,6 +506,7 @@ class _DuaCard extends StatelessWidget {
     final arabicReference = (dua.reference ?? '').isEmpty
         ? null
         : ReligiousReferenceFormatter.buildArabicReference(dua.reference!);
+    final hasTransliteration = dua.transliteration.trim().isNotEmpty;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
@@ -630,16 +631,18 @@ class _DuaCard extends StatelessWidget {
               height: 1.9,
             ),
           ),
-          const SizedBox(height: 8),
-          Text(
-            dua.transliteration,
-            style: GoogleFonts.dmSans(
-              fontSize: 11,
-              color: tokens.textSecondary,
-              fontStyle: FontStyle.italic,
-              height: 1.6,
+          if (hasTransliteration) ...[
+            const SizedBox(height: 8),
+            Text(
+              dua.transliteration,
+              style: GoogleFonts.dmSans(
+                fontSize: 11,
+                color: tokens.textSecondary,
+                fontStyle: FontStyle.italic,
+                height: 1.6,
+              ),
             ),
-          ),
+          ],
           const SizedBox(height: 8),
           Text(
             dua.translation,

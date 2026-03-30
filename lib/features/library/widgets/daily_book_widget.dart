@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/theme/app_theme.dart';
 import '../models/book_model.dart';
 import '../services/islamhouse_book_service.dart';
 import '../screens/islamic_books_screen.dart';
+import '../utils/book_link_launcher.dart';
 
 /// Widget para mostrar el libro del día de IslamHouse
 class DailyBookWidget extends ConsumerWidget {
@@ -149,7 +149,7 @@ class DailyBookWidget extends ConsumerWidget {
                   // Botón leer
                   Expanded(
                     child: ElevatedButton.icon(
-                      onPressed: () => _launchUrl(book.readUrl),
+                      onPressed: () => openBookUrl(context, book.readUrl),
                       icon: const Icon(Icons.read_more, size: 16),
                       label: const Text('Leer'),
                       style: ElevatedButton.styleFrom(
@@ -185,14 +185,6 @@ class DailyBookWidget extends ConsumerWidget {
         onOpenLibrary: () => _openLibrary(context),
       ),
     );
-  }
-
-  void _launchUrl(String url) async {
-    if (url.isEmpty) return;
-    final uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
-    }
   }
 
   void _openLibrary(BuildContext context) {

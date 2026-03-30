@@ -8,9 +8,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/services/cloud_sync_service.dart';
 import '../../../core/services/settings_service.dart';
 import '../../../core/constants/app_constants.dart';
+import '../../../core/models/adhan_model.dart';
 import '../../../core/theme/accessibility_provider.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/theme/theme_provider.dart';
+import '../../dhikr/services/dhikr_service.dart';
 import '../../hafiz/services/hafiz_service.dart';
 import '../../hadith/services/hadith_service.dart';
 import '../../prayer_times/domain/entities/prayer_cache_status.dart';
@@ -41,16 +43,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   bool adhanMaghrib = true;
   bool adhanIsha = false;
   bool prayerNotificationsEnabled = true;
-  bool haptics = true;
-  bool autoLocation = true;
   bool travelerMode = true;
   bool ramadanAutomatic = true;
   bool ramadanForced = false;
-  bool cloudBackupEnabled = false;
-  bool cloudWifiOnly = true;
   int timeOffset = 0;
   bool isHanafi = false;
   CalculationMethod calculationMethod = CalculationMethod.muslim_world_league;
+  String selectedAdhanName = 'Sin datos';
 
   // Hadices settings
   bool dailyInspirationEnabled = false;
@@ -79,8 +78,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       ramadanAutomatic =
           prefs.getBool(AppConstants.keyRamadanModeAutomatic) ?? true;
       ramadanForced = prefs.getBool(AppConstants.keyRamadanModeForced) ?? false;
-      cloudBackupEnabled = prefs.getBool(AppConstants.keyCloudBackupEnabled) ?? false;
-      cloudWifiOnly = prefs.getBool(AppConstants.keyCloudWifiOnly) ?? true;
       timeOffset = prefs.getInt('time_offset') ?? 0;
       isHanafi = prefs.getBool('madhab_hanafi') ?? false;
       final methodIndex = prefs.getInt(AppConstants.keyCalculationMethod) ?? CalculationMethod.muslim_world_league.index;
@@ -92,6 +89,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     adhanMaghrib = await _settingsService.getPrayerNotificationEnabled('maghrib');
     adhanIsha = await _settingsService.getPrayerNotificationEnabled('isha');
     prayerNotificationsEnabled = await _settingsService.getNotificationsEnabled();
+    selectedAdhanName = _getAdhanName(await _settingsService.getAdhan());
 
     // Cargar configuración de hadices
     final inspirationService = ref.read(
@@ -129,18 +127,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       }
     });
     await ref.read(adhanManagerProvider).scheduleTodayAdhans();
-  }
-
-  Future<void> _toggleCloudBackup(bool value) async {
-    await ref.read(cloudSyncServiceProvider).setEnabled(value);
-    if (!mounted) return;
-    setState(() => cloudBackupEnabled = value);
-  }
-
-  Future<void> _toggleCloudWifiOnly(bool value) async {
-    await ref.read(cloudSyncServiceProvider).setWifiOnly(value);
-    if (!mounted) return;
-    setState(() => cloudWifiOnly = value);
   }
 
   Future<void> _togglePrayerNotificationsEnabled(bool value) async {
@@ -277,6 +263,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     final notificationPermissionGranted =
         ref.watch(systemNotificationPermissionProvider).valueOrNull;
     final ramadanStatus = ref.watch(ramadanStatusProvider).valueOrNull;
+    final prayerSchedule = ref.watch(prayerScheduleProvider).valueOrNull?.schedule;
+    final tracking = ref.watch(prayerTrackingProvider);
+    final dhikrSnapshot = ref.watch(dhikrSnapshotProvider).valueOrNull;
     final prayerNotificationsStatus =
         ref.watch(prayerNotificationsEnabledProvider).valueOrNull ??
         prayerNotificationsEnabled;
@@ -290,7 +279,18 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             Text('Ajustes', style: GoogleFonts.amiri(fontSize: 26, color: tokens.primary, fontWeight: FontWeight.bold)),
             Text('الإعدادات', style: GoogleFonts.dmSans(fontSize: 10, color: tokens.textSecondary)),
             const SizedBox(height: 16),
-            _buildProfileCard(tokens),
+            _buildProfileCard(
+              tokens,
+              streakValue: tracking.hasAnyCompletedPrayer
+                  ? '${tracking.currentStreak}'
+                  : '—',
+              prayersValue: tracking.hasAnyCompletedPrayer
+                  ? '${tracking.totalPrayersCompleted}'
+                  : '—',
+              dhikrValue: dhikrSnapshot == null
+                  ? '—'
+                  : '${dhikrSnapshot.lifetimeTotal}',
+            ),
             const SizedBox(height: 16),
             _buildSectionTitle(tokens, 'Apariencia'),
             ..._themes.map((theme) => _buildThemeTile(tokens, themeName, theme.$1, theme.$2, theme.$3, theme.$4)),
@@ -375,18 +375,26 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   ],
                 ),
               ),
-            _buildToggleTile(tokens, 'Fajr', '6:12 · Adhan Al-Aqsa', adhanFajr, (v) => _toggleBool('fajr', v)),
-            _buildToggleTile(tokens, 'Dhuhr', '13:45 · Adhan Makkah', adhanDhuhr, (v) => _toggleBool('dhuhr', v)),
-            _buildToggleTile(tokens, 'Asr', '17:14 · Adhan Makkah', adhanAsr, (v) => _toggleBool('asr', v)),
-            _buildToggleTile(tokens, 'Maghrib', '19:52 · Adhan Al-Aqsa', adhanMaghrib, (v) => _toggleBool('maghrib', v)),
-            _buildToggleTile(tokens, 'Isha', '21:28 · Adhan Makkah', adhanIsha, (v) => _toggleBool('isha', v)),
-            _buildSimpleToggleTile(tokens, 'Vibración háptica', 'En Tasbih y notificaciones', haptics, (v) => setState(() => haptics = v)),
+            _buildToggleTile(tokens, 'Fajr', _buildPrayerSubtitle(prayerSchedule?.fajr), adhanFajr, (v) => _toggleBool('fajr', v)),
+            _buildToggleTile(tokens, 'Dhuhr', _buildPrayerSubtitle(prayerSchedule?.dhuhr), adhanDhuhr, (v) => _toggleBool('dhuhr', v)),
+            _buildToggleTile(tokens, 'Asr', _buildPrayerSubtitle(prayerSchedule?.asr), adhanAsr, (v) => _toggleBool('asr', v)),
+            _buildToggleTile(tokens, 'Maghrib', _buildPrayerSubtitle(prayerSchedule?.maghrib), adhanMaghrib, (v) => _toggleBool('maghrib', v)),
+            _buildToggleTile(tokens, 'Isha', _buildPrayerSubtitle(prayerSchedule?.isha), adhanIsha, (v) => _toggleBool('isha', v)),
+            _buildValueTile(
+              tokens,
+              'Vibración háptica',
+              'No disponible',
+            ),
             const SizedBox(height: 14),
             _buildSectionTitle(tokens, 'Cálculo de horarios'),
             _buildValueTile(tokens, 'Método', calculationMethod.name.replaceAll('_', ' ').toUpperCase(), onTap: _showMethodSheet),
             _buildValueTile(tokens, 'Madhab (Asr)', isHanafi ? 'Hanafi' : 'Shafi\'i', onTap: () => _setMadhab(!isHanafi)),
             _buildValueTile(tokens, 'Ajuste manual', '±$timeOffset min', trailing: _offsetButtons(tokens)),
-            _buildSimpleToggleTile(tokens, 'Ubicación', 'GPS automático', autoLocation, (v) => setState(() => autoLocation = v)),
+            _buildValueTile(
+              tokens,
+              'Ubicación',
+              _locationSettingValue(locationDiagnostic),
+            ),
             const SizedBox(height: 14),
             _buildSectionTitle(tokens, 'Modo Ramadán'),
             _buildSimpleToggleTile(
@@ -447,7 +455,16 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     },
                   ),
                   loading: () => _buildSimpleToggleTile(tokens, 'Modo viajero', 'Cargando...', false, (_) {}),
-                  error: (_, __) => const SizedBox.shrink(),
+                  error: (_, __) => _buildSettingRow(
+                    label: 'Modo viajero',
+                    subtitle: 'No se pudo cargar el modo viajero',
+                    trailing: Icon(
+                      Icons.info_outline,
+                      color: tokens.textMuted,
+                      size: 18,
+                    ),
+                    tokens: tokens,
+                  ),
                 );
               },
             ),
@@ -588,28 +605,26 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ),
             const SizedBox(height: 14),
             _buildSectionTitle(tokens, 'Copia de seguridad en la nube (beta)'),
-            _buildSimpleToggleTile(tokens, 'Copia automática', 'Prepara copias anónimas de tus datos', cloudBackupEnabled, _toggleCloudBackup),
-            _buildSimpleToggleTile(tokens, 'Solo con Wi-Fi', 'Evita usar datos móviles en futuras sincronizaciones', cloudWifiOnly, _toggleCloudWifiOnly),
+            _buildValueTile(tokens, 'Modo de copia', 'Manual'),
             _buildValueTile(tokens, 'ID anónimo', deviceId ?? 'Generando...'),
             _buildValueTile(tokens, 'Última copia', lastBackup == null ? 'Nunca' : lastBackup.toLocal().toString().substring(0, 16)),
-            if (!cloudBackupEnabled && lastBackup == null)
-              Container(
-                margin: const EdgeInsets.only(bottom: 8),
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: tokens.bgSurface,
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: tokens.border),
-                ),
-                child: Text(
-                  'Todavía no has configurado copias de seguridad. Puedes exportar una primera copia manual cuando quieras.',
-                  style: GoogleFonts.dmSans(
-                    fontSize: 11,
-                    height: 1.5,
-                    color: tokens.textSecondary,
-                  ),
+            Container(
+              margin: const EdgeInsets.only(bottom: 8),
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: tokens.bgSurface,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: tokens.border),
+              ),
+              child: Text(
+                'Las copias se exportan manualmente. Qibla Time no crea backups automáticos ni sincroniza en segundo plano todavía.',
+                style: GoogleFonts.dmSans(
+                  fontSize: 11,
+                  height: 1.5,
+                  color: tokens.textSecondary,
                 ),
               ),
+            ),
             _buildValueTile(
               tokens,
               'Exportar copia',
@@ -636,7 +651,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 border: Border.all(color: tokens.primaryBorder),
               ),
               child: Text(
-                'La base de la sincronización en la nube ya está lista. Cuando el backend quede definido, este mismo formato anónimo servirá para restaurar entre dispositivos.',
+                'Puedes guardar y compartir una copia manual en formato JSON. La automatización y la sincronización entre dispositivos todavía no están habilitadas.',
                 style: GoogleFonts.dmSans(fontSize: 10, height: 1.6, color: tokens.textPrimary),
               ),
             ),
@@ -649,7 +664,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     );
   }
 
-  Widget _buildProfileCard(QiblaTokens tokens) {
+  Widget _buildProfileCard(
+    QiblaTokens tokens, {
+    required String streakValue,
+    required String prayersValue,
+    required String dhikrValue,
+  }) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -678,11 +698,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 const SizedBox(height: 4),
                 Row(
                   children: [
-                    _stat(tokens, '14', 'racha'),
+                    _stat(tokens, streakValue, 'racha'),
                     const SizedBox(width: 12),
-                    _stat(tokens, '487', 'oraciones'),
+                    _stat(tokens, prayersValue, 'oraciones'),
                     const SizedBox(width: 12),
-                    _stat(tokens, '3.2k', 'tasbih'),
+                    _stat(tokens, dhikrValue, 'tasbih'),
                   ],
                 ),
               ],
@@ -701,6 +721,25 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         Text(label, style: GoogleFonts.dmSans(fontSize: 9, color: tokens.textSecondary)),
       ],
     );
+  }
+
+  String _getAdhanName(String file) {
+    final adhan = AdhanModel.availableAdhans.firstWhere(
+      (item) => item.file == file,
+      orElse: () => AdhanModel(name: 'Adhan', file: file),
+    );
+    return adhan.name;
+  }
+
+  String _buildPrayerSubtitle(DateTime? time) {
+    final timeLabel = time == null ? 'No disponible' : _formatTime(time);
+    return '$timeLabel · $selectedAdhanName';
+  }
+
+  String _formatTime(DateTime time) {
+    final hour = time.hour.toString().padLeft(2, '0');
+    final minute = time.minute.toString().padLeft(2, '0');
+    return '$hour:$minute';
   }
 
   Widget _buildSectionTitle(QiblaTokens tokens, String text) {
@@ -951,17 +990,36 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancelar')),
             ElevatedButton(
               onPressed: () async {
-                await ref.read(cloudSyncServiceProvider).restoreFromJson(ref.read(hafizServiceProvider), controller.text.trim());
-                if (!context.mounted) return;
-                Navigator.pop(context);
-                ref.invalidate(prayerScheduleProvider);
-                ref.invalidate(prayerTrackingProvider);
-                ref.invalidate(travelerModeEnabledProvider);
-                ref.invalidate(themeControllerProvider);
-                ref.invalidate(accessibilityControllerProvider);
-                if (!mounted) return;
-                _loadSettings();
-                ScaffoldMessenger.of(this.context).showSnackBar(const SnackBar(content: Text('Copia restaurada')));
+                try {
+                  await ref.read(cloudSyncServiceProvider).restoreFromJson(
+                    ref.read(hafizServiceProvider),
+                    controller.text.trim(),
+                  );
+                  if (!context.mounted) return;
+                  Navigator.pop(context);
+                  ref.invalidate(prayerScheduleProvider);
+                  ref.invalidate(prayerTrackingProvider);
+                  ref.invalidate(travelerModeEnabledProvider);
+                  ref.invalidate(themeControllerProvider);
+                  ref.invalidate(accessibilityControllerProvider);
+                  if (!mounted) return;
+                  _loadSettings();
+                  ScaffoldMessenger.of(this.context).showSnackBar(
+                    const SnackBar(content: Text('Copia restaurada')),
+                  );
+                } on CloudSyncRestoreException catch (e) {
+                  if (!context.mounted) return;
+                  ScaffoldMessenger.of(this.context).showSnackBar(
+                    SnackBar(content: Text(e.message)),
+                  );
+                } catch (_) {
+                  if (!context.mounted) return;
+                  ScaffoldMessenger.of(this.context).showSnackBar(
+                    const SnackBar(
+                      content: Text('No se pudo restaurar la copia'),
+                    ),
+                  );
+                }
               },
               child: const Text('Restaurar'),
             ),
@@ -990,6 +1048,16 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       return status.headerLabel;
     }
     return 'Desactivado';
+  }
+
+  String _locationSettingValue(PrayerLocationDiagnostic? diagnostic) {
+    return switch (diagnostic?.permissionStatus) {
+      PrayerLocationPermissionStatus.granted =>
+        diagnostic?.serviceEnabled == false ? 'GPS apagado' : 'Automática',
+      PrayerLocationPermissionStatus.denied => 'Permiso pendiente',
+      PrayerLocationPermissionStatus.deniedForever => 'Bloqueada',
+      _ => 'No disponible',
+    };
   }
 
   Widget _buildSettingRow({

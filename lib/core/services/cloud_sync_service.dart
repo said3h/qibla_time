@@ -29,6 +29,15 @@ class CloudSyncSnapshot {
   }
 }
 
+class CloudSyncRestoreException implements Exception {
+  const CloudSyncRestoreException(this.message);
+
+  final String message;
+
+  @override
+  String toString() => message;
+}
+
 class CloudSyncService {
   Box get _syncBox => Hive.box(StorageService.syncBox);
 
@@ -88,26 +97,60 @@ class CloudSyncService {
   }
 
   Future<void> restoreFromJson(HafizService hafizService, String rawJson) async {
-    final decoded = jsonDecode(rawJson) as Map<String, dynamic>;
-    final payload = decoded['payload'] as Map<String, dynamic>;
-    final prefsPayload = payload['preferences'] as Map<String, dynamic>? ?? {};
-    final prefs = await SharedPreferences.getInstance();
-    for (final entry in prefsPayload.entries) {
-      final value = entry.value;
-      if (value is bool) {
-        await prefs.setBool(entry.key, value);
-      } else if (value is int) {
-        await prefs.setInt(entry.key, value);
-      } else if (value is double) {
-        await prefs.setDouble(entry.key, value);
-      } else if (value is String) {
-        await prefs.setString(entry.key, value);
-      } else if (value is List) {
-        await prefs.setStringList(entry.key, value.map((item) => item.toString()).toList());
-      }
+    if (rawJson.trim().isEmpty) {
+      throw const CloudSyncRestoreException('Copia no valida');
     }
-    final hafizPayload = payload['hafiz'] as Map<String, dynamic>? ?? {};
-    await hafizService.restoreSnapshot(hafizPayload);
+
+    try {
+      final decoded = jsonDecode(rawJson);
+      final root = _requireMap(decoded);
+      final payload = _requireMap(root['payload']);
+      final prefsPayload = _optionalMap(payload['preferences']);
+      final prefs = await SharedPreferences.getInstance();
+      for (final entry in prefsPayload.entries) {
+        final value = entry.value;
+        if (value is bool) {
+          await prefs.setBool(entry.key, value);
+        } else if (value is int) {
+          await prefs.setInt(entry.key, value);
+        } else if (value is double) {
+          await prefs.setDouble(entry.key, value);
+        } else if (value is String) {
+          await prefs.setString(entry.key, value);
+        } else if (value is List) {
+          await prefs.setStringList(
+            entry.key,
+            value.map((item) => item.toString()).toList(),
+          );
+        }
+      }
+
+      final hafizPayload = _optionalMap(payload['hafiz']);
+      await hafizService.restoreSnapshot(hafizPayload);
+    } on FormatException {
+      throw const CloudSyncRestoreException('Copia no valida');
+    } on CloudSyncRestoreException {
+      rethrow;
+    } catch (_) {
+      throw const CloudSyncRestoreException('No se pudo restaurar la copia');
+    }
+  }
+
+  Map<String, dynamic> _requireMap(dynamic value) {
+    if (value is Map) {
+      return Map<String, dynamic>.from(value);
+    }
+    throw CloudSyncRestoreException('Copia no valida');
+  }
+
+  Map<String, dynamic> _optionalMap(dynamic value) {
+    if (value == null) {
+      return <String, dynamic>{};
+    }
+    if (value is Map) {
+      return Map<String, dynamic>.from(value);
+    }
+    throw CloudSyncRestoreException('Copia no valida');
   }
 }
 

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/theme/app_theme.dart';
 import '../models/book_model.dart';
 import '../services/islamhouse_book_service.dart';
+import '../utils/book_link_launcher.dart';
 
 /// Pantalla de Biblioteca de Libros de IslamHouse
 class IslamicBooksScreen extends ConsumerStatefulWidget {
@@ -314,7 +314,7 @@ class _IslamicBooksScreenState extends ConsumerState<IslamicBooksScreen>
           ),
           TextButton(
             onPressed: () {
-              launchUrl(Uri.parse('https://islamhouse.com/es/'));
+              openBookUrl(context, 'https://islamhouse.com/es/');
             },
             child: const Text('Visitar IslamHouse'),
           ),
@@ -701,7 +701,7 @@ class _BookDetailSheet extends StatelessWidget {
             children: [
               Expanded(
                 child: ElevatedButton.icon(
-                  onPressed: () => _launchUrl(book.readUrl),
+                  onPressed: () => openBookUrl(context, book.readUrl),
                   icon: const Icon(Icons.read_more),
                   label: const Text('Leer'),
                   style: ElevatedButton.styleFrom(
@@ -714,7 +714,7 @@ class _BookDetailSheet extends StatelessWidget {
               const SizedBox(width: 12),
               Expanded(
                 child: OutlinedButton.icon(
-                  onPressed: () => _launchUrl(book.downloadUrl),
+                  onPressed: () => openBookUrl(context, book.downloadUrl),
                   icon: const Icon(Icons.download),
                   label: const Text('Descargar'),
                   style: OutlinedButton.styleFrom(
@@ -731,13 +731,6 @@ class _BookDetailSheet extends StatelessWidget {
     );
   }
 
-  void _launchUrl(String url) async {
-    if (url.isEmpty) return;
-    final uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
-    }
-  }
 }
 
 class _InfoChip extends StatelessWidget {

@@ -81,27 +81,61 @@ class QuranService {
       if (r.statusCode != 200) throw Exception('API error ${r.statusCode}');
     }
 
-    final arabicData  = json.decode(responses[0].body)['data'];
-    final spanishData = json.decode(responses[1].body)['data'];
-    final translitData= json.decode(responses[2].body)['data'];
+    final arabicData = _decodeApiData(
+      responses[0].body,
+      context: 'arabe',
+    );
+    final spanishData = _decodeApiData(
+      responses[1].body,
+      context: 'espanol',
+    );
+    final translitData = _decodeApiData(
+      responses[2].body,
+      context: 'transliteracion',
+    );
 
-    final arabicAyahs   = arabicData['ayahs']   as List;
-    final spanishAyahs  = spanishData['ayahs']  as List;
-    final translitAyahs = translitData['ayahs'] as List;
+    final arabicAyahs = _decodeAyahs(
+      arabicData,
+      context: 'arabe',
+      required: true,
+    );
+    final spanishAyahs = _decodeAyahs(
+      spanishData,
+      context: 'espanol',
+    );
+    final translitAyahs = _decodeAyahs(
+      translitData,
+      context: 'transliteracion',
+    );
 
     final ayahs = List.generate(arabicAyahs.length, (i) {
+      final arabicAyah = arabicAyahs[i];
+      final ayahNumber = _readRequiredInt(
+        arabicAyah,
+        'number',
+        context: 'aleya arabe ${i + 1}',
+      );
+
       return SurahAyah(
-        number:          arabicAyahs[i]['number'],
-        numberInSurah:   arabicAyahs[i]['numberInSurah'],
-        arabic:          arabicAyahs[i]['text'],
+        number: ayahNumber,
+        numberInSurah: _readRequiredInt(
+          arabicAyah,
+          'numberInSurah',
+          context: 'aleya arabe ${i + 1}',
+        ),
+        arabic: _readRequiredString(
+          arabicAyah,
+          'text',
+          context: 'aleya arabe ${i + 1}',
+        ),
         transliteration: i < translitAyahs.length
-            ? translitAyahs[i]['text'] ?? ''
+            ? _readOptionalString(translitAyahs[i], 'text')
             : '',
-        translation:     i < spanishAyahs.length
-            ? spanishAyahs[i]['text'] ?? ''
+        translation: i < spanishAyahs.length
+            ? _readOptionalString(spanishAyahs[i], 'text')
             : '',
         audioUrl: 'https://cdn.islamic.network/quran/audio/128/ar.alafasy/'
-            '${arabicAyahs[i]['number']}.mp3',
+            '$ayahNumber.mp3',
       );
     });
 
@@ -117,7 +151,7 @@ class QuranService {
     }
 
     final detail = _offlineCache?[surahNumber];
-    if (detail != null) {
+    if (detail != null && _isValidOfflineDetail(detail)) {
       return SurahLoadResult(
         detail: detail,
         source: SurahLoadSource.offline,
@@ -150,36 +184,218 @@ class QuranService {
     try {
       final jsonString = await rootBundle
           .loadString('assets/data/quran_offline.json');
-      final data = json.decode(jsonString) as Map<String, dynamic>;
+      final decoded = json.decode(jsonString);
+      if (decoded is! Map) {
+        _offlineCache = {};
+        return;
+      }
 
-      _offlineCache = {};
-      for (final entry in data['surahs'].entries) {
-        final number = int.parse(entry.key);
-        final surahData = entry.value as Map<String, dynamic>;
+      final data = Map<String, dynamic>.from(decoded);
+      final rawSurahs = data['surahs'];
+      if (rawSurahs is! Map) {
+        _offlineCache = {};
+        return;
+      }
+
+      final offlineCache = <int, SurahDetail>{};
+      for (final entry in rawSurahs.entries) {
+        final number = int.tryParse(entry.key.toString());
+        if (number == null || entry.value is! Map) {
+          continue;
+        }
+
+        final surahData = Map<String, dynamic>.from(entry.value as Map);
 
         final summary = allSurahs.firstWhere(
           (s) => s.number == number,
           orElse: () => allSurahs.first,
         );
 
-        final ayahsList = surahData['ayahs'] as List;
-        final ayahs = ayahsList.map((a) => SurahAyah(
-          number:          a['number'],
-          numberInSurah:   a['numberInSurah'],
-          arabic:          a['arabic'] ?? '',
-          transliteration: a['transliteration'] ?? '',
-          translation:     a['translation'] ?? '',
-          audioUrl:        a['audioUrl'] ?? '',
-        )).toList();
-
-        _offlineCache![number] = SurahDetail(summary: summary, ayahs: ayahs);
+        final detail = _buildOfflineDetail(
+          summary: summary,
+          surahData: surahData,
+        );
+        if (detail != null) {
+          offlineCache[number] = detail;
+        }
       }
+      _offlineCache = offlineCache;
     } catch (e) {
       _offlineCache = {}; // evita reintentar en bucle si el asset falta
     }
   }
 
   // ── Lista completa de 114 suras ─────────────────────────────
+
+  Map<String, dynamic> _decodeApiData(
+    String body, {
+    required String context,
+  }) {
+    final decoded = json.decode(body);
+    if (decoded is! Map) {
+      throw FormatException('Respuesta $context invalida: raiz no es objeto.');
+    }
+
+    final payload = Map<String, dynamic>.from(decoded);
+    final data = payload['data'];
+    if (data is! Map) {
+      throw FormatException('Respuesta $context invalida: falta data.');
+    }
+
+    return Map<String, dynamic>.from(data);
+  }
+
+  List<Map<String, dynamic>> _decodeAyahs(
+    Map<String, dynamic> data, {
+    required String context,
+    bool required = false,
+  }) {
+    final rawAyahs = data['ayahs'];
+    if (rawAyahs is! List) {
+      if (required) {
+        throw FormatException(
+          'Respuesta $context invalida: falta la lista de aleyas.',
+        );
+      }
+      return const [];
+    }
+
+    final ayahs = <Map<String, dynamic>>[];
+    for (var i = 0; i < rawAyahs.length; i++) {
+      final rawAyah = rawAyahs[i];
+      if (rawAyah is Map) {
+        ayahs.add(Map<String, dynamic>.from(rawAyah));
+        continue;
+      }
+
+      if (required) {
+        throw FormatException(
+          'Respuesta $context invalida: la aleya ${i + 1} no tiene formato valido.',
+        );
+      }
+
+      ayahs.add(const <String, dynamic>{});
+    }
+
+    if (required && ayahs.isEmpty) {
+      throw FormatException(
+        'Respuesta $context invalida: la lista de aleyas esta vacia.',
+      );
+    }
+
+    return ayahs;
+  }
+
+  int _readRequiredInt(
+    Map<String, dynamic> data,
+    String key, {
+    required String context,
+  }) {
+    final value = data[key];
+    if (value is int) return value;
+    if (value is num) return value.toInt();
+    if (value is String) {
+      final parsed = int.tryParse(value);
+      if (parsed != null) return parsed;
+    }
+
+    throw FormatException(
+      'Respuesta invalida: falta $key en $context.',
+    );
+  }
+
+  String _readRequiredString(
+    Map<String, dynamic> data,
+    String key, {
+    required String context,
+  }) {
+    final value = data[key];
+    if (value == null) {
+      throw FormatException(
+        'Respuesta invalida: falta $key en $context.',
+      );
+    }
+    return value.toString();
+  }
+
+  String _readOptionalString(
+    Map<String, dynamic>? data,
+    String key,
+  ) {
+    if (data == null) return '';
+    final value = data[key];
+    return value?.toString() ?? '';
+  }
+
+  SurahDetail? _buildOfflineDetail({
+    required SurahSummary summary,
+    required Map<String, dynamic> surahData,
+  }) {
+    final rawAyahs = surahData['ayahs'];
+    if (rawAyahs is! List || rawAyahs.isEmpty) {
+      return null;
+    }
+
+    final ayahs = <SurahAyah>[];
+    for (final rawAyah in rawAyahs) {
+      if (rawAyah is! Map) {
+        return null;
+      }
+
+      final ayahData = Map<String, dynamic>.from(rawAyah);
+      final number = _tryReadInt(ayahData, 'number');
+      final numberInSurah = _tryReadInt(ayahData, 'numberInSurah');
+      final arabic = _tryReadNonEmptyString(ayahData, 'arabic');
+      if (number == null || numberInSurah == null || arabic == null) {
+        return null;
+      }
+
+      ayahs.add(
+        SurahAyah(
+          number: number,
+          numberInSurah: numberInSurah,
+          arabic: arabic,
+          transliteration: _readOptionalString(ayahData, 'transliteration'),
+          translation: _readOptionalString(ayahData, 'translation'),
+          audioUrl: _readOptionalString(ayahData, 'audioUrl'),
+        ),
+      );
+    }
+
+    final detail = SurahDetail(summary: summary, ayahs: ayahs);
+    return _isValidOfflineDetail(detail) ? detail : null;
+  }
+
+  bool _isValidOfflineDetail(SurahDetail detail) {
+    if (detail.ayahs.isEmpty) return false;
+    return detail.ayahs.every(
+      (ayah) =>
+          ayah.number > 0 &&
+          ayah.numberInSurah > 0 &&
+          ayah.arabic.trim().isNotEmpty,
+    );
+  }
+
+  int? _tryReadInt(
+    Map<String, dynamic> data,
+    String key,
+  ) {
+    final value = data[key];
+    if (value is int) return value;
+    if (value is num) return value.toInt();
+    if (value is String) return int.tryParse(value);
+    return null;
+  }
+
+  String? _tryReadNonEmptyString(
+    Map<String, dynamic> data,
+    String key,
+  ) {
+    final value = data[key];
+    final text = value?.toString().trim();
+    if (text == null || text.isEmpty) return null;
+    return text;
+  }
 
   static List<SurahSummary> get allSurahs => [
     SurahSummary(number: 1,   nameArabic: 'الفاتحة',       nameLatin: 'Al-Fatiha',       revelationType: 'Meccan',  ayahCount: 7),
