@@ -53,21 +53,53 @@ class DailyHadithWidget extends ConsumerWidget {
             final isFavorite = favoritesAsync.valueOrNull?.contains(hadith.id) ?? false;
             final arabicReference = ReligiousReferenceFormatter
                 .buildArabicReference(snapshot.reference);
+            final isLightTheme = _isLightTheme(tokens);
+            final collectionBaseColor = _getCollectionColor(snapshot.collection);
+            final gradeBaseColor = _getGradeColor(snapshot.grade);
+            final cardTopColor = _blend(
+              tokens.primary,
+              tokens.bgSurface,
+              isLightTheme ? 0.08 : 0.14,
+            );
+            final cardBottomColor = _blend(
+              tokens.primaryLight,
+              tokens.bgSurface,
+              isLightTheme ? 0.02 : 0.06,
+            );
+            final actionSurfaceColor = _blend(
+              tokens.bgSurface2,
+              tokens.bgSurface,
+              isLightTheme ? 0.72 : 0.86,
+            );
+            final collectionColor = _accentForeground(tokens, collectionBaseColor);
+            final gradeColor = _accentForeground(tokens, gradeBaseColor);
+            final collectionChipColor = _accentBackground(
+              tokens,
+              collectionBaseColor,
+            );
+            final gradeChipColor = _accentBackground(tokens, gradeBaseColor);
 
             return Container(
               margin: const EdgeInsets.fromLTRB(16, 12, 16, 8),
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
+                color: tokens.bgSurface,
                 gradient: LinearGradient(
                   colors: [
-                    tokens.primary.withOpacity(0.08),
-                    tokens.primary.withOpacity(0.02),
+                    cardTopColor,
+                    cardBottomColor,
                   ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: tokens.primary.withOpacity(0.3)),
+                border: Border.all(
+                  color: _blend(
+                    tokens.primary,
+                    tokens.borderMed,
+                    isLightTheme ? 0.16 : 0.26,
+                  ),
+                ),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,8 +113,15 @@ class DailyHadithWidget extends ConsumerWidget {
                           vertical: 6,
                         ),
                         decoration: BoxDecoration(
-                          color: tokens.primary.withOpacity(0.15),
+                          color: _accentBackground(tokens, tokens.primary),
                           borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            color: _blend(
+                              tokens.primary,
+                              tokens.borderMed,
+                              isLightTheme ? 0.14 : 0.2,
+                            ),
+                          ),
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
@@ -113,9 +152,15 @@ class DailyHadithWidget extends ConsumerWidget {
                           vertical: 6,
                         ),
                         decoration: BoxDecoration(
-                          color: _getCollectionColor(snapshot.collection)
-                              .withOpacity(0.1),
+                          color: collectionChipColor,
                           borderRadius: BorderRadius.circular(8),
+                          border: Border.all(
+                            color: _blend(
+                              collectionBaseColor,
+                              tokens.borderMed,
+                              isLightTheme ? 0.16 : 0.24,
+                            ),
+                          ),
                         ),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
@@ -126,7 +171,7 @@ class DailyHadithWidget extends ConsumerWidget {
                               style: GoogleFonts.dmSans(
                                 fontSize: 9,
                                 fontWeight: FontWeight.w600,
-                                color: _getCollectionColor(snapshot.collection),
+                                color: collectionColor,
                               ),
                             ),
                             if (_getArabicCollectionLabel(snapshot.collection) != null)
@@ -136,7 +181,7 @@ class DailyHadithWidget extends ConsumerWidget {
                                 style: GoogleFonts.amiri(
                                   fontSize: 11,
                                   fontWeight: FontWeight.w700,
-                                  color: _getCollectionColor(snapshot.collection),
+                                  color: collectionColor,
                                 ),
                               ),
                           ],
@@ -197,7 +242,7 @@ class DailyHadithWidget extends ConsumerWidget {
                                   style: GoogleFonts.amiri(
                                     fontSize: 11,
                                     fontWeight: FontWeight.w700,
-                                    color: tokens.textMuted,
+                                    color: tokens.textSecondary,
                                   ),
                                 ),
                               ),
@@ -212,9 +257,15 @@ class DailyHadithWidget extends ConsumerWidget {
                           vertical: 5,
                         ),
                         decoration: BoxDecoration(
-                          color: _getGradeColor(snapshot.grade)
-                              .withOpacity(0.15),
+                          color: gradeChipColor,
                           borderRadius: BorderRadius.circular(6),
+                          border: Border.all(
+                            color: _blend(
+                              gradeBaseColor,
+                              tokens.borderMed,
+                              isLightTheme ? 0.16 : 0.24,
+                            ),
+                          ),
                         ),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
@@ -225,7 +276,7 @@ class DailyHadithWidget extends ConsumerWidget {
                               style: GoogleFonts.dmSans(
                                 fontSize: 8,
                                 fontWeight: FontWeight.w600,
-                                color: _getGradeColor(snapshot.grade),
+                                color: gradeColor,
                               ),
                             ),
                             if (_getArabicGradeLabel(snapshot.grade) != null)
@@ -235,7 +286,7 @@ class DailyHadithWidget extends ConsumerWidget {
                                 style: GoogleFonts.amiri(
                                   fontSize: 10,
                                   fontWeight: FontWeight.w700,
-                                  color: _getGradeColor(snapshot.grade),
+                                  color: gradeColor,
                                 ),
                               ),
                           ],
@@ -277,8 +328,15 @@ class DailyHadithWidget extends ConsumerWidget {
                           child: Container(
                             height: 40,
                             decoration: BoxDecoration(
+                              color: actionSurfaceColor,
                               borderRadius: BorderRadius.circular(10),
-                              border: Border.all(color: tokens.border),
+                              border: Border.all(
+                                color: _blend(
+                                  tokens.primary,
+                                  tokens.border,
+                                  isLightTheme ? 0.08 : 0.16,
+                                ),
+                              ),
                             ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -314,7 +372,7 @@ class DailyHadithWidget extends ConsumerWidget {
                         style: IconButton.styleFrom(
                           backgroundColor: isFavorite
                               ? Colors.red
-                              : tokens.bgSurface,
+                              : actionSurfaceColor,
                           foregroundColor: isFavorite
                               ? Colors.white
                               : tokens.textPrimary,
@@ -364,6 +422,26 @@ class DailyHadithWidget extends ConsumerWidget {
     Navigator.of(context).push(
       MaterialPageRoute(builder: (_) => const HadithLibraryScreen()),
     );
+  }
+
+  bool _isLightTheme(QiblaTokens tokens) {
+    return ThemeData.estimateBrightnessForColor(tokens.bgPage) ==
+        Brightness.light;
+  }
+
+  Color _blend(Color foreground, Color background, double opacity) {
+    return Color.alphaBlend(foreground.withOpacity(opacity), background);
+  }
+
+  Color _accentBackground(QiblaTokens tokens, Color accent) {
+    final opacity = _isLightTheme(tokens) ? 0.12 : 0.2;
+    return _blend(accent, tokens.bgSurface2, opacity);
+  }
+
+  Color _accentForeground(QiblaTokens tokens, Color accent) {
+    return _isLightTheme(tokens)
+        ? Color.alphaBlend(Colors.black.withOpacity(0.26), accent)
+        : Color.alphaBlend(Colors.white.withOpacity(0.14), accent);
   }
 
   Color _getCollectionColor(String collection) {

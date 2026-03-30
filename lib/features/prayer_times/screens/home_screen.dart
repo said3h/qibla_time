@@ -5,6 +5,7 @@ import 'package:hijri/hijri_calendar.dart';
 
 import '../../../core/services/connectivity_service.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../../core/utils/spanish_date_labels.dart';
 import '../../calendar/screens/calendar_screen.dart';
 import '../../dhikr/screens/dhikr_screen.dart';
 import '../../dhikr/services/dhikr_service.dart';
@@ -41,7 +42,6 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
-  static const _weekdays = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
   static const _weekdaysArabic = ['اثن', 'ثلا', 'أرب', 'خمي', 'جمع', 'سبت', 'أحد'];
   static const _generateHomeInsights = GenerateHomeInsightsUseCase();
 
@@ -318,7 +318,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    _weekdays[date.weekday - 1],
+                    SpanishDateLabels.shortWeekday(date),
                     style: GoogleFonts.dmSans(
                       fontSize: 9,
                       fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
@@ -1729,61 +1729,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   String _formatCompactDate(DateTime date) {
-    const months = [
-      'ene',
-      'feb',
-      'mar',
-      'abr',
-      'may',
-      'jun',
-      'jul',
-      'ago',
-      'sep',
-      'oct',
-      'nov',
-      'dic',
-    ];
-    return '${date.day} ${months[date.month - 1]}';
+    return SpanishDateLabels.compactDate(date);
   }
 
   String _formatHeroDate(DateTime date) {
-    const weekdays = [
-      'Lunes',
-      'Martes',
-      'Miércoles',
-      'Jueves',
-      'Viernes',
-      'Sábado',
-      'Domingo',
-    ];
-    return '${weekdays[date.weekday - 1]} ${date.day}/${date.month}';
+    return '${SpanishDateLabels.longWeekday(date)} ${date.day}/${date.month}';
   }
 
   String _formatHeroDateLong(DateTime date) {
-    const weekdays = [
-      'Lunes',
-      'Martes',
-      'Miércoles',
-      'Jueves',
-      'Viernes',
-      'Sábado',
-      'Domingo',
-    ];
-    const months = [
-      'enero',
-      'febrero',
-      'marzo',
-      'abril',
-      'mayo',
-      'junio',
-      'julio',
-      'agosto',
-      'septiembre',
-      'octubre',
-      'noviembre',
-      'diciembre',
-    ];
-    return '${weekdays[date.weekday - 1]}, ${date.day} de ${months[date.month - 1]}';
+    return SpanishDateLabels.fullDate(date);
   }
 
   String _formatRemaining(Duration? remaining) {

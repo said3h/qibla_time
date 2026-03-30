@@ -6,6 +6,7 @@ import '../../../core/theme/app_theme.dart';
 import '../../../core/utils/religious_reference_formatter.dart';
 import '../models/dua_model.dart';
 import '../services/dua_service.dart';
+import '../utils/dua_share_helper.dart';
 import 'dua_category_detail_screen.dart';
 
 class DuasScreen extends ConsumerStatefulWidget {
@@ -616,6 +617,22 @@ class _DuaCard extends StatelessWidget {
                         : Icons.bookmark_border_rounded,
                     size: 18,
                     color: dua.isFeatured ? tokens.primary : tokens.textMuted,
+                  ),
+                  const SizedBox(height: 4),
+                  IconButton(
+                    tooltip: 'Compartir',
+                    onPressed: () => shareDua(context, dua),
+                    visualDensity: VisualDensity.compact,
+                    padding: EdgeInsets.zero,
+                    constraints: const BoxConstraints(
+                      minWidth: 28,
+                      minHeight: 28,
+                    ),
+                    icon: Icon(
+                      Icons.share_outlined,
+                      size: 18,
+                      color: tokens.primary,
+                    ),
                   ),
                 ],
               ),

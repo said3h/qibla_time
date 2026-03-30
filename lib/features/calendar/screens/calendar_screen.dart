@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hijri/hijri_calendar.dart';
-import 'package:intl/intl.dart';
 
 import '../../../core/theme/app_theme.dart';
+import '../../../core/utils/spanish_date_labels.dart';
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({super.key});
@@ -47,24 +47,45 @@ class _CalendarScreenState extends State<CalendarScreen> {
           ),
         ),
       ),
-      body: ListView(
-        padding: const EdgeInsets.all(16),
-        children: [
-          _buildHijriBanner(tokens),
-          const SizedBox(height: 24),
-          _buildGregorianDatePicker(tokens),
-          const SizedBox(height: 32),
-          Text(
-            'Fechas importantes (${currentHijri.hYear} AH)',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: tokens.primary,
-            ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              _blend(
+                tokens.primary,
+                tokens.bgPage,
+                _isLightTheme(tokens) ? 0.03 : 0.07,
+              ),
+              tokens.bgPage,
+              _blend(
+                tokens.accent,
+                tokens.bgApp,
+                _isLightTheme(tokens) ? 0.02 : 0.04,
+              ),
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
           ),
-          const SizedBox(height: 16),
-          ..._buildUpcomingEvents(tokens),
-        ],
+        ),
+        child: ListView(
+          padding: const EdgeInsets.all(16),
+          children: [
+            _buildHijriBanner(tokens),
+            const SizedBox(height: 24),
+            _buildGregorianDatePicker(tokens),
+            const SizedBox(height: 32),
+            Text(
+              'Fechas importantes (${currentHijri.hYear} AH)',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: tokens.textPrimary,
+              ),
+            ),
+            const SizedBox(height: 16),
+            ..._buildUpcomingEvents(tokens),
+          ],
+        ),
       ),
     );
   }
@@ -96,7 +117,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
         tokens,
         event['name'] as String,
         '${event['day']} ${hCalendar.toFormat("MMMM")}',
-        DateFormat('EEEE, d MMM yyyy', 'es').format(gregorianDate),
+        SpanishDateLabels.shortWeekdayDate(gregorianDate),
         isCurrentMonth,
       );
     }).toList();
@@ -107,11 +128,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
     final bannerAccent = _foregroundFor(tokens.accent);
     final today = _dateOnly(DateTime.now());
     final isToday = _isSameDay(selectedDate, today);
-    final todayLabel = DateFormat('EEEE, d MMMM yyyy', 'es').format(today);
-    final selectedLabel = DateFormat(
-      'EEEE, d MMMM yyyy',
-      'es',
-    ).format(selectedDate);
+    final todayLabel = SpanishDateLabels.fullDateWithYear(today);
+    final selectedLabel = SpanishDateLabels.fullDateWithYear(selectedDate);
 
     return Container(
       padding: const EdgeInsets.all(24),
@@ -238,14 +256,22 @@ class _CalendarScreenState extends State<CalendarScreen> {
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
             decoration: BoxDecoration(
-              color: tokens.bgSurface,
+              color: _surfaceCardColor(tokens),
               borderRadius: BorderRadius.circular(15),
-              border: Border.all(color: tokens.borderMed),
+              border: Border.all(
+                color: _blend(
+                  tokens.primary,
+                  tokens.borderMed,
+                  _isLightTheme(tokens) ? 0.12 : 0.2,
+                ),
+              ),
               boxShadow: [
                 BoxShadow(
-                  color: tokens.border.withOpacity(0.2),
-                  blurRadius: 10,
-                  offset: const Offset(0, 4),
+                  color: tokens.primary.withOpacity(
+                    _isLightTheme(tokens) ? 0.08 : 0.16,
+                  ),
+                  blurRadius: 14,
+                  offset: const Offset(0, 6),
                 ),
               ],
             ),
@@ -253,7 +279,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  DateFormat('d MMMM yyyy', 'es').format(selectedDate),
+                  '${selectedDate.day} de ${SpanishDateLabels.longMonth(selectedDate)} de ${selectedDate.year}',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -276,14 +302,34 @@ class _CalendarScreenState extends State<CalendarScreen> {
     String gregorianDateString,
     bool isCurrentMonth,
   ) {
+    final isLightTheme = _isLightTheme(tokens);
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
-        color: isCurrentMonth ? tokens.primaryBg : tokens.bgSurface,
+        color: isCurrentMonth
+            ? _highlightCardColor(tokens)
+            : _surfaceCardColor(tokens),
         borderRadius: BorderRadius.circular(15),
         border: Border.all(
-          color: isCurrentMonth ? tokens.primaryBorder : tokens.border,
+          color: isCurrentMonth
+              ? _blend(
+                  tokens.primary,
+                  tokens.primaryBorder,
+                  isLightTheme ? 0.12 : 0.18,
+                )
+              : _blend(
+                  tokens.primary,
+                  tokens.border,
+                  isLightTheme ? 0.06 : 0.12,
+                ),
         ),
+        boxShadow: [
+          BoxShadow(
+            color: tokens.primary.withOpacity(isLightTheme ? 0.04 : 0.1),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
@@ -339,6 +385,31 @@ class _CalendarScreenState extends State<CalendarScreen> {
   Color _foregroundFor(Color background) {
     final brightness = ThemeData.estimateBrightnessForColor(background);
     return brightness == Brightness.dark ? Colors.white : Colors.black;
+  }
+
+  bool _isLightTheme(QiblaTokens tokens) {
+    return ThemeData.estimateBrightnessForColor(tokens.bgPage) ==
+        Brightness.light;
+  }
+
+  Color _blend(Color foreground, Color background, double opacity) {
+    return Color.alphaBlend(foreground.withOpacity(opacity), background);
+  }
+
+  Color _surfaceCardColor(QiblaTokens tokens) {
+    return _blend(
+      tokens.primary,
+      tokens.bgSurface,
+      _isLightTheme(tokens) ? 0.05 : 0.09,
+    );
+  }
+
+  Color _highlightCardColor(QiblaTokens tokens) {
+    return _blend(
+      tokens.primary,
+      tokens.bgSurface,
+      _isLightTheme(tokens) ? 0.12 : 0.18,
+    );
   }
 
   DateTime _dateOnly(DateTime date) {
