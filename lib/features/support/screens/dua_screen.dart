@@ -18,6 +18,7 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
   String _selectedCategory = 'morning';
   late final TextEditingController _searchController;
   String _searchQuery = '';
+  final ScrollController _scrollController = ScrollController();
 
   static const _categoryOrder = [
     'morning',
@@ -119,6 +120,7 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
   @override
   void dispose() {
     _searchController.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -196,6 +198,7 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
     final featured = duas.where((dua) => dua.isFeatured).toList();
 
     return ListView(
+      controller: _scrollController,
       padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
       children: [
         Text(
@@ -365,7 +368,18 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
               final count = grouped[key]?.length ?? 0;
 
               return InkWell(
-                onTap: () => setState(() => _selectedCategory = key),
+                onTap: () {
+                  setState(() => _selectedCategory = key);
+                  Future.delayed(const Duration(milliseconds: 100), () {
+                    if (_scrollController.hasClients) {
+                      _scrollController.animateTo(
+                        450,
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeInOut,
+                      );
+                    }
+                  });
+                },
                 borderRadius: BorderRadius.circular(16),
                 child: Container(
                   padding: const EdgeInsets.all(14),

@@ -109,22 +109,28 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 connectivityAsync.valueOrNull ?? true,
               ),
               _buildCalendarStrip(tokens),
-              SizedBox(
-                height: 220,
-                child: selectedPrayerScheduleAsync.when(
-                  data: (resolvedSchedule) => _buildHeroSection(
-                    resolvedSchedule,
-                    selectedNextPrayerInfo,
-                    selectedCountdown,
-                    tokens,
-                    streak,
-                    locationDiagnosticAsync.valueOrNull,
-                    _selectedDate,
+              Padding(
+                padding: const EdgeInsets.only(bottom: 12),
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    minHeight: 200,
+                    maxHeight: 260,
                   ),
-                  loading: () => _buildLoadingHero(tokens),
-                  error: (_, __) => _buildFallbackHero(
-                    tokens,
-                    locationDiagnosticAsync.valueOrNull,
+                  child: selectedPrayerScheduleAsync.when(
+                    data: (resolvedSchedule) => _buildHeroSection(
+                      resolvedSchedule,
+                      selectedNextPrayerInfo,
+                      selectedCountdown,
+                      tokens,
+                      streak,
+                      locationDiagnosticAsync.valueOrNull,
+                      _selectedDate,
+                    ),
+                    loading: () => _buildLoadingHero(tokens),
+                    error: (_, __) => _buildFallbackHero(
+                      tokens,
+                      locationDiagnosticAsync.valueOrNull,
+                    ),
                   ),
                 ),
               ),
