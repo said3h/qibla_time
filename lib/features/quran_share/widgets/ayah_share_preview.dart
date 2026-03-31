@@ -12,13 +12,6 @@ class AyahSharePreview extends StatelessWidget {
     this.cardOnly = false,
   });
 
-  static const EdgeInsets _cardOnlyPadding = EdgeInsets.fromLTRB(
-    60,
-    60,
-    60,
-    80,
-  );
-
   final AyahShareData data;
   final AyahShareThemeData theme;
   final bool cardOnly;
@@ -43,13 +36,7 @@ class AyahSharePreview extends StatelessWidget {
     );
 
     if (cardOnly) {
-      return ColoredBox(
-        color: theme.canvasBackgroundColor,
-        child: Padding(
-          padding: _cardOnlyPadding,
-          child: card,
-        ),
-      );
+      return card;
     }
 
     return ColoredBox(

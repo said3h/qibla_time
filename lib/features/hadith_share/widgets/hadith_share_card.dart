@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../shared_share/widgets/share_content_badge.dart';
 import '../models/hadith_share_data.dart';
 import '../models/hadith_share_theme.dart';
 
@@ -37,21 +38,9 @@ class HadithShareCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-              decoration: BoxDecoration(
-                color: resolvedTheme.accentColor.withOpacity(0.10),
-                borderRadius: BorderRadius.circular(999),
-              ),
-              child: Text(
-                'HADITH',
-                style: GoogleFonts.dmSans(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                  letterSpacing: 2.8,
-                  color: resolvedTheme.accentColor,
-                ),
-              ),
+            ShareContentBadge(
+              label: data.badgeLabel,
+              accentColor: resolvedTheme.accentColor,
             ),
             if (data.hasArabicText) ...[
               SizedBox(height: resolvedTheme.sectionSpacing),
@@ -101,6 +90,28 @@ class HadithShareCard extends StatelessWidget {
               color: resolvedTheme.dividerColor,
             ),
             SizedBox(height: resolvedTheme.contentSpacing),
+            if (data.hasArabicReference) ...[
+              SizedBox(
+                width: double.infinity,
+                child: Directionality(
+                  textDirection: TextDirection.rtl,
+                  child: Text(
+                    data.arabicReference!.trim(),
+                    textAlign: TextAlign.right,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontFamily: resolvedTheme.arabicFontFamily,
+                      fontSize: resolvedTheme.referenceFontSize * 1.02,
+                      height: resolvedTheme.referenceLineHeight,
+                      fontWeight: FontWeight.w600,
+                      color: resolvedTheme.secondaryTextColor,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: resolvedTheme.contentSpacing * 0.55),
+            ],
             SizedBox(
               width: double.infinity,
               child: Text(

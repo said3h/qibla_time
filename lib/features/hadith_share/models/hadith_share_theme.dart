@@ -95,8 +95,12 @@ class HadithShareThemeData {
     final arabicLength = (data.arabicText ?? '').trim().length;
     final translationLength = data.translation.trim().length;
     final referenceLength = data.reference.trim().length;
+    final arabicReferenceLength = (data.arabicReference ?? '').trim().length;
     final densityScore =
-        (arabicLength / 320) + (translationLength / 540) + (referenceLength / 120);
+        (arabicLength / 320) +
+        (translationLength / 540) +
+        (referenceLength / 120) +
+        (arabicReferenceLength / 110);
 
     if (densityScore <= 1.25) {
       return this;

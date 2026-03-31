@@ -107,6 +107,7 @@ class AyahShareService {
       ayahNumber: ayah.numberInSurah,
       arabicText: includeArabic ? ayah.arabic : '',
       translation: includeTranslation ? ayah.translation : null,
+      badgeLabel: 'QURAN',
       branding: 'App: Qibla Time',
     );
   }

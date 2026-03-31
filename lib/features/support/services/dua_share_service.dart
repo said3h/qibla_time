@@ -2,6 +2,7 @@ import 'package:cross_file/cross_file.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../core/theme/app_theme.dart';
+import '../../../core/utils/religious_reference_formatter.dart';
 import '../../hadith_share/models/hadith_share_data.dart';
 import '../../hadith_share/models/hadith_share_theme.dart';
 import '../../hadith_share/services/hadith_share_image_service.dart';
@@ -96,6 +97,10 @@ class DuaShareService {
     final title = dua.title.trim();
     final reference = (dua.reference ?? '').trim();
     final source = (dua.source ?? '').trim();
+    final arabicReference = (dua.reference ?? '').trim().isEmpty
+        ? null
+        : ReligiousReferenceFormatter.buildArabicReference(dua.reference!);
+    final arabicCategoryLabel = _duaCategoryArabicLabel(dua.category);
     final referenceSections = <String>[
       if (title.isNotEmpty) title,
       if (reference.isNotEmpty) reference,
@@ -108,7 +113,32 @@ class DuaShareService {
           : null,
       translation: includeTranslation ? dua.translation : '',
       reference: referenceSections.join(' · '),
+      arabicReference: arabicReference ?? arabicCategoryLabel,
+      badgeLabel: 'DUA',
       branding: 'App: Qibla Time',
     );
+  }
+
+  String? _duaCategoryArabicLabel(String category) {
+    return switch (category) {
+      'morning' => 'الصباح',
+      'night' => 'المساء',
+      'sleep' => 'النوم',
+      'travel' => 'السفر',
+      'food' => 'الطعام',
+      'sickness' => 'المرض',
+      'protection' => 'التحصين',
+      'repentance' => 'التوبة',
+      'mosque' => 'المسجد',
+      'rain' => 'المطر',
+      'stress' => 'الكرب',
+      'gratitude' => 'الشكر',
+      'wudu' => 'الوضوء',
+      'after_prayer' => 'بعد الصلاة',
+      'zikr' => 'الذكر',
+      'parents' => 'العائلة',
+      'hajj' => 'الحج',
+      _ => null,
+    };
   }
 }

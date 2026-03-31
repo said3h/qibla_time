@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../core/theme/app_theme.dart';
+import '../../../core/utils/religious_reference_formatter.dart';
 import '../../hadith_share/models/hadith_share_data.dart';
 import '../../hadith_share/models/hadith_share_theme.dart';
 import '../../hadith_share/services/hadith_share_image_service.dart';
@@ -103,6 +104,9 @@ class HadithShareService {
       arabicText: includeArabic ? hadith.arabic : null,
       translation: includeTranslation ? hadith.translation : '',
       reference: hadith.reference,
+      arabicReference:
+          ReligiousReferenceFormatter.buildArabicReference(hadith.reference),
+      badgeLabel: 'HADITH',
       branding: 'App: Qibla Time',
     );
   }

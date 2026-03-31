@@ -6,6 +6,7 @@ class AyahShareData {
     required this.ayahNumber,
     required this.arabicText,
     this.translation,
+    this.badgeLabel = 'QURAN',
     this.branding = 'App: Qibla Time',
   });
 
@@ -15,6 +16,7 @@ class AyahShareData {
   final int ayahNumber;
   final String arabicText;
   final String? translation;
+  final String badgeLabel;
   final String branding;
 
   bool get hasArabicText => arabicText.trim().isNotEmpty;

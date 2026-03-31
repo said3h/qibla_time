@@ -102,6 +102,7 @@ class AyahShareVideoService {
         ayahNumber: draft.ayahNumber,
         arabicText: draft.arabicText,
         translation: draft.translation,
+        badgeLabel: 'QURAN',
         branding: 'App: Qibla Time',
       ),
       theme: AyahShareThemeData.fromTokens(

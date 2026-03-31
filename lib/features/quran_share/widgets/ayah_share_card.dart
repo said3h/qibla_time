@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../shared_share/widgets/share_content_badge.dart';
 import '../models/ayah_share_data.dart';
 import '../models/ayah_share_theme.dart';
 
@@ -37,21 +38,9 @@ class AyahShareCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-              decoration: BoxDecoration(
-                color: resolvedTheme.accentColor.withOpacity(0.10),
-                borderRadius: BorderRadius.circular(999),
-              ),
-              child: Text(
-                'QURAN',
-                style: GoogleFonts.dmSans(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                  letterSpacing: 2.8,
-                  color: resolvedTheme.accentColor,
-                ),
-              ),
+            ShareContentBadge(
+              label: data.badgeLabel,
+              accentColor: resolvedTheme.accentColor,
             ),
             if (data.hasArabicText) ...[
               SizedBox(height: resolvedTheme.sectionSpacing),
