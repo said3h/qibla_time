@@ -98,88 +98,99 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
-      body: SafeArea(
-        child: RefreshIndicator(
-          onRefresh: () async {
-            ref.invalidate(prayerScheduleProvider);
-            ref.invalidate(nextPrayerInfoProvider);
-            ref.invalidate(prayerCountdownProvider);
-            ref.invalidate(prayerScheduleForDateProvider(_selectedDate));
-          },
-          color: tokens.primary,
-          backgroundColor: tokens.bgSurface,
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              _buildHeader(
-                context,
-                tokens,
-                locationLabelAsync.valueOrNull,
-                connectivityAsync.valueOrNull ?? true,
-              ),
-              _buildCalendarStrip(tokens),
-              const SizedBox(height: 12),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 14),
-                child: selectedPrayerScheduleAsync.when(
-                  data: (resolvedSchedule) => _buildHeroSection(
-                    resolvedSchedule,
-                    selectedNextPrayerInfo,
-                    selectedCountdown,
-                    tokens,
-                    streak,
-                    locationDiagnosticAsync.valueOrNull,
-                    _selectedDate,
-                  ),
-                  loading: () => _buildLoadingHero(tokens),
-                  error: (_, __) => _buildFallbackHero(
-                    tokens,
-                    locationDiagnosticAsync.valueOrNull,
-                  ),
-                ),
-              ),
-              selectedPrayerScheduleAsync.when(
-                data: (resolvedSchedule) => _buildPrayerSection(
-                  resolvedSchedule?.schedule,
-                  selectedNextPrayerInfo,
-                  selectedCompletedPrayers,
-                  _selectedDate,
-                  tokens,
-                ),
-                loading: () => _buildPrayerSkeleton(tokens),
-                error: (_, __) => _buildPrayerFallback(
-                  tokens,
-                  locationDiagnosticAsync.valueOrNull,
-                ),
-              ),
-              bannerAsync.when(
-                data: (banner) => banner == null
-                    ? const SizedBox.shrink()
-                    : _buildTravelBanner(tokens, banner),
-                loading: () => const SizedBox.shrink(),
-                error: (_, __) => const SizedBox.shrink(),
-              ),
-              // Hadiz del día - Widget mejorado con 1,954 hadices
-              const DailyHadithWidget(),
-              // Libro del día - IslamHouse
-              const DailyBookWidget(),
-              _buildRamadanCard(
-                tokens,
-                prayerScheduleAsync.valueOrNull?.schedule,
-                ramadanStatusAsync.valueOrNull,
-              ),
-              _buildRamadanGoalsCard(
-                context,
-                tokens,
-                prayerScheduleAsync.valueOrNull?.schedule,
-                ramadanStatusAsync.valueOrNull,
-                tracking,
-                lastReadingAsync.valueOrNull,
-                dhikrSnapshotAsync.valueOrNull,
-              ),
-              _buildQuickActions(tokens),
-              const SizedBox(height: 16),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              _blend(tokens.primary, tokens.bgPage, _isLightTheme(tokens) ? 0.03 : 0.06),
+              tokens.bgPage,
+              _blend(tokens.accent, tokens.bgApp, _isLightTheme(tokens) ? 0.02 : 0.04),
             ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: SafeArea(
+          child: RefreshIndicator(
+            onRefresh: () async {
+              ref.invalidate(prayerScheduleProvider);
+              ref.invalidate(nextPrayerInfoProvider);
+              ref.invalidate(prayerCountdownProvider);
+              ref.invalidate(prayerScheduleForDateProvider(_selectedDate));
+            },
+            color: tokens.primary,
+            backgroundColor: tokens.bgSurface,
+            child: ListView(
+              padding: EdgeInsets.zero,
+              children: [
+                _buildHeader(
+                  context,
+                  tokens,
+                  locationLabelAsync.valueOrNull,
+                  connectivityAsync.valueOrNull ?? true,
+                ),
+                _buildCalendarStrip(tokens),
+                const SizedBox(height: 12),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 14),
+                  child: selectedPrayerScheduleAsync.when(
+                    data: (resolvedSchedule) => _buildHeroSection(
+                      resolvedSchedule,
+                      selectedNextPrayerInfo,
+                      selectedCountdown,
+                      tokens,
+                      streak,
+                      locationDiagnosticAsync.valueOrNull,
+                      _selectedDate,
+                    ),
+                    loading: () => _buildLoadingHero(tokens),
+                    error: (_, __) => _buildFallbackHero(
+                      tokens,
+                      locationDiagnosticAsync.valueOrNull,
+                    ),
+                  ),
+                ),
+                selectedPrayerScheduleAsync.when(
+                  data: (resolvedSchedule) => _buildPrayerSection(
+                    resolvedSchedule?.schedule,
+                    selectedNextPrayerInfo,
+                    selectedCompletedPrayers,
+                    _selectedDate,
+                    tokens,
+                  ),
+                  loading: () => _buildPrayerSkeleton(tokens),
+                  error: (_, __) => _buildPrayerFallback(
+                    tokens,
+                    locationDiagnosticAsync.valueOrNull,
+                  ),
+                ),
+                bannerAsync.when(
+                  data: (banner) => banner == null
+                      ? const SizedBox.shrink()
+                      : _buildTravelBanner(tokens, banner),
+                  loading: () => const SizedBox.shrink(),
+                  error: (_, __) => const SizedBox.shrink(),
+                ),
+                const DailyHadithWidget(),
+                const DailyBookWidget(),
+                _buildRamadanCard(
+                  tokens,
+                  prayerScheduleAsync.valueOrNull?.schedule,
+                  ramadanStatusAsync.valueOrNull,
+                ),
+                _buildRamadanGoalsCard(
+                  context,
+                  tokens,
+                  prayerScheduleAsync.valueOrNull?.schedule,
+                  ramadanStatusAsync.valueOrNull,
+                  tracking,
+                  lastReadingAsync.valueOrNull,
+                  dhikrSnapshotAsync.valueOrNull,
+                ),
+                _buildQuickActions(tokens),
+                const SizedBox(height: 16),
+              ],
+            ),
           ),
         ),
       ),
@@ -193,26 +204,45 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     bool isOnline,
   ) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 12, 20, 10),
+      padding: const EdgeInsets.fromLTRB(18, 14, 18, 10),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              color: _blend(tokens.primary, tokens.bgSurface, _isLightTheme(tokens) ? 0.08 : 0.14),
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: _blend(tokens.primary, tokens.border, 0.18)),
+            ),
+            child: Icon(
+              Icons.auto_awesome_rounded,
+              size: 18,
+              color: tokens.primary,
+            ),
+          ),
+          const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   'Qibla Time',
-                  style: GoogleFonts.amiri(
-                    fontSize: 24,
+                  style: GoogleFonts.dmSerifDisplay(
+                    fontSize: 22,
                     fontWeight: FontWeight.bold,
                     color: tokens.primary,
+                    letterSpacing: 0.3,
                   ),
                 ),
+                const SizedBox(height: 2),
                 Text(
-                  '${isOnline ? 'En línea' : 'Sin red'} - ${locationLabel ?? 'Ubicación no disponible'}',
+                  '${isOnline ? 'En línea' : 'Sin red'} · ${locationLabel ?? 'Ubicación no disponible'}',
                   style: GoogleFonts.dmSans(
                     fontSize: 10,
                     color: tokens.textSecondary,
+                    letterSpacing: 0.2,
                   ),
                 ),
               ],
@@ -220,9 +250,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ),
           Container(
             decoration: BoxDecoration(
-              color: tokens.bgSurface,
-              shape: BoxShape.circle,
-              border: Border.all(color: tokens.border),
+              color: _blend(tokens.bgSurface2, tokens.bgSurface, _isLightTheme(tokens) ? 0.7 : 0.88),
+              borderRadius: BorderRadius.circular(18),
+              border: Border.all(color: _blend(tokens.primary, tokens.border, 0.12)),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(_isLightTheme(tokens) ? 0.04 : 0.16),
+                  blurRadius: 18,
+                  offset: const Offset(0, 8),
+                ),
+              ],
             ),
             child: IconButton(
               tooltip: 'Ajustes',
@@ -280,111 +317,167 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final dates =
         List.generate(15, (index) => today.subtract(Duration(days: 6 - index)));
 
-    return SizedBox(
-      height: 94,
-      child: ListView.separated(
-        controller: _calendarController,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        scrollDirection: Axis.horizontal,
-        physics: const BouncingScrollPhysics(),
-        itemCount: dates.length,
-        separatorBuilder: (_, __) => const SizedBox(width: 8),
-        itemBuilder: (_, index) {
-          final date = dates[index];
-          final hijri = HijriCalendar.fromDate(date);
-          final isToday = _isSameDay(date, today);
-          final isSelected = _isSameDay(date, _selectedDate);
-          final hasEvent = hijri.hDay == 1 || hijri.hDay == 15;
-
-          return InkWell(
-            onTap: () {
-              setState(() {
-                _selectedDate = _dateOnly(date);
-              });
-            },
-            borderRadius: BorderRadius.circular(14),
-            child: Container(
-              width: 64,
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 6),
-              decoration: BoxDecoration(
-                color: isSelected
-                    ? tokens.activeBg
-                    : isToday
-                        ? tokens.primaryBg
-                        : tokens.bgSurface,
-                borderRadius: BorderRadius.circular(14),
-                border: Border.all(
-                  color: isSelected
-                      ? tokens.activeBorder
-                      : isToday
-                          ? tokens.primaryBorder
-                          : tokens.border,
-                  width: isSelected ? 1.5 : 1,
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 4, 16, 0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  'CALENDARIO SAGRADO',
+                  style: GoogleFonts.dmSans(
+                    fontSize: 9,
+                    letterSpacing: 1.6,
+                    color: tokens.textSecondary,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    SpanishDateLabels.shortWeekday(date),
-                    style: GoogleFonts.dmSans(
-                      fontSize: 9,
-                      fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-                      color: isSelected ? tokens.primaryLight : tokens.textSecondary,
-                    ),
-                  ),
-                  Text(
-                    _weekdaysArabic[date.weekday - 1],
-                    style: GoogleFonts.amiri(
-                      fontSize: 9,
-                      fontWeight: FontWeight.w700,
-                      color: isSelected ? tokens.primary : tokens.textMuted,
-                      height: 1.0,
-                    ),
-                  ),
-                  const SizedBox(height: 2),
-                  Text(
-                    '${date.day}',
-                    style: GoogleFonts.dmSans(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                      color: tokens.textPrimary,
-                    ),
-                  ),
-                  Text(
-                    '${hijri.hDay} ${hijri.getShortMonthName()}',
-                    style: GoogleFonts.dmSans(
-                      fontSize: 8,
-                      color: isSelected ? tokens.primary : tokens.textMuted,
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: 3),
-                  if (isSelected)
-                    Container(
-                      width: 16,
-                      height: 4,
-                      decoration: BoxDecoration(
-                        color: tokens.primary,
-                        borderRadius: BorderRadius.circular(999),
-                      ),
-                    )
-                  else if (hasEvent)
-                    Container(
-                      width: 4,
-                      height: 4,
-                      decoration: BoxDecoration(
-                        color: tokens.primary,
-                        shape: BoxShape.circle,
-                      ),
-                    )
-                  else
-                    const SizedBox(height: 4),
-                ],
+              Text(
+                _formatCompactDate(_selectedDate),
+                style: GoogleFonts.dmSans(
+                  fontSize: 10,
+                  color: tokens.primaryLight,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          SizedBox(
+            height: 104,
+            child: ListView.separated(
+              controller: _calendarController,
+              scrollDirection: Axis.horizontal,
+              physics: const BouncingScrollPhysics(),
+              itemCount: dates.length,
+              separatorBuilder: (_, __) => const SizedBox(width: 10),
+              itemBuilder: (_, index) {
+                final date = dates[index];
+                final hijri = HijriCalendar.fromDate(date);
+                final isToday = _isSameDay(date, today);
+                final isSelected = _isSameDay(date, _selectedDate);
+                final hasEvent = hijri.hDay == 1 || hijri.hDay == 15;
+
+                return InkWell(
+                  onTap: () {
+                    setState(() {
+                      _selectedDate = _dateOnly(date);
+                    });
+                  },
+                  borderRadius: BorderRadius.circular(22),
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 220),
+                    curve: Curves.easeOutCubic,
+                    width: 78,
+                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: isSelected
+                            ? [
+                                _blend(tokens.primary, tokens.bgSurface, 0.22),
+                                _blend(tokens.primary, tokens.bgSurface, 0.08),
+                              ]
+                            : [
+                                _blend(tokens.bgSurface2, tokens.bgSurface, 0.86),
+                                tokens.bgSurface,
+                              ],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                      ),
+                      borderRadius: BorderRadius.circular(22),
+                      border: Border.all(
+                        color: isSelected
+                            ? tokens.primary.withOpacity(0.35)
+                            : isToday
+                                ? tokens.primaryBorder
+                                : tokens.border,
+                        width: isSelected ? 1.4 : 1,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: isSelected
+                              ? tokens.primary.withOpacity(0.16)
+                              : Colors.black.withOpacity(0.08),
+                          blurRadius: isSelected ? 18 : 10,
+                          offset: const Offset(0, 8),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          SpanishDateLabels.shortWeekday(date),
+                          style: GoogleFonts.dmSans(
+                            fontSize: 9,
+                            fontWeight: FontWeight.w600,
+                            color: isSelected ? tokens.primaryLight : tokens.textSecondary,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 14,
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              _weekdaysArabic[date.weekday - 1],
+                              style: GoogleFonts.amiri(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w700,
+                                color: isSelected ? tokens.primary : tokens.textMuted,
+                                height: 1,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          '${date.day}',
+                          style: GoogleFonts.dmSans(
+                            fontSize: 19,
+                            fontWeight: FontWeight.w500,
+                            color: tokens.textPrimary,
+                          ),
+                        ),
+                        Text(
+                          '${hijri.hDay} ${hijri.getShortMonthName()}',
+                          style: GoogleFonts.dmSans(
+                            fontSize: 8,
+                            color: isSelected ? tokens.primaryLight : tokens.textMuted,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        const SizedBox(height: 6),
+                        if (isSelected)
+                          Container(
+                            width: 22,
+                            height: 4,
+                            decoration: BoxDecoration(
+                              color: tokens.primary,
+                              borderRadius: BorderRadius.circular(999),
+                            ),
+                          )
+                        else if (hasEvent)
+                          Container(
+                            width: 5,
+                            height: 5,
+                            decoration: BoxDecoration(
+                              color: tokens.primary,
+                              shape: BoxShape.circle,
+                            ),
+                          )
+                        else
+                          const SizedBox(height: 5),
+                      ],
+                    ),
+                  ),
+                );
+              },
             ),
-          );
-        },
+          ),
+        ],
       ),
     );
   }
@@ -414,92 +507,123 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     final hero = tokens.getHero(nextPrayerInfo.prayer.key);
     final names = _prayerName(nextPrayerInfo.prayer);
-    final nextPrayerSubtitle = remaining == null
-        ? 'Hoy a las ${_formatTime(nextPrayerInfo.time)}'
-        : 'Hoy a las ${_formatTime(nextPrayerInfo.time)} - ${_formatRemaining(remaining)}';
+    final nextPrayerSubtitle = 'Comienza a las ${_formatTime(nextPrayerInfo.time)}';
 
     return Container(
       margin: const EdgeInsets.fromLTRB(16, 0, 16, 0),
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.fromLTRB(20, 18, 20, 20),
       decoration: BoxDecoration(
-        color: hero.bg,
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: tokens.primaryBorder),
+        color: _blend(hero.bg, tokens.bgSurface, 0.78),
+        borderRadius: BorderRadius.circular(30),
+        border: Border.all(color: _blend(tokens.primary, tokens.borderMed, 0.22)),
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [hero.bg, hero.tint],
+          colors: [
+            _blend(hero.bg, tokens.bgSurface, 0.82),
+            _blend(hero.tint, tokens.bgSurface, 0.9),
+          ],
         ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.18),
+            blurRadius: 24,
+            offset: const Offset(0, 14),
+          ),
+        ],
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Stack(
         children: [
-          Row(
+          Positioned(
+            top: -6,
+            right: -2,
+            child: Icon(
+              Icons.mosque_rounded,
+              size: 96,
+              color: tokens.primary.withOpacity(0.08),
+            ),
+          ),
+          Column(
             children: [
-              Expanded(
-                child: Text(
-                  'Próxima oración'.toUpperCase(),
-                  style: GoogleFonts.dmSans(
-                    fontSize: 9,
-                    color: hero.label,
-                    letterSpacing: 1.5,
-                  ),
+              Text(
+                'PRÓXIMA ORACIÓN',
+                style: GoogleFonts.dmSans(
+                  fontSize: 9,
+                  color: tokens.primary.withOpacity(0.65),
+                  letterSpacing: 1.8,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
+              const SizedBox(height: 6),
+              Text(
+                names.$1,
+                textAlign: TextAlign.center,
+                style: GoogleFonts.dmSerifDisplay(
+                  fontSize: 42,
+                  color: tokens.primary,
+                  height: 1.0,
+                ),
+              ),
+              const SizedBox(height: 2),
+              Text(
+                names.$2,
+                textAlign: TextAlign.center,
+                style: GoogleFonts.amiri(
+                  fontSize: 24,
+                  color: tokens.primaryLight,
+                  height: 1.05,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                _selectedDate == _dateOnly(DateTime.now())
+                    ? 'Consulta central de hoy'
+                    : _formatHeroDate(_selectedDate),
+                style: GoogleFonts.dmSans(
+                  fontSize: 11,
+                  color: tokens.textSecondary,
+                ),
+              ),
+              if (resolvedSchedule?.fromCache == true) ...[
+                const SizedBox(height: 10),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: tokens.primaryBg,
+                    borderRadius: BorderRadius.circular(999),
+                    border: Border.all(color: tokens.primaryBorder),
+                  ),
+                  child: Text(
+                    'Usando tu última ubicación guardada',
+                    style: GoogleFonts.dmSans(
+                      fontSize: 10,
+                      color: tokens.textPrimary,
+                    ),
+                  ),
+                ),
+              ],
+              const SizedBox(height: 18),
+              _buildCountdown(tokens, remaining),
+              const SizedBox(height: 16),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: tokens.primaryBg,
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: tokens.primaryBorder),
+                  color: _blend(tokens.primary, tokens.bgSurface, 0.12),
+                  borderRadius: BorderRadius.circular(999),
+                  border: Border.all(color: _blend(tokens.primary, tokens.borderMed, 0.2)),
                 ),
                 child: Text(
-                  isToday ? 'Hoy' : 'Consulta abajo',
+                  nextPrayerSubtitle,
                   style: GoogleFonts.dmSans(
                     fontSize: 10,
-                    color: tokens.primaryLight,
+                    color: tokens.primary,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: 0.2,
                   ),
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 6),
-          Text(
-            '${names.$1} - ${names.$2}',
-            style: GoogleFonts.amiri(
-              fontSize: 32,
-              color: tokens.primaryLight,
-              height: 1.1,
-            ),
-          ),
-          const SizedBox(height: 2),
-          Text(
-            nextPrayerSubtitle,
-            style: GoogleFonts.dmSans(
-              fontSize: 12,
-              color: tokens.textSecondary,
-            ),
-          ),
-          if (resolvedSchedule?.fromCache == true) ...[
-            const SizedBox(height: 8),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-              decoration: BoxDecoration(
-                color: tokens.primaryBg,
-                borderRadius: BorderRadius.circular(999),
-                border: Border.all(color: tokens.primaryBorder),
-              ),
-              child: Text(
-                'Usando tu última ubicación guardada',
-                style: GoogleFonts.dmSans(
-                  fontSize: 10,
-                  color: tokens.textPrimary,
-                ),
-              ),
-            ),
-          ],
-          const SizedBox(height: 14),
-          _buildCountdown(tokens, remaining),
         ],
       ),
     );
@@ -514,76 +638,77 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final hijri = HijriCalendar.fromDate(selectedDate);
     return Container(
       margin: const EdgeInsets.fromLTRB(16, 0, 16, 0),
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.fromLTRB(20, 18, 20, 20),
       decoration: BoxDecoration(
         color: tokens.bgSurface,
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: tokens.border),
+        borderRadius: BorderRadius.circular(30),
+        border: Border.all(color: _blend(tokens.primary, tokens.border, 0.12)),
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [tokens.bgSurface, tokens.bgSurface2],
+          colors: [
+            _blend(tokens.primary, tokens.bgSurface, _isLightTheme(tokens) ? 0.06 : 0.1),
+            _blend(tokens.bgSurface2, tokens.bgSurface, 0.9),
+          ],
         ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.12),
+            blurRadius: 20,
+            offset: const Offset(0, 12),
+          ),
+        ],
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Expanded(
-                child: Text(
-                  isToday
-                      ? 'HOY'
-                      : 'FECHA SELECCIONADA',
-                  style: GoogleFonts.dmSans(
-                    fontSize: 9,
-                    color: tokens.textSecondary,
-                    letterSpacing: 1.5,
-                  ),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: BoxDecoration(
-                  color: tokens.primaryBg,
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: tokens.primaryBorder),
-                ),
-                child: Text(
-                  isToday ? 'Hoy' : 'Consulta abajo',
-                  style: GoogleFonts.dmSans(
-                    fontSize: 10,
-                    color: tokens.primaryLight,
-                  ),
-                ),
-              ),
-            ],
+          Text(
+            isToday ? 'HOY' : 'FECHA SELECCIONADA',
+            textAlign: TextAlign.center,
+            style: GoogleFonts.dmSans(
+              fontSize: 9,
+              color: tokens.textSecondary,
+              letterSpacing: 1.8,
+              fontWeight: FontWeight.w600,
+            ),
           ),
           const SizedBox(height: 8),
           Text(
             _formatHeroDateLong(selectedDate),
-            style: GoogleFonts.amiri(
-              fontSize: 26,
-              color: tokens.primaryLight,
-              height: 1.1,
+            textAlign: TextAlign.center,
+            style: GoogleFonts.dmSerifDisplay(
+              fontSize: 30,
+              color: tokens.primary,
+              height: 1.08,
             ),
           ),
-          const SizedBox(height: 4),
+          const SizedBox(height: 6),
           Text(
             '${hijri.hDay} ${hijri.toFormat("MMMM")} ${hijri.hYear} AH',
-            style: GoogleFonts.dmSans(
-              fontSize: 12,
-              color: tokens.textSecondary,
+            textAlign: TextAlign.center,
+            style: GoogleFonts.amiri(
+              fontSize: 18,
+              color: tokens.primaryLight,
+              height: 1.2,
             ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 12),
+          Container(
+            width: 40,
+            height: 3,
+            decoration: BoxDecoration(
+              color: tokens.primary.withOpacity(0.45),
+              borderRadius: BorderRadius.circular(999),
+            ),
+          ),
+          const SizedBox(height: 12),
           Text(
             isToday
                 ? 'Consulta abajo los horarios completos de hoy.'
                 : 'Consulta abajo los horarios completos del día seleccionado.',
+            textAlign: TextAlign.center,
             style: GoogleFonts.dmSans(
               fontSize: 12,
-              height: 1.5,
+              height: 1.55,
               color: tokens.textPrimary,
             ),
           ),
@@ -616,20 +741,37 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: tokens.bgSurface,
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(30),
         border: Border.all(color: tokens.border),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             'Cargando horarios',
-            style: GoogleFonts.dmSans(color: tokens.textPrimary),
+            style: GoogleFonts.dmSerifDisplay(
+              fontSize: 24,
+              color: tokens.primary,
+            ),
+          ),
+          const SizedBox(height: 16),
+          SizedBox(
+            width: 172,
+            height: 172,
+            child: Center(
+              child: CircularProgressIndicator(
+                color: tokens.primary,
+                backgroundColor: tokens.bgSurface2,
+                strokeWidth: 4,
+              ),
+            ),
           ),
           const SizedBox(height: 8),
-          LinearProgressIndicator(
-            color: tokens.primary,
-            backgroundColor: tokens.bgSurface2,
+          Text(
+            'Preparando tu próxima oración',
+            style: GoogleFonts.dmSans(
+              fontSize: 12,
+              color: tokens.textSecondary,
+            ),
           ),
         ],
       ),
@@ -1420,14 +1562,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Widget _buildCountdown(QiblaTokens tokens, Duration? remaining) {
     if (remaining == null) {
       return Container(
-        width: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+        width: 188,
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 18),
         decoration: BoxDecoration(
           color: Colors.black.withOpacity(0.18),
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(24),
         ),
         child: Text(
           'Cuenta atras no disponible',
+          textAlign: TextAlign.center,
           style: GoogleFonts.dmSans(
             fontSize: 12,
             fontWeight: FontWeight.w500,
@@ -1440,42 +1583,71 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final hours = remaining.inHours.toString().padLeft(2, '0');
     final minutes = (remaining.inMinutes % 60).toString().padLeft(2, '0');
     final seconds = (remaining.inSeconds % 60).toString().padLeft(2, '0');
-    final items = [(hours, 'horas'), (minutes, 'min'), (seconds, 'seg')];
+    final clampedMinutes = remaining.inMinutes.clamp(0, 360);
+    final progress = (1 - (clampedMinutes / 360)).clamp(0.08, 0.96).toDouble();
 
-    return Row(
-      children: [
-        for (var i = 0; i < items.length; i++) ...[
-          Expanded(
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.25),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Column(
-                children: [
-                  Text(
-                    items[i].$1,
-                    style: GoogleFonts.dmSans(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w500,
-                      color: tokens.textPrimary,
-                    ),
-                  ),
-                  Text(
-                    items[i].$2,
-                    style: GoogleFonts.dmSans(
-                      fontSize: 8,
-                      color: tokens.textSecondary,
-                    ),
-                  ),
-                ],
+    return SizedBox(
+      width: 188,
+      height: 188,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          SizedBox(
+            width: 188,
+            height: 188,
+            child: CustomPaint(
+              painter: _CountdownRingPainter(
+                trackColor: _blend(tokens.bgSurface2, Colors.black, 0.7),
+                progressColor: tokens.primary,
+                progress: progress,
               ),
             ),
           ),
-          if (i != items.length - 1) const SizedBox(width: 8),
+          Container(
+            width: 154,
+            height: 154,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: _blend(tokens.bgSurface, Colors.black, 0.82),
+              border: Border.all(
+                color: _blend(tokens.primary, tokens.borderMed, 0.12),
+              ),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  '$hours:$minutes',
+                  style: GoogleFonts.dmSans(
+                    fontSize: 32,
+                    fontWeight: FontWeight.w300,
+                    color: tokens.textPrimary,
+                    letterSpacing: -0.6,
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  'RESTANTE',
+                  style: GoogleFonts.dmSans(
+                    fontSize: 9,
+                    color: tokens.textSecondary,
+                    letterSpacing: 1.5,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  '$seconds seg',
+                  style: GoogleFonts.dmSans(
+                    fontSize: 11,
+                    color: tokens.primaryLight,
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
-      ],
+      ),
     );
   }
 
@@ -1521,42 +1693,74 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
               ),
               Text(
-                '${completed.length}/5',
-                style: GoogleFonts.dmSans(fontSize: 10, color: tokens.primary),
+                isToday
+                    ? '${SpanishDateLabels.longWeekday(date)}, día de adoración'
+                    : '${completed.length}/5 marcadas',
+                style: GoogleFonts.dmSans(fontSize: 10, color: tokens.primaryLight),
               ),
             ],
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 10),
           ...prayers.map((prayer) {
             final isCurrent = prayer.$1.key == nextPrayerName;
             final isDone = _isPrayerDone(completed, prayer.$1.key);
             return Container(
-              margin: const EdgeInsets.only(bottom: 6),
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 11),
+              margin: const EdgeInsets.only(bottom: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
               decoration: BoxDecoration(
-                color: isCurrent ? tokens.activeBg : tokens.bgSurface,
-                borderRadius: BorderRadius.circular(14),
+                color: isCurrent
+                    ? _blend(tokens.primary, tokens.bgSurface, 0.12)
+                    : isDone
+                        ? _blend(tokens.bgSurface, tokens.bgPage, 0.9)
+                        : tokens.bgSurface,
+                borderRadius: BorderRadius.circular(22),
                 border: Border.all(
-                  color: isCurrent ? tokens.activeBorder : tokens.border,
+                  color: isCurrent
+                      ? _blend(tokens.primary, tokens.primaryBorder, 0.18)
+                      : tokens.border,
                 ),
+                boxShadow: [
+                  BoxShadow(
+                    color: isCurrent
+                        ? tokens.primary.withOpacity(0.12)
+                        : Colors.black.withOpacity(0.06),
+                    blurRadius: isCurrent ? 18 : 10,
+                    offset: const Offset(0, 8),
+                  ),
+                ],
               ),
               child: Row(
                 children: [
+                  Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: isCurrent ? tokens.primary.withOpacity(0.14) : tokens.bgSurface2,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(
+                      _prayerIcon(prayer.$1),
+                      size: 18,
+                      color: isCurrent ? tokens.primary : tokens.textSecondary,
+                    ),
+                  ),
+                  const SizedBox(width: 14),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           prayer.$2,
-                          style: GoogleFonts.amiri(
-                            fontSize: 16,
-                            color: tokens.textPrimary,
+                          style: GoogleFonts.dmSans(
+                            fontSize: 14,
+                            fontWeight: isCurrent ? FontWeight.w700 : FontWeight.w600,
+                            color: isCurrent ? tokens.primary : tokens.textPrimary,
                           ),
                         ),
                         Text(
                           prayer.$3,
                           style: GoogleFonts.amiri(
-                            fontSize: 11,
+                            fontSize: 13,
                             color: tokens.textSecondary,
                           ),
                         ),
@@ -1567,9 +1771,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     _formatTime(prayer.$4),
                     style: GoogleFonts.dmSans(
                       fontSize: 14,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: isCurrent ? FontWeight.w700 : FontWeight.w500,
                       color: isCurrent
-                          ? tokens.primaryLight
+                          ? tokens.primary
                           : tokens.textPrimary,
                     ),
                   ),
@@ -1655,50 +1859,82 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
-      child: GridView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: actions.length,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 4,
-          mainAxisSpacing: 8,
-          crossAxisSpacing: 8,
-          childAspectRatio: 0.95,
-        ),
-        itemBuilder: (_, index) {
-          final action = actions[index];
-          return InkWell(
-            onTap: () async {
-              await Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => action.$3 as Widget),
-              );
-              ref.invalidate(lastReadingProvider);
-              ref.invalidate(dhikrSnapshotProvider);
-            },
-            borderRadius: BorderRadius.circular(16),
-            child: Container(
-              decoration: BoxDecoration(
-                color: tokens.bgSurface,
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: tokens.border),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(action.$1, size: 22, color: tokens.primary),
-                  const SizedBox(height: 6),
-                  Text(
-                    action.$2,
-                    style: GoogleFonts.dmSans(
-                      fontSize: 9,
-                      color: tokens.textSecondary,
-                    ),
-                  ),
-                ],
-              ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'ACCESOS SAGRADOS',
+            style: GoogleFonts.dmSans(
+              fontSize: 9,
+              color: tokens.textSecondary,
+              letterSpacing: 1.6,
+              fontWeight: FontWeight.w600,
             ),
-          );
-        },
+          ),
+          const SizedBox(height: 10),
+          GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: actions.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10,
+              childAspectRatio: 1.14,
+            ),
+            itemBuilder: (_, index) {
+              final action = actions[index];
+              return InkWell(
+                onTap: () async {
+                  await Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) => action.$3 as Widget),
+                  );
+                  ref.invalidate(lastReadingProvider);
+                  ref.invalidate(dhikrSnapshotProvider);
+                },
+                borderRadius: BorderRadius.circular(24),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: _blend(tokens.bgSurface2, tokens.bgSurface, 0.88),
+                    borderRadius: BorderRadius.circular(24),
+                    border: Border.all(color: _blend(tokens.primary, tokens.border, 0.08)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.08),
+                        blurRadius: 12,
+                        offset: const Offset(0, 8),
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: 42,
+                        height: 42,
+                        decoration: BoxDecoration(
+                          color: _blend(tokens.primary, tokens.bgSurface, 0.14),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(action.$1, size: 20, color: tokens.primary),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        action.$2,
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.dmSans(
+                          fontSize: 10,
+                          color: tokens.textPrimary,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
       ),
     );
   }
@@ -1728,6 +1964,29 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       case PrayerName.isha:
         return ('Isha', 'عشاء');
     }
+  }
+
+  IconData _prayerIcon(PrayerName prayer) {
+    switch (prayer) {
+      case PrayerName.fajr:
+        return Icons.wb_twilight_rounded;
+      case PrayerName.dhuhr:
+        return Icons.wb_sunny_rounded;
+      case PrayerName.asr:
+        return Icons.light_mode_rounded;
+      case PrayerName.maghrib:
+        return Icons.nightlight_round;
+      case PrayerName.isha:
+        return Icons.dark_mode_rounded;
+    }
+  }
+
+  bool _isLightTheme(QiblaTokens tokens) {
+    return ThemeData.estimateBrightnessForColor(tokens.bgPage) == Brightness.light;
+  }
+
+  Color _blend(Color foreground, Color background, double amount) {
+    return Color.lerp(background, foreground, amount.clamp(0.0, 1.0))!;
   }
 
   String _formatTime(DateTime dateTime) {
@@ -1804,4 +2063,50 @@ class _RamadanGoalItem {
   final _RamadanGoalState state;
   final Widget? destination;
   final String? actionLabel;
+}
+
+class _CountdownRingPainter extends CustomPainter {
+  const _CountdownRingPainter({
+    required this.trackColor,
+    required this.progressColor,
+    required this.progress,
+  });
+
+  final Color trackColor;
+  final Color progressColor;
+  final double progress;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final stroke = 4.0;
+    final rect = Offset.zero & size;
+    final circleRect = rect.deflate(stroke / 2);
+
+    final trackPaint = Paint()
+      ..color = trackColor
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = stroke;
+
+    final progressPaint = Paint()
+      ..color = progressColor
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = stroke
+      ..strokeCap = StrokeCap.round;
+
+    canvas.drawArc(circleRect, 0, 6.283185307179586, false, trackPaint);
+    canvas.drawArc(
+      circleRect,
+      -1.5707963267948966,
+      6.283185307179586 * progress.clamp(0.0, 1.0),
+      false,
+      progressPaint,
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant _CountdownRingPainter oldDelegate) {
+    return oldDelegate.trackColor != trackColor ||
+        oldDelegate.progressColor != progressColor ||
+        oldDelegate.progress != progress;
+  }
 }
