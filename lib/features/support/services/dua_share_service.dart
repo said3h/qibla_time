@@ -1,62 +1,57 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:cross_file/cross_file.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../core/theme/app_theme.dart';
 import '../../hadith_share/models/hadith_share_data.dart';
 import '../../hadith_share/models/hadith_share_theme.dart';
 import '../../hadith_share/services/hadith_share_image_service.dart';
-import '../models/hadith.dart';
+import '../models/dua_model.dart';
 
-final hadithShareServiceProvider = Provider<HadithShareService>((ref) {
-  return HadithShareService();
-});
+class DuaShareService {
+  const DuaShareService();
 
-/// Servicio para compartir hadices como texto o imagen
-class HadithShareService {
-  /// Construye el texto para compartir
   String buildShareText(
-    Hadith hadith, {
+    Dua dua, {
     bool includeArabic = true,
     bool includeTranslation = true,
   }) {
     final shareData = buildShareData(
-      hadith,
+      dua,
       includeArabic: includeArabic,
       includeTranslation: includeTranslation,
     );
 
     final sections = <String>[
+      if (dua.title.trim().isNotEmpty) dua.title.trim(),
       if (shareData.hasArabicText) shareData.arabicText!.trim(),
       if (shareData.hasTranslation) shareData.translation.trim(),
       if (shareData.reference.trim().isNotEmpty)
-        '- ${shareData.reference.trim()}',
-      'App: Qibla Time',
+        'Referencia: ${shareData.reference.trim()}',
+      shareData.branding.trim(),
     ];
 
     return sections.join('\n\n');
   }
 
-  /// Comparte el hadiz como texto
-  Future<void> shareHadithAsText(
-    Hadith hadith, {
+  Future<void> shareDuaAsText(
+    Dua dua, {
     bool includeArabic = true,
     bool includeTranslation = true,
   }) async {
     await Share.share(
       buildShareText(
-        hadith,
+        dua,
         includeArabic: includeArabic,
         includeTranslation: includeTranslation,
       ),
-      subject: 'Hadiz del día - Qibla Time',
+      subject: dua.title.trim().isEmpty ? 'Dua' : dua.title.trim(),
     );
   }
 
-  /// Comparte el hadiz como imagen
-  Future<void> shareHadithAsImage(
-    Hadith hadith,
+  Future<void> shareDuaAsImage(
+    Dua dua,
     QiblaTokens tokens, {
-    HadithShareExportMode mode = HadithShareExportMode.cardOnly,
+    HadithShareExportMode mode = HadithShareExportMode.storyCanvas,
     bool includeArabic = true,
     bool includeTranslation = true,
   }) async {
@@ -67,42 +62,52 @@ class HadithShareService {
     }
 
     final transparentBackground = mode == HadithShareExportMode.cardOnly;
-    final shareData = buildShareData(
-      hadith,
-      includeArabic: includeArabic,
-      includeTranslation: includeTranslation,
-    );
     final file = await HadithShareImageService.savePng(
-      data: shareData,
+      data: buildShareData(
+        dua,
+        includeArabic: includeArabic,
+        includeTranslation: includeTranslation,
+      ),
       theme: HadithShareThemeData.fromTokens(
         tokens,
         transparentBackground: transparentBackground,
       ),
       transparentBackground: transparentBackground,
       mode: mode,
-      fileName: 'hadith_${hadith.id}_${DateTime.now().millisecondsSinceEpoch}',
+      fileName: 'dua_${dua.id}_${DateTime.now().millisecondsSinceEpoch}',
     );
 
     await Share.shareXFiles(
       [XFile(file.path)],
       text: buildShareText(
-        hadith,
+        dua,
         includeArabic: includeArabic,
         includeTranslation: includeTranslation,
       ),
-      subject: 'Hadiz compartido desde Qibla Time',
+      subject: dua.title.trim().isEmpty ? 'Dua' : dua.title.trim(),
     );
   }
 
   HadithShareData buildShareData(
-    Hadith hadith, {
+    Dua dua, {
     bool includeArabic = true,
     bool includeTranslation = true,
   }) {
+    final title = dua.title.trim();
+    final reference = (dua.reference ?? '').trim();
+    final source = (dua.source ?? '').trim();
+    final referenceSections = <String>[
+      if (title.isNotEmpty) title,
+      if (reference.isNotEmpty) reference,
+      if (source.isNotEmpty) source,
+    ];
+
     return HadithShareData(
-      arabicText: includeArabic ? hadith.arabic : null,
-      translation: includeTranslation ? hadith.translation : '',
-      reference: hadith.reference,
+      arabicText: includeArabic && dua.arabicText.trim().isNotEmpty
+          ? dua.arabicText
+          : null,
+      translation: includeTranslation ? dua.translation : '',
+      reference: referenceSections.join(' · '),
       branding: 'App: Qibla Time',
     );
   }

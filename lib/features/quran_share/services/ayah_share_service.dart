@@ -15,15 +15,21 @@ final ayahShareServiceProvider = Provider<AyahShareService>((ref) {
 class AyahShareService {
   String buildShareText(
     SurahSummary summary,
-    SurahAyah ayah,
-  ) {
-    final arabic = ayah.arabic.trim();
-    final translation = ayah.translation.trim();
+    SurahAyah ayah, {
+    bool includeArabic = true,
+    bool includeTranslation = true,
+  }) {
+    final shareData = buildShareData(
+      summary,
+      ayah,
+      includeArabic: includeArabic,
+      includeTranslation: includeTranslation,
+    );
 
     final sections = <String>[
-      if (arabic.isNotEmpty) arabic,
-      if (translation.isNotEmpty) translation,
-      '\u2014 ${summary.nameLatin} (${summary.number}:${ayah.numberInSurah})',
+      if (shareData.hasArabicText) shareData.arabicText.trim(),
+      if (shareData.hasTranslation) shareData.translation!.trim(),
+      '- ${shareData.referenceLabel}',
       'App: Qibla Time',
     ];
 
@@ -32,38 +38,76 @@ class AyahShareService {
 
   Future<void> shareAyahAsText(
     SurahSummary summary,
-    SurahAyah ayah,
-  ) async {
-    await Share.share(buildShareText(summary, ayah));
+    SurahAyah ayah, {
+    bool includeArabic = true,
+    bool includeTranslation = true,
+  }) async {
+    await Share.share(
+      buildShareText(
+        summary,
+        ayah,
+        includeArabic: includeArabic,
+        includeTranslation: includeTranslation,
+      ),
+    );
   }
 
   Future<void> shareAyahAsImage(
     SurahSummary summary,
     SurahAyah ayah,
-    QiblaTokens tokens,
-  ) async {
+    QiblaTokens tokens, {
+    AyahShareExportMode mode = AyahShareExportMode.cardOnly,
+    bool includeArabic = true,
+    bool includeTranslation = true,
+  }) async {
+    if (!includeArabic && !includeTranslation) {
+      throw ArgumentError(
+        'At least one of includeArabic or includeTranslation must be true.',
+      );
+    }
+
+    final transparentBackground = mode == AyahShareExportMode.cardOnly;
     final file = await AyahShareImageService.savePng(
-      data: AyahShareData(
-        surahNumber: summary.number,
-        surahNameLatin: summary.nameLatin,
-        surahNameArabic: summary.nameArabic,
-        ayahNumber: ayah.numberInSurah,
-        arabicText: ayah.arabic,
-        translation: ayah.translation,
-        branding: 'App: Qibla Time',
+      data: buildShareData(
+        summary,
+        ayah,
+        includeArabic: includeArabic,
+        includeTranslation: includeTranslation,
       ),
       theme: AyahShareThemeData.fromTokens(
         tokens,
-        transparentBackground: true,
+        transparentBackground: transparentBackground,
       ),
-      transparentBackground: true,
-      mode: AyahShareExportMode.cardOnly,
+      transparentBackground: transparentBackground,
+      mode: mode,
       fileName: 'ayah_${summary.number}_${ayah.numberInSurah}',
     );
 
     await Share.shareXFiles(
       [XFile(file.path)],
-      text: 'Aleya ${ayah.numberInSurah} de ${summary.nameLatin}',
+      text: buildShareText(
+        summary,
+        ayah,
+        includeArabic: includeArabic,
+        includeTranslation: includeTranslation,
+      ),
+    );
+  }
+
+  AyahShareData buildShareData(
+    SurahSummary summary,
+    SurahAyah ayah, {
+    bool includeArabic = true,
+    bool includeTranslation = true,
+  }) {
+    return AyahShareData(
+      surahNumber: summary.number,
+      surahNameLatin: summary.nameLatin,
+      surahNameArabic: summary.nameArabic,
+      ayahNumber: ayah.numberInSurah,
+      arabicText: includeArabic ? ayah.arabic : '',
+      translation: includeTranslation ? ayah.translation : null,
+      branding: 'App: Qibla Time',
     );
   }
 }

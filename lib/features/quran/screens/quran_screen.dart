@@ -12,6 +12,7 @@ import '../../../core/theme/app_theme.dart';
 import '../../hafiz/screens/hafiz_mode_screen.dart';
 import '../../quran_share/services/ayah_share_service.dart';
 import '../../quran_share/services/ayah_share_video_service.dart';
+import '../../quran_share/widgets/ayah_share_preview_sheet.dart';
 import '../models/quran_models.dart';
 import 'allah_names_screen.dart';
 import '../services/quran_audio_download_service.dart';
@@ -795,6 +796,17 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     );
   }
 
+  Future<void> _openAyahSharePreview(SurahAyah ayah) async {
+    await showAyahSharePreviewSheet(
+      context: context,
+      summary: widget.summary,
+      ayah: ayah,
+      shareService: ref.read(ayahShareServiceProvider),
+      videoService: ref.read(ayahShareVideoServiceProvider),
+      tokens: QiblaThemes.current,
+    );
+  }
+
   Future<void> _showAyahShareOptions(SurahAyah ayah) async {
     final action = await showModalBottomSheet<_AyahShareAction>(
       context: context,
@@ -1346,7 +1358,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
 
               return InkWell(
                 onTap: () => _saveReading(ayah.numberInSurah),
-                onLongPress: () => _showAyahShareOptions(ayah),
+                onLongPress: () => _openAyahSharePreview(ayah),
                 borderRadius: BorderRadius.circular(16),
                 child: Container(
                   margin: const EdgeInsets.only(bottom: 10),

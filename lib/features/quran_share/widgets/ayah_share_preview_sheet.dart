@@ -1,19 +1,24 @@
+import 'package:cross_file/cross_file.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../core/theme/app_theme.dart';
-import '../../hadith/models/hadith.dart';
-import '../../hadith/services/hadith_share_service.dart';
-import '../../hadith_share/models/hadith_share_data.dart';
-import '../../hadith_share/models/hadith_share_theme.dart';
-import '../../hadith_share/services/hadith_share_image_service.dart';
-import '../../hadith_share/widgets/hadith_share_preview.dart';
+import '../../quran/models/quran_models.dart';
+import '../models/ayah_share_data.dart';
+import '../models/ayah_share_theme.dart';
+import '../services/ayah_share_image_service.dart';
+import '../services/ayah_share_service.dart';
+import '../services/ayah_share_video_service.dart';
+import '../widgets/ayah_share_preview.dart';
 import '../../shared_share/widgets/content_share_preview_sheet.dart';
 
-Future<void> showHadithSharePreviewSheet({
+Future<void> showAyahSharePreviewSheet({
   required BuildContext context,
-  required Hadith hadith,
-  required HadithShareService shareService,
+  required SurahSummary summary,
+  required SurahAyah ayah,
+  required AyahShareService shareService,
+  required AyahShareVideoService videoService,
   required QiblaTokens tokens,
 }) {
   return showModalBottomSheet<void>(
@@ -23,41 +28,46 @@ Future<void> showHadithSharePreviewSheet({
     backgroundColor: Colors.transparent,
     builder: (_) => FractionallySizedBox(
       heightFactor: 0.94,
-      child: _HadithSharePreviewSheet(
-        hadith: hadith,
+      child: _AyahSharePreviewSheet(
+        summary: summary,
+        ayah: ayah,
         shareService: shareService,
+        videoService: videoService,
         tokens: tokens,
       ),
     ),
   );
 }
 
-enum _HadithShareAction { text, image }
+enum _AyahShareAction { text, image, video }
 
-class _HadithSharePreviewSheet extends StatefulWidget {
-  const _HadithSharePreviewSheet({
-    required this.hadith,
+class _AyahSharePreviewSheet extends StatefulWidget {
+  const _AyahSharePreviewSheet({
+    required this.summary,
+    required this.ayah,
     required this.shareService,
+    required this.videoService,
     required this.tokens,
   });
 
-  final Hadith hadith;
-  final HadithShareService shareService;
+  final SurahSummary summary;
+  final SurahAyah ayah;
+  final AyahShareService shareService;
+  final AyahShareVideoService videoService;
   final QiblaTokens tokens;
 
   @override
-  State<_HadithSharePreviewSheet> createState() =>
-      _HadithSharePreviewSheetState();
+  State<_AyahSharePreviewSheet> createState() => _AyahSharePreviewSheetState();
 }
 
-class _HadithSharePreviewSheetState extends State<_HadithSharePreviewSheet> {
+class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
   SharePreviewLayoutOption _selectedLayout = SharePreviewLayoutOption.card;
   late SharePreviewContentOption _selectedContent;
-  _HadithShareAction? _activeAction;
+  _AyahShareAction? _activeAction;
 
-  bool get _hasArabicText => widget.hadith.arabic.trim().isNotEmpty;
+  bool get _hasArabicText => widget.ayah.arabic.trim().isNotEmpty;
 
-  bool get _hasTranslation => widget.hadith.translation.trim().isNotEmpty;
+  bool get _hasTranslation => widget.ayah.translation.trim().isNotEmpty;
 
   bool get _isBusy => _activeAction != null;
 
@@ -82,18 +92,19 @@ class _HadithSharePreviewSheetState extends State<_HadithSharePreviewSheet> {
   bool get _includeTranslation =>
       _selectedContent.includeTranslation(_hasTranslation);
 
-  HadithShareExportMode get _exportMode =>
+  AyahShareExportMode get _exportMode =>
       _selectedLayout == SharePreviewLayoutOption.card
-          ? HadithShareExportMode.cardOnly
-          : HadithShareExportMode.storyCanvas;
+          ? AyahShareExportMode.cardOnly
+          : AyahShareExportMode.storyCanvas;
 
-  HadithShareThemeData get _previewTheme => HadithShareThemeData.fromTokens(
+  AyahShareThemeData get _previewTheme => AyahShareThemeData.fromTokens(
         widget.tokens,
         transparentBackground: _selectedLayout == SharePreviewLayoutOption.card,
       );
 
-  HadithShareData get _previewData => widget.shareService.buildShareData(
-        widget.hadith,
+  AyahShareData get _previewData => widget.shareService.buildShareData(
+        widget.summary,
+        widget.ayah,
         includeArabic: _includeArabic,
         includeTranslation: _includeTranslation,
       );
@@ -103,11 +114,12 @@ class _HadithSharePreviewSheetState extends State<_HadithSharePreviewSheet> {
       return;
     }
 
-    setState(() => _activeAction = _HadithShareAction.text);
+    setState(() => _activeAction = _AyahShareAction.text);
 
     try {
-      await widget.shareService.shareHadithAsText(
-        widget.hadith,
+      await widget.shareService.shareAyahAsText(
+        widget.summary,
+        widget.ayah,
         includeArabic: _includeArabic,
         includeTranslation: _includeTranslation,
       );
@@ -117,7 +129,7 @@ class _HadithSharePreviewSheetState extends State<_HadithSharePreviewSheet> {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('No se pudo compartir el texto del hadiz.'),
+          content: Text('No se pudo compartir el texto de esta aleya.'),
         ),
       );
     } finally {
@@ -132,11 +144,12 @@ class _HadithSharePreviewSheetState extends State<_HadithSharePreviewSheet> {
       return;
     }
 
-    setState(() => _activeAction = _HadithShareAction.image);
+    setState(() => _activeAction = _AyahShareAction.image);
 
     try {
-      await widget.shareService.shareHadithAsImage(
-        widget.hadith,
+      await widget.shareService.shareAyahAsImage(
+        widget.summary,
+        widget.ayah,
         widget.tokens,
         mode: _exportMode,
         includeArabic: _includeArabic,
@@ -149,7 +162,78 @@ class _HadithSharePreviewSheetState extends State<_HadithSharePreviewSheet> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text(
-            'No se pudo generar la imagen del hadiz ahora mismo.',
+            'No se pudo generar la imagen de esta aleya ahora mismo.',
+          ),
+        ),
+      );
+    } finally {
+      if (mounted) {
+        setState(() => _activeAction = null);
+      }
+    }
+  }
+
+  Future<void> _shareVideo() async {
+    if (_isBusy || (!_includeArabic && !_includeTranslation)) {
+      return;
+    }
+
+    final messenger = ScaffoldMessenger.of(context);
+    setState(() => _activeAction = _AyahShareAction.video);
+
+    try {
+      final draft = await widget.videoService.prepareDraft(
+        summary: widget.summary,
+        ayah: widget.ayah,
+        includeArabic: _includeArabic,
+        includeTranslation: _includeTranslation,
+        exportMode: _exportMode,
+      );
+      if (!mounted) return;
+
+      if (draft == null) {
+        messenger.hideCurrentSnackBar();
+        messenger.showSnackBar(
+          const SnackBar(
+            content: Text(
+              'No hay audio disponible para generar el video de esta aleya.',
+            ),
+          ),
+        );
+        return;
+      }
+
+      messenger.hideCurrentSnackBar();
+      messenger.showSnackBar(
+        const SnackBar(
+          duration: Duration(seconds: 45),
+          content: Text('Generando video de la aleya...'),
+        ),
+      );
+
+      final file = await widget.videoService.exportVideo(draft);
+      if (!mounted) return;
+
+      messenger.hideCurrentSnackBar();
+      await Share.shareXFiles(
+        [XFile(file.path)],
+        text: widget.shareService.buildShareText(
+          widget.summary,
+          widget.ayah,
+          includeArabic: _includeArabic,
+          includeTranslation: _includeTranslation,
+        ),
+      );
+      if (!mounted) return;
+      Navigator.of(context).pop();
+    } catch (_) {
+      if (!mounted) return;
+
+      messenger.hideCurrentSnackBar();
+      messenger.showSnackBar(
+        const SnackBar(
+          content: Text(
+            'No se pudo generar el video de esta aleya ahora mismo.',
           ),
         ),
       );
@@ -166,9 +250,9 @@ class _HadithSharePreviewSheetState extends State<_HadithSharePreviewSheet> {
 
     return SharePreviewBottomSheet(
       tokens: tokens,
-      title: 'Compartir hadiz',
-      subtitle: 'Elige layout y contenido antes de compartir.',
-      preview: HadithSharePreview(
+      title: 'Compartir aleya ${widget.ayah.numberInSurah}',
+      subtitle: 'Mantén la misma experiencia visual para texto, imagen y video.',
+      preview: AyahSharePreview(
         data: _previewData,
         theme: _previewTheme,
         cardOnly: _selectedLayout == SharePreviewLayoutOption.card,
@@ -245,31 +329,34 @@ class _HadithSharePreviewSheetState extends State<_HadithSharePreviewSheet> {
           ],
         ),
       ],
-      footer: _ShareFooter(
+      footer: _AyahShareFooter(
         tokens: tokens,
         isBusy: _isBusy,
+        activeAction: _activeAction,
         onShareText: _shareText,
         onShareImage: _shareImage,
-        activeAction: _activeAction,
+        onShareVideo: _shareVideo,
       ),
     );
   }
 }
 
-class _ShareFooter extends StatelessWidget {
-  const _ShareFooter({
+class _AyahShareFooter extends StatelessWidget {
+  const _AyahShareFooter({
     required this.tokens,
     required this.isBusy,
+    required this.activeAction,
     required this.onShareText,
     required this.onShareImage,
-    required this.activeAction,
+    required this.onShareVideo,
   });
 
   final QiblaTokens tokens;
   final bool isBusy;
+  final _AyahShareAction? activeAction;
   final VoidCallback onShareText;
   final VoidCallback onShareImage;
-  final _HadithShareAction? activeAction;
+  final VoidCallback onShareVideo;
 
   @override
   Widget build(BuildContext context) {
@@ -287,7 +374,7 @@ class _ShareFooter extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
               ),
             ),
-            child: activeAction == _HadithShareAction.image
+            child: activeAction == _AyahShareAction.image
                 ? const SizedBox(
                     width: 20,
                     height: 20,
@@ -306,35 +393,68 @@ class _ShareFooter extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 10),
-        SizedBox(
-          width: double.infinity,
-          child: OutlinedButton(
-            onPressed: isBusy ? null : onShareText,
-            style: OutlinedButton.styleFrom(
-              foregroundColor: tokens.textPrimary,
-              side: BorderSide(color: tokens.borderMed),
-              padding: const EdgeInsets.symmetric(vertical: 14),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
+        Row(
+          children: [
+            Expanded(
+              child: OutlinedButton(
+                onPressed: isBusy ? null : onShareText,
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: tokens.textPrimary,
+                  side: BorderSide(color: tokens.borderMed),
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                ),
+                child: activeAction == _AyahShareAction.text
+                    ? SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2.2,
+                          valueColor: AlwaysStoppedAnimation(tokens.primary),
+                        ),
+                      )
+                    : Text(
+                        'Texto',
+                        style: GoogleFonts.dmSans(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
               ),
             ),
-            child: activeAction == _HadithShareAction.text
-                ? SizedBox(
-                    width: 20,
-                    height: 20,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2.2,
-                      valueColor: AlwaysStoppedAnimation(tokens.primary),
-                    ),
-                  )
-                : Text(
-                    'Compartir texto',
-                    style: GoogleFonts.dmSans(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w700,
-                    ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: OutlinedButton(
+                onPressed: isBusy ? null : onShareVideo,
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: tokens.textPrimary,
+                  side: BorderSide(color: tokens.borderMed),
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
                   ),
-          ),
+                ),
+                child: activeAction == _AyahShareAction.video
+                    ? SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2.2,
+                          valueColor: AlwaysStoppedAnimation(tokens.primary),
+                        ),
+                      )
+                    : Text(
+                        'Video',
+                        style: GoogleFonts.dmSans(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+              ),
+            ),
+          ],
         ),
       ],
     );

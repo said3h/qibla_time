@@ -301,30 +301,14 @@ class DailyHadithWidget extends ConsumerWidget {
                   Row(
                     children: [
                       Expanded(
-                        child: PopupMenuButton<String>(
-                          onSelected: (value) async {
-                            if (value == 'text') {
-                              await hadithShareService.shareHadithAsText(hadith);
-                              return;
-                            }
-
-                            await showHadithSharePreviewSheet(
-                              context: context,
-                              hadith: hadith,
-                              shareService: hadithShareService,
-                              tokens: tokens,
-                            );
-                          },
-                          itemBuilder: (_) => const [
-                            PopupMenuItem<String>(
-                              value: 'text',
-                              child: Text('Compartir texto'),
-                            ),
-                            PopupMenuItem<String>(
-                              value: 'image',
-                              child: Text('Compartir imagen'),
-                            ),
-                          ],
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(10),
+                          onTap: () => showHadithSharePreviewSheet(
+                            context: context,
+                            hadith: hadith,
+                            shareService: hadithShareService,
+                            tokens: tokens,
+                          ),
                           child: Container(
                             height: 40,
                             decoration: BoxDecoration(

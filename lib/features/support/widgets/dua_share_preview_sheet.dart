@@ -2,18 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theme/app_theme.dart';
-import '../../hadith/models/hadith.dart';
-import '../../hadith/services/hadith_share_service.dart';
-import '../../hadith_share/models/hadith_share_data.dart';
-import '../../hadith_share/models/hadith_share_theme.dart';
 import '../../hadith_share/services/hadith_share_image_service.dart';
+import '../../hadith_share/models/hadith_share_theme.dart';
 import '../../hadith_share/widgets/hadith_share_preview.dart';
 import '../../shared_share/widgets/content_share_preview_sheet.dart';
+import '../models/dua_model.dart';
+import '../services/dua_share_service.dart';
 
-Future<void> showHadithSharePreviewSheet({
+Future<void> showDuaSharePreviewSheet({
   required BuildContext context,
-  required Hadith hadith,
-  required HadithShareService shareService,
+  required Dua dua,
+  required DuaShareService shareService,
   required QiblaTokens tokens,
 }) {
   return showModalBottomSheet<void>(
@@ -23,8 +22,8 @@ Future<void> showHadithSharePreviewSheet({
     backgroundColor: Colors.transparent,
     builder: (_) => FractionallySizedBox(
       heightFactor: 0.94,
-      child: _HadithSharePreviewSheet(
-        hadith: hadith,
+      child: _DuaSharePreviewSheet(
+        dua: dua,
         shareService: shareService,
         tokens: tokens,
       ),
@@ -32,32 +31,31 @@ Future<void> showHadithSharePreviewSheet({
   );
 }
 
-enum _HadithShareAction { text, image }
+enum _DuaShareAction { text, image }
 
-class _HadithSharePreviewSheet extends StatefulWidget {
-  const _HadithSharePreviewSheet({
-    required this.hadith,
+class _DuaSharePreviewSheet extends StatefulWidget {
+  const _DuaSharePreviewSheet({
+    required this.dua,
     required this.shareService,
     required this.tokens,
   });
 
-  final Hadith hadith;
-  final HadithShareService shareService;
+  final Dua dua;
+  final DuaShareService shareService;
   final QiblaTokens tokens;
 
   @override
-  State<_HadithSharePreviewSheet> createState() =>
-      _HadithSharePreviewSheetState();
+  State<_DuaSharePreviewSheet> createState() => _DuaSharePreviewSheetState();
 }
 
-class _HadithSharePreviewSheetState extends State<_HadithSharePreviewSheet> {
-  SharePreviewLayoutOption _selectedLayout = SharePreviewLayoutOption.card;
+class _DuaSharePreviewSheetState extends State<_DuaSharePreviewSheet> {
+  SharePreviewLayoutOption _selectedLayout = SharePreviewLayoutOption.story;
   late SharePreviewContentOption _selectedContent;
-  _HadithShareAction? _activeAction;
+  _DuaShareAction? _activeAction;
 
-  bool get _hasArabicText => widget.hadith.arabic.trim().isNotEmpty;
+  bool get _hasArabicText => widget.dua.arabicText.trim().isNotEmpty;
 
-  bool get _hasTranslation => widget.hadith.translation.trim().isNotEmpty;
+  bool get _hasTranslation => widget.dua.translation.trim().isNotEmpty;
 
   bool get _isBusy => _activeAction != null;
 
@@ -92,22 +90,16 @@ class _HadithSharePreviewSheetState extends State<_HadithSharePreviewSheet> {
         transparentBackground: _selectedLayout == SharePreviewLayoutOption.card,
       );
 
-  HadithShareData get _previewData => widget.shareService.buildShareData(
-        widget.hadith,
-        includeArabic: _includeArabic,
-        includeTranslation: _includeTranslation,
-      );
-
   Future<void> _shareText() async {
     if (_isBusy || (!_includeArabic && !_includeTranslation)) {
       return;
     }
 
-    setState(() => _activeAction = _HadithShareAction.text);
+    setState(() => _activeAction = _DuaShareAction.text);
 
     try {
-      await widget.shareService.shareHadithAsText(
-        widget.hadith,
+      await widget.shareService.shareDuaAsText(
+        widget.dua,
         includeArabic: _includeArabic,
         includeTranslation: _includeTranslation,
       );
@@ -117,7 +109,7 @@ class _HadithSharePreviewSheetState extends State<_HadithSharePreviewSheet> {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('No se pudo compartir el texto del hadiz.'),
+          content: Text('No se pudo compartir el texto de la dua.'),
         ),
       );
     } finally {
@@ -132,11 +124,11 @@ class _HadithSharePreviewSheetState extends State<_HadithSharePreviewSheet> {
       return;
     }
 
-    setState(() => _activeAction = _HadithShareAction.image);
+    setState(() => _activeAction = _DuaShareAction.image);
 
     try {
-      await widget.shareService.shareHadithAsImage(
-        widget.hadith,
+      await widget.shareService.shareDuaAsImage(
+        widget.dua,
         widget.tokens,
         mode: _exportMode,
         includeArabic: _includeArabic,
@@ -148,9 +140,7 @@ class _HadithSharePreviewSheetState extends State<_HadithSharePreviewSheet> {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text(
-            'No se pudo generar la imagen del hadiz ahora mismo.',
-          ),
+          content: Text('No se pudo generar la imagen de la dua.'),
         ),
       );
     } finally {
@@ -163,13 +153,20 @@ class _HadithSharePreviewSheetState extends State<_HadithSharePreviewSheet> {
   @override
   Widget build(BuildContext context) {
     final tokens = widget.tokens;
+    final previewData = widget.shareService.buildShareData(
+      widget.dua,
+      includeArabic: _includeArabic,
+      includeTranslation: _includeTranslation,
+    );
 
     return SharePreviewBottomSheet(
       tokens: tokens,
-      title: 'Compartir hadiz',
-      subtitle: 'Elige layout y contenido antes de compartir.',
+      title: widget.dua.title.trim().isEmpty
+          ? 'Compartir dua'
+          : 'Compartir ${widget.dua.title.trim()}',
+      subtitle: 'Usa la misma experiencia visual del hadiz para dua y adhkar.',
       preview: HadithSharePreview(
-        data: _previewData,
+        data: previewData,
         theme: _previewTheme,
         cardOnly: _selectedLayout == SharePreviewLayoutOption.card,
       ),
@@ -245,31 +242,31 @@ class _HadithSharePreviewSheetState extends State<_HadithSharePreviewSheet> {
           ],
         ),
       ],
-      footer: _ShareFooter(
+      footer: _DuaShareFooter(
         tokens: tokens,
         isBusy: _isBusy,
+        activeAction: _activeAction,
         onShareText: _shareText,
         onShareImage: _shareImage,
-        activeAction: _activeAction,
       ),
     );
   }
 }
 
-class _ShareFooter extends StatelessWidget {
-  const _ShareFooter({
+class _DuaShareFooter extends StatelessWidget {
+  const _DuaShareFooter({
     required this.tokens,
     required this.isBusy,
+    required this.activeAction,
     required this.onShareText,
     required this.onShareImage,
-    required this.activeAction,
   });
 
   final QiblaTokens tokens;
   final bool isBusy;
+  final _DuaShareAction? activeAction;
   final VoidCallback onShareText;
   final VoidCallback onShareImage;
-  final _HadithShareAction? activeAction;
 
   @override
   Widget build(BuildContext context) {
@@ -287,7 +284,7 @@ class _ShareFooter extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
               ),
             ),
-            child: activeAction == _HadithShareAction.image
+            child: activeAction == _DuaShareAction.image
                 ? const SizedBox(
                     width: 20,
                     height: 20,
@@ -318,7 +315,7 @@ class _ShareFooter extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
               ),
             ),
-            child: activeAction == _HadithShareAction.text
+            child: activeAction == _DuaShareAction.text
                 ? SizedBox(
                     width: 20,
                     height: 20,

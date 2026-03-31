@@ -226,8 +226,7 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
                         hadith: dailyHadith,
                         isFavorite: favorites.contains(dailyHadith.id),
                         onToggleFavorite: () => _toggleFavorite(dailyHadith.id),
-                        onShareText: () => _shareText(dailyHadith),
-                        onShareImage: () => _shareImage(dailyHadith),
+                        onShare: () => _shareImage(dailyHadith),
                       ),
 
                     if (dailyHadith != null && !_isSearching)
@@ -267,8 +266,7 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
                             hadith: hadith,
                             isFavorite: favorites.contains(hadith.id),
                             onToggleFavorite: () => _toggleFavorite(hadith.id),
-                            onShareText: () => _shareText(hadith),
-                            onShareImage: () => _shareImage(hadith),
+                            onShare: () => _shareImage(hadith),
                           ),
                         ),
                       ),
@@ -322,10 +320,6 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
   Future<void> _toggleFavorite(int hadithId) async {
     await ref.read(hadithServiceProvider).toggleFavorite(hadithId);
     ref.invalidate(hadithFavoritesProvider);
-  }
-
-  Future<void> _shareText(Hadith hadith) async {
-    await ref.read(hadithShareServiceProvider).shareHadithAsText(hadith);
   }
 
   Future<void> _shareImage(Hadith hadith) async {
@@ -441,15 +435,13 @@ class _FeaturedHadithCard extends StatelessWidget {
     required this.hadith,
     required this.isFavorite,
     required this.onToggleFavorite,
-    required this.onShareText,
-    required this.onShareImage,
+    required this.onShare,
   });
 
   final Hadith hadith;
   final bool isFavorite;
   final VoidCallback onToggleFavorite;
-  final VoidCallback onShareText;
-  final VoidCallback onShareImage;
+  final VoidCallback onShare;
 
   @override
   Widget build(BuildContext context) {
@@ -606,8 +598,7 @@ class _FeaturedHadithCard extends StatelessWidget {
           _HadithActions(
             isFavorite: isFavorite,
             onToggleFavorite: onToggleFavorite,
-            onShareText: onShareText,
-            onShareImage: onShareImage,
+            onShare: onShare,
           ),
         ],
       ),
@@ -630,15 +621,13 @@ class _HadithCard extends StatelessWidget {
     required this.hadith,
     required this.isFavorite,
     required this.onToggleFavorite,
-    required this.onShareText,
-    required this.onShareImage,
+    required this.onShare,
   });
 
   final Hadith hadith;
   final bool isFavorite;
   final VoidCallback onToggleFavorite;
-  final VoidCallback onShareText;
-  final VoidCallback onShareImage;
+  final VoidCallback onShare;
 
   @override
   Widget build(BuildContext context) {
@@ -756,8 +745,7 @@ class _HadithCard extends StatelessWidget {
             _HadithActions(
               isFavorite: isFavorite,
               onToggleFavorite: onToggleFavorite,
-              onShareText: onShareText,
-              onShareImage: onShareImage,
+              onShare: onShare,
             ),
           ],
         ),
@@ -776,14 +764,12 @@ class _HadithActions extends StatelessWidget {
   const _HadithActions({
     required this.isFavorite,
     required this.onToggleFavorite,
-    required this.onShareText,
-    required this.onShareImage,
+    required this.onShare,
   });
 
   final bool isFavorite;
   final VoidCallback onToggleFavorite;
-  final VoidCallback onShareText;
-  final VoidCallback onShareImage;
+  final VoidCallback onShare;
 
   @override
   Widget build(BuildContext context) {
@@ -792,24 +778,9 @@ class _HadithActions extends StatelessWidget {
       spacing: 8,
       runSpacing: 8,
       children: [
-        PopupMenuButton<String>(
-          onSelected: (value) {
-            if (value == 'text') {
-              onShareText();
-              return;
-            }
-            onShareImage();
-          },
-          itemBuilder: (_) => const [
-            PopupMenuItem<String>(
-              value: 'text',
-              child: Text('Compartir texto'),
-            ),
-            PopupMenuItem<String>(
-              value: 'image',
-              child: Text('Compartir imagen'),
-            ),
-          ],
+        InkWell(
+          borderRadius: BorderRadius.circular(20),
+          onTap: onShare,
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
             decoration: BoxDecoration(

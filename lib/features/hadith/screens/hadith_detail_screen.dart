@@ -71,12 +71,18 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
             onPressed: _toggleFavorite,
           ),
           // Menú de compartir
+          IconButton(
+            icon: Icon(
+              Icons.share_outlined,
+              color: tokens.textPrimary,
+            ),
+            tooltip: 'Compartir',
+            onPressed: _openSharePreview,
+          ),
           PopupMenuButton<String>(
             onSelected: _handleMenuAction,
             itemBuilder: (_) => [
               const PopupMenuItem(value: 'copy', child: Text('Copiar texto')),
-              const PopupMenuItem(value: 'share_text', child: Text('Compartir texto')),
-              const PopupMenuItem(value: 'share_image', child: Text('Compartir imagen')),
             ],
           ),
         ],
@@ -467,7 +473,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
           icon: Icons.share_outlined,
           label: 'Compartir',
           color: Colors.green,
-          onTap: _openShareImagePreview,
+          onTap: _openSharePreview,
         ),
         _QuickActionButton(
           icon: _isFavorite ? Icons.favorite : Icons.favorite_border,
@@ -572,7 +578,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
           children: [
             Expanded(
               child: ElevatedButton.icon(
-                onPressed: _openShareImagePreview,
+                onPressed: _openSharePreview,
                 icon: const Icon(Icons.share),
                 label: const Text('Compartir'),
                 style: ElevatedButton.styleFrom(
@@ -628,32 +634,15 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
     );
   }
 
-  Future<void> _shareHadith(Hadith hadith) async {
-    try {
-      await ref.read(hadithShareServiceProvider).shareHadithAsText(hadith);
-    } catch (_) {
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('No se pudo compartir el hadiz')),
-      );
-    }
-  }
-
   Future<void> _handleMenuAction(String value) async {
     switch (value) {
       case 'copy':
         _copyToClipboard(widget.hadith);
         break;
-      case 'share_text':
-        await ref.read(hadithShareServiceProvider).shareHadithAsText(widget.hadith);
-        break;
-      case 'share_image':
-        await _openShareImagePreview();
-        break;
     }
   }
 
-  Future<void> _openShareImagePreview() {
+  Future<void> _openSharePreview() {
     return showHadithSharePreviewSheet(
       context: context,
       hadith: widget.hadith,

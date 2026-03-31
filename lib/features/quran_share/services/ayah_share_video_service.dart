@@ -28,6 +28,7 @@ class AyahShareVideoDraft {
     required this.translation,
     required this.audioPathOrUrl,
     required this.isLocalAudio,
+    required this.exportMode,
   });
 
   final int surahNumber;
@@ -38,6 +39,7 @@ class AyahShareVideoDraft {
   final String translation;
   final String audioPathOrUrl;
   final bool isLocalAudio;
+  final AyahShareExportMode exportMode;
 
   String get referenceLabel => '$surahNameLatin ($surahNumber:$ayahNumber)';
 }
@@ -53,7 +55,16 @@ class AyahShareVideoService {
   Future<AyahShareVideoDraft?> prepareDraft({
     required SurahSummary summary,
     required SurahAyah ayah,
+    bool includeArabic = true,
+    bool includeTranslation = true,
+    AyahShareExportMode exportMode = AyahShareExportMode.storyCanvas,
   }) async {
+    if (!includeArabic && !includeTranslation) {
+      throw ArgumentError(
+        'At least one of includeArabic or includeTranslation must be true.',
+      );
+    }
+
     final localPath = await _ref
         .read(quranAudioDownloadServiceProvider)
         .getDownloadedAyahPath(summary.number, ayah);
@@ -68,10 +79,11 @@ class AyahShareVideoService {
       surahNameLatin: summary.nameLatin,
       surahNameArabic: summary.nameArabic,
       ayahNumber: ayah.numberInSurah,
-      arabicText: ayah.arabic,
-      translation: ayah.translation,
+      arabicText: includeArabic ? ayah.arabic : '',
+      translation: includeTranslation ? ayah.translation : '',
       audioPathOrUrl: preferredAudio,
       isLocalAudio: localPath != null,
+      exportMode: exportMode,
     );
   }
 
@@ -94,10 +106,10 @@ class AyahShareVideoService {
       ),
       theme: AyahShareThemeData.fromTokens(
         QiblaThemes.current,
-        transparentBackground: true,
+        transparentBackground: draft.exportMode == AyahShareExportMode.cardOnly,
       ),
-      transparentBackground: true,
-      mode: AyahShareExportMode.cardOnly,
+      transparentBackground: draft.exportMode == AyahShareExportMode.cardOnly,
+      mode: draft.exportMode,
       fileName: '${fileStem}_card',
       directory: workingDirectory,
     );
