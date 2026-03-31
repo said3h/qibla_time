@@ -151,15 +151,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                 ),
                 selectedPrayerScheduleAsync.when(
-                  data: (resolvedSchedule) => _buildPrayerSection(
+                  data: (resolvedSchedule) => _buildPremiumPrayerSection(
                     resolvedSchedule?.schedule,
                     selectedNextPrayerInfo,
                     selectedCompletedPrayers,
                     _selectedDate,
                     tokens,
                   ),
-                  loading: () => _buildPrayerSkeleton(tokens),
-                  error: (_, __) => _buildPrayerFallback(
+                  loading: () => _buildPremiumPrayerSkeleton(tokens),
+                  error: (_, __) => _buildPremiumPrayerFallback(
                     tokens,
                     locationDiagnosticAsync.valueOrNull,
                   ),
@@ -1848,6 +1848,340 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 
+  Widget _buildPremiumPrayerSection(
+    PrayerSchedule? prayerSchedule,
+    NextPrayerInfo? nextPrayerInfo,
+    List<String> completed,
+    DateTime date,
+    QiblaTokens tokens,
+  ) {
+    if (prayerSchedule == null) {
+      return _buildPremiumPrayerFallback(tokens, null);
+    }
+
+    final prayers = <(PrayerName, String, String, DateTime)>[
+      (PrayerName.fajr, 'Fajr', 'فجر', prayerSchedule.fajr),
+      (PrayerName.dhuhr, 'Dhuhr', 'ظهر', prayerSchedule.dhuhr),
+      (PrayerName.asr, 'Asr', 'عصر', prayerSchedule.asr),
+      (PrayerName.maghrib, 'Maghrib', 'مغرب', prayerSchedule.maghrib),
+      (PrayerName.isha, 'Isha', 'عشاء', prayerSchedule.isha),
+    ];
+    final now = DateTime.now();
+    final nextPrayerName = nextPrayerInfo?.prayer.key;
+    final isToday = _isSameDay(date, _dateOnly(now));
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 6, 16, 0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      isToday ? 'ORACIONES DE HOY' : 'HORARIOS DEL DÍA',
+                      style: GoogleFonts.dmSans(
+                        fontSize: 9,
+                        color: tokens.textSecondary,
+                        letterSpacing: 1.6,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      isToday
+                          ? 'Ritmo completo de tus cinco oraciones'
+                          : 'Consulta y marca los horarios de ${_formatCompactDate(date)}',
+                      style: GoogleFonts.dmSans(
+                        fontSize: 12,
+                        color: tokens.textPrimary,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 12),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                decoration: BoxDecoration(
+                  color: _blend(tokens.primary, tokens.bgSurface, 0.1),
+                  borderRadius: BorderRadius.circular(999),
+                  border: Border.all(
+                    color: _blend(tokens.primary, tokens.borderMed, 0.18),
+                  ),
+                ),
+                child: Text(
+                  isToday
+                      ? '${completed.length}/5 marcadas'
+                      : SpanishDateLabels.longWeekday(date),
+                  style: GoogleFonts.dmSans(
+                    fontSize: 10,
+                    color: tokens.primaryLight,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 14),
+          ...List.generate(prayers.length, (index) {
+            final prayer = prayers[index];
+            final isNext = isToday && prayer.$1.key == nextPrayerName;
+            final isDone = _isPrayerDone(completed, prayer.$1.key);
+            final isNow =
+                isToday &&
+                !isNext &&
+                !isDone &&
+                _isPremiumCurrentPrayerWindow(prayers, index, now);
+            final tone = _premiumPrayerCardTone(
+              isNow: isNow,
+              isNext: isNext,
+              isDone: isDone,
+              isToday: isToday,
+              prayerTime: prayer.$4,
+              now: now,
+            );
+            final style = _premiumPrayerCardStyle(tokens, tone);
+
+            return Container(
+              margin: const EdgeInsets.only(bottom: 12),
+              padding: const EdgeInsets.fromLTRB(16, 15, 16, 15),
+              decoration: BoxDecoration(
+                color: style.surfaceColor,
+                borderRadius: BorderRadius.circular(26),
+                border: Border.all(color: style.borderColor),
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    _blend(style.surfaceColor, tokens.bgSurface2, 0.22),
+                    style.surfaceColor,
+                  ],
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: style.shadowColor,
+                    blurRadius: tone == _PremiumPrayerCardTone.idle ? 10 : 16,
+                    offset: const Offset(0, 8),
+                  ),
+                ],
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 46,
+                    height: 46,
+                    decoration: BoxDecoration(
+                      color: style.iconBackground,
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(
+                        color: _blend(style.iconColor, tokens.border, 0.14),
+                      ),
+                    ),
+                    child: Icon(
+                      _prayerIcon(prayer.$1),
+                      size: 20,
+                      color: style.iconColor,
+                    ),
+                  ),
+                  const SizedBox(width: 14),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                prayer.$2,
+                                style: GoogleFonts.dmSans(
+                                  fontSize: 15,
+                                  fontWeight: tone == _PremiumPrayerCardTone.idle
+                                      ? FontWeight.w600
+                                      : FontWeight.w700,
+                                  color: tone == _PremiumPrayerCardTone.next
+                                      ? tokens.primary
+                                      : tokens.textPrimary,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+                            _buildPremiumPrayerStatusChip(style),
+                          ],
+                        ),
+                        const SizedBox(height: 4),
+                        Directionality(
+                          textDirection: TextDirection.rtl,
+                          child: Text(
+                            prayer.$3,
+                            style: GoogleFonts.amiri(
+                              fontSize: 15,
+                              color: tone == _PremiumPrayerCardTone.now
+                                  ? style.iconColor
+                                  : tokens.textSecondary,
+                              height: 1.1,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        Text(
+                          isDone
+                              ? 'Ya la marcaste como completada.'
+                              : isNow
+                              ? 'Esta oración está en curso ahora mismo.'
+                              : isNext
+                              ? 'Es la siguiente en el ritmo de hoy.'
+                              : isToday
+                              ? 'Pendiente dentro del recorrido de hoy.'
+                              : 'Disponible para revisar esta fecha.',
+                          style: GoogleFonts.dmSans(
+                            fontSize: 10,
+                            color: tokens.textSecondary,
+                            height: 1.45,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 10,
+                        ),
+                        decoration: BoxDecoration(
+                          color: style.timeBackground,
+                          borderRadius: BorderRadius.circular(18),
+                          border: Border.all(
+                            color: _blend(style.timeColor, tokens.border, 0.12),
+                          ),
+                        ),
+                        child: Text(
+                          _formatTime(prayer.$4),
+                          style: GoogleFonts.dmSans(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                            color: style.timeColor,
+                            letterSpacing: -0.2,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      GestureDetector(
+                        onTap: () => ref
+                            .read(prayerTrackingProvider.notifier)
+                            .togglePrayer(prayer.$1.key, date: date),
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 180),
+                          width: 30,
+                          height: 30,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(999),
+                            color: isDone
+                                ? tokens.accent
+                                : _blend(tokens.bgSurface2, tokens.bgSurface, 0.82),
+                            border: Border.all(
+                              color: isDone
+                                  ? tokens.accent
+                                  : _blend(tokens.textMuted, tokens.border, 0.22),
+                              width: 1.4,
+                            ),
+                          ),
+                          child: Icon(
+                            isDone
+                                ? Icons.check_rounded
+                                : Icons.add_task_rounded,
+                            size: 16,
+                            color: isDone ? tokens.bgPage : tokens.textSecondary,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            );
+          }),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPremiumPrayerSkeleton(QiblaTokens tokens) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 6, 16, 0),
+      child: Column(
+        children: List.generate(
+          3,
+          (_) => Container(
+            height: 92,
+            margin: const EdgeInsets.only(bottom: 12),
+            decoration: BoxDecoration(
+              color: _blend(tokens.bgSurface2, tokens.bgSurface, 0.86),
+              borderRadius: BorderRadius.circular(26),
+              border: Border.all(color: tokens.border),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPremiumPrayerFallback(
+    QiblaTokens tokens,
+    PrayerLocationDiagnostic? diagnostic,
+  ) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 6, 16, 0),
+      child: Container(
+        padding: const EdgeInsets.all(18),
+        decoration: BoxDecoration(
+          color: _blend(tokens.bgSurface2, tokens.bgSurface, 0.86),
+          borderRadius: BorderRadius.circular(26),
+          border: Border.all(color: tokens.border),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: 38,
+              height: 38,
+              decoration: BoxDecoration(
+                color: _blend(tokens.primary, tokens.bgSurface, 0.1),
+                borderRadius: BorderRadius.circular(14),
+              ),
+              child: Icon(
+                Icons.schedule_rounded,
+                color: tokens.primary,
+                size: 18,
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                _locationDiagnosticBody(diagnostic),
+                style: GoogleFonts.dmSans(
+                  fontSize: 12,
+                  height: 1.5,
+                  color: tokens.textSecondary,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _buildQuickActions(QiblaTokens tokens) {
     final actions = [
       (Icons.auto_stories_outlined, 'Hadices', const HadithLibraryScreen()),
@@ -1951,6 +2285,144 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     return completed.contains(prayerName.toLowerCase());
   }
 
+  bool _isPremiumCurrentPrayerWindow(
+    List<(PrayerName, String, String, DateTime)> prayers,
+    int index,
+    DateTime now,
+  ) {
+    final prayerTime = prayers[index].$4;
+    if (now.isBefore(prayerTime)) {
+      return false;
+    }
+
+    if (index == prayers.length - 1) {
+      return true;
+    }
+
+    return now.isBefore(prayers[index + 1].$4);
+  }
+
+  _PremiumPrayerCardTone _premiumPrayerCardTone({
+    required bool isNow,
+    required bool isNext,
+    required bool isDone,
+    required bool isToday,
+    required DateTime prayerTime,
+    required DateTime now,
+  }) {
+    if (isDone) {
+      return _PremiumPrayerCardTone.completed;
+    }
+    if (isNow) {
+      return _PremiumPrayerCardTone.now;
+    }
+    if (isNext) {
+      return _PremiumPrayerCardTone.next;
+    }
+    if (isToday && prayerTime.isAfter(now)) {
+      return _PremiumPrayerCardTone.upcoming;
+    }
+    return _PremiumPrayerCardTone.idle;
+  }
+
+  _PremiumPrayerCardStyle _premiumPrayerCardStyle(
+    QiblaTokens tokens,
+    _PremiumPrayerCardTone tone,
+  ) {
+    switch (tone) {
+      case _PremiumPrayerCardTone.now:
+        return _PremiumPrayerCardStyle(
+          label: 'Ahora',
+          surfaceColor: _blend(tokens.accent, tokens.bgSurface, 0.16),
+          borderColor: _blend(tokens.accent, tokens.borderMed, 0.22),
+          shadowColor: tokens.accent.withOpacity(0.12),
+          iconBackground: _blend(tokens.accent, tokens.bgSurface2, 0.2),
+          iconColor: tokens.accent,
+          timeBackground: _blend(tokens.accent, tokens.bgSurface, 0.14),
+          timeColor: tokens.textPrimary,
+          badgeBackground: _blend(tokens.accent, tokens.bgSurface, 0.18),
+          badgeBorder: _blend(tokens.accent, tokens.borderMed, 0.18),
+          badgeForeground: tokens.accent,
+        );
+      case _PremiumPrayerCardTone.next:
+        return _PremiumPrayerCardStyle(
+          label: 'Siguiente',
+          surfaceColor: _blend(tokens.primary, tokens.bgSurface, 0.14),
+          borderColor: _blend(tokens.primary, tokens.primaryBorder, 0.2),
+          shadowColor: tokens.primary.withOpacity(0.12),
+          iconBackground: _blend(tokens.primary, tokens.bgSurface2, 0.18),
+          iconColor: tokens.primary,
+          timeBackground: _blend(tokens.primary, tokens.bgSurface, 0.12),
+          timeColor: tokens.primaryLight,
+          badgeBackground: _blend(tokens.primary, tokens.bgSurface, 0.16),
+          badgeBorder: _blend(tokens.primary, tokens.borderMed, 0.18),
+          badgeForeground: tokens.primaryLight,
+        );
+      case _PremiumPrayerCardTone.completed:
+        return _PremiumPrayerCardStyle(
+          label: 'Completada',
+          surfaceColor: _blend(tokens.bgSurface, tokens.bgPage, 0.9),
+          borderColor: tokens.border,
+          shadowColor: Colors.black.withOpacity(0.06),
+          iconBackground: _blend(tokens.accent, tokens.bgSurface, 0.1),
+          iconColor: tokens.accent,
+          timeBackground: _blend(tokens.bgSurface2, tokens.bgSurface, 0.88),
+          timeColor: tokens.textSecondary,
+          badgeBackground: _blend(tokens.accent, tokens.bgSurface, 0.14),
+          badgeBorder: _blend(tokens.accent, tokens.border, 0.12),
+          badgeForeground: tokens.accent,
+        );
+      case _PremiumPrayerCardTone.upcoming:
+        return _PremiumPrayerCardStyle(
+          label: 'Próxima',
+          surfaceColor: _blend(tokens.bgSurface2, tokens.bgSurface, 0.84),
+          borderColor: _blend(tokens.primary, tokens.border, 0.08),
+          shadowColor: Colors.black.withOpacity(0.07),
+          iconBackground: _blend(tokens.primary, tokens.bgSurface, 0.08),
+          iconColor: tokens.textSecondary,
+          timeBackground: _blend(tokens.bgSurface, tokens.bgPage, 0.82),
+          timeColor: tokens.textPrimary,
+          badgeBackground: _blend(tokens.bgSurface2, tokens.bgSurface, 0.92),
+          badgeBorder: tokens.border,
+          badgeForeground: tokens.textSecondary,
+        );
+      case _PremiumPrayerCardTone.idle:
+        return _PremiumPrayerCardStyle(
+          label: 'Pendiente',
+          surfaceColor: tokens.bgSurface,
+          borderColor: tokens.border,
+          shadowColor: Colors.black.withOpacity(0.06),
+          iconBackground: tokens.bgSurface2,
+          iconColor: tokens.textSecondary,
+          timeBackground: _blend(tokens.bgSurface2, tokens.bgSurface, 0.88),
+          timeColor: tokens.textPrimary,
+          badgeBackground: _blend(tokens.bgSurface2, tokens.bgSurface, 0.92),
+          badgeBorder: tokens.border,
+          badgeForeground: tokens.textSecondary,
+        );
+    }
+  }
+
+  Widget _buildPremiumPrayerStatusChip(_PremiumPrayerCardStyle style) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      decoration: BoxDecoration(
+        color: style.badgeBackground,
+        borderRadius: BorderRadius.circular(999),
+        border: Border.all(color: style.badgeBorder),
+      ),
+      child: Text(
+        style.label,
+        style: GoogleFonts.dmSans(
+          fontSize: 9,
+          color: style.badgeForeground,
+          fontWeight: FontWeight.w700,
+          letterSpacing: 0.3,
+        ),
+      ),
+    );
+  }
+
   (String, String) _prayerName(PrayerName prayer) {
     switch (prayer) {
       case PrayerName.fajr:
@@ -2047,6 +2519,14 @@ enum _RamadanGoalState {
   completed,
 }
 
+enum _PremiumPrayerCardTone {
+  now,
+  next,
+  completed,
+  upcoming,
+  idle,
+}
+
 class _RamadanGoalItem {
   const _RamadanGoalItem({
     required this.title,
@@ -2063,6 +2543,34 @@ class _RamadanGoalItem {
   final _RamadanGoalState state;
   final Widget? destination;
   final String? actionLabel;
+}
+
+class _PremiumPrayerCardStyle {
+  const _PremiumPrayerCardStyle({
+    required this.label,
+    required this.surfaceColor,
+    required this.borderColor,
+    required this.shadowColor,
+    required this.iconBackground,
+    required this.iconColor,
+    required this.timeBackground,
+    required this.timeColor,
+    required this.badgeBackground,
+    required this.badgeBorder,
+    required this.badgeForeground,
+  });
+
+  final String label;
+  final Color surfaceColor;
+  final Color borderColor;
+  final Color shadowColor;
+  final Color iconBackground;
+  final Color iconColor;
+  final Color timeBackground;
+  final Color timeColor;
+  final Color badgeBackground;
+  final Color badgeBorder;
+  final Color badgeForeground;
 }
 
 class _CountdownRingPainter extends CustomPainter {
