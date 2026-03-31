@@ -532,19 +532,48 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ),
         ],
       ),
-      child: Stack(
-        children: [
-          Positioned(
-            top: -6,
-            right: -2,
-            child: Icon(
-              Icons.mosque_rounded,
-              size: 96,
-              color: tokens.primary.withOpacity(0.08),
+      child: SizedBox(
+        width: double.infinity,
+        child: Stack(
+          alignment: Alignment.topCenter,
+          clipBehavior: Clip.none,
+          children: [
+            Positioned(
+              top: 2,
+              right: -28,
+              child: IgnorePointer(
+                child: Icon(
+                  Icons.mosque_rounded,
+                  size: 112,
+                  color: tokens.primary.withOpacity(0.038),
+                ),
+              ),
             ),
-          ),
-          Column(
-            children: [
+            Positioned(
+              top: 26,
+              right: 10,
+              child: IgnorePointer(
+                child: Container(
+                  width: 72,
+                  height: 72,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: RadialGradient(
+                      colors: [
+                        tokens.primary.withOpacity(0.06),
+                        Colors.transparent,
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              width: double.infinity,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
               Text(
                 'PRÓXIMA ORACIÓN',
                 style: GoogleFonts.dmSans(
@@ -602,9 +631,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                 ),
               ],
-              const SizedBox(height: 18),
-              _buildCountdown(tokens, remaining),
               const SizedBox(height: 16),
+              _buildCountdown(tokens, remaining, names.$1),
+              const SizedBox(height: 14),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
@@ -622,9 +651,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                 ),
               ),
-            ],
-          ),
-        ],
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -1559,7 +1590,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     return 'La pantalla principal sigue visible aunque los horarios aún no estén listos.';
   }
 
-  Widget _buildCountdown(QiblaTokens tokens, Duration? remaining) {
+  Widget _buildCountdown(
+    QiblaTokens tokens,
+    Duration? remaining,
+    String? nextPrayerLabel,
+  ) {
     if (remaining == null) {
       return Container(
         width: 188,
@@ -1580,11 +1615,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       );
     }
 
-    final hours = remaining.inHours.toString().padLeft(2, '0');
-    final minutes = (remaining.inMinutes % 60).toString().padLeft(2, '0');
-    final seconds = (remaining.inSeconds % 60).toString().padLeft(2, '0');
+    final countdownDisplay = _formatHeroCountdown(remaining);
     final clampedMinutes = remaining.inMinutes.clamp(0, 360);
     final progress = (1 - (clampedMinutes / 360)).clamp(0.08, 0.96).toDouble();
+    final contextLabel = nextPrayerLabel == null
+        ? 'Cuenta atrás activa'
+        : 'hasta $nextPrayerLabel';
 
     return SizedBox(
       width: 188,
@@ -1617,17 +1653,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  '$hours:$minutes',
-                  style: GoogleFonts.dmSans(
-                    fontSize: 32,
-                    fontWeight: FontWeight.w300,
-                    color: tokens.textPrimary,
-                    letterSpacing: -0.6,
-                  ),
-                ),
-                const SizedBox(height: 2),
-                Text(
-                  'RESTANTE',
+                  'CUENTA ATRÁS',
                   style: GoogleFonts.dmSans(
                     fontSize: 9,
                     color: tokens.textSecondary,
@@ -1636,11 +1662,42 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                 ),
                 const SizedBox(height: 8),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 14),
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      countdownDisplay.$1,
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.dmSans(
+                        fontSize: countdownDisplay.$3 ? 26 : 30,
+                        fontWeight: FontWeight.w600,
+                        color: tokens.textPrimary,
+                        letterSpacing: -0.7,
+                      ),
+                    ),
+                  ),
+                ),
+                if (countdownDisplay.$2 != null) ...[
+                  const SizedBox(height: 4),
+                  Text(
+                    countdownDisplay.$2!,
+                    style: GoogleFonts.dmSans(
+                      fontSize: 11,
+                      color: tokens.primaryLight,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.2,
+                    ),
+                  ),
+                ],
+                const SizedBox(height: 8),
                 Text(
-                  '$seconds seg',
+                  contextLabel,
+                  textAlign: TextAlign.center,
                   style: GoogleFonts.dmSans(
-                    fontSize: 11,
-                    color: tokens.primaryLight,
+                    fontSize: 10,
+                    color: tokens.textSecondary,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ],
@@ -2491,6 +2548,31 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final hours = safe.inHours;
     final minutes = safe.inMinutes.remainder(60);
     return '${hours}h ${minutes.toString().padLeft(2, '0')}min';
+  }
+
+  (String, String?, bool) _formatHeroCountdown(Duration remaining) {
+    final safe = remaining.isNegative ? Duration.zero : remaining;
+    final hours = safe.inHours;
+    final minutes = safe.inMinutes.remainder(60);
+    final seconds = safe.inSeconds.remainder(60);
+
+    if (hours > 0) {
+      return (
+        '$hours h ${minutes.toString().padLeft(2, '0')} min',
+        null,
+        true,
+      );
+    }
+
+    if (safe.inMinutes > 0) {
+      return (
+        '$minutes min',
+        '${seconds.toString().padLeft(2, '0')} s',
+        false,
+      );
+    }
+
+    return ('$seconds s', null, false);
   }
 
   IconData _insightIcon(HomeInsightKind kind) {

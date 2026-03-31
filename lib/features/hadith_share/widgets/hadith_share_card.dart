@@ -18,6 +18,10 @@ class HadithShareCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final resolvedTheme = theme.resolveFor(data);
+    final showArabicMetadata = data.hasArabicText && data.hasArabicReference;
+    final showTranslationMetadata =
+        data.hasTranslation && data.reference.trim().isNotEmpty;
+    final showMetadata = showArabicMetadata || showTranslationMetadata;
 
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -84,50 +88,54 @@ class HadithShareCard extends StatelessWidget {
               ),
               SizedBox(height: resolvedTheme.sectionSpacing),
             ],
-            Container(
-              width: double.infinity,
-              height: 1,
-              color: resolvedTheme.dividerColor,
-            ),
-            SizedBox(height: resolvedTheme.contentSpacing),
-            if (data.hasArabicReference) ...[
-              SizedBox(
+            if (showMetadata) ...[
+              Container(
                 width: double.infinity,
-                child: Directionality(
-                  textDirection: TextDirection.rtl,
-                  child: Text(
-                    data.arabicReference!.trim(),
-                    textAlign: TextAlign.right,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontFamily: resolvedTheme.arabicFontFamily,
-                      fontSize: resolvedTheme.referenceFontSize * 1.02,
-                      height: resolvedTheme.referenceLineHeight,
-                      fontWeight: FontWeight.w600,
-                      color: resolvedTheme.secondaryTextColor,
+                height: 1,
+                color: resolvedTheme.dividerColor,
+              ),
+              SizedBox(height: resolvedTheme.contentSpacing),
+              if (showArabicMetadata) ...[
+                SizedBox(
+                  width: double.infinity,
+                  child: Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: Text(
+                      data.arabicReference!.trim(),
+                      textAlign: TextAlign.right,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontFamily: resolvedTheme.arabicFontFamily,
+                        fontSize: resolvedTheme.referenceFontSize * 1.02,
+                        height: resolvedTheme.referenceLineHeight,
+                        fontWeight: FontWeight.w600,
+                        color: resolvedTheme.secondaryTextColor,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(height: resolvedTheme.contentSpacing * 0.55),
-            ],
-            SizedBox(
-              width: double.infinity,
-              child: Text(
-                data.reference.trim(),
-                textAlign: TextAlign.left,
-                maxLines: 3,
-                overflow: TextOverflow.ellipsis,
-                style: GoogleFonts.dmSans(
-                  fontSize: resolvedTheme.referenceFontSize,
-                  height: resolvedTheme.referenceLineHeight,
-                  fontWeight: FontWeight.w600,
-                  color: resolvedTheme.referenceTextColor,
+                if (showTranslationMetadata)
+                  SizedBox(height: resolvedTheme.contentSpacing * 0.55),
+              ],
+              if (showTranslationMetadata)
+                SizedBox(
+                  width: double.infinity,
+                  child: Text(
+                    data.reference.trim(),
+                    textAlign: TextAlign.left,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.dmSans(
+                      fontSize: resolvedTheme.referenceFontSize,
+                      height: resolvedTheme.referenceLineHeight,
+                      fontWeight: FontWeight.w600,
+                      color: resolvedTheme.referenceTextColor,
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            SizedBox(height: resolvedTheme.contentSpacing * 1.2),
+              SizedBox(height: resolvedTheme.contentSpacing * 1.2),
+            ],
             SizedBox(
               width: double.infinity,
               child: Text(
