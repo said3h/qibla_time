@@ -50,10 +50,8 @@ class FocusNotifier extends StateNotifier<FocusState> {
 
   StreamSubscription<dynamic>? _sensorSub;
   DateTime? _lastSujudTime;
-  Timer? _proximityTimer;
 
   static const _debounce = Duration(milliseconds: 800);
-  static const _minProximityDuration = Duration(milliseconds: 500);
   static const _dndChannel = MethodChannel('com.qiblatime/dnd');
 
   Future<void> activate() async {
@@ -76,23 +74,14 @@ class FocusNotifier extends StateNotifier<FocusState> {
         if (!state.isActive) return;
 
         final isNear = event is int ? event > 0 : event == true;
-
-        if (isNear) {
-          if (_proximityTimer != null || state.isNear) return;
-          _proximityTimer = Timer(_minProximityDuration, () {
-            _proximityTimer = null;
-            if (!state.isActive) return;
-            state = state.copyWith(isNear: true, sensorAvailable: true);
-            _onProximityConfirmed();
-          });
-          return;
+        if (isNear && !state.isNear) {
+          _onProximityConfirmed();
         }
 
-        _proximityTimer?.cancel();
-        _proximityTimer = null;
-        if (state.isNear) {
-          state = state.copyWith(isNear: false, sensorAvailable: true);
-        }
+        state = state.copyWith(
+          isNear: isNear,
+          sensorAvailable: true,
+        );
       },
       onError: (_, __) {
         _stopSensor();
@@ -158,8 +147,6 @@ class FocusNotifier extends StateNotifier<FocusState> {
   void _stopSensor() {
     _sensorSub?.cancel();
     _sensorSub = null;
-    _proximityTimer?.cancel();
-    _proximityTimer = null;
   }
 
   @override
