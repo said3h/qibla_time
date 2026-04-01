@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../core/theme/app_theme.dart';
 import '../services/hadith_offline_service.dart';
 
-/// Pantalla informativa sobre la disponibilidad offline de hadices
+/// Pantalla informativa sobre la disponibilidad sin conexión de hadices
 class HadithOfflineScreen extends ConsumerStatefulWidget {
   const HadithOfflineScreen({super.key});
 
@@ -43,7 +43,7 @@ class _HadithOfflineScreenState extends ConsumerState<HadithOfflineScreen> {
       backgroundColor: tokens.bgPage,
       appBar: AppBar(
         title: Text(
-          'Hadices Offline',
+          'Hadices sin conexión',
           style: GoogleFonts.amiri(
             fontSize: 22,
             fontWeight: FontWeight.bold,
@@ -181,7 +181,7 @@ class _HadithOfflineScreenState extends ConsumerState<HadithOfflineScreen> {
           const SizedBox(width: 12),
           Expanded(
             child: Text(
-              'Los hadices ya vienen incluidos en la app y permanecen disponibles sin conexión. No hace falta sincronizar ni eliminar colecciones para usarlos.',
+              'Los hadices ya vienen incluidos en la app y siguen disponibles sin conexión. No hace falta sincronizar nada ni eliminar colecciones para usarlos.',
               style: GoogleFonts.dmSans(
                 fontSize: 11,
                 height: 1.5,

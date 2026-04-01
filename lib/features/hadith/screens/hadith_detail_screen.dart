@@ -54,7 +54,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
       backgroundColor: tokens.bgPage,
       appBar: AppBar(
         title: Text(
-          'Detalle del Hadiz',
+          'Detalle del hadiz',
           style: GoogleFonts.amiri(
             fontSize: 22,
             fontWeight: FontWeight.bold,
@@ -98,7 +98,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
           if (_showArabic) ...[
             _buildSection(
               tokens: tokens,
-              title: 'Texto en Árabe',
+              title: 'Texto en árabe',
               icon: Icons.text_fields,
               child: _buildArabicText(tokens, hadith.arabic),
             ),
@@ -109,7 +109,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
           if (_showTranslation) ...[
             _buildSection(
               tokens: tokens,
-              title: 'Traducción al Español',
+              title: 'Traducción al español',
               icon: Icons.translate,
               child: _buildTranslationText(tokens, hadith.translation),
             ),
@@ -416,7 +416,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
               Icon(Icons.label_outline, size: 18, color: tokens.primary),
               const SizedBox(width: 8),
               Text(
-                'Categoría / Tema',
+                'Categoría / tema',
                 style: GoogleFonts.dmSans(
                   fontSize: 12,
                   fontWeight: FontWeight.w700,
@@ -518,7 +518,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
           ),
           const SizedBox(height: 8),
           Text(
-            'Este hadiz forma parte de la colección completa de 1,954 hadices en español con tildes correctas. Fuente: HadeethEnc.com',
+            'Este hadiz forma parte de una colección de 1.954 hadices en español. Fuente: HadeethEnc.com.',
             style: GoogleFonts.dmSans(
               fontSize: 10,
               height: 1.6,
@@ -540,7 +540,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
               _showArabic ? Icons.visibility : Icons.visibility_off,
               size: 16,
             ),
-            label: Text(_showArabic ? 'Ocultar Árabe' : 'Mostrar Árabe'),
+            label: Text(_showArabic ? 'Ocultar árabe' : 'Mostrar árabe'),
             style: OutlinedButton.styleFrom(
               foregroundColor: tokens.textPrimary,
               padding: const EdgeInsets.symmetric(vertical: 12),
@@ -555,7 +555,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
               _showTranslation ? Icons.visibility : Icons.visibility_off,
               size: 16,
             ),
-            label: Text(_showTranslation ? 'Ocultar Español' : 'Mostrar Español'),
+            label: Text(_showTranslation ? 'Ocultar español' : 'Mostrar español'),
             style: OutlinedButton.styleFrom(
               foregroundColor: tokens.textPrimary,
               padding: const EdgeInsets.symmetric(vertical: 12),

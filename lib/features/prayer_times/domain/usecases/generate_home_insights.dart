@@ -65,7 +65,7 @@ class GenerateHomeInsightsUseCase {
           kind: HomeInsightKind.guidance,
           title: 'Empieza hoy',
           message: activeDays == 0
-              ? 'Marca tus primeras oraciones y la app empezará a mostrar patrones útiles.'
+              ? 'Marca tus primeras oraciones y en Inicio empezarán a aparecer patrones útiles.'
               : 'Sigue marcando tus oraciones y verás patrones más precisos en Inicio.',
         ),
       );
@@ -91,21 +91,21 @@ class GenerateHomeInsightsUseCase {
       return const HomeInsight(
         kind: HomeInsightKind.progress,
         title: 'Casi completas hoy',
-        message: 'Te falta 1 oración para cerrar el 5/5 de hoy.',
+        message: 'Te falta una oración para completar el 5/5 de hoy.',
       );
     }
     if (prayerCountToday > 0 && prayerCountToday < 4) {
       return HomeInsight(
         kind: HomeInsightKind.progress,
         title: 'Buen ritmo hoy',
-        message: 'Llevas $prayerCountToday/5 oraciones marcadas. Mantener el impulso cuenta.',
+        message: 'Llevas $prayerCountToday/5 oraciones marcadas. Seguir así también cuenta.',
       );
     }
     if (prayerCountToday == 0 && now.hour >= 12) {
       return const HomeInsight(
         kind: HomeInsightKind.progress,
         title: 'Todavía puedes empezar',
-        message: 'Aún no has marcado oraciones hoy. Empezar por la siguiente ya cambia el día.',
+        message: 'Aún no has marcado ninguna oración hoy. Empezar por la siguiente ya cambia el día.',
       );
     }
     return null;
@@ -116,7 +116,7 @@ class GenerateHomeInsightsUseCase {
       return HomeInsight(
         kind: HomeInsightKind.streak,
         title: 'Racha en marcha',
-        message: 'Llevas una racha de $streak días completos. Protégela hoy.',
+        message: 'Llevas una racha de $streak días completos. Cuídala hoy.',
       );
     }
     return null;
@@ -172,7 +172,7 @@ class GenerateHomeInsightsUseCase {
       return HomeInsight(
         kind: HomeInsightKind.prayerPattern,
         title: 'Tu oración más constante',
-        message: '$prayer es la que mejor estás manteniendo este último tramo.',
+        message: '$prayer es la oración que estás manteniendo con más constancia últimamente.',
       );
     }
 
@@ -181,7 +181,7 @@ class GenerateHomeInsightsUseCase {
       return HomeInsight(
         kind: HomeInsightKind.prayerPattern,
         title: 'Punto a reforzar',
-        message: '$prayer es la oración que más te cuesta ahora mismo. Un pequeño foco ahí puede mover toda la semana.',
+        message: '$prayer es la oración que más te está costando ahora mismo. Poner un poco de foco ahí puede cambiar toda la semana.',
       );
     }
 
@@ -243,7 +243,7 @@ class GenerateHomeInsightsUseCase {
     return HomeInsight(
       kind: HomeInsightKind.ramadan,
       title: ramadanStatus.headerLabel,
-      message: 'Las pequeñas constancias de hoy pueden pesar mucho durante Ramadán.',
+      message: 'Los pequeños pasos de hoy pueden contar mucho durante Ramadán.',
     );
   }
 

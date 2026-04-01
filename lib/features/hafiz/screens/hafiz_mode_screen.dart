@@ -274,7 +274,7 @@ class _HafizPracticeScreenState extends ConsumerState<HafizPracticeScreen> {
           );
         },
         loading: () => Center(child: CircularProgressIndicator(color: tokens.primary)),
-        error: (_, __) => Center(child: Text('No se pudo cargar la sura.', style: GoogleFonts.dmSans(color: tokens.textSecondary))),
+        error: (_, __) => Center(child: Text('No hemos podido cargar la sura.', style: GoogleFonts.dmSans(color: tokens.textSecondary))),
       ),
     );
   }

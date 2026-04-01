@@ -167,7 +167,7 @@ class DownloadedSurahsScreen extends ConsumerWidget {
           child: Padding(
             padding: const EdgeInsets.all(24),
             child: Text(
-              'No se pudo cargar la lista de descargas ahora mismo.',
+              'No hemos podido cargar tus descargas por ahora.',
               textAlign: TextAlign.center,
               style: GoogleFonts.dmSans(color: tokens.textSecondary),
             ),

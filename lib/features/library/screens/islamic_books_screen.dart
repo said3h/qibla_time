@@ -193,7 +193,7 @@ class _IslamicBooksScreenState extends ConsumerState<IslamicBooksScreen>
       data: (categories) {
         if (categories.isEmpty) {
           return const _EmptyState(
-            message: 'No hay categorias disponibles',
+            message: 'No hay categorías disponibles',
             icon: Icons.folder_off_outlined,
           );
         }
@@ -291,10 +291,10 @@ class _IslamicBooksScreenState extends ConsumerState<IslamicBooksScreen>
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Esta biblioteca contiene libros islámicos en español proporcionados por IslamHouse.com'),
+            const Text('Esta biblioteca reúne libros islámicos en español de IslamHouse.com.'),
             const SizedBox(height: 16),
             Text(
-              '• 1,564+ libros disponibles',
+              '• Más de 1.500 libros disponibles',
               style: GoogleFonts.dmSans(fontSize: 12),
             ),
             Text(

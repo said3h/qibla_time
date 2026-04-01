@@ -117,7 +117,7 @@ class _HadithSharePreviewSheetState extends State<_HadithSharePreviewSheet> {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('No se pudo compartir el texto del hadiz.'),
+          content: Text('No hemos podido compartir el texto del hadiz.'),
         ),
       );
     } finally {
@@ -149,7 +149,7 @@ class _HadithSharePreviewSheetState extends State<_HadithSharePreviewSheet> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text(
-            'No se pudo generar la imagen del hadiz ahora mismo.',
+            'No hemos podido generar la imagen del hadiz.',
           ),
         ),
       );
@@ -167,7 +167,7 @@ class _HadithSharePreviewSheetState extends State<_HadithSharePreviewSheet> {
     return SharePreviewBottomSheet(
       tokens: tokens,
       title: 'Compartir hadiz',
-      subtitle: 'Elige layout y contenido antes de compartir.',
+      subtitle: 'Elige el formato y el contenido antes de compartir.',
       preview: HadithSharePreview(
         data: _previewData,
         theme: _previewTheme,
@@ -178,7 +178,7 @@ class _HadithSharePreviewSheetState extends State<_HadithSharePreviewSheet> {
           title: 'Estilo / fondo',
           children: [
             ShareSelectionChip(
-              label: 'Card',
+              label: 'Tarjeta',
               selected: _selectedLayout == SharePreviewLayoutOption.card,
               onSelected: () {
                 setState(() {
@@ -187,7 +187,7 @@ class _HadithSharePreviewSheetState extends State<_HadithSharePreviewSheet> {
               },
             ),
             ShareSelectionChip(
-              label: 'Story',
+              label: 'Historia',
               selected: _selectedLayout == SharePreviewLayoutOption.story,
               onSelected: () {
                 setState(() {

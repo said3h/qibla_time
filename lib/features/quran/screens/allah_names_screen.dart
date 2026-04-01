@@ -63,7 +63,7 @@ class AllahNamesScreen extends ConsumerWidget {
           child: Padding(
             padding: const EdgeInsets.all(24),
             child: Text(
-              'No se pudieron cargar los nombres ahora mismo.',
+              'No hemos podido cargar los nombres por ahora.',
               textAlign: TextAlign.center,
               style: GoogleFonts.dmSans(color: tokens.textSecondary),
             ),

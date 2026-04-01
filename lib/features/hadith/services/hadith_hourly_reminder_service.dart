@@ -10,8 +10,8 @@ class HadithHourlyReminderService {
   final HadithService _hadithService;
 
   static const String _channelId = 'hadith_hourly_reminders';
-  static const String _channelName = 'Recordatorio de Hadiz';
-  static const String _channelDesc = 'Recordatorios hourly de hadices';
+  static const String _channelName = 'Recordatorios de hadices';
+  static const String _channelDesc = 'Recordatorios horarios de hadices';
   static const String _prefsKey = 'hadith_hourly_enabled';
   static const String _prefsStartHour = 'hadith_hourly_start';
   static const String _prefsEndHour = 'hadith_hourly_end';
@@ -38,7 +38,7 @@ class HadithHourlyReminderService {
         ));
   }
 
-  /// Verifica si los recordatorios hourly están habilitados
+  /// Verifica si los recordatorios horarios están habilitados
   Future<bool> isEnabled() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getBool(_prefsKey) ?? false;
@@ -76,7 +76,7 @@ class HadithHourlyReminderService {
     await scheduleAllReminders();
   }
 
-  /// Programa todos los recordatorios hourly
+  /// Programa todos los recordatorios horarios
   Future<void> scheduleAllReminders() async {
     if (!await isEnabled()) return;
 
@@ -94,7 +94,7 @@ class HadithHourlyReminderService {
 
   /// Programa un recordatorio para una hora específica
   Future<void> _scheduleReminderForHour(int hour) async {
-    // Nota: programar notificaciones hourly exactas requiere configuración especial
+    // Nota: programar notificaciones horarias exactas requiere configuración especial
     // Esta es una implementación simplificada
     final now = tz.TZDateTime.now(tz.local);
     var scheduledDate = tz.TZDateTime(tz.local, now.year, now.month, now.day, hour, 0);
@@ -107,12 +107,12 @@ class HadithHourlyReminderService {
     final hadith = await _hadithService.getRandomHadiths(count: 1);
     final hadithText = hadith.isNotEmpty
         ? hadith.first.translation
-        : 'Recordatorio: Lee un hadiz del Profeta ﷺ';
+        : 'Recordatorio: lee un hadiz del Profeta ﷺ';
 
     // Usar notificación periódica diaria a la hora especificada
     await _plugin.zonedSchedule(
       20000 + hour,
-      '📖 Hadiz del Momento',
+      '📖 Hadiz del momento',
       hadithText.length > 150 ? '${hadithText.substring(0, 147)}...' : hadithText,
       scheduledDate,
       _notificationDetails(),
@@ -159,11 +159,13 @@ class HadithHourlyReminderService {
   /// Envía una notificación inmediata (para testing)
   Future<void> sendTestNotification() async {
     final hadith = await _hadithService.getRandomHadiths(count: 1);
-    final hadithText = hadith.isNotEmpty ? hadith.first.translation : 'Test de recordatorio de hadiz';
+    final hadithText = hadith.isNotEmpty
+        ? hadith.first.translation
+        : 'Prueba de recordatorio de hadiz';
 
     await _plugin.show(
       20999,
-      '📖 Recordatorio de Hadiz',
+      '📖 Recordatorio de hadiz',
       hadithText,
       _notificationDetails(),
     );

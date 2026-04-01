@@ -85,7 +85,7 @@ class _AdhanSelectorScreenState extends State<AdhanSelectorScreen> {
     });
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('Adhan guardado: ${_getAdhanName(file)}'),
+        content: Text('Adhan seleccionado: ${_getAdhanName(file)}'),
         behavior: SnackBarBehavior.floating,
       ),
     );
@@ -148,7 +148,7 @@ class _AdhanSelectorScreenState extends State<AdhanSelectorScreen> {
       });
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('No se pudo reproducir la vista previa: $e'),
+          content: const Text('No hemos podido reproducir la vista previa.'),
           behavior: SnackBarBehavior.floating,
         ),
       );
@@ -185,7 +185,7 @@ class _AdhanSelectorScreenState extends State<AdhanSelectorScreen> {
       backgroundColor: tokens.bgPage,
       appBar: AppBar(
         title: Text(
-          'Seleccionar Adhan',
+          'Seleccionar adhan',
           style: GoogleFonts.dmSans(fontWeight: FontWeight.w700),
         ),
         backgroundColor: tokens.bgApp,
@@ -245,7 +245,7 @@ class _AdhanSelectorScreenState extends State<AdhanSelectorScreen> {
           ),
           const SizedBox(height: 12),
           Text(
-            'Elige el Adhan para tus avisos',
+            'Elige el adhan para tus avisos',
             style: GoogleFonts.dmSans(
               color: tokens.textPrimary,
               fontSize: 18,

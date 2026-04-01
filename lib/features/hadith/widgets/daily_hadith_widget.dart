@@ -638,7 +638,7 @@ class _HadithUnavailableWidget extends StatelessWidget {
           const SizedBox(width: 12),
           Expanded(
             child: Text(
-              'Hadiz del día no disponible',
+              'El hadiz del día no está disponible por ahora.',
               style: GoogleFonts.dmSans(
                 fontSize: 12,
                 height: 1.5,
@@ -649,7 +649,7 @@ class _HadithUnavailableWidget extends StatelessWidget {
           const SizedBox(width: 12),
           TextButton(
             onPressed: onOpenLibrary,
-            child: const Text('Abrir'),
+            child: const Text('Ver hadices'),
           ),
         ],
       ),

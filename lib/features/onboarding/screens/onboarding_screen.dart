@@ -319,7 +319,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
           _FeatureCard(
             icon: Icons.explore_rounded,
             title: 'Qibla y práctica diaria',
-            body: 'Brújula, tasbih, tracking y más en el mismo flujo.',
+            body: 'Brújula, tasbih, seguimiento y más en el mismo flujo.',
             tokens: tokens,
           ),
           const SizedBox(height: 10),
@@ -362,7 +362,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
             body: locationReady
                 ? 'Lista para calcular horarios y Qibla.'
                 : _locationPermission == LocationPermission.deniedForever
-                    ? 'El permiso está bloqueado. Puedes activarlo luego desde Ajustes del sistema.'
+                    ? 'El permiso está bloqueado. Puedes activarlo después desde los ajustes del sistema.'
                     : _hasLocationPermission && !_locationServiceEnabled
                         ? 'El GPS del dispositivo está desactivado. Puedes seguir y activarlo después.'
                         : 'Necesaria para horarios precisos y dirección a La Meca.',
@@ -379,7 +379,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
             title: 'Notificaciones',
             body: _notificationsGranted
                 ? 'Listas para recordarte las oraciones.'
-                : 'Así puedes recibir tus avisos de adhan y resúmenes futuros.',
+                : 'Así podrás recibir avisos de adhan y recordatorios más adelante.',
             status: _notificationsGranted ? 'Concedido' : 'Pendiente',
             actionLabel: 'Activar',
             action: _requestNotifications,
@@ -402,7 +402,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
           final selected = method == _method;
           return _SelectableTile(
             title: _methodLabel(method),
-            subtitle: selected ? 'Seleccionado ahora mismo' : 'Toca para usar este método',
+            subtitle: selected ? 'Seleccionado ahora' : 'Toca para elegir este método',
             selected: selected,
             tokens: tokens,
             onTap: () => _persistMethod(method),
@@ -442,7 +442,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
     return _StepScaffold(
       title: 'Adhan y avisos',
       subtitle:
-          'Qibla Time puede avisarte de cada oración y usar un adhan suave por defecto. Después podrás elegir otro sonido.',
+          'Qibla Time puede avisarte de cada oración con un adhan suave por defecto. Después podrás cambiarlo.',
       child: Column(
         children: [
           Container(
@@ -509,7 +509,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  'Se usara el sonido que tengas seleccionado. Puedes cambiarlo luego en Ajustes.',
+                  'Se usará el sonido que tengas seleccionado. Puedes cambiarlo después en Ajustes.',
                   style: GoogleFonts.dmSans(
                     fontSize: 11,
                     color: tokens.textSecondary,
@@ -533,7 +533,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
     return _StepScaffold(
       title: 'Todo listo',
       subtitle:
-          'Ya puedes empezar con tus horarios, tu Qibla y el seguimiento diario. Todo esto se puede ajustar después.',
+          'Ya puedes empezar con tus horarios, tu Qibla y tu seguimiento diario. Todo esto se puede ajustar después.',
       child: Container(
         width: double.infinity,
         padding: const EdgeInsets.all(18),

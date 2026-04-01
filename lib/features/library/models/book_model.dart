@@ -48,7 +48,7 @@ class IslamHouseBook {
     final title = _firstNonEmpty([
       json['title'],
       json['description'],
-      'Sin titulo',
+      'Sin título',
     ]);
     final titleArabic = _firstNonEmpty([
       json['title_arabic'],
@@ -136,7 +136,7 @@ class IslamHouseBook {
     };
   }
 
-  /// Obtiene el libro del dia basado en la fecha.
+  /// Obtiene el libro del día basado en la fecha.
   static IslamHouseBook getBookOfDay(List<IslamHouseBook> books) {
     if (books.isEmpty) {
       return _placeholder();
@@ -150,7 +150,7 @@ class IslamHouseBook {
   static IslamHouseBook _placeholder() {
     return const IslamHouseBook(
       id: 0,
-      title: 'Libro del dia',
+      title: 'Libro del día',
       titleArabic: '',
       description: 'Un libro recomendado para leer hoy',
       author: 'IslamHouse',
@@ -169,19 +169,19 @@ class IslamHouseBook {
 
   /// Categorias principales disponibles.
   static const List<String> mainCategories = [
-    'El Noble Coran',
+    'El Noble Corán',
     'La Sunnah del Profeta',
-    'Creencia Islamica',
-    'Jurisprudencia Islamica',
+    'Creencia islámica',
+    'Jurisprudencia islámica',
     'Virtudes',
     'Pecados Mayores',
-    'Idioma Arabe',
+    'Idioma árabe',
     'Llamada al Islam',
     'Historia',
-    'Cultura Islamica',
+    'Cultura islámica',
     'Sermones',
-    'Lecciones Academicas',
-    'Biografia Profetica',
+    'Lecciones académicas',
+    'Biografía profética',
     'Presentando el Islam',
   ];
 

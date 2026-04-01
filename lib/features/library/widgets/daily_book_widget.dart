@@ -472,7 +472,7 @@ class _BooksUnavailableWidget extends StatelessWidget {
           const SizedBox(width: 12),
           Expanded(
             child: Text(
-              'Biblioteca no disponible',
+              'La biblioteca no está disponible por ahora.',
               style: GoogleFonts.dmSans(
                 fontSize: 12,
                 height: 1.5,
@@ -483,7 +483,7 @@ class _BooksUnavailableWidget extends StatelessWidget {
           const SizedBox(width: 12),
           TextButton(
             onPressed: onOpenLibrary,
-            child: const Text('Abrir'),
+            child: const Text('Ir a libros'),
           ),
         ],
       ),

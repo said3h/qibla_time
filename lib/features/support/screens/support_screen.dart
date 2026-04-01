@@ -38,7 +38,7 @@ class SupportScreen extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Text(
-            'Qibla Time es gratuita y sin anuncios intrusivos. Esta pantalla resume formas reales y honestas de apoyar el proyecto, sin prometer acciones que todavía no existen dentro de la app.',
+            'Qibla Time es gratuita y no tiene anuncios intrusivos. Aquí tienes formas reales y sencillas de apoyar el proyecto, sin promesas ni funciones que todavía no existen en la app.',
             textAlign: TextAlign.center,
             style: GoogleFonts.dmSans(
               fontSize: 14,
@@ -51,19 +51,19 @@ class SupportScreen extends StatelessWidget {
             icon: Icons.star_rate_rounded,
             title: 'Valora la app',
             description:
-                'Cuando la ficha definitiva de tienda esté disponible, una reseña ayudará a que más personas encuentren Qibla Time.',
+                'Cuando la ficha definitiva en la tienda esté lista, una reseña ayudará a que más personas descubran Qibla Time.',
           ),
           _SupportInfoCard(
             icon: Icons.share_rounded,
-            title: 'Compártela con otras personas',
+            title: 'Compártela',
             description:
-                'Recomendar Qibla Time a familiares y amistades también es una forma real de apoyar el proyecto.',
+                'Recomendar Qibla Time a familiares y amistades también ayuda de verdad al proyecto.',
           ),
           _SupportInfoCard(
             icon: Icons.volunteer_activism_outlined,
             title: 'Sadaqah',
             description:
-                'La opción de apoyo económico todavía no está habilitada dentro de la app.',
+                'El apoyo económico todavía no está disponible en la app.',
           ),
           const SizedBox(height: 24),
           Container(

@@ -23,9 +23,9 @@ class WeeklySummaryNotificationService {
     await NotificationService.instance.cancel(_notificationId);
     await NotificationService.instance.scheduleReminder(
       id: _notificationId,
-      title: 'Resumen semanal listo',
+      title: 'Tu resumen semanal ya está listo',
       body:
-          'Esta semana rezaste ${summary.prayersCompleted}/${summary.maxPossible} oraciones. Tu mejor día fue ${summary.strongestDay.shortLabel}.',
+          'Esta semana completaste ${summary.prayersCompleted}/${summary.maxPossible} oraciones. Tu mejor día fue ${summary.strongestDay.shortLabel}.',
       scheduledAt: scheduledAt,
     );
   }

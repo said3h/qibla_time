@@ -17,7 +17,7 @@ class IslamHouseBookService {
 
   final String _languageCode;
 
-  /// Obtiene lista de libros en espanol.
+  /// Obtiene lista de libros en español.
   Future<List<IslamHouseBook>> getBooks({
     int page = 1,
     int limit = 20,
@@ -117,7 +117,7 @@ class IslamHouseBookService {
     return books.take(limit).toList();
   }
 
-  /// Obtiene libros mas descargados.
+  /// Obtiene libros más descargados.
   Future<List<IslamHouseBook>> getMostDownloaded({int limit = 10}) async {
     final books = await getBooks(limit: limit);
     return books.take(limit).toList();

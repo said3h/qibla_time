@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 
-/// Servicio para gestionar la disponibilidad offline de hadices
+/// Servicio para gestionar la disponibilidad sin conexión de hadices
 class HadithOfflineService {
   /// Colecciones incluidas dentro de la app.
   static const Map<String, String> availableCollections = {
@@ -12,10 +12,10 @@ class HadithOfflineService {
     'abudawud': 'Sunan Abu Dawud',
     'ahmad': 'Musnad Ahmad',
     'malik': 'Muwatta Malik',
-    'general': 'Otros Hadices',
+    'general': 'Otros hadices',
   };
 
-  /// Todas las colecciones están disponibles offline de forma permanente.
+  /// Todas las colecciones están disponibles sin conexión de forma permanente.
   Future<bool> isCollectionDownloaded(String collectionKey) async {
     return availableCollections.containsKey(collectionKey);
   }
@@ -25,7 +25,7 @@ class HadithOfflineService {
     return availableCollections.keys.toList();
   }
 
-  /// No-op: los hadices ya vienen incluidos offline dentro de la app.
+  /// No-op: los hadices ya vienen incluidos sin conexión dentro de la app.
   Future<void> markCollectionAsDownloaded(String collectionKey) async {}
 
   /// No-op: no existe sincronización real para hadices.
@@ -34,7 +34,7 @@ class HadithOfflineService {
   /// No-op: no se elimina contenido real, ya que las colecciones están en assets.
   Future<void> removeCollection(String collectionKey) async {}
 
-  /// Obtiene el estado real de disponibilidad offline.
+  /// Obtiene el estado real de disponibilidad sin conexión.
   Future<HadithOfflineStatus> getStatus() async {
     return HadithOfflineStatus(
       downloadedCollections: await getDownloadedCollections(),
@@ -44,7 +44,7 @@ class HadithOfflineService {
     );
   }
 
-  /// Carga hadices desde assets (siempre disponible offline)
+  /// Carga hadices desde assets (siempre disponibles sin conexión)
   Future<List<dynamic>> loadCollection(String collectionKey) async {
     try {
       final jsonString = await rootBundle.loadString(
@@ -56,13 +56,13 @@ class HadithOfflineService {
     }
   }
 
-  /// Verifica si todos los hadices están disponibles offline
+  /// Verifica si todos los hadices están disponibles sin conexión
   Future<bool> isAllHadithsAvailable() async {
     return true;
   }
 }
 
-/// Estado offline de los hadices
+/// Estado sin conexión de los hadices
 class HadithOfflineStatus {
   const HadithOfflineStatus({
     required this.downloadedCollections,

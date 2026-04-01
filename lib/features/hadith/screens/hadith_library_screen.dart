@@ -81,7 +81,7 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
       backgroundColor: tokens.bgPage,
       appBar: AppBar(
         title: Text(
-          'Biblioteca de Hadices',
+          'Biblioteca de hadices',
           style: GoogleFonts.amiri(
             fontSize: 24,
             fontWeight: FontWeight.bold,
@@ -103,7 +103,7 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
                 ),
               );
             },
-            tooltip: 'Hadices offline',
+            tooltip: 'Hadices sin conexión',
           ),
         ],
       ),
@@ -463,7 +463,7 @@ class _FeaturedHadithCard extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  'HADITH DEL DIA',
+                  'HADIZ DEL DÍA',
                   style: GoogleFonts.dmSans(
                     fontSize: 10,
                     fontWeight: FontWeight.w700,
@@ -848,7 +848,7 @@ class _EmptyState extends StatelessWidget {
           Text(
             isSearch
                 ? 'No se encontraron hadices para "$query"'
-                : 'No hay hadices disponibles',
+                : 'No hay hadices disponibles por ahora',
             style: GoogleFonts.dmSans(
               fontSize: 14,
               fontWeight: FontWeight.w600,
@@ -858,8 +858,8 @@ class _EmptyState extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             isSearch
-                ? 'Intenta con otros términos o quita los filtros'
-                : 'Los hadices se cargarán pronto',
+                ? 'Prueba con otros términos o quita algunos filtros.'
+                : 'En cuanto terminen de cargarse, aparecerán aquí.',
             textAlign: TextAlign.center,
             style: GoogleFonts.dmSans(
               fontSize: 12,

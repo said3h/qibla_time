@@ -83,29 +83,29 @@ class QuranService {
 
     final arabicData = _decodeApiData(
       responses[0].body,
-      context: 'arabe',
+      context: 'árabe',
     );
     final spanishData = _decodeApiData(
       responses[1].body,
-      context: 'espanol',
+      context: 'español',
     );
     final translitData = _decodeApiData(
       responses[2].body,
-      context: 'transliteracion',
+      context: 'transliteración',
     );
 
     final arabicAyahs = _decodeAyahs(
       arabicData,
-      context: 'arabe',
+      context: 'árabe',
       required: true,
     );
     final spanishAyahs = _decodeAyahs(
       spanishData,
-      context: 'espanol',
+      context: 'español',
     );
     final translitAyahs = _decodeAyahs(
       translitData,
-      context: 'transliteracion',
+      context: 'transliteración',
     );
 
     final ayahs = List.generate(arabicAyahs.length, (i) {
@@ -113,7 +113,7 @@ class QuranService {
       final ayahNumber = _readRequiredInt(
         arabicAyah,
         'number',
-        context: 'aleya arabe ${i + 1}',
+        context: 'aleya árabe ${i + 1}',
       );
 
       return SurahAyah(
@@ -121,12 +121,12 @@ class QuranService {
         numberInSurah: _readRequiredInt(
           arabicAyah,
           'numberInSurah',
-          context: 'aleya arabe ${i + 1}',
+          context: 'aleya árabe ${i + 1}',
         ),
         arabic: _readRequiredString(
           arabicAyah,
           'text',
-          context: 'aleya arabe ${i + 1}',
+          context: 'aleya árabe ${i + 1}',
         ),
         transliteration: i < translitAyahs.length
             ? _readOptionalString(translitAyahs[i], 'text')

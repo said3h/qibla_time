@@ -39,10 +39,10 @@ class AnalyticsShareService {
   }
 
   String _shareText(WeeklySummary summary, TrackingState tracking) {
-    return 'Mi progreso en Qibla Time\n'
+    return 'Así va mi semana en Qibla Time\n'
         'Racha actual: ${tracking.currentStreak} días\n'
         'Esta semana: ${summary.prayersCompleted}/${summary.maxPossible} oraciones\n'
-        'Mejor día: ${summary.strongestDay.shortLabel}\n'
+        'Tu mejor día: ${summary.strongestDay.shortLabel}\n'
         '${summary.interpretation}';
   }
 
@@ -107,7 +107,7 @@ class AnalyticsShareService {
 
     _paintText(
       canvas,
-      text: tracking.currentStreak == 1 ? 'día seguido' : 'días seguidos',
+      text: tracking.currentStreak == 1 ? 'día de racha' : 'días de racha',
       style: GoogleFonts.dmSans(
         fontSize: 28,
         color: tokens.textSecondary,
@@ -122,14 +122,14 @@ class AnalyticsShareService {
       tokens: tokens,
       rect: Rect.fromLTWH(92, statsTop, 280, 172),
       value: '${summary.prayersCompleted}/${summary.maxPossible}',
-      label: 'oraciones esta semana',
+      label: 'oraciones de esta semana',
     );
     _drawStatCard(
       canvas,
       tokens: tokens,
       rect: Rect.fromLTWH(400, statsTop, 280, 172),
       value: summary.strongestDay.shortLabel,
-      label: '${summary.strongestDay.completed}/5 mejor día',
+      label: '${summary.strongestDay.completed}/5 en tu mejor día',
     );
     _drawStatCard(
       canvas,
@@ -166,7 +166,7 @@ class AnalyticsShareService {
 
     _paintText(
       canvas,
-      text: 'Comparte tu progreso y sigue con constancia.',
+      text: 'Comparte tu progreso y sigue cuidando tu constancia.',
       style: GoogleFonts.dmSans(
         fontSize: 22,
         color: tokens.textSecondary,

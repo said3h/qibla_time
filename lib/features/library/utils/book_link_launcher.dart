@@ -4,13 +4,13 @@ import 'package:url_launcher/url_launcher.dart';
 Future<void> openBookUrl(BuildContext context, String url) async {
   final trimmedUrl = url.trim();
   if (trimmedUrl.isEmpty) {
-    _showBookLinkFeedback(context, 'Enlace no disponible');
+    _showBookLinkFeedback(context, 'Este enlace no está disponible.');
     return;
   }
 
   final uri = Uri.tryParse(trimmedUrl);
   if (uri == null || !uri.hasScheme) {
-    _showBookLinkFeedback(context, 'Enlace no disponible');
+    _showBookLinkFeedback(context, 'Este enlace no está disponible.');
     return;
   }
 
@@ -18,7 +18,7 @@ Future<void> openBookUrl(BuildContext context, String url) async {
     final canOpen = await canLaunchUrl(uri);
     if (!context.mounted) return;
     if (!canOpen) {
-      _showBookLinkFeedback(context, 'No se pudo abrir el enlace');
+      _showBookLinkFeedback(context, 'No hemos podido abrir el enlace.');
       return;
     }
 
@@ -28,11 +28,11 @@ Future<void> openBookUrl(BuildContext context, String url) async {
     );
     if (!context.mounted) return;
     if (!launched) {
-      _showBookLinkFeedback(context, 'No se pudo abrir el enlace');
+      _showBookLinkFeedback(context, 'No hemos podido abrir el enlace.');
     }
   } catch (_) {
     if (!context.mounted) return;
-    _showBookLinkFeedback(context, 'No se pudo abrir el enlace');
+    _showBookLinkFeedback(context, 'No hemos podido abrir el enlace.');
   }
 }
 

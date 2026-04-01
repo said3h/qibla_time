@@ -191,7 +191,7 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
                   border: Border.all(color: tokens.border),
                 ),
                 child: Text(
-                  'No pudimos cargar el contenido de Dua ahora mismo.',
+                  'No hemos podido cargar el contenido de Dua.',
                   style: GoogleFonts.dmSans(
                     fontSize: 12,
                     color: tokens.textPrimary,
@@ -253,7 +253,7 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
             border: Border.all(color: tokens.primaryBorder),
           ),
           child: Text(
-            'Colección ampliada con duas y adhkar para el día a día. Toca una categoría para ver todas las duas disponibles.',
+            'Una colección cuidada de duas y adhkar para el día a día. Toca una categoría para ver todas las duas disponibles.',
             style: GoogleFonts.dmSans(
               fontSize: 12,
               height: 1.6,

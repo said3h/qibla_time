@@ -859,7 +859,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     }
 
     final text = !systemPermissionGranted
-        ? 'Tus recordatorios de Adhan estan configurados, pero el permiso del sistema sigue pendiente.'
+        ? 'Tus recordatorios de adhan están configurados, pero el permiso del sistema sigue pendiente.'
         : 'Los avisos generales de oración están pausados ahora mismo.';
 
     return Padding(
@@ -1184,13 +1184,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             const SizedBox(height: 10),
             Row(
               children: [
-                Expanded(child: _summaryMetric(tokens, '${summary.fullDays}', 'días 5/5')),
+                Expanded(child: _summaryMetric(tokens, '${summary.fullDays}', 'días completos')),
                 Expanded(child: _summaryMetric(tokens, '${summary.currentStreak}', 'racha actual')),
                 Expanded(
                   child: _summaryMetric(
                     tokens,
                     summary.strongestDay.shortLabel,
-                    '${summary.strongestDay.completed}/5 mejor día',
+                    '${summary.strongestDay.completed}/5 en tu mejor día',
                   ),
                 ),
               ],
@@ -1604,7 +1604,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           borderRadius: BorderRadius.circular(24),
         ),
         child: Text(
-          'Cuenta atras no disponible',
+          'Cuenta atrás no disponible',
           textAlign: TextAlign.center,
           style: GoogleFonts.dmSans(
             fontSize: 12,

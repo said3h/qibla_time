@@ -109,7 +109,7 @@ class _DuaSharePreviewSheetState extends State<_DuaSharePreviewSheet> {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('No se pudo compartir el texto de la dua.'),
+          content: Text('No hemos podido compartir el texto de la dua.'),
         ),
       );
     } finally {
@@ -140,7 +140,7 @@ class _DuaSharePreviewSheetState extends State<_DuaSharePreviewSheet> {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('No se pudo generar la imagen de la dua.'),
+          content: Text('No hemos podido generar la imagen de la dua.'),
         ),
       );
     } finally {
@@ -164,7 +164,7 @@ class _DuaSharePreviewSheetState extends State<_DuaSharePreviewSheet> {
       title: widget.dua.title.trim().isEmpty
           ? 'Compartir dua'
           : 'Compartir ${widget.dua.title.trim()}',
-      subtitle: 'Usa la misma experiencia visual del hadiz para dua y adhkar.',
+      subtitle: 'Usa la misma presentación visual del hadiz para la dua y los adhkar.',
       preview: HadithSharePreview(
         data: previewData,
         theme: _previewTheme,
@@ -175,7 +175,7 @@ class _DuaSharePreviewSheetState extends State<_DuaSharePreviewSheet> {
           title: 'Estilo / fondo',
           children: [
             ShareSelectionChip(
-              label: 'Card',
+              label: 'Tarjeta',
               selected: _selectedLayout == SharePreviewLayoutOption.card,
               onSelected: () {
                 setState(() {
@@ -184,7 +184,7 @@ class _DuaSharePreviewSheetState extends State<_DuaSharePreviewSheet> {
               },
             ),
             ShareSelectionChip(
-              label: 'Story',
+              label: 'Historia',
               selected: _selectedLayout == SharePreviewLayoutOption.story,
               onSelected: () {
                 setState(() {

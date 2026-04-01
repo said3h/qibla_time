@@ -260,7 +260,7 @@ class _DailyProtectionCardState extends State<_DailyProtectionCard> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'PROTECCION DIARIA',
+            'PROTECCIÓN DIARIA',
             style: GoogleFonts.dmSans(
               fontSize: 10,
               fontWeight: FontWeight.w700,
@@ -671,7 +671,7 @@ class _SurahTile extends StatelessWidget {
             if (isDownloaded)
               Text(
                 isDownloadedFavorite
-                    ? 'Audio descargado - favorita offline'
+                    ? 'Audio descargado · favorita sin conexión'
                     : 'Audio descargado',
                 style: GoogleFonts.dmSans(
                   fontSize: 10,
@@ -832,7 +832,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                 leading: const Icon(Icons.short_text_outlined),
                 title: const Text('Compartir texto'),
                 subtitle: Text(
-                  'Compartir el árabe, la traducción y la referencia.',
+                  'Incluye el árabe, la traducción y la referencia.',
                   style: GoogleFonts.dmSans(fontSize: 12),
                 ),
                 onTap: () => Navigator.of(sheetContext).pop(_AyahShareAction.text),
@@ -841,7 +841,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                 leading: const Icon(Icons.image_outlined),
                 title: const Text('Compartir imagen'),
                 subtitle: Text(
-                  'Generar una tarjeta PNG con la aleya.',
+                  'Crea una imagen con la aleya.',
                   style: GoogleFonts.dmSans(fontSize: 12),
                 ),
                 onTap: () =>
@@ -851,7 +851,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                 leading: const Icon(Icons.movie_outlined),
                 title: const Text('Compartir video'),
                 subtitle: Text(
-                  'Generar un MP4 con la tarjeta y la recitación.',
+                  'Crea un video con la tarjeta y la recitación.',
                   style: GoogleFonts.dmSans(fontSize: 12),
                 ),
                 onTap: () =>
@@ -884,7 +884,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text(
-                'No se pudo generar la imagen de esta aleya ahora mismo.',
+                'No hemos podido generar la imagen de esta aleya.',
               ),
             ),
           );
@@ -912,7 +912,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
         messenger.showSnackBar(
           const SnackBar(
             content: Text(
-              'No hay audio disponible para generar el video de esta aleya.',
+              'Esta aleya no tiene audio disponible para generar el video.',
             ),
           ),
         );
@@ -923,7 +923,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       messenger.showSnackBar(
         const SnackBar(
           duration: Duration(seconds: 45),
-          content: Text('Generando video de la aleya...'),
+          content: Text('Estamos generando el video de la aleya...'),
         ),
       );
 
@@ -942,7 +942,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       messenger.showSnackBar(
         const SnackBar(
           content: Text(
-            'No se pudo generar el video de esta aleya ahora mismo.',
+            'No hemos podido generar el video de esta aleya.',
           ),
         ),
       );
@@ -1005,7 +1005,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
               detail.ayahs.where((ayah) => ayah.audioUrl.isNotEmpty).length,
           downloadedAyahs: 0,
           errorMessage:
-              'No se pudo comprobar la descarga local en este dispositivo.',
+              'No hemos podido comprobar la descarga en este dispositivo.',
         );
         _isDownloadedFavorite = false;
         _isCheckingDownloadState = false;
@@ -1049,7 +1049,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Audio descargado para escuchar esta sura sin conexión.'),
+          content: Text('Audio descargado. Ya puedes escuchar esta sura sin conexión.'),
         ),
       );
     } catch (_) {
@@ -1064,13 +1064,13 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
             .copyWith(
               status: SurahAudioDownloadStatus.error,
               errorMessage:
-                  'No se pudo completar la descarga. Comprueba tu conexión e inténtalo de nuevo.',
+                  'No hemos podido completar la descarga. Revisa tu conexión y vuelve a intentarlo.',
             );
       });
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text(
-            'No se pudo completar la descarga del audio ahora mismo.',
+            'No hemos podido completar la descarga del audio.',
           ),
         ),
       );
@@ -1092,13 +1092,13 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
               ListTile(
                 leading: const Icon(Icons.play_circle_outline),
                 title: const Text('Reproducir'),
-                subtitle: const Text('Escuchar la sura usando el audio guardado.'),
+                subtitle: const Text('Escucha la sura con el audio ya guardado.'),
                 onTap: () => Navigator.of(sheetContext).pop('play'),
               ),
               ListTile(
                 leading: Icon(Icons.cloud_off_outlined, color: tokens.textSecondary),
                 title: const Text('Quitar descarga'),
-                subtitle: const Text('Liberar espacio y volver a usar audio online.'),
+                subtitle: const Text('Libera espacio y vuelve a escucharla en línea.'),
                 onTap: () => Navigator.of(sheetContext).pop('remove'),
               ),
             ],
@@ -1123,7 +1123,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        content: Text('La descarga local se ha quitado de esta sura.'),
+        content: Text('La descarga de esta sura se ha eliminado.'),
       ),
     );
   }
@@ -1140,8 +1140,8 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       SnackBar(
         content: Text(
           isFavorite
-              ? 'Sura guardada entre tus descargadas favoritas.'
-              : 'Sura quitada de tus descargadas favoritas.',
+              ? 'Sura guardada entre tus descargas favoritas.'
+              : 'Sura retirada de tus descargas favoritas.',
         ),
       ),
     );
@@ -1171,13 +1171,13 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       return 'Audio no disponible para esta aleya.';
     }
     if (_downloadState?.isDownloaded == true) {
-      return 'Audio descargado en este dispositivo.';
+      return 'El audio ya está descargado en este dispositivo.';
     }
     switch (source) {
       case SurahLoadSource.online:
-        return 'Audio disponible para esta aleya.';
+        return 'Puedes escuchar esta aleya.';
       case SurahLoadSource.offline:
-        return 'Audio disponible si tienes conexión.';
+        return 'Puedes escuchar esta aleya si tienes conexión.';
       case SurahLoadSource.placeholder:
         return 'Audio no disponible para esta aleya.';
     }
@@ -1194,14 +1194,14 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
 
     final downloadState = _downloadState;
     if (downloadState?.isDownloading == true) {
-      return 'Descargando audio para escuchar la sura sin conexión. ${downloadState!.downloadedAyahs}/${downloadState.availableAyahs} aleyas listas.';
+      return 'Estamos descargando el audio para escuchar esta sura sin conexión. ${downloadState!.downloadedAyahs}/${downloadState.availableAyahs} aleyas listas.';
     }
     if (downloadState?.isDownloaded == true) {
-      return 'Audio descargado en este dispositivo. Esta sura puede reproducirse sin conexión.';
+      return 'El audio ya está descargado en este dispositivo. Puedes escuchar esta sura sin conexión.';
     }
     if (downloadState?.status == SurahAudioDownloadStatus.error) {
       return downloadState?.errorMessage ??
-          'No se pudo completar la descarga del audio.';
+          'No hemos podido completar la descarga del audio.';
     }
 
     final missingCount = detail.ayahs.length - availableCount;
@@ -1211,14 +1211,14 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
 
     final downloadNote =
         downloadState?.hasPartialDownload == true
-            ? ' Ya hay ${downloadState!.downloadedAyahs}/${downloadState.availableAyahs} aleyas guardadas localmente.'
-            : ' Puedes descargarla para escucharla sin conexión.';
+            ? ' Ya tienes ${downloadState!.downloadedAyahs}/${downloadState.availableAyahs} aleyas guardadas en el dispositivo.'
+            : ' También puedes descargarla para escucharla sin conexión.';
 
     switch (source) {
       case SurahLoadSource.online:
-        return 'Puedes escuchar la sura completa en reproducción continua.$availabilityNote$downloadNote';
+        return 'Puedes escuchar esta sura seguida, en reproducción continua.$availabilityNote$downloadNote';
       case SurahLoadSource.offline:
-        return 'La sura puede sonar completa si tienes conexión.$availabilityNote$downloadNote';
+        return 'Puedes escuchar esta sura completa si tienes conexión.$availabilityNote$downloadNote';
       case SurahLoadSource.placeholder:
         return 'La recitación completa no está disponible para esta sura.';
     }
@@ -1249,7 +1249,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text(
-            'No se pudo reproducir el audio ahora mismo. Comprueba tu conexión e inténtalo de nuevo.',
+            'No hemos podido reproducir el audio. Revisa tu conexión y vuelve a intentarlo.',
           ),
         ),
       );
@@ -1281,7 +1281,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text(
-            'No se pudo iniciar la recitación completa ahora mismo.',
+            'No hemos podido iniciar la recitación completa.',
           ),
         ),
       );
@@ -1477,7 +1477,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                       ),
                       const SizedBox(height: 10),
                       Text(
-                        '${_audioStatusLabel(ayah, result.source)} Toca esta aleya para guardar aquí tu punto de lectura. Mantén pulsado para compartirla.',
+                        '${_audioStatusLabel(ayah, result.source)} Toca esta aleya para guardar tu punto de lectura aquí. Mantén pulsado para compartirla.',
                         style: GoogleFonts.dmSans(
                           fontSize: 10,
                           color: tokens.textMuted,
@@ -1495,7 +1495,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
           child: Padding(
             padding: const EdgeInsets.all(24),
             child: Text(
-              'No se pudo cargar esta sura ahora mismo. Comprueba la conexión e inténtalo de nuevo.',
+              'No hemos podido cargar esta sura. Revisa la conexión y vuelve a intentarlo.',
               textAlign: TextAlign.center,
               style: GoogleFonts.dmSans(color: tokens.textSecondary),
             ),
@@ -1517,11 +1517,11 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     }
     final sourceMessage = switch (source) {
       SurahLoadSource.online =>
-        'Contenido cargado online. Puedes reproducir el audio de cada aleya mientras tengas conexión.',
+        'Contenido cargado en línea. Puedes escuchar el audio de cada aleya mientras tengas conexión.',
       SurahLoadSource.offline =>
-        'Texto cargado offline. El audio de cada aleya puede requerir conexión.',
+        'Texto cargado sin conexión. El audio de algunas aleyas puede requerir conexión.',
       SurahLoadSource.placeholder =>
-        'Contenido parcial sin conexión. El audio no está disponible.',
+        'Contenido parcial sin conexión. El audio no está disponible por ahora.',
     };
     textParts.add(sourceMessage);
 

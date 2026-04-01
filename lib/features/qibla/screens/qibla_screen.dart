@@ -103,14 +103,14 @@ class QiblaScreen extends ConsumerWidget {
               loading: () => _buildLoading(tokens),
               error: (_, __) => _buildError(
                 tokens,
-                'No se pudo calcular la dirección a la Kaaba con esta ubicación.',
+                'No hemos podido calcular la dirección de la Kaaba con esta ubicación.',
               ),
             );
           },
           loading: () => _buildLoading(tokens),
           error: (_, __) => _buildError(
             tokens,
-            'No se pudo iniciar la brújula. Comprueba si tu dispositivo dispone de sensor magnético.',
+            'No hemos podido iniciar la brújula. Comprueba si tu dispositivo tiene sensor magnético.',
           ),
         ),
       ),
@@ -371,7 +371,7 @@ class QiblaScreen extends ConsumerWidget {
       } else if (diagnostic.permissionStatus ==
           PrayerLocationPermissionStatus.denied) {
         text =
-            'La app necesita permiso de ubicación para orientar la Qibla correctamente.';
+            'Qibla Time necesita permiso de ubicación para orientar la Qibla con precisión.';
       }
     }
     return _buildError(tokens, text);

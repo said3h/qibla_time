@@ -59,9 +59,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   static const _themes = [
     ('dark', 'Oscuro', 'Cielo antes del Fajr', '🌙'),
     ('light', 'Claro', 'Para uso en exteriores', '☀️'),
-    ('amoled', 'AMOLED', 'Negro puro, ahorra bateria', '⚫'),
+    ('amoled', 'AMOLED', 'Negro puro, ahorra batería', '⚫'),
     ('deuteranopia', 'Deuteranopia', 'Sin rojo/verde', '👁'),
-    ('monochrome', 'Monocromia', 'Acromatopsia y baja vision', '⬜'),
+    ('monochrome', 'Monocromía', 'Acromatopsia y baja visión', '⬜'),
   ];
 
   @override
@@ -330,7 +330,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               onTap: () => ref.read(accessibilityControllerProvider.notifier).reset(),
             ),
             const SizedBox(height: 14),
-            _buildSectionTitle(tokens, 'Notificaciones · adhan'),
+            _buildSectionTitle(tokens, 'Notificaciones de adhan'),
             _buildValueTile(
               tokens,
               'Sonido del adhan',
@@ -457,7 +457,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   loading: () => _buildSimpleToggleTile(tokens, 'Modo viajero', 'Cargando...', false, (_) {}),
                   error: (_, __) => _buildSettingRow(
                     label: 'Modo viajero',
-                    subtitle: 'No se pudo cargar el modo viajero',
+                    subtitle: 'No hemos podido cargar el modo viajero',
                     trailing: Icon(
                       Icons.info_outline,
                       color: tokens.textMuted,
@@ -471,7 +471,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
             const SizedBox(height: 6),
 
-            // Ubicaciones recientes
+            // Lugares recientes
             Consumer(
               builder: (context, ref, _) {
                 final locationsAsync = ref.watch(recentLocationsProvider);
@@ -534,8 +534,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   },
                   loading: () => const SizedBox(height: 40),
                   error: (_, __) => _buildSettingRow(
-                    label: 'Ubicaciones recientes',
-                    subtitle: 'Error al cargar',
+                    label: 'Lugares recientes',
+                    subtitle: 'No hemos podido cargarlo',
                     trailing: Icon(Icons.error, color: tokens.danger, size: 18),
                     tokens: tokens,
                   ),
@@ -617,7 +617,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 border: Border.all(color: tokens.border),
               ),
               child: Text(
-                'Las copias se exportan manualmente. Qibla Time no crea backups automáticos ni sincroniza en segundo plano todavía.',
+                'Las copias se exportan manualmente. Qibla Time todavía no crea copias automáticas ni sincroniza en segundo plano.',
                 style: GoogleFonts.dmSans(
                   fontSize: 11,
                   height: 1.5,
@@ -651,7 +651,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 border: Border.all(color: tokens.primaryBorder),
               ),
               child: Text(
-                'Puedes guardar y compartir una copia manual en formato JSON. La automatización y la sincronización entre dispositivos todavía no están habilitadas.',
+                'Puedes guardar y compartir una copia manual en formato JSON. La automatización y la sincronización entre dispositivos aún no están disponibles.',
                 style: GoogleFonts.dmSans(fontSize: 10, height: 1.6, color: tokens.textPrimary),
               ),
             ),
@@ -1016,7 +1016,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   if (!context.mounted) return;
                   ScaffoldMessenger.of(this.context).showSnackBar(
                     const SnackBar(
-                      content: Text('No se pudo restaurar la copia'),
+                      content: Text('No hemos podido restaurar la copia.'),
                     ),
                   );
                 }

@@ -129,7 +129,7 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('No se pudo compartir el texto de esta aleya.'),
+          content: Text('No hemos podido compartir el texto de esta aleya.'),
         ),
       );
     } finally {
@@ -162,7 +162,7 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text(
-            'No se pudo generar la imagen de esta aleya ahora mismo.',
+            'No hemos podido generar la imagen de esta aleya.',
           ),
         ),
       );
@@ -233,7 +233,7 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
       messenger.showSnackBar(
         const SnackBar(
           content: Text(
-            'No se pudo generar el video de esta aleya ahora mismo.',
+            'No hemos podido generar el video de esta aleya.',
           ),
         ),
       );
@@ -251,7 +251,7 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
     return SharePreviewBottomSheet(
       tokens: tokens,
       title: 'Compartir aleya ${widget.ayah.numberInSurah}',
-      subtitle: 'Mantén la misma experiencia visual para texto, imagen y video.',
+      subtitle: 'Mantén la misma presentación visual para texto, imagen y video.',
       preview: AyahSharePreview(
         data: _previewData,
         theme: _previewTheme,
@@ -262,7 +262,7 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
           title: 'Estilo / fondo',
           children: [
             ShareSelectionChip(
-              label: 'Card',
+              label: 'Tarjeta',
               selected: _selectedLayout == SharePreviewLayoutOption.card,
               onSelected: () {
                 setState(() {
@@ -271,7 +271,7 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
               },
             ),
             ShareSelectionChip(
-              label: 'Story',
+              label: 'Historia',
               selected: _selectedLayout == SharePreviewLayoutOption.story,
               onSelected: () {
                 setState(() {

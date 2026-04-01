@@ -139,7 +139,7 @@ class AnalyticsScreen extends ConsumerWidget {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              'No se pudo compartir tu progreso ahora mismo.',
+              'No hemos podido compartir tu progreso. Inténtalo de nuevo en un momento.',
               style: GoogleFonts.dmSans(),
             ),
           ),
@@ -171,7 +171,7 @@ class _EmptyAnalyticsState extends StatelessWidget {
               Icon(Icons.insights_outlined, size: 42, color: tokens.primary),
               const SizedBox(height: 14),
               Text(
-                'Todavía no hay datos de oración',
+                'Aún no hay datos de tus oraciones',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.amiri(
                   fontSize: 24,
@@ -181,7 +181,7 @@ class _EmptyAnalyticsState extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                'Marca tus oraciones desde Inicio y aquí verás tu racha, tu progreso semanal y tus días más fuertes.',
+                'Marca tus oraciones desde Inicio para ver aquí tu racha, tu progreso semanal y tus días más constantes.',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.dmSans(
                   fontSize: 12,
@@ -201,7 +201,7 @@ class _EmptyAnalyticsState extends StatelessWidget {
                   border: Border.all(color: tokens.primaryBorder),
                 ),
                 child: Text(
-                  'Consejo: empieza marcando una sola oración hoy para desbloquear tus estadísticas.',
+                  'Empieza marcando una oración hoy y aquí comenzarán a aparecer tus estadísticas.',
                   textAlign: TextAlign.center,
                   style: GoogleFonts.dmSans(
                     fontSize: 11,
@@ -248,16 +248,16 @@ class _WeeklySummaryCard extends StatelessWidget {
               const SizedBox(width: 12),
               Expanded(
                 child: _SummaryStat(
-                  label: 'Días 5/5',
+                  label: 'Días completos',
                   value: '${summary.fullDays}',
-                  helper: 'días completos',
+                  helper: '5/5',
                   tokens: tokens,
                 ),
               ),
               const SizedBox(width: 12),
               Expanded(
                 child: _SummaryStat(
-                  label: 'Mejor día',
+                  label: 'Tu mejor día',
                   value: summary.strongestDay.shortLabel,
                   helper: '${summary.strongestDay.completed}/5',
                   tokens: tokens,
@@ -396,7 +396,7 @@ class _StreakCard extends StatelessWidget {
                 const SizedBox(height: 2),
                 Text(
                   streak == 0
-                      ? 'Completa hoy tus 5 oraciones para empezar.'
+                      ? 'Completa tus 5 oraciones de hoy para iniciar tu racha.'
                       : 'Tu mejor racha es de $best días.',
                   style: GoogleFonts.dmSans(
                     fontSize: 12,
@@ -415,7 +415,7 @@ class _StreakCard extends StatelessWidget {
                 border: Border.all(color: tokens.primaryBorder),
               ),
               child: Text(
-                'Record',
+                'Récord',
                 style: GoogleFonts.dmSans(
                   fontSize: 10,
                   fontWeight: FontWeight.w600,
@@ -451,7 +451,7 @@ class _AchievementsCard extends StatelessWidget {
             data: (items) {
               if (items.isEmpty) {
                 return Text(
-                  'Tus logros aparecerán aquí a medida que avances.',
+                  'Tus logros irán apareciendo aquí a medida que avances.',
                   style: GoogleFonts.dmSans(
                     fontSize: 13,
                     color: tokens.textSecondary,
@@ -486,7 +486,7 @@ class _AchievementsCard extends StatelessWidget {
               ),
             ),
             error: (_, __) => Text(
-              'No se pudieron cargar los logros ahora mismo.',
+              'No hemos podido cargar los logros por ahora.',
               style: GoogleFonts.dmSans(
                 fontSize: 13,
                 color: tokens.textSecondary,
@@ -745,7 +745,7 @@ class _PrayerProgressCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _SectionTitle(title: 'Por oración - últimos 30 días', tokens: tokens),
+          _SectionTitle(title: 'Por oración · últimos 30 días', tokens: tokens),
           const SizedBox(height: 14),
           ..._prayers.map(
             (prayer) => Padding(

@@ -13,8 +13,8 @@ class DailyInspirationNotificationService {
   final HadithService _hadithService;
 
   static const String _channelId = 'daily_inspiration';
-  static const String _channelName = 'Reflexión Diaria';
-  static const String _channelDesc = 'Versículo del Corán y Hadiz del día';
+  static const String _channelName = 'Reflexión diaria';
+  static const String _channelDesc = 'Versículo del Corán y hadiz del día';
   static const String _prefsKey = 'daily_inspiration_enabled';
   static const String _prefsHourKey = 'daily_inspiration_hour';
 
@@ -121,7 +121,7 @@ class DailyInspirationNotificationService {
       final quranVerse = await QuranVerseService.getDailyVerse('es');
 
       // Construir título
-      final title = 'Reflexión del Día';
+      final title = 'Reflexión del día';
 
       // Construir cuerpo con hadiz o versículo (alternar)
       final now = DateTime.now();
@@ -141,7 +141,7 @@ class DailyInspirationNotificationService {
             : translation;
         body += ' — ${quranVerse.reference}';
       } else {
-        body = 'Tu reflexión espiritual diaria de Qibla Time';
+        body = 'Tu reflexión espiritual diaria en Qibla Time.';
       }
 
       return NotificationContent(
@@ -152,7 +152,7 @@ class DailyInspirationNotificationService {
     } catch (e) {
       // Fallback en caso de error
       return NotificationContent(
-        title: 'Qibla Time - Reflexión Diaria',
+        title: 'Qibla Time · Reflexión diaria',
         body: 'Tu recordatorio espiritual de hoy',
         isHadith: true,
       );
