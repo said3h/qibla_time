@@ -19,6 +19,7 @@ import '../../domain/repositories/prayer_times_repository.dart';
 import '../../domain/usecases/get_next_prayer_info.dart';
 import '../../domain/usecases/get_prayer_schedule.dart';
 import '../../domain/usecases/reschedule_prayer_notifications.dart';
+import '../../services/travel_mode_service.dart';
 
 final prayerLocationDataSourceProvider = Provider<PrayerLocationDataSource>((ref) {
   return PrayerLocationDataSource();
@@ -119,7 +120,23 @@ final systemNotificationPermissionProvider = FutureProvider<bool>((ref) async {
 });
 
 final prayerScheduleProvider = FutureProvider<ResolvedPrayerSchedule?>((ref) async {
-  return ref.watch(getPrayerScheduleUseCaseProvider).call();
+  final resolvedSchedule = await ref.watch(getPrayerScheduleUseCaseProvider).call();
+  if (resolvedSchedule == null) {
+    return null;
+  }
+
+  try {
+    await ref
+        .read(travelModeServiceProvider)
+        .recordLocationUpdateFromLocation(resolvedSchedule.location);
+    ref.invalidate(lastLocationLabelProvider);
+    ref.invalidate(recentLocationsProvider);
+    ref.invalidate(travelBannerProvider);
+  } catch (_) {
+    // No bloquear la carga de horarios por un fallo al resolver el contexto de ubicación.
+  }
+
+  return resolvedSchedule;
 });
 
 final prayerScheduleForDateProvider =

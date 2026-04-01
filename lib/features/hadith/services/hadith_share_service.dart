@@ -104,10 +104,96 @@ class HadithShareService {
       arabicText: includeArabic ? hadith.arabic : null,
       translation: includeTranslation ? hadith.translation : '',
       reference: hadith.reference,
-      arabicReference:
-          ReligiousReferenceFormatter.buildArabicReference(hadith.reference),
+      arabicReference: _buildArabicHadithReference(hadith.reference),
       badgeLabel: 'HADITH',
       branding: 'App: Qibla Time',
     );
+  }
+
+  String? _buildArabicHadithReference(String reference) {
+    final formatted = ReligiousReferenceFormatter.buildArabicReference(reference);
+    if (formatted != null) {
+      return formatted;
+    }
+
+    final normalized = reference.trim().toLowerCase();
+    if (normalized.isEmpty) {
+      return null;
+    }
+
+    final matches = <({int index, String label})>[];
+    final entries = <({List<String> aliases, String arabicLabel})>[
+      (
+        aliases: ['bujari', 'bukhari', 'al-bukhari', 'al bukhari'],
+        arabicLabel: 'البخاري',
+      ),
+      (
+        aliases: ['muslim'],
+        arabicLabel: 'مسلم',
+      ),
+      (
+        aliases: ['al-tirmidhi', 'tirmidhi', 'at-tirmidhi'],
+        arabicLabel: 'الترمذي',
+      ),
+      (
+        aliases: ['abu-dawud', 'abu dawud', 'abudawud'],
+        arabicLabel: 'أبو داود',
+      ),
+      (
+        aliases: ['an-nsaai', 'an-nsaa\'i', 'an-nsaa’i', 'nasai', 'al-nasai'],
+        arabicLabel: 'النسائي',
+      ),
+      (
+        aliases: ['ibn mayah', 'ibn majah', 'ibnmajah'],
+        arabicLabel: 'ابن ماجه',
+      ),
+      (
+        aliases: ['muwatta', 'malik'],
+        arabicLabel: 'مالك',
+      ),
+      (
+        aliases: ['ahmad'],
+        arabicLabel: 'أحمد',
+      ),
+      (
+        aliases: ['ibn hibban'],
+        arabicLabel: 'ابن حبان',
+      ),
+      (
+        aliases: ['al-hakim', 'al hakim'],
+        arabicLabel: 'الحاكم',
+      ),
+      (
+        aliases: ['ad-darimi', 'ad darimi', 'darimi'],
+        arabicLabel: 'الدارمي',
+      ),
+      (
+        aliases: ['at-tabarani', 'at tabarani', 'tabarani'],
+        arabicLabel: 'الطبراني',
+      ),
+    ];
+
+    for (final entry in entries) {
+      for (final alias in entry.aliases) {
+        final index = normalized.indexOf(alias);
+        if (index == -1) continue;
+        matches.add((index: index, label: entry.arabicLabel));
+        break;
+      }
+    }
+
+    if (matches.isEmpty) {
+      return null;
+    }
+
+    matches.sort((a, b) => a.index.compareTo(b.index));
+    final orderedLabels = <String>[];
+    for (final match in matches) {
+      if (!orderedLabels.contains(match.label)) {
+        orderedLabels.add(match.label);
+      }
+    }
+
+    return orderedLabels.join('، ');
   }
 }

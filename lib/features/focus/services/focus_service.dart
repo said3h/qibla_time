@@ -15,6 +15,7 @@ class FocusState {
   final bool isNear;
   final bool dndActive;
   final int sujudCount;
+  final bool sensorAvailable;
 
   const FocusState({
     this.isActive = false,
@@ -22,6 +23,7 @@ class FocusState {
     this.isNear = false,
     this.dndActive = false,
     this.sujudCount = 0,
+    this.sensorAvailable = true,
   });
 
   FocusState copyWith({
@@ -30,6 +32,7 @@ class FocusState {
     bool? isNear,
     bool? dndActive,
     int? sujudCount,
+    bool? sensorAvailable,
   }) {
     return FocusState(
       isActive: isActive ?? this.isActive,
@@ -37,6 +40,7 @@ class FocusState {
       isNear: isNear ?? this.isNear,
       dndActive: dndActive ?? this.dndActive,
       sujudCount: sujudCount ?? this.sujudCount,
+      sensorAvailable: sensorAvailable ?? this.sensorAvailable,
     );
   }
 }
@@ -54,7 +58,7 @@ class FocusNotifier extends StateNotifier<FocusState> {
 
   Future<void> activate() async {
     _resetSensorSession();
-    state = const FocusState(isActive: true);
+    state = const FocusState(isActive: true, sensorAvailable: true);
     await _tryEnableDnd();
     _startSensor();
   }
@@ -67,28 +71,38 @@ class FocusNotifier extends StateNotifier<FocusState> {
 
   void _startSensor() {
     _stopSensor();
-    _sensorSub = ProximitySensor.events.listen((dynamic event) {
-      if (!state.isActive) return;
+    _sensorSub = ProximitySensor.events.listen(
+      (dynamic event) {
+        if (!state.isActive) return;
 
-      final isNear = event is int ? event > 0 : event == true;
+        final isNear = event is int ? event > 0 : event == true;
 
-      if (isNear) {
-        if (_proximityTimer != null || state.isNear) return;
-        _proximityTimer = Timer(_minProximityDuration, () {
-          _proximityTimer = null;
-          if (!state.isActive) return;
-          state = state.copyWith(isNear: true);
-          _onProximityConfirmed();
-        });
-        return;
-      }
+        if (isNear) {
+          if (_proximityTimer != null || state.isNear) return;
+          _proximityTimer = Timer(_minProximityDuration, () {
+            _proximityTimer = null;
+            if (!state.isActive) return;
+            state = state.copyWith(isNear: true, sensorAvailable: true);
+            _onProximityConfirmed();
+          });
+          return;
+        }
 
-      _proximityTimer?.cancel();
-      _proximityTimer = null;
-      if (state.isNear) {
-        state = state.copyWith(isNear: false);
-      }
-    });
+        _proximityTimer?.cancel();
+        _proximityTimer = null;
+        if (state.isNear) {
+          state = state.copyWith(isNear: false, sensorAvailable: true);
+        }
+      },
+      onError: (_, __) {
+        _stopSensor();
+        if (!state.isActive) return;
+        state = state.copyWith(
+          isNear: false,
+          sensorAvailable: false,
+        );
+      },
+    );
   }
 
   void _onProximityConfirmed() {

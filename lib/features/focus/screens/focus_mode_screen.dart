@@ -146,6 +146,17 @@ class _FocusModeScreenState extends ConsumerState<FocusModeScreen>
               children: [
                 const Spacer(),
 
+                Text(
+                  'RAKAHA',
+                  style: GoogleFonts.dmSans(
+                    fontSize: 11,
+                    color: Colors.white.withOpacity(0.42),
+                    letterSpacing: 2.4,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const SizedBox(height: 8),
+
                 // Árabe: "خشوع" (khushu — concentración espiritual)
                 Text(
                   'خشوع',
@@ -354,6 +365,18 @@ class _SensorStatus extends StatelessWidget {
           color: Colors.white.withOpacity(0.3),
           letterSpacing: 1.5,
         ),
+      );
+    }
+
+    if (!focus.sensorAvailable) {
+      return Text(
+        'SENSOR NO DISPONIBLE · USA MODO MANUAL',
+        style: TextStyle(
+          fontSize: 10,
+          color: Colors.white.withOpacity(0.36),
+          letterSpacing: 1.6,
+        ),
+        textAlign: TextAlign.center,
       );
     }
 

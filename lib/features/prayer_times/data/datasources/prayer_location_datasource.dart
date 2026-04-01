@@ -35,8 +35,8 @@ class PrayerLocationDataSource {
 
     try {
       final position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.medium,
-        timeLimit: const Duration(seconds: 5),
+        desiredAccuracy: LocationAccuracy.high,
+        timeLimit: const Duration(seconds: 8),
       );
       final location = PrayerLocation(
         latitude: position.latitude,
@@ -50,6 +50,21 @@ class PrayerLocationDataSource {
         source: LocationAccessSource.live,
       );
     } catch (_) {
+      final lastKnownPosition = await Geolocator.getLastKnownPosition();
+      if (lastKnownPosition != null) {
+        final location = PrayerLocation(
+          latitude: lastKnownPosition.latitude,
+          longitude: lastKnownPosition.longitude,
+        );
+        if (persistOnSuccess) {
+          await persistLastKnownLocation(location);
+        }
+        return LocationAccessResult(
+          location: location,
+          source: LocationAccessSource.cache,
+        );
+      }
+
       return _getLastKnownLocationResult();
     }
   }

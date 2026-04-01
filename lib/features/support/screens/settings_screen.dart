@@ -479,7 +479,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   data: (locations) {
                     if (locations.isEmpty) {
                       return _buildSettingRow(
-                        label: 'Ubicaciones recientes',
+                        label: 'Lugares recientes',
                         subtitle: 'Sin viajes recientes',
                         trailing: Icon(Icons.history, color: tokens.textMuted, size: 18),
                         tokens: tokens,
@@ -491,7 +491,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         Padding(
                           padding: const EdgeInsets.only(left: 4, bottom: 8, top: 4),
                           child: Text(
-                            'UBICACIONES RECIENTES',
+                            'LUGARES RECIENTES',
                             style: TextStyle(
                               fontSize: 9,
                               color: tokens.textSecondary,

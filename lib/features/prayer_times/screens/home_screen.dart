@@ -539,28 +539,28 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           clipBehavior: Clip.none,
           children: [
             Positioned(
-              top: 2,
-              right: -28,
+              top: 6,
+              right: -18,
               child: IgnorePointer(
                 child: Icon(
                   Icons.mosque_rounded,
-                  size: 112,
-                  color: tokens.primary.withOpacity(0.038),
+                  size: 118,
+                  color: tokens.primary.withOpacity(0.045),
                 ),
               ),
             ),
             Positioned(
-              top: 26,
-              right: 10,
+              top: 30,
+              right: 18,
               child: IgnorePointer(
                 child: Container(
-                  width: 72,
-                  height: 72,
+                  width: 84,
+                  height: 84,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     gradient: RadialGradient(
                       colors: [
-                        tokens.primary.withOpacity(0.06),
+                        tokens.primary.withOpacity(0.08),
                         Colors.transparent,
                       ],
                     ),
@@ -2243,7 +2243,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final actions = [
       (Icons.auto_stories_outlined, 'Hadices', const HadithLibraryScreen()),
       (Icons.library_books_outlined, 'Libros', const IslamicBooksScreen()),
-      (Icons.menu_book_outlined, 'Corán', const QuranScreen()),
+      (Icons.self_improvement_rounded, 'Rakaha', const FocusModeScreen()),
       (Icons.calendar_month_outlined, 'Calendario', const CalendarScreen()),
       (Icons.insights_outlined, 'Análisis', const AnalyticsScreen()),
     ];

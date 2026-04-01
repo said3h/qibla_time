@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../features/dhikr/screens/dhikr_screen.dart';
+import '../../features/prayer_times/presentation/providers/prayer_times_providers.dart';
 import '../../features/prayer_times/screens/home_screen.dart';
+import '../../features/prayer_times/services/travel_mode_service.dart';
 import '../../features/qibla/screens/qibla_screen.dart';
 import '../../features/quran/screens/quran_screen.dart';
 import '../../features/quran/services/quran_mini_player_service.dart';
@@ -16,8 +18,52 @@ class MainNavigation extends ConsumerStatefulWidget {
   ConsumerState<MainNavigation> createState() => _MainNavigationState();
 }
 
-class _MainNavigationState extends ConsumerState<MainNavigation> {
+class _MainNavigationState extends ConsumerState<MainNavigation>
+    with WidgetsBindingObserver {
+  static const _foregroundRefreshCooldown = Duration(seconds: 12);
+
   int _currentIndex = 0;
+  DateTime? _lastForegroundRefreshAt;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state != AppLifecycleState.resumed || !mounted) {
+      return;
+    }
+
+    final now = DateTime.now();
+    final lastRefreshAt = _lastForegroundRefreshAt;
+    if (lastRefreshAt != null &&
+        now.difference(lastRefreshAt) < _foregroundRefreshCooldown) {
+      return;
+    }
+
+    _lastForegroundRefreshAt = now;
+    _refreshLocationDrivenState();
+  }
+
+  void _refreshLocationDrivenState() {
+    ref.invalidate(prayerLocationProvider);
+    ref.invalidate(prayerLocationDiagnosticProvider);
+    ref.invalidate(prayerScheduleProvider);
+    ref.invalidate(nextPrayerInfoProvider);
+    ref.invalidate(prayerCountdownProvider);
+    ref.invalidate(lastLocationLabelProvider);
+    ref.invalidate(recentLocationsProvider);
+    ref.invalidate(travelBannerProvider);
+  }
 
   @override
   Widget build(BuildContext context) {
