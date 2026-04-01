@@ -1,8 +1,8 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:proximity_sensor/proximity_sensor.dart';
 
 final focusProvider =
     StateNotifierProvider<FocusNotifier, FocusState>((ref) {
@@ -48,33 +48,53 @@ class FocusState {
 class FocusNotifier extends StateNotifier<FocusState> {
   FocusNotifier() : super(const FocusState());
 
+  static const _proximityEventChannel = EventChannel('com.qiblatime/proximity');
   StreamSubscription<dynamic>? _sensorSub;
   DateTime? _lastSujudTime;
 
   static const _debounce = Duration(milliseconds: 800);
   static const _dndChannel = MethodChannel('com.qiblatime/dnd');
+  
+  // Debug flag - set to true for verbose logging
+  static const _debugMode = true;
+
+  void _log(String msg) {
+    if (_debugMode) {
+      debugPrint('[FOCUS] $msg');
+    }
+  }
 
   Future<void> activate() async {
+    _log('=== ACTIVATE called ===');
     _resetSensorSession();
     state = const FocusState(isActive: true, sensorAvailable: true);
     await _tryEnableDnd();
     _startSensor();
+    _log('=== ACTIVATE complete ===');
   }
 
   Future<void> deactivate() async {
+    _log('=== DEACTIVATE called ===');
     _resetSensorSession();
     await _tryDisableDnd();
     state = const FocusState(isActive: false);
   }
 
   void _startSensor() {
+    _log('_startSensor: Starting sensor subscription');
     _stopSensor();
-    _sensorSub = ProximitySensor.events.listen(
+    _sensorSub = _proximityEvents().listen(
       (dynamic event) {
-        if (!state.isActive) return;
+        if (!state.isActive) {
+          _log('_startSensor: IGNORED event - state not active');
+          return;
+        }
 
         final isNear = event is int ? event > 0 : event == true;
+        _log('_startSensor: event=$event, isNear=$isNear, wasNear=${state.isNear}');
+        
         if (isNear && !state.isNear) {
+          _log('_startSensor: PROXIMITY CONFIRMED - calling _onProximityConfirmed()');
           _onProximityConfirmed();
         }
 
@@ -83,7 +103,8 @@ class FocusNotifier extends StateNotifier<FocusState> {
           sensorAvailable: true,
         );
       },
-      onError: (_, __) {
+      onError: (error, stackTrace) {
+        _log('_startSensor: ERROR - error=$error, stackTrace=$stackTrace');
         _stopSensor();
         if (!state.isActive) return;
         state = state.copyWith(
@@ -91,21 +112,51 @@ class FocusNotifier extends StateNotifier<FocusState> {
           sensorAvailable: false,
         );
       },
+      onDone: () {
+        _log('_startSensor: Stream DONE');
+      },
     );
+    _log('_startSensor: Sensor subscription established');
+  }
+
+  Stream<int> _proximityEvents() {
+    if (kIsWeb) {
+      _log('_proximityEvents: Web platform - returning empty stream');
+      return const Stream<int>.empty();
+    }
+
+    _log('_proximityEvents: Setting up receiveBroadcastStream');
+    return _proximityEventChannel.receiveBroadcastStream().map((dynamic event) {
+      _log('_proximityEvents: Received raw event=$event (type: ${event.runtimeType})');
+      if (event is int) {
+        _log('_proximityEvents: Mapped int event=$event');
+        return event;
+      }
+      if (event is bool) {
+        final val = event ? 1 : 0;
+        _log('_proximityEvents: Mapped bool event=$event -> $val');
+        return val;
+      }
+      throw StateError('Unexpected proximity event type: ${event.runtimeType}');
+    });
   }
 
   void _onProximityConfirmed() {
+    _log('_onProximityConfirmed: ENTER');
     final now = DateTime.now();
     if (_lastSujudTime != null &&
         now.difference(_lastSujudTime!) < _debounce) {
+      _log('_onProximityConfirmed: DEBOUNCED - too soon');
       return;
     }
 
     _lastSujudTime = now;
     final newSujudCount = state.sujudCount + 1;
+    _log('_onProximityConfirmed: newSujudCount=$newSujudCount, currentRakahs=${state.rakahs}');
 
     if (newSujudCount >= 2) {
       HapticFeedback.mediumImpact();
+      _log('_onProximityConfirmed: RAKAH COMPLETED - incrementing rakahs');
       state = state.copyWith(
         rakahs: state.rakahs + 1,
         sujudCount: 0,
@@ -114,6 +165,7 @@ class FocusNotifier extends StateNotifier<FocusState> {
     }
 
     HapticFeedback.lightImpact();
+    _log('_onProximityConfirmed: SUDJUD #$newSujudCount registered');
     state = state.copyWith(sujudCount: newSujudCount);
   }
 
@@ -124,9 +176,12 @@ class FocusNotifier extends StateNotifier<FocusState> {
 
   Future<void> _tryEnableDnd() async {
     try {
+      _log('_tryEnableDnd: Calling platform method');
       final granted = await _dndChannel.invokeMethod<bool>('enableDnd');
       state = state.copyWith(dndActive: granted ?? false);
-    } on PlatformException {
+      _log('_tryEnableDnd: granted=$granted');
+    } on PlatformException catch (e) {
+      _log('_tryEnableDnd: PlatformException - code=${e.code}, message=${e.message}');
       state = state.copyWith(dndActive: false);
     }
   }
@@ -134,23 +189,28 @@ class FocusNotifier extends StateNotifier<FocusState> {
   Future<void> _tryDisableDnd() async {
     try {
       await _dndChannel.invokeMethod('disableDnd');
-    } on PlatformException {
+      _log('_tryDisableDnd: Success');
+    } on PlatformException catch (e) {
+      _log('_tryDisableDnd: PlatformException - code=${e.code}, message=${e.message}');
       // Keep focus mode usable even when the platform call is unavailable.
     }
   }
 
   void _resetSensorSession() {
+    _log('_resetSensorSession: Resetting');
     _stopSensor();
     _lastSujudTime = null;
   }
 
   void _stopSensor() {
+    _log('_stopSensor: Cancelling subscription');
     _sensorSub?.cancel();
     _sensorSub = null;
   }
 
   @override
   void dispose() {
+    _log('dispose: Cleaning up');
     _resetSensorSession();
     super.dispose();
   }
