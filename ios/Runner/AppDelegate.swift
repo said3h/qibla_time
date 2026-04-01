@@ -60,12 +60,13 @@ final class QiblaProximityStreamHandler: NSObject, FlutterStreamHandler {
 
     GeneratedPluginRegistrant.register(with: self)
 
-    let proximityRegistrar = registrar(forPlugin: "QiblaProximityChannel")
-    let proximityChannel = FlutterEventChannel(
-      name: "com.qiblatime/proximity",
-      binaryMessenger: proximityRegistrar.messenger()
-    )
-    proximityChannel.setStreamHandler(proximityStreamHandler)
+    if let proximityRegistrar = registrar(forPlugin: "QiblaProximityChannel") {
+      let proximityChannel = FlutterEventChannel(
+        name: "com.qiblatime/proximity",
+        binaryMessenger: proximityRegistrar.messenger()
+      )
+      proximityChannel.setStreamHandler(proximityStreamHandler)
+    }
 
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
