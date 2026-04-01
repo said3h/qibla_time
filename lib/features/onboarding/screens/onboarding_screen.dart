@@ -23,7 +23,8 @@ class OnboardingScreen extends StatefulWidget {
   State<OnboardingScreen> createState() => _OnboardingScreenState();
 }
 
-class _OnboardingScreenState extends State<OnboardingScreen> {
+class _OnboardingScreenState extends State<OnboardingScreen>
+    with WidgetsBindingObserver {
   final PageController _controller = PageController();
   final SettingsService _settingsService = SettingsService.instance;
   final AudioService _audioService = AudioService.instance;
@@ -48,7 +49,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _loadInitialState();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state != AppLifecycleState.resumed || !mounted) {
+      return;
+    }
+
+    _refreshPermissionState(clearBusy: true);
   }
 
   Future<void> _loadInitialState() async {
@@ -56,10 +67,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     final methodIndex = prefs.getInt('calculation_method');
     final hanafi = prefs.getBool('madhab_hanafi') ?? false;
     final notifEnabled = await _settingsService.getNotificationsEnabled();
-    final locationPermission = await Geolocator.checkPermission();
-    final locationServiceEnabled = await Geolocator.isLocationServiceEnabled();
-    final notificationsGranted =
-        await NotificationService.instance.areNotificationsEnabled();
+    final permissionState = await _readPermissionState();
 
     if (!mounted) return;
     setState(() {
@@ -68,14 +76,55 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           : CalculationMethod.values[methodIndex];
       _isHanafi = hanafi;
       _notificationsEnabled = notifEnabled;
-      _locationPermission = locationPermission;
-      _locationServiceEnabled = locationServiceEnabled;
-      _notificationsGranted = notificationsGranted;
+      _locationPermission = permissionState.locationPermission;
+      _locationServiceEnabled = permissionState.locationServiceEnabled;
+      _notificationsGranted = permissionState.notificationsGranted;
     });
   }
 
+  Future<
+      ({
+        LocationPermission locationPermission,
+        bool locationServiceEnabled,
+        bool notificationsGranted,
+      })> _readPermissionState() async {
+    final locationPermission = await Geolocator.checkPermission();
+    final locationServiceEnabled = await Geolocator.isLocationServiceEnabled();
+    final notificationsGranted =
+        await NotificationService.instance.areNotificationsEnabled();
+
+    return (
+      locationPermission: locationPermission,
+      locationServiceEnabled: locationServiceEnabled,
+      notificationsGranted: notificationsGranted,
+    );
+  }
+
+  Future<void> _refreshPermissionState({bool clearBusy = false}) async {
+    try {
+      final permissionState = await _readPermissionState();
+      if (!mounted) return;
+      setState(() {
+        _locationPermission = permissionState.locationPermission;
+        _locationServiceEnabled = permissionState.locationServiceEnabled;
+        _notificationsGranted = permissionState.notificationsGranted;
+        if (clearBusy) {
+          _busy = false;
+        }
+      });
+    } catch (_) {
+      if (!mounted || !clearBusy) return;
+      setState(() => _busy = false);
+    }
+  }
+
+  bool get _hasLocationPermission =>
+      _locationPermission == LocationPermission.always ||
+      _locationPermission == LocationPermission.whileInUse;
+
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _controller.dispose();
     super.dispose();
   }
@@ -100,30 +149,48 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Future<void> _requestLocation() async {
+    if (_busy) return;
     setState(() => _busy = true);
-    var permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
+    try {
+      var permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+      }
+
+      if (permission == LocationPermission.deniedForever) {
+        await Geolocator.openAppSettings();
+        return;
+      }
+
+      if (permission == LocationPermission.denied) {
+        return;
+      }
+
+      final enabled = await Geolocator.isLocationServiceEnabled();
+      if (!enabled) {
+        await Geolocator.openLocationSettings();
+      }
+    } finally {
+      await _refreshPermissionState(clearBusy: true);
     }
-    final enabled = await Geolocator.isLocationServiceEnabled();
-    if (!mounted) return;
-    setState(() {
-      _busy = false;
-      _locationPermission = permission;
-      _locationServiceEnabled = enabled;
-    });
   }
 
   Future<void> _requestNotifications() async {
+    if (_busy) return;
     setState(() => _busy = true);
-    await _settingsService.saveNotificationsEnabled(true);
-    final granted = await NotificationService.instance.requestPermission();
-    if (!mounted) return;
-    setState(() {
-      _busy = false;
-      _notificationsGranted = granted;
-      _notificationsEnabled = true;
-    });
+    try {
+      await _settingsService.saveNotificationsEnabled(true);
+      final granted = await NotificationService.instance.requestPermission();
+      if (!mounted) return;
+      setState(() {
+        _notificationsGranted = granted;
+        _notificationsEnabled = true;
+      });
+    } finally {
+      if (mounted) {
+        setState(() => _busy = false);
+      }
+    }
   }
 
   Future<void> _persistMethod(CalculationMethod method) async {
@@ -268,9 +335,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Widget _buildPermissions(QiblaTokens tokens) {
-    final locationReady = _locationServiceEnabled &&
-        _locationPermission != LocationPermission.denied &&
-        _locationPermission != LocationPermission.deniedForever;
+    final locationReady = _locationServiceEnabled && _hasLocationPermission;
+    final locationActionLabel = _locationPermission ==
+            LocationPermission.deniedForever
+        ? 'Abrir ajustes'
+        : _hasLocationPermission && !_locationServiceEnabled
+            ? 'Activar GPS'
+            : 'Permitir';
+    final locationStatus = locationReady
+        ? 'Concedido'
+        : _locationPermission == LocationPermission.deniedForever
+            ? 'Bloqueado'
+            : _hasLocationPermission && !_locationServiceEnabled
+                ? 'GPS apagado'
+                : 'Pendiente';
 
     return _StepScaffold(
       title: 'Permisos importantes',
@@ -285,15 +363,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ? 'Lista para calcular horarios y Qibla.'
                 : _locationPermission == LocationPermission.deniedForever
                     ? 'El permiso está bloqueado. Puedes activarlo luego desde Ajustes del sistema.'
-                    : !_locationServiceEnabled
+                    : _hasLocationPermission && !_locationServiceEnabled
                         ? 'El GPS del dispositivo está desactivado. Puedes seguir y activarlo después.'
                         : 'Necesaria para horarios precisos y dirección a La Meca.',
-            status: locationReady
-                ? 'Concedido'
-                : _locationPermission == LocationPermission.deniedForever
-                    ? 'Bloqueado'
-                    : 'Pendiente',
-            actionLabel: 'Permitir',
+            status: locationStatus,
+            actionLabel: locationActionLabel,
             action: _requestLocation,
             tokens: tokens,
             completed: locationReady,
