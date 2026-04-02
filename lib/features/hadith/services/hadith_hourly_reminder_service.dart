@@ -1,8 +1,11 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timezone/timezone.dart' as tz;
 
+import '../../../l10n/l10n.dart';
 import 'hadith_service.dart';
+import '../../prayer_times/services/notification_service.dart';
 
 /// Servicio para recordatorios de hadices cada hora
 class HadithHourlyReminderService {
@@ -10,8 +13,6 @@ class HadithHourlyReminderService {
   final HadithService _hadithService;
 
   static const String _channelId = 'hadith_hourly_reminders';
-  static const String _channelName = 'Recordatorios de hadices';
-  static const String _channelDesc = 'Recordatorios horarios de hadices';
   static const String _prefsKey = 'hadith_hourly_enabled';
   static const String _prefsStartHour = 'hadith_hourly_start';
   static const String _prefsEndHour = 'hadith_hourly_end';
@@ -24,13 +25,14 @@ class HadithHourlyReminderService {
 
   /// Inicializa el canal de notificaciones
   Future<void> initializeChannel() async {
+    final l10n = appLocalizationsForDevice();
     await _plugin
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
-        ?.createNotificationChannel(const AndroidNotificationChannel(
+        ?.createNotificationChannel(AndroidNotificationChannel(
           _channelId,
-          _channelName,
-          description: _channelDesc,
+          l10n.notificationHadithReminderChannelName,
+          description: l10n.notificationHadithReminderChannelDescription,
           importance: Importance.defaultImportance,
           playSound: false,
           enableVibration: false,
@@ -104,15 +106,15 @@ class HadithHourlyReminderService {
       scheduledDate = scheduledDate.add(const Duration(days: 1));
     }
 
+    final l10n = appLocalizationsForDevice();
     final hadith = await _hadithService.getRandomHadiths(count: 1);
     final hadithText = hadith.isNotEmpty
         ? hadith.first.translation
-        : 'Recordatorio: lee un hadiz del Profeta ﷺ';
+        : l10n.notificationHadithReminderFallbackBody;
 
-    // Usar notificación periódica diaria a la hora especificada
     await _plugin.zonedSchedule(
       20000 + hour,
-      '📖 Hadiz del momento',
+      l10n.notificationHadithReminderTitle,
       hadithText.length > 150 ? '${hadithText.substring(0, 147)}...' : hadithText,
       scheduledDate,
       _notificationDetails(),
@@ -135,11 +137,12 @@ class HadithHourlyReminderService {
 
   /// Configuración de notificación
   NotificationDetails _notificationDetails() {
-    return const NotificationDetails(
+    final l10n = appLocalizationsForDevice();
+    return NotificationDetails(
       android: AndroidNotificationDetails(
         _channelId,
-        _channelName,
-        channelDescription: _channelDesc,
+        l10n.notificationHadithReminderChannelName,
+        channelDescription: l10n.notificationHadithReminderChannelDescription,
         importance: Importance.defaultImportance,
         priority: Priority.defaultPriority,
         playSound: false,
@@ -158,16 +161,25 @@ class HadithHourlyReminderService {
 
   /// Envía una notificación inmediata (para testing)
   Future<void> sendTestNotification() async {
+    final l10n = appLocalizationsForDevice();
     final hadith = await _hadithService.getRandomHadiths(count: 1);
     final hadithText = hadith.isNotEmpty
         ? hadith.first.translation
-        : 'Prueba de recordatorio de hadiz';
+        : l10n.notificationHadithReminderTestBody;
 
     await _plugin.show(
       20999,
-      '📖 Recordatorio de hadiz',
+      l10n.notificationHadithReminderTestTitle,
       hadithText,
       _notificationDetails(),
     );
   }
 }
+
+final hadithHourlyReminderServiceProvider =
+    Provider<HadithHourlyReminderService>((ref) {
+  return HadithHourlyReminderService(
+    plugin: NotificationService.instance.plugin,
+    hadithService: ref.read(hadithServiceProvider),
+  );
+});

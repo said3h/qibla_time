@@ -1,0 +1,626 @@
+{
+  "@@locale": "ar",
+  "appTitle": "قبلة تايم",
+  "commonSkip": "تخطي",
+  "commonBack": "رجوع",
+  "commonContinue": "متابعة",
+  "commonEnter": "دخول",
+  "commonAllow": "السماح",
+  "commonActivate": "تفعيل",
+  "commonEnable": "تفعيل",
+  "commonEnableGps": "تفعيل GPS",
+  "commonOpenSettings": "فتح الإعدادات",
+  "commonPending": "قيد الانتظار",
+  "commonGranted": "مفعّل",
+  "commonBlocked": "محظور",
+  "commonReady": "جاهزة",
+  "commonDisabled": "معطّل",
+  "commonUnavailable": "غير متاح",
+  "commonToday": "اليوم",
+  "commonYesterday": "أمس",
+  "commonLoading": "جارٍ التحميل...",
+  "commonShare": "مشاركة",
+  "commonManual": "يدوي",
+  "commonImportJson": "استيراد JSON",
+  "commonExport": "تصدير",
+  "commonOpen": "فتح",
+  "commonVersion": "الإصدار",
+  "commonAbout": "حول التطبيق",
+  "commonMethod": "الطريقة",
+  "commonMadhab": "المذهب",
+  "commonLocation": "الموقع",
+  "commonNotifications": "الإشعارات",
+  "commonNoData": "لا توجد بيانات",
+  "commonNever": "أبدًا",
+  "commonGenerating": "جارٍ الإنشاء...",
+  "commonChecking": "جارٍ التحقق...",
+  "commonDelete": "حذف",
+  "commonSystemStatus": "حالة النظام",
+  "commonCurrentStatus": "الحالة الحالية",
+  "commonOffset": "الإزاحة",
+  "commonAutomatic": "تلقائي",
+  "commonPrepared": "جاهزة",
+  "commonActivated": "مفعّلة",
+  "commonPaused": "متوقفة",
+  "commonSystem": "النظام",
+  "onboardingWelcomeTitle": "مرحبًا بك في قبلة تايم",
+  "onboardingWelcomeSubtitle": "مواقيت الصلاة والقبلة والقرآن والتذكيرات في تطبيق خفيف لروتينك اليومي.",
+  "onboardingFeatureSchedulesTitle": "مواقيت موثوقة",
+  "onboardingFeatureSchedulesBody": "تُحسب حسب موقعك وطريقة الحساب المفضلة لديك.",
+  "onboardingFeaturePracticeTitle": "القبلة والممارسة اليومية",
+  "onboardingFeaturePracticeBody": "بوصلة وتسبيح وتتبع وغير ذلك في تجربة واحدة سلسة.",
+  "onboardingFeatureRemindersTitle": "تذكيرات مفيدة",
+  "onboardingFeatureRemindersBody": "إشعارات الأذان والإعدادات الأساسية جاهزة من اليوم الأول.",
+  "onboardingPermissionsTitle": "أذونات مهمة",
+  "onboardingPermissionsSubtitle": "نطلب فقط ما نحتاجه لحساب المواقيت واستخدام القبلة وتنبيهك في الوقت المناسب.",
+  "onboardingLocationReadyBody": "جاهزة لحساب المواقيت والقبلة.",
+  "onboardingLocationBlockedBody": "تم حظر إذن الموقع. يمكنك تفعيله لاحقًا من إعدادات النظام.",
+  "onboardingLocationGpsOffBody": "خدمة GPS في جهازك متوقفة. يمكنك المتابعة وتفعيلها لاحقًا.",
+  "onboardingLocationPendingBody": "مطلوب لمواقيت دقيقة وتحديد اتجاه مكة.",
+  "onboardingNotificationsReadyBody": "جاهزة لتذكيرك بالصلوات.",
+  "onboardingNotificationsPendingBody": "بهذا يمكنك تلقي تنبيهات الأذان والتذكيرات لاحقًا.",
+  "onboardingMethodTitle": "طريقة الحساب",
+  "onboardingMethodSubtitle": "يمكنك تغييرها لاحقًا، لكن هذا يضبط المواقيت بشكل صحيح من اليوم.",
+  "onboardingSelectedNow": "محدد الآن",
+  "onboardingTapToChooseMethod": "اضغط لاختيار هذه الطريقة",
+  "onboardingMadhabTitle": "المذهب لصلاة العصر",
+  "onboardingMadhabSubtitle": "يؤثر فقط في حساب صلاة العصر. إذا لم تكن متأكدًا، يمكنك إبقاء الشافعي وتغييره لاحقًا.",
+  "onboardingMadhabCommonTitle": "شافعي / مالكي / حنبلي",
+  "onboardingMadhabCommonSubtitle": "الخيار الأكثر شيوعًا للبداية",
+  "onboardingMadhabHanafiTitle": "حنفي",
+  "onboardingMadhabHanafiSubtitle": "استخدم الحساب الحنفي لصلاة العصر",
+  "onboardingAdhanTitle": "الأذان والتنبيهات",
+  "onboardingAdhanSubtitle": "يمكن لقبلة تايم تنبيهك لكل صلاة بأذان هادئ افتراضيًا. ويمكنك تغييره لاحقًا.",
+  "onboardingPrayerNotificationsTitle": "إشعارات الصلاة",
+  "onboardingPrayerNotificationsSubtitle": "يمكنك تفعيلها الآن أو المتابعة بدونها في الوقت الحالي.",
+  "onboardingAdhanPreviewTitle": "معاينة سريعة للأذان",
+  "onboardingAdhanPreviewSubtitle": "سيُستخدم الصوت الذي اخترته. ويمكنك تغييره لاحقًا من الإعدادات.",
+  "onboardingAdhanStopPreview": "إيقاف المعاينة",
+  "onboardingAdhanListenPreview": "الاستماع للمعاينة",
+  "onboardingDoneTitle": "كل شيء جاهز",
+  "onboardingDoneSubtitle": "يمكنك الآن البدء بمواقيتك وقبلتك وتتبعك اليومي. ويمكن تعديل كل ذلك لاحقًا.",
+  "onboardingSummaryLocationBlocked": "محظورة حاليًا",
+  "onboardingSummaryNotificationsPrepared": "جاهزة",
+  "methodMuslimWorldLeague": "رابطة العالم الإسلامي",
+  "methodNorthAmerica": "ISNA / أمريكا الشمالية",
+  "methodUmmAlQura": "أم القرى",
+  "methodEgyptian": "الهيئة المصرية",
+  "homeHeaderOnline": "متصل",
+  "homeHeaderOffline": "بدون شبكة",
+  "homeHeaderLocationUnavailable": "الموقع غير متاح",
+  "homeHeaderStatusLine": "{networkStatus} · {location}",
+  "@homeHeaderStatusLine": {
+    "placeholders": {
+      "networkStatus": {},
+      "location": {}
+    }
+  },
+  "homeHeroNextPrayer": "الصلاة القادمة",
+  "homeHeroTodayOverview": "النظرة الرئيسية لليوم",
+  "homeHeroUsingSavedLocation": "يتم استخدام آخر موقع محفوظ",
+  "homeSelectedDateToday": "اليوم",
+  "homeSelectedDateCustom": "التاريخ المحدد",
+  "homeCountdownUnavailable": "العد التنازلي غير متاح",
+  "homeCountdownActive": "العد التنازلي نشط",
+  "homeCountdownUntil": "حتى {prayer}",
+  "@homeCountdownUntil": {
+    "placeholders": {
+      "prayer": {}
+    }
+  },
+  "homeCountdownLabelUppercase": "العد التنازلي",
+  "homeDurationUntil": "خلال {hours}س {minutes}د",
+  "@homeDurationUntil": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      },
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "homeDurationHoursMinutes": "{hours} س {minutes} د",
+  "@homeDurationHoursMinutes": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      },
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "homeDurationMinutes": "{minutes} د",
+  "@homeDurationMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "homeDurationSeconds": "{seconds} ث",
+  "@homeDurationSeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "String"
+      }
+    }
+  },
+  "homePrayerSectionToday": "صلوات اليوم",
+  "homePrayerSectionForDate": "مواقيت {date}",
+  "@homePrayerSectionForDate": {
+    "placeholders": {
+      "date": {}
+    }
+  },
+  "homePrayerSectionWorshipDay": "{weekday}، يوم عبادة",
+  "@homePrayerSectionWorshipDay": {
+    "placeholders": {
+      "weekday": {}
+    }
+  },
+  "homePrayerSectionMarkedCount": "{count}/5 محددة",
+  "@homePrayerSectionMarkedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsTitle": "الإعدادات",
+  "settingsTitleArabic": "الإعدادات",
+  "settingsSectionAppearance": "المظهر",
+  "settingsSectionAccessibility": "إمكانية الوصول",
+  "settingsSectionAdhanNotifications": "إشعارات الأذان",
+  "settingsSectionScheduleCalculation": "حساب المواقيت",
+  "settingsSectionRamadanMode": "وضع رمضان",
+  "settingsSectionHadith": "الأحاديث",
+  "settingsSectionTravelerMode": "وضع السفر",
+  "settingsSectionRecentPlaces": "الأماكن الأخيرة",
+  "settingsSectionSmartCache": "الذاكرة المؤقتة الذكية",
+  "settingsSectionSupport": "الصدقة · الدعم",
+  "settingsSectionCloudBackup": "النسخ الاحتياطي السحابي (بيتا)",
+  "settingsTextSize": "حجم النص",
+  "settingsCurrentScale": "المقياس الحالي: {scale}x",
+  "@settingsCurrentScale": {
+    "placeholders": {
+      "scale": {}
+    }
+  },
+  "settingsHighContrast": "تباين عالٍ",
+  "settingsHighContrastSubtitle": "يحسن القراءة في جميع أجزاء التطبيق",
+  "settingsUseSystemBold": "استخدام الخط العريض من النظام",
+  "settingsUseSystemBoldSubtitle": "يحترم تفضيل VoiceOver وTalkBack",
+  "settingsResetAccessibility": "إعادة ضبط إمكانية الوصول",
+  "settingsReset": "إعادة ضبط",
+  "settingsThemeDarkTitle": "داكن",
+  "settingsThemeDarkSubtitle": "سماء ما قبل الفجر",
+  "settingsThemeLightTitle": "فاتح",
+  "settingsThemeLightSubtitle": "للاستخدام الخارجي",
+  "settingsThemeAmoledTitle": "أموليد",
+  "settingsThemeAmoledSubtitle": "أسود نقي ويوفر البطارية",
+  "settingsThemeDeuteranopiaTitle": "عمى الألوان الأحمر/الأخضر",
+  "settingsThemeDeuteranopiaSubtitle": "بدون الأحمر والأخضر",
+  "settingsThemeMonochromeTitle": "أحادي اللون",
+  "settingsThemeMonochromeSubtitle": "للاكروماتوبسيا وضعف البصر",
+  "settingsLanguage": "لغة التطبيق",
+  "settingsLanguageSubtitle": "اختر ما إذا كنت تريد أن يتبع التطبيق لغة الجهاز أو يستخدم لغة ثابتة في جميع أجزائه.",
+  "settingsLanguageDialogTitle": "لغة التطبيق",
+  "settingsLanguageOptionSystem": "اتباع لغة الجهاز",
+  "settingsLanguageSystemValue": "تلقائي ({language})",
+  "@settingsLanguageSystemValue": {
+    "placeholders": {
+      "language": {}
+    }
+  },
+  "settingsLanguageOptionSpanish": "Español",
+  "settingsLanguageOptionEnglish": "English",
+  "settingsLanguageOptionArabic": "العربية",
+  "settingsAdhanSound": "صوت الأذان",
+  "settingsAdhanSoundAction": "اختيار ومعاينة",
+  "settingsGeneralNotifications": "الإشعارات العامة",
+  "settingsGeneralNotificationsSubtitle": "تفعيل أو إيقاف جميع تنبيهات الصلاة",
+  "settingsSystemPermissionPendingBody": "تنبيهات الأذان مضبوطة، لكن إذن النظام ما زال معلقًا.",
+  "settingsHapticFeedback": "الاهتزاز اللمسي",
+  "settingsRamadanAutomatic": "وضع رمضان التلقائي",
+  "settingsRamadanAutomaticSubtitle": "يعمل تلقائيًا عند دخول رمضان في التقويم الإسلامي",
+  "settingsRamadanForced": "فرض وضع رمضان",
+  "settingsRamadanForcedSubtitle": "تفعيل عرض رمضان يدويًا",
+  "settingsDailyNotification": "إشعار يومي",
+  "settingsDailyNotificationSubtitle": "استقبل حديثًا أو آية كل يوم",
+  "settingsNotificationHour": "وقت الإشعار",
+  "settingsTravelerMode": "وضع السفر",
+  "settingsTravelerModeSubtitle": "يكتشف تغيّر المدينة تلقائيًا (>50 كم)",
+  "settingsTravelerModeLoadError": "تعذر تحميل وضع السفر",
+  "settingsRecentPlaces": "الأماكن الأخيرة",
+  "settingsNoRecentTrips": "لا توجد رحلات حديثة",
+  "settingsLoadError": "تعذر تحميله",
+  "settingsCacheValidUntil": "الذاكرة المؤقتة صالحة حتى",
+  "settingsCacheEntries": "عناصر الذاكرة المؤقتة",
+  "settingsClearCache": "مسح الذاكرة المؤقتة",
+  "settingsSupportInfo": "معلومات الدعم",
+  "settingsSupportCardTitle": "ادعم التطوير",
+  "settingsSupportCardSubtitle": "كل تبرع قد يكون صدقة جارية",
+  "settingsBackupMode": "وضع النسخ الاحتياطي",
+  "settingsAnonymousId": "معرّف مجهول",
+  "settingsLastBackup": "آخر نسخة",
+  "settingsExportBackup": "تصدير نسخة",
+  "settingsRestoreBackup": "استعادة نسخة",
+  "settingsBackupInfoBody": "يمكنك حفظ ومشاركة نسخة يدوية بصيغة JSON. الأتمتة والمزامنة بين الأجهزة غير متاحتين بعد.",
+  "settingsRestoreBackupDialogTitle": "استعادة النسخة",
+  "settingsRestoreBackupSuccess": "تمت استعادة النسخة",
+  "settingsRestoreBackupError": "تعذر استعادة النسخة.",
+  "settingsDailyNotificationEnabled": "تم تفعيل الإشعار اليومي",
+  "settingsDailyNotificationDisabled": "تم إيقاف الإشعار اليومي",
+  "settingsSelectHourTitle": "اختر الساعة",
+  "settingsToday": "اليوم",
+  "settingsYesterday": "أمس",
+  "settingsDaysAgo": "منذ {count} أيام",
+  "@settingsDaysAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsRamadanManualActive": "مفعل يدويًا",
+  "settingsLocationBlocked": "محظورة",
+  "settingsLocationPendingPermission": "الإذن معلق",
+  "settingsLocationAutomatic": "تلقائية",
+  "settingsLocationSavedUnavailable": "لا يوجد موقع محفوظ",
+  "settingsLocationStatus": "حالة الموقع",
+  "settingsGpsOff": "GPS متوقف",
+  "settingsScheduleSource": "مصدر المواقيت",
+  "settingsScheduleSourceReady": "الذاكرة المؤقتة جاهزة",
+  "settingsNotificationSystem": "إشعارات النظام",
+  "settingsNotificationApp": "إشعارات التطبيق",
+  "settingsNotificationsGranted": "مفعّلة",
+  "commonPlay": "تشغيل",
+  "commonText": "نص",
+  "commonVideo": "فيديو",
+  "commonRemove": "إزالة",
+  "shareBranding": "التطبيق: قبلة تايم",
+  "shareReferenceLabel": "المرجع: {reference}",
+  "@shareReferenceLabel": {
+    "placeholders": {
+      "reference": {}
+    }
+  },
+  "shareSubjectDua": "دعاء",
+  "shareSubjectHadithOfDay": "حديث اليوم - قبلة تايم",
+  "shareSubjectHadithShared": "حديث تمت مشاركته من قبلة تايم",
+  "shareBadgeHadith": "حديث",
+  "shareBadgeDua": "دعاء",
+  "shareBadgeQuran": "القرآن",
+  "shareSectionStyle": "النمط / الخلفية",
+  "shareSectionContent": "المحتوى",
+  "shareLayoutCard": "بطاقة",
+  "shareLayoutStory": "قصة",
+  "shareContentBilingual": "العربية + الترجمة",
+  "shareContentArabicOnly": "العربية فقط",
+  "shareContentTranslationOnly": "الترجمة فقط",
+  "shareActionShareImage": "مشاركة صورة",
+  "shareActionShareText": "مشاركة نص",
+  "shareHadithTitle": "مشاركة حديث",
+  "shareHadithSubtitle": "اختر التنسيق والمحتوى قبل المشاركة.",
+  "shareHadithTextError": "تعذر علينا مشاركة نص الحديث.",
+  "shareHadithImageError": "تعذر علينا إنشاء صورة الحديث.",
+  "shareDuaTitle": "مشاركة دعاء",
+  "shareDuaTitleNamed": "مشاركة {title}",
+  "@shareDuaTitleNamed": {
+    "placeholders": {
+      "title": {}
+    }
+  },
+  "shareDuaSubtitle": "استخدم نفس المعالجة البصرية الخاصة بالحديث للدعاء والأذكار.",
+  "shareDuaTextError": "تعذر علينا مشاركة نص الدعاء.",
+  "shareDuaImageError": "تعذر علينا إنشاء صورة الدعاء.",
+  "shareAyahTitle": "مشاركة الآية {number}",
+  "@shareAyahTitle": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "shareAyahSubtitle": "حافظ على العرض البصري نفسه للنص والصورة والفيديو.",
+  "shareAyahTextError": "تعذر علينا مشاركة نص هذه الآية.",
+  "shareAyahImageError": "تعذر علينا إنشاء صورة هذه الآية.",
+  "shareAyahVideoNoAudio": "لا يوجد صوت متاح لإنشاء فيديو لهذه الآية.",
+  "shareAyahVideoGenerating": "جارٍ إنشاء فيديو الآية...",
+  "shareAyahVideoError": "تعذر علينا إنشاء فيديو هذه الآية.",
+  "notificationAdhanChannelName": "الأذان",
+  "notificationAdhanChannelDescription": "إشعارات مواقيت الصلاة",
+  "notificationAdhanTitle": "قبلة تايم - {prayerName}",
+  "@notificationAdhanTitle": {
+    "placeholders": {
+      "prayerName": {}
+    }
+  },
+  "notificationAdhanBody": "حان وقت الصلاة",
+  "notificationReminderChannelName": "قبلة تايم - تذكيرات",
+  "notificationReminderChannelDescription": "تذكيرات سياقية لرمضان والجمعة",
+  "notificationDailyReflectionChannelName": "تأمل يومي",
+  "notificationDailyReflectionChannelDescription": "آية من القرآن وحديث اليوم",
+  "notificationDailyReflectionTitle": "تأمل اليوم",
+  "notificationDailyReflectionFallbackBody": "تأملك الروحي اليومي في قبلة تايم.",
+  "notificationDailyReflectionErrorTitle": "قبلة تايم · تأمل يومي",
+  "notificationDailyReflectionErrorBody": "تذكيرك الروحي لهذا اليوم",
+  "notificationHadithReminderChannelName": "تذكيرات الأحاديث",
+  "notificationHadithReminderChannelDescription": "تذكيرات الأحاديث كل ساعة",
+  "notificationHadithReminderFallbackBody": "تذكير: اقرأ حديثًا عن النبي ﷺ",
+  "notificationHadithReminderTitle": "📖 حديث هذه اللحظة",
+  "notificationHadithReminderTestBody": "اختبار تذكير الحديث",
+  "notificationHadithReminderTestTitle": "📖 تذكير بحديث",
+  "notificationWeeklySummaryTitle": "ملخصك الأسبوعي جاهز",
+  "notificationWeeklySummaryBody": "أكملت هذا الأسبوع {prayersCompleted}/{maxPossible} من الصلوات. وكان أفضل أيامك {strongestDay}.",
+  "@notificationWeeklySummaryBody": {
+    "placeholders": {
+      "prayersCompleted": {
+        "type": "int"
+      },
+      "maxPossible": {
+        "type": "int"
+      },
+      "strongestDay": {}
+    }
+  },
+  "quranDailyVerseFallbackTranslation": "الله لا إله إلا هو الحي القيوم، لا تأخذه سنة ولا نوم.",
+  "quranDailyVerseFallbackTransliteration": "Allahu la ilaha illa huwal hayyul qayyum...",
+  "quranDailyVerseFallbackReference": "البقرة [2:255]",
+  "quranTitle": "القرآن",
+  "quranSubtitle": "114 سورة · قراءة متواصلة",
+  "quranHafizLabel": "حافظ",
+  "quranUtilityAyatAlKursi": "آية الكرسي",
+  "quranUtilityAllahNames": "99 اسمًا",
+  "quranUtilityDownloaded": "تم تنزيلها",
+  "quranProtectionTitle": "التحصين اليومي",
+  "quranProtectionSubtitle": "وصول سريع إلى آية الكرسي وسور الحماية. يمكنك فتحها للقراءة أو الاستماع ثم تسجيل تكرارها ثلاث مرات.",
+  "quranProtectionAyatAlKursiHelper": "البقرة 2:255",
+  "quranProtectionSurahHelper": "سورة {number}",
+  "@quranProtectionSurahHelper": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "quranProtectionIkhlasTitle": "الإخلاص",
+  "quranProtectionFalaqTitle": "الفلق",
+  "quranProtectionNasTitle": "الناس",
+  "quranProtectionRepeatCount": "{helper} · {count}/3 مرات",
+  "@quranProtectionRepeatCount": {
+    "placeholders": {
+      "helper": {},
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quranProtectionCompleteTooltip": "مكتمل",
+  "quranProtectionIncrementTooltip": "+1 تكرار",
+  "quranReadingHintTitle": "قراءة متواصلة",
+  "quranReadingHintBody": "افتح أي سورة وسنحفظ آخر آية قرأتها لتعود إليها لاحقًا.",
+  "quranReadingHintSecondary": "يمكنك أيضًا حفظ العلامات بالضغط على أيقونة الإشارة أثناء القراءة.",
+  "quranContinueReadingTitle": "متابعة القراءة",
+  "quranBookmarksTitle": "العلامات",
+  "quranRevelationMecca": "مكية",
+  "quranRevelationMedina": "مدنية",
+  "quranAyahCount": "{count, plural, =1{آية واحدة} other{{count} آيات}}",
+  "@quranAyahCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quranLastReadingAyah": "آخر قراءة: الآية {ayah}",
+  "@quranLastReadingAyah": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranBookmarkCount": "{count, plural, =1{علامة محفوظة واحدة} other{{count} علامات محفوظة}}",
+  "@quranBookmarkCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quranDownloadedFavoriteOffline": "الصوت مُنزّل · مفضلة دون اتصال",
+  "quranDownloadedAudio": "الصوت مُنزّل",
+  "quranReadingPointSaved": "تم حفظ موضع القراءة عند الآية {ayah}",
+  "@quranReadingPointSaved": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranBookmarkSaved": "تم حفظ العلامة عند الآية {ayah}",
+  "@quranBookmarkSaved": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranBookmarkRemoved": "تمت إزالة العلامة من الآية {ayah}",
+  "@quranBookmarkRemoved": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranShareAyahTitle": "مشاركة الآية {ayah}",
+  "@quranShareAyahTitle": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranShareTextSubtitle": "يتضمن النص العربي والترجمة والمرجع.",
+  "quranShareImageSubtitle": "أنشئ صورة لهذه الآية.",
+  "quranShareVideoSubtitle": "أنشئ فيديو بالبطاقة والتلاوة.",
+  "quranAyahImageError": "تعذر علينا إنشاء صورة هذه الآية.",
+  "quranAyahVideoNoAudio": "هذه الآية لا يتوفر لها صوت لإنشاء الفيديو.",
+  "quranAyahVideoGenerating": "جارٍ إنشاء فيديو الآية...",
+  "quranAyahVideoShareText": "الآية {ayah} من {surah}",
+  "@quranAyahVideoShareText": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      },
+      "surah": {}
+    }
+  },
+  "quranAyahVideoError": "تعذر علينا إنشاء فيديو هذه الآية.",
+  "quranDownloadCheckError": "تعذر علينا التحقق من التنزيل على هذا الجهاز.",
+  "quranDownloadSuccess": "تم تنزيل الصوت. يمكنك الآن الاستماع إلى هذه السورة دون اتصال.",
+  "quranDownloadDetailedError": "تعذر علينا إكمال التنزيل. تحقق من اتصالك ثم حاول مرة أخرى.",
+  "quranDownloadShortError": "تعذر علينا إكمال تنزيل الصوت.",
+  "quranDownloadedAudioPlaySubtitle": "استمع إلى السورة بالصوت المحفوظ.",
+  "quranDownloadedAudioRemoveSubtitle": "وفّر مساحة ثم استمع إليها عبر الإنترنت من جديد.",
+  "quranDownloadedAudioRemoved": "تمت إزالة تنزيل هذه السورة.",
+  "quranDownloadedFavoriteAdded": "تم حفظ السورة ضمن تنزيلاتك المفضلة.",
+  "quranDownloadedFavoriteRemoved": "تمت إزالة السورة من تنزيلاتك المفضلة.",
+  "quranAyahAudioUnavailable": "الصوت غير متاح لهذه الآية.",
+  "quranAyahAudioDownloaded": "الصوت مُنزّل بالفعل على هذا الجهاز.",
+  "quranAyahAudioAvailable": "يمكنك الاستماع إلى هذه الآية.",
+  "quranAyahAudioRequiresConnection": "يمكنك الاستماع إلى هذه الآية إذا كان لديك اتصال.",
+  "quranSurahRecitationUnavailable": "التلاوة الكاملة غير متاحة لهذه السورة.",
+  "quranSurahAudioDownloading": "جارٍ تنزيل الصوت للاستماع إلى هذه السورة دون اتصال. {downloaded}/{total} آيات جاهزة.",
+  "@quranSurahAudioDownloading": {
+    "placeholders": {
+      "downloaded": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "quranSurahAudioDownloaded": "الصوت مُنزّل بالفعل على هذا الجهاز. يمكنك الاستماع إلى هذه السورة دون اتصال.",
+  "quranSurahAudioMissingAyahs": "{count, plural, =1{سيتم تجاوز آية واحدة بلا صوت.} other{سيتم تجاوز {count} آيات بلا صوت.}}",
+  "@quranSurahAudioMissingAyahs": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quranSurahAudioPartialDownload": "لديك بالفعل {downloaded}/{total} آيات محفوظة على هذا الجهاز.",
+  "@quranSurahAudioPartialDownload": {
+    "placeholders": {
+      "downloaded": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "quranSurahAudioDownloadAvailable": "يمكنك أيضًا تنزيلها للاستماع دون اتصال.",
+  "quranSurahAudioPlayOnline": "يمكنك الاستماع إلى هذه السورة بشكل متواصل.",
+  "quranSurahAudioPlayWithConnection": "يمكنك الاستماع إلى هذه السورة كاملة إذا كان لديك اتصال.",
+  "quranAyahPlaybackError": "تعذر علينا تشغيل الصوت. تحقق من اتصالك ثم حاول مرة أخرى.",
+  "quranSurahPlaybackError": "تعذر علينا بدء التلاوة الكاملة.",
+  "quranLastReadingBadge": "آخر قراءة",
+  "quranPauseAudio": "إيقاف الصوت مؤقتًا",
+  "quranResumeAudio": "متابعة الصوت",
+  "quranPlayAudio": "تشغيل الصوت",
+  "quranAudioUnavailable": "الصوت غير متاح",
+  "quranRemoveBookmark": "إزالة العلامة",
+  "quranSaveBookmark": "حفظ العلامة",
+  "quranAyahFooterHint": "{status} اضغط على هذه الآية لحفظ موضع قراءتك هنا، واضغط مطولًا لمشاركتها.",
+  "@quranAyahFooterHint": {
+    "placeholders": {
+      "status": {}
+    }
+  },
+  "quranDetailLoadError": "تعذر علينا تحميل هذه السورة. تحقق من اتصالك ثم حاول مرة أخرى.",
+  "quranTopBannerResume": "استئناف من الآية {ayah}.",
+  "@quranTopBannerResume": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranTopBannerOnline": "تم تحميل المحتوى عبر الإنترنت. يمكنك الاستماع إلى صوت كل آية ما دام الاتصال متاحًا.",
+  "quranTopBannerOffline": "تم تحميل النص دون اتصال. قد يحتاج صوت بعض الآيات إلى اتصال.",
+  "quranTopBannerPlaceholder": "تم تحميل محتوى جزئي دون اتصال. الصوت غير متاح حاليًا.",
+  "quranSurahAudioCardTitle": "الاستماع إلى السورة",
+  "quranAvailableAyahs": "{available}/{total} آيات",
+  "@quranAvailableAyahs": {
+    "placeholders": {
+      "available": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "quranPauseSurah": "إيقاف السورة مؤقتًا",
+  "quranResumeSurah": "متابعة السورة",
+  "quranListenSurah": "الاستماع إلى السورة",
+  "quranStop": "إيقاف",
+  "quranCheckingAudio": "جارٍ التحقق من الصوت",
+  "quranDownloadingProgress": "جارٍ التنزيل {downloaded}/{total}",
+  "@quranDownloadingProgress": {
+    "placeholders": {
+      "downloaded": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "quranDownloaded": "تم التنزيل",
+  "quranDownloadAudio": "تنزيل الصوت",
+  "quranDownloadedFavoriteLabel": "مفضلة مُنزّلة",
+  "quranMarkFavorite": "تمييز كمفضلة",
+  "quranPlayingSurahAyah": "يتم تشغيل السورة · الآية {ayah}",
+  "@quranPlayingSurahAyah": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranPausedSurahAyah": "السورة متوقفة مؤقتًا · الآية {ayah}",
+  "@quranPausedSurahAyah": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranPlayingAyah": "يتم تشغيل الآية {ayah}",
+  "@quranPlayingAyah": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranPausedAyah": "الآية {ayah} متوقفة مؤقتًا",
+  "@quranPausedAyah": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranActiveAudioSurahHint": "ستستمر السورة تلقائيًا مع الآية التالية.",
+  "quranActiveAudioAyahHint": "يمكنك الإيقاف المؤقت أو المتابعة أو الإيقاف لهذه التلاوة.",
+  "quranStopAudio": "إيقاف الصوت"
+}

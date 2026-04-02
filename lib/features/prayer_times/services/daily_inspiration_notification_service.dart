@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timezone/timezone.dart' as tz;
 
+import '../../../l10n/l10n.dart';
 import '../../hadith/services/hadith_service.dart';
 import 'notification_service.dart';
 import '../services/quran_service.dart';
@@ -13,8 +14,6 @@ class DailyInspirationNotificationService {
   final HadithService _hadithService;
 
   static const String _channelId = 'daily_inspiration';
-  static const String _channelName = 'Reflexión diaria';
-  static const String _channelDesc = 'Versículo del Corán y hadiz del día';
   static const String _prefsKey = 'daily_inspiration_enabled';
   static const String _prefsHourKey = 'daily_inspiration_hour';
 
@@ -26,13 +25,14 @@ class DailyInspirationNotificationService {
 
   /// Inicializa el canal de notificaciones
   Future<void> initializeChannel() async {
+    final l10n = appLocalizationsForDevice();
     await _plugin
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
-        ?.createNotificationChannel(const AndroidNotificationChannel(
+        ?.createNotificationChannel(AndroidNotificationChannel(
           _channelId,
-          _channelName,
-          description: _channelDesc,
+          l10n.notificationDailyReflectionChannelName,
+          description: l10n.notificationDailyReflectionChannelDescription,
           importance: Importance.defaultImportance,
           playSound: false,
           enableVibration: false,
@@ -113,19 +113,15 @@ class DailyInspirationNotificationService {
 
   /// Genera el contenido de la notificación
   Future<NotificationContent> _generateNotificationContent() async {
+    final l10n = appLocalizationsForDevice();
     try {
-      // Obtener hadiz del día
       final hadith = await _hadithService.getHadithOfDay();
-
-      // Obtener versículo del día (llamada estática)
-      final quranVerse = await QuranVerseService.getDailyVerse('es');
-
-      // Construir título
-      final title = 'Reflexión del día';
-
-      // Construir cuerpo con hadiz o versículo (alternar)
+      final quranVerse = await QuranVerseService.getDailyVerse(
+        currentLanguageCode(),
+      );
+      final title = l10n.notificationDailyReflectionTitle;
       final now = DateTime.now();
-      final useHadith = now.day % 2 == 0; // Alternar días
+      final useHadith = now.day % 2 == 0;
 
       String body;
       if (useHadith && hadith != null) {
@@ -134,14 +130,12 @@ class DailyInspirationNotificationService {
             ? '${translation.substring(0, 147)}...'
             : translation;
         body += ' — ${hadith.reference}';
-      } else if (quranVerse != null) {
+      } else {
         final translation = quranVerse.translationText;
         body = translation.length > 150
             ? '${translation.substring(0, 147)}...'
             : translation;
         body += ' — ${quranVerse.reference}';
-      } else {
-        body = 'Tu reflexión espiritual diaria en Qibla Time.';
       }
 
       return NotificationContent(
@@ -149,11 +143,10 @@ class DailyInspirationNotificationService {
         body: body,
         isHadith: useHadith,
       );
-    } catch (e) {
-      // Fallback en caso de error
+    } catch (_) {
       return NotificationContent(
-        title: 'Qibla Time · Reflexión diaria',
-        body: 'Tu recordatorio espiritual de hoy',
+        title: l10n.notificationDailyReflectionErrorTitle,
+        body: l10n.notificationDailyReflectionErrorBody,
         isHadith: true,
       );
     }
@@ -161,11 +154,12 @@ class DailyInspirationNotificationService {
 
   /// Configuración de notificación
   NotificationDetails _notificationDetails() {
-    return const NotificationDetails(
+    final l10n = appLocalizationsForDevice();
+    return NotificationDetails(
       android: AndroidNotificationDetails(
         _channelId,
-        _channelName,
-        channelDescription: _channelDesc,
+        l10n.notificationDailyReflectionChannelName,
+        channelDescription: l10n.notificationDailyReflectionChannelDescription,
         importance: Importance.defaultImportance,
         priority: Priority.defaultPriority,
         playSound: false,

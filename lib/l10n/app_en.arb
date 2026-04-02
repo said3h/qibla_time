@@ -1,0 +1,626 @@
+{
+  "@@locale": "en",
+  "appTitle": "Qibla Time",
+  "commonSkip": "Skip",
+  "commonBack": "Back",
+  "commonContinue": "Continue",
+  "commonEnter": "Enter",
+  "commonAllow": "Allow",
+  "commonActivate": "Activate",
+  "commonEnable": "Enable",
+  "commonEnableGps": "Turn on GPS",
+  "commonOpenSettings": "Open settings",
+  "commonPending": "Pending",
+  "commonGranted": "Granted",
+  "commonBlocked": "Blocked",
+  "commonReady": "Ready",
+  "commonDisabled": "Disabled",
+  "commonUnavailable": "Unavailable",
+  "commonToday": "Today",
+  "commonYesterday": "Yesterday",
+  "commonLoading": "Loading...",
+  "commonShare": "Share",
+  "commonManual": "Manual",
+  "commonImportJson": "Import JSON",
+  "commonExport": "Export",
+  "commonOpen": "Open",
+  "commonVersion": "Version",
+  "commonAbout": "About",
+  "commonMethod": "Method",
+  "commonMadhab": "Madhab",
+  "commonLocation": "Location",
+  "commonNotifications": "Notifications",
+  "commonNoData": "No data",
+  "commonNever": "Never",
+  "commonGenerating": "Generating...",
+  "commonChecking": "Checking...",
+  "commonDelete": "Delete",
+  "commonSystemStatus": "System status",
+  "commonCurrentStatus": "Current status",
+  "commonOffset": "Offset",
+  "commonAutomatic": "Automatic",
+  "commonPrepared": "Prepared",
+  "commonActivated": "Enabled",
+  "commonPaused": "Paused",
+  "commonSystem": "System",
+  "onboardingWelcomeTitle": "Welcome to Qibla Time",
+  "onboardingWelcomeSubtitle": "Prayer times, Qibla, Quran and reminders in a light app for your daily routine.",
+  "onboardingFeatureSchedulesTitle": "Reliable prayer times",
+  "onboardingFeatureSchedulesBody": "Calculated from your location and preferred method.",
+  "onboardingFeaturePracticeTitle": "Qibla and daily practice",
+  "onboardingFeaturePracticeBody": "Compass, tasbih, tracking and more in one smooth flow.",
+  "onboardingFeatureRemindersTitle": "Helpful reminders",
+  "onboardingFeatureRemindersBody": "Adhan notifications and key settings ready from day one.",
+  "onboardingPermissionsTitle": "Important permissions",
+  "onboardingPermissionsSubtitle": "We only ask for what is needed to calculate prayer times, use Qibla and notify you on time.",
+  "onboardingLocationReadyBody": "Ready to calculate prayer times and Qibla.",
+  "onboardingLocationBlockedBody": "Location access is blocked. You can enable it later from system settings.",
+  "onboardingLocationGpsOffBody": "Your device GPS is off. You can continue and turn it on later.",
+  "onboardingLocationPendingBody": "Needed for accurate prayer times and direction to Makkah.",
+  "onboardingNotificationsReadyBody": "Ready to remind you of each prayer.",
+  "onboardingNotificationsPendingBody": "This lets you receive adhan alerts and reminders later on.",
+  "onboardingMethodTitle": "Calculation method",
+  "onboardingMethodSubtitle": "You can change it later, but this keeps your prayer times configured correctly from today.",
+  "onboardingSelectedNow": "Selected now",
+  "onboardingTapToChooseMethod": "Tap to choose this method",
+  "onboardingMadhabTitle": "Madhab for Asr",
+  "onboardingMadhabSubtitle": "This only affects the calculation of Asr. If you are unsure, you can keep Shafi and change it later.",
+  "onboardingMadhabCommonTitle": "Shafi / Maliki / Hanbali",
+  "onboardingMadhabCommonSubtitle": "The most common option to start with",
+  "onboardingMadhabHanafiTitle": "Hanafi",
+  "onboardingMadhabHanafiSubtitle": "Use the Hanafi calculation for Asr",
+  "onboardingAdhanTitle": "Adhan and alerts",
+  "onboardingAdhanSubtitle": "Qibla Time can alert you for every prayer with a gentle adhan by default. You can change it later.",
+  "onboardingPrayerNotificationsTitle": "Prayer notifications",
+  "onboardingPrayerNotificationsSubtitle": "You can enable them now or continue without them for the moment.",
+  "onboardingAdhanPreviewTitle": "Quick adhan preview",
+  "onboardingAdhanPreviewSubtitle": "The sound you have selected will be used. You can change it later in Settings.",
+  "onboardingAdhanStopPreview": "Stop preview",
+  "onboardingAdhanListenPreview": "Listen to preview",
+  "onboardingDoneTitle": "All set",
+  "onboardingDoneSubtitle": "You can now start with your prayer times, Qibla and daily tracking. Everything can be adjusted later.",
+  "onboardingSummaryLocationBlocked": "Blocked for now",
+  "onboardingSummaryNotificationsPrepared": "Prepared",
+  "methodMuslimWorldLeague": "Muslim World League",
+  "methodNorthAmerica": "ISNA / North America",
+  "methodUmmAlQura": "Umm al-Qura",
+  "methodEgyptian": "Egyptian Authority",
+  "homeHeaderOnline": "Online",
+  "homeHeaderOffline": "Offline",
+  "homeHeaderLocationUnavailable": "Location unavailable",
+  "homeHeaderStatusLine": "{networkStatus} · {location}",
+  "@homeHeaderStatusLine": {
+    "placeholders": {
+      "networkStatus": {},
+      "location": {}
+    }
+  },
+  "homeHeroNextPrayer": "NEXT PRAYER",
+  "homeHeroTodayOverview": "Today's main view",
+  "homeHeroUsingSavedLocation": "Using your last saved location",
+  "homeSelectedDateToday": "TODAY",
+  "homeSelectedDateCustom": "SELECTED DATE",
+  "homeCountdownUnavailable": "Countdown unavailable",
+  "homeCountdownActive": "Countdown active",
+  "homeCountdownUntil": "until {prayer}",
+  "@homeCountdownUntil": {
+    "placeholders": {
+      "prayer": {}
+    }
+  },
+  "homeCountdownLabelUppercase": "COUNTDOWN",
+  "homeDurationUntil": "in {hours}h {minutes}min",
+  "@homeDurationUntil": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      },
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "homeDurationHoursMinutes": "{hours} h {minutes} min",
+  "@homeDurationHoursMinutes": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      },
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "homeDurationMinutes": "{minutes} min",
+  "@homeDurationMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "homeDurationSeconds": "{seconds} s",
+  "@homeDurationSeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "String"
+      }
+    }
+  },
+  "homePrayerSectionToday": "Today's prayers",
+  "homePrayerSectionForDate": "Times for {date}",
+  "@homePrayerSectionForDate": {
+    "placeholders": {
+      "date": {}
+    }
+  },
+  "homePrayerSectionWorshipDay": "{weekday}, day of worship",
+  "@homePrayerSectionWorshipDay": {
+    "placeholders": {
+      "weekday": {}
+    }
+  },
+  "homePrayerSectionMarkedCount": "{count}/5 checked",
+  "@homePrayerSectionMarkedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsTitle": "Settings",
+  "settingsTitleArabic": "الإعدادات",
+  "settingsSectionAppearance": "Appearance",
+  "settingsSectionAccessibility": "Accessibility",
+  "settingsSectionAdhanNotifications": "Adhan notifications",
+  "settingsSectionScheduleCalculation": "Prayer time calculation",
+  "settingsSectionRamadanMode": "Ramadan mode",
+  "settingsSectionHadith": "Hadith",
+  "settingsSectionTravelerMode": "Travel mode",
+  "settingsSectionRecentPlaces": "RECENT PLACES",
+  "settingsSectionSmartCache": "Smart cache",
+  "settingsSectionSupport": "Sadaqah · Support",
+  "settingsSectionCloudBackup": "Cloud backup (beta)",
+  "settingsTextSize": "Text size",
+  "settingsCurrentScale": "Current scale: {scale}x",
+  "@settingsCurrentScale": {
+    "placeholders": {
+      "scale": {}
+    }
+  },
+  "settingsHighContrast": "High contrast",
+  "settingsHighContrastSubtitle": "Improves readability across the app",
+  "settingsUseSystemBold": "Use system bold text",
+  "settingsUseSystemBoldSubtitle": "Respects the VoiceOver/TalkBack preference",
+  "settingsResetAccessibility": "Reset accessibility",
+  "settingsReset": "Reset",
+  "settingsThemeDarkTitle": "Dark",
+  "settingsThemeDarkSubtitle": "Sky before Fajr",
+  "settingsThemeLightTitle": "Light",
+  "settingsThemeLightSubtitle": "For outdoor use",
+  "settingsThemeAmoledTitle": "AMOLED",
+  "settingsThemeAmoledSubtitle": "Pure black, saves battery",
+  "settingsThemeDeuteranopiaTitle": "Deuteranopia",
+  "settingsThemeDeuteranopiaSubtitle": "No red/green",
+  "settingsThemeMonochromeTitle": "Monochrome",
+  "settingsThemeMonochromeSubtitle": "For achromatopsia and low vision",
+  "settingsLanguage": "App language",
+  "settingsLanguageSubtitle": "Choose whether the app should follow your device language or use one fixed language everywhere.",
+  "settingsLanguageDialogTitle": "App language",
+  "settingsLanguageOptionSystem": "Follow device language",
+  "settingsLanguageSystemValue": "Automatic ({language})",
+  "@settingsLanguageSystemValue": {
+    "placeholders": {
+      "language": {}
+    }
+  },
+  "settingsLanguageOptionSpanish": "Español",
+  "settingsLanguageOptionEnglish": "English",
+  "settingsLanguageOptionArabic": "العربية",
+  "settingsAdhanSound": "Adhan sound",
+  "settingsAdhanSoundAction": "Choose and preview",
+  "settingsGeneralNotifications": "General notifications",
+  "settingsGeneralNotificationsSubtitle": "Enable or pause all prayer alerts",
+  "settingsSystemPermissionPendingBody": "Adhan alerts are configured, but the system permission is still pending.",
+  "settingsHapticFeedback": "Haptic feedback",
+  "settingsRamadanAutomatic": "Automatic Ramadan mode",
+  "settingsRamadanAutomaticSubtitle": "Turns on automatically when the Islamic calendar enters Ramadan",
+  "settingsRamadanForced": "Force Ramadan mode",
+  "settingsRamadanForcedSubtitle": "Enable the Ramadan view manually",
+  "settingsDailyNotification": "Daily notification",
+  "settingsDailyNotificationSubtitle": "Receive a hadith or verse every day",
+  "settingsNotificationHour": "Notification time",
+  "settingsTravelerMode": "Travel mode",
+  "settingsTravelerModeSubtitle": "Automatically detects city changes (>50 km)",
+  "settingsTravelerModeLoadError": "We couldn't load travel mode",
+  "settingsRecentPlaces": "Recent places",
+  "settingsNoRecentTrips": "No recent trips",
+  "settingsLoadError": "We couldn't load it",
+  "settingsCacheValidUntil": "Cache valid until",
+  "settingsCacheEntries": "Cache entries",
+  "settingsClearCache": "Clear cache",
+  "settingsSupportInfo": "Support information",
+  "settingsSupportCardTitle": "Support development",
+  "settingsSupportCardSubtitle": "Every donation can become a sadaqah jariyah",
+  "settingsBackupMode": "Backup mode",
+  "settingsAnonymousId": "Anonymous ID",
+  "settingsLastBackup": "Last backup",
+  "settingsExportBackup": "Export backup",
+  "settingsRestoreBackup": "Restore backup",
+  "settingsBackupInfoBody": "You can save and share a manual backup in JSON format. Automation and cross-device sync are not available yet.",
+  "settingsRestoreBackupDialogTitle": "Restore backup",
+  "settingsRestoreBackupSuccess": "Backup restored",
+  "settingsRestoreBackupError": "We couldn't restore the backup.",
+  "settingsDailyNotificationEnabled": "Daily notification enabled",
+  "settingsDailyNotificationDisabled": "Daily notification disabled",
+  "settingsSelectHourTitle": "Select time",
+  "settingsToday": "Today",
+  "settingsYesterday": "Yesterday",
+  "settingsDaysAgo": "{count} days ago",
+  "@settingsDaysAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsRamadanManualActive": "Manually active",
+  "settingsLocationBlocked": "Blocked",
+  "settingsLocationPendingPermission": "Permission pending",
+  "settingsLocationAutomatic": "Automatic",
+  "settingsLocationSavedUnavailable": "No saved location",
+  "settingsLocationStatus": "Location status",
+  "settingsGpsOff": "GPS off",
+  "settingsScheduleSource": "Schedule source",
+  "settingsScheduleSourceReady": "Cache ready",
+  "settingsNotificationSystem": "System notif.",
+  "settingsNotificationApp": "App notif.",
+  "settingsNotificationsGranted": "Granted",
+  "commonPlay": "Play",
+  "commonText": "Text",
+  "commonVideo": "Video",
+  "commonRemove": "Remove",
+  "shareBranding": "App: Qibla Time",
+  "shareReferenceLabel": "Reference: {reference}",
+  "@shareReferenceLabel": {
+    "placeholders": {
+      "reference": {}
+    }
+  },
+  "shareSubjectDua": "Dua",
+  "shareSubjectHadithOfDay": "Hadith of the day - Qibla Time",
+  "shareSubjectHadithShared": "Hadith shared from Qibla Time",
+  "shareBadgeHadith": "HADITH",
+  "shareBadgeDua": "DUA",
+  "shareBadgeQuran": "QURAN",
+  "shareSectionStyle": "Style / background",
+  "shareSectionContent": "Content",
+  "shareLayoutCard": "Card",
+  "shareLayoutStory": "Story",
+  "shareContentBilingual": "Arabic + translation",
+  "shareContentArabicOnly": "Arabic only",
+  "shareContentTranslationOnly": "Translation only",
+  "shareActionShareImage": "Share image",
+  "shareActionShareText": "Share text",
+  "shareHadithTitle": "Share hadith",
+  "shareHadithSubtitle": "Choose the format and content before sharing.",
+  "shareHadithTextError": "We couldn't share the hadith text.",
+  "shareHadithImageError": "We couldn't generate the hadith image.",
+  "shareDuaTitle": "Share dua",
+  "shareDuaTitleNamed": "Share {title}",
+  "@shareDuaTitleNamed": {
+    "placeholders": {
+      "title": {}
+    }
+  },
+  "shareDuaSubtitle": "Use the same visual treatment as the hadith for dua and adhkar.",
+  "shareDuaTextError": "We couldn't share the dua text.",
+  "shareDuaImageError": "We couldn't generate the dua image.",
+  "shareAyahTitle": "Share ayah {number}",
+  "@shareAyahTitle": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "shareAyahSubtitle": "Keep the same visual presentation for text, image and video.",
+  "shareAyahTextError": "We couldn't share this ayah as text.",
+  "shareAyahImageError": "We couldn't generate this ayah image.",
+  "shareAyahVideoNoAudio": "There is no audio available to generate a video for this ayah.",
+  "shareAyahVideoGenerating": "Generating the ayah video...",
+  "shareAyahVideoError": "We couldn't generate the video for this ayah.",
+  "notificationAdhanChannelName": "Adhan",
+  "notificationAdhanChannelDescription": "Prayer time notifications",
+  "notificationAdhanTitle": "Qibla Time - {prayerName}",
+  "@notificationAdhanTitle": {
+    "placeholders": {
+      "prayerName": {}
+    }
+  },
+  "notificationAdhanBody": "It is time for prayer",
+  "notificationReminderChannelName": "Qibla Time - Reminders",
+  "notificationReminderChannelDescription": "Contextual reminders for Ramadan and Jumu'ah",
+  "notificationDailyReflectionChannelName": "Daily reflection",
+  "notificationDailyReflectionChannelDescription": "Verse of the Quran and hadith of the day",
+  "notificationDailyReflectionTitle": "Reflection of the day",
+  "notificationDailyReflectionFallbackBody": "Your daily spiritual reflection in Qibla Time.",
+  "notificationDailyReflectionErrorTitle": "Qibla Time · Daily reflection",
+  "notificationDailyReflectionErrorBody": "Your spiritual reminder for today",
+  "notificationHadithReminderChannelName": "Hadith reminders",
+  "notificationHadithReminderChannelDescription": "Hourly hadith reminders",
+  "notificationHadithReminderFallbackBody": "Reminder: read a hadith of the Prophet ﷺ",
+  "notificationHadithReminderTitle": "📖 Hadith for this moment",
+  "notificationHadithReminderTestBody": "Test hadith reminder",
+  "notificationHadithReminderTestTitle": "📖 Hadith reminder",
+  "notificationWeeklySummaryTitle": "Your weekly summary is ready",
+  "notificationWeeklySummaryBody": "This week you completed {prayersCompleted}/{maxPossible} prayers. Your strongest day was {strongestDay}.",
+  "@notificationWeeklySummaryBody": {
+    "placeholders": {
+      "prayersCompleted": {
+        "type": "int"
+      },
+      "maxPossible": {
+        "type": "int"
+      },
+      "strongestDay": {}
+    }
+  },
+  "quranDailyVerseFallbackTranslation": "Allah: there is no deity except Him, the Ever-Living, the Sustainer of all. Neither drowsiness nor sleep overtakes Him.",
+  "quranDailyVerseFallbackTransliteration": "Allahu la ilaha illa huwal hayyul qayyum...",
+  "quranDailyVerseFallbackReference": "Al-Baqara [2:255]",
+  "quranTitle": "Quran",
+  "quranSubtitle": "114 surahs · continuous reading",
+  "quranHafizLabel": "Hafiz",
+  "quranUtilityAyatAlKursi": "Ayat al-Kursi",
+  "quranUtilityAllahNames": "99 names",
+  "quranUtilityDownloaded": "Downloaded",
+  "quranProtectionTitle": "DAILY PROTECTION",
+  "quranProtectionSubtitle": "Quick access to Ayat al-Kursi and the protection surahs. Open them to read or listen, then mark your three repetitions.",
+  "quranProtectionAyatAlKursiHelper": "Al-Baqara 2:255",
+  "quranProtectionSurahHelper": "Surah {number}",
+  "@quranProtectionSurahHelper": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "quranProtectionIkhlasTitle": "Al-Ikhlas",
+  "quranProtectionFalaqTitle": "Al-Falaq",
+  "quranProtectionNasTitle": "An-Nas",
+  "quranProtectionRepeatCount": "{helper} · {count}/3 repetitions",
+  "@quranProtectionRepeatCount": {
+    "placeholders": {
+      "helper": {},
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quranProtectionCompleteTooltip": "Complete",
+  "quranProtectionIncrementTooltip": "+1 repetition",
+  "quranReadingHintTitle": "CONTINUOUS READING",
+  "quranReadingHintBody": "Open any surah and we will save your last ayah so you can come back later.",
+  "quranReadingHintSecondary": "You can also save bookmarks by tapping the bookmark icon while reading.",
+  "quranContinueReadingTitle": "CONTINUE READING",
+  "quranBookmarksTitle": "BOOKMARKS",
+  "quranRevelationMecca": "Makkah",
+  "quranRevelationMedina": "Madinah",
+  "quranAyahCount": "{count, plural, =1{1 ayah} other{{count} ayahs}}",
+  "@quranAyahCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quranLastReadingAyah": "Last reading: ayah {ayah}",
+  "@quranLastReadingAyah": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranBookmarkCount": "{count, plural, =1{1 saved bookmark} other{{count} saved bookmarks}}",
+  "@quranBookmarkCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quranDownloadedFavoriteOffline": "Audio downloaded · offline favorite",
+  "quranDownloadedAudio": "Audio downloaded",
+  "quranReadingPointSaved": "Reading point saved at ayah {ayah}",
+  "@quranReadingPointSaved": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranBookmarkSaved": "Bookmark saved at ayah {ayah}",
+  "@quranBookmarkSaved": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranBookmarkRemoved": "Bookmark removed from ayah {ayah}",
+  "@quranBookmarkRemoved": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranShareAyahTitle": "Share ayah {ayah}",
+  "@quranShareAyahTitle": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranShareTextSubtitle": "Includes the Arabic text, translation and reference.",
+  "quranShareImageSubtitle": "Create an image with the ayah.",
+  "quranShareVideoSubtitle": "Create a video with the card and recitation.",
+  "quranAyahImageError": "We couldn't generate the image for this ayah.",
+  "quranAyahVideoNoAudio": "This ayah has no audio available to generate a video.",
+  "quranAyahVideoGenerating": "We are generating the ayah video...",
+  "quranAyahVideoShareText": "Ayah {ayah} from {surah}",
+  "@quranAyahVideoShareText": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      },
+      "surah": {}
+    }
+  },
+  "quranAyahVideoError": "We couldn't generate the video for this ayah.",
+  "quranDownloadCheckError": "We couldn't verify the download on this device.",
+  "quranDownloadSuccess": "Audio downloaded. You can now listen to this surah offline.",
+  "quranDownloadDetailedError": "We couldn't complete the download. Check your connection and try again.",
+  "quranDownloadShortError": "We couldn't complete the audio download.",
+  "quranDownloadedAudioPlaySubtitle": "Listen to the surah with the saved audio.",
+  "quranDownloadedAudioRemoveSubtitle": "Free up space and listen to it online again.",
+  "quranDownloadedAudioRemoved": "This surah download has been removed.",
+  "quranDownloadedFavoriteAdded": "Surah saved among your downloaded favorites.",
+  "quranDownloadedFavoriteRemoved": "Surah removed from your downloaded favorites.",
+  "quranAyahAudioUnavailable": "Audio is unavailable for this ayah.",
+  "quranAyahAudioDownloaded": "The audio is already downloaded on this device.",
+  "quranAyahAudioAvailable": "You can listen to this ayah.",
+  "quranAyahAudioRequiresConnection": "You can listen to this ayah if you have a connection.",
+  "quranSurahRecitationUnavailable": "Full recitation is unavailable for this surah.",
+  "quranSurahAudioDownloading": "We are downloading the audio so you can listen to this surah offline. {downloaded}/{total} ayahs ready.",
+  "@quranSurahAudioDownloading": {
+    "placeholders": {
+      "downloaded": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "quranSurahAudioDownloaded": "The audio is already downloaded on this device. You can listen to this surah offline.",
+  "quranSurahAudioMissingAyahs": "{count, plural, =1{1 ayah without audio will be skipped.} other{{count} ayahs without audio will be skipped.}}",
+  "@quranSurahAudioMissingAyahs": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quranSurahAudioPartialDownload": "You already have {downloaded}/{total} ayahs saved on this device.",
+  "@quranSurahAudioPartialDownload": {
+    "placeholders": {
+      "downloaded": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "quranSurahAudioDownloadAvailable": "You can also download it to listen offline.",
+  "quranSurahAudioPlayOnline": "You can listen to this surah straight through in continuous playback.",
+  "quranSurahAudioPlayWithConnection": "You can listen to this full surah if you have a connection.",
+  "quranAyahPlaybackError": "We couldn't play the audio. Check your connection and try again.",
+  "quranSurahPlaybackError": "We couldn't start the full recitation.",
+  "quranLastReadingBadge": "Last reading",
+  "quranPauseAudio": "Pause audio",
+  "quranResumeAudio": "Resume audio",
+  "quranPlayAudio": "Play audio",
+  "quranAudioUnavailable": "Audio unavailable",
+  "quranRemoveBookmark": "Remove bookmark",
+  "quranSaveBookmark": "Save bookmark",
+  "quranAyahFooterHint": "{status} Tap this ayah to save your reading point here. Long press to share it.",
+  "@quranAyahFooterHint": {
+    "placeholders": {
+      "status": {}
+    }
+  },
+  "quranDetailLoadError": "We couldn't load this surah. Check your connection and try again.",
+  "quranTopBannerResume": "Resuming from ayah {ayah}.",
+  "@quranTopBannerResume": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranTopBannerOnline": "Content loaded online. You can listen to each ayah audio while you have a connection.",
+  "quranTopBannerOffline": "Text loaded offline. Audio for some ayahs may still require a connection.",
+  "quranTopBannerPlaceholder": "Partial content loaded offline. Audio is not available for now.",
+  "quranSurahAudioCardTitle": "LISTEN TO SURAH",
+  "quranAvailableAyahs": "{available}/{total} ayahs",
+  "@quranAvailableAyahs": {
+    "placeholders": {
+      "available": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "quranPauseSurah": "Pause surah",
+  "quranResumeSurah": "Resume surah",
+  "quranListenSurah": "Listen to surah",
+  "quranStop": "Stop",
+  "quranCheckingAudio": "Checking audio",
+  "quranDownloadingProgress": "Downloading {downloaded}/{total}",
+  "@quranDownloadingProgress": {
+    "placeholders": {
+      "downloaded": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "quranDownloaded": "Downloaded",
+  "quranDownloadAudio": "Download audio",
+  "quranDownloadedFavoriteLabel": "Downloaded favorite",
+  "quranMarkFavorite": "Mark favorite",
+  "quranPlayingSurahAyah": "Playing surah · ayah {ayah}",
+  "@quranPlayingSurahAyah": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranPausedSurahAyah": "Surah paused · ayah {ayah}",
+  "@quranPausedSurahAyah": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranPlayingAyah": "Playing ayah {ayah}",
+  "@quranPlayingAyah": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranPausedAyah": "Ayah {ayah} paused",
+  "@quranPausedAyah": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranActiveAudioSurahHint": "The surah will continue automatically with the next ayah.",
+  "quranActiveAudioAyahHint": "You can pause, resume or stop this recitation.",
+  "quranStopAudio": "Stop audio"
+}

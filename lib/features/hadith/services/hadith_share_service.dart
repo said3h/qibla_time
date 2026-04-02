@@ -3,6 +3,7 @@ import 'package:share_plus/share_plus.dart';
 
 import '../../../core/theme/app_theme.dart';
 import '../../../core/utils/religious_reference_formatter.dart';
+import '../../../l10n/l10n.dart';
 import '../../hadith_share/models/hadith_share_data.dart';
 import '../../hadith_share/models/hadith_share_theme.dart';
 import '../../hadith_share/services/hadith_share_image_service.dart';
@@ -20,6 +21,7 @@ class HadithShareService {
     bool includeArabic = true,
     bool includeTranslation = true,
   }) {
+    final l10n = appLocalizationsForDevice();
     final shareData = buildShareData(
       hadith,
       includeArabic: includeArabic,
@@ -31,7 +33,7 @@ class HadithShareService {
       if (shareData.hasTranslation) shareData.translation.trim(),
       if (shareData.reference.trim().isNotEmpty)
         '- ${shareData.reference.trim()}',
-      'App: Qibla Time',
+      l10n.shareBranding,
     ];
 
     return sections.join('\n\n');
@@ -43,13 +45,14 @@ class HadithShareService {
     bool includeArabic = true,
     bool includeTranslation = true,
   }) async {
+    final l10n = appLocalizationsForDevice();
     await Share.share(
       buildShareText(
         hadith,
         includeArabic: includeArabic,
         includeTranslation: includeTranslation,
       ),
-      subject: 'Hadiz del día - Qibla Time',
+      subject: l10n.shareSubjectHadithOfDay,
     );
   }
 
@@ -67,6 +70,7 @@ class HadithShareService {
       );
     }
 
+    final l10n = appLocalizationsForDevice();
     final transparentBackground = mode == HadithShareExportMode.cardOnly;
     final shareData = buildShareData(
       hadith,
@@ -91,7 +95,7 @@ class HadithShareService {
         includeArabic: includeArabic,
         includeTranslation: includeTranslation,
       ),
-      subject: 'Hadiz compartido desde Qibla Time',
+      subject: l10n.shareSubjectHadithShared,
     );
   }
 
@@ -100,13 +104,14 @@ class HadithShareService {
     bool includeArabic = true,
     bool includeTranslation = true,
   }) {
+    final l10n = appLocalizationsForDevice();
     return HadithShareData(
       arabicText: includeArabic ? hadith.arabic : null,
       translation: includeTranslation ? hadith.translation : '',
       reference: hadith.reference,
       arabicReference: _buildArabicHadithReference(hadith.reference),
-      badgeLabel: 'HADITH',
-      branding: 'App: Qibla Time',
+      badgeLabel: l10n.shareBadgeHadith,
+      branding: l10n.shareBranding,
     );
   }
 

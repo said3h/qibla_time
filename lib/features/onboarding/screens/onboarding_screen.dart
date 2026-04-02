@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/services/audio_service.dart';
 import '../../../core/services/settings_service.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../../l10n/l10n.dart';
 import '../../prayer_times/services/notification_service.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -234,6 +235,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
   @override
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
+    final l10n = context.l10n;
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
@@ -258,7 +260,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                   const SizedBox(width: 12),
                   TextButton(
                     onPressed: _busy ? null : () => widget.onSkipped(),
-                    child: const Text('Saltar'),
+                    child: Text(l10n.commonSkip),
                   ),
                 ],
               ),
@@ -283,14 +285,16 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                   Expanded(
                     child: OutlinedButton(
                       onPressed: _step == 0 || _busy ? null : _back,
-                      child: const Text('Atrás'),
+                      child: Text(l10n.commonBack),
                     ),
                   ),
                   const SizedBox(width: 10),
                   Expanded(
                     child: ElevatedButton(
                       onPressed: _busy ? null : _next,
-                      child: Text(_step == 5 ? 'Entrar' : 'Continuar'),
+                      child: Text(
+                        _step == 5 ? l10n.commonEnter : l10n.commonContinue,
+                      ),
                     ),
                   ),
                 ],
@@ -303,30 +307,30 @@ class _OnboardingScreenState extends State<OnboardingScreen>
   }
 
   Widget _buildWelcome(QiblaTokens tokens) {
+    final l10n = context.l10n;
     return _StepScaffold(
-      title: 'Bienvenido a Qibla Time',
-      subtitle:
-          'Horarios, Qibla, Corán y recordatorios en una app ligera para tu rutina diaria.',
+      title: l10n.onboardingWelcomeTitle,
+      subtitle: l10n.onboardingWelcomeSubtitle,
       child: Column(
         children: [
           _FeatureCard(
             icon: Icons.access_time_rounded,
-            title: 'Horarios fiables',
-            body: 'Calculados según tu ubicación y tu método preferido.',
+            title: l10n.onboardingFeatureSchedulesTitle,
+            body: l10n.onboardingFeatureSchedulesBody,
             tokens: tokens,
           ),
           const SizedBox(height: 10),
           _FeatureCard(
             icon: Icons.explore_rounded,
-            title: 'Qibla y práctica diaria',
-            body: 'Brújula, tasbih, seguimiento y más en el mismo flujo.',
+            title: l10n.onboardingFeaturePracticeTitle,
+            body: l10n.onboardingFeaturePracticeBody,
             tokens: tokens,
           ),
           const SizedBox(height: 10),
           _FeatureCard(
             icon: Icons.notifications_active_outlined,
-            title: 'Recordatorios útiles',
-            body: 'Notificaciones de adhan y ajustes listos desde el primer día.',
+            title: l10n.onboardingFeatureRemindersTitle,
+            body: l10n.onboardingFeatureRemindersBody,
             tokens: tokens,
           ),
         ],
@@ -335,37 +339,37 @@ class _OnboardingScreenState extends State<OnboardingScreen>
   }
 
   Widget _buildPermissions(QiblaTokens tokens) {
+    final l10n = context.l10n;
     final locationReady = _locationServiceEnabled && _hasLocationPermission;
     final locationActionLabel = _locationPermission ==
             LocationPermission.deniedForever
-        ? 'Abrir ajustes'
+        ? l10n.commonOpenSettings
         : _hasLocationPermission && !_locationServiceEnabled
-            ? 'Activar GPS'
-            : 'Permitir';
+            ? l10n.commonEnableGps
+            : l10n.commonAllow;
     final locationStatus = locationReady
-        ? 'Concedido'
+        ? l10n.commonGranted
         : _locationPermission == LocationPermission.deniedForever
-            ? 'Bloqueado'
+            ? l10n.commonBlocked
             : _hasLocationPermission && !_locationServiceEnabled
-                ? 'GPS apagado'
-                : 'Pendiente';
+                ? l10n.settingsGpsOff
+                : l10n.commonPending;
 
     return _StepScaffold(
-      title: 'Permisos importantes',
-      subtitle:
-          'Te pedimos solo lo necesario para calcular horarios, usar Qibla y avisarte a tiempo.',
+      title: l10n.onboardingPermissionsTitle,
+      subtitle: l10n.onboardingPermissionsSubtitle,
       child: Column(
         children: [
           _PermissionCard(
             icon: Icons.place_outlined,
-            title: 'Ubicación',
+            title: l10n.commonLocation,
             body: locationReady
-                ? 'Lista para calcular horarios y Qibla.'
+                ? l10n.onboardingLocationReadyBody
                 : _locationPermission == LocationPermission.deniedForever
-                    ? 'El permiso está bloqueado. Puedes activarlo después desde los ajustes del sistema.'
+                    ? l10n.onboardingLocationBlockedBody
                     : _hasLocationPermission && !_locationServiceEnabled
-                        ? 'El GPS del dispositivo está desactivado. Puedes seguir y activarlo después.'
-                        : 'Necesaria para horarios precisos y dirección a La Meca.',
+                        ? l10n.onboardingLocationGpsOffBody
+                        : l10n.onboardingLocationPendingBody,
             status: locationStatus,
             actionLabel: locationActionLabel,
             action: _requestLocation,
@@ -376,12 +380,14 @@ class _OnboardingScreenState extends State<OnboardingScreen>
           const SizedBox(height: 12),
           _PermissionCard(
             icon: Icons.notifications_none_rounded,
-            title: 'Notificaciones',
+            title: l10n.commonNotifications,
             body: _notificationsGranted
-                ? 'Listas para recordarte las oraciones.'
-                : 'Así podrás recibir avisos de adhan y recordatorios más adelante.',
-            status: _notificationsGranted ? 'Concedido' : 'Pendiente',
-            actionLabel: 'Activar',
+                ? l10n.onboardingNotificationsReadyBody
+                : l10n.onboardingNotificationsPendingBody,
+            status: _notificationsGranted
+                ? l10n.commonGranted
+                : l10n.commonPending,
+            actionLabel: l10n.commonActivate,
             action: _requestNotifications,
             tokens: tokens,
             completed: _notificationsGranted,
@@ -393,16 +399,18 @@ class _OnboardingScreenState extends State<OnboardingScreen>
   }
 
   Widget _buildMethod(QiblaTokens tokens) {
+    final l10n = context.l10n;
     return _StepScaffold(
-      title: 'Método de cálculo',
-      subtitle:
-          'Puedes cambiarlo más tarde, pero esto deja los horarios bien configurados desde hoy.',
+      title: l10n.onboardingMethodTitle,
+      subtitle: l10n.onboardingMethodSubtitle,
       child: Column(
         children: _recommendedMethods.map((method) {
           final selected = method == _method;
           return _SelectableTile(
             title: _methodLabel(method),
-            subtitle: selected ? 'Seleccionado ahora' : 'Toca para elegir este método',
+            subtitle: selected
+                ? l10n.onboardingSelectedNow
+                : l10n.onboardingTapToChooseMethod,
             selected: selected,
             tokens: tokens,
             onTap: () => _persistMethod(method),
@@ -413,22 +421,22 @@ class _OnboardingScreenState extends State<OnboardingScreen>
   }
 
   Widget _buildMadhab(QiblaTokens tokens) {
+    final l10n = context.l10n;
     return _StepScaffold(
-      title: 'Madhab para Asr',
-      subtitle:
-          'Solo afecta al cálculo de la oración de Asr. Si dudas, puedes dejar Shafi y cambiarlo después.',
+      title: l10n.onboardingMadhabTitle,
+      subtitle: l10n.onboardingMadhabSubtitle,
       child: Column(
         children: [
           _SelectableTile(
-            title: 'Shafi / Maliki / Hanbali',
-            subtitle: 'La opción más común para empezar',
+            title: l10n.onboardingMadhabCommonTitle,
+            subtitle: l10n.onboardingMadhabCommonSubtitle,
             selected: !_isHanafi,
             tokens: tokens,
             onTap: () => _persistMadhab(false),
           ),
           _SelectableTile(
-            title: 'Hanafi',
-            subtitle: 'Usa el cálculo hanafí para Asr',
+            title: l10n.onboardingMadhabHanafiTitle,
+            subtitle: l10n.onboardingMadhabHanafiSubtitle,
             selected: _isHanafi,
             tokens: tokens,
             onTap: () => _persistMadhab(true),
@@ -439,10 +447,10 @@ class _OnboardingScreenState extends State<OnboardingScreen>
   }
 
   Widget _buildAdhan(QiblaTokens tokens) {
+    final l10n = context.l10n;
     return _StepScaffold(
-      title: 'Adhan y avisos',
-      subtitle:
-          'Qibla Time puede avisarte de cada oración con un adhan suave por defecto. Después podrás cambiarlo.',
+      title: l10n.onboardingAdhanTitle,
+      subtitle: l10n.onboardingAdhanSubtitle,
       child: Column(
         children: [
           Container(
@@ -460,7 +468,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Notificaciones de oración',
+                        l10n.onboardingPrayerNotificationsTitle,
                         style: GoogleFonts.dmSans(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
@@ -469,7 +477,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'Puedes activarlas o seguir sin ellas por ahora.',
+                        l10n.onboardingPrayerNotificationsSubtitle,
                         style: GoogleFonts.dmSans(
                           fontSize: 11,
                           color: tokens.textSecondary,
@@ -500,7 +508,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Prueba rápida del adhan',
+                  l10n.onboardingAdhanPreviewTitle,
                   style: GoogleFonts.dmSans(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
@@ -509,7 +517,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  'Se usará el sonido que tengas seleccionado. Puedes cambiarlo después en Ajustes.',
+                  l10n.onboardingAdhanPreviewSubtitle,
                   style: GoogleFonts.dmSans(
                     fontSize: 11,
                     color: tokens.textSecondary,
@@ -519,7 +527,11 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                 ElevatedButton.icon(
                   onPressed: _togglePreview,
                   icon: Icon(_playingPreview ? Icons.stop_circle_outlined : Icons.play_circle_outline),
-                  label: Text(_playingPreview ? 'Detener prueba' : 'Escuchar prueba'),
+                  label: Text(
+                    _playingPreview
+                        ? l10n.onboardingAdhanStopPreview
+                        : l10n.onboardingAdhanListenPreview,
+                  ),
                 ),
               ],
             ),
@@ -530,10 +542,10 @@ class _OnboardingScreenState extends State<OnboardingScreen>
   }
 
   Widget _buildDone(QiblaTokens tokens) {
+    final l10n = context.l10n;
     return _StepScaffold(
-      title: 'Todo listo',
-      subtitle:
-          'Ya puedes empezar con tus horarios, tu Qibla y tu seguimiento diario. Todo esto se puede ajustar después.',
+      title: l10n.onboardingDoneTitle,
+      subtitle: l10n.onboardingDoneSubtitle,
       child: Container(
         width: double.infinity,
         padding: const EdgeInsets.all(18),
@@ -545,26 +557,32 @@ class _OnboardingScreenState extends State<OnboardingScreen>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _summaryRow(tokens, 'Método', _methodLabel(_method)),
-            _summaryRow(tokens, 'Madhab', _isHanafi ? 'Hanafi' : 'Shafi'),
+            _summaryRow(tokens, l10n.commonMethod, _methodLabel(_method)),
             _summaryRow(
               tokens,
-              'Ubicación',
-              _locationPermission == LocationPermission.deniedForever
-                  ? 'Bloqueada por ahora'
-                  : _locationServiceEnabled
-                      ? 'Lista'
-                      : 'Pendiente',
+              l10n.commonMadhab,
+              _isHanafi ? l10n.onboardingMadhabHanafiTitle : 'Shafi',
             ),
             _summaryRow(
               tokens,
-              'Notificaciones',
+              l10n.commonLocation,
+              _locationPermission == LocationPermission.deniedForever
+                  ? l10n.onboardingSummaryLocationBlocked
+                  : _locationServiceEnabled
+                      ? l10n.commonReady
+                      : l10n.commonPending,
+            ),
+            _summaryRow(
+              tokens,
+              l10n.commonNotifications,
               _notificationsEnabled
-                  ? (_notificationsGranted ? 'Activadas' : 'Preparadas')
-                  : 'Desactivadas',
+                  ? (_notificationsGranted
+                      ? l10n.commonActivated
+                      : l10n.onboardingSummaryNotificationsPrepared)
+                  : l10n.commonDisabled,
             ),
           ],
-        ),
+      ),
       ),
     );
   }
@@ -597,15 +615,16 @@ class _OnboardingScreenState extends State<OnboardingScreen>
   }
 
   String _methodLabel(CalculationMethod method) {
+    final l10n = context.l10n;
     switch (method) {
       case CalculationMethod.muslim_world_league:
-        return 'Muslim World League';
+        return l10n.methodMuslimWorldLeague;
       case CalculationMethod.north_america:
-        return 'ISNA / Norteamérica';
+        return l10n.methodNorthAmerica;
       case CalculationMethod.umm_al_qura:
-        return 'Umm al-Qura';
+        return l10n.methodUmmAlQura;
       case CalculationMethod.egyptian:
-        return 'Egyptian Authority';
+        return l10n.methodEgyptian;
       default:
         return method.name.replaceAll('_', ' ');
     }

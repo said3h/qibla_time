@@ -1,6 +1,9 @@
 import 'dart:convert';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
+
+import '../../../l10n/l10n.dart';
 
 class QuranVerse {
   final String arabicText;
@@ -19,48 +22,67 @@ class QuranVerse {
 }
 
 class QuranVerseService {
-  // Using Al-Quran Cloud API
   static Future<QuranVerse> getDailyVerse(String languageCode) async {
-    // We pick a pseudo-random verse based on the day of the year
+    final normalizedLanguage = _normalizedLanguageCode(languageCode);
+    final translationEdition = _translationEditionFor(normalizedLanguage);
+    final referenceNameField =
+        normalizedLanguage == 'ar' ? 'name' : 'englishName';
     final now = DateTime.now();
     final dayOfYear = now.difference(DateTime(now.year, 1, 1)).inDays;
-    // There are 6236 verses in the Quran
     final verseNumber = (dayOfYear * 7) % 6236 + 1;
 
-    // Fetch Arabic original
     try {
-      final arabicResponse = await http.get(Uri.parse('https://api.alquran.cloud/v1/ayah/$verseNumber/editions/quran-uthmani,es.garcia,en.transliteration'));
+      final response = await http.get(
+        Uri.parse(
+          'https://api.alquran.cloud/v1/ayah/$verseNumber/editions/quran-uthmani,$translationEdition,en.transliteration',
+        ),
+      );
 
-      if (arabicResponse.statusCode == 200) {
-        final data = json.decode(arabicResponse.body)['data'];
-
-        // data[0] is Arabic (quran-uthmani)
-        // data[1] is Spanish (es.garcia) - translation with proper accents
-        // data[2] is Transliteration (en.transliteration)
-
-        return QuranVerse(
-          arabicText: data[0]['text'],
-          translationText: data[1]['text'],
-          transliterationText: data[2]['text'],
-          reference: '${data[0]['surah']['englishName']} [${data[0]['surah']['number']}:${data[0]['numberInSurah']}]',
-          audioUrl: 'https://cdn.islamic.network/quran/audio/128/ar.alafasy/$verseNumber.mp3',
-        );
-      } else {
+      if (response.statusCode != 200) {
         throw Exception('Failed to load daily verse');
       }
-    } catch (e) {
-      // Offline Fallback: Ayat al-Kursi
+
+      final data = json.decode(response.body)['data'];
+
       return QuranVerse(
-        arabicText: 'ٱللَّهُ لَآ إِلَٰهَ إِلَّا هُوَ ٱلْحَىُّ ٱلْقَيُّومُ ۚ لَا تَأْخُذُهُۥ سِنَةٌ وَلَا نَوْمٌ',
-        translationText: 'Allah! No hay más dios que Él, el Viviente, el Subsistente por Sí mismo. Ni la somnolencia ni el sueño se apoderan de Él.',
-        transliterationText: 'Allahu la ilaha illa huwal hayyul qayyum...',
-        reference: 'Al-Baqara [2:255]',
+        arabicText: data[0]['text'],
+        translationText: data[1]['text'],
+        transliterationText: data[2]['text'],
+        reference:
+            '${data[0]['surah'][referenceNameField]} [${data[0]['surah']['number']}:${data[0]['numberInSurah']}]',
+        audioUrl:
+            'https://cdn.islamic.network/quran/audio/128/ar.alafasy/$verseNumber.mp3',
+      );
+    } catch (_) {
+      final l10n = appLocalizationsForLocaleCode(normalizedLanguage);
+      return QuranVerse(
+        arabicText:
+            'اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُۥ سِنَةٌ وَلَا نَوْمٌ',
+        translationText: l10n.quranDailyVerseFallbackTranslation,
+        transliterationText: l10n.quranDailyVerseFallbackTransliteration,
+        reference: l10n.quranDailyVerseFallbackReference,
         audioUrl: '',
       );
     }
   }
+
+  static String _normalizedLanguageCode(String languageCode) {
+    return switch (languageCode) {
+      'ar' => 'ar',
+      'en' => 'en',
+      _ => 'es',
+    };
+  }
+
+  static String _translationEditionFor(String languageCode) {
+    return switch (languageCode) {
+      'ar' => 'ar.muyassar',
+      'en' => 'en.sahih',
+      _ => 'es.garcia',
+    };
+  }
 }
 
 final dailyVerseProvider = FutureProvider<QuranVerse>((ref) async {
-  return QuranVerseService.getDailyVerse('es');
+  return QuranVerseService.getDailyVerse(currentLanguageCode());
 });

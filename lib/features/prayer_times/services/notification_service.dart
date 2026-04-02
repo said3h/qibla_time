@@ -3,9 +3,12 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
+import '../../../l10n/l10n.dart';
+
 class NotificationService {
   NotificationService._();
   static final NotificationService instance = NotificationService._();
+  static const _androidAdhanChannelPrefix = 'adhan_channel_v2_';
 
   final FlutterLocalNotificationsPlugin _plugin =
       FlutterLocalNotificationsPlugin();
@@ -33,16 +36,24 @@ class NotificationService {
     required DateTime scheduledAt,
     required String adhanFile,
   }) async {
-    final androidSound = 'adhan_${adhanFile.replaceAll('.mp3', '')}';
+    final l10n = appLocalizationsForDevice();
+    final androidSound = _androidSoundNameFor(adhanFile);
+    final androidChannelId = _androidChannelIdFor(adhanFile);
+
+    await _ensureAndroidAdhanChannel(
+      channelId: androidChannelId,
+      soundName: androidSound,
+      l10n: l10n,
+    );
 
     final details = NotificationDetails(
       android: AndroidNotificationDetails(
-        'adhan_channel',
-        'Adhan',
-        channelDescription: 'Notificaciones de horario de oración',
+        androidChannelId,
+        l10n.notificationAdhanChannelName,
+        channelDescription: l10n.notificationAdhanChannelDescription,
         importance: Importance.max,
         priority: Priority.high,
-        sound: UriAndroidNotificationSound(androidSound),
+        sound: RawResourceAndroidNotificationSound(androidSound),
         playSound: true,
         enableVibration: true,
       ),
@@ -56,8 +67,8 @@ class NotificationService {
 
     await _plugin.zonedSchedule(
       id,
-      'Qibla Time - $prayerName',
-      'Es la hora de la oración',
+      l10n.notificationAdhanTitle(prayerName),
+      l10n.notificationAdhanBody,
       tz.TZDateTime.from(scheduledAt, tz.local),
       details,
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
@@ -72,11 +83,12 @@ class NotificationService {
     required String body,
     required DateTime scheduledAt,
   }) async {
+    final l10n = appLocalizationsForDevice();
     final details = NotificationDetails(
-      android: const AndroidNotificationDetails(
+      android: AndroidNotificationDetails(
         'qiblatime_reminders',
-        'Qibla Time - Recordatorios',
-        channelDescription: 'Recordatorios contextuales de Ramadán y Yumu\'ah',
+        l10n.notificationReminderChannelName,
+        channelDescription: l10n.notificationReminderChannelDescription,
         importance: Importance.high,
         priority: Priority.high,
         playSound: true,
@@ -105,7 +117,15 @@ class NotificationService {
     required String body,
     String adhanFile = 'azan1.mp3',
   }) async {
-    final androidSound = 'adhan_${adhanFile.replaceAll('.mp3', '')}';
+    final l10n = appLocalizationsForDevice();
+    final androidSound = _androidSoundNameFor(adhanFile);
+    final androidChannelId = _androidChannelIdFor(adhanFile);
+
+    await _ensureAndroidAdhanChannel(
+      channelId: androidChannelId,
+      soundName: androidSound,
+      l10n: l10n,
+    );
 
     await _plugin.show(
       99,
@@ -113,11 +133,11 @@ class NotificationService {
       body,
       NotificationDetails(
         android: AndroidNotificationDetails(
-          'adhan_channel',
-          'Adhan',
+          androidChannelId,
+          l10n.notificationAdhanChannelName,
           importance: Importance.max,
           priority: Priority.high,
-          sound: UriAndroidNotificationSound(androidSound),
+          sound: RawResourceAndroidNotificationSound(androidSound),
           playSound: true,
         ),
         iOS: DarwinNotificationDetails(
@@ -132,6 +152,41 @@ class NotificationService {
   Future<void> cancel(int id) async => _plugin.cancel(id);
 
   Future<void> cancelAll() async => _plugin.cancelAll();
+
+  String _androidSoundNameFor(String adhanFile) {
+    return 'adhan_${adhanFile.replaceAll('.mp3', '')}';
+  }
+
+  String _androidChannelIdFor(String adhanFile) {
+    return '$_androidAdhanChannelPrefix${_androidSoundNameFor(adhanFile)}';
+  }
+
+  Future<void> _ensureAndroidAdhanChannel({
+    required String channelId,
+    required String soundName,
+    required AppLocalizations l10n,
+  }) async {
+    final android = _plugin.resolvePlatformSpecificImplementation<
+        AndroidFlutterLocalNotificationsPlugin>();
+    if (android == null) {
+      return;
+    }
+
+    // Android 8+ fija el sonido al crear el canal. Usamos un canal por adhan
+    // para evitar que un canal previo contaminado siga reproduciendo el sonido
+    // por defecto o un adhan antiguo.
+    await android.createNotificationChannel(
+      AndroidNotificationChannel(
+        channelId,
+        l10n.notificationAdhanChannelName,
+        description: l10n.notificationAdhanChannelDescription,
+        importance: Importance.max,
+        playSound: true,
+        enableVibration: true,
+        sound: RawResourceAndroidNotificationSound(soundName),
+      ),
+    );
+  }
 
   Future<bool> requestPermission() async {
     final android = _plugin

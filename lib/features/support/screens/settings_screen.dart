@@ -8,12 +8,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/services/cloud_sync_service.dart';
 import '../../../core/services/settings_service.dart';
 import '../../../core/constants/app_constants.dart';
+import '../../../core/localization/locale_controller.dart';
 import '../../../core/models/adhan_model.dart';
 import '../../../core/theme/accessibility_provider.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/theme/theme_provider.dart';
+import '../../../l10n/l10n.dart';
 import '../../dhikr/services/dhikr_service.dart';
 import '../../hafiz/services/hafiz_service.dart';
+import '../../hadith/services/hadith_hourly_reminder_service.dart';
 import '../../hadith/services/hadith_service.dart';
 import '../../prayer_times/domain/entities/prayer_cache_status.dart';
 import '../../prayer_times/domain/entities/prayer_location_diagnostic.dart';
@@ -22,8 +25,10 @@ import '../../prayer_times/presentation/providers/ramadan_providers.dart';
 import '../../prayer_times/services/adhan_manager.dart';
 import '../../prayer_times/services/daily_inspiration_notification_service.dart';
 import '../../prayer_times/presentation/providers/prayer_times_providers.dart';
+import '../../prayer_times/services/quran_service.dart';
 import '../../prayer_times/services/travel_mode_service.dart';
 import '../../tracking/services/tracking_service.dart';
+import '../../tracking/services/weekly_summary_notification_service.dart';
 import 'adhan_selector_screen.dart';
 import 'support_screen.dart';
 
@@ -56,12 +61,19 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   int dailyInspirationHour = 8;
   int hadithFavoritesCount = 0;
 
+  static const _languageOptions = <Locale?>[
+    null,
+    Locale('es'),
+    Locale('en'),
+    Locale('ar'),
+  ];
+
   static const _themes = [
-    ('dark', 'Oscuro', 'Cielo antes del Fajr', '🌙'),
-    ('light', 'Claro', 'Para uso en exteriores', '☀️'),
-    ('amoled', 'AMOLED', 'Negro puro, ahorra batería', '⚫'),
-    ('deuteranopia', 'Deuteranopia', 'Sin rojo/verde', '👁'),
-    ('monochrome', 'Monocromía', 'Acromatopsia y baja visión', '⬜'),
+    ('dark', '🌙'),
+    ('light', '☀️'),
+    ('amoled', '⚫'),
+    ('deuteranopia', '👁'),
+    ('monochrome', '⬜'),
   ];
 
   @override
@@ -170,8 +182,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       SnackBar(
         content: Text(
           value
-              ? 'Notificación diaria activada'
-              : 'Notificación diaria desactivada',
+              ? context.l10n.settingsDailyNotificationEnabled
+              : context.l10n.settingsDailyNotificationDisabled,
         ),
         duration: const Duration(seconds: 2),
       ),
@@ -183,7 +195,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       context: context,
       builder: (_) => AlertDialog(
         backgroundColor: tokens.bgSurface,
-        title: const Text('Seleccionar hora'),
+        title: Text(context.l10n.settingsSelectHourTitle),
         content: SizedBox(
           width: double.maxFinite,
           height: 360,
@@ -192,7 +204,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             children: List.generate(
               24,
               (index) => ListTile(
-                title: Text('${index}:00'),
+                title: Text('$index:00'),
                 selected: index == dailyInspirationHour,
                 onTap: () => Navigator.of(context).pop(index),
               ),
@@ -215,6 +227,110 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
   Future<void> _setTheme(String theme) async {
     await ref.read(themeControllerProvider.notifier).setTheme(theme);
+  }
+
+  Future<void> _openAdhanSelector() async {
+    await Navigator.of(context).push(
+      MaterialPageRoute(builder: (_) => const AdhanSelectorScreen()),
+    );
+
+    if (!mounted) return;
+    await _loadSettings();
+    await ref.read(adhanManagerProvider).scheduleTodayAdhans();
+  }
+
+  Future<void> _setAppLocale(Locale? locale) async {
+    await ref.read(appLocaleControllerProvider.notifier).setLocale(locale);
+    ref.invalidate(dailyVerseProvider);
+
+    final dailyInspirationService =
+        ref.read(dailyInspirationNotificationServiceProvider);
+    final hadithReminderService =
+        ref.read(hadithHourlyReminderServiceProvider);
+
+    await ref.read(adhanManagerProvider).scheduleTodayAdhans();
+    await dailyInspirationService.initializeChannel();
+    await dailyInspirationService.scheduleDailyNotification();
+    await hadithReminderService.initializeChannel();
+    await hadithReminderService.scheduleAllReminders();
+    await ref
+        .read(weeklySummaryNotificationServiceProvider)
+        .scheduleWeeklySummaryNotification();
+  }
+
+  Future<void> _showLanguageSheet() async {
+    final tokens = QiblaThemes.current;
+    final l10n = context.l10n;
+    final selectedLocale = ref.read(appLocaleControllerProvider);
+    final effectiveLocale = currentAppLocale();
+
+    await showModalBottomSheet<void>(
+      context: context,
+      backgroundColor: tokens.bgSurface,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (context) {
+        return ListView(
+          padding: const EdgeInsets.all(16),
+          shrinkWrap: true,
+          children: [
+            Text(
+              l10n.settingsLanguageDialogTitle,
+              style: GoogleFonts.dmSans(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: tokens.textPrimary,
+              ),
+            ),
+            const SizedBox(height: 14),
+            ..._languageOptions.map((locale) {
+              final isSelected =
+                  (selectedLocale?.languageCode ?? 'system') ==
+                  (locale?.languageCode ?? 'system');
+              final title = locale == null
+                  ? l10n.settingsLanguageOptionSystem
+                  : _languageOptionTitle(locale.languageCode);
+              final subtitle = locale == null
+                  ? l10n.settingsLanguageSystemValue(
+                      _languageOptionTitle(effectiveLocale.languageCode),
+                    )
+                  : null;
+
+              return ListTile(
+                tileColor: isSelected ? tokens.activeBg : tokens.bgSurface2,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                title: Text(
+                  title,
+                  style: GoogleFonts.dmSans(
+                    color: isSelected ? tokens.primaryLight : tokens.textPrimary,
+                    fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+                  ),
+                ),
+                subtitle: subtitle == null
+                    ? null
+                    : Text(
+                        subtitle,
+                        style: GoogleFonts.dmSans(
+                          fontSize: 11,
+                          color: tokens.textSecondary,
+                        ),
+                      ),
+                trailing: isSelected ? Icon(Icons.check, color: tokens.primary) : null,
+                onTap: () async {
+                  await _setAppLocale(locale);
+                  if (context.mounted) {
+                    Navigator.pop(context);
+                  }
+                },
+              );
+            }),
+          ],
+        );
+      },
+    );
   }
 
   Future<void> _setCalculationMethod(CalculationMethod method) async {
@@ -253,6 +369,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
+    final l10n = context.l10n;
+    final appLocale = ref.watch(appLocaleControllerProvider);
+    final effectiveAppLocale = currentAppLocale();
     final themeName = ref.watch(themeControllerProvider);
     final accessibility = ref.watch(accessibilityControllerProvider);
     final cacheStatus = ref.watch(prayerCacheStatusProvider);
@@ -276,8 +395,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         child: ListView(
           padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
           children: [
-            Text('Ajustes', style: GoogleFonts.amiri(fontSize: 26, color: tokens.primary, fontWeight: FontWeight.bold)),
-            Text('الإعدادات', style: GoogleFonts.dmSans(fontSize: 10, color: tokens.textSecondary)),
+            Text(l10n.settingsTitle, style: GoogleFonts.amiri(fontSize: 26, color: tokens.primary, fontWeight: FontWeight.bold)),
+            Text(l10n.settingsTitleArabic, style: GoogleFonts.dmSans(fontSize: 10, color: tokens.textSecondary)),
             const SizedBox(height: 16),
             _buildProfileCard(
               tokens,
@@ -292,10 +411,38 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   : '${dhikrSnapshot.lifetimeTotal}',
             ),
             const SizedBox(height: 16),
-            _buildSectionTitle(tokens, 'Apariencia'),
-            ..._themes.map((theme) => _buildThemeTile(tokens, themeName, theme.$1, theme.$2, theme.$3, theme.$4)),
+            _buildSectionTitle(tokens, l10n.settingsSectionAppearance),
+            ..._themes.map((theme) => _buildThemeTile(
+                  tokens,
+                  themeName,
+                  theme.$1,
+                  _themeTitle(theme.$1),
+                  _themeSubtitle(theme.$1),
+                  theme.$2,
+                )),
+            _buildSettingRow(
+              label: l10n.settingsLanguage,
+              subtitle: l10n.settingsLanguageSubtitle,
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    _languageSettingValue(appLocale, effectiveAppLocale),
+                    style: GoogleFonts.dmSans(
+                      fontSize: 12,
+                      color: tokens.primary,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(width: 6),
+                  Icon(Icons.chevron_right, color: tokens.textSecondary, size: 18),
+                ],
+              ),
+              onTap: _showLanguageSheet,
+              tokens: tokens,
+            ),
             const SizedBox(height: 14),
-            _buildSectionTitle(tokens, 'Accesibilidad'),
+            _buildSectionTitle(tokens, l10n.settingsSectionAccessibility),
             Container(
               margin: const EdgeInsets.only(bottom: 5),
               padding: const EdgeInsets.all(14),
@@ -307,9 +454,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Tamaño de texto', style: GoogleFonts.dmSans(fontSize: 13, color: tokens.textPrimary)),
+                  Text(l10n.settingsTextSize, style: GoogleFonts.dmSans(fontSize: 13, color: tokens.textPrimary)),
                   const SizedBox(height: 4),
-                  Text('Escala actual: ${accessibility.fontScale.toStringAsFixed(1)}x', style: GoogleFonts.dmSans(fontSize: 10, color: tokens.textSecondary)),
+                  Text(l10n.settingsCurrentScale(accessibility.fontScale.toStringAsFixed(1)), style: GoogleFonts.dmSans(fontSize: 10, color: tokens.textSecondary)),
                   Slider(
                     value: accessibility.fontScale,
                     min: 0.8,
@@ -321,30 +468,26 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 ],
               ),
             ),
-            _buildSimpleToggleTile(tokens, 'Alto contraste', 'Mejora legibilidad en toda la app', accessibility.highContrast, (v) => ref.read(accessibilityControllerProvider.notifier).setHighContrast(v)),
-            _buildSimpleToggleTile(tokens, 'Usar negrita del sistema', 'Respeta la preferencia de VoiceOver/TalkBack', accessibility.useSystemBoldText, (v) => ref.read(accessibilityControllerProvider.notifier).setUseSystemBoldText(v)),
+            _buildSimpleToggleTile(tokens, l10n.settingsHighContrast, l10n.settingsHighContrastSubtitle, accessibility.highContrast, (v) => ref.read(accessibilityControllerProvider.notifier).setHighContrast(v)),
+            _buildSimpleToggleTile(tokens, l10n.settingsUseSystemBold, l10n.settingsUseSystemBoldSubtitle, accessibility.useSystemBoldText, (v) => ref.read(accessibilityControllerProvider.notifier).setUseSystemBoldText(v)),
             _buildValueTile(
               tokens,
-              'Restablecer accesibilidad',
-              'Restablecer',
+              l10n.settingsResetAccessibility,
+              l10n.settingsReset,
               onTap: () => ref.read(accessibilityControllerProvider.notifier).reset(),
             ),
             const SizedBox(height: 14),
-            _buildSectionTitle(tokens, 'Notificaciones de adhan'),
+            _buildSectionTitle(tokens, l10n.settingsSectionAdhanNotifications),
             _buildValueTile(
               tokens,
-              'Sonido del adhan',
-              'Elegir y previsualizar',
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (_) => const AdhanSelectorScreen()),
-                );
-              },
+              l10n.settingsAdhanSound,
+              l10n.settingsAdhanSoundAction,
+              onTap: _openAdhanSelector,
             ),
             _buildSimpleToggleTile(
               tokens,
-              'Notificaciones generales',
-              'Activa o pausa todos los avisos de oración',
+              l10n.settingsGeneralNotifications,
+              l10n.settingsGeneralNotificationsSubtitle,
               prayerNotificationsStatus,
               _togglePrayerNotificationsEnabled,
             ),
@@ -364,7 +507,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     const SizedBox(width: 10),
                     Expanded(
                       child: Text(
-                        'Los avisos de adhan están configurados, pero el permiso del sistema sigue pendiente.',
+                        l10n.settingsSystemPermissionPendingBody,
                         style: GoogleFonts.dmSans(
                           fontSize: 11,
                           height: 1.5,
@@ -382,62 +525,62 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             _buildToggleTile(tokens, 'Isha', _buildPrayerSubtitle(prayerSchedule?.isha), adhanIsha, (v) => _toggleBool('isha', v)),
             _buildValueTile(
               tokens,
-              'Vibración háptica',
-              'No disponible',
+              l10n.settingsHapticFeedback,
+              l10n.commonUnavailable,
             ),
             const SizedBox(height: 14),
-            _buildSectionTitle(tokens, 'Cálculo de horarios'),
-            _buildValueTile(tokens, 'Método', calculationMethod.name.replaceAll('_', ' ').toUpperCase(), onTap: _showMethodSheet),
+            _buildSectionTitle(tokens, l10n.settingsSectionScheduleCalculation),
+            _buildValueTile(tokens, l10n.commonMethod, calculationMethod.name.replaceAll('_', ' ').toUpperCase(), onTap: _showMethodSheet),
             _buildValueTile(tokens, 'Madhab (Asr)', isHanafi ? 'Hanafi' : 'Shafi\'i', onTap: () => _setMadhab(!isHanafi)),
             _buildValueTile(tokens, 'Ajuste manual', '±$timeOffset min', trailing: _offsetButtons(tokens)),
             _buildValueTile(
               tokens,
-              'Ubicación',
+              l10n.commonLocation,
               _locationSettingValue(locationDiagnostic),
             ),
             const SizedBox(height: 14),
-            _buildSectionTitle(tokens, 'Modo Ramadán'),
+            _buildSectionTitle(tokens, l10n.settingsSectionRamadanMode),
             _buildSimpleToggleTile(
               tokens,
-              'Modo Ramadán automático',
-              'Se activa solo cuando el calendario islámico entra en Ramadán',
+              l10n.settingsRamadanAutomatic,
+              l10n.settingsRamadanAutomaticSubtitle,
               ramadanAutomatic,
               _toggleRamadanAutomatic,
             ),
             _buildSimpleToggleTile(
               tokens,
-              'Forzar modo Ramadán',
-              'Activar vista de Ramadán manualmente',
+              l10n.settingsRamadanForced,
+              l10n.settingsRamadanForcedSubtitle,
               ramadanForced,
               _toggleRamadanForced,
             ),
             if (ramadanStatus != null)
               _buildValueTile(
                 tokens,
-                'Estado actual',
+                l10n.commonCurrentStatus,
                 _ramadanStatusLabel(ramadanStatus),
               ),
             const SizedBox(height: 14),
 
             // ── SECCIÓN HADICES ────────────────────────────────────────
-            _buildSectionTitle(tokens, 'Hadices'),
+            _buildSectionTitle(tokens, l10n.settingsSectionHadith),
             _buildSimpleToggleTile(
               tokens,
-              'Notificación diaria',
-              'Recibe un hadiz o versículo cada día',
+              l10n.settingsDailyNotification,
+              l10n.settingsDailyNotificationSubtitle,
               dailyInspirationEnabled,
               (v) => _toggleDailyInspiration(v),
             ),
             _buildValueTile(
               tokens,
-              'Hora de notificación',
-              '${dailyInspirationHour}:00',
+              l10n.settingsNotificationHour,
+              '$dailyInspirationHour:00',
               onTap: () => _selectNotificationHour(tokens),
             ),
             const SizedBox(height: 14),
 
             // ── SECCIÓN TRAVEL MODE ────────────────────────────────────────
-            _buildSectionTitle(tokens, 'Modo viajero'),
+            _buildSectionTitle(tokens, l10n.settingsSectionTravelerMode),
 
             // Toggle principal
             Consumer(
@@ -446,18 +589,18 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 return enabledAsync.when(
                   data: (enabled) => _buildSimpleToggleTile(
                     tokens,
-                    'Modo viajero',
-                    'Detecta automáticamente cambios de ciudad (>50 km)',
+                    l10n.settingsTravelerMode,
+                    l10n.settingsTravelerModeSubtitle,
                     enabled,
                     (value) async {
                       await ref.read(travelModeServiceProvider).setEnabled(value);
                       ref.invalidate(travelerModeEnabledProvider);
                     },
                   ),
-                  loading: () => _buildSimpleToggleTile(tokens, 'Modo viajero', 'Cargando...', false, (_) {}),
+                  loading: () => _buildSimpleToggleTile(tokens, l10n.settingsTravelerMode, l10n.commonLoading, false, (_) {}),
                   error: (_, __) => _buildSettingRow(
-                    label: 'Modo viajero',
-                    subtitle: 'No hemos podido cargar el modo viajero',
+                    label: l10n.settingsTravelerMode,
+                    subtitle: l10n.settingsTravelerModeLoadError,
                     trailing: Icon(
                       Icons.info_outline,
                       color: tokens.textMuted,
@@ -479,8 +622,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   data: (locations) {
                     if (locations.isEmpty) {
                       return _buildSettingRow(
-                        label: 'Lugares recientes',
-                        subtitle: 'Sin viajes recientes',
+                        label: l10n.settingsRecentPlaces,
+                        subtitle: l10n.settingsNoRecentTrips,
                         trailing: Icon(Icons.history, color: tokens.textMuted, size: 18),
                         tokens: tokens,
                       );
@@ -491,7 +634,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         Padding(
                           padding: const EdgeInsets.only(left: 4, bottom: 8, top: 4),
                           child: Text(
-                            'LUGARES RECIENTES',
+                            l10n.settingsSectionRecentPlaces,
                             style: TextStyle(
                               fontSize: 9,
                               color: tokens.textSecondary,
@@ -534,8 +677,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   },
                   loading: () => const SizedBox(height: 40),
                   error: (_, __) => _buildSettingRow(
-                    label: 'Lugares recientes',
-                    subtitle: 'No hemos podido cargarlo',
+                    label: l10n.settingsRecentPlaces,
+                    subtitle: l10n.settingsLoadError,
                     trailing: Icon(Icons.error, color: tokens.danger, size: 18),
                     tokens: tokens,
                   ),
@@ -543,20 +686,20 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               },
             ),
 
-            _buildSectionTitle(tokens, 'Caché inteligente'),
-            _buildValueTile(tokens, 'Caché válida hasta', cacheStatus.validUntil?.toLocal().toString().substring(0, 16) ?? 'Sin caché'),
-            _buildValueTile(tokens, 'Entradas en caché', '${cacheStatus.entryCount}'),
+            _buildSectionTitle(tokens, l10n.settingsSectionSmartCache),
+            _buildValueTile(tokens, l10n.settingsCacheValidUntil, cacheStatus.validUntil?.toLocal().toString().substring(0, 16) ?? l10n.commonUnavailable),
+            _buildValueTile(tokens, l10n.settingsCacheEntries, '${cacheStatus.entryCount}'),
             _buildValueTile(
               tokens,
-              'Limpiar caché',
-              'Borrar',
+              l10n.settingsClearCache,
+              l10n.commonDelete,
               onTap: () async {
                 await ref.read(prayerCacheDataSourceProvider).clear();
                 ref.invalidate(prayerCacheStatusProvider);
               },
             ),
             const SizedBox(height: 14),
-            _buildSectionTitle(tokens, 'Estado del sistema'),
+            _buildSectionTitle(tokens, l10n.commonSystemStatus),
             _buildSystemStatusCard(
               tokens,
               locationLabel: locationLabel,
@@ -566,7 +709,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               cacheStatus: cacheStatus,
             ),
             const SizedBox(height: 14),
-            _buildSectionTitle(tokens, 'Sadaqah · Apoyo'),
+            _buildSectionTitle(tokens, l10n.settingsSectionSupport),
             Container(
               margin: const EdgeInsets.only(bottom: 5),
               padding: const EdgeInsets.all(14),
@@ -583,8 +726,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Apoya el desarrollo', style: GoogleFonts.dmSans(fontSize: 13, color: tokens.primaryLight, fontWeight: FontWeight.w500)),
-                        Text('Cada donación puede ser una sadaqah jariyah', style: GoogleFonts.dmSans(fontSize: 10, color: tokens.textSecondary)),
+                        Text(l10n.settingsSupportCardTitle, style: GoogleFonts.dmSans(fontSize: 13, color: tokens.primaryLight, fontWeight: FontWeight.w500)),
+                        Text(l10n.settingsSupportCardSubtitle, style: GoogleFonts.dmSans(fontSize: 10, color: tokens.textSecondary)),
                       ],
                     ),
                   ),
@@ -593,8 +736,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ),
             _buildValueTile(
               tokens,
-              'Información de apoyo',
-              'Abrir',
+              l10n.settingsSupportInfo,
+              l10n.commonOpen,
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
@@ -604,10 +747,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               },
             ),
             const SizedBox(height: 14),
-            _buildSectionTitle(tokens, 'Copia de seguridad en la nube (beta)'),
-            _buildValueTile(tokens, 'Modo de copia', 'Manual'),
-            _buildValueTile(tokens, 'ID anónimo', deviceId ?? 'Generando...'),
-            _buildValueTile(tokens, 'Última copia', lastBackup == null ? 'Nunca' : lastBackup.toLocal().toString().substring(0, 16)),
+            _buildSectionTitle(tokens, l10n.settingsSectionCloudBackup),
+            _buildValueTile(tokens, l10n.settingsBackupMode, l10n.commonManual),
+            _buildValueTile(tokens, l10n.settingsAnonymousId, deviceId ?? l10n.commonGenerating),
+            _buildValueTile(tokens, l10n.settingsLastBackup, lastBackup == null ? l10n.commonNever : lastBackup.toLocal().toString().substring(0, 16)),
             Container(
               margin: const EdgeInsets.only(bottom: 8),
               padding: const EdgeInsets.all(12),
@@ -617,7 +760,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 border: Border.all(color: tokens.border),
               ),
               child: Text(
-                'Las copias se exportan manualmente. Qibla Time todavía no crea copias automáticas ni sincroniza en segundo plano.',
+                l10n.settingsBackupInfoBody,
                 style: GoogleFonts.dmSans(
                   fontSize: 11,
                   height: 1.5,
@@ -627,8 +770,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ),
             _buildValueTile(
               tokens,
-              'Exportar copia',
-              'Compartir',
+              l10n.settingsExportBackup,
+              l10n.commonShare,
               onTap: () async {
                 final snapshot = await ref.read(cloudSyncServiceProvider).createBackupSnapshot(ref.read(hafizServiceProvider));
                 if (!mounted) return;
@@ -638,8 +781,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ),
             _buildValueTile(
               tokens,
-              'Restaurar copia',
-              'Importar JSON',
+              l10n.settingsRestoreBackup,
+              l10n.commonImportJson,
               onTap: _showRestoreDialog,
             ),
             Container(
@@ -651,12 +794,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 border: Border.all(color: tokens.primaryBorder),
               ),
               child: Text(
-                'Puedes guardar y compartir una copia manual en formato JSON. La automatización y la sincronización entre dispositivos aún no están disponibles.',
+                l10n.settingsBackupInfoBody,
                 style: GoogleFonts.dmSans(fontSize: 10, height: 1.6, color: tokens.textPrimary),
               ),
             ),
-            _buildSectionTitle(tokens, 'Acerca de'),
-            _buildValueTile(tokens, 'Versión', '3.0.0'),
+            _buildSectionTitle(tokens, l10n.commonAbout),
+            _buildValueTile(tokens, l10n.commonVersion, '3.0.0'),
             _buildValueTile(tokens, 'Licencias de código abierto', '→'),
           ],
         ),
@@ -732,8 +875,53 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   }
 
   String _buildPrayerSubtitle(DateTime? time) {
-    final timeLabel = time == null ? 'No disponible' : _formatTime(time);
+    final timeLabel = time == null ? context.l10n.commonUnavailable : _formatTime(time);
     return '$timeLabel · $selectedAdhanName';
+  }
+
+  String _themeTitle(String id) {
+    final l10n = context.l10n;
+    return switch (id) {
+      'dark' => l10n.settingsThemeDarkTitle,
+      'light' => l10n.settingsThemeLightTitle,
+      'amoled' => l10n.settingsThemeAmoledTitle,
+      'deuteranopia' => l10n.settingsThemeDeuteranopiaTitle,
+      'monochrome' => l10n.settingsThemeMonochromeTitle,
+      _ => id,
+    };
+  }
+
+  String _themeSubtitle(String id) {
+    final l10n = context.l10n;
+    return switch (id) {
+      'dark' => l10n.settingsThemeDarkSubtitle,
+      'light' => l10n.settingsThemeLightSubtitle,
+      'amoled' => l10n.settingsThemeAmoledSubtitle,
+      'deuteranopia' => l10n.settingsThemeDeuteranopiaSubtitle,
+      'monochrome' => l10n.settingsThemeMonochromeSubtitle,
+      _ => '',
+    };
+  }
+
+  String _languageSettingValue(Locale? appLocale, Locale effectiveLocale) {
+    final l10n = context.l10n;
+    if (appLocale == null) {
+      return l10n.settingsLanguageSystemValue(
+        _languageOptionTitle(effectiveLocale.languageCode),
+      );
+    }
+
+    return _languageOptionTitle(appLocale.languageCode);
+  }
+
+  String _languageOptionTitle(String languageCode) {
+    final l10n = context.l10n;
+    return switch (languageCode) {
+      'es' => l10n.settingsLanguageOptionSpanish,
+      'en' => l10n.settingsLanguageOptionEnglish,
+      'ar' => l10n.settingsLanguageOptionArabic,
+      _ => languageCode.toUpperCase(),
+    };
   }
 
   String _formatTime(DateTime time) {
@@ -860,20 +1048,21 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     required bool prayerNotificationsStatus,
     required PrayerCacheStatus cacheStatus,
   }) {
+    final l10n = context.l10n;
     final locationValue = locationLabel ??
         (locationDiagnostic?.lastKnownLocation == null
-            ? 'Sin ubicación guardada'
+            ? l10n.settingsLocationSavedUnavailable
             : '${locationDiagnostic!.lastKnownLocation!.latitude.toStringAsFixed(2)}, ${locationDiagnostic.lastKnownLocation!.longitude.toStringAsFixed(2)}');
 
     final locationStatus = switch (locationDiagnostic?.permissionStatus) {
-      PrayerLocationPermissionStatus.deniedForever => 'Bloqueado',
-      PrayerLocationPermissionStatus.denied => 'Pendiente',
-      PrayerLocationPermissionStatus.granted => locationDiagnostic?.serviceEnabled == false ? 'GPS apagado' : 'Listo',
-      _ => 'Sin comprobar',
+      PrayerLocationPermissionStatus.deniedForever => l10n.commonBlocked,
+      PrayerLocationPermissionStatus.denied => l10n.commonPending,
+      PrayerLocationPermissionStatus.granted => locationDiagnostic?.serviceEnabled == false ? l10n.settingsGpsOff : l10n.commonReady,
+      _ => l10n.commonChecking,
     };
 
     final scheduleSource =
-        cacheStatus.entryCount > 0 ? 'Caché preparada' : 'Pendiente';
+        cacheStatus.entryCount > 0 ? l10n.settingsScheduleSourceReady : l10n.commonPending;
 
     return Container(
       width: double.infinity,
@@ -885,15 +1074,15 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       ),
       child: Column(
         children: [
-          _diagnosticRow(tokens, 'Método', calculationMethod.name.replaceAll('_', ' ').toUpperCase()),
+          _diagnosticRow(tokens, l10n.commonMethod, calculationMethod.name.replaceAll('_', ' ').toUpperCase()),
           _diagnosticRow(tokens, 'Madhab', isHanafi ? 'Hanafi' : 'Shafi\'i'),
-          _diagnosticRow(tokens, 'Offset', '${timeOffset >= 0 ? '+' : ''}$timeOffset min'),
-          _diagnosticRow(tokens, 'Notif. sistema', notificationPermissionGranted == null ? 'Comprobando...' : notificationPermissionGranted ? 'Concedidas' : 'Pendientes'),
-          _diagnosticRow(tokens, 'Notif. app', prayerNotificationsStatus ? 'Activadas' : 'Pausadas'),
-          _diagnosticRow(tokens, 'Ubicación', locationValue),
-          _diagnosticRow(tokens, 'Estado de la ubicación', locationStatus),
-          _diagnosticRow(tokens, 'Fuente horarios', scheduleSource),
-          _diagnosticRow(tokens, 'Caché', '${cacheStatus.entryCount} entradas'),
+          _diagnosticRow(tokens, l10n.commonOffset, '${timeOffset >= 0 ? '+' : ''}$timeOffset min'),
+          _diagnosticRow(tokens, l10n.settingsNotificationSystem, notificationPermissionGranted == null ? l10n.commonChecking : notificationPermissionGranted ? l10n.settingsNotificationsGranted : l10n.commonPending),
+          _diagnosticRow(tokens, l10n.settingsNotificationApp, prayerNotificationsStatus ? l10n.commonActivated : l10n.commonPaused),
+          _diagnosticRow(tokens, l10n.commonLocation, locationValue),
+          _diagnosticRow(tokens, l10n.settingsLocationStatus, locationStatus),
+          _diagnosticRow(tokens, l10n.settingsScheduleSource, scheduleSource),
+          _diagnosticRow(tokens, l10n.settingsCacheEntries, '${cacheStatus.entryCount}'),
         ],
       ),
     );
@@ -973,12 +1162,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   Future<void> _showRestoreDialog() async {
     final controller = TextEditingController();
     final tokens = QiblaThemes.current;
+    final l10n = context.l10n;
     await showDialog<void>(
       context: context,
       builder: (context) {
         return AlertDialog(
           backgroundColor: tokens.bgSurface,
-          title: Text('Restaurar copia', style: GoogleFonts.dmSans(color: tokens.textPrimary, fontWeight: FontWeight.w600)),
+          title: Text(l10n.settingsRestoreBackupDialogTitle, style: GoogleFonts.dmSans(color: tokens.textPrimary, fontWeight: FontWeight.w600)),
           content: TextField(
             controller: controller,
             minLines: 8,
@@ -1005,7 +1195,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   if (!mounted) return;
                   _loadSettings();
                   ScaffoldMessenger.of(this.context).showSnackBar(
-                    const SnackBar(content: Text('Copia restaurada')),
+                    SnackBar(content: Text(l10n.settingsRestoreBackupSuccess)),
                   );
                 } on CloudSyncRestoreException catch (e) {
                   if (!context.mounted) return;
@@ -1015,9 +1205,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 } catch (_) {
                   if (!context.mounted) return;
                   ScaffoldMessenger.of(this.context).showSnackBar(
-                    const SnackBar(
-                      content: Text('No hemos podido restaurar la copia.'),
-                    ),
+                    SnackBar(content: Text(l10n.settingsRestoreBackupError)),
                   );
                 }
               },
@@ -1032,31 +1220,34 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   // ── HELPERS PARA TRAVEL MODE ────────────────────────────────────
 
   String _formatDate(DateTime date) {
+    final l10n = context.l10n;
     final now = DateTime.now();
     final diff = now.difference(date);
-    if (diff.inDays == 0) return 'Hoy';
-    if (diff.inDays == 1) return 'Ayer';
-    if (diff.inDays < 7) return 'Hace ${diff.inDays} días';
+    if (diff.inDays == 0) return l10n.settingsToday;
+    if (diff.inDays == 1) return l10n.settingsYesterday;
+    if (diff.inDays < 7) return l10n.settingsDaysAgo(diff.inDays);
     return '${date.day}/${date.month}/${date.year}';
   }
 
   String _ramadanStatusLabel(RamadanStatus status) {
+    final l10n = context.l10n;
     if (status.isManualPreview) {
-      return 'Activo manual';
+      return l10n.settingsRamadanManualActive;
     }
     if (status.isEnabled) {
       return status.headerLabel;
     }
-    return 'Desactivado';
+    return l10n.commonDisabled;
   }
 
   String _locationSettingValue(PrayerLocationDiagnostic? diagnostic) {
+    final l10n = context.l10n;
     return switch (diagnostic?.permissionStatus) {
       PrayerLocationPermissionStatus.granted =>
-        diagnostic?.serviceEnabled == false ? 'GPS apagado' : 'Automática',
-      PrayerLocationPermissionStatus.denied => 'Permiso pendiente',
-      PrayerLocationPermissionStatus.deniedForever => 'Bloqueada',
-      _ => 'No disponible',
+        diagnostic?.serviceEnabled == false ? l10n.settingsGpsOff : l10n.settingsLocationAutomatic,
+      PrayerLocationPermissionStatus.denied => l10n.settingsLocationPendingPermission,
+      PrayerLocationPermissionStatus.deniedForever => l10n.settingsLocationBlocked,
+      _ => l10n.commonUnavailable,
     };
   }
 
@@ -1065,15 +1256,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     required String subtitle,
     required Widget trailing,
     required QiblaTokens tokens,
+    VoidCallback? onTap,
   }) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 5),
+    final child = Padding(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 11),
-      decoration: BoxDecoration(
-        color: tokens.bgSurface,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: tokens.border),
-      ),
       child: Row(
         children: [
           Expanded(
@@ -1088,6 +1274,22 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           trailing,
         ],
       ),
+    );
+
+    return Container(
+      margin: const EdgeInsets.only(bottom: 5),
+      decoration: BoxDecoration(
+        color: tokens.bgSurface,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: tokens.border),
+      ),
+      child: onTap == null
+          ? child
+          : InkWell(
+              onTap: onTap,
+              borderRadius: BorderRadius.circular(12),
+              child: child,
+            ),
     );
   }
 }

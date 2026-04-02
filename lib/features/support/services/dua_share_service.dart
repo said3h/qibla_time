@@ -3,6 +3,7 @@ import 'package:share_plus/share_plus.dart';
 
 import '../../../core/theme/app_theme.dart';
 import '../../../core/utils/religious_reference_formatter.dart';
+import '../../../l10n/l10n.dart';
 import '../../hadith_share/models/hadith_share_data.dart';
 import '../../hadith_share/models/hadith_share_theme.dart';
 import '../../hadith_share/services/hadith_share_image_service.dart';
@@ -16,6 +17,7 @@ class DuaShareService {
     bool includeArabic = true,
     bool includeTranslation = true,
   }) {
+    final l10n = appLocalizationsForDevice();
     final shareData = buildShareData(
       dua,
       includeArabic: includeArabic,
@@ -27,7 +29,7 @@ class DuaShareService {
       if (shareData.hasArabicText) shareData.arabicText!.trim(),
       if (shareData.hasTranslation) shareData.translation.trim(),
       if (shareData.reference.trim().isNotEmpty)
-        'Referencia: ${shareData.reference.trim()}',
+        l10n.shareReferenceLabel(shareData.reference.trim()),
       shareData.branding.trim(),
     ];
 
@@ -39,13 +41,14 @@ class DuaShareService {
     bool includeArabic = true,
     bool includeTranslation = true,
   }) async {
+    final l10n = appLocalizationsForDevice();
     await Share.share(
       buildShareText(
         dua,
         includeArabic: includeArabic,
         includeTranslation: includeTranslation,
       ),
-      subject: dua.title.trim().isEmpty ? 'Dua' : dua.title.trim(),
+      subject: dua.title.trim().isEmpty ? l10n.shareSubjectDua : dua.title.trim(),
     );
   }
 
@@ -62,6 +65,7 @@ class DuaShareService {
       );
     }
 
+    final l10n = appLocalizationsForDevice();
     final transparentBackground = mode == HadithShareExportMode.cardOnly;
     final file = await HadithShareImageService.savePng(
       data: buildShareData(
@@ -85,7 +89,7 @@ class DuaShareService {
         includeArabic: includeArabic,
         includeTranslation: includeTranslation,
       ),
-      subject: dua.title.trim().isEmpty ? 'Dua' : dua.title.trim(),
+      subject: dua.title.trim().isEmpty ? l10n.shareSubjectDua : dua.title.trim(),
     );
   }
 
@@ -94,6 +98,7 @@ class DuaShareService {
     bool includeArabic = true,
     bool includeTranslation = true,
   }) {
+    final l10n = appLocalizationsForDevice();
     final title = dua.title.trim();
     final reference = (dua.reference ?? '').trim();
     final source = (dua.source ?? '').trim();
@@ -114,8 +119,8 @@ class DuaShareService {
       translation: includeTranslation ? dua.translation : '',
       reference: referenceSections.join(' · '),
       arabicReference: arabicReference ?? arabicCategoryLabel,
-      badgeLabel: 'DUA',
-      branding: 'App: Qibla Time',
+      badgeLabel: l10n.shareBadgeDua,
+      branding: l10n.shareBranding,
     );
   }
 

@@ -6,6 +6,7 @@ import 'package:hijri/hijri_calendar.dart';
 import '../../../core/services/connectivity_service.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/utils/spanish_date_labels.dart';
+import '../../../l10n/l10n.dart';
 import '../../calendar/screens/calendar_screen.dart';
 import '../../dhikr/screens/dhikr_screen.dart';
 import '../../dhikr/services/dhikr_service.dart';
@@ -203,6 +204,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     String? locationLabel,
     bool isOnline,
   ) {
+    final l10n = context.l10n;
     return Padding(
       padding: const EdgeInsets.fromLTRB(18, 14, 18, 10),
       child: Row(
@@ -238,7 +240,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  '${isOnline ? 'En línea' : 'Sin red'} · ${locationLabel ?? 'Ubicación no disponible'}',
+                  l10n.homeHeaderStatusLine(
+                    isOnline ? l10n.homeHeaderOnline : l10n.homeHeaderOffline,
+                    locationLabel ?? l10n.homeHeaderLocationUnavailable,
+                  ),
                   style: GoogleFonts.dmSans(
                     fontSize: 10,
                     color: tokens.textSecondary,
@@ -491,6 +496,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     PrayerLocationDiagnostic? locationDiagnostic,
     DateTime selectedDate,
   ) {
+    final l10n = context.l10n;
     final prayerSchedule = resolvedSchedule?.schedule;
     if (prayerSchedule == null) {
       return _buildFallbackHero(tokens, locationDiagnostic);
@@ -575,7 +581,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
               Text(
-                'PRÓXIMA ORACIÓN',
+                l10n.homeHeroNextPrayer,
                 style: GoogleFonts.dmSans(
                   fontSize: 9,
                   color: tokens.primary.withOpacity(0.65),
@@ -606,7 +612,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               const SizedBox(height: 4),
               Text(
                 _selectedDate == _dateOnly(DateTime.now())
-                    ? 'Consulta central de hoy'
+                    ? l10n.homeHeroTodayOverview
                     : _formatHeroDate(_selectedDate),
                 style: GoogleFonts.dmSans(
                   fontSize: 11,
@@ -623,7 +629,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     border: Border.all(color: tokens.primaryBorder),
                   ),
                   child: Text(
-                    'Usando tu última ubicación guardada',
+                    l10n.homeHeroUsingSavedLocation,
                     style: GoogleFonts.dmSans(
                       fontSize: 10,
                       color: tokens.textPrimary,
@@ -665,6 +671,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     DateTime selectedDate,
     bool fromCache,
   ) {
+    final l10n = context.l10n;
     final isToday = _isSameDay(selectedDate, _dateOnly(DateTime.now()));
     final hijri = HijriCalendar.fromDate(selectedDate);
     return Container(
@@ -693,7 +700,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       child: Column(
         children: [
           Text(
-            isToday ? 'HOY' : 'FECHA SELECCIONADA',
+            isToday ? l10n.homeSelectedDateToday : l10n.homeSelectedDateCustom,
             textAlign: TextAlign.center,
             style: GoogleFonts.dmSans(
               fontSize: 9,
@@ -752,8 +759,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 borderRadius: BorderRadius.circular(999),
                 border: Border.all(color: tokens.primaryBorder),
               ),
-              child: Text(
-                'Usando tu última ubicación guardada',
+                  child: Text(
+                    l10n.homeHeroUsingSavedLocation,
                 style: GoogleFonts.dmSans(
                   fontSize: 10,
                   color: tokens.textPrimary,
@@ -1595,6 +1602,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     Duration? remaining,
     String? nextPrayerLabel,
   ) {
+    final l10n = context.l10n;
     if (remaining == null) {
       return Container(
         width: 188,
@@ -1604,7 +1612,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           borderRadius: BorderRadius.circular(24),
         ),
         child: Text(
-          'Cuenta atrás no disponible',
+          l10n.homeCountdownUnavailable,
           textAlign: TextAlign.center,
           style: GoogleFonts.dmSans(
             fontSize: 12,
@@ -1619,8 +1627,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final clampedMinutes = remaining.inMinutes.clamp(0, 360);
     final progress = (1 - (clampedMinutes / 360)).clamp(0.08, 0.96).toDouble();
     final contextLabel = nextPrayerLabel == null
-        ? 'Cuenta atrás activa'
-        : 'hasta $nextPrayerLabel';
+        ? l10n.homeCountdownActive
+        : l10n.homeCountdownUntil(nextPrayerLabel);
 
     return SizedBox(
       width: 188,
@@ -1653,7 +1661,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'CUENTA ATRÁS',
+                  l10n.homeCountdownLabelUppercase,
                   style: GoogleFonts.dmSans(
                     fontSize: 9,
                     color: tokens.textSecondary,
@@ -1715,6 +1723,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     DateTime date,
     QiblaTokens tokens,
   ) {
+    final l10n = context.l10n;
     if (prayerSchedule == null) {
       return _buildPrayerFallback(tokens, null);
     }
@@ -1739,8 +1748,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               Expanded(
                 child: Text(
                   (isToday
-                          ? 'Oraciones de hoy'
-                          : 'Horarios de ${_formatCompactDate(date)}')
+                          ? l10n.homePrayerSectionToday
+                          : l10n.homePrayerSectionForDate(_formatCompactDate(date)))
                       .toUpperCase(),
                   style: GoogleFonts.dmSans(
                     fontSize: 9,
@@ -1751,8 +1760,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               ),
               Text(
                 isToday
-                    ? '${SpanishDateLabels.longWeekday(date)}, día de adoración'
-                    : '${completed.length}/5 marcadas',
+                    ? l10n.homePrayerSectionWorshipDay(
+                        SpanishDateLabels.longWeekday(date),
+                      )
+                    : l10n.homePrayerSectionMarkedCount(completed.length),
                 style: GoogleFonts.dmSans(fontSize: 10, color: tokens.primaryLight),
               ),
             ],
@@ -2537,20 +2548,29 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   String _formatRemaining(Duration? remaining) {
+    final l10n = context.l10n;
     if (remaining == null) {
-      return 'sin cuenta atrás';
+      return l10n.homeCountdownUnavailable.toLowerCase();
     }
-    return 'en ${remaining.inHours}h ${remaining.inMinutes.remainder(60)}min';
+    return l10n.homeDurationUntil(
+      remaining.inHours,
+      remaining.inMinutes.remainder(60),
+    );
   }
 
   String _formatRamadanCountdown(Duration remaining) {
+    final l10n = context.l10n;
     final safe = remaining.isNegative ? Duration.zero : remaining;
     final hours = safe.inHours;
     final minutes = safe.inMinutes.remainder(60);
-    return '${hours}h ${minutes.toString().padLeft(2, '0')}min';
+    return l10n.homeDurationHoursMinutes(
+      hours,
+      minutes.toString().padLeft(2, '0'),
+    );
   }
 
   (String, String?, bool) _formatHeroCountdown(Duration remaining) {
+    final l10n = context.l10n;
     final safe = remaining.isNegative ? Duration.zero : remaining;
     final hours = safe.inHours;
     final minutes = safe.inMinutes.remainder(60);
@@ -2558,7 +2578,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     if (hours > 0) {
       return (
-        '$hours h ${minutes.toString().padLeft(2, '0')} min',
+        l10n.homeDurationHoursMinutes(
+          hours,
+          minutes.toString().padLeft(2, '0'),
+        ),
         null,
         true,
       );
@@ -2566,13 +2589,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     if (safe.inMinutes > 0) {
       return (
-        '$minutes min',
-        '${seconds.toString().padLeft(2, '0')} s',
+        l10n.homeDurationMinutes(minutes),
+        l10n.homeDurationSeconds(seconds.toString().padLeft(2, '0')),
         false,
       );
     }
 
-    return ('$seconds s', null, false);
+    return (l10n.homeDurationSeconds(seconds.toString()), null, false);
   }
 
   IconData _insightIcon(HomeInsightKind kind) {

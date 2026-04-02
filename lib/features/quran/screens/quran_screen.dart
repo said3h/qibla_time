@@ -9,6 +9,7 @@ import 'package:share_plus/share_plus.dart';
 
 import '../../../core/services/audio_service.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../../l10n/l10n.dart';
 import '../../hafiz/screens/hafiz_mode_screen.dart';
 import '../../quran_share/services/ayah_share_service.dart';
 import '../../quran_share/services/ayah_share_video_service.dart';
@@ -26,6 +27,7 @@ class QuranScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
     final tokens = QiblaThemes.current;
     final surahs = ref.watch(quranSurahsProvider);
     final lastReading = ref.watch(lastReadingProvider).valueOrNull;
@@ -49,7 +51,7 @@ class QuranScreen extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Corán',
+                        l10n.quranTitle,
                         style: GoogleFonts.amiri(
                           fontSize: 26,
                           color: tokens.primary,
@@ -57,7 +59,7 @@ class QuranScreen extends ConsumerWidget {
                         ),
                       ),
                       Text(
-                        '114 suras - lectura continua',
+                        l10n.quranSubtitle,
                         style: GoogleFonts.dmSans(
                           fontSize: 10,
                           color: tokens.textSecondary,
@@ -75,7 +77,7 @@ class QuranScreen extends ConsumerWidget {
                     );
                   },
                   icon: const Icon(Icons.auto_stories),
-                  label: const Text('Hafiz'),
+                  label: Text(l10n.quranHafizLabel),
                 ),
               ],
             ),
@@ -195,6 +197,7 @@ class _QuranUtilityRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -202,12 +205,12 @@ class _QuranUtilityRow extends StatelessWidget {
         OutlinedButton.icon(
           onPressed: onProtectionTap,
           icon: const Icon(Icons.shield_moon_outlined),
-          label: const Text('Ayat al-Kursi'),
+          label: Text(l10n.quranUtilityAyatAlKursi),
         ),
         OutlinedButton.icon(
           onPressed: onAllahNamesTap,
           icon: const Icon(Icons.auto_awesome_outlined),
-          label: const Text('99 nombres'),
+          label: Text(l10n.quranUtilityAllahNames),
         ),
         OutlinedButton.icon(
           onPressed: () {
@@ -218,7 +221,7 @@ class _QuranUtilityRow extends StatelessWidget {
             );
           },
           icon: const Icon(Icons.download_done),
-          label: const Text('Descargadas'),
+          label: Text(l10n.quranUtilityDownloaded),
         ),
       ],
     );
@@ -248,6 +251,7 @@ class _DailyProtectionCardState extends State<_DailyProtectionCard> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final tokens = QiblaThemes.current;
     return Container(
       padding: const EdgeInsets.all(16),
@@ -260,7 +264,7 @@ class _DailyProtectionCardState extends State<_DailyProtectionCard> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'PROTECCIÓN DIARIA',
+            l10n.quranProtectionTitle,
             style: GoogleFonts.dmSans(
               fontSize: 10,
               fontWeight: FontWeight.w700,
@@ -270,7 +274,7 @@ class _DailyProtectionCardState extends State<_DailyProtectionCard> {
           ),
           const SizedBox(height: 8),
           Text(
-            'Acceso rápido a Ayat al-Kursi y las suras de protección. Puedes abrirlas para leer o escuchar y marcar tu repetición 3 veces.',
+            l10n.quranProtectionSubtitle,
             style: GoogleFonts.dmSans(
               fontSize: 12,
               height: 1.6,
@@ -279,32 +283,32 @@ class _DailyProtectionCardState extends State<_DailyProtectionCard> {
           ),
           const SizedBox(height: 14),
           _ProtectionTile(
-            title: 'Ayat al-Kursi',
-            helper: 'Al-Baqarah 2:255',
+            title: l10n.quranUtilityAyatAlKursi,
+            helper: l10n.quranProtectionAyatAlKursiHelper,
             count: _repeatCounts['kursi'] ?? 0,
             onIncrement: () => _increment('kursi'),
             onOpen: widget.onOpenAyatAlKursi,
           ),
           const SizedBox(height: 10),
           _ProtectionTile(
-            title: 'Al-Ikhlas',
-            helper: 'Sura 112',
+            title: l10n.quranProtectionIkhlasTitle,
+            helper: l10n.quranProtectionSurahHelper(112),
             count: _repeatCounts['ikhlas'] ?? 0,
             onIncrement: () => _increment('ikhlas'),
             onOpen: () => widget.onOpenSurah(112),
           ),
           const SizedBox(height: 10),
           _ProtectionTile(
-            title: 'Al-Falaq',
-            helper: 'Sura 113',
+            title: l10n.quranProtectionFalaqTitle,
+            helper: l10n.quranProtectionSurahHelper(113),
             count: _repeatCounts['falaq'] ?? 0,
             onIncrement: () => _increment('falaq'),
             onOpen: () => widget.onOpenSurah(113),
           ),
           const SizedBox(height: 10),
           _ProtectionTile(
-            title: 'An-Nas',
-            helper: 'Sura 114',
+            title: l10n.quranProtectionNasTitle,
+            helper: l10n.quranProtectionSurahHelper(114),
             count: _repeatCounts['nas'] ?? 0,
             onIncrement: () => _increment('nas'),
             onOpen: () => widget.onOpenSurah(114),
@@ -339,6 +343,7 @@ class _ProtectionTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final tokens = QiblaThemes.current;
     final isComplete = count >= 3;
     return Container(
@@ -366,7 +371,7 @@ class _ProtectionTile extends StatelessWidget {
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  '$helper - ${count}/3 repeticiones',
+                  l10n.quranProtectionRepeatCount(helper, count),
                   style: GoogleFonts.dmSans(
                     fontSize: 11,
                     color: tokens.textSecondary,
@@ -381,12 +386,14 @@ class _ProtectionTile extends StatelessWidget {
               isComplete ? Icons.check_circle_outline : Icons.repeat_rounded,
               color: tokens.primary,
             ),
-            tooltip: isComplete ? 'Completo' : '+1 repeticion',
+            tooltip: isComplete
+                ? l10n.quranProtectionCompleteTooltip
+                : l10n.quranProtectionIncrementTooltip,
           ),
           OutlinedButton.icon(
             onPressed: onOpen,
             icon: const Icon(Icons.play_circle_outline),
-            label: const Text('Abrir'),
+            label: Text(l10n.commonOpen),
           ),
         ],
       ),
@@ -399,6 +406,7 @@ class _ReadingHintCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final tokens = QiblaThemes.current;
     return Container(
       padding: const EdgeInsets.all(16),
@@ -417,7 +425,7 @@ class _ReadingHintCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'LECTURA CONTINUA',
+                  l10n.quranReadingHintTitle,
                   style: GoogleFonts.dmSans(
                     fontSize: 9,
                     letterSpacing: 1.4,
@@ -426,7 +434,7 @@ class _ReadingHintCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 6),
                 Text(
-                  'Abre cualquier sura y guardaremos tu última aleya para que puedas retomar más tarde.',
+                  l10n.quranReadingHintBody,
                   style: GoogleFonts.dmSans(
                     fontSize: 12,
                     height: 1.5,
@@ -435,7 +443,7 @@ class _ReadingHintCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 6),
                 Text(
-                  'También podrás guardar marcadores tocando el icono de marcador dentro de la lectura.',
+                  l10n.quranReadingHintSecondary,
                   style: GoogleFonts.dmSans(
                     fontSize: 11,
                     height: 1.5,
@@ -462,6 +470,7 @@ class _ContinueReadingCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final tokens = QiblaThemes.current;
     return InkWell(
       onTap: onTap,
@@ -482,7 +491,7 @@ class _ContinueReadingCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'CONTINUAR LECTURA',
+                    l10n.quranContinueReadingTitle,
                     style: GoogleFonts.dmSans(
                       fontSize: 9,
                       letterSpacing: 1.4,
@@ -520,6 +529,7 @@ class _BookmarksCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final tokens = QiblaThemes.current;
     return Container(
       padding: const EdgeInsets.all(16),
@@ -532,7 +542,7 @@ class _BookmarksCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'MARCADORES',
+            l10n.quranBookmarksTitle,
             style: GoogleFonts.dmSans(
               fontSize: 9,
               letterSpacing: 1.4,
@@ -590,12 +600,13 @@ class _SurahTile extends StatelessWidget {
   final bool isDownloaded;
   final bool isDownloadedFavorite;
 
-  String _revelationLabel(String revelationType) {
+  String _revelationLabel(BuildContext context, String revelationType) {
+    final l10n = context.l10n;
     switch (revelationType) {
       case 'Meccan':
-        return 'La Meca';
+        return l10n.quranRevelationMecca;
       case 'Medinan':
-        return 'Medina';
+        return l10n.quranRevelationMedina;
       default:
         return revelationType;
     }
@@ -603,6 +614,7 @@ class _SurahTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final tokens = QiblaThemes.current;
     final isLastRead = lastReading?.surahNumber == surah.number;
     final bookmarkCount = bookmarks
@@ -646,7 +658,7 @@ class _SurahTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '${_revelationLabel(surah.revelationType)} - ${surah.ayahCount} aleyas',
+              '${_revelationLabel(context, surah.revelationType)} · ${l10n.quranAyahCount(surah.ayahCount)}',
               style: GoogleFonts.dmSans(
                 fontSize: 11,
                 color: tokens.textSecondary,
@@ -654,7 +666,7 @@ class _SurahTile extends StatelessWidget {
             ),
             if (isLastRead)
               Text(
-                'Última lectura: aleya ${lastReading!.ayahNumber}',
+                l10n.quranLastReadingAyah(lastReading!.ayahNumber),
                 style: GoogleFonts.dmSans(
                   fontSize: 10,
                   color: tokens.primary,
@@ -662,7 +674,7 @@ class _SurahTile extends StatelessWidget {
               ),
             if (bookmarkCount > 0)
               Text(
-                '$bookmarkCount marcador${bookmarkCount == 1 ? '' : 'es'} guardado${bookmarkCount == 1 ? '' : 's'}',
+                l10n.quranBookmarkCount(bookmarkCount),
                 style: GoogleFonts.dmSans(
                   fontSize: 10,
                   color: tokens.textMuted,
@@ -671,8 +683,8 @@ class _SurahTile extends StatelessWidget {
             if (isDownloaded)
               Text(
                 isDownloadedFavorite
-                    ? 'Audio descargado · favorita sin conexión'
-                    : 'Audio descargado',
+                    ? l10n.quranDownloadedFavoriteOffline
+                    : l10n.quranDownloadedAudio,
                 style: GoogleFonts.dmSans(
                   fontSize: 10,
                   color: tokens.primary,
@@ -772,9 +784,10 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
         .saveLastReading(widget.summary, ayahNumber);
     ref.invalidate(lastReadingProvider);
     if (!mounted || !showFeedback) return;
+    final l10n = context.l10n;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('Punto de lectura guardado en la aleya $ayahNumber'),
+        content: Text(l10n.quranReadingPointSaved(ayahNumber)),
       ),
     );
   }
@@ -785,12 +798,13 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
         .toggleBookmark(widget.summary, ayahNumber);
     ref.invalidate(quranBookmarksProvider);
     if (!mounted) return;
+    final l10n = context.l10n;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
           saved
-              ? 'Marcador guardado en la aleya $ayahNumber'
-              : 'Marcador eliminado de la aleya $ayahNumber',
+              ? l10n.quranBookmarkSaved(ayahNumber)
+              : l10n.quranBookmarkRemoved(ayahNumber),
         ),
       ),
     );
@@ -811,6 +825,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     final action = await showModalBottomSheet<_AyahShareAction>(
       context: context,
       builder: (sheetContext) {
+        final l10n = sheetContext.l10n;
         final tokens = QiblaThemes.current;
         return SafeArea(
           child: Column(
@@ -820,7 +835,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 18, 20, 8),
                 child: Text(
-                  'Compartir aleya ${ayah.numberInSurah}',
+                  l10n.quranShareAyahTitle(ayah.numberInSurah),
                   style: GoogleFonts.dmSans(
                     fontSize: 16,
                     fontWeight: FontWeight.w700,
@@ -830,18 +845,18 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
               ),
               ListTile(
                 leading: const Icon(Icons.short_text_outlined),
-                title: const Text('Compartir texto'),
+                title: Text(l10n.shareActionShareText),
                 subtitle: Text(
-                  'Incluye el árabe, la traducción y la referencia.',
+                  l10n.quranShareTextSubtitle,
                   style: GoogleFonts.dmSans(fontSize: 12),
                 ),
                 onTap: () => Navigator.of(sheetContext).pop(_AyahShareAction.text),
               ),
               ListTile(
                 leading: const Icon(Icons.image_outlined),
-                title: const Text('Compartir imagen'),
+                title: Text(l10n.shareActionShareImage),
                 subtitle: Text(
-                  'Crea una imagen con la aleya.',
+                  l10n.quranShareImageSubtitle,
                   style: GoogleFonts.dmSans(fontSize: 12),
                 ),
                 onTap: () =>
@@ -849,9 +864,9 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
               ),
               ListTile(
                 leading: const Icon(Icons.movie_outlined),
-                title: const Text('Compartir video'),
+                title: Text(l10n.commonVideo),
                 subtitle: Text(
-                  'Crea un video con la tarjeta y la recitación.',
+                  l10n.quranShareVideoSubtitle,
                   style: GoogleFonts.dmSans(fontSize: 12),
                 ),
                 onTap: () =>
@@ -882,9 +897,9 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
         } catch (_) {
           if (!mounted) return;
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
+            SnackBar(
               content: Text(
-                'No hemos podido generar la imagen de esta aleya.',
+                context.l10n.quranAyahImageError,
               ),
             ),
           );
@@ -899,6 +914,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   Future<void> _shareAyahAsVideo(SurahAyah ayah) async {
     final videoService = ref.read(ayahShareVideoServiceProvider);
     final messenger = ScaffoldMessenger.of(context);
+    final l10n = context.l10n;
 
     try {
       final draft = await videoService.prepareDraft(
@@ -910,9 +926,9 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       if (draft == null) {
         messenger.hideCurrentSnackBar();
         messenger.showSnackBar(
-          const SnackBar(
+          SnackBar(
             content: Text(
-              'Esta aleya no tiene audio disponible para generar el video.',
+              l10n.quranAyahVideoNoAudio,
             ),
           ),
         );
@@ -921,9 +937,9 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
 
       messenger.hideCurrentSnackBar();
       messenger.showSnackBar(
-        const SnackBar(
-          duration: Duration(seconds: 45),
-          content: Text('Estamos generando el video de la aleya...'),
+        SnackBar(
+          duration: const Duration(seconds: 45),
+          content: Text(l10n.quranAyahVideoGenerating),
         ),
       );
 
@@ -933,16 +949,19 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       messenger.hideCurrentSnackBar();
       await Share.shareXFiles(
         [XFile(file.path)],
-        text: 'Aleya ${ayah.numberInSurah} de ${widget.summary.nameLatin}',
+        text: l10n.quranAyahVideoShareText(
+          ayah.numberInSurah,
+          widget.summary.nameLatin,
+        ),
       );
     } catch (_) {
       if (!mounted) return;
 
       messenger.hideCurrentSnackBar();
       messenger.showSnackBar(
-        const SnackBar(
+        SnackBar(
           content: Text(
-            'No hemos podido generar el video de esta aleya.',
+            l10n.quranAyahVideoError,
           ),
         ),
       );
@@ -998,14 +1017,14 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       });
     } catch (_) {
       if (!mounted) return;
+      final l10n = context.l10n;
       setState(() {
         _downloadState = SurahAudioDownloadState(
           status: SurahAudioDownloadStatus.error,
           availableAyahs:
               detail.ayahs.where((ayah) => ayah.audioUrl.isNotEmpty).length,
           downloadedAyahs: 0,
-          errorMessage:
-              'No hemos podido comprobar la descarga en este dispositivo.',
+          errorMessage: l10n.quranDownloadCheckError,
         );
         _isDownloadedFavorite = false;
         _isCheckingDownloadState = false;
@@ -1048,12 +1067,13 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       ref.invalidate(favoriteDownloadedSurahsProvider);
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Audio descargado. Ya puedes escuchar esta sura sin conexión.'),
+        SnackBar(
+          content: Text(context.l10n.quranDownloadSuccess),
         ),
       );
     } catch (_) {
       if (!mounted) return;
+      final l10n = context.l10n;
       setState(() {
         _downloadState = (_downloadState ??
                 SurahAudioDownloadState(
@@ -1063,14 +1083,13 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                 ))
             .copyWith(
               status: SurahAudioDownloadStatus.error,
-              errorMessage:
-                  'No hemos podido completar la descarga. Revisa tu conexión y vuelve a intentarlo.',
+              errorMessage: l10n.quranDownloadDetailedError,
             );
       });
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
+        SnackBar(
           content: Text(
-            'No hemos podido completar la descarga del audio.',
+            l10n.quranDownloadShortError,
           ),
         ),
       );
@@ -1084,6 +1103,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     final action = await showModalBottomSheet<String>(
       context: context,
       builder: (sheetContext) {
+        final l10n = sheetContext.l10n;
         final tokens = QiblaThemes.current;
         return SafeArea(
           child: Column(
@@ -1091,14 +1111,14 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
             children: [
               ListTile(
                 leading: const Icon(Icons.play_circle_outline),
-                title: const Text('Reproducir'),
-                subtitle: const Text('Escucha la sura con el audio ya guardado.'),
+                title: Text(l10n.commonPlay),
+                subtitle: Text(l10n.quranDownloadedAudioPlaySubtitle),
                 onTap: () => Navigator.of(sheetContext).pop('play'),
               ),
               ListTile(
                 leading: Icon(Icons.cloud_off_outlined, color: tokens.textSecondary),
-                title: const Text('Quitar descarga'),
-                subtitle: const Text('Libera espacio y vuelve a escucharla en línea.'),
+                title: Text(l10n.commonRemove),
+                subtitle: Text(l10n.quranDownloadedAudioRemoveSubtitle),
                 onTap: () => Navigator.of(sheetContext).pop('remove'),
               ),
             ],
@@ -1122,8 +1142,8 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     ref.invalidate(favoriteDownloadedSurahsProvider);
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('La descarga de esta sura se ha eliminado.'),
+      SnackBar(
+        content: Text(context.l10n.quranDownloadedAudioRemoved),
       ),
     );
   }
@@ -1135,13 +1155,14 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     );
     ref.invalidate(favoriteDownloadedSurahsProvider);
     if (!mounted) return;
+    final l10n = context.l10n;
     setState(() => _isDownloadedFavorite = isFavorite);
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
           isFavorite
-              ? 'Sura guardada entre tus descargas favoritas.'
-              : 'Sura retirada de tus descargas favoritas.',
+              ? l10n.quranDownloadedFavoriteAdded
+              : l10n.quranDownloadedFavoriteRemoved,
         ),
       ),
     );
@@ -1167,19 +1188,20 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   }
 
   String _audioStatusLabel(SurahAyah ayah, SurahLoadSource source) {
+    final l10n = context.l10n;
     if (!_canPlayAyahAudio(ayah, source)) {
-      return 'Audio no disponible para esta aleya.';
+      return l10n.quranAyahAudioUnavailable;
     }
     if (_downloadState?.isDownloaded == true) {
-      return 'El audio ya está descargado en este dispositivo.';
+      return l10n.quranAyahAudioDownloaded;
     }
     switch (source) {
       case SurahLoadSource.online:
-        return 'Puedes escuchar esta aleya.';
+        return l10n.quranAyahAudioAvailable;
       case SurahLoadSource.offline:
-        return 'Puedes escuchar esta aleya si tienes conexión.';
+        return l10n.quranAyahAudioRequiresConnection;
       case SurahLoadSource.placeholder:
-        return 'Audio no disponible para esta aleya.';
+        return l10n.quranAyahAudioUnavailable;
     }
   }
 
@@ -1187,40 +1209,43 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     SurahDetail detail,
     SurahLoadSource source,
   ) {
+    final l10n = context.l10n;
     final availableCount = _surahQueueFor(detail, source).length;
     if (availableCount == 0) {
-      return 'La recitación completa no está disponible para esta sura.';
+      return l10n.quranSurahRecitationUnavailable;
     }
 
     final downloadState = _downloadState;
     if (downloadState?.isDownloading == true) {
-      return 'Estamos descargando el audio para escuchar esta sura sin conexión. ${downloadState!.downloadedAyahs}/${downloadState.availableAyahs} aleyas listas.';
+      return l10n.quranSurahAudioDownloading(
+        downloadState!.downloadedAyahs,
+        downloadState.availableAyahs,
+      );
     }
     if (downloadState?.isDownloaded == true) {
-      return 'El audio ya está descargado en este dispositivo. Puedes escuchar esta sura sin conexión.';
+      return l10n.quranSurahAudioDownloaded;
     }
     if (downloadState?.status == SurahAudioDownloadStatus.error) {
-      return downloadState?.errorMessage ??
-          'No hemos podido completar la descarga del audio.';
+      return downloadState?.errorMessage ?? l10n.quranDownloadShortError;
     }
 
     final missingCount = detail.ayahs.length - availableCount;
     final availabilityNote = missingCount > 0
-        ? ' Se omitirán $missingCount aleya${missingCount == 1 ? '' : 's'} sin audio.'
+        ? ' ${l10n.quranSurahAudioMissingAyahs(missingCount)}'
         : '';
 
     final downloadNote =
         downloadState?.hasPartialDownload == true
-            ? ' Ya tienes ${downloadState!.downloadedAyahs}/${downloadState.availableAyahs} aleyas guardadas en el dispositivo.'
-            : ' También puedes descargarla para escucharla sin conexión.';
+            ? ' ${l10n.quranSurahAudioPartialDownload(downloadState!.downloadedAyahs, downloadState.availableAyahs)}'
+            : ' ${l10n.quranSurahAudioDownloadAvailable}';
 
     switch (source) {
       case SurahLoadSource.online:
-        return 'Puedes escuchar esta sura seguida, en reproducción continua.$availabilityNote$downloadNote';
+        return '${l10n.quranSurahAudioPlayOnline}$availabilityNote$downloadNote';
       case SurahLoadSource.offline:
-        return 'Puedes escuchar esta sura completa si tienes conexión.$availabilityNote$downloadNote';
+        return '${l10n.quranSurahAudioPlayWithConnection}$availabilityNote$downloadNote';
       case SurahLoadSource.placeholder:
-        return 'La recitación completa no está disponible para esta sura.';
+        return l10n.quranSurahRecitationUnavailable;
     }
   }
 
@@ -1247,9 +1272,9 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       if (!mounted) return;
       controller.clear();
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
+        SnackBar(
           content: Text(
-            'No hemos podido reproducir el audio. Revisa tu conexión y vuelve a intentarlo.',
+            context.l10n.quranAyahPlaybackError,
           ),
         ),
       );
@@ -1279,9 +1304,9 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       if (!mounted) return;
       controller.clear();
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
+        SnackBar(
           content: Text(
-            'No hemos podido iniciar la recitación completa.',
+            context.l10n.quranSurahPlaybackError,
           ),
         ),
       );
@@ -1300,6 +1325,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   @override
   Widget build(BuildContext context) {
     ref.watch(quranMiniPlayerControllerProvider);
+    final l10n = context.l10n;
     final tokens = QiblaThemes.current;
     final detailAsync = ref.watch(surahLoadResultProvider(widget.summary));
     final bookmarks = ref.watch(quranBookmarksProvider).valueOrNull ?? const [];
@@ -1410,7 +1436,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                                 border: Border.all(color: tokens.primaryBorder),
                               ),
                               child: Text(
-                                'Última lectura',
+                                l10n.quranLastReadingBadge,
                                 style: GoogleFonts.dmSans(
                                   fontSize: 10,
                                   color: tokens.primaryLight,
@@ -1421,11 +1447,11 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                           IconButton(
                             tooltip: canPlayAudio
                                 ? (isPlayingAudio
-                                      ? 'Pausar audio'
+                                      ? l10n.quranPauseAudio
                                       : isActiveAudio
-                                          ? 'Reanudar audio'
-                                          : 'Reproducir audio')
-                                : 'Audio no disponible',
+                                          ? l10n.quranResumeAudio
+                                          : l10n.quranPlayAudio)
+                                : l10n.quranAudioUnavailable,
                             onPressed: canPlayAudio
                                 ? () => _toggleAyahAudio(ayah, result.source)
                                 : null,
@@ -1442,8 +1468,8 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                           ),
                           IconButton(
                             tooltip: isBookmarked
-                                ? 'Quitar marcador'
-                                : 'Guardar marcador',
+                                ? l10n.quranRemoveBookmark
+                                : l10n.quranSaveBookmark,
                             onPressed: () => _toggleBookmark(ayah.numberInSurah),
                             icon: Icon(
                               isBookmarked
@@ -1477,7 +1503,9 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                       ),
                       const SizedBox(height: 10),
                       Text(
-                        '${_audioStatusLabel(ayah, result.source)} Toca esta aleya para guardar tu punto de lectura aquí. Mantén pulsado para compartirla.',
+                        l10n.quranAyahFooterHint(
+                          _audioStatusLabel(ayah, result.source),
+                        ),
                         style: GoogleFonts.dmSans(
                           fontSize: 10,
                           color: tokens.textMuted,
@@ -1495,7 +1523,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
           child: Padding(
             padding: const EdgeInsets.all(24),
             child: Text(
-              'No hemos podido cargar esta sura. Revisa la conexión y vuelve a intentarlo.',
+              l10n.quranDetailLoadError,
               textAlign: TextAlign.center,
               style: GoogleFonts.dmSans(color: tokens.textSecondary),
             ),
@@ -1510,18 +1538,19 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     SurahLoadSource source,
     int initialAyah,
   ) {
+    final l10n = context.l10n;
     final hasResume = initialAyah > 1;
     final textParts = <String>[];
     if (hasResume) {
-      textParts.add('Retomando desde la aleya $initialAyah.');
+      textParts.add(l10n.quranTopBannerResume(initialAyah));
     }
     final sourceMessage = switch (source) {
       SurahLoadSource.online =>
-        'Contenido cargado en línea. Puedes escuchar el audio de cada aleya mientras tengas conexión.',
+        l10n.quranTopBannerOnline,
       SurahLoadSource.offline =>
-        'Texto cargado sin conexión. El audio de algunas aleyas puede requerir conexión.',
+        l10n.quranTopBannerOffline,
       SurahLoadSource.placeholder =>
-        'Contenido parcial sin conexión. El audio no está disponible por ahora.',
+        l10n.quranTopBannerPlaceholder,
     };
     textParts.add(sourceMessage);
 
@@ -1558,6 +1587,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     SurahDetail detail,
     SurahLoadSource source,
   ) {
+    final l10n = context.l10n;
     final canPlaySurah = _canPlaySurahAudio(detail, source);
     final availableAyahs = _surahQueueFor(detail, source).length;
     final isSurahPlayback = _hasActiveSurahSessionForCurrentScreen;
@@ -1586,7 +1616,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
               const SizedBox(width: 10),
               Expanded(
                 child: Text(
-                  'ESCUCHAR SURA',
+                  l10n.quranSurahAudioCardTitle,
                   style: GoogleFonts.dmSans(
                     fontSize: 10,
                     letterSpacing: 1.2,
@@ -1596,7 +1626,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                 ),
               ),
               Text(
-                '$availableAyahs/${detail.ayahs.length} aleyas',
+                l10n.quranAvailableAyahs(availableAyahs, detail.ayahs.length),
                 style: GoogleFonts.dmSans(
                   fontSize: 10,
                   color: tokens.textSecondary,
@@ -1629,14 +1659,16 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                 ),
                 label: Text(
                   isSurahPlayback
-                      ? (_isAudioPlaying ? 'Pausar sura' : 'Reanudar sura')
-                      : 'Escuchar sura',
+                      ? (_isAudioPlaying
+                          ? l10n.quranPauseSurah
+                          : l10n.quranResumeSurah)
+                      : l10n.quranListenSurah,
                 ),
               ),
               OutlinedButton.icon(
                 onPressed: _activeAyahNumber != null ? _stopActiveAudio : null,
                 icon: const Icon(Icons.stop_circle_outlined),
-                label: const Text('Detener'),
+                label: Text(l10n.quranStop),
               ),
               OutlinedButton.icon(
                 onPressed: !canDownload
@@ -1661,14 +1693,17 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                 ),
                 label: Text(
                   !canDownload
-                      ? 'Audio no disponible'
+                      ? l10n.quranAudioUnavailable
                       : isCheckingDownloadState
-                          ? 'Comprobando audio'
+                          ? l10n.quranCheckingAudio
                       : isDownloading
-                          ? 'Descargando ${downloadState?.downloadedAyahs ?? 0}/${downloadState?.availableAyahs ?? availableAyahs}'
+                          ? l10n.quranDownloadingProgress(
+                              downloadState?.downloadedAyahs ?? 0,
+                              downloadState?.availableAyahs ?? availableAyahs,
+                            )
                           : isDownloaded
-                              ? 'Descargado'
-                              : 'Descargar audio',
+                              ? l10n.quranDownloaded
+                              : l10n.quranDownloadAudio,
                 ),
               ),
               if (isDownloaded)
@@ -1681,8 +1716,8 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                   ),
                   label: Text(
                     _isDownloadedFavorite
-                        ? 'Favorita descargada'
-                        : 'Marcar favorita',
+                        ? l10n.quranDownloadedFavoriteLabel
+                        : l10n.quranMarkFavorite,
                   ),
                 ),
             ],
@@ -1693,6 +1728,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   }
 
   Widget _buildActiveAudioIndicator(QiblaTokens tokens) {
+    final l10n = context.l10n;
     final ayahNumber = _activeAyahNumber;
     if (ayahNumber == null) {
       return const SizedBox.shrink();
@@ -1723,11 +1759,11 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                 Text(
                   _playbackMode == _QuranPlaybackMode.surah
                       ? (_isAudioPlaying
-                          ? 'Reproduciendo la sura - aleya $ayahNumber'
-                          : 'Sura en pausa - aleya $ayahNumber')
+                          ? l10n.quranPlayingSurahAyah(ayahNumber)
+                          : l10n.quranPausedSurahAyah(ayahNumber))
                       : (_isAudioPlaying
-                          ? 'Reproduciendo aleya $ayahNumber'
-                          : 'Aleya $ayahNumber en pausa'),
+                          ? l10n.quranPlayingAyah(ayahNumber)
+                          : l10n.quranPausedAyah(ayahNumber)),
                   style: GoogleFonts.dmSans(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
@@ -1737,8 +1773,8 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                 const SizedBox(height: 2),
                 Text(
                   _playbackMode == _QuranPlaybackMode.surah
-                      ? 'La sura seguirá automáticamente con la siguiente aleya.'
-                      : 'Puedes pausar, reanudar o detener esta recitación.',
+                      ? l10n.quranActiveAudioSurahHint
+                      : l10n.quranActiveAudioAyahHint,
                   style: GoogleFonts.dmSans(
                     fontSize: 10,
                     color: tokens.textSecondary,
@@ -1748,7 +1784,9 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
             ),
           ),
           IconButton(
-            tooltip: _isAudioPlaying ? 'Pausar audio' : 'Reanudar audio',
+            tooltip: _isAudioPlaying
+                ? l10n.quranPauseAudio
+                : l10n.quranResumeAudio,
             onPressed: _toggleActiveAudioFromIndicator,
             icon: Icon(
               _isAudioPlaying
@@ -1758,7 +1796,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
             ),
           ),
           IconButton(
-            tooltip: 'Detener audio',
+            tooltip: l10n.quranStopAudio,
             onPressed: _stopActiveAudio,
             icon: Icon(
               Icons.stop_circle_outlined,

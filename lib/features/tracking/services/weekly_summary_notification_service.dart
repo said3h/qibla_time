@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../l10n/l10n.dart';
 import '../../prayer_times/services/notification_service.dart';
 import '../models/tracking_models.dart';
 
@@ -16,6 +17,7 @@ class WeeklySummaryNotificationService {
   static const _trackingPrefsKey = 'prayer_tracking_data';
 
   Future<void> scheduleWeeklySummaryNotification() async {
+    final l10n = appLocalizationsForDevice();
     final tracking = await _loadTrackingState();
     final summary = tracking.currentWeekSummary;
     final scheduledAt = _nextSundayAtNine();
@@ -23,9 +25,12 @@ class WeeklySummaryNotificationService {
     await NotificationService.instance.cancel(_notificationId);
     await NotificationService.instance.scheduleReminder(
       id: _notificationId,
-      title: 'Tu resumen semanal ya está listo',
-      body:
-          'Esta semana completaste ${summary.prayersCompleted}/${summary.maxPossible} oraciones. Tu mejor día fue ${summary.strongestDay.shortLabel}.',
+      title: l10n.notificationWeeklySummaryTitle,
+      body: l10n.notificationWeeklySummaryBody(
+        summary.prayersCompleted,
+        summary.maxPossible,
+        summary.strongestDay.shortLabel,
+      ),
       scheduledAt: scheduledAt,
     );
   }

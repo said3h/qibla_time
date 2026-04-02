@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../core/theme/app_theme.dart';
+import '../../../l10n/l10n.dart';
 import '../../quran/models/quran_models.dart';
 import '../models/ayah_share_data.dart';
 import '../models/ayah_share_theme.dart';
@@ -19,6 +20,7 @@ class AyahShareService {
     bool includeArabic = true,
     bool includeTranslation = true,
   }) {
+    final l10n = appLocalizationsForDevice();
     final shareData = buildShareData(
       summary,
       ayah,
@@ -30,7 +32,7 @@ class AyahShareService {
       if (shareData.hasArabicText) shareData.arabicText.trim(),
       if (shareData.hasTranslation) shareData.translation!.trim(),
       '- ${shareData.referenceLabel}',
-      'App: Qibla Time',
+      l10n.shareBranding,
     ];
 
     return sections.join('\n\n');
@@ -100,6 +102,7 @@ class AyahShareService {
     bool includeArabic = true,
     bool includeTranslation = true,
   }) {
+    final l10n = appLocalizationsForDevice();
     return AyahShareData(
       surahNumber: summary.number,
       surahNameLatin: summary.nameLatin,
@@ -107,8 +110,8 @@ class AyahShareService {
       ayahNumber: ayah.numberInSurah,
       arabicText: includeArabic ? ayah.arabic : '',
       translation: includeTranslation ? ayah.translation : null,
-      badgeLabel: 'QURAN',
-      branding: 'App: Qibla Time',
+      badgeLabel: l10n.shareBadgeQuran,
+      branding: l10n.shareBranding,
     );
   }
 }

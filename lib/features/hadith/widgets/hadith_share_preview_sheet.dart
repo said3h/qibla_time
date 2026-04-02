@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theme/app_theme.dart';
+import '../../../l10n/l10n.dart';
 import '../../hadith/models/hadith.dart';
 import '../../hadith/services/hadith_share_service.dart';
 import '../../hadith_share/models/hadith_share_data.dart';
@@ -116,8 +117,8 @@ class _HadithSharePreviewSheetState extends State<_HadithSharePreviewSheet> {
     } catch (_) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('No hemos podido compartir el texto del hadiz.'),
+        SnackBar(
+          content: Text(context.l10n.shareHadithTextError),
         ),
       );
     } finally {
@@ -147,10 +148,8 @@ class _HadithSharePreviewSheetState extends State<_HadithSharePreviewSheet> {
     } catch (_) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text(
-            'No hemos podido generar la imagen del hadiz.',
-          ),
+        SnackBar(
+          content: Text(context.l10n.shareHadithImageError),
         ),
       );
     } finally {
@@ -163,11 +162,12 @@ class _HadithSharePreviewSheetState extends State<_HadithSharePreviewSheet> {
   @override
   Widget build(BuildContext context) {
     final tokens = widget.tokens;
+    final l10n = context.l10n;
 
     return SharePreviewBottomSheet(
       tokens: tokens,
-      title: 'Compartir hadiz',
-      subtitle: 'Elige el formato y el contenido antes de compartir.',
+      title: l10n.shareHadithTitle,
+      subtitle: l10n.shareHadithSubtitle,
       preview: HadithSharePreview(
         data: _previewData,
         theme: _previewTheme,
@@ -175,10 +175,10 @@ class _HadithSharePreviewSheetState extends State<_HadithSharePreviewSheet> {
       ),
       sections: [
         ShareOptionSection(
-          title: 'Estilo / fondo',
+          title: l10n.shareSectionStyle,
           children: [
             ShareSelectionChip(
-              label: 'Tarjeta',
+              label: l10n.shareLayoutCard,
               selected: _selectedLayout == SharePreviewLayoutOption.card,
               onSelected: () {
                 setState(() {
@@ -187,7 +187,7 @@ class _HadithSharePreviewSheetState extends State<_HadithSharePreviewSheet> {
               },
             ),
             ShareSelectionChip(
-              label: 'Historia',
+              label: l10n.shareLayoutStory,
               selected: _selectedLayout == SharePreviewLayoutOption.story,
               onSelected: () {
                 setState(() {
@@ -198,10 +198,10 @@ class _HadithSharePreviewSheetState extends State<_HadithSharePreviewSheet> {
           ],
         ),
         ShareOptionSection(
-          title: 'Contenido',
+          title: l10n.shareSectionContent,
           children: [
             ShareSelectionChip(
-              label: 'Árabe + traducción',
+              label: l10n.shareContentBilingual,
               selected:
                   _selectedContent == SharePreviewContentOption.bilingual,
               enabled: SharePreviewContentOption.bilingual.isAvailable(
@@ -215,7 +215,7 @@ class _HadithSharePreviewSheetState extends State<_HadithSharePreviewSheet> {
               },
             ),
             ShareSelectionChip(
-              label: 'Solo árabe',
+              label: l10n.shareContentArabicOnly,
               selected:
                   _selectedContent == SharePreviewContentOption.arabicOnly,
               enabled: SharePreviewContentOption.arabicOnly.isAvailable(
@@ -229,7 +229,7 @@ class _HadithSharePreviewSheetState extends State<_HadithSharePreviewSheet> {
               },
             ),
             ShareSelectionChip(
-              label: 'Solo traducción',
+              label: l10n.shareContentTranslationOnly,
               selected:
                   _selectedContent == SharePreviewContentOption.translationOnly,
               enabled: SharePreviewContentOption.translationOnly.isAvailable(
@@ -273,6 +273,8 @@ class _ShareFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
+
     return Column(
       children: [
         SizedBox(
@@ -297,7 +299,7 @@ class _ShareFooter extends StatelessWidget {
                     ),
                   )
                 : Text(
-                    'Compartir imagen',
+                    l10n.shareActionShareImage,
                     style: GoogleFonts.dmSans(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
@@ -328,7 +330,7 @@ class _ShareFooter extends StatelessWidget {
                     ),
                   )
                 : Text(
-                    'Compartir texto',
+                    l10n.shareActionShareText,
                     style: GoogleFonts.dmSans(
                       fontSize: 13,
                       fontWeight: FontWeight.w700,

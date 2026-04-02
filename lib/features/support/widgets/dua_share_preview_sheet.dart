@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theme/app_theme.dart';
-import '../../hadith_share/services/hadith_share_image_service.dart';
+import '../../../l10n/l10n.dart';
 import '../../hadith_share/models/hadith_share_theme.dart';
+import '../../hadith_share/services/hadith_share_image_service.dart';
 import '../../hadith_share/widgets/hadith_share_preview.dart';
 import '../../shared_share/widgets/content_share_preview_sheet.dart';
 import '../models/dua_model.dart';
@@ -108,8 +109,8 @@ class _DuaSharePreviewSheetState extends State<_DuaSharePreviewSheet> {
     } catch (_) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('No hemos podido compartir el texto de la dua.'),
+        SnackBar(
+          content: Text(context.l10n.shareDuaTextError),
         ),
       );
     } finally {
@@ -139,8 +140,8 @@ class _DuaSharePreviewSheetState extends State<_DuaSharePreviewSheet> {
     } catch (_) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('No hemos podido generar la imagen de la dua.'),
+        SnackBar(
+          content: Text(context.l10n.shareDuaImageError),
         ),
       );
     } finally {
@@ -153,6 +154,7 @@ class _DuaSharePreviewSheetState extends State<_DuaSharePreviewSheet> {
   @override
   Widget build(BuildContext context) {
     final tokens = widget.tokens;
+    final l10n = context.l10n;
     final previewData = widget.shareService.buildShareData(
       widget.dua,
       includeArabic: _includeArabic,
@@ -162,9 +164,9 @@ class _DuaSharePreviewSheetState extends State<_DuaSharePreviewSheet> {
     return SharePreviewBottomSheet(
       tokens: tokens,
       title: widget.dua.title.trim().isEmpty
-          ? 'Compartir dua'
-          : 'Compartir ${widget.dua.title.trim()}',
-      subtitle: 'Usa la misma presentación visual del hadiz para la dua y los adhkar.',
+          ? l10n.shareDuaTitle
+          : l10n.shareDuaTitleNamed(widget.dua.title.trim()),
+      subtitle: l10n.shareDuaSubtitle,
       preview: HadithSharePreview(
         data: previewData,
         theme: _previewTheme,
@@ -172,10 +174,10 @@ class _DuaSharePreviewSheetState extends State<_DuaSharePreviewSheet> {
       ),
       sections: [
         ShareOptionSection(
-          title: 'Estilo / fondo',
+          title: l10n.shareSectionStyle,
           children: [
             ShareSelectionChip(
-              label: 'Tarjeta',
+              label: l10n.shareLayoutCard,
               selected: _selectedLayout == SharePreviewLayoutOption.card,
               onSelected: () {
                 setState(() {
@@ -184,7 +186,7 @@ class _DuaSharePreviewSheetState extends State<_DuaSharePreviewSheet> {
               },
             ),
             ShareSelectionChip(
-              label: 'Historia',
+              label: l10n.shareLayoutStory,
               selected: _selectedLayout == SharePreviewLayoutOption.story,
               onSelected: () {
                 setState(() {
@@ -195,10 +197,10 @@ class _DuaSharePreviewSheetState extends State<_DuaSharePreviewSheet> {
           ],
         ),
         ShareOptionSection(
-          title: 'Contenido',
+          title: l10n.shareSectionContent,
           children: [
             ShareSelectionChip(
-              label: 'Árabe + traducción',
+              label: l10n.shareContentBilingual,
               selected:
                   _selectedContent == SharePreviewContentOption.bilingual,
               enabled: SharePreviewContentOption.bilingual.isAvailable(
@@ -212,7 +214,7 @@ class _DuaSharePreviewSheetState extends State<_DuaSharePreviewSheet> {
               },
             ),
             ShareSelectionChip(
-              label: 'Solo árabe',
+              label: l10n.shareContentArabicOnly,
               selected:
                   _selectedContent == SharePreviewContentOption.arabicOnly,
               enabled: SharePreviewContentOption.arabicOnly.isAvailable(
@@ -226,7 +228,7 @@ class _DuaSharePreviewSheetState extends State<_DuaSharePreviewSheet> {
               },
             ),
             ShareSelectionChip(
-              label: 'Solo traducción',
+              label: l10n.shareContentTranslationOnly,
               selected:
                   _selectedContent == SharePreviewContentOption.translationOnly,
               enabled: SharePreviewContentOption.translationOnly.isAvailable(
@@ -270,6 +272,8 @@ class _DuaShareFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
+
     return Column(
       children: [
         SizedBox(
@@ -294,7 +298,7 @@ class _DuaShareFooter extends StatelessWidget {
                     ),
                   )
                 : Text(
-                    'Compartir imagen',
+                    l10n.shareActionShareImage,
                     style: GoogleFonts.dmSans(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
@@ -325,7 +329,7 @@ class _DuaShareFooter extends StatelessWidget {
                     ),
                   )
                 : Text(
-                    'Compartir texto',
+                    l10n.shareActionShareText,
                     style: GoogleFonts.dmSans(
                       fontSize: 13,
                       fontWeight: FontWeight.w700,

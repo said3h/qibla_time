@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 
 import '../../../core/theme/app_theme.dart';
+import '../../../l10n/l10n.dart';
 import '../../quran/models/quran_models.dart';
 import '../../quran/services/quran_audio_download_service.dart';
 import '../models/ayah_share_data.dart';
@@ -88,6 +89,7 @@ class AyahShareVideoService {
   }
 
   Future<File> exportVideo(AyahShareVideoDraft draft) async {
+    final l10n = appLocalizationsForDevice();
     final tempDirectory = await getTemporaryDirectory();
     final workingDirectory = await Directory(
       '${tempDirectory.path}/ayah_share_video',
@@ -102,8 +104,8 @@ class AyahShareVideoService {
         ayahNumber: draft.ayahNumber,
         arabicText: draft.arabicText,
         translation: draft.translation,
-        badgeLabel: 'QURAN',
-        branding: 'App: Qibla Time',
+        badgeLabel: l10n.shareBadgeQuran,
+        branding: l10n.shareBranding,
       ),
       theme: AyahShareThemeData.fromTokens(
         QiblaThemes.current,

@@ -4,14 +4,15 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../core/theme/app_theme.dart';
+import '../../../l10n/l10n.dart';
 import '../../quran/models/quran_models.dart';
+import '../../shared_share/widgets/content_share_preview_sheet.dart';
 import '../models/ayah_share_data.dart';
 import '../models/ayah_share_theme.dart';
 import '../services/ayah_share_image_service.dart';
 import '../services/ayah_share_service.dart';
 import '../services/ayah_share_video_service.dart';
 import '../widgets/ayah_share_preview.dart';
-import '../../shared_share/widgets/content_share_preview_sheet.dart';
 
 Future<void> showAyahSharePreviewSheet({
   required BuildContext context,
@@ -128,8 +129,8 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
     } catch (_) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('No hemos podido compartir el texto de esta aleya.'),
+        SnackBar(
+          content: Text(context.l10n.shareAyahTextError),
         ),
       );
     } finally {
@@ -160,10 +161,8 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
     } catch (_) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text(
-            'No hemos podido generar la imagen de esta aleya.',
-          ),
+        SnackBar(
+          content: Text(context.l10n.shareAyahImageError),
         ),
       );
     } finally {
@@ -179,6 +178,7 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
     }
 
     final messenger = ScaffoldMessenger.of(context);
+    final l10n = context.l10n;
     setState(() => _activeAction = _AyahShareAction.video);
 
     try {
@@ -194,10 +194,8 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
       if (draft == null) {
         messenger.hideCurrentSnackBar();
         messenger.showSnackBar(
-          const SnackBar(
-            content: Text(
-              'No hay audio disponible para generar el video de esta aleya.',
-            ),
+          SnackBar(
+            content: Text(l10n.shareAyahVideoNoAudio),
           ),
         );
         return;
@@ -205,9 +203,9 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
 
       messenger.hideCurrentSnackBar();
       messenger.showSnackBar(
-        const SnackBar(
-          duration: Duration(seconds: 45),
-          content: Text('Generando video de la aleya...'),
+        SnackBar(
+          duration: const Duration(seconds: 45),
+          content: Text(l10n.shareAyahVideoGenerating),
         ),
       );
 
@@ -231,10 +229,8 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
 
       messenger.hideCurrentSnackBar();
       messenger.showSnackBar(
-        const SnackBar(
-          content: Text(
-            'No hemos podido generar el video de esta aleya.',
-          ),
+        SnackBar(
+          content: Text(l10n.shareAyahVideoError),
         ),
       );
     } finally {
@@ -247,11 +243,12 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
   @override
   Widget build(BuildContext context) {
     final tokens = widget.tokens;
+    final l10n = context.l10n;
 
     return SharePreviewBottomSheet(
       tokens: tokens,
-      title: 'Compartir aleya ${widget.ayah.numberInSurah}',
-      subtitle: 'Mantén la misma presentación visual para texto, imagen y video.',
+      title: l10n.shareAyahTitle(widget.ayah.numberInSurah),
+      subtitle: l10n.shareAyahSubtitle,
       preview: AyahSharePreview(
         data: _previewData,
         theme: _previewTheme,
@@ -259,10 +256,10 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
       ),
       sections: [
         ShareOptionSection(
-          title: 'Estilo / fondo',
+          title: l10n.shareSectionStyle,
           children: [
             ShareSelectionChip(
-              label: 'Tarjeta',
+              label: l10n.shareLayoutCard,
               selected: _selectedLayout == SharePreviewLayoutOption.card,
               onSelected: () {
                 setState(() {
@@ -271,7 +268,7 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
               },
             ),
             ShareSelectionChip(
-              label: 'Historia',
+              label: l10n.shareLayoutStory,
               selected: _selectedLayout == SharePreviewLayoutOption.story,
               onSelected: () {
                 setState(() {
@@ -282,10 +279,10 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
           ],
         ),
         ShareOptionSection(
-          title: 'Contenido',
+          title: l10n.shareSectionContent,
           children: [
             ShareSelectionChip(
-              label: 'Árabe + traducción',
+              label: l10n.shareContentBilingual,
               selected:
                   _selectedContent == SharePreviewContentOption.bilingual,
               enabled: SharePreviewContentOption.bilingual.isAvailable(
@@ -299,7 +296,7 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
               },
             ),
             ShareSelectionChip(
-              label: 'Solo árabe',
+              label: l10n.shareContentArabicOnly,
               selected:
                   _selectedContent == SharePreviewContentOption.arabicOnly,
               enabled: SharePreviewContentOption.arabicOnly.isAvailable(
@@ -313,7 +310,7 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
               },
             ),
             ShareSelectionChip(
-              label: 'Solo traducción',
+              label: l10n.shareContentTranslationOnly,
               selected:
                   _selectedContent == SharePreviewContentOption.translationOnly,
               enabled: SharePreviewContentOption.translationOnly.isAvailable(
@@ -360,6 +357,8 @@ class _AyahShareFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
+
     return Column(
       children: [
         SizedBox(
@@ -384,7 +383,7 @@ class _AyahShareFooter extends StatelessWidget {
                     ),
                   )
                 : Text(
-                    'Compartir imagen',
+                    l10n.shareActionShareImage,
                     style: GoogleFonts.dmSans(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
@@ -416,7 +415,7 @@ class _AyahShareFooter extends StatelessWidget {
                         ),
                       )
                     : Text(
-                        'Texto',
+                        l10n.commonText,
                         style: GoogleFonts.dmSans(
                           fontSize: 13,
                           fontWeight: FontWeight.w700,
@@ -446,7 +445,7 @@ class _AyahShareFooter extends StatelessWidget {
                         ),
                       )
                     : Text(
-                        'Video',
+                        l10n.commonVideo,
                         style: GoogleFonts.dmSans(
                           fontSize: 13,
                           fontWeight: FontWeight.w700,
