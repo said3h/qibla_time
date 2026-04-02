@@ -113,14 +113,14 @@ class HadithHourlyReminderService {
         : l10n.notificationHadithReminderFallbackBody;
 
     await _plugin.zonedSchedule(
-      20000 + hour,
-      l10n.notificationHadithReminderTitle,
-      hadithText.length > 150 ? '${hadithText.substring(0, 147)}...' : hadithText,
-      scheduledDate,
-      _notificationDetails(),
+      id: 20000 + hour,
+      title: l10n.notificationHadithReminderTitle,
+      body: hadithText.length > 150
+          ? '${hadithText.substring(0, 147)}...'
+          : hadithText,
+      scheduledDate: scheduledDate,
+      notificationDetails: _notificationDetails(),
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-      uiLocalNotificationDateInterpretation:
-          UILocalNotificationDateInterpretation.absoluteTime,
       payload: hour.toString(),
     );
   }
@@ -131,7 +131,7 @@ class HadithHourlyReminderService {
     final endHour = await getEndHour();
 
     for (int hour = startHour; hour <= endHour; hour++) {
-      await _plugin.cancel(20000 + hour);
+      await _plugin.cancel(id: 20000 + hour);
     }
   }
 
@@ -168,10 +168,10 @@ class HadithHourlyReminderService {
         : l10n.notificationHadithReminderTestBody;
 
     await _plugin.show(
-      20999,
-      l10n.notificationHadithReminderTestTitle,
-      hadithText,
-      _notificationDetails(),
+      id: 20999,
+      title: l10n.notificationHadithReminderTestTitle,
+      body: hadithText,
+      notificationDetails: _notificationDetails(),
     );
   }
 }

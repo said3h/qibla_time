@@ -19,7 +19,7 @@ class NotificationService {
     tz.initializeTimeZones();
 
     await _plugin.initialize(
-      const InitializationSettings(
+      settings: const InitializationSettings(
         android: AndroidInitializationSettings('@mipmap/ic_launcher'),
         iOS: DarwinInitializationSettings(
           requestAlertPermission: true,
@@ -66,14 +66,12 @@ class NotificationService {
     );
 
     await _plugin.zonedSchedule(
-      id,
-      l10n.notificationAdhanTitle(prayerName),
-      l10n.notificationAdhanBody,
-      tz.TZDateTime.from(scheduledAt, tz.local),
-      details,
+      id: id,
+      title: l10n.notificationAdhanTitle(prayerName),
+      body: l10n.notificationAdhanBody,
+      scheduledDate: tz.TZDateTime.from(scheduledAt, tz.local),
+      notificationDetails: details,
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-      uiLocalNotificationDateInterpretation:
-          UILocalNotificationDateInterpretation.absoluteTime,
     );
   }
 
@@ -101,14 +99,12 @@ class NotificationService {
     );
 
     await _plugin.zonedSchedule(
-      id,
-      title,
-      body,
-      tz.TZDateTime.from(scheduledAt, tz.local),
-      details,
+      id: id,
+      title: title,
+      body: body,
+      scheduledDate: tz.TZDateTime.from(scheduledAt, tz.local),
+      notificationDetails: details,
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-      uiLocalNotificationDateInterpretation:
-          UILocalNotificationDateInterpretation.absoluteTime,
     );
   }
 
@@ -128,10 +124,10 @@ class NotificationService {
     );
 
     await _plugin.show(
-      99,
-      title,
-      body,
-      NotificationDetails(
+      id: 99,
+      title: title,
+      body: body,
+      notificationDetails: NotificationDetails(
         android: AndroidNotificationDetails(
           androidChannelId,
           l10n.notificationAdhanChannelName,
@@ -149,7 +145,7 @@ class NotificationService {
     );
   }
 
-  Future<void> cancel(int id) async => _plugin.cancel(id);
+  Future<void> cancel(int id) async => _plugin.cancel(id: id);
 
   Future<void> cancelAll() async => _plugin.cancelAll();
 

@@ -94,21 +94,32 @@ class DailyInspirationNotificationService {
     final content = await _generateNotificationContent();
 
     await _plugin.zonedSchedule(
+      id: 10001,
+      title: content.title,
+      body: content.body,
+      scheduledDate: scheduledDate,
+      notificationDetails: _notificationDetails(),
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+      matchDateTimeComponents: DateTimeComponents.time,
+    );
+    /*
+    await _plugin.zonedSchedule(
       10001, // ID único para notificación diaria
-      content.title,
-      content.body,
-      scheduledDate,
-      _notificationDetails(),
+      title: content.title,
+      body: content.body,
+      scheduledDate: scheduledDate,
+      notificationDetails: _notificationDetails(),
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
       matchDateTimeComponents: DateTimeComponents.time,
     );
+    */
   }
 
   /// Cancela la notificación diaria
   Future<void> cancelDailyNotification() async {
-    await _plugin.cancel(10001);
+    await _plugin.cancel(id: 10001);
   }
 
   /// Genera el contenido de la notificación
@@ -181,10 +192,10 @@ class DailyInspirationNotificationService {
     final content = await _generateNotificationContent();
 
     await _plugin.show(
-      10002,
-      content.title,
-      content.body,
-      _notificationDetails(),
+      id: 10002,
+      title: content.title,
+      body: content.body,
+      notificationDetails: _notificationDetails(),
     );
   }
 }
