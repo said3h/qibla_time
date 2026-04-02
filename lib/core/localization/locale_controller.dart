@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -70,9 +72,37 @@ class AppLocaleController extends StateNotifier<Locale?> {
 
     return null;
   }
+
+  /// Returns the effective language code:
+  /// 1. Manual locale if set
+  /// 2. System locale if supported by app
+  /// 3. Fallback to Spanish
+  String get currentLanguageCode {
+    // 1. Manual locale override
+    if (state != null) {
+      return state!.languageCode;
+    }
+
+    // 2. System locale (device language)
+    final systemLocale = PlatformDispatcher.instance.locale;
+    if (systemLocale != null) {
+      // Check if system language is supported by the app
+      final supportedLocale = _supportedLocaleFor(systemLocale);
+      if (supportedLocale != null) {
+        return supportedLocale.languageCode;
+      }
+    }
+
+    // 3. Fallback to Spanish
+    return 'es';
+  }
 }
 
 final appLocaleControllerProvider =
     StateNotifierProvider<AppLocaleController, Locale?>((ref) {
   return AppLocaleController();
+});
+
+final currentLanguageCodeProvider = Provider<String>((ref) {
+  return ref.watch(appLocaleControllerProvider.notifier).currentLanguageCode;
 });

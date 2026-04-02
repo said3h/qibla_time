@@ -1,0 +1,77 @@
+[
+  {
+    "id": "morning_1",
+    "translations": {
+      "es": {
+        "title": "Al comenzar el día",
+        "arabicText": "أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ",
+        "transliteration": "Asbahna wa asbaha l-mulku lillah",
+        "translation": "Hemos amanecido y el dominio pertenece a Allah.",
+        "category": "morning",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 3186, Muslim 2723",
+        "count": 1,
+        "times": ["morning"],
+        "tags": ["amanecer", "dominio", "Allah"],
+        "isFeatured": true
+      },
+      "en": {
+        "title": "At the beginning of the day",
+        "arabicText": "أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ",
+        "transliteration": "Asbahna wa asbaha l-mulku lillah",
+        "translation": "We have woken up and all sovereignty belongs to Allah.",
+        "category": "morning",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 3186, Muslim 2723",
+        "count": 1,
+        "times": ["morning"],
+        "tags": ["morning", "sovereignty", "Allah"],
+        "isFeatured": true
+      },
+      "fr": {
+        "title": "Au début de la journée",
+        "arabicText": "أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ",
+        "transliteration": "Asbahna wa asbaha l-mulku lillah",
+        "translation": "Nous nous sommes réveillés et la souveraineté appartient à Allah.",
+        "category": "morning",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 3186, Muslim 2723",
+        "count": 1,
+        "times": ["morning"],
+        "tags": ["matin", "souveraineté", "Allah"],
+        "isFeatured": true
+      }
+    }
+  },
+  {
+    "id": "morning_2",
+    "translations": {
+      "es": {
+        "title": "Al despertar del sueño",
+        "arabicText": "الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ",
+        "transliteration": "Alhamdu lillahi alladhi ahyana ba'da ma amatana wa ilayhi n-nushur",
+        "translation": "Alabado sea Allah, que nos devolvió la vida después de habernos hecho morir, y hacia Él será el retorno.",
+        "category": "morning",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6312",
+        "count": 1,
+        "times": ["despertar"],
+        "tags": ["vida", "muerte", "resurrección"],
+        "isFeatured": true
+      },
+      "en": {
+        "title": "Upon waking from sleep",
+        "arabicText": "الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ",
+        "transliteration": "Alhamdu lillahi alladhi ahyana ba'da ma amatana wa ilayhi n-nushur",
+        "translation": "Praise be to Allah who gave us life after having caused us to die, and towards Him is the return.",
+        "category": "morning",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6312",
+        "count": 1,
+        "times": ["waking"],
+        "tags": ["life", "death", "resurrection"],
+        "isFeatured": true
+      }
+    }
+  }
+]
