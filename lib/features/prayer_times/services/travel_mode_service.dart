@@ -1,12 +1,14 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 
+import '../../../core/localization/locale_controller.dart';
 import '../../../l10n/l10n.dart';
 import '../data/datasources/travel_location_label_datasource.dart';
 import '../data/datasources/travel_mode_datasource.dart';
 import '../data/datasources/travel_mode_notification_datasource.dart';
 import '../domain/entities/prayer_location.dart';
 import '../domain/entities/recent_location.dart';
+import '../domain/entities/travel_pending_banner.dart';
 import '../domain/entities/travel_mode_update_result.dart';
 import '../domain/usecases/detect_travel_mode_change.dart';
 
@@ -53,9 +55,9 @@ class TravelModeService {
     );
 
     final pendingBanner = detection.travelDetected
-        ? _buildPendingBanner(
+        ? TravelPendingBanner(
             label: label,
-            distanceKmRounded: detection.distanceKmRounded,
+            distanceKm: detection.distanceKmRounded ?? 0,
           )
         : null;
 
@@ -94,7 +96,7 @@ class TravelModeService {
     );
   }
 
-  Future<String?> getPendingBanner() {
+  Future<TravelPendingBanner?> getPendingBanner() {
     return _dataSource.getPendingBanner();
   }
 
@@ -109,17 +111,6 @@ class TravelModeService {
   Future<List<RecentLocation>> getRecentLocations() {
     return _dataSource.getRecentLocations();
   }
-
-  String _buildPendingBanner({
-    required String label,
-    required int? distanceKmRounded,
-  }) {
-    final l10n = appLocalizationsForCurrentLocale();
-    return l10n.travelModeBannerLocationDetected(
-      label,
-      distanceKmRounded ?? 0,
-    );
-  }
 }
 
 final travelModeServiceProvider = Provider<TravelModeService>((ref) {
@@ -131,10 +122,24 @@ final travelerModeEnabledProvider = FutureProvider<bool>((ref) async {
 });
 
 final travelBannerProvider = FutureProvider<String?>((ref) async {
-  return ref.watch(travelModeServiceProvider).getPendingBanner();
+  final languageCode = ref.watch(currentLanguageCodeProvider);
+  final pendingBanner = await ref
+      .watch(travelModeServiceProvider)
+      .getPendingBanner();
+  if (pendingBanner == null) {
+    return null;
+  }
+
+  final l10n = appLocalizationsForLocaleCode(languageCode);
+  return l10n.travelModeBannerLocationDetected(
+    pendingBanner.label,
+    pendingBanner.distanceKm,
+  );
 });
 
-final recentLocationsProvider = FutureProvider<List<RecentLocation>>((ref) async {
+final recentLocationsProvider = FutureProvider<List<RecentLocation>>((
+  ref,
+) async {
   return ref.watch(travelModeServiceProvider).getRecentLocations();
 });
 

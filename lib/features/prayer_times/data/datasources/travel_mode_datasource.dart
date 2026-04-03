@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../domain/entities/prayer_location.dart';
 import '../../domain/entities/recent_location.dart';
+import '../../domain/entities/travel_pending_banner.dart';
 import '../../domain/entities/travel_mode_state.dart';
 
 class TravelModeDataSource {
@@ -32,14 +33,33 @@ class TravelModeDataSource {
     await prefs.setBool(AppConstants.keyTravelerModeEnabled, value);
   }
 
-  Future<String?> getPendingBanner() async {
+  Future<TravelPendingBanner?> getPendingBanner() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getString(AppConstants.keyTravelerPendingBanner);
+    final raw = prefs.getString(AppConstants.keyTravelerPendingBanner);
+    if (raw == null || raw.isEmpty) {
+      return null;
+    }
+
+    try {
+      final decoded = jsonDecode(raw);
+      if (decoded is! Map<String, dynamic>) {
+        await prefs.remove(AppConstants.keyTravelerPendingBanner);
+        return null;
+      }
+
+      return TravelPendingBanner.fromJson(decoded);
+    } catch (_) {
+      await prefs.remove(AppConstants.keyTravelerPendingBanner);
+      return null;
+    }
   }
 
-  Future<void> setPendingBanner(String banner) async {
+  Future<void> setPendingBanner(TravelPendingBanner banner) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(AppConstants.keyTravelerPendingBanner, banner);
+    await prefs.setString(
+      AppConstants.keyTravelerPendingBanner,
+      jsonEncode(banner.toJson()),
+    );
   }
 
   Future<void> clearPendingBanner() async {
@@ -63,16 +83,23 @@ class TravelModeDataSource {
 
   Future<List<RecentLocation>> getRecentLocations() async {
     final prefs = await SharedPreferences.getInstance();
-    final raw = prefs.getStringList(AppConstants.keyTravelerRecentLocations) ?? [];
+    final raw =
+        prefs.getStringList(AppConstants.keyTravelerRecentLocations) ?? [];
     return raw
-        .map((item) => RecentLocation.fromJson(jsonDecode(item) as Map<String, dynamic>))
+        .map(
+          (item) =>
+              RecentLocation.fromJson(jsonDecode(item) as Map<String, dynamic>),
+        )
         .toList();
   }
 
   Future<void> storeRecentLocation(RecentLocation location) async {
     final prefs = await SharedPreferences.getInstance();
     final current = await getRecentLocations();
-    final updated = [location, ...current.where((item) => item.label != location.label)]
+    final updated = [
+      location,
+      ...current.where((item) => item.label != location.label),
+    ]
         .take(5)
         .map((item) => jsonEncode(item.toJson()))
         .toList();

@@ -1,3 +1,5 @@
+import 'travel_pending_banner.dart';
+
 class TravelModeUpdateResult {
   const TravelModeUpdateResult({
     required this.label,
@@ -7,7 +9,7 @@ class TravelModeUpdateResult {
 
   final String label;
   final bool travelDetected;
-  final String? pendingBanner;
+  final TravelPendingBanner? pendingBanner;
 
   bool get shouldRefreshPrayerData => travelDetected;
 }
