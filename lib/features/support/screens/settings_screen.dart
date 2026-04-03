@@ -8,7 +8,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/services/cloud_sync_service.dart';
 import '../../../core/services/settings_service.dart';
 import '../../../core/constants/app_constants.dart';
-import '../../../core/localization/locale_controller.dart';
 import '../../../core/models/adhan_model.dart';
 import '../../../core/theme/accessibility_provider.dart';
 import '../../../core/theme/app_theme.dart';
@@ -16,7 +15,6 @@ import '../../../core/theme/theme_provider.dart';
 import '../../../l10n/l10n.dart';
 import '../../dhikr/services/dhikr_service.dart';
 import '../../hafiz/services/hafiz_service.dart';
-import '../../hadith/services/hadith_hourly_reminder_service.dart';
 import '../../hadith/services/hadith_service.dart';
 import '../../prayer_times/domain/entities/prayer_cache_status.dart';
 import '../../prayer_times/domain/entities/prayer_location_diagnostic.dart';
@@ -25,10 +23,8 @@ import '../../prayer_times/presentation/providers/ramadan_providers.dart';
 import '../../prayer_times/services/adhan_manager.dart';
 import '../../prayer_times/services/daily_inspiration_notification_service.dart';
 import '../../prayer_times/presentation/providers/prayer_times_providers.dart';
-import '../../prayer_times/services/quran_service.dart';
 import '../../prayer_times/services/travel_mode_service.dart';
 import '../../tracking/services/tracking_service.dart';
-import '../../tracking/services/weekly_summary_notification_service.dart';
 import 'adhan_selector_screen.dart';
 import 'support_screen.dart';
 
@@ -60,13 +56,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   bool dailyInspirationEnabled = false;
   int dailyInspirationHour = 8;
   int hadithFavoritesCount = 0;
-
-  static const _languageOptions = <Locale?>[
-    null,
-    Locale('es'),
-    Locale('en'),
-    Locale('ar'),
-  ];
 
   static const _themes = [
     ('dark', '🌙'),
@@ -239,100 +228,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     await ref.read(adhanManagerProvider).scheduleTodayAdhans();
   }
 
-  Future<void> _setAppLocale(Locale? locale) async {
-    await ref.read(appLocaleControllerProvider.notifier).setLocale(locale);
-    ref.invalidate(dailyVerseProvider);
-
-    final dailyInspirationService =
-        ref.read(dailyInspirationNotificationServiceProvider);
-    final hadithReminderService =
-        ref.read(hadithHourlyReminderServiceProvider);
-
-    await ref.read(adhanManagerProvider).scheduleTodayAdhans();
-    await dailyInspirationService.initializeChannel();
-    await dailyInspirationService.scheduleDailyNotification();
-    await hadithReminderService.initializeChannel();
-    await hadithReminderService.scheduleAllReminders();
-    await ref
-        .read(weeklySummaryNotificationServiceProvider)
-        .scheduleWeeklySummaryNotification();
-  }
-
-  Future<void> _showLanguageSheet() async {
-    final tokens = QiblaThemes.current;
-    final l10n = context.l10n;
-    final selectedLocale = ref.read(appLocaleControllerProvider);
-    final effectiveLocale = currentAppLocale();
-
-    await showModalBottomSheet<void>(
-      context: context,
-      backgroundColor: tokens.bgSurface,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-      ),
-      builder: (context) {
-        return ListView(
-          padding: const EdgeInsets.all(16),
-          shrinkWrap: true,
-          children: [
-            Text(
-              l10n.settingsLanguageDialogTitle,
-              style: GoogleFonts.dmSans(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: tokens.textPrimary,
-              ),
-            ),
-            const SizedBox(height: 14),
-            ..._languageOptions.map((locale) {
-              final isSelected =
-                  (selectedLocale?.languageCode ?? 'system') ==
-                  (locale?.languageCode ?? 'system');
-              final title = locale == null
-                  ? l10n.settingsLanguageOptionSystem
-                  : _languageOptionTitle(locale.languageCode);
-              final subtitle = locale == null
-                  ? l10n.settingsLanguageSystemValue(
-                      _languageOptionTitle(effectiveLocale.languageCode),
-                    )
-                  : null;
-
-              return ListTile(
-                tileColor: isSelected ? tokens.activeBg : tokens.bgSurface2,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(14),
-                ),
-                title: Text(
-                  title,
-                  style: GoogleFonts.dmSans(
-                    color: isSelected ? tokens.primaryLight : tokens.textPrimary,
-                    fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-                  ),
-                ),
-                subtitle: subtitle == null
-                    ? null
-                    : Text(
-                        subtitle,
-                        style: GoogleFonts.dmSans(
-                          fontSize: 11,
-                          color: tokens.textSecondary,
-                        ),
-                      ),
-                trailing: isSelected ? Icon(Icons.check, color: tokens.primary) : null,
-                onTap: () async {
-                  await _setAppLocale(locale);
-                  if (context.mounted) {
-                    Navigator.pop(context);
-                  }
-                },
-              );
-            }),
-          ],
-        );
-      },
-    );
-  }
-
   Future<void> _setCalculationMethod(CalculationMethod method) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt(AppConstants.keyCalculationMethod, method.index);
@@ -370,8 +265,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
     final l10n = context.l10n;
-    final appLocale = ref.watch(appLocaleControllerProvider);
-    final effectiveAppLocale = currentAppLocale();
     final themeName = ref.watch(themeControllerProvider);
     final accessibility = ref.watch(accessibilityControllerProvider);
     final cacheStatus = ref.watch(prayerCacheStatusProvider);
@@ -420,27 +313,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   _themeSubtitle(theme.$1),
                   theme.$2,
                 )),
-            _buildSettingRow(
-              label: l10n.settingsLanguage,
-              subtitle: l10n.settingsLanguageSubtitle,
-              trailing: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    _languageSettingValue(appLocale, effectiveAppLocale),
-                    style: GoogleFonts.dmSans(
-                      fontSize: 12,
-                      color: tokens.primary,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  const SizedBox(width: 6),
-                  Icon(Icons.chevron_right, color: tokens.textSecondary, size: 18),
-                ],
-              ),
-              onTap: _showLanguageSheet,
-              tokens: tokens,
-            ),
             const SizedBox(height: 14),
             _buildSectionTitle(tokens, l10n.settingsSectionAccessibility),
             Container(
@@ -903,27 +775,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     };
   }
 
-  String _languageSettingValue(Locale? appLocale, Locale effectiveLocale) {
-    final l10n = context.l10n;
-    if (appLocale == null) {
-      return l10n.settingsLanguageSystemValue(
-        _languageOptionTitle(effectiveLocale.languageCode),
-      );
-    }
-
-    return _languageOptionTitle(appLocale.languageCode);
-  }
-
-  String _languageOptionTitle(String languageCode) {
-    final l10n = context.l10n;
-    return switch (languageCode) {
-      'es' => l10n.settingsLanguageOptionSpanish,
-      'en' => l10n.settingsLanguageOptionEnglish,
-      'ar' => l10n.settingsLanguageOptionArabic,
-      _ => languageCode.toUpperCase(),
-    };
-  }
-
   String _formatTime(DateTime time) {
     final hour = time.hour.toString().padLeft(2, '0');
     final minute = time.minute.toString().padLeft(2, '0');
@@ -1256,26 +1107,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     required String subtitle,
     required Widget trailing,
     required QiblaTokens tokens,
-    VoidCallback? onTap,
   }) {
-    final child = Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 11),
-      child: Row(
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(label, style: TextStyle(fontSize: 13, color: tokens.textPrimary)),
-                Text(subtitle, style: TextStyle(fontSize: 10, color: tokens.textSecondary)),
-              ],
-            ),
-          ),
-          trailing,
-        ],
-      ),
-    );
-
     return Container(
       margin: const EdgeInsets.only(bottom: 5),
       decoration: BoxDecoration(
@@ -1283,13 +1115,23 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: tokens.border),
       ),
-      child: onTap == null
-          ? child
-          : InkWell(
-              onTap: onTap,
-              borderRadius: BorderRadius.circular(12),
-              child: child,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 11),
+        child: Row(
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(label, style: TextStyle(fontSize: 13, color: tokens.textPrimary)),
+                  Text(subtitle, style: TextStyle(fontSize: 10, color: tokens.textSecondary)),
+                ],
+              ),
             ),
+            trailing,
+          ],
+        ),
+      ),
     );
   }
 }
