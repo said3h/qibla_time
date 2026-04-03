@@ -106,8 +106,12 @@ class HadithHourlyReminderService {
       scheduledDate = scheduledDate.add(const Duration(days: 1));
     }
 
-    final l10n = appLocalizationsForDevice();
-    final hadith = await _hadithService.getRandomHadiths(count: 1);
+    final language = currentLanguageCode();
+    final l10n = appLocalizationsForLocaleCode(language);
+    final hadith = await _hadithService.getRandomHadiths(
+      count: 1,
+      forcedLanguage: language,
+    );
     final hadithText = hadith.isNotEmpty
         ? hadith.first.translation
         : l10n.notificationHadithReminderFallbackBody;
@@ -137,7 +141,7 @@ class HadithHourlyReminderService {
 
   /// Configuración de notificación
   NotificationDetails _notificationDetails() {
-    final l10n = appLocalizationsForDevice();
+    final l10n = appLocalizationsForCurrentLocale();
     return NotificationDetails(
       android: AndroidNotificationDetails(
         _channelId,
@@ -161,8 +165,12 @@ class HadithHourlyReminderService {
 
   /// Envía una notificación inmediata (para testing)
   Future<void> sendTestNotification() async {
-    final l10n = appLocalizationsForDevice();
-    final hadith = await _hadithService.getRandomHadiths(count: 1);
+    final language = currentLanguageCode();
+    final l10n = appLocalizationsForLocaleCode(language);
+    final hadith = await _hadithService.getRandomHadiths(
+      count: 1,
+      forcedLanguage: language,
+    );
     final hadithText = hadith.isNotEmpty
         ? hadith.first.translation
         : l10n.notificationHadithReminderTestBody;

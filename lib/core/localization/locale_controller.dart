@@ -73,28 +73,30 @@ class AppLocaleController extends StateNotifier<Locale?> {
     return null;
   }
 
-  /// Returns the effective language code:
-  /// 1. Manual locale if set
-  /// 2. System locale if supported by app
-  /// 3. Fallback to Spanish
-  String get currentLanguageCode {
-    // 1. Manual locale override
-    if (state != null) {
-      return state!.languageCode;
-    }
-
-    // 2. System locale (device language)
-    final systemLocale = PlatformDispatcher.instance.locale;
-    if (systemLocale != null) {
-      // Check if system language is supported by the app
-      final supportedLocale = _supportedLocaleFor(systemLocale);
+  static String effectiveLanguageCode([Locale? manualLocale]) {
+    final locale = manualLocale ?? currentLocale;
+    if (locale != null) {
+      final supportedLocale = _supportedLocaleFor(locale);
       if (supportedLocale != null) {
         return supportedLocale.languageCode;
       }
     }
 
-    // 3. Fallback to Spanish
+    final systemLocale = PlatformDispatcher.instance.locale;
+    final supportedSystemLocale = _supportedLocaleFor(systemLocale);
+    if (supportedSystemLocale != null) {
+      return supportedSystemLocale.languageCode;
+    }
+
     return 'es';
+  }
+
+  /// Returns the effective language code:
+  /// 1. Manual locale if set
+  /// 2. System locale if supported by app
+  /// 3. Fallback to Spanish
+  String get currentLanguageCode {
+    return effectiveLanguageCode(state);
   }
 }
 
@@ -104,5 +106,6 @@ final appLocaleControllerProvider =
 });
 
 final currentLanguageCodeProvider = Provider<String>((ref) {
-  return ref.watch(appLocaleControllerProvider.notifier).currentLanguageCode;
+  final locale = ref.watch(appLocaleControllerProvider);
+  return AppLocaleController.effectiveLanguageCode(locale);
 });

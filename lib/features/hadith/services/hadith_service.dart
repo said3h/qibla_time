@@ -17,13 +17,18 @@ import '../models/hadith.dart';
 /// - Soporta fallback automático a español
 /// - backward compatibility con formato antiguo (hadiths_complete.json)
 class HadithService {
+  HadithService({String? initialLanguageCode})
+      : _currentLanguage = _normalizeLanguageCode(
+          initialLanguageCode ?? AppLocaleController.effectiveLanguageCode(),
+        );
+
   Box get _box => Hive.box(StorageService.hadithBox);
 
   // Cache en memoria para evitar cargar múltiples veces
   List<HadithMultilenguaje>? _allHadithsCache;
   
   // Idioma actualmente seleccionado
-  String _currentLanguage = 'es';
+  String _currentLanguage;
 
   /// Carga todos los hadices desde assets
   Future<List<HadithMultilenguaje>> loadAllMultilenguaje() async {
@@ -214,23 +219,30 @@ class HadithService {
 
   /// Actualiza el idioma actual del servicio
   void setCurrentLanguage(String languageCode) {
-    _currentLanguage = languageCode;
-    // Limpiar cache para que se use el nuevo idioma
-    _allHadithsCache = null;
+    _currentLanguage = _normalizeLanguageCode(languageCode);
+  }
+
+  static String _normalizeLanguageCode(String languageCode) {
+    return switch (languageCode) {
+      'ar' => 'ar',
+      'en' => 'en',
+      _ => 'es',
+    };
   }
 }
 
 final hadithServiceProvider = Provider<HadithService>((ref) {
-  return HadithService();
+  final language = ref.watch(currentLanguageCodeProvider);
+  final service = HadithService(initialLanguageCode: language);
+  ref.listen<String>(currentLanguageCodeProvider, (_, next) {
+    service.setCurrentLanguage(next);
+  });
+  return service;
 });
 
 /// Provider que escucha cambios de idioma y actualiza el servicio
 final hadithServiceWithLocaleProvider = Provider<HadithService>((ref) {
-  final service = HadithService();
-  ref.listen<String>(currentLanguageCodeProvider, (prev, next) {
-    service.setCurrentLanguage(next);
-  });
-  return service;
+  return ref.watch(hadithServiceProvider);
 });
 
 final dailyHadithProvider = FutureProvider<Hadith?>((ref) async {

@@ -124,12 +124,13 @@ class DailyInspirationNotificationService {
 
   /// Genera el contenido de la notificación
   Future<NotificationContent> _generateNotificationContent() async {
-    final l10n = appLocalizationsForDevice();
+    final language = currentLanguageCode();
+    final l10n = appLocalizationsForLocaleCode(language);
     try {
-      final hadith = await _hadithService.getHadithOfDay();
-      final quranVerse = await QuranVerseService.getDailyVerse(
-        currentLanguageCode(),
+      final hadith = await _hadithService.getHadithOfDay(
+        forcedLanguage: language,
       );
+      final quranVerse = await QuranVerseService.getDailyVerse(language);
       final title = l10n.notificationDailyReflectionTitle;
       final now = DateTime.now();
       final useHadith = now.day % 2 == 0;
@@ -165,7 +166,7 @@ class DailyInspirationNotificationService {
 
   /// Configuración de notificación
   NotificationDetails _notificationDetails() {
-    final l10n = appLocalizationsForDevice();
+    final l10n = appLocalizationsForCurrentLocale();
     return NotificationDetails(
       android: AndroidNotificationDetails(
         _channelId,
