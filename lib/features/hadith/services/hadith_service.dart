@@ -6,17 +6,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 
 import '../../../core/constants/app_constants.dart';
-import '../../../core/services/storage_service.dart';
 import '../../../core/localization/locale_controller.dart';
+import '../../../core/services/storage_service.dart';
 import '../models/hadith.dart';
 
-/// Servicio para gestionar hadices con soporte multilenguaje
-/// 
-/// Estructura de datos:
-/// - Carga JSONs por idioma desde assets/hadiths/{idioma}/hadiths.json
-/// - Soporta fallback automático a español
-/// - backward compatibility con formato antiguo (hadiths_complete.json)
 class HadithService {
+  static const _minimumExpectedHadithCount = 500;
+
   HadithService({String? initialLanguageCode})
       : _currentLanguage = _normalizeLanguageCode(
           initialLanguageCode ?? AppLocaleController.effectiveLanguageCode(),
@@ -24,56 +20,53 @@ class HadithService {
 
   Box get _box => Hive.box(StorageService.hadithBox);
 
-  // Cache en memoria para evitar cargar múltiples veces
   List<HadithMultilenguaje>? _allHadithsCache;
-  
-  // Idioma actualmente seleccionado
   String _currentLanguage;
 
-  /// Carga todos los hadices desde assets
   Future<List<HadithMultilenguaje>> loadAllMultilenguaje() async {
-    // Usar cache si ya está cargado
     if (_allHadithsCache != null) {
       return _allHadithsCache!;
     }
 
-    try {
-      // Intentar cargar el archivo nuevo por idioma
-      final raw = await rootBundle.loadString('assets/hadiths/hadiths_multilang.json');
-      final decoded = jsonDecode(raw) as List<dynamic>;
-      _allHadithsCache = decoded
-          .map((item) => HadithMultilenguaje.fromJson(item as Map<String, dynamic>))
-          .toList();
+    final fullDataset = await _tryLoadAsset(
+      'assets/hadiths/hadiths_multilang_full.json',
+      minimumEntries: _minimumExpectedHadithCount,
+    );
+    if (fullDataset != null) {
+      _allHadithsCache = fullDataset;
       return _allHadithsCache!;
-    } catch (e) {
-      // Fallback al archivo antiguo si hay error (formato legacy)
-      try {
-        final raw = await rootBundle.loadString('assets/hadiths/hadiths_complete.json');
-        final decoded = jsonDecode(raw) as List<dynamic>;
-        _allHadithsCache = decoded
-            .map((item) => HadithMultilenguaje.fromJson(item as Map<String, dynamic>))
-            .toList();
-        return _allHadithsCache!;
-      } catch (e2) {
-        // Ultimo recurso: daily_hadiths.json
-        final raw = await rootBundle.loadString('assets/hadiths/daily_hadiths.json');
-        final decoded = jsonDecode(raw) as List<dynamic>;
-        _allHadithsCache = decoded
-            .map((item) => HadithMultilenguaje.fromJson(item as Map<String, dynamic>))
-            .toList();
-        return _allHadithsCache!;
-      }
     }
+
+    final defaultDataset = await _tryLoadAsset(
+      'assets/hadiths/hadiths_multilang.json',
+      minimumEntries: _minimumExpectedHadithCount,
+    );
+    if (defaultDataset != null) {
+      _allHadithsCache = defaultDataset;
+      return _allHadithsCache!;
+    }
+
+    final legacyDataset = await _tryLoadAsset(
+      'assets/hadiths/hadiths_complete.json',
+    );
+    if (legacyDataset != null) {
+      _allHadithsCache = legacyDataset;
+      return _allHadithsCache!;
+    }
+
+    final fallbackDataset = await _tryLoadAsset(
+      'assets/hadiths/daily_hadiths.json',
+    );
+    _allHadithsCache = fallbackDataset ?? const [];
+    return _allHadithsCache!;
   }
 
-  /// Obtiene la lista de hadices en el idioma seleccionado con fallback
   Future<List<Hadith>> loadAll({String? forcedLanguage}) async {
     final language = forcedLanguage ?? _currentLanguage;
     final multilangList = await loadAllMultilenguaje();
-    return multilangList.map((h) => h.getHadith(language)).toList();
+    return multilangList.map((hadith) => hadith.getHadith(language)).toList();
   }
 
-  /// Obtiene el hadiz del día en el idioma actual
   Future<Hadith?> getHadithOfDay({String? forcedLanguage}) async {
     final language = forcedLanguage ?? _currentLanguage;
     final hadiths = await loadAll(forcedLanguage: language);
@@ -83,7 +76,6 @@ class HadithService {
     return hadiths[seed % hadiths.length];
   }
 
-  /// Obtiene un hadiz específico por su ID
   Future<Hadith?> getHadithById(int id, {String? forcedLanguage}) async {
     final language = forcedLanguage ?? _currentLanguage;
     final hadiths = await loadAll(forcedLanguage: language);
@@ -95,15 +87,25 @@ class HadithService {
     return null;
   }
 
-  /// Obtiene hadices de una colección específica
-  Future<List<Hadith>> getHadithsByCollection(String collection, {String? forcedLanguage}) async {
+  Future<List<Hadith>> getHadithsByCollection(
+    String collection, {
+    String? forcedLanguage,
+  }) async {
     final language = forcedLanguage ?? _currentLanguage;
     final all = await loadAll(forcedLanguage: language);
-    return all.where((h) => _extractCollection(h.reference).toLowerCase() == collection.toLowerCase()).toList();
+    return all
+        .where(
+          (hadith) =>
+              _extractCollection(hadith.reference).toLowerCase() ==
+              collection.toLowerCase(),
+        )
+        .toList();
   }
 
-  /// Busca hadices por texto
-  Future<List<Hadith>> searchHadiths(String query, {String? forcedLanguage}) async {
+  Future<List<Hadith>> searchHadiths(
+    String query, {
+    String? forcedLanguage,
+  }) async {
     if (query.trim().isEmpty) {
       return [];
     }
@@ -112,19 +114,21 @@ class HadithService {
     final all = await loadAll(forcedLanguage: language);
     final queryLower = query.toLowerCase();
 
-    return all.where((h) =>
-      h.translation.toLowerCase().contains(queryLower) ||
-      h.arabic.contains(query) ||
-      h.category.toLowerCase().contains(queryLower) ||
-      h.reference.toLowerCase().contains(queryLower)
-    ).toList();
+    return all
+        .where(
+          (hadith) =>
+              hadith.translation.toLowerCase().contains(queryLower) ||
+              hadith.arabic.contains(query) ||
+              hadith.category.toLowerCase().contains(queryLower) ||
+              hadith.reference.toLowerCase().contains(queryLower),
+        )
+        .toList();
   }
 
-  /// Obtiene todas las colecciones disponibles con su conteo
   Future<Map<String, int>> getCollections({String? forcedLanguage}) async {
     final language = forcedLanguage ?? _currentLanguage;
     final all = await loadAll(forcedLanguage: language);
-    final Map<String, int> collections = {};
+    final collections = <String, int>{};
 
     for (final hadith in all) {
       final collection = _extractCollection(hadith.reference);
@@ -134,38 +138,50 @@ class HadithService {
     return collections;
   }
 
-  /// Extrae el nombre de la colección de la referencia
   String _extractCollection(String reference) {
     final refLower = reference.toLowerCase();
-    if (refLower.contains('bujari') || refLower.contains('bukhari')) return 'Bukhari';
+    if (refLower.contains('bujari') || refLower.contains('bukhari')) {
+      return 'Bukhari';
+    }
     if (refLower.contains('muslim')) return 'Muslim';
     if (refLower.contains('tirmidhi')) return 'Tirmidhi';
-    if (refLower.contains('abu dawud') || refLower.contains('abudawud')) return 'Abu Dawud';
+    if (refLower.contains('abu dawud') || refLower.contains('abudawud')) {
+      return 'Abu Dawud';
+    }
     if (refLower.contains('nasai')) return 'Nasai';
-    if (refLower.contains('ibn majah') || refLower.contains('ibnmajah')) return 'Ibn Majah';
-    if (refLower.contains('malik') || refLower.contains('muwatta')) return 'Malik';
+    if (refLower.contains('ibn majah') || refLower.contains('ibnmajah')) {
+      return 'Ibn Majah';
+    }
+    if (refLower.contains('malik') || refLower.contains('muwatta')) {
+      return 'Malik';
+    }
     if (refLower.contains('ahmad')) return 'Ahmad';
     return 'Otros';
   }
 
-  /// Obtiene hadices por grado de autenticidad
-  Future<List<Hadith>> getHadithsByGrade(String grade, {String? forcedLanguage}) async {
+  Future<List<Hadith>> getHadithsByGrade(
+    String grade, {
+    String? forcedLanguage,
+  }) async {
     final language = forcedLanguage ?? _currentLanguage;
     final all = await loadAll(forcedLanguage: language);
-    return all.where((h) => h.grade.toLowerCase() == grade.toLowerCase()).toList();
+    return all
+        .where((hadith) => hadith.grade.toLowerCase() == grade.toLowerCase())
+        .toList();
   }
 
-  /// Obtiene los grados de autenticidad disponibles
   Future<List<String>> getAvailableGrades({String? forcedLanguage}) async {
     final language = forcedLanguage ?? _currentLanguage;
     final all = await loadAll(forcedLanguage: language);
-    final grades = all.map((h) => h.grade).toSet().toList();
+    final grades = all.map((hadith) => hadith.grade).toSet().toList();
     grades.sort();
     return grades;
   }
 
-  /// Obtiene hadices aleatorios
-  Future<List<Hadith>> getRandomHadiths({int count = 1, String? forcedLanguage}) async {
+  Future<List<Hadith>> getRandomHadiths({
+    int count = 1,
+    String? forcedLanguage,
+  }) async {
     final language = forcedLanguage ?? _currentLanguage;
     final all = await loadAll(forcedLanguage: language);
     if (all.isEmpty) return [];
@@ -185,20 +201,20 @@ class HadithService {
     return selected;
   }
 
-  /// Obtiene hadices favoritos (devuelve en idioma actual)
   Future<List<Hadith>> getFavoriteHadiths({String? forcedLanguage}) async {
     final language = forcedLanguage ?? _currentLanguage;
     final favorites = await getFavorites();
     if (favorites.isEmpty) return [];
 
     final all = await loadAll(forcedLanguage: language);
-    return all.where((h) => favorites.contains(h.id)).toList();
+    return all.where((hadith) => favorites.contains(hadith.id)).toList();
   }
 
-  // ── Sistema de Favoritos (sin cambios) ─────────────────────────────────────
-
   Future<Set<int>> getFavorites() async {
-    final stored = _box.get(AppConstants.keyHadithFavorites, defaultValue: <dynamic>[]);
+    final stored = _box.get(
+      AppConstants.keyHadithFavorites,
+      defaultValue: <dynamic>[],
+    );
     return (stored as List<dynamic>).map((item) => item as int).toSet();
   }
 
@@ -217,7 +233,6 @@ class HadithService {
     return favorites.contains(hadithId);
   }
 
-  /// Actualiza el idioma actual del servicio
   void setCurrentLanguage(String languageCode) {
     _currentLanguage = _normalizeLanguageCode(languageCode);
   }
@@ -228,6 +243,30 @@ class HadithService {
       'en' => 'en',
       _ => 'es',
     };
+  }
+
+  Future<List<HadithMultilenguaje>?> _tryLoadAsset(
+    String assetPath, {
+    int minimumEntries = 1,
+  }) async {
+    try {
+      final raw = await rootBundle.loadString(assetPath);
+      final decoded = jsonDecode(raw) as List<dynamic>;
+      final hadiths = decoded
+          .map(
+            (item) =>
+                HadithMultilenguaje.fromJson(item as Map<String, dynamic>),
+          )
+          .toList();
+
+      if (hadiths.length < minimumEntries) {
+        return null;
+      }
+
+      return hadiths;
+    } catch (_) {
+      return null;
+    }
   }
 }
 
@@ -240,14 +279,15 @@ final hadithServiceProvider = Provider<HadithService>((ref) {
   return service;
 });
 
-/// Provider que escucha cambios de idioma y actualiza el servicio
 final hadithServiceWithLocaleProvider = Provider<HadithService>((ref) {
   return ref.watch(hadithServiceProvider);
 });
 
 final dailyHadithProvider = FutureProvider<Hadith?>((ref) async {
   final language = ref.watch(currentLanguageCodeProvider);
-  return ref.watch(hadithServiceProvider).getHadithOfDay(forcedLanguage: language);
+  return ref
+      .watch(hadithServiceProvider)
+      .getHadithOfDay(forcedLanguage: language);
 });
 
 final allHadithsProvider = FutureProvider<List<Hadith>>((ref) async {

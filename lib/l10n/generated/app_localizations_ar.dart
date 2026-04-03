@@ -2390,5 +2390,33 @@ class AppLocalizationsAr extends AppLocalizations {
   String get adhanSelectorTitle => 'الأذان';
 
   @override
+  String get navHome => 'الرئيسية';
+
+  @override
+  String get navQibla => 'القبلة';
+
+  @override
+  String get navTasbih => 'تسبيح';
+
+  @override
+  String get navDua => 'دعاء';
+
+  @override
+  String get navQuran => 'القرآن';
+
+  @override
+  String travelModeBannerLocationDetected(Object label, int distanceKm) {
+    return 'تم اكتشاف موقع جديد: $label - $distanceKm كم';
+  }
+
+  @override
+  String get travelModeNotificationTitle => 'Qibla Time - موقع جديد';
+
+  @override
+  String travelModeNotificationBody(Object label) {
+    return '$label - تم تحديث أوقات الصلاة';
+  }
+
+  @override
   String get analyticsAchievementUnlocked => 'مفتوح';
 }

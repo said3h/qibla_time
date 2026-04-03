@@ -968,5 +968,26 @@
   "adhanSelectorResumePreview": "Reanudar vista previa",
   "adhanSelectorSelected": "Has seleccionado {name}",
   "adhanSelectorTitle": "Adhan",
+  "navHome": "Inicio",
+  "navQibla": "Qibla",
+  "navTasbih": "Tasbih",
+  "navDua": "Dua",
+  "navQuran": "Corán",
+  "travelModeBannerLocationDetected": "Nueva ubicación detectada: {label} - {distanceKm} km",
+  "@travelModeBannerLocationDetected": {
+    "placeholders": {
+      "label": {},
+      "distanceKm": {
+        "type": "int"
+      }
+    }
+  },
+  "travelModeNotificationTitle": "Qibla Time - Nueva ubicación",
+  "travelModeNotificationBody": "{label} - Horarios actualizados",
+  "@travelModeNotificationBody": {
+    "placeholders": {
+      "label": {}
+    }
+  },
   "analyticsAchievementUnlocked": "Completado"
 }

@@ -76,6 +76,7 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
     final l10n = context.l10n;
+    final isArabicOnly = Localizations.localeOf(context).languageCode == 'ar';
     final allHadithsAsync = ref.watch(allHadithsProvider);
     final dailyHadithAsync = ref.watch(dailyHadithProvider);
     final favoritesAsync = ref.watch(hadithFavoritesProvider);
@@ -231,6 +232,7 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
                     if (dailyHadith != null && !_isSearching)
                       _FeaturedHadithCard(
                         hadith: dailyHadith,
+                        isArabicOnly: isArabicOnly,
                         isFavorite: favorites.contains(dailyHadith.id),
                         onToggleFavorite: () => _toggleFavorite(dailyHadith.id),
                         onShare: () => _shareImage(dailyHadith),
@@ -271,6 +273,7 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
                           padding: const EdgeInsets.only(bottom: 12),
                           child: _HadithCard(
                             hadith: hadith,
+                            isArabicOnly: isArabicOnly,
                             isFavorite: favorites.contains(hadith.id),
                             onToggleFavorite: () => _toggleFavorite(hadith.id),
                             onShare: () => _shareImage(hadith),
@@ -464,12 +467,14 @@ class _FilterStatusBanner extends StatelessWidget {
 class _FeaturedHadithCard extends StatelessWidget {
   const _FeaturedHadithCard({
     required this.hadith,
+    required this.isArabicOnly,
     required this.isFavorite,
     required this.onToggleFavorite,
     required this.onShare,
   });
 
   final Hadith hadith;
+  final bool isArabicOnly;
   final bool isFavorite;
   final VoidCallback onToggleFavorite;
   final VoidCallback onShare;
@@ -549,15 +554,17 @@ class _FeaturedHadithCard extends StatelessWidget {
               color: tokens.textPrimary,
             ),
           ),
-          const SizedBox(height: 10),
-          Text(
-            hadith.translation,
-            style: GoogleFonts.dmSans(
-              fontSize: 13,
-              height: 1.6,
-              color: tokens.textPrimary,
+          if (!isArabicOnly) ...[
+            const SizedBox(height: 10),
+            Text(
+              hadith.translation,
+              style: GoogleFonts.dmSans(
+                fontSize: 13,
+                height: 1.6,
+                color: tokens.textPrimary,
+              ),
             ),
-          ),
+          ],
           const SizedBox(height: 8),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -650,12 +657,14 @@ class _FeaturedHadithCard extends StatelessWidget {
 class _HadithCard extends StatelessWidget {
   const _HadithCard({
     required this.hadith,
+    required this.isArabicOnly,
     required this.isFavorite,
     required this.onToggleFavorite,
     required this.onShare,
   });
 
   final Hadith hadith;
+  final bool isArabicOnly;
   final bool isFavorite;
   final VoidCallback onToggleFavorite;
   final VoidCallback onShare;
@@ -763,15 +772,17 @@ class _HadithCard extends StatelessWidget {
                 color: tokens.textPrimary,
               ),
             ),
-            const SizedBox(height: 8),
-            Text(
-              hadith.translation,
-              style: GoogleFonts.dmSans(
-                fontSize: 12,
-                height: 1.6,
-                color: tokens.textPrimary,
+            if (!isArabicOnly) ...[
+              const SizedBox(height: 8),
+              Text(
+                hadith.translation,
+                style: GoogleFonts.dmSans(
+                  fontSize: 12,
+                  height: 1.6,
+                  color: tokens.textPrimary,
+                ),
               ),
-            ),
+            ],
             const SizedBox(height: 10),
             _HadithActions(
               isFavorite: isFavorite,

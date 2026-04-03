@@ -2457,5 +2457,33 @@ class AppLocalizationsEs extends AppLocalizations {
   String get adhanSelectorTitle => 'Adhan';
 
   @override
+  String get navHome => 'Inicio';
+
+  @override
+  String get navQibla => 'Qibla';
+
+  @override
+  String get navTasbih => 'Tasbih';
+
+  @override
+  String get navDua => 'Dua';
+
+  @override
+  String get navQuran => 'Corán';
+
+  @override
+  String travelModeBannerLocationDetected(Object label, int distanceKm) {
+    return 'Nueva ubicación detectada: $label - $distanceKm km';
+  }
+
+  @override
+  String get travelModeNotificationTitle => 'Qibla Time - Nueva ubicación';
+
+  @override
+  String travelModeNotificationBody(Object label) {
+    return '$label - Horarios actualizados';
+  }
+
+  @override
   String get analyticsAchievementUnlocked => 'Completado';
 }

@@ -9,6 +9,7 @@ import '../../features/qibla/screens/qibla_screen.dart';
 import '../../features/quran/screens/quran_screen.dart';
 import '../../features/quran/services/quran_mini_player_service.dart';
 import '../../features/support/screens/dua_screen.dart';
+import '../../l10n/l10n.dart';
 import '../theme/theme_provider.dart';
 
 class MainNavigation extends ConsumerStatefulWidget {
@@ -67,6 +68,7 @@ class _MainNavigationState extends ConsumerState<MainNavigation>
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final themeName = ref.watch(themeControllerProvider);
     final theme = Theme.of(context);
     final miniPlayerState = ref.watch(quranMiniPlayerControllerProvider);
@@ -114,31 +116,31 @@ class _MainNavigationState extends ConsumerState<MainNavigation>
                 },
                 height: 78,
                 labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
-                destinations: const [
+                destinations: [
                   NavigationDestination(
-                    icon: Icon(Icons.home_outlined),
-                    selectedIcon: Icon(Icons.home_rounded),
-                    label: 'Inicio',
+                    icon: const Icon(Icons.home_outlined),
+                    selectedIcon: const Icon(Icons.home_rounded),
+                    label: l10n.navHome,
                   ),
                   NavigationDestination(
-                    icon: Icon(Icons.explore_outlined),
-                    selectedIcon: Icon(Icons.explore),
-                    label: 'Qibla',
+                    icon: const Icon(Icons.explore_outlined),
+                    selectedIcon: const Icon(Icons.explore),
+                    label: l10n.navQibla,
                   ),
                   NavigationDestination(
-                    icon: Icon(Icons.scatter_plot_outlined),
-                    selectedIcon: Icon(Icons.scatter_plot),
-                    label: 'Tasbih',
+                    icon: const Icon(Icons.scatter_plot_outlined),
+                    selectedIcon: const Icon(Icons.scatter_plot),
+                    label: l10n.navTasbih,
                   ),
                   NavigationDestination(
-                    icon: Icon(Icons.volunteer_activism_outlined),
-                    selectedIcon: Icon(Icons.volunteer_activism),
-                    label: 'Dua',
+                    icon: const Icon(Icons.volunteer_activism_outlined),
+                    selectedIcon: const Icon(Icons.volunteer_activism),
+                    label: l10n.navDua,
                   ),
                   NavigationDestination(
-                    icon: Icon(Icons.menu_book_outlined),
-                    selectedIcon: Icon(Icons.menu_book),
-                    label: 'Corán',
+                    icon: const Icon(Icons.menu_book_outlined),
+                    selectedIcon: const Icon(Icons.menu_book),
+                    label: l10n.navQuran,
                   ),
                 ],
               ),

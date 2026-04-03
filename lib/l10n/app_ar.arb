@@ -968,5 +968,26 @@
   "adhanSelectorResumePreview": "متابعة المعاينة",
   "adhanSelectorSelected": "تم اختيار {name}",
   "adhanSelectorTitle": "الأذان",
+  "navHome": "الرئيسية",
+  "navQibla": "القبلة",
+  "navTasbih": "تسبيح",
+  "navDua": "دعاء",
+  "navQuran": "القرآن",
+  "travelModeBannerLocationDetected": "تم اكتشاف موقع جديد: {label} - {distanceKm} كم",
+  "@travelModeBannerLocationDetected": {
+    "placeholders": {
+      "label": {},
+      "distanceKm": {
+        "type": "int"
+      }
+    }
+  },
+  "travelModeNotificationTitle": "Qibla Time - موقع جديد",
+  "travelModeNotificationBody": "{label} - تم تحديث أوقات الصلاة",
+  "@travelModeNotificationBody": {
+    "placeholders": {
+      "label": {}
+    }
+  },
   "analyticsAchievementUnlocked": "مفتوح"
 }

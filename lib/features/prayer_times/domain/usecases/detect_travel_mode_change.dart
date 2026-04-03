@@ -10,7 +10,6 @@ class DetectTravelModeChangeUseCase {
     required bool enabled,
     required PrayerLocation currentLocation,
     required String currentTimezone,
-    required String label,
     PrayerLocation? previousLocation,
     String? previousTimezone,
     double kmThreshold = 50,
@@ -29,8 +28,6 @@ class DetectTravelModeChangeUseCase {
     return TravelModeDetection(
       travelDetected: true,
       distanceKmRounded: distanceKm.round(),
-      pendingBanner:
-          'Nueva ubicación detectada: $label - ${distanceKm.round()} km',
     );
   }
 

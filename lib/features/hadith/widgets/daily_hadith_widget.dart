@@ -21,6 +21,7 @@ class DailyHadithWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final tokens = QiblaThemes.current;
     final l10n = context.l10n;
+    final isArabicOnly = Localizations.localeOf(context).languageCode == 'ar';
     final hadithAsync = ref.watch(dailyHadithProvider);
     final favoritesAsync = ref.watch(hadithFavoritesProvider);
 
@@ -189,10 +190,11 @@ class DailyHadithWidget extends ConsumerWidget {
                 ),
               ),
 
-              const SizedBox(height: 12),
+              if (!isArabicOnly) const SizedBox(height: 12),
 
               // Traducción
-              Text(
+              if (!isArabicOnly) ...[
+                Text(
                 snapshot.translation,
                 style: GoogleFonts.dmSans(
                   fontSize: 12,
@@ -200,6 +202,7 @@ class DailyHadithWidget extends ConsumerWidget {
                   color: tokens.textPrimary,
                 ),
               ),
+              ],
 
               const SizedBox(height: 10),
 

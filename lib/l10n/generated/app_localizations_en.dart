@@ -2442,5 +2442,33 @@ class AppLocalizationsEn extends AppLocalizations {
   String get adhanSelectorTitle => 'Adhan';
 
   @override
+  String get navHome => 'Home';
+
+  @override
+  String get navQibla => 'Qibla';
+
+  @override
+  String get navTasbih => 'Tasbih';
+
+  @override
+  String get navDua => 'Dua';
+
+  @override
+  String get navQuran => 'Quran';
+
+  @override
+  String travelModeBannerLocationDetected(Object label, int distanceKm) {
+    return 'New location detected: $label - $distanceKm km';
+  }
+
+  @override
+  String get travelModeNotificationTitle => 'Qibla Time - New location';
+
+  @override
+  String travelModeNotificationBody(Object label) {
+    return '$label - Prayer times updated';
+  }
+
+  @override
   String get analyticsAchievementUnlocked => 'Unlocked';
 }

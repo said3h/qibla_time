@@ -4271,6 +4271,54 @@ abstract class AppLocalizations {
   /// **'Adhan'**
   String get adhanSelectorTitle;
 
+  /// No description provided for @navHome.
+  ///
+  /// In es, this message translates to:
+  /// **'Inicio'**
+  String get navHome;
+
+  /// No description provided for @navQibla.
+  ///
+  /// In es, this message translates to:
+  /// **'Qibla'**
+  String get navQibla;
+
+  /// No description provided for @navTasbih.
+  ///
+  /// In es, this message translates to:
+  /// **'Tasbih'**
+  String get navTasbih;
+
+  /// No description provided for @navDua.
+  ///
+  /// In es, this message translates to:
+  /// **'Dua'**
+  String get navDua;
+
+  /// No description provided for @navQuran.
+  ///
+  /// In es, this message translates to:
+  /// **'Corán'**
+  String get navQuran;
+
+  /// No description provided for @travelModeBannerLocationDetected.
+  ///
+  /// In es, this message translates to:
+  /// **'Nueva ubicación detectada: {label} - {distanceKm} km'**
+  String travelModeBannerLocationDetected(Object label, int distanceKm);
+
+  /// No description provided for @travelModeNotificationTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Qibla Time - Nueva ubicación'**
+  String get travelModeNotificationTitle;
+
+  /// No description provided for @travelModeNotificationBody.
+  ///
+  /// In es, this message translates to:
+  /// **'{label} - Horarios actualizados'**
+  String travelModeNotificationBody(Object label);
+
   /// No description provided for @analyticsAchievementUnlocked.
   ///
   /// In es, this message translates to:

@@ -51,6 +51,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
     final tokens = QiblaThemes.current;
     final hadith = widget.hadith;
     final l10n = context.l10n;
+    final isArabicOnly = Localizations.localeOf(context).languageCode == 'ar';
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
@@ -111,7 +112,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
           ],
 
           // Traducción
-          if (_showTranslation) ...[
+          if (!isArabicOnly && _showTranslation) ...[
             _buildSection(
               tokens: tokens,
               title: l10n.hadithDetailTranslation,
@@ -138,7 +139,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
           const SizedBox(height: 16),
 
           // Botones de toggle
-          _buildToggleButtons(tokens),
+          _buildToggleButtons(tokens, isArabicOnly),
           const SizedBox(height: 32),
         ],
       ),
@@ -535,7 +536,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
     );
   }
 
-  Widget _buildToggleButtons(QiblaTokens tokens) {
+  Widget _buildToggleButtons(QiblaTokens tokens, bool isArabicOnly) {
     return Row(
       children: [
         Expanded(
@@ -556,25 +557,28 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
             ),
           ),
         ),
-        const SizedBox(width: 8),
-        Expanded(
-          child: OutlinedButton.icon(
-            onPressed: () => setState(() => _showTranslation = !_showTranslation),
-            icon: Icon(
-              _showTranslation ? Icons.visibility : Icons.visibility_off,
-              size: 16,
-            ),
-            label: Text(
-              _showTranslation
-                  ? context.l10n.hadithDetailHideTranslation
-                  : context.l10n.hadithDetailShowTranslation,
-            ),
-            style: OutlinedButton.styleFrom(
-              foregroundColor: tokens.textPrimary,
-              padding: const EdgeInsets.symmetric(vertical: 12),
+        if (!isArabicOnly) ...[
+          const SizedBox(width: 8),
+          Expanded(
+            child: OutlinedButton.icon(
+              onPressed: () =>
+                  setState(() => _showTranslation = !_showTranslation),
+              icon: Icon(
+                _showTranslation ? Icons.visibility : Icons.visibility_off,
+                size: 16,
+              ),
+              label: Text(
+                _showTranslation
+                    ? context.l10n.hadithDetailHideTranslation
+                    : context.l10n.hadithDetailShowTranslation,
+              ),
+              style: OutlinedButton.styleFrom(
+                foregroundColor: tokens.textPrimary,
+                padding: const EdgeInsets.symmetric(vertical: 12),
+              ),
             ),
           ),
-        ),
+        ],
       ],
     );
   }

@@ -359,6 +359,7 @@ class _DhikrScreenState extends State<DhikrScreen> {
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
     final l10n = context.l10n;
+    final isArabicOnly = Localizations.localeOf(context).languageCode == 'ar';
 
     if (_isLoading || _snapshot == null) {
       return Scaffold(
@@ -426,24 +427,26 @@ class _DhikrScreenState extends State<DhikrScreen> {
                 color: tokens.primaryLight,
               ),
             ),
-            const SizedBox(height: 4),
-            Text(
-              phrase.transliteration,
-              textAlign: TextAlign.center,
-              style: GoogleFonts.dmSans(
-                fontSize: 13,
-                color: tokens.textSecondary,
+            if (!isArabicOnly) ...[
+              const SizedBox(height: 4),
+              Text(
+                phrase.transliteration,
+                textAlign: TextAlign.center,
+                style: GoogleFonts.dmSans(
+                  fontSize: 13,
+                  color: tokens.textSecondary,
+                ),
               ),
-            ),
-            const SizedBox(height: 2),
-            Text(
-              _localizedMeaning(phrase.transliteration),
-              textAlign: TextAlign.center,
-              style: GoogleFonts.dmSans(
-                fontSize: 11,
-                color: tokens.textMuted,
+              const SizedBox(height: 2),
+              Text(
+                _localizedMeaning(phrase.transliteration),
+                textAlign: TextAlign.center,
+                style: GoogleFonts.dmSans(
+                  fontSize: 11,
+                  color: tokens.textMuted,
+                ),
               ),
-            ),
+            ],
             const SizedBox(height: 22),
             GestureDetector(
               onTap: _increment,

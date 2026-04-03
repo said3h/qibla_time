@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 
+import '../../../l10n/l10n.dart';
 import '../data/datasources/travel_location_label_datasource.dart';
 import '../data/datasources/travel_mode_datasource.dart';
 import '../data/datasources/travel_mode_notification_datasource.dart';
@@ -47,13 +48,19 @@ class TravelModeService {
       enabled: state.enabled,
       currentLocation: currentLocation,
       currentTimezone: timezone,
-      label: label,
       previousLocation: state.previousLocation,
       previousTimezone: state.previousTimezone,
     );
 
-    if (detection.pendingBanner != null) {
-      await _dataSource.setPendingBanner(detection.pendingBanner!);
+    final pendingBanner = detection.travelDetected
+        ? _buildPendingBanner(
+            label: label,
+            distanceKmRounded: detection.distanceKmRounded,
+          )
+        : null;
+
+    if (pendingBanner != null) {
+      await _dataSource.setPendingBanner(pendingBanner);
       await _notificationDataSource.showTravelDetected(label);
     }
 
@@ -74,7 +81,7 @@ class TravelModeService {
     return TravelModeUpdateResult(
       label: label,
       travelDetected: detection.travelDetected,
-      pendingBanner: detection.pendingBanner,
+      pendingBanner: pendingBanner,
     );
   }
 
@@ -101,6 +108,17 @@ class TravelModeService {
 
   Future<List<RecentLocation>> getRecentLocations() {
     return _dataSource.getRecentLocations();
+  }
+
+  String _buildPendingBanner({
+    required String label,
+    required int? distanceKmRounded,
+  }) {
+    final l10n = appLocalizationsForCurrentLocale();
+    return l10n.travelModeBannerLocationDetected(
+      label,
+      distanceKmRounded ?? 0,
+    );
   }
 }
 
