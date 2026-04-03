@@ -1,6 +1,7 @@
 // lib/features/tracking/models/tracking_models.dart
 
 import '../../../core/utils/spanish_date_labels.dart';
+import '../../../l10n/l10n.dart';
 
 class HeatmapDay {
   final DateTime date;
@@ -44,11 +45,11 @@ class MonthlyStats {
       maxPossible == 0 ? 0.0 : prayersCompleted / maxPossible;
 
   String get monthName {
-    const names = [
-      '', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-      'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
-    ];
-    return names[month];
+    final value = SpanishDateLabels.longMonth(DateTime(year, month));
+    if (value.isEmpty) {
+      return '$month/$year';
+    }
+    return value[0].toUpperCase() + value.substring(1);
   }
 }
 
@@ -98,16 +99,17 @@ class WeeklySummary {
   bool get hasAnyActivity => prayersCompleted > 0;
 
   String get interpretation {
+    final l10n = appLocalizationsForCurrentLocale();
     if (!hasAnyActivity) {
-      return 'Empieza marcando tus oraciones y verás aquí tu semana.';
+      return l10n.analyticsWeekInterpretationEmpty;
     }
     if (completionRate >= 0.85) {
-      return 'Semana muy sólida. Has mantenido una constancia excelente.';
+      return l10n.analyticsWeekInterpretationStrong;
     }
     if (completionRate >= 0.6) {
-      return 'Buen ritmo esta semana. Un pequeño empujón te acerca al 5/5.';
+      return l10n.analyticsWeekInterpretationGood;
     }
-    return 'Cada oración cuenta. Intenta cerrar fuerte los próximos días.';
+    return l10n.analyticsWeekInterpretationEncouragement;
   }
 }
 

@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theme/app_theme.dart';
 import '../../../core/utils/religious_reference_formatter.dart';
+import '../../../l10n/l10n.dart';
 import '../../hadith/models/hadith.dart';
 import '../../hadith/screens/hadith_library_screen.dart';
 import '../../hadith/services/hadith_service.dart';
@@ -49,12 +50,13 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
     final hadith = widget.hadith;
+    final l10n = context.l10n;
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
       appBar: AppBar(
         title: Text(
-          'Detalle del hadiz',
+          l10n.hadithDetailTitle,
           style: GoogleFonts.amiri(
             fontSize: 22,
             fontWeight: FontWeight.bold,
@@ -76,13 +78,16 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
               Icons.share_outlined,
               color: tokens.textPrimary,
             ),
-            tooltip: 'Compartir',
+            tooltip: l10n.commonShare,
             onPressed: _openSharePreview,
           ),
           PopupMenuButton<String>(
             onSelected: _handleMenuAction,
             itemBuilder: (_) => [
-              const PopupMenuItem(value: 'copy', child: Text('Copiar texto')),
+              PopupMenuItem(
+                value: 'copy',
+                child: Text(l10n.hadithDetailCopyText),
+              ),
             ],
           ),
         ],
@@ -98,7 +103,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
           if (_showArabic) ...[
             _buildSection(
               tokens: tokens,
-              title: 'Texto en árabe',
+              title: l10n.hadithDetailArabicText,
               icon: Icons.text_fields,
               child: _buildArabicText(tokens, hadith.arabic),
             ),
@@ -109,7 +114,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
           if (_showTranslation) ...[
             _buildSection(
               tokens: tokens,
-              title: 'Traducción al español',
+              title: l10n.hadithDetailTranslation,
               icon: Icons.translate,
               child: _buildTranslationText(tokens, hadith.translation),
             ),
@@ -247,9 +252,9 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
           ),
           const SizedBox(height: 12),
           Text(
-            'ID: ${hadith.id}',
-            style: GoogleFonts.dmSans(
-              fontSize: 10,
+                context.l10n.hadithDetailId(hadith.id),
+                style: GoogleFonts.dmSans(
+                  fontSize: 10,
               color: tokens.textSecondary,
             ),
           ),
@@ -337,7 +342,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
               Icon(Icons.book, size: 18, color: tokens.primary),
               const SizedBox(width: 8),
               Text(
-                'Referencia',
+                context.l10n.commonReference,
                 style: GoogleFonts.dmSans(
                   fontSize: 12,
                   fontWeight: FontWeight.w700,
@@ -376,7 +381,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
             children: [
               Expanded(
                 child: Text(
-                  'Grado: ${hadith.grade}',
+                  context.l10n.hadithDetailGrade(hadith.grade),
                   style: GoogleFonts.dmSans(
                     fontSize: 11,
                     color: tokens.textSecondary,
@@ -416,7 +421,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
               Icon(Icons.label_outline, size: 18, color: tokens.primary),
               const SizedBox(width: 8),
               Text(
-                'Categoría / tema',
+                context.l10n.commonCategory,
                 style: GoogleFonts.dmSans(
                   fontSize: 12,
                   fontWeight: FontWeight.w700,
@@ -427,7 +432,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
           ),
           const SizedBox(height: 10),
           Text(
-            category.isNotEmpty ? category : 'Sin categoría específica',
+            category.isNotEmpty ? category : context.l10n.hadithDetailNoCategory,
             style: GoogleFonts.dmSans(
               fontSize: 13,
               height: 1.6,
@@ -465,25 +470,25 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
       children: [
         _QuickActionButton(
           icon: Icons.copy_all_outlined,
-          label: 'Copiar',
+          label: context.l10n.commonCopy,
           color: tokens.primary,
           onTap: () => _copyToClipboard(hadith),
         ),
         _QuickActionButton(
           icon: Icons.share_outlined,
-          label: 'Compartir',
+          label: context.l10n.commonShare,
           color: Colors.green,
           onTap: _openSharePreview,
         ),
         _QuickActionButton(
           icon: _isFavorite ? Icons.favorite : Icons.favorite_border,
-          label: _isFavorite ? 'Guardado' : 'Guardar',
+          label: _isFavorite ? context.l10n.commonSaved : context.l10n.commonSave,
           color: _isFavorite ? Colors.red : Colors.orange,
           onTap: _toggleFavorite,
         ),
         _QuickActionButton(
           icon: Icons.open_in_new,
-          label: 'Biblioteca',
+          label: context.l10n.commonHadiths,
           color: Colors.blue,
           onTap: _openLibrary,
         ),
@@ -507,7 +512,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
               Icon(Icons.info_outline, size: 16, color: tokens.primary),
               const SizedBox(width: 8),
               Text(
-                'Información',
+                context.l10n.commonInformation,
                 style: GoogleFonts.dmSans(
                   fontSize: 11,
                   fontWeight: FontWeight.w700,
@@ -518,7 +523,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
           ),
           const SizedBox(height: 8),
           Text(
-            'Este hadiz forma parte de una colección de 1.954 hadices en español. Fuente: HadeethEnc.com.',
+            context.l10n.hadithDetailInfoBody,
             style: GoogleFonts.dmSans(
               fontSize: 10,
               height: 1.6,
@@ -540,7 +545,11 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
               _showArabic ? Icons.visibility : Icons.visibility_off,
               size: 16,
             ),
-            label: Text(_showArabic ? 'Ocultar árabe' : 'Mostrar árabe'),
+            label: Text(
+              _showArabic
+                  ? context.l10n.hadithDetailHideArabic
+                  : context.l10n.hadithDetailShowArabic,
+            ),
             style: OutlinedButton.styleFrom(
               foregroundColor: tokens.textPrimary,
               padding: const EdgeInsets.symmetric(vertical: 12),
@@ -555,7 +564,11 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
               _showTranslation ? Icons.visibility : Icons.visibility_off,
               size: 16,
             ),
-            label: Text(_showTranslation ? 'Ocultar español' : 'Mostrar español'),
+            label: Text(
+              _showTranslation
+                  ? context.l10n.hadithDetailHideTranslation
+                  : context.l10n.hadithDetailShowTranslation,
+            ),
             style: OutlinedButton.styleFrom(
               foregroundColor: tokens.textPrimary,
               padding: const EdgeInsets.symmetric(vertical: 12),
@@ -567,6 +580,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
   }
 
   Widget _buildBottomBar(QiblaTokens tokens) {
+    final l10n = context.l10n;
     return SafeArea(
       child: Container(
         padding: const EdgeInsets.all(12),
@@ -580,7 +594,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
               child: ElevatedButton.icon(
                 onPressed: _openSharePreview,
                 icon: const Icon(Icons.share),
-                label: const Text('Compartir'),
+                label: Text(l10n.commonShare),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: tokens.primary,
                   foregroundColor: Colors.white,
@@ -616,7 +630,11 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(_isFavorite ? 'Hadiz guardado en favoritos' : 'Hadiz eliminado de favoritos'),
+        content: Text(
+          _isFavorite
+              ? context.l10n.hadithDetailSavedToFavorites
+              : context.l10n.hadithDetailRemovedFromFavorites,
+        ),
         duration: const Duration(seconds: 2),
       ),
     );
@@ -627,9 +645,9 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
     await Clipboard.setData(ClipboardData(text: text));
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Texto copiado al portapapeles'),
-        duration: Duration(seconds: 2),
+      SnackBar(
+        content: Text(context.l10n.hadithDetailCopied),
+        duration: const Duration(seconds: 2),
       ),
     );
   }
@@ -695,7 +713,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
     if (refLower.contains('ibn majah') || refLower.contains('ibnmajah')) return 'Ibn Majah';
     if (refLower.contains('malik') || refLower.contains('muwatta')) return 'Malik';
     if (refLower.contains('ahmad')) return 'Ahmad';
-    return 'Otros';
+    return context.l10n.commonOther;
   }
 
   String? _getArabicCollectionLabel(String collection) {

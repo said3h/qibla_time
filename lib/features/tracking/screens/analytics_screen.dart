@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theme/app_theme.dart';
 import '../../../core/theme/theme_provider.dart';
+import '../../../l10n/l10n.dart';
 import '../../hadith/services/hadith_service.dart';
 import '../models/achievement.dart';
 import '../models/tracking_models.dart';
@@ -22,6 +23,7 @@ class AnalyticsScreen extends ConsumerWidget {
     final achievements = ref.watch(achievementsProvider);
     final themeName = ref.watch(themeControllerProvider);
     final tokens = QiblaThemes.fromName(themeName);
+    final l10n = context.l10n;
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
@@ -29,7 +31,7 @@ class AnalyticsScreen extends ConsumerWidget {
         backgroundColor: tokens.bgApp,
         elevation: 0,
         title: Text(
-          'Estadísticas',
+          l10n.commonStatistics,
           style: GoogleFonts.amiri(
             fontSize: 26,
             fontWeight: FontWeight.bold,
@@ -39,7 +41,7 @@ class AnalyticsScreen extends ConsumerWidget {
         actions: tracking.hasAnyCompletedPrayer
             ? [
                 PopupMenuButton<_AnalyticsShareAction>(
-                  tooltip: 'Compartir progreso',
+                  tooltip: l10n.analyticsShareProgressTooltip,
                   icon: Icon(Icons.ios_share_rounded, color: tokens.primary),
                   color: tokens.bgSurface,
                   onSelected: (action) => _handleShareAction(
@@ -53,7 +55,7 @@ class AnalyticsScreen extends ConsumerWidget {
                     PopupMenuItem(
                       value: _AnalyticsShareAction.image,
                       child: Text(
-                        'Compartir imagen',
+                        l10n.analyticsShareImage,
                         style: GoogleFonts.dmSans(
                           fontSize: 13,
                           color: tokens.textPrimary,
@@ -63,7 +65,7 @@ class AnalyticsScreen extends ConsumerWidget {
                     PopupMenuItem(
                       value: _AnalyticsShareAction.text,
                       child: Text(
-                        'Compartir texto',
+                        l10n.analyticsShareText,
                         style: GoogleFonts.dmSans(
                           fontSize: 13,
                           color: tokens.textPrimary,
@@ -139,7 +141,7 @@ class AnalyticsScreen extends ConsumerWidget {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              'No hemos podido compartir tu progreso. Inténtalo de nuevo en un momento.',
+              context.l10n.analyticsShareError,
               style: GoogleFonts.dmSans(),
             ),
           ),
@@ -171,7 +173,7 @@ class _EmptyAnalyticsState extends StatelessWidget {
               Icon(Icons.insights_outlined, size: 42, color: tokens.primary),
               const SizedBox(height: 14),
               Text(
-                'Aún no hay datos de tus oraciones',
+                context.l10n.analyticsEmptyTitle,
                 textAlign: TextAlign.center,
                 style: GoogleFonts.amiri(
                   fontSize: 24,
@@ -181,7 +183,7 @@ class _EmptyAnalyticsState extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                'Marca tus oraciones desde Inicio para ver aquí tu racha, tu progreso semanal y tus días más constantes.',
+                context.l10n.analyticsEmptyBody,
                 textAlign: TextAlign.center,
                 style: GoogleFonts.dmSans(
                   fontSize: 12,
@@ -201,7 +203,7 @@ class _EmptyAnalyticsState extends StatelessWidget {
                   border: Border.all(color: tokens.primaryBorder),
                 ),
                 child: Text(
-                  'Empieza marcando una oración hoy y aquí comenzarán a aparecer tus estadísticas.',
+                  context.l10n.analyticsEmptyHint,
                   textAlign: TextAlign.center,
                   style: GoogleFonts.dmSans(
                     fontSize: 11,
@@ -233,22 +235,22 @@ class _WeeklySummaryCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _SectionTitle(title: 'Resumen semanal', tokens: tokens),
+          _SectionTitle(title: context.l10n.analyticsWeeklySummaryTitle, tokens: tokens),
           const SizedBox(height: 16),
           Row(
             children: [
               Expanded(
                 child: _SummaryStat(
-                  label: 'Esta semana',
+                  label: context.l10n.analyticsThisWeekLabel,
                   value: '${summary.prayersCompleted}/${summary.maxPossible}',
-                  helper: 'oraciones',
+                  helper: context.l10n.commonPrayers,
                   tokens: tokens,
                 ),
               ),
               const SizedBox(width: 12),
               Expanded(
                 child: _SummaryStat(
-                  label: 'Días completos',
+                  label: context.l10n.analyticsFullDaysLabel,
                   value: '${summary.fullDays}',
                   helper: '5/5',
                   tokens: tokens,
@@ -257,7 +259,7 @@ class _WeeklySummaryCard extends StatelessWidget {
               const SizedBox(width: 12),
               Expanded(
                 child: _SummaryStat(
-                  label: 'Tu mejor día',
+                  label: context.l10n.analyticsBestDayLabel,
                   value: summary.strongestDay.shortLabel,
                   helper: '${summary.strongestDay.completed}/5',
                   tokens: tokens,
@@ -357,6 +359,7 @@ class _StreakCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final streak = tracking.currentStreak;
     final best = tracking.bestStreak;
+    final l10n = context.l10n;
 
     return _Card(
       tokens: tokens,
@@ -385,8 +388,8 @@ class _StreakCard extends StatelessWidget {
               children: [
                 Text(
                   streak == 0
-                      ? 'Sin racha activa'
-                      : '$streak ${streak == 1 ? 'día' : 'días'} seguidos',
+                      ? l10n.analyticsNoActiveStreak
+                      : l10n.analyticsStreakDays(streak),
                   style: GoogleFonts.amiri(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
@@ -396,8 +399,8 @@ class _StreakCard extends StatelessWidget {
                 const SizedBox(height: 2),
                 Text(
                   streak == 0
-                      ? 'Completa tus 5 oraciones de hoy para iniciar tu racha.'
-                      : 'Tu mejor racha es de $best días.',
+                      ? l10n.analyticsStartStreakHint
+                      : l10n.analyticsBestStreakHint(best),
                   style: GoogleFonts.dmSans(
                     fontSize: 12,
                     color: tokens.textSecondary,
@@ -415,7 +418,7 @@ class _StreakCard extends StatelessWidget {
                 border: Border.all(color: tokens.primaryBorder),
               ),
               child: Text(
-                'Récord',
+                l10n.analyticsRecordBadge,
                 style: GoogleFonts.dmSans(
                   fontSize: 10,
                   fontWeight: FontWeight.w600,
@@ -445,13 +448,13 @@ class _AchievementsCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _SectionTitle(title: 'Logros', tokens: tokens),
+          _SectionTitle(title: context.l10n.analyticsAchievementsTitle, tokens: tokens),
           const SizedBox(height: 14),
           achievements.when(
             data: (items) {
               if (items.isEmpty) {
                 return Text(
-                  'Tus logros irán apareciendo aquí a medida que avances.',
+                  context.l10n.analyticsAchievementsEmpty,
                   style: GoogleFonts.dmSans(
                     fontSize: 13,
                     color: tokens.textSecondary,
@@ -486,7 +489,7 @@ class _AchievementsCard extends StatelessWidget {
               ),
             ),
             error: (_, __) => Text(
-              'No hemos podido cargar los logros por ahora.',
+              context.l10n.analyticsAchievementsLoadError,
               style: GoogleFonts.dmSans(
                 fontSize: 13,
                 color: tokens.textSecondary,
@@ -612,7 +615,7 @@ class _HeatmapCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _SectionTitle(title: 'Últimos 30 días', tokens: tokens),
+          _SectionTitle(title: context.l10n.analyticsLast30DaysTitle, tokens: tokens),
           const SizedBox(height: 14),
           GridView.builder(
             shrinkWrap: true,
@@ -629,7 +632,7 @@ class _HeatmapCard extends StatelessWidget {
           Row(
             children: [
               Text(
-                'Menos',
+                context.l10n.analyticsLessLabel,
                 style: GoogleFonts.dmSans(
                   fontSize: 10,
                   color: tokens.textMuted,
@@ -645,7 +648,7 @@ class _HeatmapCard extends StatelessWidget {
               ),
               const SizedBox(width: 6),
               Text(
-                'Más',
+                context.l10n.analyticsMoreLabel,
                 style: GoogleFonts.dmSans(
                   fontSize: 10,
                   color: tokens.textMuted,
@@ -745,7 +748,7 @@ class _PrayerProgressCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _SectionTitle(title: 'Por oración · últimos 30 días', tokens: tokens),
+          _SectionTitle(title: context.l10n.analyticsByPrayerTitle, tokens: tokens),
           const SizedBox(height: 14),
           ..._prayers.map(
             (prayer) => Padding(
@@ -847,6 +850,7 @@ class _MonthlyTotalsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final stats = tracking.currentMonthStats;
     final completionPercentage = (stats.completionRate * 100).round();
+    final l10n = context.l10n;
 
     return _Card(
       tokens: tokens,
@@ -885,20 +889,20 @@ class _MonthlyTotalsCard extends StatelessWidget {
                 child: Column(
                   children: [
                     _StatRow(
-                      label: 'Oraciones completadas',
+                      label: l10n.analyticsCompletedPrayersLabel,
                       value: '${stats.prayersCompleted}/${stats.maxPossible}',
                       tokens: tokens,
                     ),
                     const SizedBox(height: 10),
                     _StatRow(
-                      label: 'Días completos',
-                      value: '${stats.fullDays} días',
+                      label: l10n.analyticsFullDaysLabel,
+                      value: l10n.analyticsDaysValue(stats.fullDays),
                       tokens: tokens,
                     ),
                     const SizedBox(height: 10),
                     _StatRow(
-                      label: 'Mejor racha',
-                      value: '${tracking.bestStreak} días',
+                      label: l10n.analyticsBestStreakLabel,
+                      value: l10n.analyticsDaysValue(tracking.bestStreak),
                       tokens: tokens,
                     ),
                   ],
@@ -1044,6 +1048,7 @@ class _HadithStatsCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final tokens = QiblaThemes.current;
+    final l10n = context.l10n;
     final favoritesAsync = ref.watch(hadithFavoritesProvider);
     final hadithsAsync = ref.watch(allHadithsProvider);
 
@@ -1070,13 +1075,13 @@ class _HadithStatsCard extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _SectionTitle(title: 'Hadices', tokens: tokens),
+                _SectionTitle(title: l10n.commonHadiths, tokens: tokens),
                 const SizedBox(height: 16),
                 Row(
                   children: [
                     Expanded(
                       child: _StatItem(
-                        label: 'Total',
+                        label: l10n.commonTotal,
                         value: totalHadiths.toString(),
                         icon: Icons.auto_stories,
                         color: Colors.green,
@@ -1086,7 +1091,7 @@ class _HadithStatsCard extends ConsumerWidget {
                     const SizedBox(width: 16),
                     Expanded(
                       child: _StatItem(
-                        label: 'Favoritos',
+                        label: l10n.analyticsFavoritesLabel,
                         value: favoritesCount.toString(),
                         icon: Icons.favorite,
                         color: Colors.red,
@@ -1100,7 +1105,7 @@ class _HadithStatsCard extends ConsumerWidget {
                   children: [
                     Expanded(
                       child: _StatItem(
-                        label: 'Colecciones',
+                        label: l10n.analyticsCollectionsLabel,
                         value: collectionsCount.toString(),
                         icon: Icons.folder,
                         color: Colors.orange,
@@ -1110,7 +1115,7 @@ class _HadithStatsCard extends ConsumerWidget {
                     const SizedBox(width: 16),
                     Expanded(
                       child: _StatItem(
-                        label: 'Grados',
+                        label: l10n.analyticsGradesLabel,
                         value: gradesCount.toString(),
                         icon: Icons.verified,
                         color: Colors.blue,
@@ -1127,7 +1132,7 @@ class _HadithStatsCard extends ConsumerWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Favoritos guardados',
+                          l10n.analyticsSavedFavoritesLabel,
                           style: GoogleFonts.dmSans(
                             fontSize: 11,
                             color: tokens.textPrimary,
@@ -1170,7 +1175,7 @@ class _HadithStatsCard extends ConsumerWidget {
         ),
         error: (_, __) => _CompactAnalyticsErrorCard(
           tokens: tokens,
-          message: 'No se pudieron cargar las estadísticas de hadices.',
+          message: l10n.analyticsHadithStatsLoadError,
         ),
       ),
       loading: () => _Card(
@@ -1181,7 +1186,7 @@ class _HadithStatsCard extends ConsumerWidget {
       ),
       error: (_, __) => _CompactAnalyticsErrorCard(
         tokens: tokens,
-        message: 'No se pudieron cargar las estadísticas de hadices.',
+        message: l10n.analyticsHadithStatsLoadError,
       ),
     );
   }

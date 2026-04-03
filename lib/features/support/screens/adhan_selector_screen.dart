@@ -8,6 +8,7 @@ import '../../../core/models/adhan_model.dart';
 import '../../../core/services/audio_service.dart';
 import '../../../core/services/settings_service.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../../l10n/l10n.dart';
 
 class AdhanSelectorScreen extends StatefulWidget {
   const AdhanSelectorScreen({super.key});
@@ -83,9 +84,10 @@ class _AdhanSelectorScreenState extends State<AdhanSelectorScreen> {
     setState(() {
       _selectedAdhan = file;
     });
+    final l10n = context.l10n;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('Adhan seleccionado: ${_getAdhanName(file)}'),
+        content: Text(l10n.adhanSelectorSelected(_getAdhanName(file))),
         behavior: SnackBarBehavior.floating,
       ),
     );
@@ -100,12 +102,13 @@ class _AdhanSelectorScreenState extends State<AdhanSelectorScreen> {
   }
 
   String _secondaryText(AdhanModel adhan, bool isActive, bool isPlaying) {
-    if (isPlaying) return 'Reproduciendo...';
-    if (isActive) return 'Vista previa en pausa';
+    final l10n = context.l10n;
+    if (isPlaying) return l10n.adhanSelectorPreviewPlaying;
+    if (isActive) return l10n.adhanSelectorPreviewPaused;
     if (adhan.description != null && adhan.description!.trim().isNotEmpty) {
       return adhan.description!;
     }
-    return 'Vista previa';
+    return l10n.adhanSelectorPreviewIdle;
   }
 
   Future<void> _togglePreview(String file) async {
@@ -148,7 +151,7 @@ class _AdhanSelectorScreenState extends State<AdhanSelectorScreen> {
       });
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text('No hemos podido reproducir la vista previa.'),
+          content: Text(context.l10n.adhanSelectorPreviewError),
           behavior: SnackBarBehavior.floating,
         ),
       );
@@ -180,12 +183,13 @@ class _AdhanSelectorScreenState extends State<AdhanSelectorScreen> {
   @override
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
+    final l10n = context.l10n;
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
       appBar: AppBar(
         title: Text(
-          'Seleccionar adhan',
+          l10n.adhanSelectorTitle,
           style: GoogleFonts.dmSans(fontWeight: FontWeight.w700),
         ),
         backgroundColor: tokens.bgApp,
@@ -219,6 +223,7 @@ class _AdhanSelectorScreenState extends State<AdhanSelectorScreen> {
   }
 
   Widget _buildHeader(QiblaTokens tokens) {
+    final l10n = context.l10n;
     return Container(
       margin: const EdgeInsets.all(16),
       padding: const EdgeInsets.all(20),
@@ -245,7 +250,7 @@ class _AdhanSelectorScreenState extends State<AdhanSelectorScreen> {
           ),
           const SizedBox(height: 12),
           Text(
-            'Elige el adhan para tus avisos',
+            l10n.adhanSelectorHeaderTitle,
             style: GoogleFonts.dmSans(
               color: tokens.textPrimary,
               fontSize: 18,
@@ -254,7 +259,7 @@ class _AdhanSelectorScreenState extends State<AdhanSelectorScreen> {
           ),
           const SizedBox(height: 8),
           Text(
-            'Puedes escuchar una vista previa breve antes de seleccionarlo.',
+            l10n.adhanSelectorHeaderBody,
             style: GoogleFonts.dmSans(
               color: tokens.textSecondary,
               fontSize: 14,
@@ -268,9 +273,13 @@ class _AdhanSelectorScreenState extends State<AdhanSelectorScreen> {
   }
 
   Widget _buildPlayerBar(QiblaTokens tokens) {
+    final l10n = context.l10n;
     final currentAdhan = AdhanModel.availableAdhans.firstWhere(
       (a) => a.file == _activeAdhan,
-      orElse: () => AdhanModel(name: 'Adhan', file: _activeAdhan!),
+      orElse: () => AdhanModel(
+        name: context.l10n.adhanSelectorTitle,
+        file: _activeAdhan!,
+      ),
     );
 
     final sliderValue = _duration.inMilliseconds > 0
@@ -318,7 +327,9 @@ class _AdhanSelectorScreenState extends State<AdhanSelectorScreen> {
                     ),
                     const SizedBox(height: 2),
                     Text(
-                      _isPreviewPlaying ? 'Reproduciendo...' : 'Vista previa en pausa',
+                      _isPreviewPlaying
+                          ? l10n.adhanSelectorPreviewPlaying
+                          : l10n.adhanSelectorPreviewPaused,
                       style: GoogleFonts.dmSans(
                         fontSize: 12,
                         color: tokens.textSecondary,
@@ -366,7 +377,9 @@ class _AdhanSelectorScreenState extends State<AdhanSelectorScreen> {
               FilledButton.icon(
                 onPressed: _activeAdhan == null ? null : () => _togglePreview(_activeAdhan!),
                 icon: Icon(_isPreviewPlaying ? Icons.pause : Icons.record_voice_over),
-                label: Text(_isPreviewPlaying ? 'Pausar' : 'Reanudar'),
+                label: Text(
+                  _isPreviewPlaying ? l10n.commonPause : l10n.commonResume,
+                ),
               ),
               const Spacer(),
               Text(
@@ -390,6 +403,7 @@ class _AdhanSelectorScreenState extends State<AdhanSelectorScreen> {
     bool isSelected,
     bool isActive,
   ) {
+    final l10n = context.l10n;
     final isPlaying = isActive && _isPreviewPlaying;
     final hasHighlight = isSelected || isActive;
     final subtitleText = _secondaryText(adhan, isActive, isPlaying);
@@ -478,10 +492,10 @@ class _AdhanSelectorScreenState extends State<AdhanSelectorScreen> {
         ),
         trailing: IconButton(
           tooltip: isPlaying
-              ? 'Pausar vista previa'
+              ? l10n.adhanSelectorPausePreview
               : isActive
-                  ? 'Reanudar vista previa'
-                  : 'Escuchar vista previa',
+                  ? l10n.adhanSelectorResumePreview
+                  : l10n.adhanSelectorListenPreview,
           icon: Icon(
             isPlaying ? Icons.pause : Icons.record_voice_over,
             size: 28,

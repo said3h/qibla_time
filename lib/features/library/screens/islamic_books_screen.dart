@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theme/app_theme.dart';
+import '../../../l10n/l10n.dart';
 import '../models/book_model.dart';
 import '../services/islamhouse_book_service.dart';
 import '../utils/book_link_launcher.dart';
@@ -17,10 +18,12 @@ class IslamicBooksScreen extends ConsumerStatefulWidget {
 
 class _IslamicBooksScreenState extends ConsumerState<IslamicBooksScreen>
     with SingleTickerProviderStateMixin {
+  static const _allCategoriesValue = '__all__';
+
   final _searchController = TextEditingController();
   late TabController _tabController;
 
-  String _selectedCategory = 'Todos';
+  String _selectedCategory = _allCategoriesValue;
   bool _showFilters = false;
 
   @override
@@ -39,6 +42,7 @@ class _IslamicBooksScreenState extends ConsumerState<IslamicBooksScreen>
   @override
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
+    final l10n = context.l10n;
     final booksAsync = ref.watch(islamHouseBooksProvider);
     final featuredAsync = ref.watch(islamHouseFeaturedBooksProvider);
     final categoriesAsync = ref.watch(islamHouseCategoriesProvider);
@@ -47,7 +51,7 @@ class _IslamicBooksScreenState extends ConsumerState<IslamicBooksScreen>
       backgroundColor: tokens.bgPage,
       appBar: AppBar(
         title: Text(
-          'Biblioteca Islámica',
+          l10n.booksLibraryTitle,
           style: GoogleFonts.amiri(
             fontSize: 22,
             fontWeight: FontWeight.bold,
@@ -58,7 +62,7 @@ class _IslamicBooksScreenState extends ConsumerState<IslamicBooksScreen>
           IconButton(
             icon: const Icon(Icons.info_outline),
             onPressed: _showAbout,
-            tooltip: 'Acerca de',
+            tooltip: l10n.commonAbout,
           ),
         ],
         bottom: TabBar(
@@ -66,10 +70,10 @@ class _IslamicBooksScreenState extends ConsumerState<IslamicBooksScreen>
           labelColor: tokens.primary,
           unselectedLabelColor: tokens.textSecondary,
           indicatorColor: tokens.primary,
-          tabs: const [
-            Tab(icon: Icon(Icons.library_books), text: 'Libros'),
-            Tab(icon: Icon(Icons.star), text: 'Destacados'),
-            Tab(icon: Icon(Icons.folder), text: 'Categorías'),
+          tabs: [
+            Tab(icon: const Icon(Icons.library_books), text: l10n.commonBooks),
+            Tab(icon: const Icon(Icons.star), text: l10n.commonFeatured),
+            Tab(icon: const Icon(Icons.folder), text: l10n.booksCategoriesTab),
           ],
         ),
       ),
@@ -86,6 +90,7 @@ class _IslamicBooksScreenState extends ConsumerState<IslamicBooksScreen>
 
   Widget _buildBooksTab(AsyncValue<List<IslamHouseBook>> booksAsync) {
     final tokens = QiblaThemes.current;
+    final l10n = context.l10n;
 
     return Column(
       children: [
@@ -95,7 +100,7 @@ class _IslamicBooksScreenState extends ConsumerState<IslamicBooksScreen>
           child: TextField(
             controller: _searchController,
             decoration: InputDecoration(
-              hintText: 'Buscar libros...',
+              hintText: l10n.booksSearchHint,
               prefixIcon: const Icon(Icons.search),
               suffixIcon: _searchController.text.isNotEmpty
                   ? IconButton(
@@ -125,7 +130,7 @@ class _IslamicBooksScreenState extends ConsumerState<IslamicBooksScreen>
 
               if (filtered.isEmpty) {
                 return _EmptyState(
-                  message: 'No se encontraron libros',
+                  message: l10n.booksEmptySearch,
                   icon: Icons.search_off,
                 );
               }
@@ -161,8 +166,8 @@ class _IslamicBooksScreenState extends ConsumerState<IslamicBooksScreen>
     return featuredAsync.when(
       data: (books) {
         if (books.isEmpty) {
-          return const _EmptyState(
-            message: 'No hay libros destacados',
+          return _EmptyState(
+            message: context.l10n.booksEmptyFeatured,
             icon: Icons.star_border,
           );
         }
@@ -192,13 +197,13 @@ class _IslamicBooksScreenState extends ConsumerState<IslamicBooksScreen>
     return categoriesAsync.when(
       data: (categories) {
         if (categories.isEmpty) {
-          return const _EmptyState(
-            message: 'No hay categorías disponibles',
+          return _EmptyState(
+            message: context.l10n.booksEmptyCategories,
             icon: Icons.folder_off_outlined,
           );
         }
 
-        final allCategories = ['Todos', ...categories.map((c) => c.name)];
+        final allCategories = [_allCategoriesValue, ...categories.map((c) => c.name)];
 
         return ListView.builder(
           padding: const EdgeInsets.all(16),
@@ -233,7 +238,9 @@ class _IslamicBooksScreenState extends ConsumerState<IslamicBooksScreen>
                       const SizedBox(width: 12),
                       Expanded(
                         child: Text(
-                          category,
+                          category == _allCategoriesValue
+                              ? context.l10n.booksAllCategories
+                              : category,
                           style: GoogleFonts.dmSans(
                             fontSize: 13,
                             fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
@@ -262,7 +269,7 @@ class _IslamicBooksScreenState extends ConsumerState<IslamicBooksScreen>
     var filtered = books;
 
     // Filtro por categoría
-    if (_selectedCategory != 'Todos') {
+    if (_selectedCategory != _allCategoriesValue) {
       filtered = filtered
           .where((b) => b.category.contains(_selectedCategory))
           .toList();
@@ -283,26 +290,27 @@ class _IslamicBooksScreenState extends ConsumerState<IslamicBooksScreen>
   }
 
   void _showAbout() {
+    final l10n = context.l10n;
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        title: const Text('Biblioteca Islámica'),
+        title: Text(l10n.booksLibraryTitle),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Esta biblioteca reúne libros islámicos en español de IslamHouse.com.'),
+            Text(l10n.booksAboutBody),
             const SizedBox(height: 16),
             Text(
-              '• Más de 1.500 libros disponibles',
+              '• ${l10n.booksAboutBulletCatalog}',
               style: GoogleFonts.dmSans(fontSize: 12),
             ),
             Text(
-              '• Contenido verificado',
+              '• ${l10n.booksAboutBulletVerified}',
               style: GoogleFonts.dmSans(fontSize: 12),
             ),
             Text(
-              '• Múltiples categorías',
+              '• ${l10n.booksAboutBulletCategories}',
               style: GoogleFonts.dmSans(fontSize: 12),
             ),
           ],
@@ -310,13 +318,13 @@ class _IslamicBooksScreenState extends ConsumerState<IslamicBooksScreen>
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cerrar'),
+            child: Text(l10n.commonClose),
           ),
           TextButton(
             onPressed: () {
               openBookUrl(context, 'https://islamhouse.com/es/');
             },
-            child: const Text('Visitar IslamHouse'),
+            child: Text(l10n.booksVisitIslamHouse),
           ),
         ],
       ),
@@ -334,6 +342,7 @@ class _BookCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
+    final l10n = context.l10n;
 
     return GestureDetector(
       onTap: () => _openBook(context),
@@ -448,6 +457,7 @@ class _BookListCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
+    final l10n = context.l10n;
 
     return GestureDetector(
       onTap: () => _openBook(context),
@@ -503,7 +513,7 @@ class _BookListCard extends StatelessWidget {
                           const Icon(Icons.star, size: 12, color: Colors.amber),
                           const SizedBox(width: 4),
                           Text(
-                            'Destacado',
+                            l10n.commonFeatured,
                             style: GoogleFonts.dmSans(
                               fontSize: 9,
                               fontWeight: FontWeight.w600,
@@ -538,7 +548,7 @@ class _BookListCard extends StatelessWidget {
                       Icon(Icons.description, size: 12, color: tokens.textSecondary),
                       const SizedBox(width: 4),
                       Text(
-                        '${book.pages} págs',
+                        l10n.booksPageCount(book.pages),
                         style: GoogleFonts.dmSans(
                           fontSize: 10,
                           color: tokens.textSecondary,
@@ -587,6 +597,7 @@ class _BookDetailSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
+    final l10n = context.l10n;
 
     return DraggableScrollableSheet(
       initialChildSize: 0.7,
@@ -667,7 +678,7 @@ class _BookDetailSheet extends StatelessWidget {
           // Info
           Row(
             children: [
-              _InfoChip(icon: Icons.description, label: '${book.pages} págs'),
+              _InfoChip(icon: Icons.description, label: l10n.booksPageCount(book.pages)),
               const SizedBox(width: 8),
               _InfoChip(icon: Icons.storage, label: book.size),
               const SizedBox(width: 8),
@@ -678,7 +689,7 @@ class _BookDetailSheet extends StatelessWidget {
 
           // Description
           Text(
-            'Descripción',
+            l10n.booksDescription,
             style: GoogleFonts.dmSans(
               fontSize: 14,
               fontWeight: FontWeight.w600,
@@ -703,7 +714,7 @@ class _BookDetailSheet extends StatelessWidget {
                 child: ElevatedButton.icon(
                   onPressed: () => openBookUrl(context, book.readUrl),
                   icon: const Icon(Icons.read_more),
-                  label: const Text('Leer'),
+                  label: Text(l10n.commonRead),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: tokens.primary,
                     foregroundColor: Colors.white,
@@ -716,7 +727,7 @@ class _BookDetailSheet extends StatelessWidget {
                 child: OutlinedButton.icon(
                   onPressed: () => openBookUrl(context, book.downloadUrl),
                   icon: const Icon(Icons.download),
-                  label: const Text('Descargar'),
+                  label: Text(l10n.commonDownload),
                   style: OutlinedButton.styleFrom(
                     foregroundColor: tokens.primary,
                     padding: const EdgeInsets.symmetric(vertical: 14),
@@ -806,6 +817,7 @@ class _ErrorState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
+    final l10n = context.l10n;
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(24),
@@ -815,7 +827,7 @@ class _ErrorState extends StatelessWidget {
             Icon(Icons.error_outline, size: 48, color: Colors.red),
             const SizedBox(height: 16),
             Text(
-              'Error al cargar',
+              l10n.booksLoadErrorTitle,
               style: GoogleFonts.dmSans(
                 fontSize: 14,
                 fontWeight: FontWeight.w600,

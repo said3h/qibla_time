@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theme/app_theme.dart';
+import '../../../l10n/l10n.dart';
 import '../../prayer_times/domain/entities/prayer_location_diagnostic.dart';
 import '../../prayer_times/presentation/providers/prayer_times_providers.dart';
 import '../services/qibla_service.dart';
@@ -20,6 +21,7 @@ class QiblaScreen extends ConsumerWidget {
     final bearingAsync = ref.watch(qiblaBearingProvider);
     final distanceAsync = ref.watch(distanceToMeccaProvider);
     final locationDiagnosticAsync = ref.watch(prayerLocationDiagnosticProvider);
+    final l10n = context.l10n;
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
@@ -30,7 +32,7 @@ class QiblaScreen extends ConsumerWidget {
             if (heading == null) {
               return _buildError(
                 tokens,
-                'No pudimos leer la brújula. Prueba a mover el teléfono en forma de 8 y aléjalo de fundas magnéticas.',
+                l10n.qiblaCompassReadError,
               );
             }
 
@@ -38,6 +40,7 @@ class QiblaScreen extends ConsumerWidget {
               data: (bearing) {
                 if (bearing == null) {
                   return _buildLocationIssue(
+                    context,
                     tokens,
                     locationDiagnosticAsync.valueOrNull,
                   );
@@ -53,9 +56,9 @@ class QiblaScreen extends ConsumerWidget {
                       _buildHeader(context, tokens),
                       const SizedBox(height: 18),
                       distanceAsync.when(
-                        data: (distance) => _buildDistanceCard(tokens, distance),
-                        loading: () => _buildDistanceCard(tokens, null),
-                        error: (_, __) => _buildDistanceCard(tokens, null),
+                        data: (distance) => _buildDistanceCard(context, tokens, distance),
+                        loading: () => _buildDistanceCard(context, tokens, null),
+                        error: (_, __) => _buildDistanceCard(context, tokens, null),
                       ),
                       const SizedBox(height: 20),
                       _buildCompass(tokens, dialRotation, needleRotation),
@@ -76,7 +79,9 @@ class QiblaScreen extends ConsumerWidget {
                           border: Border.all(color: tokens.border),
                         ),
                         child: Text(
-                          'Qibla · ${_getDirectionName(bearing)} · Dirección a la Kaaba',
+                          l10n.qiblaDirectionSummary(
+                            _getDirectionName(context, bearing),
+                          ),
                           style: GoogleFonts.dmSans(
                             fontSize: 12,
                             color: tokens.textSecondary,
@@ -87,7 +92,7 @@ class QiblaScreen extends ConsumerWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Text(
-                          'Mantén el dispositivo plano y alejado de imanes para mayor precisión.',
+                          l10n.qiblaGuidanceBody,
                           textAlign: TextAlign.center,
                           style: GoogleFonts.dmSans(
                             fontSize: 11,
@@ -100,17 +105,17 @@ class QiblaScreen extends ConsumerWidget {
                   ),
                 );
               },
-              loading: () => _buildLoading(tokens),
+              loading: () => _buildLoading(context, tokens),
               error: (_, __) => _buildError(
                 tokens,
-                'No hemos podido calcular la dirección de la Kaaba con esta ubicación.',
+                l10n.qiblaDirectionLoadError,
               ),
             );
           },
-          loading: () => _buildLoading(tokens),
+          loading: () => _buildLoading(context, tokens),
           error: (_, __) => _buildError(
             tokens,
-            'No hemos podido iniciar la brújula. Comprueba si tu dispositivo tiene sensor magnético.',
+            l10n.qiblaCompassInitError,
           ),
         ),
       ),
@@ -118,6 +123,7 @@ class QiblaScreen extends ConsumerWidget {
   }
 
   Widget _buildHeader(BuildContext context, QiblaTokens tokens) {
+    final l10n = context.l10n;
     return Row(
       children: [
         Expanded(
@@ -125,7 +131,7 @@ class QiblaScreen extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Qibla',
+                l10n.qiblaTitle,
                 style: GoogleFonts.amiri(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
@@ -133,7 +139,7 @@ class QiblaScreen extends ConsumerWidget {
                 ),
               ),
               Text(
-                'القبلة · Dirección a la Kaaba',
+                l10n.qiblaSubtitle,
                 style: GoogleFonts.dmSans(
                   fontSize: 11,
                   color: tokens.textSecondary,
@@ -150,7 +156,12 @@ class QiblaScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildDistanceCard(QiblaTokens tokens, double? distance) {
+  Widget _buildDistanceCard(
+    BuildContext context,
+    QiblaTokens tokens,
+    double? distance,
+  ) {
+    final l10n = context.l10n;
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
@@ -162,9 +173,22 @@ class QiblaScreen extends ConsumerWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _buildStat(tokens, Icons.place_outlined, distance == null ? '--' : distance.toStringAsFixed(0), 'km', 'Distancia'),
+          _buildStat(
+            tokens,
+            Icons.place_outlined,
+            distance == null ? '--' : distance.toStringAsFixed(0),
+            'km',
+            l10n.qiblaDistanceLabel,
+          ),
           Container(width: 1, height: 40, color: tokens.primaryBorder),
-          _buildStat(tokens, Icons.my_location, '±3', 'm', 'Precisión', valueColor: tokens.accent),
+          _buildStat(
+            tokens,
+            Icons.my_location,
+            '±3',
+            'm',
+            l10n.qiblaPrecisionLabel,
+            valueColor: tokens.accent,
+          ),
         ],
       ),
     );
@@ -256,7 +280,7 @@ class QiblaScreen extends ConsumerWidget {
                   Positioned(top: 24, child: _cardinal('N', Colors.red.shade400)),
                   Positioned(bottom: 24, child: _cardinal('S', tokens.textSecondary)),
                   Positioned(right: 24, child: _cardinal('E', tokens.textSecondary)),
-                  Positioned(left: 24, child: _cardinal('O', tokens.textSecondary)),
+                  Positioned(left: 24, child: _cardinal('W', tokens.textSecondary)),
                 ],
               ),
             ),
@@ -280,7 +304,9 @@ class QiblaScreen extends ConsumerWidget {
                       ),
                     ],
                   ),
-                  child: const Center(child: Text('🕋', style: TextStyle(fontSize: 20))),
+                  child: const Center(
+                    child: Icon(Icons.navigation_rounded, size: 22, color: Colors.white),
+                  ),
                 ),
                 Container(
                   width: 3,
@@ -318,7 +344,7 @@ class QiblaScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildLoading(QiblaTokens tokens) {
+  Widget _buildLoading(BuildContext context, QiblaTokens tokens) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -326,7 +352,7 @@ class QiblaScreen extends ConsumerWidget {
           CircularProgressIndicator(color: tokens.primary),
           const SizedBox(height: 14),
           Text(
-            'Inicializando brújula...',
+            context.l10n.qiblaLoading,
             style: GoogleFonts.dmSans(color: tokens.textSecondary),
           ),
         ],
@@ -356,39 +382,40 @@ class QiblaScreen extends ConsumerWidget {
   }
 
   Widget _buildLocationIssue(
+    BuildContext context,
     QiblaTokens tokens,
     PrayerLocationDiagnostic? diagnostic,
   ) {
-    String text = 'Activa la ubicación para calcular la dirección de la Qibla.';
+    final l10n = context.l10n;
+    var text = l10n.qiblaEnableLocationMessage;
     if (diagnostic != null) {
       if (!diagnostic.serviceEnabled) {
-        text =
-            'La ubicación del dispositivo está desactivada. Activa el GPS para calcular la Qibla con precisión.';
+        text = l10n.qiblaGpsDisabledMessage;
       } else if (diagnostic.permissionStatus ==
           PrayerLocationPermissionStatus.deniedForever) {
-        text =
-            'El permiso de ubicación está bloqueado. Puedes activarlo desde los ajustes del sistema.';
+        text = l10n.qiblaPermissionBlockedMessage;
       } else if (diagnostic.permissionStatus ==
           PrayerLocationPermissionStatus.denied) {
-        text =
-            'Qibla Time necesita permiso de ubicación para orientar la Qibla con precisión.';
+        text = l10n.qiblaPermissionNeededMessage;
       }
     }
     return _buildError(tokens, text);
   }
 
-  String _getDirectionName(double bearing) {
-    if (bearing >= 337.5 || bearing < 22.5) return 'Norte';
-    if (bearing < 67.5) return 'Noreste';
-    if (bearing < 112.5) return 'Este';
-    if (bearing < 157.5) return 'Sureste';
-    if (bearing < 202.5) return 'Sur';
-    if (bearing < 247.5) return 'Suroeste';
-    if (bearing < 292.5) return 'Oeste';
-    return 'Noroeste';
+  String _getDirectionName(BuildContext context, double bearing) {
+    final l10n = context.l10n;
+    if (bearing >= 337.5 || bearing < 22.5) return l10n.qiblaDirectionNorth;
+    if (bearing < 67.5) return l10n.qiblaDirectionNorthEast;
+    if (bearing < 112.5) return l10n.qiblaDirectionEast;
+    if (bearing < 157.5) return l10n.qiblaDirectionSouthEast;
+    if (bearing < 202.5) return l10n.qiblaDirectionSouth;
+    if (bearing < 247.5) return l10n.qiblaDirectionSouthWest;
+    if (bearing < 292.5) return l10n.qiblaDirectionWest;
+    return l10n.qiblaDirectionNorthWest;
   }
 
   void _showInfoDialog(BuildContext context, QiblaTokens tokens) {
+    final l10n = context.l10n;
     showDialog<void>(
       context: context,
       builder: (context) {
@@ -402,7 +429,7 @@ class QiblaScreen extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Cómo usar la brújula',
+                  l10n.qiblaHowToUseTitle,
                   style: GoogleFonts.amiri(
                     fontSize: 24,
                     color: tokens.primary,
@@ -410,15 +437,30 @@ class QiblaScreen extends ConsumerWidget {
                   ),
                 ),
                 const SizedBox(height: 16),
-                _infoRow(tokens, '📱', 'Mantén el dispositivo plano', 'Evita inclinaciones para ganar precisión'),
-                _infoRow(tokens, '🚫', 'Aleja imanes y metal', 'Los campos magnéticos afectan a la lectura'),
-                _infoRow(tokens, '🔄', 'Calibra si es necesario', 'Mueve el teléfono en forma de 8'),
+                _infoRow(
+                  tokens,
+                  '📱',
+                  l10n.qiblaHowToUseKeepFlatTitle,
+                  l10n.qiblaHowToUseKeepFlatBody,
+                ),
+                _infoRow(
+                  tokens,
+                  '🚫',
+                  l10n.qiblaHowToUseAvoidMagnetsTitle,
+                  l10n.qiblaHowToUseAvoidMagnetsBody,
+                ),
+                _infoRow(
+                  tokens,
+                  '🔄',
+                  l10n.qiblaHowToUseCalibrateTitle,
+                  l10n.qiblaHowToUseCalibrateBody,
+                ),
                 const SizedBox(height: 16),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () => Navigator.pop(context),
-                    child: const Text('Entendido'),
+                    child: Text(l10n.commonDone),
                   ),
                 ),
               ],

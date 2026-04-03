@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../l10n/l10n.dart';
 import '../../prayer_times/domain/entities/ramadan_status.dart';
 import '../../prayer_times/presentation/providers/ramadan_providers.dart';
 import '../models/achievement.dart';
@@ -30,6 +31,7 @@ class AchievementService {
     TrackingState tracking, {
     RamadanStatus? ramadanStatus,
   }) async {
+    final l10n = appLocalizationsForCurrentLocale();
     final prefs = await SharedPreferences.getInstance();
     final unlockedMap = _decodeUnlockedMap(prefs.getString(_prefsKey));
     final now = DateTime.now();
@@ -45,8 +47,8 @@ class AchievementService {
       _buildAchievement(
         unlockedMap: unlockedMap,
         id: 'first_prayer',
-        title: 'Primera oración',
-        description: 'Marca tu primera oración completada.',
+        title: l10n.achievementFirstPrayerTitle,
+        description: l10n.achievementFirstPrayerDescription,
         icon: Icons.play_circle_outline,
         current: totalPrayers > 0 ? 1 : 0,
         target: 1,
@@ -54,8 +56,8 @@ class AchievementService {
       _buildAchievement(
         unlockedMap: unlockedMap,
         id: 'full_day',
-        title: 'Día completo',
-        description: 'Completa las 5 oraciones en un mismo día.',
+        title: l10n.achievementFullDayTitle,
+        description: l10n.achievementFullDayDescription,
         icon: Icons.today_outlined,
         current: fullDays > 0 ? 1 : 0,
         target: 1,
@@ -63,8 +65,8 @@ class AchievementService {
       _buildAchievement(
         unlockedMap: unlockedMap,
         id: 'streak_3',
-        title: '3 días seguidos',
-        description: 'Mantén una racha de 3 días completos.',
+        title: l10n.achievementStreak3Title,
+        description: l10n.achievementStreak3Description,
         icon: Icons.local_fire_department_outlined,
         current: bestStreak,
         target: 3,
@@ -72,8 +74,8 @@ class AchievementService {
       _buildAchievement(
         unlockedMap: unlockedMap,
         id: 'streak_7',
-        title: '7 días seguidos',
-        description: 'Mantén una racha de 7 días completos.',
+        title: l10n.achievementStreak7Title,
+        description: l10n.achievementStreak7Description,
         icon: Icons.workspace_premium_outlined,
         current: bestStreak,
         target: 7,
@@ -81,8 +83,8 @@ class AchievementService {
       _buildAchievement(
         unlockedMap: unlockedMap,
         id: 'streak_30',
-        title: '30 días seguidos',
-        description: 'Mantén una racha de 30 días completos.',
+        title: l10n.achievementStreak30Title,
+        description: l10n.achievementStreak30Description,
         icon: Icons.emoji_events_outlined,
         current: bestStreak,
         target: 30,
@@ -90,8 +92,8 @@ class AchievementService {
       _buildAchievement(
         unlockedMap: unlockedMap,
         id: 'total_100',
-        title: '100 oraciones',
-        description: 'Acumula 100 oraciones completadas.',
+        title: l10n.achievementTotal100Title,
+        description: l10n.achievementTotal100Description,
         icon: Icons.auto_graph_outlined,
         current: totalPrayers,
         target: 100,
@@ -99,8 +101,8 @@ class AchievementService {
       _buildAchievement(
         unlockedMap: unlockedMap,
         id: 'first_ramadan',
-        title: 'Primer Ramadán activo',
-        description: 'Activa Qibla Time durante Ramadán.',
+        title: l10n.achievementFirstRamadanTitle,
+        description: l10n.achievementFirstRamadanDescription,
         icon: Icons.nightlight_round,
         current: ramadanProgress,
         target: 1,

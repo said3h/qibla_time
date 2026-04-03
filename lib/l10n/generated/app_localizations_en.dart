@@ -360,7 +360,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String homePrayerSectionMarkedCount(int count) {
-    return '$count/5 checked';
+    return '$count/5 marked';
   }
 
   @override
@@ -1236,4 +1236,1211 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get quranStopAudio => 'Stop audio';
+
+  @override
+  String get commonAuthenticity => 'Authenticity';
+
+  @override
+  String get commonBooks => 'Books';
+
+  @override
+  String get commonCancel => 'Cancel';
+
+  @override
+  String get commonCategory => 'Category';
+
+  @override
+  String get commonClose => 'Close';
+
+  @override
+  String get commonCollection => 'Collection';
+
+  @override
+  String get commonCopy => 'Copy';
+
+  @override
+  String get commonDone => 'Done';
+
+  @override
+  String get commonDownload => 'Download';
+
+  @override
+  String get commonFeatured => 'Featured';
+
+  @override
+  String get commonFilter => 'Filter';
+
+  @override
+  String get commonGeneral => 'General';
+
+  @override
+  String get commonHadiths => 'Hadiths';
+
+  @override
+  String get commonInformation => 'Information';
+
+  @override
+  String get commonNext => 'Next';
+
+  @override
+  String get commonOther => 'Other';
+
+  @override
+  String get commonPause => 'Pause';
+
+  @override
+  String get commonPrayers => 'prayers';
+
+  @override
+  String get commonQuran => 'Quran';
+
+  @override
+  String get commonRead => 'Read';
+
+  @override
+  String get commonReference => 'Reference';
+
+  @override
+  String get commonResume => 'Resume';
+
+  @override
+  String get commonSave => 'Save';
+
+  @override
+  String get commonSaved => 'Saved';
+
+  @override
+  String get commonStatistics => 'Statistics';
+
+  @override
+  String get commonTotal => 'Total';
+
+  @override
+  String get achievementFirstPrayerTitle => 'First prayer';
+
+  @override
+  String get achievementFirstPrayerDescription =>
+      'You marked your first prayer in the app.';
+
+  @override
+  String get achievementFullDayTitle => 'Full day';
+
+  @override
+  String get achievementFullDayDescription =>
+      'You completed all five prayers in a single day.';
+
+  @override
+  String get achievementStreak3Title => '3-day streak';
+
+  @override
+  String get achievementStreak3Description =>
+      'You kept your consistency for three days in a row.';
+
+  @override
+  String get achievementStreak7Title => '7-day streak';
+
+  @override
+  String get achievementStreak7Description =>
+      'Seven straight days of tracking. Great rhythm.';
+
+  @override
+  String get achievementStreak30Title => '30-day streak';
+
+  @override
+  String get achievementStreak30Description =>
+      'Thirty straight days. Extraordinary consistency.';
+
+  @override
+  String get achievementTotal100Title => '100 prayers';
+
+  @override
+  String get achievementTotal100Description =>
+      'You recorded 100 completed prayers.';
+
+  @override
+  String get achievementFirstRamadanTitle => 'First Ramadan';
+
+  @override
+  String get achievementFirstRamadanDescription =>
+      'You completed your first active Ramadan day.';
+
+  @override
+  String get analyticsAchievementsTitle => 'Achievements';
+
+  @override
+  String get analyticsAchievementsEmpty => 'No achievements unlocked yet.';
+
+  @override
+  String get analyticsAchievementsLoadError =>
+      'We couldn\'t load your achievements.';
+
+  @override
+  String get analyticsBestDayLabel => 'Best day';
+
+  @override
+  String analyticsBestStreakHint(Object count) {
+    return 'Your best streak: $count days';
+  }
+
+  @override
+  String get analyticsBestStreakLabel => 'Best streak';
+
+  @override
+  String get analyticsByPrayerTitle => 'By prayer';
+
+  @override
+  String get analyticsCollectionsLabel => 'Collections';
+
+  @override
+  String get analyticsCompletedPrayersLabel => 'Completed prayers';
+
+  @override
+  String get analyticsCurrentStreakLabel => 'Current streak';
+
+  @override
+  String analyticsDaysValue(Object count) {
+    return '$count days';
+  }
+
+  @override
+  String get analyticsEmptyBody =>
+      'Start marking your prayers and you will see your consistency here.';
+
+  @override
+  String get analyticsEmptyHint =>
+      'Complete your first prayer to unlock this panel.';
+
+  @override
+  String get analyticsEmptyTitle => 'No statistics yet';
+
+  @override
+  String get analyticsFavoritesLabel => 'Favorites';
+
+  @override
+  String get analyticsFullDaysLabel => 'Full days';
+
+  @override
+  String get analyticsGradesLabel => 'Grades';
+
+  @override
+  String get analyticsHadithStatsLoadError =>
+      'Hadith statistics could not be loaded.';
+
+  @override
+  String get analyticsLast30DaysTitle => 'Last 30 days';
+
+  @override
+  String get analyticsLessLabel => 'Less';
+
+  @override
+  String get analyticsMoreLabel => 'More';
+
+  @override
+  String get analyticsNoActiveStreak => 'No active streak';
+
+  @override
+  String get analyticsRecordBadge => 'Record';
+
+  @override
+  String get analyticsSavedFavoritesLabel => 'Saved favorites';
+
+  @override
+  String get analyticsShareError => 'We couldn\'t share your progress.';
+
+  @override
+  String get analyticsShareImage => 'Share image';
+
+  @override
+  String get analyticsShareProgressTooltip => 'Share progress';
+
+  @override
+  String get analyticsShareText => 'Share text';
+
+  @override
+  String get analyticsStartStreakHint => 'Start a new streak today.';
+
+  @override
+  String analyticsStreakDays(Object count) {
+    return '$count streak days';
+  }
+
+  @override
+  String get analyticsThisWeekLabel => 'This week';
+
+  @override
+  String get analyticsWeekInterpretationEmpty =>
+      'There is not enough activity yet this week.';
+
+  @override
+  String get analyticsWeekInterpretationEncouragement =>
+      'Keep going little by little. Every prayer counts.';
+
+  @override
+  String get analyticsWeekInterpretationGood =>
+      'You are doing well this week. A bit more consistency will make a difference.';
+
+  @override
+  String get analyticsWeekInterpretationStrong =>
+      'Very strong week. You are keeping an excellent rhythm.';
+
+  @override
+  String get analyticsWeeklySummaryTitle => 'Weekly summary';
+
+  @override
+  String get booksAboutBody =>
+      'This library brings together IslamHouse books for quick reading inside the app.';
+
+  @override
+  String get booksAboutBulletCatalog =>
+      'A curated catalog that is easy to explore';
+
+  @override
+  String get booksAboutBulletCategories =>
+      'Categories to find the right reading faster';
+
+  @override
+  String get booksAboutBulletVerified =>
+      'Content from a recognized Islamic library';
+
+  @override
+  String get booksAllCategories => 'All categories';
+
+  @override
+  String get booksCategoriesTab => 'Categories';
+
+  @override
+  String get booksDescription => 'Description';
+
+  @override
+  String get booksEmptyCategories => 'No categories available.';
+
+  @override
+  String get booksEmptyFeatured => 'No featured books for now.';
+
+  @override
+  String get booksEmptySearch => 'We couldn\'t find books for that search.';
+
+  @override
+  String get booksLibraryTitle => 'Books';
+
+  @override
+  String get booksLoadErrorTitle => 'We couldn\'t load the library';
+
+  @override
+  String get booksMainCategoryAcademicLessons => 'Academic lessons';
+
+  @override
+  String get booksMainCategoryArabicLanguage => 'Arabic language';
+
+  @override
+  String get booksMainCategoryCallToIslam => 'Call to Islam';
+
+  @override
+  String get booksMainCategoryHistory => 'History';
+
+  @override
+  String get booksMainCategoryIslamicBelief => 'Islamic belief';
+
+  @override
+  String get booksMainCategoryIslamicCulture => 'Islamic culture';
+
+  @override
+  String get booksMainCategoryIslamicJurisprudence => 'Islamic jurisprudence';
+
+  @override
+  String get booksMainCategoryMajorSins => 'Major sins';
+
+  @override
+  String get booksMainCategoryNobleQuran => 'Noble Quran';
+
+  @override
+  String get booksMainCategoryPresentingIslam => 'Presenting Islam';
+
+  @override
+  String get booksMainCategoryPropheticBiography => 'Prophetic biography';
+
+  @override
+  String get booksMainCategoryProphetSunnah => 'Prophet\'s Sunnah';
+
+  @override
+  String get booksMainCategorySermons => 'Sermons';
+
+  @override
+  String get booksMainCategoryVirtues => 'Virtues';
+
+  @override
+  String booksPageCount(Object pages) {
+    return '$pages pages';
+  }
+
+  @override
+  String get booksPlaceholderDescription => 'Books will appear here soon.';
+
+  @override
+  String get booksPlaceholderTitle => 'Library in progress';
+
+  @override
+  String get booksSearchHint => 'Search book or author';
+
+  @override
+  String get booksUnnamedCategory => 'Unnamed category';
+
+  @override
+  String get booksUntitled => 'Untitled';
+
+  @override
+  String get booksVisitIslamHouse => 'Visit IslamHouse';
+
+  @override
+  String get calendarCurrentMonth => 'THIS MONTH';
+
+  @override
+  String get calendarEventAshura => 'Ashura';
+
+  @override
+  String get calendarEventDayOfArafah => 'Day of Arafah';
+
+  @override
+  String get calendarEventEidAdha => 'Eid al-Adha';
+
+  @override
+  String get calendarEventEidFitr => 'Eid al-Fitr';
+
+  @override
+  String get calendarEventIslamicNewYear => 'Islamic New Year';
+
+  @override
+  String get calendarEventRamadanStart => 'Start of Ramadan';
+
+  @override
+  String calendarImportantDatesTitle(Object year) {
+    return 'Important dates of $year';
+  }
+
+  @override
+  String get calendarSelectDate => 'Select a date';
+
+  @override
+  String get calendarSelectedDateUppercase => 'SELECTED DATE';
+
+  @override
+  String get calendarTitle => 'Islamic calendar';
+
+  @override
+  String calendarTodayLabel(Object date) {
+    return 'Today · $date';
+  }
+
+  @override
+  String get dhikrChooseCustomValue => 'Choose custom value';
+
+  @override
+  String get dhikrDailyGoalCompletedMessage =>
+      'You completed your daily dhikr goal.';
+
+  @override
+  String get dhikrDailyGoalHelper =>
+      'Choose how many repetitions you want to reach today.';
+
+  @override
+  String get dhikrDailyGoalShort => 'Daily goal';
+
+  @override
+  String get dhikrDailyGoalTitle => 'Daily goal';
+
+  @override
+  String dhikrDailyGoalUpdated(Object value) {
+    return 'Daily goal updated to $value';
+  }
+
+  @override
+  String get dhikrFeedbackAlmostThere =>
+      'You are doing very well. You are close to your daily goal.';
+
+  @override
+  String get dhikrFeedbackCompleted =>
+      'Daily goal completed. May Allah accept your dhikr.';
+
+  @override
+  String get dhikrFeedbackCycleCompleted =>
+      'Cycle completed. You can keep going calmly.';
+
+  @override
+  String get dhikrFeedbackGoodPace =>
+      'Good pace. Keep these repetitions with serenity.';
+
+  @override
+  String get dhikrFeedbackStart =>
+      'Start with a few gentle and steady repetitions.';
+
+  @override
+  String get dhikrFeedbackTakeYourTime =>
+      'Take your time. Every repetition counts.';
+
+  @override
+  String get dhikrGoalsSection => 'GOALS';
+
+  @override
+  String get dhikrHistoryEmptyBody =>
+      'There is not enough history yet for this view.';
+
+  @override
+  String get dhikrHistorySavedBody =>
+      'Your recent progress is saved automatically.';
+
+  @override
+  String get dhikrLast7Days => '7 days';
+
+  @override
+  String get dhikrMeaningAlhamdulillah => 'Praise be to Allah';
+
+  @override
+  String get dhikrMeaningAllahuAkbar => 'Allah is the Greatest';
+
+  @override
+  String get dhikrMeaningSubhanAllah => 'Glory be to Allah';
+
+  @override
+  String get dhikrRepetitionsFieldHint => 'Example: 100';
+
+  @override
+  String get dhikrRepetitionsFieldLabel => 'Repetitions';
+
+  @override
+  String get dhikrResetSession => 'Reset session';
+
+  @override
+  String dhikrSessionCountOf(Object count) {
+    return 'of $count';
+  }
+
+  @override
+  String get dhikrSessionCycleCompleted => 'You completed this dhikr cycle.';
+
+  @override
+  String get dhikrSessionGoalHelper =>
+      'Set how many repetitions you want per cycle.';
+
+  @override
+  String get dhikrSessionGoalShort => 'Session goal';
+
+  @override
+  String get dhikrSessionGoalTitle => 'Session goal';
+
+  @override
+  String dhikrSessionGoalUpdated(Object value) {
+    return 'Session goal updated to $value';
+  }
+
+  @override
+  String get dhikrSessionResetMessage => 'The session has been reset.';
+
+  @override
+  String get dhikrSubtitle => 'Mindful remembrance for your day';
+
+  @override
+  String get dhikrSummarySection => 'SUMMARY';
+
+  @override
+  String get dhikrTitle => 'Dhikr';
+
+  @override
+  String dhikrTodayCycle(Object current, Object today, Object total) {
+    return 'Today: $today · cycle $current/$total';
+  }
+
+  @override
+  String get hadithDailyBadge => 'HADITH OF THE DAY';
+
+  @override
+  String get hadithDailyOpenLibrary => 'Open hadiths';
+
+  @override
+  String get hadithDailyUnavailable =>
+      'We couldn\'t load the hadith of the day.';
+
+  @override
+  String get hadithDetailArabicText => 'Arabic text';
+
+  @override
+  String get hadithDetailCopied => 'Hadith copied';
+
+  @override
+  String get hadithDetailCopyText => 'Copy text';
+
+  @override
+  String hadithDetailGrade(Object grade) {
+    return 'Grade: $grade';
+  }
+
+  @override
+  String get hadithDetailHideArabic => 'Hide Arabic';
+
+  @override
+  String get hadithDetailHideTranslation => 'Hide translation';
+
+  @override
+  String hadithDetailId(Object id) {
+    return 'ID: $id';
+  }
+
+  @override
+  String get hadithDetailInfoBody =>
+      'This hadith may vary depending on the collection, grade, and available translation.';
+
+  @override
+  String get hadithDetailNoCategory => 'No category';
+
+  @override
+  String get hadithDetailRemovedFromFavorites =>
+      'Hadith removed from favorites';
+
+  @override
+  String get hadithDetailSavedToFavorites => 'Hadith saved to favorites';
+
+  @override
+  String get hadithDetailShowArabic => 'Show Arabic';
+
+  @override
+  String get hadithDetailShowTranslation => 'Show translation';
+
+  @override
+  String get hadithDetailTitle => 'Hadith details';
+
+  @override
+  String get hadithDetailTranslation => 'Translation';
+
+  @override
+  String get hadithLibraryAllCollections => 'All collections';
+
+  @override
+  String get hadithLibraryAllGrades => 'All grades';
+
+  @override
+  String hadithLibraryAllHadiths(Object count) {
+    return '$count hadiths';
+  }
+
+  @override
+  String get hadithLibraryEmptyBody =>
+      'There are no hadiths available right now.';
+
+  @override
+  String get hadithLibraryEmptySearchBody =>
+      'Try another search or remove filters.';
+
+  @override
+  String hadithLibraryEmptySearchTitle(Object query) {
+    return 'No results for “$query”';
+  }
+
+  @override
+  String get hadithLibraryEmptyTitle => 'No hadiths available';
+
+  @override
+  String get hadithLibraryFiltersError => 'We couldn\'t load the filters.';
+
+  @override
+  String get hadithLibraryFiltersLoading => 'Loading filters…';
+
+  @override
+  String hadithLibraryLoadError(Object error) {
+    return 'We couldn\'t load the hadiths.\n$error';
+  }
+
+  @override
+  String hadithLibraryResultsCount(Object count) {
+    return '$count results';
+  }
+
+  @override
+  String get hadithLibrarySearchHint => 'Search hadith or reference';
+
+  @override
+  String get hadithLibraryTitle => 'Hadiths';
+
+  @override
+  String hadithOfflineAvailability(Object progress) {
+    return '$progress available offline';
+  }
+
+  @override
+  String get hadithOfflineAvailable => 'Available';
+
+  @override
+  String get hadithOfflineCollectionsTitle => 'Included collections';
+
+  @override
+  String get hadithOfflineIncludedSubtitle =>
+      'All content comes built into the app';
+
+  @override
+  String get hadithOfflineIncludedTitle => 'Offline from the start';
+
+  @override
+  String get hadithOfflineInfoBody =>
+      'The hadiths shown here are already available without any extra download.';
+
+  @override
+  String get hadithOfflineTitle => 'Offline hadiths';
+
+  @override
+  String get hafizActivePlans => 'Active plans';
+
+  @override
+  String hafizAyahRange(Object end, Object start) {
+    return 'Ayahs $start-$end';
+  }
+
+  @override
+  String get hafizConfigureSession => 'Configure session';
+
+  @override
+  String get hafizEmptyBody =>
+      'You have not created any memorization plan yet.';
+
+  @override
+  String get hafizEmptyHint =>
+      'Choose a surah and define a short range to begin.';
+
+  @override
+  String get hafizEmptyTitle => 'Start your review';
+
+  @override
+  String hafizEndAyah(Object ayah) {
+    return 'Ending ayah: $ayah';
+  }
+
+  @override
+  String get hafizLoadError => 'We couldn\'t load this surah.';
+
+  @override
+  String get hafizLogRepetition => 'Log repetition';
+
+  @override
+  String get hafizPlanSaved => 'Plan saved';
+
+  @override
+  String get hafizRepetitionLogged => 'Repetition logged';
+
+  @override
+  String get hafizReviewedSurahs => 'Reviewed surahs';
+
+  @override
+  String get hafizSavePlan => 'Save plan';
+
+  @override
+  String get hafizSelectedSegment => 'Selected segment';
+
+  @override
+  String hafizStartAyah(Object ayah) {
+    return 'Starting ayah: $ayah';
+  }
+
+  @override
+  String get hafizSubtitle => 'Organize short and consistent reviews';
+
+  @override
+  String hafizSurahNoPlan(Object count) {
+    return '$count ayahs · no plan';
+  }
+
+  @override
+  String hafizSurahProgress(Object end, Object percent, Object start) {
+    return '$start-$end · $percent% completed';
+  }
+
+  @override
+  String hafizTargetRepetitions(Object count) {
+    return 'Target: $count';
+  }
+
+  @override
+  String get homeCalendarStripTitle => 'SACRED CALENDAR';
+
+  @override
+  String get homeGoalCompleted => 'done';
+
+  @override
+  String get homeGoalInProgress => 'in progress';
+
+  @override
+  String get homeInsightAlmostCompleteTodayMessage =>
+      'You are very close to closing a strong day.';
+
+  @override
+  String get homeInsightAlmostCompleteTodayTitle => 'Almost complete today';
+
+  @override
+  String homeInsightBetterThanLastWeekMessage(Object delta) {
+    return 'You completed $delta more prayers than last week.';
+  }
+
+  @override
+  String get homeInsightBetterThanLastWeekTitle => 'Better than last week';
+
+  @override
+  String homeInsightDhikrDoneMessage(Object count) {
+    return 'You made $count repetitions today. Very strong finish.';
+  }
+
+  @override
+  String get homeInsightDhikrDoneTitle => 'Dhikr completed';
+
+  @override
+  String homeInsightDhikrGoodPaceMessage(Object current, Object goal) {
+    return 'You are at $current/$goal repetitions today.';
+  }
+
+  @override
+  String get homeInsightDhikrGoodPaceTitle => 'Good dhikr pace';
+
+  @override
+  String homeInsightGoodPaceTodayMessage(Object count) {
+    return 'You have completed $count prayers today.';
+  }
+
+  @override
+  String get homeInsightGoodPaceTodayTitle => 'Good pace today';
+
+  @override
+  String homeInsightMostConsistentPrayerMessage(Object prayer) {
+    return '$prayer is currently your most stable moment.';
+  }
+
+  @override
+  String get homeInsightMostConsistentPrayerTitle =>
+      'Your most consistent prayer';
+
+  @override
+  String homeInsightPrayerToStrengthenMessage(Object prayer) {
+    return '$prayer needs a little more attention.';
+  }
+
+  @override
+  String get homeInsightPrayerToStrengthenTitle => 'Prayer to strengthen';
+
+  @override
+  String get homeInsightRamadanConsistencyMessage =>
+      'Your practice today already shows a good balance.';
+
+  @override
+  String get homeInsightRamadanConsistencyTitle => 'Ramadan consistency';
+
+  @override
+  String get homeInsightRamadanMomentumMessage =>
+      'Use this part of the day to keep your momentum going.';
+
+  @override
+  String get homeInsightRamadanMomentumTitle => 'Ramadan momentum';
+
+  @override
+  String get homeInsightRamadanSmallStepsMessage =>
+      'In Ramadan, small and steady steps matter a lot.';
+
+  @override
+  String get homeInsightStartTodayFirstMessage =>
+      'Your day is still open. Mark your first prayer and build momentum.';
+
+  @override
+  String get homeInsightStartTodayMoreMessage =>
+      'You still have time to begin calmly.';
+
+  @override
+  String get homeInsightStartTodayTitle => 'Start today';
+
+  @override
+  String get homeInsightStillCanStartMessage =>
+      'One small step now can change the tone of your day.';
+
+  @override
+  String get homeInsightStillCanStartTitle => 'You can still begin';
+
+  @override
+  String homeInsightStreakInMotionMessage(Object streak) {
+    return 'You are on $streak straight days. Protect that consistency.';
+  }
+
+  @override
+  String get homeInsightStreakInMotionTitle => 'Streak in motion';
+
+  @override
+  String get homeInsightTodayLabel => 'TODAY\'S INSIGHT';
+
+  @override
+  String get homeLoadingScheduleBody => 'Preparing your next prayer';
+
+  @override
+  String get homeLoadingScheduleTitle => 'Loading times';
+
+  @override
+  String get homeLocationCachedBody =>
+      'We are preparing your times using your last saved location.';
+
+  @override
+  String get homeLocationEnableDeviceLocation => 'Enable device location';
+
+  @override
+  String get homeLocationGpsDisabledBody =>
+      'Without GPS we cannot calculate accurate prayer times or align the Qibla.';
+
+  @override
+  String get homeLocationPendingBody =>
+      'The home screen stays visible even while prayer times are not ready yet.';
+
+  @override
+  String get homeLocationPermissionBlocked => 'Location permission blocked';
+
+  @override
+  String get homeLocationPermissionBlockedBody =>
+      'You can enable location for Qibla Time later in your system settings.';
+
+  @override
+  String get homeLocationPermissionNeeded =>
+      'Allow location to view your prayer times';
+
+  @override
+  String get homeLocationPermissionNeededBody =>
+      'Qibla Time needs your location to show reliable times for your city.';
+
+  @override
+  String get homeLocationPreparingTitle => 'Preparing your prayer times';
+
+  @override
+  String homeNextPrayerStartsAt(Object time) {
+    return 'Starts at $time';
+  }
+
+  @override
+  String get homeNotificationPaused =>
+      'General prayer alerts are paused right now.';
+
+  @override
+  String get homeNotificationPermissionPending =>
+      'Your adhan reminders are configured, but the system permission is still pending.';
+
+  @override
+  String get homePrayerDescriptionCompleted =>
+      'You already marked this prayer as completed.';
+
+  @override
+  String get homePrayerDescriptionNext =>
+      'This is the next prayer in today\'s rhythm.';
+
+  @override
+  String get homePrayerDescriptionNow =>
+      'This prayer is currently in progress.';
+
+  @override
+  String get homePrayerDescriptionPendingToday =>
+      'Still pending in today\'s flow.';
+
+  @override
+  String get homePrayerDescriptionReviewDate =>
+      'Available to review for this date.';
+
+  @override
+  String homePrayerSectionSelectedDaySubtitle(Object date) {
+    return 'Check and mark the times for $date';
+  }
+
+  @override
+  String get homePrayerSectionSelectedDayTitle => 'DAY SCHEDULE';
+
+  @override
+  String get homePrayerSectionTodaySubtitle =>
+      'Complete rhythm of your five daily prayers';
+
+  @override
+  String get homePrayerSectionTodayTitle => 'TODAY\'S PRAYERS';
+
+  @override
+  String get homePrayerStatusCompleted => 'Completed';
+
+  @override
+  String get homePrayerStatusNext => 'Next';
+
+  @override
+  String get homePrayerStatusNow => 'Now';
+
+  @override
+  String get homePrayerStatusUpcoming => 'Upcoming';
+
+  @override
+  String get homeQuickActionsTitle => 'SACRED SHORTCUTS';
+
+  @override
+  String get homeRamadanClosingSoon => 'closing soon';
+
+  @override
+  String get homeRamadanContinueReading => 'Continue reading';
+
+  @override
+  String homeRamadanCountdownIftar(Object duration) {
+    return '$duration until iftar';
+  }
+
+  @override
+  String homeRamadanCountdownImsak(Object duration) {
+    return '$duration until imsak';
+  }
+
+  @override
+  String homeRamadanCountdownTomorrowImsak(Object duration) {
+    return '$duration until tomorrow\'s imsak';
+  }
+
+  @override
+  String homeRamadanDhikrCompletedBody(Object current, Object goal) {
+    return '$current/$goal repetitions today. Daily goal completed.';
+  }
+
+  @override
+  String homeRamadanDhikrInProgressBody(Object current, Object goal) {
+    return '$current/$goal repetitions today. You already started.';
+  }
+
+  @override
+  String get homeRamadanDhikrPreparingBody =>
+      'Preparing your daily dhikr progress.';
+
+  @override
+  String homeRamadanDhikrStartBody(Object goal) {
+    return 'Your goal today is $goal. Even a few repetitions already count.';
+  }
+
+  @override
+  String homeRamadanFastingCompleted(Object time) {
+    return 'You can make iftar from $time.';
+  }
+
+  @override
+  String homeRamadanFastingInProgress(Object time) {
+    return 'Fasting day in progress until $time.';
+  }
+
+  @override
+  String get homeRamadanFastingLabel => 'Fasting';
+
+  @override
+  String get homeRamadanFastingTitle => 'Fasting';
+
+  @override
+  String get homeRamadanGoalsCompleteMessage =>
+      'A very complete Ramadan day. Keep this rhythm with calm.';
+
+  @override
+  String get homeRamadanGoalsProgressMessage =>
+      'You are doing well today. One small step more can close your day strongly.';
+
+  @override
+  String homeRamadanGoalsReady(Object completed, Object total) {
+    return '$completed/$total ready';
+  }
+
+  @override
+  String get homeRamadanGoalsStartMessage =>
+      'Start with something small: one prayer, a few ayahs, or a few minutes of dhikr.';
+
+  @override
+  String get homeRamadanGoalsTitle => 'RAMADAN GOALS';
+
+  @override
+  String get homeRamadanModeTitle => 'RAMADAN MODE';
+
+  @override
+  String get homeRamadanNextFocus => 'next focus';
+
+  @override
+  String get homeRamadanNightLabel => 'Night';
+
+  @override
+  String get homeRamadanOpenQuran => 'Open Quran';
+
+  @override
+  String get homeRamadanOpenTasbih => 'Open tasbih';
+
+  @override
+  String homeRamadanPrayerGoal(Object count) {
+    return '$count/5 completed today';
+  }
+
+  @override
+  String homeRamadanQuranRecentProgress(Object ayah, Object surah) {
+    return 'Resume $surah, ayah $ayah. You have recent progress.';
+  }
+
+  @override
+  String homeRamadanQuranReturnBody(Object ayah, Object surah) {
+    return 'Your last point was $surah, ayah $ayah. It is worth returning to it today.';
+  }
+
+  @override
+  String homeRamadanQuranSavedToday(Object ayah, Object surah) {
+    return 'Reading saved today in $surah, ayah $ayah.';
+  }
+
+  @override
+  String get homeRamadanQuranStartBody =>
+      'Read a short passage today and you can continue it later easily.';
+
+  @override
+  String get homeRamadanStartAction => 'Start';
+
+  @override
+  String get homeRamadanSuhoorLabel => 'Suhoor';
+
+  @override
+  String get homeRamadanUntilIftar => 'until iftar';
+
+  @override
+  String get homeSelectedDateCustomBody =>
+      'See the full prayer times for the selected day below.';
+
+  @override
+  String get homeSelectedDateTodayBody =>
+      'See the full prayer times for today below.';
+
+  @override
+  String homeWeeklyBestDayHelper(Object count) {
+    return '$count/5 on your best day';
+  }
+
+  @override
+  String get qiblaCompassInitError => 'We couldn\'t start the compass.';
+
+  @override
+  String get qiblaCompassReadError => 'We couldn\'t read the compass sensor.';
+
+  @override
+  String get qiblaDirectionEast => 'East';
+
+  @override
+  String get qiblaDirectionLoadError =>
+      'We couldn\'t load the direction to the Kaaba.';
+
+  @override
+  String get qiblaDirectionNorth => 'North';
+
+  @override
+  String get qiblaDirectionNorthEast => 'Northeast';
+
+  @override
+  String get qiblaDirectionNorthWest => 'Northwest';
+
+  @override
+  String get qiblaDirectionSouth => 'South';
+
+  @override
+  String get qiblaDirectionSouthEast => 'Southeast';
+
+  @override
+  String get qiblaDirectionSouthWest => 'Southwest';
+
+  @override
+  String qiblaDirectionSummary(Object direction) {
+    return 'Direction to the Kaaba: $direction';
+  }
+
+  @override
+  String get qiblaDirectionWest => 'West';
+
+  @override
+  String get qiblaDistanceLabel => 'Distance';
+
+  @override
+  String get qiblaEnableLocationMessage =>
+      'Enable location to calculate the direction to the Kaaba.';
+
+  @override
+  String get qiblaGpsDisabledMessage =>
+      'Enable your device GPS to get a reliable direction.';
+
+  @override
+  String get qiblaGuidanceBody =>
+      'Keep the device flat and turn gently until the indicator aligns.';
+
+  @override
+  String get qiblaHowToUseAvoidMagnetsBody =>
+      'Keep it away from magnets, metal cases, or devices that may disturb the sensor.';
+
+  @override
+  String get qiblaHowToUseAvoidMagnetsTitle => 'Avoid interference';
+
+  @override
+  String get qiblaHowToUseCalibrateBody =>
+      'If the compass fails, move the phone in a figure-eight motion to recalibrate it.';
+
+  @override
+  String get qiblaHowToUseCalibrateTitle => 'Calibrate if needed';
+
+  @override
+  String get qiblaHowToUseKeepFlatBody =>
+      'Keep the device flat to improve compass accuracy.';
+
+  @override
+  String get qiblaHowToUseKeepFlatTitle => 'Keep the device flat';
+
+  @override
+  String get qiblaHowToUseTitle => 'How to use the compass';
+
+  @override
+  String get qiblaLoading => 'Calculating direction…';
+
+  @override
+  String get qiblaPermissionBlockedMessage =>
+      'Location permission is blocked. Enable it in system settings.';
+
+  @override
+  String get qiblaPermissionNeededMessage =>
+      'We need location permission to guide you toward the Kaaba.';
+
+  @override
+  String get qiblaPrecisionLabel => 'Accuracy';
+
+  @override
+  String get qiblaSubtitle => 'Direction to the Kaaba';
+
+  @override
+  String get qiblaTitle => 'Qibla';
+
+  @override
+  String get adhanSelectorHeaderBody =>
+      'Listen to a short preview before choosing the adhan used for your reminders.';
+
+  @override
+  String get adhanSelectorHeaderTitle => 'Choose your call to prayer';
+
+  @override
+  String get adhanSelectorListenPreview => 'Listen to preview';
+
+  @override
+  String get adhanSelectorPausePreview => 'Pause preview';
+
+  @override
+  String get adhanSelectorPreviewError =>
+      'We couldn\'t play the adhan preview.';
+
+  @override
+  String get adhanSelectorPreviewIdle => 'Tap to hear a preview';
+
+  @override
+  String get adhanSelectorPreviewPaused => 'Preview paused';
+
+  @override
+  String get adhanSelectorPreviewPlaying => 'Playing preview';
+
+  @override
+  String get adhanSelectorResumePreview => 'Resume preview';
+
+  @override
+  String adhanSelectorSelected(Object name) {
+    return 'You selected $name';
+  }
+
+  @override
+  String get adhanSelectorTitle => 'Adhan';
+
+  @override
+  String get analyticsAchievementUnlocked => 'Unlocked';
 }

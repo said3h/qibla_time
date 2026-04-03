@@ -1,75 +1,73 @@
+import 'package:intl/intl.dart';
+
+import '../../l10n/l10n.dart';
+
 class SpanishDateLabels {
-  static const _weekdaysShort = [
-    'Lun',
-    'Mar',
-    'Mié',
-    'Jue',
-    'Vie',
-    'Sáb',
-    'Dom',
-  ];
+  static String shortWeekday(DateTime date) {
+    return _capitalize(
+      _stripTrailingDot(
+        DateFormat.E(_locale()).format(date),
+      ),
+    );
+  }
 
-  static const _weekdaysLong = [
-    'Lunes',
-    'Martes',
-    'Miércoles',
-    'Jueves',
-    'Viernes',
-    'Sábado',
-    'Domingo',
-  ];
+  static String longWeekday(DateTime date) {
+    return _capitalize(DateFormat.EEEE(_locale()).format(date));
+  }
 
-  static const _monthsShort = [
-    'ene',
-    'feb',
-    'mar',
-    'abr',
-    'may',
-    'jun',
-    'jul',
-    'ago',
-    'sep',
-    'oct',
-    'nov',
-    'dic',
-  ];
+  static String shortMonth(DateTime date) {
+    return _stripTrailingDot(DateFormat.MMM(_locale()).format(date));
+  }
 
-  static const _monthsLong = [
-    'enero',
-    'febrero',
-    'marzo',
-    'abril',
-    'mayo',
-    'junio',
-    'julio',
-    'agosto',
-    'septiembre',
-    'octubre',
-    'noviembre',
-    'diciembre',
-  ];
-
-  static String shortWeekday(DateTime date) => _weekdaysShort[date.weekday - 1];
-
-  static String longWeekday(DateTime date) => _weekdaysLong[date.weekday - 1];
-
-  static String shortMonth(DateTime date) => _monthsShort[date.month - 1];
-
-  static String longMonth(DateTime date) => _monthsLong[date.month - 1];
+  static String longMonth(DateTime date) {
+    return DateFormat.MMMM(_locale()).format(date);
+  }
 
   static String compactDate(DateTime date) {
     return '${date.day} ${shortMonth(date)}';
   }
 
   static String shortWeekdayDate(DateTime date) {
-    return '${longWeekday(date)}, ${date.day} ${shortMonth(date)} ${date.year}';
+    switch (_locale()) {
+      case 'ar':
+        return DateFormat('EEEE، d MMM yyyy', 'ar').format(date);
+      case 'en':
+        return DateFormat('EEEE, MMM d yyyy', 'en').format(date);
+      default:
+        return DateFormat("EEEE, d MMM yyyy", 'es').format(date);
+    }
   }
 
   static String fullDate(DateTime date) {
-    return '${longWeekday(date)}, ${date.day} de ${longMonth(date)}';
+    switch (_locale()) {
+      case 'ar':
+        return DateFormat('EEEE، d MMMM', 'ar').format(date);
+      case 'en':
+        return DateFormat('EEEE, MMMM d', 'en').format(date);
+      default:
+        return DateFormat("EEEE, d 'de' MMMM", 'es').format(date);
+    }
   }
 
   static String fullDateWithYear(DateTime date) {
-    return '${longWeekday(date)}, ${date.day} de ${longMonth(date)} de ${date.year}';
+    switch (_locale()) {
+      case 'ar':
+        return DateFormat('EEEE، d MMMM yyyy', 'ar').format(date);
+      case 'en':
+        return DateFormat('EEEE, MMMM d, yyyy', 'en').format(date);
+      default:
+        return DateFormat("EEEE, d 'de' MMMM 'de' yyyy", 'es').format(date);
+    }
+  }
+
+  static String _locale() => currentLanguageCode();
+
+  static String _stripTrailingDot(String value) {
+    return value.endsWith('.') ? value.substring(0, value.length - 1) : value;
+  }
+
+  static String _capitalize(String value) {
+    if (value.isEmpty) return value;
+    return value[0].toUpperCase() + value.substring(1);
   }
 }

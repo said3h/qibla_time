@@ -1,5 +1,6 @@
 import '../entities/home_insight.dart';
 import '../entities/ramadan_status.dart';
+import '../../../../l10n/l10n.dart';
 import '../../../tracking/models/tracking_models.dart';
 
 class GenerateHomeInsightsUseCase {
@@ -13,18 +14,23 @@ class GenerateHomeInsightsUseCase {
     int? dhikrTodayCount,
     int? dhikrDailyGoal,
   }) {
+    final l10n = appLocalizationsForCurrentLocale();
     final candidates = <HomeInsight>[];
     final prayerCountToday = tracking.completedCountFor(now);
     final activeDays = tracking.data.values
         .where((day) => day.values.any((completed) => completed))
         .length;
 
-    final todayInsight = _todayProgressInsight(prayerCountToday, now);
+    final todayInsight = _todayProgressInsight(
+      prayerCountToday,
+      now,
+      l10n: l10n,
+    );
     if (todayInsight != null) {
       candidates.add(todayInsight);
     }
 
-    final streakInsight = _streakInsight(tracking.currentStreak);
+    final streakInsight = _streakInsight(tracking.currentStreak, l10n: l10n);
     if (streakInsight != null) {
       candidates.add(streakInsight);
     }
@@ -37,6 +43,7 @@ class GenerateHomeInsightsUseCase {
     final prayerPatternInsight = _prayerPatternInsight(
       tracking,
       activeDays: activeDays,
+      l10n: l10n,
     );
     if (prayerPatternInsight != null) {
       candidates.add(prayerPatternInsight);
@@ -45,6 +52,7 @@ class GenerateHomeInsightsUseCase {
     final dhikrInsight = _dhikrInsight(
       todayCount: dhikrTodayCount,
       dailyGoal: dhikrDailyGoal,
+      l10n: l10n,
     );
     if (dhikrInsight != null) {
       candidates.add(dhikrInsight);
@@ -54,6 +62,7 @@ class GenerateHomeInsightsUseCase {
       ramadanStatus: ramadanStatus,
       weeklySummary: weeklySummary,
       prayerCountToday: prayerCountToday,
+      l10n: l10n,
     );
     if (ramadanInsight != null) {
       candidates.add(ramadanInsight);
@@ -63,10 +72,10 @@ class GenerateHomeInsightsUseCase {
       candidates.add(
         HomeInsight(
           kind: HomeInsightKind.guidance,
-          title: 'Empieza hoy',
+          title: l10n.homeInsightStartTodayTitle,
           message: activeDays == 0
-              ? 'Marca tus primeras oraciones y en Inicio empezarán a aparecer patrones útiles.'
-              : 'Sigue marcando tus oraciones y verás patrones más precisos en Inicio.',
+              ? l10n.homeInsightStartTodayFirstMessage
+              : l10n.homeInsightStartTodayMoreMessage,
         ),
       );
     }
@@ -86,43 +95,51 @@ class GenerateHomeInsightsUseCase {
     );
   }
 
-  HomeInsight? _todayProgressInsight(int prayerCountToday, DateTime now) {
+  HomeInsight? _todayProgressInsight(
+    int prayerCountToday,
+    DateTime now, {
+    required AppLocalizations l10n,
+  }) {
     if (prayerCountToday == 4) {
-      return const HomeInsight(
+      return HomeInsight(
         kind: HomeInsightKind.progress,
-        title: 'Casi completas hoy',
-        message: 'Te falta una oración para completar el 5/5 de hoy.',
+        title: l10n.homeInsightAlmostCompleteTodayTitle,
+        message: l10n.homeInsightAlmostCompleteTodayMessage,
       );
     }
     if (prayerCountToday > 0 && prayerCountToday < 4) {
       return HomeInsight(
         kind: HomeInsightKind.progress,
-        title: 'Buen ritmo hoy',
-        message: 'Llevas $prayerCountToday/5 oraciones marcadas. Seguir así también cuenta.',
+        title: l10n.homeInsightGoodPaceTodayTitle,
+        message: l10n.homeInsightGoodPaceTodayMessage(prayerCountToday),
       );
     }
     if (prayerCountToday == 0 && now.hour >= 12) {
-      return const HomeInsight(
+      return HomeInsight(
         kind: HomeInsightKind.progress,
-        title: 'Todavía puedes empezar',
-        message: 'Aún no has marcado ninguna oración hoy. Empezar por la siguiente ya cambia el día.',
+        title: l10n.homeInsightStillCanStartTitle,
+        message: l10n.homeInsightStillCanStartMessage,
       );
     }
     return null;
   }
 
-  HomeInsight? _streakInsight(int streak) {
+  HomeInsight? _streakInsight(
+    int streak, {
+    required AppLocalizations l10n,
+  }) {
     if (streak >= 2) {
       return HomeInsight(
         kind: HomeInsightKind.streak,
-        title: 'Racha en marcha',
-        message: 'Llevas una racha de $streak días completos. Cuídala hoy.',
+        title: l10n.homeInsightStreakInMotionTitle,
+        message: l10n.homeInsightStreakInMotionMessage(streak),
       );
     }
     return null;
   }
 
   HomeInsight? _improvementInsight(TrackingState tracking, DateTime now) {
+    final l10n = appLocalizationsForCurrentLocale();
     final currentWeek = _completedPrayersInWindow(
       tracking,
       endDate: now,
@@ -142,8 +159,8 @@ class GenerateHomeInsightsUseCase {
     if (delta >= 4) {
       return HomeInsight(
         kind: HomeInsightKind.improvement,
-        title: 'Vas mejor que la semana pasada',
-        message: 'Has sumado $delta oraciones más que en los 7 días anteriores.',
+        title: l10n.homeInsightBetterThanLastWeekTitle,
+        message: l10n.homeInsightBetterThanLastWeekMessage(delta),
       );
     }
     return null;
@@ -152,6 +169,7 @@ class GenerateHomeInsightsUseCase {
   HomeInsight? _prayerPatternInsight(
     TrackingState tracking, {
     required int activeDays,
+    required AppLocalizations l10n,
   }) {
     if (activeDays < 5) {
       return null;
@@ -171,8 +189,8 @@ class GenerateHomeInsightsUseCase {
       final prayer = _prayerLabel(strongest.key);
       return HomeInsight(
         kind: HomeInsightKind.prayerPattern,
-        title: 'Tu oración más constante',
-        message: '$prayer es la oración que estás manteniendo con más constancia últimamente.',
+        title: l10n.homeInsightMostConsistentPrayerTitle,
+        message: l10n.homeInsightMostConsistentPrayerMessage(prayer),
       );
     }
 
@@ -180,8 +198,8 @@ class GenerateHomeInsightsUseCase {
       final prayer = _prayerLabel(weakest.key);
       return HomeInsight(
         kind: HomeInsightKind.prayerPattern,
-        title: 'Punto a reforzar',
-        message: '$prayer es la oración que más te está costando ahora mismo. Poner un poco de foco ahí puede cambiar toda la semana.',
+        title: l10n.homeInsightPrayerToStrengthenTitle,
+        message: l10n.homeInsightPrayerToStrengthenMessage(prayer),
       );
     }
 
@@ -191,6 +209,7 @@ class GenerateHomeInsightsUseCase {
   HomeInsight? _dhikrInsight({
     int? todayCount,
     int? dailyGoal,
+    required AppLocalizations l10n,
   }) {
     if (todayCount == null || dailyGoal == null || dailyGoal <= 0) {
       return null;
@@ -199,16 +218,16 @@ class GenerateHomeInsightsUseCase {
     if (todayCount >= dailyGoal) {
       return HomeInsight(
         kind: HomeInsightKind.dhikr,
-        title: 'Dhikr del día cumplido',
-        message: 'Ya alcanzaste tu meta diaria de dhikr con $todayCount repeticiones.',
+        title: l10n.homeInsightDhikrDoneTitle,
+        message: l10n.homeInsightDhikrDoneMessage(todayCount),
       );
     }
 
     if (todayCount >= (dailyGoal / 2).ceil() && todayCount > 0) {
       return HomeInsight(
         kind: HomeInsightKind.dhikr,
-        title: 'Buen ritmo de dhikr',
-        message: 'Llevas $todayCount/$dailyGoal repeticiones hoy. Vas por buen camino.',
+        title: l10n.homeInsightDhikrGoodPaceTitle,
+        message: l10n.homeInsightDhikrGoodPaceMessage(todayCount, dailyGoal),
       );
     }
 
@@ -219,31 +238,32 @@ class GenerateHomeInsightsUseCase {
     required RamadanStatus? ramadanStatus,
     required WeeklySummary weeklySummary,
     required int prayerCountToday,
+    required AppLocalizations l10n,
   }) {
     if (ramadanStatus == null || !ramadanStatus.isEnabled) {
       return null;
     }
 
     if (weeklySummary.completionRate >= 0.7) {
-      return const HomeInsight(
+      return HomeInsight(
         kind: HomeInsightKind.ramadan,
-        title: 'Buena constancia en Ramadán',
-        message: 'Durante Ramadán estás manteniendo un ritmo sólido en tus oraciones.',
+        title: l10n.homeInsightRamadanConsistencyTitle,
+        message: l10n.homeInsightRamadanConsistencyMessage,
       );
     }
 
     if (prayerCountToday >= 2) {
-      return const HomeInsight(
+      return HomeInsight(
         kind: HomeInsightKind.ramadan,
-        title: 'Aprovecha el impulso de hoy',
-        message: 'Ramadán es un buen momento para cerrar fuerte el resto del día.',
+        title: l10n.homeInsightRamadanMomentumTitle,
+        message: l10n.homeInsightRamadanMomentumMessage,
       );
     }
 
     return HomeInsight(
       kind: HomeInsightKind.ramadan,
       title: ramadanStatus.headerLabel,
-      message: 'Los pequeños pasos de hoy pueden contar mucho durante Ramadán.',
+      message: l10n.homeInsightRamadanSmallStepsMessage,
     );
   }
 

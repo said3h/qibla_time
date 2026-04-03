@@ -3,6 +3,7 @@ import 'package:hijri/hijri_calendar.dart';
 
 import '../../../core/theme/app_theme.dart';
 import '../../../core/utils/spanish_date_labels.dart';
+import '../../../l10n/l10n.dart';
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({super.key});
@@ -18,7 +19,13 @@ class _CalendarScreenState extends State<CalendarScreen> {
   @override
   void initState() {
     super.initState();
-    HijriCalendar.setLocal('en');
+    currentHijri = HijriCalendar.fromDate(selectedDate);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    HijriCalendar.setLocal(_hijriLocaleFor(context.l10n.localeName));
     currentHijri = HijriCalendar.fromDate(selectedDate);
   }
 
@@ -32,6 +39,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
   @override
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
+    final l10n = context.l10n;
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
@@ -40,7 +48,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
         foregroundColor: tokens.textPrimary,
         elevation: 0,
         title: Text(
-          'Calendario islámico',
+          l10n.calendarTitle,
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: tokens.textPrimary,
@@ -75,7 +83,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
             _buildGregorianDatePicker(tokens),
             const SizedBox(height: 32),
             Text(
-              'Fechas importantes (${currentHijri.hYear} AH)',
+              l10n.calendarImportantDatesTitle(currentHijri.hYear),
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -92,31 +100,31 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
   List<Widget> _buildUpcomingEvents(QiblaTokens tokens) {
     final events = [
-      {'name': 'Año nuevo islámico', 'day': 1, 'month': 1},
-      {'name': 'Ashura', 'day': 10, 'month': 1},
-      {'name': 'Inicio de Ramadán', 'day': 1, 'month': 9},
-      {'name': 'Eid al-Fitr', 'day': 1, 'month': 10},
-      {'name': 'Día de Arafah', 'day': 9, 'month': 12},
-      {'name': 'Eid al-Adha', 'day': 10, 'month': 12},
+      ('newYear', 1, 1),
+      ('ashura', 10, 1),
+      ('ramadan', 1, 9),
+      ('eidFitr', 1, 10),
+      ('arafah', 9, 12),
+      ('eidAdha', 10, 12),
     ];
 
     return events.map((event) {
       final hCalendar = HijriCalendar();
       hCalendar.hYear = currentHijri.hYear;
-      hCalendar.hMonth = event['month'] as int;
-      hCalendar.hDay = event['day'] as int;
+      hCalendar.hMonth = event.$3;
+      hCalendar.hDay = event.$2;
 
       final gregorianDate = hCalendar.hijriToGregorian(
         hCalendar.hYear,
         hCalendar.hMonth,
         hCalendar.hDay,
       );
-      final isCurrentMonth = currentHijri.hMonth == event['month'];
+      final isCurrentMonth = currentHijri.hMonth == event.$3;
 
       return _buildEventItem(
         tokens,
-        event['name'] as String,
-        '${event['day']} ${hCalendar.toFormat("MMMM")}',
+        _eventName(event.$1),
+        '${event.$2} ${hCalendar.toFormat("MMMM")}',
         SpanishDateLabels.shortWeekdayDate(gregorianDate),
         isCurrentMonth,
       );
@@ -124,6 +132,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
   }
 
   Widget _buildHijriBanner(QiblaTokens tokens) {
+    final l10n = context.l10n;
     final bannerText = _foregroundFor(tokens.primary);
     final bannerAccent = _foregroundFor(tokens.accent);
     final today = _dateOnly(DateTime.now());
@@ -151,7 +160,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
       child: Column(
         children: [
           Text(
-            isToday ? 'HOY' : 'FECHA SELECCIONADA',
+            isToday ? l10n.commonToday.toUpperCase() : l10n.calendarSelectedDateUppercase,
             style: TextStyle(
               color: bannerText.withOpacity(0.7),
               fontSize: 12,
@@ -183,7 +192,11 @@ class _CalendarScreenState extends State<CalendarScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.calendar_month, color: bannerText.withOpacity(0.75), size: 18),
+              Icon(
+                Icons.calendar_month,
+                color: bannerText.withOpacity(0.75),
+                size: 18,
+              ),
               const SizedBox(width: 8),
               Text(
                 selectedLabel,
@@ -198,7 +211,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
           if (!isToday) ...[
             const SizedBox(height: 10),
             Text(
-              'Hoy: $todayLabel',
+              l10n.calendarTodayLabel(todayLabel),
               style: TextStyle(
                 color: bannerText.withOpacity(0.78),
                 fontSize: 12,
@@ -212,11 +225,12 @@ class _CalendarScreenState extends State<CalendarScreen> {
   }
 
   Widget _buildGregorianDatePicker(QiblaTokens tokens) {
+    final l10n = context.l10n;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Selecciona una fecha',
+          l10n.calendarSelectDate,
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
@@ -279,7 +293,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  '${selectedDate.day} de ${SpanishDateLabels.longMonth(selectedDate)} de ${selectedDate.year}',
+                  SpanishDateLabels.fullDateWithYear(selectedDate),
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -302,13 +316,12 @@ class _CalendarScreenState extends State<CalendarScreen> {
     String gregorianDateString,
     bool isCurrentMonth,
   ) {
+    final l10n = context.l10n;
     final isLightTheme = _isLightTheme(tokens);
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
-        color: isCurrentMonth
-            ? _highlightCardColor(tokens)
-            : _surfaceCardColor(tokens),
+        color: isCurrentMonth ? _highlightCardColor(tokens) : _surfaceCardColor(tokens),
         borderRadius: BorderRadius.circular(15),
         border: Border.all(
           color: isCurrentMonth
@@ -369,7 +382,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
-                  'ESTE MES',
+                  l10n.calendarCurrentMonth.toUpperCase(),
                   style: TextStyle(
                     color: _foregroundFor(tokens.primary),
                     fontSize: 10,
@@ -382,14 +395,33 @@ class _CalendarScreenState extends State<CalendarScreen> {
     );
   }
 
+  String _eventName(String id) {
+    final l10n = context.l10n;
+    return switch (id) {
+      'newYear' => l10n.calendarEventIslamicNewYear,
+      'ashura' => l10n.calendarEventAshura,
+      'ramadan' => l10n.calendarEventRamadanStart,
+      'eidFitr' => l10n.calendarEventEidFitr,
+      'arafah' => l10n.calendarEventDayOfArafah,
+      'eidAdha' => l10n.calendarEventEidAdha,
+      _ => id,
+    };
+  }
+
+  String _hijriLocaleFor(String localeName) {
+    if (localeName.startsWith('ar')) {
+      return 'ar';
+    }
+    return 'en';
+  }
+
   Color _foregroundFor(Color background) {
     final brightness = ThemeData.estimateBrightnessForColor(background);
     return brightness == Brightness.dark ? Colors.white : Colors.black;
   }
 
   bool _isLightTheme(QiblaTokens tokens) {
-    return ThemeData.estimateBrightnessForColor(tokens.bgPage) ==
-        Brightness.light;
+    return ThemeData.estimateBrightnessForColor(tokens.bgPage) == Brightness.light;
   }
 
   Color _blend(Color foreground, Color background, double opacity) {

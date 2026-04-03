@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theme/app_theme.dart';
+import '../../../l10n/l10n.dart';
 import '../../quran/models/quran_models.dart';
 import '../../quran/services/quran_service.dart';
 import '../models/hafiz_models.dart';
@@ -15,6 +16,7 @@ class HafizModeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final tokens = QiblaThemes.current;
+    final l10n = context.l10n;
     final surahs = ref.watch(quranSurahsProvider);
     final progress = ref.watch(hafizProgressProvider);
 
@@ -25,7 +27,7 @@ class HafizModeScreen extends ConsumerWidget {
           padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
           children: [
             Text('Hafiz', style: GoogleFonts.amiri(fontSize: 26, fontWeight: FontWeight.bold, color: tokens.primary)),
-            Text('Memorización guiada con repeticiones y repaso', style: GoogleFonts.dmSans(fontSize: 11, color: tokens.textSecondary)),
+            Text(l10n.hafizSubtitle, style: GoogleFonts.dmSans(fontSize: 11, color: tokens.textSecondary)),
             const SizedBox(height: 16),
             _buildSummary(tokens, progress),
             if (progress.isEmpty) ...[
@@ -51,8 +53,12 @@ class HafizModeScreen extends ConsumerWidget {
                   title: Text(surah.nameLatin, style: GoogleFonts.dmSans(color: tokens.textPrimary, fontWeight: FontWeight.w500)),
                   subtitle: Text(
                     plan == null
-                        ? '${surah.ayahCount} aleyas · sin plan activo'
-                        : 'Aleyas ${plan.startAyah}-${plan.endAyah} · ${(plan.completion * 100).round()}% completado',
+                        ? l10n.hafizSurahNoPlan(surah.ayahCount)
+                        : l10n.hafizSurahProgress(
+                            plan.startAyah,
+                            plan.endAyah,
+                            (plan.completion * 100).round(),
+                          ),
                     style: GoogleFonts.dmSans(fontSize: 11, color: tokens.textSecondary),
                   ),
                   trailing: Text(surah.nameArabic, style: GoogleFonts.amiri(fontSize: 20, color: tokens.primaryLight)),
@@ -66,6 +72,7 @@ class HafizModeScreen extends ConsumerWidget {
   }
 
   Widget _buildSummary(QiblaTokens tokens, List<HafizProgress> progress) {
+    final l10n = appLocalizationsForCurrentLocale();
     final completed = progress.where((item) => item.completedRepetitions >= item.targetRepetitions).length;
     return Container(
       padding: const EdgeInsets.all(16),
@@ -76,14 +83,15 @@ class HafizModeScreen extends ConsumerWidget {
       ),
       child: Row(
         children: [
-          Expanded(child: _stat(tokens, '${progress.length}', 'planes activos')),
-          Expanded(child: _stat(tokens, '$completed', 'suras repasadas')),
+          Expanded(child: _stat(tokens, '${progress.length}', l10n.hafizActivePlans)),
+          Expanded(child: _stat(tokens, '$completed', l10n.hafizReviewedSurahs)),
         ],
       ),
     );
   }
 
   Widget _buildEmptyState(QiblaTokens tokens) {
+    final l10n = appLocalizationsForCurrentLocale();
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(16),
@@ -96,7 +104,7 @@ class HafizModeScreen extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Todavía no tienes planes activos',
+            l10n.hafizEmptyTitle,
             style: GoogleFonts.dmSans(
               fontSize: 14,
               fontWeight: FontWeight.w600,
@@ -105,7 +113,7 @@ class HafizModeScreen extends ConsumerWidget {
           ),
           const SizedBox(height: 6),
           Text(
-            'Elige una sura de la lista para crear tu primer plan de memorización. Empezar pequeño suele funcionar mejor.',
+            l10n.hafizEmptyBody,
             style: GoogleFonts.dmSans(
               fontSize: 11,
               height: 1.6,
@@ -121,7 +129,7 @@ class HafizModeScreen extends ConsumerWidget {
               border: Border.all(color: tokens.primaryBorder),
             ),
             child: Text(
-              'Sugerencia: prueba con una sura corta y 5 repeticiones.',
+              l10n.hafizEmptyHint,
               style: GoogleFonts.dmSans(
                 fontSize: 11,
                 color: tokens.textPrimary,
@@ -178,6 +186,7 @@ class _HafizPracticeScreenState extends ConsumerState<HafizPracticeScreen> {
   @override
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
+    final l10n = context.l10n;
     final detailAsync = ref.watch(surahDetailProvider(widget.summary));
 
     return Scaffold(
@@ -202,9 +211,9 @@ class _HafizPracticeScreenState extends ConsumerState<HafizPracticeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Segmento seleccionado', style: GoogleFonts.dmSans(fontSize: 10, letterSpacing: 1.2, color: tokens.textSecondary)),
+                    Text(l10n.hafizSelectedSegment, style: GoogleFonts.dmSans(fontSize: 10, letterSpacing: 1.2, color: tokens.textSecondary)),
                     const SizedBox(height: 8),
-                    Text('Aleyas $_startAyah - $_endAyah', style: GoogleFonts.dmSans(fontSize: 18, fontWeight: FontWeight.w600, color: tokens.primaryLight)),
+                    Text(l10n.hafizAyahRange(_startAyah, _endAyah), style: GoogleFonts.dmSans(fontSize: 18, fontWeight: FontWeight.w600, color: tokens.primaryLight)),
                     const SizedBox(height: 12),
                     if (currentAyah != null) ...[
                       Text(currentAyah.arabic, textAlign: TextAlign.right, style: GoogleFonts.amiri(fontSize: 24, height: 1.8, color: tokens.textPrimary)),
@@ -218,7 +227,7 @@ class _HafizPracticeScreenState extends ConsumerState<HafizPracticeScreen> {
                           child: ElevatedButton.icon(
                             onPressed: currentAyah == null ? null : () => _playAyah(currentAyah),
                             icon: Icon(_playing ? Icons.pause_circle : Icons.play_circle),
-                            label: Text(_playing ? 'Pausar' : 'Reproducir'),
+                            label: Text(_playing ? l10n.commonPause : l10n.commonPlay),
                           ),
                         ),
                         const SizedBox(width: 8),
@@ -230,7 +239,7 @@ class _HafizPracticeScreenState extends ConsumerState<HafizPracticeScreen> {
                               });
                             },
                             icon: const Icon(Icons.repeat),
-                            label: const Text('Siguiente'),
+                            label: Text(l10n.commonNext),
                           ),
                         ),
                       ],
@@ -251,9 +260,9 @@ class _HafizPracticeScreenState extends ConsumerState<HafizPracticeScreen> {
                         await ref.read(hafizServiceProvider).savePlan(plan);
                         ref.read(hafizProgressProvider.notifier).state = ref.read(hafizServiceProvider).getProgress();
                         if (!mounted) return;
-                        ScaffoldMessenger.of(this.context).showSnackBar(const SnackBar(content: Text('Plan de memorización guardado')));
+                        ScaffoldMessenger.of(this.context).showSnackBar(SnackBar(content: Text(l10n.hafizPlanSaved)));
                       },
-                      child: const Text('Guardar plan'),
+                      child: Text(l10n.hafizSavePlan),
                     ),
                     const SizedBox(height: 8),
                     OutlinedButton(
@@ -263,9 +272,9 @@ class _HafizPracticeScreenState extends ConsumerState<HafizPracticeScreen> {
                               await ref.read(hafizServiceProvider).incrementRepetition(widget.summary.number);
                               ref.read(hafizProgressProvider.notifier).state = ref.read(hafizServiceProvider).getProgress();
                               if (!mounted) return;
-                              ScaffoldMessenger.of(this.context).showSnackBar(const SnackBar(content: Text('Repetición registrada')));
+                              ScaffoldMessenger.of(this.context).showSnackBar(SnackBar(content: Text(l10n.hafizRepetitionLogged)));
                             },
-                      child: const Text('Registrar repetición'),
+                      child: Text(l10n.hafizLogRepetition),
                     ),
                   ],
                 ),
@@ -274,12 +283,13 @@ class _HafizPracticeScreenState extends ConsumerState<HafizPracticeScreen> {
           );
         },
         loading: () => Center(child: CircularProgressIndicator(color: tokens.primary)),
-        error: (_, __) => Center(child: Text('No hemos podido cargar la sura.', style: GoogleFonts.dmSans(color: tokens.textSecondary))),
+        error: (_, __) => Center(child: Text(l10n.hafizLoadError, style: GoogleFonts.dmSans(color: tokens.textSecondary))),
       ),
     );
   }
 
   Widget _buildControls(QiblaTokens tokens, SurahDetail detail) {
+    final l10n = context.l10n;
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -290,9 +300,9 @@ class _HafizPracticeScreenState extends ConsumerState<HafizPracticeScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Configura tu sesión', style: GoogleFonts.dmSans(fontSize: 14, fontWeight: FontWeight.w600, color: tokens.textPrimary)),
+          Text(l10n.hafizConfigureSession, style: GoogleFonts.dmSans(fontSize: 14, fontWeight: FontWeight.w600, color: tokens.textPrimary)),
           const SizedBox(height: 10),
-          Text('Aleya inicial: $_startAyah', style: GoogleFonts.dmSans(color: tokens.textSecondary)),
+          Text(l10n.hafizStartAyah(_startAyah), style: GoogleFonts.dmSans(color: tokens.textSecondary)),
           Slider(
             value: _startAyah.toDouble(),
             min: 1,
@@ -305,7 +315,7 @@ class _HafizPracticeScreenState extends ConsumerState<HafizPracticeScreen> {
               });
             },
           ),
-          Text('Aleya final: $_endAyah', style: GoogleFonts.dmSans(color: tokens.textSecondary)),
+          Text(l10n.hafizEndAyah(_endAyah), style: GoogleFonts.dmSans(color: tokens.textSecondary)),
           Slider(
             value: _endAyah.toDouble(),
             min: _startAyah.toDouble(),
@@ -317,7 +327,7 @@ class _HafizPracticeScreenState extends ConsumerState<HafizPracticeScreen> {
               });
             },
           ),
-          Text('Repeticiones objetivo: $_targetRepetitions', style: GoogleFonts.dmSans(color: tokens.textSecondary)),
+          Text(l10n.hafizTargetRepetitions(_targetRepetitions), style: GoogleFonts.dmSans(color: tokens.textSecondary)),
           Slider(
             value: _targetRepetitions.toDouble(),
             min: 3,

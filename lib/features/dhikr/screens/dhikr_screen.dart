@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theme/app_theme.dart';
 import '../../../core/utils/spanish_date_labels.dart';
+import '../../../l10n/l10n.dart';
 import '../services/dhikr_service.dart';
 
 class DhikrPhrase {
@@ -42,17 +43,17 @@ class _DhikrScreenState extends State<DhikrScreen> {
     (
       arabic: 'سُبْحَانَ اللّٰهِ',
       transliteration: 'SubhanAllah',
-      meaning: 'Gloria a Allah',
+      meaning: 'SubhanAllah',
     ),
     (
       arabic: 'الْحَمْدُ لِلّٰهِ',
       transliteration: 'Alhamdulillah',
-      meaning: 'Alabado sea Allah',
+      meaning: 'Alhamdulillah',
     ),
     (
       arabic: 'اللّٰهُ أَكْبَر',
       transliteration: 'Allahu Akbar',
-      meaning: 'Allah es el más Grande',
+      meaning: 'Allahu Akbar',
     ),
   ];
 
@@ -99,6 +100,7 @@ class _DhikrScreenState extends State<DhikrScreen> {
   void _increment() {
     final snapshot = _snapshot;
     if (snapshot == null) return;
+    final l10n = context.l10n;
 
     HapticFeedback.lightImpact();
 
@@ -117,10 +119,10 @@ class _DhikrScreenState extends State<DhikrScreen> {
     });
 
     if (completesSession) {
-      _showMessage('Ciclo completado. Pasamos al siguiente dhikr.');
+      _showMessage(l10n.dhikrSessionCycleCompleted);
     }
     if (!snapshot.dailyGoalReached && optimistic.dailyGoalReached) {
-      _showMessage('Meta diaria completada. Puedes seguir si lo deseas.');
+      _showMessage(l10n.dhikrDailyGoalCompletedMessage);
     }
 
     _writeQueue = _writeQueue.then((_) async {
@@ -141,7 +143,7 @@ class _DhikrScreenState extends State<DhikrScreen> {
       _count = 0;
       _currentPhraseIndex = 0;
     });
-    _showMessage('Sesión reiniciada. Tu historial diario sigue guardado.');
+    _showMessage(context.l10n.dhikrSessionResetMessage);
   }
 
   Future<void> _pickGoal({required bool daily}) async {
@@ -151,10 +153,11 @@ class _DhikrScreenState extends State<DhikrScreen> {
     final tokens = QiblaThemes.current;
     final currentValue = daily ? snapshot.dailyGoal : snapshot.sessionGoal;
     final presets = daily ? _dailyGoalPresets : _sessionGoalPresets;
-    final title = daily ? 'Meta diaria' : 'Meta por sesión';
+    final l10n = context.l10n;
+    final title = daily ? l10n.dhikrDailyGoalTitle : l10n.dhikrSessionGoalTitle;
     final helper = daily
-        ? 'Cuántas repeticiones quieres completar a lo largo del día.'
-        : 'Cuántas repeticiones quieres por ciclo antes de pasar al siguiente dhikr.';
+        ? l10n.dhikrDailyGoalHelper
+        : l10n.dhikrSessionGoalHelper;
 
     final selected = await showModalBottomSheet<int>(
       context: context,
@@ -210,7 +213,7 @@ class _DhikrScreenState extends State<DhikrScreen> {
                     Navigator.of(context).pop(custom);
                   },
                   icon: const Icon(Icons.edit_outlined),
-                  label: const Text('Elegir valor personalizado'),
+                  label: Text(l10n.dhikrChooseCustomValue),
                 ),
               ],
             ),
@@ -236,8 +239,8 @@ class _DhikrScreenState extends State<DhikrScreen> {
 
     _showMessage(
       daily
-          ? 'Meta diaria ajustada a $selected repeticiones.'
-          : 'Meta por sesión ajustada a $selected repeticiones.',
+          ? context.l10n.dhikrDailyGoalUpdated(selected)
+          : context.l10n.dhikrSessionGoalUpdated(selected),
     );
   }
 
@@ -256,15 +259,15 @@ class _DhikrScreenState extends State<DhikrScreen> {
             controller: controller,
             keyboardType: TextInputType.number,
             autofocus: true,
-            decoration: const InputDecoration(
-              labelText: 'Número de repeticiones',
-              hintText: 'Ejemplo: 150',
+            decoration: InputDecoration(
+              labelText: context.l10n.dhikrRepetitionsFieldLabel,
+              hintText: context.l10n.dhikrRepetitionsFieldHint,
             ),
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: const Text('Cancelar'),
+              child: Text(context.l10n.commonCancel),
             ),
             FilledButton(
               onPressed: () {
@@ -275,7 +278,7 @@ class _DhikrScreenState extends State<DhikrScreen> {
                 }
                 Navigator.of(context).pop(parsed);
               },
-              child: const Text('Guardar'),
+              child: Text(context.l10n.commonSave),
             ),
           ],
         );
@@ -318,32 +321,44 @@ class _DhikrScreenState extends State<DhikrScreen> {
   }
 
   String _feedbackText(DhikrSnapshot snapshot) {
+    final l10n = context.l10n;
     if (snapshot.todayCount == 0) {
-      return 'Empieza con unas repeticiones y guardaremos tu avance de hoy.';
+      return l10n.dhikrFeedbackStart;
     }
     if (snapshot.dailyGoalReached) {
-      return 'Meta diaria completada. Si quieres, continúa con calma.';
+      return l10n.dhikrFeedbackCompleted;
     }
     final progress = snapshot.todayCount / snapshot.dailyGoal;
     if (progress >= 0.75) {
-      return 'Ya casi completas tu objetivo diario.';
+      return l10n.dhikrFeedbackAlmostThere;
     }
     if (progress >= 0.4) {
-      return 'Buen ritmo. Cada repetición cuenta.';
+      return l10n.dhikrFeedbackGoodPace;
     }
     if (_count == 0) {
-      return 'Ciclo completado. Puedes seguir con el siguiente dhikr.';
+      return l10n.dhikrFeedbackCycleCompleted;
     }
-    return 'Avanza a tu ritmo y vuelve cuando quieras.';
+    return l10n.dhikrFeedbackTakeYourTime;
   }
 
   String _dayLabel(DateTime date) {
     return SpanishDateLabels.shortWeekday(date);
   }
 
+  String _localizedMeaning(String transliteration) {
+    final l10n = context.l10n;
+    return switch (transliteration) {
+      'SubhanAllah' => l10n.dhikrMeaningSubhanAllah,
+      'Alhamdulillah' => l10n.dhikrMeaningAlhamdulillah,
+      'Allahu Akbar' => l10n.dhikrMeaningAllahuAkbar,
+      _ => transliteration,
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
+    final l10n = context.l10n;
 
     if (_isLoading || _snapshot == null) {
       return Scaffold(
@@ -378,7 +393,7 @@ class _DhikrScreenState extends State<DhikrScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Tasbih',
+                        l10n.dhikrTitle,
                         style: GoogleFonts.amiri(
                           fontSize: 26,
                           color: tokens.primary,
@@ -386,7 +401,7 @@ class _DhikrScreenState extends State<DhikrScreen> {
                         ),
                       ),
                       Text(
-                        'Tasbih diario · progreso y constancia',
+                        l10n.dhikrSubtitle,
                         style: GoogleFonts.dmSans(
                           fontSize: 10,
                           color: tokens.textSecondary,
@@ -396,7 +411,7 @@ class _DhikrScreenState extends State<DhikrScreen> {
                   ),
                 ),
                 IconButton(
-                  tooltip: 'Reiniciar sesión',
+                  tooltip: l10n.dhikrResetSession,
                   onPressed: _resetSession,
                   icon: Icon(Icons.refresh, color: tokens.primary),
                 ),
@@ -422,7 +437,7 @@ class _DhikrScreenState extends State<DhikrScreen> {
             ),
             const SizedBox(height: 2),
             Text(
-              phrase.meaning,
+              _localizedMeaning(phrase.transliteration),
               textAlign: TextAlign.center,
               style: GoogleFonts.dmSans(
                 fontSize: 11,
@@ -469,7 +484,7 @@ class _DhikrScreenState extends State<DhikrScreen> {
                             ),
                           ),
                           Text(
-                            'de ${snapshot.sessionGoal}',
+                            l10n.dhikrSessionCountOf(snapshot.sessionGoal),
                             style: GoogleFonts.dmSans(
                               fontSize: 11,
                               color: tokens.textSecondary,
@@ -502,7 +517,11 @@ class _DhikrScreenState extends State<DhikrScreen> {
             ),
             const SizedBox(height: 12),
             Text(
-              'Hoy: ${snapshot.todayCount} · Ciclo ${_currentPhraseIndex + 1}/${_activePhrases.length}',
+              l10n.dhikrTodayCycle(
+                snapshot.todayCount,
+                _currentPhraseIndex + 1,
+                _activePhrases.length,
+              ),
               textAlign: TextAlign.center,
               style: GoogleFonts.dmSans(
                 fontSize: 11,
@@ -541,7 +560,7 @@ class _DhikrScreenState extends State<DhikrScreen> {
                     children: [
                       Expanded(
                         child: Text(
-                          'META DIARIA',
+                          l10n.dhikrDailyGoalTitle.toUpperCase(),
                           style: GoogleFonts.dmSans(
                             fontSize: 9,
                             letterSpacing: 1.2,
@@ -585,7 +604,7 @@ class _DhikrScreenState extends State<DhikrScreen> {
                   foregroundColor: tokens.textSecondary,
                 ),
                 icon: const Icon(Icons.refresh_rounded),
-                label: const Text('Reiniciar sesión'),
+                label: Text(l10n.dhikrResetSession),
               ),
             ),
           ],
@@ -611,6 +630,7 @@ class _GoalCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
+    final l10n = context.l10n;
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
@@ -622,7 +642,7 @@ class _GoalCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'METAS',
+            l10n.dhikrGoalsSection,
             style: GoogleFonts.dmSans(
               fontSize: 9,
               letterSpacing: 1.2,
@@ -634,7 +654,7 @@ class _GoalCard extends StatelessWidget {
             children: [
               Expanded(
                 child: _GoalTile(
-                  label: 'Por sesión',
+                  label: l10n.dhikrSessionGoalShort,
                   value: '$sessionGoal',
                   onTap: onSessionTap,
                 ),
@@ -642,7 +662,7 @@ class _GoalCard extends StatelessWidget {
               const SizedBox(width: 10),
               Expanded(
                 child: _GoalTile(
-                  label: 'Diaria',
+                  label: l10n.dhikrDailyGoalShort,
                   value: '$dailyGoal',
                   onTap: onDailyTap,
                 ),
@@ -767,6 +787,7 @@ class _HistoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
+    final l10n = context.l10n;
     final maxCount = snapshot.recentDays.fold<int>(
       1,
       (currentMax, item) => math.max(currentMax, item.count),
@@ -783,7 +804,7 @@ class _HistoryCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'RESUMEN',
+            l10n.dhikrSummarySection,
             style: GoogleFonts.dmSans(
               fontSize: 9,
               letterSpacing: 1.2,
@@ -794,23 +815,23 @@ class _HistoryCard extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: _HistoryStat(label: 'Hoy', value: '${snapshot.todayCount}'),
+                child: _HistoryStat(label: l10n.commonToday, value: '${snapshot.todayCount}'),
               ),
               Expanded(
                 child: _HistoryStat(
-                  label: 'Ayer',
+                  label: l10n.commonYesterday,
                   value: '${snapshot.yesterdayCount}',
                 ),
               ),
               Expanded(
                 child: _HistoryStat(
-                  label: '7 días',
+                  label: l10n.dhikrLast7Days,
                   value: '${snapshot.rollingWeekCount}',
                 ),
               ),
               Expanded(
                 child: _HistoryStat(
-                  label: 'Total',
+                  label: l10n.commonTotal,
                   value: '${snapshot.lifetimeTotal}',
                 ),
               ),
@@ -861,8 +882,8 @@ class _HistoryCard extends StatelessWidget {
           const SizedBox(height: 10),
           Text(
             snapshot.todayCount == 0
-                ? 'Todavía no hay repeticiones hoy. El primer toque ya empezará tu registro diario.'
-                : 'Tu historial diario se guarda automáticamente para que puedas seguir tu constancia.',
+                ? l10n.dhikrHistoryEmptyBody
+                : l10n.dhikrHistorySavedBody,
             style: GoogleFonts.dmSans(
               fontSize: 11,
               height: 1.5,

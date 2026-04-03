@@ -2212,6 +2212,2070 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Detener audio'**
   String get quranStopAudio;
+
+  /// No description provided for @commonAuthenticity.
+  ///
+  /// In es, this message translates to:
+  /// **'Autenticidad'**
+  String get commonAuthenticity;
+
+  /// No description provided for @commonBooks.
+  ///
+  /// In es, this message translates to:
+  /// **'Libros'**
+  String get commonBooks;
+
+  /// No description provided for @commonCancel.
+  ///
+  /// In es, this message translates to:
+  /// **'Cancelar'**
+  String get commonCancel;
+
+  /// No description provided for @commonCategory.
+  ///
+  /// In es, this message translates to:
+  /// **'Categoría'**
+  String get commonCategory;
+
+  /// No description provided for @commonClose.
+  ///
+  /// In es, this message translates to:
+  /// **'Cerrar'**
+  String get commonClose;
+
+  /// No description provided for @commonCollection.
+  ///
+  /// In es, this message translates to:
+  /// **'Colección'**
+  String get commonCollection;
+
+  /// No description provided for @commonCopy.
+  ///
+  /// In es, this message translates to:
+  /// **'Copiar'**
+  String get commonCopy;
+
+  /// No description provided for @commonDone.
+  ///
+  /// In es, this message translates to:
+  /// **'Hecho'**
+  String get commonDone;
+
+  /// No description provided for @commonDownload.
+  ///
+  /// In es, this message translates to:
+  /// **'Descargar'**
+  String get commonDownload;
+
+  /// No description provided for @commonFeatured.
+  ///
+  /// In es, this message translates to:
+  /// **'Destacados'**
+  String get commonFeatured;
+
+  /// No description provided for @commonFilter.
+  ///
+  /// In es, this message translates to:
+  /// **'Filtrar'**
+  String get commonFilter;
+
+  /// No description provided for @commonGeneral.
+  ///
+  /// In es, this message translates to:
+  /// **'General'**
+  String get commonGeneral;
+
+  /// No description provided for @commonHadiths.
+  ///
+  /// In es, this message translates to:
+  /// **'Hadices'**
+  String get commonHadiths;
+
+  /// No description provided for @commonInformation.
+  ///
+  /// In es, this message translates to:
+  /// **'Información'**
+  String get commonInformation;
+
+  /// No description provided for @commonNext.
+  ///
+  /// In es, this message translates to:
+  /// **'Siguiente'**
+  String get commonNext;
+
+  /// No description provided for @commonOther.
+  ///
+  /// In es, this message translates to:
+  /// **'Otros'**
+  String get commonOther;
+
+  /// No description provided for @commonPause.
+  ///
+  /// In es, this message translates to:
+  /// **'Pausar'**
+  String get commonPause;
+
+  /// No description provided for @commonPrayers.
+  ///
+  /// In es, this message translates to:
+  /// **'oraciones'**
+  String get commonPrayers;
+
+  /// No description provided for @commonQuran.
+  ///
+  /// In es, this message translates to:
+  /// **'Corán'**
+  String get commonQuran;
+
+  /// No description provided for @commonRead.
+  ///
+  /// In es, this message translates to:
+  /// **'Leer'**
+  String get commonRead;
+
+  /// No description provided for @commonReference.
+  ///
+  /// In es, this message translates to:
+  /// **'Referencia'**
+  String get commonReference;
+
+  /// No description provided for @commonResume.
+  ///
+  /// In es, this message translates to:
+  /// **'Reanudar'**
+  String get commonResume;
+
+  /// No description provided for @commonSave.
+  ///
+  /// In es, this message translates to:
+  /// **'Guardar'**
+  String get commonSave;
+
+  /// No description provided for @commonSaved.
+  ///
+  /// In es, this message translates to:
+  /// **'Guardado'**
+  String get commonSaved;
+
+  /// No description provided for @commonStatistics.
+  ///
+  /// In es, this message translates to:
+  /// **'Estadísticas'**
+  String get commonStatistics;
+
+  /// No description provided for @commonTotal.
+  ///
+  /// In es, this message translates to:
+  /// **'Total'**
+  String get commonTotal;
+
+  /// No description provided for @achievementFirstPrayerTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Primera oración'**
+  String get achievementFirstPrayerTitle;
+
+  /// No description provided for @achievementFirstPrayerDescription.
+  ///
+  /// In es, this message translates to:
+  /// **'Has marcado tu primera oración en la app.'**
+  String get achievementFirstPrayerDescription;
+
+  /// No description provided for @achievementFullDayTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Día completo'**
+  String get achievementFullDayTitle;
+
+  /// No description provided for @achievementFullDayDescription.
+  ///
+  /// In es, this message translates to:
+  /// **'Has completado las cinco oraciones de un mismo día.'**
+  String get achievementFullDayDescription;
+
+  /// No description provided for @achievementStreak3Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Racha de 3 días'**
+  String get achievementStreak3Title;
+
+  /// No description provided for @achievementStreak3Description.
+  ///
+  /// In es, this message translates to:
+  /// **'Has mantenido tu constancia durante tres días seguidos.'**
+  String get achievementStreak3Description;
+
+  /// No description provided for @achievementStreak7Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Racha de 7 días'**
+  String get achievementStreak7Title;
+
+  /// No description provided for @achievementStreak7Description.
+  ///
+  /// In es, this message translates to:
+  /// **'Siete días seguidos de seguimiento. Muy buen ritmo.'**
+  String get achievementStreak7Description;
+
+  /// No description provided for @achievementStreak30Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Racha de 30 días'**
+  String get achievementStreak30Title;
+
+  /// No description provided for @achievementStreak30Description.
+  ///
+  /// In es, this message translates to:
+  /// **'Treinta días seguidos. Una constancia extraordinaria.'**
+  String get achievementStreak30Description;
+
+  /// No description provided for @achievementTotal100Title.
+  ///
+  /// In es, this message translates to:
+  /// **'100 oraciones'**
+  String get achievementTotal100Title;
+
+  /// No description provided for @achievementTotal100Description.
+  ///
+  /// In es, this message translates to:
+  /// **'Has registrado 100 oraciones completadas.'**
+  String get achievementTotal100Description;
+
+  /// No description provided for @achievementFirstRamadanTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Primer Ramadán'**
+  String get achievementFirstRamadanTitle;
+
+  /// No description provided for @achievementFirstRamadanDescription.
+  ///
+  /// In es, this message translates to:
+  /// **'Has completado tu primera jornada activa de Ramadán.'**
+  String get achievementFirstRamadanDescription;
+
+  /// No description provided for @analyticsAchievementsTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Logros'**
+  String get analyticsAchievementsTitle;
+
+  /// No description provided for @analyticsAchievementsEmpty.
+  ///
+  /// In es, this message translates to:
+  /// **'Todavía no hay logros desbloqueados.'**
+  String get analyticsAchievementsEmpty;
+
+  /// No description provided for @analyticsAchievementsLoadError.
+  ///
+  /// In es, this message translates to:
+  /// **'No hemos podido cargar tus logros.'**
+  String get analyticsAchievementsLoadError;
+
+  /// No description provided for @analyticsBestDayLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Mejor día'**
+  String get analyticsBestDayLabel;
+
+  /// No description provided for @analyticsBestStreakHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Tu mejor racha: {count} días'**
+  String analyticsBestStreakHint(Object count);
+
+  /// No description provided for @analyticsBestStreakLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Mejor racha'**
+  String get analyticsBestStreakLabel;
+
+  /// No description provided for @analyticsByPrayerTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Por oración'**
+  String get analyticsByPrayerTitle;
+
+  /// No description provided for @analyticsCollectionsLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Colecciones'**
+  String get analyticsCollectionsLabel;
+
+  /// No description provided for @analyticsCompletedPrayersLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Oraciones completadas'**
+  String get analyticsCompletedPrayersLabel;
+
+  /// No description provided for @analyticsCurrentStreakLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Racha actual'**
+  String get analyticsCurrentStreakLabel;
+
+  /// No description provided for @analyticsDaysValue.
+  ///
+  /// In es, this message translates to:
+  /// **'{count} días'**
+  String analyticsDaysValue(Object count);
+
+  /// No description provided for @analyticsEmptyBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Empieza a marcar tus oraciones y aquí verás cómo avanza tu constancia.'**
+  String get analyticsEmptyBody;
+
+  /// No description provided for @analyticsEmptyHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Completa tu primera oración para desbloquear este panel.'**
+  String get analyticsEmptyHint;
+
+  /// No description provided for @analyticsEmptyTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Todavía no hay estadísticas'**
+  String get analyticsEmptyTitle;
+
+  /// No description provided for @analyticsFavoritesLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Favoritos'**
+  String get analyticsFavoritesLabel;
+
+  /// No description provided for @analyticsFullDaysLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Días completos'**
+  String get analyticsFullDaysLabel;
+
+  /// No description provided for @analyticsGradesLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Grados'**
+  String get analyticsGradesLabel;
+
+  /// No description provided for @analyticsHadithStatsLoadError.
+  ///
+  /// In es, this message translates to:
+  /// **'No se pudieron cargar las estadísticas de hadices.'**
+  String get analyticsHadithStatsLoadError;
+
+  /// No description provided for @analyticsLast30DaysTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Últimos 30 días'**
+  String get analyticsLast30DaysTitle;
+
+  /// No description provided for @analyticsLessLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Menos'**
+  String get analyticsLessLabel;
+
+  /// No description provided for @analyticsMoreLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Más'**
+  String get analyticsMoreLabel;
+
+  /// No description provided for @analyticsNoActiveStreak.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin racha activa'**
+  String get analyticsNoActiveStreak;
+
+  /// No description provided for @analyticsRecordBadge.
+  ///
+  /// In es, this message translates to:
+  /// **'Récord'**
+  String get analyticsRecordBadge;
+
+  /// No description provided for @analyticsSavedFavoritesLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Favoritos guardados'**
+  String get analyticsSavedFavoritesLabel;
+
+  /// No description provided for @analyticsShareError.
+  ///
+  /// In es, this message translates to:
+  /// **'No hemos podido compartir tu progreso.'**
+  String get analyticsShareError;
+
+  /// No description provided for @analyticsShareImage.
+  ///
+  /// In es, this message translates to:
+  /// **'Compartir imagen'**
+  String get analyticsShareImage;
+
+  /// No description provided for @analyticsShareProgressTooltip.
+  ///
+  /// In es, this message translates to:
+  /// **'Compartir progreso'**
+  String get analyticsShareProgressTooltip;
+
+  /// No description provided for @analyticsShareText.
+  ///
+  /// In es, this message translates to:
+  /// **'Compartir texto'**
+  String get analyticsShareText;
+
+  /// No description provided for @analyticsStartStreakHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Empieza hoy una nueva racha.'**
+  String get analyticsStartStreakHint;
+
+  /// No description provided for @analyticsStreakDays.
+  ///
+  /// In es, this message translates to:
+  /// **'{count} días de racha'**
+  String analyticsStreakDays(Object count);
+
+  /// No description provided for @analyticsThisWeekLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Esta semana'**
+  String get analyticsThisWeekLabel;
+
+  /// No description provided for @analyticsWeekInterpretationEmpty.
+  ///
+  /// In es, this message translates to:
+  /// **'Aún no hay suficiente actividad esta semana.'**
+  String get analyticsWeekInterpretationEmpty;
+
+  /// No description provided for @analyticsWeekInterpretationEncouragement.
+  ///
+  /// In es, this message translates to:
+  /// **'Sigue poco a poco. Cada oración cuenta.'**
+  String get analyticsWeekInterpretationEncouragement;
+
+  /// No description provided for @analyticsWeekInterpretationGood.
+  ///
+  /// In es, this message translates to:
+  /// **'Vas bien esta semana. Un poco más de constancia marcará diferencia.'**
+  String get analyticsWeekInterpretationGood;
+
+  /// No description provided for @analyticsWeekInterpretationStrong.
+  ///
+  /// In es, this message translates to:
+  /// **'Semana muy sólida. Estás manteniendo un ritmo excelente.'**
+  String get analyticsWeekInterpretationStrong;
+
+  /// No description provided for @analyticsWeeklySummaryTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Resumen semanal'**
+  String get analyticsWeeklySummaryTitle;
+
+  /// No description provided for @booksAboutBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Esta biblioteca reúne libros de IslamHouse para una consulta rápida desde la app.'**
+  String get booksAboutBody;
+
+  /// No description provided for @booksAboutBulletCatalog.
+  ///
+  /// In es, this message translates to:
+  /// **'Catálogo cuidado y fácil de explorar'**
+  String get booksAboutBulletCatalog;
+
+  /// No description provided for @booksAboutBulletCategories.
+  ///
+  /// In es, this message translates to:
+  /// **'Categorías para encontrar lecturas más rápido'**
+  String get booksAboutBulletCategories;
+
+  /// No description provided for @booksAboutBulletVerified.
+  ///
+  /// In es, this message translates to:
+  /// **'Contenido procedente de una biblioteca islámica reconocida'**
+  String get booksAboutBulletVerified;
+
+  /// No description provided for @booksAllCategories.
+  ///
+  /// In es, this message translates to:
+  /// **'Todas las categorías'**
+  String get booksAllCategories;
+
+  /// No description provided for @booksCategoriesTab.
+  ///
+  /// In es, this message translates to:
+  /// **'Categorías'**
+  String get booksCategoriesTab;
+
+  /// No description provided for @booksDescription.
+  ///
+  /// In es, this message translates to:
+  /// **'Descripción'**
+  String get booksDescription;
+
+  /// No description provided for @booksEmptyCategories.
+  ///
+  /// In es, this message translates to:
+  /// **'No hay categorías disponibles.'**
+  String get booksEmptyCategories;
+
+  /// No description provided for @booksEmptyFeatured.
+  ///
+  /// In es, this message translates to:
+  /// **'No hay libros destacados por ahora.'**
+  String get booksEmptyFeatured;
+
+  /// No description provided for @booksEmptySearch.
+  ///
+  /// In es, this message translates to:
+  /// **'No encontramos libros con esa búsqueda.'**
+  String get booksEmptySearch;
+
+  /// No description provided for @booksLibraryTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Libros'**
+  String get booksLibraryTitle;
+
+  /// No description provided for @booksLoadErrorTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'No hemos podido cargar la biblioteca'**
+  String get booksLoadErrorTitle;
+
+  /// No description provided for @booksMainCategoryAcademicLessons.
+  ///
+  /// In es, this message translates to:
+  /// **'Lecciones académicas'**
+  String get booksMainCategoryAcademicLessons;
+
+  /// No description provided for @booksMainCategoryArabicLanguage.
+  ///
+  /// In es, this message translates to:
+  /// **'Lengua árabe'**
+  String get booksMainCategoryArabicLanguage;
+
+  /// No description provided for @booksMainCategoryCallToIslam.
+  ///
+  /// In es, this message translates to:
+  /// **'Llamada al islam'**
+  String get booksMainCategoryCallToIslam;
+
+  /// No description provided for @booksMainCategoryHistory.
+  ///
+  /// In es, this message translates to:
+  /// **'Historia'**
+  String get booksMainCategoryHistory;
+
+  /// No description provided for @booksMainCategoryIslamicBelief.
+  ///
+  /// In es, this message translates to:
+  /// **'Creencia islámica'**
+  String get booksMainCategoryIslamicBelief;
+
+  /// No description provided for @booksMainCategoryIslamicCulture.
+  ///
+  /// In es, this message translates to:
+  /// **'Cultura islámica'**
+  String get booksMainCategoryIslamicCulture;
+
+  /// No description provided for @booksMainCategoryIslamicJurisprudence.
+  ///
+  /// In es, this message translates to:
+  /// **'Jurisprudencia islámica'**
+  String get booksMainCategoryIslamicJurisprudence;
+
+  /// No description provided for @booksMainCategoryMajorSins.
+  ///
+  /// In es, this message translates to:
+  /// **'Pecados mayores'**
+  String get booksMainCategoryMajorSins;
+
+  /// No description provided for @booksMainCategoryNobleQuran.
+  ///
+  /// In es, this message translates to:
+  /// **'Noble Corán'**
+  String get booksMainCategoryNobleQuran;
+
+  /// No description provided for @booksMainCategoryPresentingIslam.
+  ///
+  /// In es, this message translates to:
+  /// **'Presentar el islam'**
+  String get booksMainCategoryPresentingIslam;
+
+  /// No description provided for @booksMainCategoryPropheticBiography.
+  ///
+  /// In es, this message translates to:
+  /// **'Biografía profética'**
+  String get booksMainCategoryPropheticBiography;
+
+  /// No description provided for @booksMainCategoryProphetSunnah.
+  ///
+  /// In es, this message translates to:
+  /// **'Sunna del Profeta'**
+  String get booksMainCategoryProphetSunnah;
+
+  /// No description provided for @booksMainCategorySermons.
+  ///
+  /// In es, this message translates to:
+  /// **'Sermones'**
+  String get booksMainCategorySermons;
+
+  /// No description provided for @booksMainCategoryVirtues.
+  ///
+  /// In es, this message translates to:
+  /// **'Virtudes'**
+  String get booksMainCategoryVirtues;
+
+  /// No description provided for @booksPageCount.
+  ///
+  /// In es, this message translates to:
+  /// **'{pages} págs'**
+  String booksPageCount(Object pages);
+
+  /// No description provided for @booksPlaceholderDescription.
+  ///
+  /// In es, this message translates to:
+  /// **'Pronto aparecerán libros aquí.'**
+  String get booksPlaceholderDescription;
+
+  /// No description provided for @booksPlaceholderTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Biblioteca en preparación'**
+  String get booksPlaceholderTitle;
+
+  /// No description provided for @booksSearchHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Buscar libro o autor'**
+  String get booksSearchHint;
+
+  /// No description provided for @booksUnnamedCategory.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin categoría'**
+  String get booksUnnamedCategory;
+
+  /// No description provided for @booksUntitled.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin título'**
+  String get booksUntitled;
+
+  /// No description provided for @booksVisitIslamHouse.
+  ///
+  /// In es, this message translates to:
+  /// **'Visitar IslamHouse'**
+  String get booksVisitIslamHouse;
+
+  /// No description provided for @calendarCurrentMonth.
+  ///
+  /// In es, this message translates to:
+  /// **'ESTE MES'**
+  String get calendarCurrentMonth;
+
+  /// No description provided for @calendarEventAshura.
+  ///
+  /// In es, this message translates to:
+  /// **'Ashura'**
+  String get calendarEventAshura;
+
+  /// No description provided for @calendarEventDayOfArafah.
+  ///
+  /// In es, this message translates to:
+  /// **'Día de Arafah'**
+  String get calendarEventDayOfArafah;
+
+  /// No description provided for @calendarEventEidAdha.
+  ///
+  /// In es, this message translates to:
+  /// **'Eid al-Adha'**
+  String get calendarEventEidAdha;
+
+  /// No description provided for @calendarEventEidFitr.
+  ///
+  /// In es, this message translates to:
+  /// **'Eid al-Fitr'**
+  String get calendarEventEidFitr;
+
+  /// No description provided for @calendarEventIslamicNewYear.
+  ///
+  /// In es, this message translates to:
+  /// **'Año nuevo islámico'**
+  String get calendarEventIslamicNewYear;
+
+  /// No description provided for @calendarEventRamadanStart.
+  ///
+  /// In es, this message translates to:
+  /// **'Inicio de Ramadán'**
+  String get calendarEventRamadanStart;
+
+  /// No description provided for @calendarImportantDatesTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Fechas importantes de {year}'**
+  String calendarImportantDatesTitle(Object year);
+
+  /// No description provided for @calendarSelectDate.
+  ///
+  /// In es, this message translates to:
+  /// **'Selecciona una fecha'**
+  String get calendarSelectDate;
+
+  /// No description provided for @calendarSelectedDateUppercase.
+  ///
+  /// In es, this message translates to:
+  /// **'FECHA SELECCIONADA'**
+  String get calendarSelectedDateUppercase;
+
+  /// No description provided for @calendarTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Calendario islámico'**
+  String get calendarTitle;
+
+  /// No description provided for @calendarTodayLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Hoy · {date}'**
+  String calendarTodayLabel(Object date);
+
+  /// No description provided for @dhikrChooseCustomValue.
+  ///
+  /// In es, this message translates to:
+  /// **'Elegir valor personalizado'**
+  String get dhikrChooseCustomValue;
+
+  /// No description provided for @dhikrDailyGoalCompletedMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'Has completado tu meta diaria de dhikr.'**
+  String get dhikrDailyGoalCompletedMessage;
+
+  /// No description provided for @dhikrDailyGoalHelper.
+  ///
+  /// In es, this message translates to:
+  /// **'Elige cuántas repeticiones quieres alcanzar hoy.'**
+  String get dhikrDailyGoalHelper;
+
+  /// No description provided for @dhikrDailyGoalShort.
+  ///
+  /// In es, this message translates to:
+  /// **'Meta diaria'**
+  String get dhikrDailyGoalShort;
+
+  /// No description provided for @dhikrDailyGoalTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Meta diaria'**
+  String get dhikrDailyGoalTitle;
+
+  /// No description provided for @dhikrDailyGoalUpdated.
+  ///
+  /// In es, this message translates to:
+  /// **'Meta diaria actualizada a {value}'**
+  String dhikrDailyGoalUpdated(Object value);
+
+  /// No description provided for @dhikrFeedbackAlmostThere.
+  ///
+  /// In es, this message translates to:
+  /// **'Vas muy bien. Estás cerca de tu meta diaria.'**
+  String get dhikrFeedbackAlmostThere;
+
+  /// No description provided for @dhikrFeedbackCompleted.
+  ///
+  /// In es, this message translates to:
+  /// **'Meta diaria completada. Que Allah acepte tu dhikr.'**
+  String get dhikrFeedbackCompleted;
+
+  /// No description provided for @dhikrFeedbackCycleCompleted.
+  ///
+  /// In es, this message translates to:
+  /// **'Ciclo completado. Puedes seguir con calma.'**
+  String get dhikrFeedbackCycleCompleted;
+
+  /// No description provided for @dhikrFeedbackGoodPace.
+  ///
+  /// In es, this message translates to:
+  /// **'Buen ritmo. Mantén estas repeticiones con serenidad.'**
+  String get dhikrFeedbackGoodPace;
+
+  /// No description provided for @dhikrFeedbackStart.
+  ///
+  /// In es, this message translates to:
+  /// **'Empieza con unas repeticiones suaves y constantes.'**
+  String get dhikrFeedbackStart;
+
+  /// No description provided for @dhikrFeedbackTakeYourTime.
+  ///
+  /// In es, this message translates to:
+  /// **'Tómate tu tiempo. Cada repetición cuenta.'**
+  String get dhikrFeedbackTakeYourTime;
+
+  /// No description provided for @dhikrGoalsSection.
+  ///
+  /// In es, this message translates to:
+  /// **'OBJETIVOS'**
+  String get dhikrGoalsSection;
+
+  /// No description provided for @dhikrHistoryEmptyBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Todavía no hay historial suficiente para esta vista.'**
+  String get dhikrHistoryEmptyBody;
+
+  /// No description provided for @dhikrHistorySavedBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Tu progreso reciente se guarda automáticamente.'**
+  String get dhikrHistorySavedBody;
+
+  /// No description provided for @dhikrLast7Days.
+  ///
+  /// In es, this message translates to:
+  /// **'7 días'**
+  String get dhikrLast7Days;
+
+  /// No description provided for @dhikrMeaningAlhamdulillah.
+  ///
+  /// In es, this message translates to:
+  /// **'Alabado sea Allah'**
+  String get dhikrMeaningAlhamdulillah;
+
+  /// No description provided for @dhikrMeaningAllahuAkbar.
+  ///
+  /// In es, this message translates to:
+  /// **'Allah es el más Grande'**
+  String get dhikrMeaningAllahuAkbar;
+
+  /// No description provided for @dhikrMeaningSubhanAllah.
+  ///
+  /// In es, this message translates to:
+  /// **'Gloria a Allah'**
+  String get dhikrMeaningSubhanAllah;
+
+  /// No description provided for @dhikrRepetitionsFieldHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Ejemplo: 100'**
+  String get dhikrRepetitionsFieldHint;
+
+  /// No description provided for @dhikrRepetitionsFieldLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Repeticiones'**
+  String get dhikrRepetitionsFieldLabel;
+
+  /// No description provided for @dhikrResetSession.
+  ///
+  /// In es, this message translates to:
+  /// **'Reiniciar sesión'**
+  String get dhikrResetSession;
+
+  /// No description provided for @dhikrSessionCountOf.
+  ///
+  /// In es, this message translates to:
+  /// **'de {count}'**
+  String dhikrSessionCountOf(Object count);
+
+  /// No description provided for @dhikrSessionCycleCompleted.
+  ///
+  /// In es, this message translates to:
+  /// **'Has completado este ciclo de dhikr.'**
+  String get dhikrSessionCycleCompleted;
+
+  /// No description provided for @dhikrSessionGoalHelper.
+  ///
+  /// In es, this message translates to:
+  /// **'Define cuántas repeticiones quieres hacer por ciclo.'**
+  String get dhikrSessionGoalHelper;
+
+  /// No description provided for @dhikrSessionGoalShort.
+  ///
+  /// In es, this message translates to:
+  /// **'Meta de sesión'**
+  String get dhikrSessionGoalShort;
+
+  /// No description provided for @dhikrSessionGoalTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Meta de sesión'**
+  String get dhikrSessionGoalTitle;
+
+  /// No description provided for @dhikrSessionGoalUpdated.
+  ///
+  /// In es, this message translates to:
+  /// **'Meta de sesión actualizada a {value}'**
+  String dhikrSessionGoalUpdated(Object value);
+
+  /// No description provided for @dhikrSessionResetMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'La sesión se ha reiniciado.'**
+  String get dhikrSessionResetMessage;
+
+  /// No description provided for @dhikrSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Recuerdo consciente para tu día'**
+  String get dhikrSubtitle;
+
+  /// No description provided for @dhikrSummarySection.
+  ///
+  /// In es, this message translates to:
+  /// **'RESUMEN'**
+  String get dhikrSummarySection;
+
+  /// No description provided for @dhikrTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Dhikr'**
+  String get dhikrTitle;
+
+  /// No description provided for @dhikrTodayCycle.
+  ///
+  /// In es, this message translates to:
+  /// **'Hoy: {today} · ciclo {current}/{total}'**
+  String dhikrTodayCycle(Object current, Object today, Object total);
+
+  /// No description provided for @hadithDailyBadge.
+  ///
+  /// In es, this message translates to:
+  /// **'HADIZ DEL DÍA'**
+  String get hadithDailyBadge;
+
+  /// No description provided for @hadithDailyOpenLibrary.
+  ///
+  /// In es, this message translates to:
+  /// **'Ver hadices'**
+  String get hadithDailyOpenLibrary;
+
+  /// No description provided for @hadithDailyUnavailable.
+  ///
+  /// In es, this message translates to:
+  /// **'No hemos podido cargar el hadiz del día.'**
+  String get hadithDailyUnavailable;
+
+  /// No description provided for @hadithDetailArabicText.
+  ///
+  /// In es, this message translates to:
+  /// **'Texto árabe'**
+  String get hadithDetailArabicText;
+
+  /// No description provided for @hadithDetailCopied.
+  ///
+  /// In es, this message translates to:
+  /// **'Hadiz copiado'**
+  String get hadithDetailCopied;
+
+  /// No description provided for @hadithDetailCopyText.
+  ///
+  /// In es, this message translates to:
+  /// **'Copiar texto'**
+  String get hadithDetailCopyText;
+
+  /// No description provided for @hadithDetailGrade.
+  ///
+  /// In es, this message translates to:
+  /// **'Grado: {grade}'**
+  String hadithDetailGrade(Object grade);
+
+  /// No description provided for @hadithDetailHideArabic.
+  ///
+  /// In es, this message translates to:
+  /// **'Ocultar árabe'**
+  String get hadithDetailHideArabic;
+
+  /// No description provided for @hadithDetailHideTranslation.
+  ///
+  /// In es, this message translates to:
+  /// **'Ocultar traducción'**
+  String get hadithDetailHideTranslation;
+
+  /// No description provided for @hadithDetailId.
+  ///
+  /// In es, this message translates to:
+  /// **'ID: {id}'**
+  String hadithDetailId(Object id);
+
+  /// No description provided for @hadithDetailInfoBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Este hadiz puede variar según la colección, el grado y la traducción disponible.'**
+  String get hadithDetailInfoBody;
+
+  /// No description provided for @hadithDetailNoCategory.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin categoría'**
+  String get hadithDetailNoCategory;
+
+  /// No description provided for @hadithDetailRemovedFromFavorites.
+  ///
+  /// In es, this message translates to:
+  /// **'Hadiz quitado de favoritos'**
+  String get hadithDetailRemovedFromFavorites;
+
+  /// No description provided for @hadithDetailSavedToFavorites.
+  ///
+  /// In es, this message translates to:
+  /// **'Hadiz guardado en favoritos'**
+  String get hadithDetailSavedToFavorites;
+
+  /// No description provided for @hadithDetailShowArabic.
+  ///
+  /// In es, this message translates to:
+  /// **'Mostrar árabe'**
+  String get hadithDetailShowArabic;
+
+  /// No description provided for @hadithDetailShowTranslation.
+  ///
+  /// In es, this message translates to:
+  /// **'Mostrar traducción'**
+  String get hadithDetailShowTranslation;
+
+  /// No description provided for @hadithDetailTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Detalle del hadiz'**
+  String get hadithDetailTitle;
+
+  /// No description provided for @hadithDetailTranslation.
+  ///
+  /// In es, this message translates to:
+  /// **'Traducción'**
+  String get hadithDetailTranslation;
+
+  /// No description provided for @hadithLibraryAllCollections.
+  ///
+  /// In es, this message translates to:
+  /// **'Todas las colecciones'**
+  String get hadithLibraryAllCollections;
+
+  /// No description provided for @hadithLibraryAllGrades.
+  ///
+  /// In es, this message translates to:
+  /// **'Todos los grados'**
+  String get hadithLibraryAllGrades;
+
+  /// No description provided for @hadithLibraryAllHadiths.
+  ///
+  /// In es, this message translates to:
+  /// **'{count} hadices'**
+  String hadithLibraryAllHadiths(Object count);
+
+  /// No description provided for @hadithLibraryEmptyBody.
+  ///
+  /// In es, this message translates to:
+  /// **'No hay hadices disponibles ahora mismo.'**
+  String get hadithLibraryEmptyBody;
+
+  /// No description provided for @hadithLibraryEmptySearchBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Prueba con otra búsqueda o quita los filtros.'**
+  String get hadithLibraryEmptySearchBody;
+
+  /// No description provided for @hadithLibraryEmptySearchTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin resultados para “{query}”'**
+  String hadithLibraryEmptySearchTitle(Object query);
+
+  /// No description provided for @hadithLibraryEmptyTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin hadices disponibles'**
+  String get hadithLibraryEmptyTitle;
+
+  /// No description provided for @hadithLibraryFiltersError.
+  ///
+  /// In es, this message translates to:
+  /// **'No hemos podido cargar los filtros.'**
+  String get hadithLibraryFiltersError;
+
+  /// No description provided for @hadithLibraryFiltersLoading.
+  ///
+  /// In es, this message translates to:
+  /// **'Cargando filtros…'**
+  String get hadithLibraryFiltersLoading;
+
+  /// No description provided for @hadithLibraryLoadError.
+  ///
+  /// In es, this message translates to:
+  /// **'No se pudieron cargar los hadices.\n{error}'**
+  String hadithLibraryLoadError(Object error);
+
+  /// No description provided for @hadithLibraryResultsCount.
+  ///
+  /// In es, this message translates to:
+  /// **'{count} resultados'**
+  String hadithLibraryResultsCount(Object count);
+
+  /// No description provided for @hadithLibrarySearchHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Buscar hadiz o referencia'**
+  String get hadithLibrarySearchHint;
+
+  /// No description provided for @hadithLibraryTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Hadices'**
+  String get hadithLibraryTitle;
+
+  /// No description provided for @hadithOfflineAvailability.
+  ///
+  /// In es, this message translates to:
+  /// **'{progress} disponible sin conexión'**
+  String hadithOfflineAvailability(Object progress);
+
+  /// No description provided for @hadithOfflineAvailable.
+  ///
+  /// In es, this message translates to:
+  /// **'Disponible'**
+  String get hadithOfflineAvailable;
+
+  /// No description provided for @hadithOfflineCollectionsTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Colecciones incluidas'**
+  String get hadithOfflineCollectionsTitle;
+
+  /// No description provided for @hadithOfflineIncludedSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Todo el contenido viene integrado en la app'**
+  String get hadithOfflineIncludedSubtitle;
+
+  /// No description provided for @hadithOfflineIncludedTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin conexión desde el principio'**
+  String get hadithOfflineIncludedTitle;
+
+  /// No description provided for @hadithOfflineInfoBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Los hadices incluidos aquí ya están disponibles sin descarga adicional.'**
+  String get hadithOfflineInfoBody;
+
+  /// No description provided for @hadithOfflineTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Hadices sin conexión'**
+  String get hadithOfflineTitle;
+
+  /// No description provided for @hafizActivePlans.
+  ///
+  /// In es, this message translates to:
+  /// **'Planes activos'**
+  String get hafizActivePlans;
+
+  /// No description provided for @hafizAyahRange.
+  ///
+  /// In es, this message translates to:
+  /// **'Aleyas {start}-{end}'**
+  String hafizAyahRange(Object end, Object start);
+
+  /// No description provided for @hafizConfigureSession.
+  ///
+  /// In es, this message translates to:
+  /// **'Configurar sesión'**
+  String get hafizConfigureSession;
+
+  /// No description provided for @hafizEmptyBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Todavía no has creado ningún plan de memorización.'**
+  String get hafizEmptyBody;
+
+  /// No description provided for @hafizEmptyHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Elige una sura y define un tramo corto para empezar.'**
+  String get hafizEmptyHint;
+
+  /// No description provided for @hafizEmptyTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Empieza tu repaso'**
+  String get hafizEmptyTitle;
+
+  /// No description provided for @hafizEndAyah.
+  ///
+  /// In es, this message translates to:
+  /// **'Aleya final: {ayah}'**
+  String hafizEndAyah(Object ayah);
+
+  /// No description provided for @hafizLoadError.
+  ///
+  /// In es, this message translates to:
+  /// **'No hemos podido cargar esta sura.'**
+  String get hafizLoadError;
+
+  /// No description provided for @hafizLogRepetition.
+  ///
+  /// In es, this message translates to:
+  /// **'Registrar repetición'**
+  String get hafizLogRepetition;
+
+  /// No description provided for @hafizPlanSaved.
+  ///
+  /// In es, this message translates to:
+  /// **'Plan guardado'**
+  String get hafizPlanSaved;
+
+  /// No description provided for @hafizRepetitionLogged.
+  ///
+  /// In es, this message translates to:
+  /// **'Repetición registrada'**
+  String get hafizRepetitionLogged;
+
+  /// No description provided for @hafizReviewedSurahs.
+  ///
+  /// In es, this message translates to:
+  /// **'Suras repasadas'**
+  String get hafizReviewedSurahs;
+
+  /// No description provided for @hafizSavePlan.
+  ///
+  /// In es, this message translates to:
+  /// **'Guardar plan'**
+  String get hafizSavePlan;
+
+  /// No description provided for @hafizSelectedSegment.
+  ///
+  /// In es, this message translates to:
+  /// **'Tramo seleccionado'**
+  String get hafizSelectedSegment;
+
+  /// No description provided for @hafizStartAyah.
+  ///
+  /// In es, this message translates to:
+  /// **'Aleya inicial: {ayah}'**
+  String hafizStartAyah(Object ayah);
+
+  /// No description provided for @hafizSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Organiza repasos breves y constantes'**
+  String get hafizSubtitle;
+
+  /// No description provided for @hafizSurahNoPlan.
+  ///
+  /// In es, this message translates to:
+  /// **'{count} aleyas · sin plan'**
+  String hafizSurahNoPlan(Object count);
+
+  /// No description provided for @hafizSurahProgress.
+  ///
+  /// In es, this message translates to:
+  /// **'{start}-{end} · {percent}% completado'**
+  String hafizSurahProgress(Object end, Object percent, Object start);
+
+  /// No description provided for @hafizTargetRepetitions.
+  ///
+  /// In es, this message translates to:
+  /// **'Objetivo: {count}'**
+  String hafizTargetRepetitions(Object count);
+
+  /// No description provided for @homeCalendarStripTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'CALENDARIO SAGRADO'**
+  String get homeCalendarStripTitle;
+
+  /// No description provided for @homeGoalCompleted.
+  ///
+  /// In es, this message translates to:
+  /// **'cumplido'**
+  String get homeGoalCompleted;
+
+  /// No description provided for @homeGoalInProgress.
+  ///
+  /// In es, this message translates to:
+  /// **'en progreso'**
+  String get homeGoalInProgress;
+
+  /// No description provided for @homeInsightAlmostCompleteTodayMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'Te queda muy poco para cerrar un día fuerte.'**
+  String get homeInsightAlmostCompleteTodayMessage;
+
+  /// No description provided for @homeInsightAlmostCompleteTodayTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Casi completo hoy'**
+  String get homeInsightAlmostCompleteTodayTitle;
+
+  /// No description provided for @homeInsightBetterThanLastWeekMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'Has completado {delta} oraciones más que la semana pasada.'**
+  String homeInsightBetterThanLastWeekMessage(Object delta);
+
+  /// No description provided for @homeInsightBetterThanLastWeekTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Mejor que la semana pasada'**
+  String get homeInsightBetterThanLastWeekTitle;
+
+  /// No description provided for @homeInsightDhikrDoneMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'Has hecho {count} repeticiones hoy. Muy buen cierre.'**
+  String homeInsightDhikrDoneMessage(Object count);
+
+  /// No description provided for @homeInsightDhikrDoneTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Dhikr completado'**
+  String get homeInsightDhikrDoneTitle;
+
+  /// No description provided for @homeInsightDhikrGoodPaceMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'Llevas {current}/{goal} repeticiones hoy.'**
+  String homeInsightDhikrGoodPaceMessage(Object current, Object goal);
+
+  /// No description provided for @homeInsightDhikrGoodPaceTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Buen ritmo de dhikr'**
+  String get homeInsightDhikrGoodPaceTitle;
+
+  /// No description provided for @homeInsightGoodPaceTodayMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'Llevas {count} oraciones completadas hoy.'**
+  String homeInsightGoodPaceTodayMessage(Object count);
+
+  /// No description provided for @homeInsightGoodPaceTodayTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Buen ritmo hoy'**
+  String get homeInsightGoodPaceTodayTitle;
+
+  /// No description provided for @homeInsightMostConsistentPrayerMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'{prayer} está siendo tu momento más estable.'**
+  String homeInsightMostConsistentPrayerMessage(Object prayer);
+
+  /// No description provided for @homeInsightMostConsistentPrayerTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Tu oración más constante'**
+  String get homeInsightMostConsistentPrayerTitle;
+
+  /// No description provided for @homeInsightPrayerToStrengthenMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'{prayer} necesita un poco más de atención.'**
+  String homeInsightPrayerToStrengthenMessage(Object prayer);
+
+  /// No description provided for @homeInsightPrayerToStrengthenTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Oración a reforzar'**
+  String get homeInsightPrayerToStrengthenTitle;
+
+  /// No description provided for @homeInsightRamadanConsistencyMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'Tu práctica de hoy ya refleja un buen equilibrio.'**
+  String get homeInsightRamadanConsistencyMessage;
+
+  /// No description provided for @homeInsightRamadanConsistencyTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Constancia en Ramadán'**
+  String get homeInsightRamadanConsistencyTitle;
+
+  /// No description provided for @homeInsightRamadanMomentumMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'Aprovecha este tramo del día para sostener el impulso.'**
+  String get homeInsightRamadanMomentumMessage;
+
+  /// No description provided for @homeInsightRamadanMomentumTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Momento de Ramadán'**
+  String get homeInsightRamadanMomentumTitle;
+
+  /// No description provided for @homeInsightRamadanSmallStepsMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'En Ramadán, los pasos pequeños y constantes cuentan mucho.'**
+  String get homeInsightRamadanSmallStepsMessage;
+
+  /// No description provided for @homeInsightStartTodayFirstMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'Tu día aún está abierto. Marca tu primera oración y crea impulso.'**
+  String get homeInsightStartTodayFirstMessage;
+
+  /// No description provided for @homeInsightStartTodayMoreMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'Todavía estás a tiempo de empezar con calma.'**
+  String get homeInsightStartTodayMoreMessage;
+
+  /// No description provided for @homeInsightStartTodayTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Empieza hoy'**
+  String get homeInsightStartTodayTitle;
+
+  /// No description provided for @homeInsightStillCanStartMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'Un paso pequeño ahora puede cambiar el tono del día.'**
+  String get homeInsightStillCanStartMessage;
+
+  /// No description provided for @homeInsightStillCanStartTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Aún puedes empezar'**
+  String get homeInsightStillCanStartTitle;
+
+  /// No description provided for @homeInsightStreakInMotionMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'Llevas {streak} días seguidos. Protege esa constancia.'**
+  String homeInsightStreakInMotionMessage(Object streak);
+
+  /// No description provided for @homeInsightStreakInMotionTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Racha en movimiento'**
+  String get homeInsightStreakInMotionTitle;
+
+  /// No description provided for @homeInsightTodayLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'INSIGHT DE HOY'**
+  String get homeInsightTodayLabel;
+
+  /// No description provided for @homeLoadingScheduleBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Preparando tu próxima oración'**
+  String get homeLoadingScheduleBody;
+
+  /// No description provided for @homeLoadingScheduleTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Cargando horarios'**
+  String get homeLoadingScheduleTitle;
+
+  /// No description provided for @homeLocationCachedBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Estamos preparando tus horarios usando la última ubicación guardada.'**
+  String get homeLocationCachedBody;
+
+  /// No description provided for @homeLocationEnableDeviceLocation.
+  ///
+  /// In es, this message translates to:
+  /// **'Activa la ubicación del dispositivo'**
+  String get homeLocationEnableDeviceLocation;
+
+  /// No description provided for @homeLocationGpsDisabledBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin GPS activo no podemos calcular horarios precisos ni orientar la Qibla.'**
+  String get homeLocationGpsDisabledBody;
+
+  /// No description provided for @homeLocationPendingBody.
+  ///
+  /// In es, this message translates to:
+  /// **'La pantalla principal sigue visible aunque los horarios aún no estén listos.'**
+  String get homeLocationPendingBody;
+
+  /// No description provided for @homeLocationPermissionBlocked.
+  ///
+  /// In es, this message translates to:
+  /// **'Permiso de ubicación bloqueado'**
+  String get homeLocationPermissionBlocked;
+
+  /// No description provided for @homeLocationPermissionBlockedBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Puedes activar la ubicación para Qibla Time desde los ajustes del sistema cuando quieras.'**
+  String get homeLocationPermissionBlockedBody;
+
+  /// No description provided for @homeLocationPermissionNeeded.
+  ///
+  /// In es, this message translates to:
+  /// **'Permite la ubicación para ver tus horarios'**
+  String get homeLocationPermissionNeeded;
+
+  /// No description provided for @homeLocationPermissionNeededBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Qibla Time necesita tu ubicación para mostrar horarios fiables según tu ciudad.'**
+  String get homeLocationPermissionNeededBody;
+
+  /// No description provided for @homeLocationPreparingTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Preparando tus horarios'**
+  String get homeLocationPreparingTitle;
+
+  /// No description provided for @homeNextPrayerStartsAt.
+  ///
+  /// In es, this message translates to:
+  /// **'Comienza a las {time}'**
+  String homeNextPrayerStartsAt(Object time);
+
+  /// No description provided for @homeNotificationPaused.
+  ///
+  /// In es, this message translates to:
+  /// **'Los avisos generales de oración están pausados ahora mismo.'**
+  String get homeNotificationPaused;
+
+  /// No description provided for @homeNotificationPermissionPending.
+  ///
+  /// In es, this message translates to:
+  /// **'Tus recordatorios de adhan están configurados, pero el permiso del sistema sigue pendiente.'**
+  String get homeNotificationPermissionPending;
+
+  /// No description provided for @homePrayerDescriptionCompleted.
+  ///
+  /// In es, this message translates to:
+  /// **'Ya la marcaste como completada.'**
+  String get homePrayerDescriptionCompleted;
+
+  /// No description provided for @homePrayerDescriptionNext.
+  ///
+  /// In es, this message translates to:
+  /// **'Es la siguiente en el ritmo de hoy.'**
+  String get homePrayerDescriptionNext;
+
+  /// No description provided for @homePrayerDescriptionNow.
+  ///
+  /// In es, this message translates to:
+  /// **'Esta oración está en curso ahora mismo.'**
+  String get homePrayerDescriptionNow;
+
+  /// No description provided for @homePrayerDescriptionPendingToday.
+  ///
+  /// In es, this message translates to:
+  /// **'Pendiente dentro del recorrido de hoy.'**
+  String get homePrayerDescriptionPendingToday;
+
+  /// No description provided for @homePrayerDescriptionReviewDate.
+  ///
+  /// In es, this message translates to:
+  /// **'Disponible para revisar esta fecha.'**
+  String get homePrayerDescriptionReviewDate;
+
+  /// No description provided for @homePrayerSectionSelectedDaySubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Consulta y marca los horarios de {date}'**
+  String homePrayerSectionSelectedDaySubtitle(Object date);
+
+  /// No description provided for @homePrayerSectionSelectedDayTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'HORARIOS DEL DÍA'**
+  String get homePrayerSectionSelectedDayTitle;
+
+  /// No description provided for @homePrayerSectionTodaySubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Ritmo completo de tus cinco oraciones'**
+  String get homePrayerSectionTodaySubtitle;
+
+  /// No description provided for @homePrayerSectionTodayTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'ORACIONES DE HOY'**
+  String get homePrayerSectionTodayTitle;
+
+  /// No description provided for @homePrayerStatusCompleted.
+  ///
+  /// In es, this message translates to:
+  /// **'Completada'**
+  String get homePrayerStatusCompleted;
+
+  /// No description provided for @homePrayerStatusNext.
+  ///
+  /// In es, this message translates to:
+  /// **'Siguiente'**
+  String get homePrayerStatusNext;
+
+  /// No description provided for @homePrayerStatusNow.
+  ///
+  /// In es, this message translates to:
+  /// **'Ahora'**
+  String get homePrayerStatusNow;
+
+  /// No description provided for @homePrayerStatusUpcoming.
+  ///
+  /// In es, this message translates to:
+  /// **'Próxima'**
+  String get homePrayerStatusUpcoming;
+
+  /// No description provided for @homeQuickActionsTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'ACCESOS SAGRADOS'**
+  String get homeQuickActionsTitle;
+
+  /// No description provided for @homeRamadanClosingSoon.
+  ///
+  /// In es, this message translates to:
+  /// **'cierre cercano'**
+  String get homeRamadanClosingSoon;
+
+  /// No description provided for @homeRamadanContinueReading.
+  ///
+  /// In es, this message translates to:
+  /// **'Continuar lectura'**
+  String get homeRamadanContinueReading;
+
+  /// No description provided for @homeRamadanCountdownIftar.
+  ///
+  /// In es, this message translates to:
+  /// **'Faltan {duration} para Iftar'**
+  String homeRamadanCountdownIftar(Object duration);
+
+  /// No description provided for @homeRamadanCountdownImsak.
+  ///
+  /// In es, this message translates to:
+  /// **'Faltan {duration} para Imsak'**
+  String homeRamadanCountdownImsak(Object duration);
+
+  /// No description provided for @homeRamadanCountdownTomorrowImsak.
+  ///
+  /// In es, this message translates to:
+  /// **'Faltan {duration} para Imsak de mañana'**
+  String homeRamadanCountdownTomorrowImsak(Object duration);
+
+  /// No description provided for @homeRamadanDhikrCompletedBody.
+  ///
+  /// In es, this message translates to:
+  /// **'{current}/{goal} repeticiones hoy. Meta diaria cumplida.'**
+  String homeRamadanDhikrCompletedBody(Object current, Object goal);
+
+  /// No description provided for @homeRamadanDhikrInProgressBody.
+  ///
+  /// In es, this message translates to:
+  /// **'{current}/{goal} repeticiones hoy. Ya has empezado.'**
+  String homeRamadanDhikrInProgressBody(Object current, Object goal);
+
+  /// No description provided for @homeRamadanDhikrPreparingBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Preparando tu progreso diario de dhikr.'**
+  String get homeRamadanDhikrPreparingBody;
+
+  /// No description provided for @homeRamadanDhikrStartBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Tu objetivo de hoy es {goal}. Unas pocas repeticiones ya suman.'**
+  String homeRamadanDhikrStartBody(Object goal);
+
+  /// No description provided for @homeRamadanFastingCompleted.
+  ///
+  /// In es, this message translates to:
+  /// **'Ya puedes hacer iftar desde las {time}.'**
+  String homeRamadanFastingCompleted(Object time);
+
+  /// No description provided for @homeRamadanFastingInProgress.
+  ///
+  /// In es, this message translates to:
+  /// **'Día de ayuno en curso hasta las {time}.'**
+  String homeRamadanFastingInProgress(Object time);
+
+  /// No description provided for @homeRamadanFastingLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Ayuno'**
+  String get homeRamadanFastingLabel;
+
+  /// No description provided for @homeRamadanFastingTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Ayuno'**
+  String get homeRamadanFastingTitle;
+
+  /// No description provided for @homeRamadanGoalsCompleteMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'Jornada de Ramadán muy completa. Mantén este ritmo con calma.'**
+  String get homeRamadanGoalsCompleteMessage;
+
+  /// No description provided for @homeRamadanGoalsProgressMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'Vas bien hoy. Un pequeño paso más puede cerrar tu día con fuerza.'**
+  String get homeRamadanGoalsProgressMessage;
+
+  /// No description provided for @homeRamadanGoalsReady.
+  ///
+  /// In es, this message translates to:
+  /// **'{completed}/{total} listos'**
+  String homeRamadanGoalsReady(Object completed, Object total);
+
+  /// No description provided for @homeRamadanGoalsStartMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'Empieza por algo pequeño: una oración, unas aleyas o unos minutos de dhikr.'**
+  String get homeRamadanGoalsStartMessage;
+
+  /// No description provided for @homeRamadanGoalsTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'OBJETIVOS DE RAMADÁN'**
+  String get homeRamadanGoalsTitle;
+
+  /// No description provided for @homeRamadanModeTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'MODO RAMADÁN'**
+  String get homeRamadanModeTitle;
+
+  /// No description provided for @homeRamadanNextFocus.
+  ///
+  /// In es, this message translates to:
+  /// **'próximo foco'**
+  String get homeRamadanNextFocus;
+
+  /// No description provided for @homeRamadanNightLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Noche'**
+  String get homeRamadanNightLabel;
+
+  /// No description provided for @homeRamadanOpenQuran.
+  ///
+  /// In es, this message translates to:
+  /// **'Abrir Corán'**
+  String get homeRamadanOpenQuran;
+
+  /// No description provided for @homeRamadanOpenTasbih.
+  ///
+  /// In es, this message translates to:
+  /// **'Abrir tasbih'**
+  String get homeRamadanOpenTasbih;
+
+  /// No description provided for @homeRamadanPrayerGoal.
+  ///
+  /// In es, this message translates to:
+  /// **'{count}/5 completadas hoy'**
+  String homeRamadanPrayerGoal(Object count);
+
+  /// No description provided for @homeRamadanQuranRecentProgress.
+  ///
+  /// In es, this message translates to:
+  /// **'Retoma {surah}, aleya {ayah}. Tienes progreso reciente.'**
+  String homeRamadanQuranRecentProgress(Object ayah, Object surah);
+
+  /// No description provided for @homeRamadanQuranReturnBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Tu último punto fue {surah}, aleya {ayah}. Merece la pena retomarlo hoy.'**
+  String homeRamadanQuranReturnBody(Object ayah, Object surah);
+
+  /// No description provided for @homeRamadanQuranSavedToday.
+  ///
+  /// In es, this message translates to:
+  /// **'Lectura guardada hoy en {surah}, aleya {ayah}.'**
+  String homeRamadanQuranSavedToday(Object ayah, Object surah);
+
+  /// No description provided for @homeRamadanQuranStartBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Haz una lectura corta hoy y luego podrás retomarla fácilmente.'**
+  String get homeRamadanQuranStartBody;
+
+  /// No description provided for @homeRamadanStartAction.
+  ///
+  /// In es, this message translates to:
+  /// **'Empezar'**
+  String get homeRamadanStartAction;
+
+  /// No description provided for @homeRamadanSuhoorLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Suhoor'**
+  String get homeRamadanSuhoorLabel;
+
+  /// No description provided for @homeRamadanUntilIftar.
+  ///
+  /// In es, this message translates to:
+  /// **'hasta iftar'**
+  String get homeRamadanUntilIftar;
+
+  /// No description provided for @homeSelectedDateCustomBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Consulta abajo los horarios completos del día seleccionado.'**
+  String get homeSelectedDateCustomBody;
+
+  /// No description provided for @homeSelectedDateTodayBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Consulta abajo los horarios completos de hoy.'**
+  String get homeSelectedDateTodayBody;
+
+  /// No description provided for @homeWeeklyBestDayHelper.
+  ///
+  /// In es, this message translates to:
+  /// **'{count}/5 en tu mejor día'**
+  String homeWeeklyBestDayHelper(Object count);
+
+  /// No description provided for @qiblaCompassInitError.
+  ///
+  /// In es, this message translates to:
+  /// **'No hemos podido iniciar la brújula.'**
+  String get qiblaCompassInitError;
+
+  /// No description provided for @qiblaCompassReadError.
+  ///
+  /// In es, this message translates to:
+  /// **'No hemos podido leer el sensor de la brújula.'**
+  String get qiblaCompassReadError;
+
+  /// No description provided for @qiblaDirectionEast.
+  ///
+  /// In es, this message translates to:
+  /// **'Este'**
+  String get qiblaDirectionEast;
+
+  /// No description provided for @qiblaDirectionLoadError.
+  ///
+  /// In es, this message translates to:
+  /// **'No hemos podido cargar la dirección a la Kaaba.'**
+  String get qiblaDirectionLoadError;
+
+  /// No description provided for @qiblaDirectionNorth.
+  ///
+  /// In es, this message translates to:
+  /// **'Norte'**
+  String get qiblaDirectionNorth;
+
+  /// No description provided for @qiblaDirectionNorthEast.
+  ///
+  /// In es, this message translates to:
+  /// **'Noreste'**
+  String get qiblaDirectionNorthEast;
+
+  /// No description provided for @qiblaDirectionNorthWest.
+  ///
+  /// In es, this message translates to:
+  /// **'Noroeste'**
+  String get qiblaDirectionNorthWest;
+
+  /// No description provided for @qiblaDirectionSouth.
+  ///
+  /// In es, this message translates to:
+  /// **'Sur'**
+  String get qiblaDirectionSouth;
+
+  /// No description provided for @qiblaDirectionSouthEast.
+  ///
+  /// In es, this message translates to:
+  /// **'Sureste'**
+  String get qiblaDirectionSouthEast;
+
+  /// No description provided for @qiblaDirectionSouthWest.
+  ///
+  /// In es, this message translates to:
+  /// **'Suroeste'**
+  String get qiblaDirectionSouthWest;
+
+  /// No description provided for @qiblaDirectionSummary.
+  ///
+  /// In es, this message translates to:
+  /// **'Dirección a la Kaaba: {direction}'**
+  String qiblaDirectionSummary(Object direction);
+
+  /// No description provided for @qiblaDirectionWest.
+  ///
+  /// In es, this message translates to:
+  /// **'Oeste'**
+  String get qiblaDirectionWest;
+
+  /// No description provided for @qiblaDistanceLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Distancia'**
+  String get qiblaDistanceLabel;
+
+  /// No description provided for @qiblaEnableLocationMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'Activa la ubicación para calcular la dirección a la Kaaba.'**
+  String get qiblaEnableLocationMessage;
+
+  /// No description provided for @qiblaGpsDisabledMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'Activa el GPS del dispositivo para obtener una dirección fiable.'**
+  String get qiblaGpsDisabledMessage;
+
+  /// No description provided for @qiblaGuidanceBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Mantén el dispositivo plano y gira suavemente hasta alinear el indicador.'**
+  String get qiblaGuidanceBody;
+
+  /// No description provided for @qiblaHowToUseAvoidMagnetsBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Aléjalo de imanes, fundas metálicas o dispositivos que afecten al sensor.'**
+  String get qiblaHowToUseAvoidMagnetsBody;
+
+  /// No description provided for @qiblaHowToUseAvoidMagnetsTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Evita interferencias'**
+  String get qiblaHowToUseAvoidMagnetsTitle;
+
+  /// No description provided for @qiblaHowToUseCalibrateBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Si la brújula falla, mueve el teléfono en forma de ocho para recalibrarlo.'**
+  String get qiblaHowToUseCalibrateBody;
+
+  /// No description provided for @qiblaHowToUseCalibrateTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Calibra si hace falta'**
+  String get qiblaHowToUseCalibrateTitle;
+
+  /// No description provided for @qiblaHowToUseKeepFlatBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Mantén el dispositivo plano para mejorar la precisión de la brújula.'**
+  String get qiblaHowToUseKeepFlatBody;
+
+  /// No description provided for @qiblaHowToUseKeepFlatTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Mantén el dispositivo plano'**
+  String get qiblaHowToUseKeepFlatTitle;
+
+  /// No description provided for @qiblaHowToUseTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Cómo usar la brújula'**
+  String get qiblaHowToUseTitle;
+
+  /// No description provided for @qiblaLoading.
+  ///
+  /// In es, this message translates to:
+  /// **'Calculando dirección…'**
+  String get qiblaLoading;
+
+  /// No description provided for @qiblaPermissionBlockedMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'El permiso de ubicación está bloqueado. Actívalo en los ajustes del sistema.'**
+  String get qiblaPermissionBlockedMessage;
+
+  /// No description provided for @qiblaPermissionNeededMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'Necesitamos permiso de ubicación para orientarte hacia la Kaaba.'**
+  String get qiblaPermissionNeededMessage;
+
+  /// No description provided for @qiblaPrecisionLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Precisión'**
+  String get qiblaPrecisionLabel;
+
+  /// No description provided for @qiblaSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Dirección a la Kaaba'**
+  String get qiblaSubtitle;
+
+  /// No description provided for @qiblaTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Qibla'**
+  String get qiblaTitle;
+
+  /// No description provided for @adhanSelectorHeaderBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Escucha una vista previa corta antes de elegir el adhan que sonará en tus recordatorios.'**
+  String get adhanSelectorHeaderBody;
+
+  /// No description provided for @adhanSelectorHeaderTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Elige tu llamada a la oración'**
+  String get adhanSelectorHeaderTitle;
+
+  /// No description provided for @adhanSelectorListenPreview.
+  ///
+  /// In es, this message translates to:
+  /// **'Escuchar vista previa'**
+  String get adhanSelectorListenPreview;
+
+  /// No description provided for @adhanSelectorPausePreview.
+  ///
+  /// In es, this message translates to:
+  /// **'Pausar vista previa'**
+  String get adhanSelectorPausePreview;
+
+  /// No description provided for @adhanSelectorPreviewError.
+  ///
+  /// In es, this message translates to:
+  /// **'No hemos podido reproducir la vista previa del adhan.'**
+  String get adhanSelectorPreviewError;
+
+  /// No description provided for @adhanSelectorPreviewIdle.
+  ///
+  /// In es, this message translates to:
+  /// **'Toca para escuchar una vista previa'**
+  String get adhanSelectorPreviewIdle;
+
+  /// No description provided for @adhanSelectorPreviewPaused.
+  ///
+  /// In es, this message translates to:
+  /// **'Vista previa en pausa'**
+  String get adhanSelectorPreviewPaused;
+
+  /// No description provided for @adhanSelectorPreviewPlaying.
+  ///
+  /// In es, this message translates to:
+  /// **'Escuchando vista previa'**
+  String get adhanSelectorPreviewPlaying;
+
+  /// No description provided for @adhanSelectorResumePreview.
+  ///
+  /// In es, this message translates to:
+  /// **'Reanudar vista previa'**
+  String get adhanSelectorResumePreview;
+
+  /// No description provided for @adhanSelectorSelected.
+  ///
+  /// In es, this message translates to:
+  /// **'Has seleccionado {name}'**
+  String adhanSelectorSelected(Object name);
+
+  /// No description provided for @adhanSelectorTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Adhan'**
+  String get adhanSelectorTitle;
+
+  /// No description provided for @analyticsAchievementUnlocked.
+  ///
+  /// In es, this message translates to:
+  /// **'Completado'**
+  String get analyticsAchievementUnlocked;
 }
 
 class _AppLocalizationsDelegate

@@ -267,7 +267,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               ],
             ),
             child: IconButton(
-              tooltip: 'Ajustes',
+              tooltip: l10n.settingsTitle,
               onPressed: () async {
                 await Navigator.of(context).push(
                   MaterialPageRoute(builder: (_) => const SettingsScreen()),
@@ -318,6 +318,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   Widget _buildCalendarStrip(QiblaTokens tokens) {
+    final l10n = context.l10n;
     final today = _dateOnly(DateTime.now());
     final dates =
         List.generate(15, (index) => today.subtract(Duration(days: 6 - index)));
@@ -331,7 +332,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             children: [
               Expanded(
                 child: Text(
-                  'CALENDARIO SAGRADO',
+                  l10n.homeCalendarStripTitle,
                   style: GoogleFonts.dmSans(
                     fontSize: 9,
                     letterSpacing: 1.6,
@@ -513,7 +514,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     final hero = tokens.getHero(nextPrayerInfo.prayer.key);
     final names = _prayerName(nextPrayerInfo.prayer);
-    final nextPrayerSubtitle = 'Comienza a las ${_formatTime(nextPrayerInfo.time)}';
+    final nextPrayerSubtitle = context.l10n.homeNextPrayerStartsAt(
+      _formatTime(nextPrayerInfo.time),
+    );
 
     return Container(
       margin: const EdgeInsets.fromLTRB(16, 0, 16, 0),
@@ -741,8 +744,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           const SizedBox(height: 12),
           Text(
             isToday
-                ? 'Consulta abajo los horarios completos de hoy.'
-                : 'Consulta abajo los horarios completos del día seleccionado.',
+                ? l10n.homeSelectedDateTodayBody
+                : l10n.homeSelectedDateCustomBody,
             textAlign: TextAlign.center,
             style: GoogleFonts.dmSans(
               fontSize: 12,
@@ -774,6 +777,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   Widget _buildLoadingHero(QiblaTokens tokens) {
+    final l10n = context.l10n;
     return Container(
       margin: const EdgeInsets.fromLTRB(16, 0, 16, 0),
       padding: const EdgeInsets.all(20),
@@ -785,7 +789,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       child: Column(
         children: [
           Text(
-            'Cargando horarios',
+            l10n.homeLoadingScheduleTitle,
             style: GoogleFonts.dmSerifDisplay(
               fontSize: 24,
               color: tokens.primary,
@@ -805,7 +809,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ),
           const SizedBox(height: 8),
           Text(
-            'Preparando tu próxima oración',
+            l10n.homeLoadingScheduleBody,
             style: GoogleFonts.dmSans(
               fontSize: 12,
               color: tokens.textSecondary,
@@ -858,6 +862,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     bool? systemPermissionGranted,
     bool? prayerNotificationsEnabled,
   ) {
+    final l10n = context.l10n;
     if (systemPermissionGranted == null || prayerNotificationsEnabled == null) {
       return const SizedBox.shrink();
     }
@@ -866,8 +871,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     }
 
     final text = !systemPermissionGranted
-        ? 'Tus recordatorios de adhan están configurados, pero el permiso del sistema sigue pendiente.'
-        : 'Los avisos generales de oración están pausados ahora mismo.';
+        ? l10n.homeNotificationPermissionPending
+        : l10n.homeNotificationPaused;
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
@@ -904,6 +909,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     PrayerSchedule? schedule,
     RamadanStatus? ramadanStatus,
   ) {
+    final l10n = context.l10n;
     if (schedule == null || ramadanStatus == null || !ramadanStatus.isEnabled) {
       return const SizedBox.shrink();
     }
@@ -924,11 +930,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         : beforeIftar
             ? schedule.maghrib
             : nextImsak;
+    final countdownValue = _formatRamadanCountdown(targetTime.difference(now));
     final countdownLabel = beforeImsak
-        ? 'Faltan ${_formatRamadanCountdown(targetTime.difference(now))} para Imsak'
+        ? l10n.homeRamadanCountdownImsak(countdownValue)
         : beforeIftar
-        ? 'Faltan ${_formatRamadanCountdown(targetTime.difference(now))} para Iftar'
-        : 'Faltan ${_formatRamadanCountdown(targetTime.difference(now))} para Imsak de mañana';
+        ? l10n.homeRamadanCountdownIftar(countdownValue)
+        : l10n.homeRamadanCountdownTomorrowImsak(countdownValue);
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
@@ -946,7 +953,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               children: [
                 Expanded(
                   child: Text(
-                    'MODO RAMADAN',
+                    l10n.homeRamadanModeTitle,
                     style: GoogleFonts.dmSans(
                       fontSize: 9,
                       color: tokens.textSecondary,
@@ -1013,15 +1020,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   child: _summaryMetric(
                     tokens,
                     beforeImsak
-                        ? 'Suhoor'
+                        ? l10n.homeRamadanSuhoorLabel
                         : beforeIftar
-                            ? 'Ayuno'
-                            : 'Noche',
+                            ? l10n.homeRamadanFastingLabel
+                            : l10n.homeRamadanNightLabel,
                     beforeImsak
-                        ? 'cierre cercano'
+                        ? l10n.homeRamadanClosingSoon
                         : beforeIftar
-                            ? 'hasta iftar'
-                            : 'proximo foco',
+                            ? l10n.homeRamadanUntilIftar
+                            : l10n.homeRamadanNextFocus,
                   ),
                 ),
               ],
@@ -1045,6 +1052,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     QiblaTokens tokens,
     HomeInsightBundle bundle,
   ) {
+    final l10n = context.l10n;
     final primary = bundle.primary;
     final secondary = bundle.secondary;
 
@@ -1082,7 +1090,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'INSIGHT DE HOY',
+                        l10n.homeInsightTodayLabel,
                         style: GoogleFonts.dmSans(
                           fontSize: 9,
                           color: tokens.textSecondary,
@@ -1154,6 +1162,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   Widget _buildWeeklySummaryCard(QiblaTokens tokens, WeeklySummary summary) {
+    final l10n = context.l10n;
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
       child: Container(
@@ -1170,7 +1179,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               children: [
                 Expanded(
                   child: Text(
-                    'RESUMEN SEMANAL',
+                    l10n.analyticsWeeklySummaryTitle,
                     style: GoogleFonts.dmSans(
                       fontSize: 9,
                       color: tokens.textSecondary,
@@ -1191,13 +1200,27 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             const SizedBox(height: 10),
             Row(
               children: [
-                Expanded(child: _summaryMetric(tokens, '${summary.fullDays}', 'días completos')),
-                Expanded(child: _summaryMetric(tokens, '${summary.currentStreak}', 'racha actual')),
+                Expanded(
+                  child: _summaryMetric(
+                    tokens,
+                    '${summary.fullDays}',
+                    l10n.analyticsFullDaysLabel,
+                  ),
+                ),
+                Expanded(
+                  child: _summaryMetric(
+                    tokens,
+                    '${summary.currentStreak}',
+                    l10n.analyticsCurrentStreakLabel,
+                  ),
+                ),
                 Expanded(
                   child: _summaryMetric(
                     tokens,
                     summary.strongestDay.shortLabel,
-                    '${summary.strongestDay.completed}/5 en tu mejor día',
+                    l10n.homeWeeklyBestDayHelper(
+                      summary.strongestDay.completed,
+                    ),
                   ),
                 ),
               ],
@@ -1259,10 +1282,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final quranGoal = _buildQuranGoal(lastReading, now);
     final dhikrGoal = _buildDhikrGoal(dhikrSnapshot);
     final fastingGoal = _buildFastingGoal(schedule, now);
+    final l10n = context.l10n;
     final items = <_RamadanGoalItem>[
       _RamadanGoalItem(
-        title: 'Oraciones',
-        description: '$prayerCount/5 completadas hoy',
+        title: l10n.commonPrayers,
+        description: l10n.homeRamadanPrayerGoal(prayerCount),
         icon: Icons.mosque_outlined,
         state: prayerCount >= 5
             ? _RamadanGoalState.completed
@@ -1294,7 +1318,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               children: [
                 Expanded(
                   child: Text(
-                    'OBJETIVOS DE RAMADAN',
+                    l10n.homeRamadanGoalsTitle,
                     style: GoogleFonts.dmSans(
                       fontSize: 9,
                       color: tokens.textSecondary,
@@ -1303,7 +1327,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                 ),
                 Text(
-                  '$completedCount/4 listos',
+                  l10n.homeRamadanGoalsReady(completedCount, items.length),
                   style: GoogleFonts.dmSans(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
@@ -1317,10 +1341,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             const SizedBox(height: 8),
             Text(
               completedCount == items.length
-                  ? 'Jornada de Ramadán muy completa. Mantén este ritmo con calma.'
+                  ? l10n.homeRamadanGoalsCompleteMessage
                   : completedCount >= 2
-                  ? 'Vas bien hoy. Un pequeño paso más puede cerrar tu día con fuerza.'
-                  : 'Empieza por algo pequeño: una oración, unas aleyas o unos minutos de dhikr.',
+                  ? l10n.homeRamadanGoalsProgressMessage
+                  : l10n.homeRamadanGoalsStartMessage,
               style: GoogleFonts.dmSans(
                 fontSize: 11,
                 height: 1.5,
@@ -1387,7 +1411,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ),
           if (item.destination != null)
             IconButton(
-              tooltip: item.actionLabel ?? 'Abrir',
+              tooltip: item.actionLabel ?? context.l10n.commonOpen,
               onPressed: () async {
                 await Navigator.of(context).push(
                   MaterialPageRoute(builder: (_) => item.destination!),
@@ -1422,14 +1446,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     QuranReadingPoint? lastReading,
     DateTime now,
   ) {
+    final l10n = context.l10n;
     if (lastReading == null) {
-      return const _RamadanGoalItem(
-        title: 'Corán',
-        description: 'Haz una lectura corta hoy y luego podrás retomarla fácilmente.',
+      return _RamadanGoalItem(
+        title: l10n.commonQuran,
+        description: l10n.homeRamadanQuranStartBody,
         icon: Icons.menu_book_outlined,
         state: _RamadanGoalState.pending,
-        destination: QuranScreen(),
-        actionLabel: 'Abrir Corán',
+        destination: const QuranScreen(),
+        actionLabel: l10n.homeRamadanOpenQuran,
       );
     }
 
@@ -1445,83 +1470,93 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     if (daysSince <= 0) {
       return _RamadanGoalItem(
-        title: 'Corán',
-        description:
-            'Lectura guardada hoy en ${lastReading.surahNameLatin}, aleya ${lastReading.ayahNumber}.',
+        title: l10n.commonQuran,
+        description: l10n.homeRamadanQuranSavedToday(
+          lastReading.surahNameLatin,
+          lastReading.ayahNumber,
+        ),
         icon: Icons.menu_book_outlined,
         state: _RamadanGoalState.completed,
         destination: const QuranScreen(),
-        actionLabel: 'Continuar lectura',
+        actionLabel: l10n.homeRamadanContinueReading,
       );
     }
 
     if (daysSince <= 3) {
       return _RamadanGoalItem(
-        title: 'Corán',
-        description:
-            'Retoma ${lastReading.surahNameLatin}, aleya ${lastReading.ayahNumber}. Tienes progreso reciente.',
+        title: l10n.commonQuran,
+        description: l10n.homeRamadanQuranRecentProgress(
+          lastReading.surahNameLatin,
+          lastReading.ayahNumber,
+        ),
         icon: Icons.menu_book_outlined,
         state: _RamadanGoalState.inProgress,
         destination: const QuranScreen(),
-        actionLabel: 'Continuar lectura',
+        actionLabel: l10n.homeRamadanContinueReading,
       );
     }
 
     return _RamadanGoalItem(
-      title: 'Corán',
-      description:
-          'Tu último punto fue ${lastReading.surahNameLatin}, aleya ${lastReading.ayahNumber}. Merece la pena retomarlo hoy.',
+      title: l10n.commonQuran,
+      description: l10n.homeRamadanQuranReturnBody(
+        lastReading.surahNameLatin,
+        lastReading.ayahNumber,
+      ),
       icon: Icons.menu_book_outlined,
       state: _RamadanGoalState.pending,
       destination: const QuranScreen(),
-      actionLabel: 'Abrir Corán',
+      actionLabel: l10n.homeRamadanOpenQuran,
     );
   }
 
   _RamadanGoalItem _buildDhikrGoal(DhikrSnapshot? snapshot) {
+    final l10n = context.l10n;
     if (snapshot == null) {
-      return const _RamadanGoalItem(
+      return _RamadanGoalItem(
         title: 'Dhikr',
-        description: 'Preparando tu progreso diario de dhikr.',
+        description: l10n.homeRamadanDhikrPreparingBody,
         icon: Icons.auto_awesome_outlined,
         state: _RamadanGoalState.pending,
-        destination: DhikrScreen(),
-        actionLabel: 'Abrir Tasbih',
+        destination: const DhikrScreen(),
+        actionLabel: l10n.homeRamadanOpenTasbih,
       );
     }
 
     if (snapshot.dailyGoalReached) {
       return _RamadanGoalItem(
         title: 'Dhikr',
-        description:
-            '${snapshot.todayCount}/${snapshot.dailyGoal} repeticiones hoy. Meta diaria cumplida.',
+        description: l10n.homeRamadanDhikrCompletedBody(
+          snapshot.todayCount,
+          snapshot.dailyGoal,
+        ),
         icon: Icons.auto_awesome_outlined,
         state: _RamadanGoalState.completed,
         destination: const DhikrScreen(),
-        actionLabel: 'Seguir',
+        actionLabel: l10n.commonContinue,
       );
     }
 
     if (snapshot.todayCount > 0) {
       return _RamadanGoalItem(
         title: 'Dhikr',
-        description:
-            '${snapshot.todayCount}/${snapshot.dailyGoal} repeticiones hoy. Ya has empezado.',
+        description: l10n.homeRamadanDhikrInProgressBody(
+          snapshot.todayCount,
+          snapshot.dailyGoal,
+        ),
         icon: Icons.auto_awesome_outlined,
         state: _RamadanGoalState.inProgress,
         destination: const DhikrScreen(),
-        actionLabel: 'Continuar',
+        actionLabel: l10n.commonContinue,
       );
     }
 
     return _RamadanGoalItem(
       title: 'Dhikr',
-      description:
-          'Tu objetivo de hoy es ${snapshot.dailyGoal}. Unas pocas repeticiones ya suman.',
+      description: l10n.homeRamadanDhikrStartBody(snapshot.dailyGoal),
       icon: Icons.auto_awesome_outlined,
       state: _RamadanGoalState.pending,
       destination: const DhikrScreen(),
-      actionLabel: 'Empezar',
+      actionLabel: l10n.homeRamadanStartAction,
     );
   }
 
@@ -1529,18 +1564,23 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     PrayerSchedule schedule,
     DateTime now,
   ) {
+    final l10n = context.l10n;
     if (now.isBefore(schedule.maghrib)) {
       return _RamadanGoalItem(
-        title: 'Ayuno',
-        description: 'Dia de ayuno en curso hasta las ${_formatTime(schedule.maghrib)}.',
+        title: l10n.homeRamadanFastingTitle,
+        description: l10n.homeRamadanFastingInProgress(
+          _formatTime(schedule.maghrib),
+        ),
         icon: Icons.wb_sunny_outlined,
         state: _RamadanGoalState.inProgress,
       );
     }
 
     return _RamadanGoalItem(
-      title: 'Ayuno',
-      description: 'Ya puedes hacer iftar desde las ${_formatTime(schedule.maghrib)}.',
+      title: l10n.homeRamadanFastingTitle,
+      description: l10n.homeRamadanFastingCompleted(
+        _formatTime(schedule.maghrib),
+      ),
       icon: Icons.nightlight_round,
       state: _RamadanGoalState.completed,
     );
@@ -1550,51 +1590,69 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     QiblaTokens tokens,
     _RamadanGoalState state,
   ) {
+    final l10n = context.l10n;
     switch (state) {
       case _RamadanGoalState.completed:
-        return (tokens.accent, 'cumplido', tokens.primaryBg, tokens.primaryBorder);
+        return (
+          tokens.accent,
+          l10n.homeGoalCompleted,
+          tokens.primaryBg,
+          tokens.primaryBorder,
+        );
       case _RamadanGoalState.inProgress:
-        return (tokens.primaryLight, 'en progreso', tokens.activeBg, tokens.activeBorder);
+        return (
+          tokens.primaryLight,
+          l10n.homeGoalInProgress,
+          tokens.activeBg,
+          tokens.activeBorder,
+        );
       case _RamadanGoalState.pending:
-        return (tokens.textMuted, 'pendiente', tokens.bgSurface, tokens.border);
+        return (
+          tokens.textMuted,
+          l10n.commonPending,
+          tokens.bgSurface,
+          tokens.border,
+        );
     }
   }
 
   String _locationDiagnosticTitle(PrayerLocationDiagnostic? diagnostic) {
+    final l10n = context.l10n;
     if (diagnostic == null) {
-      return 'Preparando tus horarios';
+      return l10n.homeLocationPreparingTitle;
     }
     if (!diagnostic.serviceEnabled) {
-      return 'Activa la ubicación del dispositivo';
+      return l10n.homeLocationEnableDeviceLocation;
     }
     if (diagnostic.permissionStatus ==
         PrayerLocationPermissionStatus.deniedForever) {
-      return 'Permiso de ubicación bloqueado';
+      return l10n.homeLocationPermissionBlocked;
     }
     if (diagnostic.permissionStatus == PrayerLocationPermissionStatus.denied) {
-      return 'Permite la ubicación para ver tus horarios';
+      return l10n.homeLocationPermissionNeeded;
     }
-    return 'Preparando tus horarios';
+    return l10n.homeLocationPreparingTitle;
   }
 
   String _locationDiagnosticBody(PrayerLocationDiagnostic? diagnostic) {
+    final l10n = context.l10n;
     if (diagnostic == null) {
-      return 'La pantalla principal sigue visible aunque los horarios aún no estén listos.';
+      return l10n.homeLocationPendingBody;
     }
     if (!diagnostic.serviceEnabled) {
-      return 'Sin GPS activo no podemos calcular horarios precisos ni orientar la Qibla.';
+      return l10n.homeLocationGpsDisabledBody;
     }
     if (diagnostic.permissionStatus ==
         PrayerLocationPermissionStatus.deniedForever) {
-      return 'Puedes activar la ubicación para Qibla Time desde los ajustes del sistema cuando quieras.';
+      return l10n.homeLocationPermissionBlockedBody;
     }
     if (diagnostic.permissionStatus == PrayerLocationPermissionStatus.denied) {
-      return 'Qibla Time necesita tu ubicación para mostrar horarios fiables según tu ciudad.';
+      return l10n.homeLocationPermissionNeededBody;
     }
     if (diagnostic.hasCachedLocation) {
-      return 'Estamos preparando tus horarios usando la última ubicación guardada.';
+      return l10n.homeLocationCachedBody;
     }
-    return 'La pantalla principal sigue visible aunque los horarios aún no estén listos.';
+    return l10n.homeLocationPendingBody;
   }
 
   Widget _buildCountdown(
@@ -1923,6 +1981,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     DateTime date,
     QiblaTokens tokens,
   ) {
+    final l10n = context.l10n;
     if (prayerSchedule == null) {
       return _buildPremiumPrayerFallback(tokens, null);
     }
@@ -1951,7 +2010,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      isToday ? 'ORACIONES DE HOY' : 'HORARIOS DEL DÍA',
+                      isToday
+                          ? l10n.homePrayerSectionTodayTitle
+                          : l10n.homePrayerSectionSelectedDayTitle,
                       style: GoogleFonts.dmSans(
                         fontSize: 9,
                         color: tokens.textSecondary,
@@ -1962,8 +2023,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     const SizedBox(height: 4),
                     Text(
                       isToday
-                          ? 'Ritmo completo de tus cinco oraciones'
-                          : 'Consulta y marca los horarios de ${_formatCompactDate(date)}',
+                          ? l10n.homePrayerSectionTodaySubtitle
+                          : l10n.homePrayerSectionSelectedDaySubtitle(
+                              _formatCompactDate(date),
+                            ),
                       style: GoogleFonts.dmSans(
                         fontSize: 12,
                         color: tokens.textPrimary,
@@ -1985,7 +2048,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
                 child: Text(
                   isToday
-                      ? '${completed.length}/5 marcadas'
+                      ? l10n.homePrayerSectionMarkedCount(completed.length)
                       : SpanishDateLabels.longWeekday(date),
                   style: GoogleFonts.dmSans(
                     fontSize: 10,
@@ -2100,14 +2163,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         const SizedBox(height: 10),
                         Text(
                           isDone
-                              ? 'Ya la marcaste como completada.'
+                              ? l10n.homePrayerDescriptionCompleted
                               : isNow
-                              ? 'Esta oración está en curso ahora mismo.'
+                              ? l10n.homePrayerDescriptionNow
                               : isNext
-                              ? 'Es la siguiente en el ritmo de hoy.'
+                              ? l10n.homePrayerDescriptionNext
                               : isToday
-                              ? 'Pendiente dentro del recorrido de hoy.'
-                              : 'Disponible para revisar esta fecha.',
+                              ? l10n.homePrayerDescriptionPendingToday
+                              : l10n.homePrayerDescriptionReviewDate,
                           style: GoogleFonts.dmSans(
                             fontSize: 10,
                             color: tokens.textSecondary,
@@ -2251,12 +2314,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   Widget _buildQuickActions(QiblaTokens tokens) {
+    final l10n = context.l10n;
     final actions = [
-      (Icons.auto_stories_outlined, 'Hadices', const HadithLibraryScreen()),
-      (Icons.library_books_outlined, 'Libros', const IslamicBooksScreen()),
+      (Icons.auto_stories_outlined, l10n.commonHadiths, const HadithLibraryScreen()),
+      (Icons.library_books_outlined, l10n.commonBooks, const IslamicBooksScreen()),
       (Icons.self_improvement_rounded, 'Rakaha', const FocusModeScreen()),
-      (Icons.calendar_month_outlined, 'Calendario', const CalendarScreen()),
-      (Icons.insights_outlined, 'Análisis', const AnalyticsScreen()),
+      (Icons.calendar_month_outlined, l10n.calendarTitle, const CalendarScreen()),
+      (Icons.insights_outlined, l10n.commonStatistics, const AnalyticsScreen()),
     ];
 
     return Padding(
@@ -2265,7 +2329,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'ACCESOS SAGRADOS',
+            l10n.homeQuickActionsTitle,
             style: GoogleFonts.dmSans(
               fontSize: 9,
               color: tokens.textSecondary,
@@ -2397,10 +2461,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     QiblaTokens tokens,
     _PremiumPrayerCardTone tone,
   ) {
+    final l10n = context.l10n;
     switch (tone) {
       case _PremiumPrayerCardTone.now:
         return _PremiumPrayerCardStyle(
-          label: 'Ahora',
+          label: l10n.homePrayerStatusNow,
           surfaceColor: _blend(tokens.accent, tokens.bgSurface, 0.16),
           borderColor: _blend(tokens.accent, tokens.borderMed, 0.22),
           shadowColor: tokens.accent.withOpacity(0.12),
@@ -2414,7 +2479,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         );
       case _PremiumPrayerCardTone.next:
         return _PremiumPrayerCardStyle(
-          label: 'Siguiente',
+          label: l10n.homePrayerStatusNext,
           surfaceColor: _blend(tokens.primary, tokens.bgSurface, 0.14),
           borderColor: _blend(tokens.primary, tokens.primaryBorder, 0.2),
           shadowColor: tokens.primary.withOpacity(0.12),
@@ -2428,7 +2493,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         );
       case _PremiumPrayerCardTone.completed:
         return _PremiumPrayerCardStyle(
-          label: 'Completada',
+          label: l10n.homePrayerStatusCompleted,
           surfaceColor: _blend(tokens.bgSurface, tokens.bgPage, 0.9),
           borderColor: tokens.border,
           shadowColor: Colors.black.withOpacity(0.06),
@@ -2442,7 +2507,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         );
       case _PremiumPrayerCardTone.upcoming:
         return _PremiumPrayerCardStyle(
-          label: 'Próxima',
+          label: l10n.homePrayerStatusUpcoming,
           surfaceColor: _blend(tokens.bgSurface2, tokens.bgSurface, 0.84),
           borderColor: _blend(tokens.primary, tokens.border, 0.08),
           shadowColor: Colors.black.withOpacity(0.07),
@@ -2456,7 +2521,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         );
       case _PremiumPrayerCardTone.idle:
         return _PremiumPrayerCardStyle(
-          label: 'Pendiente',
+          label: l10n.commonPending,
           surfaceColor: tokens.bgSurface,
           borderColor: tokens.border,
           shadowColor: Colors.black.withOpacity(0.06),

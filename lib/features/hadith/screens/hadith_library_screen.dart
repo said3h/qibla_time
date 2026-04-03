@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theme/app_theme.dart';
 import '../../../core/utils/religious_reference_formatter.dart';
+import '../../../l10n/l10n.dart';
 import '../models/hadith.dart';
 import '../services/hadith_service.dart';
 import '../services/hadith_share_service.dart';
@@ -22,11 +23,14 @@ class HadithLibraryScreen extends ConsumerStatefulWidget {
 }
 
 class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
+  static const _allCollectionsValue = '__all__';
+  static const _allGradesValue = '__all__';
+
   final _searchController = TextEditingController();
   final _debouncer = Debouncer(delay: const Duration(milliseconds: 300));
 
-  String _selectedCollection = 'Todas';
-  String _selectedGrade = 'Todos';
+  String _selectedCollection = _allCollectionsValue;
+  String _selectedGrade = _allGradesValue;
   List<Hadith> _searchResults = [];
   bool _isSearching = false;
   bool _showFilters = false;
@@ -71,6 +75,7 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
   @override
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
+    final l10n = context.l10n;
     final allHadithsAsync = ref.watch(allHadithsProvider);
     final dailyHadithAsync = ref.watch(dailyHadithProvider);
     final favoritesAsync = ref.watch(hadithFavoritesProvider);
@@ -81,7 +86,7 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
       backgroundColor: tokens.bgPage,
       appBar: AppBar(
         title: Text(
-          'Biblioteca de hadices',
+          l10n.hadithLibraryTitle,
           style: GoogleFonts.amiri(
             fontSize: 24,
             fontWeight: FontWeight.bold,
@@ -92,7 +97,7 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
           IconButton(
             icon: Icon(_showFilters ? Icons.filter_alt : Icons.filter_alt_outlined),
             onPressed: () => setState(() => _showFilters = !_showFilters),
-            tooltip: 'Filtros',
+            tooltip: l10n.commonFilter,
           ),
           IconButton(
             icon: const Icon(Icons.offline_pin_outlined),
@@ -103,7 +108,7 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
                 ),
               );
             },
-            tooltip: 'Hadices sin conexión',
+            tooltip: l10n.hadithOfflineTitle,
           ),
         ],
       ),
@@ -115,7 +120,7 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
             child: TextField(
               controller: _searchController,
               decoration: InputDecoration(
-                hintText: 'Buscar hadices...',
+                hintText: l10n.hadithLibrarySearchHint,
                 prefixIcon: const Icon(Icons.search),
                 suffixIcon: _searchController.text.isNotEmpty
                     ? IconButton(
@@ -157,36 +162,38 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
                     children: [
                       Expanded(
                         child: _FilterDropdown(
-                          label: 'Colección',
+                          label: l10n.commonCollection,
                           value: _selectedCollection,
-                          items: ['Todas', ...collections.keys],
-                          onChanged: (v) => setState(() => _selectedCollection = v ?? 'Todas'),
+                          items: [_allCollectionsValue, ...collections.keys],
+                          itemLabelBuilder: (value) => _collectionLabel(context, value),
+                          onChanged: (v) => setState(() => _selectedCollection = v ?? _allCollectionsValue),
                         ),
                       ),
                       const SizedBox(width: 8),
                       Expanded(
                         child: _FilterDropdown(
-                          label: 'Autenticidad',
+                          label: l10n.commonAuthenticity,
                           value: _selectedGrade,
-                          items: ['Todos', ...grades],
-                          onChanged: (v) => setState(() => _selectedGrade = v ?? 'Todos'),
+                          items: [_allGradesValue, ...grades],
+                          itemLabelBuilder: (value) => _gradeLabel(context, value),
+                          onChanged: (v) => setState(() => _selectedGrade = v ?? _allGradesValue),
                         ),
                       ),
                     ],
                   ),
                 ),
-                loading: () => const _FilterStatusBanner(
-                  message: 'Cargando filtros...',
+                loading: () => _FilterStatusBanner(
+                  message: l10n.hadithLibraryFiltersLoading,
                 ),
-                error: (_, __) => const _FilterStatusBanner(
-                  message: 'No se pudieron cargar los filtros.',
+                error: (_, __) => _FilterStatusBanner(
+                  message: l10n.hadithLibraryFiltersError,
                 ),
               ),
-              loading: () => const _FilterStatusBanner(
-                message: 'Cargando filtros...',
+              loading: () => _FilterStatusBanner(
+                message: l10n.hadithLibraryFiltersLoading,
               ),
-              error: (_, __) => const _FilterStatusBanner(
-                message: 'No se pudieron cargar los filtros.',
+              error: (_, __) => _FilterStatusBanner(
+                message: l10n.hadithLibraryFiltersError,
               ),
             ),
 
@@ -239,8 +246,8 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
                         children: [
                           Text(
                             _isSearching || _searchController.text.isNotEmpty
-                                ? '${displayHadiths.length} resultado${displayHadiths.length != 1 ? 's' : ''}'
-                                : 'TODOS LOS HADICES (${hadiths.length})',
+                                ? l10n.hadithLibraryResultsCount(displayHadiths.length)
+                                : l10n.hadithLibraryAllHadiths(hadiths.length),
                             style: GoogleFonts.dmSans(
                               fontSize: 10,
                               fontWeight: FontWeight.w600,
@@ -280,7 +287,7 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
                 child: Padding(
                   padding: const EdgeInsets.all(24),
                   child: Text(
-                    'No se pudieron cargar los hadices: $e',
+                    l10n.hadithLibraryLoadError(e.toString()),
                     textAlign: TextAlign.center,
                     style: GoogleFonts.dmSans(color: tokens.textSecondary),
                   ),
@@ -296,21 +303,36 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
   List<Hadith> _applyFilters(List<Hadith> hadiths) {
     var filtered = hadiths;
 
-    // Filtro por colección
-    if (_selectedCollection != 'Todas') {
+    if (_selectedCollection != _allCollectionsValue) {
       filtered = filtered
           .where((h) => _extractCollection(h.reference) == _selectedCollection)
           .toList();
     }
 
-    // Filtro por grado de autenticidad
-    if (_selectedGrade != 'Todos') {
+    if (_selectedGrade != _allGradesValue) {
       filtered = filtered
           .where((h) => h.grade == _selectedGrade)
           .toList();
     }
 
     return filtered;
+  }
+
+  String _collectionLabel(BuildContext context, String value) {
+    if (value == _allCollectionsValue) {
+      return context.l10n.hadithLibraryAllCollections;
+    }
+    if (value == 'Other') {
+      return context.l10n.commonOther;
+    }
+    return value;
+  }
+
+  String _gradeLabel(BuildContext context, String value) {
+    if (value == _allGradesValue) {
+      return context.l10n.hadithLibraryAllGrades;
+    }
+    return value;
   }
 
   String _extractCollection(String reference) {
@@ -339,12 +361,14 @@ class _FilterDropdown extends StatelessWidget {
     required this.label,
     required this.value,
     required this.items,
+    required this.itemLabelBuilder,
     required this.onChanged,
   });
 
   final String label;
   final String value;
   final List<String> items;
+  final String Function(String value) itemLabelBuilder;
   final ValueChanged<String?> onChanged;
 
   @override
@@ -364,7 +388,14 @@ class _FilterDropdown extends StatelessWidget {
         const SizedBox(height: 4),
         DropdownButtonFormField<String>(
           value: items.contains(value) ? value : items.first,
-          items: items.map((item) => DropdownMenuItem(value: item, child: Text(item))).toList(),
+          items: items
+              .map(
+                (item) => DropdownMenuItem(
+                  value: item,
+                  child: Text(itemLabelBuilder(item)),
+                ),
+              )
+              .toList(),
           onChanged: onChanged,
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -463,7 +494,7 @@ class _FeaturedHadithCard extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  'HADIZ DEL DÍA',
+                  context.l10n.hadithDailyBadge,
                   style: GoogleFonts.dmSans(
                     fontSize: 10,
                     fontWeight: FontWeight.w700,
@@ -794,7 +825,7 @@ class _HadithActions extends StatelessWidget {
                 Icon(Icons.share_outlined, size: 18, color: tokens.textPrimary),
                 const SizedBox(width: 8),
                 Text(
-                  'Compartir',
+                  context.l10n.commonShare,
                   style: GoogleFonts.dmSans(
                     fontSize: 14,
                     color: tokens.textPrimary,
@@ -811,7 +842,9 @@ class _HadithActions extends StatelessWidget {
             isFavorite ? Icons.favorite_rounded : Icons.favorite_border_rounded,
             color: isFavorite ? Colors.red : tokens.textPrimary,
           ),
-          label: Text(isFavorite ? 'Guardado' : 'Guardar'),
+          label: Text(
+            isFavorite ? context.l10n.commonSaved : context.l10n.commonSave,
+          ),
           style: OutlinedButton.styleFrom(
             foregroundColor: tokens.textPrimary,
           ),
@@ -847,8 +880,8 @@ class _EmptyState extends StatelessWidget {
           const SizedBox(height: 16),
           Text(
             isSearch
-                ? 'No se encontraron hadices para "$query"'
-                : 'No hay hadices disponibles por ahora',
+                ? context.l10n.hadithLibraryEmptySearchTitle(query)
+                : context.l10n.hadithLibraryEmptyTitle,
             style: GoogleFonts.dmSans(
               fontSize: 14,
               fontWeight: FontWeight.w600,
@@ -858,8 +891,8 @@ class _EmptyState extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             isSearch
-                ? 'Prueba con otros términos o quita algunos filtros.'
-                : 'En cuanto terminen de cargarse, aparecerán aquí.',
+                ? context.l10n.hadithLibraryEmptySearchBody
+                : context.l10n.hadithLibraryEmptyBody,
             textAlign: TextAlign.center,
             style: GoogleFonts.dmSans(
               fontSize: 12,
@@ -913,7 +946,7 @@ String _extractHadithCollection(String reference) {
     return 'Malik';
   }
   if (refLower.contains('ahmad')) return 'Ahmad';
-  return 'Otros';
+  return 'Other';
 }
 
 String? _getArabicCollectionLabel(String collection) {

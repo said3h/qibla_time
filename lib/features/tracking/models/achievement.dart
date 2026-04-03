@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../l10n/l10n.dart';
+
 class Achievement {
   const Achievement({
     required this.id,
@@ -28,7 +30,9 @@ class Achievement {
   }
 
   String get progressLabel {
-    if (isUnlocked) return 'Desbloqueado';
+    if (isUnlocked) {
+      return appLocalizationsForCurrentLocale().analyticsAchievementUnlocked;
+    }
     return '$current/$target';
   }
 }

@@ -1,4 +1,6 @@
 /// Modelo para libros de IslamHouse
+import '../../../l10n/l10n.dart';
+
 class IslamHouseBook {
   const IslamHouseBook({
     required this.id,
@@ -35,6 +37,7 @@ class IslamHouseBook {
   final int downloads;
 
   factory IslamHouseBook.fromJson(Map<String, dynamic> json) {
+    final l10n = appLocalizationsForCurrentLocale();
     final attachments = (json['attachments'] as List? ?? const [])
         .whereType<Map>()
         .map((item) => Map<String, dynamic>.from(item))
@@ -48,7 +51,7 @@ class IslamHouseBook {
     final title = _firstNonEmpty([
       json['title'],
       json['description'],
-      'Sin título',
+      l10n.booksUntitled,
     ]);
     final titleArabic = _firstNonEmpty([
       json['title_arabic'],
@@ -84,8 +87,8 @@ class IslamHouseBook {
       author: author,
       category: _firstNonEmpty([
         json['category'],
-        json['type'] == 'books' ? 'Libros' : null,
-        'General',
+        json['type'] == 'books' ? l10n.commonBooks : null,
+        l10n.commonGeneral,
       ]),
       language: _firstNonEmpty([
         json['language'],
@@ -148,13 +151,14 @@ class IslamHouseBook {
 
   /// Libro placeholder cuando no hay datos.
   static IslamHouseBook _placeholder() {
-    return const IslamHouseBook(
+    final l10n = appLocalizationsForCurrentLocale();
+    return IslamHouseBook(
       id: 0,
-      title: 'Libro del día',
+      title: l10n.booksPlaceholderTitle,
       titleArabic: '',
-      description: 'Un libro recomendado para leer hoy',
+      description: l10n.booksPlaceholderDescription,
       author: 'IslamHouse',
-      category: 'Libros',
+      category: l10n.commonBooks,
       language: 'es',
       downloadUrl: '',
       readUrl: 'https://islamhouse.com/es/',
@@ -168,22 +172,25 @@ class IslamHouseBook {
   }
 
   /// Categorias principales disponibles.
-  static const List<String> mainCategories = [
-    'El Noble Corán',
-    'La Sunnah del Profeta',
-    'Creencia islámica',
-    'Jurisprudencia islámica',
-    'Virtudes',
-    'Pecados Mayores',
-    'Idioma árabe',
-    'Llamada al Islam',
-    'Historia',
-    'Cultura islámica',
-    'Sermones',
-    'Lecciones académicas',
-    'Biografía profética',
-    'Presentando el Islam',
-  ];
+  static List<String> get mainCategories {
+    final l10n = appLocalizationsForCurrentLocale();
+    return [
+      l10n.booksMainCategoryNobleQuran,
+      l10n.booksMainCategoryProphetSunnah,
+      l10n.booksMainCategoryIslamicBelief,
+      l10n.booksMainCategoryIslamicJurisprudence,
+      l10n.booksMainCategoryVirtues,
+      l10n.booksMainCategoryMajorSins,
+      l10n.booksMainCategoryArabicLanguage,
+      l10n.booksMainCategoryCallToIslam,
+      l10n.booksMainCategoryHistory,
+      l10n.booksMainCategoryIslamicCulture,
+      l10n.booksMainCategorySermons,
+      l10n.booksMainCategoryAcademicLessons,
+      l10n.booksMainCategoryPropheticBiography,
+      l10n.booksMainCategoryPresentingIslam,
+    ];
+  }
 
   static String _firstNonEmpty(List<Object?> values) {
     for (final value in values) {
@@ -213,9 +220,10 @@ class IslamHouseCategory {
   final int? parentId;
 
   factory IslamHouseCategory.fromJson(Map<String, dynamic> json) {
+    final l10n = appLocalizationsForCurrentLocale();
     return IslamHouseCategory(
       id: json['id'] as int? ?? 0,
-      name: json['name'] as String? ?? 'Sin nombre',
+      name: json['name'] as String? ?? l10n.booksUnnamedCategory,
       nameArabic: json['name_arabic'] as String? ?? '',
       bookCount: json['book_count'] as int? ?? 0,
       parentId: json['parent_id'] as int?,

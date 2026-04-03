@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theme/app_theme.dart';
 import '../../../core/utils/religious_reference_formatter.dart';
+import '../../../l10n/l10n.dart';
 import '../../hadith/screens/hadith_library_screen.dart';
 import '../../hadith/services/hadith_service.dart';
 import '../../hadith/services/hadith_share_service.dart';
@@ -19,6 +20,7 @@ class DailyHadithWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final tokens = QiblaThemes.current;
+    final l10n = context.l10n;
     final hadithAsync = ref.watch(dailyHadithProvider);
     final favoritesAsync = ref.watch(hadithFavoritesProvider);
 
@@ -117,7 +119,7 @@ class DailyHadithWidget extends ConsumerWidget {
                         ),
                         const SizedBox(width: 6),
                         Text(
-                          'HADIZ DEL DÍA',
+                          l10n.hadithDailyBadge,
                           style: GoogleFonts.dmSans(
                             fontSize: 9,
                             fontWeight: FontWeight.w700,
@@ -316,7 +318,7 @@ class DailyHadithWidget extends ConsumerWidget {
                             ),
                             const SizedBox(width: 8),
                             Text(
-                              'Compartir',
+                              l10n.commonShare,
                               style: GoogleFonts.dmSans(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w500,
@@ -355,7 +357,7 @@ class DailyHadithWidget extends ConsumerWidget {
                         Icons.auto_stories_outlined,
                         size: 18,
                       ),
-                      label: const Text('Hadices'),
+                      label: Text(l10n.commonHadiths),
                       style: FilledButton.styleFrom(
                         backgroundColor: tokens.primary,
                         foregroundColor: Colors.white,
@@ -620,7 +622,7 @@ class _HadithUnavailableWidget extends StatelessWidget {
           const SizedBox(width: 12),
           Expanded(
             child: Text(
-              'El hadiz del día no está disponible por ahora.',
+              context.l10n.hadithDailyUnavailable,
               style: GoogleFonts.dmSans(
                 fontSize: 12,
                 height: 1.5,
@@ -631,7 +633,7 @@ class _HadithUnavailableWidget extends StatelessWidget {
           const SizedBox(width: 12),
           TextButton(
             onPressed: onOpenLibrary,
-            child: const Text('Ver hadices'),
+            child: Text(context.l10n.hadithDailyOpenLibrary),
           ),
         ],
       ),
