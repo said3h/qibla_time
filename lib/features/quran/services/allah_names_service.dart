@@ -3,15 +3,48 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/localization/locale_controller.dart';
 import '../models/allah_name.dart';
 
 class AllahNamesService {
-  Future<List<AllahName>> loadAll() async {
-    final raw = await rootBundle.loadString('assets/data/asmaul_husna.json');
-    final decoded = jsonDecode(raw) as List<dynamic>;
-    return decoded
-        .map((item) => AllahName.fromJson(item as Map<String, dynamic>))
+  List<AllahNameMultilang>? _cache;
+
+  Future<List<AllahName>> loadAll(String languageCode) async {
+    final names = await _loadMultilang();
+    final normalizedLanguage = _normalizeLanguageCode(languageCode);
+    return names
+        .map(
+          (name) => name.getName(
+            normalizedLanguage,
+            fallbackLanguage: 'es',
+          ),
+        )
         .toList();
+  }
+
+  Future<List<AllahNameMultilang>> _loadMultilang() async {
+    if (_cache != null) return _cache!;
+
+    final raw = await rootBundle.loadString(
+      'assets/data/allah_names_multilang.json',
+    );
+    final decoded = jsonDecode(raw) as List<dynamic>;
+    _cache = decoded
+        .map(
+          (item) => AllahNameMultilang.fromJson(
+            item as Map<String, dynamic>,
+          ),
+        )
+        .toList();
+    return _cache!;
+  }
+
+  static String _normalizeLanguageCode(String languageCode) {
+    return switch (languageCode) {
+      'ar' => 'ar',
+      'en' => 'en',
+      _ => 'es',
+    };
   }
 }
 
@@ -20,5 +53,6 @@ final allahNamesServiceProvider = Provider<AllahNamesService>((ref) {
 });
 
 final allahNamesProvider = FutureProvider<List<AllahName>>((ref) async {
-  return ref.watch(allahNamesServiceProvider).loadAll();
+  final languageCode = ref.watch(currentLanguageCodeProvider);
+  return ref.watch(allahNamesServiceProvider).loadAll(languageCode);
 });

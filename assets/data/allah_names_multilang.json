@@ -1,0 +1,1883 @@
+[
+  {
+    "id": 1,
+    "arabic": "الرحمن",
+    "transliteration": "Ar-Rahman",
+    "translations": {
+      "es": {
+        "name": "El Compasivo",
+        "description": ""
+      },
+      "en": {
+        "name": "The Most Gracious",
+        "description": ""
+      },
+      "ar": {
+        "name": "الرحمن",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 2,
+    "arabic": "الرحيم",
+    "transliteration": "Ar-Rahim",
+    "translations": {
+      "es": {
+        "name": "El Misericordioso",
+        "description": ""
+      },
+      "en": {
+        "name": "The Most Merciful",
+        "description": ""
+      },
+      "ar": {
+        "name": "الرحيم",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 3,
+    "arabic": "الملك",
+    "transliteration": "Al-Malik",
+    "translations": {
+      "es": {
+        "name": "El Rey",
+        "description": ""
+      },
+      "en": {
+        "name": "The King",
+        "description": ""
+      },
+      "ar": {
+        "name": "الملك",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 4,
+    "arabic": "القدوس",
+    "transliteration": "Al-Quddus",
+    "translations": {
+      "es": {
+        "name": "El Santísimo",
+        "description": ""
+      },
+      "en": {
+        "name": "The Most Holy",
+        "description": ""
+      },
+      "ar": {
+        "name": "القدوس",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 5,
+    "arabic": "السلام",
+    "transliteration": "As-Salam",
+    "translations": {
+      "es": {
+        "name": "La Paz",
+        "description": ""
+      },
+      "en": {
+        "name": "The Source of Peace",
+        "description": ""
+      },
+      "ar": {
+        "name": "السلام",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 6,
+    "arabic": "المؤمن",
+    "transliteration": "Al-Mu'min",
+    "translations": {
+      "es": {
+        "name": "El que da seguridad",
+        "description": ""
+      },
+      "en": {
+        "name": "The Guardian of Faith",
+        "description": ""
+      },
+      "ar": {
+        "name": "المؤمن",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 7,
+    "arabic": "المهيمن",
+    "transliteration": "Al-Muhaymin",
+    "translations": {
+      "es": {
+        "name": "El Protector",
+        "description": ""
+      },
+      "en": {
+        "name": "The Protector",
+        "description": ""
+      },
+      "ar": {
+        "name": "المهيمن",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 8,
+    "arabic": "العزيز",
+    "transliteration": "Al-Aziz",
+    "translations": {
+      "es": {
+        "name": "El Poderoso",
+        "description": ""
+      },
+      "en": {
+        "name": "The Almighty",
+        "description": ""
+      },
+      "ar": {
+        "name": "العزيز",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 9,
+    "arabic": "الجبار",
+    "transliteration": "Al-Jabbar",
+    "translations": {
+      "es": {
+        "name": "El Irresistible",
+        "description": ""
+      },
+      "en": {
+        "name": "The Compeller",
+        "description": ""
+      },
+      "ar": {
+        "name": "الجبار",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 10,
+    "arabic": "المتكبر",
+    "transliteration": "Al-Mutakabbir",
+    "translations": {
+      "es": {
+        "name": "El Sublime",
+        "description": ""
+      },
+      "en": {
+        "name": "The Majestic",
+        "description": ""
+      },
+      "ar": {
+        "name": "المتكبر",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 11,
+    "arabic": "الخالق",
+    "transliteration": "Al-Khaliq",
+    "translations": {
+      "es": {
+        "name": "El Creador",
+        "description": ""
+      },
+      "en": {
+        "name": "The Creator",
+        "description": ""
+      },
+      "ar": {
+        "name": "الخالق",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 12,
+    "arabic": "البارئ",
+    "transliteration": "Al-Bari",
+    "translations": {
+      "es": {
+        "name": "El Originador",
+        "description": ""
+      },
+      "en": {
+        "name": "The Originator",
+        "description": ""
+      },
+      "ar": {
+        "name": "البارئ",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 13,
+    "arabic": "المصور",
+    "transliteration": "Al-Musawwir",
+    "translations": {
+      "es": {
+        "name": "El Formador",
+        "description": ""
+      },
+      "en": {
+        "name": "The Fashioner",
+        "description": ""
+      },
+      "ar": {
+        "name": "المصور",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 14,
+    "arabic": "الغفار",
+    "transliteration": "Al-Ghaffar",
+    "translations": {
+      "es": {
+        "name": "El Gran Perdonador",
+        "description": ""
+      },
+      "en": {
+        "name": "The Great Forgiver",
+        "description": ""
+      },
+      "ar": {
+        "name": "الغفار",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 15,
+    "arabic": "القهار",
+    "transliteration": "Al-Qahhar",
+    "translations": {
+      "es": {
+        "name": "El Dominador Supremo",
+        "description": ""
+      },
+      "en": {
+        "name": "The Subduer",
+        "description": ""
+      },
+      "ar": {
+        "name": "القهار",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 16,
+    "arabic": "الوهاب",
+    "transliteration": "Al-Wahhab",
+    "translations": {
+      "es": {
+        "name": "El Dador Generoso",
+        "description": ""
+      },
+      "en": {
+        "name": "The Bestower",
+        "description": ""
+      },
+      "ar": {
+        "name": "الوهاب",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 17,
+    "arabic": "الرزاق",
+    "transliteration": "Ar-Razzaq",
+    "translations": {
+      "es": {
+        "name": "El Sustentador",
+        "description": ""
+      },
+      "en": {
+        "name": "The Provider",
+        "description": ""
+      },
+      "ar": {
+        "name": "الرزاق",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 18,
+    "arabic": "الفتاح",
+    "transliteration": "Al-Fattah",
+    "translations": {
+      "es": {
+        "name": "El que abre",
+        "description": ""
+      },
+      "en": {
+        "name": "The Opener",
+        "description": ""
+      },
+      "ar": {
+        "name": "الفتاح",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 19,
+    "arabic": "العليم",
+    "transliteration": "Al-Alim",
+    "translations": {
+      "es": {
+        "name": "El Omnisciente",
+        "description": ""
+      },
+      "en": {
+        "name": "The All-Knowing",
+        "description": ""
+      },
+      "ar": {
+        "name": "العليم",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 20,
+    "arabic": "القابض",
+    "transliteration": "Al-Qabid",
+    "translations": {
+      "es": {
+        "name": "El que restringe",
+        "description": ""
+      },
+      "en": {
+        "name": "The Constrictor",
+        "description": ""
+      },
+      "ar": {
+        "name": "القابض",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 21,
+    "arabic": "الباسط",
+    "transliteration": "Al-Basit",
+    "translations": {
+      "es": {
+        "name": "El que expande",
+        "description": ""
+      },
+      "en": {
+        "name": "The Expander",
+        "description": ""
+      },
+      "ar": {
+        "name": "الباسط",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 22,
+    "arabic": "الخافض",
+    "transliteration": "Al-Khafid",
+    "translations": {
+      "es": {
+        "name": "El que humilla",
+        "description": ""
+      },
+      "en": {
+        "name": "The Abaser",
+        "description": ""
+      },
+      "ar": {
+        "name": "الخافض",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 23,
+    "arabic": "الرافع",
+    "transliteration": "Ar-Rafi",
+    "translations": {
+      "es": {
+        "name": "El que eleva",
+        "description": ""
+      },
+      "en": {
+        "name": "The Exalter",
+        "description": ""
+      },
+      "ar": {
+        "name": "الرافع",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 24,
+    "arabic": "المعز",
+    "transliteration": "Al-Muizz",
+    "translations": {
+      "es": {
+        "name": "El que honra",
+        "description": ""
+      },
+      "en": {
+        "name": "The Honorer",
+        "description": ""
+      },
+      "ar": {
+        "name": "المعز",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 25,
+    "arabic": "المذل",
+    "transliteration": "Al-Mudhill",
+    "translations": {
+      "es": {
+        "name": "El que humilla a quien quiere",
+        "description": ""
+      },
+      "en": {
+        "name": "The Humiliator",
+        "description": ""
+      },
+      "ar": {
+        "name": "المذل",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 26,
+    "arabic": "السميع",
+    "transliteration": "As-Sami",
+    "translations": {
+      "es": {
+        "name": "El que todo lo oye",
+        "description": ""
+      },
+      "en": {
+        "name": "The All-Hearing",
+        "description": ""
+      },
+      "ar": {
+        "name": "السميع",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 27,
+    "arabic": "البصير",
+    "transliteration": "Al-Basir",
+    "translations": {
+      "es": {
+        "name": "El que todo lo ve",
+        "description": ""
+      },
+      "en": {
+        "name": "The All-Seeing",
+        "description": ""
+      },
+      "ar": {
+        "name": "البصير",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 28,
+    "arabic": "الحكم",
+    "transliteration": "Al-Hakam",
+    "translations": {
+      "es": {
+        "name": "El Juez",
+        "description": ""
+      },
+      "en": {
+        "name": "The Judge",
+        "description": ""
+      },
+      "ar": {
+        "name": "الحكم",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 29,
+    "arabic": "العدل",
+    "transliteration": "Al-Adl",
+    "translations": {
+      "es": {
+        "name": "El Justo",
+        "description": ""
+      },
+      "en": {
+        "name": "The Just",
+        "description": ""
+      },
+      "ar": {
+        "name": "العدل",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 30,
+    "arabic": "اللطيف",
+    "transliteration": "Al-Latif",
+    "translations": {
+      "es": {
+        "name": "El Sutil y Bondadoso",
+        "description": ""
+      },
+      "en": {
+        "name": "The Subtle and Kind",
+        "description": ""
+      },
+      "ar": {
+        "name": "اللطيف",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 31,
+    "arabic": "الخبير",
+    "transliteration": "Al-Khabir",
+    "translations": {
+      "es": {
+        "name": "El Bien Informado",
+        "description": ""
+      },
+      "en": {
+        "name": "The All-Aware",
+        "description": ""
+      },
+      "ar": {
+        "name": "الخبير",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 32,
+    "arabic": "الحليم",
+    "transliteration": "Al-Halim",
+    "translations": {
+      "es": {
+        "name": "El Clemente",
+        "description": ""
+      },
+      "en": {
+        "name": "The Forbearing",
+        "description": ""
+      },
+      "ar": {
+        "name": "الحليم",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 33,
+    "arabic": "العظيم",
+    "transliteration": "Al-Azim",
+    "translations": {
+      "es": {
+        "name": "El Grandioso",
+        "description": ""
+      },
+      "en": {
+        "name": "The Magnificent",
+        "description": ""
+      },
+      "ar": {
+        "name": "العظيم",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 34,
+    "arabic": "الغفور",
+    "transliteration": "Al-Ghafur",
+    "translations": {
+      "es": {
+        "name": "El Perdonador",
+        "description": ""
+      },
+      "en": {
+        "name": "The Forgiving",
+        "description": ""
+      },
+      "ar": {
+        "name": "الغفور",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 35,
+    "arabic": "الشكور",
+    "transliteration": "Ash-Shakur",
+    "translations": {
+      "es": {
+        "name": "El Agradecido",
+        "description": ""
+      },
+      "en": {
+        "name": "The Grateful",
+        "description": ""
+      },
+      "ar": {
+        "name": "الشكور",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 36,
+    "arabic": "العلي",
+    "transliteration": "Al-Ali",
+    "translations": {
+      "es": {
+        "name": "El Altísimo",
+        "description": ""
+      },
+      "en": {
+        "name": "The Most High",
+        "description": ""
+      },
+      "ar": {
+        "name": "العلي",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 37,
+    "arabic": "الكبير",
+    "transliteration": "Al-Kabir",
+    "translations": {
+      "es": {
+        "name": "El Más Grande",
+        "description": ""
+      },
+      "en": {
+        "name": "The Greatest",
+        "description": ""
+      },
+      "ar": {
+        "name": "الكبير",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 38,
+    "arabic": "الحفيظ",
+    "transliteration": "Al-Hafiz",
+    "translations": {
+      "es": {
+        "name": "El Preservador",
+        "description": ""
+      },
+      "en": {
+        "name": "The Preserver",
+        "description": ""
+      },
+      "ar": {
+        "name": "الحفيظ",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 39,
+    "arabic": "المقيت",
+    "transliteration": "Al-Muqit",
+    "translations": {
+      "es": {
+        "name": "El Sustentador de todo",
+        "description": ""
+      },
+      "en": {
+        "name": "The Nourisher",
+        "description": ""
+      },
+      "ar": {
+        "name": "المقيت",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 40,
+    "arabic": "الحسيب",
+    "transliteration": "Al-Hasib",
+    "translations": {
+      "es": {
+        "name": "El que toma cuenta",
+        "description": ""
+      },
+      "en": {
+        "name": "The Reckoner",
+        "description": ""
+      },
+      "ar": {
+        "name": "الحسيب",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 41,
+    "arabic": "الجليل",
+    "transliteration": "Al-Jalil",
+    "translations": {
+      "es": {
+        "name": "El Majestuoso",
+        "description": ""
+      },
+      "en": {
+        "name": "The Majestic",
+        "description": ""
+      },
+      "ar": {
+        "name": "الجليل",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 42,
+    "arabic": "الكريم",
+    "transliteration": "Al-Karim",
+    "translations": {
+      "es": {
+        "name": "El Generosísimo",
+        "description": ""
+      },
+      "en": {
+        "name": "The Most Generous",
+        "description": ""
+      },
+      "ar": {
+        "name": "الكريم",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 43,
+    "arabic": "الرقيب",
+    "transliteration": "Ar-Raqib",
+    "translations": {
+      "es": {
+        "name": "El Vigilante",
+        "description": ""
+      },
+      "en": {
+        "name": "The Watchful",
+        "description": ""
+      },
+      "ar": {
+        "name": "الرقيب",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 44,
+    "arabic": "المجيب",
+    "transliteration": "Al-Mujib",
+    "translations": {
+      "es": {
+        "name": "El que responde",
+        "description": ""
+      },
+      "en": {
+        "name": "The Responsive",
+        "description": ""
+      },
+      "ar": {
+        "name": "المجيب",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 45,
+    "arabic": "الواسع",
+    "transliteration": "Al-Wasi",
+    "translations": {
+      "es": {
+        "name": "El Amplio",
+        "description": ""
+      },
+      "en": {
+        "name": "The All-Encompassing",
+        "description": ""
+      },
+      "ar": {
+        "name": "الواسع",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 46,
+    "arabic": "الحكيم",
+    "transliteration": "Al-Hakim",
+    "translations": {
+      "es": {
+        "name": "El Sabio",
+        "description": ""
+      },
+      "en": {
+        "name": "The Wise",
+        "description": ""
+      },
+      "ar": {
+        "name": "الحكيم",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 47,
+    "arabic": "الودود",
+    "transliteration": "Al-Wadud",
+    "translations": {
+      "es": {
+        "name": "El Amoroso",
+        "description": ""
+      },
+      "en": {
+        "name": "The Loving",
+        "description": ""
+      },
+      "ar": {
+        "name": "الودود",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 48,
+    "arabic": "المجيد",
+    "transliteration": "Al-Majid",
+    "translations": {
+      "es": {
+        "name": "El Glorioso",
+        "description": ""
+      },
+      "en": {
+        "name": "The Glorious",
+        "description": ""
+      },
+      "ar": {
+        "name": "المجيد",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 49,
+    "arabic": "الباعث",
+    "transliteration": "Al-Baith",
+    "translations": {
+      "es": {
+        "name": "El que resucita",
+        "description": ""
+      },
+      "en": {
+        "name": "The Resurrector",
+        "description": ""
+      },
+      "ar": {
+        "name": "الباعث",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 50,
+    "arabic": "الشهيد",
+    "transliteration": "Ash-Shahid",
+    "translations": {
+      "es": {
+        "name": "El Testigo",
+        "description": ""
+      },
+      "en": {
+        "name": "The Witness",
+        "description": ""
+      },
+      "ar": {
+        "name": "الشهيد",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 51,
+    "arabic": "الحق",
+    "transliteration": "Al-Haqq",
+    "translations": {
+      "es": {
+        "name": "La Verdad",
+        "description": ""
+      },
+      "en": {
+        "name": "The Truth",
+        "description": ""
+      },
+      "ar": {
+        "name": "الحق",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 52,
+    "arabic": "الوكيل",
+    "transliteration": "Al-Wakil",
+    "translations": {
+      "es": {
+        "name": "El Dispone de los asuntos",
+        "description": ""
+      },
+      "en": {
+        "name": "The Trustee",
+        "description": ""
+      },
+      "ar": {
+        "name": "الوكيل",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 53,
+    "arabic": "القوي",
+    "transliteration": "Al-Qawiyy",
+    "translations": {
+      "es": {
+        "name": "El Fuerte",
+        "description": ""
+      },
+      "en": {
+        "name": "The Strong",
+        "description": ""
+      },
+      "ar": {
+        "name": "القوي",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 54,
+    "arabic": "المتين",
+    "transliteration": "Al-Matin",
+    "translations": {
+      "es": {
+        "name": "El Firme",
+        "description": ""
+      },
+      "en": {
+        "name": "The Firm",
+        "description": ""
+      },
+      "ar": {
+        "name": "المتين",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 55,
+    "arabic": "الولي",
+    "transliteration": "Al-Wali",
+    "translations": {
+      "es": {
+        "name": "El Protector Cercano",
+        "description": ""
+      },
+      "en": {
+        "name": "The Protecting Friend",
+        "description": ""
+      },
+      "ar": {
+        "name": "الولي",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 56,
+    "arabic": "الحميد",
+    "transliteration": "Al-Hamid",
+    "translations": {
+      "es": {
+        "name": "El Loable",
+        "description": ""
+      },
+      "en": {
+        "name": "The Praiseworthy",
+        "description": ""
+      },
+      "ar": {
+        "name": "الحميد",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 57,
+    "arabic": "المحصي",
+    "transliteration": "Al-Muhsi",
+    "translations": {
+      "es": {
+        "name": "El que todo lo enumera",
+        "description": ""
+      },
+      "en": {
+        "name": "The Counter",
+        "description": ""
+      },
+      "ar": {
+        "name": "المحصي",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 58,
+    "arabic": "المبدئ",
+    "transliteration": "Al-Mubdi",
+    "translations": {
+      "es": {
+        "name": "El Originador",
+        "description": ""
+      },
+      "en": {
+        "name": "The Originator",
+        "description": ""
+      },
+      "ar": {
+        "name": "المبدئ",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 59,
+    "arabic": "المعيد",
+    "transliteration": "Al-Muid",
+    "translations": {
+      "es": {
+        "name": "El Restaurador",
+        "description": ""
+      },
+      "en": {
+        "name": "The Restorer",
+        "description": ""
+      },
+      "ar": {
+        "name": "المعيد",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 60,
+    "arabic": "المحيي",
+    "transliteration": "Al-Muhyi",
+    "translations": {
+      "es": {
+        "name": "El Dador de vida",
+        "description": ""
+      },
+      "en": {
+        "name": "The Giver of Life",
+        "description": ""
+      },
+      "ar": {
+        "name": "المحيي",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 61,
+    "arabic": "المميت",
+    "transliteration": "Al-Mumit",
+    "translations": {
+      "es": {
+        "name": "El que da la muerte",
+        "description": ""
+      },
+      "en": {
+        "name": "The Creator of Death",
+        "description": ""
+      },
+      "ar": {
+        "name": "المميت",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 62,
+    "arabic": "الحي",
+    "transliteration": "Al-Hayy",
+    "translations": {
+      "es": {
+        "name": "El Viviente",
+        "description": ""
+      },
+      "en": {
+        "name": "The Ever-Living",
+        "description": ""
+      },
+      "ar": {
+        "name": "الحي",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 63,
+    "arabic": "القيوم",
+    "transliteration": "Al-Qayyum",
+    "translations": {
+      "es": {
+        "name": "El Autosubsistente",
+        "description": ""
+      },
+      "en": {
+        "name": "The Self-Subsisting",
+        "description": ""
+      },
+      "ar": {
+        "name": "القيوم",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 64,
+    "arabic": "الواجد",
+    "transliteration": "Al-Wajid",
+    "translations": {
+      "es": {
+        "name": "El que encuentra todo",
+        "description": ""
+      },
+      "en": {
+        "name": "The Finder",
+        "description": ""
+      },
+      "ar": {
+        "name": "الواجد",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 65,
+    "arabic": "الماجد",
+    "transliteration": "Al-Majid",
+    "translations": {
+      "es": {
+        "name": "El Noble y Glorioso",
+        "description": ""
+      },
+      "en": {
+        "name": "The Noble and Glorious",
+        "description": ""
+      },
+      "ar": {
+        "name": "الماجد",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 66,
+    "arabic": "الواحد",
+    "transliteration": "Al-Wahid",
+    "translations": {
+      "es": {
+        "name": "El Único",
+        "description": ""
+      },
+      "en": {
+        "name": "The One",
+        "description": ""
+      },
+      "ar": {
+        "name": "الواحد",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 67,
+    "arabic": "الأحد",
+    "transliteration": "Al-Ahad",
+    "translations": {
+      "es": {
+        "name": "El Uno",
+        "description": ""
+      },
+      "en": {
+        "name": "The Unique",
+        "description": ""
+      },
+      "ar": {
+        "name": "الأحد",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 68,
+    "arabic": "الصمد",
+    "transliteration": "As-Samad",
+    "translations": {
+      "es": {
+        "name": "El Absoluto",
+        "description": ""
+      },
+      "en": {
+        "name": "The Eternal Refuge",
+        "description": ""
+      },
+      "ar": {
+        "name": "الصمد",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 69,
+    "arabic": "القادر",
+    "transliteration": "Al-Qadir",
+    "translations": {
+      "es": {
+        "name": "El Omnipotente",
+        "description": ""
+      },
+      "en": {
+        "name": "The Able",
+        "description": ""
+      },
+      "ar": {
+        "name": "القادر",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 70,
+    "arabic": "المقتدر",
+    "transliteration": "Al-Muqtadir",
+    "translations": {
+      "es": {
+        "name": "El Determinante",
+        "description": ""
+      },
+      "en": {
+        "name": "The Creator of All Power",
+        "description": ""
+      },
+      "ar": {
+        "name": "المقتدر",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 71,
+    "arabic": "المقدم",
+    "transliteration": "Al-Muqaddim",
+    "translations": {
+      "es": {
+        "name": "El que adelanta",
+        "description": ""
+      },
+      "en": {
+        "name": "The Expediter",
+        "description": ""
+      },
+      "ar": {
+        "name": "المقدم",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 72,
+    "arabic": "المؤخر",
+    "transliteration": "Al-Muakhkhir",
+    "translations": {
+      "es": {
+        "name": "El que retrasa",
+        "description": ""
+      },
+      "en": {
+        "name": "The Delayer",
+        "description": ""
+      },
+      "ar": {
+        "name": "المؤخر",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 73,
+    "arabic": "الأول",
+    "transliteration": "Al-Awwal",
+    "translations": {
+      "es": {
+        "name": "El Primero",
+        "description": ""
+      },
+      "en": {
+        "name": "The First",
+        "description": ""
+      },
+      "ar": {
+        "name": "الأول",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 74,
+    "arabic": "الآخر",
+    "transliteration": "Al-Akhir",
+    "translations": {
+      "es": {
+        "name": "El Último",
+        "description": ""
+      },
+      "en": {
+        "name": "The Last",
+        "description": ""
+      },
+      "ar": {
+        "name": "الآخر",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 75,
+    "arabic": "الظاهر",
+    "transliteration": "Az-Zahir",
+    "translations": {
+      "es": {
+        "name": "El Manifiesto",
+        "description": ""
+      },
+      "en": {
+        "name": "The Manifest",
+        "description": ""
+      },
+      "ar": {
+        "name": "الظاهر",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 76,
+    "arabic": "الباطن",
+    "transliteration": "Al-Batin",
+    "translations": {
+      "es": {
+        "name": "El Oculto",
+        "description": ""
+      },
+      "en": {
+        "name": "The Hidden",
+        "description": ""
+      },
+      "ar": {
+        "name": "الباطن",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 77,
+    "arabic": "الوالي",
+    "transliteration": "Al-Wali",
+    "translations": {
+      "es": {
+        "name": "El Gobernante",
+        "description": ""
+      },
+      "en": {
+        "name": "The Governor",
+        "description": ""
+      },
+      "ar": {
+        "name": "الوالي",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 78,
+    "arabic": "المتعالي",
+    "transliteration": "Al-Mutaali",
+    "translations": {
+      "es": {
+        "name": "El Altísimo sobre todo",
+        "description": ""
+      },
+      "en": {
+        "name": "The Most Exalted",
+        "description": ""
+      },
+      "ar": {
+        "name": "المتعالي",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 79,
+    "arabic": "البر",
+    "transliteration": "Al-Barr",
+    "translations": {
+      "es": {
+        "name": "El Bueno",
+        "description": ""
+      },
+      "en": {
+        "name": "The Source of All Goodness",
+        "description": ""
+      },
+      "ar": {
+        "name": "البر",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 80,
+    "arabic": "التواب",
+    "transliteration": "At-Tawwab",
+    "translations": {
+      "es": {
+        "name": "El que acepta el arrepentimiento",
+        "description": ""
+      },
+      "en": {
+        "name": "The Acceptor of Repentance",
+        "description": ""
+      },
+      "ar": {
+        "name": "التواب",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 81,
+    "arabic": "المنتقم",
+    "transliteration": "Al-Muntaqim",
+    "translations": {
+      "es": {
+        "name": "El Justiciero",
+        "description": ""
+      },
+      "en": {
+        "name": "The Avenger",
+        "description": ""
+      },
+      "ar": {
+        "name": "المنتقم",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 82,
+    "arabic": "العفو",
+    "transliteration": "Al-Afuww",
+    "translations": {
+      "es": {
+        "name": "El Indulgente",
+        "description": ""
+      },
+      "en": {
+        "name": "The Pardoner",
+        "description": ""
+      },
+      "ar": {
+        "name": "العفو",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 83,
+    "arabic": "الرؤوف",
+    "transliteration": "Ar-Ra'uf",
+    "translations": {
+      "es": {
+        "name": "El Compasivo con ternura",
+        "description": ""
+      },
+      "en": {
+        "name": "The Compassionate",
+        "description": ""
+      },
+      "ar": {
+        "name": "الرؤوف",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 84,
+    "arabic": "مالك الملك",
+    "transliteration": "Malik-ul-Mulk",
+    "translations": {
+      "es": {
+        "name": "El Dueño del Reino",
+        "description": ""
+      },
+      "en": {
+        "name": "The Owner of Sovereignty",
+        "description": ""
+      },
+      "ar": {
+        "name": "مالك الملك",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 85,
+    "arabic": "ذو الجلال والإكرام",
+    "transliteration": "Dhul-Jalali wal-Ikram",
+    "translations": {
+      "es": {
+        "name": "Señor de la Majestad y la Generosidad",
+        "description": ""
+      },
+      "en": {
+        "name": "Lord of Majesty and Generosity",
+        "description": ""
+      },
+      "ar": {
+        "name": "ذو الجلال والإكرام",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 86,
+    "arabic": "المقسط",
+    "transliteration": "Al-Muqsit",
+    "translations": {
+      "es": {
+        "name": "El Equitativo",
+        "description": ""
+      },
+      "en": {
+        "name": "The Equitable",
+        "description": ""
+      },
+      "ar": {
+        "name": "المقسط",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 87,
+    "arabic": "الجامع",
+    "transliteration": "Al-Jami",
+    "translations": {
+      "es": {
+        "name": "El Reunidor",
+        "description": ""
+      },
+      "en": {
+        "name": "The Gatherer",
+        "description": ""
+      },
+      "ar": {
+        "name": "الجامع",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 88,
+    "arabic": "الغني",
+    "transliteration": "Al-Ghani",
+    "translations": {
+      "es": {
+        "name": "El Rico, el Autosuficiente",
+        "description": ""
+      },
+      "en": {
+        "name": "The Self-Sufficient",
+        "description": ""
+      },
+      "ar": {
+        "name": "الغني",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 89,
+    "arabic": "المغني",
+    "transliteration": "Al-Mughni",
+    "translations": {
+      "es": {
+        "name": "El que enriquece",
+        "description": ""
+      },
+      "en": {
+        "name": "The Enricher",
+        "description": ""
+      },
+      "ar": {
+        "name": "المغني",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 90,
+    "arabic": "المانع",
+    "transliteration": "Al-Mani",
+    "translations": {
+      "es": {
+        "name": "El que impide",
+        "description": ""
+      },
+      "en": {
+        "name": "The Preventer",
+        "description": ""
+      },
+      "ar": {
+        "name": "المانع",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 91,
+    "arabic": "الضار",
+    "transliteration": "Ad-Darr",
+    "translations": {
+      "es": {
+        "name": "El que permite la adversidad",
+        "description": ""
+      },
+      "en": {
+        "name": "The Creator of Harm",
+        "description": ""
+      },
+      "ar": {
+        "name": "الضار",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 92,
+    "arabic": "النافع",
+    "transliteration": "An-Nafi",
+    "translations": {
+      "es": {
+        "name": "El que otorga beneficio",
+        "description": ""
+      },
+      "en": {
+        "name": "The Creator of Good",
+        "description": ""
+      },
+      "ar": {
+        "name": "النافع",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 93,
+    "arabic": "النور",
+    "transliteration": "An-Nur",
+    "translations": {
+      "es": {
+        "name": "La Luz",
+        "description": ""
+      },
+      "en": {
+        "name": "The Light",
+        "description": ""
+      },
+      "ar": {
+        "name": "النور",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 94,
+    "arabic": "الهادي",
+    "transliteration": "Al-Hadi",
+    "translations": {
+      "es": {
+        "name": "El Guía",
+        "description": ""
+      },
+      "en": {
+        "name": "The Guide",
+        "description": ""
+      },
+      "ar": {
+        "name": "الهادي",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 95,
+    "arabic": "البديع",
+    "transliteration": "Al-Badi",
+    "translations": {
+      "es": {
+        "name": "El Incomparable Originador",
+        "description": ""
+      },
+      "en": {
+        "name": "The Incomparable Originator",
+        "description": ""
+      },
+      "ar": {
+        "name": "البديع",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 96,
+    "arabic": "الباقي",
+    "transliteration": "Al-Baqi",
+    "translations": {
+      "es": {
+        "name": "El Eterno",
+        "description": ""
+      },
+      "en": {
+        "name": "The Everlasting",
+        "description": ""
+      },
+      "ar": {
+        "name": "الباقي",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 97,
+    "arabic": "الوارث",
+    "transliteration": "Al-Warith",
+    "translations": {
+      "es": {
+        "name": "El Heredero de todo",
+        "description": ""
+      },
+      "en": {
+        "name": "The Inheritor of All",
+        "description": ""
+      },
+      "ar": {
+        "name": "الوارث",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 98,
+    "arabic": "الرشيد",
+    "transliteration": "Ar-Rashid",
+    "translations": {
+      "es": {
+        "name": "El que guía con rectitud",
+        "description": ""
+      },
+      "en": {
+        "name": "The Guide to the Right Path",
+        "description": ""
+      },
+      "ar": {
+        "name": "الرشيد",
+        "description": ""
+      }
+    }
+  },
+  {
+    "id": 99,
+    "arabic": "الصبور",
+    "transliteration": "As-Sabur",
+    "translations": {
+      "es": {
+        "name": "El Paciente",
+        "description": ""
+      },
+      "en": {
+        "name": "The Patient",
+        "description": ""
+      },
+      "ar": {
+        "name": "الصبور",
+        "description": ""
+      }
+    }
+  }
+]

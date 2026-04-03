@@ -85,6 +85,7 @@ class _AllahNameCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
     final l10n = context.l10n;
+    final isArabicOnly = name.languageCode == 'ar';
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -120,24 +121,39 @@ class _AllahNameCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 10),
-          Text(
-            name.transliteration,
-            style: GoogleFonts.dmSans(
-              fontSize: 15,
-              fontWeight: FontWeight.w700,
-              color: tokens.textPrimary,
+          if (!isArabicOnly) ...[
+            const SizedBox(height: 10),
+            Text(
+              name.name,
+              style: GoogleFonts.dmSans(
+                fontSize: 15,
+                fontWeight: FontWeight.w700,
+                color: tokens.textPrimary,
+              ),
             ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            name.meaning,
-            style: GoogleFonts.dmSans(
-              fontSize: 12,
-              height: 1.6,
-              color: tokens.textSecondary,
+            if (name.transliteration.trim().isNotEmpty) ...[
+              const SizedBox(height: 4),
+              Text(
+                name.transliteration,
+                style: GoogleFonts.dmSans(
+                  fontSize: 12,
+                  color: tokens.textSecondary,
+                  fontStyle: FontStyle.italic,
+                ),
+              ),
+            ],
+          ],
+          if (name.hasDescription) ...[
+            const SizedBox(height: 4),
+            Text(
+              name.description,
+              style: GoogleFonts.dmSans(
+                fontSize: 12,
+                height: 1.6,
+                color: tokens.textSecondary,
+              ),
             ),
-          ),
+          ],
           const SizedBox(height: 12),
           Align(
             alignment: Alignment.centerLeft,
@@ -149,7 +165,7 @@ class _AllahNameCard extends StatelessWidget {
                       initialPhrase: DhikrPhrase(
                         arabic: name.arabic,
                         transliteration: name.transliteration,
-                        meaning: name.meaning,
+                        meaning: name.name,
                       ),
                     ),
                   ),
