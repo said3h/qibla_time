@@ -2471,4 +2471,284 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get analyticsAchievementUnlocked => 'Unlocked';
+
+  @override
+  String navigationMiniPlayerAyah(Object surah, int ayah) {
+    return '$surah · Ayah $ayah';
+  }
+
+  @override
+  String get onboardingGatePreparing => 'Preparing Qibla Time';
+
+  @override
+  String get supportScreenTitle => 'Support Qibla Time';
+
+  @override
+  String get supportScreenThankYou => 'Thank you for being here';
+
+  @override
+  String get supportScreenBody =>
+      'Your support helps us care for Qibla Time, keep the app alive, and continue building useful tools for your daily life.';
+
+  @override
+  String get supportScreenRateTitle => 'Rate the app';
+
+  @override
+  String get supportScreenRateBody =>
+      'A good rating helps more people discover Qibla Time.';
+
+  @override
+  String get supportScreenShareTitle => 'Share Qibla Time';
+
+  @override
+  String get supportScreenShareBody =>
+      'Recommending the app to family and friends is also a form of sadaqah.';
+
+  @override
+  String get supportScreenSadaqahTitle => 'Support with intention';
+
+  @override
+  String get supportScreenSadaqahBody =>
+      'If Qibla Time helps you, you can support the project with a small sincere contribution.';
+
+  @override
+  String get supportScreenQuote =>
+      'Whoever helps others reach something good also shares in its reward, if Allah wills.';
+
+  @override
+  String get allahNamesTitle => 'The 99 Names of Allah';
+
+  @override
+  String get allahNamesIntro =>
+      'Explore a curated selection of Allah\'s names, with transliteration and meaning so you can remember them with calm.';
+
+  @override
+  String get allahNamesLoadError => 'We couldn\'t load the names of Allah.';
+
+  @override
+  String get allahNamesUseInTasbih => 'Use in tasbih';
+
+  @override
+  String get downloadedSurahsTitle => 'Downloaded surahs';
+
+  @override
+  String get downloadedSurahsEmpty => 'You have not downloaded any surah yet.';
+
+  @override
+  String get downloadedSurahsFavorite => 'Favorite';
+
+  @override
+  String get downloadedSurahsMarkFavorite => 'Mark as favorite';
+
+  @override
+  String get downloadedSurahsRemoveDownload => 'Remove download';
+
+  @override
+  String get downloadedSurahsLoadError =>
+      'We couldn\'t load your downloaded surahs.';
+
+  @override
+  String get focusModeDndActive => 'RAKAHA ACTIVE · DO NOT DISTURB ON';
+
+  @override
+  String get focusModeOpenDndSettings => 'Enable Do Not Disturb in settings';
+
+  @override
+  String get focusModeTitle => 'RAKAHA';
+
+  @override
+  String get focusModeSujudCount => '+ sujud';
+
+  @override
+  String get focusModeDndHint =>
+      'WITHOUT INTERRUPTIONS IT FEELS BETTER WITH DO NOT DISTURB';
+
+  @override
+  String get focusModeReleaseToCancel => 'Release to cancel';
+
+  @override
+  String get focusModeHoldToExit => 'Hold to exit';
+
+  @override
+  String get settingsMadhabAsr => 'Madhab (Asr)';
+
+  @override
+  String get settingsManualAdjustment => 'Manual adjustment';
+
+  @override
+  String get settingsOpenSourceLicenses => 'Open-source licenses';
+
+  @override
+  String get settingsProfileUser => 'User';
+
+  @override
+  String get settingsProfileStreak => 'streak';
+
+  @override
+  String get settingsProfilePrayers => 'prayers';
+
+  @override
+  String get settingsProfileTasbih => 'tasbih';
+
+  @override
+  String get commonShafii => 'Shafi\'i';
+
+  @override
+  String get commonRestore => 'Restore';
+
+  @override
+  String get settingsRestoreBackupPasteHint => 'Paste the exported JSON here';
+
+  @override
+  String get dailyBookBadge => 'BOOK OF THE DAY';
+
+  @override
+  String get dailyBookUnavailable => 'The library is not available right now.';
+
+  @override
+  String get dailyBookOpenLibrary => 'Open books';
+
+  @override
+  String get hadithOfflineIncludedInApp => 'Included in the app';
+
+  @override
+  String hadithOfflineAgoDays(int count) {
+    return '$count days ago';
+  }
+
+  @override
+  String hadithOfflineAgoHours(int count) {
+    return '$count hours ago';
+  }
+
+  @override
+  String hadithOfflineAgoMinutes(int count) {
+    return '$count minutes ago';
+  }
+
+  @override
+  String get hadithOfflineNow => 'Just now';
+
+  @override
+  String get analyticsShareWeekTitle => 'Weekly summary';
+
+  @override
+  String analyticsShareCurrentStreak(int count) {
+    return 'Current streak: $count';
+  }
+
+  @override
+  String analyticsShareThisWeek(int completed, int maxPossible) {
+    return 'This week: $completed/$maxPossible prayers';
+  }
+
+  @override
+  String analyticsShareBestDay(Object day) {
+    return 'Best day: $day';
+  }
+
+  @override
+  String get analyticsShareWeekHeading => 'WEEKLY SUMMARY';
+
+  @override
+  String get analyticsShareStreakDaySingular => 'day streak';
+
+  @override
+  String get analyticsShareStreakDayPlural => 'days streak';
+
+  @override
+  String get analyticsShareWeeklyPrayersLabel => 'Prayers this week';
+
+  @override
+  String analyticsShareBestDayLabel(int count) {
+    return 'Best day · $count/5';
+  }
+
+  @override
+  String get analyticsShareFullDaysLabel => 'Full days';
+
+  @override
+  String get analyticsShareFooter => 'Your progress in Qibla Time';
+
+  @override
+  String get analyticsShareImageError =>
+      'We couldn\'t generate the progress image.';
+
+  @override
+  String quranDownloadAyahAudioError(int ayah) {
+    return 'We couldn\'t download the audio for ayah $ayah.';
+  }
+
+  @override
+  String get recentLocationUnknown => 'Unknown location';
+
+  @override
+  String get cloudSyncRestoreInvalid => 'Invalid backup';
+
+  @override
+  String get cloudSyncRestoreFailed => 'We couldn\'t restore the backup';
+
+  @override
+  String get bookLinkUnavailable => 'This link is not available.';
+
+  @override
+  String get bookLinkOpenError => 'We couldn\'t open the link.';
+
+  @override
+  String ramadanStatusHeaderDay(int day) {
+    return 'Ramadan day $day';
+  }
+
+  @override
+  String get ramadanStatusHeaderManual => 'Manual Ramadan mode';
+
+  @override
+  String get ramadanStatusBlessingDetected =>
+      'May Allah accept your fast and your deeds today.';
+
+  @override
+  String get ramadanStatusBlessingManual =>
+      'Special Ramadan view manually enabled for testing.';
+
+  @override
+  String get ramadanStatusSuggestionDhikr =>
+      'Remember to increase your dhikr today.';
+
+  @override
+  String get ramadanStatusSuggestionQuran =>
+      'Try to read a little more Quran today.';
+
+  @override
+  String get ramadanStatusSuggestionDua =>
+      'Use this day to make dua with calm.';
+
+  @override
+  String get ramadanStatusSuggestionSadaqah =>
+      'Even a small sadaqah counts during Ramadan.';
+
+  @override
+  String adhanSelectorOptionDescription(int number) {
+    return 'Call to prayer $number';
+  }
+
+  @override
+  String get prayerNotificationImsakTitle => 'Imsak is coming';
+
+  @override
+  String get prayerNotificationImsakBody =>
+      '15 minutes left until imsak. If you are still having suhoor, now is a good time to wrap up.';
+
+  @override
+  String get prayerNotificationIftarTitle => 'Iftar is coming';
+
+  @override
+  String get prayerNotificationIftarBody =>
+      '15 minutes left until iftar. May Allah accept your fast today.';
+
+  @override
+  String get prayerNotificationJumuahTitle => 'Jumu\'ah today';
+
+  @override
+  String get prayerNotificationJumuahBody =>
+      'Prepare for Jumu\'ah before Dhuhr and set aside a calm moment to head to the mosque.';
 }

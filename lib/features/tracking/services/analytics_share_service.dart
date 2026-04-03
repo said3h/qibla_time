@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../core/theme/app_theme.dart';
+import '../../../l10n/l10n.dart';
 import '../models/tracking_models.dart';
 
 final analyticsShareServiceProvider = Provider<AnalyticsShareService>((ref) {
@@ -39,10 +40,11 @@ class AnalyticsShareService {
   }
 
   String _shareText(WeeklySummary summary, TrackingState tracking) {
-    return 'Así va mi semana en Qibla Time\n'
-        'Racha actual: ${tracking.currentStreak} días\n'
-        'Esta semana: ${summary.prayersCompleted}/${summary.maxPossible} oraciones\n'
-        'Tu mejor día: ${summary.strongestDay.shortLabel}\n'
+    final l10n = appLocalizationsForCurrentLocale();
+    return '${l10n.analyticsShareWeekTitle}\n'
+        '${l10n.analyticsShareCurrentStreak(tracking.currentStreak)}\n'
+        '${l10n.analyticsShareThisWeek(summary.prayersCompleted, summary.maxPossible)}\n'
+        '${l10n.analyticsShareBestDay(summary.strongestDay.shortLabel)}\n'
         '${summary.interpretation}';
   }
 
@@ -51,6 +53,7 @@ class AnalyticsShareService {
     TrackingState tracking,
     QiblaTokens tokens,
   ) async {
+    final l10n = appLocalizationsForCurrentLocale();
     const width = 1080.0;
     const height = 1350.0;
     const horizontalPadding = 92.0;
@@ -82,7 +85,7 @@ class AnalyticsShareService {
 
     _paintText(
       canvas,
-      text: 'TU SEMANA',
+      text: l10n.analyticsShareWeekHeading,
       style: GoogleFonts.dmSans(
         fontSize: 30,
         fontWeight: FontWeight.w700,
@@ -107,7 +110,9 @@ class AnalyticsShareService {
 
     _paintText(
       canvas,
-      text: tracking.currentStreak == 1 ? 'día de racha' : 'días de racha',
+      text: tracking.currentStreak == 1
+          ? l10n.analyticsShareStreakDaySingular
+          : l10n.analyticsShareStreakDayPlural,
       style: GoogleFonts.dmSans(
         fontSize: 28,
         color: tokens.textSecondary,
@@ -122,21 +127,21 @@ class AnalyticsShareService {
       tokens: tokens,
       rect: Rect.fromLTWH(92, statsTop, 280, 172),
       value: '${summary.prayersCompleted}/${summary.maxPossible}',
-      label: 'oraciones de esta semana',
+      label: l10n.analyticsShareWeeklyPrayersLabel,
     );
     _drawStatCard(
       canvas,
       tokens: tokens,
       rect: Rect.fromLTWH(400, statsTop, 280, 172),
       value: summary.strongestDay.shortLabel,
-      label: '${summary.strongestDay.completed}/5 en tu mejor día',
+      label: l10n.analyticsShareBestDayLabel(summary.strongestDay.completed),
     );
     _drawStatCard(
       canvas,
       tokens: tokens,
       rect: Rect.fromLTWH(708, statsTop, 280, 172),
       value: '${summary.fullDays}',
-      label: 'días completos',
+      label: l10n.analyticsShareFullDaysLabel,
     );
 
     _paintText(
@@ -166,7 +171,7 @@ class AnalyticsShareService {
 
     _paintText(
       canvas,
-      text: 'Comparte tu progreso y sigue cuidando tu constancia.',
+      text: l10n.analyticsShareFooter,
       style: GoogleFonts.dmSans(
         fontSize: 22,
         color: tokens.textSecondary,
@@ -179,7 +184,7 @@ class AnalyticsShareService {
     final image = await picture.toImage(width.toInt(), height.toInt());
     final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
     if (byteData == null) {
-      throw StateError('No se pudo generar la imagen de estadísticas.');
+      throw StateError(l10n.analyticsShareImageError);
     }
     return byteData.buffer.asUint8List();
   }

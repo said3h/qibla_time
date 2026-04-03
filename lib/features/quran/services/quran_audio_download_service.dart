@@ -6,6 +6,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/constants/app_constants.dart';
+import '../../../l10n/l10n.dart';
 import '../models/quran_models.dart';
 
 final quranAudioDownloadServiceProvider =
@@ -78,7 +79,9 @@ class QuranAudioDownloadService {
       final response = await _client.get(Uri.parse(ayah.audioUrl));
       if (response.statusCode != 200) {
         throw HttpException(
-          'No se pudo descargar el audio de la aleya ${ayah.numberInSurah}.',
+          appLocalizationsForCurrentLocale().quranDownloadAyahAudioError(
+            ayah.numberInSurah,
+          ),
         );
       }
 

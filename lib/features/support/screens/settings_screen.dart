@@ -55,7 +55,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   int timeOffset = 0;
   bool isHanafi = false;
   CalculationMethod calculationMethod = CalculationMethod.muslim_world_league;
-  String selectedAdhanName = 'Sin datos';
+  String selectedAdhanName = '';
 
   // Hadices settings
   bool dailyInspirationEnabled = false;
@@ -545,8 +545,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             const SizedBox(height: 14),
             _buildSectionTitle(tokens, l10n.settingsSectionScheduleCalculation),
             _buildValueTile(tokens, l10n.commonMethod, calculationMethod.name.replaceAll('_', ' ').toUpperCase(), onTap: _showMethodSheet),
-            _buildValueTile(tokens, 'Madhab (Asr)', isHanafi ? 'Hanafi' : 'Shafi\'i', onTap: () => _setMadhab(!isHanafi)),
-            _buildValueTile(tokens, 'Ajuste manual', '±$timeOffset min', trailing: _offsetButtons(tokens)),
+            _buildValueTile(tokens, l10n.settingsMadhabAsr, isHanafi ? l10n.onboardingMadhabHanafiTitle : l10n.commonShafii, onTap: () => _setMadhab(!isHanafi)),
+            _buildValueTile(tokens, l10n.settingsManualAdjustment, '+/-$timeOffset min', trailing: _offsetButtons(tokens)),
             _buildValueTile(
               tokens,
               l10n.commonLocation,
@@ -734,7 +734,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               ),
               child: Row(
                 children: [
-                  const Text('💛', style: TextStyle(fontSize: 28)),
+                  Icon(Icons.favorite_rounded, color: tokens.primary, size: 28),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Column(
@@ -814,7 +814,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ),
             _buildSectionTitle(tokens, l10n.commonAbout),
             _buildValueTile(tokens, l10n.commonVersion, '3.0.0'),
-            _buildValueTile(tokens, 'Licencias de código abierto', '→'),
+            _buildValueTile(tokens, l10n.settingsOpenSourceLicenses, '→'),
           ],
         ),
       ),
@@ -851,15 +851,15 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Usuario', style: GoogleFonts.dmSans(fontSize: 15, color: tokens.textPrimary, fontWeight: FontWeight.w500)),
+                Text(context.l10n.settingsProfileUser, style: GoogleFonts.dmSans(fontSize: 15, color: tokens.textPrimary, fontWeight: FontWeight.w500)),
                 const SizedBox(height: 4),
                 Row(
                   children: [
-                    _stat(tokens, streakValue, 'racha'),
+                    _stat(tokens, streakValue, context.l10n.settingsProfileStreak),
                     const SizedBox(width: 12),
-                    _stat(tokens, prayersValue, 'oraciones'),
+                    _stat(tokens, prayersValue, context.l10n.settingsProfilePrayers),
                     const SizedBox(width: 12),
-                    _stat(tokens, dhikrValue, 'tasbih'),
+                    _stat(tokens, dhikrValue, context.l10n.settingsProfileTasbih),
                   ],
                 ),
               ],
@@ -890,7 +890,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
   String _buildPrayerSubtitle(DateTime? time) {
     final timeLabel = time == null ? context.l10n.commonUnavailable : _formatTime(time);
-    return '$timeLabel · $selectedAdhanName';
+    return '$timeLabel | $selectedAdhanName';
   }
 
   String _themeTitle(String id) {
@@ -1089,7 +1089,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       child: Column(
         children: [
           _diagnosticRow(tokens, l10n.commonMethod, calculationMethod.name.replaceAll('_', ' ').toUpperCase()),
-          _diagnosticRow(tokens, 'Madhab', isHanafi ? 'Hanafi' : 'Shafi\'i'),
+          _diagnosticRow(tokens, l10n.commonMadhab, isHanafi ? l10n.onboardingMadhabHanafiTitle : l10n.commonShafii),
           _diagnosticRow(tokens, l10n.commonOffset, '${timeOffset >= 0 ? '+' : ''}$timeOffset min'),
           _diagnosticRow(tokens, l10n.settingsNotificationSystem, notificationPermissionGranted == null ? l10n.commonChecking : notificationPermissionGranted ? l10n.settingsNotificationsGranted : l10n.commonPending),
           _diagnosticRow(tokens, l10n.settingsNotificationApp, prayerNotificationsStatus ? l10n.commonActivated : l10n.commonPaused),
@@ -1139,7 +1139,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       mainAxisSize: MainAxisSize.min,
       children: [
         IconButton(onPressed: () => _updateOffset(timeOffset - 1), icon: Icon(Icons.remove_circle_outline, color: tokens.textSecondary)),
-        Text('±$timeOffset', style: GoogleFonts.dmSans(fontSize: 12, color: tokens.primary, fontWeight: FontWeight.w500)),
+        Text('+/-$timeOffset', style: GoogleFonts.dmSans(fontSize: 12, color: tokens.primary, fontWeight: FontWeight.w500)),
         IconButton(onPressed: () => _updateOffset(timeOffset + 1), icon: Icon(Icons.add_circle_outline, color: tokens.primary)),
       ],
     );
@@ -1188,10 +1188,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             minLines: 8,
             maxLines: 12,
             style: GoogleFonts.dmSans(color: tokens.textPrimary),
-            decoration: const InputDecoration(hintText: 'Pega aquí el JSON exportado'),
+            decoration: InputDecoration(hintText: l10n.settingsRestoreBackupPasteHint),
           ),
           actions: [
-            TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancelar')),
+            TextButton(onPressed: () => Navigator.pop(context), child: Text(l10n.commonCancel)),
             ElevatedButton(
               onPressed: () async {
                 try {
@@ -1223,7 +1223,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   );
                 }
               },
-              child: const Text('Restaurar'),
+              child: Text(l10n.commonRestore),
             ),
           ],
         );

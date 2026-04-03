@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../l10n/l10n.dart';
+
 Future<void> openBookUrl(BuildContext context, String url) async {
   final trimmedUrl = url.trim();
   if (trimmedUrl.isEmpty) {
-    _showBookLinkFeedback(context, 'Este enlace no está disponible.');
+    _showBookLinkFeedback(context, context.l10n.bookLinkUnavailable);
     return;
   }
 
   final uri = Uri.tryParse(trimmedUrl);
   if (uri == null || !uri.hasScheme) {
-    _showBookLinkFeedback(context, 'Este enlace no está disponible.');
+    _showBookLinkFeedback(context, context.l10n.bookLinkUnavailable);
     return;
   }
 
@@ -18,7 +20,7 @@ Future<void> openBookUrl(BuildContext context, String url) async {
     final canOpen = await canLaunchUrl(uri);
     if (!context.mounted) return;
     if (!canOpen) {
-      _showBookLinkFeedback(context, 'No hemos podido abrir el enlace.');
+      _showBookLinkFeedback(context, context.l10n.bookLinkOpenError);
       return;
     }
 
@@ -28,11 +30,11 @@ Future<void> openBookUrl(BuildContext context, String url) async {
     );
     if (!context.mounted) return;
     if (!launched) {
-      _showBookLinkFeedback(context, 'No hemos podido abrir el enlace.');
+      _showBookLinkFeedback(context, context.l10n.bookLinkOpenError);
     }
   } catch (_) {
     if (!context.mounted) return;
-    _showBookLinkFeedback(context, 'No hemos podido abrir el enlace.');
+    _showBookLinkFeedback(context, context.l10n.bookLinkOpenError);
   }
 }
 

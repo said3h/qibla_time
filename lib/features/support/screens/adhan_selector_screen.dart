@@ -105,8 +105,16 @@ class _AdhanSelectorScreenState extends State<AdhanSelectorScreen> {
     final l10n = context.l10n;
     if (isPlaying) return l10n.adhanSelectorPreviewPlaying;
     if (isActive) return l10n.adhanSelectorPreviewPaused;
-    if (adhan.description != null && adhan.description!.trim().isNotEmpty) {
-      return adhan.description!;
+    return _defaultDescription(adhan);
+  }
+
+  String _defaultDescription(AdhanModel adhan) {
+    final l10n = context.l10n;
+    final index = AdhanModel.availableAdhans.indexWhere(
+      (item) => item.file == adhan.file,
+    );
+    if (index >= 0) {
+      return l10n.adhanSelectorOptionDescription(index + 1);
     }
     return l10n.adhanSelectorPreviewIdle;
   }

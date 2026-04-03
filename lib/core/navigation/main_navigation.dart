@@ -181,6 +181,7 @@ class _QuranMiniPlayerBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = context.l10n;
 
     return Container(
       width: double.infinity,
@@ -197,7 +198,7 @@ class _QuranMiniPlayerBar extends StatelessWidget {
         children: [
           Expanded(
             child: Text(
-              '${state.surahName} · Aleya ${state.ayahNumber}',
+              l10n.navigationMiniPlayerAyah(state.surahName, state.ayahNumber),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: theme.textTheme.bodyMedium?.copyWith(
@@ -212,7 +213,9 @@ class _QuranMiniPlayerBar extends StatelessWidget {
                   ? Icons.pause_circle_filled
                   : Icons.play_circle_fill,
             ),
-            tooltip: state.isPlaying ? 'Pausar audio' : 'Reanudar audio',
+            tooltip: state.isPlaying
+                ? l10n.quranPauseAudio
+                : l10n.quranResumeAudio,
           ),
         ],
       ),

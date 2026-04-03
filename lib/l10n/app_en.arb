@@ -989,5 +989,164 @@
       "label": {}
     }
   },
-  "analyticsAchievementUnlocked": "Unlocked"
+  "analyticsAchievementUnlocked": "Unlocked",
+  "navigationMiniPlayerAyah": "{surah} · Ayah {ayah}",
+  "@navigationMiniPlayerAyah": {
+    "placeholders": {
+      "surah": {},
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "onboardingGatePreparing": "Preparing Qibla Time",
+  "supportScreenTitle": "Support Qibla Time",
+  "supportScreenThankYou": "Thank you for being here",
+  "supportScreenBody": "Your support helps us care for Qibla Time, keep the app alive, and continue building useful tools for your daily life.",
+  "supportScreenRateTitle": "Rate the app",
+  "supportScreenRateBody": "A good rating helps more people discover Qibla Time.",
+  "supportScreenShareTitle": "Share Qibla Time",
+  "supportScreenShareBody": "Recommending the app to family and friends is also a form of sadaqah.",
+  "supportScreenSadaqahTitle": "Support with intention",
+  "supportScreenSadaqahBody": "If Qibla Time helps you, you can support the project with a small sincere contribution.",
+  "supportScreenQuote": "Whoever helps others reach something good also shares in its reward, if Allah wills.",
+  "allahNamesTitle": "The 99 Names of Allah",
+  "allahNamesIntro": "Explore a curated selection of Allah's names, with transliteration and meaning so you can remember them with calm.",
+  "allahNamesLoadError": "We couldn't load the names of Allah.",
+  "allahNamesUseInTasbih": "Use in tasbih",
+  "downloadedSurahsTitle": "Downloaded surahs",
+  "downloadedSurahsEmpty": "You have not downloaded any surah yet.",
+  "downloadedSurahsFavorite": "Favorite",
+  "downloadedSurahsMarkFavorite": "Mark as favorite",
+  "downloadedSurahsRemoveDownload": "Remove download",
+  "downloadedSurahsLoadError": "We couldn't load your downloaded surahs.",
+  "focusModeDndActive": "RAKAHA ACTIVE · DO NOT DISTURB ON",
+  "focusModeOpenDndSettings": "Enable Do Not Disturb in settings",
+  "focusModeTitle": "RAKAHA",
+  "focusModeSujudCount": "+ sujud",
+  "focusModeDndHint": "WITHOUT INTERRUPTIONS IT FEELS BETTER WITH DO NOT DISTURB",
+  "focusModeReleaseToCancel": "Release to cancel",
+  "focusModeHoldToExit": "Hold to exit",
+  "settingsMadhabAsr": "Madhab (Asr)",
+  "settingsManualAdjustment": "Manual adjustment",
+  "settingsOpenSourceLicenses": "Open-source licenses",
+  "settingsProfileUser": "User",
+  "settingsProfileStreak": "streak",
+  "settingsProfilePrayers": "prayers",
+  "settingsProfileTasbih": "tasbih",
+  "commonShafii": "Shafi'i",
+  "commonRestore": "Restore",
+  "settingsRestoreBackupPasteHint": "Paste the exported JSON here",
+  "dailyBookBadge": "BOOK OF THE DAY",
+  "dailyBookUnavailable": "The library is not available right now.",
+  "dailyBookOpenLibrary": "Open books",
+  "hadithOfflineIncludedInApp": "Included in the app",
+  "hadithOfflineAgoDays": "{count} days ago",
+  "@hadithOfflineAgoDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hadithOfflineAgoHours": "{count} hours ago",
+  "@hadithOfflineAgoHours": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hadithOfflineAgoMinutes": "{count} minutes ago",
+  "@hadithOfflineAgoMinutes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hadithOfflineNow": "Just now",
+  "analyticsShareWeekTitle": "Weekly summary",
+  "analyticsShareCurrentStreak": "Current streak: {count}",
+  "@analyticsShareCurrentStreak": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "analyticsShareThisWeek": "This week: {completed}/{maxPossible} prayers",
+  "@analyticsShareThisWeek": {
+    "placeholders": {
+      "completed": {
+        "type": "int"
+      },
+      "maxPossible": {
+        "type": "int"
+      }
+    }
+  },
+  "analyticsShareBestDay": "Best day: {day}",
+  "@analyticsShareBestDay": {
+    "placeholders": {
+      "day": {}
+    }
+  },
+  "analyticsShareWeekHeading": "WEEKLY SUMMARY",
+  "analyticsShareStreakDaySingular": "day streak",
+  "analyticsShareStreakDayPlural": "days streak",
+  "analyticsShareWeeklyPrayersLabel": "Prayers this week",
+  "analyticsShareBestDayLabel": "Best day · {count}/5",
+  "@analyticsShareBestDayLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "analyticsShareFullDaysLabel": "Full days",
+  "analyticsShareFooter": "Your progress in Qibla Time",
+  "analyticsShareImageError": "We couldn't generate the progress image.",
+  "quranDownloadAyahAudioError": "We couldn't download the audio for ayah {ayah}.",
+  "@quranDownloadAyahAudioError": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "recentLocationUnknown": "Unknown location",
+  "cloudSyncRestoreInvalid": "Invalid backup",
+  "cloudSyncRestoreFailed": "We couldn't restore the backup",
+  "bookLinkUnavailable": "This link is not available.",
+  "bookLinkOpenError": "We couldn't open the link.",
+  "ramadanStatusHeaderDay": "Ramadan day {day}",
+  "@ramadanStatusHeaderDay": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      }
+    }
+  },
+  "ramadanStatusHeaderManual": "Manual Ramadan mode",
+  "ramadanStatusBlessingDetected": "May Allah accept your fast and your deeds today.",
+  "ramadanStatusBlessingManual": "Special Ramadan view manually enabled for testing.",
+  "ramadanStatusSuggestionDhikr": "Remember to increase your dhikr today.",
+  "ramadanStatusSuggestionQuran": "Try to read a little more Quran today.",
+  "ramadanStatusSuggestionDua": "Use this day to make dua with calm.",
+  "ramadanStatusSuggestionSadaqah": "Even a small sadaqah counts during Ramadan.",
+  "adhanSelectorOptionDescription": "Call to prayer {number}",
+  "@adhanSelectorOptionDescription": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "prayerNotificationImsakTitle": "Imsak is coming",
+  "prayerNotificationImsakBody": "15 minutes left until imsak. If you are still having suhoor, now is a good time to wrap up.",
+  "prayerNotificationIftarTitle": "Iftar is coming",
+  "prayerNotificationIftarBody": "15 minutes left until iftar. May Allah accept your fast today.",
+  "prayerNotificationJumuahTitle": "Jumu'ah today",
+  "prayerNotificationJumuahBody": "Prepare for Jumu'ah before Dhuhr and set aside a calm moment to head to the mosque."
 }

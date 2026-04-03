@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theme/app_theme.dart';
+import '../../../l10n/l10n.dart';
 import '../../dhikr/screens/dhikr_screen.dart';
 import '../models/allah_name.dart';
 import '../services/allah_names_service.dart';
@@ -13,13 +14,14 @@ class AllahNamesScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final tokens = QiblaThemes.current;
+    final l10n = context.l10n;
     final namesAsync = ref.watch(allahNamesProvider);
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
       appBar: AppBar(
         title: Text(
-          'Asmaul Husna',
+          l10n.allahNamesTitle,
           style: GoogleFonts.amiri(
             fontSize: 26,
             fontWeight: FontWeight.bold,
@@ -42,7 +44,7 @@ class AllahNamesScreen extends ConsumerWidget {
                   border: Border.all(color: tokens.primaryBorder),
                 ),
                 child: Text(
-                  'Recorre los 99 nombres de Allah y, si quieres, abre cualquiera en Tasbih para repetirlo con calma.',
+                  l10n.allahNamesIntro,
                   style: GoogleFonts.dmSans(
                     fontSize: 12,
                     height: 1.6,
@@ -63,7 +65,7 @@ class AllahNamesScreen extends ConsumerWidget {
           child: Padding(
             padding: const EdgeInsets.all(24),
             child: Text(
-              'No hemos podido cargar los nombres por ahora.',
+              l10n.allahNamesLoadError,
               textAlign: TextAlign.center,
               style: GoogleFonts.dmSans(color: tokens.textSecondary),
             ),
@@ -82,6 +84,8 @@ class _AllahNameCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
+    final l10n = context.l10n;
+
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -152,7 +156,7 @@ class _AllahNameCard extends StatelessWidget {
                 );
               },
               icon: const Icon(Icons.repeat_rounded),
-              label: const Text('Usar en Tasbih'),
+              label: Text(l10n.allahNamesUseInTasbih),
             ),
           ),
         ],

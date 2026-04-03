@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theme/app_theme.dart';
+import '../../../l10n/l10n.dart';
 
 class SupportScreen extends StatelessWidget {
   const SupportScreen({super.key});
@@ -9,12 +10,13 @@ class SupportScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
+    final l10n = context.l10n;
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
       appBar: AppBar(
         title: Text(
-          'Apoya Qibla Time',
+          l10n.supportScreenTitle,
           style: GoogleFonts.amiri(
             fontSize: 22,
             fontWeight: FontWeight.bold,
@@ -28,7 +30,7 @@ class SupportScreen extends StatelessWidget {
           Icon(Icons.favorite_rounded, color: tokens.primary, size: 72),
           const SizedBox(height: 20),
           Text(
-            'Jazak Allahu khayran',
+            l10n.supportScreenThankYou,
             textAlign: TextAlign.center,
             style: GoogleFonts.amiri(
               fontSize: 30,
@@ -38,7 +40,7 @@ class SupportScreen extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Text(
-            'Qibla Time es gratuita y no tiene anuncios intrusivos. Aquí tienes formas reales y sencillas de apoyar el proyecto, sin promesas ni funciones que todavía no existen en la app.',
+            l10n.supportScreenBody,
             textAlign: TextAlign.center,
             style: GoogleFonts.dmSans(
               fontSize: 14,
@@ -49,21 +51,18 @@ class SupportScreen extends StatelessWidget {
           const SizedBox(height: 28),
           _SupportInfoCard(
             icon: Icons.star_rate_rounded,
-            title: 'Valora la app',
-            description:
-                'Cuando la ficha definitiva en la tienda esté lista, una reseña ayudará a que más personas descubran Qibla Time.',
+            title: l10n.supportScreenRateTitle,
+            description: l10n.supportScreenRateBody,
           ),
           _SupportInfoCard(
             icon: Icons.share_rounded,
-            title: 'Compártela',
-            description:
-                'Recomendar Qibla Time a familiares y amistades también ayuda de verdad al proyecto.',
+            title: l10n.supportScreenShareTitle,
+            description: l10n.supportScreenShareBody,
           ),
           _SupportInfoCard(
             icon: Icons.volunteer_activism_outlined,
-            title: 'Sadaqah',
-            description:
-                'El apoyo económico todavía no está disponible en la app.',
+            title: l10n.supportScreenSadaqahTitle,
+            description: l10n.supportScreenSadaqahBody,
           ),
           const SizedBox(height: 24),
           Container(
@@ -74,7 +73,7 @@ class SupportScreen extends StatelessWidget {
               border: Border.all(color: tokens.primaryBorder),
             ),
             child: Text(
-              '"La caridad no disminuye la riqueza."',
+              l10n.supportScreenQuote,
               textAlign: TextAlign.center,
               style: GoogleFonts.dmSans(
                 fontSize: 13,

@@ -1,4 +1,5 @@
 import '../../../../core/services/settings_service.dart';
+import '../../../../l10n/l10n.dart';
 import '../../domain/entities/prayer_name.dart';
 import '../../domain/entities/prayer_schedule.dart';
 import '../../domain/entities/ramadan_status.dart';
@@ -79,6 +80,7 @@ class PrayerNotificationsDataSource {
     PrayerSchedule schedule, {
     required DateTime now,
   }) async {
+    final l10n = appLocalizationsForCurrentLocale();
     final ramadanStatus = RamadanStatus.fromDate(
       now,
       automaticEnabled: await _settingsService.getRamadanModeAutomatic(),
@@ -93,9 +95,8 @@ class PrayerNotificationsDataSource {
     if (imsakReminderAt.isAfter(now)) {
       await _notificationService.scheduleReminder(
         id: _ramadanImsakReminderId,
-        title: 'Imsak se acerca',
-        body:
-            'Faltan 15 minutos para Imsak. Si aun vas a hacer suhoor, es buen momento para cerrar.',
+        title: l10n.prayerNotificationImsakTitle,
+        body: l10n.prayerNotificationImsakBody,
         scheduledAt: imsakReminderAt,
       );
     }
@@ -104,9 +105,8 @@ class PrayerNotificationsDataSource {
     if (iftarReminderAt.isAfter(now)) {
       await _notificationService.scheduleReminder(
         id: _ramadanIftarReminderId,
-        title: 'Iftar se acerca',
-        body:
-            'Faltan 15 minutos para Iftar. Que Allah acepte tu ayuno de hoy.',
+        title: l10n.prayerNotificationIftarTitle,
+        body: l10n.prayerNotificationIftarBody,
         scheduledAt: iftarReminderAt,
       );
     }
@@ -116,6 +116,7 @@ class PrayerNotificationsDataSource {
     PrayerSchedule schedule, {
     required DateTime now,
   }) async {
+    final l10n = appLocalizationsForCurrentLocale();
     if (now.weekday != DateTime.friday) {
       return;
     }
@@ -130,9 +131,8 @@ class PrayerNotificationsDataSource {
 
     await _notificationService.scheduleReminder(
       id: _jumuahReminderId,
-      title: 'Jumu\'ah hoy',
-      body:
-          'Preparate para Jumu\'ah antes de Dhuhr y reserva un momento para ir con calma a la mezquita.',
+      title: l10n.prayerNotificationJumuahTitle,
+      body: l10n.prayerNotificationJumuahBody,
       scheduledAt: reminderTime,
     );
   }

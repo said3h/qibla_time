@@ -4324,6 +4324,486 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Completado'**
   String get analyticsAchievementUnlocked;
+
+  /// No description provided for @navigationMiniPlayerAyah.
+  ///
+  /// In es, this message translates to:
+  /// **'{surah} · Aleya {ayah}'**
+  String navigationMiniPlayerAyah(Object surah, int ayah);
+
+  /// No description provided for @onboardingGatePreparing.
+  ///
+  /// In es, this message translates to:
+  /// **'Preparando Qibla Time'**
+  String get onboardingGatePreparing;
+
+  /// No description provided for @supportScreenTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Apoyar Qibla Time'**
+  String get supportScreenTitle;
+
+  /// No description provided for @supportScreenThankYou.
+  ///
+  /// In es, this message translates to:
+  /// **'Gracias por estar aquí'**
+  String get supportScreenThankYou;
+
+  /// No description provided for @supportScreenBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Tu apoyo nos ayuda a cuidar Qibla Time, mantener la app viva y seguir creando herramientas útiles para tu día a día.'**
+  String get supportScreenBody;
+
+  /// No description provided for @supportScreenRateTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Valora la app'**
+  String get supportScreenRateTitle;
+
+  /// No description provided for @supportScreenRateBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Una buena valoración ayuda a que más personas descubran Qibla Time.'**
+  String get supportScreenRateBody;
+
+  /// No description provided for @supportScreenShareTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Comparte Qibla Time'**
+  String get supportScreenShareTitle;
+
+  /// No description provided for @supportScreenShareBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Recomendar la app a familia y amistades también es una forma de sadaqah.'**
+  String get supportScreenShareBody;
+
+  /// No description provided for @supportScreenSadaqahTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Apoya con intención'**
+  String get supportScreenSadaqahTitle;
+
+  /// No description provided for @supportScreenSadaqahBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Si Qibla Time te sirve, puedes apoyar el proyecto con una pequeña ayuda sincera.'**
+  String get supportScreenSadaqahBody;
+
+  /// No description provided for @supportScreenQuote.
+  ///
+  /// In es, this message translates to:
+  /// **'Quien facilita un bien para otros también participa en su recompensa, si Allah quiere.'**
+  String get supportScreenQuote;
+
+  /// No description provided for @allahNamesTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Los 99 nombres de Allah'**
+  String get allahNamesTitle;
+
+  /// No description provided for @allahNamesIntro.
+  ///
+  /// In es, this message translates to:
+  /// **'Explora una selección cuidada de los nombres de Allah, con transliteración y significado para recordarlos con calma.'**
+  String get allahNamesIntro;
+
+  /// No description provided for @allahNamesLoadError.
+  ///
+  /// In es, this message translates to:
+  /// **'No hemos podido cargar los nombres de Allah.'**
+  String get allahNamesLoadError;
+
+  /// No description provided for @allahNamesUseInTasbih.
+  ///
+  /// In es, this message translates to:
+  /// **'Usar en tasbih'**
+  String get allahNamesUseInTasbih;
+
+  /// No description provided for @downloadedSurahsTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Suras descargadas'**
+  String get downloadedSurahsTitle;
+
+  /// No description provided for @downloadedSurahsEmpty.
+  ///
+  /// In es, this message translates to:
+  /// **'Todavía no has descargado ninguna sura.'**
+  String get downloadedSurahsEmpty;
+
+  /// No description provided for @downloadedSurahsFavorite.
+  ///
+  /// In es, this message translates to:
+  /// **'Favorita'**
+  String get downloadedSurahsFavorite;
+
+  /// No description provided for @downloadedSurahsMarkFavorite.
+  ///
+  /// In es, this message translates to:
+  /// **'Marcar favorita'**
+  String get downloadedSurahsMarkFavorite;
+
+  /// No description provided for @downloadedSurahsRemoveDownload.
+  ///
+  /// In es, this message translates to:
+  /// **'Quitar descarga'**
+  String get downloadedSurahsRemoveDownload;
+
+  /// No description provided for @downloadedSurahsLoadError.
+  ///
+  /// In es, this message translates to:
+  /// **'No hemos podido cargar tus suras descargadas.'**
+  String get downloadedSurahsLoadError;
+
+  /// No description provided for @focusModeDndActive.
+  ///
+  /// In es, this message translates to:
+  /// **'RAKAHA ACTIVA · NO MOLESTAR ENCENDIDO'**
+  String get focusModeDndActive;
+
+  /// No description provided for @focusModeOpenDndSettings.
+  ///
+  /// In es, this message translates to:
+  /// **'Activa No molestar en ajustes'**
+  String get focusModeOpenDndSettings;
+
+  /// No description provided for @focusModeTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'RAKAHA'**
+  String get focusModeTitle;
+
+  /// No description provided for @focusModeSujudCount.
+  ///
+  /// In es, this message translates to:
+  /// **'+ sujud'**
+  String get focusModeSujudCount;
+
+  /// No description provided for @focusModeDndHint.
+  ///
+  /// In es, this message translates to:
+  /// **'SIN INTERRUPCIONES SUENA MEJOR CON NO MOLESTAR'**
+  String get focusModeDndHint;
+
+  /// No description provided for @focusModeReleaseToCancel.
+  ///
+  /// In es, this message translates to:
+  /// **'Suelta para cancelar'**
+  String get focusModeReleaseToCancel;
+
+  /// No description provided for @focusModeHoldToExit.
+  ///
+  /// In es, this message translates to:
+  /// **'Mantén pulsado para salir'**
+  String get focusModeHoldToExit;
+
+  /// No description provided for @settingsMadhabAsr.
+  ///
+  /// In es, this message translates to:
+  /// **'Madhab (Asr)'**
+  String get settingsMadhabAsr;
+
+  /// No description provided for @settingsManualAdjustment.
+  ///
+  /// In es, this message translates to:
+  /// **'Ajuste manual'**
+  String get settingsManualAdjustment;
+
+  /// No description provided for @settingsOpenSourceLicenses.
+  ///
+  /// In es, this message translates to:
+  /// **'Licencias de código abierto'**
+  String get settingsOpenSourceLicenses;
+
+  /// No description provided for @settingsProfileUser.
+  ///
+  /// In es, this message translates to:
+  /// **'Usuario'**
+  String get settingsProfileUser;
+
+  /// No description provided for @settingsProfileStreak.
+  ///
+  /// In es, this message translates to:
+  /// **'racha'**
+  String get settingsProfileStreak;
+
+  /// No description provided for @settingsProfilePrayers.
+  ///
+  /// In es, this message translates to:
+  /// **'oraciones'**
+  String get settingsProfilePrayers;
+
+  /// No description provided for @settingsProfileTasbih.
+  ///
+  /// In es, this message translates to:
+  /// **'tasbih'**
+  String get settingsProfileTasbih;
+
+  /// No description provided for @commonShafii.
+  ///
+  /// In es, this message translates to:
+  /// **'Shafi\'i'**
+  String get commonShafii;
+
+  /// No description provided for @commonRestore.
+  ///
+  /// In es, this message translates to:
+  /// **'Restaurar'**
+  String get commonRestore;
+
+  /// No description provided for @settingsRestoreBackupPasteHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Pega aquí el JSON exportado'**
+  String get settingsRestoreBackupPasteHint;
+
+  /// No description provided for @dailyBookBadge.
+  ///
+  /// In es, this message translates to:
+  /// **'LIBRO DEL DÍA'**
+  String get dailyBookBadge;
+
+  /// No description provided for @dailyBookUnavailable.
+  ///
+  /// In es, this message translates to:
+  /// **'La biblioteca no está disponible por ahora.'**
+  String get dailyBookUnavailable;
+
+  /// No description provided for @dailyBookOpenLibrary.
+  ///
+  /// In es, this message translates to:
+  /// **'Ir a libros'**
+  String get dailyBookOpenLibrary;
+
+  /// No description provided for @hadithOfflineIncludedInApp.
+  ///
+  /// In es, this message translates to:
+  /// **'Incluidos en la app'**
+  String get hadithOfflineIncludedInApp;
+
+  /// No description provided for @hadithOfflineAgoDays.
+  ///
+  /// In es, this message translates to:
+  /// **'Hace {count} días'**
+  String hadithOfflineAgoDays(int count);
+
+  /// No description provided for @hadithOfflineAgoHours.
+  ///
+  /// In es, this message translates to:
+  /// **'Hace {count} horas'**
+  String hadithOfflineAgoHours(int count);
+
+  /// No description provided for @hadithOfflineAgoMinutes.
+  ///
+  /// In es, this message translates to:
+  /// **'Hace {count} minutos'**
+  String hadithOfflineAgoMinutes(int count);
+
+  /// No description provided for @hadithOfflineNow.
+  ///
+  /// In es, this message translates to:
+  /// **'Ahora mismo'**
+  String get hadithOfflineNow;
+
+  /// No description provided for @analyticsShareWeekTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Resumen semanal'**
+  String get analyticsShareWeekTitle;
+
+  /// No description provided for @analyticsShareCurrentStreak.
+  ///
+  /// In es, this message translates to:
+  /// **'Racha actual: {count}'**
+  String analyticsShareCurrentStreak(int count);
+
+  /// No description provided for @analyticsShareThisWeek.
+  ///
+  /// In es, this message translates to:
+  /// **'Esta semana: {completed}/{maxPossible} oraciones'**
+  String analyticsShareThisWeek(int completed, int maxPossible);
+
+  /// No description provided for @analyticsShareBestDay.
+  ///
+  /// In es, this message translates to:
+  /// **'Mejor día: {day}'**
+  String analyticsShareBestDay(Object day);
+
+  /// No description provided for @analyticsShareWeekHeading.
+  ///
+  /// In es, this message translates to:
+  /// **'RESUMEN SEMANAL'**
+  String get analyticsShareWeekHeading;
+
+  /// No description provided for @analyticsShareStreakDaySingular.
+  ///
+  /// In es, this message translates to:
+  /// **'día de racha'**
+  String get analyticsShareStreakDaySingular;
+
+  /// No description provided for @analyticsShareStreakDayPlural.
+  ///
+  /// In es, this message translates to:
+  /// **'días de racha'**
+  String get analyticsShareStreakDayPlural;
+
+  /// No description provided for @analyticsShareWeeklyPrayersLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Oraciones de esta semana'**
+  String get analyticsShareWeeklyPrayersLabel;
+
+  /// No description provided for @analyticsShareBestDayLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Mejor día · {count}/5'**
+  String analyticsShareBestDayLabel(int count);
+
+  /// No description provided for @analyticsShareFullDaysLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Días completos'**
+  String get analyticsShareFullDaysLabel;
+
+  /// No description provided for @analyticsShareFooter.
+  ///
+  /// In es, this message translates to:
+  /// **'Tu progreso en Qibla Time'**
+  String get analyticsShareFooter;
+
+  /// No description provided for @analyticsShareImageError.
+  ///
+  /// In es, this message translates to:
+  /// **'No hemos podido generar la imagen de progreso.'**
+  String get analyticsShareImageError;
+
+  /// No description provided for @quranDownloadAyahAudioError.
+  ///
+  /// In es, this message translates to:
+  /// **'No se pudo descargar el audio de la aleya {ayah}.'**
+  String quranDownloadAyahAudioError(int ayah);
+
+  /// No description provided for @recentLocationUnknown.
+  ///
+  /// In es, this message translates to:
+  /// **'Ubicación desconocida'**
+  String get recentLocationUnknown;
+
+  /// No description provided for @cloudSyncRestoreInvalid.
+  ///
+  /// In es, this message translates to:
+  /// **'Copia no válida'**
+  String get cloudSyncRestoreInvalid;
+
+  /// No description provided for @cloudSyncRestoreFailed.
+  ///
+  /// In es, this message translates to:
+  /// **'No se pudo restaurar la copia'**
+  String get cloudSyncRestoreFailed;
+
+  /// No description provided for @bookLinkUnavailable.
+  ///
+  /// In es, this message translates to:
+  /// **'Este enlace no está disponible.'**
+  String get bookLinkUnavailable;
+
+  /// No description provided for @bookLinkOpenError.
+  ///
+  /// In es, this message translates to:
+  /// **'No hemos podido abrir el enlace.'**
+  String get bookLinkOpenError;
+
+  /// No description provided for @ramadanStatusHeaderDay.
+  ///
+  /// In es, this message translates to:
+  /// **'Ramadán día {day}'**
+  String ramadanStatusHeaderDay(int day);
+
+  /// No description provided for @ramadanStatusHeaderManual.
+  ///
+  /// In es, this message translates to:
+  /// **'Modo Ramadán manual'**
+  String get ramadanStatusHeaderManual;
+
+  /// No description provided for @ramadanStatusBlessingDetected.
+  ///
+  /// In es, this message translates to:
+  /// **'Que Allah acepte tu ayuno y tus obras de hoy.'**
+  String get ramadanStatusBlessingDetected;
+
+  /// No description provided for @ramadanStatusBlessingManual.
+  ///
+  /// In es, this message translates to:
+  /// **'Vista especial de Ramadán activada manualmente para pruebas.'**
+  String get ramadanStatusBlessingManual;
+
+  /// No description provided for @ramadanStatusSuggestionDhikr.
+  ///
+  /// In es, this message translates to:
+  /// **'Recuerda aumentar el dhikr hoy.'**
+  String get ramadanStatusSuggestionDhikr;
+
+  /// No description provided for @ramadanStatusSuggestionQuran.
+  ///
+  /// In es, this message translates to:
+  /// **'Intenta leer un poco más de Corán hoy.'**
+  String get ramadanStatusSuggestionQuran;
+
+  /// No description provided for @ramadanStatusSuggestionDua.
+  ///
+  /// In es, this message translates to:
+  /// **'Aprovecha este día para hacer dua con calma.'**
+  String get ramadanStatusSuggestionDua;
+
+  /// No description provided for @ramadanStatusSuggestionSadaqah.
+  ///
+  /// In es, this message translates to:
+  /// **'Una pequeña sadaqah también cuenta durante Ramadán.'**
+  String get ramadanStatusSuggestionSadaqah;
+
+  /// No description provided for @adhanSelectorOptionDescription.
+  ///
+  /// In es, this message translates to:
+  /// **'Llamada a la oración {number}'**
+  String adhanSelectorOptionDescription(int number);
+
+  /// No description provided for @prayerNotificationImsakTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Imsak se acerca'**
+  String get prayerNotificationImsakTitle;
+
+  /// No description provided for @prayerNotificationImsakBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Faltan 15 minutos para Imsak. Si aún vas a hacer suhoor, es buen momento para cerrar.'**
+  String get prayerNotificationImsakBody;
+
+  /// No description provided for @prayerNotificationIftarTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Iftar se acerca'**
+  String get prayerNotificationIftarTitle;
+
+  /// No description provided for @prayerNotificationIftarBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Faltan 15 minutos para Iftar. Que Allah acepte tu ayuno de hoy.'**
+  String get prayerNotificationIftarBody;
+
+  /// No description provided for @prayerNotificationJumuahTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Jumu\'ah hoy'**
+  String get prayerNotificationJumuahTitle;
+
+  /// No description provided for @prayerNotificationJumuahBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Prepárate para Jumu\'ah antes de Dhuhr y reserva un momento para ir con calma a la mezquita.'**
+  String get prayerNotificationJumuahBody;
 }
 
 class _AppLocalizationsDelegate

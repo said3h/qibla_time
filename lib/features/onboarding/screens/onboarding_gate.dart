@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/navigation/main_navigation.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../../l10n/l10n.dart';
 import '../services/onboarding_service.dart';
 import 'onboarding_screen.dart';
 
@@ -34,6 +35,7 @@ class _OnboardingGateState extends State<OnboardingGate> {
   @override
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
+    final l10n = context.l10n;
 
     return FutureBuilder<bool>(
       future: _statusFuture,
@@ -48,7 +50,7 @@ class _OnboardingGateState extends State<OnboardingGate> {
                   CircularProgressIndicator(color: tokens.primary),
                   const SizedBox(height: 16),
                   Text(
-                    'Preparando Qibla Time',
+                    l10n.onboardingGatePreparing,
                     style: GoogleFonts.dmSans(
                       color: tokens.textSecondary,
                       fontSize: 13,

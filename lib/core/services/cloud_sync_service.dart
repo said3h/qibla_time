@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../constants/app_constants.dart';
 import 'storage_service.dart';
 import '../../features/hafiz/services/hafiz_service.dart';
+import '../../l10n/l10n.dart';
 
 class CloudSyncSnapshot {
   const CloudSyncSnapshot({
@@ -98,7 +99,9 @@ class CloudSyncService {
 
   Future<void> restoreFromJson(HafizService hafizService, String rawJson) async {
     if (rawJson.trim().isEmpty) {
-      throw const CloudSyncRestoreException('Copia no valida');
+      throw CloudSyncRestoreException(
+        appLocalizationsForCurrentLocale().cloudSyncRestoreInvalid,
+      );
     }
 
     try {
@@ -128,11 +131,15 @@ class CloudSyncService {
       final hafizPayload = _optionalMap(payload['hafiz']);
       await hafizService.restoreSnapshot(hafizPayload);
     } on FormatException {
-      throw const CloudSyncRestoreException('Copia no valida');
+      throw CloudSyncRestoreException(
+        appLocalizationsForCurrentLocale().cloudSyncRestoreInvalid,
+      );
     } on CloudSyncRestoreException {
       rethrow;
     } catch (_) {
-      throw const CloudSyncRestoreException('No se pudo restaurar la copia');
+      throw CloudSyncRestoreException(
+        appLocalizationsForCurrentLocale().cloudSyncRestoreFailed,
+      );
     }
   }
 
@@ -140,7 +147,9 @@ class CloudSyncService {
     if (value is Map) {
       return Map<String, dynamic>.from(value);
     }
-    throw CloudSyncRestoreException('Copia no valida');
+    throw CloudSyncRestoreException(
+      appLocalizationsForCurrentLocale().cloudSyncRestoreInvalid,
+    );
   }
 
   Map<String, dynamic> _optionalMap(dynamic value) {
@@ -150,7 +159,9 @@ class CloudSyncService {
     if (value is Map) {
       return Map<String, dynamic>.from(value);
     }
-    throw CloudSyncRestoreException('Copia no valida');
+    throw CloudSyncRestoreException(
+      appLocalizationsForCurrentLocale().cloudSyncRestoreInvalid,
+    );
   }
 }
 

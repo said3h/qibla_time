@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theme/app_theme.dart';
+import '../../../l10n/l10n.dart';
 import '../services/quran_audio_download_service.dart';
 import '../services/quran_service.dart';
 import 'quran_screen.dart';
@@ -13,6 +14,7 @@ class DownloadedSurahsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final tokens = QiblaThemes.current;
+    final l10n = context.l10n;
     final surahs = ref.watch(quranSurahsProvider);
     final downloadedAsync = ref.watch(downloadedSurahNumbersProvider);
     final favoritesAsync = ref.watch(favoriteDownloadedSurahsProvider);
@@ -21,7 +23,7 @@ class DownloadedSurahsScreen extends ConsumerWidget {
       backgroundColor: tokens.bgPage,
       appBar: AppBar(
         title: Text(
-          'Suras descargadas',
+          l10n.downloadedSurahsTitle,
           style: GoogleFonts.amiri(
             fontSize: 26,
             fontWeight: FontWeight.bold,
@@ -41,7 +43,7 @@ class DownloadedSurahsScreen extends ConsumerWidget {
               child: Padding(
                 padding: const EdgeInsets.all(24),
                 child: Text(
-                  'Todavía no has descargado audio de ninguna sura.',
+                  l10n.downloadedSurahsEmpty,
                   textAlign: TextAlign.center,
                   style: GoogleFonts.dmSans(color: tokens.textSecondary),
                 ),
@@ -120,17 +122,21 @@ class DownloadedSurahsScreen extends ConsumerWidget {
                           onPressed: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (_) => QuranDetailScreen(summary: surah),
+                                builder: (_) =>
+                                    QuranDetailScreen(summary: surah),
                               ),
                             );
                           },
                           icon: const Icon(Icons.play_circle_outline),
-                          label: const Text('Abrir'),
+                          label: Text(l10n.commonOpen),
                         ),
                         OutlinedButton.icon(
                           onPressed: () async {
-                            final service = ref.read(quranAudioDownloadServiceProvider);
-                            await service.toggleDownloadedSurahFavorite(surah.number);
+                            final service =
+                                ref.read(quranAudioDownloadServiceProvider);
+                            await service.toggleDownloadedSurahFavorite(
+                              surah.number,
+                            );
                             ref.invalidate(favoriteDownloadedSurahsProvider);
                           },
                           icon: Icon(
@@ -139,18 +145,21 @@ class DownloadedSurahsScreen extends ConsumerWidget {
                                 : Icons.star_border_rounded,
                           ),
                           label: Text(
-                            isFavorite ? 'Favorita' : 'Marcar favorita',
+                            isFavorite
+                                ? l10n.downloadedSurahsFavorite
+                                : l10n.downloadedSurahsMarkFavorite,
                           ),
                         ),
                         OutlinedButton.icon(
                           onPressed: () async {
-                            final service = ref.read(quranAudioDownloadServiceProvider);
+                            final service =
+                                ref.read(quranAudioDownloadServiceProvider);
                             await service.removeSurahDownload(surah.number);
                             ref.invalidate(downloadedSurahNumbersProvider);
                             ref.invalidate(favoriteDownloadedSurahsProvider);
                           },
                           icon: const Icon(Icons.cloud_off_outlined),
-                          label: const Text('Quitar descarga'),
+                          label: Text(l10n.downloadedSurahsRemoveDownload),
                         ),
                       ],
                     ),
@@ -167,7 +176,7 @@ class DownloadedSurahsScreen extends ConsumerWidget {
           child: Padding(
             padding: const EdgeInsets.all(24),
             child: Text(
-              'No hemos podido cargar tus descargas por ahora.',
+              l10n.downloadedSurahsLoadError,
               textAlign: TextAlign.center,
               style: GoogleFonts.dmSans(color: tokens.textSecondary),
             ),

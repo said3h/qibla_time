@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theme/app_theme.dart';
+import '../../../l10n/l10n.dart';
 import '../models/book_model.dart';
 import '../services/islamhouse_book_service.dart';
 import '../screens/islamic_books_screen.dart';
@@ -15,6 +16,7 @@ class DailyBookWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final tokens = QiblaThemes.current;
+    final l10n = context.l10n;
     final featuredAsync = ref.watch(islamHouseFeaturedBooksProvider);
 
     return featuredAsync.when(
@@ -96,7 +98,7 @@ class DailyBookWidget extends ConsumerWidget {
                         ),
                         const SizedBox(width: 6),
                         Text(
-                          'LIBRO DEL DÍA',
+                          l10n.dailyBookBadge,
                           style: GoogleFonts.dmSans(
                             fontSize: 9,
                             fontWeight: FontWeight.w700,
@@ -161,7 +163,7 @@ class DailyBookWidget extends ConsumerWidget {
                 children: [
                   _InfoChip(
                     icon: Icons.description,
-                    label: '${book.pages} págs',
+                    label: l10n.booksPageCount(book.pages),
                     accent: accentColor,
                     tokens: tokens,
                   ),
@@ -192,7 +194,7 @@ class DailyBookWidget extends ConsumerWidget {
                     child: ElevatedButton.icon(
                       onPressed: () => openBookUrl(context, book.readUrl),
                       icon: const Icon(Icons.read_more, size: 16),
-                      label: const Text('Leer'),
+                      label: Text(l10n.commonRead),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: accentColor,
                         foregroundColor: accentForeground,
@@ -472,7 +474,7 @@ class _BooksUnavailableWidget extends StatelessWidget {
           const SizedBox(width: 12),
           Expanded(
             child: Text(
-              'La biblioteca no está disponible por ahora.',
+              context.l10n.dailyBookUnavailable,
               style: GoogleFonts.dmSans(
                 fontSize: 12,
                 height: 1.5,
@@ -483,7 +485,7 @@ class _BooksUnavailableWidget extends StatelessWidget {
           const SizedBox(width: 12),
           TextButton(
             onPressed: onOpenLibrary,
-            child: const Text('Ir a libros'),
+            child: Text(context.l10n.dailyBookOpenLibrary),
           ),
         ],
       ),

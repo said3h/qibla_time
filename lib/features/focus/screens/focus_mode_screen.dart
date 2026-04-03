@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import '../../../l10n/l10n.dart';
 import '../services/focus_service.dart';
 
 const _kHoldToExitDuration = Duration(seconds: 2);
@@ -61,6 +62,7 @@ class _FocusModeScreenState extends ConsumerState<FocusModeScreen>
   @override
   Widget build(BuildContext context) {
     final focus = ref.watch(focusProvider);
+    final l10n = context.l10n;
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -79,7 +81,7 @@ class _FocusModeScreenState extends ConsumerState<FocusModeScreen>
                   ),
                   const SizedBox(width: 8),
                   Text(
-                    'RAKAHA ACTIVA - NO MOLESTAR ENCENDIDO',
+                    l10n.focusModeDndActive,
                     style: TextStyle(
                       color: Colors.white.withOpacity(0.5),
                       fontSize: 10,
@@ -96,9 +98,9 @@ class _FocusModeScreenState extends ConsumerState<FocusModeScreen>
                   size: 14,
                   color: Colors.amber,
                 ),
-                label: const Text(
-                  'Activa No Molestar en ajustes',
-                  style: TextStyle(color: Colors.amber, fontSize: 12),
+                label: Text(
+                  l10n.focusModeOpenDndSettings,
+                  style: const TextStyle(color: Colors.amber, fontSize: 12),
                 ),
               ),
             const Spacer(),
@@ -106,7 +108,7 @@ class _FocusModeScreenState extends ConsumerState<FocusModeScreen>
               child: Column(
                 children: [
                   Text(
-                    'RAKAHA',
+                    l10n.focusModeTitle,
                     style: TextStyle(
                       color: Colors.white.withOpacity(0.3),
                       fontSize: 24,
@@ -126,7 +128,7 @@ class _FocusModeScreenState extends ConsumerState<FocusModeScreen>
                   ),
                   if (focus.sujudCount > 0)
                     Text(
-                      '+ sujud',
+                      l10n.focusModeSujudCount,
                       style: TextStyle(
                         color: Colors.teal.withOpacity(0.7),
                         fontSize: 20,
@@ -136,7 +138,7 @@ class _FocusModeScreenState extends ConsumerState<FocusModeScreen>
                   if (!focus.dndActive) ...[
                     const SizedBox(height: 16),
                     Text(
-                      'SIN INTERRUPCIONES SUENA MEJOR CON NO MOLESTAR',
+                      l10n.focusModeDndHint,
                       style: TextStyle(
                         color: Colors.white.withOpacity(0.22),
                         fontSize: 10,
@@ -204,8 +206,8 @@ class _FocusModeScreenState extends ConsumerState<FocusModeScreen>
                     const SizedBox(height: 16),
                     Text(
                       _isExiting
-                          ? 'Suelta para cancelar'
-                          : 'Manten pulsado para salir',
+                          ? l10n.focusModeReleaseToCancel
+                          : l10n.focusModeHoldToExit,
                       style: TextStyle(
                         color: Colors.white.withOpacity(0.4),
                         fontSize: 14,

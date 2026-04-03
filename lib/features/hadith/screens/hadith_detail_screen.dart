@@ -433,7 +433,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
           ),
           const SizedBox(height: 10),
           Text(
-            category.isNotEmpty ? category : context.l10n.hadithDetailNoCategory,
+            _localizedCategoryLabel(category),
             style: GoogleFonts.dmSans(
               fontSize: 13,
               height: 1.6,
@@ -836,6 +836,96 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
         return 'الزهد';
       default:
         return null;
+    }
+  }
+
+  String _localizedCategoryLabel(String category) {
+    if (category.trim().isEmpty) {
+      return context.l10n.hadithDetailNoCategory;
+    }
+
+    if (Localizations.localeOf(context).languageCode != 'en') {
+      return category;
+    }
+
+    switch (category.trim().toLowerCase()) {
+      case 'adab':
+        return 'Adab';
+      case 'amor de alá':
+      case 'amor de ala':
+        return 'Love of Allah';
+      case 'autorreflexión':
+      case 'autorreflexion':
+        return 'Self-reflection';
+      case 'ayuno':
+        return 'Fasting';
+      case 'carácter':
+      case 'caracter':
+        return 'Character';
+      case 'caridad':
+        return 'Charity';
+      case 'compasión':
+      case 'compasion':
+        return 'Compassion';
+      case 'conocimiento':
+        return 'Knowledge';
+      case 'constancia':
+        return 'Consistency';
+      case 'corazón':
+      case 'corazon':
+        return 'Heart';
+      case 'dhikr':
+        return 'Dhikr';
+      case 'dua':
+        return 'Dua';
+      case 'familia':
+        return 'Family';
+      case 'fraternidad':
+        return 'Brotherhood';
+      case 'gratitud':
+        return 'Gratitude';
+      case 'haya':
+        return 'Haya';
+      case 'honestidad':
+        return 'Honesty';
+      case 'ihsan':
+        return 'Ihsan';
+      case 'intenciones':
+        return 'Intentions';
+      case 'istighfar':
+        return 'Istighfar';
+      case 'justicia':
+        return 'Justice';
+      case 'lengua':
+        return 'Tongue';
+      case 'mezquita':
+        return 'Mosque';
+      case 'misericordia':
+        return 'Mercy';
+      case 'paciencia':
+        return 'Patience';
+      case 'purificación':
+      case 'purificacion':
+        return 'Purification';
+      case 'quran':
+        return 'Quran';
+      case 'rizq':
+      case 'sustento':
+        return 'Provision';
+      case 'salah':
+        return 'Salah';
+      case 'seguridad':
+        return 'Safety';
+      case 'servicio':
+        return 'Service';
+      case 'sinceridad':
+        return 'Sincerity';
+      case 'taqwa':
+        return 'Taqwa';
+      case 'zuhd':
+        return 'Zuhd';
+      default:
+        return category;
     }
   }
 }

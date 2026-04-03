@@ -1,5 +1,7 @@
 import 'package:hijri/hijri_calendar.dart';
 
+import '../../../../l10n/l10n.dart';
+
 HijriCalendar currentHijriDate([DateTime? date]) {
   HijriCalendar.setLocal('en');
   return HijriCalendar.fromDate(date ?? DateTime.now());
@@ -46,19 +48,27 @@ class RamadanStatus {
 
   bool get isManualPreview => forced && !detectedByDate;
 
-  String get headerLabel =>
-      detectedByDate ? 'Ramadán día $hijriDay' : 'Modo Ramadán manual';
+  String get headerLabel {
+    final l10n = appLocalizationsForCurrentLocale();
+    return detectedByDate
+        ? l10n.ramadanStatusHeaderDay(hijriDay)
+        : l10n.ramadanStatusHeaderManual;
+  }
 
-  String get blessingMessage => detectedByDate
-      ? 'Que Allah acepte tu ayuno y tus obras de hoy.'
-      : 'Vista especial de Ramadán activada manualmente para pruebas.';
+  String get blessingMessage {
+    final l10n = appLocalizationsForCurrentLocale();
+    return detectedByDate
+        ? l10n.ramadanStatusBlessingDetected
+        : l10n.ramadanStatusBlessingManual;
+  }
 
   String get dailySuggestion {
-    const suggestions = [
-      'Recuerda aumentar el dhikr hoy.',
-      'Intenta leer un poco más de Corán hoy.',
-      'Aprovecha este día para hacer dua con calma.',
-      'Una pequeña sadaqah también cuenta durante Ramadán.',
+    final l10n = appLocalizationsForCurrentLocale();
+    final suggestions = [
+      l10n.ramadanStatusSuggestionDhikr,
+      l10n.ramadanStatusSuggestionQuran,
+      l10n.ramadanStatusSuggestionDua,
+      l10n.ramadanStatusSuggestionSadaqah,
     ];
 
     final index = (hijriDay - 1).abs() % suggestions.length;
