@@ -16,9 +16,6 @@ final duaServiceProvider = Provider<DuaService>((ref) {
 });
 
 class DuaService {
-  static const _minimumExpectedDuas = 20;
-  static const _minimumExpectedCategories = 3;
-
   DuaService({String? initialLanguageCode})
       : _currentLanguage = _normalizeLanguageCode(
           initialLanguageCode ?? AppLocaleController.effectiveLanguageCode(),
@@ -27,26 +24,10 @@ class DuaService {
   List<DuaMultilenguaje>? _cache;
   String _currentLanguage;
 
-  /// Carga todas las dúas en formato multilenguaje
   Future<List<DuaMultilenguaje>> loadAllMultilenguaje() async {
     if (_cache != null) return _cache!;
 
-    try {
-      final raw = await rootBundle.loadString('assets/data/duas_multilang.json');
-      final decoded = jsonDecode(raw) as List<dynamic>;
-      final multilangDuas = decoded
-          .map((item) => DuaMultilenguaje.fromJson(item as Map<String, dynamic>))
-          .toList();
-
-      if (_isCompleteEnough(multilangDuas)) {
-        _cache = multilangDuas;
-        return _cache!;
-      }
-    } catch (_) {
-      // Si falla el archivo nuevo, hacemos fallback completo abajo.
-    }
-
-    final raw = await rootBundle.loadString('assets/data/duas_hisnul.json');
+    final raw = await rootBundle.loadString('assets/data/duas_multilang.json');
     final decoded = jsonDecode(raw) as List<dynamic>;
     _cache = decoded
         .map((item) => DuaMultilenguaje.fromJson(item as Map<String, dynamic>))
@@ -54,21 +35,21 @@ class DuaService {
     return _cache!;
   }
 
-  /// Obtiene la lista de duas en el idioma seleccionado con fallback
   Future<List<Dua>> loadAll({String? forcedLanguage}) async {
     final language = forcedLanguage ?? _currentLanguage;
     final multilangList = await loadAllMultilenguaje();
-    return multilangList.map((d) => d.getDua(language)).toList();
+    return multilangList.map((dua) => dua.getDua(language)).toList();
   }
 
-  /// Obtiene duas por categoría en el idioma actual
-  Future<List<Dua>> getByCategory(String category, {String? forcedLanguage}) async {
+  Future<List<Dua>> getByCategory(
+    String category, {
+    String? forcedLanguage,
+  }) async {
     final language = forcedLanguage ?? _currentLanguage;
     final duas = await loadAll(forcedLanguage: language);
     return duas.where((dua) => dua.category == category).toList();
   }
 
-  /// Obtiene todas las categorías disponibles
   Future<List<String>> getCategories({String? forcedLanguage}) async {
     final language = forcedLanguage ?? _currentLanguage;
     final duas = await loadAll(forcedLanguage: language);
@@ -77,26 +58,32 @@ class DuaService {
     return categories;
   }
 
-  /// Obtiene duas destacados
   Future<List<Dua>> getFeatured({String? forcedLanguage}) async {
     final language = forcedLanguage ?? _currentLanguage;
     final duas = await loadAll(forcedLanguage: language);
     return duas.where((dua) => dua.isFeatured).toList();
   }
 
-  /// Busca duas por texto
   Future<List<Dua>> search(String query, {String? forcedLanguage}) async {
     if (query.trim().isEmpty) return [];
-    
+
     final language = forcedLanguage ?? _currentLanguage;
     final duas = await loadAll(forcedLanguage: language);
     final queryLower = query.toLowerCase();
-    
-    return duas.where((d) =>
-      d.title.toLowerCase().contains(queryLower) ||
-      d.translation.toLowerCase().contains(queryLower) ||
-      d.arabicText.contains(query)
-    ).toList();
+
+    return duas.where((dua) {
+      final tagString = dua.tags?.join(' ') ?? '';
+      final reference = dua.reference ?? '';
+      final source = dua.source ?? '';
+
+      return dua.title.toLowerCase().contains(queryLower) ||
+          dua.translation.toLowerCase().contains(queryLower) ||
+          dua.transliteration.toLowerCase().contains(queryLower) ||
+          reference.toLowerCase().contains(queryLower) ||
+          source.toLowerCase().contains(queryLower) ||
+          tagString.toLowerCase().contains(queryLower) ||
+          dua.arabicText.contains(query);
+    }).toList();
   }
 
   void setCurrentLanguage(String languageCode) {
@@ -110,27 +97,8 @@ class DuaService {
       _ => 'es',
     };
   }
-
-  bool _isCompleteEnough(List<DuaMultilenguaje> duas) {
-    if (duas.length < _minimumExpectedDuas) {
-      return false;
-    }
-
-    final categories = <String>{};
-    for (final dua in duas) {
-      for (final translation in dua.translations.values) {
-        final category = translation.category.trim();
-        if (category.isNotEmpty) {
-          categories.add(category);
-        }
-      }
-    }
-
-    return categories.length >= _minimumExpectedCategories;
-  }
 }
 
-// Providers que automáticamente usan el idioma actual
 final allDuasProvider = FutureProvider<List<Dua>>((ref) async {
   final language = ref.watch(currentLanguageCodeProvider);
   return ref.watch(duaServiceProvider).loadAll(forcedLanguage: language);
@@ -141,7 +109,13 @@ final duaCategoriesProvider = FutureProvider<List<String>>((ref) async {
   return ref.watch(duaServiceProvider).getCategories(forcedLanguage: language);
 });
 
-final duaByCategoryProvider = FutureProvider.family<List<Dua>, String>((ref, category) async {
+final duaByCategoryProvider = FutureProvider.family<List<Dua>, String>((
+  ref,
+  category,
+) async {
   final language = ref.watch(currentLanguageCodeProvider);
-  return ref.watch(duaServiceProvider).getByCategory(category, forcedLanguage: language);
+  return ref.watch(duaServiceProvider).getByCategory(
+    category,
+    forcedLanguage: language,
+  );
 });

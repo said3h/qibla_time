@@ -44,7 +44,6 @@ class Dua {
     );
   }
 
-  /// Creates a new Dua with a different translation
   Dua copyWithTranslation(String newTranslation) {
     return Dua(
       id: id,
@@ -66,21 +65,47 @@ class Dua {
 class DuaMultilenguaje {
   final String id;
   final Map<String, DuaTranslation> translations;
+  final String canonicalCategory;
 
   const DuaMultilenguaje({
     required this.id,
     required this.translations,
+    required this.canonicalCategory,
   });
 
   factory DuaMultilenguaje.fromJson(Map<String, dynamic> json) {
     final translations = <String, DuaTranslation>{};
     final translationsJson = json['translations'] as Map<String, dynamic>? ?? {};
-    
+    final sharedArabicText = json['arabicText'] as String? ?? '';
+    final sharedTransliteration = json['transliteration'] as String? ?? '';
+    final sharedReference = json['reference'] as String?;
+    final sharedSource = json['source'] as String?;
+    final sharedCount = (json['count'] as num?)?.toInt();
+    final sharedTags = (json['tags'] as List<dynamic>?)?.cast<String>();
+    final sharedTimes = (json['times'] as List<dynamic>?)?.cast<String>();
+
     translationsJson.forEach((langCode, data) {
-      translations[langCode] = DuaTranslation.fromJson(data as Map<String, dynamic>);
+      final merged = Map<String, dynamic>.from(data as Map<String, dynamic>);
+      merged.putIfAbsent('arabicText', () => sharedArabicText);
+      merged.putIfAbsent('transliteration', () => sharedTransliteration);
+      if (sharedReference != null) {
+        merged.putIfAbsent('reference', () => sharedReference);
+      }
+      if (sharedSource != null) {
+        merged.putIfAbsent('source', () => sharedSource);
+      }
+      if (sharedCount != null) {
+        merged.putIfAbsent('count', () => sharedCount);
+      }
+      if (sharedTags != null) {
+        merged.putIfAbsent('tags', () => sharedTags);
+      }
+      if (sharedTimes != null) {
+        merged.putIfAbsent('times', () => sharedTimes);
+      }
+      translations[langCode] = DuaTranslation.fromJson(merged);
     });
 
-    // Fallback legacy support: if old format exists
     if (translations.isEmpty && json['arabicText'] != null) {
       translations['es'] = DuaTranslation(
         title: json['title'] as String? ?? '',
@@ -100,14 +125,17 @@ class DuaMultilenguaje {
     return DuaMultilenguaje(
       id: json['id'] as String,
       translations: translations,
+      canonicalCategory: _resolveCanonicalCategory(translations),
     );
   }
 
   Dua toDua(String languageCode, {String fallbackLanguage = 'es'}) {
     final translation = translations[languageCode] ?? translations[fallbackLanguage];
-    
+
     if (translation == null) {
-      throw Exception('No se encontró traducción para el dua $id en $languageCode ni en fallback $fallbackLanguage');
+      throw Exception(
+        'No translation found for dua $id in $languageCode or fallback $fallbackLanguage',
+      );
     }
 
     return Dua(
@@ -116,7 +144,7 @@ class DuaMultilenguaje {
       arabicText: translation.arabicText,
       transliteration: translation.transliteration,
       translation: translation.translation,
-      category: translation.category,
+      category: canonicalCategory,
       reference: translation.reference,
       isFeatured: translation.isFeatured,
       source: translation.source,
@@ -126,23 +154,22 @@ class DuaMultilenguaje {
     );
   }
 
-  /// Gets the dua with fallback strategy
   Dua getDua(String languageCode, {String fallbackLanguage = 'es'}) {
     final translation = translations[languageCode] ?? translations[fallbackLanguage];
-    
+
     if (translation == null) {
-      // Return first available translation or throw
       final firstEntry = translations.values.firstOrNull;
       if (firstEntry == null) {
-        throw Exception('Dua $id sin traducciones disponibles');
+        throw Exception('Dua $id has no translations available');
       }
+
       return Dua(
         id: id,
         title: firstEntry.title,
         arabicText: firstEntry.arabicText,
         transliteration: firstEntry.transliteration,
         translation: firstEntry.translation,
-        category: firstEntry.category,
+        category: canonicalCategory,
         reference: firstEntry.reference,
         isFeatured: firstEntry.isFeatured,
         source: firstEntry.source,
@@ -158,7 +185,7 @@ class DuaMultilenguaje {
       arabicText: translation.arabicText,
       transliteration: translation.transliteration,
       translation: translation.translation,
-      category: translation.category,
+      category: canonicalCategory,
       reference: translation.reference,
       isFeatured: translation.isFeatured,
       source: translation.source,
@@ -169,6 +196,44 @@ class DuaMultilenguaje {
   }
 
   bool hasLanguage(String languageCode) => translations.containsKey(languageCode);
+
+  static String _resolveCanonicalCategory(
+    Map<String, DuaTranslation> translations,
+  ) {
+    final preferredCategory = translations['es']?.category ??
+        translations['en']?.category ??
+        translations.values.firstOrNull?.category ??
+        '';
+    final normalized = preferredCategory.trim().toLowerCase();
+
+    return switch (normalized) {
+      'morning' => 'morning',
+      'night' => 'night',
+      'sleep' => 'sleep',
+      'wudu' => 'wudu',
+      'ablution' => 'wudu',
+      'after_prayer' => 'after_prayer',
+      'after prayer' => 'after_prayer',
+      'zikr' => 'zikr',
+      'dhikr' => 'zikr',
+      'travel' => 'travel',
+      'food' => 'food',
+      'sickness' => 'sickness',
+      'illness' => 'sickness',
+      'protection' => 'protection',
+      'repentance' => 'repentance',
+      'mosque' => 'mosque',
+      'rain' => 'rain',
+      'stress' => 'stress',
+      'hardship' => 'stress',
+      'gratitude' => 'gratitude',
+      'parents' => 'parents',
+      'family' => 'parents',
+      'hajj' => 'hajj',
+      'hajj & umrah' => 'hajj',
+      _ => normalized,
+    };
+  }
 }
 
 class DuaTranslation {
