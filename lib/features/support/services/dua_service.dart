@@ -16,6 +16,9 @@ final duaServiceProvider = Provider<DuaService>((ref) {
 });
 
 class DuaService {
+  static const _minimumExpectedDuas = 20;
+  static const _minimumExpectedCategories = 3;
+
   DuaService({String? initialLanguageCode})
       : _currentLanguage = _normalizeLanguageCode(
           initialLanguageCode ?? AppLocaleController.effectiveLanguageCode(),
@@ -29,22 +32,26 @@ class DuaService {
     if (_cache != null) return _cache!;
 
     try {
-      // Intentar cargar el archivo nuevo multilenguaje
       final raw = await rootBundle.loadString('assets/data/duas_multilang.json');
       final decoded = jsonDecode(raw) as List<dynamic>;
-      _cache = decoded
+      final multilangDuas = decoded
           .map((item) => DuaMultilenguaje.fromJson(item as Map<String, dynamic>))
           .toList();
-      return _cache!;
-    } catch (e) {
-      // Fallback al archivo antiguo
-      final raw = await rootBundle.loadString('assets/data/duas_hisnul.json');
-      final decoded = jsonDecode(raw) as List<dynamic>;
-      _cache = decoded
-          .map((item) => DuaMultilenguaje.fromJson(item as Map<String, dynamic>))
-          .toList();
-      return _cache!;
+
+      if (_isCompleteEnough(multilangDuas)) {
+        _cache = multilangDuas;
+        return _cache!;
+      }
+    } catch (_) {
+      // Si falla el archivo nuevo, hacemos fallback completo abajo.
     }
+
+    final raw = await rootBundle.loadString('assets/data/duas_hisnul.json');
+    final decoded = jsonDecode(raw) as List<dynamic>;
+    _cache = decoded
+        .map((item) => DuaMultilenguaje.fromJson(item as Map<String, dynamic>))
+        .toList();
+    return _cache!;
   }
 
   /// Obtiene la lista de duas en el idioma seleccionado con fallback
@@ -102,6 +109,24 @@ class DuaService {
       'en' => 'en',
       _ => 'es',
     };
+  }
+
+  bool _isCompleteEnough(List<DuaMultilenguaje> duas) {
+    if (duas.length < _minimumExpectedDuas) {
+      return false;
+    }
+
+    final categories = <String>{};
+    for (final dua in duas) {
+      for (final translation in dua.translations.values) {
+        final category = translation.category.trim();
+        if (category.isNotEmpty) {
+          categories.add(category);
+        }
+      }
+    }
+
+    return categories.length >= _minimumExpectedCategories;
   }
 }
 
