@@ -8,15 +8,23 @@
 // El usuario nunca ve un error — siempre ve contenido.
 
 import 'dart:convert';
+
 import 'package:flutter/services.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:http/http.dart' as http;
+
+import '../../../core/localization/locale_controller.dart';
 import '../models/quran_models.dart';
 
 // ── Providers ──────────────────────────────────────────────────
 
 final quranServiceProvider = Provider<QuranService>((ref) {
-  return QuranService();
+  final language = ref.watch(currentLanguageCodeProvider);
+  final service = QuranService(initialLanguageCode: language);
+  ref.listen<String>(currentLanguageCodeProvider, (_, next) {
+    service.setCurrentLanguage(next);
+  });
+  return service;
 });
 
 final quranSurahsProvider = Provider<List<SurahSummary>>((ref) {
@@ -25,7 +33,7 @@ final quranSurahsProvider = Provider<List<SurahSummary>>((ref) {
 
 final surahDetailProvider = FutureProvider.family<SurahDetail, SurahSummary>(
   (ref, summary) async {
-    final service = ref.read(quranServiceProvider);
+    final service = ref.watch(quranServiceProvider);
     return (await service.getSurahDetail(summary)).detail;
   },
 );
@@ -33,7 +41,7 @@ final surahDetailProvider = FutureProvider.family<SurahDetail, SurahSummary>(
 final surahLoadResultProvider =
     FutureProvider.family<SurahLoadResult, SurahSummary>(
   (ref, summary) async {
-    final service = ref.read(quranServiceProvider);
+    final service = ref.watch(quranServiceProvider);
     return service.getSurahDetail(summary);
   },
 );
@@ -41,36 +49,54 @@ final surahLoadResultProvider =
 // ── Servicio ───────────────────────────────────────────────────
 
 class QuranService {
+  QuranService({String? initialLanguageCode})
+      : _currentLanguage = _normalizeLanguageCode(
+          initialLanguageCode ?? AppLocaleController.effectiveLanguageCode(),
+        );
+
   static const _baseUrl = 'https://api.alquran.cloud/v1';
   static const _timeoutSeconds = 8;
 
   // Cache en memoria para no releer el JSON en cada petición
   static Map<int, SurahDetail>? _offlineCache;
+  String _currentLanguage;
 
   // ── Obtener detalle de una sura ─────────────────────────────
 
   Future<SurahLoadResult> getSurahDetail(SurahSummary summary) async {
     try {
       return SurahLoadResult(
-        detail: await _fetchFromApi(summary),
+        detail: await _fetchFromApi(
+          summary,
+          languageCode: _currentLanguage,
+        ),
         source: SurahLoadSource.online,
       );
     } catch (_) {
       // API falló → fallback al JSON local
-      return _fetchFromLocal(summary.number);
+      return _fetchFromLocal(
+        summary.number,
+        languageCode: _currentLanguage,
+      );
     }
   }
 
   // ── API online ──────────────────────────────────────────────
 
-  Future<SurahDetail> _fetchFromApi(SurahSummary summary) async {
-    // Petición paralela: árabe + español (García con tildes) + transliteración
+  Future<SurahDetail> _fetchFromApi(
+    SurahSummary summary, {
+    required String languageCode,
+  }) async {
+    final normalizedLanguage = _normalizeLanguageCode(languageCode);
+    final translationEdition = _translationEditionFor(normalizedLanguage);
+
+    // Petición paralela: árabe + traducción según idioma + transliteración
     final responses = await Future.wait([
       http.get(
         Uri.parse('$_baseUrl/surah/${summary.number}/ar.alafasy'),
       ).timeout(const Duration(seconds: _timeoutSeconds)),
       http.get(
-        Uri.parse('$_baseUrl/surah/${summary.number}/es.garcia'),
+        Uri.parse('$_baseUrl/surah/${summary.number}/$translationEdition'),
       ).timeout(const Duration(seconds: _timeoutSeconds)),
       http.get(
         Uri.parse('$_baseUrl/surah/${summary.number}/en.transliteration'),
@@ -85,9 +111,9 @@ class QuranService {
       responses[0].body,
       context: 'árabe',
     );
-    final spanishData = _decodeApiData(
+    final translationData = _decodeApiData(
       responses[1].body,
-      context: 'español',
+      context: 'traducción',
     );
     final translitData = _decodeApiData(
       responses[2].body,
@@ -99,9 +125,9 @@ class QuranService {
       context: 'árabe',
       required: true,
     );
-    final spanishAyahs = _decodeAyahs(
-      spanishData,
-      context: 'español',
+    final translationAyahs = _decodeAyahs(
+      translationData,
+      context: 'traducción',
     );
     final translitAyahs = _decodeAyahs(
       translitData,
@@ -131,8 +157,8 @@ class QuranService {
         transliteration: i < translitAyahs.length
             ? _readOptionalString(translitAyahs[i], 'text')
             : '',
-        translation: i < spanishAyahs.length
-            ? _readOptionalString(spanishAyahs[i], 'text')
+        translation: i < translationAyahs.length
+            ? _readOptionalString(translationAyahs[i], 'text')
             : '',
         audioUrl: 'https://cdn.islamic.network/quran/audio/128/ar.alafasy/'
             '$ayahNumber.mp3',
@@ -144,7 +170,10 @@ class QuranService {
 
   // ── JSON local (fallback) ───────────────────────────────────
 
-  Future<SurahLoadResult> _fetchFromLocal(int surahNumber) async {
+  Future<SurahLoadResult> _fetchFromLocal(
+    int surahNumber, {
+    required String languageCode,
+  }) async {
     // Cargar y cachear el JSON completo la primera vez
     if (_offlineCache == null) {
       await _loadOfflineCache();
@@ -172,7 +201,7 @@ class QuranService {
             numberInSurah: 0,
             arabic: 'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ',
             transliteration: 'Bismi llahi r-rahmani r-rahim',
-            translation: 'Contenido no disponible sin conexión a internet.',
+            translation: _offlinePlaceholderTranslation(languageCode),
             audioUrl: '',
           ),
         ],
@@ -395,6 +424,34 @@ class QuranService {
     final text = value?.toString().trim();
     if (text == null || text.isEmpty) return null;
     return text;
+  }
+
+  void setCurrentLanguage(String languageCode) {
+    _currentLanguage = _normalizeLanguageCode(languageCode);
+  }
+
+  static String _normalizeLanguageCode(String languageCode) {
+    return switch (languageCode) {
+      'ar' => 'ar',
+      'en' => 'en',
+      _ => 'es',
+    };
+  }
+
+  static String _translationEditionFor(String languageCode) {
+    return switch (languageCode) {
+      'ar' => 'ar.muyassar',
+      'en' => 'en.sahih',
+      _ => 'es.garcia',
+    };
+  }
+
+  static String _offlinePlaceholderTranslation(String languageCode) {
+    return switch (_normalizeLanguageCode(languageCode)) {
+      'ar' => 'المحتوى غير متاح دون اتصال بالإنترنت.',
+      'en' => 'Content is unavailable without an internet connection.',
+      _ => 'Contenido no disponible sin conexión a internet.',
+    };
   }
 
   static List<SurahSummary> get allSurahs => [

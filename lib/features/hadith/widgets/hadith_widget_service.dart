@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:home_widget/home_widget.dart';
 
+import '../models/hadith.dart';
 import '../services/hadith_service.dart';
 
 /// Servicio para sincronizar el hadiz del día con el widget de Home Screen
@@ -32,25 +33,32 @@ class HadithWidgetService {
   /// Obtiene el snapshot del hadiz del día para el widget
   static Future<HadithSnapshot?> getDailyHadithSnapshot(
     HadithService hadithService,
+    String? languageCode,
   ) async {
     try {
-      final hadith = await hadithService.getHadithOfDay();
+      final hadith = await hadithService.getHadithOfDay(
+        forcedLanguage: languageCode,
+      );
       if (hadith == null) return null;
 
-      return HadithSnapshot(
-        arabic: hadith.arabic.length > 150
-            ? hadith.arabic.substring(0, 147) + '...'
-            : hadith.arabic,
-        translation: hadith.translation.length > 200
-            ? hadith.translation.substring(0, 197) + '...'
-            : hadith.translation,
-        reference: _shortenReference(hadith.reference),
-        grade: hadith.grade,
-        collection: _extractCollection(hadith.reference),
-      );
+      return snapshotFromHadith(hadith);
     } catch (_) {
       return null;
     }
+  }
+
+  static HadithSnapshot snapshotFromHadith(Hadith hadith) {
+    return HadithSnapshot(
+      arabic: hadith.arabic.length > 150
+          ? hadith.arabic.substring(0, 147) + '...'
+          : hadith.arabic,
+      translation: hadith.translation.length > 200
+          ? hadith.translation.substring(0, 197) + '...'
+          : hadith.translation,
+      reference: _shortenReference(hadith.reference),
+      grade: hadith.grade,
+      collection: _extractCollection(hadith.reference),
+    );
   }
 
   static String _shortenReference(String reference) {
@@ -97,6 +105,10 @@ final hadithWidgetServiceProvider = Provider<HadithWidgetService>((ref) {
 
 /// Provider que obtiene el snapshot del hadiz del día
 final dailyHadithSnapshotProvider = FutureProvider<HadithSnapshot?>((ref) async {
-  final hadithService = ref.read(hadithServiceProvider);
-  return HadithWidgetService.getDailyHadithSnapshot(hadithService);
+  final hadith = await ref.watch(dailyHadithProvider.future);
+  if (hadith == null) {
+    return null;
+  }
+
+  return HadithWidgetService.snapshotFromHadith(hadith);
 });

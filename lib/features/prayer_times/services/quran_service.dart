@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
+import '../../../core/localization/locale_controller.dart';
 import '../../../l10n/l10n.dart';
 
 class QuranVerse {
@@ -84,5 +85,6 @@ class QuranVerseService {
 }
 
 final dailyVerseProvider = FutureProvider<QuranVerse>((ref) async {
-  return QuranVerseService.getDailyVerse(currentLanguageCode());
+  final language = ref.watch(currentLanguageCodeProvider);
+  return QuranVerseService.getDailyVerse(language);
 });
