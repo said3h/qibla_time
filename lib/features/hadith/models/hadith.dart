@@ -17,12 +17,13 @@ class Hadith {
 
   factory Hadith.fromJson(Map<String, dynamic> json) {
     return Hadith(
-      id: json['id'] as int,
-      arabic: json['arabic'] as String,
-      translation: json['translation'] as String,
-      reference: json['reference'] as String,
-      category: json['category'] as String,
-      grade: json['grade'] as String,
+      id: (json['id'] as num).toInt(),
+      arabic: json['arabic'] as String? ?? '',
+      translation:
+          json['translation'] as String? ?? json['text'] as String? ?? '',
+      reference: json['reference'] as String? ?? '',
+      category: json['category'] as String? ?? '',
+      grade: json['grade'] as String? ?? '',
     );
   }
 
@@ -51,9 +52,12 @@ class HadithMultilenguaje {
   factory HadithMultilenguaje.fromJson(Map<String, dynamic> json) {
     final translations = <String, HadithTranslation>{};
     final translationsJson = json['translations'] as Map<String, dynamic>? ?? {};
-    
+    final sharedArabic = json['arabic'] as String? ?? '';
+
     translationsJson.forEach((langCode, data) {
-      translations[langCode] = HadithTranslation.fromJson(data as Map<String, dynamic>);
+      final merged = Map<String, dynamic>.from(data as Map<String, dynamic>);
+      merged.putIfAbsent('arabic', () => sharedArabic);
+      translations[langCode] = HadithTranslation.fromJson(merged);
     });
 
     // Fallback legacy support: if old format exists
@@ -68,7 +72,7 @@ class HadithMultilenguaje {
     }
 
     return HadithMultilenguaje(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       translations: translations,
     );
   }
@@ -141,7 +145,8 @@ class HadithTranslation {
   factory HadithTranslation.fromJson(Map<String, dynamic> json) {
     return HadithTranslation(
       arabic: json['arabic'] as String? ?? '',
-      translation: json['translation'] as String? ?? '',
+      translation:
+          json['translation'] as String? ?? json['text'] as String? ?? '',
       category: json['category'] as String? ?? '',
       reference: json['reference'] as String? ?? '',
       grade: json['grade'] as String? ?? '',

@@ -485,6 +485,7 @@ class _FeaturedHadithCard extends StatelessWidget {
     final arabicReference = ReligiousReferenceFormatter.buildArabicReference(
       hadith.reference,
     );
+    final hasTranslation = hadith.translation.trim().isNotEmpty;
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -554,7 +555,7 @@ class _FeaturedHadithCard extends StatelessWidget {
               color: tokens.textPrimary,
             ),
           ),
-          if (!isArabicOnly) ...[
+          if (!isArabicOnly && hasTranslation) ...[
             const SizedBox(height: 10),
             Text(
               hadith.translation,
@@ -675,6 +676,7 @@ class _HadithCard extends StatelessWidget {
     final arabicReference = ReligiousReferenceFormatter.buildArabicReference(
       hadith.reference,
     );
+    final hasTranslation = hadith.translation.trim().isNotEmpty;
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(
@@ -772,7 +774,7 @@ class _HadithCard extends StatelessWidget {
                 color: tokens.textPrimary,
               ),
             ),
-            if (!isArabicOnly) ...[
+            if (!isArabicOnly && hasTranslation) ...[
               const SizedBox(height: 8),
               Text(
                 hadith.translation,

@@ -36,6 +36,7 @@ class DailyHadithWidget extends ConsumerWidget {
 
         final hadithShareService = ref.read(hadithShareServiceProvider);
         final snapshot = HadithWidgetService.snapshotFromHadith(hadith);
+        final hasTranslation = snapshot.translation.trim().isNotEmpty;
         final isFavorite =
             favoritesAsync.valueOrNull?.contains(hadith.id) ?? false;
         final arabicReference =
@@ -190,18 +191,19 @@ class DailyHadithWidget extends ConsumerWidget {
                 ),
               ),
 
-              if (!isArabicOnly) const SizedBox(height: 12),
+              if (!isArabicOnly && hasTranslation)
+                const SizedBox(height: 12),
 
               // Traducción
-              if (!isArabicOnly) ...[
+              if (!isArabicOnly && hasTranslation) ...[
                 Text(
-                snapshot.translation,
-                style: GoogleFonts.dmSans(
-                  fontSize: 12,
-                  height: 1.5,
-                  color: tokens.textPrimary,
+                  snapshot.translation,
+                  style: GoogleFonts.dmSans(
+                    fontSize: 12,
+                    height: 1.5,
+                    color: tokens.textPrimary,
+                  ),
                 ),
-              ),
               ],
 
               const SizedBox(height: 10),

@@ -52,6 +52,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
     final hadith = widget.hadith;
     final l10n = context.l10n;
     final isArabicOnly = Localizations.localeOf(context).languageCode == 'ar';
+    final hasTranslation = hadith.translation.trim().isNotEmpty;
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
@@ -112,7 +113,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
           ],
 
           // Traducción
-          if (!isArabicOnly && _showTranslation) ...[
+          if (!isArabicOnly && hasTranslation && _showTranslation) ...[
             _buildSection(
               tokens: tokens,
               title: l10n.hadithDetailTranslation,
@@ -139,7 +140,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
           const SizedBox(height: 16),
 
           // Botones de toggle
-          _buildToggleButtons(tokens, isArabicOnly),
+          _buildToggleButtons(tokens, isArabicOnly, hasTranslation),
           const SizedBox(height: 32),
         ],
       ),
@@ -536,7 +537,11 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
     );
   }
 
-  Widget _buildToggleButtons(QiblaTokens tokens, bool isArabicOnly) {
+  Widget _buildToggleButtons(
+    QiblaTokens tokens,
+    bool isArabicOnly,
+    bool hasTranslation,
+  ) {
     return Row(
       children: [
         Expanded(
@@ -557,7 +562,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
             ),
           ),
         ),
-        if (!isArabicOnly) ...[
+        if (!isArabicOnly && hasTranslation) ...[
           const SizedBox(width: 8),
           Expanded(
             child: OutlinedButton.icon(

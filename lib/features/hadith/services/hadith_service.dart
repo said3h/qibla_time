@@ -11,7 +11,8 @@ import '../../../core/services/storage_service.dart';
 import '../models/hadith.dart';
 
 class HadithService {
-  static const _minimumExpectedHadithCount = 500;
+  static const _primaryHadithAsset = 'assets/data/hadiths_multilang_v2.json';
+  static const _minimumExpectedHadithCount = 1900;
 
   HadithService({String? initialLanguageCode})
       : _currentLanguage = _normalizeLanguageCode(
@@ -28,36 +29,15 @@ class HadithService {
       return _allHadithsCache!;
     }
 
-    final fullDataset = await _tryLoadAsset(
-      'assets/hadiths/hadiths_multilang_full.json',
+    final primaryDataset = await _tryLoadAsset(
+      _primaryHadithAsset,
       minimumEntries: _minimumExpectedHadithCount,
     );
-    if (fullDataset != null) {
-      _allHadithsCache = fullDataset;
-      return _allHadithsCache!;
+    if (primaryDataset == null) {
+      throw Exception('No se pudo cargar el dataset principal de hadices');
     }
 
-    final defaultDataset = await _tryLoadAsset(
-      'assets/hadiths/hadiths_multilang.json',
-      minimumEntries: _minimumExpectedHadithCount,
-    );
-    if (defaultDataset != null) {
-      _allHadithsCache = defaultDataset;
-      return _allHadithsCache!;
-    }
-
-    final legacyDataset = await _tryLoadAsset(
-      'assets/hadiths/hadiths_complete.json',
-    );
-    if (legacyDataset != null) {
-      _allHadithsCache = legacyDataset;
-      return _allHadithsCache!;
-    }
-
-    final fallbackDataset = await _tryLoadAsset(
-      'assets/hadiths/daily_hadiths.json',
-    );
-    _allHadithsCache = fallbackDataset ?? const [];
+    _allHadithsCache = primaryDataset;
     return _allHadithsCache!;
   }
 
