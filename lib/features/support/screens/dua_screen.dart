@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../core/localization/locale_controller.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/utils/religious_reference_formatter.dart';
 import '../models/dua_model.dart';
 import '../services/dua_service.dart';
+import '../utils/dua_locale_presentation.dart';
 import '../utils/dua_share_helper.dart';
 import 'dua_category_detail_screen.dart';
 
@@ -40,112 +42,6 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
     'hajj',
   ];
 
-  static const _categoryMeta =
-      <String, ({IconData icon, String label, String hint, String arabicLabel})>{
-        'morning': (
-          icon: Icons.wb_sunny_outlined,
-          label: 'Mañana',
-          hint: 'Inicio del día',
-          arabicLabel: 'الصباح',
-        ),
-        'night': (
-          icon: Icons.nights_stay_outlined,
-          label: 'Noche',
-          hint: 'Cierre del día',
-          arabicLabel: 'المساء',
-        ),
-        'sleep': (
-          icon: Icons.bedtime_outlined,
-          label: 'Sueño',
-          hint: 'Antes de dormir',
-          arabicLabel: 'النوم',
-        ),
-        'travel': (
-          icon: Icons.connecting_airports_outlined,
-          label: 'Viaje',
-          hint: 'Salida y trayecto',
-          arabicLabel: 'السفر',
-        ),
-        'food': (
-          icon: Icons.restaurant_outlined,
-          label: 'Comida',
-          hint: 'Antes y después',
-          arabicLabel: 'الطعام',
-        ),
-        'sickness': (
-          icon: Icons.local_hospital_outlined,
-          label: 'Enfermedad',
-          hint: 'Curación y visita',
-          arabicLabel: 'المرض',
-        ),
-        'protection': (
-          icon: Icons.shield_outlined,
-          label: 'Protección',
-          hint: 'Refugio y cuidado',
-          arabicLabel: 'التحصين',
-        ),
-        'repentance': (
-          icon: Icons.refresh_outlined,
-          label: 'Arrepentimiento',
-          hint: 'Perdón y vuelta',
-          arabicLabel: 'التوبة',
-        ),
-        'mosque': (
-          icon: Icons.mosque_outlined,
-          label: 'Mezquita',
-          hint: 'Entrar y salir',
-          arabicLabel: 'المسجد',
-        ),
-        'rain': (
-          icon: Icons.water_drop_outlined,
-          label: 'Lluvia',
-          hint: 'Durante la lluvia',
-          arabicLabel: 'المطر',
-        ),
-        'stress': (
-          icon: Icons.self_improvement_outlined,
-          label: 'Dificultad',
-          hint: 'Tristeza y carga',
-          arabicLabel: 'الكرب',
-        ),
-        'gratitude': (
-          icon: Icons.favorite_border_outlined,
-          label: 'Gratitud',
-          hint: 'Agradecimiento',
-          arabicLabel: 'الشكر',
-        ),
-        'wudu': (
-          icon: Icons.water_outlined,
-          label: 'Ablución',
-          hint: 'Wudu y pureza',
-          arabicLabel: 'الوضوء',
-        ),
-        'after_prayer': (
-          icon: Icons.access_time_outlined,
-          label: 'Después de orar',
-          hint: 'Tras cada oración',
-          arabicLabel: 'بعد الصلاة',
-        ),
-        'zikr': (
-          icon: Icons.auto_awesome_outlined,
-          label: 'Dhikr',
-          hint: 'Alabanza y recuerdo',
-          arabicLabel: 'الذكر',
-        ),
-        'parents': (
-          icon: Icons.family_restroom_outlined,
-          label: 'Familia',
-          hint: 'Padres e hijos',
-          arabicLabel: 'العائلة',
-        ),
-        'hajj': (
-          icon: Icons.route_outlined,
-          label: 'Hajj y Umrah',
-          hint: 'Peregrinación',
-          arabicLabel: 'الحج',
-        ),
-      };
-
   @override
   void initState() {
     super.initState();
@@ -161,13 +57,19 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
   @override
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
+    final languageCode = ref.watch(currentLanguageCodeProvider);
     final duasAsync = ref.watch(allDuasProvider);
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
       body: SafeArea(
         child: duasAsync.when(
-          data: (duas) => _buildLoadedState(context, tokens, duas),
+          data: (duas) => _buildLoadedState(
+            context,
+            tokens,
+            duas,
+            languageCode,
+          ),
           loading: () => Center(
             child: CircularProgressIndicator(color: tokens.primary),
           ),
@@ -175,11 +77,18 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
             padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
             children: [
               Text(
-                'Dua y adhkar',
+                DuaLocalePresentation.screenTitle(languageCode),
                 style: GoogleFonts.amiri(
                   fontSize: 26,
                   color: tokens.primary,
                   fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                DuaLocalePresentation.screenSubtitle(languageCode),
+                style: GoogleFonts.dmSans(
+                  fontSize: 10,
+                  color: tokens.textSecondary,
                 ),
               ),
               const SizedBox(height: 16),
@@ -191,7 +100,7 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
                   border: Border.all(color: tokens.border),
                 ),
                 child: Text(
-                  'No hemos podido cargar el contenido de Dua.',
+                  DuaLocalePresentation.loadError(languageCode),
                   style: GoogleFonts.dmSans(
                     fontSize: 12,
                     color: tokens.textPrimary,
@@ -209,6 +118,7 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
     BuildContext context,
     QiblaTokens tokens,
     List<Dua> duas,
+    String languageCode,
   ) {
     final normalizedQuery = _searchQuery.trim().toLowerCase();
     final visibleDuas = normalizedQuery.isEmpty
@@ -230,7 +140,7 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
       padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
       children: [
         Text(
-          'Dua y adhkar',
+          DuaLocalePresentation.screenTitle(languageCode),
           style: GoogleFonts.amiri(
             fontSize: 26,
             color: tokens.primary,
@@ -238,7 +148,7 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
           ),
         ),
         Text(
-          'الادعية والاذكار',
+          DuaLocalePresentation.screenSubtitle(languageCode),
           style: GoogleFonts.dmSans(
             fontSize: 10,
             color: tokens.textSecondary,
@@ -253,7 +163,7 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
             border: Border.all(color: tokens.primaryBorder),
           ),
           child: Text(
-            'Una colección cuidada de duas y adhkar para el día a día. Toca una categoría para ver todas las duas disponibles.',
+            DuaLocalePresentation.introBody(languageCode),
             style: GoogleFonts.dmSans(
               fontSize: 12,
               height: 1.6,
@@ -270,7 +180,7 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
             color: tokens.textPrimary,
           ),
           decoration: InputDecoration(
-            hintText: 'Buscar dua o adhkar',
+            hintText: DuaLocalePresentation.searchHint(languageCode),
             hintStyle: GoogleFonts.dmSans(
               fontSize: 13,
               color: tokens.textMuted,
@@ -279,12 +189,17 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
             suffixIcon: _searchQuery.isEmpty
                 ? null
                 : IconButton(
-                    tooltip: 'Limpiar búsqueda',
+                    tooltip:
+                        DuaLocalePresentation.clearSearchTooltip(languageCode),
                     onPressed: () {
                       _searchController.clear();
                       setState(() => _searchQuery = '');
                     },
-                    icon: Icon(Icons.close, color: tokens.textSecondary, size: 18),
+                    icon: Icon(
+                      Icons.close,
+                      color: tokens.textSecondary,
+                      size: 18,
+                    ),
                   ),
             filled: true,
             fillColor: tokens.bgSurface,
@@ -319,9 +234,11 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
                   const SizedBox(width: 10),
                   Expanded(
                     child: Text(
-                      visibleDuas.isEmpty
-                          ? 'No encontramos resultados para "$_searchQuery".'
-                          : '${visibleDuas.length} resultado${visibleDuas.length == 1 ? '' : 's'} para "$_searchQuery".',
+                      DuaLocalePresentation.resultsMessage(
+                        languageCode,
+                        _searchQuery,
+                        visibleDuas.length,
+                      ),
                       style: GoogleFonts.dmSans(
                         fontSize: 11,
                         color: tokens.textPrimary,
@@ -344,7 +261,7 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Sin resultados',
+                  DuaLocalePresentation.noResultsTitle(languageCode),
                   style: GoogleFonts.dmSans(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
@@ -353,7 +270,7 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
                 ),
                 const SizedBox(height: 6),
                 Text(
-                  'Prueba con palabras como lluvia, viaje, protección, sueño o gratitud.',
+                  DuaLocalePresentation.noResultsBody(languageCode),
                   style: GoogleFonts.dmSans(
                     fontSize: 11,
                     height: 1.6,
@@ -365,7 +282,7 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
           )
         else ...[
           Text(
-            'CATEGORÍAS',
+            DuaLocalePresentation.categoriesLabel(languageCode),
             style: GoogleFonts.dmSans(
               fontSize: 9,
               letterSpacing: 1.4,
@@ -385,14 +302,14 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
             ),
             itemBuilder: (_, index) {
               final key = categoryKeys[index];
-              final meta = _categoryMeta[key] ??
-                  (
-                    icon: Icons.auto_awesome_outlined,
-                    label: key,
-                    hint: 'Categoría',
-                    arabicLabel: 'قسم',
-                  );
+              final meta = DuaLocalePresentation.categoryMetaFor(
+                key,
+                languageCode,
+              );
               final count = grouped[key]?.length ?? 0;
+              final isArabicOnly =
+                  DuaLocalePresentation.isArabicOnly(languageCode);
+              final showArabicLabel = meta.arabicLabel != meta.label;
 
               return InkWell(
                 onTap: () {
@@ -425,26 +342,37 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
                           children: [
                             Text(
                               meta.label,
-                              style: GoogleFonts.dmSans(
+                              style: isArabicOnly
+                                  ? GoogleFonts.amiri(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w700,
+                                      color: tokens.textPrimary,
+                                    )
+                                  : GoogleFonts.dmSans(
                                 fontSize: 12,
                                 color: tokens.textPrimary,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
-                            Align(
-                              alignment: Alignment.centerRight,
-                              child: Text(
-                                meta.arabicLabel,
-                                textAlign: TextAlign.right,
-                                style: GoogleFonts.amiri(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w700,
-                                  color: tokens.textSecondary,
+                            if (showArabicLabel)
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: Text(
+                                  meta.arabicLabel,
+                                  textAlign: TextAlign.right,
+                                  style: GoogleFonts.amiri(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w700,
+                                    color: tokens.textSecondary,
+                                  ),
                                 ),
                               ),
-                            ),
                             Text(
-                              '$count adhkar · ${meta.hint}',
+                              DuaLocalePresentation.categoryCountLabel(
+                                languageCode,
+                                count,
+                                meta.hint,
+                              ),
                               style: GoogleFonts.dmSans(
                                 fontSize: 10,
                                 color: tokens.textSecondary,
@@ -462,7 +390,7 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
           if (normalizedQuery.isEmpty) ...[
             const SizedBox(height: 16),
             Text(
-              'DESTACADAS',
+              DuaLocalePresentation.featuredLabel(languageCode),
               style: GoogleFonts.dmSans(
                 fontSize: 9,
                 letterSpacing: 1.4,
@@ -470,7 +398,13 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
               ),
             ),
             const SizedBox(height: 10),
-            ...featured.take(6).map((dua) => _DuaCard(dua: dua, compact: true)),
+            ...featured.take(6).map(
+                  (dua) => _DuaCard(
+                    dua: dua,
+                    compact: true,
+                    languageCode: languageCode,
+                  ),
+                ),
           ],
         ],
       ],
@@ -494,20 +428,31 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
 class _DuaCard extends StatelessWidget {
   const _DuaCard({
     required this.dua,
+    required this.languageCode,
     this.compact = false,
   });
 
   final Dua dua;
+  final String languageCode;
   final bool compact;
 
   @override
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
-    final meta = _DuasScreenState._categoryMeta[dua.category];
+    final meta = DuaLocalePresentation.categoryMetaFor(
+      dua.category,
+      languageCode,
+    );
     final arabicReference = (dua.reference ?? '').isEmpty
         ? null
         : ReligiousReferenceFormatter.buildArabicReference(dua.reference!);
-    final hasTransliteration = dua.transliteration.trim().isNotEmpty;
+    final isArabicOnly = DuaLocalePresentation.isArabicOnly(languageCode);
+    final hasArabicTitle = DuaLocalePresentation.containsArabicText(dua.title);
+    final showTitle = !isArabicOnly || hasArabicTitle;
+    final hasTransliteration =
+        !isArabicOnly && dua.transliteration.trim().isNotEmpty;
+    final hasTranslation =
+        !isArabicOnly && dua.translation.trim().isNotEmpty;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
@@ -527,15 +472,16 @@ class _DuaCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      dua.title.toUpperCase(),
-                      style: GoogleFonts.dmSans(
-                        fontSize: 10,
-                        color: tokens.primary,
-                        letterSpacing: 1.0,
-                        fontWeight: FontWeight.w600,
+                    if (showTitle)
+                      Text(
+                        isArabicOnly ? dua.title : dua.title.toUpperCase(),
+                        style: GoogleFonts.dmSans(
+                          fontSize: 10,
+                          color: tokens.primary,
+                          letterSpacing: isArabicOnly ? 0 : 1.0,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                    ),
                     if ((dua.reference ?? '').isNotEmpty) ...[
                       const SizedBox(height: 4),
                       Column(
@@ -570,23 +516,23 @@ class _DuaCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 12),
-              if (meta != null)
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 6,
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 6,
+                ),
+                decoration: BoxDecoration(
+                  color: tokens.primary.withOpacity(0.08),
+                  borderRadius: BorderRadius.circular(999),
+                  border: Border.all(
+                    color: tokens.primary.withOpacity(0.16),
                   ),
-                  decoration: BoxDecoration(
-                    color: tokens.primary.withOpacity(0.08),
-                    borderRadius: BorderRadius.circular(999),
-                    border: Border.all(
-                      color: tokens.primary.withOpacity(0.16),
-                    ),
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    if (!isArabicOnly)
                       Text(
                         meta.label,
                         style: GoogleFonts.dmSans(
@@ -595,18 +541,18 @@ class _DuaCard extends StatelessWidget {
                           color: tokens.primary,
                         ),
                       ),
-                      Text(
-                        meta.arabicLabel,
-                        textAlign: TextAlign.right,
-                        style: GoogleFonts.amiri(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w700,
-                          color: tokens.primary,
-                        ),
+                    Text(
+                      meta.arabicLabel,
+                      textAlign: TextAlign.right,
+                      style: GoogleFonts.amiri(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w700,
+                        color: tokens.primary,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
+              ),
             ],
           ),
           const SizedBox(height: 12),
@@ -631,28 +577,54 @@ class _DuaCard extends StatelessWidget {
               ),
             ),
           ],
-          const SizedBox(height: 8),
-          Text(
-            dua.translation,
-            style: GoogleFonts.dmSans(
-              fontSize: 12,
-              color: tokens.textPrimary,
-              height: 1.7,
+          if (hasTranslation) ...[
+            const SizedBox(height: 8),
+            Text(
+              dua.translation,
+              style: GoogleFonts.dmSans(
+                fontSize: 12,
+                color: tokens.textPrimary,
+                height: 1.7,
+              ),
             ),
-          ),
+          ],
           const SizedBox(height: 10),
           Row(
             children: [
-              Icon(
-                dua.isFeatured
-                    ? Icons.favorite_rounded
-                    : Icons.bookmark_border_rounded,
-                size: 18,
-                color: dua.isFeatured ? tokens.primary : tokens.textMuted,
-              ),
+              if (dua.count != null && dua.count! > 1)
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
+                  decoration: BoxDecoration(
+                    color: tokens.primaryBg,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: tokens.primaryBorder),
+                  ),
+                  child: Text(
+                    DuaLocalePresentation.repeatCountLabel(
+                      languageCode,
+                      dua.count!,
+                    ),
+                    style: GoogleFonts.dmSans(
+                      fontSize: 9,
+                      color: tokens.primary,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                )
+              else
+                Icon(
+                  dua.isFeatured
+                      ? Icons.favorite_rounded
+                      : Icons.bookmark_border_rounded,
+                  size: 18,
+                  color: dua.isFeatured ? tokens.primary : tokens.textMuted,
+                ),
               const Spacer(),
               IconButton(
-                tooltip: 'Compartir',
+                tooltip: DuaLocalePresentation.shareTooltip(languageCode),
                 onPressed: () => shareDua(context, dua),
                 visualDensity: VisualDensity.compact,
                 padding: EdgeInsets.zero,

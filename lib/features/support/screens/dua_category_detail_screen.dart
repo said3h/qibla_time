@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../core/localization/locale_controller.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/utils/religious_reference_formatter.dart';
 import '../models/dua_model.dart';
 import '../services/dua_service.dart';
+import '../utils/dua_locale_presentation.dart';
 import '../utils/dua_share_helper.dart';
 
 class DuaCategoryDetailScreen extends ConsumerStatefulWidget {
@@ -25,7 +27,8 @@ class DuaCategoryDetailScreen extends ConsumerStatefulWidget {
       _DuaCategoryDetailScreenState();
 }
 
-class _DuaCategoryDetailScreenState extends ConsumerState<DuaCategoryDetailScreen>
+class _DuaCategoryDetailScreenState
+    extends ConsumerState<DuaCategoryDetailScreen>
     with SingleTickerProviderStateMixin {
   late final AnimationController _entranceController;
   late final Animation<double> _headerOpacity;
@@ -78,7 +81,13 @@ class _DuaCategoryDetailScreenState extends ConsumerState<DuaCategoryDetailScree
   @override
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
+    final languageCode = ref.watch(currentLanguageCodeProvider);
     final duasAsync = ref.watch(allDuasProvider);
+    final categoryMeta = DuaLocalePresentation.categoryMetaFor(
+      widget.categoryKey,
+      languageCode,
+    );
+    final showArabicSubtitle = categoryMeta.arabicLabel != categoryMeta.label;
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
@@ -107,7 +116,7 @@ class _DuaCategoryDetailScreenState extends ConsumerState<DuaCategoryDetailScree
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 24),
                       child: Text(
-                        widget.categoryLabel,
+                        categoryMeta.label,
                         textAlign: TextAlign.center,
                         style: GoogleFonts.dmSerifDisplay(
                           fontSize: 26,
@@ -117,25 +126,27 @@ class _DuaCategoryDetailScreenState extends ConsumerState<DuaCategoryDetailScree
                         ),
                       ),
                     ),
-                    const SizedBox(height: 6),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: Directionality(
-                          textDirection: TextDirection.rtl,
-                          child: Text(
-                            widget.categoryArabicLabel,
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.amiri(
-                              fontSize: 18,
-                              height: 1.6,
-                              color: tokens.textSecondary,
+                    if (showArabicSubtitle) ...[
+                      const SizedBox(height: 6),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: Directionality(
+                            textDirection: TextDirection.rtl,
+                            child: Text(
+                              categoryMeta.arabicLabel,
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.amiri(
+                                fontSize: 18,
+                                height: 1.6,
+                                color: tokens.textSecondary,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
+                    ],
                     const SizedBox(height: 12),
                     Container(
                       width: 40,
@@ -175,7 +186,9 @@ class _DuaCategoryDetailScreenState extends ConsumerState<DuaCategoryDetailScree
                                 ),
                                 const SizedBox(height: 16),
                                 Text(
-                                  'No hay duas en esta categoría',
+                                  DuaLocalePresentation.emptyCategory(
+                                    languageCode,
+                                  ),
                                   style: GoogleFonts.dmSans(
                                     fontSize: 14,
                                     color: tokens.textPrimary,
@@ -192,7 +205,10 @@ class _DuaCategoryDetailScreenState extends ConsumerState<DuaCategoryDetailScree
                         itemCount: categoryDuas.length,
                         itemBuilder: (context, index) {
                           final dua = categoryDuas[index];
-                          return _DuaCard(dua: dua);
+                          return _DuaCard(
+                            dua: dua,
+                            languageCode: languageCode,
+                          );
                         },
                       );
                     },
@@ -203,7 +219,7 @@ class _DuaCategoryDetailScreenState extends ConsumerState<DuaCategoryDetailScree
                       child: Padding(
                         padding: const EdgeInsets.all(24),
                         child: Text(
-                          'Error al cargar las duas',
+                          DuaLocalePresentation.detailLoadError(languageCode),
                           style: GoogleFonts.dmSans(
                             fontSize: 14,
                             color: tokens.textPrimary,
@@ -223,9 +239,13 @@ class _DuaCategoryDetailScreenState extends ConsumerState<DuaCategoryDetailScree
 }
 
 class _DuaCard extends StatelessWidget {
-  const _DuaCard({required this.dua});
+  const _DuaCard({
+    required this.dua,
+    required this.languageCode,
+  });
 
   final Dua dua;
+  final String languageCode;
 
   @override
   Widget build(BuildContext context) {
@@ -233,7 +253,13 @@ class _DuaCard extends StatelessWidget {
     final arabicReference = (dua.reference ?? '').isEmpty
         ? null
         : ReligiousReferenceFormatter.buildArabicReference(dua.reference!);
-    final hasTransliteration = dua.transliteration.trim().isNotEmpty;
+    final isArabicOnly = DuaLocalePresentation.isArabicOnly(languageCode);
+    final hasArabicTitle = DuaLocalePresentation.containsArabicText(dua.title);
+    final showTitle = !isArabicOnly || hasArabicTitle;
+    final hasTransliteration =
+        !isArabicOnly && dua.transliteration.trim().isNotEmpty;
+    final hasTranslation =
+        !isArabicOnly && dua.translation.trim().isNotEmpty;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
@@ -253,16 +279,18 @@ class _DuaCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      dua.title.toUpperCase(),
-                      style: GoogleFonts.dmSans(
-                        fontSize: 10,
-                        color: tokens.primary,
-                        letterSpacing: 1.0,
-                        fontWeight: FontWeight.w600,
+                    if (showTitle)
+                      Text(
+                        isArabicOnly ? dua.title : dua.title.toUpperCase(),
+                        style: GoogleFonts.dmSans(
+                          fontSize: 10,
+                          color: tokens.primary,
+                          letterSpacing: isArabicOnly ? 0 : 1.0,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                    ),
-                    if ((dua.source ?? '').isNotEmpty || (dua.reference ?? '').isNotEmpty) ...[
+                    if ((dua.source ?? '').isNotEmpty ||
+                        (dua.reference ?? '').isNotEmpty) ...[
                       const SizedBox(height: 4),
                       Row(
                         children: [
@@ -341,15 +369,17 @@ class _DuaCard extends StatelessWidget {
               ),
             ),
           ],
-          const SizedBox(height: 8),
-          Text(
-            dua.translation,
-            style: GoogleFonts.dmSans(
-              fontSize: 12,
-              color: tokens.textPrimary,
-              height: 1.7,
+          if (hasTranslation) ...[
+            const SizedBox(height: 8),
+            Text(
+              dua.translation,
+              style: GoogleFonts.dmSans(
+                fontSize: 12,
+                color: tokens.textPrimary,
+                height: 1.7,
+              ),
             ),
-          ),
+          ],
           const SizedBox(height: 10),
           Row(
             children: [
@@ -365,7 +395,10 @@ class _DuaCard extends StatelessWidget {
                     border: Border.all(color: tokens.primaryBorder),
                   ),
                   child: Text(
-                    '${dua.count} veces',
+                    DuaLocalePresentation.repeatCountLabel(
+                      languageCode,
+                      dua.count!,
+                    ),
                     style: GoogleFonts.dmSans(
                       fontSize: 9,
                       color: tokens.primary,
@@ -383,7 +416,7 @@ class _DuaCard extends StatelessWidget {
                 ),
               const Spacer(),
               IconButton(
-                tooltip: 'Compartir',
+                tooltip: DuaLocalePresentation.shareTooltip(languageCode),
                 onPressed: () => shareDua(context, dua),
                 visualDensity: VisualDensity.compact,
                 padding: EdgeInsets.zero,
