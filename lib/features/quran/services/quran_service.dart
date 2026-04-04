@@ -434,6 +434,7 @@ class QuranService {
     return switch (languageCode) {
       'ar' => 'ar',
       'en' => 'en',
+      'fr' => 'fr',
       _ => 'es',
     };
   }
@@ -442,6 +443,7 @@ class QuranService {
     return switch (languageCode) {
       'ar' => 'ar.muyassar',
       'en' => 'en.sahih',
+      'fr' => 'fr.hamidullah',
       _ => 'es.garcia',
     };
   }
@@ -450,6 +452,7 @@ class QuranService {
     return switch (_normalizeLanguageCode(languageCode)) {
       'ar' => 'المحتوى غير متاح دون اتصال بالإنترنت.',
       'en' => 'Content is unavailable without an internet connection.',
+      'fr' => 'Le contenu n’est pas disponible sans connexion internet.',
       _ => 'Contenido no disponible sin conexión a internet.',
     };
   }

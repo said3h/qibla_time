@@ -135,6 +135,46 @@ class DuaLocalePresentation {
     'hajj': 'Pilgrimage',
   };
 
+  static const _categoryFrenchLabels = <String, String>{
+    'morning': 'Matin',
+    'night': 'Nuit',
+    'sleep': 'Sommeil',
+    'wudu': 'Wudu',
+    'after_prayer': 'Après la prière',
+    'zikr': 'Dhikr',
+    'travel': 'Voyage',
+    'food': 'Repas',
+    'sickness': 'Maladie',
+    'protection': 'Protection',
+    'repentance': 'Repentance',
+    'mosque': 'Mosquée',
+    'rain': 'Pluie',
+    'stress': 'Difficulté',
+    'gratitude': 'Gratitude',
+    'parents': 'Famille',
+    'hajj': 'Hajj et Omra',
+  };
+
+  static const _categoryFrenchHints = <String, String>{
+    'morning': 'Début de la journée',
+    'night': 'Fin de la journée',
+    'sleep': 'Avant de dormir',
+    'wudu': 'Wudu et pureté',
+    'after_prayer': 'Après chaque prière',
+    'zikr': 'Rappel et louange',
+    'travel': 'Départ et trajet',
+    'food': 'Avant et après le repas',
+    'sickness': 'Guérison et visite',
+    'protection': 'Refuge et protection',
+    'repentance': 'Pardon et retour',
+    'mosque': 'Entrer et sortir',
+    'rain': 'Pendant la pluie',
+    'stress': 'Tristesse et épreuve',
+    'gratitude': 'Reconnaissance',
+    'parents': 'Parents et enfants',
+    'hajj': 'Pèlerinage',
+  };
+
   static const _categoryArabicHints = <String, String>{
     'morning': 'بداية اليوم',
     'night': 'ختام اليوم',
@@ -159,6 +199,7 @@ class DuaLocalePresentation {
     return switch (languageCode) {
       'ar' => 'ar',
       'en' => 'en',
+      'fr' => 'fr',
       _ => 'es',
     };
   }
@@ -183,6 +224,12 @@ class DuaLocalePresentation {
           hint: _categoryEnglishHints[key] ?? 'Category',
           arabicLabel: arabicLabel,
         ),
+      'fr' => DuaCategoryMeta(
+          icon: icon,
+          label: _categoryFrenchLabels[key] ?? key,
+          hint: _categoryFrenchHints[key] ?? 'Catégorie',
+          arabicLabel: arabicLabel,
+        ),
       'ar' => DuaCategoryMeta(
           icon: icon,
           label: _categoryArabicLabels[key] ?? arabicLabel,
@@ -201,6 +248,7 @@ class DuaLocalePresentation {
   static String screenTitle(String languageCode) {
     return switch (normalizeLanguageCode(languageCode)) {
       'en' => 'Dua and adhkar',
+      'fr' => 'Dou‘a et adhkar',
       'ar' => 'الدعاء والأذكار',
       _ => 'Dua y adhkar',
     };
@@ -208,8 +256,10 @@ class DuaLocalePresentation {
 
   static String screenSubtitle(String languageCode) {
     return switch (normalizeLanguageCode(languageCode)) {
+      'en' => 'Daily invocations to accompany your day',
+      'fr' => 'Invocations quotidiennes pour accompagner votre journée',
       'ar' => 'مختارات يومية للذكر والدعاء',
-      _ => 'الادعية والاذكار',
+      _ => 'Invocaciones diarias para acompañar tu día',
     };
   }
 
@@ -217,6 +267,8 @@ class DuaLocalePresentation {
     return switch (normalizeLanguageCode(languageCode)) {
       'en' =>
         'A curated collection of duas and adhkar for everyday life. Tap a category to see all available duas.',
+      'fr' =>
+        'Une collection soignée de dou‘a et d’adhkar pour le quotidien. Touchez une catégorie pour voir toutes les dou‘a disponibles.',
       'ar' =>
         'مجموعة مختارة من الأدعية والأذكار لليوم والليلة. افتح أي قسم لرؤية جميع الأدعية المتاحة.',
       _ =>
@@ -227,6 +279,7 @@ class DuaLocalePresentation {
   static String searchHint(String languageCode) {
     return switch (normalizeLanguageCode(languageCode)) {
       'en' => 'Search dua or adhkar',
+      'fr' => 'Rechercher une dou‘a ou un dhikr',
       'ar' => 'ابحث عن دعاء أو ذكر',
       _ => 'Buscar dua o adhkar',
     };
@@ -235,6 +288,7 @@ class DuaLocalePresentation {
   static String clearSearchTooltip(String languageCode) {
     return switch (normalizeLanguageCode(languageCode)) {
       'en' => 'Clear search',
+      'fr' => 'Effacer la recherche',
       'ar' => 'مسح البحث',
       _ => 'Limpiar búsqueda',
     };
@@ -249,6 +303,7 @@ class DuaLocalePresentation {
     if (count == 0) {
       return switch (normalized) {
         'en' => 'No results found for "$query".',
+        'fr' => 'Aucun résultat pour "$query".',
         'ar' => 'لم نجد نتائج لعبارة "$query".',
         _ => 'No encontramos resultados para "$query".',
       };
@@ -256,6 +311,7 @@ class DuaLocalePresentation {
 
     return switch (normalized) {
       'en' => '$count result${count == 1 ? '' : 's'} for "$query".',
+      'fr' => '$count résultat${count == 1 ? '' : 's'} pour "$query".',
       'ar' => '$count نتيجة لعبارة "$query".',
       _ => '$count resultado${count == 1 ? '' : 's'} para "$query".',
     };
@@ -264,6 +320,7 @@ class DuaLocalePresentation {
   static String noResultsTitle(String languageCode) {
     return switch (normalizeLanguageCode(languageCode)) {
       'en' => 'No results',
+      'fr' => 'Aucun résultat',
       'ar' => 'لا توجد نتائج',
       _ => 'Sin resultados',
     };
@@ -273,6 +330,8 @@ class DuaLocalePresentation {
     return switch (normalizeLanguageCode(languageCode)) {
       'en' =>
         'Try words like rain, travel, protection, sleep or gratitude.',
+      'fr' =>
+        'Essayez des mots comme pluie, voyage, protection, sommeil ou gratitude.',
       'ar' =>
         'جرّب كلمات مثل المطر أو السفر أو التحصين أو النوم أو الشكر.',
       _ =>
@@ -283,6 +342,7 @@ class DuaLocalePresentation {
   static String categoriesLabel(String languageCode) {
     return switch (normalizeLanguageCode(languageCode)) {
       'en' => 'CATEGORIES',
+      'fr' => 'CATÉGORIES',
       'ar' => 'الأقسام',
       _ => 'CATEGORÍAS',
     };
@@ -291,6 +351,7 @@ class DuaLocalePresentation {
   static String featuredLabel(String languageCode) {
     return switch (normalizeLanguageCode(languageCode)) {
       'en' => 'FEATURED',
+      'fr' => 'À LA UNE',
       'ar' => 'مختارات',
       _ => 'DESTACADAS',
     };
@@ -303,6 +364,7 @@ class DuaLocalePresentation {
   ) {
     return switch (normalizeLanguageCode(languageCode)) {
       'en' => '$count adhkar · $hint',
+      'fr' => '$count adhkar · $hint',
       'ar' => '$count ذكر · $hint',
       _ => '$count adhkar · $hint',
     };
@@ -311,6 +373,7 @@ class DuaLocalePresentation {
   static String loadError(String languageCode) {
     return switch (normalizeLanguageCode(languageCode)) {
       'en' => 'We could not load the dua content.',
+      'fr' => 'Nous n’avons pas pu charger le contenu des dou‘a.',
       'ar' => 'تعذر علينا تحميل محتوى الدعاء.',
       _ => 'No hemos podido cargar el contenido de Dua.',
     };
@@ -319,6 +382,7 @@ class DuaLocalePresentation {
   static String emptyCategory(String languageCode) {
     return switch (normalizeLanguageCode(languageCode)) {
       'en' => 'There are no duas in this category.',
+      'fr' => 'Il n’y a aucune dou‘a dans cette catégorie.',
       'ar' => 'لا توجد أدعية في هذا القسم.',
       _ => 'No hay duas en esta categoría',
     };
@@ -327,6 +391,7 @@ class DuaLocalePresentation {
   static String detailLoadError(String languageCode) {
     return switch (normalizeLanguageCode(languageCode)) {
       'en' => 'Error loading duas.',
+      'fr' => 'Erreur lors du chargement des dou‘a.',
       'ar' => 'حدث خطأ أثناء تحميل الأدعية.',
       _ => 'Error al cargar las duas',
     };
@@ -335,6 +400,7 @@ class DuaLocalePresentation {
   static String repeatCountLabel(String languageCode, int count) {
     return switch (normalizeLanguageCode(languageCode)) {
       'en' => '$count times',
+      'fr' => '$count fois',
       'ar' => '$count مرات',
       _ => '$count veces',
     };
@@ -343,6 +409,7 @@ class DuaLocalePresentation {
   static String shareTooltip(String languageCode) {
     return switch (normalizeLanguageCode(languageCode)) {
       'en' => 'Share',
+      'fr' => 'Partager',
       'ar' => 'مشاركة',
       _ => 'Compartir',
     };

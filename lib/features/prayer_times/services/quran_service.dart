@@ -71,6 +71,7 @@ class QuranVerseService {
     return switch (languageCode) {
       'ar' => 'ar',
       'en' => 'en',
+      'fr' => 'fr',
       _ => 'es',
     };
   }
@@ -79,6 +80,7 @@ class QuranVerseService {
     return switch (languageCode) {
       'ar' => 'ar.muyassar',
       'en' => 'en.sahih',
+      'fr' => 'fr.hamidullah',
       _ => 'es.garcia',
     };
   }

@@ -12,11 +12,12 @@ class AllahNamesService {
   Future<List<AllahName>> loadAll(String languageCode) async {
     final names = await _loadMultilang();
     final normalizedLanguage = _normalizeLanguageCode(languageCode);
+    final fallbackLanguage = _fallbackContentLanguage(normalizedLanguage);
     return names
         .map(
           (name) => name.getName(
             normalizedLanguage,
-            fallbackLanguage: 'es',
+            fallbackLanguage: fallbackLanguage,
           ),
         )
         .toList();
@@ -43,6 +44,14 @@ class AllahNamesService {
     return switch (languageCode) {
       'ar' => 'ar',
       'en' => 'en',
+      'fr' => 'fr',
+      _ => 'es',
+    };
+  }
+
+  static String _fallbackContentLanguage(String languageCode) {
+    return switch (_normalizeLanguageCode(languageCode)) {
+      'fr' => 'en',
       _ => 'es',
     };
   }

@@ -43,8 +43,16 @@ class HadithService {
 
   Future<List<Hadith>> loadAll({String? forcedLanguage}) async {
     final language = forcedLanguage ?? _currentLanguage;
+    final fallbackLanguage = _fallbackContentLanguage(language);
     final multilangList = await loadAllMultilenguaje();
-    return multilangList.map((hadith) => hadith.getHadith(language)).toList();
+    return multilangList
+        .map(
+          (hadith) => hadith.getHadith(
+            language,
+            fallbackLanguage: fallbackLanguage,
+          ),
+        )
+        .toList();
   }
 
   Future<Hadith?> getHadithOfDay({String? forcedLanguage}) async {
@@ -221,6 +229,14 @@ class HadithService {
     return switch (languageCode) {
       'ar' => 'ar',
       'en' => 'en',
+      'fr' => 'fr',
+      _ => 'es',
+    };
+  }
+
+  static String _fallbackContentLanguage(String languageCode) {
+    return switch (_normalizeLanguageCode(languageCode)) {
+      'fr' => 'en',
       _ => 'es',
     };
   }

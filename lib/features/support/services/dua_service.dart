@@ -37,8 +37,16 @@ class DuaService {
 
   Future<List<Dua>> loadAll({String? forcedLanguage}) async {
     final language = forcedLanguage ?? _currentLanguage;
+    final fallbackLanguage = _fallbackContentLanguage(language);
     final multilangList = await loadAllMultilenguaje();
-    return multilangList.map((dua) => dua.getDua(language)).toList();
+    return multilangList
+        .map(
+          (dua) => dua.getDua(
+            language,
+            fallbackLanguage: fallbackLanguage,
+          ),
+        )
+        .toList();
   }
 
   Future<List<Dua>> getByCategory(
@@ -94,6 +102,14 @@ class DuaService {
     return switch (languageCode) {
       'ar' => 'ar',
       'en' => 'en',
+      'fr' => 'fr',
+      _ => 'es',
+    };
+  }
+
+  static String _fallbackContentLanguage(String languageCode) {
+    return switch (_normalizeLanguageCode(languageCode)) {
+      'fr' => 'en',
       _ => 'es',
     };
   }
