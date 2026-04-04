@@ -56,7 +56,12 @@ class HadithMultilenguaje {
 
     translationsJson.forEach((langCode, data) {
       final merged = Map<String, dynamic>.from(data as Map<String, dynamic>);
-      merged.putIfAbsent('arabic', () => sharedArabic);
+      final localizedArabic = (merged['arabic'] as String? ?? '').trim();
+      if (localizedArabic.isEmpty && sharedArabic.trim().isNotEmpty) {
+        merged['arabic'] = sharedArabic;
+      } else {
+        merged.putIfAbsent('arabic', () => sharedArabic);
+      }
       translations[langCode] = HadithTranslation.fromJson(merged);
     });
 
