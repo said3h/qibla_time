@@ -47,7 +47,7 @@
       },
       "ar": {
         "title": "بداية اليوم",
-        "translation": "",
+        "translation": "أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ",
         "category": "الصباح",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 3186, Muslim 2723",
@@ -129,7 +129,7 @@
       },
       "ar": {
         "title": "عند الاستيقاظ من النوم",
-        "translation": "",
+        "translation": "الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ",
         "category": "الصباح",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 6312",
@@ -213,7 +213,7 @@
       },
       "ar": {
         "title": "حماية الصباح",
-        "translation": "",
+        "translation": "أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ",
         "category": "الصباح",
         "source": "Hisnul Muslim",
         "reference": "Muslim 2709",
@@ -299,7 +299,7 @@
       },
       "ar": {
         "title": "عند الخروج من البيت صباحًا",
-        "translation": "",
+        "translation": "بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ لاَ حَوْلَ وَلاَ قُوَّةَ إِلاَّ بِاللَّهِ",
         "category": "الصباح",
         "source": "Hisnul Muslim",
         "reference": "Abu Dawud 5095",
@@ -383,7 +383,7 @@
       },
       "ar": {
         "title": "عند ارتداء الثياب",
-        "translation": "",
+        "translation": "الْحَمْدُ لِلَّهِ الَّذِي كَسَانِي هَذَا وَرَزَقَنِيهِ مِنْ غَيْرِ حَوْلٍ مِنِّي وَلاَ قُوَّةٍ",
         "category": "الصباح",
         "source": "Hisnul Muslim",
         "reference": "Abu Dawud 4023",
@@ -465,7 +465,7 @@
       },
       "ar": {
         "title": "عند دخول الخلاء",
-        "translation": "",
+        "translation": "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ",
         "category": "الصباح",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 6322",
@@ -544,7 +544,7 @@
       },
       "ar": {
         "title": "عند الخروج من الخلاء",
-        "translation": "",
+        "translation": "غُفْرَانَكَ",
         "category": "الصباح",
         "source": "Hisnul Muslim",
         "reference": "Abu Dawud 30",
@@ -624,7 +624,7 @@
       },
       "ar": {
         "title": "بداية الليل",
-        "translation": "",
+        "translation": "أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ",
         "category": "المساء",
         "source": "Hisnul Muslim",
         "reference": "Muslim 2723",
@@ -708,7 +708,7 @@
       },
       "ar": {
         "title": "التوكل على الله عند النوم",
-        "translation": "",
+        "translation": "حَسْبِيَ اللَّهُ لاَ إِلَهَ إِلاَّ هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ",
         "category": "المساء",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 3193, At-Tirmidhi 3394",
@@ -794,7 +794,7 @@
       },
       "ar": {
         "title": "عند الاضطجاع للنوم",
-        "translation": "",
+        "translation": "اللَّهُمَّ قِنِي عَذَابَكَ يَوْمَ تَبْعَثُ عِبَادَكَ",
         "category": "المساء",
         "source": "Hisnul Muslim",
         "reference": "Abu Dawud 5045",
@@ -878,7 +878,7 @@
       },
       "ar": {
         "title": "دعاء ليلة القدر",
-        "translation": "",
+        "translation": "اللَّهُمَّ إِنَّكَ عَفُوٌّ كَرِيمٌ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي",
         "category": "المساء",
         "source": "Hisnul Muslim",
         "reference": "At-Tirmidhi 3513",
@@ -960,7 +960,7 @@
       },
       "ar": {
         "title": "قبل النوم",
-        "translation": "",
+        "translation": "بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا",
         "category": "النوم",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 6324",
@@ -1039,7 +1039,7 @@
       },
       "ar": {
         "title": "عند التقلب في الفراش",
-        "translation": "",
+        "translation": "لاَ إِلَهَ إِلاَّ اللَّهُ الْوَاحِدُ الْقَهَّارُ",
         "category": "النوم",
         "source": "Hisnul Muslim",
         "reference": "At-Tirmidhi 3397",
@@ -1119,7 +1119,7 @@
       },
       "ar": {
         "title": "الحماية عند النوم",
-        "translation": "",
+        "translation": "أَعُوذُ بِعِزَّةِ اللَّهِ وَقُدْرَتِهِ مِنْ شَرِّ مَا أَجِدُ",
         "category": "النوم",
         "source": "Hisnul Muslim",
         "reference": "Abu Dawud 3894",
@@ -1198,7 +1198,7 @@
       },
       "ar": {
         "title": "عند النوم في المسجد",
-        "translation": "",
+        "translation": "اللَّهُمَّ رَبَّ الْمَلَكُوتِ",
         "category": "النوم",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 6321",
@@ -1275,7 +1275,7 @@
       },
       "ar": {
         "title": "الدعاء قبل الاستيقاظ",
-        "translation": "",
+        "translation": "الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا",
         "category": "النوم",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 6312",
@@ -1355,7 +1355,7 @@
       },
       "ar": {
         "title": "عند ركوب الدابة",
-        "translation": "",
+        "translation": "سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ",
         "category": "السفر",
         "source": "Hisnul Muslim",
         "reference": "Az-Zukhruf 43:13-14",
@@ -1437,7 +1437,7 @@
       },
       "ar": {
         "title": "عند السفر",
-        "translation": "",
+        "translation": "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ وَعْثَاءِ السَّفَرِ وَكَآبَةِ الْمَنْظَرِ وَسُوءِ الْمُنْقَلَبِ",
         "category": "السفر",
         "source": "Hisnul Muslim",
         "reference": "Abu Dawud 2597",
@@ -1516,7 +1516,7 @@
       },
       "ar": {
         "title": "عند دخول البلدة",
-        "translation": "",
+        "translation": "اللَّهُمَّ بَارِكْ لَنَا فِيهِ",
         "category": "السفر",
         "source": "Hisnul Muslim",
         "reference": "Abu Dawud 3930",
@@ -1593,7 +1593,7 @@
       },
       "ar": {
         "title": "عند ركوب الطائرة",
-        "translation": "",
+        "translation": "سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ",
         "category": "السفر",
         "source": "Hisnul Muslim",
         "reference": "Az-Zukhruf 43:13",
@@ -1670,7 +1670,7 @@
       },
       "ar": {
         "title": "دعاء المسافر",
-        "translation": "",
+        "translation": "اللَّهُمَّ اجْعَلْ لَنَا مِنْهُ خَارِجًا وَمَدْخَلًا وَاجْعَلْ لَنَا مِنْهُ وَجْهًا",
         "category": "السفر",
         "source": "Hisnul Muslim",
         "reference": "Ibn As-Sunni 269",
@@ -1747,7 +1747,7 @@
       },
       "ar": {
         "title": "قبل الطعام",
-        "translation": "",
+        "translation": "بِسْمِ اللَّهِ",
         "category": "الطعام",
         "source": "Hisnul Muslim",
         "reference": "At-Tirmidhi 1858",
@@ -1827,7 +1827,7 @@
       },
       "ar": {
         "title": "بعد الطعام",
-        "translation": "",
+        "translation": "الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنِي هَذَا وَرَزَقَنِيهِ مِنْ غَيْرِ حَوْلٍ مِنِّي وَلاَ قُوَّةٍ",
         "category": "الطعام",
         "source": "Hisnul Muslim",
         "reference": "Abu Dawud 4023",
@@ -1906,7 +1906,7 @@
       },
       "ar": {
         "title": "عند الشرب",
-        "translation": "",
+        "translation": "الْحَمْدُ لِلَّهِ",
         "category": "الطعام",
         "source": "Hisnul Muslim",
         "reference": "At-Tirmidhi 3456",
@@ -1986,7 +1986,7 @@
       },
       "ar": {
         "title": "عند الإفطار",
-        "translation": "",
+        "translation": "اللَّهُمَّ لَكَ صُمْتُ وَبِكَ آمَنْتُ وَعَلَيْكَ تَوَكَّلْتُ وَبِرَّكَ أَفْطَرْتُ",
         "category": "الطعام",
         "source": "Hisnul Muslim",
         "reference": "Abu Dawud 2045",
@@ -2065,7 +2065,7 @@
       },
       "ar": {
         "title": "قبل الأكل في العيد",
-        "translation": "",
+        "translation": "اللَّهُمَّ أَطْعِمْ مَنْ عَفَا وَاكْسُ مَنْ عَفَا",
         "category": "الطعام",
         "source": "Hisnul Muslim",
         "reference": "At-Tirmidhi 1020",
@@ -2145,7 +2145,7 @@
       },
       "ar": {
         "title": "طلب الشفاء",
-        "translation": "",
+        "translation": "اللَّهُمَّ رَبَّ النَّاسِ أَذْهِبِ الْبَأْسَ اشْفِ أَنْتَ الشَّافِي لاَ شِفَاءَ إِلاَّ شِفَاؤُكَ",
         "category": "المرض",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 5742",
@@ -2227,7 +2227,7 @@
       },
       "ar": {
         "title": "عند زيارة المريض",
-        "translation": "",
+        "translation": "لاَ بَأْسَ طَهُورٌ إِنْ شَاءَ اللَّهُ",
         "category": "المرض",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 5662",
@@ -2306,7 +2306,7 @@
       },
       "ar": {
         "title": "دعاء المريض",
-        "translation": "",
+        "translation": "رَبِّ اشْفِهِ وَعَافِهِ",
         "category": "المرض",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 5641",
@@ -2386,7 +2386,7 @@
       },
       "ar": {
         "title": "عند الوعك",
-        "translation": "",
+        "translation": "بِسْمِ اللَّهِ أَعُوذُ بِعِزَّةِ اللَّهِ وَقُدْرَتِهِ مِنْ شَرِّ مَا أَجِدُ",
         "category": "المرض",
         "source": "Hisnul Muslim",
         "reference": "Abu Dawud 3894",
@@ -2468,7 +2468,7 @@
       },
       "ar": {
         "title": "الدعاء لوجع الرأس",
-        "translation": "",
+        "translation": "بِسْمِ اللَّهِ أَرْقيكَ مِنْ كُلِّ شَيْءٍ يُؤْذِيكَ وَمِنْ شَرِّ كُلِّ نَفْسٍ أَوْ عَيْنٍ حَاسِدٍ",
         "category": "المرض",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 5740",
@@ -2552,7 +2552,7 @@
       },
       "ar": {
         "title": "الحماية العامة",
-        "translation": "",
+        "translation": "أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ",
         "category": "التحصين",
         "source": "Hisnul Muslim",
         "reference": "Muslim 2709",
@@ -2632,7 +2632,7 @@
       },
       "ar": {
         "title": "حماية الأطفال",
-        "translation": "",
+        "translation": "أُعِيذُكُمَا بِكَلِمَاتِ اللَّهِ التَّامَّةِ مِنْ كُلِّ شَيْطَانٍ وَهَامَّةٍ وَمِنْ كُلِّ عَيْنٍ لَامَّةٍ",
         "category": "التحصين",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 3371",
@@ -2712,7 +2712,7 @@
       },
       "ar": {
         "title": "الحماية من الشر",
-        "translation": "",
+        "translation": "أَعُوذُ بِكَرَامَاتِهِ وَقُدْرَتِهِ مِنْ شَرِّ مَا يَنْزِلُ مِنْ السَّمَاءِ",
         "category": "التحصين",
         "source": "Hisnul Muslim",
         "reference": "At-Tirmidhi 3428",
@@ -2795,7 +2795,7 @@
       },
       "ar": {
         "title": "من الحسد",
-        "translation": "",
+        "translation": "بِسْمِ اللَّهِ أَعُوذُ بِكَ مِنْ شَرِّ مَا خَلَقَ",
         "category": "التحصين",
         "source": "Hisnul Muslim",
         "reference": "Muslim 2714",
@@ -2876,7 +2876,7 @@
       },
       "ar": {
         "title": "من الخواطر السيئة",
-        "translation": "",
+        "translation": "اللَّهُمَّ مُنَفِّرَ الشَّيَاطِينِ وَمُخَلِّصِ الْمُؤْمِنِينَ",
         "category": "التحصين",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 6326",
@@ -2958,7 +2958,7 @@
       },
       "ar": {
         "title": "سيد الاستغفار",
-        "translation": "",
+        "translation": "اللَّهُمَّ أَنْتَ رَبِّي لاَ إِلَهَ إِلاَّ أَنْتَ خَلَقْتَنِي وَأَنَا عَبْدُكَ وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ",
         "category": "التوبة",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 6306",
@@ -3040,7 +3040,7 @@
       },
       "ar": {
         "title": "الاستغفار البسيط",
-        "translation": "",
+        "translation": "رَبِّ اغْفِرْ لِي وَتُبْ عَلَيَّ إِنَّكَ أَنْتَ التَّوَّابُ الرَّحِيمُ",
         "category": "التوبة",
         "source": "Hisnul Muslim",
         "reference": "At-Tirmidhi 3434",
@@ -3119,7 +3119,7 @@
       },
       "ar": {
         "title": "أستغفر الله العظيم",
-        "translation": "",
+        "translation": "أَسْتَغْفِرُ اللَّهَ الْعَظِيمَ الَّذِي لَا إِلَهَ إِلاَّ هُوَ الْحَيُّ الْقَيُّومُ وَأَتُوبُ إِلَيْهِ",
         "category": "التوبة",
         "source": "Hisnul Muslim",
         "reference": "At-Tirmidhi 3577",
@@ -3196,7 +3196,7 @@
       },
       "ar": {
         "title": "دعاء التراويح",
-        "translation": "",
+        "translation": "اللَّهُمَّ إِنَّكَ عُفُوٌّ كَرِيمٌ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي",
         "category": "التوبة",
         "source": "Hisnul Muslim",
         "reference": "At-Tirmidhi 3513",
@@ -3276,7 +3276,7 @@
       },
       "ar": {
         "title": "عند دخول المسجد",
-        "translation": "",
+        "translation": "اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ",
         "category": "المسجد",
         "source": "Hisnul Muslim",
         "reference": "Muslim 713",
@@ -3355,7 +3355,7 @@
       },
       "ar": {
         "title": "عند الخروج من المسجد",
-        "translation": "",
+        "translation": "اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ",
         "category": "المسجد",
         "source": "Hisnul Muslim",
         "reference": "Muslim 713",
@@ -3435,7 +3435,7 @@
       },
       "ar": {
         "title": "عند سماع الأذان",
-        "translation": "",
+        "translation": "وَأَنَا أَشْهَدُ أَنْ لاَ إِلَهَ إِلاَّ اللَّهُ وَأَنَّ مُحَمَّدًا رَسُولُ اللَّهِ",
         "category": "المسجد",
         "source": "Hisnul Muslim",
         "reference": "Muslim 385",
@@ -3514,7 +3514,7 @@
       },
       "ar": {
         "title": "عند الدعاء في المسجد",
-        "translation": "",
+        "translation": "اللَّهُمَّ رَبَّ هَذِهِ الدَّعْوَةِ التَّامَّةِ",
         "category": "المسجد",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 720",
@@ -3591,7 +3591,7 @@
       },
       "ar": {
         "title": "صدق الله العظيم",
-        "translation": "",
+        "translation": "صَدَقَ اللَّهُ الْكَبِيرُ",
         "category": "المسجد",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 738",
@@ -3668,7 +3668,7 @@
       },
       "ar": {
         "title": "عند رؤية المطر",
-        "translation": "",
+        "translation": "اللَّهُمَّ صَيِّبًا نَافِعًا",
         "category": "المطر",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 1032",
@@ -3745,7 +3745,7 @@
       },
       "ar": {
         "title": "بعد المطر",
-        "translation": "",
+        "translation": "مُطِرْنَا بِفَضْلِ اللَّهِ وَرَحْمَتِهِ",
         "category": "المطر",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 846",
@@ -3822,7 +3822,7 @@
       },
       "ar": {
         "title": "الدعاء عند القحط",
-        "translation": "",
+        "translation": "اللَّهُمَّ اسْقِنَا غَيْثًا مُغِيثًا مَرِيئًا نَافِعًا",
         "category": "المطر",
         "source": "Hisnul Muslim",
         "reference": "Ibn Majah 2269",
@@ -3898,7 +3898,7 @@
       },
       "ar": {
         "title": "دعاء يونس",
-        "translation": "",
+        "translation": "لاَ إِلَهَ إِلاَّ أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ",
         "category": "الكرب",
         "source": "Hisnul Muslim",
         "reference": "Al-Anbiya 21:87",
@@ -3972,7 +3972,7 @@
       },
       "ar": {
         "title": "التيسير في المصاعب",
-        "translation": "",
+        "translation": "اللَّهُمَّ لاَ سَهْلَ إِلاَّ مَا جَعَلْتَهُ سَهْلاً وَأَنْتَ تَجْعَلُ الْحُزْنَ إِذَا شِئْتَ سَهْلاً",
         "category": "الكرب",
         "source": "Hisnul Muslim",
         "reference": "Ibn Hibban 2427",
@@ -4043,7 +4043,7 @@
       },
       "ar": {
         "title": "في الأوقات الصعبة",
-        "translation": "",
+        "translation": "حَسْبِيَ اللَّهُ وَكَفَى",
         "category": "الكرب",
         "source": "Hisnul Muslim",
         "reference": "Az-Zumar 39:38",
@@ -4115,7 +4115,7 @@
       },
       "ar": {
         "title": "عندما يسوء شيء",
-        "translation": "",
+        "translation": "رَبِّ إِنِّي لِمَا أَنْزَلْتَ إِلَيَّ مِنْ خَيْرٍ فَقِيرٌ",
         "category": "الكرب",
         "source": "Hisnul Muslim",
         "reference": "Al-Qasas 28:24",
@@ -4189,7 +4189,7 @@
       },
       "ar": {
         "title": "دعاء موسى",
-        "translation": "",
+        "translation": "رَبِّ إِنِّي ظَلَمْتُ نَفْسِي فَاغْفِرْ لِي",
         "category": "الكرب",
         "source": "Hisnul Muslim",
         "reference": "Al-Qasas 28:16",
@@ -4260,7 +4260,7 @@
       },
       "ar": {
         "title": "الشكر على النعم",
-        "translation": "",
+        "translation": "الْحَمْدُ لِلَّهِ الَّذِي بِنِعْمَتِهِ تَتِمُّ الصَّالِحَاتُ",
         "category": "الشكر",
         "source": "Hisnul Muslim",
         "reference": "Ibn Majah 3803",
@@ -4332,7 +4332,7 @@
       },
       "ar": {
         "title": "طلب الشكر",
-        "translation": "",
+        "translation": "رَبِّ أَوْزِعْنِي أَنْ أَشْكُرَ نِعْمَتَكَ الَّتِي أَنْعَمْتَ عَلَيَّ",
         "category": "الشكر",
         "source": "Hisnul Muslim",
         "reference": "Al-Ankabut 27:19",
@@ -4403,7 +4403,7 @@
       },
       "ar": {
         "title": "عند نيل نعمة",
-        "translation": "",
+        "translation": "اللَّهُمَّ لَكَ الْحَمْدُ حَتَّى تَرْضَى",
         "category": "الشكر",
         "source": "Hisnul Muslim",
         "reference": "At-Tirmidhi 2732",
@@ -4472,7 +4472,7 @@
       },
       "ar": {
         "title": "شكرًا لله",
-        "translation": "",
+        "translation": "شُكْرًا لِلَّهِ",
         "category": "الشكر",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 6042",
@@ -4548,7 +4548,7 @@
       },
       "ar": {
         "title": "بعد الصلاة",
-        "translation": "",
+        "translation": "اللَّهُمَّ أَعِنِّي عَلَى ذِكْرِكَ وَشُكْرِكَ وَحُسْنِ عِبَادَتِكَ",
         "category": "بعد الصلاة",
         "source": "Hisnul Muslim",
         "reference": "Abu Dawud 1422",
@@ -4627,7 +4627,7 @@
       },
       "ar": {
         "title": "سبحان الله",
-        "translation": "",
+        "translation": "سُبْحَانَ اللَّهِ",
         "category": "بعد الصلاة",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 6405",
@@ -4704,7 +4704,7 @@
       },
       "ar": {
         "title": "الحمد لله",
-        "translation": "",
+        "translation": "الْحَمْدُ لِلَّهِ",
         "category": "بعد الصلاة",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 6405",
@@ -4781,7 +4781,7 @@
       },
       "ar": {
         "title": "الله أكبر",
-        "translation": "",
+        "translation": "اللَّهُ أَكْبَرُ",
         "category": "بعد الصلاة",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 6405",
@@ -4861,7 +4861,7 @@
       },
       "ar": {
         "title": "الشهادة الأخيرة",
-        "translation": "",
+        "translation": "لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",
         "category": "بعد الصلاة",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 6406",
@@ -4940,7 +4940,7 @@
       },
       "ar": {
         "title": "الحماية من النفاق",
-        "translation": "",
+        "translation": "اللَّهُمَّ لَا تُخْزِنِي يَوْمَ الْقِيَامَةِ",
         "category": "بعد الصلاة",
         "source": "Hisnul Muslim",
         "reference": "Abu Dawud 767",
@@ -5020,7 +5020,7 @@
       },
       "ar": {
         "title": "الدخول إلى الجنة",
-        "translation": "",
+        "translation": "اللَّهُمَّ أَجِرْنِي مِنَ النَّارِ",
         "category": "بعد الصلاة",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 6328",
@@ -5098,7 +5098,7 @@
       },
       "ar": {
         "title": "عند الوضوء",
-        "translation": "",
+        "translation": "أَشْهَدُ أَنْ لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
         "category": "الوضوء",
         "source": "Hisnul Muslim",
         "reference": "Muslim 234",
@@ -5169,7 +5169,7 @@
       },
       "ar": {
         "title": "بعد الوضوء",
-        "translation": "",
+        "translation": "اللَّهُمَّ اجْعَلْنِي مِنَ التَّوَّابِينَ وَاجْعَلْنِي مِنَ الْمُتَطَهِّرِينَ",
         "category": "الوضوء",
         "source": "Hisnul Muslim",
         "reference": "At-Tirmidhi 55",
@@ -5238,7 +5238,7 @@
       },
       "ar": {
         "title": "الوضوء التام",
-        "translation": "",
+        "translation": "شَهِدْتُ أَنْ لاَ إِلَهَ إِلاَّ اللَّهُ وَأَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
         "category": "الوضوء",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 6296",
@@ -5310,7 +5310,7 @@
       },
       "ar": {
         "title": "التلبية",
-        "translation": "",
+        "translation": "لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ، لَبَّيْكَ لاَ شَرِيكَ لَكَ لَبَّيْكَ، إِنَّ الْحَمْدَ وَالنِّعْمَةَ لَكَ وَالْمُلْكَ لاَ شَرِيكَ لَكَ",
         "category": "الحج والعمرة",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 6149",
@@ -5384,7 +5384,7 @@
       },
       "ar": {
         "title": "عند رؤية الكعبة",
-        "translation": "",
+        "translation": "اللَّهُمَّ زِدْ هَذَا الْبَيْتَ تَكْرِيمًا وَتَعْظِيمًا وَمَهَابَةً",
         "category": "الحج والعمرة",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 1333",
@@ -5455,7 +5455,7 @@
       },
       "ar": {
         "title": "أثناء الطواف",
-        "translation": "",
+        "translation": "رَبِّ اجْعَلْنِي مُقِيمَ الصَّلَاةِ وَمِنْ ذُرِّيَّتِي",
         "category": "الحج والعمرة",
         "source": "Hisnul Muslim",
         "reference": "Ibrahim 14:40",
@@ -5524,7 +5524,7 @@
       },
       "ar": {
         "title": "دعاء السعي",
-        "translation": "",
+        "translation": "اللَّهُمَّ اجْعَلْ فِي قَلْبِي نُورًا وَفِي بَصَرِي نُورًا",
         "category": "الحج والعمرة",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 6316",
@@ -5596,7 +5596,7 @@
       },
       "ar": {
         "title": "الدعاء للوالدين",
-        "translation": "",
+        "translation": "رَبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا",
         "category": "العائلة",
         "source": "Hisnul Muslim",
         "reference": "Al-Isra 17:24",
@@ -5670,7 +5670,7 @@
       },
       "ar": {
         "title": "بركة الوالدين",
-        "translation": "",
+        "translation": "رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ",
         "category": "العائلة",
         "source": "Hisnul Muslim",
         "reference": "Al-Furqan 25:74",
@@ -5741,7 +5741,7 @@
       },
       "ar": {
         "title": "بركة الأبناء",
-        "translation": "",
+        "translation": "اللَّهُمَّ بَارِكْ لِي فِي أَهْلِي",
         "category": "العائلة",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 6332",
@@ -5813,7 +5813,7 @@
       },
       "ar": {
         "title": "للوالدين المتوفيين",
-        "translation": "",
+        "translation": "اللَّهُمَّ اغْفِرْ لِوَالِدَيَّ وَارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا",
         "category": "العائلة",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 2472",
@@ -5890,7 +5890,7 @@
       },
       "ar": {
         "title": "التسبيح صباحًا",
-        "translation": "",
+        "translation": "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ",
         "category": "الذكر",
         "source": "Hisnul Muslim",
         "reference": "Muslim 2692",
@@ -5971,7 +5971,7 @@
       },
       "ar": {
         "title": "التحميد",
-        "translation": "",
+        "translation": "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ",
         "category": "الذكر",
         "source": "Hisnul Muslim",
         "reference": "Al-Fatiha 1:2",
@@ -6052,7 +6052,7 @@
       },
       "ar": {
         "title": "التكبير",
-        "translation": "",
+        "translation": "اللَّهُ أَكْبَرُ كَبِيرًا",
         "category": "الذكر",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 6406",
@@ -6133,7 +6133,7 @@
       },
       "ar": {
         "title": "أستغفر الله",
-        "translation": "",
+        "translation": "أَسْتَغْفِرُ اللَّهَ الْعَظِيمَ",
         "category": "الذكر",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 6407",
@@ -6214,7 +6214,7 @@
       },
       "ar": {
         "title": "لا إله إلا الله",
-        "translation": "",
+        "translation": "لَا إِلَهَ إِلَّا اللَّهُ",
         "category": "الذكر",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 6408",
@@ -6298,7 +6298,7 @@
       },
       "ar": {
         "title": "كلمة التوحيد",
-        "translation": "",
+        "translation": "لَا إِلَهَ إِلَّا اللَّهُ مُحَمَّدٌ رَسُولُ اللَّهِ",
         "category": "الذكر",
         "source": "Hisnul Muslim",
         "reference": "Muslim 190",
@@ -6384,7 +6384,7 @@
       },
       "ar": {
         "title": "ربنا آتنا",
-        "translation": "",
+        "translation": "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
         "category": "الذكر",
         "source": "Hisnul Muslim",
         "reference": "Al-Bakarah 2:201",
@@ -6467,7 +6467,7 @@
       },
       "ar": {
         "title": "سبحان الله وبحمده",
-        "translation": "",
+        "translation": "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ سُبْحَانَ اللَّهِ الْعَظِيمِ",
         "category": "الذكر",
         "source": "Hisnul Muslim",
         "reference": "Muslim 2732",
@@ -6546,7 +6546,7 @@
       },
       "ar": {
         "title": "دعاء الاستخارة",
-        "translation": "",
+        "translation": "اللَّهُمَّ إِنِّي أَسْتَخِيرُكَ بِعِلْمِكَ وَأَسْتَقْدِرُكَ بِقُدْرَتِكَ",
         "category": "الذكر",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 6382",
@@ -6619,7 +6619,7 @@
       },
       "ar": {
         "title": "ربنا ولا تحملنا",
-        "translation": "",
+        "translation": "رَبَّنَا وَلَا تُحَمِّلْنَا مَا لَا طَاقَةَ لَنَا بِهِ",
         "category": "الكرب",
         "source": "Hisnul Muslim",
         "reference": "Al-Bakarah 2:286",
@@ -6688,7 +6688,7 @@
       },
       "ar": {
         "title": "دعاء الطالب",
-        "translation": "",
+        "translation": "اللَّهُمَّ نَوِّرْ قُلُوبَنَا بِنُورِ الْعِلْمِ",
         "category": "الذكر",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 5766",
@@ -6761,7 +6761,7 @@
       },
       "ar": {
         "title": "الدعاء للمطر",
-        "translation": "",
+        "translation": "اللَّهُمَّ أَنْبِتْ لَنَا الْأَرْضَ",
         "category": "المطر",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 1773",
@@ -6834,7 +6834,7 @@
       },
       "ar": {
         "title": "دعاء التاجر",
-        "translation": "",
+        "translation": "اللَّهُمَّ بَارِكْ لِي فِي رِزْقِي",
         "category": "الشكر",
         "source": "Hisnul Muslim",
         "reference": "At-Tirmidhi 3588",
@@ -6903,7 +6903,7 @@
       },
       "ar": {
         "title": "الدعاء للسلام",
-        "translation": "",
+        "translation": "اللَّهُمَّ أَصْلِحْ لِي دِينِي الَّذِي هُوَ عِصْمَةُ أَمْرِي",
         "category": "الذكر",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 2420",
@@ -6972,7 +6972,7 @@
       },
       "ar": {
         "title": "الدعاء للهداية",
-        "translation": "",
+        "translation": "اللَّهُمَّ اهْدِنِي سَدَادًا",
         "category": "الذكر",
         "source": "Hisnul Muslim",
         "reference": "Abu Dawud 1539",
@@ -7041,7 +7041,7 @@
       },
       "ar": {
         "title": "الدعاء للصبر",
-        "translation": "",
+        "translation": "اللَّهُمَّ اجْعَلْنِي صَابِرًا",
         "category": "الكرب",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 5819",
@@ -7114,7 +7114,7 @@
       },
       "ar": {
         "title": "دعاء الصباح التام",
-        "translation": "",
+        "translation": "أَصْبَحْنَا عَلَى فِطْرَةِ الْإِسْلَامِ",
         "category": "الصباح",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 2809",
@@ -7191,7 +7191,7 @@
       },
       "ar": {
         "title": "دعاء المساء",
-        "translation": "",
+        "translation": "أَمْسَيْنَا عَلَى فِطْرَةِ الْإِسْلَامِ",
         "category": "المساء",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 2809",
@@ -7264,7 +7264,7 @@
       },
       "ar": {
         "title": "دعاء الشكر اليومي",
-        "translation": "",
+        "translation": "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ فِي كُلِّ يَوْمٍ",
         "category": "الشكر",
         "source": "Hisnul Muslim",
         "reference": "Al-Fatiha 1:2",
@@ -7333,7 +7333,7 @@
       },
       "ar": {
         "title": "الدعاء للذاكرة",
-        "translation": "",
+        "translation": "اللَّهُمَّ لَا تُنْسِنِي مَا عَلَّمْتَنِي",
         "category": "الذكر",
         "source": "Hisnul Muslim",
         "reference": "Ibn As-Sunni 245",
@@ -7406,7 +7406,7 @@
       },
       "ar": {
         "title": "دعاء المسافر القصير",
-        "translation": "",
+        "translation": "اللَّهُمَّ هَوِّنْ عَلَيْنَا السَّفَرَ",
         "category": "السفر",
         "source": "Hisnul Muslim",
         "reference": "Abu Dawud 2600",
@@ -7479,7 +7479,7 @@
       },
       "ar": {
         "title": "الدعاء للحماية من الشر",
-        "translation": "",
+        "translation": "أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ",
         "category": "التحصين",
         "source": "Hisnul Muslim",
         "reference": "Muslim 2709",
@@ -7548,7 +7548,7 @@
       },
       "ar": {
         "title": "الدعاء من الخوف",
-        "translation": "",
+        "translation": "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ وَجَدٍ",
         "category": "الكرب",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 6377",
@@ -7621,7 +7621,7 @@
       },
       "ar": {
         "title": "الدعاء من الجوع",
-        "translation": "",
+        "translation": "اللَّهُمَّ بَارِكْ لَنَا فِي طَعَامِنَا",
         "category": "الطعام",
         "source": "Hisnul Muslim",
         "reference": "At-Tirmidhi 1801",
@@ -7698,7 +7698,7 @@
       },
       "ar": {
         "title": "الدعاء من العطش",
-        "translation": "",
+        "translation": "اللَّهُمَّ بَارِكْ لَنَا فِي شَرَابِنَا",
         "category": "الطعام",
         "source": "Hisnul Muslim",
         "reference": "At-Tirmidhi 1802",

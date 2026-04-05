@@ -267,8 +267,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   Future<void> _showLanguageSheet() async {
     final tokens = QiblaThemes.current;
     final l10n = context.l10n;
-    final selectedLocale = ref.read(appLocaleControllerProvider);
-    final effectiveLocale = currentAppLocale();
 
     await showModalBottomSheet<void>(
       context: context,
@@ -277,68 +275,75 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
       builder: (context) {
-        return ListView(
-          padding: const EdgeInsets.all(16),
-          shrinkWrap: true,
-          children: [
-            Text(
-              l10n.settingsLanguageDialogTitle,
-              style: GoogleFonts.dmSans(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: tokens.textPrimary,
-              ),
-            ),
-            const SizedBox(height: 14),
-            ..._languageOptions.map((locale) {
-              final isSelected =
-                  (selectedLocale?.languageCode ?? 'system') ==
-                  (locale?.languageCode ?? 'system');
-              final title = locale == null
-                  ? l10n.settingsLanguageOptionSystem
-                  : _languageOptionTitle(locale.languageCode);
-              final subtitle = locale == null
-                  ? l10n.settingsLanguageSystemValue(
-                      _languageOptionTitle(effectiveLocale.languageCode),
-                    )
-                  : null;
+        return Consumer(
+          builder: (context, ref, _) {
+            final selectedLocale = ref.watch(appLocaleControllerProvider);
+            final effectiveLocale = currentAppLocale(selectedLocale);
 
-              return ListTile(
-                tileColor: isSelected ? tokens.activeBg : tokens.bgSurface2,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(14),
-                ),
-                title: Text(
-                  title,
+            return ListView(
+              padding: const EdgeInsets.all(16),
+              shrinkWrap: true,
+              children: [
+                Text(
+                  l10n.settingsLanguageDialogTitle,
                   style: GoogleFonts.dmSans(
-                    color: isSelected
-                        ? tokens.primaryLight
-                        : tokens.textPrimary,
-                    fontWeight:
-                        isSelected ? FontWeight.w600 : FontWeight.w500,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: tokens.textPrimary,
                   ),
                 ),
-                subtitle: subtitle == null
-                    ? null
-                    : Text(
-                        subtitle,
-                        style: GoogleFonts.dmSans(
-                          fontSize: 11,
-                          color: tokens.textSecondary,
-                        ),
+                const SizedBox(height: 14),
+                ..._languageOptions.map((locale) {
+                  final isSelected =
+                      (selectedLocale?.languageCode ?? 'system') ==
+                      (locale?.languageCode ?? 'system');
+                  final title = locale == null
+                      ? l10n.settingsLanguageOptionSystem
+                      : _languageOptionTitle(locale.languageCode);
+                  final subtitle = locale == null
+                      ? l10n.settingsLanguageSystemValue(
+                          _languageOptionTitle(effectiveLocale.languageCode),
+                        )
+                      : null;
+
+                  return ListTile(
+                    tileColor: isSelected ? tokens.activeBg : tokens.bgSurface2,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                    title: Text(
+                      title,
+                      style: GoogleFonts.dmSans(
+                        color: isSelected
+                            ? tokens.primaryLight
+                            : tokens.textPrimary,
+                        fontWeight:
+                            isSelected ? FontWeight.w600 : FontWeight.w500,
                       ),
-                trailing: isSelected
-                    ? Icon(Icons.check, color: tokens.primary)
-                    : null,
-                onTap: () async {
-                  await _setAppLocale(locale);
-                  if (context.mounted) {
-                    Navigator.pop(context);
-                  }
-                },
-              );
-            }),
-          ],
+                    ),
+                    subtitle: subtitle == null
+                        ? null
+                        : Text(
+                            subtitle,
+                            style: GoogleFonts.dmSans(
+                              fontSize: 11,
+                              color: tokens.textSecondary,
+                            ),
+                          ),
+                    trailing: isSelected
+                        ? Icon(Icons.check, color: tokens.primary)
+                        : null,
+                    onTap: () async {
+                      await _setAppLocale(locale);
+                      if (context.mounted) {
+                        Navigator.pop(context);
+                      }
+                    },
+                  );
+                }),
+              ],
+            );
+          },
         );
       },
     );
