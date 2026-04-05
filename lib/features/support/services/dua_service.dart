@@ -39,14 +39,10 @@ class DuaService {
     final language = _normalizeLanguageCode(
       forcedLanguage ?? _currentLanguage,
     );
-    final fallbackLanguage = _fallbackContentLanguage(language);
     final multilangList = await loadAllMultilenguaje();
     return multilangList
         .map(
-          (dua) => dua.getDua(
-            language,
-            fallbackLanguage: fallbackLanguage,
-          ),
+          (dua) => _resolveDuaForLanguage(dua, language),
         )
         .toList();
   }
@@ -101,7 +97,14 @@ class DuaService {
   }
 
   static String _normalizeLanguageCode(String languageCode) {
-    return switch (languageCode) {
+    final normalized = languageCode
+        .trim()
+        .toLowerCase()
+        .replaceAll('-', '_')
+        .split('_')
+        .first;
+
+    return switch (normalized) {
       'ar' => 'ar',
       'en' => 'en',
       'fr' => 'fr',
@@ -109,11 +112,35 @@ class DuaService {
     };
   }
 
-  static String _fallbackContentLanguage(String languageCode) {
+  Dua _resolveDuaForLanguage(DuaMultilenguaje dua, String languageCode) {
+    for (final candidate in _resolutionOrder(languageCode)) {
+      final translation = dua.translations[candidate];
+      if (!_hasUsableLocalizedContent(translation)) {
+        continue;
+      }
+      return dua.getDua(candidate, fallbackLanguage: candidate);
+    }
+
+    return dua.getDua('es', fallbackLanguage: 'es');
+  }
+
+  static List<String> _resolutionOrder(String languageCode) {
     return switch (_normalizeLanguageCode(languageCode)) {
-      'fr' => 'es',
-      _ => 'es',
+      'fr' => const ['fr', 'en', 'es'],
+      'en' => const ['en', 'es'],
+      'ar' => const ['ar', 'es'],
+      _ => const ['es', 'en'],
     };
+  }
+
+  static bool _hasUsableLocalizedContent(DuaTranslation? translation) {
+    if (translation == null) {
+      return false;
+    }
+
+    return translation.title.trim().isNotEmpty ||
+        translation.translation.trim().isNotEmpty ||
+        translation.category.trim().isNotEmpty;
   }
 }
 
