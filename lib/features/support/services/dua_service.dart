@@ -36,7 +36,9 @@ class DuaService {
   }
 
   Future<List<Dua>> loadAll({String? forcedLanguage}) async {
-    final language = forcedLanguage ?? _currentLanguage;
+    final language = _normalizeLanguageCode(
+      forcedLanguage ?? _currentLanguage,
+    );
     final fallbackLanguage = _fallbackContentLanguage(language);
     final multilangList = await loadAllMultilenguaje();
     return multilangList
@@ -109,7 +111,7 @@ class DuaService {
 
   static String _fallbackContentLanguage(String languageCode) {
     return switch (_normalizeLanguageCode(languageCode)) {
-      'fr' => 'en',
+      'fr' => 'es',
       _ => 'es',
     };
   }
