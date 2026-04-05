@@ -231,6 +231,15 @@ class NotificationService {
   }
 
   Future<bool> requestPermission() async {
+    final status = await Permission.notification.status;
+    if (status.isPermanentlyDenied) {
+      await openAppSettings();
+      return false;
+    }
+    if (status.isGranted) {
+      return true;
+    }
+
     final android = _plugin
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>();
