@@ -1,6 +1,7 @@
 import 'package:geocoding/geocoding.dart';
 
 import '../../../../core/localization/locale_controller.dart';
+import '../../../../core/services/logger_service.dart';
 import '../../domain/entities/prayer_location.dart';
 
 class TravelLocationLabelDataSource {
@@ -25,7 +26,9 @@ class TravelLocationLabelDataSource {
           return parts.join(', ');
         }
       }
-    } catch (_) {}
+    } catch (e) {
+      AppLogger.warning('Geocoding failed, falling back to coordinates', error: e);
+    }
 
     return '${location.latitude.toStringAsFixed(2)}, ${location.longitude.toStringAsFixed(2)}';
   }
