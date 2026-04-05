@@ -138,8 +138,11 @@ class DuaService {
       return false;
     }
 
+    if (translation.translation.trim().isNotEmpty) {
+      return true;
+    }
+
     return translation.title.trim().isNotEmpty ||
-        translation.translation.trim().isNotEmpty ||
         translation.category.trim().isNotEmpty;
   }
 }
