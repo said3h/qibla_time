@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hijri/hijri_calendar.dart';
 
+import '../../../core/localization/locale_controller.dart';
 import '../../../core/services/connectivity_service.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/utils/spanish_date_labels.dart';
@@ -602,16 +603,18 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   height: 1.0,
                 ),
               ),
-              const SizedBox(height: 2),
-              Text(
-                names.$2,
-                textAlign: TextAlign.center,
-                style: GoogleFonts.amiri(
-                  fontSize: 24,
-                  color: tokens.primaryLight,
-                  height: 1.05,
+              if (names.$2.isNotEmpty) ...[
+                const SizedBox(height: 2),
+                Text(
+                  names.$2,
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.amiri(
+                    fontSize: 24,
+                    color: tokens.primaryLight,
+                    height: 1.05,
+                  ),
                 ),
-              ),
+              ],
               const SizedBox(height: 4),
               Text(
                 _selectedDate == _dateOnly(DateTime.now())
@@ -1786,12 +1789,38 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       return _buildPrayerFallback(tokens, null);
     }
 
+    final isArabicOnly = Localizations.localeOf(context).languageCode == 'ar';
     final prayers = [
-      (PrayerName.fajr, 'Fajr', 'فجر', prayerSchedule.fajr),
-      (PrayerName.dhuhr, 'Dhuhr', 'ظهر', prayerSchedule.dhuhr),
-      (PrayerName.asr, 'Asr', 'عصر', prayerSchedule.asr),
-      (PrayerName.maghrib, 'Maghrib', 'مغرب', prayerSchedule.maghrib),
-      (PrayerName.isha, 'Isha', 'عشاء', prayerSchedule.isha),
+      (
+        PrayerName.fajr,
+        PrayerName.fajr.localizedDisplayName(isArabicOnly ? 'ar' : 'en'),
+        isArabicOnly ? '' : PrayerName.fajr.displayNameArabic,
+        prayerSchedule.fajr,
+      ),
+      (
+        PrayerName.dhuhr,
+        PrayerName.dhuhr.localizedDisplayName(isArabicOnly ? 'ar' : 'en'),
+        isArabicOnly ? '' : PrayerName.dhuhr.displayNameArabic,
+        prayerSchedule.dhuhr,
+      ),
+      (
+        PrayerName.asr,
+        PrayerName.asr.localizedDisplayName(isArabicOnly ? 'ar' : 'en'),
+        isArabicOnly ? '' : PrayerName.asr.displayNameArabic,
+        prayerSchedule.asr,
+      ),
+      (
+        PrayerName.maghrib,
+        PrayerName.maghrib.localizedDisplayName(isArabicOnly ? 'ar' : 'en'),
+        isArabicOnly ? '' : PrayerName.maghrib.displayNameArabic,
+        prayerSchedule.maghrib,
+      ),
+      (
+        PrayerName.isha,
+        PrayerName.isha.localizedDisplayName(isArabicOnly ? 'ar' : 'en'),
+        isArabicOnly ? '' : PrayerName.isha.displayNameArabic,
+        prayerSchedule.isha,
+      ),
     ];
     final nextPrayerName = nextPrayerInfo?.prayer.key;
     final isToday = _isSameDay(date, _dateOnly(DateTime.now()));
@@ -1883,13 +1912,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             color: isCurrent ? tokens.primary : tokens.textPrimary,
                           ),
                         ),
-                        Text(
-                          prayer.$3,
-                          style: GoogleFonts.amiri(
-                            fontSize: 13,
-                            color: tokens.textSecondary,
+                        if (prayer.$3.isNotEmpty)
+                          Text(
+                            prayer.$3,
+                            style: GoogleFonts.amiri(
+                              fontSize: 13,
+                              color: tokens.textSecondary,
+                            ),
                           ),
-                        ),
                       ],
                     ),
                   ),
@@ -1986,12 +2016,38 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       return _buildPremiumPrayerFallback(tokens, null);
     }
 
+    final isArabicOnly = Localizations.localeOf(context).languageCode == 'ar';
     final prayers = <(PrayerName, String, String, DateTime)>[
-      (PrayerName.fajr, 'Fajr', 'فجر', prayerSchedule.fajr),
-      (PrayerName.dhuhr, 'Dhuhr', 'ظهر', prayerSchedule.dhuhr),
-      (PrayerName.asr, 'Asr', 'عصر', prayerSchedule.asr),
-      (PrayerName.maghrib, 'Maghrib', 'مغرب', prayerSchedule.maghrib),
-      (PrayerName.isha, 'Isha', 'عشاء', prayerSchedule.isha),
+      (
+        PrayerName.fajr,
+        PrayerName.fajr.localizedDisplayName(isArabicOnly ? 'ar' : 'en'),
+        isArabicOnly ? '' : PrayerName.fajr.displayNameArabic,
+        prayerSchedule.fajr,
+      ),
+      (
+        PrayerName.dhuhr,
+        PrayerName.dhuhr.localizedDisplayName(isArabicOnly ? 'ar' : 'en'),
+        isArabicOnly ? '' : PrayerName.dhuhr.displayNameArabic,
+        prayerSchedule.dhuhr,
+      ),
+      (
+        PrayerName.asr,
+        PrayerName.asr.localizedDisplayName(isArabicOnly ? 'ar' : 'en'),
+        isArabicOnly ? '' : PrayerName.asr.displayNameArabic,
+        prayerSchedule.asr,
+      ),
+      (
+        PrayerName.maghrib,
+        PrayerName.maghrib.localizedDisplayName(isArabicOnly ? 'ar' : 'en'),
+        isArabicOnly ? '' : PrayerName.maghrib.displayNameArabic,
+        prayerSchedule.maghrib,
+      ),
+      (
+        PrayerName.isha,
+        PrayerName.isha.localizedDisplayName(isArabicOnly ? 'ar' : 'en'),
+        isArabicOnly ? '' : PrayerName.isha.displayNameArabic,
+        prayerSchedule.isha,
+      ),
     ];
     final now = DateTime.now();
     final nextPrayerName = nextPrayerInfo?.prayer.key;
@@ -2146,20 +2202,22 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             _buildPremiumPrayerStatusChip(style),
                           ],
                         ),
-                        const SizedBox(height: 4),
-                        Directionality(
-                          textDirection: TextDirection.rtl,
-                          child: Text(
-                            prayer.$3,
-                            style: GoogleFonts.amiri(
-                              fontSize: 15,
-                              color: tone == _PremiumPrayerCardTone.now
-                                  ? style.iconColor
-                                  : tokens.textSecondary,
-                              height: 1.1,
+                        if (prayer.$3.isNotEmpty) ...[
+                          const SizedBox(height: 4),
+                          Directionality(
+                            textDirection: TextDirection.rtl,
+                            child: Text(
+                              prayer.$3,
+                              style: GoogleFonts.amiri(
+                                fontSize: 15,
+                                color: tone == _PremiumPrayerCardTone.now
+                                    ? style.iconColor
+                                    : tokens.textSecondary,
+                                height: 1.1,
+                              ),
                             ),
                           ),
-                        ),
+                        ],
                         const SizedBox(height: 10),
                         Text(
                           isDone
@@ -2557,18 +2615,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   (String, String) _prayerName(PrayerName prayer) {
-    switch (prayer) {
-      case PrayerName.fajr:
-        return ('Fajr', 'فجر');
-      case PrayerName.dhuhr:
-        return ('Dhuhr', 'ظهر');
-      case PrayerName.asr:
-        return ('Asr', 'عصر');
-      case PrayerName.maghrib:
-        return ('Maghrib', 'مغرب');
-      case PrayerName.isha:
-        return ('Isha', 'عشاء');
-    }
+    final languageCode = AppLocaleController.effectiveLanguageCode();
+    final primary = prayer.localizedDisplayName(languageCode);
+    final secondary = languageCode == 'ar' ? '' : prayer.displayNameArabic;
+    return (primary, secondary);
   }
 
   IconData _prayerIcon(PrayerName prayer) {

@@ -17,6 +17,7 @@ class DailyBookWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final tokens = QiblaThemes.current;
     final l10n = context.l10n;
+    final isArabicOnly = Localizations.localeOf(context).languageCode == 'ar';
     final featuredAsync = ref.watch(islamHouseFeaturedBooksProvider);
 
     return featuredAsync.when(
@@ -29,6 +30,18 @@ class DailyBookWidget extends ConsumerWidget {
         }
 
         final book = IslamHouseBook.getBookOfDay(books);
+        final title = _displayTitle(book, isArabicOnly);
+        final showCategory = !isArabicOnly || _containsArabicText(book.category);
+        final showAuthor = !isArabicOnly || _containsArabicText(book.author);
+        final description = _displayDescription(book, isArabicOnly);
+
+        if (isArabicOnly && title.isEmpty) {
+          return _BooksUnavailableWidget(
+            tokens: tokens,
+            onOpenLibrary: () => _openLibrary(context),
+          );
+        }
+
         final accentColor = _bookAccent(tokens, book.title);
         final accentForeground = _foregroundFor(accentColor);
         final cardTopColor = _blend(
@@ -110,43 +123,44 @@ class DailyBookWidget extends ConsumerWidget {
                     ),
                   ),
                   const Spacer(),
-                  Text(
-                    book.category,
-                    style: GoogleFonts.dmSans(
-                      fontSize: 9,
-                      fontWeight: FontWeight.w600,
-                      color: tokens.primary,
+                  if (showCategory)
+                    Text(
+                      book.category,
+                      style: GoogleFonts.dmSans(
+                        fontSize: 9,
+                        fontWeight: FontWeight.w600,
+                        color: tokens.primary,
+                      ),
                     ),
-                  ),
                 ],
               ),
               const SizedBox(height: 14),
 
               // Título y autor
               Text(
-                book.title,
+                title,
                 style: GoogleFonts.amiri(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: tokens.textPrimary,
                 ),
               ),
-              const SizedBox(height: 4),
-              Text(
-                book.author,
-                style: GoogleFonts.dmSans(
-                  fontSize: 12,
-                  color: tokens.textSecondary,
+              if (showAuthor) ...[
+                const SizedBox(height: 4),
+                Text(
+                  book.author,
+                  style: GoogleFonts.dmSans(
+                    fontSize: 12,
+                    color: tokens.textSecondary,
+                  ),
                 ),
-              ),
+              ],
               const SizedBox(height: 12),
 
               // Descripción corta
-              if (book.description.isNotEmpty)
+              if (description.isNotEmpty)
                 Text(
-                  book.description.length > 120
-                      ? '${book.description.substring(0, 117)}...'
-                      : book.description,
+                  description,
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                   style: GoogleFonts.dmSans(
@@ -267,6 +281,35 @@ class DailyBookWidget extends ConsumerWidget {
     return _isLightTheme(tokens)
         ? Color.alphaBlend(Colors.black.withOpacity(0.28), accent)
         : Color.alphaBlend(Colors.white.withOpacity(0.14), accent);
+  }
+
+  String _displayTitle(IslamHouseBook book, bool isArabicOnly) {
+    if (!isArabicOnly) {
+      return book.title;
+    }
+
+    if (book.titleArabic.trim().isNotEmpty) {
+      return book.titleArabic.trim();
+    }
+
+    return _containsArabicText(book.title) ? book.title.trim() : '';
+  }
+
+  String _displayDescription(IslamHouseBook book, bool isArabicOnly) {
+    final source = book.description.trim();
+    if (source.isEmpty) {
+      return '';
+    }
+
+    if (isArabicOnly && !_containsArabicText(source)) {
+      return '';
+    }
+
+    return source.length > 120 ? '${source.substring(0, 117)}...' : source;
+  }
+
+  bool _containsArabicText(String value) {
+    return RegExp(r'[\u0600-\u06FF]').hasMatch(value);
   }
 }
 

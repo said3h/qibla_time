@@ -1,6 +1,8 @@
+import '../../../../core/localization/locale_controller.dart';
 import '../entities/home_insight.dart';
 import '../entities/ramadan_status.dart';
 import '../../../../l10n/l10n.dart';
+import '../entities/prayer_name.dart';
 import '../../../tracking/models/tracking_models.dart';
 
 class GenerateHomeInsightsUseCase {
@@ -285,17 +287,18 @@ class GenerateHomeInsightsUseCase {
   }
 
   String _prayerLabel(String prayerKey) {
+    final languageCode = AppLocaleController.effectiveLanguageCode();
     switch (prayerKey) {
       case 'fajr':
-        return 'Fajr';
+        return PrayerName.fajr.localizedDisplayName(languageCode);
       case 'dhuhr':
-        return 'Dhuhr';
+        return PrayerName.dhuhr.localizedDisplayName(languageCode);
       case 'asr':
-        return 'Asr';
+        return PrayerName.asr.localizedDisplayName(languageCode);
       case 'maghrib':
-        return 'Maghrib';
+        return PrayerName.maghrib.localizedDisplayName(languageCode);
       case 'isha':
-        return 'Isha';
+        return PrayerName.isha.localizedDisplayName(languageCode);
       default:
         return prayerKey;
     }

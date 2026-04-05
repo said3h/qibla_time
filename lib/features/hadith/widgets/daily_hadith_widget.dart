@@ -50,8 +50,8 @@ class DailyHadithWidget extends ConsumerWidget {
         final gradeLabel = isArabicOnly
             ? (arabicGradeLabel ?? snapshot.grade)
             : snapshot.grade;
-        final primaryReference = isArabicOnly && arabicReference != null
-            ? arabicReference
+        final primaryReference = isArabicOnly
+            ? (arabicReference ?? '')
             : snapshot.reference;
         final isLightTheme = _isLightTheme(tokens);
         final collectionBaseColor = _getCollectionColor(snapshot.collection);
@@ -228,13 +228,14 @@ class DailyHadithWidget extends ConsumerWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          primaryReference,
-                          style: GoogleFonts.dmSans(
-                            fontSize: 9,
-                            color: tokens.textSecondary,
+                        if (primaryReference.isNotEmpty)
+                          Text(
+                            primaryReference,
+                            style: GoogleFonts.dmSans(
+                              fontSize: 9,
+                              color: tokens.textSecondary,
+                            ),
                           ),
-                        ),
                         if (!isArabicOnly && arabicReference != null) ...[
                           const SizedBox(height: 4),
                           Align(

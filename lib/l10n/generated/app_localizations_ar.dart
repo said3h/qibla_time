@@ -2551,14 +2551,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get settingsRestoreBackupPasteHint => 'Pega aquí el JSON exportado';
 
   @override
-  String get dailyBookBadge => 'LIBRO DEL DÍA';
+  String get dailyBookBadge => 'كتاب اليوم';
 
   @override
-  String get dailyBookUnavailable =>
-      'La biblioteca no está disponible por ahora.';
+  String get dailyBookUnavailable => 'مكتبة الكتب غير متاحة الآن.';
 
   @override
-  String get dailyBookOpenLibrary => 'Ir a libros';
+  String get dailyBookOpenLibrary => 'فتح الكتب';
 
   @override
   String get hadithOfflineIncludedInApp => 'Incluidos en la app';

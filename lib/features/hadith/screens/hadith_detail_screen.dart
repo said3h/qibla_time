@@ -335,7 +335,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
     );
     final arabicGradeLabel = _getArabicGradeLabel(hadith.grade);
     final primaryReference =
-        isArabicOnly && arabicReference != null ? arabicReference : hadith.reference;
+        isArabicOnly ? (arabicReference ?? '') : hadith.reference;
     final gradeDescription = isArabicOnly && arabicGradeLabel != null
         ? context.l10n.hadithDetailGrade(arabicGradeLabel)
         : context.l10n.hadithDetailGrade(hadith.grade);
@@ -364,14 +364,15 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
             ],
           ),
           const SizedBox(height: 10),
-          Text(
-            primaryReference,
-            style: GoogleFonts.dmSans(
-              fontSize: 13,
-              height: 1.6,
-              color: tokens.textPrimary,
+          if (primaryReference.isNotEmpty)
+            Text(
+              primaryReference,
+              style: GoogleFonts.dmSans(
+                fontSize: 13,
+                height: 1.6,
+                color: tokens.textPrimary,
+              ),
             ),
-          ),
           if (!isArabicOnly && arabicReference != null) ...[
             const SizedBox(height: 8),
             Align(

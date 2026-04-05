@@ -1495,15 +1495,17 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                           color: tokens.textPrimary,
                         ),
                       ),
-                      const SizedBox(height: 10),
-                      Text(
-                        ayah.translation,
-                        style: GoogleFonts.dmSans(
-                          fontSize: 13,
-                          height: 1.7,
-                          color: tokens.textPrimary,
+                      if (ayah.translation.trim().isNotEmpty) ...[
+                        const SizedBox(height: 10),
+                        Text(
+                          ayah.translation,
+                          style: GoogleFonts.dmSans(
+                            fontSize: 13,
+                            height: 1.7,
+                            color: tokens.textPrimary,
+                          ),
                         ),
-                      ),
+                      ],
                       const SizedBox(height: 10),
                       Text(
                         l10n.quranAyahFooterHint(

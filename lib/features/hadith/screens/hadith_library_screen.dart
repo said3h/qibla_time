@@ -501,7 +501,7 @@ class _FeaturedHadithCard extends StatelessWidget {
     final gradeLabel =
         isArabicOnly ? (arabicGradeLabel ?? hadith.grade) : hadith.grade;
     final primaryReference =
-        isArabicOnly && arabicReference != null ? arabicReference : hadith.reference;
+        isArabicOnly ? (arabicReference ?? '') : hadith.reference;
     final hasTranslation = hadith.translation.trim().isNotEmpty;
     return Container(
       padding: const EdgeInsets.all(16),
@@ -588,13 +588,14 @@ class _FeaturedHadithCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      primaryReference,
-                      style: GoogleFonts.dmSans(
-                        fontSize: 10,
-                        color: tokens.textSecondary,
+                    if (primaryReference.isNotEmpty)
+                      Text(
+                        primaryReference,
+                        style: GoogleFonts.dmSans(
+                          fontSize: 10,
+                          color: tokens.textSecondary,
+                        ),
                       ),
-                    ),
                     if (!isArabicOnly && arabicReference != null) ...[
                       const SizedBox(height: 4),
                       Align(
@@ -694,7 +695,7 @@ class _HadithCard extends StatelessWidget {
     final gradeLabel =
         isArabicOnly ? (arabicGradeLabel ?? hadith.grade) : hadith.grade;
     final primaryReference =
-        isArabicOnly && arabicReference != null ? arabicReference : hadith.reference;
+        isArabicOnly ? (arabicReference ?? '') : hadith.reference;
     final hasTranslation = hadith.translation.trim().isNotEmpty;
     return GestureDetector(
       onTap: () {
@@ -721,13 +722,14 @@ class _HadithCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        primaryReference,
-                        style: GoogleFonts.dmSans(
-                          fontSize: 10,
-                          color: tokens.textSecondary,
+                      if (primaryReference.isNotEmpty)
+                        Text(
+                          primaryReference,
+                          style: GoogleFonts.dmSans(
+                            fontSize: 10,
+                            color: tokens.textSecondary,
+                          ),
                         ),
-                      ),
                       if (!isArabicOnly && arabicReference != null) ...[
                         const SizedBox(height: 4),
                         Align(

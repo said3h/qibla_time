@@ -256,7 +256,7 @@ class _DuaCard extends StatelessWidget {
     final isArabicOnly = DuaLocalePresentation.isArabicOnly(languageCode);
     final showSource = !isArabicOnly && (dua.source ?? '').isNotEmpty;
     final primaryReference =
-        isArabicOnly && arabicReference != null ? arabicReference : dua.reference;
+        isArabicOnly ? arabicReference : dua.reference;
     final showReference = (primaryReference ?? '').isNotEmpty;
     final hasArabicTitle = DuaLocalePresentation.containsArabicText(dua.title);
     final showTitle = !isArabicOnly || hasArabicTitle;

@@ -782,6 +782,8 @@ class _PrayerBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isArabicOnly = Localizations.localeOf(context).languageCode == 'ar';
+    final primaryLabel = isArabicOnly ? arabic : name;
     final percentage = (ratio * 100).round();
 
     return Column(
@@ -791,20 +793,21 @@ class _PrayerBar extends StatelessWidget {
             SizedBox(
               width: 64,
               child: Text(
-                name,
+                primaryLabel,
                 style: GoogleFonts.amiri(
                   fontSize: 15,
                   color: tokens.textPrimary,
                 ),
               ),
             ),
-            Text(
-              arabic,
-              style: GoogleFonts.amiri(
-                fontSize: 13,
-                color: tokens.textSecondary,
+            if (!isArabicOnly)
+              Text(
+                arabic,
+                style: GoogleFonts.amiri(
+                  fontSize: 13,
+                  color: tokens.textSecondary,
+                ),
               ),
-            ),
             const Spacer(),
             Text(
               '$percentage%',

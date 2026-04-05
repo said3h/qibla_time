@@ -130,9 +130,17 @@ final travelBannerProvider = FutureProvider<String?>((ref) async {
     return null;
   }
 
+  final visibleLabel = _visibleLocationLabelForLanguage(
+    pendingBanner.label,
+    languageCode,
+  );
+  if (visibleLabel == null) {
+    return null;
+  }
+
   final l10n = appLocalizationsForLocaleCode(languageCode);
   return l10n.travelModeBannerLocationDetected(
-    pendingBanner.label,
+    visibleLabel,
     pendingBanner.distanceKm,
   );
 });
@@ -144,5 +152,24 @@ final recentLocationsProvider = FutureProvider<List<RecentLocation>>((
 });
 
 final lastLocationLabelProvider = FutureProvider<String?>((ref) async {
-  return ref.watch(travelModeServiceProvider).getLastLocationLabel();
+  final languageCode = ref.watch(currentLanguageCodeProvider);
+  final label = await ref.watch(travelModeServiceProvider).getLastLocationLabel();
+  return _visibleLocationLabelForLanguage(label, languageCode);
 });
+
+String? _visibleLocationLabelForLanguage(String? label, String languageCode) {
+  final trimmed = label?.trim() ?? '';
+  if (trimmed.isEmpty) {
+    return null;
+  }
+
+  if (languageCode == 'ar' && !_containsArabicScript(trimmed)) {
+    return null;
+  }
+
+  return trimmed;
+}
+
+bool _containsArabicScript(String value) {
+  return RegExp(r'[\u0600-\u06FF]').hasMatch(value);
+}

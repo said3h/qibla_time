@@ -1,3 +1,4 @@
+import '../../../../core/localization/locale_controller.dart';
 import '../../domain/entities/prayer_name.dart';
 import '../../domain/entities/prayer_schedule.dart';
 import '../../domain/usecases/get_next_prayer_info.dart';
@@ -22,7 +23,9 @@ class PrayerWidgetDataSource {
 
     await _widgetSyncService.syncNextPrayer(
       PrayerSnapshot(
-        name: nextPrayer.prayer.displayName.toUpperCase(),
+        name: nextPrayer.prayer
+            .localizedDisplayName(AppLocaleController.effectiveLanguageCode())
+            .toUpperCase(),
         timeLabel:
             '${nextPrayer.time.hour.toString().padLeft(2, '0')}:${nextPrayer.time.minute.toString().padLeft(2, '0')}',
         countdownLabel:

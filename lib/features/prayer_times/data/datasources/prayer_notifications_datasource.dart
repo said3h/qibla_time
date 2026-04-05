@@ -1,3 +1,4 @@
+import '../../../../core/localization/locale_controller.dart';
 import '../../../../core/services/settings_service.dart';
 import '../../../../l10n/l10n.dart';
 import '../../domain/entities/prayer_name.dart';
@@ -54,7 +55,9 @@ class PrayerNotificationsDataSource {
 
       await _notificationService.scheduleAdhan(
         id: _prayerIds[prayer.key]!,
-        prayerName: prayer.key.displayName,
+        prayerName: prayer.key.localizedDisplayName(
+          AppLocaleController.effectiveLanguageCode(),
+        ),
         scheduledAt: prayer.value,
         adhanFile: adhanFile,
       );

@@ -1013,5 +1013,8 @@
       "label": {}
     }
   },
-  "analyticsAchievementUnlocked": "مفتوح"
+  "analyticsAchievementUnlocked": "مفتوح",
+  "dailyBookBadge": "كتاب اليوم",
+  "dailyBookUnavailable": "مكتبة الكتب غير متاحة الآن.",
+  "dailyBookOpenLibrary": "فتح الكتب"
 }

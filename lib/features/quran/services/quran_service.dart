@@ -182,7 +182,10 @@ class QuranService {
     final detail = _offlineCache?[surahNumber];
     if (detail != null && _isValidOfflineDetail(detail)) {
       return SurahLoadResult(
-        detail: detail,
+        detail: _localizedOfflineDetail(
+          detail,
+          languageCode: languageCode,
+        ),
         source: SurahLoadSource.offline,
       );
     }
@@ -402,6 +405,32 @@ class QuranService {
           ayah.number > 0 &&
           ayah.numberInSurah > 0 &&
           ayah.arabic.trim().isNotEmpty,
+    );
+  }
+
+  SurahDetail _localizedOfflineDetail(
+    SurahDetail detail, {
+    required String languageCode,
+  }) {
+    final normalizedLanguage = _normalizeLanguageCode(languageCode);
+    if (normalizedLanguage != 'ar') {
+      return detail;
+    }
+
+    return SurahDetail(
+      summary: detail.summary,
+      ayahs: detail.ayahs
+          .map(
+            (ayah) => SurahAyah(
+              number: ayah.number,
+              numberInSurah: ayah.numberInSurah,
+              arabic: ayah.arabic,
+              transliteration: ayah.transliteration,
+              translation: '',
+              audioUrl: ayah.audioUrl,
+            ),
+          )
+          .toList(),
     );
   }
 

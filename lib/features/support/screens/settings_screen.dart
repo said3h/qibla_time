@@ -20,6 +20,7 @@ import '../../hadith/services/hadith_hourly_reminder_service.dart';
 import '../../hadith/services/hadith_service.dart';
 import '../../prayer_times/domain/entities/prayer_cache_status.dart';
 import '../../prayer_times/domain/entities/prayer_location_diagnostic.dart';
+import '../../prayer_times/domain/entities/prayer_name.dart';
 import '../../prayer_times/domain/entities/ramadan_status.dart';
 import '../../prayer_times/presentation/providers/ramadan_providers.dart';
 import '../../prayer_times/services/adhan_manager.dart';
@@ -538,11 +539,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   ],
                 ),
               ),
-            _buildToggleTile(tokens, 'Fajr', _buildPrayerSubtitle(prayerSchedule?.fajr), adhanFajr, (v) => _toggleBool('fajr', v)),
-            _buildToggleTile(tokens, 'Dhuhr', _buildPrayerSubtitle(prayerSchedule?.dhuhr), adhanDhuhr, (v) => _toggleBool('dhuhr', v)),
-            _buildToggleTile(tokens, 'Asr', _buildPrayerSubtitle(prayerSchedule?.asr), adhanAsr, (v) => _toggleBool('asr', v)),
-            _buildToggleTile(tokens, 'Maghrib', _buildPrayerSubtitle(prayerSchedule?.maghrib), adhanMaghrib, (v) => _toggleBool('maghrib', v)),
-            _buildToggleTile(tokens, 'Isha', _buildPrayerSubtitle(prayerSchedule?.isha), adhanIsha, (v) => _toggleBool('isha', v)),
+            _buildToggleTile(tokens, _prayerSettingLabel('fajr', context), _buildPrayerSubtitle(prayerSchedule?.fajr), adhanFajr, (v) => _toggleBool('fajr', v)),
+            _buildToggleTile(tokens, _prayerSettingLabel('dhuhr', context), _buildPrayerSubtitle(prayerSchedule?.dhuhr), adhanDhuhr, (v) => _toggleBool('dhuhr', v)),
+            _buildToggleTile(tokens, _prayerSettingLabel('asr', context), _buildPrayerSubtitle(prayerSchedule?.asr), adhanAsr, (v) => _toggleBool('asr', v)),
+            _buildToggleTile(tokens, _prayerSettingLabel('maghrib', context), _buildPrayerSubtitle(prayerSchedule?.maghrib), adhanMaghrib, (v) => _toggleBool('maghrib', v)),
+            _buildToggleTile(tokens, _prayerSettingLabel('isha', context), _buildPrayerSubtitle(prayerSchedule?.isha), adhanIsha, (v) => _toggleBool('isha', v)),
             _buildValueTile(
               tokens,
               l10n.settingsHapticFeedback,
@@ -897,6 +898,18 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   String _buildPrayerSubtitle(DateTime? time) {
     final timeLabel = time == null ? context.l10n.commonUnavailable : _formatTime(time);
     return '$timeLabel | $selectedAdhanName';
+  }
+
+  String _prayerSettingLabel(String prayerKey, BuildContext context) {
+    final languageCode = Localizations.localeOf(context).languageCode;
+    return switch (prayerKey) {
+      'fajr' => PrayerName.fajr.localizedDisplayName(languageCode),
+      'dhuhr' => PrayerName.dhuhr.localizedDisplayName(languageCode),
+      'asr' => PrayerName.asr.localizedDisplayName(languageCode),
+      'maghrib' => PrayerName.maghrib.localizedDisplayName(languageCode),
+      'isha' => PrayerName.isha.localizedDisplayName(languageCode),
+      _ => prayerKey,
+    };
   }
 
   String _themeTitle(String id) {

@@ -23,4 +23,23 @@ extension PrayerNameX on PrayerName {
         return 'Isha';
     }
   }
+
+  String get displayNameArabic {
+    switch (this) {
+      case PrayerName.fajr:
+        return 'فجر';
+      case PrayerName.dhuhr:
+        return 'ظهر';
+      case PrayerName.asr:
+        return 'عصر';
+      case PrayerName.maghrib:
+        return 'مغرب';
+      case PrayerName.isha:
+        return 'عشاء';
+    }
+  }
+
+  String localizedDisplayName(String languageCode) {
+    return languageCode == 'ar' ? displayNameArabic : displayName;
+  }
 }

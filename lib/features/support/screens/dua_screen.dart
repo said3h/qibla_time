@@ -448,7 +448,7 @@ class _DuaCard extends StatelessWidget {
         : ReligiousReferenceFormatter.buildArabicReference(dua.reference!);
     final isArabicOnly = DuaLocalePresentation.isArabicOnly(languageCode);
     final primaryReference =
-        isArabicOnly && arabicReference != null ? arabicReference : dua.reference;
+        isArabicOnly ? arabicReference : dua.reference;
     final hasArabicTitle = DuaLocalePresentation.containsArabicText(dua.title);
     final showTitle = !isArabicOnly || hasArabicTitle;
     final hasTransliteration =

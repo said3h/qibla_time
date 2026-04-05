@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../core/localization/locale_controller.dart';
 import '../models/book_model.dart';
 
 /// Servicio para acceder a la API de IslamHouse.
@@ -175,8 +176,8 @@ class IslamHouseBookService {
     return filtered;
   }
 
-  static const String _cacheKey = 'islamhouse_books_cache';
-  static const String _cacheTimestampKey = 'islamhouse_books_cache_timestamp';
+  String get _cacheKey => 'islamhouse_books_cache_$_languageCode';
+  String get _cacheTimestampKey => 'islamhouse_books_cache_timestamp_$_languageCode';
 
   /// Guarda libros en cache.
   Future<void> cacheBooks(List<IslamHouseBook> books) async {
@@ -236,7 +237,8 @@ class IslamHouseBookService {
 }
 
 final islamHouseBookServiceProvider = Provider<IslamHouseBookService>((ref) {
-  return IslamHouseBookService(languageCode: 'es');
+  final languageCode = ref.watch(currentLanguageCodeProvider);
+  return IslamHouseBookService(languageCode: languageCode);
 });
 
 final islamHouseBooksProvider = FutureProvider<List<IslamHouseBook>>((ref) async {
