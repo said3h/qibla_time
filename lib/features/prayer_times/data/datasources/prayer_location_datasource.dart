@@ -35,8 +35,9 @@ class PrayerLocationDataSource {
 
     try {
       final position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high,
+        desiredAccuracy: LocationAccuracy.medium,
         timeLimit: const Duration(seconds: 8),
+        distanceFilter: 100,
       );
       final location = PrayerLocation(
         latitude: position.latitude,
