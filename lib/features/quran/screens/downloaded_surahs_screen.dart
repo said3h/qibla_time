@@ -58,6 +58,8 @@ class DownloadedSurahsScreen extends ConsumerWidget {
             itemBuilder: (_, index) {
               final surah = downloadedSurahs[index];
               final isFavorite = favoriteNumbers.contains(surah.number);
+              final isArabicOnly =
+                  Localizations.localeOf(context).languageCode == 'ar';
               return Container(
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
@@ -87,21 +89,23 @@ class DownloadedSurahsScreen extends ConsumerWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                surah.nameLatin,
+                                isArabicOnly ? surah.nameArabic : surah.nameLatin,
                                 style: GoogleFonts.dmSans(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w700,
                                   color: tokens.textPrimary,
                                 ),
                               ),
-                              const SizedBox(height: 2),
-                              Text(
-                                surah.nameArabic,
-                                style: GoogleFonts.amiri(
-                                  fontSize: 18,
-                                  color: tokens.primaryLight,
+                              if (!isArabicOnly) ...[
+                                const SizedBox(height: 2),
+                                Text(
+                                  surah.nameArabic,
+                                  style: GoogleFonts.amiri(
+                                    fontSize: 18,
+                                    color: tokens.primaryLight,
+                                  ),
                                 ),
-                              ),
+                              ],
                             ],
                           ),
                         ),

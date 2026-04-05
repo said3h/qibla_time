@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 
+import '../../../core/localization/locale_controller.dart';
 import '../../../core/services/audio_service.dart';
 import '../models/quran_models.dart';
 import 'quran_audio_download_service.dart';
@@ -114,7 +115,7 @@ class QuranMiniPlayerController extends StateNotifier<QuranMiniPlayerState> {
     );
 
     state = QuranMiniPlayerState(
-      surahName: summary.nameLatin,
+      surahName: _surahLabel(summary),
       surahNumber: summary.number,
       ayahNumber: ayah.numberInSurah,
       isPlaying: true,
@@ -404,7 +405,7 @@ class QuranMiniPlayerController extends StateNotifier<QuranMiniPlayerState> {
       stopFirst: false,
     );
     state = QuranMiniPlayerState(
-      surahName: summary.nameLatin,
+      surahName: _surahLabel(summary),
       surahNumber: summary.number,
       ayahNumber: ayah.numberInSurah,
       isPlaying: true,
@@ -419,6 +420,12 @@ class QuranMiniPlayerController extends StateNotifier<QuranMiniPlayerState> {
     _surahQueueIndex = -1;
     _resolvedSurahQueue.clear();
     _prefetchingAyahTasks.clear();
+  }
+
+  String _surahLabel(SurahSummary summary) {
+    return _ref.read(currentLanguageCodeProvider) == 'ar'
+        ? summary.nameArabic
+        : summary.nameLatin;
   }
 
   void _handlePlayerStateChanged(PlayerState playerState) {

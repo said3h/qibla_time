@@ -2425,7 +2425,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String navigationMiniPlayerAyah(Object surah, int ayah) {
-    return '$surah · Aleya $ayah';
+    return '$surah · الآية $ayah';
   }
 
   @override
@@ -2481,23 +2481,22 @@ class AppLocalizationsAr extends AppLocalizations {
   String get allahNamesUseInTasbih => 'Usar en tasbih';
 
   @override
-  String get downloadedSurahsTitle => 'Suras descargadas';
+  String get downloadedSurahsTitle => 'السور المنزلة';
 
   @override
-  String get downloadedSurahsEmpty => 'Todavía no has descargado ninguna sura.';
+  String get downloadedSurahsEmpty => 'لم تُنزَّل أي سورة بعد.';
 
   @override
-  String get downloadedSurahsFavorite => 'Favorita';
+  String get downloadedSurahsFavorite => 'مفضلة';
 
   @override
-  String get downloadedSurahsMarkFavorite => 'Marcar favorita';
+  String get downloadedSurahsMarkFavorite => 'تمييز كمفضلة';
 
   @override
-  String get downloadedSurahsRemoveDownload => 'Quitar descarga';
+  String get downloadedSurahsRemoveDownload => 'إزالة التنزيل';
 
   @override
-  String get downloadedSurahsLoadError =>
-      'No hemos podido cargar tus suras descargadas.';
+  String get downloadedSurahsLoadError => 'تعذر علينا تحميل السور المنزلة.';
 
   @override
   String get focusModeDndActive => 'RAKAHA ACTIVA · NO MOLESTAR ENCENDIDO';
@@ -2629,7 +2628,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String quranDownloadAyahAudioError(int ayah) {
-    return 'No se pudo descargar el audio de la aleya $ayah.';
+    return 'تعذر علينا تنزيل صوت الآية $ayah.';
   }
 
   @override

@@ -500,7 +500,7 @@ class _ContinueReadingCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    point.shortLabel,
+                    _readingPointLabel(context, point),
                     style: GoogleFonts.dmSans(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
@@ -562,7 +562,7 @@ class _BookmarksCard extends StatelessWidget {
                     const SizedBox(width: 10),
                     Expanded(
                       child: Text(
-                        bookmark.shortLabel,
+                        _readingPointLabel(context, bookmark),
                         style: GoogleFonts.dmSans(
                           fontSize: 12,
                           color: tokens.textPrimary,
@@ -616,6 +616,7 @@ class _SurahTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final tokens = QiblaThemes.current;
+    final isArabicOnly = Localizations.localeOf(context).languageCode == 'ar';
     final isLastRead = lastReading?.surahNumber == surah.number;
     final bookmarkCount = bookmarks
         .where((bookmark) => bookmark.surahNumber == surah.number)
@@ -648,7 +649,7 @@ class _SurahTile extends StatelessWidget {
           ),
         ),
         title: Text(
-          surah.nameLatin,
+          _surahPrimaryName(context, surah),
           style: GoogleFonts.dmSans(
             color: tokens.textPrimary,
             fontWeight: FontWeight.w500,
@@ -692,13 +693,15 @@ class _SurahTile extends StatelessWidget {
               ),
           ],
         ),
-        trailing: Text(
-          surah.nameArabic,
-          style: GoogleFonts.amiri(
-            fontSize: 20,
-            color: tokens.primaryLight,
-          ),
-        ),
+        trailing: isArabicOnly
+            ? null
+            : Text(
+                surah.nameArabic,
+                style: GoogleFonts.amiri(
+                  fontSize: 20,
+                  color: tokens.primaryLight,
+                ),
+              ),
       ),
     );
   }
@@ -1334,7 +1337,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     return Scaffold(
       backgroundColor: tokens.bgPage,
       appBar: AppBar(
-        title: Text(widget.summary.nameLatin),
+        title: Text(_surahPrimaryName(context, widget.summary)),
       ),
       body: detailAsync.when(
         data: (result) {
@@ -1807,4 +1810,18 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       ),
     );
   }
+}
+
+String _surahPrimaryName(BuildContext context, SurahSummary surah) {
+  return Localizations.localeOf(context).languageCode == 'ar'
+      ? surah.nameArabic
+      : surah.nameLatin;
+}
+
+String _readingPointLabel(BuildContext context, QuranReadingPoint point) {
+  if (Localizations.localeOf(context).languageCode == 'ar') {
+    return '${point.surahNameArabic} · الآية ${point.ayahNumber}';
+  }
+
+  return point.shortLabel;
 }

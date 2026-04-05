@@ -974,6 +974,29 @@
   "navTasbih": "تسبيح",
   "navDua": "دعاء",
   "navQuran": "القرآن",
+  "navigationMiniPlayerAyah": "{surah} · الآية {ayah}",
+  "@navigationMiniPlayerAyah": {
+    "placeholders": {
+      "surah": {},
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "downloadedSurahsTitle": "السور المنزلة",
+  "downloadedSurahsEmpty": "لم تُنزَّل أي سورة بعد.",
+  "downloadedSurahsFavorite": "مفضلة",
+  "downloadedSurahsMarkFavorite": "تمييز كمفضلة",
+  "downloadedSurahsRemoveDownload": "إزالة التنزيل",
+  "downloadedSurahsLoadError": "تعذر علينا تحميل السور المنزلة.",
+  "quranDownloadAyahAudioError": "تعذر علينا تنزيل صوت الآية {ayah}.",
+  "@quranDownloadAyahAudioError": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
   "travelModeBannerLocationDetected": "تم اكتشاف موقع جديد: {label} - {distanceKm} كم",
   "@travelModeBannerLocationDetected": {
     "placeholders": {

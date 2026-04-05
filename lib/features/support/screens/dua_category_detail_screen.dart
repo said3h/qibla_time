@@ -254,6 +254,10 @@ class _DuaCard extends StatelessWidget {
         ? null
         : ReligiousReferenceFormatter.buildArabicReference(dua.reference!);
     final isArabicOnly = DuaLocalePresentation.isArabicOnly(languageCode);
+    final showSource = !isArabicOnly && (dua.source ?? '').isNotEmpty;
+    final primaryReference =
+        isArabicOnly && arabicReference != null ? arabicReference : dua.reference;
+    final showReference = (primaryReference ?? '').isNotEmpty;
     final hasArabicTitle = DuaLocalePresentation.containsArabicText(dua.title);
     final showTitle = !isArabicOnly || hasArabicTitle;
     final hasTransliteration =
@@ -289,12 +293,11 @@ class _DuaCard extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                    if ((dua.source ?? '').isNotEmpty ||
-                        (dua.reference ?? '').isNotEmpty) ...[
+                    if (showSource || showReference) ...[
                       const SizedBox(height: 4),
                       Row(
                         children: [
-                          if ((dua.source ?? '').isNotEmpty) ...[
+                          if (showSource) ...[
                             Flexible(
                               child: Text(
                                 dua.source!,
@@ -305,7 +308,7 @@ class _DuaCard extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            if ((dua.reference ?? '').isNotEmpty)
+                            if (showReference)
                               Text(
                                 ' · ',
                                 style: GoogleFonts.dmSans(
@@ -314,10 +317,10 @@ class _DuaCard extends StatelessWidget {
                                 ),
                               ),
                           ],
-                          if ((dua.reference ?? '').isNotEmpty)
+                          if (showReference)
                             Flexible(
                               child: Text(
-                                dua.reference!,
+                                primaryReference!,
                                 style: GoogleFonts.dmSans(
                                   fontSize: 9,
                                   color: tokens.textSecondary,
@@ -326,7 +329,7 @@ class _DuaCard extends StatelessWidget {
                             ),
                         ],
                       ),
-                      if (arabicReference != null) ...[
+                      if (!isArabicOnly && arabicReference != null) ...[
                         const SizedBox(height: 2),
                         Align(
                           alignment: Alignment.centerRight,

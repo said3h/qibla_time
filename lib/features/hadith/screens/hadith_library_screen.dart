@@ -322,18 +322,26 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
   }
 
   String _collectionLabel(BuildContext context, String value) {
+    final isArabicOnly = Localizations.localeOf(context).languageCode == 'ar';
     if (value == _allCollectionsValue) {
       return context.l10n.hadithLibraryAllCollections;
     }
     if (value == 'Other') {
       return context.l10n.commonOther;
     }
+    if (isArabicOnly) {
+      return _getArabicCollectionLabel(value) ?? value;
+    }
     return value;
   }
 
   String _gradeLabel(BuildContext context, String value) {
+    final isArabicOnly = Localizations.localeOf(context).languageCode == 'ar';
     if (value == _allGradesValue) {
       return context.l10n.hadithLibraryAllGrades;
+    }
+    if (isArabicOnly) {
+      return _getArabicGradeLabel(value) ?? value;
     }
     return value;
   }
@@ -485,6 +493,15 @@ class _FeaturedHadithCard extends StatelessWidget {
     final arabicReference = ReligiousReferenceFormatter.buildArabicReference(
       hadith.reference,
     );
+    final collection = _extractCollection(hadith.reference);
+    final arabicCollectionLabel = _getArabicCollectionLabel(collection);
+    final collectionLabel =
+        isArabicOnly ? (arabicCollectionLabel ?? collection) : collection;
+    final arabicGradeLabel = _getArabicGradeLabel(hadith.grade);
+    final gradeLabel =
+        isArabicOnly ? (arabicGradeLabel ?? hadith.grade) : hadith.grade;
+    final primaryReference =
+        isArabicOnly && arabicReference != null ? arabicReference : hadith.reference;
     final hasTranslation = hadith.translation.trim().isNotEmpty;
     return Container(
       padding: const EdgeInsets.all(16),
@@ -520,19 +537,16 @@ class _FeaturedHadithCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      _extractCollection(hadith.reference),
+                      collectionLabel,
                       style: GoogleFonts.dmSans(
                         fontSize: 10,
                         fontWeight: FontWeight.w600,
                         color: tokens.primary,
                       ),
                     ),
-                    if (_getArabicCollectionLabel(_extractCollection(hadith.reference)) !=
-                        null)
+                    if (!isArabicOnly && arabicCollectionLabel != null)
                       Text(
-                        _getArabicCollectionLabel(
-                          _extractCollection(hadith.reference),
-                        )!,
+                        arabicCollectionLabel,
                         textAlign: TextAlign.right,
                         style: GoogleFonts.amiri(
                           fontSize: 11,
@@ -575,13 +589,13 @@ class _FeaturedHadithCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      hadith.reference,
+                      primaryReference,
                       style: GoogleFonts.dmSans(
                         fontSize: 10,
                         color: tokens.textSecondary,
                       ),
                     ),
-                    if (arabicReference != null) ...[
+                    if (!isArabicOnly && arabicReference != null) ...[
                       const SizedBox(height: 4),
                       Align(
                         alignment: Alignment.centerRight,
@@ -611,16 +625,16 @@ class _FeaturedHadithCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      hadith.grade,
+                      gradeLabel,
                       style: GoogleFonts.dmSans(
                         fontSize: 9,
                         fontWeight: FontWeight.w600,
                         color: _getGradeColor(hadith.grade),
                       ),
                     ),
-                    if (_getArabicGradeLabel(hadith.grade) != null)
+                    if (!isArabicOnly && arabicGradeLabel != null)
                       Text(
-                        _getArabicGradeLabel(hadith.grade)!,
+                        arabicGradeLabel,
                         textAlign: TextAlign.right,
                         style: GoogleFonts.amiri(
                           fontSize: 10,
@@ -676,6 +690,11 @@ class _HadithCard extends StatelessWidget {
     final arabicReference = ReligiousReferenceFormatter.buildArabicReference(
       hadith.reference,
     );
+    final arabicGradeLabel = _getArabicGradeLabel(hadith.grade);
+    final gradeLabel =
+        isArabicOnly ? (arabicGradeLabel ?? hadith.grade) : hadith.grade;
+    final primaryReference =
+        isArabicOnly && arabicReference != null ? arabicReference : hadith.reference;
     final hasTranslation = hadith.translation.trim().isNotEmpty;
     return GestureDetector(
       onTap: () {
@@ -703,13 +722,13 @@ class _HadithCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        hadith.reference,
+                        primaryReference,
                         style: GoogleFonts.dmSans(
                           fontSize: 10,
                           color: tokens.textSecondary,
                         ),
                       ),
-                      if (arabicReference != null) ...[
+                      if (!isArabicOnly && arabicReference != null) ...[
                         const SizedBox(height: 4),
                         Align(
                           alignment: Alignment.centerRight,
@@ -742,16 +761,16 @@ class _HadithCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        hadith.grade,
+                        gradeLabel,
                         style: GoogleFonts.dmSans(
                           fontSize: 9,
                           fontWeight: FontWeight.w600,
                           color: _getGradeColor(hadith.grade),
                         ),
                       ),
-                      if (_getArabicGradeLabel(hadith.grade) != null)
+                      if (!isArabicOnly && arabicGradeLabel != null)
                         Text(
-                          _getArabicGradeLabel(hadith.grade)!,
+                          arabicGradeLabel,
                           textAlign: TextAlign.right,
                           style: GoogleFonts.amiri(
                             fontSize: 10,

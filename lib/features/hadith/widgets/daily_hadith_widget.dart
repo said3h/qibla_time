@@ -41,6 +41,18 @@ class DailyHadithWidget extends ConsumerWidget {
             favoritesAsync.valueOrNull?.contains(hadith.id) ?? false;
         final arabicReference =
             ReligiousReferenceFormatter.buildArabicReference(snapshot.reference);
+        final arabicCollectionLabel =
+            _getArabicCollectionLabel(snapshot.collection);
+        final arabicGradeLabel = _getArabicGradeLabel(snapshot.grade);
+        final collectionLabel = isArabicOnly
+            ? (arabicCollectionLabel ?? snapshot.collection)
+            : snapshot.collection;
+        final gradeLabel = isArabicOnly
+            ? (arabicGradeLabel ?? snapshot.grade)
+            : snapshot.grade;
+        final primaryReference = isArabicOnly && arabicReference != null
+            ? arabicReference
+            : snapshot.reference;
         final isLightTheme = _isLightTheme(tokens);
         final collectionBaseColor = _getCollectionColor(snapshot.collection);
         final gradeBaseColor = _getGradeColor(snapshot.grade);
@@ -155,16 +167,16 @@ class DailyHadithWidget extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
-                          snapshot.collection,
+                          collectionLabel,
                           style: GoogleFonts.dmSans(
                             fontSize: 9,
                             fontWeight: FontWeight.w600,
                             color: collectionColor,
                           ),
                         ),
-                        if (_getArabicCollectionLabel(snapshot.collection) != null)
+                        if (!isArabicOnly && arabicCollectionLabel != null)
                           Text(
-                            _getArabicCollectionLabel(snapshot.collection)!,
+                            arabicCollectionLabel,
                             textAlign: TextAlign.right,
                             style: GoogleFonts.amiri(
                               fontSize: 11,
@@ -217,13 +229,13 @@ class DailyHadithWidget extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          snapshot.reference,
+                          primaryReference,
                           style: GoogleFonts.dmSans(
                             fontSize: 9,
                             color: tokens.textSecondary,
                           ),
                         ),
-                        if (arabicReference != null) ...[
+                        if (!isArabicOnly && arabicReference != null) ...[
                           const SizedBox(height: 4),
                           Align(
                             alignment: Alignment.centerRight,
@@ -263,16 +275,16 @@ class DailyHadithWidget extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
-                          snapshot.grade,
+                          gradeLabel,
                           style: GoogleFonts.dmSans(
                             fontSize: 8,
                             fontWeight: FontWeight.w600,
                             color: gradeColor,
                           ),
                         ),
-                        if (_getArabicGradeLabel(snapshot.grade) != null)
+                        if (!isArabicOnly && arabicGradeLabel != null)
                           Text(
-                            _getArabicGradeLabel(snapshot.grade)!,
+                            arabicGradeLabel,
                             textAlign: TextAlign.right,
                             style: GoogleFonts.amiri(
                               fontSize: 10,

@@ -1,6 +1,5 @@
 {
   "ar": [
-    "navigationMiniPlayerAyah",
     "onboardingGatePreparing",
     "supportScreenTitle",
     "supportScreenThankYou",
@@ -16,12 +15,6 @@
     "allahNamesIntro",
     "allahNamesLoadError",
     "allahNamesUseInTasbih",
-    "downloadedSurahsTitle",
-    "downloadedSurahsEmpty",
-    "downloadedSurahsFavorite",
-    "downloadedSurahsMarkFavorite",
-    "downloadedSurahsRemoveDownload",
-    "downloadedSurahsLoadError",
     "focusModeDndActive",
     "focusModeOpenDndSettings",
     "focusModeTitle",
@@ -59,7 +52,6 @@
     "analyticsShareFullDaysLabel",
     "analyticsShareFooter",
     "analyticsShareImageError",
-    "quranDownloadAyahAudioError",
     "recentLocationUnknown",
     "cloudSyncRestoreInvalid",
     "cloudSyncRestoreFailed",

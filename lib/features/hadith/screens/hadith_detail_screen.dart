@@ -149,6 +149,14 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
   }
 
   Widget _buildHeader(QiblaTokens tokens, Hadith hadith) {
+    final isArabicOnly = Localizations.localeOf(context).languageCode == 'ar';
+    final collection = _extractCollection(hadith.reference);
+    final arabicCollectionLabel = _getArabicCollectionLabel(collection);
+    final collectionLabel =
+        isArabicOnly ? (arabicCollectionLabel ?? collection) : collection;
+    final arabicGradeLabel = _getArabicGradeLabel(hadith.grade);
+    final gradeLabel =
+        isArabicOnly ? (arabicGradeLabel ?? hadith.grade) : hadith.grade;
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -188,7 +196,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
                         ),
                         const SizedBox(width: 6),
                         Text(
-                          _extractCollection(hadith.reference),
+                          collectionLabel,
                           style: GoogleFonts.dmSans(
                             fontSize: 11,
                             fontWeight: FontWeight.w700,
@@ -197,16 +205,11 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
                         ),
                       ],
                     ),
-                    if (_getArabicCollectionLabel(
-                          _extractCollection(hadith.reference),
-                        ) !=
-                        null)
+                    if (!isArabicOnly && arabicCollectionLabel != null)
                       Padding(
                         padding: const EdgeInsets.only(top: 4),
                         child: Text(
-                          _getArabicCollectionLabel(
-                            _extractCollection(hadith.reference),
-                          )!,
+                          arabicCollectionLabel,
                           textAlign: TextAlign.right,
                           style: GoogleFonts.amiri(
                             fontSize: 12,
@@ -230,16 +233,16 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      hadith.grade,
+                      gradeLabel,
                       style: GoogleFonts.dmSans(
                         fontSize: 10,
                         fontWeight: FontWeight.w700,
                         color: _getGradeColor(hadith.grade),
                       ),
                     ),
-                    if (_getArabicGradeLabel(hadith.grade) != null)
+                    if (!isArabicOnly && arabicGradeLabel != null)
                       Text(
-                        _getArabicGradeLabel(hadith.grade)!,
+                        arabicGradeLabel,
                         textAlign: TextAlign.right,
                         style: GoogleFonts.amiri(
                           fontSize: 11,
@@ -326,9 +329,16 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
   }
 
   Widget _buildReferenceCard(QiblaTokens tokens, Hadith hadith) {
+    final isArabicOnly = Localizations.localeOf(context).languageCode == 'ar';
     final arabicReference = ReligiousReferenceFormatter.buildArabicReference(
       hadith.reference,
     );
+    final arabicGradeLabel = _getArabicGradeLabel(hadith.grade);
+    final primaryReference =
+        isArabicOnly && arabicReference != null ? arabicReference : hadith.reference;
+    final gradeDescription = isArabicOnly && arabicGradeLabel != null
+        ? context.l10n.hadithDetailGrade(arabicGradeLabel)
+        : context.l10n.hadithDetailGrade(hadith.grade);
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -355,14 +365,14 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
           ),
           const SizedBox(height: 10),
           Text(
-            hadith.reference,
+            primaryReference,
             style: GoogleFonts.dmSans(
               fontSize: 13,
               height: 1.6,
               color: tokens.textPrimary,
             ),
           ),
-          if (arabicReference != null) ...[
+          if (!isArabicOnly && arabicReference != null) ...[
             const SizedBox(height: 8),
             Align(
               alignment: Alignment.centerRight,
@@ -383,16 +393,16 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
             children: [
               Expanded(
                 child: Text(
-                  context.l10n.hadithDetailGrade(hadith.grade),
+                  gradeDescription,
                   style: GoogleFonts.dmSans(
                     fontSize: 11,
                     color: tokens.textSecondary,
                   ),
                 ),
               ),
-              if (_getArabicGradeLabel(hadith.grade) != null)
+              if (!isArabicOnly && arabicGradeLabel != null)
                 Text(
-                  _getArabicGradeLabel(hadith.grade)!,
+                  arabicGradeLabel,
                   textAlign: TextAlign.right,
                   style: GoogleFonts.amiri(
                     fontSize: 12,
@@ -408,6 +418,11 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
   }
 
   Widget _buildCategoryCard(QiblaTokens tokens, String category) {
+    final isArabicOnly = Localizations.localeOf(context).languageCode == 'ar';
+    final arabicCategoryLabel = _getArabicCategoryLabel(category);
+    final categoryLabel = isArabicOnly && arabicCategoryLabel != null
+        ? arabicCategoryLabel
+        : _localizedCategoryLabel(category);
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -434,19 +449,19 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
           ),
           const SizedBox(height: 10),
           Text(
-            _localizedCategoryLabel(category),
+            categoryLabel,
             style: GoogleFonts.dmSans(
               fontSize: 13,
               height: 1.6,
               color: tokens.textPrimary,
             ),
           ),
-          if (_getArabicCategoryLabel(category) != null) ...[
+          if (!isArabicOnly && arabicCategoryLabel != null) ...[
             const SizedBox(height: 8),
             Align(
               alignment: Alignment.centerRight,
               child: Text(
-                _getArabicCategoryLabel(category)!,
+                arabicCategoryLabel,
                 textAlign: TextAlign.right,
                 style: GoogleFonts.amiri(
                   fontSize: 13,
@@ -847,6 +862,12 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
   String _localizedCategoryLabel(String category) {
     if (category.trim().isEmpty) {
       return context.l10n.hadithDetailNoCategory;
+    }
+
+    final arabicCategoryLabel = _getArabicCategoryLabel(category);
+    if (Localizations.localeOf(context).languageCode == 'ar' &&
+        arabicCategoryLabel != null) {
+      return arabicCategoryLabel;
     }
 
     if (Localizations.localeOf(context).languageCode != 'en') {
