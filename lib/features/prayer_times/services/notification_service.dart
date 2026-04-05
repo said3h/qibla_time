@@ -3,6 +3,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
+import '../../../core/services/logger_service.dart';
 import '../../../l10n/l10n.dart';
 
 class NotificationService {
@@ -16,18 +17,27 @@ class NotificationService {
   FlutterLocalNotificationsPlugin get plugin => _plugin;
 
   Future<void> initialize() async {
-    tz.initializeTimeZones();
+    try {
+      tz.initializeTimeZones();
 
-    await _plugin.initialize(
-      settings: const InitializationSettings(
-        android: AndroidInitializationSettings('@mipmap/ic_launcher'),
-        iOS: DarwinInitializationSettings(
-          requestAlertPermission: true,
-          requestBadgePermission: true,
-          requestSoundPermission: true,
+      await _plugin.initialize(
+        settings: const InitializationSettings(
+          android: AndroidInitializationSettings('@mipmap/ic_launcher'),
+          iOS: DarwinInitializationSettings(
+            requestAlertPermission: true,
+            requestBadgePermission: true,
+            requestSoundPermission: true,
+          ),
         ),
-      ),
-    );
+      );
+    } catch (e, stackTrace) {
+      AppLogger.error(
+        'Failed to initialize notifications',
+        error: e,
+        stackTrace: stackTrace,
+      );
+      rethrow;
+    }
   }
 
   Future<void> scheduleAdhan({
@@ -36,43 +46,52 @@ class NotificationService {
     required DateTime scheduledAt,
     required String adhanFile,
   }) async {
-    final l10n = appLocalizationsForDevice();
-    final androidSound = _androidSoundNameFor(adhanFile);
-    final androidChannelId = _androidChannelIdFor(adhanFile);
+    try {
+      final l10n = appLocalizationsForDevice();
+      final androidSound = _androidSoundNameFor(adhanFile);
+      final androidChannelId = _androidChannelIdFor(adhanFile);
 
-    await _ensureAndroidAdhanChannel(
-      channelId: androidChannelId,
-      soundName: androidSound,
-      l10n: l10n,
-    );
+      await _ensureAndroidAdhanChannel(
+        channelId: androidChannelId,
+        soundName: androidSound,
+        l10n: l10n,
+      );
 
-    final details = NotificationDetails(
-      android: AndroidNotificationDetails(
-        androidChannelId,
-        l10n.notificationAdhanChannelName,
-        channelDescription: l10n.notificationAdhanChannelDescription,
-        importance: Importance.max,
-        priority: Priority.high,
-        sound: RawResourceAndroidNotificationSound(androidSound),
-        playSound: true,
-        enableVibration: true,
-      ),
-      iOS: DarwinNotificationDetails(
-        sound: adhanFile,
-        presentAlert: true,
-        presentBadge: true,
-        presentSound: true,
-      ),
-    );
+      final details = NotificationDetails(
+        android: AndroidNotificationDetails(
+          androidChannelId,
+          l10n.notificationAdhanChannelName,
+          channelDescription: l10n.notificationAdhanChannelDescription,
+          importance: Importance.max,
+          priority: Priority.high,
+          sound: RawResourceAndroidNotificationSound(androidSound),
+          playSound: true,
+          enableVibration: true,
+        ),
+        iOS: DarwinNotificationDetails(
+          sound: adhanFile,
+          presentAlert: true,
+          presentBadge: true,
+          presentSound: true,
+        ),
+      );
 
-    await _plugin.zonedSchedule(
-      id: id,
-      title: l10n.notificationAdhanTitle(prayerName),
-      body: l10n.notificationAdhanBody,
-      scheduledDate: tz.TZDateTime.from(scheduledAt, tz.local),
-      notificationDetails: details,
-      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-    );
+      await _plugin.zonedSchedule(
+        id: id,
+        title: l10n.notificationAdhanTitle(prayerName),
+        body: l10n.notificationAdhanBody,
+        scheduledDate: tz.TZDateTime.from(scheduledAt, tz.local),
+        notificationDetails: details,
+        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+      );
+    } catch (e, stackTrace) {
+      AppLogger.error(
+        'Failed to schedule adhan notification',
+        error: e,
+        stackTrace: stackTrace,
+      );
+      rethrow;
+    }
   }
 
   Future<void> scheduleReminder({
@@ -81,31 +100,40 @@ class NotificationService {
     required String body,
     required DateTime scheduledAt,
   }) async {
-    final l10n = appLocalizationsForDevice();
-    final details = NotificationDetails(
-      android: AndroidNotificationDetails(
-        'qiblatime_reminders',
-        l10n.notificationReminderChannelName,
-        channelDescription: l10n.notificationReminderChannelDescription,
-        importance: Importance.high,
-        priority: Priority.high,
-        playSound: true,
-      ),
-      iOS: const DarwinNotificationDetails(
-        presentAlert: true,
-        presentBadge: true,
-        presentSound: true,
-      ),
-    );
+    try {
+      final l10n = appLocalizationsForDevice();
+      final details = NotificationDetails(
+        android: AndroidNotificationDetails(
+          'qiblatime_reminders',
+          l10n.notificationReminderChannelName,
+          channelDescription: l10n.notificationReminderChannelDescription,
+          importance: Importance.high,
+          priority: Priority.high,
+          playSound: true,
+        ),
+        iOS: const DarwinNotificationDetails(
+          presentAlert: true,
+          presentBadge: true,
+          presentSound: true,
+        ),
+      );
 
-    await _plugin.zonedSchedule(
-      id: id,
-      title: title,
-      body: body,
-      scheduledDate: tz.TZDateTime.from(scheduledAt, tz.local),
-      notificationDetails: details,
-      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-    );
+      await _plugin.zonedSchedule(
+        id: id,
+        title: title,
+        body: body,
+        scheduledDate: tz.TZDateTime.from(scheduledAt, tz.local),
+        notificationDetails: details,
+        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+      );
+    } catch (e, stackTrace) {
+      AppLogger.error(
+        'Failed to schedule reminder notification',
+        error: e,
+        stackTrace: stackTrace,
+      );
+      rethrow;
+    }
   }
 
   Future<void> showInstant({
@@ -113,36 +141,45 @@ class NotificationService {
     required String body,
     String adhanFile = 'azan1.mp3',
   }) async {
-    final l10n = appLocalizationsForDevice();
-    final androidSound = _androidSoundNameFor(adhanFile);
-    final androidChannelId = _androidChannelIdFor(adhanFile);
+    try {
+      final l10n = appLocalizationsForDevice();
+      final androidSound = _androidSoundNameFor(adhanFile);
+      final androidChannelId = _androidChannelIdFor(adhanFile);
 
-    await _ensureAndroidAdhanChannel(
-      channelId: androidChannelId,
-      soundName: androidSound,
-      l10n: l10n,
-    );
+      await _ensureAndroidAdhanChannel(
+        channelId: androidChannelId,
+        soundName: androidSound,
+        l10n: l10n,
+      );
 
-    await _plugin.show(
-      id: 99,
-      title: title,
-      body: body,
-      notificationDetails: NotificationDetails(
-        android: AndroidNotificationDetails(
-          androidChannelId,
-          l10n.notificationAdhanChannelName,
-          importance: Importance.max,
-          priority: Priority.high,
-          sound: RawResourceAndroidNotificationSound(androidSound),
-          playSound: true,
+      await _plugin.show(
+        id: 99,
+        title: title,
+        body: body,
+        notificationDetails: NotificationDetails(
+          android: AndroidNotificationDetails(
+            androidChannelId,
+            l10n.notificationAdhanChannelName,
+            importance: Importance.max,
+            priority: Priority.high,
+            sound: RawResourceAndroidNotificationSound(androidSound),
+            playSound: true,
+          ),
+          iOS: DarwinNotificationDetails(
+            sound: adhanFile,
+            presentAlert: true,
+            presentSound: true,
+          ),
         ),
-        iOS: DarwinNotificationDetails(
-          sound: adhanFile,
-          presentAlert: true,
-          presentSound: true,
-        ),
-      ),
-    );
+      );
+    } catch (e, stackTrace) {
+      AppLogger.error(
+        'Failed to show instant notification',
+        error: e,
+        stackTrace: stackTrace,
+      );
+      rethrow;
+    }
   }
 
   Future<void> cancel(int id) async => _plugin.cancel(id: id);
@@ -162,26 +199,35 @@ class NotificationService {
     required String soundName,
     required AppLocalizations l10n,
   }) async {
-    final android = _plugin.resolvePlatformSpecificImplementation<
-        AndroidFlutterLocalNotificationsPlugin>();
-    if (android == null) {
-      return;
-    }
+    try {
+      final android = _plugin.resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>();
+      if (android == null) {
+        return;
+      }
 
-    // Android 8+ fija el sonido al crear el canal. Usamos un canal por adhan
-    // para evitar que un canal previo contaminado siga reproduciendo el sonido
-    // por defecto o un adhan antiguo.
-    await android.createNotificationChannel(
-      AndroidNotificationChannel(
-        channelId,
-        l10n.notificationAdhanChannelName,
-        description: l10n.notificationAdhanChannelDescription,
-        importance: Importance.max,
-        playSound: true,
-        enableVibration: true,
-        sound: RawResourceAndroidNotificationSound(soundName),
-      ),
-    );
+      // Android 8+ fija el sonido al crear el canal. Usamos un canal por adhan
+      // para evitar que un canal previo contaminado siga reproduciendo el sonido
+      // por defecto o un adhan antiguo.
+      await android.createNotificationChannel(
+        AndroidNotificationChannel(
+          channelId,
+          l10n.notificationAdhanChannelName,
+          description: l10n.notificationAdhanChannelDescription,
+          importance: Importance.max,
+          playSound: true,
+          enableVibration: true,
+          sound: RawResourceAndroidNotificationSound(soundName),
+        ),
+      );
+    } catch (e, stackTrace) {
+      AppLogger.error(
+        'Failed to create Android adhan notification channel',
+        error: e,
+        stackTrace: stackTrace,
+      );
+      rethrow;
+    }
   }
 
   Future<bool> requestPermission() async {

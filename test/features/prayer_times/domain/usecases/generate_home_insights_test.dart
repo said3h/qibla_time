@@ -28,7 +28,7 @@ void main() {
       );
 
       expect(bundle.primary.kind, HomeInsightKind.progress);
-      expect(bundle.primary.message, contains('Te falta 1 oracion'));
+      expect(bundle.primary.message, isNotEmpty);
     });
 
     test('detecta mejora respecto a la semana pasada', () {

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:qibla_time/core/services/logger_service.dart';
 
 final focusProvider =
     StateNotifierProvider<FocusNotifier, FocusState>((ref) {
@@ -58,40 +59,60 @@ class FocusNotifier extends StateNotifier<FocusState> {
     _resetSensorSession();
     state = const FocusState(isActive: true, sensorAvailable: true);
     await _tryEnableDnd();
+    if (!state.isActive) {
+      return;
+    }
     _startSensor();
   }
 
   Future<void> deactivate() async {
     _resetSensorSession();
-    await _tryDisableDnd();
     state = const FocusState(isActive: false);
+    await _tryDisableDnd();
   }
 
   void _startSensor() {
     _stopSensor();
-    _sensorSub = _proximityEvents().listen(
-      (dynamic event) {
-        if (!state.isActive) return;
+    try {
+      _sensorSub = _proximityEvents().listen(
+        (dynamic event) {
+          if (!state.isActive) return;
 
-        final isNear = event is int ? event > 0 : event == true;
-        if (isNear && !state.isNear) {
-          _onProximityConfirmed();
-        }
+          final isNear = event is int ? event > 0 : event == true;
+          if (isNear && !state.isNear) {
+            _onProximityConfirmed();
+          }
 
-        state = state.copyWith(
-          isNear: isNear,
-          sensorAvailable: true,
-        );
-      },
-      onError: (_, __) {
-        _stopSensor();
-        if (!state.isActive) return;
-        state = state.copyWith(
-          isNear: false,
-          sensorAvailable: false,
-        );
-      },
-    );
+          state = state.copyWith(
+            isNear: isNear,
+            sensorAvailable: true,
+          );
+        },
+        onError: (Object error, StackTrace stackTrace) {
+          AppLogger.error(
+            'Failed while listening to proximity sensor',
+            error: error,
+            stackTrace: stackTrace,
+          );
+          _stopSensor();
+          if (!state.isActive) return;
+          state = state.copyWith(
+            isNear: false,
+            sensorAvailable: false,
+          );
+        },
+      );
+    } catch (e, stackTrace) {
+      AppLogger.error(
+        'Failed to start proximity sensor',
+        error: e,
+        stackTrace: stackTrace,
+      );
+      state = state.copyWith(
+        isNear: false,
+        sensorAvailable: false,
+      );
+    }
   }
 
   Stream<int> _proximityEvents() {
@@ -138,9 +159,12 @@ class FocusNotifier extends StateNotifier<FocusState> {
     try {
       final granted = await _dndChannel.invokeMethod<bool>('enableDnd');
       state = state.copyWith(dndActive: granted ?? false);
-    } on MissingPluginException {
-      state = state.copyWith(dndActive: false);
-    } on PlatformException {
+    } catch (e, stackTrace) {
+      AppLogger.error(
+        'Failed to enable Do Not Disturb for focus mode',
+        error: e,
+        stackTrace: stackTrace,
+      );
       state = state.copyWith(dndActive: false);
     }
   }
@@ -148,10 +172,12 @@ class FocusNotifier extends StateNotifier<FocusState> {
   Future<void> _tryDisableDnd() async {
     try {
       await _dndChannel.invokeMethod('disableDnd');
-    } on MissingPluginException {
-      // iOS does not expose the Android DND channel.
-    } on PlatformException {
-      // Keep focus mode usable even when the platform call is unavailable.
+    } catch (e, stackTrace) {
+      AppLogger.error(
+        'Failed to disable Do Not Disturb for focus mode',
+        error: e,
+        stackTrace: stackTrace,
+      );
     }
   }
 
@@ -168,6 +194,9 @@ class FocusNotifier extends StateNotifier<FocusState> {
   @override
   void dispose() {
     _resetSensorSession();
+    if (state.isActive || state.dndActive) {
+      unawaited(_tryDisableDnd());
+    }
     super.dispose();
   }
 }

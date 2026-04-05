@@ -172,7 +172,7 @@ class TrackingState {
     DateTime? previousDate;
 
     for (final key in sortedKeys) {
-      final date = DateTime.parse(key);
+      final date = _parseDateKeyUtc(key);
       final isComplete = _countForDay(key) == 5;
       final isConsecutive =
           previousDate != null && date.difference(previousDate).inDays == 1;
@@ -290,4 +290,13 @@ class TrackingState {
 
   static String _fmt(DateTime date) =>
       '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
+
+  static DateTime _parseDateKeyUtc(String key) {
+    final parts = key.split('-');
+    return DateTime.utc(
+      int.parse(parts[0]),
+      int.parse(parts[1]),
+      int.parse(parts[2]),
+    );
+  }
 }

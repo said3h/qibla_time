@@ -20,11 +20,20 @@ jobs:
       - name: Verify Flutter version
         run: flutter --version
 
-      - name: Install CocoaPods
-        run: sudo gem install cocoapods
-
       - name: Get dependencies
         run: flutter pub get
+
+      - name: Run tests
+        run: flutter test
+      
+      - name: Check test results
+        if: failure()
+        run: |
+          echo "❌ Tests failed - stopping build"
+          exit 1
+
+      - name: Install CocoaPods
+        run: sudo gem install cocoapods
 
       - name: Install pods
         run: cd ios && pod install

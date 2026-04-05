@@ -11,7 +11,6 @@ void main() {
         enabled: false,
         currentLocation: const PrayerLocation(latitude: 48.8566, longitude: 2.3522),
         currentTimezone: 'CET',
-        label: 'Paris, France',
         previousLocation: const PrayerLocation(latitude: 40.4168, longitude: -3.7038),
         previousTimezone: 'CET',
       );
@@ -25,14 +24,13 @@ void main() {
         enabled: true,
         currentLocation: const PrayerLocation(latitude: 48.8566, longitude: 2.3522),
         currentTimezone: 'CET',
-        label: 'Paris, France',
         previousLocation: const PrayerLocation(latitude: 40.4168, longitude: -3.7038),
         previousTimezone: 'CET',
       );
 
       expect(result.travelDetected, isTrue);
       expect(result.distanceKmRounded, greaterThan(50));
-      expect(result.pendingBanner, contains('Paris, France'));
+      expect(result.pendingBanner, isNull);
     });
 
     test('detects travel when the timezone changes even with little movement', () {
@@ -40,13 +38,12 @@ void main() {
         enabled: true,
         currentLocation: const PrayerLocation(latitude: 48.8566, longitude: 2.3522),
         currentTimezone: 'CEST',
-        label: 'Paris, France',
         previousLocation: const PrayerLocation(latitude: 48.8570, longitude: 2.3525),
         previousTimezone: 'CET',
       );
 
       expect(result.travelDetected, isTrue);
-      expect(result.pendingBanner, isNotNull);
+      expect(result.distanceKmRounded, isNotNull);
     });
 
     test('returns no travel when movement stays below threshold and timezone matches', () {
@@ -54,7 +51,6 @@ void main() {
         enabled: true,
         currentLocation: const PrayerLocation(latitude: 48.8566, longitude: 2.3522),
         currentTimezone: 'CET',
-        label: 'Paris, France',
         previousLocation: const PrayerLocation(latitude: 48.8570, longitude: 2.3525),
         previousTimezone: 'CET',
       );

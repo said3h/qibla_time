@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:qibla_time/features/tracking/services/tracking_service.dart';
+import 'package:qibla_time/features/tracking/models/tracking_models.dart';
 
 void main() {
   group('TrackingState.currentWeekSummary', () {

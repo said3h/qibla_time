@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -24,7 +25,7 @@ class _FocusModeScreenState extends ConsumerState<FocusModeScreen>
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => ref.read(focusProvider.notifier).activate());
+    unawaited(ref.read(focusProvider.notifier).activate());
 
     _exitController = AnimationController(
       vsync: this,
@@ -39,6 +40,7 @@ class _FocusModeScreenState extends ConsumerState<FocusModeScreen>
   @override
   void dispose() {
     _exitController.dispose();
+    ref.read(focusProvider.notifier).deactivate();
     super.dispose();
   }
 

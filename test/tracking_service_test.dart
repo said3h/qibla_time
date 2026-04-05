@@ -1,7 +1,14 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:qibla_time/features/tracking/services/tracking_service.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
+  setUp(() {
+    SharedPreferences.setMockInitialValues({});
+  });
+
   group('PrayerTrackingNotifier', () {
     test('normalizes prayer keys to lowercase canonical values', () async {
       final notifier = PrayerTrackingNotifier();

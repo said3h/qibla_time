@@ -1,3 +1,4 @@
+import '../../../../core/services/logger_service.dart';
 import '../../domain/entities/prayer_location.dart';
 import '../../domain/entities/resolved_prayer_schedule.dart';
 import '../../domain/repositories/prayer_times_repository.dart';
@@ -38,8 +39,17 @@ class PrayerTimesRepositoryImpl implements PrayerTimesRepository {
   final FindInvalidPrayerCacheEntriesUseCase _findInvalidEntriesUseCase;
 
   @override
-  Future<PrayerLocation?> getCurrentLocation() {
-    return _locationDataSource.getCurrentLocation();
+  Future<PrayerLocation?> getCurrentLocation() async {
+    try {
+      return await _locationDataSource.getCurrentLocation();
+    } catch (e, stackTrace) {
+      AppLogger.error(
+        'Failed to get current prayer location',
+        error: e,
+        stackTrace: stackTrace,
+      );
+      rethrow;
+    }
   }
 
   @override
@@ -56,11 +66,30 @@ class PrayerTimesRepositoryImpl implements PrayerTimesRepository {
     DateTime reference, {
     required bool syncWidget,
   }) async {
-    final location = await _locationDataSource.getCurrentLocation();
+    final PrayerLocation? location;
+    try {
+      location = await _locationDataSource.getCurrentLocation();
+    } catch (e, stackTrace) {
+      AppLogger.error(
+        'Failed to load location for prayer schedule',
+        error: e,
+        stackTrace: stackTrace,
+      );
+      rethrow;
+    }
     if (location == null) {
       return null;
     }
-    await _locationDataSource.persistLastKnownLocation(location);
+    try {
+      await _locationDataSource.persistLastKnownLocation(location);
+    } catch (e, stackTrace) {
+      AppLogger.error(
+        'Failed to persist last known prayer location',
+        error: e,
+        stackTrace: stackTrace,
+      );
+      rethrow;
+    }
 
     final settings = await _settingsDataSource.getSettings();
     final cachedSchedule = await _cacheDataSource.getFor(location, reference);
@@ -72,7 +101,16 @@ class PrayerTimesRepositoryImpl implements PrayerTimesRepository {
 
     if (source == PrayerScheduleSource.cache && cachedSchedule != null) {
       if (syncWidget) {
-        await _widgetDataSource.sync(cachedSchedule.schedule);
+        try {
+          await _widgetDataSource.sync(cachedSchedule.schedule);
+        } catch (e, stackTrace) {
+          AppLogger.error(
+            'Failed to sync prayer widget from cached schedule',
+            error: e,
+            stackTrace: stackTrace,
+          );
+          rethrow;
+        }
       }
       return ResolvedPrayerSchedule(
         location: location,
@@ -87,9 +125,27 @@ class PrayerTimesRepositoryImpl implements PrayerTimesRepository {
       settings: settings,
       now: reference,
     );
-    await _cacheDataSource.save(location: location, schedule: calculated);
+    try {
+      await _cacheDataSource.save(location: location, schedule: calculated);
+    } catch (e, stackTrace) {
+      AppLogger.error(
+        'Failed to cache calculated prayer schedule',
+        error: e,
+        stackTrace: stackTrace,
+      );
+      rethrow;
+    }
     if (syncWidget) {
-      await _widgetDataSource.sync(calculated);
+      try {
+        await _widgetDataSource.sync(calculated);
+      } catch (e, stackTrace) {
+        AppLogger.error(
+          'Failed to sync prayer widget from calculated schedule',
+          error: e,
+          stackTrace: stackTrace,
+        );
+        rethrow;
+      }
     }
     return ResolvedPrayerSchedule(
       location: location,
@@ -104,13 +160,22 @@ class PrayerTimesRepositoryImpl implements PrayerTimesRepository {
     PrayerLocation location, {
     double kmThreshold = 50,
   }) async {
-    final entries = await _cacheDataSource.getAll();
-    final keys = _findInvalidEntriesUseCase.call(
-      entries: entries,
-      currentLocation: location,
-      now: DateTime.now(),
-      kmThreshold: kmThreshold,
-    );
-    await _cacheDataSource.deleteAll(keys);
+    try {
+      final entries = await _cacheDataSource.getAll();
+      final keys = _findInvalidEntriesUseCase.call(
+        entries: entries,
+        currentLocation: location,
+        now: DateTime.now(),
+        kmThreshold: kmThreshold,
+      );
+      await _cacheDataSource.deleteAll(keys);
+    } catch (e, stackTrace) {
+      AppLogger.error(
+        'Failed to invalidate prayer cache for location',
+        error: e,
+        stackTrace: stackTrace,
+      );
+      rethrow;
+    }
   }
 }
