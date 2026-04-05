@@ -15,6 +15,10 @@
       "ar": {
         "name": "الرحمن",
         "description": ""
+      },
+      "fr": {
+        "name": "Le Tout Miséricordieux",
+        "description": ""
       }
     }
   },
@@ -33,6 +37,10 @@
       },
       "ar": {
         "name": "الرحيم",
+        "description": ""
+      },
+      "fr": {
+        "name": "Le Très Miséricordieux",
         "description": ""
       }
     }
@@ -53,6 +61,10 @@
       "ar": {
         "name": "الملك",
         "description": ""
+      },
+      "fr": {
+        "name": "Le Roi Souverain",
+        "description": ""
       }
     }
   },
@@ -71,6 +83,10 @@
       },
       "ar": {
         "name": "القدوس",
+        "description": ""
+      },
+      "fr": {
+        "name": "Le Très Saint",
         "description": ""
       }
     }
@@ -91,6 +107,10 @@
       "ar": {
         "name": "السلام",
         "description": ""
+      },
+      "fr": {
+        "name": "La Paix",
+        "description": ""
       }
     }
   },
@@ -109,6 +129,10 @@
       },
       "ar": {
         "name": "المؤمن",
+        "description": ""
+      },
+      "fr": {
+        "name": "Le Garant de la foi",
         "description": ""
       }
     }
@@ -129,6 +153,10 @@
       "ar": {
         "name": "المهيمن",
         "description": ""
+      },
+      "fr": {
+        "name": "Le Protecteur",
+        "description": ""
       }
     }
   },
@@ -147,6 +175,10 @@
       },
       "ar": {
         "name": "العزيز",
+        "description": ""
+      },
+      "fr": {
+        "name": "Le Tout Puissant",
         "description": ""
       }
     }
@@ -167,6 +199,10 @@
       "ar": {
         "name": "الجبار",
         "description": ""
+      },
+      "fr": {
+        "name": "L'Imposant",
+        "description": ""
       }
     }
   },
@@ -185,6 +221,10 @@
       },
       "ar": {
         "name": "المتكبر",
+        "description": ""
+      },
+      "fr": {
+        "name": "Le Suprême",
         "description": ""
       }
     }
@@ -205,6 +245,10 @@
       "ar": {
         "name": "الخالق",
         "description": ""
+      },
+      "fr": {
+        "name": "Le Créateur",
+        "description": ""
       }
     }
   },
@@ -223,6 +267,10 @@
       },
       "ar": {
         "name": "البارئ",
+        "description": ""
+      },
+      "fr": {
+        "name": "Le Producteur",
         "description": ""
       }
     }
@@ -243,6 +291,10 @@
       "ar": {
         "name": "المصور",
         "description": ""
+      },
+      "fr": {
+        "name": "Le Formateur",
+        "description": ""
       }
     }
   },
@@ -261,6 +313,10 @@
       },
       "ar": {
         "name": "الغفار",
+        "description": ""
+      },
+      "fr": {
+        "name": "Le Grand Pardonneur",
         "description": ""
       }
     }
@@ -281,6 +337,10 @@
       "ar": {
         "name": "القهار",
         "description": ""
+      },
+      "fr": {
+        "name": "Le Dominateur",
+        "description": ""
       }
     }
   },
@@ -299,6 +359,10 @@
       },
       "ar": {
         "name": "الوهاب",
+        "description": ""
+      },
+      "fr": {
+        "name": "Le Grand Donateur",
         "description": ""
       }
     }
@@ -319,6 +383,10 @@
       "ar": {
         "name": "الرزاق",
         "description": ""
+      },
+      "fr": {
+        "name": "Le Grand Pourvoyeur",
+        "description": ""
       }
     }
   },
@@ -337,6 +405,10 @@
       },
       "ar": {
         "name": "الفتاح",
+        "description": ""
+      },
+      "fr": {
+        "name": "Celui qui ouvre",
         "description": ""
       }
     }
@@ -357,6 +429,10 @@
       "ar": {
         "name": "العليم",
         "description": ""
+      },
+      "fr": {
+        "name": "L'Omniscient",
+        "description": ""
       }
     }
   },
@@ -375,6 +451,10 @@
       },
       "ar": {
         "name": "القابض",
+        "description": ""
+      },
+      "fr": {
+        "name": "Celui qui restreint",
         "description": ""
       }
     }
@@ -395,6 +475,10 @@
       "ar": {
         "name": "الباسط",
         "description": ""
+      },
+      "fr": {
+        "name": "Celui qui dilate",
+        "description": ""
       }
     }
   },
@@ -413,6 +497,10 @@
       },
       "ar": {
         "name": "الخافض",
+        "description": ""
+      },
+      "fr": {
+        "name": "Celui qui abaisse",
         "description": ""
       }
     }
@@ -433,6 +521,10 @@
       "ar": {
         "name": "الرافع",
         "description": ""
+      },
+      "fr": {
+        "name": "Celui qui élève",
+        "description": ""
       }
     }
   },
@@ -451,6 +543,10 @@
       },
       "ar": {
         "name": "المعز",
+        "description": ""
+      },
+      "fr": {
+        "name": "Celui qui rend puissant",
         "description": ""
       }
     }
@@ -471,6 +567,10 @@
       "ar": {
         "name": "المذل",
         "description": ""
+      },
+      "fr": {
+        "name": "Celui qui humilie",
+        "description": ""
       }
     }
   },
@@ -489,6 +589,10 @@
       },
       "ar": {
         "name": "السميع",
+        "description": ""
+      },
+      "fr": {
+        "name": "L'Audient",
         "description": ""
       }
     }
@@ -509,6 +613,10 @@
       "ar": {
         "name": "البصير",
         "description": ""
+      },
+      "fr": {
+        "name": "Le Clairvoyant",
+        "description": ""
       }
     }
   },
@@ -527,6 +635,10 @@
       },
       "ar": {
         "name": "الحكم",
+        "description": ""
+      },
+      "fr": {
+        "name": "Le Juge",
         "description": ""
       }
     }
@@ -547,6 +659,10 @@
       "ar": {
         "name": "العدل",
         "description": ""
+      },
+      "fr": {
+        "name": "Le Juste",
+        "description": ""
       }
     }
   },
@@ -565,6 +681,10 @@
       },
       "ar": {
         "name": "اللطيف",
+        "description": ""
+      },
+      "fr": {
+        "name": "Le Doux",
         "description": ""
       }
     }
@@ -585,6 +705,10 @@
       "ar": {
         "name": "الخبير",
         "description": ""
+      },
+      "fr": {
+        "name": "Le Bien-Informé",
+        "description": ""
       }
     }
   },
@@ -603,6 +727,10 @@
       },
       "ar": {
         "name": "الحليم",
+        "description": ""
+      },
+      "fr": {
+        "name": "Le Longanime",
         "description": ""
       }
     }
@@ -623,6 +751,10 @@
       "ar": {
         "name": "العظيم",
         "description": ""
+      },
+      "fr": {
+        "name": "Le Magnifique",
+        "description": ""
       }
     }
   },
@@ -641,6 +773,10 @@
       },
       "ar": {
         "name": "الغفور",
+        "description": ""
+      },
+      "fr": {
+        "name": "Le Pardonneur",
         "description": ""
       }
     }
@@ -661,6 +797,10 @@
       "ar": {
         "name": "الشكور",
         "description": ""
+      },
+      "fr": {
+        "name": "Le Reconnaissant",
+        "description": ""
       }
     }
   },
@@ -679,6 +819,10 @@
       },
       "ar": {
         "name": "العلي",
+        "description": ""
+      },
+      "fr": {
+        "name": "Le Sublime",
         "description": ""
       }
     }
@@ -699,6 +843,10 @@
       "ar": {
         "name": "الكبير",
         "description": ""
+      },
+      "fr": {
+        "name": "Le Plus Grand",
+        "description": ""
       }
     }
   },
@@ -717,6 +865,10 @@
       },
       "ar": {
         "name": "الحفيظ",
+        "description": ""
+      },
+      "fr": {
+        "name": "Le Préservateur",
         "description": ""
       }
     }
@@ -737,6 +889,10 @@
       "ar": {
         "name": "المقيت",
         "description": ""
+      },
+      "fr": {
+        "name": "Le Nourricier",
+        "description": ""
       }
     }
   },
@@ -755,6 +911,10 @@
       },
       "ar": {
         "name": "الحسيب",
+        "description": ""
+      },
+      "fr": {
+        "name": "Celui qui règle les comptes",
         "description": ""
       }
     }
@@ -775,6 +935,10 @@
       "ar": {
         "name": "الجليل",
         "description": ""
+      },
+      "fr": {
+        "name": "Le Majestueux",
+        "description": ""
       }
     }
   },
@@ -793,6 +957,10 @@
       },
       "ar": {
         "name": "الكريم",
+        "description": ""
+      },
+      "fr": {
+        "name": "Le Généreux",
         "description": ""
       }
     }
@@ -813,6 +981,10 @@
       "ar": {
         "name": "الرقيب",
         "description": ""
+      },
+      "fr": {
+        "name": "L'Observateur",
+        "description": ""
       }
     }
   },
@@ -831,6 +1003,10 @@
       },
       "ar": {
         "name": "المجيب",
+        "description": ""
+      },
+      "fr": {
+        "name": "Celui qui exauce",
         "description": ""
       }
     }
@@ -851,6 +1027,10 @@
       "ar": {
         "name": "الواسع",
         "description": ""
+      },
+      "fr": {
+        "name": "L'Immense",
+        "description": ""
       }
     }
   },
@@ -869,6 +1049,10 @@
       },
       "ar": {
         "name": "الحكيم",
+        "description": ""
+      },
+      "fr": {
+        "name": "Le Sage",
         "description": ""
       }
     }
@@ -889,6 +1073,10 @@
       "ar": {
         "name": "الودود",
         "description": ""
+      },
+      "fr": {
+        "name": "Le Tout Affectueux",
+        "description": ""
       }
     }
   },
@@ -907,6 +1095,10 @@
       },
       "ar": {
         "name": "المجيد",
+        "description": ""
+      },
+      "fr": {
+        "name": "Le Glorieux",
         "description": ""
       }
     }
@@ -927,6 +1119,10 @@
       "ar": {
         "name": "الباعث",
         "description": ""
+      },
+      "fr": {
+        "name": "Celui qui ressuscite",
+        "description": ""
       }
     }
   },
@@ -945,6 +1141,10 @@
       },
       "ar": {
         "name": "الشهيد",
+        "description": ""
+      },
+      "fr": {
+        "name": "Le Témoin",
         "description": ""
       }
     }
@@ -965,6 +1165,10 @@
       "ar": {
         "name": "الحق",
         "description": ""
+      },
+      "fr": {
+        "name": "La Vérité",
+        "description": ""
       }
     }
   },
@@ -983,6 +1187,10 @@
       },
       "ar": {
         "name": "الوكيل",
+        "description": ""
+      },
+      "fr": {
+        "name": "Celui qui se suffit",
         "description": ""
       }
     }
@@ -1003,6 +1211,10 @@
       "ar": {
         "name": "القوي",
         "description": ""
+      },
+      "fr": {
+        "name": "Le Fort",
+        "description": ""
       }
     }
   },
@@ -1021,6 +1233,10 @@
       },
       "ar": {
         "name": "المتين",
+        "description": ""
+      },
+      "fr": {
+        "name": "Le Solide",
         "description": ""
       }
     }
@@ -1041,6 +1257,10 @@
       "ar": {
         "name": "الولي",
         "description": ""
+      },
+      "fr": {
+        "name": "Le Protecteur",
+        "description": ""
       }
     }
   },
@@ -1059,6 +1279,10 @@
       },
       "ar": {
         "name": "الحميد",
+        "description": ""
+      },
+      "fr": {
+        "name": "Le Louable",
         "description": ""
       }
     }
@@ -1079,6 +1303,10 @@
       "ar": {
         "name": "المحصي",
         "description": ""
+      },
+      "fr": {
+        "name": "Celui qui dénombre tout",
+        "description": ""
       }
     }
   },
@@ -1097,6 +1325,10 @@
       },
       "ar": {
         "name": "المبدئ",
+        "description": ""
+      },
+      "fr": {
+        "name": "Celui qui commence",
         "description": ""
       }
     }
@@ -1117,6 +1349,10 @@
       "ar": {
         "name": "المعيد",
         "description": ""
+      },
+      "fr": {
+        "name": "Celui qui fait revenir",
+        "description": ""
       }
     }
   },
@@ -1135,6 +1371,10 @@
       },
       "ar": {
         "name": "المحيي",
+        "description": ""
+      },
+      "fr": {
+        "name": "Celui qui donne la vie",
         "description": ""
       }
     }
@@ -1155,6 +1395,10 @@
       "ar": {
         "name": "المميت",
         "description": ""
+      },
+      "fr": {
+        "name": "Celui qui donne la mort",
+        "description": ""
       }
     }
   },
@@ -1173,6 +1417,10 @@
       },
       "ar": {
         "name": "الحي",
+        "description": ""
+      },
+      "fr": {
+        "name": "Le Vivant",
         "description": ""
       }
     }
@@ -1193,6 +1441,10 @@
       "ar": {
         "name": "القيوم",
         "description": ""
+      },
+      "fr": {
+        "name": "Le Subsistant",
+        "description": ""
       }
     }
   },
@@ -1211,6 +1463,10 @@
       },
       "ar": {
         "name": "الواجد",
+        "description": ""
+      },
+      "fr": {
+        "name": "Celui qui trouve tout",
         "description": ""
       }
     }
@@ -1231,6 +1487,10 @@
       "ar": {
         "name": "الماجد",
         "description": ""
+      },
+      "fr": {
+        "name": "Le Noble et Glorieux",
+        "description": ""
       }
     }
   },
@@ -1249,6 +1509,10 @@
       },
       "ar": {
         "name": "الواحد",
+        "description": ""
+      },
+      "fr": {
+        "name": "L'Unique",
         "description": ""
       }
     }
@@ -1269,6 +1533,10 @@
       "ar": {
         "name": "الأحد",
         "description": ""
+      },
+      "fr": {
+        "name": "L'Un",
+        "description": ""
       }
     }
   },
@@ -1287,6 +1555,10 @@
       },
       "ar": {
         "name": "الصمد",
+        "description": ""
+      },
+      "fr": {
+        "name": "L'Absolu",
         "description": ""
       }
     }
@@ -1307,6 +1579,10 @@
       "ar": {
         "name": "القادر",
         "description": ""
+      },
+      "fr": {
+        "name": "Le Capable",
+        "description": ""
       }
     }
   },
@@ -1325,6 +1601,10 @@
       },
       "ar": {
         "name": "المقتدر",
+        "description": ""
+      },
+      "fr": {
+        "name": "Le Détenteur de tout pouvoir",
         "description": ""
       }
     }
@@ -1345,6 +1625,10 @@
       "ar": {
         "name": "المقدم",
         "description": ""
+      },
+      "fr": {
+        "name": "Celui qui avance",
+        "description": ""
       }
     }
   },
@@ -1363,6 +1647,10 @@
       },
       "ar": {
         "name": "المؤخر",
+        "description": ""
+      },
+      "fr": {
+        "name": "Celui qui retarde",
         "description": ""
       }
     }
@@ -1383,6 +1671,10 @@
       "ar": {
         "name": "الأول",
         "description": ""
+      },
+      "fr": {
+        "name": "Le Premier",
+        "description": ""
       }
     }
   },
@@ -1401,6 +1693,10 @@
       },
       "ar": {
         "name": "الآخر",
+        "description": ""
+      },
+      "fr": {
+        "name": "Le Dernier",
         "description": ""
       }
     }
@@ -1421,6 +1717,10 @@
       "ar": {
         "name": "الظاهر",
         "description": ""
+      },
+      "fr": {
+        "name": "L'Apparent",
+        "description": ""
       }
     }
   },
@@ -1439,6 +1739,10 @@
       },
       "ar": {
         "name": "الباطن",
+        "description": ""
+      },
+      "fr": {
+        "name": "Le Caché",
         "description": ""
       }
     }
@@ -1459,6 +1763,10 @@
       "ar": {
         "name": "الوالي",
         "description": ""
+      },
+      "fr": {
+        "name": "Le Gouverneur",
+        "description": ""
       }
     }
   },
@@ -1477,6 +1785,10 @@
       },
       "ar": {
         "name": "المتعالي",
+        "description": ""
+      },
+      "fr": {
+        "name": "Le Très Exalté",
         "description": ""
       }
     }
@@ -1497,6 +1809,10 @@
       "ar": {
         "name": "البر",
         "description": ""
+      },
+      "fr": {
+        "name": "Le Bienfaisant",
+        "description": ""
       }
     }
   },
@@ -1515,6 +1831,10 @@
       },
       "ar": {
         "name": "التواب",
+        "description": ""
+      },
+      "fr": {
+        "name": "Celui qui accepte le repentir",
         "description": ""
       }
     }
@@ -1535,6 +1855,10 @@
       "ar": {
         "name": "المنتقم",
         "description": ""
+      },
+      "fr": {
+        "name": "Le Justicier",
+        "description": ""
       }
     }
   },
@@ -1553,6 +1877,10 @@
       },
       "ar": {
         "name": "العفو",
+        "description": ""
+      },
+      "fr": {
+        "name": "L'Indulgent",
         "description": ""
       }
     }
@@ -1573,6 +1901,10 @@
       "ar": {
         "name": "الرؤوف",
         "description": ""
+      },
+      "fr": {
+        "name": "Le Compatissant",
+        "description": ""
       }
     }
   },
@@ -1591,6 +1923,10 @@
       },
       "ar": {
         "name": "مالك الملك",
+        "description": ""
+      },
+      "fr": {
+        "name": "Le Maître du Royaume",
         "description": ""
       }
     }
@@ -1611,6 +1947,10 @@
       "ar": {
         "name": "ذو الجلال والإكرام",
         "description": ""
+      },
+      "fr": {
+        "name": "Le Seigneur de la Majesté et de la Générosité",
+        "description": ""
       }
     }
   },
@@ -1629,6 +1969,10 @@
       },
       "ar": {
         "name": "المقسط",
+        "description": ""
+      },
+      "fr": {
+        "name": "L'Équitable",
         "description": ""
       }
     }
@@ -1649,6 +1993,10 @@
       "ar": {
         "name": "الجامع",
         "description": ""
+      },
+      "fr": {
+        "name": "Le Rassembleur",
+        "description": ""
       }
     }
   },
@@ -1667,6 +2015,10 @@
       },
       "ar": {
         "name": "الغني",
+        "description": ""
+      },
+      "fr": {
+        "name": "Le Riche",
         "description": ""
       }
     }
@@ -1687,6 +2039,10 @@
       "ar": {
         "name": "المغني",
         "description": ""
+      },
+      "fr": {
+        "name": "Celui qui enrichit",
+        "description": ""
       }
     }
   },
@@ -1705,6 +2061,10 @@
       },
       "ar": {
         "name": "المانع",
+        "description": ""
+      },
+      "fr": {
+        "name": "Celui qui empêche",
         "description": ""
       }
     }
@@ -1725,6 +2085,10 @@
       "ar": {
         "name": "الضار",
         "description": ""
+      },
+      "fr": {
+        "name": "Celui qui nuit",
+        "description": ""
       }
     }
   },
@@ -1743,6 +2107,10 @@
       },
       "ar": {
         "name": "النافع",
+        "description": ""
+      },
+      "fr": {
+        "name": "Celui qui profite",
         "description": ""
       }
     }
@@ -1763,6 +2131,10 @@
       "ar": {
         "name": "النور",
         "description": ""
+      },
+      "fr": {
+        "name": "La Lumière",
+        "description": ""
       }
     }
   },
@@ -1781,6 +2153,10 @@
       },
       "ar": {
         "name": "الهادي",
+        "description": ""
+      },
+      "fr": {
+        "name": "Le Guide",
         "description": ""
       }
     }
@@ -1801,6 +2177,10 @@
       "ar": {
         "name": "البديع",
         "description": ""
+      },
+      "fr": {
+        "name": "L'Incomparable Créateur",
+        "description": ""
       }
     }
   },
@@ -1819,6 +2199,10 @@
       },
       "ar": {
         "name": "الباقي",
+        "description": ""
+      },
+      "fr": {
+        "name": "L'Éternel",
         "description": ""
       }
     }
@@ -1839,6 +2223,10 @@
       "ar": {
         "name": "الوارث",
         "description": ""
+      },
+      "fr": {
+        "name": "L'Héritier",
+        "description": ""
       }
     }
   },
@@ -1858,6 +2246,10 @@
       "ar": {
         "name": "الرشيد",
         "description": ""
+      },
+      "fr": {
+        "name": "Celui qui guide avec droiture",
+        "description": ""
       }
     }
   },
@@ -1876,6 +2268,10 @@
       },
       "ar": {
         "name": "الصبور",
+        "description": ""
+      },
+      "fr": {
+        "name": "Le Patient",
         "description": ""
       }
     }
