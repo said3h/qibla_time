@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:adhan/adhan.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -58,6 +62,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   CalculationMethod calculationMethod = CalculationMethod.muslim_world_league;
   String selectedAdhanName = '';
 
+  bool _exactAlarmPermissionGranted = true;
+
   // Hadices settings
   bool dailyInspirationEnabled = false;
   int dailyInspirationHour = 8;
@@ -114,6 +120,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     dailyInspirationHour = await inspirationService.getNotificationHour();
     hadithFavoritesCount =
         (await ref.read(hadithServiceProvider).getFavorites()).length;
+
+    if (Platform.isAndroid) {
+      final androidInfo = await DeviceInfoPlugin().androidInfo;
+      if (androidInfo.version.sdkInt >= 31) {
+        final status = await Permission.scheduleExactAlarm.status;
+        if (mounted) setState(() => _exactAlarmPermissionGranted = status.isGranted);
+      }
+    }
 
     if (!mounted) return;
     setState(() {});
@@ -535,6 +549,36 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                           color: tokens.textPrimary,
                         ),
                       ),
+                    ),
+                  ],
+                ),
+              ),
+            if (!_exactAlarmPermissionGranted && Platform.isAndroid)
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 8),
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: tokens.bgSurface,
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: tokens.border),
+                ),
+                child: Row(
+                  children: [
+                    const Icon(Icons.alarm_off, color: Colors.orange, size: 20),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        'El adhan puede no sonar si la app está cerrada. Activa las alarmas exactas en Ajustes.',
+                        style: TextStyle(fontSize: 13, color: tokens.textPrimary),
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () async {
+                        await openAppSettings();
+                        if (!mounted) return;
+                        await _loadSettings();
+                      },
+                      child: const Text('Activar'),
                     ),
                   ],
                 ),
