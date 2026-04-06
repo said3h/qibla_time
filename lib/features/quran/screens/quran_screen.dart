@@ -162,15 +162,21 @@ class QuranScreen extends ConsumerWidget {
               },
             ),
             const SizedBox(height: 16),
-            ...surahs.map(
-              (surah) => _SurahTile(
-                surah: surah,
-                lastReading: lastReading,
-                bookmarks: bookmarks,
-                isDownloaded: downloadedSurahs.contains(surah.number),
-                isDownloadedFavorite:
-                    favoriteDownloadedSurahs.contains(surah.number),
-              ),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: surahs.length,
+              itemBuilder: (context, index) {
+                final surah = surahs[index];
+                return _SurahTile(
+                  surah: surah,
+                  lastReading: lastReading,
+                  bookmarks: bookmarks,
+                  isDownloaded: downloadedSurahs.contains(surah.number),
+                  isDownloadedFavorite:
+                      favoriteDownloadedSurahs.contains(surah.number),
+                );
+              },
             ),
           ],
         ),
