@@ -11,8 +11,10 @@ import '../models/hadith.dart';
 import '../services/hadith_service.dart';
 import '../services/hadith_share_service.dart';
 import '../utils/hadith_category_presentation.dart';
+import '../utils/hadith_collection_presentation.dart';
 import '../widgets/hadith_share_preview_sheet.dart';
 import 'hadith_category_detail_screen.dart';
+import 'hadith_collection_detail_screen.dart';
 import 'hadith_detail_screen.dart';
 import 'hadith_offline_screen.dart';
 
@@ -253,6 +255,16 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
                 return ListView(
                   padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
                   children: [
+                    if (_searchController.text.trim().isEmpty)
+                      collectionsAsync.when(
+                        data: (collections) => _buildCollectionSection(
+                          context: context,
+                          collections: collections,
+                        ),
+                        loading: () => const SizedBox.shrink(),
+                        error: (_, __) => const SizedBox.shrink(),
+                      ),
+
                     if (_searchController.text.trim().isEmpty)
                       categoriesAsync.when(
                         data: (categories) => _buildCategorySection(
@@ -500,12 +512,154 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
     );
   }
 
+  Widget _buildCollectionSection({
+    required BuildContext context,
+    required Map<String, int> collections,
+  }) {
+    if (collections.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
+    final tokens = QiblaThemes.current;
+    final languageCode = Localizations.localeOf(context).languageCode;
+    final isArabicOnly = languageCode == 'ar';
+    final collectionEntries = collections.entries.toList()
+      ..sort((a, b) {
+        final leftOrder = HadithCollectionPresentation.orderedCollections.indexOf(
+          a.key,
+        );
+        final rightOrder =
+            HadithCollectionPresentation.orderedCollections.indexOf(b.key);
+        if (leftOrder != -1 || rightOrder != -1) {
+          if (leftOrder == -1) return 1;
+          if (rightOrder == -1) return -1;
+          return leftOrder.compareTo(rightOrder);
+        }
+        final countCompare = b.value.compareTo(a.value);
+        if (countCompare != 0) {
+          return countCompare;
+        }
+        return a.key.toLowerCase().compareTo(b.key.toLowerCase());
+      });
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            context.l10n.commonCollection,
+            style: GoogleFonts.dmSans(
+              fontSize: 9,
+              letterSpacing: 1.4,
+              color: tokens.textSecondary,
+            ),
+          ),
+          const SizedBox(height: 10),
+          GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: collectionEntries.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 8,
+              mainAxisSpacing: 8,
+              childAspectRatio: 1.65,
+            ),
+            itemBuilder: (_, index) {
+              final entry = collectionEntries[index];
+              final meta = HadithCollectionPresentation.metaFor(
+                entry.key,
+                languageCode,
+              );
+              final showArabicLabel =
+                  meta.arabicLabel.isNotEmpty && meta.arabicLabel != meta.label;
+
+              return InkWell(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => HadithCollectionDetailScreen(
+                        collectionKey: entry.key,
+                        collectionLabel: meta.label,
+                        collectionArabicLabel: meta.arabicLabel,
+                      ),
+                    ),
+                  );
+                },
+                borderRadius: BorderRadius.circular(16),
+                child: Container(
+                  padding: const EdgeInsets.all(14),
+                  decoration: BoxDecoration(
+                    color: tokens.bgSurface,
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(color: tokens.border),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(meta.icon, size: 22, color: tokens.primary),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              meta.label,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: isArabicOnly
+                                  ? GoogleFonts.amiri(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w700,
+                                      color: tokens.textPrimary,
+                                    )
+                                  : GoogleFonts.dmSans(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600,
+                                      color: tokens.textPrimary,
+                                    ),
+                            ),
+                            if (showArabicLabel)
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: Text(
+                                  meta.arabicLabel,
+                                  textAlign: TextAlign.right,
+                                  style: GoogleFonts.amiri(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w700,
+                                    color: tokens.textSecondary,
+                                  ),
+                                ),
+                              ),
+                            Text(
+                              context.l10n.hadithLibraryAllHadiths(entry.value),
+                              style: GoogleFonts.dmSans(
+                                fontSize: 10,
+                                color: tokens.textSecondary,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
   String _collectionLabel(BuildContext context, String value) {
     final isArabicOnly = Localizations.localeOf(context).languageCode == 'ar';
     if (value == _allCollectionsValue) {
       return context.l10n.hadithLibraryAllCollections;
     }
-    if (value == 'Other') {
+    if (value == 'Other' || value == 'Otros') {
       return context.l10n.commonOther;
     }
     if (isArabicOnly) {
@@ -577,7 +731,7 @@ class _FilterDropdown extends StatelessWidget {
         ),
         const SizedBox(height: 4),
         DropdownButtonFormField<String>(
-          value: items.contains(value) ? value : items.first,
+          initialValue: items.contains(value) ? value : items.first,
           items: items
               .map(
                 (item) => DropdownMenuItem(
@@ -708,7 +862,7 @@ class _FeaturedHadithCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
                 decoration: BoxDecoration(
-                  color: tokens.primary.withOpacity(0.1),
+                  color: tokens.primary.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Column(
@@ -797,7 +951,7 @@ class _FeaturedHadithCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: _getGradeColor(hadith.grade).withOpacity(0.1),
+                  color: _getGradeColor(hadith.grade).withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Column(
@@ -934,7 +1088,7 @@ class _HadithCard extends StatelessWidget {
                     vertical: 4,
                   ),
                   decoration: BoxDecoration(
-                    color: _getGradeColor(hadith.grade).withOpacity(0.1),
+                    color: _getGradeColor(hadith.grade).withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: Column(
@@ -1163,7 +1317,7 @@ String _extractHadithCollection(String reference) {
     return 'Malik';
   }
   if (refLower.contains('ahmad')) return 'Ahmad';
-  return 'Other';
+  return 'Otros';
 }
 
 String? _getArabicCollectionLabel(String collection) {
