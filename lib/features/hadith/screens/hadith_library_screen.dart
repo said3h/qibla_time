@@ -356,7 +356,7 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
 
     if (_selectedCategory != _allCategoriesValue) {
       filtered = filtered
-          .where((h) => h.category == _selectedCategory)
+          .where((h) => h.category.trim().toLowerCase() == _selectedCategory)
           .toList();
     }
 
@@ -411,7 +411,7 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
             itemBuilder: (_, index) {
               final entry = categoryEntries[index];
               final categoryHadiths = hadiths
-                  .where((hadith) => hadith.category == entry.key)
+                  .where((hadith) => hadith.category.trim().toLowerCase() == entry.key)
                   .toList();
               final meta = HadithCategoryPresentation.metaFor(
                 entry.key,
