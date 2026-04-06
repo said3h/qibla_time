@@ -131,8 +131,9 @@ class HadithService {
     final all = await loadAll(forcedLanguage: language);
     final categories = <String, int>{};
     for (final hadith in all) {
-      if (hadith.category.trim().isEmpty) continue;
-      categories[hadith.category] = (categories[hadith.category] ?? 0) + 1;
+      final normalizedCategory = hadith.category.trim().toLowerCase();
+      if (normalizedCategory.isEmpty) continue;
+      categories[normalizedCategory] = (categories[normalizedCategory] ?? 0) + 1;
     }
     return categories;
   }
