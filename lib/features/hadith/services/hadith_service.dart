@@ -140,22 +140,33 @@ class HadithService {
 
   String _extractCollection(String reference) {
     final refLower = reference.toLowerCase();
-    if (refLower.contains('bujari') || refLower.contains('bukhari')) {
-      return 'Bukhari';
+    if (refLower.contains('bujari') ||
+        refLower.contains('bukhari') ||
+        refLower.contains('boukhari')) {
+      return 'Sahih al-Bukhari';
     }
-    if (refLower.contains('muslim')) return 'Muslim';
-    if (refLower.contains('tirmidhi')) return 'Tirmidhi';
-    if (refLower.contains('abu dawud') || refLower.contains('abudawud')) {
-      return 'Abu Dawud';
+    if (refLower.contains('muslim') || refLower.contains('mouslim')) {
+      return 'Sahih Muslim';
     }
-    if (refLower.contains('nasai')) return 'Nasai';
+    if (refLower.contains('riyad') || refLower.contains('salihin')) {
+      return 'Riyad as-Salihin';
+    }
+    if (refLower.contains('nawawi')) return '40 Hadith Nawawi';
+    if (refLower.contains('tirmidhi')) return 'Jami\' at-Tirmidhi';
+    if (refLower.contains('abu dawud') ||
+        refLower.contains('abudawud') ||
+        refLower.contains('abou dawoud')) {
+      return 'Sunan Abu Dawud';
+    }
+    if (refLower.contains('nasai') || refLower.contains('nasa\'i')) {
+      return 'Sunan an-Nasa\'i';
+    }
     if (refLower.contains('ibn majah') || refLower.contains('ibnmajah')) {
-      return 'Ibn Majah';
+      return 'Sunan Ibn Majah';
     }
     if (refLower.contains('malik') || refLower.contains('muwatta')) {
-      return 'Malik';
+      return 'Muwatta Malik';
     }
-    if (refLower.contains('ahmad')) return 'Ahmad';
     return 'Otros';
   }
 

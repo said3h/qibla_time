@@ -14,38 +14,41 @@ class HadithCollectionMeta {
 
 class HadithCollectionPresentation {
   static const orderedCollections = <String>[
-    'Bukhari',
-    'Muslim',
-    'Tirmidhi',
-    'Abu Dawud',
-    'Nasai',
-    'Ibn Majah',
-    'Malik',
-    'Ahmad',
+    'Sahih al-Bukhari',
+    'Sahih Muslim',
+    'Riyad as-Salihin',
+    '40 Hadith Nawawi',
+    'Sunan Abu Dawud',
+    'Jami\' at-Tirmidhi',
+    'Sunan an-Nasa\'i',
+    'Sunan Ibn Majah',
+    'Muwatta Malik',
     'Otros',
   ];
 
   static const _icons = <String, IconData>{
-    'Bukhari': Icons.auto_stories_outlined,
-    'Muslim': Icons.book_outlined,
-    'Tirmidhi': Icons.menu_book_outlined,
-    'Abu Dawud': Icons.library_books_outlined,
-    'Nasai': Icons.import_contacts_outlined,
-    'Ibn Majah': Icons.chrome_reader_mode_outlined,
-    'Malik': Icons.collections_bookmark_outlined,
-    'Ahmad': Icons.history_edu_outlined,
+    'Sahih al-Bukhari': Icons.auto_stories_outlined,
+    'Sahih Muslim': Icons.book_outlined,
+    'Riyad as-Salihin': Icons.local_florist_outlined,
+    '40 Hadith Nawawi': Icons.format_list_numbered_outlined,
+    'Sunan Abu Dawud': Icons.library_books_outlined,
+    'Jami\' at-Tirmidhi': Icons.menu_book_outlined,
+    'Sunan an-Nasa\'i': Icons.import_contacts_outlined,
+    'Sunan Ibn Majah': Icons.chrome_reader_mode_outlined,
+    'Muwatta Malik': Icons.collections_bookmark_outlined,
     'Otros': Icons.more_horiz_outlined,
   };
 
   static const _arabicLabels = <String, String>{
-    'Bukhari': 'البخاري',
-    'Muslim': 'مسلم',
-    'Tirmidhi': 'الترمذي',
-    'Abu Dawud': 'أبو داود',
-    'Nasai': 'النسائي',
-    'Ibn Majah': 'ابن ماجه',
-    'Malik': 'مالك',
-    'Ahmad': 'أحمد',
+    'Sahih al-Bukhari': 'صحيح البخاري',
+    'Sahih Muslim': 'صحيح مسلم',
+    'Riyad as-Salihin': 'رياض الصالحين',
+    '40 Hadith Nawawi': 'الأربعون النووية',
+    'Sunan Abu Dawud': 'سنن أبي داود',
+    'Jami\' at-Tirmidhi': 'جامع الترمذي',
+    'Sunan an-Nasa\'i': 'سنن النسائي',
+    'Sunan Ibn Majah': 'سنن ابن ماجه',
+    'Muwatta Malik': 'موطأ مالك',
     'Otros': 'أخرى',
   };
 
@@ -80,21 +83,37 @@ class HadithCollectionPresentation {
     final value = collection.trim().toLowerCase();
     switch (value) {
       case 'bukhari':
-        return 'Bukhari';
+      case 'boukhari':
+      case 'sahih al-bukhari':
+        return 'Sahih al-Bukhari';
       case 'muslim':
-        return 'Muslim';
-      case 'tirmidhi':
-        return 'Tirmidhi';
+      case 'mouslim':
+      case 'sahih muslim':
+        return 'Sahih Muslim';
+      case 'riyad':
+      case 'salihin':
+      case 'riyad as-salihin':
+        return 'Riyad as-Salihin';
+      case 'nawawi':
+      case '40 hadith nawawi':
+        return '40 Hadith Nawawi';
       case 'abu dawud':
-        return 'Abu Dawud';
+      case 'abou dawoud':
+      case 'sunan abu dawud':
+        return 'Sunan Abu Dawud';
+      case 'tirmidhi':
+      case 'jami\' at-tirmidhi':
+        return 'Jami\' at-Tirmidhi';
       case 'nasai':
-        return 'Nasai';
+      case 'nasa\'i':
+      case 'sunan an-nasa\'i':
+        return 'Sunan an-Nasa\'i';
       case 'ibn majah':
-        return 'Ibn Majah';
+      case 'sunan ibn majah':
+        return 'Sunan Ibn Majah';
       case 'malik':
-        return 'Malik';
-      case 'ahmad':
-        return 'Ahmad';
+      case 'muwatta malik':
+        return 'Muwatta Malik';
       case 'other':
       case 'otros':
         return 'Otros';

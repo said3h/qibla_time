@@ -10,10 +10,8 @@ import '../../../l10n/l10n.dart';
 import '../models/hadith.dart';
 import '../services/hadith_service.dart';
 import '../services/hadith_share_service.dart';
-import '../utils/hadith_category_presentation.dart';
 import '../utils/hadith_collection_presentation.dart';
 import '../widgets/hadith_share_preview_sheet.dart';
-import 'hadith_category_detail_screen.dart';
 import 'hadith_collection_detail_screen.dart';
 import 'hadith_detail_screen.dart';
 import 'hadith_offline_screen.dart';
@@ -265,17 +263,6 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
                         error: (_, __) => const SizedBox.shrink(),
                       ),
 
-                    if (_searchController.text.trim().isEmpty)
-                      categoriesAsync.when(
-                        data: (categories) => _buildCategorySection(
-                          context: context,
-                          hadiths: hadiths,
-                          categories: categories,
-                        ),
-                        loading: () => const SizedBox.shrink(),
-                        error: (_, __) => const SizedBox.shrink(),
-                      ),
-
                     // Hadiz del día destacado
                     if (dailyHadith != null && !_isSearching)
                       _FeaturedHadithCard(
@@ -375,143 +362,6 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
     return filtered;
   }
 
-  Widget _buildCategorySection({
-    required BuildContext context,
-    required List<Hadith> hadiths,
-    required Map<String, int> categories,
-  }) {
-    if (categories.isEmpty) {
-      return const SizedBox.shrink();
-    }
-
-    final tokens = QiblaThemes.current;
-    final languageCode = Localizations.localeOf(context).languageCode;
-    final isArabicOnly = languageCode == 'ar';
-    final categoryEntries = categories.entries.toList()
-      ..sort((a, b) {
-        final countCompare = b.value.compareTo(a.value);
-        if (countCompare != 0) {
-          return countCompare;
-        }
-        return a.key.toLowerCase().compareTo(b.key.toLowerCase());
-      });
-
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            context.l10n.commonCategory,
-            style: GoogleFonts.dmSans(
-              fontSize: 9,
-              letterSpacing: 1.4,
-              color: tokens.textSecondary,
-            ),
-          ),
-          const SizedBox(height: 10),
-          GridView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: categoryEntries.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 8,
-              mainAxisSpacing: 8,
-              childAspectRatio: 1.65,
-            ),
-            itemBuilder: (_, index) {
-              final entry = categoryEntries[index];
-              final categoryHadiths = hadiths
-                  .where((hadith) => hadith.category.trim().toLowerCase() == entry.key)
-                  .toList();
-              final meta = HadithCategoryPresentation.metaFor(
-                entry.key,
-                languageCode,
-              );
-              final showArabicLabel =
-                  meta.arabicLabel.isNotEmpty && meta.arabicLabel != meta.label;
-
-              return InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => HadithCategoryDetailScreen(
-                        categoryKey: entry.key,
-                        categoryLabel: meta.label,
-                        categoryArabicLabel: meta.arabicLabel,
-                        hadiths: categoryHadiths,
-                      ),
-                    ),
-                  );
-                },
-                borderRadius: BorderRadius.circular(16),
-                child: Container(
-                  padding: const EdgeInsets.all(14),
-                  decoration: BoxDecoration(
-                    color: tokens.bgSurface,
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: tokens.border),
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(meta.icon, size: 22, color: tokens.primary),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              meta.label,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: isArabicOnly
-                                  ? GoogleFonts.amiri(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w700,
-                                      color: tokens.textPrimary,
-                                    )
-                                  : GoogleFonts.dmSans(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w600,
-                                      color: tokens.textPrimary,
-                                    ),
-                            ),
-                            if (showArabicLabel)
-                              Align(
-                                alignment: Alignment.centerRight,
-                                child: Text(
-                                  meta.arabicLabel,
-                                  textAlign: TextAlign.right,
-                                  style: GoogleFonts.amiri(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w700,
-                                    color: tokens.textSecondary,
-                                  ),
-                                ),
-                              ),
-                            Text(
-                              context.l10n.hadithLibraryAllHadiths(entry.value),
-                              style: GoogleFonts.dmSans(
-                                fontSize: 10,
-                                color: tokens.textSecondary,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            },
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget _buildCollectionSection({
     required BuildContext context,
     required Map<String, int> collections,
@@ -523,24 +373,10 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
     final tokens = QiblaThemes.current;
     final languageCode = Localizations.localeOf(context).languageCode;
     final isArabicOnly = languageCode == 'ar';
-    final collectionEntries = collections.entries.toList()
-      ..sort((a, b) {
-        final leftOrder = HadithCollectionPresentation.orderedCollections.indexOf(
-          a.key,
-        );
-        final rightOrder =
-            HadithCollectionPresentation.orderedCollections.indexOf(b.key);
-        if (leftOrder != -1 || rightOrder != -1) {
-          if (leftOrder == -1) return 1;
-          if (rightOrder == -1) return -1;
-          return leftOrder.compareTo(rightOrder);
-        }
-        final countCompare = b.value.compareTo(a.value);
-        if (countCompare != 0) {
-          return countCompare;
-        }
-        return a.key.toLowerCase().compareTo(b.key.toLowerCase());
-      });
+    final collectionEntries = HadithCollectionPresentation.orderedCollections
+        .where((collection) => collection != 'Otros')
+        .map((collection) => MapEntry(collection, collections[collection] ?? 0))
+        .toList();
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
@@ -1301,40 +1137,77 @@ final hadithGradesProvider = FutureProvider<List<String>>((ref) async {
 
 String _extractHadithCollection(String reference) {
   final refLower = reference.toLowerCase();
-  if (refLower.contains('bujari') || refLower.contains('bukhari')) {
-    return 'Bukhari';
+  if (refLower.contains('bujari') ||
+      refLower.contains('bukhari') ||
+      refLower.contains('boukhari')) {
+    return 'Sahih al-Bukhari';
   }
-  if (refLower.contains('muslim')) return 'Muslim';
-  if (refLower.contains('tirmidhi')) return 'Tirmidhi';
-  if (refLower.contains('abu dawud') || refLower.contains('abudawud')) {
-    return 'Abu Dawud';
+  if (refLower.contains('muslim') || refLower.contains('mouslim')) {
+    return 'Sahih Muslim';
   }
-  if (refLower.contains('nasai')) return 'Nasai';
+  if (refLower.contains('riyad') || refLower.contains('salihin')) {
+    return 'Riyad as-Salihin';
+  }
+  if (refLower.contains('nawawi')) return '40 Hadith Nawawi';
+  if (refLower.contains('tirmidhi')) return 'Jami\' at-Tirmidhi';
+  if (refLower.contains('abu dawud') ||
+      refLower.contains('abudawud') ||
+      refLower.contains('abou dawoud')) {
+    return 'Sunan Abu Dawud';
+  }
+  if (refLower.contains('nasai') || refLower.contains('nasa\'i')) {
+    return 'Sunan an-Nasa\'i';
+  }
   if (refLower.contains('ibn majah') || refLower.contains('ibnmajah')) {
-    return 'Ibn Majah';
+    return 'Sunan Ibn Majah';
   }
   if (refLower.contains('malik') || refLower.contains('muwatta')) {
-    return 'Malik';
+    return 'Muwatta Malik';
   }
-  if (refLower.contains('ahmad')) return 'Ahmad';
   return 'Otros';
 }
 
 String? _getArabicCollectionLabel(String collection) {
-  switch (collection.trim().toLowerCase()) {
-    case 'bukhari':
+  final normalized = collection.trim().toLowerCase();
+  switch (normalized) {
+    case 'sahih al-bukhari':
+      return 'صحيح البخاري';
+    case 'sahih muslim':
+      return 'صحيح مسلم';
+    case 'riyad as-salihin':
+      return 'رياض الصالحين';
+    case '40 hadith nawawi':
+      return 'الأربعون النووية';
+    case 'sunan abu dawud':
+      return 'سنن أبي داود';
+    case 'jami\' at-tirmidhi':
+      return 'جامع الترمذي';
+    case 'sunan an-nasa\'i':
+      return 'سنن النسائي';
+    case 'sunan ibn majah':
+      return 'سنن ابن ماجه';
+    case 'muwatta malik':
+      return 'موطأ مالك';
+  }
+
+  switch (normalized) {
+    case 'sahih al-bukhari':
       return 'البخاري';
-    case 'muslim':
+    case 'sahih muslim':
       return 'مسلم';
-    case 'tirmidhi':
+    case 'riyad as-salihin':
+      return 'رياض الصالحين';
+    case '40 hadith nawawi':
+      return 'الأربعون النووية';
+    case 'jami\' at-tirmidhi':
       return 'الترمذي';
-    case 'abu dawud':
+    case 'sunan abu dawud':
       return 'أبو داود';
-    case 'nasai':
+    case 'sunan an-nasa\'i':
       return 'النسائي';
-    case 'ibn majah':
+    case 'sunan ibn majah':
       return 'ابن ماجه';
-    case 'malik':
+    case 'muwatta malik':
       return 'مالك';
     case 'ahmad':
       return 'أحمد';

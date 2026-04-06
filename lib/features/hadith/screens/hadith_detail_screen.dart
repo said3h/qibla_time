@@ -710,11 +710,23 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
 
   Color _getCollectionColor(String reference) {
     final refLower = reference.toLowerCase();
-    if (refLower.contains('bujari') || refLower.contains('bukhari')) return Colors.green;
-    if (refLower.contains('muslim')) return Colors.blue;
+    if (refLower.contains('bujari') ||
+        refLower.contains('bukhari') ||
+        refLower.contains('boukhari')) {
+      return Colors.green;
+    }
+    if (refLower.contains('muslim') || refLower.contains('mouslim')) {
+      return Colors.blue;
+    }
     if (refLower.contains('tirmidhi')) return Colors.orange;
-    if (refLower.contains('abu dawud') || refLower.contains('abudawud')) return Colors.purple;
-    if (refLower.contains('nasai')) return Colors.teal;
+    if (refLower.contains('abu dawud') ||
+        refLower.contains('abudawud') ||
+        refLower.contains('abou dawoud')) {
+      return Colors.purple;
+    }
+    if (refLower.contains('nasai') || refLower.contains('nasa\'i')) {
+      return Colors.teal;
+    }
     if (refLower.contains('ibn majah') || refLower.contains('ibnmajah')) return Colors.indigo;
     if (refLower.contains('malik') || refLower.contains('muwatta')) return Colors.amber;
     if (refLower.contains('ahmad')) return Colors.brown;
@@ -730,19 +742,60 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
 
   String _extractCollection(String reference) {
     final refLower = reference.toLowerCase();
-    if (refLower.contains('bujari') || refLower.contains('bukhari')) return 'Bukhari';
-    if (refLower.contains('muslim')) return 'Muslim';
-    if (refLower.contains('tirmidhi')) return 'Tirmidhi';
-    if (refLower.contains('abu dawud') || refLower.contains('abudawud')) return 'Abu Dawud';
-    if (refLower.contains('nasai')) return 'Nasai';
-    if (refLower.contains('ibn majah') || refLower.contains('ibnmajah')) return 'Ibn Majah';
-    if (refLower.contains('malik') || refLower.contains('muwatta')) return 'Malik';
-    if (refLower.contains('ahmad')) return 'Ahmad';
+    if (refLower.contains('bujari') ||
+        refLower.contains('bukhari') ||
+        refLower.contains('boukhari')) {
+      return 'Sahih al-Bukhari';
+    }
+    if (refLower.contains('muslim') || refLower.contains('mouslim')) {
+      return 'Sahih Muslim';
+    }
+    if (refLower.contains('riyad') || refLower.contains('salihin')) {
+      return 'Riyad as-Salihin';
+    }
+    if (refLower.contains('nawawi')) return '40 Hadith Nawawi';
+    if (refLower.contains('tirmidhi')) return 'Jami\' at-Tirmidhi';
+    if (refLower.contains('abu dawud') ||
+        refLower.contains('abudawud') ||
+        refLower.contains('abou dawoud')) {
+      return 'Sunan Abu Dawud';
+    }
+    if (refLower.contains('nasai') || refLower.contains('nasa\'i')) {
+      return 'Sunan an-Nasa\'i';
+    }
+    if (refLower.contains('ibn majah') || refLower.contains('ibnmajah')) {
+      return 'Sunan Ibn Majah';
+    }
+    if (refLower.contains('malik') || refLower.contains('muwatta')) {
+      return 'Muwatta Malik';
+    }
     return context.l10n.commonOther;
   }
 
   String? _getArabicCollectionLabel(String collection) {
-    switch (collection.trim().toLowerCase()) {
+    final normalized = collection.trim().toLowerCase();
+    switch (normalized) {
+      case 'sahih al-bukhari':
+        return 'صحيح البخاري';
+      case 'sahih muslim':
+        return 'صحيح مسلم';
+      case 'riyad as-salihin':
+        return 'رياض الصالحين';
+      case '40 hadith nawawi':
+        return 'الأربعون النووية';
+      case 'sunan abu dawud':
+        return 'سنن أبي داود';
+      case 'jami\' at-tirmidhi':
+        return 'جامع الترمذي';
+      case 'sunan an-nasa\'i':
+        return 'سنن النسائي';
+      case 'sunan ibn majah':
+        return 'سنن ابن ماجه';
+      case 'muwatta malik':
+        return 'موطأ مالك';
+    }
+
+    switch (normalized) {
       case 'bukhari':
         return 'البخاري';
       case 'muslim':
