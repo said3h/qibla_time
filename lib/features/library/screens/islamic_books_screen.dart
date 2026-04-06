@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -373,10 +374,11 @@ class _BookCard extends StatelessWidget {
                   ),
                 ),
                 child: book.coverUrl.isNotEmpty
-                    ? Image.network(
-                        book.coverUrl,
+                    ? CachedNetworkImage(
+                        imageUrl: book.coverUrl,
                         fit: BoxFit.cover,
-                        errorBuilder: (_, __, ___) => const Icon(Icons.menu_book, size: 48),
+                        placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                        errorWidget: (context, url, error) => const Icon(Icons.book, size: 40),
                       )
                     : const Icon(Icons.menu_book, size: 48),
               ),
@@ -486,10 +488,11 @@ class _BookListCard extends StatelessWidget {
               child: book.coverUrl.isNotEmpty
                   ? ClipRRect(
                       borderRadius: BorderRadius.circular(8),
-                      child: Image.network(
-                        book.coverUrl,
+                      child: CachedNetworkImage(
+                        imageUrl: book.coverUrl,
                         fit: BoxFit.cover,
-                        errorBuilder: (_, __, ___) => const Icon(Icons.menu_book),
+                        placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                        errorWidget: (context, url, error) => const Icon(Icons.book, size: 40),
                       ),
                     )
                   : const Icon(Icons.menu_book),
