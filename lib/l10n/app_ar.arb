@@ -799,6 +799,7 @@
   "hadithDetailTranslation": "الترجمة",
   "hadithLibraryAllCollections": "كل المجموعات",
   "hadithLibraryAllGrades": "كل الدرجات",
+  "hadithLibraryAllCategories": "كل الفئات",
   "hadithLibraryAllHadiths": "{count} حديثًا",
   "hadithLibraryEmptyBody": "لا توجد أحاديث متاحة الآن.",
   "hadithLibraryEmptySearchBody": "جرّب بحثًا آخر أو أزل عوامل التصفية.",

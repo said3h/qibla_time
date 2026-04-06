@@ -799,6 +799,7 @@
   "hadithDetailTranslation": "Traducción",
   "hadithLibraryAllCollections": "Todas las colecciones",
   "hadithLibraryAllGrades": "Todos los grados",
+  "hadithLibraryAllCategories": "Todas las categorías",
   "hadithLibraryAllHadiths": "{count} hadices",
   "hadithLibraryEmptyBody": "No hay hadices disponibles ahora mismo.",
   "hadithLibraryEmptySearchBody": "Prueba con otra búsqueda o quita los filtros.",

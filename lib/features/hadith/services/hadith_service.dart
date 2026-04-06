@@ -126,6 +126,17 @@ class HadithService {
     return collections;
   }
 
+  Future<Map<String, int>> getCategories({String? forcedLanguage}) async {
+    final language = forcedLanguage ?? _currentLanguage;
+    final all = await loadAll(forcedLanguage: language);
+    final categories = <String, int>{};
+    for (final hadith in all) {
+      if (hadith.category.trim().isEmpty) continue;
+      categories[hadith.category] = (categories[hadith.category] ?? 0) + 1;
+    }
+    return categories;
+  }
+
   String _extractCollection(String reference) {
     final refLower = reference.toLowerCase();
     if (refLower.contains('bujari') || refLower.contains('bukhari')) {

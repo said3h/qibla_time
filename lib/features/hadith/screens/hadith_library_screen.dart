@@ -25,12 +25,14 @@ class HadithLibraryScreen extends ConsumerStatefulWidget {
 class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
   static const _allCollectionsValue = '__all__';
   static const _allGradesValue = '__all__';
+  static const _allCategoriesValue = '__all__';
 
   final _searchController = TextEditingController();
   final _debouncer = Debouncer(delay: const Duration(milliseconds: 300));
 
   String _selectedCollection = _allCollectionsValue;
   String _selectedGrade = _allGradesValue;
+  String _selectedCategory = _allCategoriesValue;
   List<Hadith> _searchResults = [];
   bool _isSearching = false;
   bool _showFilters = false;
@@ -82,6 +84,7 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
     final favoritesAsync = ref.watch(hadithFavoritesProvider);
     final collectionsAsync = ref.watch(hadithCollectionsProvider);
     final gradesAsync = ref.watch(hadithGradesProvider);
+    final categoriesAsync = ref.watch(hadithCategoriesProvider);
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
@@ -158,28 +161,48 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
             collectionsAsync.when(
               data: (collections) => gradesAsync.when(
                 data: (grades) => Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
-                  child: Row(
+                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(
-                        child: _FilterDropdown(
-                          label: l10n.commonCollection,
-                          value: _selectedCollection,
-                          items: [_allCollectionsValue, ...collections.keys],
-                          itemLabelBuilder: (value) => _collectionLabel(context, value),
-                          onChanged: (v) => setState(() => _selectedCollection = v ?? _allCollectionsValue),
-                        ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: _FilterDropdown(
+                              label: l10n.commonCollection,
+                              value: _selectedCollection,
+                              items: [_allCollectionsValue, ...collections.keys],
+                              itemLabelBuilder: (value) => _collectionLabel(context, value),
+                              onChanged: (v) => setState(() => _selectedCollection = v ?? _allCollectionsValue),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: _FilterDropdown(
+                              label: l10n.commonAuthenticity,
+                              value: _selectedGrade,
+                              items: [_allGradesValue, ...grades],
+                              itemLabelBuilder: (value) => _gradeLabel(context, value),
+                              onChanged: (v) => setState(() => _selectedGrade = v ?? _allGradesValue),
+                            ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: _FilterDropdown(
-                          label: l10n.commonAuthenticity,
-                          value: _selectedGrade,
-                          items: [_allGradesValue, ...grades],
-                          itemLabelBuilder: (value) => _gradeLabel(context, value),
-                          onChanged: (v) => setState(() => _selectedGrade = v ?? _allGradesValue),
+                      const SizedBox(height: 8),
+                      categoriesAsync.when(
+                        data: (categories) => _FilterDropdown(
+                          label: l10n.commonCategory,
+                          value: _selectedCategory,
+                          items: [_allCategoriesValue, ...categories.keys],
+                          itemLabelBuilder: (value) => value == _allCategoriesValue
+                              ? l10n.hadithLibraryAllCategories
+                              : value,
+                          onChanged: (v) => setState(() => _selectedCategory = v ?? _allCategoriesValue),
                         ),
+                        loading: () => const SizedBox.shrink(),
+                        error: (_, __) => const SizedBox.shrink(),
                       ),
+                      const SizedBox(height: 12),
                     ],
                   ),
                 ),
@@ -315,6 +338,12 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
     if (_selectedGrade != _allGradesValue) {
       filtered = filtered
           .where((h) => h.grade == _selectedGrade)
+          .toList();
+    }
+
+    if (_selectedCategory != _allCategoriesValue) {
+      filtered = filtered
+          .where((h) => h.category == _selectedCategory)
           .toList();
     }
 
@@ -956,6 +985,10 @@ class Debouncer {
 
 final hadithCollectionsProvider = FutureProvider<Map<String, int>>((ref) async {
   return ref.read(hadithServiceProvider).getCollections();
+});
+
+final hadithCategoriesProvider = FutureProvider<Map<String, int>>((ref) async {
+  return ref.read(hadithServiceProvider).getCategories();
 });
 
 final hadithGradesProvider = FutureProvider<List<String>>((ref) async {
