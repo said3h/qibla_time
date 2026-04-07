@@ -413,7 +413,7 @@ class QuranService {
     required String languageCode,
   }) {
     final normalizedLanguage = _normalizeLanguageCode(languageCode);
-    if (normalizedLanguage != 'ar') {
+    if (normalizedLanguage != 'ar' && normalizedLanguage != 'de') {
       return detail;
     }
 
@@ -460,8 +460,16 @@ class QuranService {
   }
 
   static String _normalizeLanguageCode(String languageCode) {
-    return switch (languageCode) {
+    final normalized = languageCode
+        .trim()
+        .toLowerCase()
+        .replaceAll('-', '_')
+        .split('_')
+        .first;
+
+    return switch (normalized) {
       'ar' => 'ar',
+      'de' => 'de',
       'en' => 'en',
       'fr' => 'fr',
       _ => 'es',
@@ -471,6 +479,7 @@ class QuranService {
   static String _translationEditionFor(String languageCode) {
     return switch (languageCode) {
       'ar' => 'ar.muyassar',
+      'de' => 'de.bubenheim',
       'en' => 'en.sahih',
       'fr' => 'fr.hamidullah',
       _ => 'es.garcia',
@@ -480,6 +489,7 @@ class QuranService {
   static String _offlinePlaceholderTranslation(String languageCode) {
     return switch (_normalizeLanguageCode(languageCode)) {
       'ar' => 'المحتوى غير متاح دون اتصال بالإنترنت.',
+      'de' => 'Inhalte sind ohne Internetverbindung nicht verfügbar.',
       'en' => 'Content is unavailable without an internet connection.',
       'fr' => 'Le contenu n’est pas disponible sans connexion internet.',
       _ => 'Contenido no disponible sin conexión a internet.',

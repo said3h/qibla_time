@@ -175,6 +175,46 @@ class DuaLocalePresentation {
     'hajj': 'Pèlerinage',
   };
 
+  static const _categoryGermanLabels = <String, String>{
+    'morning': 'Morgen',
+    'night': 'Nacht',
+    'sleep': 'Schlaf',
+    'wudu': 'Wudu',
+    'after_prayer': 'Nach dem Gebet',
+    'zikr': 'Dhikr',
+    'travel': 'Reise',
+    'food': 'Essen',
+    'sickness': 'Krankheit',
+    'protection': 'Schutz',
+    'repentance': 'Reue',
+    'mosque': 'Moschee',
+    'rain': 'Regen',
+    'stress': 'Belastung',
+    'gratitude': 'Dankbarkeit',
+    'parents': 'Familie',
+    'hajj': 'Hadsch und Umra',
+  };
+
+  static const _categoryGermanHints = <String, String>{
+    'morning': 'Beginn des Tages',
+    'night': 'Ende des Tages',
+    'sleep': 'Vor dem Schlafen',
+    'wudu': 'Wudu und Reinheit',
+    'after_prayer': 'Nach jedem Gebet',
+    'zikr': 'Gedenken und Lobpreis',
+    'travel': 'Aufbruch und Reise',
+    'food': 'Vor und nach dem Essen',
+    'sickness': 'Heilung und Besuch',
+    'protection': 'Zuflucht und Schutz',
+    'repentance': 'Vergebung und Umkehr',
+    'mosque': 'Beim Betreten und Verlassen',
+    'rain': 'Waehrend des Regens',
+    'stress': 'Traurigkeit und Belastung',
+    'gratitude': 'Dank und Lob',
+    'parents': 'Eltern und Kinder',
+    'hajj': 'Pilgerfahrt',
+  };
+
   static const _categoryArabicHints = <String, String>{
     'morning': 'بداية اليوم',
     'night': 'ختام اليوم',
@@ -198,6 +238,7 @@ class DuaLocalePresentation {
   static String normalizeLanguageCode(String languageCode) {
     return switch (languageCode) {
       'ar' => 'ar',
+      'de' => 'de',
       'en' => 'en',
       'fr' => 'fr',
       _ => 'es',
@@ -218,6 +259,13 @@ class DuaLocalePresentation {
     final arabicLabel = _categoryArabicLabels[key] ?? 'قسم';
 
     return switch (normalized) {
+      'de' => DuaCategoryMeta(
+          icon: icon,
+          label:
+              _categoryGermanLabels[key] ?? _categoryEnglishLabels[key] ?? key,
+          hint: _categoryGermanHints[key] ?? 'Kategorie',
+          arabicLabel: arabicLabel,
+        ),
       'en' => DuaCategoryMeta(
           icon: icon,
           label: _categoryEnglishLabels[key] ?? key,
