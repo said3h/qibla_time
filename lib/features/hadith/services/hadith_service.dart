@@ -151,17 +151,23 @@ class HadithService {
     if (refLower.contains('riyad') || refLower.contains('salihin')) {
       return 'Riyad as-Salihin';
     }
-    if (refLower.contains('nawawi')) return '40 Hadith Nawawi';
+    if (refLower.contains('nawawi') || refLower.contains('40 hadith')) return '40 Hadith Nawawi';
     if (refLower.contains('tirmidhi')) return 'Jami\' at-Tirmidhi';
     if (refLower.contains('abu dawud') ||
+        refLower.contains('abu-dawud') ||
         refLower.contains('abudawud') ||
         refLower.contains('abou dawoud')) {
       return 'Sunan Abu Dawud';
     }
-    if (refLower.contains('nasai') || refLower.contains('nasa\'i')) {
-      return 'Sunan an-Nasa\'i';
+    if (refLower.contains('nasai') ||
+        refLower.contains("nasa'i") ||
+        refLower.contains('nsaa') ||
+        refLower.contains('nasaa')) {
+      return "Sunan an-Nasa'i";
     }
-    if (refLower.contains('ibn majah') || refLower.contains('ibnmajah')) {
+    if (refLower.contains('ibn majah') ||
+        refLower.contains('ibnmajah') ||
+        refLower.contains('ibn mayah')) {
       return 'Sunan Ibn Majah';
     }
     if (refLower.contains('malik') || refLower.contains('muwatta')) {
