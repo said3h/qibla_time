@@ -464,6 +464,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsLanguageOptionFrench => 'Français';
 
   @override
+  String get settingsLanguageOptionGerman => 'German';
+
+  @override
   String get settingsLanguageOptionArabic => 'العربية';
 
   @override

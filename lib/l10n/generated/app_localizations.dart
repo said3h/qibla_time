@@ -969,6 +969,12 @@ abstract class AppLocalizations {
   /// **'Français'**
   String get settingsLanguageOptionFrench;
 
+  /// No description provided for @settingsLanguageOptionGerman.
+  ///
+  /// In es, this message translates to:
+  /// **'Alemán'**
+  String get settingsLanguageOptionGerman;
+
   /// No description provided for @settingsLanguageOptionArabic.
   ///
   /// In es, this message translates to:
