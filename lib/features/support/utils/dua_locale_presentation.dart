@@ -298,6 +298,7 @@ class DuaLocalePresentation {
       'en' => 'Dua and adhkar',
       'fr' => 'Dou‘a et adhkar',
       'ar' => 'الدعاء والأذكار',
+      'de' => 'Dua und Adhkar',
       _ => 'Dua y adhkar',
     };
   }
@@ -307,6 +308,7 @@ class DuaLocalePresentation {
       'en' => 'Daily invocations to accompany your day',
       'fr' => 'Invocations quotidiennes pour accompagner votre journée',
       'ar' => 'مختارات يومية للذكر والدعاء',
+      'de' => 'Tägliche Bittgebete für deinen Tag',
       _ => 'Invocaciones diarias para acompañar tu día',
     };
   }
