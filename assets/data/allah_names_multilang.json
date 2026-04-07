@@ -19,6 +19,10 @@
       "fr": {
         "name": "Le Tout Miséricordieux",
         "description": ""
+      },
+      "de": {
+        "name": "Der Allerbarmer",
+        "description": "Der Allerbarmer"
       }
     }
   },
@@ -42,6 +46,10 @@
       "fr": {
         "name": "Le Très Miséricordieux",
         "description": ""
+      },
+      "de": {
+        "name": "Der Barmherzige",
+        "description": "Der Barmherzige"
       }
     }
   },
@@ -65,6 +73,10 @@
       "fr": {
         "name": "Le Roi Souverain",
         "description": ""
+      },
+      "de": {
+        "name": "Der König",
+        "description": "Der König"
       }
     }
   },
@@ -88,6 +100,10 @@
       "fr": {
         "name": "Le Très Saint",
         "description": ""
+      },
+      "de": {
+        "name": "Der Hochheilige",
+        "description": "Der Hochheilige"
       }
     }
   },
@@ -111,6 +127,10 @@
       "fr": {
         "name": "La Paix",
         "description": ""
+      },
+      "de": {
+        "name": "Der Friede",
+        "description": "Der Friede"
       }
     }
   },
@@ -134,6 +154,10 @@
       "fr": {
         "name": "Le Garant de la foi",
         "description": ""
+      },
+      "de": {
+        "name": "Der Beschützer des Glaubens",
+        "description": "Der Beschützer des Glaubens"
       }
     }
   },
@@ -157,6 +181,10 @@
       "fr": {
         "name": "Le Protecteur",
         "description": ""
+      },
+      "de": {
+        "name": "Der Wächter",
+        "description": "Der Wächter"
       }
     }
   },
@@ -180,6 +208,10 @@
       "fr": {
         "name": "Le Tout Puissant",
         "description": ""
+      },
+      "de": {
+        "name": "Der Allmächtige",
+        "description": "Der Allmächtige"
       }
     }
   },
@@ -203,6 +235,10 @@
       "fr": {
         "name": "L'Imposant",
         "description": ""
+      },
+      "de": {
+        "name": "Der Bezwinger",
+        "description": "Der Bezwinger"
       }
     }
   },
@@ -226,6 +262,10 @@
       "fr": {
         "name": "Le Suprême",
         "description": ""
+      },
+      "de": {
+        "name": "Der Majestätische",
+        "description": "Der Majestätische"
       }
     }
   },
@@ -249,6 +289,10 @@
       "fr": {
         "name": "Le Créateur",
         "description": ""
+      },
+      "de": {
+        "name": "Der Schöpfer",
+        "description": "Der Schöpfer"
       }
     }
   },
@@ -272,6 +316,10 @@
       "fr": {
         "name": "Le Producteur",
         "description": ""
+      },
+      "de": {
+        "name": "Der Urschöpfer",
+        "description": "Der Urschöpfer"
       }
     }
   },
@@ -295,6 +343,10 @@
       "fr": {
         "name": "Le Formateur",
         "description": ""
+      },
+      "de": {
+        "name": "Der Gestalter",
+        "description": "Der Gestalter"
       }
     }
   },
@@ -318,6 +370,10 @@
       "fr": {
         "name": "Le Grand Pardonneur",
         "description": ""
+      },
+      "de": {
+        "name": "Der große Vergeber",
+        "description": "Der große Vergeber"
       }
     }
   },
@@ -341,6 +397,10 @@
       "fr": {
         "name": "Le Dominateur",
         "description": ""
+      },
+      "de": {
+        "name": "Der Überwältiger",
+        "description": "Der Überwältiger"
       }
     }
   },
@@ -364,6 +424,10 @@
       "fr": {
         "name": "Le Grand Donateur",
         "description": ""
+      },
+      "de": {
+        "name": "Der Schenkende",
+        "description": "Der Schenkende"
       }
     }
   },
@@ -387,6 +451,10 @@
       "fr": {
         "name": "Le Grand Pourvoyeur",
         "description": ""
+      },
+      "de": {
+        "name": "Der Versorger",
+        "description": "Der Versorger"
       }
     }
   },
@@ -410,6 +478,10 @@
       "fr": {
         "name": "Celui qui ouvre",
         "description": ""
+      },
+      "de": {
+        "name": "Der Öffner",
+        "description": "Der Öffner"
       }
     }
   },
@@ -433,6 +505,10 @@
       "fr": {
         "name": "L'Omniscient",
         "description": ""
+      },
+      "de": {
+        "name": "Der Allwissende",
+        "description": "Der Allwissende"
       }
     }
   },
@@ -456,6 +532,10 @@
       "fr": {
         "name": "Celui qui restreint",
         "description": ""
+      },
+      "de": {
+        "name": "Der Beschränker",
+        "description": "Der Beschränker"
       }
     }
   },
@@ -479,6 +559,10 @@
       "fr": {
         "name": "Celui qui dilate",
         "description": ""
+      },
+      "de": {
+        "name": "Der Erweiterer",
+        "description": "Der Erweiterer"
       }
     }
   },
@@ -502,6 +586,10 @@
       "fr": {
         "name": "Celui qui abaisse",
         "description": ""
+      },
+      "de": {
+        "name": "Der Erniedriger",
+        "description": "Der Erniedriger"
       }
     }
   },
@@ -525,6 +613,10 @@
       "fr": {
         "name": "Celui qui élève",
         "description": ""
+      },
+      "de": {
+        "name": "Der Erheber",
+        "description": "Der Erheber"
       }
     }
   },
@@ -548,6 +640,10 @@
       "fr": {
         "name": "Celui qui rend puissant",
         "description": ""
+      },
+      "de": {
+        "name": "Der Ehrende",
+        "description": "Der Ehrende"
       }
     }
   },
@@ -571,6 +667,10 @@
       "fr": {
         "name": "Celui qui humilie",
         "description": ""
+      },
+      "de": {
+        "name": "Der Demütiger",
+        "description": "Der Demütiger"
       }
     }
   },
@@ -594,6 +694,10 @@
       "fr": {
         "name": "L'Audient",
         "description": ""
+      },
+      "de": {
+        "name": "Der Allhörende",
+        "description": "Der Allhörende"
       }
     }
   },
@@ -617,6 +721,10 @@
       "fr": {
         "name": "Le Clairvoyant",
         "description": ""
+      },
+      "de": {
+        "name": "Der Allsehende",
+        "description": "Der Allsehende"
       }
     }
   },
@@ -640,6 +748,10 @@
       "fr": {
         "name": "Le Juge",
         "description": ""
+      },
+      "de": {
+        "name": "Der Richter",
+        "description": "Der Richter"
       }
     }
   },
@@ -663,6 +775,10 @@
       "fr": {
         "name": "Le Juste",
         "description": ""
+      },
+      "de": {
+        "name": "Der Gerechte",
+        "description": "Der Gerechte"
       }
     }
   },
@@ -686,6 +802,10 @@
       "fr": {
         "name": "Le Doux",
         "description": ""
+      },
+      "de": {
+        "name": "Der Feinfühlige",
+        "description": "Der Feinfühlige"
       }
     }
   },
@@ -709,6 +829,10 @@
       "fr": {
         "name": "Le Bien-Informé",
         "description": ""
+      },
+      "de": {
+        "name": "Der Allkundige",
+        "description": "Der Allkundige"
       }
     }
   },
@@ -732,6 +856,10 @@
       "fr": {
         "name": "Le Longanime",
         "description": ""
+      },
+      "de": {
+        "name": "Der Nachsichtige",
+        "description": "Der Nachsichtige"
       }
     }
   },
@@ -755,6 +883,10 @@
       "fr": {
         "name": "Le Magnifique",
         "description": ""
+      },
+      "de": {
+        "name": "Der Gewaltige",
+        "description": "Der Gewaltige"
       }
     }
   },
@@ -778,6 +910,10 @@
       "fr": {
         "name": "Le Pardonneur",
         "description": ""
+      },
+      "de": {
+        "name": "Der Vergebende",
+        "description": "Der Vergebende"
       }
     }
   },
@@ -801,6 +937,10 @@
       "fr": {
         "name": "Le Reconnaissant",
         "description": ""
+      },
+      "de": {
+        "name": "Der Dankbare",
+        "description": "Der Dankbare"
       }
     }
   },
@@ -824,6 +964,10 @@
       "fr": {
         "name": "Le Sublime",
         "description": ""
+      },
+      "de": {
+        "name": "Der Höchste",
+        "description": "Der Höchste"
       }
     }
   },
@@ -847,6 +991,10 @@
       "fr": {
         "name": "Le Plus Grand",
         "description": ""
+      },
+      "de": {
+        "name": "Der Größte",
+        "description": "Der Größte"
       }
     }
   },
@@ -870,6 +1018,10 @@
       "fr": {
         "name": "Le Préservateur",
         "description": ""
+      },
+      "de": {
+        "name": "Der Bewahrer",
+        "description": "Der Bewahrer"
       }
     }
   },
@@ -893,6 +1045,10 @@
       "fr": {
         "name": "Le Nourricier",
         "description": ""
+      },
+      "de": {
+        "name": "Der Ernährer",
+        "description": "Der Ernährer"
       }
     }
   },
@@ -916,6 +1072,10 @@
       "fr": {
         "name": "Celui qui règle les comptes",
         "description": ""
+      },
+      "de": {
+        "name": "Der Abrechner",
+        "description": "Der Abrechner"
       }
     }
   },
@@ -939,6 +1099,10 @@
       "fr": {
         "name": "Le Majestueux",
         "description": ""
+      },
+      "de": {
+        "name": "Der Erhabene",
+        "description": "Der Erhabene"
       }
     }
   },
@@ -962,6 +1126,10 @@
       "fr": {
         "name": "Le Généreux",
         "description": ""
+      },
+      "de": {
+        "name": "Der Großzügige",
+        "description": "Der Großzügige"
       }
     }
   },
@@ -985,6 +1153,10 @@
       "fr": {
         "name": "L'Observateur",
         "description": ""
+      },
+      "de": {
+        "name": "Der Aufmerksame",
+        "description": "Der Aufmerksame"
       }
     }
   },
@@ -1008,6 +1180,10 @@
       "fr": {
         "name": "Celui qui exauce",
         "description": ""
+      },
+      "de": {
+        "name": "Der Erhörender",
+        "description": "Der Erhörender"
       }
     }
   },
@@ -1031,6 +1207,10 @@
       "fr": {
         "name": "L'Immense",
         "description": ""
+      },
+      "de": {
+        "name": "Der Umfassende",
+        "description": "Der Umfassende"
       }
     }
   },
@@ -1054,6 +1234,10 @@
       "fr": {
         "name": "Le Sage",
         "description": ""
+      },
+      "de": {
+        "name": "Der Weise",
+        "description": "Der Weise"
       }
     }
   },
@@ -1077,6 +1261,10 @@
       "fr": {
         "name": "Le Tout Affectueux",
         "description": ""
+      },
+      "de": {
+        "name": "Der Liebevolle",
+        "description": "Der Liebevolle"
       }
     }
   },
@@ -1100,6 +1288,10 @@
       "fr": {
         "name": "Le Glorieux",
         "description": ""
+      },
+      "de": {
+        "name": "Der Ruhmreiche",
+        "description": "Der Ruhmreiche"
       }
     }
   },
@@ -1123,6 +1315,10 @@
       "fr": {
         "name": "Celui qui ressuscite",
         "description": ""
+      },
+      "de": {
+        "name": "Der Auferwecker",
+        "description": "Der Auferwecker"
       }
     }
   },
@@ -1146,6 +1342,10 @@
       "fr": {
         "name": "Le Témoin",
         "description": ""
+      },
+      "de": {
+        "name": "Der Zeuge",
+        "description": "Der Zeuge"
       }
     }
   },
@@ -1169,6 +1369,10 @@
       "fr": {
         "name": "La Vérité",
         "description": ""
+      },
+      "de": {
+        "name": "Die Wahrheit",
+        "description": "Die Wahrheit"
       }
     }
   },
@@ -1192,6 +1396,10 @@
       "fr": {
         "name": "Celui qui se suffit",
         "description": ""
+      },
+      "de": {
+        "name": "Der Sachwalter",
+        "description": "Der Sachwalter"
       }
     }
   },
@@ -1215,6 +1423,10 @@
       "fr": {
         "name": "Le Fort",
         "description": ""
+      },
+      "de": {
+        "name": "Der Starke",
+        "description": "Der Starke"
       }
     }
   },
@@ -1238,6 +1450,10 @@
       "fr": {
         "name": "Le Solide",
         "description": ""
+      },
+      "de": {
+        "name": "Der Unerschütterliche",
+        "description": "Der Unerschütterliche"
       }
     }
   },
@@ -1261,6 +1477,10 @@
       "fr": {
         "name": "Le Protecteur",
         "description": ""
+      },
+      "de": {
+        "name": "Der Beschützende Freund",
+        "description": "Der Beschützende Freund"
       }
     }
   },
@@ -1284,6 +1504,10 @@
       "fr": {
         "name": "Le Louable",
         "description": ""
+      },
+      "de": {
+        "name": "Der Lobenswürdige",
+        "description": "Der Lobenswürdige"
       }
     }
   },
@@ -1307,6 +1531,10 @@
       "fr": {
         "name": "Celui qui dénombre tout",
         "description": ""
+      },
+      "de": {
+        "name": "Der Zähler",
+        "description": "Der Zähler"
       }
     }
   },
@@ -1330,6 +1558,10 @@
       "fr": {
         "name": "Celui qui commence",
         "description": ""
+      },
+      "de": {
+        "name": "Der Begründer",
+        "description": "Der Begründer"
       }
     }
   },
@@ -1353,6 +1585,10 @@
       "fr": {
         "name": "Celui qui fait revenir",
         "description": ""
+      },
+      "de": {
+        "name": "Der Wiederhersteller",
+        "description": "Der Wiederhersteller"
       }
     }
   },
@@ -1376,6 +1612,10 @@
       "fr": {
         "name": "Celui qui donne la vie",
         "description": ""
+      },
+      "de": {
+        "name": "Der Lebendig-Macher",
+        "description": "Der Lebendig-Macher"
       }
     }
   },
@@ -1399,6 +1639,10 @@
       "fr": {
         "name": "Celui qui donne la mort",
         "description": ""
+      },
+      "de": {
+        "name": "Der Todbringer",
+        "description": "Der Todbringer"
       }
     }
   },
@@ -1422,6 +1666,10 @@
       "fr": {
         "name": "Le Vivant",
         "description": ""
+      },
+      "de": {
+        "name": "Der Ewig-Lebende",
+        "description": "Der Ewig-Lebende"
       }
     }
   },
@@ -1445,6 +1693,10 @@
       "fr": {
         "name": "Le Subsistant",
         "description": ""
+      },
+      "de": {
+        "name": "Der Sich-Selbst-Erhaltende",
+        "description": "Der Sich-Selbst-Erhaltende"
       }
     }
   },
@@ -1468,6 +1720,10 @@
       "fr": {
         "name": "Celui qui trouve tout",
         "description": ""
+      },
+      "de": {
+        "name": "Der Findende",
+        "description": "Der Findende"
       }
     }
   },
@@ -1491,6 +1747,10 @@
       "fr": {
         "name": "Le Noble et Glorieux",
         "description": ""
+      },
+      "de": {
+        "name": "Der Edle und Ruhmreiche",
+        "description": "Der Edle und Ruhmreiche"
       }
     }
   },
@@ -1514,6 +1774,10 @@
       "fr": {
         "name": "L'Unique",
         "description": ""
+      },
+      "de": {
+        "name": "Der Eine",
+        "description": "Der Eine"
       }
     }
   },
@@ -1537,6 +1801,10 @@
       "fr": {
         "name": "L'Un",
         "description": ""
+      },
+      "de": {
+        "name": "Der Einzigartige",
+        "description": "Der Einzigartige"
       }
     }
   },
@@ -1560,6 +1828,10 @@
       "fr": {
         "name": "L'Absolu",
         "description": ""
+      },
+      "de": {
+        "name": "Die ewige Zuflucht",
+        "description": "Die ewige Zuflucht"
       }
     }
   },
@@ -1583,6 +1855,10 @@
       "fr": {
         "name": "Le Capable",
         "description": ""
+      },
+      "de": {
+        "name": "Der Fähige",
+        "description": "Der Fähige"
       }
     }
   },
@@ -1606,6 +1882,10 @@
       "fr": {
         "name": "Le Détenteur de tout pouvoir",
         "description": ""
+      },
+      "de": {
+        "name": "Der Allvermögende",
+        "description": "Der Allvermögende"
       }
     }
   },
@@ -1629,6 +1909,10 @@
       "fr": {
         "name": "Celui qui avance",
         "description": ""
+      },
+      "de": {
+        "name": "Der Beschleuniger",
+        "description": "Der Beschleuniger"
       }
     }
   },
@@ -1652,6 +1936,10 @@
       "fr": {
         "name": "Celui qui retarde",
         "description": ""
+      },
+      "de": {
+        "name": "Der Verzögerer",
+        "description": "Der Verzögerer"
       }
     }
   },
@@ -1675,6 +1963,10 @@
       "fr": {
         "name": "Le Premier",
         "description": ""
+      },
+      "de": {
+        "name": "Der Erste",
+        "description": "Der Erste"
       }
     }
   },
@@ -1698,6 +1990,10 @@
       "fr": {
         "name": "Le Dernier",
         "description": ""
+      },
+      "de": {
+        "name": "Der Letzte",
+        "description": "Der Letzte"
       }
     }
   },
@@ -1721,6 +2017,10 @@
       "fr": {
         "name": "L'Apparent",
         "description": ""
+      },
+      "de": {
+        "name": "Der Offenkundige",
+        "description": "Der Offenkundige"
       }
     }
   },
@@ -1744,6 +2044,10 @@
       "fr": {
         "name": "Le Caché",
         "description": ""
+      },
+      "de": {
+        "name": "Der Verborgene",
+        "description": "Der Verborgene"
       }
     }
   },
@@ -1767,6 +2071,10 @@
       "fr": {
         "name": "Le Gouverneur",
         "description": ""
+      },
+      "de": {
+        "name": "Der Herrscher",
+        "description": "Der Herrscher"
       }
     }
   },
@@ -1790,6 +2098,10 @@
       "fr": {
         "name": "Le Très Exalté",
         "description": ""
+      },
+      "de": {
+        "name": "der Höchsterhabene",
+        "description": "der Höchsterhabene"
       }
     }
   },
@@ -1813,6 +2125,10 @@
       "fr": {
         "name": "Le Bienfaisant",
         "description": ""
+      },
+      "de": {
+        "name": "Der Gütige",
+        "description": "Der Gütige"
       }
     }
   },
@@ -1836,6 +2152,10 @@
       "fr": {
         "name": "Celui qui accepte le repentir",
         "description": ""
+      },
+      "de": {
+        "name": "Der Reue-Annehmende",
+        "description": "Der Reue-Annehmende"
       }
     }
   },
@@ -1859,6 +2179,10 @@
       "fr": {
         "name": "Le Justicier",
         "description": ""
+      },
+      "de": {
+        "name": "Der Rächer",
+        "description": "Der Rächer"
       }
     }
   },
@@ -1882,6 +2206,10 @@
       "fr": {
         "name": "L'Indulgent",
         "description": ""
+      },
+      "de": {
+        "name": "Der Verzeihende",
+        "description": "Der Verzeihende"
       }
     }
   },
@@ -1905,6 +2233,10 @@
       "fr": {
         "name": "Le Compatissant",
         "description": ""
+      },
+      "de": {
+        "name": "Der Mitleidige",
+        "description": "Der Mitleidige"
       }
     }
   },
@@ -1928,6 +2260,10 @@
       "fr": {
         "name": "Le Maître du Royaume",
         "description": ""
+      },
+      "de": {
+        "name": "Der Besitzer der Herrschaft",
+        "description": "Der Besitzer der Herrschaft"
       }
     }
   },
@@ -1951,6 +2287,10 @@
       "fr": {
         "name": "Le Seigneur de la Majesté et de la Générosité",
         "description": ""
+      },
+      "de": {
+        "name": "Der Herr der Majestät und Großzügigkeit",
+        "description": "Der Herr der Majestät und Großzügigkeit"
       }
     }
   },
@@ -1974,6 +2314,10 @@
       "fr": {
         "name": "L'Équitable",
         "description": ""
+      },
+      "de": {
+        "name": "Der Ausgleichende",
+        "description": "Der Ausgleichende"
       }
     }
   },
@@ -1997,6 +2341,10 @@
       "fr": {
         "name": "Le Rassembleur",
         "description": ""
+      },
+      "de": {
+        "name": "Der Versammler",
+        "description": "Der Versammler"
       }
     }
   },
@@ -2020,6 +2368,10 @@
       "fr": {
         "name": "Le Riche",
         "description": ""
+      },
+      "de": {
+        "name": "Der Unbedürftige",
+        "description": "Der Unbedürftige"
       }
     }
   },
@@ -2043,6 +2395,10 @@
       "fr": {
         "name": "Celui qui enrichit",
         "description": ""
+      },
+      "de": {
+        "name": "Der Bereicherer",
+        "description": "Der Bereicherer"
       }
     }
   },
@@ -2066,6 +2422,10 @@
       "fr": {
         "name": "Celui qui empêche",
         "description": ""
+      },
+      "de": {
+        "name": "Der Verhinderer",
+        "description": "Der Verhinderer"
       }
     }
   },
@@ -2089,6 +2449,10 @@
       "fr": {
         "name": "Celui qui nuit",
         "description": ""
+      },
+      "de": {
+        "name": "Der Schädiger",
+        "description": "Der Schädiger"
       }
     }
   },
@@ -2112,6 +2476,10 @@
       "fr": {
         "name": "Celui qui profite",
         "description": ""
+      },
+      "de": {
+        "name": "Der Wohltuer",
+        "description": "Der Wohltuer"
       }
     }
   },
@@ -2135,6 +2503,10 @@
       "fr": {
         "name": "La Lumière",
         "description": ""
+      },
+      "de": {
+        "name": "Das Licht",
+        "description": "Das Licht"
       }
     }
   },
@@ -2158,6 +2530,10 @@
       "fr": {
         "name": "Le Guide",
         "description": ""
+      },
+      "de": {
+        "name": "der Rechtschaffene",
+        "description": "der Rechtschaffene"
       }
     }
   },
@@ -2181,6 +2557,10 @@
       "fr": {
         "name": "L'Incomparable Créateur",
         "description": ""
+      },
+      "de": {
+        "name": "Der unvergleichliche Schöpfer",
+        "description": "Der unvergleichliche Schöpfer"
       }
     }
   },
@@ -2204,6 +2584,10 @@
       "fr": {
         "name": "L'Éternel",
         "description": ""
+      },
+      "de": {
+        "name": "Der Ewige",
+        "description": "Der Ewige"
       }
     }
   },
@@ -2227,6 +2611,10 @@
       "fr": {
         "name": "L'Héritier",
         "description": ""
+      },
+      "de": {
+        "name": "Der Erbe",
+        "description": "Der Erbe"
       }
     }
   },
@@ -2250,6 +2638,10 @@
       "fr": {
         "name": "Celui qui guide avec droiture",
         "description": ""
+      },
+      "de": {
+        "name": "Der Rechtleiter",
+        "description": "Der Rechtleiter"
       }
     }
   },
@@ -2273,6 +2665,10 @@
       "fr": {
         "name": "Le Patient",
         "description": ""
+      },
+      "de": {
+        "name": "Der Geduldige",
+        "description": "Der Geduldige"
       }
     }
   }
