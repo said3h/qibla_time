@@ -319,6 +319,8 @@ class DuaLocalePresentation {
         'A curated collection of duas and adhkar for everyday life. Tap a category to see all available duas.',
       'fr' =>
         'Une collection soignée de dou‘a et d’adhkar pour le quotidien. Touchez une catégorie pour voir toutes les dou‘a disponibles.',
+      'de' =>
+        'Eine sorgfältig zusammengestellte Sammlung von Duas und Adhkar für den Alltag. Tippe auf eine Kategorie, um alle verfügbaren Duas zu sehen.',
       'ar' =>
         'مجموعة مختارة من الأدعية والأذكار لليوم والليلة. افتح أي قسم لرؤية جميع الأدعية المتاحة.',
       _ =>
