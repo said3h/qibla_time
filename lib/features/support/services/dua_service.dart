@@ -108,6 +108,7 @@ class DuaService {
       'ar' => 'ar',
       'en' => 'en',
       'fr' => 'fr',
+      'de' => 'de',
       _ => 'es',
     };
   }
@@ -126,6 +127,7 @@ class DuaService {
 
   static List<String> _resolutionOrder(String languageCode) {
     return switch (_normalizeLanguageCode(languageCode)) {
+      'de' => const ['de', 'en', 'es'],
       'fr' => const ['fr', 'en', 'es'],
       'en' => const ['en', 'es'],
       'ar' => const ['ar', 'es'],

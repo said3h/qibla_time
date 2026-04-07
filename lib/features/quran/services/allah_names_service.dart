@@ -45,12 +45,14 @@ class AllahNamesService {
       'ar' => 'ar',
       'en' => 'en',
       'fr' => 'fr',
+      'de' || 'de_DE' || 'de-DE' => 'de',
       _ => 'es',
     };
   }
 
   static String _fallbackContentLanguage(String languageCode) {
     return switch (_normalizeLanguageCode(languageCode)) {
+      'de' => 'en',
       'fr' => 'en',
       _ => 'es',
     };

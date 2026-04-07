@@ -7,6 +7,7 @@ import 'generated/app_localizations.dart';
 
 export 'generated/app_localizations.dart';
 export 'generated/app_localizations_ar.dart';
+export 'generated/app_localizations_de.dart';
 export 'generated/app_localizations_en.dart';
 export 'generated/app_localizations_es.dart';
 
