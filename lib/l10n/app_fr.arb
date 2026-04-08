@@ -1150,5 +1150,6 @@
   "prayerNotificationIftarBody": "Il reste 15 minutes avant l’iftar. Qu’Allah accepte votre jeûne aujourd’hui.",
   "prayerNotificationJumuahTitle": "Jumu’ah aujourd’hui",
   "prayerNotificationJumuahBody": "Préparez-vous pour la Jumu’ah avant Dhuhr et gardez un moment de calme pour vous rendre à la mosquée.",
-  "settingsLanguageOptionFrench": "Français"
+  "settingsLanguageOptionFrench": "Français",
+  "settingsLanguageOptionIndonesian": "Indonésien"
 }

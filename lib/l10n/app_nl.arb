@@ -160,7 +160,7 @@
       "weekday": {}
     }
   },
-  "homePrayerSectionMarkedCount": "{count}/5 aangevinkt",
+  "homePrayerSectionMarkedCount": "{count}/5 gemarkeerd",
   "@homePrayerSectionMarkedCount": {
     "placeholders": {
       "count": {
@@ -643,7 +643,6 @@
   "commonNext": "Volgende",
   "commonOther": "Overig",
   "commonPause": "Pauzeren",
-  "commonPlay": "Afspelen",
   "commonPrayers": "gebeden",
   "commonQuran": "Quran",
   "commonRead": "Lezen",
@@ -888,7 +887,6 @@
   "homePrayerDescriptionNow": "Dit gebed is momenteel in uitvoering.",
   "homePrayerDescriptionPendingToday": "Nog open in de stroom van vandaag.",
   "homePrayerDescriptionReviewDate": "Beschikbaar om te bekijken voor deze datum.",
-  "homePrayerSectionMarkedCount": "{count}/5 gemarkeerd",
   "homePrayerSectionSelectedDaySubtitle": "Bekijk en markeer de tijden voor {date}",
   "homePrayerSectionSelectedDayTitle": "DAGSCHEMA",
   "homePrayerSectionTodaySubtitle": "Volledig ritme van je vijf dagelijkse gebeden",
@@ -1152,5 +1150,6 @@
   "prayerNotificationIftarTitle": "Iftar komt eraan",
   "prayerNotificationIftarBody": "Nog 15 minuten tot iftar. Moge Allah je vasten vandaag aanvaarden.",
   "prayerNotificationJumuahTitle": "Jumu'ah vandaag",
-  "prayerNotificationJumuahBody": "Bereid je voor op Jumu'ah vóór Dhuhr en reserveer een kalm moment om naar de moskee te gaan."
+  "prayerNotificationJumuahBody": "Bereid je voor op Jumu'ah vóór Dhuhr en reserveer een kalm moment om naar de moskee te gaan.",
+  "settingsLanguageOptionIndonesian": "Indonesisch"
 }

@@ -643,7 +643,6 @@
   "commonNext": "Siguiente",
   "commonOther": "Otros",
   "commonPause": "Pausar",
-  "commonPlay": "Reproducir",
   "commonPrayers": "oraciones",
   "commonQuran": "Corán",
   "commonRead": "Leer",
@@ -888,7 +887,6 @@
   "homePrayerDescriptionNow": "Esta oración está en curso ahora mismo.",
   "homePrayerDescriptionPendingToday": "Pendiente dentro del recorrido de hoy.",
   "homePrayerDescriptionReviewDate": "Disponible para revisar esta fecha.",
-  "homePrayerSectionMarkedCount": "{count}/5 marcadas",
   "homePrayerSectionSelectedDaySubtitle": "Consulta y marca los horarios de {date}",
   "homePrayerSectionSelectedDayTitle": "HORARIOS DEL DÍA",
   "homePrayerSectionTodaySubtitle": "Ritmo completo de tus cinco oraciones",
@@ -1152,5 +1150,6 @@
   "prayerNotificationIftarTitle": "Iftar se acerca",
   "prayerNotificationIftarBody": "Faltan 15 minutos para Iftar. Que Allah acepte tu ayuno de hoy.",
   "prayerNotificationJumuahTitle": "Jumu'ah hoy",
-  "prayerNotificationJumuahBody": "Prepárate para Jumu'ah antes de Dhuhr y reserva un momento para ir con calma a la mezquita."
+  "prayerNotificationJumuahBody": "Prepárate para Jumu'ah antes de Dhuhr y reserva un momento para ir con calma a la mezquita.",
+  "settingsLanguageOptionIndonesian": "Indonesio"
 }

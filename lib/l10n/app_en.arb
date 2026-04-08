@@ -160,7 +160,7 @@
       "weekday": {}
     }
   },
-  "homePrayerSectionMarkedCount": "{count}/5 checked",
+  "homePrayerSectionMarkedCount": "{count}/5 marked",
   "@homePrayerSectionMarkedCount": {
     "placeholders": {
       "count": {
@@ -643,7 +643,6 @@
   "commonNext": "Next",
   "commonOther": "Other",
   "commonPause": "Pause",
-  "commonPlay": "Play",
   "commonPrayers": "prayers",
   "commonQuran": "Quran",
   "commonRead": "Read",
@@ -888,7 +887,6 @@
   "homePrayerDescriptionNow": "This prayer is currently in progress.",
   "homePrayerDescriptionPendingToday": "Still pending in today's flow.",
   "homePrayerDescriptionReviewDate": "Available to review for this date.",
-  "homePrayerSectionMarkedCount": "{count}/5 marked",
   "homePrayerSectionSelectedDaySubtitle": "Check and mark the times for {date}",
   "homePrayerSectionSelectedDayTitle": "DAY SCHEDULE",
   "homePrayerSectionTodaySubtitle": "Complete rhythm of your five daily prayers",
@@ -1152,5 +1150,6 @@
   "prayerNotificationIftarTitle": "Iftar is coming",
   "prayerNotificationIftarBody": "15 minutes left until iftar. May Allah accept your fast today.",
   "prayerNotificationJumuahTitle": "Jumu'ah today",
-  "prayerNotificationJumuahBody": "Prepare for Jumu'ah before Dhuhr and set aside a calm moment to head to the mosque."
+  "prayerNotificationJumuahBody": "Prepare for Jumu'ah before Dhuhr and set aside a calm moment to head to the mosque.",
+  "settingsLanguageOptionIndonesian": "Indonesian"
 }

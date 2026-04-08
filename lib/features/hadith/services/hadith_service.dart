@@ -261,6 +261,7 @@ class HadithService {
       'fr' => 'fr',
       'de' || 'de_DE' || 'de-DE' => 'de',
       'nl' || 'nl_NL' || 'nl-NL' => 'nl',
+      'id' || 'id_ID' || 'id-ID' => 'id',
       _ => 'es',
     };
   }
@@ -270,6 +271,7 @@ class HadithService {
       'de' => 'en',
       'fr' => 'en',
       'nl' => 'en',
+      'id' => 'en',
       _ => 'es',
     };
   }

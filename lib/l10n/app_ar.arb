@@ -160,7 +160,7 @@
       "weekday": {}
     }
   },
-  "homePrayerSectionMarkedCount": "{count}/5 محددة",
+  "homePrayerSectionMarkedCount": "{count}/5 معلّمة",
   "@homePrayerSectionMarkedCount": {
     "placeholders": {
       "count": {
@@ -643,7 +643,6 @@
   "commonNext": "التالي",
   "commonOther": "أخرى",
   "commonPause": "إيقاف مؤقت",
-  "commonPlay": "تشغيل",
   "commonPrayers": "صلوات",
   "commonQuran": "القرآن",
   "commonRead": "قراءة",
@@ -888,7 +887,6 @@
   "homePrayerDescriptionNow": "هذه الصلاة جارية الآن.",
   "homePrayerDescriptionPendingToday": "ما زالت معلقة ضمن مسار اليوم.",
   "homePrayerDescriptionReviewDate": "متاحة للمراجعة لهذا التاريخ.",
-  "homePrayerSectionMarkedCount": "{count}/5 معلّمة",
   "homePrayerSectionSelectedDaySubtitle": "راجع وعلّم المواقيت الخاصة بـ {date}",
   "homePrayerSectionSelectedDayTitle": "مواقيت اليوم",
   "homePrayerSectionTodaySubtitle": "إيقاع صلواتك الخمس لليوم",
@@ -1019,5 +1017,6 @@
   "analyticsAchievementUnlocked": "مفتوح",
   "dailyBookBadge": "كتاب اليوم",
   "dailyBookUnavailable": "مكتبة الكتب غير متاحة الآن.",
-  "dailyBookOpenLibrary": "فتح الكتب"
+  "dailyBookOpenLibrary": "فتح الكتب",
+  "settingsLanguageOptionIndonesian": "الإندونيسية"
 }

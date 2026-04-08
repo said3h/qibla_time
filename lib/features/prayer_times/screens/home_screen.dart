@@ -2635,6 +2635,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           PrayerName.maghrib => 'Maghrib',
           PrayerName.isha => 'Ischa',
         },
+      'id' => switch (prayer) {
+          PrayerName.fajr => 'Subuh',
+          PrayerName.dhuhr => 'Dzuhur',
+          PrayerName.asr => 'Ashar',
+          PrayerName.maghrib => 'Maghrib',
+          PrayerName.isha => 'Isya',
+        },
       'nl' => switch (prayer) {
           PrayerName.fajr => 'Fajr',
           PrayerName.dhuhr => 'Dhoehr',

@@ -160,7 +160,7 @@
       "weekday": {}
     }
   },
-  "homePrayerSectionMarkedCount": "{count}/5 abgehakt",
+  "homePrayerSectionMarkedCount": "{count}/5 markiert",
   "@homePrayerSectionMarkedCount": {
     "placeholders": {
       "count": {
@@ -643,7 +643,6 @@
   "commonNext": "Weiter",
   "commonOther": "Andere",
   "commonPause": "Pause",
-  "commonPlay": "Abspielen",
   "commonPrayers": "Gebete",
   "commonQuran": "Quran",
   "commonRead": "Lesen",
@@ -888,7 +887,6 @@
   "homePrayerDescriptionNow": "Dieses Gebet läuft derzeit.",
   "homePrayerDescriptionPendingToday": "Heute noch ausstehend.",
   "homePrayerDescriptionReviewDate": "Verfügbar zur Überprüfung für dieses Datum.",
-  "homePrayerSectionMarkedCount": "{count}/5 markiert",
   "homePrayerSectionSelectedDaySubtitle": "Überprüfen und markieren Sie die Zeiten für {date}",
   "homePrayerSectionSelectedDayTitle": "TAGESZEITPLAN",
   "homePrayerSectionTodaySubtitle": "Vollständiger Rhythmus Ihrer fünf täglichen Gebete",
@@ -1152,5 +1150,6 @@
   "prayerNotificationIftarTitle": "Iftar naht",
   "prayerNotificationIftarBody": "Noch 15 Minuten bis Iftar. Möge Allah Ihr Fasten heute annehmen.",
   "prayerNotificationJumuahTitle": "Dschumu'a heute",
-  "prayerNotificationJumuahBody": "Bereiten Sie sich vor Dhuhr auf Dschumu'a vor und nehmen Sie sich einen ruhigen Moment, um zur Moschee zu gehen."
+  "prayerNotificationJumuahBody": "Bereiten Sie sich vor Dhuhr auf Dschumu'a vor und nehmen Sie sich einen ruhigen Moment, um zur Moschee zu gehen.",
+  "settingsLanguageOptionIndonesian": "Indonesisch"
 }

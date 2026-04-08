@@ -27,6 +27,10 @@
       "nl": {
         "name": "De Barmhartige",
         "description": "De Genadevolle, Die barmhartigheid toont aan al Zijn schepselen"
+      },
+      "id": {
+        "name": "Yang Maha Pengasih",
+        "description": "Yang memberikan rahmat kepada seluruh makhluk-Nya"
       }
     }
   },
@@ -58,6 +62,10 @@
       "nl": {
         "name": "De Genadevolle",
         "description": "De Erfarmer, Die specifieke genade toont aan de gelovigen"
+      },
+      "id": {
+        "name": "Yang Maha Penyayang",
+        "description": "Yang memberikan rahmat khusus kepada orang-orang beriman"
       }
     }
   },
@@ -89,6 +97,10 @@
       "nl": {
         "name": "De Koning",
         "description": "De Soevereine Heerser, aan Wie alle heerschappij toebehoort"
+      },
+      "id": {
+        "name": "Yang Maha Merajai",
+        "description": "Penguasa mutlak seluruh alam semesta"
       }
     }
   },
@@ -120,6 +132,10 @@
       "nl": {
         "name": "De Heilige",
         "description": "De Volmaakt Zuivere, vrij van alle imperfectie"
+      },
+      "id": {
+        "name": "Yang Maha Suci",
+        "description": "Yang suci dari segala kekurangan dan cela"
       }
     }
   },
@@ -151,6 +167,10 @@
       "nl": {
         "name": "De Vrede",
         "description": "De Bron van Vrede en Veiligheid"
+      },
+      "id": {
+        "name": "Yang Maha Memberi Kesejahteraan",
+        "description": "Sumber kedamaian dan kesejahteraan"
       }
     }
   },
@@ -182,6 +202,10 @@
       "nl": {
         "name": "De Beschermer",
         "description": "Die waakt over en beschermt wat Hij heeft geschapen"
+      },
+      "id": {
+        "name": "Yang Maha Memelihara",
+        "description": "Yang menjaga dan memelihara seluruh makhluk-Nya"
       }
     }
   },
@@ -213,6 +237,10 @@
       "nl": {
         "name": "De Almachtige",
         "description": "De Onoverwinnelijke, Die niet te overtreffen is"
+      },
+      "id": {
+        "name": "Yang Maha Perkasa",
+        "description": "Yang memiliki kekuatan yang tidak terkalahkan"
       }
     }
   },
@@ -244,6 +272,10 @@
       "nl": {
         "name": "De Verhevenste",
         "description": "De Meest Verhevene, Die alles overstijgt"
+      },
+      "id": {
+        "name": "Yang Maha Megah",
+        "description": "Yang memiliki keagungan dan kemuliaan"
       }
     }
   },
@@ -275,6 +307,10 @@
       "nl": {
         "name": "De Schepper",
         "description": "Die alles uit het niets schept"
+      },
+      "id": {
+        "name": "Yang Maha Pencipta",
+        "description": "Yang menciptakan segala sesuatu dari ketiadaan"
       }
     }
   },
@@ -306,6 +342,10 @@
       "nl": {
         "name": "De Vormgever",
         "description": "Die de beste vormen en gestalten geeft"
+      },
+      "id": {
+        "name": "Yang Maha Membentuk Rupa",
+        "description": "Yang membentuk segala sesuatu dengan bentuk yang terbaik"
       }
     }
   },
@@ -337,6 +377,10 @@
       "nl": {
         "name": "De Vergevensgezinde",
         "description": "Die herhaaldelijk vergeeft en fouten bedekt"
+      },
+      "id": {
+        "name": "Yang Maha Pengampun",
+        "description": "Yang banyak mengampuni dosa hamba-hamba-Nya"
       }
     }
   },
@@ -368,6 +412,10 @@
       "nl": {
         "name": "De Overweldiger",
         "description": "Wiens macht en beheerschap alles omvat"
+      },
+      "id": {
+        "name": "Yang Maha Memaksa",
+        "description": "Yang menghendaki segala sesuatu terjadi"
       }
     }
   },
@@ -399,6 +447,10 @@
       "nl": {
         "name": "De Gever",
         "description": "Die overvloedig en vrijgevig geeft"
+      },
+      "id": {
+        "name": "Yang Maha Pemberi Karunia",
+        "description": "Yang melimpahkan karunia dan anugerah"
       }
     }
   },
@@ -430,6 +482,10 @@
       "nl": {
         "name": "De Voorziener",
         "description": "Die voorziet in de behoeften van Zijn schepselen"
+      },
+      "id": {
+        "name": "Yang Maha Pemberi Rezeki",
+        "description": "Yang memberikan rezeki kepada seluruh makhluk"
       }
     }
   },
@@ -461,6 +517,10 @@
       "nl": {
         "name": "De Beslisser",
         "description": "Die oordeelt en beslist met volmaakte wijsheid"
+      },
+      "id": {
+        "name": "Yang Maha Pembuka",
+        "description": "Yang membuka pintu rahmat dan kebaikan"
       }
     }
   },
@@ -492,6 +552,10 @@
       "nl": {
         "name": "De Liefdevolle",
         "description": "Die oprechte liefde en genegenheid toont"
+      },
+      "id": {
+        "name": "Yang Maha Mengetahui",
+        "description": "Yang mengetahui segala sesuatu"
       }
     }
   },
@@ -523,6 +587,10 @@
       "nl": {
         "name": "De Verhevene",
         "description": "De Hoogste in rang en positie"
+      },
+      "id": {
+        "name": "Yang Maha Menahan",
+        "description": "Yang menahan dan mencegah segala sesuatu"
       }
     }
   },
@@ -554,6 +622,10 @@
       "nl": {
         "name": "De Grote",
         "description": "De Meest Geweldige in grootte en majesteit"
+      },
+      "id": {
+        "name": "Yang Maha Mulia",
+        "description": "Yang memiliki kemuliaan yang sempurna"
       }
     }
   },
@@ -585,6 +657,10 @@
       "nl": {
         "name": "De Bewaker",
         "description": "Die alles beschermt en bewaakt"
+      },
+      "id": {
+        "name": "Yang Maha Penghitung",
+        "description": "Yang menghitung segala sesuatu dengan tepat"
       }
     }
   },
@@ -616,6 +692,10 @@
       "nl": {
         "name": "De Rekenaar",
         "description": "Die alles nauwkeels berekent en afrekent"
+      },
+      "id": {
+        "name": "Yang Maha Memulai",
+        "description": "Yang memulai penciptaan dari awal"
       }
     }
   },
@@ -647,6 +727,10 @@
       "nl": {
         "name": "De Sublieme",
         "description": "De Meest Verhevene en Sublieme"
+      },
+      "id": {
+        "name": "Yang Maha Mengembalikan",
+        "description": "Yang mengembalikan segala sesuatu kepada-Nya"
       }
     }
   },
@@ -678,6 +762,10 @@
       "nl": {
         "name": "De Eerbiedwaardige",
         "description": "Die alle eer en grootheid bezit"
+      },
+      "id": {
+        "name": "Yang Maha Menghidupkan",
+        "description": "Yang menghidupkan makhluk yang telah mati"
       }
     }
   },
@@ -709,6 +797,10 @@
       "nl": {
         "name": "De Alziende",
         "description": "Die alles ziet en waarneemt"
+      },
+      "id": {
+        "name": "Yang Maha Mematikan",
+        "description": "Yang mematikan segala sesuatu"
       }
     }
   },
@@ -740,6 +832,10 @@
       "nl": {
         "name": "De Rechtvaardige",
         "description": "Die volmaakt rechtvaardig oordeelt"
+      },
+      "id": {
+        "name": "Yang Maha Hidup",
+        "description": "Yang hidup selama-lamanya tanpa kematian"
       }
     }
   },
@@ -771,6 +867,10 @@
       "nl": {
         "name": "De Fijnzinnige",
         "description": "Die het subtieste en verborgenste begrijpt"
+      },
+      "id": {
+        "name": "Yang Maha Mandiri",
+        "description": "Yang tidak membutuhkan sesuatu pun"
       }
     }
   },
@@ -802,6 +902,10 @@
       "nl": {
         "name": "De Alwetende",
         "description": "Die alles weet, zichtbaar en verborgen"
+      },
+      "id": {
+        "name": "Yang Maha Agung",
+        "description": "Yang memiliki keagungan yang sempurna"
       }
     }
   },
@@ -833,6 +937,10 @@
       "nl": {
         "name": "De Zachtmoedige",
         "description": "Die met zachtmoedigheid en zachtheid behandelt"
+      },
+      "id": {
+        "name": "Yang Maha Esa",
+        "description": "Yang satu dan tidak ada sekutu bagi-Nya"
       }
     }
   },
@@ -864,6 +972,10 @@
       "nl": {
         "name": "De Grootmoedige",
         "description": "Die edelmoedig en genereus is"
+      },
+      "id": {
+        "name": "Yang Maha Kekal",
+        "description": "Yang kekal sepanjang masa"
       }
     }
   },
@@ -895,6 +1007,10 @@
       "nl": {
         "name": "De Alhorende",
         "description": "Die alles hoort en verneemt"
+      },
+      "id": {
+        "name": "Yang Maha Mendengar",
+        "description": "Yang mendengar segala sesuatu"
       }
     }
   },
@@ -926,6 +1042,10 @@
       "nl": {
         "name": "De Onafhankelijke",
         "description": "Die geen behoefte heeft aan iets of iemand"
+      },
+      "id": {
+        "name": "Yang Maha Melihat",
+        "description": "Yang melihat segala sesuatu"
       }
     }
   },
@@ -957,6 +1077,10 @@
       "nl": {
         "name": "De Perfecte",
         "description": "De Volmaakte in elk opzicht"
+      },
+      "id": {
+        "name": "Yang Maha Mengadili",
+        "description": "Yang menghukum dengan adil"
       }
     }
   },
@@ -988,6 +1112,10 @@
       "nl": {
         "name": "De Grote",
         "description": "De Meest Geweldige en Grootse"
+      },
+      "id": {
+        "name": "Yang Maha Bijaksana",
+        "description": "Yang bijaksana dalam segala perbuatan"
       }
     }
   },
@@ -1019,6 +1147,10 @@
       "nl": {
         "name": "De Waarderende",
         "description": "Die kleine daden waardeert en beloont"
+      },
+      "id": {
+        "name": "Yang Maha Lembut",
+        "description": "Yang lembut dan penyayang kepada hamba-hamba-Nya"
       }
     }
   },
@@ -1050,6 +1182,10 @@
       "nl": {
         "name": "De Allerhoogste",
         "description": "De Meest Verhevene boven alle schepselen"
+      },
+      "id": {
+        "name": "Yang Maha Memberi Kabar",
+        "description": "Yang memberikan kabar gembira dan peringatan"
       }
     }
   },
@@ -1081,6 +1217,10 @@
       "nl": {
         "name": "De Onvergankelijke",
         "description": "Die eeuwig blijft en niet vergaat"
+      },
+      "id": {
+        "name": "Yang Maha Mengumpulkan",
+        "description": "Yang mengumpulkan seluruh makhluk di hari kiamat"
       }
     }
   },
@@ -1112,6 +1252,10 @@
       "nl": {
         "name": "De Schepper",
         "description": "De Oorspronkelijke Schepper van alles"
+      },
+      "id": {
+        "name": "Yang Maha Kaya",
+        "description": "Yang tidak membutuhkan apa pun"
       }
     }
   },
@@ -1143,6 +1287,10 @@
       "nl": {
         "name": "De Enige",
         "description": "De Enige en Unieke"
+      },
+      "id": {
+        "name": "Yang Maha Mencukupi",
+        "description": "Yang mencukupi kebutuhan hamba-hamba-Nya"
       }
     }
   },
@@ -1174,6 +1322,10 @@
       "nl": {
         "name": "De Ene",
         "description": "De Ene, zonder partner of gelijke"
+      },
+      "id": {
+        "name": "Yang Maha Mencegah",
+        "description": "Yang mencegah segala sesuatu yang buruk"
       }
     }
   },
@@ -1205,6 +1357,10 @@
       "nl": {
         "name": "De Toevlucht",
         "description": "Op Wie alles steunt en vertrouw"
+      },
+      "id": {
+        "name": "Yang Maha Menimpa",
+        "description": "Yang menimpa makhluk dengan kebaikan dan keburukan"
       }
     }
   },
@@ -1236,6 +1392,10 @@
       "nl": {
         "name": "De Almachtige",
         "description": "De Alvermogende, tot alles in staat"
+      },
+      "id": {
+        "name": "Yang Maha Bermanfaat",
+        "description": "Yang memberikan manfaat kepada makhluk-Nya"
       }
     }
   },
@@ -1267,6 +1427,10 @@
       "nl": {
         "name": "De Krachtige",
         "description": "Die absolute kracht en macht bezit"
+      },
+      "id": {
+        "name": "Yang Maha Bercahaya",
+        "description": "Cahaya langit dan bumi"
       }
     }
   },
@@ -1298,6 +1462,10 @@
       "nl": {
         "name": "De Versneller",
         "description": "Die dingen laat gebeuren en bespoedigen"
+      },
+      "id": {
+        "name": "Yang Maha Pembimbing",
+        "description": "Yang membimbing hamba-hamba-Nya kepada kebenaran"
       }
     }
   },
@@ -1329,6 +1497,10 @@
       "nl": {
         "name": "De Uitsteller",
         "description": "Die zaken uitstelt tot het juiste moment"
+      },
+      "id": {
+        "name": "Yang Maha Pencipta",
+        "description": "Yang menciptakan segala sesuatu dengan sempurna"
       }
     }
   },
@@ -1360,6 +1532,10 @@
       "nl": {
         "name": "De Eerste",
         "description": "Voor Wie niets bestond"
+      },
+      "id": {
+        "name": "Yang Maha Kekal",
+        "description": "Yang kekal tanpa batas waktu"
       }
     }
   },
@@ -1391,6 +1567,10 @@
       "nl": {
         "name": "De Laatste",
         "description": "Na Wie niets zal bestaan"
+      },
+      "id": {
+        "name": "Yang Maha Pewaris",
+        "description": "Yang mewarisi seluruh alam semesta"
       }
     }
   },
@@ -1422,6 +1602,10 @@
       "nl": {
         "name": "De Manifeste",
         "description": "Die duidelijk zichtbaar is in Zijn tekenen"
+      },
+      "id": {
+        "name": "Yang Maha Membimbing",
+        "description": "Yang membimbing kepada jalan yang lurus"
       }
     }
   },
@@ -1453,6 +1637,10 @@
       "nl": {
         "name": "De Verborgene",
         "description": "Die verborgen is voor de zintuigen"
+      },
+      "id": {
+        "name": "Yang Maha Sabar",
+        "description": "Yang sabar menghadapi dosa hamba-hamba-Nya"
       }
     }
   },
@@ -1484,6 +1672,10 @@
       "nl": {
         "name": "De Beschermer",
         "description": "Die leiding geeft en beschermt"
+      },
+      "id": {
+        "name": "Yang Maha Adil",
+        "description": "Yang adil dalam segala keputusan-Nya"
       }
     }
   },
@@ -1515,6 +1707,10 @@
       "nl": {
         "name": "De Geprezene",
         "description": "Die alle lof en prijs verdient"
+      },
+      "id": {
+        "name": "Yang Maha Pengasih",
+        "description": "Yang memiliki kasih sayang yang luas"
       }
     }
   },
@@ -1546,6 +1742,10 @@
       "nl": {
         "name": "De Rekenaar",
         "description": "Die nauwkeurig rekenschap aflegt"
+      },
+      "id": {
+        "name": "Yang Maha Mengetahui",
+        "description": "Yang mengetahui rahasia dan yang tersembunyi"
       }
     }
   },
@@ -1577,6 +1777,10 @@
       "nl": {
         "name": "De Beginker",
         "description": "Die alles doet ontstaan uit het niets"
+      },
+      "id": {
+        "name": "Yang Maha Perkasa",
+        "description": "Yang memiliki kekuatan yang sempurna"
       }
     }
   },
@@ -1608,6 +1812,10 @@
       "nl": {
         "name": "De Terugbrenger",
         "description": "Die het leven terugbrengt na de dood"
+      },
+      "id": {
+        "name": "Yang Maha Pengampun",
+        "description": "Yang luas ampunan-Nya"
       }
     }
   },
@@ -1639,6 +1847,10 @@
       "nl": {
         "name": "De Gever",
         "description": "Die onophoudelijk geeft en schenkt"
+      },
+      "id": {
+        "name": "Yang Maha Penyayang",
+        "description": "Yang menyayangi hamba-hamba-Nya"
       }
     }
   },
@@ -1670,6 +1882,10 @@
       "nl": {
         "name": "De Ontnemer",
         "description": "Die neemt wat Hij wil"
+      },
+      "id": {
+        "name": "Yang Maha Menatap",
+        "description": "Yang menatap segala sesuatu dengan penglihatan-Nya"
       }
     }
   },
@@ -1701,6 +1917,10 @@
       "nl": {
         "name": "De Verrijker",
         "description": "Die onafhankelijk en rijk maakt"
+      },
+      "id": {
+        "name": "Yang Maha Menetapkan",
+        "description": "Yang menetapkan segala sesuatu dengan hikmah"
       }
     }
   },
@@ -1732,6 +1952,10 @@
       "nl": {
         "name": "De Arme Maker",
         "description": "Die behoeftig en arm maakt"
+      },
+      "id": {
+        "name": "Yang Maha Mengawasi",
+        "description": "Yang mengawasi seluruh makhluk-Nya"
       }
     }
   },
@@ -1763,6 +1987,10 @@
       "nl": {
         "name": "De Dichtbijzijnde",
         "description": "Die zeer nabij is tot Zijn schepselen"
+      },
+      "id": {
+        "name": "Yang Maha Memberi",
+        "description": "Yang memberi tanpa pamrih"
       }
     }
   },
@@ -1794,6 +2022,10 @@
       "nl": {
         "name": "De Verre",
         "description": "Die verheven en transcendent is"
+      },
+      "id": {
+        "name": "Yang Maha Meminta",
+        "description": "Yang meminta hamba-hamba-Nya untuk beribadah"
       }
     }
   },
@@ -1825,6 +2057,10 @@
       "nl": {
         "name": "De Getuige",
         "description": "Die alles getuigt en waarneemt"
+      },
+      "id": {
+        "name": "Yang Maha Kuat",
+        "description": "Yang memiliki kekuatan yang tak tertandingi"
       }
     }
   },
@@ -1856,6 +2092,10 @@
       "nl": {
         "name": "De Waarachtige",
         "description": "De Absoluut Ware en Echt"
+      },
+      "id": {
+        "name": "Yang Maha Teguh",
+        "description": "Yang teguh dalam segala keadaan"
       }
     }
   },
@@ -1887,6 +2127,10 @@
       "nl": {
         "name": "De Betrouwbare",
         "description": "Die volledig te vertrouwen is"
+      },
+      "id": {
+        "name": "Yang Maha Melindungi",
+        "description": "Yang melindungi hamba-hamba-Nya yang beriman"
       }
     }
   },
@@ -1918,6 +2162,10 @@
       "nl": {
         "name": "De Sterkste",
         "description": "De Sterkste en Krachtigste"
+      },
+      "id": {
+        "name": "Yang Maha Terpuji",
+        "description": "Yang terpuji dalam segala perbuatan-Nya"
       }
     }
   },
@@ -1949,6 +2197,10 @@
       "nl": {
         "name": "De Standvastige",
         "description": "De Onwrikbare en Bestendige"
+      },
+      "id": {
+        "name": "Yang Maha Menghitung",
+        "description": "Yang menghitung segala amal perbuatan"
       }
     }
   },
@@ -1980,6 +2232,10 @@
       "nl": {
         "name": "De Vriend",
         "description": "De Beschermdende en Liefdevolle Vriend"
+      },
+      "id": {
+        "name": "Yang Maha Memulai",
+        "description": "Yang memulai segala sesuatu"
       }
     }
   },
@@ -2011,6 +2267,10 @@
       "nl": {
         "name": "De Geprezene",
         "description": "Die alle lof verdient"
+      },
+      "id": {
+        "name": "Yang Maha Mengembalikan",
+        "description": "Yang mengembalikan semua kepada-Nya"
       }
     }
   },
@@ -2042,6 +2302,10 @@
       "nl": {
         "name": "De Opwekker",
         "description": "Die de doden opwekt"
+      },
+      "id": {
+        "name": "Yang Maha Menghidupkan",
+        "description": "Yang menghidupkan setelah kematian"
       }
     }
   },
@@ -2073,6 +2337,10 @@
       "nl": {
         "name": "De Getuige",
         "description": "Die over alles getuigt"
+      },
+      "id": {
+        "name": "Yang Maha Mematikan",
+        "description": "Yang mematikan semua makhluk"
       }
     }
   },
@@ -2104,6 +2372,10 @@
       "nl": {
         "name": "De Waarheid",
         "description": "De Absolute en Eeuwige Waarheid"
+      },
+      "id": {
+        "name": "Yang Maha Hidup",
+        "description": "Yang hidup selama-lamanya"
       }
     }
   },
@@ -2135,6 +2407,10 @@
       "nl": {
         "name": "De Borg",
         "description": "De Beste Garant en Borg"
+      },
+      "id": {
+        "name": "Yang Maha Berdiri Sendiri",
+        "description": "Yang berdiri sendiri tanpa bantuan"
       }
     }
   },
@@ -2166,6 +2442,10 @@
       "nl": {
         "name": "De Krachtige",
         "description": "Die kracht en vermogen bezit"
+      },
+      "id": {
+        "name": "Yang Maha Agung",
+        "description": "Yang memiliki keagungan sempurna"
       }
     }
   },
@@ -2197,6 +2477,10 @@
       "nl": {
         "name": "De Machtige",
         "description": "Die majesteit en grootsheid bezit"
+      },
+      "id": {
+        "name": "Yang Maha Mulia",
+        "description": "Yang mulia dan tidak membutuhkan siapa pun"
       }
     }
   },
@@ -2228,6 +2512,10 @@
       "nl": {
         "name": "De Snel Rekenende",
         "description": "Die snel afrekent"
+      },
+      "id": {
+        "name": "Yang Maha Esa",
+        "description": "Yang satu dan tidak ada yang menyamai-Nya"
       }
     }
   },
@@ -2259,6 +2547,10 @@
       "nl": {
         "name": "De Verhevene",
         "description": "De Sublieme in rang"
+      },
+      "id": {
+        "name": "Yang Maha Abadi",
+        "description": "Yang abadi tanpa permulaan dan akhir"
       }
     }
   },
@@ -2290,6 +2582,10 @@
       "nl": {
         "name": "De Grootmoedige",
         "description": "Die edelmoedig en vrijgevig is"
+      },
+      "id": {
+        "name": "Yang Maha Menetapkan",
+        "description": "Yang menetapkan segala sesuatu"
       }
     }
   },
@@ -2321,6 +2617,10 @@
       "nl": {
         "name": "De Liefdevolle",
         "description": "Die genegenheid en liefde toont"
+      },
+      "id": {
+        "name": "Yang Maha Bijaksana",
+        "description": "Yang bijaksana dalam setiap keputusan"
       }
     }
   },
@@ -2352,6 +2652,10 @@
       "nl": {
         "name": "De Heerser",
         "description": "Die soevereiniteit en gezag uitoefent"
+      },
+      "id": {
+        "name": "Yang Maha Lembut",
+        "description": "Yang lembut dalam mengatur urusan hamba-Nya"
       }
     }
   },
@@ -2383,6 +2687,10 @@
       "nl": {
         "name": "De Eerbiedwaardige",
         "description": "Die eer en vrijgevigheid bezit"
+      },
+      "id": {
+        "name": "Yang Maha Luas Pemberian-Nya",
+        "description": "Yang luas karunia dan nikmat-Nya"
       }
     }
   },
@@ -2414,6 +2722,10 @@
       "nl": {
         "name": "De Opwekker",
         "description": "Die levens opwekt"
+      },
+      "id": {
+        "name": "Yang Maha Mengetahui",
+        "description": "Yang mengetahui apa yang tampak dan tersembunyi"
       }
     }
   },
@@ -2445,6 +2757,10 @@
       "nl": {
         "name": "De Getuige",
         "description": "De Getuige van de Waarheid"
+      },
+      "id": {
+        "name": "Yang Maha Kuasa",
+        "description": "Yang berkuasa atas segala sesuatu"
       }
     }
   },
@@ -2476,6 +2792,10 @@
       "nl": {
         "name": "De Kracht",
         "description": "De Kracht en Mogelijkheid Zelf"
+      },
+      "id": {
+        "name": "Yang Maha Gagah",
+        "description": "Yang gagah dan kuat"
       }
     }
   },
@@ -2507,6 +2827,10 @@
       "nl": {
         "name": "De Macht",
         "description": "De Bron van Majesteit"
+      },
+      "id": {
+        "name": "Yang Maha Mencegah",
+        "description": "Yang mencegah segala kemudaratan"
       }
     }
   },
@@ -2538,6 +2862,10 @@
       "nl": {
         "name": "De Vertrager",
         "description": "Die uitstelt met wijsheid"
+      },
+      "id": {
+        "name": "Yang Maha Menunda",
+        "description": "Yang menunda hukuman dengan bijaksana"
       }
     }
   },
@@ -2569,6 +2897,10 @@
       "nl": {
         "name": "De Eerste",
         "description": "Voor Wie alles bestond"
+      },
+      "id": {
+        "name": "Yang Pertama",
+        "description": "Yang pertama sebelum segala sesuatu ada"
       }
     }
   },
@@ -2600,6 +2932,10 @@
       "nl": {
         "name": "De Laatste",
         "description": "Na Wie alles zal vergaan"
+      },
+      "id": {
+        "name": "Yang Terakhir",
+        "description": "Yang terakhir setelah segala sesuatu lenyap"
       }
     }
   },
@@ -2631,6 +2967,10 @@
       "nl": {
         "name": "De Duidelijke",
         "description": "Die manifest en duidelijk is"
+      },
+      "id": {
+        "name": "Yang Nyata",
+        "description": "Yang nyata adanya dalam tanda-tanda-Nya"
       }
     }
   },
@@ -2662,6 +3002,10 @@
       "nl": {
         "name": "De Verborgene",
         "description": "Die onzichtbaar en verborgen is"
+      },
+      "id": {
+        "name": "Yang Tersembunyi",
+        "description": "Yang tersembunyi dari penglihatan mata"
       }
     }
   },
@@ -2693,6 +3037,10 @@
       "nl": {
         "name": "De Beschermer",
         "description": "Die zaken regelt en beschermt"
+      },
+      "id": {
+        "name": "Yang Berkuasa",
+        "description": "Yang berkuasa atas segala urusan"
       }
     }
   },
@@ -2724,6 +3072,10 @@
       "nl": {
         "name": "De Rechtvaardige",
         "description": "Die rechtvaardig en billijk is"
+      },
+      "id": {
+        "name": "Yang Maha Suci",
+        "description": "Yang suci dari segala kekurangan"
       }
     }
   },
@@ -2755,6 +3107,10 @@
       "nl": {
         "name": "De Verzamelaar",
         "description": "Die alle schepselen zal verzamelen"
+      },
+      "id": {
+        "name": "Yang Maha Mengumpulkan",
+        "description": "Yang mengumpulkan seluruh umat manusia"
       }
     }
   },
@@ -2786,6 +3142,10 @@
       "nl": {
         "name": "De Onafhankelijke",
         "description": "Die rijk en onafhankelijk is"
+      },
+      "id": {
+        "name": "Yang Maha Kaya",
+        "description": "Yang kaya dan tidak membutuhkan makhluk-Nya"
       }
     }
   },
@@ -2817,6 +3177,10 @@
       "nl": {
         "name": "De Gever van Macht",
         "description": "Die macht en autoriteit geeft"
+      },
+      "id": {
+        "name": "Yang Maha Pemberi Kekuasaan",
+        "description": "Yang memberi kekuasaan kepada siapa yang dikehendaki"
       }
     }
   },
@@ -2848,6 +3212,10 @@
       "nl": {
         "name": "De Ontnemer",
         "description": "Die macht en bezit ontneemt"
+      },
+      "id": {
+        "name": "Yang Maha Pencabut Kekuasaan",
+        "description": "Yang mencabut kekuasaan dari siapa yang dikehendaki"
       }
     }
   },
@@ -2879,6 +3247,10 @@
       "nl": {
         "name": "De Brenger van Kwaad",
         "description": "Die beproeving en tegenspoed brengt"
+      },
+      "id": {
+        "name": "Yang Maha Pemberi Kemuliaan",
+        "description": "Yang memuliakan siapa yang dikehendaki"
       }
     }
   },
@@ -2910,6 +3282,10 @@
       "nl": {
         "name": "De Brenger van Goeds",
         "description": "Die zegen en voordeel brengt"
+      },
+      "id": {
+        "name": "Yang Maha Menghinakan",
+        "description": "Yang menghinakan siapa yang dikehendaki"
       }
     }
   },
@@ -2941,6 +3317,10 @@
       "nl": {
         "name": "Het Licht",
         "description": "Die de harten en zielen verlicht"
+      },
+      "id": {
+        "name": "Yang Maha Mendengar",
+        "description": "Yang mendengar segala suara"
       }
     }
   },
@@ -2972,6 +3352,10 @@
       "nl": {
         "name": "De Gids",
         "description": "Die leidt en richting geeft"
+      },
+      "id": {
+        "name": "Yang Maha Melihat",
+        "description": "Yang melihat segala yang ada"
       }
     }
   },
@@ -3003,6 +3387,10 @@
       "nl": {
         "name": "De Schepper",
         "description": "De Oorspronkelijke Maker en Ontwerper"
+      },
+      "id": {
+        "name": "Yang Maha Mengadili",
+        "description": "Yang mengadili dengan keadilan sempurna"
       }
     }
   },
@@ -3034,6 +3422,10 @@
       "nl": {
         "name": "De Bestendige",
         "description": "Die eeuwig en duurzaam blijft"
+      },
+      "id": {
+        "name": "Yang Maha Adil",
+        "description": "Yang tidak menzalimi hamba-hamba-Nya"
       }
     }
   },
@@ -3065,6 +3457,10 @@
       "nl": {
         "name": "De Geduldige",
         "description": "De Eeuwige Geduldige, Die niet haastig is"
+      },
+      "id": {
+        "name": "Yang Maha Sabar",
+        "description": "Yang sabar menanti taubat hamba-hamba-Nya"
       }
     }
   }
