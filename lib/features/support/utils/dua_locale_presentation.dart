@@ -331,6 +331,7 @@ class DuaLocalePresentation {
   static String searchHint(String languageCode) {
     return switch (normalizeLanguageCode(languageCode)) {
       'en' => 'Search dua or adhkar',
+      'de' => 'Dua oder Adhkar suchen',
       'fr' => 'Rechercher une dou‘a ou un dhikr',
       'ar' => 'ابحث عن دعاء أو ذكر',
       _ => 'Buscar dua o adhkar',
@@ -340,6 +341,7 @@ class DuaLocalePresentation {
   static String clearSearchTooltip(String languageCode) {
     return switch (normalizeLanguageCode(languageCode)) {
       'en' => 'Clear search',
+      'de' => 'Suche löschen',
       'fr' => 'Effacer la recherche',
       'ar' => 'مسح البحث',
       _ => 'Limpiar búsqueda',
@@ -355,6 +357,7 @@ class DuaLocalePresentation {
     if (count == 0) {
       return switch (normalized) {
         'en' => 'No results found for "$query".',
+        'de' => 'Keine Ergebnisse für "$query".',
         'fr' => 'Aucun résultat pour "$query".',
         'ar' => 'لم نجد نتائج لعبارة "$query".',
         _ => 'No encontramos resultados para "$query".',
@@ -363,6 +366,7 @@ class DuaLocalePresentation {
 
     return switch (normalized) {
       'en' => '$count result${count == 1 ? '' : 's'} for "$query".',
+      'de' => '$count Ergebnis${count == 1 ? '' : 'se'} für "$query".',
       'fr' => '$count résultat${count == 1 ? '' : 's'} pour "$query".',
       'ar' => '$count نتيجة لعبارة "$query".',
       _ => '$count resultado${count == 1 ? '' : 's'} para "$query".',
@@ -372,6 +376,7 @@ class DuaLocalePresentation {
   static String noResultsTitle(String languageCode) {
     return switch (normalizeLanguageCode(languageCode)) {
       'en' => 'No results',
+      'de' => 'Keine Ergebnisse',
       'fr' => 'Aucun résultat',
       'ar' => 'لا توجد نتائج',
       _ => 'Sin resultados',
@@ -382,6 +387,8 @@ class DuaLocalePresentation {
     return switch (normalizeLanguageCode(languageCode)) {
       'en' =>
         'Try words like rain, travel, protection, sleep or gratitude.',
+      'de' =>
+        'Versuche Begriffe wie Regen, Reise, Schutz, Schlaf oder Dankbarkeit.',
       'fr' =>
         'Essayez des mots comme pluie, voyage, protection, sommeil ou gratitude.',
       'ar' =>
@@ -394,6 +401,7 @@ class DuaLocalePresentation {
   static String categoriesLabel(String languageCode) {
     return switch (normalizeLanguageCode(languageCode)) {
       'en' => 'CATEGORIES',
+      'de' => 'KATEGORIEN',
       'fr' => 'CATÉGORIES',
       'ar' => 'الأقسام',
       _ => 'CATEGORÍAS',
@@ -403,6 +411,7 @@ class DuaLocalePresentation {
   static String featuredLabel(String languageCode) {
     return switch (normalizeLanguageCode(languageCode)) {
       'en' => 'FEATURED',
+      'de' => 'EMPFOHLEN',
       'fr' => 'À LA UNE',
       'ar' => 'مختارات',
       _ => 'DESTACADAS',
@@ -415,6 +424,7 @@ class DuaLocalePresentation {
     String hint,
   ) {
     return switch (normalizeLanguageCode(languageCode)) {
+      'de' => '$count Adhkar · $hint',
       'en' => '$count adhkar · $hint',
       'fr' => '$count adhkar · $hint',
       'ar' => '$count ذكر · $hint',
@@ -424,6 +434,7 @@ class DuaLocalePresentation {
 
   static String loadError(String languageCode) {
     return switch (normalizeLanguageCode(languageCode)) {
+      'de' => 'Der Inhalt der Duas konnte nicht geladen werden.',
       'en' => 'We could not load the dua content.',
       'fr' => 'Nous n’avons pas pu charger le contenu des dou‘a.',
       'ar' => 'تعذر علينا تحميل محتوى الدعاء.',
@@ -433,6 +444,7 @@ class DuaLocalePresentation {
 
   static String emptyCategory(String languageCode) {
     return switch (normalizeLanguageCode(languageCode)) {
+      'de' => 'Keine Duas in dieser Kategorie',
       'en' => 'There are no duas in this category.',
       'fr' => 'Il n’y a aucune dou‘a dans cette catégorie.',
       'ar' => 'لا توجد أدعية في هذا القسم.',
@@ -442,6 +454,7 @@ class DuaLocalePresentation {
 
   static String detailLoadError(String languageCode) {
     return switch (normalizeLanguageCode(languageCode)) {
+      'de' => 'Fehler beim Laden der Duas',
       'en' => 'Error loading duas.',
       'fr' => 'Erreur lors du chargement des dou‘a.',
       'ar' => 'حدث خطأ أثناء تحميل الأدعية.',
@@ -451,6 +464,7 @@ class DuaLocalePresentation {
 
   static String repeatCountLabel(String languageCode, int count) {
     return switch (normalizeLanguageCode(languageCode)) {
+      'de' => '$count Mal',
       'en' => '$count times',
       'fr' => '$count fois',
       'ar' => '$count مرات',
@@ -460,6 +474,7 @@ class DuaLocalePresentation {
 
   static String shareTooltip(String languageCode) {
     return switch (normalizeLanguageCode(languageCode)) {
+      'de' => 'Teilen',
       'en' => 'Share',
       'fr' => 'Partager',
       'ar' => 'مشاركة',
