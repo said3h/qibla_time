@@ -1789,35 +1789,36 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       return _buildPrayerFallback(tokens, null);
     }
 
-    final isArabicOnly = Localizations.localeOf(context).languageCode == 'ar';
+    final languageCode = AppLocaleController.effectiveLanguageCode();
+    final isArabicOnly = languageCode == 'ar';
     final prayers = [
       (
         PrayerName.fajr,
-        PrayerName.fajr.localizedDisplayName(isArabicOnly ? 'ar' : 'en'),
+        _localizedPrayerPrimaryName(PrayerName.fajr, languageCode),
         isArabicOnly ? '' : PrayerName.fajr.displayNameArabic,
         prayerSchedule.fajr,
       ),
       (
         PrayerName.dhuhr,
-        PrayerName.dhuhr.localizedDisplayName(isArabicOnly ? 'ar' : 'en'),
+        _localizedPrayerPrimaryName(PrayerName.dhuhr, languageCode),
         isArabicOnly ? '' : PrayerName.dhuhr.displayNameArabic,
         prayerSchedule.dhuhr,
       ),
       (
         PrayerName.asr,
-        PrayerName.asr.localizedDisplayName(isArabicOnly ? 'ar' : 'en'),
+        _localizedPrayerPrimaryName(PrayerName.asr, languageCode),
         isArabicOnly ? '' : PrayerName.asr.displayNameArabic,
         prayerSchedule.asr,
       ),
       (
         PrayerName.maghrib,
-        PrayerName.maghrib.localizedDisplayName(isArabicOnly ? 'ar' : 'en'),
+        _localizedPrayerPrimaryName(PrayerName.maghrib, languageCode),
         isArabicOnly ? '' : PrayerName.maghrib.displayNameArabic,
         prayerSchedule.maghrib,
       ),
       (
         PrayerName.isha,
-        PrayerName.isha.localizedDisplayName(isArabicOnly ? 'ar' : 'en'),
+        _localizedPrayerPrimaryName(PrayerName.isha, languageCode),
         isArabicOnly ? '' : PrayerName.isha.displayNameArabic,
         prayerSchedule.isha,
       ),
@@ -2016,35 +2017,36 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       return _buildPremiumPrayerFallback(tokens, null);
     }
 
-    final isArabicOnly = Localizations.localeOf(context).languageCode == 'ar';
+    final languageCode = AppLocaleController.effectiveLanguageCode();
+    final isArabicOnly = languageCode == 'ar';
     final prayers = <(PrayerName, String, String, DateTime)>[
       (
         PrayerName.fajr,
-        PrayerName.fajr.localizedDisplayName(isArabicOnly ? 'ar' : 'en'),
+        _localizedPrayerPrimaryName(PrayerName.fajr, languageCode),
         isArabicOnly ? '' : PrayerName.fajr.displayNameArabic,
         prayerSchedule.fajr,
       ),
       (
         PrayerName.dhuhr,
-        PrayerName.dhuhr.localizedDisplayName(isArabicOnly ? 'ar' : 'en'),
+        _localizedPrayerPrimaryName(PrayerName.dhuhr, languageCode),
         isArabicOnly ? '' : PrayerName.dhuhr.displayNameArabic,
         prayerSchedule.dhuhr,
       ),
       (
         PrayerName.asr,
-        PrayerName.asr.localizedDisplayName(isArabicOnly ? 'ar' : 'en'),
+        _localizedPrayerPrimaryName(PrayerName.asr, languageCode),
         isArabicOnly ? '' : PrayerName.asr.displayNameArabic,
         prayerSchedule.asr,
       ),
       (
         PrayerName.maghrib,
-        PrayerName.maghrib.localizedDisplayName(isArabicOnly ? 'ar' : 'en'),
+        _localizedPrayerPrimaryName(PrayerName.maghrib, languageCode),
         isArabicOnly ? '' : PrayerName.maghrib.displayNameArabic,
         prayerSchedule.maghrib,
       ),
       (
         PrayerName.isha,
-        PrayerName.isha.localizedDisplayName(isArabicOnly ? 'ar' : 'en'),
+        _localizedPrayerPrimaryName(PrayerName.isha, languageCode),
         isArabicOnly ? '' : PrayerName.isha.displayNameArabic,
         prayerSchedule.isha,
       ),
@@ -2616,9 +2618,25 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   (String, String) _prayerName(PrayerName prayer) {
     final languageCode = AppLocaleController.effectiveLanguageCode();
-    final primary = prayer.localizedDisplayName(languageCode);
+    final primary = _localizedPrayerPrimaryName(prayer, languageCode);
     final secondary = languageCode == 'ar' ? '' : prayer.displayNameArabic;
     return (primary, secondary);
+  }
+
+  String _localizedPrayerPrimaryName(
+    PrayerName prayer,
+    String languageCode,
+  ) {
+    return switch (languageCode) {
+      'de' => switch (prayer) {
+          PrayerName.fajr => 'Fadschr',
+          PrayerName.dhuhr => 'Zuhr',
+          PrayerName.asr => 'Asr',
+          PrayerName.maghrib => 'Maghrib',
+          PrayerName.isha => 'Ischa',
+        },
+      _ => prayer.localizedDisplayName(languageCode),
+    };
   }
 
   IconData _prayerIcon(PrayerName prayer) {
