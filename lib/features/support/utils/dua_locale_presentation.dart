@@ -392,7 +392,7 @@ class DuaLocalePresentation {
   static String screenTitle(String languageCode) {
     return switch (normalizeLanguageCode(languageCode)) {
       'en' => 'Dua and adhkar',
-      'fr' => 'Dou'a et adhkar',
+      'fr' => "Dou'a et adhkar",
       'ar' => 'الدعاء والأذكار',
       'de' => 'Dua und Adhkar',
       'id' => 'Doa dan Adhkar',
