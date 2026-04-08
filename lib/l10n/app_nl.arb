@@ -1,0 +1,1156 @@
+{
+  "@@locale": "nl",
+  "appTitle": "Qibla Time",
+  "commonSkip": "Overslaan",
+  "commonBack": "Terug",
+  "commonContinue": "Doorgaan",
+  "commonEnter": "Invoeren",
+  "commonAllow": "Toestaan",
+  "commonActivate": "Activeren",
+  "commonEnable": "Inschakelen",
+  "commonEnableGps": "GPS inschakelen",
+  "commonOpenSettings": "Instellingen openen",
+  "commonPending": "In behandeling",
+  "commonGranted": "Toegekend",
+  "commonBlocked": "Geblokkeerd",
+  "commonReady": "Klaar",
+  "commonDisabled": "Uitgeschakeld",
+  "commonUnavailable": "Niet beschikbaar",
+  "commonToday": "Vandaag",
+  "commonYesterday": "Gisteren",
+  "commonLoading": "Laden...",
+  "commonShare": "Delen",
+  "commonManual": "Handmatig",
+  "commonImportJson": "JSON importeren",
+  "commonExport": "Exporteren",
+  "commonOpen": "Openen",
+  "commonVersion": "Versie",
+  "commonAbout": "Over",
+  "commonMethod": "Methode",
+  "commonMadhab": "Madhab",
+  "commonLocation": "Locatie",
+  "commonNotifications": "Meldingen",
+  "commonNoData": "Geen gegevens",
+  "commonNever": "Nooit",
+  "commonGenerating": "Genereren...",
+  "commonChecking": "Controleren...",
+  "commonDelete": "Verwijderen",
+  "commonSystemStatus": "Systeemstatus",
+  "commonCurrentStatus": "Huidige status",
+  "commonOffset": "Afwijking",
+  "commonAutomatic": "Automatisch",
+  "commonPrepared": "Voorbereid",
+  "commonActivated": "Ingeschakeld",
+  "commonPaused": "Gepauzeerd",
+  "commonSystem": "Systeem",
+  "onboardingWelcomeTitle": "Welkom bij Qibla Time",
+  "onboardingWelcomeSubtitle": "Gebedstijden, Qibla, Quran en herinneringen in een lichte app voor je dagelijkse ritme.",
+  "onboardingFeatureSchedulesTitle": "Betrouwbare gebedstijden",
+  "onboardingFeatureSchedulesBody": "Berekend op basis van je locatie en gekozen methode.",
+  "onboardingFeaturePracticeTitle": "Qibla en dagelijkse praktijk",
+  "onboardingFeaturePracticeBody": "Kompas, tasbih, voortgang en meer in één soepele stroom.",
+  "onboardingFeatureRemindersTitle": "Nuttige herinneringen",
+  "onboardingFeatureRemindersBody": "Adhan-meldingen en belangrijke instellingen vanaf dag één gereed.",
+  "onboardingPermissionsTitle": "Belangrijke machtigingen",
+  "onboardingPermissionsSubtitle": "We vragen alleen om wat nodig is om gebedstijden te berekenen, de Qibla te gebruiken en je op tijd te melden.",
+  "onboardingLocationReadyBody": "Klaar om gebedstijden en Qibla te berekenen.",
+  "onboardingLocationBlockedBody": "Locatietoegang is geblokkeerd. Je kunt dit later inschakelen in de systeeminstellingen.",
+  "onboardingLocationGpsOffBody": "De GPS van je apparaat is uitgeschakeld. Je kunt doorgaan en het later inschakelen.",
+  "onboardingLocationPendingBody": "Nodig voor nauwkeurige gebedstijden en de richting naar Mekka.",
+  "onboardingNotificationsReadyBody": "Klaar om je aan elk gebed te herinneren.",
+  "onboardingNotificationsPendingBody": "Hiermee kun je Adhan-meldingen en herinneringen ontvangen.",
+  "onboardingMethodTitle": "Berekeningsmethode",
+  "onboardingMethodSubtitle": "Je kunt het later wijzigen, maar zo blijven je gebedstijden vanaf vandaag correct geconfigureerd.",
+  "onboardingSelectedNow": "Nu geselecteerd",
+  "onboardingTapToChooseMethod": "Tik om deze methode te kiezen",
+  "onboardingMadhabTitle": "Madhab voor Asr",
+  "onboardingMadhabSubtitle": "Dit beïnvloedt alleen de berekening van Asr. Als je het niet zeker weet, kun je Shafi houden en het later wijzigen.",
+  "onboardingMadhabCommonTitle": "Shafi / Maliki / Hanbali",
+  "onboardingMadhabCommonSubtitle": "De meest voorkomende optie om mee te beginnen",
+  "onboardingMadhabHanafiTitle": "Hanafi",
+  "onboardingMadhabHanafiSubtitle": "Gebruik de Hanafi-berekening voor Asr",
+  "onboardingAdhanTitle": "Adhan en meldingen",
+  "onboardingAdhanSubtitle": "Qibla Time kan je standaard voor elk gebed waarschuwen met een zachte Adhan. Je kunt het later wijzigen.",
+  "onboardingPrayerNotificationsTitle": "Gebedsmeldingen",
+  "onboardingPrayerNotificationsSubtitle": "Je kunt ze nu inschakelen of voorlopig zonder ze doorgaan.",
+  "onboardingAdhanPreviewTitle": "Snelle Adhan-voorbeeld",
+  "onboardingAdhanPreviewSubtitle": "Het geluid dat je hebt geselecteerd wordt gebruikt. Je kunt het later in de instellingen wijzigen.",
+  "onboardingAdhanStopPreview": "Voorbeeld stoppen",
+  "onboardingAdhanListenPreview": "Voorbeeld beluisteren",
+  "onboardingDoneTitle": "Alles gereed",
+  "onboardingDoneSubtitle": "Je kunt nu beginnen met je gebedstijden, Qibla en dagelijkse voortgang. Alles kan later worden aangepast.",
+  "onboardingSummaryLocationBlocked": "Voorlopig geblokkeerd",
+  "onboardingSummaryNotificationsPrepared": "Voorbereid",
+  "methodMuslimWorldLeague": "Muslim World League",
+  "methodNorthAmerica": "ISNA / Noord-Amerika",
+  "methodUmmAlQura": "Umm al-Qura",
+  "methodEgyptian": "Egyptische Autoriteit",
+  "homeHeaderOnline": "Online",
+  "homeHeaderOffline": "Offline",
+  "homeHeaderLocationUnavailable": "Locatie niet beschikbaar",
+  "homeHeaderStatusLine": "{networkStatus} · {location}",
+  "@homeHeaderStatusLine": {
+    "placeholders": {
+      "networkStatus": {},
+      "location": {}
+    }
+  },
+  "homeHeroNextPrayer": "VOLGEND GEBED",
+  "homeHeroTodayOverview": "Hoofdweergave van vandaag",
+  "homeHeroUsingSavedLocation": "Je laatst opgeslagen locatie wordt gebruikt",
+  "homeSelectedDateToday": "VANDAAG",
+  "homeSelectedDateCustom": "GESELECTEERDE DATUM",
+  "homeCountdownUnavailable": "Aftellen niet beschikbaar",
+  "homeCountdownActive": "Aftellen actief",
+  "homeCountdownUntil": "tot {prayer}",
+  "@homeCountdownUntil": {
+    "placeholders": {
+      "prayer": {}
+    }
+  },
+  "homeCountdownLabelUppercase": "AFTELLEN",
+  "homeDurationUntil": "over {hours}u {minutes}min",
+  "@homeDurationUntil": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      },
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "homeDurationHoursMinutes": "{hours} u {minutes} min",
+  "@homeDurationHoursMinutes": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      },
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "homeDurationMinutes": "{minutes} min",
+  "@homeDurationMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "homeDurationSeconds": "{seconds} s",
+  "@homeDurationSeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "String"
+      }
+    }
+  },
+  "homePrayerSectionToday": "Gebeden van vandaag",
+  "homePrayerSectionForDate": "Tijden voor {date}",
+  "@homePrayerSectionForDate": {
+    "placeholders": {
+      "date": {}
+    }
+  },
+  "homePrayerSectionWorshipDay": "{weekday}, dag van aanbidding",
+  "@homePrayerSectionWorshipDay": {
+    "placeholders": {
+      "weekday": {}
+    }
+  },
+  "homePrayerSectionMarkedCount": "{count}/5 aangevinkt",
+  "@homePrayerSectionMarkedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsTitle": "Instellingen",
+  "settingsTitleArabic": "الإعدادات",
+  "settingsSectionAppearance": "Weergave",
+  "settingsSectionAccessibility": "Toegankelijkheid",
+  "settingsSectionAdhanNotifications": "Adhan-meldingen",
+  "settingsSectionScheduleCalculation": "Gebedstijd-berekening",
+  "settingsSectionRamadanMode": "Ramadan-modus",
+  "settingsSectionHadith": "Hadith",
+  "settingsSectionTravelerMode": "Reismodus",
+  "settingsSectionRecentPlaces": "RECENTE PLAATSEN",
+  "settingsSectionSmartCache": "Slimme cache",
+  "settingsSectionSupport": "Sadaqah · Ondersteuning",
+  "settingsSectionCloudBackup": "Cloud-back-up (bèta)",
+  "settingsTextSize": "Tekstgrootte",
+  "settingsCurrentScale": "Huidige schaal: {scale}x",
+  "@settingsCurrentScale": {
+    "placeholders": {
+      "scale": {}
+    }
+  },
+  "settingsHighContrast": "Hoog contrast",
+  "settingsHighContrastSubtitle": "Verbetert de leesbaarheid in de hele app",
+  "settingsUseSystemBold": "Systeem vetgedrukte tekst gebruiken",
+  "settingsUseSystemBoldSubtitle": "Respecteert de VoiceOver/TalkBack-voorkeur",
+  "settingsResetAccessibility": "Toegankelijkheid herstellen",
+  "settingsReset": "Herstellen",
+  "settingsThemeDarkTitle": "Donker",
+  "settingsThemeDarkSubtitle": "Lucht voor Fajr",
+  "settingsThemeLightTitle": "Licht",
+  "settingsThemeLightSubtitle": "Voor gebruik buitenshuis",
+  "settingsThemeAmoledTitle": "AMOLED",
+  "settingsThemeAmoledSubtitle": "Zwart, bespaart batterij",
+  "settingsThemeDeuteranopiaTitle": "Deuteranopie",
+  "settingsThemeDeuteranopiaSubtitle": "Geen rood/groen",
+  "settingsThemeMonochromeTitle": "Monochroom",
+  "settingsThemeMonochromeSubtitle": "Voor achromatopsie en slechtziendheid",
+  "settingsLanguage": "App-taal",
+  "settingsLanguageSubtitle": "Kies of de app de apparaattaal moet volgen of één vaste taal overal moet gebruiken.",
+  "settingsLanguageDialogTitle": "App-taal",
+  "settingsLanguageOptionSystem": "Apparaattaal volgen",
+  "settingsLanguageSystemValue": "Automatisch ({language})",
+  "@settingsLanguageSystemValue": {
+    "placeholders": {
+      "language": {}
+    }
+  },
+  "settingsLanguageOptionSpanish": "Español",
+  "settingsLanguageOptionEnglish": "English",
+  "settingsLanguageOptionFrench": "Français",
+  "settingsLanguageOptionGerman": "Deutsch",
+  "settingsLanguageOptionArabic": "العربية",
+  "settingsLanguageOptionDutch": "Nederlands",
+  "settingsAdhanSound": "Adhan-geluid",
+  "settingsAdhanSoundAction": "Kiezen en voorbeeld",
+  "settingsGeneralNotifications": "Algemene meldingen",
+  "settingsGeneralNotificationsSubtitle": "Alle gebedswaarschuwingen in- of uitschakelen",
+  "settingsSystemPermissionPendingBody": "Adhan-meldingen zijn geconfigureerd, maar de systeemmachtiging is nog in behandeling.",
+  "settingsHapticFeedback": "Haptische feedback",
+  "settingsRamadanAutomatic": "Automatische Ramadan-modus",
+  "settingsRamadanAutomaticSubtitle": "Wordt automatisch ingeschakeld wanneer de Islamitische kalender Ramadan binnenkomt",
+  "settingsRamadanForced": "Ramadan-modus forceren",
+  "settingsRamadanForcedSubtitle": "De Ramadan-weergave handmatig inschakelen",
+  "settingsDailyNotification": "Dagelijkse melding",
+  "settingsDailyNotificationSubtitle": "Ontvang elke dag een hadith of vers",
+  "settingsNotificationHour": "Meldingstijd",
+  "settingsTravelerMode": "Reismodus",
+  "settingsTravelerModeSubtitle": "Detecteert automatisch stadswijzigingen (>50 km)",
+  "settingsTravelerModeLoadError": "We konden de reismodus niet laden",
+  "settingsRecentPlaces": "Recente plaatsen",
+  "settingsNoRecentTrips": "Geen recente reizen",
+  "settingsLoadError": "We konden het niet laden",
+  "settingsCacheValidUntil": "Cache geldig tot",
+  "settingsCacheEntries": "Cache-ingangen",
+  "settingsClearCache": "Cache wissen",
+  "settingsSupportInfo": "Ondersteuningsinformatie",
+  "settingsSupportCardTitle": "Ontwikkeling ondersteunen",
+  "settingsSupportCardSubtitle": "Elke donatie kan een sadaqah jariyah worden",
+  "settingsBackupMode": "Back-up-modus",
+  "settingsAnonymousId": "Anonieme ID",
+  "settingsLastBackup": "Laatste back-up",
+  "settingsExportBackup": "Back-up exporteren",
+  "settingsRestoreBackup": "Back-up herstellen",
+  "settingsBackupInfoBody": "Je kunt een handmatige back-up in JSON-formaat opslaan en delen. Automatisering en apparaatoverschrijdende synchronisatie zijn nog niet beschikbaar.",
+  "settingsRestoreBackupDialogTitle": "Back-up herstellen",
+  "settingsRestoreBackupSuccess": "Back-up hersteld",
+  "settingsRestoreBackupError": "We konden de back-up niet herstellen.",
+  "settingsDailyNotificationEnabled": "Dagelijkse melding ingeschakeld",
+  "settingsDailyNotificationDisabled": "Dagelijkse melding uitgeschakeld",
+  "settingsSelectHourTitle": "Tijd selecteren",
+  "settingsToday": "Vandaag",
+  "settingsYesterday": "Gisteren",
+  "settingsDaysAgo": "{count} dagen geleden",
+  "@settingsDaysAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsRamadanManualActive": "Handmatig actief",
+  "settingsLocationBlocked": "Geblokkeerd",
+  "settingsLocationPendingPermission": "Machtiging in behandeling",
+  "settingsLocationAutomatic": "Automatisch",
+  "settingsLocationSavedUnavailable": "Geen opgeslagen locatie",
+  "settingsLocationStatus": "Locatiestatus",
+  "settingsGpsOff": "GPS uit",
+  "settingsScheduleSource": "Tijdschema-bron",
+  "settingsScheduleSourceReady": "Cache gereed",
+  "settingsNotificationSystem": "Systeem meld.",
+  "settingsNotificationApp": "App meld.",
+  "settingsNotificationsGranted": "Toegekend",
+  "commonPlay": "Afspelen",
+  "commonText": "Tekst",
+  "commonVideo": "Video",
+  "commonRemove": "Verwijderen",
+  "shareBranding": "App: Qibla Time",
+  "shareReferenceLabel": "Referentie: {reference}",
+  "@shareReferenceLabel": {
+    "placeholders": {
+      "reference": {}
+    }
+  },
+  "shareSubjectDua": "Dua",
+  "shareSubjectHadithOfDay": "Hadith van de dag - Qibla Time",
+  "shareSubjectHadithShared": "Hadith gedeeld van Qibla Time",
+  "shareBadgeHadith": "HADITH",
+  "shareBadgeDua": "DUA",
+  "shareBadgeQuran": "QURAN",
+  "shareSectionStyle": "Stijl / achtergrond",
+  "shareSectionContent": "Inhoud",
+  "shareLayoutCard": "Kaart",
+  "shareLayoutStory": "Verhaal",
+  "shareContentBilingual": "Arabisch + vertaling",
+  "shareContentArabicOnly": "Alleen Arabisch",
+  "shareContentTranslationOnly": "Alleen vertaling",
+  "shareActionShareImage": "Afbeelding delen",
+  "shareActionShareText": "Tekst delen",
+  "shareHadithTitle": "Hadith delen",
+  "shareHadithSubtitle": "Kies het formaat en de inhoud voordat je deelt.",
+  "shareHadithTextError": "We konden de hadith-tekst niet delen.",
+  "shareHadithImageError": "We konden de hadith-afbeelding niet genereren.",
+  "shareDuaTitle": "Dua delen",
+  "shareDuaTitleNamed": "{title} delen",
+  "@shareDuaTitleNamed": {
+    "placeholders": {
+      "title": {}
+    }
+  },
+  "shareDuaSubtitle": "Gebruik dezelfde visuele behandeling als de hadith voor Dua en Adhkar.",
+  "shareDuaTextError": "We konden de Dua-tekst niet delen.",
+  "shareDuaImageError": "We konden de Dua-afbeelding niet genereren.",
+  "shareAyahTitle": "Ayah {number} delen",
+  "@shareAyahTitle": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "shareAyahSubtitle": "Behoud dezelfde visuele weergave voor tekst, afbeelding en video.",
+  "shareAyahTextError": "We konden deze ayah niet als tekst delen.",
+  "shareAyahImageError": "We konden deze ayah-afbeelding niet genereren.",
+  "shareAyahVideoNoAudio": "Er is geen audio beschikbaar om een video voor deze ayah te genereren.",
+  "shareAyahVideoGenerating": "De ayah-video wordt gegenereerd...",
+  "shareAyahVideoError": "We konden de video voor deze ayah niet genereren.",
+  "notificationAdhanChannelName": "Adhan",
+  "notificationAdhanChannelDescription": "Gebedstijd-meldingen",
+  "notificationAdhanTitle": "Qibla Time - {prayerName}",
+  "@notificationAdhanTitle": {
+    "placeholders": {
+      "prayerName": {}
+    }
+  },
+  "notificationAdhanBody": "Het is tijd voor het gebed",
+  "notificationReminderChannelName": "Qibla Time - Herinneringen",
+  "notificationReminderChannelDescription": "Contextuele herinneringen voor Ramadan en Jumu'ah",
+  "notificationDailyReflectionChannelName": "Dagelijkse bezinning",
+  "notificationDailyReflectionChannelDescription": "Vers van de Quran en hadith van de dag",
+  "notificationDailyReflectionTitle": "Bezegening van de dag",
+  "notificationDailyReflectionFallbackBody": "Je dagelijkse spirituele bezinning in Qibla Time.",
+  "notificationDailyReflectionErrorTitle": "Qibla Time · Dagelijkse bezinning",
+  "notificationDailyReflectionErrorBody": "Je spirituele herinnering voor vandaag",
+  "notificationHadithReminderChannelName": "Hadith-herinneringen",
+  "notificationHadithReminderChannelDescription": "Uurlijkse hadith-herinneringen",
+  "notificationHadithReminderFallbackBody": "Herinnering: lees een hadith van de Profeet ﷺ",
+  "notificationHadithReminderTitle": "📖 Hadith voor dit moment",
+  "notificationHadithReminderTestBody": "Test hadith-herinnering",
+  "notificationHadithReminderTestTitle": "📖 Hadith-herinnering",
+  "notificationWeeklySummaryTitle": "Je wekelijkse samenvatting is gereed",
+  "notificationWeeklySummaryBody": "Deze week heb je {prayersCompleted}/{maxPossible} gebeden voltooid. Je sterkste dag was {strongestDay}.",
+  "@notificationWeeklySummaryBody": {
+    "placeholders": {
+      "prayersCompleted": {
+        "type": "int"
+      },
+      "maxPossible": {
+        "type": "int"
+      },
+      "strongestDay": {}
+    }
+  },
+  "quranDailyVerseFallbackTranslation": "Allah: er is geen god dan Hij, de Levende, de Bestendige. Geen sluimer noch slaap overvalt Hem.",
+  "quranDailyVerseFallbackTransliteration": "Allahu la ilaha illa huwal hayyul qayyum...",
+  "quranDailyVerseFallbackReference": "Al-Baqara [2:255]",
+  "quranTitle": "Quran",
+  "quranSubtitle": "114 soerahs · doorlopend lezen",
+  "quranHafizLabel": "Hafiz",
+  "quranUtilityAyatAlKursi": "Ayat al-Kursi",
+  "quranUtilityAllahNames": "99 namen",
+  "quranUtilityDownloaded": "Gedownload",
+  "quranProtectionTitle": "DAGELIJKSE BESCHERMING",
+  "quranProtectionSubtitle": "Snelle toegang tot Ayat al-Kursi en de beschermingssoerahs. Open ze om te lezen of luisteren en markeer je drie herhalingen.",
+  "quranProtectionAyatAlKursiHelper": "Al-Baqara 2:255",
+  "quranProtectionSurahHelper": "Soerah {number}",
+  "@quranProtectionSurahHelper": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "quranProtectionIkhlasTitle": "Al-Ikhlas",
+  "quranProtectionFalaqTitle": "Al-Falaq",
+  "quranProtectionNasTitle": "An-Nas",
+  "quranProtectionRepeatCount": "{helper} · {count}/3 herhalingen",
+  "@quranProtectionRepeatCount": {
+    "placeholders": {
+      "helper": {},
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quranProtectionCompleteTooltip": "Voltooid",
+  "quranProtectionIncrementTooltip": "+1 herhaling",
+  "quranReadingHintTitle": "DOORLOPEND LEZEN",
+  "quranReadingHintBody": "Open een soerah en we slaan je laatste ayah op, zodat je later terug kunt keren.",
+  "quranReadingHintSecondary": "Je kunt ook bladwijzers opslaan door tijdens het lezen op het bladwijzerpictogram te tikken.",
+  "quranContinueReadingTitle": "DOORLEZEN",
+  "quranBookmarksTitle": "BLADWIJZERS",
+  "quranRevelationMecca": "Mekka",
+  "quranRevelationMedina": "Madinah",
+  "quranAyahCount": "{count, plural, =1{1 ayah} other{{count} ayahs}}",
+  "@quranAyahCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quranLastReadingAyah": "Laatste lezing: ayah {ayah}",
+  "@quranLastReadingAyah": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranBookmarkCount": "{count, plural, =1{1 opgeslagen bladwijzer} other{{count} opgeslagen bladwijzers}}",
+  "@quranBookmarkCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quranDownloadedFavoriteOffline": "Audio gedownload · offline favoriet",
+  "quranDownloadedAudio": "Audio gedownload",
+  "quranReadingPointSaved": "Leespunt opgeslagen bij ayah {ayah}",
+  "@quranReadingPointSaved": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranBookmarkSaved": "Bladwijzer opgeslagen bij ayah {ayah}",
+  "@quranBookmarkSaved": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranBookmarkRemoved": "Bladwijzer verwijderd van ayah {ayah}",
+  "@quranBookmarkRemoved": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranShareAyahTitle": "Ayah {ayah} delen",
+  "@quranShareAyahTitle": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranShareTextSubtitle": "Bevat de Arabische tekst, vertaling en referentie.",
+  "quranShareImageSubtitle": "Maak een afbeelding met de ayah.",
+  "quranShareVideoSubtitle": "Maak een video met de kaart en de recitatie.",
+  "quranAyahImageError": "We konden de afbeelding voor deze ayah niet genereren.",
+  "quranAyahVideoNoAudio": "Er is geen audio beschikbaar voor deze ayah om een video te genereren.",
+  "quranAyahVideoGenerating": "We genereren de ayah-video...",
+  "quranAyahVideoShareText": "Ayah {ayah} van {surah}",
+  "@quranAyahVideoShareText": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      },
+      "surah": {}
+    }
+  },
+  "quranAyahVideoError": "We konden de video voor deze ayah niet genereren.",
+  "quranDownloadCheckError": "We konden de download op dit apparaat niet verifiëren.",
+  "quranDownloadSuccess": "Audio gedownload. Je kunt deze soerah nu offline beluisteren.",
+  "quranDownloadDetailedError": "We konden de download niet voltooien. Controleer je verbinding en probeer het opnieuw.",
+  "quranDownloadShortError": "We konden de audio-download niet voltooien.",
+  "quranDownloadedAudioPlaySubtitle": "Luister naar de soerah met de opgeslagen audio.",
+  "quranDownloadedAudioRemoveSubtitle": "Maak ruimte vrij en luister er online opnieuw naar.",
+  "quranDownloadedAudioRemoved": "De download van deze soerah is verwijderd.",
+  "quranDownloadedFavoriteAdded": "Soerah opgeslagen bij je gedownloade favorieten.",
+  "quranDownloadedFavoriteRemoved": "Soerah verwijderd uit je gedownloade favorieten.",
+  "quranAyahAudioUnavailable": "Audio is niet beschikbaar voor deze ayah.",
+  "quranAyahAudioDownloaded": "De audio is al gedownload op dit apparaat.",
+  "quranAyahAudioAvailable": "Je kunt naar deze ayah luisteren.",
+  "quranAyahAudioRequiresConnection": "Je kunt naar deze ayah luisteren als je een verbinding hebt.",
+  "quranSurahRecitationUnavailable": "Volledige recitatie is niet beschikbaar voor deze soerah.",
+  "quranSurahAudioDownloading": "We downloaden de audio zodat je deze soerah offline kunt beluisteren. {downloaded}/{total} ayahs gereed.",
+  "@quranSurahAudioDownloading": {
+    "placeholders": {
+      "downloaded": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "quranSurahAudioDownloaded": "De audio is al gedownload op dit apparaat. Je kunt deze soerah offline beluisteren.",
+  "quranSurahAudioMissingAyahs": "{count, plural, =1{1 ayah zonder audio wordt overgeslagen.} other{{count} ayahs zonder audio worden overgeslagen.}}",
+  "@quranSurahAudioMissingAyahs": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quranSurahAudioPartialDownload": "Je hebt al {downloaded}/{total} ayahs opgeslagen op dit apparaat.",
+  "@quranSurahAudioPartialDownload": {
+    "placeholders": {
+      "downloaded": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "quranSurahAudioDownloadAvailable": "Je kunt het ook downloaden om offline te luisteren.",
+  "quranSurahAudioPlayOnline": "Je kunt deze soerah rechtstreeks beluisteren via doorlopend afspelen.",
+  "quranSurahAudioPlayWithConnection": "Je kunt deze volledige soerah beluisteren als je een verbinding hebt.",
+  "quranAyahPlaybackError": "We konden de audio niet afspelen. Controleer je verbinding en probeer het opnieuw.",
+  "quranSurahPlaybackError": "We konden de volledige recitatie niet starten.",
+  "quranLastReadingBadge": "Laatste lezing",
+  "quranPauseAudio": "Audio pauzeren",
+  "quranResumeAudio": "Audio hervatten",
+  "quranPlayAudio": "Audio afspelen",
+  "quranAudioUnavailable": "Audio niet beschikbaar",
+  "quranRemoveBookmark": "Bladwijzer verwijderen",
+  "quranSaveBookmark": "Bladwijzer opslaan",
+  "quranAyahFooterHint": "{status} Tik op deze ayah om je leespunt hier op te slaan. Lang indrukken om te delen.",
+  "@quranAyahFooterHint": {
+    "placeholders": {
+      "status": {}
+    }
+  },
+  "quranDetailLoadError": "We konden deze soerah niet laden. Controleer je verbinding en probeer het opnieuw.",
+  "quranTopBannerResume": "Hervatten vanaf ayah {ayah}.",
+  "@quranTopBannerResume": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranTopBannerOnline": "Inhoud online geladen. Je kunt elke ayah-audio beluisteren zolang je een verbinding hebt.",
+  "quranTopBannerOffline": "Tekst offline geladen. Audio voor sommige ayahs kan nog steeds een verbinding vereisen.",
+  "quranTopBannerPlaceholder": "Gedeeltelijke inhoud offline geladen. Audio is voorlopig niet beschikbaar.",
+  "quranSurahAudioCardTitle": "LUISTEREN NAAR SOERAH",
+  "quranAvailableAyahs": "{available}/{total} ayahs",
+  "@quranAvailableAyahs": {
+    "placeholders": {
+      "available": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "quranPauseSurah": "Soerah pauzeren",
+  "quranResumeSurah": "Soerah hervatten",
+  "quranListenSurah": "Luisteren naar soerah",
+  "quranStop": "Stoppen",
+  "quranCheckingAudio": "Audio controleren",
+  "quranDownloadingProgress": "Downloaden {downloaded}/{total}",
+  "@quranDownloadingProgress": {
+    "placeholders": {
+      "downloaded": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "quranDownloaded": "Gedownload",
+  "quranDownloadAudio": "Audio downloaden",
+  "quranDownloadedFavoriteLabel": "Gedownloade favoriet",
+  "quranMarkFavorite": "Markeren als favoriet",
+  "quranPlayingSurahAyah": "Afspelen soerah · ayah {ayah}",
+  "@quranPlayingSurahAyah": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranPausedSurahAyah": "Soerah gepauzeerd · ayah {ayah}",
+  "@quranPausedSurahAyah": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranPlayingAyah": "Afspelen ayah {ayah}",
+  "@quranPlayingAyah": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranPausedAyah": "Ayah {ayah} gepauzeerd",
+  "@quranPausedAyah": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranActiveAudioSurahHint": "De soerah gaat automatisch door met de volgende ayah.",
+  "quranActiveAudioAyahHint": "Je kunt deze recitatie pauzeren, hervatten of stoppen.",
+  "quranStopAudio": "Audio stoppen",
+  "commonAuthenticity": "Authenticiteit",
+  "commonBooks": "Boeken",
+  "commonCancel": "Annuleren",
+  "commonCategory": "Categorie",
+  "commonClose": "Sluiten",
+  "commonCollection": "Collectie",
+  "commonCopy": "Kopiëren",
+  "commonDone": "Klaar",
+  "commonDownload": "Downloaden",
+  "commonFeatured": "Aanbevolen",
+  "commonFilter": "Filteren",
+  "commonGeneral": "Algemeen",
+  "commonHadiths": "Hadiths",
+  "commonInformation": "Informatie",
+  "commonNext": "Volgende",
+  "commonOther": "Overig",
+  "commonPause": "Pauzeren",
+  "commonPlay": "Afspelen",
+  "commonPrayers": "gebeden",
+  "commonQuran": "Quran",
+  "commonRead": "Lezen",
+  "commonReference": "Referentie",
+  "commonResume": "Hervatten",
+  "commonSave": "Opslaan",
+  "commonSaved": "Opgeslagen",
+  "commonStatistics": "Statistieken",
+  "commonTotal": "Totaal",
+  "achievementFirstPrayerTitle": "Eerste gebed",
+  "achievementFirstPrayerDescription": "Je hebt je eerste gebed in de app gemarkeerd.",
+  "achievementFullDayTitle": "Volledige dag",
+  "achievementFullDayDescription": "Je hebt alle vijf de gebeden op één dag voltooid.",
+  "achievementStreak3Title": "3-dagen reeks",
+  "achievementStreak3Description": "Je hebt je consistentie drie dagen op rij behouden.",
+  "achievementStreak7Title": "7-dagen reeks",
+  "achievementStreak7Description": "Zeven dagen achter elkaar bijhouden. Geweldig ritme.",
+  "achievementStreak30Title": "30-dagen reeks",
+  "achievementStreak30Description": "Dertig dagen achter elkaar. Buitengewone consistentie.",
+  "achievementTotal100Title": "100 gebeden",
+  "achievementTotal100Description": "Je hebt 100 voltooide gebeden geregistreerd.",
+  "achievementFirstRamadanTitle": "Eerste Ramadan",
+  "achievementFirstRamadanDescription": "Je hebt je eerste actieve Ramadan-dag voltooid.",
+  "analyticsAchievementsTitle": "Prestaties",
+  "analyticsAchievementsEmpty": "Nog geen prestaties vrijgespeeld.",
+  "analyticsAchievementsLoadError": "We konden je prestaties niet laden.",
+  "analyticsBestDayLabel": "Beste dag",
+  "analyticsBestStreakHint": "Je beste reeks: {count} dagen",
+  "analyticsBestStreakLabel": "Beste reeks",
+  "analyticsByPrayerTitle": "Per gebed",
+  "analyticsCollectionsLabel": "Collecties",
+  "analyticsCompletedPrayersLabel": "Voltooide gebeden",
+  "analyticsCurrentStreakLabel": "Huidige reeks",
+  "analyticsDaysValue": "{count} dagen",
+  "analyticsEmptyBody": "Begin met het markeren van je gebeden en je zult je consistentie hier zien.",
+  "analyticsEmptyHint": "Voltooi je eerste gebed om dit paneel vrij te spelen.",
+  "analyticsEmptyTitle": "Nog geen statistieken",
+  "analyticsFavoritesLabel": "Favorieten",
+  "analyticsFullDaysLabel": "Volledige dagen",
+  "analyticsGradesLabel": "Classificaties",
+  "analyticsHadithStatsLoadError": "Hadith-statistieken konden niet worden geladen.",
+  "analyticsLast30DaysTitle": "Laatste 30 dagen",
+  "analyticsLessLabel": "Minder",
+  "analyticsMoreLabel": "Meer",
+  "analyticsNoActiveStreak": "Geen actieve reeks",
+  "analyticsRecordBadge": "Record",
+  "analyticsSavedFavoritesLabel": "Opgeslagen favorieten",
+  "analyticsShareError": "We konden je voortgang niet delen.",
+  "analyticsShareImage": "Afbeelding delen",
+  "analyticsShareProgressTooltip": "Voortgang delen",
+  "analyticsShareText": "Tekst delen",
+  "analyticsStartStreakHint": "Begin vandaag een nieuwe reeks.",
+  "analyticsStreakDays": "{count} reeksdagen",
+  "analyticsThisWeekLabel": "Deze week",
+  "analyticsWeekInterpretationEmpty": "Er is nog niet genoeg activiteit deze week.",
+  "analyticsWeekInterpretationEncouragement": "Blijf beetje bij beetje doorgaan. Elk gebed telt.",
+  "analyticsWeekInterpretationGood": "Je doet het goed deze week. Een beetje meer consistentie zal het verschil maken.",
+  "analyticsWeekInterpretationStrong": "Zeer sterke week. Je behoudt een uitstekend ritme.",
+  "analyticsWeeklySummaryTitle": "Wekelijkse samenvatting",
+  "booksAboutBody": "Deze bibliotheek brengt IslamHouse-boeken samen voor snel lezen in de app.",
+  "booksAboutBulletCatalog": "Een samengestelde catalogus die gemakkelijk te verkennen is",
+  "booksAboutBulletCategories": "Categorieën om de juiste lezing sneller te vinden",
+  "booksAboutBulletVerified": "Inhoud van een erkende Islamitische bibliotheek",
+  "booksAllCategories": "Alle categorieën",
+  "booksCategoriesTab": "Categorieën",
+  "booksDescription": "Beschrijving",
+  "booksEmptyCategories": "Geen categorieën beschikbaar.",
+  "booksEmptyFeatured": "Voorlopig geen aanbevolen boeken.",
+  "booksEmptySearch": "We konden geen boeken vinden voor die zoekopdracht.",
+  "booksLibraryTitle": "Boeken",
+  "booksLoadErrorTitle": "We konden de bibliotheek niet laden",
+  "booksMainCategoryAcademicLessons": "Academische lessen",
+  "booksMainCategoryArabicLanguage": "Arabische taal",
+  "booksMainCategoryCallToIslam": "Oproep tot de Islam",
+  "booksMainCategoryHistory": "Geschiedenis",
+  "booksMainCategoryIslamicBelief": "Islamitisch geloof",
+  "booksMainCategoryIslamicCulture": "Islamitische cultuur",
+  "booksMainCategoryIslamicJurisprudence": "Islamitische rechtsgeleerdheid",
+  "booksMainCategoryMajorSins": "Grote zonden",
+  "booksMainCategoryNobleQuran": "Edele Quran",
+  "booksMainCategoryPresentingIslam": "De Islam presenteren",
+  "booksMainCategoryPropheticBiography": "Profetische biografie",
+  "booksMainCategoryProphetSunnah": "Soennah van de Profeet",
+  "booksMainCategorySermons": "Preken",
+  "booksMainCategoryVirtues": "Deugden",
+  "booksPageCount": "{pages} pagina's",
+  "booksPlaceholderDescription": "Boeken worden hier binnenkort weergegeven.",
+  "booksPlaceholderTitle": "Bibliotheek in behandeling",
+  "booksSearchHint": "Zoek boek of auteur",
+  "booksUnnamedCategory": "Naamloze categorie",
+  "booksUntitled": "Naamloos",
+  "booksVisitIslamHouse": "Bezoek IslamHouse",
+  "calendarCurrentMonth": "DEZE MAAND",
+  "calendarEventAshura": "Ashura",
+  "calendarEventDayOfArafah": "Dag van Arafah",
+  "calendarEventEidAdha": "Eid al-Adha",
+  "calendarEventEidFitr": "Eid al-Fitr",
+  "calendarEventIslamicNewYear": "Islamitisch Nieuwjaar",
+  "calendarEventRamadanStart": "Begin van Ramadan",
+  "calendarImportantDatesTitle": "Belangrijke data van {year}",
+  "calendarSelectDate": "Selecteer een datum",
+  "calendarSelectedDateUppercase": "GESELECTEERDE DATUM",
+  "calendarTitle": "Islamitische kalender",
+  "calendarTodayLabel": "Vandaag · {date}",
+  "dhikrChooseCustomValue": "Aangepaste waarde kiezen",
+  "dhikrDailyGoalCompletedMessage": "Je hebt je dagelijkse dhikr-doel voltooid.",
+  "dhikrDailyGoalHelper": "Kies hoeveel herhalingen je vandaag wilt bereiken.",
+  "dhikrDailyGoalShort": "Dagelijks doel",
+  "dhikrDailyGoalTitle": "Dagelijks doel",
+  "dhikrDailyGoalUpdated": "Dagelijks doel bijgewerkt naar {value}",
+  "dhikrFeedbackAlmostThere": "Je doet het heel goed. Je bent dicht bij je dagelijkse doel.",
+  "dhikrFeedbackCompleted": "Dagelijks doel voltooid. Moge Allah je dhikr aanvaarden.",
+  "dhikrFeedbackCycleCompleted": "Cyclus voltooid. Je kunt rustig doorgaan.",
+  "dhikrFeedbackGoodPace": "Goed tempo. Behoud deze herhaling met kalmte.",
+  "dhikrFeedbackStart": "Begin met een paar zachte en gestage herhalingen.",
+  "dhikrFeedbackTakeYourTime": "Neem de tijd. Elke herhaling telt.",
+  "dhikrGoalsSection": "DOELEN",
+  "dhikrHistoryEmptyBody": "Er is nog niet genoeg geschiedenis voor deze weergave.",
+  "dhikrHistorySavedBody": "Je recente voortgang wordt automatisch opgeslagen.",
+  "dhikrLast7Days": "7 dagen",
+  "dhikrMeaningAlhamdulillah": "Lof zij Allah",
+  "dhikrMeaningAllahuAkbar": "Allah is de Grootste",
+  "dhikrMeaningSubhanAllah": "Heilig is Allah",
+  "dhikrRepetitionsFieldHint": "Voorbeeld: 100",
+  "dhikrRepetitionsFieldLabel": "Herhalingen",
+  "dhikrResetSession": "Sessie resetten",
+  "dhikrSessionCountOf": "van {count}",
+  "dhikrSessionCycleCompleted": "Je hebt deze dhikr-cyclus voltooid.",
+  "dhikrSessionGoalHelper": "Stel in hoeveel herhalingen je per cyclus wilt.",
+  "dhikrSessionGoalShort": "Sessiedoel",
+  "dhikrSessionGoalTitle": "Sessiedoel",
+  "dhikrSessionGoalUpdated": "Sessiedoel bijgewerkt naar {value}",
+  "dhikrSessionResetMessage": "De sessie is gereset.",
+  "dhikrSubtitle": "Bewust gedenken voor je dag",
+  "dhikrSummarySection": "SAMENVATTING",
+  "dhikrTitle": "Dhikr",
+  "dhikrTodayCycle": "Vandaag: {today} · cyclus {current}/{total}",
+  "hadithDailyBadge": "HADITH VAN DE DAG",
+  "hadithDailyOpenLibrary": "Hadiths openen",
+  "hadithDailyUnavailable": "We konden de hadith van de dag niet laden.",
+  "hadithDetailArabicText": "Arabische tekst",
+  "hadithDetailCopied": "Hadith gekopieerd",
+  "hadithDetailCopyText": "Tekst kopiëren",
+  "hadithDetailGrade": "Classificatie: {grade}",
+  "hadithDetailHideArabic": "Arabisch verbergen",
+  "hadithDetailHideTranslation": "Vertaling verbergen",
+  "hadithDetailId": "ID: {id}",
+  "hadithDetailInfoBody": "Deze hadith kan variëren afhankelijk van de collectie, classificatie en beschikbare vertaling.",
+  "hadithDetailNoCategory": "Geen categorie",
+  "hadithDetailRemovedFromFavorites": "Hadith verwijderd uit favorieten",
+  "hadithDetailSavedToFavorites": "Hadith opgeslagen in favorieten",
+  "hadithDetailShowArabic": "Arabisch tonen",
+  "hadithDetailShowTranslation": "Vertaling tonen",
+  "hadithDetailTitle": "Hadith-details",
+  "hadithDetailTranslation": "Vertaling",
+  "hadithLibraryAllCollections": "Alle collecties",
+  "hadithLibraryAllGrades": "Alle classificaties",
+  "hadithLibraryAllCategories": "Alle categorieën",
+  "hadithLibraryAllHadiths": "{count} hadiths",
+  "hadithLibraryEmptyBody": "Er zijn op dit moment geen hadiths beschikbaar.",
+  "hadithLibraryEmptySearchBody": "Probeer een andere zoekopdracht of verwijder filters.",
+  "hadithLibraryEmptySearchTitle": "Geen resultaten voor \"{query}\"",
+  "hadithLibraryEmptyTitle": "Geen hadiths beschikbaar",
+  "hadithLibraryFiltersError": "We konden de filters niet laden.",
+  "hadithLibraryFiltersLoading": "Filters laden…",
+  "hadithLibraryLoadError": "We konden de hadiths niet laden.\n{error}",
+  "hadithLibraryResultsCount": "{count} resultaten",
+  "hadithLibrarySearchHint": "Zoek hadith of referentie",
+  "hadithLibraryTitle": "Hadiths",
+  "hadithOfflineAvailability": "{progress} beschikbaar offline",
+  "hadithOfflineAvailable": "Beschikbaar",
+  "hadithOfflineCollectionsTitle": "Inbegrepen collecties",
+  "hadithOfflineIncludedSubtitle": "Alle inhoud is ingebouwd in de app",
+  "hadithOfflineIncludedTitle": "Offline vanaf het begin",
+  "hadithOfflineInfoBody": "De hier getoonde hadiths zijn al beschikbaar zonder extra download.",
+  "hadithOfflineTitle": "Offline hadiths",
+  "hafizActivePlans": "Actieve plannen",
+  "hafizAyahRange": "Ayahs {start}-{end}",
+  "hafizConfigureSession": "Sessie configureren",
+  "hafizEmptyBody": "Je hebt nog geen memoriseringsplan gemaakt.",
+  "hafizEmptyHint": "Kies een soerah en definieer een kort bereik om te beginnen.",
+  "hafizEmptyTitle": "Begin je herziening",
+  "hafizEndAyah": "Eindigende ayah: {ayah}",
+  "hafizLoadError": "We konden deze soerah niet laden.",
+  "hafizLogRepetition": "Herhaling registreren",
+  "hafizPlanSaved": "Plan opgeslagen",
+  "hafizRepetitionLogged": "Herhaling geregistreerd",
+  "hafizReviewedSurahs": "Herziene soerahs",
+  "hafizSavePlan": "Plan opslaan",
+  "hafizSelectedSegment": "Geselecteerd segment",
+  "hafizStartAyah": "Startende ayah: {ayah}",
+  "hafizSubtitle": "Organiseer korte en consistente herzieningen",
+  "hafizSurahNoPlan": "{count} ayahs · geen plan",
+  "hafizSurahProgress": "{start}-{end} · {percent}% voltooid",
+  "hafizTargetRepetitions": "Doel: {count}",
+  "homeCalendarStripTitle": "HEILIGE KALENDER",
+  "homeGoalCompleted": "voltooid",
+  "homeGoalInProgress": "in uitvoering",
+  "homeInsightAlmostCompleteTodayMessage": "Je bent heel dicht bij het afsluiten van een sterke dag.",
+  "homeInsightAlmostCompleteTodayTitle": "Bijna voltooid vandaag",
+  "homeInsightBetterThanLastWeekMessage": "Je hebt {delta} meer gebeden voltooid dan vorige week.",
+  "homeInsightBetterThanLastWeekTitle": "Beter dan vorige week",
+  "homeInsightDhikrDoneMessage": "Je hebt vandaag {count} herhalingen gedaan. Zeer sterke afsluiting.",
+  "homeInsightDhikrDoneTitle": "Dhikr voltooid",
+  "homeInsightDhikrGoodPaceMessage": "Je bent op {current}/{goal} herhalingen vandaag.",
+  "homeInsightDhikrGoodPaceTitle": "Goed dhikr-tempo",
+  "homeInsightGoodPaceTodayMessage": "Je hebt vandaag {count} gebeden voltooid.",
+  "homeInsightGoodPaceTodayTitle": "Goed tempo vandaag",
+  "homeInsightMostConsistentPrayerMessage": "{prayer} is momenteel je meest stabiele moment.",
+  "homeInsightMostConsistentPrayerTitle": "Je meest consistente gebed",
+  "homeInsightPrayerToStrengthenMessage": "{prayer} heeft momenteel iets meer aandacht nodig.",
+  "homeInsightPrayerToStrengthenTitle": "Gebed om te versterken",
+  "homeInsightRamadanConsistencyMessage": "Je praktijk vandaag laat al een goed evenwicht zien.",
+  "homeInsightRamadanConsistencyTitle": "Ramadan-consistentie",
+  "homeInsightRamadanMomentumMessage": "Gebruik dit deel van de dag om je momentum gaande te houden.",
+  "homeInsightRamadanMomentumTitle": "Ramadan-momentum",
+  "homeInsightRamadanSmallStepsMessage": "In Ramadan tellen kleine en gestage stappen veel.",
+  "homeInsightStartTodayFirstMessage": "Je dag staat nog open. Markeer je eerste gebed en bouw momentum op.",
+  "homeInsightStartTodayMoreMessage": "Je hebt nog steeds tijd om rustig te beginnen.",
+  "homeInsightStartTodayTitle": "Begin vandaag",
+  "homeInsightStillCanStartMessage": "Een kleine stap nu kan de toon van je dag veranderen.",
+  "homeInsightStillCanStartTitle": "Je kunt nog beginnen",
+  "homeInsightStreakInMotionMessage": "Je bent op {streak} opeenvolgende dagen. Bescherm die consistentie.",
+  "homeInsightStreakInMotionTitle": "Reeks in beweging",
+  "homeInsightTodayLabel": "INZICHT VAN VANDAAG",
+  "homeLoadingScheduleBody": "Je volgende gebed wordt voorbereid",
+  "homeLoadingScheduleTitle": "Tijden laden",
+  "homeLocationCachedBody": "We bereiden je tijden voor met je laatst opgeslagen locatie.",
+  "homeLocationEnableDeviceLocation": "Apparaatlocatie inschakelen",
+  "homeLocationGpsDisabledBody": "Zonder GPS kunnen we geen nauwkeurige gebedstijden berekenen of de Qibla uitlijnen.",
+  "homeLocationPendingBody": "Het beginscherm blijft zichtbaar, zelfs als de gebedstijden nog niet gereed zijn.",
+  "homeLocationPermissionBlocked": "Locatiemachtiging geblokkeerd",
+  "homeLocationPermissionBlockedBody": "Je kunt locatie voor Qibla Time later inschakelen in je systeeminstellingen.",
+  "homeLocationPermissionNeeded": "Sta locatie toe om je gebedstijden te bekijken",
+  "homeLocationPermissionNeededBody": "Qibla Time heeft je locatie nodig om betrouwbare tijden voor je stad te tonen.",
+  "homeLocationPreparingTitle": "Je gebedstijden voorbereiden",
+  "homeNextPrayerStartsAt": "Begint om {time}",
+  "homeNotificationPaused": "Algemene gebedswaarschuwingen zijn momenteel gepauzeerd.",
+  "homeNotificationPermissionPending": "Je Adhan-herinneringen zijn geconfigureerd, maar de systeemmachtiging is nog in behandeling.",
+  "homePrayerDescriptionCompleted": "Je hebt dit gebed al gemarkeerd als voltooid.",
+  "homePrayerDescriptionNext": "Dit is het volgende gebed in het ritme van vandaag.",
+  "homePrayerDescriptionNow": "Dit gebed is momenteel in uitvoering.",
+  "homePrayerDescriptionPendingToday": "Nog open in de stroom van vandaag.",
+  "homePrayerDescriptionReviewDate": "Beschikbaar om te bekijken voor deze datum.",
+  "homePrayerSectionMarkedCount": "{count}/5 gemarkeerd",
+  "homePrayerSectionSelectedDaySubtitle": "Bekijk en markeer de tijden voor {date}",
+  "homePrayerSectionSelectedDayTitle": "DAGSCHEMA",
+  "homePrayerSectionTodaySubtitle": "Volledig ritme van je vijf dagelijkse gebeden",
+  "homePrayerSectionTodayTitle": "GEBEDEN VAN VANDAAG",
+  "homePrayerStatusCompleted": "Voltooid",
+  "homePrayerStatusNext": "Volgende",
+  "homePrayerStatusNow": "Nu",
+  "homePrayerStatusUpcoming": "Aankomend",
+  "homeQuickActionsTitle": "HEILIGE SNELKOPPELINGEN",
+  "homeRamadanClosingSoon": "binnenkort sluitend",
+  "homeRamadanContinueReading": "Doorgaan met lezen",
+  "homeRamadanCountdownIftar": "{duration} tot iftar",
+  "homeRamadanCountdownImsak": "{duration} tot imsak",
+  "homeRamadanCountdownTomorrowImsak": "{duration} tot de imsak van morgen",
+  "homeRamadanDhikrCompletedBody": "{current}/{goal} herhalingen vandaag. Dagelijks doel voltooid.",
+  "homeRamadanDhikrInProgressBody": "{current}/{goal} herhalingen vandaag. Je bent al begonnen.",
+  "homeRamadanDhikrPreparingBody": "Je dagelijkse dhikr-voortgang wordt voorbereid.",
+  "homeRamadanDhikrStartBody": "Je doel vandaag is {goal}. Zelfs een paar herhalingen tellen al.",
+  "homeRamadanFastingCompleted": "Je kunt iftar maken vanaf {time}.",
+  "homeRamadanFastingInProgress": "Vastendag in uitvoering tot {time}.",
+  "homeRamadanFastingLabel": "Vasten",
+  "homeRamadanFastingTitle": "Vasten",
+  "homeRamadanGoalsCompleteMessage": "Een zeer volledige Ramadan-dag. Behoud dit ritme met kalmte.",
+  "homeRamadanGoalsProgressMessage": "Je doet het goed vandaag. Eén kleine stap meer kan je dag sterk afsluiten.",
+  "homeRamadanGoalsReady": "{completed}/{total} gereed",
+  "homeRamadanGoalsStartMessage": "Begin met iets kleins: één gebed, een paar ayahs of een paar minuten dhikr.",
+  "homeRamadanGoalsTitle": "RAMADAN-DOELEN",
+  "homeRamadanModeTitle": "RAMADAN-MODUS",
+  "homeRamadanNextFocus": "volgende focus",
+  "homeRamadanNightLabel": "Nacht",
+  "homeRamadanOpenQuran": "Quran openen",
+  "homeRamadanOpenTasbih": "Tasbih openen",
+  "homeRamadanPrayerGoal": "{count}/5 vandaag voltooid",
+  "homeRamadanQuranRecentProgress": "Hervat {surah}, ayah {ayah}. Je hebt recente voortgang.",
+  "homeRamadanQuranReturnBody": "Je laatste punt was {surah}, ayah {ayah}. Het is de moeite waard om er vandaag op terug te komen.",
+  "homeRamadanQuranSavedToday": "Lezing vandaag opgeslagen in {surah}, ayah {ayah}.",
+  "homeRamadanQuranStartBody": "Lees vandaag een kort fragment en je kunt het later gemakkelijk voortzetten.",
+  "homeRamadanStartAction": "Beginnen",
+  "homeRamadanSuhoorLabel": "Suhoor",
+  "homeRamadanUntilIftar": "tot iftar",
+  "homeSelectedDateCustomBody": "Bekijk hieronder de volledige gebedstijden voor de geselecteerde dag.",
+  "homeSelectedDateTodayBody": "Bekijk hieronder de volledige gebedstijden voor vandaag.",
+  "homeWeeklyBestDayHelper": "{count}/5 op je beste dag",
+  "qiblaCompassInitError": "We konden het kompas niet starten.",
+  "qiblaCompassReadError": "We konden de kompassensor niet uitlezen.",
+  "qiblaDirectionEast": "Oosten",
+  "qiblaDirectionLoadError": "We konden de richting naar de Ka'aba niet laden.",
+  "qiblaDirectionNorth": "Noorden",
+  "qiblaDirectionNorthEast": "Noordoosten",
+  "qiblaDirectionNorthWest": "Noordwesten",
+  "qiblaDirectionSouth": "Zuiden",
+  "qiblaDirectionSouthEast": "Zuidoosten",
+  "qiblaDirectionSouthWest": "Zuidwesten",
+  "qiblaDirectionSummary": "Richting naar de Ka'aba: {direction}",
+  "qiblaDirectionWest": "Westen",
+  "qiblaDistanceLabel": "Afstand",
+  "qiblaEnableLocationMessage": "Schakel locatie in om de richting naar de Ka'aba te berekenen.",
+  "qiblaGpsDisabledMessage": "Schakel de GPS van je apparaat in om een betrouwbare richting te krijgen.",
+  "qiblaGuidanceBody": "Houd het apparaat plat en draai zachtjes totdat de indicator uitlijnt.",
+  "qiblaHowToUseAvoidMagnetsBody": "Houd het uit de buurt van magneten, metalen behuizingen of apparaten die de sensor kunnen verstoren.",
+  "qiblaHowToUseAvoidMagnetsTitle": "Vermijd storing",
+  "qiblaHowToUseCalibrateBody": "Als het kompas faalt, beweeg de telefoon in een acht-beweging om het te herkalibreren.",
+  "qiblaHowToUseCalibrateTitle": "Kalibreer indien nodig",
+  "qiblaHowToUseKeepFlatBody": "Houd het apparaat plat om de kompasnauwkeurigheid te verbeteren.",
+  "qiblaHowToUseKeepFlatTitle": "Houd het apparaat plat",
+  "qiblaHowToUseTitle": "Hoe het kompas te gebruiken",
+  "qiblaLoading": "Richting berekenen…",
+  "qiblaPermissionBlockedMessage": "Locatiemachtiging is geblokkeerd. Schakel het in in de systeeminstellingen.",
+  "qiblaPermissionNeededMessage": "We hebben locatiemachtiging nodig om je naar de Ka'aba te leiden.",
+  "qiblaPrecisionLabel": "Nauwkeurigheid",
+  "qiblaSubtitle": "Richting naar de Ka'aba",
+  "qiblaTitle": "Qibla",
+  "adhanSelectorHeaderBody": "Luister naar een kort voorbeeld voordat je de Adhan kiest die voor je herinneringen wordt gebruikt.",
+  "adhanSelectorHeaderTitle": "Kies je oproep tot gebed",
+  "adhanSelectorListenPreview": "Voorbeeld beluisteren",
+  "adhanSelectorPausePreview": "Voorbeeld pauzeren",
+  "adhanSelectorPreviewError": "We konden het Adhan-voorbeeld niet afspelen.",
+  "adhanSelectorPreviewIdle": "Tik om een voorbeeld te horen",
+  "adhanSelectorPreviewPaused": "Voorbeeld gepauzeerd",
+  "adhanSelectorPreviewPlaying": "Voorbeeld wordt afgespeeld",
+  "adhanSelectorResumePreview": "Voorbeeld hervatten",
+  "adhanSelectorSelected": "Je hebt {name} geselecteerd",
+  "adhanSelectorTitle": "Adhan",
+  "navHome": "Home",
+  "navQibla": "Qibla",
+  "navTasbih": "Tasbih",
+  "navDua": "Dua",
+  "navQuran": "Quran",
+  "travelModeBannerLocationDetected": "Nieuwe locatie gedetecteerd: {label} - {distanceKm} km",
+  "@travelModeBannerLocationDetected": {
+    "placeholders": {
+      "label": {},
+      "distanceKm": {
+        "type": "int"
+      }
+    }
+  },
+  "travelModeNotificationTitle": "Qibla Time - Nieuwe locatie",
+  "travelModeNotificationBody": "{label} - Gebedstijden bijgewerkt",
+  "@travelModeNotificationBody": {
+    "placeholders": {
+      "label": {}
+    }
+  },
+  "analyticsAchievementUnlocked": "Vrijgespeeld",
+  "navigationMiniPlayerAyah": "{surah} · Ayah {ayah}",
+  "@navigationMiniPlayerAyah": {
+    "placeholders": {
+      "surah": {},
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "onboardingGatePreparing": "Qibla Time voorbereiden",
+  "supportScreenTitle": "Ondersteun Qibla Time",
+  "supportScreenThankYou": "Bedankt dat je hier bent",
+  "supportScreenBody": "Je ondersteuning helpt ons voor Qibla Time te zorgen, de app in leven te houden en nuttige hulpmiddelen voor je dagelijkse leven te blijven bouwen.",
+  "supportScreenRateTitle": "Beoordeel de app",
+  "supportScreenRateBody": "Een goede beoordeling helpt meer mensen Qibla Time te ontdekken.",
+  "supportScreenShareTitle": "Deel Qibla Time",
+  "supportScreenShareBody": "De app aan familie en vrienden aanbevelen is ook een vorm van sadaqah.",
+  "supportScreenSadaqahTitle": "Ondersteun met intentie",
+  "supportScreenSadaqahBody": "Als Qibla Time je helpt, kun je het project steunen met een kleine oprechte bijdrage.",
+  "supportScreenQuote": "Wie anderen helpt iets goeds te bereiken, deelt ook in de beloning, als Allah het wil.",
+  "allahNamesTitle": "De 99 Namen van Allah",
+  "allahNamesIntro": "Verken een samengestelde selectie van Allah's namen, met transliteratie en betekenis, zodat je ze met kalmte kunt gedenken.",
+  "allahNamesLoadError": "We konden de namen van Allah niet laden.",
+  "allahNamesUseInTasbih": "Gebruiken in tasbih",
+  "downloadedSurahsTitle": "Gedownloade soerahs",
+  "downloadedSurahsEmpty": "Je hebt nog geen soerah gedownload.",
+  "downloadedSurahsFavorite": "Favoriet",
+  "downloadedSurahsMarkFavorite": "Markeren als favoriet",
+  "downloadedSurahsRemoveDownload": "Download verwijderen",
+  "downloadedSurahsLoadError": "We konden je gedownloade soerahs niet laden.",
+  "focusModeDndActive": "RAKAHA ACTIEF · NIET STOREN INGESCHAKELD",
+  "focusModeOpenDndSettings": "Schakel Niet Storen in via instellingen",
+  "focusModeTitle": "RAKAHA",
+  "focusModeSujudCount": "+ sujud",
+  "focusModeDndHint": "ZONDER ONDERBREKINGEN VOELT HET BETER MET NIET STOREN",
+  "focusModeReleaseToCancel": "Loslaten om te annuleren",
+  "focusModeHoldToExit": "Ingedrukt houden om af te sluiten",
+  "settingsMadhabAsr": "Madhab (Asr)",
+  "settingsManualAdjustment": "Handmatige aanpassing",
+  "settingsOpenSourceLicenses": "Open-source-licenties",
+  "settingsProfileUser": "Gebruiker",
+  "settingsProfileStreak": "reeks",
+  "settingsProfilePrayers": "gebeden",
+  "settingsProfileTasbih": "tasbih",
+  "commonShafii": "Shafi'i",
+  "commonRestore": "Herstellen",
+  "settingsRestoreBackupPasteHint": "Plak de geëxporteerde JSON hier",
+  "dailyBookBadge": "BOEK VAN DE DAG",
+  "dailyBookUnavailable": "De bibliotheek is op dit moment niet beschikbaar.",
+  "dailyBookOpenLibrary": "Boeken openen",
+  "hadithOfflineIncludedInApp": "Inbegrepen in de app",
+  "hadithOfflineAgoDays": "{count} dagen geleden",
+  "@hadithOfflineAgoDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hadithOfflineAgoHours": "{count} uur geleden",
+  "@hadithOfflineAgoHours": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hadithOfflineAgoMinutes": "{count} minuten geleden",
+  "@hadithOfflineAgoMinutes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hadithOfflineNow": "Zojuist",
+  "analyticsShareWeekTitle": "Wekelijkse samenvatting",
+  "analyticsShareCurrentStreak": "Huidige reeks: {count}",
+  "@analyticsShareCurrentStreak": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "analyticsShareThisWeek": "Deze week: {completed}/{maxPossible} gebeden",
+  "@analyticsShareThisWeek": {
+    "placeholders": {
+      "completed": {
+        "type": "int"
+      },
+      "maxPossible": {
+        "type": "int"
+      }
+    }
+  },
+  "analyticsShareBestDay": "Beste dag: {day}",
+  "@analyticsShareBestDay": {
+    "placeholders": {
+      "day": {}
+    }
+  },
+  "analyticsShareWeekHeading": "WEKELIJKSE SAMENVATTING",
+  "analyticsShareStreakDaySingular": "dag reeks",
+  "analyticsShareStreakDayPlural": "dagen reeks",
+  "analyticsShareWeeklyPrayersLabel": "Gebeden deze week",
+  "analyticsShareBestDayLabel": "Beste dag · {count}/5",
+  "@analyticsShareBestDayLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "analyticsShareFullDaysLabel": "Volledige dagen",
+  "analyticsShareFooter": "Je voortgang in Qibla Time",
+  "analyticsShareImageError": "We konden de voortgangsafbeelding niet genereren.",
+  "quranDownloadAyahAudioError": "We konden de audio voor ayah {ayah} niet downloaden.",
+  "@quranDownloadAyahAudioError": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "recentLocationUnknown": "Onbekende locatie",
+  "cloudSyncRestoreInvalid": "Ongeldige back-up",
+  "cloudSyncRestoreFailed": "We konden de back-up niet herstellen",
+  "bookLinkUnavailable": "Deze link is niet beschikbaar.",
+  "bookLinkOpenError": "We konden de link niet openen.",
+  "ramadanStatusHeaderDay": "Ramadan-dag {day}",
+  "@ramadanStatusHeaderDay": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      }
+    }
+  },
+  "ramadanStatusHeaderManual": "Handmatige Ramadan-modus",
+  "ramadanStatusBlessingDetected": "Moge Allah je vasten en je daden vandaag aanvaarden.",
+  "ramadanStatusBlessingManual": "Speciale Ramadan-weergave handmatig ingeschakeld voor testen.",
+  "ramadanStatusSuggestionDhikr": "Vergeet niet je dhikr vandaag te vermeerderen.",
+  "ramadanStatusSuggestionQuran": "Probeer vandaag wat meer Quran te lezen.",
+  "ramadanStatusSuggestionDua": "Gebruik deze dag om met kalmte Dua te maken.",
+  "ramadanStatusSuggestionSadaqah": "Zelfs een kleine sadaqah telt tijdens Ramadan.",
+  "adhanSelectorOptionDescription": "Oproep tot gebed {number}",
+  "@adhanSelectorOptionDescription": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "prayerNotificationImsakTitle": "Imsak komt eraan",
+  "prayerNotificationImsakBody": "Nog 15 minuten tot imsak. Als je nog suhoor gebruikt, is dit een goed moment om af te ronden.",
+  "prayerNotificationIftarTitle": "Iftar komt eraan",
+  "prayerNotificationIftarBody": "Nog 15 minuten tot iftar. Moge Allah je vasten vandaag aanvaarden.",
+  "prayerNotificationJumuahTitle": "Jumu'ah vandaag",
+  "prayerNotificationJumuahBody": "Bereid je voor op Jumu'ah vóór Dhuhr en reserveer een kalm moment om naar de moskee te gaan."
+}

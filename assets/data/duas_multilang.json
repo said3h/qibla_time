@@ -95,6 +95,23 @@
           "Allah"
         ],
         "isFeatured": true
+      },
+      "nl": {
+        "title": "Bij het begin van de dag",
+        "translation": "Wij zijn wakker geworden en alle heerschappij behoort aan Allah.",
+        "category": "Ochtend",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 3186, Muslim 2723",
+        "count": 1,
+        "times": [
+          "ochtend"
+        ],
+        "tags": [
+          "Ochtendschemering",
+          "Heerschappij",
+          "Allah"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -192,6 +209,23 @@
           "Lob",
           "Erweckung",
           "Rückkehr"
+        ],
+        "isFeatured": true
+      },
+      "nl": {
+        "title": "Bij het wakker worden",
+        "translation": "Lof zij Allah die ons leven gaf nadat Hij ons deed sterven, en naar Hem is de terugkeer.",
+        "category": "Ochtend",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6312",
+        "count": 1,
+        "times": [
+          "wakker worden"
+        ],
+        "tags": [
+          "Leven",
+          "Dood",
+          "Opstanding"
         ],
         "isFeatured": true
       }
@@ -297,6 +331,24 @@
           "Segen"
         ],
         "isFeatured": true
+      },
+      "nl": {
+        "title": "Ochtendbescherming",
+        "translation": "Ik zoek toevlucht in de volmaakte woorden van Allah tegen het kwaad van wat Hij heeft geschapen.",
+        "category": "Ochtend",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 2709",
+        "count": 3,
+        "times": [
+          "ochtend",
+          "nacht"
+        ],
+        "tags": [
+          "Bescherming",
+          "Bescherming",
+          "Kwaad"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -400,6 +452,24 @@
           "Schutz"
         ],
         "isFeatured": true
+      },
+      "nl": {
+        "title": "Bij het ochtends huis verlaten",
+        "translation": "In de naam van Allah. Ik plaats mijn vertrouwen in Allah. Er is geen kracht en geen macht behalve met Allah.",
+        "category": "Ochtend",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 5095",
+        "count": 1,
+        "times": [
+          "huis verlaten",
+          "ochtend"
+        ],
+        "tags": [
+          "Verlaten",
+          "Vertrouwen",
+          "Kracht"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -497,6 +567,23 @@
           "Kleidung",
           "Lob",
           "Dankbarkeit"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Bij het aankleden",
+        "translation": "Lof zij Allah die mij hiermee heeft gekleed en het mij heeft voorzien zonder enige moeite of kracht van mijzelf.",
+        "category": "Ochtend",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 4023",
+        "count": 1,
+        "times": [
+          "aankleden"
+        ],
+        "tags": [
+          "Kleding",
+          "Kleding",
+          "Voorziening"
         ],
         "isFeatured": false
       }
@@ -598,6 +685,23 @@
           "Schutz"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Bij het betreden van het toilet",
+        "translation": "O Allah, ik zoek Uw bescherming tegen de mannelijke en vrouwelijke kwade wezens.",
+        "category": "Ochtend",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6322",
+        "count": 1,
+        "times": [
+          "badkamer"
+        ],
+        "tags": [
+          "Badkamer",
+          "Bescherming",
+          "Onzuiverheid"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -690,6 +794,22 @@
           "Vergebung",
           "Reinigung",
           "Dankbarkeit"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Bij het verlaten van het toilet",
+        "translation": "Ik zoek Uw vergeving.",
+        "category": "Ochtend",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 30",
+        "count": 1,
+        "times": [
+          "badkamer"
+        ],
+        "tags": [
+          "Vergeving",
+          "Badkamer"
         ],
         "isFeatured": false
       }
@@ -789,6 +909,23 @@
           "Nacht",
           "Herrschaft",
           "Lob"
+        ],
+        "isFeatured": true
+      },
+      "nl": {
+        "title": "Bij het begin van de nacht",
+        "translation": "Wij hebben de avond bereikt en alle heerschappij behoort aan Allah.",
+        "category": "Nacht",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 2723",
+        "count": 1,
+        "times": [
+          "nacht"
+        ],
+        "tags": [
+          "Nacht",
+          "Heerschappij",
+          "Allah"
         ],
         "isFeatured": true
       }
@@ -894,6 +1031,24 @@
           "Hingabe"
         ],
         "isFeatured": true
+      },
+      "nl": {
+        "title": "Vertrouwen in Allah bij het slapen",
+        "translation": "Allah is voldoende voor mij. Er is geen god behalve Hij. In Hem vertrouw ik en Hij is de Heer van de Grote Troon.",
+        "category": "Nacht",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 3193, At-Tirmidhi 3394",
+        "count": 1,
+        "times": [
+          "slapen",
+          "nacht"
+        ],
+        "tags": [
+          "Vertrouwen",
+          "Slaap",
+          "Troon"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -997,6 +1152,24 @@
           "Gebet"
         ],
         "isFeatured": true
+      },
+      "nl": {
+        "title": "Bij het gaan slapen",
+        "translation": "O Allah, bescherm mij tegen Uw straf op de Dag dat Uw dienaren worden opgewekt.",
+        "category": "Nacht",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 5045",
+        "count": 1,
+        "times": [
+          "slapen",
+          "nacht"
+        ],
+        "tags": [
+          "Bescherming",
+          "Straf",
+          "Opstanding"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -1094,6 +1267,23 @@
           "Eingeständigkeit",
           "Herrschaft",
           "Lob"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Doea van Laylatul Qadr",
+        "translation": "O Allah, U bent Vergevend en Vrijgevig. U houdt van vergeven, dus vergeef mij.",
+        "category": "Nacht",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 3513",
+        "count": 1,
+        "times": [
+          "Laylatul Qadr"
+        ],
+        "tags": [
+          "Vergeving",
+          "Nacht",
+          "Qadr"
         ],
         "isFeatured": false
       }
@@ -1195,6 +1385,23 @@
           "Allah"
         ],
         "isFeatured": true
+      },
+      "nl": {
+        "title": "Voor het slapen",
+        "translation": "In Uw naam, o Allah, sterf ik en leef ik.",
+        "category": "Slapen",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6324",
+        "count": 1,
+        "times": [
+          "slapen"
+        ],
+        "tags": [
+          "Naam",
+          "Leven",
+          "Dood"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -1287,6 +1494,22 @@
           "Schlaf",
           "Eingeständigkeit",
           "Gedenken"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Bij het omdraaien in bed",
+        "translation": "Er is geen god behalve Allah, de Ene, de Overweldiger.",
+        "category": "Slapen",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 3397",
+        "count": 1,
+        "times": [
+          "slapen"
+        ],
+        "tags": [
+          "Eenheid",
+          "Heerschappij"
         ],
         "isFeatured": false
       }
@@ -1388,6 +1611,23 @@
           "Schlaf"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Bescherming bij het slapen",
+        "translation": "Ik zoek toevlucht in de macht en kracht van Allah tegen het kwaad dat ik voel.",
+        "category": "Slapen",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 3894",
+        "count": 1,
+        "times": [
+          "slapen"
+        ],
+        "tags": [
+          "Bescherming",
+          "Kracht",
+          "Kwaad"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -1482,6 +1722,22 @@
           "Herrschaft"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Bij het sleeping in de mosque",
+        "translation": "O Allah, Heer of alle heerschappij.",
+        "category": "Slapen",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6321",
+        "count": 1,
+        "times": [
+          "slapen"
+        ],
+        "tags": [
+          "Heerschappij",
+          "mezquita"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -1574,6 +1830,22 @@
           "Aufwachen",
           "Lob",
           "Erweckung"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Doea before waking up",
+        "translation": "Praise be to Allah die gave ons leven after having caused ons to die.",
+        "category": "Slapen",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6312",
+        "count": 1,
+        "times": [
+          "wakker worden"
+        ],
+        "tags": [
+          "Leven",
+          "Dood"
         ],
         "isFeatured": false
       }
@@ -1675,6 +1947,23 @@
           "Allah"
         ],
         "isFeatured": true
+      },
+      "nl": {
+        "title": "Bij het instappen in een voertuig",
+        "translation": "Heilig is Hij, Die dit aan ons onderworpen heeft, en wij konden dit niet uit onszelf. En voorwaar, tot onze Heer zullen wij zeker terugkeren.",
+        "category": "Reizen",
+        "source": "Hisnul Muslim",
+        "reference": "Az-Zukhruf 43:13-14",
+        "count": 1,
+        "times": [
+          "reis"
+        ],
+        "tags": [
+          "Voertuig",
+          "Dienstbaarheid",
+          "Terkeer"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -1774,6 +2063,23 @@
           "Reise"
         ],
         "isFeatured": true
+      },
+      "nl": {
+        "title": "Bescherming tijdens het reizen",
+        "translation": "O Allah, ik zoek bescherming bij U tegen de moeilijkheden van het reizen, de verdriet van terugkeer, en het kwaad van de bestemming.",
+        "category": "Reizen",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 1342",
+        "count": 1,
+        "times": [
+          "reis"
+        ],
+        "tags": [
+          "Bescherming",
+          "Moeilijkheid",
+          "Terugkeer"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -1868,6 +2174,22 @@
           "Anbetung"
         ],
         "isFeatured": true
+      },
+      "nl": {
+        "title": "Bij het entering a town",
+        "translation": "O Allah, bless ons in it.",
+        "category": "Reizen",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 3930",
+        "count": 1,
+        "times": [
+          "viaje"
+        ],
+        "tags": [
+          "Dankbaarheid",
+          "ciudad"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -1960,6 +2282,23 @@
           "Berg",
           "Takbir",
           "Reise"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Bij het afdalen tijdens de reis",
+        "translation": "Ik zoek bescherming in de volmaakte woorden van Allah tegen het kwaad van wat Hij heeft geschapen.",
+        "category": "Reizen",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 2708",
+        "count": 1,
+        "times": [
+          "reis"
+        ],
+        "tags": [
+          "Bescherming",
+          "Kwaad",
+          "Reis"
         ],
         "isFeatured": false
       }
@@ -2056,6 +2395,22 @@
           "Reise"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Reizener's dua",
+        "translation": "O Allah, schenk ons a veilig departure en arrival, en a goed destination.",
+        "category": "Reizen",
+        "source": "Hisnul Muslim",
+        "reference": "Ibn As-Sunni 269",
+        "count": 1,
+        "times": [
+          "viaje"
+        ],
+        "tags": [
+          "seguridad",
+          "Reis"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -2148,6 +2503,22 @@
           "Essen",
           "Segen",
           "Bismillah"
+        ],
+        "isFeatured": true
+      },
+      "nl": {
+        "title": "Voor het eten",
+        "translation": "In de name of Allah.",
+        "category": "Voedsel",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 1858",
+        "count": 1,
+        "times": [
+          "antes_comer"
+        ],
+        "tags": [
+          "Naam",
+          "Voedsel"
         ],
         "isFeatured": true
       }
@@ -2249,6 +2620,23 @@
           "Nahrung"
         ],
         "isFeatured": true
+      },
+      "nl": {
+        "title": "Na het eten",
+        "translation": "Alle lof behoort aan Allah, Die mij gevoed heeft en mij dit heeft voorzien zonder enige inspanning of kracht van mijn kant.",
+        "category": "Voedsel",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 4023, At-Tirmidhi 3453",
+        "count": 1,
+        "times": [
+          "na het eten"
+        ],
+        "tags": [
+          "Lof",
+          "Voedsel",
+          "Voorziening"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -2343,6 +2731,22 @@
           "Lohn"
         ],
         "isFeatured": true
+      },
+      "nl": {
+        "title": "Bij het drinking water",
+        "translation": "Praise be to Allah.",
+        "category": "Voedsel",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 3456",
+        "count": 1,
+        "times": [
+          "beber"
+        ],
+        "tags": [
+          "agua",
+          "Dankbaarheid"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -2442,6 +2846,23 @@
           "Verzeihung"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Bij het breken van het vasten",
+        "translation": "O Allah, voor U heb ik gevast, in U heb ik geloofd, op U vertrouw ik en met Uw voorziening heb ik mijn vasten verbroken.",
+        "category": "Voedsel",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 2358",
+        "count": 1,
+        "times": [
+          "iftar"
+        ],
+        "tags": [
+          "Vasten",
+          "Geloof",
+          "Vertrouwen"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -2534,6 +2955,22 @@
           "Milch",
           "Segen",
           "Vermehrung"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Voor eating on Eid",
+        "translation": "O Allah, feed those die hebben forgiven en clothe those die hebben forgiven.",
+        "category": "Voedsel",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 1020",
+        "count": 1,
+        "times": [
+          "eid"
+        ],
+        "tags": [
+          "eid",
+          "Voedsel"
         ],
         "isFeatured": false
       }
@@ -2635,6 +3072,23 @@
           "Barmherzigkeit"
         ],
         "isFeatured": true
+      },
+      "nl": {
+        "title": "Bij ziekte",
+        "translation": "O Allah, Heer der mensen, verwijder de kwaal. Genees, want U bent de Genezer. Er is geen genezing behalve Uw genezing, een genezing die geen enkele ziekte achterlaat.",
+        "category": "Gezondheid",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 5675, Muslim 2191",
+        "count": 1,
+        "times": [
+          "ziekte"
+        ],
+        "tags": [
+          "Genezing",
+          "Ziekte",
+          "Mensheid"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -2734,6 +3188,23 @@
           "Geduld"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Troost bij ziekte",
+        "translation": "Geen schade, het zal een reiniging zijn, als Allah het wil.",
+        "category": "Gezondheid",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 5663",
+        "count": 1,
+        "times": [
+          "ziekte"
+        ],
+        "tags": [
+          "Geduld",
+          "Reiniging",
+          "Goddelijke wil"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -2826,6 +3297,23 @@
           "Heilung",
           "Gesundheit",
           "Gebet"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Dua voor ziekenbezoek",
+        "translation": "Mijn Heer, genees hem en schenk hem gezondheid.",
+        "category": "Gezondheid",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 5672",
+        "count": 1,
+        "times": [
+          "ziekte"
+        ],
+        "tags": [
+          "Genezing",
+          "Gezondheid",
+          "Bezoek"
         ],
         "isFeatured": false
       }
@@ -2927,6 +3415,23 @@
           "Schutz"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Bij het feeling unwell",
+        "translation": "Ik zoek toevlucht in de macht en kracht van Allah tegen het kwaad dat ik voel.",
+        "category": "Sickness",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 3894",
+        "count": 1,
+        "times": [
+          "enfermo"
+        ],
+        "tags": [
+          "Bescherming",
+          "Kracht",
+          "Kwaad"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -3024,6 +3529,23 @@
           "Schutz",
           "Neid",
           "Übel"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Bescherming bij ziekte",
+        "translation": "In de naam van Allah zoek ik bescherming bij U tegen alles wat kwaad is, en ik zoek toevlucht bij U tegen het kwaad van elke zieke ziel en elke afgunstige blik.",
+        "category": "Gezondheid",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 2061",
+        "count": 1,
+        "times": [
+          "ziekte"
+        ],
+        "tags": [
+          "Bescherming",
+          "Kwaad",
+          "Genezing"
         ],
         "isFeatured": false
       }
@@ -3130,6 +3652,24 @@
           "Wörter"
         ],
         "isFeatured": true
+      },
+      "nl": {
+        "title": "Algemeen bescherming",
+        "translation": "Ik zoek toevlucht in de volmaakte woorden van Allah tegen het kwaad van wat Hij heeft geschapen.",
+        "category": "Bescherming",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 2709",
+        "count": 3,
+        "times": [
+          "ochtend",
+          "nacht"
+        ],
+        "tags": [
+          "Bescherming",
+          "Bescherming",
+          "Kwaad"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -3220,6 +3760,21 @@
           "Feuer",
           "Zuflucht",
           "Schutz"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Bescherming voor kinderen",
+        "translation": "Ik place U under de bescherming of de perfect words of Allah van every devil, every harmful creature, en every harmful glance.",
+        "category": "Bescherming",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 3371",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "Kinderen",
+          "Bescherming",
+          "maldad"
         ],
         "isFeatured": false
       }
@@ -3326,6 +3881,24 @@
           "Schutz"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Bescherming door Allah's attributen",
+        "translation": "Ik zoek toevlucht in Zijn edele attributen en macht tegen het kwaad dat de schepping bevat.",
+        "category": "Bescherming",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 1547",
+        "count": 1,
+        "times": [
+          "ochtend",
+          "avond"
+        ],
+        "tags": [
+          "Bescherming",
+          "Attributen",
+          "Macht"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -3425,6 +3998,24 @@
           "Schutz"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Bescherming tegen het kwaad",
+        "translation": "In de naam van Allah, ik zoek bescherming bij U tegen het kwaad van wat Hij heeft geschapen.",
+        "category": "Bescherming",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 2709",
+        "count": 1,
+        "times": [
+          "ochtend",
+          "avond"
+        ],
+        "tags": [
+          "Bescherming",
+          "Kwaad",
+          "Schepping"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -3521,6 +4112,23 @@
           "Gedanken",
           "Teufel",
           "Schutz"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Against kwaad thoughts",
+        "translation": "O Allah, drive away de devils en free de believers.",
+        "category": "Bescherming",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6326",
+        "count": 1,
+        "times": [
+          "ochtend",
+          "nacht"
+        ],
+        "tags": [
+          "demonios",
+          "creyentes"
         ],
         "isFeatured": false
       }
@@ -3623,6 +4231,23 @@
           "Dienerschaft"
         ],
         "isFeatured": true
+      },
+      "nl": {
+        "title": "Berouw en vergeving",
+        "translation": "O Allah, U bent mijn Heer. Er is geen god behalve U. U hebt mij geschapen en ik ben Uw dienaar. Ik houd mij aan Uw verbond en Uw belofte zo veel als ik kan. Ik zoek bescherming bij U tegen het kwaad dat ik heb gedaan. Ik erken Uw gunst aan mij en ik belijd mijn zonden, dus vergeef mij, want niemand vergeeft zonden behalve U.",
+        "category": "Vergeving",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6306",
+        "count": 1,
+        "times": [
+          "dagelijks"
+        ],
+        "tags": [
+          "Berouw",
+          "Vergeving",
+          "Erkenning"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -3722,6 +4347,23 @@
           "Allah"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Smeekbede om vergeving",
+        "translation": "Mijn Heer, vergeef mij en aanvaard mijn berouw. Voorwaar, U bent de Aanvaardende van berouw, de Barmhartige.",
+        "category": "Vergeving",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 1516, At-Tirmidhi 3436",
+        "count": 1,
+        "times": [
+          "dagelijks"
+        ],
+        "tags": [
+          "Vergeving",
+          "Berouw",
+          "Barmhartigheid"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -3816,6 +4458,22 @@
           "Beständig"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Astaghfirullah al-Azim",
+        "translation": "Ik zoek de vergeving of Allah de Magnificent, er is geen god behalve Him, de Living, de Sustainer, en ik repent to Him.",
+        "category": "Repentance",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 3577",
+        "count": 3,
+        "times": [
+          "repentir"
+        ],
+        "tags": [
+          "Vergeving",
+          "Vergeving"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -3908,6 +4566,22 @@
           "Verzeihung",
           "Großzügigkeit",
           "Vergebung"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Doea van Tarawih",
+        "translation": "O Allah, U bent Vergevend en Vrijgevig. U houdt van vergeven, dus vergeef mij.",
+        "category": "Repentance",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 3513",
+        "count": 1,
+        "times": [
+          "tarawih"
+        ],
+        "tags": [
+          "Vergeving",
+          "ramadan"
         ],
         "isFeatured": false
       }
@@ -4009,6 +4683,23 @@
           "Eingang"
         ],
         "isFeatured": true
+      },
+      "nl": {
+        "title": "Bij het betreden van de moskee",
+        "translation": "O Allah, open voor mij de deuren van Uw barmhartigheid.",
+        "category": "Moskee",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 713",
+        "count": 1,
+        "times": [
+          "moskee"
+        ],
+        "tags": [
+          "Moskee",
+          "Barmhartigheid",
+          "Deuren"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -4103,6 +4794,22 @@
           "Ausgang"
         ],
         "isFeatured": true
+      },
+      "nl": {
+        "title": "Bij het verlaten van de moskee",
+        "translation": "O Allah, ik vraag U of Uw bounty.",
+        "category": "Moskee",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 713",
+        "count": 1,
+        "times": [
+          "moskee verlaten"
+        ],
+        "tags": [
+          "Gunst",
+          "Smeekbede"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -4202,6 +4909,23 @@
           "Hanif"
         ],
         "isFeatured": true
+      },
+      "nl": {
+        "title": "Bij het horen van de adhan",
+        "translation": "And ik testify dat er is geen god behalve Allah en dat Muhammad is de Boodschapper of Allah.",
+        "category": "Moskee",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 385",
+        "count": 1,
+        "times": [
+          "adhan"
+        ],
+        "tags": [
+          "Adhan",
+          "Getuigenis",
+          "Profeet"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -4296,6 +5020,23 @@
           "Gebet"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Bij het horen van de Adhan",
+        "translation": "O Allah, Heer van deze volmaakte oproep en van dit gebed dat verricht zal worden, geef Muhammad de plaats bij U, de rechtschapenheid en de eer die U hem hebt beloofd.",
+        "category": "Moskee",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 614",
+        "count": 1,
+        "times": [
+          "adhan"
+        ],
+        "tags": [
+          "Adhan",
+          "Profeet",
+          "Voorspraak"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -4388,6 +5129,22 @@
           "Sujud",
           "Tasbih",
           "Gebet"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Shadaq Allah",
+        "translation": "Allah heeft spoken de truth, de Magnificent.",
+        "category": "Moskee",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 738",
+        "count": 1,
+        "times": [
+          "adhan"
+        ],
+        "tags": [
+          "Waarheid",
+          "Allah"
         ],
         "isFeatured": false
       }
@@ -4484,6 +5241,22 @@
           "Nützlichkeit"
         ],
         "isFeatured": true
+      },
+      "nl": {
+        "title": "Bij het zien van regen",
+        "translation": "O Allah, schenk ons heilzame regen.",
+        "category": "Regen",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 1032",
+        "count": 1,
+        "times": [
+          "regen"
+        ],
+        "tags": [
+          "Regen",
+          "Dankbaarheid"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -4576,6 +5349,23 @@
           "Regen",
           "Barmherzigkeit",
           "Gunst"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Bij regenval",
+        "translation": "Ons is regen gegeven door de gunst en barmhartigheid van Allah.",
+        "category": "Weer",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 846, Muslim 71",
+        "count": 1,
+        "times": [
+          "regen"
+        ],
+        "tags": [
+          "Regen",
+          "Gave",
+          "Barmhartigheid"
         ],
         "isFeatured": false
       }
@@ -4672,6 +5462,22 @@
           "Nahrung"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Doea during drought",
+        "translation": "O Allah, geef ons abundant rain dat refreshes, nourishes, en benefits.",
+        "category": "Regen",
+        "source": "Hisnul Muslim",
+        "reference": "Ibn Majah 2269",
+        "count": 1,
+        "times": [
+          "regen"
+        ],
+        "tags": [
+          "sequía",
+          "Regen"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -4761,6 +5567,23 @@
           "Yunus",
           "Reue",
           "Geduld"
+        ],
+        "isFeatured": true
+      },
+      "nl": {
+        "title": "Dua van Dhu an-Nun",
+        "translation": "Er is geen god behalve U. Heilig zijt U. Voorwaar, ik behoor tot de onrechtplegers.",
+        "category": "Moeilijkheid",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 2106",
+        "count": 1,
+        "times": [
+          "moeilijkheid"
+        ],
+        "tags": [
+          "Eenheid",
+          "Heiliging",
+          "Berouw"
         ],
         "isFeatured": true
       }
@@ -4854,6 +5677,21 @@
           "Hoffnung"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Ease in difficulties",
+        "translation": "O Allah, er is geen gemak behalve wat U maak gemakkelijk, en U maak ontbering gemakkelijk bij U zal.",
+        "category": "Hardship",
+        "source": "Hisnul Muslim",
+        "reference": "Ibn Hibban 2427",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "Gemak",
+          "tristeza",
+          "Moeilijkheid"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -4940,6 +5778,23 @@
           "Genügsamkeit"
         ],
         "isFeatured": true
+      },
+      "nl": {
+        "title": "In moeilijke momenten",
+        "translation": "Allah is voor mij voldoende en Hij is genoeg. Er is geen god behalve Hij. Op Hem vertrouw ik en Hij is de Heer van de Grote Troon.",
+        "category": "Moeilijkheid",
+        "source": "Hisnul Muslim",
+        "reference": "Az-Zumar 39:38",
+        "count": 1,
+        "times": [
+          "moeilijkheid"
+        ],
+        "tags": [
+          "Vertrouwen",
+          "Voldoendheid",
+          "Troon"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -5031,6 +5886,23 @@
           "Vertrauen"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Smeekbede in nood",
+        "translation": "Mijn Heer, ik heb werkelijk behoefte aan welk goed dan ook dat U mij neerzendt.",
+        "category": "Moeilijkheid",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Qasas 28:24",
+        "count": 1,
+        "times": [
+          "nood"
+        ],
+        "tags": [
+          "Behoefte",
+          "Goedheid",
+          "Neerzending"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -5122,6 +5994,23 @@
           "Reue"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Berouw en vergeving",
+        "translation": "Mijn Heer, ik heb mezelf onrecht aangedaan. Vergeef mij.",
+        "category": "Vergeving",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Qasas 28:16",
+        "count": 1,
+        "times": [
+          "berouw"
+        ],
+        "tags": [
+          "Onrecht",
+          "Vergeving",
+          "Berouw"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -5206,6 +6095,23 @@
           "Dankbarkeit",
           "Gunst",
           "Taten"
+        ],
+        "isFeatured": true
+      },
+      "nl": {
+        "title": "Dankbaarheid voor gunsten",
+        "translation": "Lof zij Allah, door wiens gunst goede daden tot voltooiing komen.",
+        "category": "Dankbaarheid",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 3427",
+        "count": 1,
+        "times": [
+          "dagelijks"
+        ],
+        "tags": [
+          "Lof",
+          "Gunst",
+          "Daden"
         ],
         "isFeatured": true
       }
@@ -5299,6 +6205,23 @@
           "Führung"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Dankbaarheid voor gunsten",
+        "translation": "Mijn Heer, geef mij de inspiratie om dankbaar te zijn voor Uw gunst die U mij en mijn ouders hebt bewezen, en om goede daden te verrichten die U behagen.",
+        "category": "Dankbaarheid",
+        "source": "Hisnul Muslim",
+        "reference": "An-Naml 27:19",
+        "count": 1,
+        "times": [
+          "dagelijks"
+        ],
+        "tags": [
+          "Dankbaarheid",
+          "Inspiratie",
+          "Gehoorzaamheid"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -5385,6 +6308,20 @@
           "Allah"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Bij het receiving a zegening",
+        "translation": "O Allah, to U behoort alle lof until U zijn pleased.",
+        "category": "Dankbaarheid",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 2732",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "Lof",
+          "satisfacción"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -5469,6 +6406,20 @@
           "Dankbarkeit",
           "Lob",
           "Allah"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Shukran liLlah",
+        "translation": "Thanks be to Allah.",
+        "category": "Dankbaarheid",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6042",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "Dankbaarheid",
+          "agradecimiento"
         ],
         "isFeatured": false
       }
@@ -5570,6 +6521,23 @@
           "Dankbarkeit"
         ],
         "isFeatured": true
+      },
+      "nl": {
+        "title": "Na het gebed",
+        "translation": "O Allah, help mij to gedenken U, to thank U, en to aanbidding U in de best manner.",
+        "category": "Gebed",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 1422",
+        "count": 1,
+        "times": [
+          "na gebed"
+        ],
+        "tags": [
+          "Gebed",
+          "dhikr",
+          "adoración"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -5664,6 +6632,23 @@
           "Lob"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Na het gebed",
+        "translation": "Heilig zij Allah.",
+        "category": "Gebed",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 597",
+        "count": 33,
+        "times": [
+          "na gebed"
+        ],
+        "tags": [
+          "Heiliging",
+          "Lof",
+          "Gebed"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -5758,6 +6743,22 @@
           "Lob"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "AlhamduLillah",
+        "translation": "Praise be to Allah.",
+        "category": "Gebed",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6405",
+        "count": 33,
+        "times": [
+          "na gebed"
+        ],
+        "tags": [
+          "hamd",
+          "Dankbaarheid"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -5850,6 +6851,22 @@
           "Takbir",
           "Gebet",
           "Größe"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Allahu Akbar",
+        "translation": "Allah is de Greatest.",
+        "category": "Gebed",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6405",
+        "count": 34,
+        "times": [
+          "na gebed"
+        ],
+        "tags": [
+          "takbir",
+          "grandeza"
         ],
         "isFeatured": false
       }
@@ -5951,6 +6968,23 @@
           "Herrschaft"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Tasbih na gebed",
+        "translation": "Er is geen god behalve Allah, alleen zonder metgezel. Van Hem is de heerschappij en aan Hem behoort alle lof. Hij geeft leven en doet sterven en Hij is almachtig over alle dingen.",
+        "category": "Gebed",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 3415",
+        "count": 10,
+        "times": [
+          "na gebed"
+        ],
+        "tags": [
+          "Eenheid",
+          "Heerschappij",
+          "Lof"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -6043,6 +7077,22 @@
           "Gericht",
           "Schutz",
           "Würde"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Bescherming against hypocrisy",
+        "translation": "O Allah, do niet humiliate mij on de Day of Resurrection.",
+        "category": "Gebed",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 767",
+        "count": 1,
+        "times": [
+          "na gebed"
+        ],
+        "tags": [
+          "Oordeel",
+          "Vernedering"
         ],
         "isFeatured": false
       }
@@ -6144,6 +7194,23 @@
           "Zuflucht"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Entry to Paradijs",
+        "translation": "O Allah, bescherm mij van de Vuur.",
+        "category": "Gebed",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6328",
+        "count": 1,
+        "times": [
+          "na gebed"
+        ],
+        "tags": [
+          "Paradijs",
+          "Vuur",
+          "Bescherming"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -6235,6 +7302,21 @@
           "Reinigung"
         ],
         "isFeatured": true
+      },
+      "nl": {
+        "title": "Bij het uitvoeren van wudu",
+        "translation": "Ik getuig dat er geen god is behalve Allah, alleen zonder partner. En ik getuig dat Muhammad Zijn dienaar en Boodschapper is.",
+        "category": "Ablution",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 234",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "Wudu",
+          "Getuigenis",
+          "Zuiverheid"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -6321,6 +7403,20 @@
           "Wudu"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Na wudu",
+        "translation": "O Allah, neem mij op onder degenen die berouw tonen en onder degenen die zichzelf reinigen.",
+        "category": "Ablution",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 55",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "Zuiverheid",
+          "Vergeving"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -6405,6 +7501,20 @@
           "Shahada",
           "Wudu",
           "Glaube"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Volledige wudu",
+        "translation": "Ik testify dat er is geen god behalve Allah en dat Muhammad is His dienaar en Boodschapper.",
+        "category": "Ablution",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6296",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "Getuigenis",
+          "Zuiverheid"
         ],
         "isFeatured": false
       }
@@ -6498,6 +7608,21 @@
           "Hingabe"
         ],
         "isFeatured": true
+      },
+      "nl": {
+        "title": "Talbiya",
+        "translation": "Hier ben ik, O Allah, hier ben ik. Hier ben ik, U heeft geen partner, hier ben ik. Voorwaar, alle lof, gunst en heerschappij behoren aan U, U heeft geen partner.",
+        "category": "Hadj",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6149",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "Hadj",
+          "Talbiya",
+          "Reis"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -6589,6 +7714,23 @@
           "Respekt"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Dua voor het Huis van Allah",
+        "translation": "O Allah, vermeerder de eer, grootheid en verering van dit Huis.",
+        "category": "Hadj",
+        "source": "Hisnul Muslim",
+        "reference": "Ibn Majah 2943",
+        "count": 1,
+        "times": [
+          "hadj"
+        ],
+        "tags": [
+          "Eer",
+          "Grootheid",
+          "Huis"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -6675,6 +7817,23 @@
           "Nachkommenschaft"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Dua voor nageslacht",
+        "translation": "Mijn Heer, maak mij en mijn nageslacht standvastig in het gebed.",
+        "category": "Hadj",
+        "source": "Hisnul Muslim",
+        "reference": "Ibrahim 14:40",
+        "count": 1,
+        "times": [
+          "hadj"
+        ],
+        "tags": [
+          "Gebed",
+          "Nageslacht",
+          "Standvastigheid"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -6759,6 +7918,20 @@
           "Licht",
           "Herz",
           "Leitfaden"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Doea van Sa'i",
+        "translation": "O Allah, place licht in mijn hart en licht in mijn sight.",
+        "category": "Hadj",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6316",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "saei",
+          "Licht"
         ],
         "isFeatured": false
       }
@@ -6852,6 +8025,23 @@
           "Dankbarkeit"
         ],
         "isFeatured": true
+      },
+      "nl": {
+        "title": "Dua voor ouders",
+        "translation": "Mijn Heer, heb barmhartigheid met hen zoals zij mij grootgebracht hebben toen ik klein was.",
+        "category": "Familie",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Isra 17:24",
+        "count": 1,
+        "times": [
+          "dagelijks"
+        ],
+        "tags": [
+          "Barmhartigheid",
+          "Ouders",
+          "Grootbrengen"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -6943,6 +8133,23 @@
           "Nachkommen"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Dua voor gezin",
+        "translation": "Onze Heer, schenk ons onder onze echtgenoten en nakomelingen vreugde voor ons ogen.",
+        "category": "Familie",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Furqan 25:74",
+        "count": 1,
+        "times": [
+          "dagelijks"
+        ],
+        "tags": [
+          "Echtgenoten",
+          "Nakomelingen",
+          "Vreugde"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -7027,6 +8234,20 @@
           "Familie",
           "Segen",
           "Liebe"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Zegening van kinderen",
+        "translation": "O Allah, zegen mijn familie.",
+        "category": "Family",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6332",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "Dankbaarheid",
+          "Familie"
         ],
         "isFeatured": false
       }
@@ -7118,6 +8339,21 @@
           "Eltern",
           "Verzeihung",
           "Barmherzigkeit"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "For deceased ouders",
+        "translation": "O Allah, vergeef mijn ouders en hebben barmhartigheid op them as they brought mij up bij ik was small.",
+        "category": "Family",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 2472",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "Ouders",
+          "Vergeving",
+          "Barmhartigheid"
         ],
         "isFeatured": false
       }
@@ -7219,6 +8455,23 @@
           "Lob"
         ],
         "isFeatured": true
+      },
+      "nl": {
+        "title": "Tasbih in de ochtend",
+        "translation": "Heilig is Allah en lof zij Hem.",
+        "category": "Dhikr",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 2692",
+        "count": 100,
+        "times": [
+          "ochtend",
+          "nacht"
+        ],
+        "tags": [
+          "tasbih",
+          "Lof"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -7315,6 +8568,23 @@
           "Lob",
           "Herr",
           "Welten"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Tahmid",
+        "translation": "Praise be to Allah, Heer of de worlds.",
+        "category": "Dhikr",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Fatiha 1:2",
+        "count": 1,
+        "times": [
+          "ochtend",
+          "nacht"
+        ],
+        "tags": [
+          "Lof",
+          "mundos"
         ],
         "isFeatured": false
       }
@@ -7415,6 +8685,23 @@
           "Allah"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Takbir",
+        "translation": "Allah is de Greatest.",
+        "category": "Dhikr",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6406",
+        "count": 1,
+        "times": [
+          "ochtend",
+          "nacht"
+        ],
+        "tags": [
+          "takbir",
+          "grandeza"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -7511,6 +8798,23 @@
           "Verzeihung",
           "Reue",
           "Allah"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Astaghfirullah",
+        "translation": "Ik zoek de vergeving of Allah de Magnificent.",
+        "category": "Dhikr",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6407",
+        "count": 3,
+        "times": [
+          "ochtend",
+          "nacht"
+        ],
+        "tags": [
+          "Vergeving",
+          "astaghfir"
         ],
         "isFeatured": false
       }
@@ -7611,6 +8915,23 @@
           "Allah"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Tahlil",
+        "translation": "Er is geen god behalve Allah.",
+        "category": "Dagelijks",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6403",
+        "count": 100,
+        "times": [
+          "dagelijks"
+        ],
+        "tags": [
+          "Eenheid",
+          "Getuigenis",
+          "Geloof"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -7714,6 +9035,23 @@
           "Allah"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Getuigenis van geloof",
+        "translation": "Er is geen god behalve Allah en Muhammad is de Boodschapper van Allah.",
+        "category": "Dagelijks",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 35",
+        "count": 100,
+        "times": [
+          "dagelijks"
+        ],
+        "tags": [
+          "Eenheid",
+          "Boodschapper",
+          "Getuigenis"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -7817,6 +9155,23 @@
           "Schutz"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Dua voor goedheid",
+        "translation": "Onze Heer, geef ons het goede in deze wereld en het goede in het Hiernamaals, en bescherm ons tegen de bestraffing van het Vuur.",
+        "category": "Dagelijks",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Baqarah 2:201",
+        "count": 1,
+        "times": [
+          "dagelijks"
+        ],
+        "tags": [
+          "Goedheid",
+          "Hiernamaals",
+          "Bescherming"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -7915,6 +9270,23 @@
           "Erhabenheit"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "SubhanAllah wa biHamdihi",
+        "translation": "Heilig is Allah en lof zij Hem.",
+        "category": "Dhikr",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 2732",
+        "count": 1,
+        "times": [
+          "ochtend",
+          "nacht"
+        ],
+        "tags": [
+          "tasbih",
+          "gloria"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -8009,6 +9381,23 @@
           "Macht"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Istikhara - Leiding zoeken",
+        "translation": "O Allah, ik vraag U om het goede door Uw kennis, en ik vraag U om kracht door Uw macht, en ik vraag U om Uw grote gunst.",
+        "category": "Leiding",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 761",
+        "count": 1,
+        "times": [
+          "leiding"
+        ],
+        "tags": [
+          "Kennis",
+          "Macht",
+          "Gunst"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -8095,6 +9484,23 @@
           "Hoffnung"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Dua voor verlichting",
+        "translation": "Onze Heer, belast ons niet met wat wij niet kunnen dragen.",
+        "category": "Moeilijkheid",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Baqarah 2:286",
+        "count": 1,
+        "times": [
+          "moeilijkheid"
+        ],
+        "tags": [
+          "Verlichting",
+          "Draaglijkheid",
+          "Genade"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -8179,6 +9585,20 @@
           "Erleuchtung",
           "Wissen",
           "Herz"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Doea van de student",
+        "translation": "O Allah, illuminate ons hearts met de licht of kennis.",
+        "category": "Dhikr",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 5766",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "Kennis",
+          "Licht"
         ],
         "isFeatured": false
       }
@@ -8275,6 +9695,23 @@
           "Fruchtbarkeit"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Dua voor regen",
+        "translation": "O Allah, laat de aarde voor ons ontluiken.",
+        "category": "Weer",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 1169",
+        "count": 1,
+        "times": [
+          "regen"
+        ],
+        "tags": [
+          "Regen",
+          "Aarde",
+          "Voorziening"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -8359,6 +9796,20 @@
           "Lebensunterhalt",
           "Segen",
           "Handel"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Doea van de merchant",
+        "translation": "O Allah, bless mijn voorziening.",
+        "category": "Dankbaarheid",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 3588",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "sustento",
+          "Dankbaarheid"
         ],
         "isFeatured": false
       }
@@ -8447,6 +9898,20 @@
           "Fundament"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Doea voor vrede",
+        "translation": "O Allah, rectify mijn religion, which is de safeguard of mijn affairs.",
+        "category": "Dhikr",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 2420",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "religión",
+          "Vrede"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -8533,6 +9998,20 @@
           "Führung"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Doea voor leiding",
+        "translation": "O Allah, leid mij to righteousness.",
+        "category": "Dhikr",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 1539",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "Leiding",
+          "rectitud"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -8617,6 +10096,20 @@
           "Geduld",
           "Standhaftigkeit",
           "Hilfe"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Doea voor geduld",
+        "translation": "O Allah, maak mij geduldig.",
+        "category": "Hardship",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 5819",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "Geduld",
+          "Kracht"
         ],
         "isFeatured": false
       }
@@ -8713,6 +10206,22 @@
           "Erwachen"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Perfect ochtend dua",
+        "translation": "We hebben woken up op de natural disposition of Islam.",
+        "category": "Ochtend",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 2809",
+        "count": 1,
+        "times": [
+          "ochtend"
+        ],
+        "tags": [
+          "Islam",
+          "naturaleza"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -8807,6 +10316,22 @@
           "Veranlagung"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Doea at sunset",
+        "translation": "We hebben reached de avond op de natural disposition of Islam.",
+        "category": "Nacht",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 2809",
+        "count": 1,
+        "times": [
+          "nacht"
+        ],
+        "tags": [
+          "Islam",
+          "naturaleza"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -8893,6 +10418,20 @@
           "täglich"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Daily dankbaarheid dua",
+        "translation": "Praise be to Allah, Heer of de worlds, every dag.",
+        "category": "Dankbaarheid",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Fatiha 1:2",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "Lof",
+          "días"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -8977,6 +10516,20 @@
           "Gedächtnis",
           "Wissen",
           "Lehre"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Doea voor memory",
+        "translation": "O Allah, do niet maak mij forget wat U hebben taught mij.",
+        "category": "Dhikr",
+        "source": "Hisnul Muslim",
+        "reference": "Ibn As-Sunni 245",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "memoria",
+          "Kennis"
         ],
         "isFeatured": false
       }
@@ -9073,6 +10626,23 @@
           "Hilfe"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Dua voor een gemakkelijke reis",
+        "translation": "O Allah, maak onze reis gemakkelijk voor ons en laat ons gemakkelijk aankomen.",
+        "category": "Reizen",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 1342",
+        "count": 1,
+        "times": [
+          "reis"
+        ],
+        "tags": [
+          "Gemak",
+          "Reis",
+          "Aankomst"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -9159,6 +10729,20 @@
           "Wörter"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Doea voor bescherming van kwaad",
+        "translation": "Ik zoek toevlucht in de perfect words of Allah.",
+        "category": "Bescherming",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 2709",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "Bescherming",
+          "palabras"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -9243,6 +10827,23 @@
           "Angst",
           "Zuflucht",
           "Schutz"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Bescherming tegen vrees",
+        "translation": "O Allah, ik zoek bescherming bij U tegen vrees.",
+        "category": "Moeilijkheid",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 3417",
+        "count": 1,
+        "times": [
+          "vrees"
+        ],
+        "tags": [
+          "Bescherming",
+          "Vrees",
+          "Angst"
         ],
         "isFeatured": false
       }
@@ -9339,6 +10940,22 @@
           "Segen"
         ],
         "isFeatured": false
+      },
+      "nl": {
+        "title": "Doea voor hunger",
+        "translation": "O Allah, bless ons food.",
+        "category": "Voedsel",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 1801",
+        "count": 1,
+        "times": [
+          "eten"
+        ],
+        "tags": [
+          "Voedsel",
+          "Dankbaarheid"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -9431,6 +11048,23 @@
           "Durst",
           "Getränk",
           "Segen"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Bij het drinken",
+        "translation": "O Allah, zegen wat U ons aan drank hebt gegeven en maak het nuttig en niet schadelijk.",
+        "category": "Voedsel",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 3417",
+        "count": 1,
+        "times": [
+          "drinken"
+        ],
+        "tags": [
+          "Dranken",
+          "Zegening",
+          "Bescherming"
         ],
         "isFeatured": false
       }

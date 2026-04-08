@@ -2635,6 +2635,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           PrayerName.maghrib => 'Maghrib',
           PrayerName.isha => 'Ischa',
         },
+      'nl' => switch (prayer) {
+          PrayerName.fajr => 'Fajr',
+          PrayerName.dhuhr => 'Dhoehr',
+          PrayerName.asr => 'Asr',
+          PrayerName.maghrib => 'Maghrib',
+          PrayerName.isha => 'Isja',
+        },
       _ => prayer.localizedDisplayName(languageCode),
     };
   }

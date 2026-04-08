@@ -215,6 +215,46 @@ class DuaLocalePresentation {
     'hajj': 'Pilgerfahrt',
   };
 
+  static const _categoryDutchLabels = <String, String>{
+    'morning': 'Ochtend',
+    'night': 'Nacht',
+    'sleep': 'Slaap',
+    'wudu': 'Wudu',
+    'after_prayer': 'Na het gebed',
+    'zikr': 'Dhikr',
+    'travel': 'Reizen',
+    'food': 'Eten',
+    'sickness': 'Ziekte',
+    'protection': 'Bescherming',
+    'repentance': 'Berouw',
+    'mosque': 'Moskee',
+    'rain': 'Regen',
+    'stress': 'Moeilijkheid',
+    'gratitude': 'Dankbaarheid',
+    'parents': 'Familie',
+    'hajj': 'Hadj en Omra',
+  };
+
+  static const _categoryDutchHints = <String, String>{
+    'morning': 'Begin van de dag',
+    'night': 'Einde van de dag',
+    'sleep': 'Voor het slapen',
+    'wudu': 'Wudu en zuiverheid',
+    'after_prayer': 'Na elk gebed',
+    'zikr': 'Gedenken en lofprijzing',
+    'travel': 'Vertrek en reis',
+    'food': 'Voor en na het eten',
+    'sickness': 'Genezing en bezoek',
+    'protection': 'Toevlucht en bescherming',
+    'repentance': 'Vergeving en terugkeer',
+    'mosque': 'Bij het betreden en verlaten',
+    'rain': 'Tijdens de regen',
+    'stress': 'Verdriet en last',
+    'gratitude': 'Dank en lof',
+    'parents': 'Ouders en kinderen',
+    'hajj': 'Bedevaart',
+  };
+
   static const _categoryArabicHints = <String, String>{
     'morning': 'بداية اليوم',
     'night': 'ختام اليوم',
@@ -241,6 +281,7 @@ class DuaLocalePresentation {
       'de' => 'de',
       'en' => 'en',
       'fr' => 'fr',
+      'nl' => 'nl',
       _ => 'es',
     };
   }
@@ -264,6 +305,13 @@ class DuaLocalePresentation {
           label:
               _categoryGermanLabels[key] ?? _categoryEnglishLabels[key] ?? key,
           hint: _categoryGermanHints[key] ?? 'Kategorie',
+          arabicLabel: arabicLabel,
+        ),
+      'nl' => DuaCategoryMeta(
+          icon: icon,
+          label:
+              _categoryDutchLabels[key] ?? _categoryEnglishLabels[key] ?? key,
+          hint: _categoryDutchHints[key] ?? 'Categorie',
           arabicLabel: arabicLabel,
         ),
       'en' => DuaCategoryMeta(
@@ -299,6 +347,7 @@ class DuaLocalePresentation {
       'fr' => 'Dou‘a et adhkar',
       'ar' => 'الدعاء والأذكار',
       'de' => 'Dua und Adhkar',
+      'nl' => 'Dua en adhkar',
       _ => 'Dua y adhkar',
     };
   }
@@ -309,6 +358,7 @@ class DuaLocalePresentation {
       'fr' => 'Invocations quotidiennes pour accompagner votre journée',
       'ar' => 'مختارات يومية للذكر والدعاء',
       'de' => 'Tägliche Bittgebete für deinen Tag',
+      'nl' => 'Dagelijkse smeekbeden om je dag te begeleiden',
       _ => 'Invocaciones diarias para acompañar tu día',
     };
   }
@@ -318,9 +368,11 @@ class DuaLocalePresentation {
       'en' =>
         'A curated collection of duas and adhkar for everyday life. Tap a category to see all available duas.',
       'fr' =>
-        'Une collection soignée de dou‘a et d’adhkar pour le quotidien. Touchez une catégorie pour voir toutes les dou‘a disponibles.',
+        "Une collection soignée de dou'a et d'adhkar pour le quotidien. Touchez une catégorie pour voir toutes les dou'a disponibles.",
       'de' =>
         'Eine sorgfältig zusammengestellte Sammlung von Duas und Adhkar für den Alltag. Tippe auf eine Kategorie, um alle verfügbaren Duas zu sehen.',
+      'nl' =>
+        "Een zorgvuldige verzameling dua's en adhkar voor het dagelijks leven. Tik op een categorie om alle beschikbare dua's te zien.",
       'ar' =>
         'مجموعة مختارة من الأدعية والأذكار لليوم والليلة. افتح أي قسم لرؤية جميع الأدعية المتاحة.',
       _ =>
@@ -332,8 +384,9 @@ class DuaLocalePresentation {
     return switch (normalizeLanguageCode(languageCode)) {
       'en' => 'Search dua or adhkar',
       'de' => 'Dua oder Adhkar suchen',
-      'fr' => 'Rechercher une dou‘a ou un dhikr',
+      'fr' => "Rechercher une dou'a ou un dhikr",
       'ar' => 'ابحث عن دعاء أو ذكر',
+      'nl' => 'Zoek dua of adhkar',
       _ => 'Buscar dua o adhkar',
     };
   }
@@ -344,6 +397,7 @@ class DuaLocalePresentation {
       'de' => 'Suche löschen',
       'fr' => 'Effacer la recherche',
       'ar' => 'مسح البحث',
+      'nl' => 'Zoekopdracht wissen',
       _ => 'Limpiar búsqueda',
     };
   }
@@ -360,6 +414,7 @@ class DuaLocalePresentation {
         'de' => 'Keine Ergebnisse für "$query".',
         'fr' => 'Aucun résultat pour "$query".',
         'ar' => 'لم نجد نتائج لعبارة "$query".',
+        'nl' => 'Geen resultaten gevonden voor "$query".',
         _ => 'No encontramos resultados para "$query".',
       };
     }
@@ -369,6 +424,7 @@ class DuaLocalePresentation {
       'de' => '$count Ergebnis${count == 1 ? '' : 'se'} für "$query".',
       'fr' => '$count résultat${count == 1 ? '' : 's'} pour "$query".',
       'ar' => '$count نتيجة لعبارة "$query".',
+      'nl' => '$count resultaat${count == 1 ? '' : 's'} voor "$query".',
       _ => '$count resultado${count == 1 ? '' : 's'} para "$query".',
     };
   }
@@ -379,6 +435,7 @@ class DuaLocalePresentation {
       'de' => 'Keine Ergebnisse',
       'fr' => 'Aucun résultat',
       'ar' => 'لا توجد نتائج',
+      'nl' => 'Geen resultaten',
       _ => 'Sin resultados',
     };
   }
@@ -393,6 +450,8 @@ class DuaLocalePresentation {
         'Essayez des mots comme pluie, voyage, protection, sommeil ou gratitude.',
       'ar' =>
         'جرّب كلمات مثل المطر أو السفر أو التحصين أو النوم أو الشكر.',
+      'nl' =>
+        'Probeer woorden als regen, reizen, bescherming, slaap of dankbaarheid.',
       _ =>
         'Prueba con palabras como lluvia, viaje, protección, sueño o gratitud.',
     };
@@ -404,6 +463,7 @@ class DuaLocalePresentation {
       'de' => 'KATEGORIEN',
       'fr' => 'CATÉGORIES',
       'ar' => 'الأقسام',
+      'nl' => 'CATEGORIEËN',
       _ => 'CATEGORÍAS',
     };
   }
@@ -414,6 +474,7 @@ class DuaLocalePresentation {
       'de' => 'EMPFOHLEN',
       'fr' => 'À LA UNE',
       'ar' => 'مختارات',
+      'nl' => 'AANBEVOLEN',
       _ => 'DESTACADAS',
     };
   }
@@ -428,6 +489,7 @@ class DuaLocalePresentation {
       'en' => '$count adhkar · $hint',
       'fr' => '$count adhkar · $hint',
       'ar' => '$count ذكر · $hint',
+      'nl' => '$count adhkar · $hint',
       _ => '$count adhkar · $hint',
     };
   }
@@ -436,8 +498,9 @@ class DuaLocalePresentation {
     return switch (normalizeLanguageCode(languageCode)) {
       'de' => 'Der Inhalt der Duas konnte nicht geladen werden.',
       'en' => 'We could not load the dua content.',
-      'fr' => 'Nous n’avons pas pu charger le contenu des dou‘a.',
+      'fr' => "Nous n'avons pas pu charger le contenu des dou'a.",
       'ar' => 'تعذر علينا تحميل محتوى الدعاء.',
+      'nl' => 'We konden de dua-inhoud niet laden.',
       _ => 'No hemos podido cargar el contenido de Dua.',
     };
   }
@@ -446,8 +509,9 @@ class DuaLocalePresentation {
     return switch (normalizeLanguageCode(languageCode)) {
       'de' => 'Keine Duas in dieser Kategorie',
       'en' => 'There are no duas in this category.',
-      'fr' => 'Il n’y a aucune dou‘a dans cette catégorie.',
+      'fr' => "Il n'y a aucune dou'a dans cette catégorie.",
       'ar' => 'لا توجد أدعية في هذا القسم.',
+      'nl' => "Er zijn geen dua's in deze categorie.",
       _ => 'No hay duas en esta categoría',
     };
   }
@@ -456,8 +520,9 @@ class DuaLocalePresentation {
     return switch (normalizeLanguageCode(languageCode)) {
       'de' => 'Fehler beim Laden der Duas',
       'en' => 'Error loading duas.',
-      'fr' => 'Erreur lors du chargement des dou‘a.',
+      'fr' => "Erreur lors du chargement des dou'a.",
       'ar' => 'حدث خطأ أثناء تحميل الأدعية.',
+      'nl' => "Fout bij het laden van dua's.",
       _ => 'Error al cargar las duas',
     };
   }
@@ -468,6 +533,7 @@ class DuaLocalePresentation {
       'en' => '$count times',
       'fr' => '$count fois',
       'ar' => '$count مرات',
+      'nl' => '$count keer',
       _ => '$count veces',
     };
   }
@@ -478,6 +544,7 @@ class DuaLocalePresentation {
       'en' => 'Share',
       'fr' => 'Partager',
       'ar' => 'مشاركة',
+      'nl' => 'Delen',
       _ => 'Compartir',
     };
   }

@@ -23,6 +23,10 @@
       "de": {
         "name": "Der Allerbarmer",
         "description": "Der Allerbarmer"
+      },
+      "nl": {
+        "name": "De Barmhartige",
+        "description": "De Genadevolle, Die barmhartigheid toont aan al Zijn schepselen"
       }
     }
   },
@@ -50,6 +54,10 @@
       "de": {
         "name": "Der Barmherzige",
         "description": "Der Barmherzige"
+      },
+      "nl": {
+        "name": "De Genadevolle",
+        "description": "De Erfarmer, Die specifieke genade toont aan de gelovigen"
       }
     }
   },
@@ -77,6 +85,10 @@
       "de": {
         "name": "Der König",
         "description": "Der König"
+      },
+      "nl": {
+        "name": "De Koning",
+        "description": "De Soevereine Heerser, aan Wie alle heerschappij toebehoort"
       }
     }
   },
@@ -104,6 +116,10 @@
       "de": {
         "name": "Der Hochheilige",
         "description": "Der Hochheilige"
+      },
+      "nl": {
+        "name": "De Heilige",
+        "description": "De Volmaakt Zuivere, vrij van alle imperfectie"
       }
     }
   },
@@ -131,6 +147,10 @@
       "de": {
         "name": "Der Friede",
         "description": "Der Friede"
+      },
+      "nl": {
+        "name": "De Vrede",
+        "description": "De Bron van Vrede en Veiligheid"
       }
     }
   },
@@ -158,6 +178,10 @@
       "de": {
         "name": "Der Beschützer des Glaubens",
         "description": "Der Beschützer des Glaubens"
+      },
+      "nl": {
+        "name": "De Beschermer",
+        "description": "Die waakt over en beschermt wat Hij heeft geschapen"
       }
     }
   },
@@ -185,6 +209,10 @@
       "de": {
         "name": "Der Wächter",
         "description": "Der Wächter"
+      },
+      "nl": {
+        "name": "De Almachtige",
+        "description": "De Onoverwinnelijke, Die niet te overtreffen is"
       }
     }
   },
@@ -212,6 +240,10 @@
       "de": {
         "name": "Der Allmächtige",
         "description": "Der Allmächtige"
+      },
+      "nl": {
+        "name": "De Verhevenste",
+        "description": "De Meest Verhevene, Die alles overstijgt"
       }
     }
   },
@@ -239,6 +271,10 @@
       "de": {
         "name": "Der Bezwinger",
         "description": "Der Bezwinger"
+      },
+      "nl": {
+        "name": "De Schepper",
+        "description": "Die alles uit het niets schept"
       }
     }
   },
@@ -266,6 +302,10 @@
       "de": {
         "name": "Der Majestätische",
         "description": "Der Majestätische"
+      },
+      "nl": {
+        "name": "De Vormgever",
+        "description": "Die de beste vormen en gestalten geeft"
       }
     }
   },
@@ -293,6 +333,10 @@
       "de": {
         "name": "Der Schöpfer",
         "description": "Der Schöpfer"
+      },
+      "nl": {
+        "name": "De Vergevensgezinde",
+        "description": "Die herhaaldelijk vergeeft en fouten bedekt"
       }
     }
   },
@@ -320,6 +364,10 @@
       "de": {
         "name": "Der Urschöpfer",
         "description": "Der Urschöpfer"
+      },
+      "nl": {
+        "name": "De Overweldiger",
+        "description": "Wiens macht en beheerschap alles omvat"
       }
     }
   },
@@ -347,6 +395,10 @@
       "de": {
         "name": "Der Gestalter",
         "description": "Der Gestalter"
+      },
+      "nl": {
+        "name": "De Gever",
+        "description": "Die overvloedig en vrijgevig geeft"
       }
     }
   },
@@ -374,6 +426,10 @@
       "de": {
         "name": "Der große Vergeber",
         "description": "Der große Vergeber"
+      },
+      "nl": {
+        "name": "De Voorziener",
+        "description": "Die voorziet in de behoeften van Zijn schepselen"
       }
     }
   },
@@ -401,6 +457,10 @@
       "de": {
         "name": "Der Überwältiger",
         "description": "Der Überwältiger"
+      },
+      "nl": {
+        "name": "De Beslisser",
+        "description": "Die oordeelt en beslist met volmaakte wijsheid"
       }
     }
   },
@@ -428,6 +488,10 @@
       "de": {
         "name": "Der Schenkende",
         "description": "Der Schenkende"
+      },
+      "nl": {
+        "name": "De Liefdevolle",
+        "description": "Die oprechte liefde en genegenheid toont"
       }
     }
   },
@@ -455,6 +519,10 @@
       "de": {
         "name": "Der Versorger",
         "description": "Der Versorger"
+      },
+      "nl": {
+        "name": "De Verhevene",
+        "description": "De Hoogste in rang en positie"
       }
     }
   },
@@ -482,6 +550,10 @@
       "de": {
         "name": "Der Öffner",
         "description": "Der Öffner"
+      },
+      "nl": {
+        "name": "De Grote",
+        "description": "De Meest Geweldige in grootte en majesteit"
       }
     }
   },
@@ -509,6 +581,10 @@
       "de": {
         "name": "Der Allwissende",
         "description": "Der Allwissende"
+      },
+      "nl": {
+        "name": "De Bewaker",
+        "description": "Die alles beschermt en bewaakt"
       }
     }
   },
@@ -536,6 +612,10 @@
       "de": {
         "name": "Der Beschränker",
         "description": "Der Beschränker"
+      },
+      "nl": {
+        "name": "De Rekenaar",
+        "description": "Die alles nauwkeels berekent en afrekent"
       }
     }
   },
@@ -563,6 +643,10 @@
       "de": {
         "name": "Der Erweiterer",
         "description": "Der Erweiterer"
+      },
+      "nl": {
+        "name": "De Sublieme",
+        "description": "De Meest Verhevene en Sublieme"
       }
     }
   },
@@ -590,6 +674,10 @@
       "de": {
         "name": "Der Erniedriger",
         "description": "Der Erniedriger"
+      },
+      "nl": {
+        "name": "De Eerbiedwaardige",
+        "description": "Die alle eer en grootheid bezit"
       }
     }
   },
@@ -617,6 +705,10 @@
       "de": {
         "name": "Der Erheber",
         "description": "Der Erheber"
+      },
+      "nl": {
+        "name": "De Alziende",
+        "description": "Die alles ziet en waarneemt"
       }
     }
   },
@@ -644,6 +736,10 @@
       "de": {
         "name": "Der Ehrende",
         "description": "Der Ehrende"
+      },
+      "nl": {
+        "name": "De Rechtvaardige",
+        "description": "Die volmaakt rechtvaardig oordeelt"
       }
     }
   },
@@ -671,6 +767,10 @@
       "de": {
         "name": "Der Demütiger",
         "description": "Der Demütiger"
+      },
+      "nl": {
+        "name": "De Fijnzinnige",
+        "description": "Die het subtieste en verborgenste begrijpt"
       }
     }
   },
@@ -698,6 +798,10 @@
       "de": {
         "name": "Der Allhörende",
         "description": "Der Allhörende"
+      },
+      "nl": {
+        "name": "De Alwetende",
+        "description": "Die alles weet, zichtbaar en verborgen"
       }
     }
   },
@@ -725,6 +829,10 @@
       "de": {
         "name": "Der Allsehende",
         "description": "Der Allsehende"
+      },
+      "nl": {
+        "name": "De Zachtmoedige",
+        "description": "Die met zachtmoedigheid en zachtheid behandelt"
       }
     }
   },
@@ -752,6 +860,10 @@
       "de": {
         "name": "Der Richter",
         "description": "Der Richter"
+      },
+      "nl": {
+        "name": "De Grootmoedige",
+        "description": "Die edelmoedig en genereus is"
       }
     }
   },
@@ -779,6 +891,10 @@
       "de": {
         "name": "Der Gerechte",
         "description": "Der Gerechte"
+      },
+      "nl": {
+        "name": "De Alhorende",
+        "description": "Die alles hoort en verneemt"
       }
     }
   },
@@ -806,6 +922,10 @@
       "de": {
         "name": "Der Feinfühlige",
         "description": "Der Feinfühlige"
+      },
+      "nl": {
+        "name": "De Onafhankelijke",
+        "description": "Die geen behoefte heeft aan iets of iemand"
       }
     }
   },
@@ -833,6 +953,10 @@
       "de": {
         "name": "Der Allkundige",
         "description": "Der Allkundige"
+      },
+      "nl": {
+        "name": "De Perfecte",
+        "description": "De Volmaakte in elk opzicht"
       }
     }
   },
@@ -860,6 +984,10 @@
       "de": {
         "name": "Der Nachsichtige",
         "description": "Der Nachsichtige"
+      },
+      "nl": {
+        "name": "De Grote",
+        "description": "De Meest Geweldige en Grootse"
       }
     }
   },
@@ -887,6 +1015,10 @@
       "de": {
         "name": "Der Gewaltige",
         "description": "Der Gewaltige"
+      },
+      "nl": {
+        "name": "De Waarderende",
+        "description": "Die kleine daden waardeert en beloont"
       }
     }
   },
@@ -914,6 +1046,10 @@
       "de": {
         "name": "Der Vergebende",
         "description": "Der Vergebende"
+      },
+      "nl": {
+        "name": "De Allerhoogste",
+        "description": "De Meest Verhevene boven alle schepselen"
       }
     }
   },
@@ -941,6 +1077,10 @@
       "de": {
         "name": "Der Dankbare",
         "description": "Der Dankbare"
+      },
+      "nl": {
+        "name": "De Onvergankelijke",
+        "description": "Die eeuwig blijft en niet vergaat"
       }
     }
   },
@@ -968,6 +1108,10 @@
       "de": {
         "name": "Der Höchste",
         "description": "Der Höchste"
+      },
+      "nl": {
+        "name": "De Schepper",
+        "description": "De Oorspronkelijke Schepper van alles"
       }
     }
   },
@@ -995,6 +1139,10 @@
       "de": {
         "name": "Der Größte",
         "description": "Der Größte"
+      },
+      "nl": {
+        "name": "De Enige",
+        "description": "De Enige en Unieke"
       }
     }
   },
@@ -1022,6 +1170,10 @@
       "de": {
         "name": "Der Bewahrer",
         "description": "Der Bewahrer"
+      },
+      "nl": {
+        "name": "De Ene",
+        "description": "De Ene, zonder partner of gelijke"
       }
     }
   },
@@ -1049,6 +1201,10 @@
       "de": {
         "name": "Der Ernährer",
         "description": "Der Ernährer"
+      },
+      "nl": {
+        "name": "De Toevlucht",
+        "description": "Op Wie alles steunt en vertrouw"
       }
     }
   },
@@ -1076,6 +1232,10 @@
       "de": {
         "name": "Der Abrechner",
         "description": "Der Abrechner"
+      },
+      "nl": {
+        "name": "De Almachtige",
+        "description": "De Alvermogende, tot alles in staat"
       }
     }
   },
@@ -1103,6 +1263,10 @@
       "de": {
         "name": "Der Erhabene",
         "description": "Der Erhabene"
+      },
+      "nl": {
+        "name": "De Krachtige",
+        "description": "Die absolute kracht en macht bezit"
       }
     }
   },
@@ -1130,6 +1294,10 @@
       "de": {
         "name": "Der Großzügige",
         "description": "Der Großzügige"
+      },
+      "nl": {
+        "name": "De Versneller",
+        "description": "Die dingen laat gebeuren en bespoedigen"
       }
     }
   },
@@ -1157,6 +1325,10 @@
       "de": {
         "name": "Der Aufmerksame",
         "description": "Der Aufmerksame"
+      },
+      "nl": {
+        "name": "De Uitsteller",
+        "description": "Die zaken uitstelt tot het juiste moment"
       }
     }
   },
@@ -1184,6 +1356,10 @@
       "de": {
         "name": "Der Erhörender",
         "description": "Der Erhörender"
+      },
+      "nl": {
+        "name": "De Eerste",
+        "description": "Voor Wie niets bestond"
       }
     }
   },
@@ -1211,6 +1387,10 @@
       "de": {
         "name": "Der Umfassende",
         "description": "Der Umfassende"
+      },
+      "nl": {
+        "name": "De Laatste",
+        "description": "Na Wie niets zal bestaan"
       }
     }
   },
@@ -1238,6 +1418,10 @@
       "de": {
         "name": "Der Weise",
         "description": "Der Weise"
+      },
+      "nl": {
+        "name": "De Manifeste",
+        "description": "Die duidelijk zichtbaar is in Zijn tekenen"
       }
     }
   },
@@ -1265,6 +1449,10 @@
       "de": {
         "name": "Der Liebevolle",
         "description": "Der Liebevolle"
+      },
+      "nl": {
+        "name": "De Verborgene",
+        "description": "Die verborgen is voor de zintuigen"
       }
     }
   },
@@ -1292,6 +1480,10 @@
       "de": {
         "name": "Der Ruhmreiche",
         "description": "Der Ruhmreiche"
+      },
+      "nl": {
+        "name": "De Beschermer",
+        "description": "Die leiding geeft en beschermt"
       }
     }
   },
@@ -1319,6 +1511,10 @@
       "de": {
         "name": "Der Auferwecker",
         "description": "Der Auferwecker"
+      },
+      "nl": {
+        "name": "De Geprezene",
+        "description": "Die alle lof en prijs verdient"
       }
     }
   },
@@ -1346,6 +1542,10 @@
       "de": {
         "name": "Der Zeuge",
         "description": "Der Zeuge"
+      },
+      "nl": {
+        "name": "De Rekenaar",
+        "description": "Die nauwkeurig rekenschap aflegt"
       }
     }
   },
@@ -1373,6 +1573,10 @@
       "de": {
         "name": "Die Wahrheit",
         "description": "Die Wahrheit"
+      },
+      "nl": {
+        "name": "De Beginker",
+        "description": "Die alles doet ontstaan uit het niets"
       }
     }
   },
@@ -1400,6 +1604,10 @@
       "de": {
         "name": "Der Sachwalter",
         "description": "Der Sachwalter"
+      },
+      "nl": {
+        "name": "De Terugbrenger",
+        "description": "Die het leven terugbrengt na de dood"
       }
     }
   },
@@ -1427,6 +1635,10 @@
       "de": {
         "name": "Der Starke",
         "description": "Der Starke"
+      },
+      "nl": {
+        "name": "De Gever",
+        "description": "Die onophoudelijk geeft en schenkt"
       }
     }
   },
@@ -1454,6 +1666,10 @@
       "de": {
         "name": "Der Unerschütterliche",
         "description": "Der Unerschütterliche"
+      },
+      "nl": {
+        "name": "De Ontnemer",
+        "description": "Die neemt wat Hij wil"
       }
     }
   },
@@ -1481,6 +1697,10 @@
       "de": {
         "name": "Der Beschützende Freund",
         "description": "Der Beschützende Freund"
+      },
+      "nl": {
+        "name": "De Verrijker",
+        "description": "Die onafhankelijk en rijk maakt"
       }
     }
   },
@@ -1508,6 +1728,10 @@
       "de": {
         "name": "Der Lobenswürdige",
         "description": "Der Lobenswürdige"
+      },
+      "nl": {
+        "name": "De Arme Maker",
+        "description": "Die behoeftig en arm maakt"
       }
     }
   },
@@ -1535,6 +1759,10 @@
       "de": {
         "name": "Der Zähler",
         "description": "Der Zähler"
+      },
+      "nl": {
+        "name": "De Dichtbijzijnde",
+        "description": "Die zeer nabij is tot Zijn schepselen"
       }
     }
   },
@@ -1562,6 +1790,10 @@
       "de": {
         "name": "Der Begründer",
         "description": "Der Begründer"
+      },
+      "nl": {
+        "name": "De Verre",
+        "description": "Die verheven en transcendent is"
       }
     }
   },
@@ -1589,6 +1821,10 @@
       "de": {
         "name": "Der Wiederhersteller",
         "description": "Der Wiederhersteller"
+      },
+      "nl": {
+        "name": "De Getuige",
+        "description": "Die alles getuigt en waarneemt"
       }
     }
   },
@@ -1616,6 +1852,10 @@
       "de": {
         "name": "Der Lebendig-Macher",
         "description": "Der Lebendig-Macher"
+      },
+      "nl": {
+        "name": "De Waarachtige",
+        "description": "De Absoluut Ware en Echt"
       }
     }
   },
@@ -1643,6 +1883,10 @@
       "de": {
         "name": "Der Todbringer",
         "description": "Der Todbringer"
+      },
+      "nl": {
+        "name": "De Betrouwbare",
+        "description": "Die volledig te vertrouwen is"
       }
     }
   },
@@ -1670,6 +1914,10 @@
       "de": {
         "name": "Der Ewig-Lebende",
         "description": "Der Ewig-Lebende"
+      },
+      "nl": {
+        "name": "De Sterkste",
+        "description": "De Sterkste en Krachtigste"
       }
     }
   },
@@ -1697,6 +1945,10 @@
       "de": {
         "name": "Der Sich-Selbst-Erhaltende",
         "description": "Der Sich-Selbst-Erhaltende"
+      },
+      "nl": {
+        "name": "De Standvastige",
+        "description": "De Onwrikbare en Bestendige"
       }
     }
   },
@@ -1724,6 +1976,10 @@
       "de": {
         "name": "Der Findende",
         "description": "Der Findende"
+      },
+      "nl": {
+        "name": "De Vriend",
+        "description": "De Beschermdende en Liefdevolle Vriend"
       }
     }
   },
@@ -1751,6 +2007,10 @@
       "de": {
         "name": "Der Edle und Ruhmreiche",
         "description": "Der Edle und Ruhmreiche"
+      },
+      "nl": {
+        "name": "De Geprezene",
+        "description": "Die alle lof verdient"
       }
     }
   },
@@ -1778,6 +2038,10 @@
       "de": {
         "name": "Der Eine",
         "description": "Der Eine"
+      },
+      "nl": {
+        "name": "De Opwekker",
+        "description": "Die de doden opwekt"
       }
     }
   },
@@ -1805,6 +2069,10 @@
       "de": {
         "name": "Der Einzigartige",
         "description": "Der Einzigartige"
+      },
+      "nl": {
+        "name": "De Getuige",
+        "description": "Die over alles getuigt"
       }
     }
   },
@@ -1832,6 +2100,10 @@
       "de": {
         "name": "Die ewige Zuflucht",
         "description": "Die ewige Zuflucht"
+      },
+      "nl": {
+        "name": "De Waarheid",
+        "description": "De Absolute en Eeuwige Waarheid"
       }
     }
   },
@@ -1859,6 +2131,10 @@
       "de": {
         "name": "Der Fähige",
         "description": "Der Fähige"
+      },
+      "nl": {
+        "name": "De Borg",
+        "description": "De Beste Garant en Borg"
       }
     }
   },
@@ -1886,6 +2162,10 @@
       "de": {
         "name": "Der Allvermögende",
         "description": "Der Allvermögende"
+      },
+      "nl": {
+        "name": "De Krachtige",
+        "description": "Die kracht en vermogen bezit"
       }
     }
   },
@@ -1913,6 +2193,10 @@
       "de": {
         "name": "Der Beschleuniger",
         "description": "Der Beschleuniger"
+      },
+      "nl": {
+        "name": "De Machtige",
+        "description": "Die majesteit en grootsheid bezit"
       }
     }
   },
@@ -1940,6 +2224,10 @@
       "de": {
         "name": "Der Verzögerer",
         "description": "Der Verzögerer"
+      },
+      "nl": {
+        "name": "De Snel Rekenende",
+        "description": "Die snel afrekent"
       }
     }
   },
@@ -1967,6 +2255,10 @@
       "de": {
         "name": "Der Erste",
         "description": "Der Erste"
+      },
+      "nl": {
+        "name": "De Verhevene",
+        "description": "De Sublieme in rang"
       }
     }
   },
@@ -1994,6 +2286,10 @@
       "de": {
         "name": "Der Letzte",
         "description": "Der Letzte"
+      },
+      "nl": {
+        "name": "De Grootmoedige",
+        "description": "Die edelmoedig en vrijgevig is"
       }
     }
   },
@@ -2021,6 +2317,10 @@
       "de": {
         "name": "Der Offenkundige",
         "description": "Der Offenkundige"
+      },
+      "nl": {
+        "name": "De Liefdevolle",
+        "description": "Die genegenheid en liefde toont"
       }
     }
   },
@@ -2048,6 +2348,10 @@
       "de": {
         "name": "Der Verborgene",
         "description": "Der Verborgene"
+      },
+      "nl": {
+        "name": "De Heerser",
+        "description": "Die soevereiniteit en gezag uitoefent"
       }
     }
   },
@@ -2075,6 +2379,10 @@
       "de": {
         "name": "Der Herrscher",
         "description": "Der Herrscher"
+      },
+      "nl": {
+        "name": "De Eerbiedwaardige",
+        "description": "Die eer en vrijgevigheid bezit"
       }
     }
   },
@@ -2102,6 +2410,10 @@
       "de": {
         "name": "der Höchsterhabene",
         "description": "der Höchsterhabene"
+      },
+      "nl": {
+        "name": "De Opwekker",
+        "description": "Die levens opwekt"
       }
     }
   },
@@ -2129,6 +2441,10 @@
       "de": {
         "name": "Der Gütige",
         "description": "Der Gütige"
+      },
+      "nl": {
+        "name": "De Getuige",
+        "description": "De Getuige van de Waarheid"
       }
     }
   },
@@ -2156,6 +2472,10 @@
       "de": {
         "name": "Der Reue-Annehmende",
         "description": "Der Reue-Annehmende"
+      },
+      "nl": {
+        "name": "De Kracht",
+        "description": "De Kracht en Mogelijkheid Zelf"
       }
     }
   },
@@ -2183,6 +2503,10 @@
       "de": {
         "name": "Der Rächer",
         "description": "Der Rächer"
+      },
+      "nl": {
+        "name": "De Macht",
+        "description": "De Bron van Majesteit"
       }
     }
   },
@@ -2210,6 +2534,10 @@
       "de": {
         "name": "Der Verzeihende",
         "description": "Der Verzeihende"
+      },
+      "nl": {
+        "name": "De Vertrager",
+        "description": "Die uitstelt met wijsheid"
       }
     }
   },
@@ -2237,6 +2565,10 @@
       "de": {
         "name": "Der Mitleidige",
         "description": "Der Mitleidige"
+      },
+      "nl": {
+        "name": "De Eerste",
+        "description": "Voor Wie alles bestond"
       }
     }
   },
@@ -2264,6 +2596,10 @@
       "de": {
         "name": "Der Besitzer der Herrschaft",
         "description": "Der Besitzer der Herrschaft"
+      },
+      "nl": {
+        "name": "De Laatste",
+        "description": "Na Wie alles zal vergaan"
       }
     }
   },
@@ -2291,6 +2627,10 @@
       "de": {
         "name": "Der Herr der Majestät und Großzügigkeit",
         "description": "Der Herr der Majestät und Großzügigkeit"
+      },
+      "nl": {
+        "name": "De Duidelijke",
+        "description": "Die manifest en duidelijk is"
       }
     }
   },
@@ -2318,6 +2658,10 @@
       "de": {
         "name": "Der Ausgleichende",
         "description": "Der Ausgleichende"
+      },
+      "nl": {
+        "name": "De Verborgene",
+        "description": "Die onzichtbaar en verborgen is"
       }
     }
   },
@@ -2345,6 +2689,10 @@
       "de": {
         "name": "Der Versammler",
         "description": "Der Versammler"
+      },
+      "nl": {
+        "name": "De Beschermer",
+        "description": "Die zaken regelt en beschermt"
       }
     }
   },
@@ -2372,6 +2720,10 @@
       "de": {
         "name": "Der Unbedürftige",
         "description": "Der Unbedürftige"
+      },
+      "nl": {
+        "name": "De Rechtvaardige",
+        "description": "Die rechtvaardig en billijk is"
       }
     }
   },
@@ -2399,6 +2751,10 @@
       "de": {
         "name": "Der Bereicherer",
         "description": "Der Bereicherer"
+      },
+      "nl": {
+        "name": "De Verzamelaar",
+        "description": "Die alle schepselen zal verzamelen"
       }
     }
   },
@@ -2426,6 +2782,10 @@
       "de": {
         "name": "Der Verhinderer",
         "description": "Der Verhinderer"
+      },
+      "nl": {
+        "name": "De Onafhankelijke",
+        "description": "Die rijk en onafhankelijk is"
       }
     }
   },
@@ -2453,6 +2813,10 @@
       "de": {
         "name": "Der Schädiger",
         "description": "Der Schädiger"
+      },
+      "nl": {
+        "name": "De Gever van Macht",
+        "description": "Die macht en autoriteit geeft"
       }
     }
   },
@@ -2480,6 +2844,10 @@
       "de": {
         "name": "Der Wohltuer",
         "description": "Der Wohltuer"
+      },
+      "nl": {
+        "name": "De Ontnemer",
+        "description": "Die macht en bezit ontneemt"
       }
     }
   },
@@ -2507,6 +2875,10 @@
       "de": {
         "name": "Das Licht",
         "description": "Das Licht"
+      },
+      "nl": {
+        "name": "De Brenger van Kwaad",
+        "description": "Die beproeving en tegenspoed brengt"
       }
     }
   },
@@ -2534,6 +2906,10 @@
       "de": {
         "name": "der Rechtschaffene",
         "description": "der Rechtschaffene"
+      },
+      "nl": {
+        "name": "De Brenger van Goeds",
+        "description": "Die zegen en voordeel brengt"
       }
     }
   },
@@ -2561,6 +2937,10 @@
       "de": {
         "name": "Der unvergleichliche Schöpfer",
         "description": "Der unvergleichliche Schöpfer"
+      },
+      "nl": {
+        "name": "Het Licht",
+        "description": "Die de harten en zielen verlicht"
       }
     }
   },
@@ -2588,6 +2968,10 @@
       "de": {
         "name": "Der Ewige",
         "description": "Der Ewige"
+      },
+      "nl": {
+        "name": "De Gids",
+        "description": "Die leidt en richting geeft"
       }
     }
   },
@@ -2615,6 +2999,10 @@
       "de": {
         "name": "Der Erbe",
         "description": "Der Erbe"
+      },
+      "nl": {
+        "name": "De Schepper",
+        "description": "De Oorspronkelijke Maker en Ontwerper"
       }
     }
   },
@@ -2642,6 +3030,10 @@
       "de": {
         "name": "Der Rechtleiter",
         "description": "Der Rechtleiter"
+      },
+      "nl": {
+        "name": "De Bestendige",
+        "description": "Die eeuwig en duurzaam blijft"
       }
     }
   },
@@ -2669,6 +3061,10 @@
       "de": {
         "name": "Der Geduldige",
         "description": "Der Geduldige"
+      },
+      "nl": {
+        "name": "De Geduldige",
+        "description": "De Eeuwige Geduldige, Die niet haastig is"
       }
     }
   }
