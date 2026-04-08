@@ -493,7 +493,7 @@ class QuranService {
       'ar' => 'المحتوى غير متاح دون اتصال بالإنترنت.',
       'de' => 'Inhalte sind ohne Internetverbindung nicht verfügbar.',
       'en' => 'Content is unavailable without an internet connection.',
-      'fr' => 'Le contenu n'est pas disponible sans connexion internet.',
+      'fr' => "Le contenu n'est pas disponible sans connexion internet.",
       'nl' => 'Inhoud is niet beschikbaar zonder internetverbinding.',
       _ => 'Contenido no disponible sin conexión a internet.',
     };
