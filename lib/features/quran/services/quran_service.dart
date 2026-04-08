@@ -472,6 +472,7 @@ class QuranService {
       'de' => 'de',
       'en' => 'en',
       'fr' => 'fr',
+      'nl' => 'nl',
       _ => 'es',
     };
   }
@@ -482,6 +483,7 @@ class QuranService {
       'de' => 'de.bubenheim',
       'en' => 'en.sahih',
       'fr' => 'fr.hamidullah',
+      'nl' => 'nl.keyzer',
       _ => 'es.garcia',
     };
   }
@@ -491,7 +493,8 @@ class QuranService {
       'ar' => 'المحتوى غير متاح دون اتصال بالإنترنت.',
       'de' => 'Inhalte sind ohne Internetverbindung nicht verfügbar.',
       'en' => 'Content is unavailable without an internet connection.',
-      'fr' => 'Le contenu n’est pas disponible sans connexion internet.',
+      'fr' => 'Le contenu n'est pas disponible sans connexion internet.',
+      'nl' => 'Inhoud is niet beschikbaar zonder internetverbinding.',
       _ => 'Contenido no disponible sin conexión a internet.',
     };
   }
