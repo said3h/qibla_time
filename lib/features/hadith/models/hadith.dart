@@ -101,8 +101,10 @@ class HadithMultilenguaje {
 
   /// Gets the hadith with fallback strategy
   Hadith getHadith(String languageCode, {String fallbackLanguage = 'es'}) {
-    final translation = translations[languageCode] ?? translations[fallbackLanguage];
-    
+    final requestedTranslation = translations[languageCode];
+
+    final translation = requestedTranslation ?? translations[fallbackLanguage];
+
     if (translation == null) {
       // Return first available translation or throw
       final firstEntry = translations.values.firstOrNull;
