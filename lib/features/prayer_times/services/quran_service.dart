@@ -70,8 +70,12 @@ class QuranVerseService {
   static String _normalizedLanguageCode(String languageCode) {
     return switch (languageCode) {
       'ar' => 'ar',
+      'de' => 'de',
       'en' => 'en',
       'fr' => 'fr',
+      'id' => 'id',
+      'nl' => 'nl',
+      'ru' => 'ru',
       _ => 'es',
     };
   }
@@ -79,8 +83,12 @@ class QuranVerseService {
   static String _translationEditionFor(String languageCode) {
     return switch (languageCode) {
       'ar' => 'ar.muyassar',
+      'de' => 'de.bubenheim',
       'en' => 'en.sahih',
       'fr' => 'fr.hamidullah',
+      'id' => 'id.indonesian',
+      'nl' => 'nl.keyzer',
+      'ru' => 'ru.kuliev',
       _ => 'es.garcia',
     };
   }

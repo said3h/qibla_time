@@ -52,12 +52,26 @@ class HadithCollectionPresentation {
     'Otros': 'أخرى',
   };
 
+  static const _russianLabels = <String, String>{
+    'Sahih al-Bukhari': 'Сахих аль-Бухари',
+    'Sahih Muslim': 'Сахих Муслим',
+    'Riyad as-Salihin': 'Рияд ас-Салихин',
+    '40 Hadith Nawawi': '40 хадисов ан-Навави',
+    'Sunan Abu Dawud': 'Сунан Абу Дауда',
+    'Jami\' at-Tirmidhi': 'Джами ат-Тирмизи',
+    'Sunan an-Nasa\'i': 'Сунан ан-Насаи',
+    'Sunan Ibn Majah': 'Сунан Ибн Маджи',
+    'Muwatta Malik': 'Муватта Малик',
+    'Otros': 'Другие',
+  };
+
   static HadithCollectionMeta metaFor(String collection, String languageCode) {
     final normalizedCollection = _normalizeCollection(collection);
     final normalizedLanguage = switch (languageCode) {
       'ar' => 'ar',
       'en' => 'en',
       'fr' => 'fr',
+      'ru' => 'ru',
       _ => 'default',
     };
 
@@ -66,11 +80,14 @@ class HadithCollectionPresentation {
             'ar' => _arabicLabels[normalizedCollection] ?? normalizedCollection,
             'en' => 'Other',
             'fr' => 'Autres',
+            'ru' => _russianLabels[normalizedCollection] ?? 'Другие',
             _ => 'Otros',
           }
-        : (normalizedLanguage == 'ar'
-              ? (_arabicLabels[normalizedCollection] ?? normalizedCollection)
-              : normalizedCollection);
+        : switch (normalizedLanguage) {
+            'ar' => _arabicLabels[normalizedCollection] ?? normalizedCollection,
+            'ru' => _russianLabels[normalizedCollection] ?? normalizedCollection,
+            _ => normalizedCollection,
+          };
 
     return HadithCollectionMeta(
       icon: _icons[normalizedCollection] ?? Icons.auto_stories_outlined,

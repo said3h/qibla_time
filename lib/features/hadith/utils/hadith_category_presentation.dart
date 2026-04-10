@@ -161,6 +161,43 @@ class HadithCategoryPresentation {
     'zuhd': 'Zuhd',
   };
 
+  static const _russianLabels = <String, String>{
+    'adab': 'Адаб',
+    'love_allah': 'Любовь к Аллаху',
+    'self_reflection': 'Самоанализ',
+    'fasting': 'Пост',
+    'character': 'Нрав',
+    'charity': 'Милостыня',
+    'compassion': 'Милосердие',
+    'knowledge': 'Знание',
+    'consistency': 'Постоянство',
+    'heart': 'Сердце',
+    'dhikr': 'Зикр',
+    'dua': 'Дуа',
+    'family': 'Семья',
+    'brotherhood': 'Братство',
+    'gratitude': 'Благодарность',
+    'haya': 'Хая',
+    'honesty': 'Честность',
+    'ihsan': 'Ихсан',
+    'intentions': 'Намерения',
+    'istighfar': 'Истигфар',
+    'justice': 'Справедливость',
+    'tongue': 'Язык',
+    'mosque': 'Мечеть',
+    'mercy': 'Милость',
+    'patience': 'Терпение',
+    'purification': 'Очищение',
+    'quran': 'Коран',
+    'provision': 'Удел',
+    'salah': 'Намаз',
+    'safety': 'Безопасность',
+    'service': 'Служение',
+    'sincerity': 'Искренность',
+    'taqwa': 'Таква',
+    'zuhd': 'Зухд',
+  };
+
   static const _arabicLabels = <String, String>{
     'adab': 'الادب',
     'love_allah': 'محبة الله',
@@ -204,6 +241,7 @@ class HadithCategoryPresentation {
       'ar' => 'ar',
       'en' => 'en',
       'fr' => 'fr',
+      'ru' => 'ru',
       _ => 'es',
     };
 
@@ -219,6 +257,7 @@ class HadithCategoryPresentation {
       'ar' => _arabicLabels[key] ?? category,
       'en' => _englishLabels[key] ?? category,
       'fr' => _frenchLabels[key] ?? category,
+      'ru' => _russianLabels[key] ?? category,
       _ => _spanishLabels[key] ?? category,
     };
 
@@ -242,6 +281,7 @@ class HadithCategoryPresentation {
         value.contains('amor de alá') ||
         value.contains('love of allah') ||
         value.contains("amour d'allah") ||
+        value.contains('любовь к аллаху') ||
         value.contains('محبة')) {
       return 'love_allah';
     }
@@ -249,6 +289,7 @@ class HadithCategoryPresentation {
         value.contains('autorreflexión') ||
         value.contains('self-reflection') ||
         value.contains('introspection') ||
+        value.contains('самоанализ') ||
         value.contains('محاسبة')) {
       return 'self_reflection';
     }
@@ -256,6 +297,7 @@ class HadithCategoryPresentation {
         value.contains('fasting') ||
         value.contains('jeune') ||
         value.contains('jeûne') ||
+        value.contains('пост') ||
         value.contains('صيام')) {
       return 'fasting';
     }
@@ -264,6 +306,7 @@ class HadithCategoryPresentation {
         value.contains('character') ||
         value.contains('caractere') ||
         value.contains('caractère') ||
+        value.contains('нрав') ||
         value.contains('خلق')) {
       return 'character';
     }
@@ -271,24 +314,28 @@ class HadithCategoryPresentation {
         value.contains('charity') ||
         value.contains('aumone') ||
         value.contains('aumône') ||
+        value.contains('милостын') ||
         value.contains('صدقة')) {
       return 'charity';
     }
     if (value.contains('compasion') ||
         value.contains('compasión') ||
         value.contains('compassion') ||
+        value.contains('милосерд') ||
         value.contains('رحمة')) {
       return 'compassion';
     }
     if (value.contains('conocimiento') ||
         value.contains('knowledge') ||
         value.contains('connaissance') ||
+        value.contains('знани') ||
         value.contains('علم')) {
       return 'knowledge';
     }
     if (value.contains('constancia') ||
         value.contains('consistency') ||
         value.contains('constance') ||
+        value.contains('постоянств') ||
         value.contains('ثبات')) {
       return 'consistency';
     }
@@ -297,16 +344,23 @@ class HadithCategoryPresentation {
         value.contains('heart') ||
         value.contains('coeur') ||
         value.contains('cœur') ||
+        value.contains('сердц') ||
         value.contains('قلب')) {
       return 'heart';
     }
-    if (value == 'dhikr' || value.contains('ذكر')) return 'dhikr';
-    if (value == 'dua' || value.contains('دعاء') || value.contains('doua')) {
+    if (value == 'dhikr' || value.contains('ذكر') || value.contains('зикр')) {
+      return 'dhikr';
+    }
+    if (value == 'dua' ||
+        value.contains('دعاء') ||
+        value.contains('doua') ||
+        value.contains('дуа')) {
       return 'dua';
     }
     if (value.contains('familia') ||
         value.contains('family') ||
         value.contains('famille') ||
+        value.contains('семь') ||
         value.contains('اسرة') ||
         value.contains('أسرة')) {
       return 'family';
@@ -315,43 +369,56 @@ class HadithCategoryPresentation {
         value.contains('brotherhood') ||
         value.contains('fraternite') ||
         value.contains('fraternité') ||
+        value.contains('братств') ||
         value.contains('اخوة') ||
         value.contains('أخوة')) {
       return 'brotherhood';
     }
     if (value.contains('gratitud') ||
         value.contains('gratitude') ||
+        value.contains('благодар') ||
         value.contains('شكر')) {
       return 'gratitude';
     }
-    if (value == 'haya' || value.contains('حياء')) return 'haya';
+    if (value == 'haya' || value.contains('حياء') || value.contains('хая')) {
+      return 'haya';
+    }
     if (value.contains('honestidad') ||
         value.contains('honesty') ||
         value.contains('honnetete') ||
         value.contains('honnêteté') ||
+        value.contains('честност') ||
         value.contains('امانة') ||
         value.contains('أمانة')) {
       return 'honesty';
     }
-    if (value == 'ihsan' || value.contains('احسان') || value.contains('إحسان')) {
+    if (value == 'ihsan' ||
+        value.contains('احسان') ||
+        value.contains('إحسان') ||
+        value.contains('ихсан')) {
       return 'ihsan';
     }
     if (value.contains('intenciones') ||
         value.contains('intentions') ||
+        value.contains('намерени') ||
         value.contains('نيات')) {
       return 'intentions';
     }
-    if (value == 'istighfar' || value.contains('استغفار')) {
+    if (value == 'istighfar' ||
+        value.contains('استغفار') ||
+        value.contains('истигфар')) {
       return 'istighfar';
     }
     if (value.contains('justicia') ||
         value.contains('justice') ||
+        value.contains('справедлив') ||
         value.contains('عدل')) {
       return 'justice';
     }
     if (value.contains('lengua') ||
         value.contains('tongue') ||
         value.contains('langue') ||
+        value.contains('язык') ||
         value.contains('لسان')) {
       return 'tongue';
     }
@@ -359,32 +426,40 @@ class HadithCategoryPresentation {
         value.contains('mosque') ||
         value.contains('mosquee') ||
         value.contains('mosquée') ||
+        value.contains('мечет') ||
         value.contains('مسجد')) {
       return 'mosque';
     }
     if (value.contains('misericordia') ||
         value.contains('mercy') ||
+        value.contains('милост') ||
         value.contains('misericorde')) {
       return 'mercy';
     }
     if (value.contains('paciencia') ||
         value.contains('patience') ||
+        value.contains('терпен') ||
         value.contains('صبر')) {
       return 'patience';
     }
     if (value.contains('purificacion') ||
         value.contains('purificación') ||
         value.contains('purification') ||
+        value.contains('очищен') ||
         value.contains('طهارة')) {
       return 'purification';
     }
-    if (value == 'quran' || value == 'coran' || value.contains('قرآن')) {
+    if (value == 'quran' ||
+        value == 'coran' ||
+        value.contains('коран') ||
+        value.contains('قرآن')) {
       return 'quran';
     }
     if (value == 'rizq' ||
         value.contains('sustento') ||
         value.contains('provision') ||
         value.contains('subsistance') ||
+        value.contains('удел') ||
         value.contains('رزق')) {
       return 'provision';
     }
@@ -392,6 +467,7 @@ class HadithCategoryPresentation {
         value.contains('prayer') ||
         value.contains('priere') ||
         value.contains('prière') ||
+        value.contains('намаз') ||
         value.contains('صلاة')) {
       return 'salah';
     }
@@ -399,12 +475,14 @@ class HadithCategoryPresentation {
         value.contains('safety') ||
         value.contains('securite') ||
         value.contains('sécurité') ||
+        value.contains('безопас') ||
         value.contains('امان') ||
         value.contains('أمان')) {
       return 'safety';
     }
     if (value.contains('servicio') ||
         value.contains('service') ||
+        value.contains('служени') ||
         value.contains('خدمة')) {
       return 'service';
     }
@@ -412,12 +490,17 @@ class HadithCategoryPresentation {
         value.contains('sincerity') ||
         value.contains('sincerite') ||
         value.contains('sincérité') ||
+        value.contains('искренност') ||
         value.contains('اخلاص') ||
         value.contains('إخلاص')) {
       return 'sincerity';
     }
-    if (value == 'taqwa' || value.contains('تقوى')) return 'taqwa';
-    if (value == 'zuhd' || value.contains('زهد')) return 'zuhd';
+    if (value == 'taqwa' || value.contains('تقوى') || value.contains('таква')) {
+      return 'taqwa';
+    }
+    if (value == 'zuhd' || value.contains('زهد') || value.contains('зухд')) {
+      return 'zuhd';
+    }
 
     return null;
   }

@@ -1,0 +1,1156 @@
+{
+  "@@locale": "ru",
+  "appTitle": "Qibla Time",
+  "commonSkip": "Пропускать",
+  "commonBack": "Назад",
+  "commonContinue": "Продолжать",
+  "commonEnter": "Входить",
+  "commonAllow": "Позволять",
+  "commonActivate": "Активировать",
+  "commonEnable": "Давать возможность",
+  "commonEnableGps": "Включите GPS",
+  "commonOpenSettings": "Открыть настройки",
+  "commonPending": "В ожидании",
+  "commonGranted": "Предоставленный",
+  "commonBlocked": "Заблокировано",
+  "commonReady": "Готовый",
+  "commonDisabled": "Неполноценный",
+  "commonUnavailable": "Недоступно",
+  "commonToday": "Сегодня",
+  "commonYesterday": "Вчера",
+  "commonLoading": "Загрузка...",
+  "commonShare": "Делиться",
+  "commonManual": "Руководство",
+  "commonImportJson": "Импортировать JSON",
+  "commonExport": "Экспорт",
+  "commonOpen": "Открыть",
+  "commonVersion": "Версия",
+  "commonAbout": "О",
+  "commonMethod": "Метод",
+  "commonMadhab": "__МАДХАБ__",
+  "commonLocation": "Расположение",
+  "commonNotifications": "Уведомления",
+  "commonNoData": "Нет данных",
+  "commonNever": "Никогда",
+  "commonGenerating": "Создание...",
+  "commonChecking": "Проверка...",
+  "commonDelete": "Удалить",
+  "commonSystemStatus": "Статус системы",
+  "commonCurrentStatus": "Текущий статус",
+  "commonOffset": "Компенсировать",
+  "commonAutomatic": "Автоматический",
+  "commonPrepared": "Готовый",
+  "commonActivated": "Включено",
+  "commonPaused": "Приостановлено",
+  "commonSystem": "Система",
+  "onboardingWelcomeTitle": "Добро пожаловать в Qibla Time",
+  "onboardingWelcomeSubtitle": "Время молитв, Коран, Кибла и напоминания в одном лёгком приложении для вашей повседневной жизни.",
+  "onboardingFeatureSchedulesTitle": "Надежное время молитвы",
+  "onboardingFeatureSchedulesBody": "Рассчитывается с учетом вашего местоположения и предпочтительного метода.",
+  "onboardingFeaturePracticeTitle": "__КИБЛА__ и ежедневная практика",
+  "onboardingFeaturePracticeBody": "Компас, тасбих, отслеживание и многое другое в одном плавном потоке.",
+  "onboardingFeatureRemindersTitle": "Полезные напоминания",
+  "onboardingFeatureRemindersBody": "Уведомления о молитвах и ключевые настройки готовы с первого дня.",
+  "onboardingPermissionsTitle": "Важные разрешения",
+  "onboardingPermissionsSubtitle": "Мы просим только то, что необходимо для расчёта времени молитвы, использования Киблы и своевременного уведомления вас.",
+  "onboardingLocationReadyBody": "Готов рассчитать время молитвы и Киблу.",
+  "onboardingLocationBlockedBody": "Доступ к местоположению заблокирован. Вы можете включить его позже в настройках системы.",
+  "onboardingLocationGpsOffBody": "GPS вашего устройства отключен. Вы можете продолжить и включить его позже.",
+  "onboardingLocationPendingBody": "Требуется для точного времени молитвы и направления в Мекку.",
+  "onboardingNotificationsReadyBody": "Готов напомнить вам о каждой молитве.",
+  "onboardingNotificationsPendingBody": "Это позволит вам получать оповещения и напоминания об азанах позже.",
+  "onboardingMethodTitle": "Метод расчета",
+  "onboardingMethodSubtitle": "Вы можете изменить его позже, но благодаря этому время молитв будет настроено правильно с сегодняшнего дня.",
+  "onboardingSelectedNow": "Выбрано сейчас",
+  "onboardingTapToChooseMethod": "Нажмите, чтобы выбрать этот метод",
+  "onboardingMadhabTitle": "Мазхаб для асра",
+  "onboardingMadhabSubtitle": "Это влияет только на расчёт асра. Если вы не уверены, вы можете оставить шафиитский вариант и изменить его позже.",
+  "onboardingMadhabCommonTitle": "Шафи / Малики / Ханбали",
+  "onboardingMadhabCommonSubtitle": "Самый распространенный вариант для начала.",
+  "onboardingMadhabHanafiTitle": "Ханафитский",
+  "onboardingMadhabHanafiSubtitle": "Используйте ханафитский расчёт для асра.",
+  "onboardingAdhanTitle": "__АДХАН__ и оповещения",
+  "onboardingAdhanSubtitle": "Qibla Time по умолчанию может оповещать вас о каждой молитве мягким азаном. Вы можете изменить его позже.",
+  "onboardingPrayerNotificationsTitle": "Молитвенные уведомления",
+  "onboardingPrayerNotificationsSubtitle": "Вы можете включить их сейчас или пока продолжить без них.",
+  "onboardingAdhanPreviewTitle": "Быстрый просмотр азана",
+  "onboardingAdhanPreviewSubtitle": "Будет использован выбранный вами звук. Вы можете изменить его позже в настройках.",
+  "onboardingAdhanStopPreview": "Остановить предварительный просмотр",
+  "onboardingAdhanListenPreview": "Прослушать превью",
+  "onboardingDoneTitle": "Все готово",
+  "onboardingDoneSubtitle": "Теперь вы можете начать с времени молитв, Киблы и ежедневного отслеживания. Всё можно будет отрегулировать позже.",
+  "onboardingSummaryLocationBlocked": "Заблокировано на данный момент",
+  "onboardingSummaryNotificationsPrepared": "Готовый",
+  "methodMuslimWorldLeague": "Мировая мусульманская лига",
+  "methodNorthAmerica": "ИСНА / Северная Америка",
+  "methodUmmAlQura": "Умм аль-Кура",
+  "methodEgyptian": "Египетские власти",
+  "homeHeaderOnline": "Онлайн",
+  "homeHeaderOffline": "Оффлайн",
+  "homeHeaderLocationUnavailable": "Местоположение недоступно",
+  "homeHeaderStatusLine": "{networkStatus} · {location}",
+  "@homeHeaderStatusLine": {
+    "placeholders": {
+      "networkStatus": {},
+      "location": {}
+    }
+  },
+  "homeHeroNextPrayer": "СЛЕДУЮЩАЯ МОЛИТВА",
+  "homeHeroTodayOverview": "Главный вид на сегодня",
+  "homeHeroUsingSavedLocation": "Использование вашего последнего сохраненного местоположения",
+  "homeSelectedDateToday": "СЕГОДНЯ",
+  "homeSelectedDateCustom": "ВЫБРАННАЯ ДАТА",
+  "homeCountdownUnavailable": "Обратный отсчет недоступен.",
+  "homeCountdownActive": "Обратный отсчет активен",
+  "homeCountdownUntil": "до {prayer}",
+  "@homeCountdownUntil": {
+    "placeholders": {
+      "prayer": {}
+    }
+  },
+  "homeCountdownLabelUppercase": "ОБРАТНЫЙ ОТСЧЕТ",
+  "homeDurationUntil": "через {hours}ч {minutes}мин",
+  "@homeDurationUntil": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      },
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "homeDurationHoursMinutes": "{hours} ч. {minutes} мин.",
+  "@homeDurationHoursMinutes": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      },
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "homeDurationMinutes": "{minutes} мин.",
+  "@homeDurationMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "homeDurationSeconds": "{seconds} с.",
+  "@homeDurationSeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "String"
+      }
+    }
+  },
+  "homePrayerSectionToday": "Сегодняшние молитвы",
+  "homePrayerSectionForDate": "Время для {date}",
+  "@homePrayerSectionForDate": {
+    "placeholders": {
+      "date": {}
+    }
+  },
+  "homePrayerSectionWorshipDay": "{weekday}, день поклонения",
+  "@homePrayerSectionWorshipDay": {
+    "placeholders": {
+      "weekday": {}
+    }
+  },
+  "homePrayerSectionMarkedCount": "{count}/5 отмечено",
+  "@homePrayerSectionMarkedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsTitle": "Настройки",
+  "settingsTitleArabic": "إعدادات",
+  "settingsSectionAppearance": "Появление",
+  "settingsSectionAccessibility": "Доступность",
+  "settingsSectionAdhanNotifications": "__АДХАН__ уведомления",
+  "settingsSectionScheduleCalculation": "Расчет времени молитвы",
+  "settingsSectionRamadanMode": "Режим __РАМАДАН__",
+  "settingsSectionHadith": "__ХАДИТ__",
+  "settingsSectionTravelerMode": "Режим путешествия",
+  "settingsSectionRecentPlaces": "ПОСЛЕДНИЕ МЕСТА",
+  "settingsSectionSmartCache": "Умный кэш",
+  "settingsSectionSupport": "Садака · Поддержка",
+  "settingsSectionCloudBackup": "Резервное копирование в облаке (бета)",
+  "settingsTextSize": "Размер текста",
+  "settingsCurrentScale": "Текущий масштаб: {scale}x",
+  "@settingsCurrentScale": {
+    "placeholders": {
+      "scale": {}
+    }
+  },
+  "settingsHighContrast": "Высокая контрастность",
+  "settingsHighContrastSubtitle": "Улучшает читабельность приложения.",
+  "settingsUseSystemBold": "Использовать системный жирный текст",
+  "settingsUseSystemBoldSubtitle": "Соблюдает настройки VoiceOver/TalkBack.",
+  "settingsResetAccessibility": "Сбросить доступность",
+  "settingsReset": "Перезагрузить",
+  "settingsThemeDarkTitle": "Темный",
+  "settingsThemeDarkSubtitle": "Небо перед рассветом",
+  "settingsThemeLightTitle": "Свет",
+  "settingsThemeLightSubtitle": "Для наружного использования",
+  "settingsThemeAmoledTitle": "АМОЛЕД",
+  "settingsThemeAmoledSubtitle": "Чистый черный, экономит заряд батареи",
+  "settingsThemeDeuteranopiaTitle": "Дейтеранопия",
+  "settingsThemeDeuteranopiaSubtitle": "Нет красного/зеленого",
+  "settingsThemeMonochromeTitle": "Монохромный",
+  "settingsThemeMonochromeSubtitle": "При ахроматопсии и слабости зрения",
+  "settingsLanguage": "Язык приложения",
+  "settingsLanguageSubtitle": "Выберите, должно ли приложение следовать языку вашего устройства или везде использовать один фиксированный язык.",
+  "settingsLanguageDialogTitle": "Язык приложения",
+  "settingsLanguageOptionSystem": "Следуйте языку устройства",
+  "settingsLanguageSystemValue": "Автоматически ({language})",
+  "@settingsLanguageSystemValue": {
+    "placeholders": {
+      "language": {}
+    }
+  },
+  "settingsLanguageOptionSpanish": "Испанский",
+  "settingsLanguageOptionEnglish": "Английский",
+  "settingsLanguageOptionFrench": "Французский",
+  "settingsLanguageOptionGerman": "Немецкий",
+  "settingsLanguageOptionArabic": "Арабский",
+  "settingsLanguageOptionDutch": "Нидерландский",
+  "settingsAdhanSound": "__АДХАН__ звук",
+  "settingsAdhanSoundAction": "Выберите и просмотрите",
+  "settingsGeneralNotifications": "Общие уведомления",
+  "settingsGeneralNotificationsSubtitle": "Включить или приостановить все молитвенные оповещения",
+  "settingsSystemPermissionPendingBody": "Оповещения о молитвах настроены, но системное разрешение всё ещё не получено.",
+  "settingsHapticFeedback": "Тактильная обратная связь",
+  "settingsRamadanAutomatic": "Автоматический режим Рамадана",
+  "settingsRamadanAutomaticSubtitle": "Включается автоматически, когда по исламскому календарю наступает __РАМАДАН__.",
+  "settingsRamadanForced": "Принудительный режим __РАМАДАН__",
+  "settingsRamadanForcedSubtitle": "Включите оформление Рамадана вручную",
+  "settingsDailyNotification": "Ежедневное уведомление",
+  "settingsDailyNotificationSubtitle": "Получайте хадис или аят каждый день",
+  "settingsNotificationHour": "Время уведомления",
+  "settingsTravelerMode": "Режим путешествия",
+  "settingsTravelerModeSubtitle": "Автоматически обнаруживает изменения в городе (>50 км)",
+  "settingsTravelerModeLoadError": "Не удалось загрузить режим путешествия.",
+  "settingsRecentPlaces": "Недавние места",
+  "settingsNoRecentTrips": "Нет недавних поездок",
+  "settingsLoadError": "Мы не смогли загрузить его",
+  "settingsCacheValidUntil": "Кэш действителен до",
+  "settingsCacheEntries": "Записи кэша",
+  "settingsClearCache": "Очистить кеш",
+  "settingsSupportInfo": "Информация о поддержке",
+  "settingsSupportCardTitle": "Поддержка развития",
+  "settingsSupportCardSubtitle": "Каждое пожертвование может стать садака-джариятом.",
+  "settingsBackupMode": "Резервный режим",
+  "settingsAnonymousId": "Анонимный идентификатор",
+  "settingsLastBackup": "Последняя резервная копия",
+  "settingsExportBackup": "Экспортировать резервную копию",
+  "settingsRestoreBackup": "Восстановить резервную копию",
+  "settingsBackupInfoBody": "Вы можете сохранить резервную копию вручную в формате JSON и поделиться ею. Автоматизация и синхронизация между устройствами пока недоступны.",
+  "settingsRestoreBackupDialogTitle": "Восстановить резервную копию",
+  "settingsRestoreBackupSuccess": "Резервная копия восстановлена",
+  "settingsRestoreBackupError": "Нам не удалось восстановить резервную копию.",
+  "settingsDailyNotificationEnabled": "Ежедневное уведомление включено",
+  "settingsDailyNotificationDisabled": "Ежедневное уведомление отключено",
+  "settingsSelectHourTitle": "Выберите время",
+  "settingsToday": "Сегодня",
+  "settingsYesterday": "Вчера",
+  "settingsDaysAgo": "{count} дней назад",
+  "@settingsDaysAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsRamadanManualActive": "Вручную активен",
+  "settingsLocationBlocked": "Заблокировано",
+  "settingsLocationPendingPermission": "Разрешение ожидает",
+  "settingsLocationAutomatic": "Автоматический",
+  "settingsLocationSavedUnavailable": "Нет сохраненного местоположения",
+  "settingsLocationStatus": "Статус местоположения",
+  "settingsGpsOff": "GPS выключен",
+  "settingsScheduleSource": "Источник расписания",
+  "settingsScheduleSourceReady": "Кэш готов",
+  "settingsNotificationSystem": "Системное уведомление.",
+  "settingsNotificationApp": "Уведомление приложения.",
+  "settingsNotificationsGranted": "Предоставленный",
+  "commonPlay": "Играть",
+  "commonText": "Текст",
+  "commonVideo": "Видео",
+  "commonRemove": "Удалять",
+  "shareBranding": "Приложение: Qibla Time",
+  "shareReferenceLabel": "Ссылка: {reference}",
+  "@shareReferenceLabel": {
+    "placeholders": {
+      "reference": {}
+    }
+  },
+  "shareSubjectDua": "Дуа",
+  "shareSubjectHadithOfDay": "__ХАДИТ__ дня - Qibla Time",
+  "shareSubjectHadithShared": "Хадис опубликован из Qibla Time",
+  "shareBadgeHadith": "ХАДИС",
+  "shareBadgeDua": "ДУА",
+  "shareBadgeQuran": "КОРАН",
+  "shareSectionStyle": "Стиль/фон",
+  "shareSectionContent": "Содержание",
+  "shareLayoutCard": "Карта",
+  "shareLayoutStory": "История",
+  "shareContentBilingual": "арабский + перевод",
+  "shareContentArabicOnly": "только арабский",
+  "shareContentTranslationOnly": "Только перевод",
+  "shareActionShareImage": "Поделиться изображением",
+  "shareActionShareText": "Поделиться текстом",
+  "shareHadithTitle": "Поделиться хадисом",
+  "shareHadithSubtitle": "Прежде чем поделиться, выберите формат и контент.",
+  "shareHadithTextError": "Мы не смогли поделиться текстом хадиса.",
+  "shareHadithImageError": "Нам не удалось создать изображение хадиса.",
+  "shareDuaTitle": "Поделиться дуа",
+  "shareDuaTitleNamed": "Поделиться {title}",
+  "@shareDuaTitleNamed": {
+    "placeholders": {
+      "title": {}
+    }
+  },
+  "shareDuaSubtitle": "Используйте ту же визуальную подачу, что и для хадиса, чтобы поделиться дуа и азкаром.",
+  "shareDuaTextError": "Нам не удалось поделиться текстом дуа.",
+  "shareDuaImageError": "Нам не удалось создать изображение дуа.",
+  "shareAyahTitle": "Поделитесь аятом {number}",
+  "@shareAyahTitle": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "shareAyahSubtitle": "Сохраняйте одинаковое визуальное представление для текста, изображений и видео.",
+  "shareAyahTextError": "Мы не смогли поделиться этим аятом в виде текста.",
+  "shareAyahImageError": "Нам не удалось создать это изображение аята.",
+  "shareAyahVideoNoAudio": "Нет аудио для создания видео для этого аята.",
+  "shareAyahVideoGenerating": "Создание видео аята...",
+  "shareAyahVideoError": "Нам не удалось создать видео для этого аята.",
+  "notificationAdhanChannelName": "__АДХАН__",
+  "notificationAdhanChannelDescription": "Уведомления о времени молитвы",
+  "notificationAdhanTitle": "Qibla Time – {prayerName}",
+  "@notificationAdhanTitle": {
+    "placeholders": {
+      "prayerName": {}
+    }
+  },
+  "notificationAdhanBody": "Настало время молитвы",
+  "notificationReminderChannelName": "Qibla Time – Напоминания",
+  "notificationReminderChannelDescription": "Контекстные напоминания о __РАМАДАНЕ__ и Джумуа",
+  "notificationDailyReflectionChannelName": "Ежедневное размышление",
+  "notificationDailyReflectionChannelDescription": "Аят __КОРАНА__ и хадис дня",
+  "notificationDailyReflectionTitle": "Отражение дня",
+  "notificationDailyReflectionFallbackBody": "Ваше ежедневное духовное размышление в Qibla Time.",
+  "notificationDailyReflectionErrorTitle": "Qibla Time · Ежедневные размышления",
+  "notificationDailyReflectionErrorBody": "Ваше духовное напоминание на сегодня",
+  "notificationHadithReminderChannelName": "__ХАДИТ__ напоминания",
+  "notificationHadithReminderChannelDescription": "Часовые напоминания о хадисах",
+  "notificationHadithReminderFallbackBody": "Напоминание: прочтите хадис Пророка ﷺ",
+  "notificationHadithReminderTitle": "📖 __ХАДИС__ на этот момент",
+  "notificationHadithReminderTestBody": "Тестовое напоминание о хадисах",
+  "notificationHadithReminderTestTitle": "📖 __ХАДИТ__ напоминание",
+  "notificationWeeklySummaryTitle": "Ваша еженедельная сводка готова",
+  "notificationWeeklySummaryBody": "На этой неделе вы совершили {prayersCompleted}/{maxPossible} молитв. Ваш самый сильный день был {strongestDay}.",
+  "@notificationWeeklySummaryBody": {
+    "placeholders": {
+      "prayersCompleted": {
+        "type": "int"
+      },
+      "maxPossible": {
+        "type": "int"
+      },
+      "strongestDay": {}
+    }
+  },
+  "quranDailyVerseFallbackTranslation": "__АЛЛАХ__: нет божества, кроме Него, Вечно-Живого, Вседержителя. Ни сонливость, ни сон не одолевают Его.",
+  "quranDailyVerseFallbackTransliteration": "__АЛЛАХ__у ля иляха илля хуваль хайюль каюм...",
+  "quranDailyVerseFallbackReference": "Аль-Бакара [2:255]",
+  "quranTitle": "__КОРАН__",
+  "quranSubtitle": "114 сур · непрерывное чтение",
+  "quranHafizLabel": "Хафиз",
+  "quranUtilityAyatAlKursi": "Аят аль-Курси",
+  "quranUtilityAllahNames": "99 имен",
+  "quranUtilityDownloaded": "Скачано",
+  "quranProtectionTitle": "ЕЖЕДНЕВНАЯ ЗАЩИТА",
+  "quranProtectionSubtitle": "Быстрый доступ к Аяту аль-Курси и защитным сурам. Откройте их, чтобы прочитать или послушать, а затем отметьте три повторения.",
+  "quranProtectionAyatAlKursiHelper": "Аль-Бакара 2:255",
+  "quranProtectionSurahHelper": "Сура {number}",
+  "@quranProtectionSurahHelper": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "quranProtectionIkhlasTitle": "Аль-Ихлас",
+  "quranProtectionFalaqTitle": "Аль-Фалак",
+  "quranProtectionNasTitle": "Ан-Нас",
+  "quranProtectionRepeatCount": "{helper} · {count}/3 повторения",
+  "@quranProtectionRepeatCount": {
+    "placeholders": {
+      "helper": {},
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quranProtectionCompleteTooltip": "Полный",
+  "quranProtectionIncrementTooltip": "+1 повторение",
+  "quranReadingHintTitle": "НЕПРЕРЫВНОЕ ЧТЕНИЕ",
+  "quranReadingHintBody": "Откройте любую суру, и мы сохраним ваш последний аят, чтобы вы могли вернуться к нему позже.",
+  "quranReadingHintSecondary": "Вы также можете сохранить закладки, нажав на значок закладки во время чтения.",
+  "quranContinueReadingTitle": "ПРОДОЛЖИТЬ ЧТЕНИЕ",
+  "quranBookmarksTitle": "ЗАКЛАДКИ",
+  "quranRevelationMecca": "Мекка",
+  "quranRevelationMedina": "Медина",
+  "quranAyahCount": "{count, plural, one{{count} аят} few{{count} аята} many{{count} аятов} other{{count} аята}}",
+  "@quranAyahCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quranLastReadingAyah": "Последнее чтение: ая {ayah}",
+  "@quranLastReadingAyah": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranBookmarkCount": "{count, plural, one{{count} сохранённая закладка} few{{count} сохранённые закладки} many{{count} сохранённых закладок} other{{count} сохранённые закладки}}",
+  "@quranBookmarkCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quranDownloadedFavoriteOffline": "Аудио загружено · избранное офлайн",
+  "quranDownloadedAudio": "Аудио загружено",
+  "quranReadingPointSaved": "Точка чтения сохранена в аяте {ayah}.",
+  "@quranReadingPointSaved": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranBookmarkSaved": "Закладка сохранена на сайте ayah {ayah}.",
+  "@quranBookmarkSaved": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranBookmarkRemoved": "Закладка удалена из аята {ayah}",
+  "@quranBookmarkRemoved": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranShareAyahTitle": "Поделитесь аятом {ayah}",
+  "@quranShareAyahTitle": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranShareTextSubtitle": "Включает арабский текст, перевод и ссылки.",
+  "quranShareImageSubtitle": "Создайте образ с помощью аята.",
+  "quranShareVideoSubtitle": "Создайте видео с карточкой и декламацией.",
+  "quranAyahImageError": "Нам не удалось создать изображение для этого аята.",
+  "quranAyahVideoNoAudio": "В этом аяте нет звука для создания видео.",
+  "quranAyahVideoGenerating": "Мы создаём видео аята...",
+  "quranAyahVideoShareText": "Ая {ayah} из {surah}",
+  "@quranAyahVideoShareText": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      },
+      "surah": {}
+    }
+  },
+  "quranAyahVideoError": "Нам не удалось создать видео для этого аята.",
+  "quranDownloadCheckError": "Нам не удалось проверить загрузку на этом устройстве.",
+  "quranDownloadSuccess": "Аудио скачано. Теперь вы можете слушать эту суру в автономном режиме.",
+  "quranDownloadDetailedError": "Нам не удалось завершить загрузку. Проверьте подключение и повторите попытку.",
+  "quranDownloadShortError": "Не удалось завершить загрузку аудио.",
+  "quranDownloadedAudioPlaySubtitle": "Слушайте суру с сохраненным звуком.",
+  "quranDownloadedAudioRemoveSubtitle": "Освободите место и снова послушайте онлайн.",
+  "quranDownloadedAudioRemoved": "Эта загрузка суры была удалена.",
+  "quranDownloadedFavoriteAdded": "Сура сохранена среди загруженных вами избранных.",
+  "quranDownloadedFavoriteRemoved": "Сура удалена из загруженного избранного.",
+  "quranAyahAudioUnavailable": "Звук для этой аяты недоступен.",
+  "quranAyahAudioDownloaded": "Аудио уже загружено на это устройство.",
+  "quranAyahAudioAvailable": "Вы можете послушать этот аят.",
+  "quranAyahAudioRequiresConnection": "Вы можете послушать этот аят, если у вас есть связь.",
+  "quranSurahRecitationUnavailable": "Полное чтение этой суры невозможно.",
+  "quranSurahAudioDownloading": "Мы загружаем аудио, чтобы вы могли слушать эту суру в автономном режиме. {downloaded}/{total} ая готов.",
+  "@quranSurahAudioDownloading": {
+    "placeholders": {
+      "downloaded": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "quranSurahAudioDownloaded": "Аудио уже загружено на это устройство. Вы можете слушать эту суру в автономном режиме.",
+  "quranSurahAudioMissingAyahs": "{count, plural, one{{count} аят без аудио будет пропущен.} few{{count} аята без аудио будут пропущены.} many{{count} аятов без аудио будут пропущены.} other{{count} аята без аудио будут пропущены.}}",
+  "@quranSurahAudioMissingAyahs": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quranSurahAudioPartialDownload": "На этом устройстве уже сохранено {downloaded}/{total} аятов.",
+  "@quranSurahAudioPartialDownload": {
+    "placeholders": {
+      "downloaded": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "quranSurahAudioDownloadAvailable": "Вы также можете скачать его для прослушивания в автономном режиме.",
+  "quranSurahAudioPlayOnline": "Вы можете слушать эту суру прямо в режиме непрерывного воспроизведения.",
+  "quranSurahAudioPlayWithConnection": "Вы можете прослушать эту суру полностью, если у вас есть соединение.",
+  "quranAyahPlaybackError": "Мы не смогли воспроизвести звук. Проверьте подключение и повторите попытку.",
+  "quranSurahPlaybackError": "Мы не смогли начать полное чтение.",
+  "quranLastReadingBadge": "Последнее чтение",
+  "quranPauseAudio": "Пауза звука",
+  "quranResumeAudio": "Возобновить аудио",
+  "quranPlayAudio": "Воспроизвести аудио",
+  "quranAudioUnavailable": "Аудио недоступно",
+  "quranRemoveBookmark": "Удалить закладку",
+  "quranSaveBookmark": "Сохранить закладку",
+  "quranAyahFooterHint": "{status} Нажмите на этот аят, чтобы сохранить здесь свою точку зрения. Нажмите и удерживайте, чтобы поделиться.",
+  "@quranAyahFooterHint": {
+    "placeholders": {
+      "status": {}
+    }
+  },
+  "quranDetailLoadError": "Мы не смогли загрузить эту суру. Проверьте подключение и повторите попытку.",
+  "quranTopBannerResume": "Возобновление с аята {ayah}.",
+  "@quranTopBannerResume": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranTopBannerOnline": "Контент загружен онлайн. Вы можете слушать каждую аудиозапись аята, пока у вас есть соединение.",
+  "quranTopBannerOffline": "Текст загружен офлайн. Аудио для некоторых аятов может по-прежнему требовать подключения.",
+  "quranTopBannerPlaceholder": "Частичный контент загружен офлайн. Аудио пока недоступно.",
+  "quranSurahAudioCardTitle": "СЛУШАЙТЕ СУРУ",
+  "quranAvailableAyahs": "{available}/{total} аяты",
+  "@quranAvailableAyahs": {
+    "placeholders": {
+      "available": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "quranPauseSurah": "Пауза сура",
+  "quranResumeSurah": "Возобновить суру",
+  "quranListenSurah": "Слушайте суру",
+  "quranStop": "Останавливаться",
+  "quranCheckingAudio": "Проверка звука",
+  "quranDownloadingProgress": "Загрузка {downloaded}/{total}",
+  "@quranDownloadingProgress": {
+    "placeholders": {
+      "downloaded": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "quranDownloaded": "Скачано",
+  "quranDownloadAudio": "Скачать аудио",
+  "quranDownloadedFavoriteLabel": "Скачал избранное",
+  "quranMarkFavorite": "Отметить как избранное",
+  "quranPlayingSurahAyah": "Воспроизведение суры · аята {ayah}",
+  "@quranPlayingSurahAyah": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranPausedSurahAyah": "Сура сделала паузу · ая {ayah}",
+  "@quranPausedSurahAyah": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranPlayingAyah": "Играю ая {ayah}",
+  "@quranPlayingAyah": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranPausedAyah": "Ая {ayah} приостановлено",
+  "@quranPausedAyah": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranActiveAudioSurahHint": "Сура автоматически продолжится следующим аятом.",
+  "quranActiveAudioAyahHint": "Вы можете приостановить, возобновить или остановить это чтение.",
+  "quranStopAudio": "Остановить звук",
+  "commonAuthenticity": "Подлинность",
+  "commonBooks": "Книги",
+  "commonCancel": "Отмена",
+  "commonCategory": "Категория",
+  "commonClose": "Закрывать",
+  "commonCollection": "Коллекция",
+  "commonCopy": "Копировать",
+  "commonDone": "Сделанный",
+  "commonDownload": "Скачать",
+  "commonFeatured": "Рекомендуемые",
+  "commonFilter": "Фильтр",
+  "commonGeneral": "Общий",
+  "commonHadiths": "__ХАДИТ__s",
+  "commonInformation": "Информация",
+  "commonNext": "Следующий",
+  "commonOther": "Другой",
+  "commonPause": "Пауза",
+  "commonPrayers": "молитвы",
+  "commonQuran": "__КОРАН__",
+  "commonRead": "Читать",
+  "commonReference": "Ссылка",
+  "commonResume": "Резюме",
+  "commonSave": "Сохранять",
+  "commonSaved": "Сохранено",
+  "commonStatistics": "Статистика",
+  "commonTotal": "Общий",
+  "achievementFirstPrayerTitle": "Первая молитва",
+  "achievementFirstPrayerDescription": "Вы отметили свою первую молитву в приложении.",
+  "achievementFullDayTitle": "Полный день",
+  "achievementFullDayDescription": "Вы совершили все пять молитв за один день.",
+  "achievementStreak3Title": "3-дневная серия",
+  "achievementStreak3Description": "Вы сохраняли последовательность три дня подряд.",
+  "achievementStreak7Title": "7-дневная серия",
+  "achievementStreak7Description": "Семь дней слежения подряд. Отличный ритм.",
+  "achievementStreak30Title": "30-дневная серия",
+  "achievementStreak30Description": "Тридцать дней подряд. Необычайная консистенция.",
+  "achievementTotal100Title": "100 молитв",
+  "achievementTotal100Description": "Вы записали 100 завершенных молитв.",
+  "achievementFirstRamadanTitle": "Первый __РАМАДАН__",
+  "achievementFirstRamadanDescription": "Вы завершили свой первый активный день __РАМАДАН__.",
+  "analyticsAchievementsTitle": "Достижения",
+  "analyticsAchievementsEmpty": "Достижения пока не разблокированы.",
+  "analyticsAchievementsLoadError": "Нам не удалось загрузить ваши достижения.",
+  "analyticsBestDayLabel": "Лучший день",
+  "analyticsBestStreakHint": "Ваша лучшая серия: {count} дней",
+  "analyticsBestStreakLabel": "Лучшая серия",
+  "analyticsByPrayerTitle": "По молитве",
+  "analyticsCollectionsLabel": "Коллекции",
+  "analyticsCompletedPrayersLabel": "Завершенные молитвы",
+  "analyticsCurrentStreakLabel": "Текущая серия",
+  "analyticsDaysValue": "{count} дней",
+  "analyticsEmptyBody": "Начните отмечать свои молитвы, и вы увидите здесь свою последовательность.",
+  "analyticsEmptyHint": "Завершите свою первую молитву, чтобы разблокировать эту панель.",
+  "analyticsEmptyTitle": "Статистики пока нет",
+  "analyticsFavoritesLabel": "Избранное",
+  "analyticsFullDaysLabel": "Полные дни",
+  "analyticsGradesLabel": "Оценки",
+  "analyticsHadithStatsLoadError": "Не удалось загрузить статистику хадисов.",
+  "analyticsLast30DaysTitle": "Последние 30 дней",
+  "analyticsLessLabel": "Меньше",
+  "analyticsMoreLabel": "Более",
+  "analyticsNoActiveStreak": "Нет активной полосы",
+  "analyticsRecordBadge": "Записывать",
+  "analyticsSavedFavoritesLabel": "Сохраненные избранные",
+  "analyticsShareError": "Мы не смогли поделиться вашим прогрессом.",
+  "analyticsShareImage": "Поделиться изображением",
+  "analyticsShareProgressTooltip": "Поделитесь прогрессом",
+  "analyticsShareText": "Поделиться текстом",
+  "analyticsStartStreakHint": "Начните новую серию сегодня.",
+  "analyticsStreakDays": "{count} дней подряд",
+  "analyticsThisWeekLabel": "На этой неделе",
+  "analyticsWeekInterpretationEmpty": "На этой неделе еще недостаточно активности.",
+  "analyticsWeekInterpretationEncouragement": "Продолжайте понемногу. Каждая молитва имеет значение.",
+  "analyticsWeekInterpretationGood": "У тебя все хорошо на этой неделе. Немного большей последовательности будет иметь значение.",
+  "analyticsWeekInterpretationStrong": "Очень сильная неделя. Вы держите отличный ритм.",
+  "analyticsWeeklySummaryTitle": "Еженедельный обзор",
+  "booksAboutBody": "Эта библиотека объединяет книги исламского дома для быстрого чтения внутри приложения.",
+  "booksAboutBulletCatalog": "Кураторский каталог, который легко изучить.",
+  "booksAboutBulletCategories": "Категории, чтобы быстрее найти нужное чтиво",
+  "booksAboutBulletVerified": "Содержимое признанной исламской библиотеки",
+  "booksAllCategories": "Все категории",
+  "booksCategoriesTab": "Категории",
+  "booksDescription": "Описание",
+  "booksEmptyCategories": "Нет доступных категорий.",
+  "booksEmptyFeatured": "Избранных книг пока нет.",
+  "booksEmptySearch": "Мы не смогли найти книги по этому запросу.",
+  "booksLibraryTitle": "Книги",
+  "booksLoadErrorTitle": "Не удалось загрузить библиотеку",
+  "booksMainCategoryAcademicLessons": "Академические уроки",
+  "booksMainCategoryArabicLanguage": "арабский язык",
+  "booksMainCategoryCallToIslam": "Призыв к Исламу",
+  "booksMainCategoryHistory": "История",
+  "booksMainCategoryIslamicBelief": "Исламская вера",
+  "booksMainCategoryIslamicCulture": "Исламская культура",
+  "booksMainCategoryIslamicJurisprudence": "Исламская юриспруденция",
+  "booksMainCategoryMajorSins": "Главные грехи",
+  "booksMainCategoryNobleQuran": "Благородный __КОРАН__",
+  "booksMainCategoryPresentingIslam": "Представляя Ислам",
+  "booksMainCategoryPropheticBiography": "Пророческая биография",
+  "booksMainCategoryProphetSunnah": "Сунна Пророка",
+  "booksMainCategorySermons": "Проповеди",
+  "booksMainCategoryVirtues": "Достоинства",
+  "booksPageCount": "{pages} страниц",
+  "booksPlaceholderDescription": "Книги скоро здесь появятся.",
+  "booksPlaceholderTitle": "Библиотека в разработке",
+  "booksSearchHint": "Поиск книги или автора",
+  "booksUnnamedCategory": "Безымянная категория",
+  "booksUntitled": "Без названия",
+  "booksVisitIslamHouse": "Посетите ИсламХаус",
+  "calendarCurrentMonth": "В ЭТОМ МЕСЯЦЕ",
+  "calendarEventAshura": "Ашура",
+  "calendarEventDayOfArafah": "День Арафа",
+  "calendarEventEidAdha": "Ид аль-Адха",
+  "calendarEventEidFitr": "Ид аль-Фитр",
+  "calendarEventIslamicNewYear": "Исламский Новый год",
+  "calendarEventRamadanStart": "Начало __РАМАДАНА__",
+  "calendarImportantDatesTitle": "Важные даты {year}",
+  "calendarSelectDate": "Выберите дату",
+  "calendarSelectedDateUppercase": "ВЫБРАННАЯ ДАТА",
+  "calendarTitle": "Исламский календарь",
+  "calendarTodayLabel": "Сегодня · {date}",
+  "dhikrChooseCustomValue": "Выберите пользовательское значение",
+  "dhikrDailyGoalCompletedMessage": "Вы выполнили цель ежедневного зикра.",
+  "dhikrDailyGoalHelper": "Выберите, сколько повторений вы хотите достичь сегодня.",
+  "dhikrDailyGoalShort": "Ежедневная цель",
+  "dhikrDailyGoalTitle": "Ежедневная цель",
+  "dhikrDailyGoalUpdated": "Ежедневная цель обновлена ​​до {value}.",
+  "dhikrFeedbackAlmostThere": "У тебя все очень хорошо. Вы близки к своей ежедневной цели.",
+  "dhikrFeedbackCompleted": "Ежедневная цель выполнена. Пусть __АЛЛАХ__ примет ваш зикр.",
+  "dhikrFeedbackCycleCompleted": "Цикл завершен. Вы можете продолжать идти спокойно.",
+  "dhikrFeedbackGoodPace": "Хороший темп. Сохраняйте эти повторения спокойно.",
+  "dhikrFeedbackStart": "Начните с нескольких плавных и устойчивых повторений.",
+  "dhikrFeedbackTakeYourTime": "Не торопись. Каждое повторение имеет значение.",
+  "dhikrGoalsSection": "ЦЕЛИ",
+  "dhikrHistoryEmptyBody": "Для этой точки зрения еще недостаточно истории.",
+  "dhikrHistorySavedBody": "Ваш недавний прогресс сохраняется автоматически.",
+  "dhikrLast7Days": "7 дней",
+  "dhikrMeaningAlhamdulillah": "Хвала __АЛЛАХ__",
+  "dhikrMeaningAllahuAkbar": "__АЛЛАХ__ Величайший",
+  "dhikrMeaningSubhanAllah": "Слава __АЛЛАХ__",
+  "dhikrRepetitionsFieldHint": "Пример: 100",
+  "dhikrRepetitionsFieldLabel": "Повторения",
+  "dhikrResetSession": "Сбросить сеанс",
+  "dhikrSessionCountOf": "из {count}",
+  "dhikrSessionCycleCompleted": "Вы завершили этот цикл зикра.",
+  "dhikrSessionGoalHelper": "Установите, сколько повторений вы хотите за цикл.",
+  "dhikrSessionGoalShort": "Цель сеанса",
+  "dhikrSessionGoalTitle": "Цель сеанса",
+  "dhikrSessionGoalUpdated": "Цель сеанса изменена на {value}.",
+  "dhikrSessionResetMessage": "Сеанс сброшен.",
+  "dhikrSubtitle": "Внимательное воспоминание о вашем дне",
+  "dhikrSummarySection": "КРАТКОЕ СОДЕРЖАНИЕ",
+  "dhikrTitle": "__ДХИКР__",
+  "dhikrTodayCycle": "Сегодня: {today} · цикл {current}/{total}",
+  "hadithDailyBadge": "ХАДИС ДНЯ",
+  "hadithDailyOpenLibrary": "Открытые хадисы",
+  "hadithDailyUnavailable": "Нам не удалось загрузить хадис дня.",
+  "hadithDetailArabicText": "арабский текст",
+  "hadithDetailCopied": "__ХАДИТ__ скопировано",
+  "hadithDetailCopyText": "Копировать текст",
+  "hadithDetailGrade": "Оценка: {grade}",
+  "hadithDetailHideArabic": "Скрыть арабский",
+  "hadithDetailHideTranslation": "Скрыть перевод",
+  "hadithDetailId": "Идентификатор: {id}",
+  "hadithDetailInfoBody": "Этот хадис может варьироваться в зависимости от сборника, уровня и доступного перевода.",
+  "hadithDetailNoCategory": "Нет категории",
+  "hadithDetailRemovedFromFavorites": "Хадис удалён из избранного",
+  "hadithDetailSavedToFavorites": "__ХАДИТ__ сохранен в избранном",
+  "hadithDetailShowArabic": "Показать арабский",
+  "hadithDetailShowTranslation": "Показать перевод",
+  "hadithDetailTitle": "__ХАДИТ__ подробнее",
+  "hadithDetailTranslation": "Перевод",
+  "hadithLibraryAllCollections": "Все коллекции",
+  "hadithLibraryAllGrades": "Все оценки",
+  "hadithLibraryAllCategories": "Все категории",
+  "hadithLibraryAllHadiths": "{count} хадисов",
+  "hadithLibraryEmptyBody": "На данный момент хадисов нет.",
+  "hadithLibraryEmptySearchBody": "Попробуйте другой поиск или удалите фильтры.",
+  "hadithLibraryEmptySearchTitle": "Нет результатов по запросу «{query}»",
+  "hadithLibraryEmptyTitle": "Нет доступных хадисов",
+  "hadithLibraryFiltersError": "Не удалось загрузить фильтры.",
+  "hadithLibraryFiltersLoading": "Загрузка фильтров…",
+  "hadithLibraryLoadError": "Нам не удалось загрузить хадисы.\n{error}",
+  "hadithLibraryResultsCount": "{count} результатов",
+  "hadithLibrarySearchHint": "Поиск хадисов или ссылок",
+  "hadithLibraryTitle": "__ХАДИТ__s",
+  "hadithOfflineAvailability": "{progress} доступен офлайн",
+  "hadithOfflineAvailable": "Доступный",
+  "hadithOfflineCollectionsTitle": "Включенные коллекции",
+  "hadithOfflineIncludedSubtitle": "Весь контент встроен в приложение",
+  "hadithOfflineIncludedTitle": "Оффлайн с самого начала",
+  "hadithOfflineInfoBody": "Показанные здесь хадисы уже доступны без дополнительной загрузки.",
+  "hadithOfflineTitle": "Офлайн хадисы",
+  "hafizActivePlans": "Активные планы",
+  "hafizAyahRange": "Ая {start}-{end}",
+  "hafizConfigureSession": "Настроить сеанс",
+  "hafizEmptyBody": "Вы еще не создали ни одного плана запоминания.",
+  "hafizEmptyHint": "Выберите суру и для начала определите небольшой диапазон.",
+  "hafizEmptyTitle": "Начать обзор",
+  "hafizEndAyah": "Окончание аята: {ayah}",
+  "hafizLoadError": "Мы не смогли загрузить эту суру.",
+  "hafizLogRepetition": "Повторение журнала",
+  "hafizPlanSaved": "План сохранен.",
+  "hafizRepetitionLogged": "Повторение зарегистрировано",
+  "hafizReviewedSurahs": "Пересмотренные суры",
+  "hafizSavePlan": "Сохранить план",
+  "hafizSelectedSegment": "Выбранный сегмент",
+  "hafizStartAyah": "Начало ая: {ayah}",
+  "hafizSubtitle": "Организуйте короткие и последовательные обзоры",
+  "hafizSurahNoPlan": "{count} ая · нет плана",
+  "hafizSurahProgress": "{start}-{end} · {percent}% выполнено",
+  "hafizTargetRepetitions": "Цель: {count}",
+  "homeCalendarStripTitle": "СВЯЩЕННЫЙ КАЛЕНДАРЬ",
+  "homeGoalCompleted": "сделанный",
+  "homeGoalInProgress": "в ходе выполнения",
+  "homeInsightAlmostCompleteTodayMessage": "Вы очень близки к закрытию сильного дня.",
+  "homeInsightAlmostCompleteTodayTitle": "Почти завершено сегодня",
+  "homeInsightBetterThanLastWeekMessage": "Вы совершили на {delta} больше молитв, чем на прошлой неделе.",
+  "homeInsightBetterThanLastWeekTitle": "Лучше, чем на прошлой неделе",
+  "homeInsightDhikrDoneMessage": "Сегодня вы сделали {count} повторений. Очень сильный финиш.",
+  "homeInsightDhikrDoneTitle": "Зикр завершён",
+  "homeInsightDhikrGoodPaceMessage": "Сегодня у вас {current}/{goal} повторений.",
+  "homeInsightDhikrGoodPaceTitle": "Хороший темп зикра",
+  "homeInsightGoodPaceTodayMessage": "Сегодня вы совершили {count} молитв.",
+  "homeInsightGoodPaceTodayTitle": "Хороший темп сегодня",
+  "homeInsightMostConsistentPrayerMessage": "{prayer} на данный момент — ваш самый стабильный момент.",
+  "homeInsightMostConsistentPrayerTitle": "Ваша самая последовательная молитва",
+  "homeInsightPrayerToStrengthenMessage": "{prayer} нужно немного больше внимания.",
+  "homeInsightPrayerToStrengthenTitle": "Молитва об укреплении",
+  "homeInsightRamadanConsistencyMessage": "Ваша сегодняшняя практика уже показывает хороший баланс.",
+  "homeInsightRamadanConsistencyTitle": "__РАМАДАН__ последовательность",
+  "homeInsightRamadanMomentumMessage": "Используйте эту часть дня, чтобы сохранить импульс.",
+  "homeInsightRamadanMomentumTitle": "__РАМАДАН__ импульс",
+  "homeInsightRamadanSmallStepsMessage": "В __РАМАДАНЕ__ большое значение имеют маленькие и уверенные шаги.",
+  "homeInsightStartTodayFirstMessage": "Ваш день еще открыт. Отметьте свою первую молитву и придайте импульс.",
+  "homeInsightStartTodayMoreMessage": "У вас еще есть время спокойно начать.",
+  "homeInsightStartTodayTitle": "Начни сегодня",
+  "homeInsightStillCanStartMessage": "Один маленький шаг сейчас может изменить тон вашего дня.",
+  "homeInsightStillCanStartTitle": "Вы все еще можете начать",
+  "homeInsightStreakInMotionMessage": "У вас {streak} дней подряд. Берегите эту последовательность.",
+  "homeInsightStreakInMotionTitle": "Полоса в движении",
+  "homeInsightTodayLabel": "СЕГОДНЯШНИЙ ИНФОРМАЦИЯ",
+  "homeLoadingScheduleBody": "Подготовка следующей молитвы",
+  "homeLoadingScheduleTitle": "Время загрузки",
+  "homeLocationCachedBody": "Мы подготавливаем ваше время, используя ваше последнее сохраненное местоположение.",
+  "homeLocationEnableDeviceLocation": "Включить местоположение устройства",
+  "homeLocationGpsDisabledBody": "Без GPS мы не можем рассчитать точное время молитвы или выровнять Киблу.",
+  "homeLocationPendingBody": "Главный экран остается видимым, даже если время молитвы еще не готово.",
+  "homeLocationPermissionBlocked": "Разрешение на определение местоположения заблокировано",
+  "homeLocationPermissionBlockedBody": "Вы можете включить местоположение для Qibla Time позже в настройках вашей системы.",
+  "homeLocationPermissionNeeded": "Разрешить местонахождению видеть время вашей молитвы",
+  "homeLocationPermissionNeededBody": "Приложению Qibla Time требуется ваше местоположение, чтобы показывать точное время для вашего города.",
+  "homeLocationPreparingTitle": "Подготовка времени для молитвы",
+  "homeNextPrayerStartsAt": "Начинается в {time}",
+  "homeNotificationPaused": "Общие молитвенные оповещения сейчас приостановлены.",
+  "homeNotificationPermissionPending": "Ваши напоминания о азане настроены, но разрешение системы все еще не получено.",
+  "homePrayerDescriptionCompleted": "Вы уже отметили эту молитву как завершенную.",
+  "homePrayerDescriptionNext": "Это следующая молитва в сегодняшнем ритме.",
+  "homePrayerDescriptionNow": "Эта молитва в настоящее время находится в стадии выполнения.",
+  "homePrayerDescriptionPendingToday": "Все еще ожидает рассмотрения в сегодняшнем потоке.",
+  "homePrayerDescriptionReviewDate": "Доступно для просмотра на эту дату.",
+  "homePrayerSectionSelectedDaySubtitle": "Проверьте и отметьте время для {date}.",
+  "homePrayerSectionSelectedDayTitle": "РАСПИСАНИЕ ДНЯ",
+  "homePrayerSectionTodaySubtitle": "Полный ритм ваших пяти ежедневных молитв",
+  "homePrayerSectionTodayTitle": "СЕГОДНЯШНИЕ МОЛИТВЫ",
+  "homePrayerStatusCompleted": "Завершенный",
+  "homePrayerStatusNext": "Следующий",
+  "homePrayerStatusNow": "Сейчас",
+  "homePrayerStatusUpcoming": "Предстоящие",
+  "homeQuickActionsTitle": "СВЯЩЕННЫЕ ПУТИ",
+  "homeRamadanClosingSoon": "скоро закроется",
+  "homeRamadanContinueReading": "Продолжить чтение",
+  "homeRamadanCountdownIftar": "{duration} до ифтара",
+  "homeRamadanCountdownImsak": "{duration} до имсака",
+  "homeRamadanCountdownTomorrowImsak": "{duration} до завтрашнего имсака",
+  "homeRamadanDhikrCompletedBody": "Сегодня {current}/{goal} повторений. Ежедневная цель выполнена.",
+  "homeRamadanDhikrInProgressBody": "Сегодня {current}/{goal} повторений. Вы уже начали.",
+  "homeRamadanDhikrPreparingBody": "Подготовка прогресса вашего ежедневного зикра.",
+  "homeRamadanDhikrStartBody": "Ваша цель сегодня — {goal}. Даже несколько повторений уже засчитываются.",
+  "homeRamadanFastingCompleted": "Вы можете приготовить ифтар из {time}.",
+  "homeRamadanFastingInProgress": "Разгрузочный день продолжается до {time}.",
+  "homeRamadanFastingLabel": "Пост",
+  "homeRamadanFastingTitle": "Пост",
+  "homeRamadanGoalsCompleteMessage": "Очень насыщенный день __РАМАДАНА__. Сохраняйте этот ритм спокойно.",
+  "homeRamadanGoalsProgressMessage": "У тебя сегодня все хорошо. Еще один маленький шаг может окончательно завершить ваш день.",
+  "homeRamadanGoalsReady": "{completed}/{total} готово",
+  "homeRamadanGoalsStartMessage": "Начните с чего-то малого: одной молитвы, нескольких аятов или нескольких минут зикра.",
+  "homeRamadanGoalsTitle": "ЦЕЛИ РАМАДАН",
+  "homeRamadanModeTitle": "РЕЖИМ РАМАДАН",
+  "homeRamadanNextFocus": "следующий фокус",
+  "homeRamadanNightLabel": "Ночь",
+  "homeRamadanOpenQuran": "Открыть __КОРАН__",
+  "homeRamadanOpenTasbih": "Открыть тасбих",
+  "homeRamadanPrayerGoal": "{count}/5 завершено сегодня",
+  "homeRamadanQuranRecentProgress": "Возобновите {surah}, ага {ayah}. У вас есть недавний прогресс.",
+  "homeRamadanQuranReturnBody": "Ваше последнее замечание было {surah}, ага {ayah}. Сегодня стоит вернуться к этому.",
+  "homeRamadanQuranSavedToday": "Чтение сохранено сегодня в {surah}, ага {ayah}.",
+  "homeRamadanQuranStartBody": "Прочтите сегодня небольшой отрывок, и вы легко сможете продолжить его позже.",
+  "homeRamadanStartAction": "Начинать",
+  "homeRamadanSuhoorLabel": "Сухур",
+  "homeRamadanUntilIftar": "до ифтара",
+  "homeSelectedDateCustomBody": "Полное время молитв для выбранного дня смотрите ниже.",
+  "homeSelectedDateTodayBody": "Полное время молитв на сегодня смотрите ниже.",
+  "homeWeeklyBestDayHelper": "{count}/5 в твой лучший день",
+  "qiblaCompassInitError": "Мы не смогли запустить компас.",
+  "qiblaCompassReadError": "Мы не смогли прочитать показания датчика компаса.",
+  "qiblaDirectionEast": "Восток",
+  "qiblaDirectionLoadError": "Не удалось загрузить направление на Каабу.",
+  "qiblaDirectionNorth": "Север",
+  "qiblaDirectionNorthEast": "Северо-восток",
+  "qiblaDirectionNorthWest": "Северо-Запад",
+  "qiblaDirectionSouth": "Юг",
+  "qiblaDirectionSouthEast": "Юго-восток",
+  "qiblaDirectionSouthWest": "Юго-запад",
+  "qiblaDirectionSummary": "Направление к Каабе: {direction}.",
+  "qiblaDirectionWest": "Запад",
+  "qiblaDistanceLabel": "Расстояние",
+  "qiblaEnableLocationMessage": "Включите местоположение, чтобы рассчитать направление к Каабе.",
+  "qiblaGpsDisabledMessage": "Включите GPS вашего устройства, чтобы определить надежное направление.",
+  "qiblaGuidanceBody": "Держите устройство ровно и осторожно поворачивайте его, пока индикатор не совместится.",
+  "qiblaHowToUseAvoidMagnetsBody": "Держите его подальше от магнитов, металлических корпусов или устройств, которые могут помешать работе датчика.",
+  "qiblaHowToUseAvoidMagnetsTitle": "Избегайте помех",
+  "qiblaHowToUseCalibrateBody": "Если компас вышел из строя, переместите телефон в форме восьмерки, чтобы откалибровать его заново.",
+  "qiblaHowToUseCalibrateTitle": "Калибровка при необходимости",
+  "qiblaHowToUseKeepFlatBody": "Держите устройство ровно, чтобы повысить точность компаса.",
+  "qiblaHowToUseKeepFlatTitle": "Держите устройство ровно",
+  "qiblaHowToUseTitle": "Как пользоваться компасом",
+  "qiblaLoading": "Вычисление направления…",
+  "qiblaPermissionBlockedMessage": "Разрешение на определение местоположения заблокировано. Включите его в настройках системы.",
+  "qiblaPermissionNeededMessage": "Нам нужно разрешение на определение местоположения, чтобы провести вас к Каабе.",
+  "qiblaPrecisionLabel": "Точность",
+  "qiblaSubtitle": "Направление к Каабе",
+  "qiblaTitle": "__КИБЛА__",
+  "adhanSelectorHeaderBody": "Прослушайте короткий предварительный просмотр, прежде чем выбирать азан, который будет использоваться для напоминаний.",
+  "adhanSelectorHeaderTitle": "Выберите свой призыв к молитве",
+  "adhanSelectorListenPreview": "Прослушать превью",
+  "adhanSelectorPausePreview": "Приостановить предварительный просмотр",
+  "adhanSelectorPreviewError": "Не удалось воспроизвести предварительный просмотр азана.",
+  "adhanSelectorPreviewIdle": "Нажмите, чтобы прослушать предварительный просмотр",
+  "adhanSelectorPreviewPaused": "Предварительный просмотр приостановлен",
+  "adhanSelectorPreviewPlaying": "Воспроизведение предварительного просмотра",
+  "adhanSelectorResumePreview": "Возобновить предварительный просмотр",
+  "adhanSelectorSelected": "Вы выбрали {name}",
+  "adhanSelectorTitle": "__АДХАН__",
+  "navHome": "Дом",
+  "navQibla": "__КИБЛА__",
+  "navTasbih": "Тасбих",
+  "navDua": "Дуа",
+  "navQuran": "__КОРАН__",
+  "travelModeBannerLocationDetected": "Обнаружено новое местоположение: {label} – {distanceKm} км.",
+  "@travelModeBannerLocationDetected": {
+    "placeholders": {
+      "label": {},
+      "distanceKm": {
+        "type": "int"
+      }
+    }
+  },
+  "travelModeNotificationTitle": "Qibla Time - Новая локация",
+  "travelModeNotificationBody": "{label} – обновлено время молитвы.",
+  "@travelModeNotificationBody": {
+    "placeholders": {
+      "label": {}
+    }
+  },
+  "analyticsAchievementUnlocked": "Разблокировано",
+  "navigationMiniPlayerAyah": "{surah} · Ая {ayah}",
+  "@navigationMiniPlayerAyah": {
+    "placeholders": {
+      "surah": {},
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "onboardingGatePreparing": "Подготовка Qibla Time",
+  "supportScreenTitle": "Поддержка Qibla Time",
+  "supportScreenThankYou": "Спасибо, что вы здесь",
+  "supportScreenBody": "Ваша поддержка помогает нам заботиться о Qibla Time, поддерживать работу приложения и продолжать создавать полезные инструменты для вашей повседневной жизни.",
+  "supportScreenRateTitle": "Оцените приложение",
+  "supportScreenRateBody": "Хороший рейтинг поможет большему количеству людей узнать Qibla Time.",
+  "supportScreenShareTitle": "Поделиться Qibla Time",
+  "supportScreenShareBody": "Рекомендация приложения семье и друзьям также является формой садака.",
+  "supportScreenSadaqahTitle": "Поддержка намерением",
+  "supportScreenSadaqahBody": "Если Qibla Time вам поможет, вы можете поддержать проект небольшим искренним вкладом.",
+  "supportScreenQuote": "Тот, кто помогает другим достичь чего-то хорошего, также разделяет это вознаграждение, если пожелает __АЛЛАХ__.",
+  "allahNamesTitle": "99 имен __АЛЛАХ__",
+  "allahNamesIntro": "Изучите тщательно подобранную подборку имен __АЛЛАХ__ с транслитерацией и значением, чтобы вы могли спокойно их запомнить.",
+  "allahNamesLoadError": "Не удалось загрузить имена __АЛЛАХ__.",
+  "allahNamesUseInTasbih": "Использование в тасбихе",
+  "downloadedSurahsTitle": "Скачанные суры",
+  "downloadedSurahsEmpty": "Вы еще не загрузили ни одной суры.",
+  "downloadedSurahsFavorite": "Любимый",
+  "downloadedSurahsMarkFavorite": "Отметить как избранное",
+  "downloadedSurahsRemoveDownload": "Удалить загрузку",
+  "downloadedSurahsLoadError": "Нам не удалось загрузить загруженные вами суры.",
+  "focusModeDndActive": "РАКАХА АКТИВНО · НЕ БЕСПОКОИТЬ",
+  "focusModeOpenDndSettings": "Включите режим «Не беспокоить» в настройках",
+  "focusModeTitle": "РАКАХА",
+  "focusModeSujudCount": "+ суджуд",
+  "focusModeDndHint": "БЕЗ ПЕРЕРЫВОВ, ЧУВСТВУЕТ ЛУЧШЕ, ЕСЛИ НЕ БЕСПОКОИТЬ",
+  "focusModeReleaseToCancel": "Отпустите, чтобы отменить",
+  "focusModeHoldToExit": "Удерживайте, чтобы выйти",
+  "settingsMadhabAsr": "__МАДХАБ__ (АСР)",
+  "settingsManualAdjustment": "Ручная регулировка",
+  "settingsOpenSourceLicenses": "Лицензии с открытым исходным кодом",
+  "settingsProfileUser": "Пользователь",
+  "settingsProfileStreak": "полоса",
+  "settingsProfilePrayers": "молитвы",
+  "settingsProfileTasbih": "тасбих",
+  "commonShafii": "Шафииты",
+  "commonRestore": "Восстановить",
+  "settingsRestoreBackupPasteHint": "Вставьте сюда экспортированный JSON.",
+  "dailyBookBadge": "КНИГА ДНЯ",
+  "dailyBookUnavailable": "Библиотека сейчас недоступна.",
+  "dailyBookOpenLibrary": "Открытые книги",
+  "hadithOfflineIncludedInApp": "Включено в приложение",
+  "hadithOfflineAgoDays": "{count} дней назад",
+  "@hadithOfflineAgoDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hadithOfflineAgoHours": "{count} часов назад",
+  "@hadithOfflineAgoHours": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hadithOfflineAgoMinutes": "{count} минут назад",
+  "@hadithOfflineAgoMinutes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hadithOfflineNow": "Прямо сейчас",
+  "analyticsShareWeekTitle": "Еженедельный обзор",
+  "analyticsShareCurrentStreak": "Текущая серия: {count}",
+  "@analyticsShareCurrentStreak": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "analyticsShareThisWeek": "На этой неделе: {completed}/{maxPossible} молитв.",
+  "@analyticsShareThisWeek": {
+    "placeholders": {
+      "completed": {
+        "type": "int"
+      },
+      "maxPossible": {
+        "type": "int"
+      }
+    }
+  },
+  "analyticsShareBestDay": "Лучший день: {day}",
+  "@analyticsShareBestDay": {
+    "placeholders": {
+      "day": {}
+    }
+  },
+  "analyticsShareWeekHeading": "ЕЖЕНЕДЕЛЬНЫЙ ОБЗОР",
+  "analyticsShareStreakDaySingular": "дневная полоса",
+  "analyticsShareStreakDayPlural": "полоса дней",
+  "analyticsShareWeeklyPrayersLabel": "Молитвы на этой неделе",
+  "analyticsShareBestDayLabel": "Лучший день · {count}/5",
+  "@analyticsShareBestDayLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "analyticsShareFullDaysLabel": "Полные дни",
+  "analyticsShareFooter": "Ваш прогресс за Qibla Time",
+  "analyticsShareImageError": "Нам не удалось создать изображение прогресса.",
+  "quranDownloadAyahAudioError": "Не удалось скачать аудиозапись ая {ayah}.",
+  "@quranDownloadAyahAudioError": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "recentLocationUnknown": "Неизвестное местоположение",
+  "cloudSyncRestoreInvalid": "Неверная резервная копия",
+  "cloudSyncRestoreFailed": "Нам не удалось восстановить резервную копию",
+  "bookLinkUnavailable": "Эта ссылка недоступна.",
+  "bookLinkOpenError": "Мы не смогли открыть ссылку.",
+  "ramadanStatusHeaderDay": "__РАМАДАН__ день {day}",
+  "@ramadanStatusHeaderDay": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      }
+    }
+  },
+  "ramadanStatusHeaderManual": "Ручной режим __РАМАДАН__",
+  "ramadanStatusBlessingDetected": "Пусть __АЛЛАХ__ примет сегодня ваш пост и ваши дела.",
+  "ramadanStatusBlessingManual": "Специальное оформление Рамадана включено вручную для тестирования.",
+  "ramadanStatusSuggestionDhikr": "Не забудьте увеличить свой зикр сегодня.",
+  "ramadanStatusSuggestionQuran": "Постарайтесь сегодня прочитать ещё немного Корана.",
+  "ramadanStatusSuggestionDua": "Используйте этот день, чтобы спокойно совершить дуа.",
+  "ramadanStatusSuggestionSadaqah": "Даже небольшая садака имеет значение во время __РАМАДАНА__.",
+  "adhanSelectorOptionDescription": "Призыв к молитве {number}",
+  "@adhanSelectorOptionDescription": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "prayerNotificationImsakTitle": "Имсак идет",
+  "prayerNotificationImsakBody": "До имсака осталось 15 минут. Если у вас все еще есть сухур, сейчас самое время подвести итоги.",
+  "prayerNotificationIftarTitle": "Ифтар приближается",
+  "prayerNotificationIftarBody": "До ифтара осталось 15 минут. Пусть __АЛЛАХ__ примет ваш сегодняшний пост.",
+  "prayerNotificationJumuahTitle": "Джума сегодня",
+  "prayerNotificationJumuahBody": "Подготовьтесь к Джума до __ЗУХР__ и выделите спокойный момент, чтобы отправиться в мечеть.",
+  "settingsLanguageOptionIndonesian": "Индонезийский",
+  "settingsLanguageOptionRussian": "Русский"
+}

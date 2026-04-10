@@ -129,6 +129,23 @@
           "Allah"
         ],
         "isFeatured": true
+      },
+      "ru": {
+        "title": "В начале дня",
+        "translation": "Мы проснулись, и вся власть принадлежит Аллаху.",
+        "category": "Утро",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 3186, Муслим 2723",
+        "count": 1,
+        "times": [
+          "утро"
+        ],
+        "tags": [
+          "восход",
+          "домен",
+          "Аллах"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -260,6 +277,23 @@
           "Kehidupan",
           "Kematian",
           "Kebangkitan"
+        ],
+        "isFeatured": true
+      },
+      "ru": {
+        "title": "Проснувшись ото сна",
+        "translation": "Хвала Аллаху, который дал нам жизнь после того, как заставил нас умереть, и к Нему – возвращение.",
+        "category": "Утро",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 6312",
+        "count": 1,
+        "times": [
+          "despertar"
+        ],
+        "tags": [
+          "жизнь",
+          "смерть",
+          "Воскресение"
         ],
         "isFeatured": true
       }
@@ -401,6 +435,24 @@
           "Kejahatan"
         ],
         "isFeatured": false
+      },
+      "ru": {
+        "title": "Утренняя защита",
+        "translation": "Я ищу защиты в совершенных словах Аллаха от зла того, что Он создал.",
+        "category": "Утро",
+        "source": "Hisnul Muslim",
+        "reference": "Мусульманин 2709",
+        "count": 3,
+        "times": [
+          "утро",
+          "вечер"
+        ],
+        "tags": [
+          "защита",
+          "защита",
+          "плохой"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -540,6 +592,24 @@
           "Kekuatan"
         ],
         "isFeatured": false
+      },
+      "ru": {
+        "title": "Когда утром выходишь из дома",
+        "translation": "Во имя Аллаха. Я доверяю Аллаху. Нет силы и могущества, кроме как у Аллаха.",
+        "category": "Утро",
+        "source": "Hisnul Muslim",
+        "reference": "Абу Дауд 5095",
+        "count": 1,
+        "times": [
+          "salir_casa",
+          "утро"
+        ],
+        "tags": [
+          "выходить",
+          "доверять",
+          "сила"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -671,6 +741,23 @@
           "Pakaian",
           "Pakaian",
           "Rezeki"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Когда одеваюсь",
+        "translation": "Хвала Аллаху, который одел меня в это и предоставил мне это без каких-либо усилий или собственных сил.",
+        "category": "Утро",
+        "source": "Hisnul Muslim",
+        "reference": "Абу Дауд 4023",
+        "count": 1,
+        "times": [
+          "vestirse"
+        ],
+        "tags": [
+          "одежда",
+          "одежда",
+          "обеспечение"
         ],
         "isFeatured": false
       }
@@ -806,6 +893,23 @@
           "Kenajisan"
         ],
         "isFeatured": false
+      },
+      "ru": {
+        "title": "При входе в туалет",
+        "translation": "О Аллах, я ищу Твоей защиты от злых существ мужского и женского пола.",
+        "category": "Утро",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 6322",
+        "count": 1,
+        "times": [
+          "baño"
+        ],
+        "tags": [
+          "ванная комната",
+          "защита",
+          "примесь"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -930,6 +1034,22 @@
         "tags": [
           "Pengampunan",
           "Kamar Mandi"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "При выходе из туалета",
+        "translation": "Я ищу Твоего прощения.",
+        "category": "Утро",
+        "source": "Hisnul Muslim",
+        "reference": "Абу Дауд 30",
+        "count": 1,
+        "times": [
+          "baño"
+        ],
+        "tags": [
+          "извини",
+          "ванная комната"
         ],
         "isFeatured": false
       }
@@ -1063,6 +1183,23 @@
           "Malam",
           "Kedaulatan",
           "Allah"
+        ],
+        "isFeatured": true
+      },
+      "ru": {
+        "title": "В начале ночи",
+        "translation": "Мы достигли вечера, и вся власть принадлежит Аллаху.",
+        "category": "Вечер",
+        "source": "Hisnul Muslim",
+        "reference": "Мусульманин 2723",
+        "count": 1,
+        "times": [
+          "вечер"
+        ],
+        "tags": [
+          "вечер",
+          "домен",
+          "Аллах"
         ],
         "isFeatured": true
       }
@@ -1204,6 +1341,24 @@
           "Singgasana"
         ],
         "isFeatured": true
+      },
+      "ru": {
+        "title": "Доверяйте Аллаху во время сна",
+        "translation": "Аллаха мне достаточно. Нет божества, кроме Него. В Него я верю, и Он — Господь Великого Трона.",
+        "category": "Вечер",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 3193, Ат-Тирмизи 3394",
+        "count": 1,
+        "times": [
+          "dormir",
+          "вечер"
+        ],
+        "tags": [
+          "доверять",
+          "мечтать",
+          "трон"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -1343,6 +1498,24 @@
           "Kebangkitan"
         ],
         "isFeatured": false
+      },
+      "ru": {
+        "title": "Когда ложишься спать",
+        "translation": "О Аллах, защити меня от Твоего наказания в тот день, когда Ты воскресишь Своих рабов.",
+        "category": "Вечер",
+        "source": "Hisnul Muslim",
+        "reference": "Абу Дауд 5045",
+        "count": 1,
+        "times": [
+          "dormir",
+          "вечер"
+        ],
+        "tags": [
+          "защита",
+          "наказание",
+          "Воскресение"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -1474,6 +1647,23 @@
           "Pengampunan",
           "Malam",
           "Qadr"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Дуа Лейлат аль-Кадр",
+        "translation": "О Аллах, Ты Прощающий и Щедрый. Ты любишь прощать, так прости меня.",
+        "category": "Вечер",
+        "source": "Hisnul Muslim",
+        "reference": "Ат-Тирмизи 3513",
+        "count": 1,
+        "times": [
+          "laylatul_qadr"
+        ],
+        "tags": [
+          "извини",
+          "вечер",
+          "ценить"
         ],
         "isFeatured": false
       }
@@ -1609,6 +1799,23 @@
           "Kematian"
         ],
         "isFeatured": true
+      },
+      "ru": {
+        "title": "Перед сном",
+        "translation": "Во имя Твое, о Аллах, я умираю и живу.",
+        "category": "Сон",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 6324",
+        "count": 1,
+        "times": [
+          "dormir"
+        ],
+        "tags": [
+          "имя",
+          "жизнь",
+          "смерть"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -1733,6 +1940,22 @@
         "tags": [
           "Persatuan",
           "Kedaulatan"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Когда переворачиваешься в постели",
+        "translation": "Нет божества, кроме Аллаха, Единого, Покорителя.",
+        "category": "Сон",
+        "source": "Hisnul Muslim",
+        "reference": "Ат-Тирмизи 3397",
+        "count": 1,
+        "times": [
+          "dormir"
+        ],
+        "tags": [
+          "уникальность",
+          "домен"
         ],
         "isFeatured": false
       }
@@ -1868,6 +2091,23 @@
           "Kejahatan"
         ],
         "isFeatured": false
+      },
+      "ru": {
+        "title": "Защита во время сна",
+        "translation": "Я ищу убежища в могуществе и могуществе Аллаха от зла, которое я чувствую.",
+        "category": "Сон",
+        "source": "Hisnul Muslim",
+        "reference": "Абу Дауд 3894",
+        "count": 1,
+        "times": [
+          "dormir"
+        ],
+        "tags": [
+          "защита",
+          "сила",
+          "плохой"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -1994,6 +2234,22 @@
           "mezquita"
         ],
         "isFeatured": false
+      },
+      "ru": {
+        "title": "Когда спишь в мечети",
+        "translation": "О Аллах, Господь всей власти.",
+        "category": "Сон",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 6321",
+        "count": 1,
+        "times": [
+          "dormir"
+        ],
+        "tags": [
+          "домен",
+          "мечеть"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -2118,6 +2374,22 @@
         "tags": [
           "Kehidupan",
           "Kematian"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Дуа перед пробуждением",
+        "translation": "Хвала Аллаху, который дал нам жизнь после того, как заставил нас умереть.",
+        "category": "Сон",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 6312",
+        "count": 1,
+        "times": [
+          "despertar"
+        ],
+        "tags": [
+          "жизнь",
+          "смерть"
         ],
         "isFeatured": false
       }
@@ -2253,6 +2525,23 @@
           "Terkeer"
         ],
         "isFeatured": true
+      },
+      "ru": {
+        "title": "При посадке в транспортное средство",
+        "translation": "Слава Тому, Кто подчинил нам это, и мы никогда не смогли бы добиться этого своими усилиями. И к нашему Господу мы вернемся.",
+        "category": "Путешествие",
+        "source": "Hisnul Muslim",
+        "reference": "Аз-Зухруф 43:13-14",
+        "count": 1,
+        "times": [
+          "viaje"
+        ],
+        "tags": [
+          "транспортное средство",
+          "услуга",
+          "возвращаться"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -2386,6 +2675,23 @@
           "Terugkeer"
         ],
         "isFeatured": false
+      },
+      "ru": {
+        "title": "Отправляясь в путешествие",
+        "translation": "О Аллах, я ищу Твоей защиты от тягот путешествия, печали возвращения и зла места назначения.",
+        "category": "Путешествие",
+        "source": "Hisnul Muslim",
+        "reference": "Абу Дауд 2597",
+        "count": 1,
+        "times": [
+          "viaje"
+        ],
+        "tags": [
+          "трудность",
+          "грусть",
+          "путешествие"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -2510,6 +2816,22 @@
         "tags": [
           "Rasa Syukur",
           "ciudad"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "При въезде в город",
+        "translation": "О Аллах, благослови нас в этом.",
+        "category": "Путешествие",
+        "source": "Hisnul Muslim",
+        "reference": "Абу Дауд 3930",
+        "count": 1,
+        "times": [
+          "viaje"
+        ],
+        "tags": [
+          "благодарность",
+          "Сьюдад"
         ],
         "isFeatured": false
       }
@@ -2640,6 +2962,22 @@
           "Perjalanan"
         ],
         "isFeatured": false
+      },
+      "ru": {
+        "title": "При посадке в самолет",
+        "translation": "Слава Тому, Кто подчинил нам это, хотя мы никогда не смогли бы добиться этого своими усилиями.",
+        "category": "Путешествие",
+        "source": "Hisnul Muslim",
+        "reference": "Аз-Зухруф 43:13",
+        "count": 1,
+        "times": [
+          "viaje"
+        ],
+        "tags": [
+          "самолет",
+          "услуга"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -2766,6 +3104,22 @@
           "Perjalanan"
         ],
         "isFeatured": false
+      },
+      "ru": {
+        "title": "Два путешественника",
+        "translation": "О Аллах, даруй нам благополучный отъезд и прибытие, а также хорошее место назначения.",
+        "category": "Путешествие",
+        "source": "Hisnul Muslim",
+        "reference": "Ибн Ас-Суннит 269",
+        "count": 1,
+        "times": [
+          "viaje"
+        ],
+        "tags": [
+          "безопасность",
+          "путешествие"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -2890,6 +3244,22 @@
         "tags": [
           "Naam",
           "Makanan"
+        ],
+        "isFeatured": true
+      },
+      "ru": {
+        "title": "Перед едой",
+        "translation": "Во имя Аллаха.",
+        "category": "Еда",
+        "source": "Hisnul Muslim",
+        "reference": "Ат-Тирмизи 1858 г.",
+        "count": 1,
+        "times": [
+          "antes_comer"
+        ],
+        "tags": [
+          "имя",
+          "еда"
         ],
         "isFeatured": true
       }
@@ -3025,6 +3395,23 @@
           "Rezeki"
         ],
         "isFeatured": false
+      },
+      "ru": {
+        "title": "После еды",
+        "translation": "Хвала Аллаху, который накормил меня этим и предоставил мне это без каких-либо усилий или собственных сил.",
+        "category": "Еда",
+        "source": "Hisnul Muslim",
+        "reference": "Абу Дауд 4023",
+        "count": 1,
+        "times": [
+          "después_comer"
+        ],
+        "tags": [
+          "еда",
+          "обеспечение",
+          "благодарность"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -3149,6 +3536,22 @@
         "tags": [
           "agua",
           "Rasa Syukur"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Когда пьешь воду",
+        "translation": "Хвала Аллаху.",
+        "category": "Еда",
+        "source": "Hisnul Muslim",
+        "reference": "Ат-Тирмизи 3456",
+        "count": 1,
+        "times": [
+          "beber"
+        ],
+        "tags": [
+          "вода",
+          "благодарность"
         ],
         "isFeatured": false
       }
@@ -3284,6 +3687,23 @@
           "Kepercayaan"
         ],
         "isFeatured": true
+      },
+      "ru": {
+        "title": "При нарушении поста",
+        "translation": "О Аллах, ради Тебя я постился, в Тебя я уверовал, на Тебя я уповал и с Твоим обеспечением я прервал свой пост.",
+        "category": "Еда",
+        "source": "Hisnul Muslim",
+        "reference": "Абу Дауд 2045",
+        "count": 1,
+        "times": [
+          "romper_ayuno"
+        ],
+        "tags": [
+          "быстрый",
+          "Рамадан",
+          "ифтар"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -3408,6 +3828,22 @@
         "tags": [
           "eid",
           "Makanan"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Перед едой в Ид",
+        "translation": "О Аллах, накорми тех, кто простил, и одень тех, кто простил.",
+        "category": "Еда",
+        "source": "Hisnul Muslim",
+        "reference": "Ат-Тирмизи 1020",
+        "count": 1,
+        "times": [
+          "eid"
+        ],
+        "tags": [
+          "Ид",
+          "еда"
         ],
         "isFeatured": false
       }
@@ -3543,6 +3979,23 @@
           "Mensheid"
         ],
         "isFeatured": true
+      },
+      "ru": {
+        "title": "В поисках исцеления",
+        "translation": "О Аллах, Господь человечества, устрани вред. Исцеляй, ибо Ты Целитель. Нет исцеления, кроме Твоего исцеления.",
+        "category": "Болезнь",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 5742",
+        "count": 1,
+        "times": [
+          "enfermo"
+        ],
+        "tags": [
+          "выздоровление",
+          "здоровье",
+          "болезнь"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -3676,6 +4129,23 @@
           "Goddelijke wil"
         ],
         "isFeatured": false
+      },
+      "ru": {
+        "title": "При посещении больного человека",
+        "translation": "Никакого вреда, это будет очищение, если пожелает Аллах.",
+        "category": "Болезнь",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 5662",
+        "count": 1,
+        "times": [
+          "visitar_enfermo"
+        ],
+        "tags": [
+          "посещать",
+          "больной",
+          "очищение"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -3802,6 +4272,22 @@
           "Penyembuhan",
           "Kesehatan",
           "Bezoek"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Молитва больных",
+        "translation": "Господи, исцели его и даруй ему здоровье.",
+        "category": "Болезнь",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 5641",
+        "count": 1,
+        "times": [
+          "enfermo"
+        ],
+        "tags": [
+          "выздоровление",
+          "здоровье"
         ],
         "isFeatured": false
       }
@@ -3937,6 +4423,23 @@
           "Kejahatan"
         ],
         "isFeatured": false
+      },
+      "ru": {
+        "title": "Когда плохо себя чувствуешь",
+        "translation": "Во имя Аллаха. Я ищу убежища в могуществе и могуществе Аллаха от зла, которое я чувствую.",
+        "category": "Болезнь",
+        "source": "Hisnul Muslim",
+        "reference": "Абу Дауд 3894",
+        "count": 1,
+        "times": [
+          "enfermo"
+        ],
+        "tags": [
+          "защита",
+          "сила",
+          "плохой"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -4068,6 +4571,23 @@
           "Perlindungan",
           "Kejahatan",
           "Penyembuhan"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Дуа от головной боли",
+        "translation": "Во имя Аллаха ищу для вас защиты от всего, что причиняет вам вред, и от зла каждого завистника.",
+        "category": "Болезнь",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 5740",
+        "count": 1,
+        "times": [
+          "enfermo"
+        ],
+        "tags": [
+          "уход",
+          "завидовать",
+          "защита"
         ],
         "isFeatured": false
       }
@@ -4210,6 +4730,24 @@
           "Kejahatan"
         ],
         "isFeatured": true
+      },
+      "ru": {
+        "title": "Общая защита",
+        "translation": "Я ищу защиты в совершенных словах Аллаха от зла того, что Он создал.",
+        "category": "Защита",
+        "source": "Hisnul Muslim",
+        "reference": "Мусульманин 2709",
+        "count": 3,
+        "times": [
+          "утро",
+          "вечер"
+        ],
+        "tags": [
+          "защита",
+          "защита",
+          "плохой"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -4330,6 +4868,21 @@
           "Anak-anak",
           "Perlindungan",
           "maldad"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Защита детей",
+        "translation": "Я помещаю вас под защиту совершенных слов Аллаха от всякого шайтана, каждого вредного существа и каждого вредного взгляда.",
+        "category": "Защита",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 3371",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "дети",
+          "защита",
+          "зло"
         ],
         "isFeatured": false
       }
@@ -4472,6 +5025,24 @@
           "Macht"
         ],
         "isFeatured": false
+      },
+      "ru": {
+        "title": "Защита от зла",
+        "translation": "Я ищу убежища в Его благородных качествах и силе от зла, нисходящего с неба.",
+        "category": "Защита",
+        "source": "Hisnul Muslim",
+        "reference": "Ат-Тирмизи 3428",
+        "count": 1,
+        "times": [
+          "утро",
+          "вечер"
+        ],
+        "tags": [
+          "защита",
+          "сьело",
+          "плохой"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -4607,6 +5178,23 @@
           "Schepping"
         ],
         "isFeatured": false
+      },
+      "ru": {
+        "title": "Против зависти",
+        "translation": "Во имя Аллаха я ищу у Тебя защиты от зла того, что Он создал.",
+        "category": "Защита",
+        "source": "Hisnul Muslim",
+        "reference": "Мусульманин 2714",
+        "count": 1,
+        "times": [
+          "утро",
+          "вечер"
+        ],
+        "tags": [
+          "завидовать",
+          "защита"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -4737,6 +5325,23 @@
         "tags": [
           "demonios",
           "creyentes"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Против злых мыслей",
+        "translation": "О Аллах, прогони шайтатов и освободи верующих.",
+        "category": "Защита",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 6326",
+        "count": 1,
+        "times": [
+          "утро",
+          "вечер"
+        ],
+        "tags": [
+          "демоны",
+          "верующие"
         ],
         "isFeatured": false
       }
@@ -4873,6 +5478,23 @@
           "Erkenning"
         ],
         "isFeatured": true
+      },
+      "ru": {
+        "title": "Сайид аль-Истигфар",
+        "translation": "О Аллах, Ты мой Господь. Нет божества, кроме Тебя. Ты создал меня, и я Твой слуга. Я выполню Твой завет и обещаю, насколько смогу.",
+        "category": "Покаяние",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 6306",
+        "count": 1,
+        "times": [
+          "repentir"
+        ],
+        "tags": [
+          "извини",
+          "слуга",
+          "завет"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -5006,6 +5628,23 @@
           "Rahmat"
         ],
         "isFeatured": true
+      },
+      "ru": {
+        "title": "Простое прощение",
+        "translation": "Господи, прости меня и прими мое покаяние. Воистину, Ты — Принимающий покаяние, Милосердный.",
+        "category": "Покаяние",
+        "source": "Hisnul Muslim",
+        "reference": "Ат-Тирмизи 3434",
+        "count": 1,
+        "times": [
+          "repentir"
+        ],
+        "tags": [
+          "извини",
+          "извини",
+          "несчастье"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -5132,6 +5771,22 @@
           "Pengampunan"
         ],
         "isFeatured": false
+      },
+      "ru": {
+        "title": "Астагфирулла аль-Азим",
+        "translation": "Я прошу прощения у Аллаха Великолепного, нет божества, кроме Него, Живого, Поддерживающего, и я каюсь перед Ним.",
+        "category": "Покаяние",
+        "source": "Hisnul Muslim",
+        "reference": "Ат-Тирмизи 3577",
+        "count": 3,
+        "times": [
+          "repentir"
+        ],
+        "tags": [
+          "извини",
+          "извини"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -5256,6 +5911,22 @@
         "tags": [
           "Pengampunan",
           "ramadan"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Дуа Таравих",
+        "translation": "О Аллах, Ты Прощающий и Щедрый. Ты любишь прощать, так прости меня.",
+        "category": "Покаяние",
+        "source": "Hisnul Muslim",
+        "reference": "Ат-Тирмизи 3513",
+        "count": 1,
+        "times": [
+          "tarawih"
+        ],
+        "tags": [
+          "извини",
+          "Рамадан"
         ],
         "isFeatured": false
       }
@@ -5391,6 +6062,23 @@
           "Deuren"
         ],
         "isFeatured": true
+      },
+      "ru": {
+        "title": "При входе в мечеть",
+        "translation": "О Аллах, открой мне двери Твоей милости.",
+        "category": "Мечеть",
+        "source": "Hisnul Muslim",
+        "reference": "Мусульманин 713",
+        "count": 1,
+        "times": [
+          "entrar_mesquita"
+        ],
+        "tags": [
+          "мечеть",
+          "двери",
+          "несчастье"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -5515,6 +6203,22 @@
         "tags": [
           "Gunst",
           "Smeekbede"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "При выходе из мечети",
+        "translation": "О Аллах, я прошу Тебя о Твоей милости.",
+        "category": "Мечеть",
+        "source": "Hisnul Muslim",
+        "reference": "Мусульманин 713",
+        "count": 1,
+        "times": [
+          "salir_mesquita"
+        ],
+        "tags": [
+          "услуга",
+          "петиция"
         ],
         "isFeatured": false
       }
@@ -5650,6 +6354,23 @@
           "Nabi"
         ],
         "isFeatured": false
+      },
+      "ru": {
+        "title": "Когда слушаешь азан",
+        "translation": "И я свидетельствую, что нет божества, кроме Аллаха, и что Мухаммад — Посланник Аллаха.",
+        "category": "Мечеть",
+        "source": "Hisnul Muslim",
+        "reference": "Мусульманин 385",
+        "count": 1,
+        "times": [
+          "adhan"
+        ],
+        "tags": [
+          "азан",
+          "показания",
+          "пророк"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -5778,6 +6499,22 @@
           "Voorspraak"
         ],
         "isFeatured": true
+      },
+      "ru": {
+        "title": "При совершении дуа в мечети",
+        "translation": "О Аллах, Господь этого совершенного призыва.",
+        "category": "Мечеть",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 720",
+        "count": 1,
+        "times": [
+          "mezquita"
+        ],
+        "tags": [
+          "мертвый",
+          "приглашение"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -5904,6 +6641,22 @@
           "Allah"
         ],
         "isFeatured": false
+      },
+      "ru": {
+        "title": "Шадак",
+        "translation": "Аллах сказал правду, Великолепный.",
+        "category": "Мечеть",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 738",
+        "count": 1,
+        "times": [
+          "adhan"
+        ],
+        "tags": [
+          "истинный",
+          "Аллах"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -6028,6 +6781,22 @@
         "tags": [
           "Hujan",
           "Rasa Syukur"
+        ],
+        "isFeatured": true
+      },
+      "ru": {
+        "title": "Когда видишь дождь",
+        "translation": "О Аллах, даруй нам благотворный дождь.",
+        "category": "Дождь",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 1032",
+        "count": 1,
+        "times": [
+          "lluvia"
+        ],
+        "tags": [
+          "дождь",
+          "благодарность"
         ],
         "isFeatured": true
       }
@@ -6158,6 +6927,22 @@
           "Rahmat"
         ],
         "isFeatured": false
+      },
+      "ru": {
+        "title": "После дождя",
+        "translation": "Нам дарован дождь по милости и милости Аллаха.",
+        "category": "Дождь",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 846",
+        "count": 1,
+        "times": [
+          "lluvia"
+        ],
+        "tags": [
+          "дождь",
+          "несчастье"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -6282,6 +7067,22 @@
         "tags": [
           "sequía",
           "Hujan"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Дуа во время засухи",
+        "translation": "О Аллах, даруй нам обильный дождь, который освежает, питает и приносит пользу.",
+        "category": "Дождь",
+        "source": "Hisnul Muslim",
+        "reference": "Ибн Маджа 2269",
+        "count": 1,
+        "times": [
+          "lluvia"
+        ],
+        "tags": [
+          "засуха",
+          "дождь"
         ],
         "isFeatured": false
       }
@@ -6409,6 +7210,21 @@
           "Pertobatan"
         ],
         "isFeatured": true
+      },
+      "ru": {
+        "title": "Дуа Ионы",
+        "translation": "Нет божества, кроме Тебя. Слава Тебе. Воистину, я был из беззаконников.",
+        "category": "Трудность",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Анбия 21:87",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "бедствие",
+          "несправедливость",
+          "Юнус"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -6530,6 +7346,21 @@
           "Kesulitan"
         ],
         "isFeatured": false
+      },
+      "ru": {
+        "title": "Легкость в трудностях",
+        "translation": "О Аллах, нет облегчения, кроме того, что Ты облегчаешь, и Ты облегчаешь трудности, когда пожелаешь.",
+        "category": "Трудность",
+        "source": "Hisnul Muslim",
+        "reference": "Ибн Хиббан 2427",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "простота",
+          "грусть",
+          "трудность"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -6648,6 +7479,20 @@
           "Kepercayaan",
           "Voldoendheid",
           "Singgasana"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "В трудные минуты",
+        "translation": "Мне достаточно Аллаха и Его достаточно.",
+        "category": "Трудность",
+        "source": "Hisnul Muslim",
+        "reference": "Аз-Зумар 39:38",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "доверять",
+          "достаточность"
         ],
         "isFeatured": false
       }
@@ -6775,6 +7620,21 @@
           "Neerzending"
         ],
         "isFeatured": true
+      },
+      "ru": {
+        "title": "Когда что-то идет не так",
+        "translation": "Мой Господь, я действительно нуждаюсь в любом благе, которое Ты ниспосылаешь мне.",
+        "category": "Трудность",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Касас 28:24",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "бедность",
+          "нуждаться",
+          "ХОРОШИЙ"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -6900,6 +7760,21 @@
           "Pertobatan"
         ],
         "isFeatured": true
+      },
+      "ru": {
+        "title": "Двое из Моисея",
+        "translation": "Мой Господь, я обидел себя. Простите меня.",
+        "category": "Трудность",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Касас 28:16",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "несправедливость",
+          "извини",
+          "Муса"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -7018,6 +7893,20 @@
           "Pujian",
           "Gunst",
           "Daden"
+        ],
+        "isFeatured": true
+      },
+      "ru": {
+        "title": "Благодарность за благословения",
+        "translation": "Хвала Аллаху, милостью которого совершаются благие дела.",
+        "category": "Благодарность",
+        "source": "Hisnul Muslim",
+        "reference": "Ибн Маджа 3803",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "благодарность",
+          "добрые дела"
         ],
         "isFeatured": true
       }
@@ -7145,6 +8034,21 @@
           "Gehoorzaamheid"
         ],
         "isFeatured": true
+      },
+      "ru": {
+        "title": "Просить быть благодарным",
+        "translation": "Мой Господь, вдохнови меня быть благодарным за Твою милость, которую Ты даровал мне.",
+        "category": "Благодарность",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Анкабут 27:19",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "благодарность",
+          "услуга",
+          "вдохновение"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -7259,6 +8163,20 @@
           "satisfacción"
         ],
         "isFeatured": false
+      },
+      "ru": {
+        "title": "При получении благословения",
+        "translation": "О Аллах, Тебе принадлежит вся хвала, пока Ты не будешь доволен.",
+        "category": "Благодарность",
+        "source": "Hisnul Muslim",
+        "reference": "Ат-Тирмизи 2732",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "хвалить",
+          "удовлетворение"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -7371,6 +8289,20 @@
         "tags": [
           "Rasa Syukur",
           "agradecimiento"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Шукран лиЛлах",
+        "translation": "Благодарение Аллаху.",
+        "category": "Благодарность",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 6042",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "благодарность",
+          "благодарность"
         ],
         "isFeatured": false
       }
@@ -7506,6 +8438,23 @@
           "adoración"
         ],
         "isFeatured": true
+      },
+      "ru": {
+        "title": "После молитвы",
+        "translation": "О Аллах, помоги мне помнить Тебя, благодарить Тебя и поклоняться Тебе наилучшим образом.",
+        "category": "После намаза",
+        "source": "Hisnul Muslim",
+        "reference": "Абу Дауд 1422 г.",
+        "count": 1,
+        "times": [
+          "después_oración"
+        ],
+        "tags": [
+          "молитва",
+          "зикр",
+          "поклонение"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -7634,6 +8583,22 @@
           "Shalat"
         ],
         "isFeatured": true
+      },
+      "ru": {
+        "title": "СубханАллах",
+        "translation": "Слава Аллаху.",
+        "category": "После намаза",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 6405",
+        "count": 33,
+        "times": [
+          "después_oración"
+        ],
+        "tags": [
+          "четки",
+          "Глория"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -7760,6 +8725,22 @@
           "Rasa Syukur"
         ],
         "isFeatured": false
+      },
+      "ru": {
+        "title": "Альхамдулиллах",
+        "translation": "Хвала Аллаху.",
+        "category": "После намаза",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 6405",
+        "count": 33,
+        "times": [
+          "después_oración"
+        ],
+        "tags": [
+          "хвалить",
+          "благодарность"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -7884,6 +8865,22 @@
         "tags": [
           "takbir",
           "grandeza"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Аллаху Акбар",
+        "translation": "Аллах Величайший.",
+        "category": "После намаза",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 6405",
+        "count": 34,
+        "times": [
+          "después_oración"
+        ],
+        "tags": [
+          "такбир",
+          "величие"
         ],
         "isFeatured": false
       }
@@ -8019,6 +9016,23 @@
           "Pujian"
         ],
         "isFeatured": true
+      },
+      "ru": {
+        "title": "Заключительная степень",
+        "translation": "Нет божества, кроме Аллаха, одного, без сотоварища. Ему принадлежит власть и хвала, и Он способен на все.",
+        "category": "После намаза",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 6406",
+        "count": 1,
+        "times": [
+          "después_oración"
+        ],
+        "tags": [
+          "степень",
+          "домен",
+          "может"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -8143,6 +9157,22 @@
         "tags": [
           "Oordeel",
           "Vernedering"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Защита от лицемерия",
+        "translation": "О Аллах, не унижай меня в День Воскресения.",
+        "category": "После намаза",
+        "source": "Hisnul Muslim",
+        "reference": "Абу Дауд 767",
+        "count": 1,
+        "times": [
+          "después_oración"
+        ],
+        "tags": [
+          "суждение",
+          "унижение"
         ],
         "isFeatured": false
       }
@@ -8278,6 +9308,23 @@
           "Perlindungan"
         ],
         "isFeatured": false
+      },
+      "ru": {
+        "title": "Вход в рай",
+        "translation": "О Аллах, защити меня от Огня.",
+        "category": "После намаза",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 6328",
+        "count": 1,
+        "times": [
+          "después_oración"
+        ],
+        "tags": [
+          "рай",
+          "Фуэго",
+          "защита"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -8399,6 +9446,21 @@
           "Zuiverheid"
         ],
         "isFeatured": true
+      },
+      "ru": {
+        "title": "При совершении вуду",
+        "translation": "Я свидетельствую, что нет божества, кроме Аллаха, единственного без сотоварища. И я свидетельствую, что Мухаммад — Его слуга и Посланник.",
+        "category": "Вуду",
+        "source": "Hisnul Muslim",
+        "reference": "Мусульманин 234",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "вуду",
+          "показания",
+          "пуреза"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -8513,6 +9575,20 @@
           "Pengampunan"
         ],
         "isFeatured": false
+      },
+      "ru": {
+        "title": "После вуду",
+        "translation": "О Аллах, включи меня в число кающихся и в число очищающихся.",
+        "category": "Вуду",
+        "source": "Hisnul Muslim",
+        "reference": "Ат-Тирмизи 55",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "пуреза",
+          "извини"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -8625,6 +9701,20 @@
         "tags": [
           "Getuigenis",
           "Zuiverheid"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Полное вуду",
+        "translation": "Я свидетельствую, что нет божества, кроме Аллаха, и что Мухаммад — Его слуга и Посланник.",
+        "category": "Вуду",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 6296",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "показания",
+          "пуреза"
         ],
         "isFeatured": false
       }
@@ -8746,6 +9836,21 @@
           "Hadj",
           "Talbiya",
           "Perjalanan"
+        ],
+        "isFeatured": true
+      },
+      "ru": {
+        "title": "Тальбия",
+        "translation": "Вот я, о Аллах, вот я. Вот я, У тебя нет партнера, вот я. Воистину, вся хвала, благосклонность и власть принадлежат Тебе, у Тебя нет партнера.",
+        "category": "Хадж и умра",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 6149",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "хадж",
+          "телевидение",
+          "путешествие"
         ],
         "isFeatured": true
       }
@@ -8873,6 +9978,21 @@
           "Huis"
         ],
         "isFeatured": false
+      },
+      "ru": {
+        "title": "При виде Каабы",
+        "translation": "О Аллах, увеличь честь, величие и почитание этого Дома.",
+        "category": "Хадж и умра",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 1333 г.",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "Кааба",
+          "дом",
+          "честь"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -8993,6 +10113,20 @@
           "Standvastigheid"
         ],
         "isFeatured": false
+      },
+      "ru": {
+        "title": "Во время тавафа",
+        "translation": "Господь мой, сделай меня и моих потомков упорными в молитве.",
+        "category": "Хадж и умра",
+        "source": "Hisnul Muslim",
+        "reference": "Ибрагим 14:40",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "обход",
+          "молитва"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -9105,6 +10239,20 @@
         "tags": [
           "saei",
           "Cahaya"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Дуа Саи",
+        "translation": "О Аллах, помести свет в мое сердце и свет в мои глаза.",
+        "category": "Хадж и умра",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 6316",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "рвать",
+          "Лус"
         ],
         "isFeatured": false
       }
@@ -9232,6 +10380,21 @@
           "Grootbrengen"
         ],
         "isFeatured": true
+      },
+      "ru": {
+        "title": "Молитва за родителей",
+        "translation": "Господи, помилуй их, ведь они воспитали меня, когда я был маленьким.",
+        "category": "Родители",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Исра 17:24",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "родители",
+          "несчастье",
+          "благодарность"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -9357,6 +10520,21 @@
           "Vreugde"
         ],
         "isFeatured": true
+      },
+      "ru": {
+        "title": "Благословение родителей.",
+        "translation": "Господь наш, даруй нам из числа наших супругов и потомства утешение очам нашим.",
+        "category": "Родители",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Фуркан 25:7",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "семья",
+          "дети",
+          "благодарность"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -9469,6 +10647,20 @@
         "tags": [
           "Rasa Syukur",
           "Keluarga"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Благословение детей",
+        "translation": "О Аллах, благослови мою семью.",
+        "category": "Родители",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 6332",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "благодарность",
+          "семья"
         ],
         "isFeatured": false
       }
@@ -9590,6 +10782,21 @@
           "Orang Tua",
           "Pengampunan",
           "Rahmat"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Для умерших родителей",
+        "translation": "О Аллах, прости моих родителей и помилуй их, ведь они воспитали меня, когда я был маленьким.",
+        "category": "Родители",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 2472",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "родители",
+          "извини",
+          "несчастье"
         ],
         "isFeatured": false
       }
@@ -9725,6 +10932,23 @@
           "Pujian"
         ],
         "isFeatured": false
+      },
+      "ru": {
+        "title": "Тасбих утром",
+        "translation": "Слава Аллаху и хвала Ему.",
+        "category": "Зикр",
+        "source": "Hisnul Muslim",
+        "reference": "Мусульманин 2692",
+        "count": 100,
+        "times": [
+          "утро",
+          "вечер"
+        ],
+        "tags": [
+          "четки",
+          "хвалить"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -9855,6 +11079,23 @@
         "tags": [
           "Pujian",
           "mundos"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Сажа",
+        "translation": "Хвала Аллаху, Господу миров.",
+        "category": "Зикр",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Фатиха 1:2",
+        "count": 1,
+        "times": [
+          "утро",
+          "вечер"
+        ],
+        "tags": [
+          "хвалить",
+          "миры"
         ],
         "isFeatured": false
       }
@@ -9989,6 +11230,23 @@
           "grandeza"
         ],
         "isFeatured": false
+      },
+      "ru": {
+        "title": "Такбир",
+        "translation": "Аллах Величайший.",
+        "category": "Зикр",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 6406",
+        "count": 1,
+        "times": [
+          "утро",
+          "вечер"
+        ],
+        "tags": [
+          "такбир",
+          "величие"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -10119,6 +11377,23 @@
         "tags": [
           "Pengampunan",
           "astaghfir"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Астагфирулла",
+        "translation": "Я прошу прощения у Аллаха Великолепного.",
+        "category": "Зикр",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 6407",
+        "count": 3,
+        "times": [
+          "утро",
+          "вечер"
+        ],
+        "tags": [
+          "извини",
+          "Астагфир"
         ],
         "isFeatured": false
       }
@@ -10253,6 +11528,23 @@
           "Iman"
         ],
         "isFeatured": true
+      },
+      "ru": {
+        "title": "Ля иляха илля Аллах",
+        "translation": "Нет божества, кроме Аллаха.",
+        "category": "Зикр",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 6408",
+        "count": 10,
+        "times": [
+          "утро",
+          "вечер"
+        ],
+        "tags": [
+          "таухид",
+          "показания"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -10390,6 +11682,24 @@
           "Getuigenis"
         ],
         "isFeatured": true
+      },
+      "ru": {
+        "title": "Калима Таухид",
+        "translation": "Нет божества, кроме Аллаха, и Мухаммад — Посланник Аллаха.",
+        "category": "Зикр",
+        "source": "Hisnul Muslim",
+        "reference": "Мусульманин 190",
+        "count": 1,
+        "times": [
+          "утро",
+          "вечер"
+        ],
+        "tags": [
+          "таухид",
+          "степень",
+          "пророк"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -10527,6 +11837,24 @@
           "Perlindungan"
         ],
         "isFeatured": true
+      },
+      "ru": {
+        "title": "Рабана Афины",
+        "translation": "Господь наш, дай нам добро в этом мире и добро в будущей жизни и защити нас от наказания Огня.",
+        "category": "Зикр",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бакара 2:201",
+        "count": 1,
+        "times": [
+          "утро",
+          "вечер"
+        ],
+        "tags": [
+          "петиция",
+          "мир",
+          "Фуэго"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -10659,6 +11987,23 @@
           "gloria"
         ],
         "isFeatured": false
+      },
+      "ru": {
+        "title": "СубханАллах ва би Хамдихи",
+        "translation": "Слава Аллаху и хвала Ему. Слава Аллаху Великолепному.",
+        "category": "Зикр",
+        "source": "Hisnul Muslim",
+        "reference": "Мусульманин 2732",
+        "count": 1,
+        "times": [
+          "утро",
+          "вечер"
+        ],
+        "tags": [
+          "четки",
+          "Глория"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -10787,6 +12132,22 @@
           "Gunst"
         ],
         "isFeatured": true
+      },
+      "ru": {
+        "title": "Дуа Истихара",
+        "translation": "О Аллах, я ищу от Тебя лучшего посредством Твоего знания и я ищу способности Твоей силы.",
+        "category": "Зикр",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 6382",
+        "count": 1,
+        "times": [
+          "istikahara"
+        ],
+        "tags": [
+          "выбор",
+          "решение"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -10907,6 +12268,20 @@
           "Genade"
         ],
         "isFeatured": true
+      },
+      "ru": {
+        "title": "Рабана ва ла такна",
+        "translation": "Господь наш, не обременяй нас тем, чего мы не можем вынести.",
+        "category": "Трудность",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бакара 2:286",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "нагрузка",
+          "сила"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -11019,6 +12394,20 @@
         "tags": [
           "Ilmu",
           "Cahaya"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Дуа студента",
+        "translation": "О Аллах, озари наши сердца светом знания.",
+        "category": "Зикр",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 5766",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "знание",
+          "Лус"
         ],
         "isFeatured": false
       }
@@ -11149,6 +12538,22 @@
           "Rezeki"
         ],
         "isFeatured": false
+      },
+      "ru": {
+        "title": "Дуа на дождь",
+        "translation": "О Аллах, сделай для нас землю прорастающей.",
+        "category": "Дождь",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 1773 г.",
+        "count": 1,
+        "times": [
+          "lluvia"
+        ],
+        "tags": [
+          "Тьерра",
+          "обрезать"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -11261,6 +12666,20 @@
         "tags": [
           "sustento",
           "Rasa Syukur"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Дуа торговца",
+        "translation": "О Аллах, благослови мое обеспечение.",
+        "category": "Благодарность",
+        "source": "Hisnul Muslim",
+        "reference": "Ат-Тирмизи 3588",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "средства к существованию",
+          "благодарность"
         ],
         "isFeatured": false
       }
@@ -11377,6 +12796,20 @@
           "Perdamaian"
         ],
         "isFeatured": false
+      },
+      "ru": {
+        "title": "Дуа за мир",
+        "translation": "О Аллах, исправь мою религию, которая является защитой моих дел.",
+        "category": "Зикр",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 2420",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "религия",
+          "пас"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -11491,6 +12924,20 @@
           "rectitud"
         ],
         "isFeatured": false
+      },
+      "ru": {
+        "title": "Дуа за руководство",
+        "translation": "О Аллах, направь меня к праведности.",
+        "category": "Зикр",
+        "source": "Hisnul Muslim",
+        "reference": "Абу Дауд 1539 г.",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "гид",
+          "прямота"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -11603,6 +13050,20 @@
         "tags": [
           "Kesabaran",
           "Kekuatan"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Дуа за терпение",
+        "translation": "О Аллах, сделай меня терпеливым.",
+        "category": "Трудность",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 5819",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "терпение",
+          "сила"
         ],
         "isFeatured": false
       }
@@ -11731,6 +13192,22 @@
           "naturaleza"
         ],
         "isFeatured": false
+      },
+      "ru": {
+        "title": "Идеальное утреннее дуа",
+        "translation": "Мы осознали естественную склонность Ислама.",
+        "category": "Утро",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 2809",
+        "count": 1,
+        "times": [
+          "утро"
+        ],
+        "tags": [
+          "ислам",
+          "природа"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -11857,6 +13334,22 @@
           "naturaleza"
         ],
         "isFeatured": false
+      },
+      "ru": {
+        "title": "Дуа на закате",
+        "translation": "Мы подошли к вечеру естественной склонности Ислама.",
+        "category": "Вечер",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 2809",
+        "count": 1,
+        "times": [
+          "вечер"
+        ],
+        "tags": [
+          "ислам",
+          "природа"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -11971,6 +13464,20 @@
           "días"
         ],
         "isFeatured": false
+      },
+      "ru": {
+        "title": "Ежедневная благодарность два",
+        "translation": "Хвала Аллаху, Господу миров, каждый день.",
+        "category": "Благодарность",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Фатиха 1:2",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "хвалить",
+          "дни"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -12083,6 +13590,20 @@
         "tags": [
           "memoria",
           "Ilmu"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Дуа на память",
+        "translation": "О Аллах, не заставляй меня забывать то, чему Ты научил меня.",
+        "category": "Зикр",
+        "source": "Hisnul Muslim",
+        "reference": "Ибн Ас-Суннит 245",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "память",
+          "знание"
         ],
         "isFeatured": false
       }
@@ -12213,6 +13734,22 @@
           "Aankomst"
         ],
         "isFeatured": false
+      },
+      "ru": {
+        "title": "Два коротких путешественника",
+        "translation": "О Аллах, облегчи нам наш путь.",
+        "category": "Путешествие",
+        "source": "Hisnul Muslim",
+        "reference": "Абу Дауд 2600",
+        "count": 1,
+        "times": [
+          "viaje"
+        ],
+        "tags": [
+          "путешествие",
+          "простота"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -12325,6 +13862,20 @@
         "tags": [
           "Perlindungan",
           "palabras"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Дуа для защиты от зла",
+        "translation": "Я ищу прибежища в совершенных словах Аллаха.",
+        "category": "Защита",
+        "source": "Hisnul Muslim",
+        "reference": "Мусульманин 2709",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "защита",
+          "слова"
         ],
         "isFeatured": false
       }
@@ -12445,6 +13996,20 @@
           "Perlindungan",
           "Ketakutan",
           "Angst"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Дуа от страха",
+        "translation": "О Аллах, я ищу Твоей защиты от страха.",
+        "category": "Трудность",
+        "source": "Hisnul Muslim",
+        "reference": "Аль-Бухари 6377",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "страх",
+          "защита"
         ],
         "isFeatured": false
       }
@@ -12573,6 +14138,22 @@
           "Rasa Syukur"
         ],
         "isFeatured": false
+      },
+      "ru": {
+        "title": "Дуа от голода",
+        "translation": "О Аллах, благослови нашу еду.",
+        "category": "Еда",
+        "source": "Hisnul Muslim",
+        "reference": "Ат-Тирмизи 1801 г.",
+        "count": 1,
+        "times": [
+          "comida"
+        ],
+        "tags": [
+          "еда",
+          "благодарность"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -12699,6 +14280,22 @@
           "Minuman",
           "Berakah",
           "Perlindungan"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Дуа от жажды",
+        "translation": "О Аллах, благослови наш напиток.",
+        "category": "Еда",
+        "source": "Hisnul Muslim",
+        "reference": "Ат-Тирмизи 1802 г.",
+        "count": 1,
+        "times": [
+          "bebida"
+        ],
+        "tags": [
+          "напиток",
+          "благодарность"
         ],
         "isFeatured": false
       }

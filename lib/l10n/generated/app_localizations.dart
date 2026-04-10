@@ -10,6 +10,11 @@ import 'app_localizations_de.dart';
 import 'app_localizations_en.dart';
 import 'app_localizations_es.dart';
 import 'app_localizations_fr.dart';
+import 'app_localizations_id.dart';
+import 'app_localizations_nl.dart';
+import 'app_localizations_ru.dart';
+
+// ignore_for_file: type=lint
 
 /// Callers can lookup localized strings with an instance of AppLocalizations
 /// returned by `AppLocalizations.of(context)`.
@@ -19,7 +24,7 @@ import 'app_localizations_fr.dart';
 /// `supportedLocales` list. For example:
 ///
 /// ```dart
-/// import 'gen_l10n/app_localizations.dart';
+/// import 'generated/app_localizations.dart';
 ///
 /// return MaterialApp(
 ///   localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -63,7 +68,8 @@ import 'app_localizations_fr.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale)
+      : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -71,7 +77,8 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations)!;
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate =
+      _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -83,7 +90,8 @@ abstract class AppLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
+      <LocalizationsDelegate<dynamic>>[
     delegate,
     GlobalMaterialLocalizations.delegate,
     GlobalCupertinoLocalizations.delegate,
@@ -96,7 +104,10 @@ abstract class AppLocalizations {
     Locale('de'),
     Locale('en'),
     Locale('es'),
-    Locale('fr')
+    Locale('fr'),
+    Locale('id'),
+    Locale('nl'),
+    Locale('ru')
   ];
 
   /// No description provided for @appTitle.
@@ -981,6 +992,12 @@ abstract class AppLocalizations {
   /// **'العربية'**
   String get settingsLanguageOptionArabic;
 
+  /// No description provided for @settingsLanguageOptionDutch.
+  ///
+  /// In es, this message translates to:
+  /// **'Neerlandés'**
+  String get settingsLanguageOptionDutch;
+
   /// No description provided for @settingsAdhanSound.
   ///
   /// In es, this message translates to:
@@ -1633,7 +1650,8 @@ abstract class AppLocalizations {
   ///
   /// In es, this message translates to:
   /// **'Esta semana completaste {prayersCompleted}/{maxPossible} oraciones. Tu mejor día fue {strongestDay}.'**
-  String notificationWeeklySummaryBody(int prayersCompleted, int maxPossible, Object strongestDay);
+  String notificationWeeklySummaryBody(
+      int prayersCompleted, int maxPossible, Object strongestDay);
 
   /// No description provided for @quranDailyVerseFallbackTranslation.
   ///
@@ -4820,9 +4838,22 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Prepárate para Jumu\'ah antes de Dhuhr y reserva un momento para ir con calma a la mezquita.'**
   String get prayerNotificationJumuahBody;
+
+  /// No description provided for @settingsLanguageOptionIndonesian.
+  ///
+  /// In es, this message translates to:
+  /// **'Indonesio'**
+  String get settingsLanguageOptionIndonesian;
+
+  /// No description provided for @settingsLanguageOptionRussian.
+  ///
+  /// In es, this message translates to:
+  /// **'Ruso'**
+  String get settingsLanguageOptionRussian;
 }
 
-class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate
+    extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -4831,28 +4862,45 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['ar', 'de', 'en', 'es', 'fr'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>[
+        'ar',
+        'de',
+        'en',
+        'es',
+        'fr',
+        'id',
+        'nl',
+        'ru'
+      ].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
 }
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
-
-
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'ar': return AppLocalizationsAr();
-    case 'de': return AppLocalizationsDe();
-    case 'en': return AppLocalizationsEn();
-    case 'es': return AppLocalizationsEs();
-    case 'fr': return AppLocalizationsFr();
+    case 'ar':
+      return AppLocalizationsAr();
+    case 'de':
+      return AppLocalizationsDe();
+    case 'en':
+      return AppLocalizationsEn();
+    case 'es':
+      return AppLocalizationsEs();
+    case 'fr':
+      return AppLocalizationsFr();
+    case 'id':
+      return AppLocalizationsId();
+    case 'nl':
+      return AppLocalizationsNl();
+    case 'ru':
+      return AppLocalizationsRu();
   }
 
   throw FlutterError(
-    'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
-    'an issue with the localizations generation tool. Please file an issue '
-    'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.'
-  );
+      'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+      'an issue with the localizations generation tool. Please file an issue '
+      'on GitHub with a reproducible sample app and the gen-l10n configuration '
+      'that was used.');
 }

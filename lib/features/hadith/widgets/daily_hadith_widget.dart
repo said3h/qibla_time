@@ -11,6 +11,7 @@ import '../../../l10n/l10n.dart';
 import '../../hadith/screens/hadith_library_screen.dart';
 import '../../hadith/services/hadith_service.dart';
 import '../../hadith/services/hadith_share_service.dart';
+import '../../hadith/utils/hadith_collection_presentation.dart';
 import 'hadith_share_preview_sheet.dart';
 import '../widgets/hadith_widget_service.dart';
 
@@ -44,9 +45,10 @@ class DailyHadithWidget extends ConsumerWidget {
         final arabicCollectionLabel =
             _getArabicCollectionLabel(snapshot.collection);
         final arabicGradeLabel = _getArabicGradeLabel(snapshot.grade);
-        final collectionLabel = isArabicOnly
-            ? (arabicCollectionLabel ?? snapshot.collection)
-            : snapshot.collection;
+        final collectionLabel = HadithCollectionPresentation.metaFor(
+          snapshot.collection,
+          Localizations.localeOf(context).languageCode,
+        ).label;
         final gradeLabel = isArabicOnly
             ? (arabicGradeLabel ?? snapshot.grade)
             : snapshot.grade;

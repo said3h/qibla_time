@@ -1151,5 +1151,6 @@
   "prayerNotificationIftarBody": "Noch 15 Minuten bis Iftar. Möge Allah Ihr Fasten heute annehmen.",
   "prayerNotificationJumuahTitle": "Dschumu'a heute",
   "prayerNotificationJumuahBody": "Bereiten Sie sich vor Dhuhr auf Dschumu'a vor und nehmen Sie sich einen ruhigen Moment, um zur Moschee zu gehen.",
-  "settingsLanguageOptionIndonesian": "Indonesisch"
+  "settingsLanguageOptionIndonesian": "Indonesisch",
+  "settingsLanguageOptionRussian": "Russisch"
 }

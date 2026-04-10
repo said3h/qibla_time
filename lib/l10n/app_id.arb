@@ -160,7 +160,7 @@
       "weekday": {}
     }
   },
-  "homePrayerSectionMarkedCount": "{count}/5 dicentang",
+  "homePrayerSectionMarkedCount": "{count}/5 ditandai",
   "@homePrayerSectionMarkedCount": {
     "placeholders": {
       "count": {
@@ -644,7 +644,6 @@
   "commonNext": "Berikutnya",
   "commonOther": "Lainnya",
   "commonPause": "Jeda",
-  "commonPlay": "Putar",
   "commonPrayers": "shalat",
   "commonQuran": "Al-Quran",
   "commonRead": "Baca",
@@ -889,7 +888,6 @@
   "homePrayerDescriptionNow": "Shalat ini sedang berlangsung.",
   "homePrayerDescriptionPendingToday": "Masih menunggu dalam alur hari ini.",
   "homePrayerDescriptionReviewDate": "Tersedia untuk ditinjau pada tanggal ini.",
-  "homePrayerSectionMarkedCount": "{count}/5 ditandai",
   "homePrayerSectionSelectedDaySubtitle": "Periksa dan tandai waktu untuk {date}",
   "homePrayerSectionSelectedDayTitle": "JADWAL HARI",
   "homePrayerSectionTodaySubtitle": "Ritme lengkap lima shalat harian Anda",
@@ -1153,5 +1151,6 @@
   "prayerNotificationIftarTitle": "Iftar akan tiba",
   "prayerNotificationIftarBody": "15 menit lagi menuju iftar. Semoga Allah menerima puasa Anda hari ini.",
   "prayerNotificationJumuahTitle": "Jumat hari ini",
-  "prayerNotificationJumuahBody": "Bersiaplah untuk Jumat sebelum Dzuhur dan luangkan waktu tenang untuk pergi ke masjid."
+  "prayerNotificationJumuahBody": "Bersiaplah untuk Jumat sebelum Dzuhur dan luangkan waktu tenang untuk pergi ke masjid.",
+  "settingsLanguageOptionRussian": "Rusia"
 }

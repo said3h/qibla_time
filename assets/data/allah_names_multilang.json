@@ -31,6 +31,10 @@
       "id": {
         "name": "Yang Maha Pengasih",
         "description": "Yang memberikan rahmat kepada seluruh makhluk-Nya"
+      },
+      "ru": {
+        "name": "Самый Милостивый",
+        "description": ""
       }
     }
   },
@@ -66,6 +70,10 @@
       "id": {
         "name": "Yang Maha Penyayang",
         "description": "Yang memberikan rahmat khusus kepada orang-orang beriman"
+      },
+      "ru": {
+        "name": "Самый Милосердный",
+        "description": ""
       }
     }
   },
@@ -101,6 +109,10 @@
       "id": {
         "name": "Yang Maha Merajai",
         "description": "Penguasa mutlak seluruh alam semesta"
+      },
+      "ru": {
+        "name": "Король",
+        "description": ""
       }
     }
   },
@@ -136,6 +148,10 @@
       "id": {
         "name": "Yang Maha Suci",
         "description": "Yang suci dari segala kekurangan dan cela"
+      },
+      "ru": {
+        "name": "Самый Святой",
+        "description": ""
       }
     }
   },
@@ -171,6 +187,10 @@
       "id": {
         "name": "Yang Maha Memberi Kesejahteraan",
         "description": "Sumber kedamaian dan kesejahteraan"
+      },
+      "ru": {
+        "name": "Источник мира",
+        "description": ""
       }
     }
   },
@@ -206,6 +226,10 @@
       "id": {
         "name": "Yang Maha Memelihara",
         "description": "Yang menjaga dan memelihara seluruh makhluk-Nya"
+      },
+      "ru": {
+        "name": "Хранитель веры",
+        "description": ""
       }
     }
   },
@@ -241,6 +265,10 @@
       "id": {
         "name": "Yang Maha Perkasa",
         "description": "Yang memiliki kekuatan yang tidak terkalahkan"
+      },
+      "ru": {
+        "name": "Защитник",
+        "description": ""
       }
     }
   },
@@ -276,6 +304,10 @@
       "id": {
         "name": "Yang Maha Megah",
         "description": "Yang memiliki keagungan dan kemuliaan"
+      },
+      "ru": {
+        "name": "Всемогущий",
+        "description": ""
       }
     }
   },
@@ -311,6 +343,10 @@
       "id": {
         "name": "Yang Maha Pencipta",
         "description": "Yang menciptakan segala sesuatu dari ketiadaan"
+      },
+      "ru": {
+        "name": "Компеллер",
+        "description": ""
       }
     }
   },
@@ -346,6 +382,10 @@
       "id": {
         "name": "Yang Maha Membentuk Rupa",
         "description": "Yang membentuk segala sesuatu dengan bentuk yang terbaik"
+      },
+      "ru": {
+        "name": "Величественный",
+        "description": ""
       }
     }
   },
@@ -381,6 +421,10 @@
       "id": {
         "name": "Yang Maha Pengampun",
         "description": "Yang banyak mengampuni dosa hamba-hamba-Nya"
+      },
+      "ru": {
+        "name": "Создатель",
+        "description": ""
       }
     }
   },
@@ -416,6 +460,10 @@
       "id": {
         "name": "Yang Maha Memaksa",
         "description": "Yang menghendaki segala sesuatu terjadi"
+      },
+      "ru": {
+        "name": "Создатель",
+        "description": ""
       }
     }
   },
@@ -451,6 +499,10 @@
       "id": {
         "name": "Yang Maha Pemberi Karunia",
         "description": "Yang melimpahkan karunia dan anugerah"
+      },
+      "ru": {
+        "name": "Модник",
+        "description": ""
       }
     }
   },
@@ -486,6 +538,10 @@
       "id": {
         "name": "Yang Maha Pemberi Rezeki",
         "description": "Yang memberikan rezeki kepada seluruh makhluk"
+      },
+      "ru": {
+        "name": "Великий прощающий",
+        "description": ""
       }
     }
   },
@@ -521,6 +577,10 @@
       "id": {
         "name": "Yang Maha Pembuka",
         "description": "Yang membuka pintu rahmat dan kebaikan"
+      },
+      "ru": {
+        "name": "Покоритель",
+        "description": ""
       }
     }
   },
@@ -556,6 +616,10 @@
       "id": {
         "name": "Yang Maha Mengetahui",
         "description": "Yang mengetahui segala sesuatu"
+      },
+      "ru": {
+        "name": "Даритель",
+        "description": ""
       }
     }
   },
@@ -591,6 +655,10 @@
       "id": {
         "name": "Yang Maha Menahan",
         "description": "Yang menahan dan mencegah segala sesuatu"
+      },
+      "ru": {
+        "name": "Поставщик",
+        "description": ""
       }
     }
   },
@@ -626,6 +694,10 @@
       "id": {
         "name": "Yang Maha Mulia",
         "description": "Yang memiliki kemuliaan yang sempurna"
+      },
+      "ru": {
+        "name": "Открывалка",
+        "description": ""
       }
     }
   },
@@ -661,6 +733,10 @@
       "id": {
         "name": "Yang Maha Penghitung",
         "description": "Yang menghitung segala sesuatu dengan tepat"
+      },
+      "ru": {
+        "name": "Всезнающий",
+        "description": ""
       }
     }
   },
@@ -696,6 +772,10 @@
       "id": {
         "name": "Yang Maha Memulai",
         "description": "Yang memulai penciptaan dari awal"
+      },
+      "ru": {
+        "name": "Констриктор",
+        "description": ""
       }
     }
   },
@@ -731,6 +811,10 @@
       "id": {
         "name": "Yang Maha Mengembalikan",
         "description": "Yang mengembalikan segala sesuatu kepada-Nya"
+      },
+      "ru": {
+        "name": "Расширитель",
+        "description": ""
       }
     }
   },
@@ -766,6 +850,10 @@
       "id": {
         "name": "Yang Maha Menghidupkan",
         "description": "Yang menghidupkan makhluk yang telah mati"
+      },
+      "ru": {
+        "name": "Абасер",
+        "description": ""
       }
     }
   },
@@ -801,6 +889,10 @@
       "id": {
         "name": "Yang Maha Mematikan",
         "description": "Yang mematikan segala sesuatu"
+      },
+      "ru": {
+        "name": "Экзальтёр",
+        "description": ""
       }
     }
   },
@@ -836,6 +928,10 @@
       "id": {
         "name": "Yang Maha Hidup",
         "description": "Yang hidup selama-lamanya tanpa kematian"
+      },
+      "ru": {
+        "name": "Почетный",
+        "description": ""
       }
     }
   },
@@ -871,6 +967,10 @@
       "id": {
         "name": "Yang Maha Mandiri",
         "description": "Yang tidak membutuhkan sesuatu pun"
+      },
+      "ru": {
+        "name": "Унизитель",
+        "description": ""
       }
     }
   },
@@ -906,6 +1006,10 @@
       "id": {
         "name": "Yang Maha Agung",
         "description": "Yang memiliki keagungan yang sempurna"
+      },
+      "ru": {
+        "name": "Всеслышащий",
+        "description": ""
       }
     }
   },
@@ -941,6 +1045,10 @@
       "id": {
         "name": "Yang Maha Esa",
         "description": "Yang satu dan tidak ada sekutu bagi-Nya"
+      },
+      "ru": {
+        "name": "Всевидящий",
+        "description": ""
       }
     }
   },
@@ -976,6 +1084,10 @@
       "id": {
         "name": "Yang Maha Kekal",
         "description": "Yang kekal sepanjang masa"
+      },
+      "ru": {
+        "name": "Судья",
+        "description": ""
       }
     }
   },
@@ -1011,6 +1123,10 @@
       "id": {
         "name": "Yang Maha Mendengar",
         "description": "Yang mendengar segala sesuatu"
+      },
+      "ru": {
+        "name": "Справедливый",
+        "description": ""
       }
     }
   },
@@ -1046,6 +1162,10 @@
       "id": {
         "name": "Yang Maha Melihat",
         "description": "Yang melihat segala sesuatu"
+      },
+      "ru": {
+        "name": "Тонкий и добрый",
+        "description": ""
       }
     }
   },
@@ -1081,6 +1201,10 @@
       "id": {
         "name": "Yang Maha Mengadili",
         "description": "Yang menghukum dengan adil"
+      },
+      "ru": {
+        "name": "Всезнающий",
+        "description": ""
       }
     }
   },
@@ -1116,6 +1240,10 @@
       "id": {
         "name": "Yang Maha Bijaksana",
         "description": "Yang bijaksana dalam segala perbuatan"
+      },
+      "ru": {
+        "name": "Терпеливый",
+        "description": ""
       }
     }
   },
@@ -1151,6 +1279,10 @@
       "id": {
         "name": "Yang Maha Lembut",
         "description": "Yang lembut dan penyayang kepada hamba-hamba-Nya"
+      },
+      "ru": {
+        "name": "Великолепный",
+        "description": ""
       }
     }
   },
@@ -1186,6 +1318,10 @@
       "id": {
         "name": "Yang Maha Memberi Kabar",
         "description": "Yang memberikan kabar gembira dan peringatan"
+      },
+      "ru": {
+        "name": "Прощающий",
+        "description": ""
       }
     }
   },
@@ -1221,6 +1357,10 @@
       "id": {
         "name": "Yang Maha Mengumpulkan",
         "description": "Yang mengumpulkan seluruh makhluk di hari kiamat"
+      },
+      "ru": {
+        "name": "Благодарный",
+        "description": ""
       }
     }
   },
@@ -1256,6 +1396,10 @@
       "id": {
         "name": "Yang Maha Kaya",
         "description": "Yang tidak membutuhkan apa pun"
+      },
+      "ru": {
+        "name": "Самый Высокий",
+        "description": ""
       }
     }
   },
@@ -1291,6 +1435,10 @@
       "id": {
         "name": "Yang Maha Mencukupi",
         "description": "Yang mencukupi kebutuhan hamba-hamba-Nya"
+      },
+      "ru": {
+        "name": "Величайший",
+        "description": ""
       }
     }
   },
@@ -1326,6 +1474,10 @@
       "id": {
         "name": "Yang Maha Mencegah",
         "description": "Yang mencegah segala sesuatu yang buruk"
+      },
+      "ru": {
+        "name": "Хранитель",
+        "description": ""
       }
     }
   },
@@ -1361,6 +1513,10 @@
       "id": {
         "name": "Yang Maha Menimpa",
         "description": "Yang menimpa makhluk dengan kebaikan dan keburukan"
+      },
+      "ru": {
+        "name": "Питатель",
+        "description": ""
       }
     }
   },
@@ -1396,6 +1552,10 @@
       "id": {
         "name": "Yang Maha Bermanfaat",
         "description": "Yang memberikan manfaat kepada makhluk-Nya"
+      },
+      "ru": {
+        "name": "Счетчик",
+        "description": ""
       }
     }
   },
@@ -1431,6 +1591,10 @@
       "id": {
         "name": "Yang Maha Bercahaya",
         "description": "Cahaya langit dan bumi"
+      },
+      "ru": {
+        "name": "Величественный",
+        "description": ""
       }
     }
   },
@@ -1466,6 +1630,10 @@
       "id": {
         "name": "Yang Maha Pembimbing",
         "description": "Yang membimbing hamba-hamba-Nya kepada kebenaran"
+      },
+      "ru": {
+        "name": "Самый щедрый",
+        "description": ""
       }
     }
   },
@@ -1501,6 +1669,10 @@
       "id": {
         "name": "Yang Maha Pencipta",
         "description": "Yang menciptakan segala sesuatu dengan sempurna"
+      },
+      "ru": {
+        "name": "Бдительный",
+        "description": ""
       }
     }
   },
@@ -1536,6 +1708,10 @@
       "id": {
         "name": "Yang Maha Kekal",
         "description": "Yang kekal tanpa batas waktu"
+      },
+      "ru": {
+        "name": "Отзывчивый",
+        "description": ""
       }
     }
   },
@@ -1571,6 +1747,10 @@
       "id": {
         "name": "Yang Maha Pewaris",
         "description": "Yang mewarisi seluruh alam semesta"
+      },
+      "ru": {
+        "name": "Всеохватывающее",
+        "description": ""
       }
     }
   },
@@ -1606,6 +1786,10 @@
       "id": {
         "name": "Yang Maha Membimbing",
         "description": "Yang membimbing kepada jalan yang lurus"
+      },
+      "ru": {
+        "name": "Мудрый",
+        "description": ""
       }
     }
   },
@@ -1641,6 +1825,10 @@
       "id": {
         "name": "Yang Maha Sabar",
         "description": "Yang sabar menghadapi dosa hamba-hamba-Nya"
+      },
+      "ru": {
+        "name": "Любящий",
+        "description": ""
       }
     }
   },
@@ -1676,6 +1864,10 @@
       "id": {
         "name": "Yang Maha Adil",
         "description": "Yang adil dalam segala keputusan-Nya"
+      },
+      "ru": {
+        "name": "Славный",
+        "description": ""
       }
     }
   },
@@ -1711,6 +1903,10 @@
       "id": {
         "name": "Yang Maha Pengasih",
         "description": "Yang memiliki kasih sayang yang luas"
+      },
+      "ru": {
+        "name": "Воскреситель",
+        "description": ""
       }
     }
   },
@@ -1746,6 +1942,10 @@
       "id": {
         "name": "Yang Maha Mengetahui",
         "description": "Yang mengetahui rahasia dan yang tersembunyi"
+      },
+      "ru": {
+        "name": "Свидетель",
+        "description": ""
       }
     }
   },
@@ -1781,6 +1981,10 @@
       "id": {
         "name": "Yang Maha Perkasa",
         "description": "Yang memiliki kekuatan yang sempurna"
+      },
+      "ru": {
+        "name": "Правда",
+        "description": ""
       }
     }
   },
@@ -1816,6 +2020,10 @@
       "id": {
         "name": "Yang Maha Pengampun",
         "description": "Yang luas ampunan-Nya"
+      },
+      "ru": {
+        "name": "Попечитель",
+        "description": ""
       }
     }
   },
@@ -1851,6 +2059,10 @@
       "id": {
         "name": "Yang Maha Penyayang",
         "description": "Yang menyayangi hamba-hamba-Nya"
+      },
+      "ru": {
+        "name": "Сильный",
+        "description": ""
       }
     }
   },
@@ -1886,6 +2098,10 @@
       "id": {
         "name": "Yang Maha Menatap",
         "description": "Yang menatap segala sesuatu dengan penglihatan-Nya"
+      },
+      "ru": {
+        "name": "Фирма",
+        "description": ""
       }
     }
   },
@@ -1921,6 +2137,10 @@
       "id": {
         "name": "Yang Maha Menetapkan",
         "description": "Yang menetapkan segala sesuatu dengan hikmah"
+      },
+      "ru": {
+        "name": "Защищающий друг",
+        "description": ""
       }
     }
   },
@@ -1956,6 +2176,10 @@
       "id": {
         "name": "Yang Maha Mengawasi",
         "description": "Yang mengawasi seluruh makhluk-Nya"
+      },
+      "ru": {
+        "name": "Похвальный",
+        "description": ""
       }
     }
   },
@@ -1991,6 +2215,10 @@
       "id": {
         "name": "Yang Maha Memberi",
         "description": "Yang memberi tanpa pamrih"
+      },
+      "ru": {
+        "name": "Счетчик",
+        "description": ""
       }
     }
   },
@@ -2026,6 +2254,10 @@
       "id": {
         "name": "Yang Maha Meminta",
         "description": "Yang meminta hamba-hamba-Nya untuk beribadah"
+      },
+      "ru": {
+        "name": "Создатель",
+        "description": ""
       }
     }
   },
@@ -2061,6 +2293,10 @@
       "id": {
         "name": "Yang Maha Kuat",
         "description": "Yang memiliki kekuatan yang tak tertandingi"
+      },
+      "ru": {
+        "name": "Реставратор",
+        "description": ""
       }
     }
   },
@@ -2096,6 +2332,10 @@
       "id": {
         "name": "Yang Maha Teguh",
         "description": "Yang teguh dalam segala keadaan"
+      },
+      "ru": {
+        "name": "Даритель жизни",
+        "description": ""
       }
     }
   },
@@ -2131,6 +2371,10 @@
       "id": {
         "name": "Yang Maha Melindungi",
         "description": "Yang melindungi hamba-hamba-Nya yang beriman"
+      },
+      "ru": {
+        "name": "Создатель смерти",
+        "description": ""
       }
     }
   },
@@ -2166,6 +2410,10 @@
       "id": {
         "name": "Yang Maha Terpuji",
         "description": "Yang terpuji dalam segala perbuatan-Nya"
+      },
+      "ru": {
+        "name": "Вечноживущий",
+        "description": ""
       }
     }
   },
@@ -2201,6 +2449,10 @@
       "id": {
         "name": "Yang Maha Menghitung",
         "description": "Yang menghitung segala amal perbuatan"
+      },
+      "ru": {
+        "name": "Самостоятельный",
+        "description": ""
       }
     }
   },
@@ -2236,6 +2488,10 @@
       "id": {
         "name": "Yang Maha Memulai",
         "description": "Yang memulai segala sesuatu"
+      },
+      "ru": {
+        "name": "Искатель",
+        "description": ""
       }
     }
   },
@@ -2271,6 +2527,10 @@
       "id": {
         "name": "Yang Maha Mengembalikan",
         "description": "Yang mengembalikan semua kepada-Nya"
+      },
+      "ru": {
+        "name": "Благородный и славный",
+        "description": ""
       }
     }
   },
@@ -2306,6 +2566,10 @@
       "id": {
         "name": "Yang Maha Menghidupkan",
         "description": "Yang menghidupkan setelah kematian"
+      },
+      "ru": {
+        "name": "Тот самый",
+        "description": ""
       }
     }
   },
@@ -2341,6 +2605,10 @@
       "id": {
         "name": "Yang Maha Mematikan",
         "description": "Yang mematikan semua makhluk"
+      },
+      "ru": {
+        "name": "Уникальный",
+        "description": ""
       }
     }
   },
@@ -2376,6 +2644,10 @@
       "id": {
         "name": "Yang Maha Hidup",
         "description": "Yang hidup selama-lamanya"
+      },
+      "ru": {
+        "name": "Вечное убежище",
+        "description": ""
       }
     }
   },
@@ -2411,6 +2683,10 @@
       "id": {
         "name": "Yang Maha Berdiri Sendiri",
         "description": "Yang berdiri sendiri tanpa bantuan"
+      },
+      "ru": {
+        "name": "Способность",
+        "description": ""
       }
     }
   },
@@ -2446,6 +2722,10 @@
       "id": {
         "name": "Yang Maha Agung",
         "description": "Yang memiliki keagungan sempurna"
+      },
+      "ru": {
+        "name": "Создатель всей силы",
+        "description": ""
       }
     }
   },
@@ -2481,6 +2761,10 @@
       "id": {
         "name": "Yang Maha Mulia",
         "description": "Yang mulia dan tidak membutuhkan siapa pun"
+      },
+      "ru": {
+        "name": "Экспедитор",
+        "description": ""
       }
     }
   },
@@ -2516,6 +2800,10 @@
       "id": {
         "name": "Yang Maha Esa",
         "description": "Yang satu dan tidak ada yang menyamai-Nya"
+      },
+      "ru": {
+        "name": "Замедлитель",
+        "description": ""
       }
     }
   },
@@ -2551,6 +2839,10 @@
       "id": {
         "name": "Yang Maha Abadi",
         "description": "Yang abadi tanpa permulaan dan akhir"
+      },
+      "ru": {
+        "name": "Первый",
+        "description": ""
       }
     }
   },
@@ -2586,6 +2878,10 @@
       "id": {
         "name": "Yang Maha Menetapkan",
         "description": "Yang menetapkan segala sesuatu"
+      },
+      "ru": {
+        "name": "Последний",
+        "description": ""
       }
     }
   },
@@ -2621,6 +2917,10 @@
       "id": {
         "name": "Yang Maha Bijaksana",
         "description": "Yang bijaksana dalam setiap keputusan"
+      },
+      "ru": {
+        "name": "Манифест",
+        "description": ""
       }
     }
   },
@@ -2656,6 +2956,10 @@
       "id": {
         "name": "Yang Maha Lembut",
         "description": "Yang lembut dalam mengatur urusan hamba-Nya"
+      },
+      "ru": {
+        "name": "Скрытый",
+        "description": ""
       }
     }
   },
@@ -2691,6 +2995,10 @@
       "id": {
         "name": "Yang Maha Luas Pemberian-Nya",
         "description": "Yang luas karunia dan nikmat-Nya"
+      },
+      "ru": {
+        "name": "Губернатор",
+        "description": ""
       }
     }
   },
@@ -2726,6 +3034,10 @@
       "id": {
         "name": "Yang Maha Mengetahui",
         "description": "Yang mengetahui apa yang tampak dan tersembunyi"
+      },
+      "ru": {
+        "name": "Самый возвышенный",
+        "description": ""
       }
     }
   },
@@ -2761,6 +3073,10 @@
       "id": {
         "name": "Yang Maha Kuasa",
         "description": "Yang berkuasa atas segala sesuatu"
+      },
+      "ru": {
+        "name": "Источник всего добра",
+        "description": ""
       }
     }
   },
@@ -2796,6 +3112,10 @@
       "id": {
         "name": "Yang Maha Gagah",
         "description": "Yang gagah dan kuat"
+      },
+      "ru": {
+        "name": "Принимающий покаяние",
+        "description": ""
       }
     }
   },
@@ -2831,6 +3151,10 @@
       "id": {
         "name": "Yang Maha Mencegah",
         "description": "Yang mencegah segala kemudaratan"
+      },
+      "ru": {
+        "name": "Мститель",
+        "description": ""
       }
     }
   },
@@ -2866,6 +3190,10 @@
       "id": {
         "name": "Yang Maha Menunda",
         "description": "Yang menunda hukuman dengan bijaksana"
+      },
+      "ru": {
+        "name": "Прощающий",
+        "description": ""
       }
     }
   },
@@ -2901,6 +3229,10 @@
       "id": {
         "name": "Yang Pertama",
         "description": "Yang pertama sebelum segala sesuatu ada"
+      },
+      "ru": {
+        "name": "Сострадательный",
+        "description": ""
       }
     }
   },
@@ -2936,6 +3268,10 @@
       "id": {
         "name": "Yang Terakhir",
         "description": "Yang terakhir setelah segala sesuatu lenyap"
+      },
+      "ru": {
+        "name": "Владелец суверенитета",
+        "description": ""
       }
     }
   },
@@ -2971,6 +3307,10 @@
       "id": {
         "name": "Yang Nyata",
         "description": "Yang nyata adanya dalam tanda-tanda-Nya"
+      },
+      "ru": {
+        "name": "Лорд Величия и Щедрости",
+        "description": ""
       }
     }
   },
@@ -3006,6 +3346,10 @@
       "id": {
         "name": "Yang Tersembunyi",
         "description": "Yang tersembunyi dari penglihatan mata"
+      },
+      "ru": {
+        "name": "Справедливый",
+        "description": ""
       }
     }
   },
@@ -3041,6 +3385,10 @@
       "id": {
         "name": "Yang Berkuasa",
         "description": "Yang berkuasa atas segala urusan"
+      },
+      "ru": {
+        "name": "Собиратель",
+        "description": ""
       }
     }
   },
@@ -3076,6 +3424,10 @@
       "id": {
         "name": "Yang Maha Suci",
         "description": "Yang suci dari segala kekurangan"
+      },
+      "ru": {
+        "name": "Самодостаточный",
+        "description": ""
       }
     }
   },
@@ -3111,6 +3463,10 @@
       "id": {
         "name": "Yang Maha Mengumpulkan",
         "description": "Yang mengumpulkan seluruh umat manusia"
+      },
+      "ru": {
+        "name": "Обогатитель",
+        "description": ""
       }
     }
   },
@@ -3146,6 +3502,10 @@
       "id": {
         "name": "Yang Maha Kaya",
         "description": "Yang kaya dan tidak membutuhkan makhluk-Nya"
+      },
+      "ru": {
+        "name": "Предотвращение",
+        "description": ""
       }
     }
   },
@@ -3181,6 +3541,10 @@
       "id": {
         "name": "Yang Maha Pemberi Kekuasaan",
         "description": "Yang memberi kekuasaan kepada siapa yang dikehendaki"
+      },
+      "ru": {
+        "name": "Создатель вреда",
+        "description": ""
       }
     }
   },
@@ -3216,6 +3580,10 @@
       "id": {
         "name": "Yang Maha Pencabut Kekuasaan",
         "description": "Yang mencabut kekuasaan dari siapa yang dikehendaki"
+      },
+      "ru": {
+        "name": "Создатель добра",
+        "description": ""
       }
     }
   },
@@ -3251,6 +3619,10 @@
       "id": {
         "name": "Yang Maha Pemberi Kemuliaan",
         "description": "Yang memuliakan siapa yang dikehendaki"
+      },
+      "ru": {
+        "name": "Свет",
+        "description": ""
       }
     }
   },
@@ -3286,6 +3658,10 @@
       "id": {
         "name": "Yang Maha Menghinakan",
         "description": "Yang menghinakan siapa yang dikehendaki"
+      },
+      "ru": {
+        "name": "Руководство",
+        "description": ""
       }
     }
   },
@@ -3321,6 +3697,10 @@
       "id": {
         "name": "Yang Maha Mendengar",
         "description": "Yang mendengar segala suara"
+      },
+      "ru": {
+        "name": "Несравненный создатель",
+        "description": ""
       }
     }
   },
@@ -3356,6 +3736,10 @@
       "id": {
         "name": "Yang Maha Melihat",
         "description": "Yang melihat segala yang ada"
+      },
+      "ru": {
+        "name": "Вечный",
+        "description": ""
       }
     }
   },
@@ -3391,6 +3775,10 @@
       "id": {
         "name": "Yang Maha Mengadili",
         "description": "Yang mengadili dengan keadilan sempurna"
+      },
+      "ru": {
+        "name": "Наследник всего",
+        "description": ""
       }
     }
   },
@@ -3426,6 +3814,10 @@
       "id": {
         "name": "Yang Maha Adil",
         "description": "Yang tidak menzalimi hamba-hamba-Nya"
+      },
+      "ru": {
+        "name": "Путеводитель по правильному пути",
+        "description": ""
       }
     }
   },
@@ -3461,6 +3853,10 @@
       "id": {
         "name": "Yang Maha Sabar",
         "description": "Yang sabar menanti taubat hamba-hamba-Nya"
+      },
+      "ru": {
+        "name": "Пациент",
+        "description": ""
       }
     }
   }

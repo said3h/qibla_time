@@ -1,6 +1,8 @@
+// ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
 import 'app_localizations.dart';
+
+// ignore_for_file: type=lint
 
 /// The translations for German (`de`).
 class AppLocalizationsDe extends AppLocalizations {
@@ -139,97 +141,116 @@ class AppLocalizationsDe extends AppLocalizations {
   String get onboardingWelcomeTitle => 'Willkommen bei Qibla Time';
 
   @override
-  String get onboardingWelcomeSubtitle => 'Gebetszeiten, Qibla, Quran und Erinnerungen in einer leichtgewichtigen App für Ihren täglichen Rhythmus.';
+  String get onboardingWelcomeSubtitle =>
+      'Gebetszeiten, Qibla, Quran und Erinnerungen in einer leichtgewichtigen App für Ihren täglichen Rhythmus.';
 
   @override
   String get onboardingFeatureSchedulesTitle => 'Zuverlässige Gebetszeiten';
 
   @override
-  String get onboardingFeatureSchedulesBody => 'Berechnet anhand Ihres Standorts und der gewählten Methode.';
+  String get onboardingFeatureSchedulesBody =>
+      'Berechnet anhand Ihres Standorts und der gewählten Methode.';
 
   @override
   String get onboardingFeaturePracticeTitle => 'Qibla und tägliche Praxis';
 
   @override
-  String get onboardingFeaturePracticeBody => 'Kompass, Tasbih, Verlauf und mehr in einem reibungslosen Ablauf.';
+  String get onboardingFeaturePracticeBody =>
+      'Kompass, Tasbih, Verlauf und mehr in einem reibungslosen Ablauf.';
 
   @override
   String get onboardingFeatureRemindersTitle => 'Hilfreiche Erinnerungen';
 
   @override
-  String get onboardingFeatureRemindersBody => 'Adhan-Benachrichtigungen und wichtige Einstellungen von Anfang an bereit.';
+  String get onboardingFeatureRemindersBody =>
+      'Adhan-Benachrichtigungen und wichtige Einstellungen von Anfang an bereit.';
 
   @override
   String get onboardingPermissionsTitle => 'Wichtige Berechtigungen';
 
   @override
-  String get onboardingPermissionsSubtitle => 'Wir fragen nur nach dem, was benötigt wird, um Gebetszeiten zu berechnen, die Qibla zu nutzen und Sie rechtzeitig zu benachrichtigen.';
+  String get onboardingPermissionsSubtitle =>
+      'Wir fragen nur nach dem, was benötigt wird, um Gebetszeiten zu berechnen, die Qibla zu nutzen und Sie rechtzeitig zu benachrichtigen.';
 
   @override
-  String get onboardingLocationReadyBody => 'Bereit zur Berechnung der Gebetszeiten und der Qibla.';
+  String get onboardingLocationReadyBody =>
+      'Bereit zur Berechnung der Gebetszeiten und der Qibla.';
 
   @override
-  String get onboardingLocationBlockedBody => 'Standortzugriff ist blockiert. Sie können ihn später in den Systemeinstellungen aktivieren.';
+  String get onboardingLocationBlockedBody =>
+      'Standortzugriff ist blockiert. Sie können ihn später in den Systemeinstellungen aktivieren.';
 
   @override
-  String get onboardingLocationGpsOffBody => 'Das GPS Ihres Geräts ist ausgeschaltet. Sie können fortfahren und es später einschalten.';
+  String get onboardingLocationGpsOffBody =>
+      'Das GPS Ihres Geräts ist ausgeschaltet. Sie können fortfahren und es später einschalten.';
 
   @override
-  String get onboardingLocationPendingBody => 'Erforderlich für genaue Gebetszeiten und die Richtung nach Mekka.';
+  String get onboardingLocationPendingBody =>
+      'Erforderlich für genaue Gebetszeiten und die Richtung nach Mekka.';
 
   @override
-  String get onboardingNotificationsReadyBody => 'Bereit, Sie an jedes Gebet zu erinnern.';
+  String get onboardingNotificationsReadyBody =>
+      'Bereit, Sie an jedes Gebet zu erinnern.';
 
   @override
-  String get onboardingNotificationsPendingBody => 'Dies ermöglicht Ihnen, Adhan-Benachrichtigungen und Erinnerungen zu erhalten.';
+  String get onboardingNotificationsPendingBody =>
+      'Dies ermöglicht Ihnen, Adhan-Benachrichtigungen und Erinnerungen zu erhalten.';
 
   @override
   String get onboardingMethodTitle => 'Berechnungsmethode';
 
   @override
-  String get onboardingMethodSubtitle => 'Sie können sie später ändern, aber so bleiben Ihre Gebetszeiten von heute an korrekt konfiguriert.';
+  String get onboardingMethodSubtitle =>
+      'Sie können sie später ändern, aber so bleiben Ihre Gebetszeiten von heute an korrekt konfiguriert.';
 
   @override
   String get onboardingSelectedNow => 'Jetzt ausgewählt';
 
   @override
-  String get onboardingTapToChooseMethod => 'Tippen, um diese Methode zu wählen';
+  String get onboardingTapToChooseMethod =>
+      'Tippen, um diese Methode zu wählen';
 
   @override
   String get onboardingMadhabTitle => 'Madhab für Asr';
 
   @override
-  String get onboardingMadhabSubtitle => 'Dies betrifft nur die Berechnung von Asr. Wenn Sie unsicher sind, können Sie Schafi beibehalten und es später ändern.';
+  String get onboardingMadhabSubtitle =>
+      'Dies betrifft nur die Berechnung von Asr. Wenn Sie unsicher sind, können Sie Schafi beibehalten und es später ändern.';
 
   @override
   String get onboardingMadhabCommonTitle => 'Schafi / Maliki / Hanbali';
 
   @override
-  String get onboardingMadhabCommonSubtitle => 'Die gängigste Option für den Einstieg';
+  String get onboardingMadhabCommonSubtitle =>
+      'Die gängigste Option für den Einstieg';
 
   @override
   String get onboardingMadhabHanafiTitle => 'Hanafi';
 
   @override
-  String get onboardingMadhabHanafiSubtitle => 'Die hanafitische Berechnung für Asr verwenden';
+  String get onboardingMadhabHanafiSubtitle =>
+      'Die hanafitische Berechnung für Asr verwenden';
 
   @override
   String get onboardingAdhanTitle => 'Adhan und Benachrichtigungen';
 
   @override
-  String get onboardingAdhanSubtitle => 'Qibla Time kann Sie mit einem leisen Adhan standardmäßig für jedes Gebet benachrichtigen. Sie können es später ändern.';
+  String get onboardingAdhanSubtitle =>
+      'Qibla Time kann Sie mit einem leisen Adhan standardmäßig für jedes Gebet benachrichtigen. Sie können es später ändern.';
 
   @override
   String get onboardingPrayerNotificationsTitle => 'Gebetsbenachrichtigungen';
 
   @override
-  String get onboardingPrayerNotificationsSubtitle => 'Sie können sie jetzt aktivieren oder vorerst ohne sie fortfahren.';
+  String get onboardingPrayerNotificationsSubtitle =>
+      'Sie können sie jetzt aktivieren oder vorerst ohne sie fortfahren.';
 
   @override
   String get onboardingAdhanPreviewTitle => 'Schnelle Adhan-Vorschau';
 
   @override
-  String get onboardingAdhanPreviewSubtitle => 'Der von Ihnen gewählte Ton wird verwendet. Sie können ihn später in den Einstellungen ändern.';
+  String get onboardingAdhanPreviewSubtitle =>
+      'Der von Ihnen gewählte Ton wird verwendet. Sie können ihn später in den Einstellungen ändern.';
 
   @override
   String get onboardingAdhanStopPreview => 'Vorschau stoppen';
@@ -241,7 +262,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String get onboardingDoneTitle => 'Alles bereit';
 
   @override
-  String get onboardingDoneSubtitle => 'Sie können jetzt mit Ihren Gebetszeiten, der Qibla und dem täglichen Verlauf beginnen. Alles kann später angepasst werden.';
+  String get onboardingDoneSubtitle =>
+      'Sie können jetzt mit Ihren Gebetszeiten, der Qibla und dem täglichen Verlauf beginnen. Alles kann später angepasst werden.';
 
   @override
   String get onboardingSummaryLocationBlocked => 'Vorerst blockiert';
@@ -282,7 +304,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String get homeHeroTodayOverview => 'Heutige Hauptansicht';
 
   @override
-  String get homeHeroUsingSavedLocation => 'Ihr zuletzt gespeicherter Standort wird verwendet';
+  String get homeHeroUsingSavedLocation =>
+      'Ihr zuletzt gespeicherter Standort wird verwendet';
 
   @override
   String get homeSelectedDateToday => 'HEUTE';
@@ -358,7 +381,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsSectionAdhanNotifications => 'Adhan-Benachrichtigungen';
 
   @override
-  String get settingsSectionScheduleCalculation => 'Berechnung der Gebetszeiten';
+  String get settingsSectionScheduleCalculation =>
+      'Berechnung der Gebetszeiten';
 
   @override
   String get settingsSectionRamadanMode => 'Ramadan-Modus';
@@ -393,13 +417,15 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsHighContrast => 'Hoher Kontrast';
 
   @override
-  String get settingsHighContrastSubtitle => 'Verbessert die Lesbarkeit in der gesamten App';
+  String get settingsHighContrastSubtitle =>
+      'Verbessert die Lesbarkeit in der gesamten App';
 
   @override
   String get settingsUseSystemBold => 'System-Fettschrift verwenden';
 
   @override
-  String get settingsUseSystemBoldSubtitle => 'Respektiert die VoiceOver/TalkBack-Einstellung';
+  String get settingsUseSystemBoldSubtitle =>
+      'Respektiert die VoiceOver/TalkBack-Einstellung';
 
   @override
   String get settingsResetAccessibility => 'Barrierefreiheit zurücksetzen';
@@ -435,13 +461,15 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsThemeMonochromeTitle => 'Monochrom';
 
   @override
-  String get settingsThemeMonochromeSubtitle => 'Für Achromatopsie und Sehbehinderung';
+  String get settingsThemeMonochromeSubtitle =>
+      'Für Achromatopsie und Sehbehinderung';
 
   @override
   String get settingsLanguage => 'App-Sprache';
 
   @override
-  String get settingsLanguageSubtitle => 'Wählen Sie, ob die App der Gerätesprache folgen oder überall eine feste Sprache verwenden soll.';
+  String get settingsLanguageSubtitle =>
+      'Wählen Sie, ob die App der Gerätesprache folgen oder überall eine feste Sprache verwenden soll.';
 
   @override
   String get settingsLanguageDialogTitle => 'App-Sprache';
@@ -470,6 +498,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsLanguageOptionArabic => 'العربية';
 
   @override
+  String get settingsLanguageOptionDutch => 'Niederländisch';
+
+  @override
   String get settingsAdhanSound => 'Adhan-Klang';
 
   @override
@@ -479,10 +510,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsGeneralNotifications => 'Allgemeine Benachrichtigungen';
 
   @override
-  String get settingsGeneralNotificationsSubtitle => 'Alle Gebetsbenachrichtigungen aktivieren oder pausieren';
+  String get settingsGeneralNotificationsSubtitle =>
+      'Alle Gebetsbenachrichtigungen aktivieren oder pausieren';
 
   @override
-  String get settingsSystemPermissionPendingBody => 'Adhan-Benachrichtigungen sind konfiguriert, aber die Systemberechtigung steht noch aus.';
+  String get settingsSystemPermissionPendingBody =>
+      'Adhan-Benachrichtigungen sind konfiguriert, aber die Systemberechtigung steht noch aus.';
 
   @override
   String get settingsHapticFeedback => 'Haptisches Feedback';
@@ -491,19 +524,22 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsRamadanAutomatic => 'Automatischer Ramadan-Modus';
 
   @override
-  String get settingsRamadanAutomaticSubtitle => 'Wird automatisch aktiviert, wenn der islamische Kalender den Ramadan beginnt';
+  String get settingsRamadanAutomaticSubtitle =>
+      'Wird automatisch aktiviert, wenn der islamische Kalender den Ramadan beginnt';
 
   @override
   String get settingsRamadanForced => 'Ramadan-Modus erzwingen';
 
   @override
-  String get settingsRamadanForcedSubtitle => 'Die Ramadan-Ansicht manuell aktivieren';
+  String get settingsRamadanForcedSubtitle =>
+      'Die Ramadan-Ansicht manuell aktivieren';
 
   @override
   String get settingsDailyNotification => 'Tägliche Benachrichtigung';
 
   @override
-  String get settingsDailyNotificationSubtitle => 'Erhalten Sie täglich einen Hadith oder Vers';
+  String get settingsDailyNotificationSubtitle =>
+      'Erhalten Sie täglich einen Hadith oder Vers';
 
   @override
   String get settingsNotificationHour => 'Benachrichtigungszeit';
@@ -512,10 +548,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsTravelerMode => 'Reisemodus';
 
   @override
-  String get settingsTravelerModeSubtitle => 'Erkennt automatisch Stadtwechsel (>50 km)';
+  String get settingsTravelerModeSubtitle =>
+      'Erkennt automatisch Stadtwechsel (>50 km)';
 
   @override
-  String get settingsTravelerModeLoadError => 'Wir konnten den Reisemodus nicht laden';
+  String get settingsTravelerModeLoadError =>
+      'Wir konnten den Reisemodus nicht laden';
 
   @override
   String get settingsRecentPlaces => 'Letzte Orte';
@@ -542,7 +580,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsSupportCardTitle => 'Entwicklung unterstützen';
 
   @override
-  String get settingsSupportCardSubtitle => 'Jede Spende kann eine Sadaqah Jariyah werden';
+  String get settingsSupportCardSubtitle =>
+      'Jede Spende kann eine Sadaqah Jariyah werden';
 
   @override
   String get settingsBackupMode => 'Backup-Modus';
@@ -560,7 +599,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsRestoreBackup => 'Backup wiederherstellen';
 
   @override
-  String get settingsBackupInfoBody => 'Sie können ein manuelles Backup im JSON-Format speichern und teilen. Automatisierung und geräteübergreifende Synchronisierung sind noch nicht verfügbar.';
+  String get settingsBackupInfoBody =>
+      'Sie können ein manuelles Backup im JSON-Format speichern und teilen. Automatisierung und geräteübergreifende Synchronisierung sind noch nicht verfügbar.';
 
   @override
   String get settingsRestoreBackupDialogTitle => 'Backup wiederherstellen';
@@ -569,13 +609,16 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsRestoreBackupSuccess => 'Backup wiederhergestellt';
 
   @override
-  String get settingsRestoreBackupError => 'Wir konnten das Backup nicht wiederherstellen.';
+  String get settingsRestoreBackupError =>
+      'Wir konnten das Backup nicht wiederherstellen.';
 
   @override
-  String get settingsDailyNotificationEnabled => 'Tägliche Benachrichtigung aktiviert';
+  String get settingsDailyNotificationEnabled =>
+      'Tägliche Benachrichtigung aktiviert';
 
   @override
-  String get settingsDailyNotificationDisabled => 'Tägliche Benachrichtigung deaktiviert';
+  String get settingsDailyNotificationDisabled =>
+      'Tägliche Benachrichtigung deaktiviert';
 
   @override
   String get settingsSelectHourTitle => 'Zeit wählen';
@@ -696,13 +739,16 @@ class AppLocalizationsDe extends AppLocalizations {
   String get shareHadithTitle => 'Hadith teilen';
 
   @override
-  String get shareHadithSubtitle => 'Wählen Sie Format und Inhalt vor dem Teilen.';
+  String get shareHadithSubtitle =>
+      'Wählen Sie Format und Inhalt vor dem Teilen.';
 
   @override
-  String get shareHadithTextError => 'Wir konnten den Hadith-Text nicht teilen.';
+  String get shareHadithTextError =>
+      'Wir konnten den Hadith-Text nicht teilen.';
 
   @override
-  String get shareHadithImageError => 'Wir konnten das Hadith-Bild nicht generieren.';
+  String get shareHadithImageError =>
+      'Wir konnten das Hadith-Bild nicht generieren.';
 
   @override
   String get shareDuaTitle => 'Dua teilen';
@@ -713,7 +759,8 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get shareDuaSubtitle => 'Verwenden Sie die gleiche visuelle Gestaltung wie beim Hadith für Dua und Adhkar.';
+  String get shareDuaSubtitle =>
+      'Verwenden Sie die gleiche visuelle Gestaltung wie beim Hadith für Dua und Adhkar.';
 
   @override
   String get shareDuaTextError => 'Wir konnten den Dua-Text nicht teilen.';
@@ -727,22 +774,27 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get shareAyahSubtitle => 'Behalten Sie die gleiche visuelle Darstellung für Text, Bild und Video bei.';
+  String get shareAyahSubtitle =>
+      'Behalten Sie die gleiche visuelle Darstellung für Text, Bild und Video bei.';
 
   @override
-  String get shareAyahTextError => 'Wir konnten diese Ayah nicht als Text teilen.';
+  String get shareAyahTextError =>
+      'Wir konnten diese Ayah nicht als Text teilen.';
 
   @override
-  String get shareAyahImageError => 'Wir konnten dieses Ayah-Bild nicht generieren.';
+  String get shareAyahImageError =>
+      'Wir konnten dieses Ayah-Bild nicht generieren.';
 
   @override
-  String get shareAyahVideoNoAudio => 'Es ist kein Audio verfügbar, um ein Video für diese Ayah zu generieren.';
+  String get shareAyahVideoNoAudio =>
+      'Es ist kein Audio verfügbar, um ein Video für diese Ayah zu generieren.';
 
   @override
   String get shareAyahVideoGenerating => 'Das Ayah-Video wird generiert...';
 
   @override
-  String get shareAyahVideoError => 'Wir konnten das Video für diese Ayah nicht generieren.';
+  String get shareAyahVideoError =>
+      'Wir konnten das Video für diese Ayah nicht generieren.';
 
   @override
   String get notificationAdhanChannelName => 'Adhan';
@@ -762,34 +814,41 @@ class AppLocalizationsDe extends AppLocalizations {
   String get notificationReminderChannelName => 'Qibla Time - Erinnerungen';
 
   @override
-  String get notificationReminderChannelDescription => 'Kontextbezogene Erinnerungen für Ramadan und Dschumu\'a';
+  String get notificationReminderChannelDescription =>
+      'Kontextbezogene Erinnerungen für Ramadan und Dschumu\'a';
 
   @override
   String get notificationDailyReflectionChannelName => 'Tägliche Besinnung';
 
   @override
-  String get notificationDailyReflectionChannelDescription => 'Vers des Quran und Hadith des Tages';
+  String get notificationDailyReflectionChannelDescription =>
+      'Vers des Quran und Hadith des Tages';
 
   @override
   String get notificationDailyReflectionTitle => 'Besinnung des Tages';
 
   @override
-  String get notificationDailyReflectionFallbackBody => 'Ihre tägliche spirituelle Besinnung in Qibla Time.';
+  String get notificationDailyReflectionFallbackBody =>
+      'Ihre tägliche spirituelle Besinnung in Qibla Time.';
 
   @override
-  String get notificationDailyReflectionErrorTitle => 'Qibla Time · Tägliche Besinnung';
+  String get notificationDailyReflectionErrorTitle =>
+      'Qibla Time · Tägliche Besinnung';
 
   @override
-  String get notificationDailyReflectionErrorBody => 'Ihre spirituelle Erinnerung für heute';
+  String get notificationDailyReflectionErrorBody =>
+      'Ihre spirituelle Erinnerung für heute';
 
   @override
   String get notificationHadithReminderChannelName => 'Hadith-Erinnerungen';
 
   @override
-  String get notificationHadithReminderChannelDescription => 'Stündliche Hadith-Erinnerungen';
+  String get notificationHadithReminderChannelDescription =>
+      'Stündliche Hadith-Erinnerungen';
 
   @override
-  String get notificationHadithReminderFallbackBody => 'Erinnerung: Lesen Sie einen Hadith des Propheten ﷺ';
+  String get notificationHadithReminderFallbackBody =>
+      'Erinnerung: Lesen Sie einen Hadith des Propheten ﷺ';
 
   @override
   String get notificationHadithReminderTitle => '📖 Hadith für diesen Moment';
@@ -801,18 +860,22 @@ class AppLocalizationsDe extends AppLocalizations {
   String get notificationHadithReminderTestTitle => '📖 Hadith-Erinnerung';
 
   @override
-  String get notificationWeeklySummaryTitle => 'Ihre wöchentliche Zusammenfassung ist bereit';
+  String get notificationWeeklySummaryTitle =>
+      'Ihre wöchentliche Zusammenfassung ist bereit';
 
   @override
-  String notificationWeeklySummaryBody(int prayersCompleted, int maxPossible, Object strongestDay) {
+  String notificationWeeklySummaryBody(
+      int prayersCompleted, int maxPossible, Object strongestDay) {
     return 'Diese Woche haben Sie $prayersCompleted/$maxPossible Gebete absolviert. Ihr stärkster Tag war $strongestDay.';
   }
 
   @override
-  String get quranDailyVerseFallbackTranslation => 'Allah: Es gibt keinen Gott außer Ihm, dem Lebendigen und Beständigen. Weder Schlummer noch Schlaf überkommen Ihn.';
+  String get quranDailyVerseFallbackTranslation =>
+      'Allah: Es gibt keinen Gott außer Ihm, dem Lebendigen und Beständigen. Weder Schlummer noch Schlaf überkommen Ihn.';
 
   @override
-  String get quranDailyVerseFallbackTransliteration => 'Allahu la ilaha illa huwal hayyul qayyum...';
+  String get quranDailyVerseFallbackTransliteration =>
+      'Allahu la ilaha illa huwal hayyul qayyum...';
 
   @override
   String get quranDailyVerseFallbackReference => 'Al-Baqara [2:255]';
@@ -839,7 +902,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String get quranProtectionTitle => 'TÄGLICHER SCHUTZ';
 
   @override
-  String get quranProtectionSubtitle => 'Schnellzugriff auf Ayat al-Kursi und die Schutz-Suren. Öffnen Sie sie zum Lesen oder Zuhören und markieren Sie Ihre drei Wiederholungen.';
+  String get quranProtectionSubtitle =>
+      'Schnellzugriff auf Ayat al-Kursi und die Schutz-Suren. Öffnen Sie sie zum Lesen oder Zuhören und markieren Sie Ihre drei Wiederholungen.';
 
   @override
   String get quranProtectionAyatAlKursiHelper => 'Al-Baqara 2:255';
@@ -873,10 +937,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get quranReadingHintTitle => 'FORTLAUFENDE LESUNG';
 
   @override
-  String get quranReadingHintBody => 'Öffnen Sie eine Sure und wir speichern Ihre letzte Ayah, damit Sie später zurückkehren können.';
+  String get quranReadingHintBody =>
+      'Öffnen Sie eine Sure und wir speichern Ihre letzte Ayah, damit Sie später zurückkehren können.';
 
   @override
-  String get quranReadingHintSecondary => 'Sie können auch Lesezeichen speichern, indem Sie während des Lesens auf das Lesezeichen-Symbol tippen.';
+  String get quranReadingHintSecondary =>
+      'Sie können auch Lesezeichen speichern, indem Sie während des Lesens auf das Lesezeichen-Symbol tippen.';
 
   @override
   String get quranContinueReadingTitle => 'WEITERLESEN';
@@ -918,7 +984,8 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get quranDownloadedFavoriteOffline => 'Audio heruntergeladen · Offline-Favorit';
+  String get quranDownloadedFavoriteOffline =>
+      'Audio heruntergeladen · Offline-Favorit';
 
   @override
   String get quranDownloadedAudio => 'Audio heruntergeladen';
@@ -944,19 +1011,23 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get quranShareTextSubtitle => 'Enthält den arabischen Text, die Übersetzung und die Referenz.';
+  String get quranShareTextSubtitle =>
+      'Enthält den arabischen Text, die Übersetzung und die Referenz.';
 
   @override
   String get quranShareImageSubtitle => 'Ein Bild mit der Ayah erstellen.';
 
   @override
-  String get quranShareVideoSubtitle => 'Ein Video mit der Karte und der Rezitation erstellen.';
+  String get quranShareVideoSubtitle =>
+      'Ein Video mit der Karte und der Rezitation erstellen.';
 
   @override
-  String get quranAyahImageError => 'Wir konnten das Bild für diese Ayah nicht generieren.';
+  String get quranAyahImageError =>
+      'Wir konnten das Bild für diese Ayah nicht generieren.';
 
   @override
-  String get quranAyahVideoNoAudio => 'Für diese Ayah ist kein Audio verfügbar, um ein Video zu generieren.';
+  String get quranAyahVideoNoAudio =>
+      'Für diese Ayah ist kein Audio verfügbar, um ein Video zu generieren.';
 
   @override
   String get quranAyahVideoGenerating => 'Wir generieren das Ayah-Video...';
@@ -967,49 +1038,63 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get quranAyahVideoError => 'Wir konnten das Video für diese Ayah nicht generieren.';
+  String get quranAyahVideoError =>
+      'Wir konnten das Video für diese Ayah nicht generieren.';
 
   @override
-  String get quranDownloadCheckError => 'Wir konnten den Download auf diesem Gerät nicht überprüfen.';
+  String get quranDownloadCheckError =>
+      'Wir konnten den Download auf diesem Gerät nicht überprüfen.';
 
   @override
-  String get quranDownloadSuccess => 'Audio heruntergeladen. Sie können diese Sure jetzt offline anhören.';
+  String get quranDownloadSuccess =>
+      'Audio heruntergeladen. Sie können diese Sure jetzt offline anhören.';
 
   @override
-  String get quranDownloadDetailedError => 'Wir konnten den Download nicht abschließen. Überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.';
+  String get quranDownloadDetailedError =>
+      'Wir konnten den Download nicht abschließen. Überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.';
 
   @override
-  String get quranDownloadShortError => 'Wir konnten den Audio-Download nicht abschließen.';
+  String get quranDownloadShortError =>
+      'Wir konnten den Audio-Download nicht abschließen.';
 
   @override
-  String get quranDownloadedAudioPlaySubtitle => 'Hören Sie die Sure mit dem gespeicherten Audio.';
+  String get quranDownloadedAudioPlaySubtitle =>
+      'Hören Sie die Sure mit dem gespeicherten Audio.';
 
   @override
-  String get quranDownloadedAudioRemoveSubtitle => 'Speicher freigeben und wieder online anhören.';
+  String get quranDownloadedAudioRemoveSubtitle =>
+      'Speicher freigeben und wieder online anhören.';
 
   @override
-  String get quranDownloadedAudioRemoved => 'Der Download dieser Sure wurde entfernt.';
+  String get quranDownloadedAudioRemoved =>
+      'Der Download dieser Sure wurde entfernt.';
 
   @override
-  String get quranDownloadedFavoriteAdded => 'Sure zu Ihren heruntergeladenen Favoriten gespeichert.';
+  String get quranDownloadedFavoriteAdded =>
+      'Sure zu Ihren heruntergeladenen Favoriten gespeichert.';
 
   @override
-  String get quranDownloadedFavoriteRemoved => 'Sure aus Ihren heruntergeladenen Favoriten entfernt.';
+  String get quranDownloadedFavoriteRemoved =>
+      'Sure aus Ihren heruntergeladenen Favoriten entfernt.';
 
   @override
-  String get quranAyahAudioUnavailable => 'Audio ist für diese Ayah nicht verfügbar.';
+  String get quranAyahAudioUnavailable =>
+      'Audio ist für diese Ayah nicht verfügbar.';
 
   @override
-  String get quranAyahAudioDownloaded => 'Das Audio ist bereits auf diesem Gerät heruntergeladen.';
+  String get quranAyahAudioDownloaded =>
+      'Das Audio ist bereits auf diesem Gerät heruntergeladen.';
 
   @override
   String get quranAyahAudioAvailable => 'Sie können diese Ayah anhören.';
 
   @override
-  String get quranAyahAudioRequiresConnection => 'Sie können diese Ayah anhören, wenn Sie eine Verbindung haben.';
+  String get quranAyahAudioRequiresConnection =>
+      'Sie können diese Ayah anhören, wenn Sie eine Verbindung haben.';
 
   @override
-  String get quranSurahRecitationUnavailable => 'Die vollständige Rezitation ist für diese Sure nicht verfügbar.';
+  String get quranSurahRecitationUnavailable =>
+      'Die vollständige Rezitation ist für diese Sure nicht verfügbar.';
 
   @override
   String quranSurahAudioDownloading(int downloaded, int total) {
@@ -1017,7 +1102,8 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get quranSurahAudioDownloaded => 'Das Audio ist bereits auf diesem Gerät heruntergeladen. Sie können diese Sure offline anhören.';
+  String get quranSurahAudioDownloaded =>
+      'Das Audio ist bereits auf diesem Gerät heruntergeladen. Sie können diese Sure offline anhören.';
 
   @override
   String quranSurahAudioMissingAyahs(int count) {
@@ -1036,19 +1122,24 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get quranSurahAudioDownloadAvailable => 'Sie können es auch herunterladen, um offline zuzuhören.';
+  String get quranSurahAudioDownloadAvailable =>
+      'Sie können es auch herunterladen, um offline zuzuhören.';
 
   @override
-  String get quranSurahAudioPlayOnline => 'Sie können diese Sure direkt in der kontinuierlichen Wiedergabe anhören.';
+  String get quranSurahAudioPlayOnline =>
+      'Sie können diese Sure direkt in der kontinuierlichen Wiedergabe anhören.';
 
   @override
-  String get quranSurahAudioPlayWithConnection => 'Sie können diese vollständige Sure anhören, wenn Sie eine Verbindung haben.';
+  String get quranSurahAudioPlayWithConnection =>
+      'Sie können diese vollständige Sure anhören, wenn Sie eine Verbindung haben.';
 
   @override
-  String get quranAyahPlaybackError => 'Wir konnten das Audio nicht abspielen. Überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.';
+  String get quranAyahPlaybackError =>
+      'Wir konnten das Audio nicht abspielen. Überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.';
 
   @override
-  String get quranSurahPlaybackError => 'Wir konnten die vollständige Rezitation nicht starten.';
+  String get quranSurahPlaybackError =>
+      'Wir konnten die vollständige Rezitation nicht starten.';
 
   @override
   String get quranLastReadingBadge => 'Letzte Lesung';
@@ -1077,7 +1168,8 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get quranDetailLoadError => 'Wir konnten diese Sure nicht laden. Überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.';
+  String get quranDetailLoadError =>
+      'Wir konnten diese Sure nicht laden. Überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.';
 
   @override
   String quranTopBannerResume(int ayah) {
@@ -1085,13 +1177,16 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get quranTopBannerOnline => 'Inhalt online geladen. Sie können jedes Ayah-Audio anhören, solange Sie eine Verbindung haben.';
+  String get quranTopBannerOnline =>
+      'Inhalt online geladen. Sie können jedes Ayah-Audio anhören, solange Sie eine Verbindung haben.';
 
   @override
-  String get quranTopBannerOffline => 'Text offline geladen. Audio für einige Ayahs kann noch eine Verbindung erfordern.';
+  String get quranTopBannerOffline =>
+      'Text offline geladen. Audio für einige Ayahs kann noch eine Verbindung erfordern.';
 
   @override
-  String get quranTopBannerPlaceholder => 'Teilweiser Inhalt offline geladen. Audio ist vorerst nicht verfügbar.';
+  String get quranTopBannerPlaceholder =>
+      'Teilweiser Inhalt offline geladen. Audio ist vorerst nicht verfügbar.';
 
   @override
   String get quranSurahAudioCardTitle => 'SURE ANHÖREN';
@@ -1154,10 +1249,12 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get quranActiveAudioSurahHint => 'Die Sure wird automatisch mit der nächsten Ayah fortgesetzt.';
+  String get quranActiveAudioSurahHint =>
+      'Die Sure wird automatisch mit der nächsten Ayah fortgesetzt.';
 
   @override
-  String get quranActiveAudioAyahHint => 'Sie können diese Rezitation pausieren, fortsetzen oder stoppen.';
+  String get quranActiveAudioAyahHint =>
+      'Sie können diese Rezitation pausieren, fortsetzen oder stoppen.';
 
   @override
   String get quranStopAudio => 'Audio stoppen';
@@ -1244,43 +1341,50 @@ class AppLocalizationsDe extends AppLocalizations {
   String get achievementFirstPrayerTitle => 'Erstes Gebet';
 
   @override
-  String get achievementFirstPrayerDescription => 'Sie haben Ihr erstes Gebet in der App markiert.';
+  String get achievementFirstPrayerDescription =>
+      'Sie haben Ihr erstes Gebet in der App markiert.';
 
   @override
   String get achievementFullDayTitle => 'Vollständiger Tag';
 
   @override
-  String get achievementFullDayDescription => 'Sie haben alle fünf Gebete an einem einzigen Tag absolviert.';
+  String get achievementFullDayDescription =>
+      'Sie haben alle fünf Gebete an einem einzigen Tag absolviert.';
 
   @override
   String get achievementStreak3Title => '3-Tage-Serie';
 
   @override
-  String get achievementStreak3Description => 'Sie haben Ihre Beständigkeit drei Tage in Folge gehalten.';
+  String get achievementStreak3Description =>
+      'Sie haben Ihre Beständigkeit drei Tage in Folge gehalten.';
 
   @override
   String get achievementStreak7Title => '7-Tage-Serie';
 
   @override
-  String get achievementStreak7Description => 'Sieben Tage in Folge Verlauf geführt. Toller Rhythmus.';
+  String get achievementStreak7Description =>
+      'Sieben Tage in Folge Verlauf geführt. Toller Rhythmus.';
 
   @override
   String get achievementStreak30Title => '30-Tage-Serie';
 
   @override
-  String get achievementStreak30Description => 'Dreißig Tage in Folge. Außergewöhnliche Beständigkeit.';
+  String get achievementStreak30Description =>
+      'Dreißig Tage in Folge. Außergewöhnliche Beständigkeit.';
 
   @override
   String get achievementTotal100Title => '100 Gebete';
 
   @override
-  String get achievementTotal100Description => 'Sie haben 100 absolvierte Gebete erfasst.';
+  String get achievementTotal100Description =>
+      'Sie haben 100 absolvierte Gebete erfasst.';
 
   @override
   String get achievementFirstRamadanTitle => 'Erster Ramadan';
 
   @override
-  String get achievementFirstRamadanDescription => 'Sie haben Ihren ersten aktiven Ramadan-Tag absolviert.';
+  String get achievementFirstRamadanDescription =>
+      'Sie haben Ihren ersten aktiven Ramadan-Tag absolviert.';
 
   @override
   String get analyticsAchievementsTitle => 'Erfolge';
@@ -1289,7 +1393,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String get analyticsAchievementsEmpty => 'Noch keine Erfolge freigeschaltet.';
 
   @override
-  String get analyticsAchievementsLoadError => 'Wir konnten Ihre Erfolge nicht laden.';
+  String get analyticsAchievementsLoadError =>
+      'Wir konnten Ihre Erfolge nicht laden.';
 
   @override
   String get analyticsBestDayLabel => 'Bester Tag';
@@ -1320,10 +1425,12 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get analyticsEmptyBody => 'Beginnen Sie, Ihre Gebete zu markieren, und Sie werden hier Ihre Beständigkeit sehen.';
+  String get analyticsEmptyBody =>
+      'Beginnen Sie, Ihre Gebete zu markieren, und Sie werden hier Ihre Beständigkeit sehen.';
 
   @override
-  String get analyticsEmptyHint => 'Schließen Sie Ihr erstes Gebet ab, um dieses Feld freizuschalten.';
+  String get analyticsEmptyHint =>
+      'Schließen Sie Ihr erstes Gebet ab, um dieses Feld freizuschalten.';
 
   @override
   String get analyticsEmptyTitle => 'Noch keine Statistiken';
@@ -1338,7 +1445,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String get analyticsGradesLabel => 'Bewertungen';
 
   @override
-  String get analyticsHadithStatsLoadError => 'Hadith-Statistiken konnten nicht geladen werden.';
+  String get analyticsHadithStatsLoadError =>
+      'Hadith-Statistiken konnten nicht geladen werden.';
 
   @override
   String get analyticsLast30DaysTitle => 'Letzte 30 Tage';
@@ -1359,7 +1467,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String get analyticsSavedFavoritesLabel => 'Gespeicherte Favoriten';
 
   @override
-  String get analyticsShareError => 'Wir konnten Ihren Fortschritt nicht teilen.';
+  String get analyticsShareError =>
+      'Wir konnten Ihren Fortschritt nicht teilen.';
 
   @override
   String get analyticsShareImage => 'Bild teilen';
@@ -1382,31 +1491,39 @@ class AppLocalizationsDe extends AppLocalizations {
   String get analyticsThisWeekLabel => 'Diese Woche';
 
   @override
-  String get analyticsWeekInterpretationEmpty => 'Es gibt noch nicht genug Aktivität für diese Woche.';
+  String get analyticsWeekInterpretationEmpty =>
+      'Es gibt noch nicht genug Aktivität für diese Woche.';
 
   @override
-  String get analyticsWeekInterpretationEncouragement => 'Machen Sie Schritt für Schritt weiter. Jedes Gebet zählt.';
+  String get analyticsWeekInterpretationEncouragement =>
+      'Machen Sie Schritt für Schritt weiter. Jedes Gebet zählt.';
 
   @override
-  String get analyticsWeekInterpretationGood => 'Sie machen diese Woche gute Arbeit. Ein wenig mehr Beständigkeit wird den Unterschied machen.';
+  String get analyticsWeekInterpretationGood =>
+      'Sie machen diese Woche gute Arbeit. Ein wenig mehr Beständigkeit wird den Unterschied machen.';
 
   @override
-  String get analyticsWeekInterpretationStrong => 'Sehr starke Woche. Sie halten einen ausgezeichneten Rhythmus.';
+  String get analyticsWeekInterpretationStrong =>
+      'Sehr starke Woche. Sie halten einen ausgezeichneten Rhythmus.';
 
   @override
   String get analyticsWeeklySummaryTitle => 'Wöchentliche Zusammenfassung';
 
   @override
-  String get booksAboutBody => 'Diese Bibliothek vereint IslamHouse-Bücher zum schnellen Lesen in der App.';
+  String get booksAboutBody =>
+      'Diese Bibliothek vereint IslamHouse-Bücher zum schnellen Lesen in der App.';
 
   @override
-  String get booksAboutBulletCatalog => 'Ein kuratierter Katalog, der leicht zu erkunden ist';
+  String get booksAboutBulletCatalog =>
+      'Ein kuratierter Katalog, der leicht zu erkunden ist';
 
   @override
-  String get booksAboutBulletCategories => 'Kategorien, um die passende Lektüre schneller zu finden';
+  String get booksAboutBulletCategories =>
+      'Kategorien, um die passende Lektüre schneller zu finden';
 
   @override
-  String get booksAboutBulletVerified => 'Inhalte aus einer anerkannten islamischen Bibliothek';
+  String get booksAboutBulletVerified =>
+      'Inhalte aus einer anerkannten islamischen Bibliothek';
 
   @override
   String get booksAllCategories => 'Alle Kategorien';
@@ -1424,7 +1541,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String get booksEmptyFeatured => 'Vorerst keine empfohlenen Bücher.';
 
   @override
-  String get booksEmptySearch => 'Wir konnten keine Bücher für diese Suche finden.';
+  String get booksEmptySearch =>
+      'Wir konnten keine Bücher für diese Suche finden.';
 
   @override
   String get booksLibraryTitle => 'Bücher';
@@ -1451,7 +1569,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String get booksMainCategoryIslamicCulture => 'Islamische Kultur';
 
   @override
-  String get booksMainCategoryIslamicJurisprudence => 'Islamische Rechtsprechung';
+  String get booksMainCategoryIslamicJurisprudence =>
+      'Islamische Rechtsprechung';
 
   @override
   String get booksMainCategoryMajorSins => 'Große Sünden';
@@ -1480,7 +1599,8 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get booksPlaceholderDescription => 'Bücher werden in Kürze hier erscheinen.';
+  String get booksPlaceholderDescription =>
+      'Bücher werden in Kürze hier erscheinen.';
 
   @override
   String get booksPlaceholderTitle => 'Bibliothek in Bearbeitung';
@@ -1541,10 +1661,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get dhikrChooseCustomValue => 'Eigenen Wert wählen';
 
   @override
-  String get dhikrDailyGoalCompletedMessage => 'Sie haben Ihr tägliches Dhikr-Ziel erreicht.';
+  String get dhikrDailyGoalCompletedMessage =>
+      'Sie haben Ihr tägliches Dhikr-Ziel erreicht.';
 
   @override
-  String get dhikrDailyGoalHelper => 'Wählen Sie, wie viele Wiederholungen Sie heute erreichen möchten.';
+  String get dhikrDailyGoalHelper =>
+      'Wählen Sie, wie viele Wiederholungen Sie heute erreichen möchten.';
 
   @override
   String get dhikrDailyGoalShort => 'Tagesziel';
@@ -1558,31 +1680,39 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get dhikrFeedbackAlmostThere => 'Sie machen das sehr gut. Sie sind Ihrem Tagesziel nahe.';
+  String get dhikrFeedbackAlmostThere =>
+      'Sie machen das sehr gut. Sie sind Ihrem Tagesziel nahe.';
 
   @override
-  String get dhikrFeedbackCompleted => 'Tagesziel erreicht. Möge Allah Ihr Dhikr annehmen.';
+  String get dhikrFeedbackCompleted =>
+      'Tagesziel erreicht. Möge Allah Ihr Dhikr annehmen.';
 
   @override
-  String get dhikrFeedbackCycleCompleted => 'Zyklus abgeschlossen. Sie können ruhig weitermachen.';
+  String get dhikrFeedbackCycleCompleted =>
+      'Zyklus abgeschlossen. Sie können ruhig weitermachen.';
 
   @override
-  String get dhikrFeedbackGoodPace => 'Gutes Tempo. Behalten Sie diese Wiederholung mit Gelassenheit bei.';
+  String get dhikrFeedbackGoodPace =>
+      'Gutes Tempo. Behalten Sie diese Wiederholung mit Gelassenheit bei.';
 
   @override
-  String get dhikrFeedbackStart => 'Beginnen Sie mit wenigen, sanften und gleichmäßigen Wiederholungen.';
+  String get dhikrFeedbackStart =>
+      'Beginnen Sie mit wenigen, sanften und gleichmäßigen Wiederholungen.';
 
   @override
-  String get dhikrFeedbackTakeYourTime => 'Nehmen Sie sich Zeit. Jede Wiederholung zählt.';
+  String get dhikrFeedbackTakeYourTime =>
+      'Nehmen Sie sich Zeit. Jede Wiederholung zählt.';
 
   @override
   String get dhikrGoalsSection => 'ZIELE';
 
   @override
-  String get dhikrHistoryEmptyBody => 'Es gibt noch nicht genug Verlauf für diese Ansicht.';
+  String get dhikrHistoryEmptyBody =>
+      'Es gibt noch nicht genug Verlauf für diese Ansicht.';
 
   @override
-  String get dhikrHistorySavedBody => 'Ihr letzter Fortschritt wird automatisch gespeichert.';
+  String get dhikrHistorySavedBody =>
+      'Ihr letzter Fortschritt wird automatisch gespeichert.';
 
   @override
   String get dhikrLast7Days => '7 Tage';
@@ -1611,10 +1741,12 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get dhikrSessionCycleCompleted => 'Sie haben diesen Dhikr-Zyklus abgeschlossen.';
+  String get dhikrSessionCycleCompleted =>
+      'Sie haben diesen Dhikr-Zyklus abgeschlossen.';
 
   @override
-  String get dhikrSessionGoalHelper => 'Legen Sie fest, wie viele Wiederholungen pro Zyklus.';
+  String get dhikrSessionGoalHelper =>
+      'Legen Sie fest, wie viele Wiederholungen pro Zyklus.';
 
   @override
   String get dhikrSessionGoalShort => 'Sitzungsziel';
@@ -1651,7 +1783,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String get hadithDailyOpenLibrary => 'Hadithe öffnen';
 
   @override
-  String get hadithDailyUnavailable => 'Wir konnten den Hadith des Tages nicht laden.';
+  String get hadithDailyUnavailable =>
+      'Wir konnten den Hadith des Tages nicht laden.';
 
   @override
   String get hadithDetailArabicText => 'Arabischer Text';
@@ -1679,13 +1812,15 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get hadithDetailInfoBody => 'Dieser Hadith kann je nach Sammlung, Einstufung und verfügbarer Übersetzung variieren.';
+  String get hadithDetailInfoBody =>
+      'Dieser Hadith kann je nach Sammlung, Einstufung und verfügbarer Übersetzung variieren.';
 
   @override
   String get hadithDetailNoCategory => 'Keine Kategorie';
 
   @override
-  String get hadithDetailRemovedFromFavorites => 'Hadith aus Favoriten entfernt';
+  String get hadithDetailRemovedFromFavorites =>
+      'Hadith aus Favoriten entfernt';
 
   @override
   String get hadithDetailSavedToFavorites => 'Hadith in Favoriten gespeichert';
@@ -1717,10 +1852,12 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get hadithLibraryEmptyBody => 'Es sind derzeit keine Hadithe verfügbar.';
+  String get hadithLibraryEmptyBody =>
+      'Es sind derzeit keine Hadithe verfügbar.';
 
   @override
-  String get hadithLibraryEmptySearchBody => 'Versuchen Sie eine andere Suche oder entfernen Sie Filter.';
+  String get hadithLibraryEmptySearchBody =>
+      'Versuchen Sie eine andere Suche oder entfernen Sie Filter.';
 
   @override
   String hadithLibraryEmptySearchTitle(Object query) {
@@ -1764,13 +1901,15 @@ class AppLocalizationsDe extends AppLocalizations {
   String get hadithOfflineCollectionsTitle => 'Enthaltene Sammlungen';
 
   @override
-  String get hadithOfflineIncludedSubtitle => 'Alle Inhalte sind bereits in die App integriert';
+  String get hadithOfflineIncludedSubtitle =>
+      'Alle Inhalte sind bereits in die App integriert';
 
   @override
   String get hadithOfflineIncludedTitle => 'Von Anfang an offline';
 
   @override
-  String get hadithOfflineInfoBody => 'Die hier angezeigten Hadithe sind bereits ohne zusätzlichen Download verfügbar.';
+  String get hadithOfflineInfoBody =>
+      'Die hier angezeigten Hadithe sind bereits ohne zusätzlichen Download verfügbar.';
 
   @override
   String get hadithOfflineTitle => 'Offline-Hadithe';
@@ -1787,10 +1926,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get hafizConfigureSession => 'Sitzung konfigurieren';
 
   @override
-  String get hafizEmptyBody => 'Sie haben noch keinen Memorialisierungsplan erstellt.';
+  String get hafizEmptyBody =>
+      'Sie haben noch keinen Memorialisierungsplan erstellt.';
 
   @override
-  String get hafizEmptyHint => 'Wählen Sie eine Sure und legen Sie einen kurzen Bereich fest, um zu beginnen.';
+  String get hafizEmptyHint =>
+      'Wählen Sie eine Sure und legen Sie einen kurzen Bereich fest, um zu beginnen.';
 
   @override
   String get hafizEmptyTitle => 'Beginnen Sie Ihre Wiederholung';
@@ -1827,7 +1968,8 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get hafizSubtitle => 'Organisieren Sie kurze und gleichmäßige Wiederholungen';
+  String get hafizSubtitle =>
+      'Organisieren Sie kurze und gleichmäßige Wiederholungen';
 
   @override
   String hafizSurahNoPlan(Object count) {
@@ -1854,7 +1996,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String get homeGoalInProgress => 'in Bearbeitung';
 
   @override
-  String get homeInsightAlmostCompleteTodayMessage => 'Sie sind kurz davor, einen starken Tag abzuschließen.';
+  String get homeInsightAlmostCompleteTodayMessage =>
+      'Sie sind kurz davor, einen starken Tag abzuschließen.';
 
   @override
   String get homeInsightAlmostCompleteTodayTitle => 'Fast vollständig heute';
@@ -1908,31 +2051,37 @@ class AppLocalizationsDe extends AppLocalizations {
   String get homeInsightPrayerToStrengthenTitle => 'Gebet zur Stärkung';
 
   @override
-  String get homeInsightRamadanConsistencyMessage => 'Ihre Praxis heute zeigt bereits eine gute Balance.';
+  String get homeInsightRamadanConsistencyMessage =>
+      'Ihre Praxis heute zeigt bereits eine gute Balance.';
 
   @override
   String get homeInsightRamadanConsistencyTitle => 'Ramadan-Beständigkeit';
 
   @override
-  String get homeInsightRamadanMomentumMessage => 'Nutzen Sie diesen Teil des Tages, um Ihren Schwung beizubehalten.';
+  String get homeInsightRamadanMomentumMessage =>
+      'Nutzen Sie diesen Teil des Tages, um Ihren Schwung beizubehalten.';
 
   @override
   String get homeInsightRamadanMomentumTitle => 'Ramadan-Schwung';
 
   @override
-  String get homeInsightRamadanSmallStepsMessage => 'Im Ramadan zählen kleine und beständige Schritte sehr viel.';
+  String get homeInsightRamadanSmallStepsMessage =>
+      'Im Ramadan zählen kleine und beständige Schritte sehr viel.';
 
   @override
-  String get homeInsightStartTodayFirstMessage => 'Ihr Tag ist noch offen. Markieren Sie Ihr erstes Gebet und bauen Sie Schwung auf.';
+  String get homeInsightStartTodayFirstMessage =>
+      'Ihr Tag ist noch offen. Markieren Sie Ihr erstes Gebet und bauen Sie Schwung auf.';
 
   @override
-  String get homeInsightStartTodayMoreMessage => 'Sie haben noch Zeit, ruhig zu beginnen.';
+  String get homeInsightStartTodayMoreMessage =>
+      'Sie haben noch Zeit, ruhig zu beginnen.';
 
   @override
   String get homeInsightStartTodayTitle => 'Heute beginnen';
 
   @override
-  String get homeInsightStillCanStartMessage => 'Ein kleiner Schritt jetzt kann den Ton Ihres Tages verändern.';
+  String get homeInsightStillCanStartMessage =>
+      'Ein kleiner Schritt jetzt kann den Ton Ihres Tages verändern.';
 
   @override
   String get homeInsightStillCanStartTitle => 'Sie können noch beginnen';
@@ -1955,31 +2104,38 @@ class AppLocalizationsDe extends AppLocalizations {
   String get homeLoadingScheduleTitle => 'Zeiten werden geladen';
 
   @override
-  String get homeLocationCachedBody => 'Wir bereiten Ihre Zeiten anhand Ihres zuletzt gespeicherten Standorts vor.';
+  String get homeLocationCachedBody =>
+      'Wir bereiten Ihre Zeiten anhand Ihres zuletzt gespeicherten Standorts vor.';
 
   @override
   String get homeLocationEnableDeviceLocation => 'Gerätestandort aktivieren';
 
   @override
-  String get homeLocationGpsDisabledBody => 'Ohne GPS können wir keine genauen Gebetszeiten berechnen oder die Qibla ausrichten.';
+  String get homeLocationGpsDisabledBody =>
+      'Ohne GPS können wir keine genauen Gebetszeiten berechnen oder die Qibla ausrichten.';
 
   @override
-  String get homeLocationPendingBody => 'Der Startbildschirm bleibt sichtbar, auch wenn die Gebetszeiten noch nicht bereit sind.';
+  String get homeLocationPendingBody =>
+      'Der Startbildschirm bleibt sichtbar, auch wenn die Gebetszeiten noch nicht bereit sind.';
 
   @override
   String get homeLocationPermissionBlocked => 'Standortberechtigung blockiert';
 
   @override
-  String get homeLocationPermissionBlockedBody => 'Sie können die Standortberechtigung für Qibla Time später in Ihren Systemeinstellungen aktivieren.';
+  String get homeLocationPermissionBlockedBody =>
+      'Sie können die Standortberechtigung für Qibla Time später in Ihren Systemeinstellungen aktivieren.';
 
   @override
-  String get homeLocationPermissionNeeded => 'Standort erlauben, um Ihre Gebetszeiten anzuzeigen';
+  String get homeLocationPermissionNeeded =>
+      'Standort erlauben, um Ihre Gebetszeiten anzuzeigen';
 
   @override
-  String get homeLocationPermissionNeededBody => 'Qibla Time benötigt Ihren Standort, um zuverlässige Zeiten für Ihre Stadt anzuzeigen.';
+  String get homeLocationPermissionNeededBody =>
+      'Qibla Time benötigt Ihren Standort, um zuverlässige Zeiten für Ihre Stadt anzuzeigen.';
 
   @override
-  String get homeLocationPreparingTitle => 'Ihre Gebetszeiten werden vorbereitet';
+  String get homeLocationPreparingTitle =>
+      'Ihre Gebetszeiten werden vorbereitet';
 
   @override
   String homeNextPrayerStartsAt(Object time) {
@@ -1987,16 +2143,20 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get homeNotificationPaused => 'Allgemeine Gebetsbenachrichtigungen sind derzeit pausiert.';
+  String get homeNotificationPaused =>
+      'Allgemeine Gebetsbenachrichtigungen sind derzeit pausiert.';
 
   @override
-  String get homeNotificationPermissionPending => 'Ihre Adhan-Erinnerungen sind konfiguriert, aber die Systemberechtigung steht noch aus.';
+  String get homeNotificationPermissionPending =>
+      'Ihre Adhan-Erinnerungen sind konfiguriert, aber die Systemberechtigung steht noch aus.';
 
   @override
-  String get homePrayerDescriptionCompleted => 'Sie haben dieses Gebet bereits als abgeschlossen markiert.';
+  String get homePrayerDescriptionCompleted =>
+      'Sie haben dieses Gebet bereits als abgeschlossen markiert.';
 
   @override
-  String get homePrayerDescriptionNext => 'Dies ist das nächste Gebet im heutigen Rhythmus.';
+  String get homePrayerDescriptionNext =>
+      'Dies ist das nächste Gebet im heutigen Rhythmus.';
 
   @override
   String get homePrayerDescriptionNow => 'Dieses Gebet läuft derzeit.';
@@ -2005,7 +2165,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String get homePrayerDescriptionPendingToday => 'Heute noch ausstehend.';
 
   @override
-  String get homePrayerDescriptionReviewDate => 'Verfügbar zur Überprüfung für dieses Datum.';
+  String get homePrayerDescriptionReviewDate =>
+      'Verfügbar zur Überprüfung für dieses Datum.';
 
   @override
   String homePrayerSectionSelectedDaySubtitle(Object date) {
@@ -2016,7 +2177,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String get homePrayerSectionSelectedDayTitle => 'TAGESZEITPLAN';
 
   @override
-  String get homePrayerSectionTodaySubtitle => 'Vollständiger Rhythmus Ihrer fünf täglichen Gebete';
+  String get homePrayerSectionTodaySubtitle =>
+      'Vollständiger Rhythmus Ihrer fünf täglichen Gebete';
 
   @override
   String get homePrayerSectionTodayTitle => 'HEUTIGE GEBETE';
@@ -2068,7 +2230,8 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get homeRamadanDhikrPreparingBody => 'Ihr täglicher Dhikr-Fortschritt wird vorbereitet.';
+  String get homeRamadanDhikrPreparingBody =>
+      'Ihr täglicher Dhikr-Fortschritt wird vorbereitet.';
 
   @override
   String homeRamadanDhikrStartBody(Object goal) {
@@ -2092,10 +2255,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get homeRamadanFastingTitle => 'Fasten';
 
   @override
-  String get homeRamadanGoalsCompleteMessage => 'Ein sehr vollständiger Ramadan-Tag. Behalten Sie diesen Rhythmus mit Ruhe bei.';
+  String get homeRamadanGoalsCompleteMessage =>
+      'Ein sehr vollständiger Ramadan-Tag. Behalten Sie diesen Rhythmus mit Ruhe bei.';
 
   @override
-  String get homeRamadanGoalsProgressMessage => 'Sie machen heute gute Arbeit. Ein kleiner Schritt mehr kann Ihren Tag stark abschließen.';
+  String get homeRamadanGoalsProgressMessage =>
+      'Sie machen heute gute Arbeit. Ein kleiner Schritt mehr kann Ihren Tag stark abschließen.';
 
   @override
   String homeRamadanGoalsReady(Object completed, Object total) {
@@ -2103,7 +2268,8 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get homeRamadanGoalsStartMessage => 'Beginnen Sie mit etwas Kleinem: einem Gebet, einigen Ayahs oder ein paar Minuten Dhikr.';
+  String get homeRamadanGoalsStartMessage =>
+      'Beginnen Sie mit etwas Kleinem: einem Gebet, einigen Ayahs oder ein paar Minuten Dhikr.';
 
   @override
   String get homeRamadanGoalsTitle => 'RAMADAN-ZIELE';
@@ -2144,7 +2310,8 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get homeRamadanQuranStartBody => 'Lesen Sie heute einen kurzen Abschnitt und Sie können später einfach fortfahren.';
+  String get homeRamadanQuranStartBody =>
+      'Lesen Sie heute einen kurzen Abschnitt und Sie können später einfach fortfahren.';
 
   @override
   String get homeRamadanStartAction => 'Beginnen';
@@ -2156,10 +2323,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get homeRamadanUntilIftar => 'bis Iftar';
 
   @override
-  String get homeSelectedDateCustomBody => 'Sehen Sie unten die vollständigen Gebetszeiten für den gewählten Tag.';
+  String get homeSelectedDateCustomBody =>
+      'Sehen Sie unten die vollständigen Gebetszeiten für den gewählten Tag.';
 
   @override
-  String get homeSelectedDateTodayBody => 'Sehen Sie unten die vollständigen Gebetszeiten für heute.';
+  String get homeSelectedDateTodayBody =>
+      'Sehen Sie unten die vollständigen Gebetszeiten für heute.';
 
   @override
   String homeWeeklyBestDayHelper(Object count) {
@@ -2170,13 +2339,15 @@ class AppLocalizationsDe extends AppLocalizations {
   String get qiblaCompassInitError => 'Wir konnten den Kompass nicht starten.';
 
   @override
-  String get qiblaCompassReadError => 'Wir konnten den Kompasssensor nicht lesen.';
+  String get qiblaCompassReadError =>
+      'Wir konnten den Kompasssensor nicht lesen.';
 
   @override
   String get qiblaDirectionEast => 'Osten';
 
   @override
-  String get qiblaDirectionLoadError => 'Wir konnten die Richtung zur Kaaba nicht laden.';
+  String get qiblaDirectionLoadError =>
+      'Wir konnten die Richtung zur Kaaba nicht laden.';
 
   @override
   String get qiblaDirectionNorth => 'Norden';
@@ -2208,28 +2379,34 @@ class AppLocalizationsDe extends AppLocalizations {
   String get qiblaDistanceLabel => 'Entfernung';
 
   @override
-  String get qiblaEnableLocationMessage => 'Aktivieren Sie den Standort, um die Richtung zur Kaaba zu berechnen.';
+  String get qiblaEnableLocationMessage =>
+      'Aktivieren Sie den Standort, um die Richtung zur Kaaba zu berechnen.';
 
   @override
-  String get qiblaGpsDisabledMessage => 'Aktivieren Sie das GPS Ihres Geräts, um eine zuverlässige Richtung zu erhalten.';
+  String get qiblaGpsDisabledMessage =>
+      'Aktivieren Sie das GPS Ihres Geräts, um eine zuverlässige Richtung zu erhalten.';
 
   @override
-  String get qiblaGuidanceBody => 'Halten Sie das Gerät flach und drehen Sie es sanft, bis sich der Anzeiger ausrichtet.';
+  String get qiblaGuidanceBody =>
+      'Halten Sie das Gerät flach und drehen Sie es sanft, bis sich der Anzeiger ausrichtet.';
 
   @override
-  String get qiblaHowToUseAvoidMagnetsBody => 'Halten Sie es fern von Magneten, Metallhüllen oder Geräten, die den Sensor stören könnten.';
+  String get qiblaHowToUseAvoidMagnetsBody =>
+      'Halten Sie es fern von Magneten, Metallhüllen oder Geräten, die den Sensor stören könnten.';
 
   @override
   String get qiblaHowToUseAvoidMagnetsTitle => 'Störungen vermeiden';
 
   @override
-  String get qiblaHowToUseCalibrateBody => 'Wenn der Kompass versagt, bewegen Sie das Telefon in einer Achterbewegung, um ihn neu zu kalibrieren.';
+  String get qiblaHowToUseCalibrateBody =>
+      'Wenn der Kompass versagt, bewegen Sie das Telefon in einer Achterbewegung, um ihn neu zu kalibrieren.';
 
   @override
   String get qiblaHowToUseCalibrateTitle => 'Bei Bedarf kalibrieren';
 
   @override
-  String get qiblaHowToUseKeepFlatBody => 'Halten Sie das Gerät flach, um die Kompassgenauigkeit zu verbessern.';
+  String get qiblaHowToUseKeepFlatBody =>
+      'Halten Sie das Gerät flach, um die Kompassgenauigkeit zu verbessern.';
 
   @override
   String get qiblaHowToUseKeepFlatTitle => 'Gerät flach halten';
@@ -2241,10 +2418,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get qiblaLoading => 'Richtung wird berechnet…';
 
   @override
-  String get qiblaPermissionBlockedMessage => 'Standortberechtigung ist blockiert. Aktivieren Sie sie in den Systemeinstellungen.';
+  String get qiblaPermissionBlockedMessage =>
+      'Standortberechtigung ist blockiert. Aktivieren Sie sie in den Systemeinstellungen.';
 
   @override
-  String get qiblaPermissionNeededMessage => 'Wir benötigen die Standortberechtigung, um Sie zur Kaaba zu führen.';
+  String get qiblaPermissionNeededMessage =>
+      'Wir benötigen die Standortberechtigung, um Sie zur Kaaba zu führen.';
 
   @override
   String get qiblaPrecisionLabel => 'Genauigkeit';
@@ -2256,7 +2435,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String get qiblaTitle => 'Qibla';
 
   @override
-  String get adhanSelectorHeaderBody => 'Hören Sie eine kurze Vorschau, bevor Sie den Adhan für Ihre Erinnerungen wählen.';
+  String get adhanSelectorHeaderBody =>
+      'Hören Sie eine kurze Vorschau, bevor Sie den Adhan für Ihre Erinnerungen wählen.';
 
   @override
   String get adhanSelectorHeaderTitle => 'Wählen Sie Ihren Gebetsruf';
@@ -2268,7 +2448,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String get adhanSelectorPausePreview => 'Vorschau pausieren';
 
   @override
-  String get adhanSelectorPreviewError => 'Wir konnten die Adhan-Vorschau nicht abspielen.';
+  String get adhanSelectorPreviewError =>
+      'Wir konnten die Adhan-Vorschau nicht abspielen.';
 
   @override
   String get adhanSelectorPreviewIdle => 'Tippen, um eine Vorschau zu hören';
@@ -2336,34 +2517,40 @@ class AppLocalizationsDe extends AppLocalizations {
   String get supportScreenThankYou => 'Danke, dass Sie hier sind';
 
   @override
-  String get supportScreenBody => 'Ihre Unterstützung hilft uns, Qibla Time zu pflegen, die App am Leben zu erhalten und weiterhin nützliche Werkzeuge für Ihren Alltag zu entwickeln.';
+  String get supportScreenBody =>
+      'Ihre Unterstützung hilft uns, Qibla Time zu pflegen, die App am Leben zu erhalten und weiterhin nützliche Werkzeuge für Ihren Alltag zu entwickeln.';
 
   @override
   String get supportScreenRateTitle => 'App bewerten';
 
   @override
-  String get supportScreenRateBody => 'Eine gute Bewertung hilft mehr Menschen, Qibla Time zu entdecken.';
+  String get supportScreenRateBody =>
+      'Eine gute Bewertung hilft mehr Menschen, Qibla Time zu entdecken.';
 
   @override
   String get supportScreenShareTitle => 'Qibla Time teilen';
 
   @override
-  String get supportScreenShareBody => 'Die App Familie und Freunden zu empfehlen ist ebenfalls eine Form der Sadaqah.';
+  String get supportScreenShareBody =>
+      'Die App Familie und Freunden zu empfehlen ist ebenfalls eine Form der Sadaqah.';
 
   @override
   String get supportScreenSadaqahTitle => 'Mit Absicht unterstützen';
 
   @override
-  String get supportScreenSadaqahBody => 'Wenn Qibla Time Ihnen hilft, können Sie das Projekt mit einem kleinen aufrichtigen Beitrag unterstützen.';
+  String get supportScreenSadaqahBody =>
+      'Wenn Qibla Time Ihnen hilft, können Sie das Projekt mit einem kleinen aufrichtigen Beitrag unterstützen.';
 
   @override
-  String get supportScreenQuote => 'Wer anderen hilft, etwas Gutes zu erreichen, nimmt ebenfalls an seiner Belohnung teil, so Allah will.';
+  String get supportScreenQuote =>
+      'Wer anderen hilft, etwas Gutes zu erreichen, nimmt ebenfalls an seiner Belohnung teil, so Allah will.';
 
   @override
   String get allahNamesTitle => 'Die 99 Namen Allahs';
 
   @override
-  String get allahNamesIntro => 'Erkunden Sie eine sorgfältig zusammengestellte Auswahl der Namen Allahs, mit Transliteration und Bedeutung, damit Sie sie mit Ruhe bedenken können.';
+  String get allahNamesIntro =>
+      'Erkunden Sie eine sorgfältig zusammengestellte Auswahl der Namen Allahs, mit Transliteration und Bedeutung, damit Sie sie mit Ruhe bedenken können.';
 
   @override
   String get allahNamesLoadError => 'Wir konnten die Namen Allahs nicht laden.';
@@ -2375,7 +2562,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String get downloadedSurahsTitle => 'Heruntergeladene Suren';
 
   @override
-  String get downloadedSurahsEmpty => 'Sie haben noch keine Sure heruntergeladen.';
+  String get downloadedSurahsEmpty =>
+      'Sie haben noch keine Sure heruntergeladen.';
 
   @override
   String get downloadedSurahsFavorite => 'Favorit';
@@ -2387,13 +2575,15 @@ class AppLocalizationsDe extends AppLocalizations {
   String get downloadedSurahsRemoveDownload => 'Download entfernen';
 
   @override
-  String get downloadedSurahsLoadError => 'Wir konnten Ihre heruntergeladenen Suren nicht laden.';
+  String get downloadedSurahsLoadError =>
+      'Wir konnten Ihre heruntergeladenen Suren nicht laden.';
 
   @override
   String get focusModeDndActive => 'RAKAHA AKTIV · BITTE NICHT STÖREN AN';
 
   @override
-  String get focusModeOpenDndSettings => 'Bitte nicht stören in den Einstellungen aktivieren';
+  String get focusModeOpenDndSettings =>
+      'Bitte nicht stören in den Einstellungen aktivieren';
 
   @override
   String get focusModeTitle => 'RAKAHA';
@@ -2402,7 +2592,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String get focusModeSujudCount => '+ Sujud';
 
   @override
-  String get focusModeDndHint => 'OHNE UNTERBRECHUNGEN FÜHLT ES SICH BESSER AN MIT BITTE NICHT STÖREN';
+  String get focusModeDndHint =>
+      'OHNE UNTERBRECHUNGEN FÜHLT ES SICH BESSER AN MIT BITTE NICHT STÖREN';
 
   @override
   String get focusModeReleaseToCancel => 'Loslassen zum Abbrechen';
@@ -2438,13 +2629,15 @@ class AppLocalizationsDe extends AppLocalizations {
   String get commonRestore => 'Wiederherstellen';
 
   @override
-  String get settingsRestoreBackupPasteHint => 'Fügen Sie hier das exportierte JSON ein';
+  String get settingsRestoreBackupPasteHint =>
+      'Fügen Sie hier das exportierte JSON ein';
 
   @override
   String get dailyBookBadge => 'BUCH DES TAGES';
 
   @override
-  String get dailyBookUnavailable => 'Die Bibliothek ist derzeit nicht verfügbar.';
+  String get dailyBookUnavailable =>
+      'Die Bibliothek ist derzeit nicht verfügbar.';
 
   @override
   String get dailyBookOpenLibrary => 'Bücher öffnen';
@@ -2512,7 +2705,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String get analyticsShareFooter => 'Ihr Fortschritt in Qibla Time';
 
   @override
-  String get analyticsShareImageError => 'Wir konnten das Fortschrittsbild nicht generieren.';
+  String get analyticsShareImageError =>
+      'Wir konnten das Fortschrittsbild nicht generieren.';
 
   @override
   String quranDownloadAyahAudioError(int ayah) {
@@ -2526,7 +2720,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String get cloudSyncRestoreInvalid => 'Ungültiges Backup';
 
   @override
-  String get cloudSyncRestoreFailed => 'Wir konnten das Backup nicht wiederherstellen.';
+  String get cloudSyncRestoreFailed =>
+      'Wir konnten das Backup nicht wiederherstellen.';
 
   @override
   String get bookLinkUnavailable => 'Dieser Link ist nicht verfügbar.';
@@ -2543,22 +2738,28 @@ class AppLocalizationsDe extends AppLocalizations {
   String get ramadanStatusHeaderManual => 'Manueller Ramadan-Modus';
 
   @override
-  String get ramadanStatusBlessingDetected => 'Möge Allah Ihr Fasten und Ihre Taten heute annehmen.';
+  String get ramadanStatusBlessingDetected =>
+      'Möge Allah Ihr Fasten und Ihre Taten heute annehmen.';
 
   @override
-  String get ramadanStatusBlessingManual => 'Besondere Ramadan-Ansicht manuell zum Testen aktiviert.';
+  String get ramadanStatusBlessingManual =>
+      'Besondere Ramadan-Ansicht manuell zum Testen aktiviert.';
 
   @override
-  String get ramadanStatusSuggestionDhikr => 'Denken Sie daran, heute Ihr Dhikr zu vermehren.';
+  String get ramadanStatusSuggestionDhikr =>
+      'Denken Sie daran, heute Ihr Dhikr zu vermehren.';
 
   @override
-  String get ramadanStatusSuggestionQuran => 'Versuchen Sie, heute etwas mehr Quran zu lesen.';
+  String get ramadanStatusSuggestionQuran =>
+      'Versuchen Sie, heute etwas mehr Quran zu lesen.';
 
   @override
-  String get ramadanStatusSuggestionDua => 'Nutzen Sie diesen Tag, um in Ruhe Dua zu machen.';
+  String get ramadanStatusSuggestionDua =>
+      'Nutzen Sie diesen Tag, um in Ruhe Dua zu machen.';
 
   @override
-  String get ramadanStatusSuggestionSadaqah => 'Selbst eine kleine Sadaqah zählt während des Ramadan.';
+  String get ramadanStatusSuggestionSadaqah =>
+      'Selbst eine kleine Sadaqah zählt während des Ramadan.';
 
   @override
   String adhanSelectorOptionDescription(int number) {
@@ -2569,17 +2770,26 @@ class AppLocalizationsDe extends AppLocalizations {
   String get prayerNotificationImsakTitle => 'Imsak naht';
 
   @override
-  String get prayerNotificationImsakBody => 'Noch 15 Minuten bis Imsak. Wenn Sie noch Suhoor essen, ist jetzt ein guter Zeitpunkt, um aufzuhören.';
+  String get prayerNotificationImsakBody =>
+      'Noch 15 Minuten bis Imsak. Wenn Sie noch Suhoor essen, ist jetzt ein guter Zeitpunkt, um aufzuhören.';
 
   @override
   String get prayerNotificationIftarTitle => 'Iftar naht';
 
   @override
-  String get prayerNotificationIftarBody => 'Noch 15 Minuten bis Iftar. Möge Allah Ihr Fasten heute annehmen.';
+  String get prayerNotificationIftarBody =>
+      'Noch 15 Minuten bis Iftar. Möge Allah Ihr Fasten heute annehmen.';
 
   @override
   String get prayerNotificationJumuahTitle => 'Dschumu\'a heute';
 
   @override
-  String get prayerNotificationJumuahBody => 'Bereiten Sie sich vor Dhuhr auf Dschumu\'a vor und nehmen Sie sich einen ruhigen Moment, um zur Moschee zu gehen.';
+  String get prayerNotificationJumuahBody =>
+      'Bereiten Sie sich vor Dhuhr auf Dschumu\'a vor und nehmen Sie sich einen ruhigen Moment, um zur Moschee zu gehen.';
+
+  @override
+  String get settingsLanguageOptionIndonesian => 'Indonesisch';
+
+  @override
+  String get settingsLanguageOptionRussian => 'Russisch';
 }

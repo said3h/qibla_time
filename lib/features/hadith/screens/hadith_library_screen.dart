@@ -491,17 +491,14 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
   }
 
   String _collectionLabel(BuildContext context, String value) {
-    final isArabicOnly = Localizations.localeOf(context).languageCode == 'ar';
+    final languageCode = Localizations.localeOf(context).languageCode;
     if (value == _allCollectionsValue) {
       return context.l10n.hadithLibraryAllCollections;
     }
     if (value == 'Other' || value == 'Otros') {
       return context.l10n.commonOther;
     }
-    if (isArabicOnly) {
-      return _getArabicCollectionLabel(value) ?? value;
-    }
-    return value;
+    return HadithCollectionPresentation.metaFor(value, languageCode).label;
   }
 
   String _gradeLabel(BuildContext context, String value) {
@@ -659,13 +656,16 @@ class _FeaturedHadithCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
+    final languageCode = Localizations.localeOf(context).languageCode;
     final arabicReference = ReligiousReferenceFormatter.buildArabicReference(
       hadith.reference,
     );
     final collection = _extractCollection(hadith.reference);
     final arabicCollectionLabel = _getArabicCollectionLabel(collection);
-    final collectionLabel =
-        isArabicOnly ? (arabicCollectionLabel ?? collection) : collection;
+    final collectionLabel = HadithCollectionPresentation.metaFor(
+      collection,
+      languageCode,
+    ).label;
     final arabicGradeLabel = _getArabicGradeLabel(hadith.grade);
     final gradeLabel =
         isArabicOnly ? (arabicGradeLabel ?? hadith.grade) : hadith.grade;

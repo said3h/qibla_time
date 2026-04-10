@@ -48,6 +48,7 @@ class AllahNamesService {
       'de' || 'de_DE' || 'de-DE' => 'de',
       'nl' || 'nl_NL' || 'nl-NL' => 'nl',
       'id' || 'id_ID' || 'id-ID' => 'id',
+      'ru' || 'ru_RU' || 'ru-RU' => 'ru',
       _ => 'es',
     };
   }
@@ -58,6 +59,7 @@ class AllahNamesService {
       'fr' => 'en',
       'nl' => 'en',
       'id' => 'en',
+      'ru' => 'en',
       _ => 'es',
     };
   }

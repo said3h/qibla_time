@@ -1151,5 +1151,6 @@
   "prayerNotificationIftarBody": "15 minutes left until iftar. May Allah accept your fast today.",
   "prayerNotificationJumuahTitle": "Jumu'ah today",
   "prayerNotificationJumuahBody": "Prepare for Jumu'ah before Dhuhr and set aside a calm moment to head to the mosque.",
-  "settingsLanguageOptionIndonesian": "Indonesian"
+  "settingsLanguageOptionIndonesian": "Indonesian",
+  "settingsLanguageOptionRussian": "Russian"
 }

@@ -10,6 +10,8 @@ import '../../hadith/models/hadith.dart';
 import '../../hadith/screens/hadith_library_screen.dart';
 import '../../hadith/services/hadith_service.dart';
 import '../../hadith/services/hadith_share_service.dart';
+import '../../hadith/utils/hadith_category_presentation.dart';
+import '../../hadith/utils/hadith_collection_presentation.dart';
 import '../widgets/hadith_share_preview_sheet.dart';
 
 /// Pantalla de detalle de un hadiz específico
@@ -149,11 +151,14 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
   }
 
   Widget _buildHeader(QiblaTokens tokens, Hadith hadith) {
-    final isArabicOnly = Localizations.localeOf(context).languageCode == 'ar';
+    final languageCode = Localizations.localeOf(context).languageCode;
+    final isArabicOnly = languageCode == 'ar';
     final collection = _extractCollection(hadith.reference);
     final arabicCollectionLabel = _getArabicCollectionLabel(collection);
-    final collectionLabel =
-        isArabicOnly ? (arabicCollectionLabel ?? collection) : collection;
+    final collectionLabel = HadithCollectionPresentation.metaFor(
+      collection,
+      languageCode,
+    ).label;
     final arabicGradeLabel = _getArabicGradeLabel(hadith.grade);
     final gradeLabel =
         isArabicOnly ? (arabicGradeLabel ?? hadith.grade) : hadith.grade;
@@ -917,96 +922,10 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
     if (category.trim().isEmpty) {
       return context.l10n.hadithDetailNoCategory;
     }
-
-    final arabicCategoryLabel = _getArabicCategoryLabel(category);
-    if (Localizations.localeOf(context).languageCode == 'ar' &&
-        arabicCategoryLabel != null) {
-      return arabicCategoryLabel;
-    }
-
-    if (Localizations.localeOf(context).languageCode != 'en') {
-      return category;
-    }
-
-    switch (category.trim().toLowerCase()) {
-      case 'adab':
-        return 'Adab';
-      case 'amor de alá':
-      case 'amor de ala':
-        return 'Love of Allah';
-      case 'autorreflexión':
-      case 'autorreflexion':
-        return 'Self-reflection';
-      case 'ayuno':
-        return 'Fasting';
-      case 'carácter':
-      case 'caracter':
-        return 'Character';
-      case 'caridad':
-        return 'Charity';
-      case 'compasión':
-      case 'compasion':
-        return 'Compassion';
-      case 'conocimiento':
-        return 'Knowledge';
-      case 'constancia':
-        return 'Consistency';
-      case 'corazón':
-      case 'corazon':
-        return 'Heart';
-      case 'dhikr':
-        return 'Dhikr';
-      case 'dua':
-        return 'Dua';
-      case 'familia':
-        return 'Family';
-      case 'fraternidad':
-        return 'Brotherhood';
-      case 'gratitud':
-        return 'Gratitude';
-      case 'haya':
-        return 'Haya';
-      case 'honestidad':
-        return 'Honesty';
-      case 'ihsan':
-        return 'Ihsan';
-      case 'intenciones':
-        return 'Intentions';
-      case 'istighfar':
-        return 'Istighfar';
-      case 'justicia':
-        return 'Justice';
-      case 'lengua':
-        return 'Tongue';
-      case 'mezquita':
-        return 'Mosque';
-      case 'misericordia':
-        return 'Mercy';
-      case 'paciencia':
-        return 'Patience';
-      case 'purificación':
-      case 'purificacion':
-        return 'Purification';
-      case 'quran':
-        return 'Quran';
-      case 'rizq':
-      case 'sustento':
-        return 'Provision';
-      case 'salah':
-        return 'Salah';
-      case 'seguridad':
-        return 'Safety';
-      case 'servicio':
-        return 'Service';
-      case 'sinceridad':
-        return 'Sincerity';
-      case 'taqwa':
-        return 'Taqwa';
-      case 'zuhd':
-        return 'Zuhd';
-      default:
-        return category;
-    }
+    return HadithCategoryPresentation.metaFor(
+      category,
+      Localizations.localeOf(context).languageCode,
+    ).label;
   }
 }
 

@@ -1,0 +1,2801 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
+import 'app_localizations.dart';
+
+// ignore_for_file: type=lint
+
+/// The translations for Russian (`ru`).
+class AppLocalizationsRu extends AppLocalizations {
+  AppLocalizationsRu([String locale = 'ru']) : super(locale);
+
+  @override
+  String get appTitle => 'Qibla Time';
+
+  @override
+  String get commonSkip => 'Пропускать';
+
+  @override
+  String get commonBack => 'Назад';
+
+  @override
+  String get commonContinue => 'Продолжать';
+
+  @override
+  String get commonEnter => 'Входить';
+
+  @override
+  String get commonAllow => 'Позволять';
+
+  @override
+  String get commonActivate => 'Активировать';
+
+  @override
+  String get commonEnable => 'Давать возможность';
+
+  @override
+  String get commonEnableGps => 'Включите GPS';
+
+  @override
+  String get commonOpenSettings => 'Открыть настройки';
+
+  @override
+  String get commonPending => 'В ожидании';
+
+  @override
+  String get commonGranted => 'Предоставленный';
+
+  @override
+  String get commonBlocked => 'Заблокировано';
+
+  @override
+  String get commonReady => 'Готовый';
+
+  @override
+  String get commonDisabled => 'Неполноценный';
+
+  @override
+  String get commonUnavailable => 'Недоступно';
+
+  @override
+  String get commonToday => 'Сегодня';
+
+  @override
+  String get commonYesterday => 'Вчера';
+
+  @override
+  String get commonLoading => 'Загрузка...';
+
+  @override
+  String get commonShare => 'Делиться';
+
+  @override
+  String get commonManual => 'Руководство';
+
+  @override
+  String get commonImportJson => 'Импортировать JSON';
+
+  @override
+  String get commonExport => 'Экспорт';
+
+  @override
+  String get commonOpen => 'Открыть';
+
+  @override
+  String get commonVersion => 'Версия';
+
+  @override
+  String get commonAbout => 'О';
+
+  @override
+  String get commonMethod => 'Метод';
+
+  @override
+  String get commonMadhab => '__МАДХАБ__';
+
+  @override
+  String get commonLocation => 'Расположение';
+
+  @override
+  String get commonNotifications => 'Уведомления';
+
+  @override
+  String get commonNoData => 'Нет данных';
+
+  @override
+  String get commonNever => 'Никогда';
+
+  @override
+  String get commonGenerating => 'Создание...';
+
+  @override
+  String get commonChecking => 'Проверка...';
+
+  @override
+  String get commonDelete => 'Удалить';
+
+  @override
+  String get commonSystemStatus => 'Статус системы';
+
+  @override
+  String get commonCurrentStatus => 'Текущий статус';
+
+  @override
+  String get commonOffset => 'Компенсировать';
+
+  @override
+  String get commonAutomatic => 'Автоматический';
+
+  @override
+  String get commonPrepared => 'Готовый';
+
+  @override
+  String get commonActivated => 'Включено';
+
+  @override
+  String get commonPaused => 'Приостановлено';
+
+  @override
+  String get commonSystem => 'Система';
+
+  @override
+  String get onboardingWelcomeTitle => 'Добро пожаловать в Qibla Time';
+
+  @override
+  String get onboardingWelcomeSubtitle =>
+      'Время молитв, Коран, Кибла и напоминания в одном лёгком приложении для вашей повседневной жизни.';
+
+  @override
+  String get onboardingFeatureSchedulesTitle => 'Надежное время молитвы';
+
+  @override
+  String get onboardingFeatureSchedulesBody =>
+      'Рассчитывается с учетом вашего местоположения и предпочтительного метода.';
+
+  @override
+  String get onboardingFeaturePracticeTitle =>
+      '__КИБЛА__ и ежедневная практика';
+
+  @override
+  String get onboardingFeaturePracticeBody =>
+      'Компас, тасбих, отслеживание и многое другое в одном плавном потоке.';
+
+  @override
+  String get onboardingFeatureRemindersTitle => 'Полезные напоминания';
+
+  @override
+  String get onboardingFeatureRemindersBody =>
+      'Уведомления о молитвах и ключевые настройки готовы с первого дня.';
+
+  @override
+  String get onboardingPermissionsTitle => 'Важные разрешения';
+
+  @override
+  String get onboardingPermissionsSubtitle =>
+      'Мы просим только то, что необходимо для расчёта времени молитвы, использования Киблы и своевременного уведомления вас.';
+
+  @override
+  String get onboardingLocationReadyBody =>
+      'Готов рассчитать время молитвы и Киблу.';
+
+  @override
+  String get onboardingLocationBlockedBody =>
+      'Доступ к местоположению заблокирован. Вы можете включить его позже в настройках системы.';
+
+  @override
+  String get onboardingLocationGpsOffBody =>
+      'GPS вашего устройства отключен. Вы можете продолжить и включить его позже.';
+
+  @override
+  String get onboardingLocationPendingBody =>
+      'Требуется для точного времени молитвы и направления в Мекку.';
+
+  @override
+  String get onboardingNotificationsReadyBody =>
+      'Готов напомнить вам о каждой молитве.';
+
+  @override
+  String get onboardingNotificationsPendingBody =>
+      'Это позволит вам получать оповещения и напоминания об азанах позже.';
+
+  @override
+  String get onboardingMethodTitle => 'Метод расчета';
+
+  @override
+  String get onboardingMethodSubtitle =>
+      'Вы можете изменить его позже, но благодаря этому время молитв будет настроено правильно с сегодняшнего дня.';
+
+  @override
+  String get onboardingSelectedNow => 'Выбрано сейчас';
+
+  @override
+  String get onboardingTapToChooseMethod => 'Нажмите, чтобы выбрать этот метод';
+
+  @override
+  String get onboardingMadhabTitle => 'Мазхаб для асра';
+
+  @override
+  String get onboardingMadhabSubtitle =>
+      'Это влияет только на расчёт асра. Если вы не уверены, вы можете оставить шафиитский вариант и изменить его позже.';
+
+  @override
+  String get onboardingMadhabCommonTitle => 'Шафи / Малики / Ханбали';
+
+  @override
+  String get onboardingMadhabCommonSubtitle =>
+      'Самый распространенный вариант для начала.';
+
+  @override
+  String get onboardingMadhabHanafiTitle => 'Ханафитский';
+
+  @override
+  String get onboardingMadhabHanafiSubtitle =>
+      'Используйте ханафитский расчёт для асра.';
+
+  @override
+  String get onboardingAdhanTitle => '__АДХАН__ и оповещения';
+
+  @override
+  String get onboardingAdhanSubtitle =>
+      'Qibla Time по умолчанию может оповещать вас о каждой молитве мягким азаном. Вы можете изменить его позже.';
+
+  @override
+  String get onboardingPrayerNotificationsTitle => 'Молитвенные уведомления';
+
+  @override
+  String get onboardingPrayerNotificationsSubtitle =>
+      'Вы можете включить их сейчас или пока продолжить без них.';
+
+  @override
+  String get onboardingAdhanPreviewTitle => 'Быстрый просмотр азана';
+
+  @override
+  String get onboardingAdhanPreviewSubtitle =>
+      'Будет использован выбранный вами звук. Вы можете изменить его позже в настройках.';
+
+  @override
+  String get onboardingAdhanStopPreview =>
+      'Остановить предварительный просмотр';
+
+  @override
+  String get onboardingAdhanListenPreview => 'Прослушать превью';
+
+  @override
+  String get onboardingDoneTitle => 'Все готово';
+
+  @override
+  String get onboardingDoneSubtitle =>
+      'Теперь вы можете начать с времени молитв, Киблы и ежедневного отслеживания. Всё можно будет отрегулировать позже.';
+
+  @override
+  String get onboardingSummaryLocationBlocked =>
+      'Заблокировано на данный момент';
+
+  @override
+  String get onboardingSummaryNotificationsPrepared => 'Готовый';
+
+  @override
+  String get methodMuslimWorldLeague => 'Мировая мусульманская лига';
+
+  @override
+  String get methodNorthAmerica => 'ИСНА / Северная Америка';
+
+  @override
+  String get methodUmmAlQura => 'Умм аль-Кура';
+
+  @override
+  String get methodEgyptian => 'Египетские власти';
+
+  @override
+  String get homeHeaderOnline => 'Онлайн';
+
+  @override
+  String get homeHeaderOffline => 'Оффлайн';
+
+  @override
+  String get homeHeaderLocationUnavailable => 'Местоположение недоступно';
+
+  @override
+  String homeHeaderStatusLine(Object networkStatus, Object location) {
+    return '$networkStatus · $location';
+  }
+
+  @override
+  String get homeHeroNextPrayer => 'СЛЕДУЮЩАЯ МОЛИТВА';
+
+  @override
+  String get homeHeroTodayOverview => 'Главный вид на сегодня';
+
+  @override
+  String get homeHeroUsingSavedLocation =>
+      'Использование вашего последнего сохраненного местоположения';
+
+  @override
+  String get homeSelectedDateToday => 'СЕГОДНЯ';
+
+  @override
+  String get homeSelectedDateCustom => 'ВЫБРАННАЯ ДАТА';
+
+  @override
+  String get homeCountdownUnavailable => 'Обратный отсчет недоступен.';
+
+  @override
+  String get homeCountdownActive => 'Обратный отсчет активен';
+
+  @override
+  String homeCountdownUntil(Object prayer) {
+    return 'до $prayer';
+  }
+
+  @override
+  String get homeCountdownLabelUppercase => 'ОБРАТНЫЙ ОТСЧЕТ';
+
+  @override
+  String homeDurationUntil(int hours, int minutes) {
+    return 'через $hoursч $minutesмин';
+  }
+
+  @override
+  String homeDurationHoursMinutes(int hours, String minutes) {
+    return '$hours ч. $minutes мин.';
+  }
+
+  @override
+  String homeDurationMinutes(int minutes) {
+    return '$minutes мин.';
+  }
+
+  @override
+  String homeDurationSeconds(String seconds) {
+    return '$seconds с.';
+  }
+
+  @override
+  String get homePrayerSectionToday => 'Сегодняшние молитвы';
+
+  @override
+  String homePrayerSectionForDate(Object date) {
+    return 'Время для $date';
+  }
+
+  @override
+  String homePrayerSectionWorshipDay(Object weekday) {
+    return '$weekday, день поклонения';
+  }
+
+  @override
+  String homePrayerSectionMarkedCount(int count) {
+    return '$count/5 отмечено';
+  }
+
+  @override
+  String get settingsTitle => 'Настройки';
+
+  @override
+  String get settingsTitleArabic => 'إعدادات';
+
+  @override
+  String get settingsSectionAppearance => 'Появление';
+
+  @override
+  String get settingsSectionAccessibility => 'Доступность';
+
+  @override
+  String get settingsSectionAdhanNotifications => '__АДХАН__ уведомления';
+
+  @override
+  String get settingsSectionScheduleCalculation => 'Расчет времени молитвы';
+
+  @override
+  String get settingsSectionRamadanMode => 'Режим __РАМАДАН__';
+
+  @override
+  String get settingsSectionHadith => '__ХАДИТ__';
+
+  @override
+  String get settingsSectionTravelerMode => 'Режим путешествия';
+
+  @override
+  String get settingsSectionRecentPlaces => 'ПОСЛЕДНИЕ МЕСТА';
+
+  @override
+  String get settingsSectionSmartCache => 'Умный кэш';
+
+  @override
+  String get settingsSectionSupport => 'Садака · Поддержка';
+
+  @override
+  String get settingsSectionCloudBackup =>
+      'Резервное копирование в облаке (бета)';
+
+  @override
+  String get settingsTextSize => 'Размер текста';
+
+  @override
+  String settingsCurrentScale(Object scale) {
+    return 'Текущий масштаб: ${scale}x';
+  }
+
+  @override
+  String get settingsHighContrast => 'Высокая контрастность';
+
+  @override
+  String get settingsHighContrastSubtitle =>
+      'Улучшает читабельность приложения.';
+
+  @override
+  String get settingsUseSystemBold => 'Использовать системный жирный текст';
+
+  @override
+  String get settingsUseSystemBoldSubtitle =>
+      'Соблюдает настройки VoiceOver/TalkBack.';
+
+  @override
+  String get settingsResetAccessibility => 'Сбросить доступность';
+
+  @override
+  String get settingsReset => 'Перезагрузить';
+
+  @override
+  String get settingsThemeDarkTitle => 'Темный';
+
+  @override
+  String get settingsThemeDarkSubtitle => 'Небо перед рассветом';
+
+  @override
+  String get settingsThemeLightTitle => 'Свет';
+
+  @override
+  String get settingsThemeLightSubtitle => 'Для наружного использования';
+
+  @override
+  String get settingsThemeAmoledTitle => 'АМОЛЕД';
+
+  @override
+  String get settingsThemeAmoledSubtitle =>
+      'Чистый черный, экономит заряд батареи';
+
+  @override
+  String get settingsThemeDeuteranopiaTitle => 'Дейтеранопия';
+
+  @override
+  String get settingsThemeDeuteranopiaSubtitle => 'Нет красного/зеленого';
+
+  @override
+  String get settingsThemeMonochromeTitle => 'Монохромный';
+
+  @override
+  String get settingsThemeMonochromeSubtitle =>
+      'При ахроматопсии и слабости зрения';
+
+  @override
+  String get settingsLanguage => 'Язык приложения';
+
+  @override
+  String get settingsLanguageSubtitle =>
+      'Выберите, должно ли приложение следовать языку вашего устройства или везде использовать один фиксированный язык.';
+
+  @override
+  String get settingsLanguageDialogTitle => 'Язык приложения';
+
+  @override
+  String get settingsLanguageOptionSystem => 'Следуйте языку устройства';
+
+  @override
+  String settingsLanguageSystemValue(Object language) {
+    return 'Автоматически ($language)';
+  }
+
+  @override
+  String get settingsLanguageOptionSpanish => 'Испанский';
+
+  @override
+  String get settingsLanguageOptionEnglish => 'Английский';
+
+  @override
+  String get settingsLanguageOptionFrench => 'Французский';
+
+  @override
+  String get settingsLanguageOptionGerman => 'Немецкий';
+
+  @override
+  String get settingsLanguageOptionArabic => 'Арабский';
+
+  @override
+  String get settingsLanguageOptionDutch => 'Нидерландский';
+
+  @override
+  String get settingsAdhanSound => '__АДХАН__ звук';
+
+  @override
+  String get settingsAdhanSoundAction => 'Выберите и просмотрите';
+
+  @override
+  String get settingsGeneralNotifications => 'Общие уведомления';
+
+  @override
+  String get settingsGeneralNotificationsSubtitle =>
+      'Включить или приостановить все молитвенные оповещения';
+
+  @override
+  String get settingsSystemPermissionPendingBody =>
+      'Оповещения о молитвах настроены, но системное разрешение всё ещё не получено.';
+
+  @override
+  String get settingsHapticFeedback => 'Тактильная обратная связь';
+
+  @override
+  String get settingsRamadanAutomatic => 'Автоматический режим Рамадана';
+
+  @override
+  String get settingsRamadanAutomaticSubtitle =>
+      'Включается автоматически, когда по исламскому календарю наступает __РАМАДАН__.';
+
+  @override
+  String get settingsRamadanForced => 'Принудительный режим __РАМАДАН__';
+
+  @override
+  String get settingsRamadanForcedSubtitle =>
+      'Включите оформление Рамадана вручную';
+
+  @override
+  String get settingsDailyNotification => 'Ежедневное уведомление';
+
+  @override
+  String get settingsDailyNotificationSubtitle =>
+      'Получайте хадис или аят каждый день';
+
+  @override
+  String get settingsNotificationHour => 'Время уведомления';
+
+  @override
+  String get settingsTravelerMode => 'Режим путешествия';
+
+  @override
+  String get settingsTravelerModeSubtitle =>
+      'Автоматически обнаруживает изменения в городе (>50 км)';
+
+  @override
+  String get settingsTravelerModeLoadError =>
+      'Не удалось загрузить режим путешествия.';
+
+  @override
+  String get settingsRecentPlaces => 'Недавние места';
+
+  @override
+  String get settingsNoRecentTrips => 'Нет недавних поездок';
+
+  @override
+  String get settingsLoadError => 'Мы не смогли загрузить его';
+
+  @override
+  String get settingsCacheValidUntil => 'Кэш действителен до';
+
+  @override
+  String get settingsCacheEntries => 'Записи кэша';
+
+  @override
+  String get settingsClearCache => 'Очистить кеш';
+
+  @override
+  String get settingsSupportInfo => 'Информация о поддержке';
+
+  @override
+  String get settingsSupportCardTitle => 'Поддержка развития';
+
+  @override
+  String get settingsSupportCardSubtitle =>
+      'Каждое пожертвование может стать садака-джариятом.';
+
+  @override
+  String get settingsBackupMode => 'Резервный режим';
+
+  @override
+  String get settingsAnonymousId => 'Анонимный идентификатор';
+
+  @override
+  String get settingsLastBackup => 'Последняя резервная копия';
+
+  @override
+  String get settingsExportBackup => 'Экспортировать резервную копию';
+
+  @override
+  String get settingsRestoreBackup => 'Восстановить резервную копию';
+
+  @override
+  String get settingsBackupInfoBody =>
+      'Вы можете сохранить резервную копию вручную в формате JSON и поделиться ею. Автоматизация и синхронизация между устройствами пока недоступны.';
+
+  @override
+  String get settingsRestoreBackupDialogTitle => 'Восстановить резервную копию';
+
+  @override
+  String get settingsRestoreBackupSuccess => 'Резервная копия восстановлена';
+
+  @override
+  String get settingsRestoreBackupError =>
+      'Нам не удалось восстановить резервную копию.';
+
+  @override
+  String get settingsDailyNotificationEnabled =>
+      'Ежедневное уведомление включено';
+
+  @override
+  String get settingsDailyNotificationDisabled =>
+      'Ежедневное уведомление отключено';
+
+  @override
+  String get settingsSelectHourTitle => 'Выберите время';
+
+  @override
+  String get settingsToday => 'Сегодня';
+
+  @override
+  String get settingsYesterday => 'Вчера';
+
+  @override
+  String settingsDaysAgo(int count) {
+    return '$count дней назад';
+  }
+
+  @override
+  String get settingsRamadanManualActive => 'Вручную активен';
+
+  @override
+  String get settingsLocationBlocked => 'Заблокировано';
+
+  @override
+  String get settingsLocationPendingPermission => 'Разрешение ожидает';
+
+  @override
+  String get settingsLocationAutomatic => 'Автоматический';
+
+  @override
+  String get settingsLocationSavedUnavailable =>
+      'Нет сохраненного местоположения';
+
+  @override
+  String get settingsLocationStatus => 'Статус местоположения';
+
+  @override
+  String get settingsGpsOff => 'GPS выключен';
+
+  @override
+  String get settingsScheduleSource => 'Источник расписания';
+
+  @override
+  String get settingsScheduleSourceReady => 'Кэш готов';
+
+  @override
+  String get settingsNotificationSystem => 'Системное уведомление.';
+
+  @override
+  String get settingsNotificationApp => 'Уведомление приложения.';
+
+  @override
+  String get settingsNotificationsGranted => 'Предоставленный';
+
+  @override
+  String get commonPlay => 'Играть';
+
+  @override
+  String get commonText => 'Текст';
+
+  @override
+  String get commonVideo => 'Видео';
+
+  @override
+  String get commonRemove => 'Удалять';
+
+  @override
+  String get shareBranding => 'Приложение: Qibla Time';
+
+  @override
+  String shareReferenceLabel(Object reference) {
+    return 'Ссылка: $reference';
+  }
+
+  @override
+  String get shareSubjectDua => 'Дуа';
+
+  @override
+  String get shareSubjectHadithOfDay => '__ХАДИТ__ дня - Qibla Time';
+
+  @override
+  String get shareSubjectHadithShared => 'Хадис опубликован из Qibla Time';
+
+  @override
+  String get shareBadgeHadith => 'ХАДИС';
+
+  @override
+  String get shareBadgeDua => 'ДУА';
+
+  @override
+  String get shareBadgeQuran => 'КОРАН';
+
+  @override
+  String get shareSectionStyle => 'Стиль/фон';
+
+  @override
+  String get shareSectionContent => 'Содержание';
+
+  @override
+  String get shareLayoutCard => 'Карта';
+
+  @override
+  String get shareLayoutStory => 'История';
+
+  @override
+  String get shareContentBilingual => 'арабский + перевод';
+
+  @override
+  String get shareContentArabicOnly => 'только арабский';
+
+  @override
+  String get shareContentTranslationOnly => 'Только перевод';
+
+  @override
+  String get shareActionShareImage => 'Поделиться изображением';
+
+  @override
+  String get shareActionShareText => 'Поделиться текстом';
+
+  @override
+  String get shareHadithTitle => 'Поделиться хадисом';
+
+  @override
+  String get shareHadithSubtitle =>
+      'Прежде чем поделиться, выберите формат и контент.';
+
+  @override
+  String get shareHadithTextError => 'Мы не смогли поделиться текстом хадиса.';
+
+  @override
+  String get shareHadithImageError =>
+      'Нам не удалось создать изображение хадиса.';
+
+  @override
+  String get shareDuaTitle => 'Поделиться дуа';
+
+  @override
+  String shareDuaTitleNamed(Object title) {
+    return 'Поделиться $title';
+  }
+
+  @override
+  String get shareDuaSubtitle =>
+      'Используйте ту же визуальную подачу, что и для хадиса, чтобы поделиться дуа и азкаром.';
+
+  @override
+  String get shareDuaTextError => 'Нам не удалось поделиться текстом дуа.';
+
+  @override
+  String get shareDuaImageError => 'Нам не удалось создать изображение дуа.';
+
+  @override
+  String shareAyahTitle(int number) {
+    return 'Поделитесь аятом $number';
+  }
+
+  @override
+  String get shareAyahSubtitle =>
+      'Сохраняйте одинаковое визуальное представление для текста, изображений и видео.';
+
+  @override
+  String get shareAyahTextError =>
+      'Мы не смогли поделиться этим аятом в виде текста.';
+
+  @override
+  String get shareAyahImageError =>
+      'Нам не удалось создать это изображение аята.';
+
+  @override
+  String get shareAyahVideoNoAudio =>
+      'Нет аудио для создания видео для этого аята.';
+
+  @override
+  String get shareAyahVideoGenerating => 'Создание видео аята...';
+
+  @override
+  String get shareAyahVideoError =>
+      'Нам не удалось создать видео для этого аята.';
+
+  @override
+  String get notificationAdhanChannelName => '__АДХАН__';
+
+  @override
+  String get notificationAdhanChannelDescription =>
+      'Уведомления о времени молитвы';
+
+  @override
+  String notificationAdhanTitle(Object prayerName) {
+    return 'Qibla Time – $prayerName';
+  }
+
+  @override
+  String get notificationAdhanBody => 'Настало время молитвы';
+
+  @override
+  String get notificationReminderChannelName => 'Qibla Time – Напоминания';
+
+  @override
+  String get notificationReminderChannelDescription =>
+      'Контекстные напоминания о __РАМАДАНЕ__ и Джумуа';
+
+  @override
+  String get notificationDailyReflectionChannelName => 'Ежедневное размышление';
+
+  @override
+  String get notificationDailyReflectionChannelDescription =>
+      'Аят __КОРАНА__ и хадис дня';
+
+  @override
+  String get notificationDailyReflectionTitle => 'Отражение дня';
+
+  @override
+  String get notificationDailyReflectionFallbackBody =>
+      'Ваше ежедневное духовное размышление в Qibla Time.';
+
+  @override
+  String get notificationDailyReflectionErrorTitle =>
+      'Qibla Time · Ежедневные размышления';
+
+  @override
+  String get notificationDailyReflectionErrorBody =>
+      'Ваше духовное напоминание на сегодня';
+
+  @override
+  String get notificationHadithReminderChannelName => '__ХАДИТ__ напоминания';
+
+  @override
+  String get notificationHadithReminderChannelDescription =>
+      'Часовые напоминания о хадисах';
+
+  @override
+  String get notificationHadithReminderFallbackBody =>
+      'Напоминание: прочтите хадис Пророка ﷺ';
+
+  @override
+  String get notificationHadithReminderTitle => '📖 __ХАДИС__ на этот момент';
+
+  @override
+  String get notificationHadithReminderTestBody =>
+      'Тестовое напоминание о хадисах';
+
+  @override
+  String get notificationHadithReminderTestTitle => '📖 __ХАДИТ__ напоминание';
+
+  @override
+  String get notificationWeeklySummaryTitle =>
+      'Ваша еженедельная сводка готова';
+
+  @override
+  String notificationWeeklySummaryBody(
+      int prayersCompleted, int maxPossible, Object strongestDay) {
+    return 'На этой неделе вы совершили $prayersCompleted/$maxPossible молитв. Ваш самый сильный день был $strongestDay.';
+  }
+
+  @override
+  String get quranDailyVerseFallbackTranslation =>
+      '__АЛЛАХ__: нет божества, кроме Него, Вечно-Живого, Вседержителя. Ни сонливость, ни сон не одолевают Его.';
+
+  @override
+  String get quranDailyVerseFallbackTransliteration =>
+      '__АЛЛАХ__у ля иляха илля хуваль хайюль каюм...';
+
+  @override
+  String get quranDailyVerseFallbackReference => 'Аль-Бакара [2:255]';
+
+  @override
+  String get quranTitle => '__КОРАН__';
+
+  @override
+  String get quranSubtitle => '114 сур · непрерывное чтение';
+
+  @override
+  String get quranHafizLabel => 'Хафиз';
+
+  @override
+  String get quranUtilityAyatAlKursi => 'Аят аль-Курси';
+
+  @override
+  String get quranUtilityAllahNames => '99 имен';
+
+  @override
+  String get quranUtilityDownloaded => 'Скачано';
+
+  @override
+  String get quranProtectionTitle => 'ЕЖЕДНЕВНАЯ ЗАЩИТА';
+
+  @override
+  String get quranProtectionSubtitle =>
+      'Быстрый доступ к Аяту аль-Курси и защитным сурам. Откройте их, чтобы прочитать или послушать, а затем отметьте три повторения.';
+
+  @override
+  String get quranProtectionAyatAlKursiHelper => 'Аль-Бакара 2:255';
+
+  @override
+  String quranProtectionSurahHelper(int number) {
+    return 'Сура $number';
+  }
+
+  @override
+  String get quranProtectionIkhlasTitle => 'Аль-Ихлас';
+
+  @override
+  String get quranProtectionFalaqTitle => 'Аль-Фалак';
+
+  @override
+  String get quranProtectionNasTitle => 'Ан-Нас';
+
+  @override
+  String quranProtectionRepeatCount(Object helper, int count) {
+    return '$helper · $count/3 повторения';
+  }
+
+  @override
+  String get quranProtectionCompleteTooltip => 'Полный';
+
+  @override
+  String get quranProtectionIncrementTooltip => '+1 повторение';
+
+  @override
+  String get quranReadingHintTitle => 'НЕПРЕРЫВНОЕ ЧТЕНИЕ';
+
+  @override
+  String get quranReadingHintBody =>
+      'Откройте любую суру, и мы сохраним ваш последний аят, чтобы вы могли вернуться к нему позже.';
+
+  @override
+  String get quranReadingHintSecondary =>
+      'Вы также можете сохранить закладки, нажав на значок закладки во время чтения.';
+
+  @override
+  String get quranContinueReadingTitle => 'ПРОДОЛЖИТЬ ЧТЕНИЕ';
+
+  @override
+  String get quranBookmarksTitle => 'ЗАКЛАДКИ';
+
+  @override
+  String get quranRevelationMecca => 'Мекка';
+
+  @override
+  String get quranRevelationMedina => 'Медина';
+
+  @override
+  String quranAyahCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count аята',
+      many: '$count аятов',
+      few: '$count аята',
+      one: '$count аят',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String quranLastReadingAyah(int ayah) {
+    return 'Последнее чтение: ая $ayah';
+  }
+
+  @override
+  String quranBookmarkCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count сохранённые закладки',
+      many: '$count сохранённых закладок',
+      few: '$count сохранённые закладки',
+      one: '$count сохранённая закладка',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get quranDownloadedFavoriteOffline =>
+      'Аудио загружено · избранное офлайн';
+
+  @override
+  String get quranDownloadedAudio => 'Аудио загружено';
+
+  @override
+  String quranReadingPointSaved(int ayah) {
+    return 'Точка чтения сохранена в аяте $ayah.';
+  }
+
+  @override
+  String quranBookmarkSaved(int ayah) {
+    return 'Закладка сохранена на сайте ayah $ayah.';
+  }
+
+  @override
+  String quranBookmarkRemoved(int ayah) {
+    return 'Закладка удалена из аята $ayah';
+  }
+
+  @override
+  String quranShareAyahTitle(int ayah) {
+    return 'Поделитесь аятом $ayah';
+  }
+
+  @override
+  String get quranShareTextSubtitle =>
+      'Включает арабский текст, перевод и ссылки.';
+
+  @override
+  String get quranShareImageSubtitle => 'Создайте образ с помощью аята.';
+
+  @override
+  String get quranShareVideoSubtitle =>
+      'Создайте видео с карточкой и декламацией.';
+
+  @override
+  String get quranAyahImageError =>
+      'Нам не удалось создать изображение для этого аята.';
+
+  @override
+  String get quranAyahVideoNoAudio =>
+      'В этом аяте нет звука для создания видео.';
+
+  @override
+  String get quranAyahVideoGenerating => 'Мы создаём видео аята...';
+
+  @override
+  String quranAyahVideoShareText(int ayah, Object surah) {
+    return 'Ая $ayah из $surah';
+  }
+
+  @override
+  String get quranAyahVideoError =>
+      'Нам не удалось создать видео для этого аята.';
+
+  @override
+  String get quranDownloadCheckError =>
+      'Нам не удалось проверить загрузку на этом устройстве.';
+
+  @override
+  String get quranDownloadSuccess =>
+      'Аудио скачано. Теперь вы можете слушать эту суру в автономном режиме.';
+
+  @override
+  String get quranDownloadDetailedError =>
+      'Нам не удалось завершить загрузку. Проверьте подключение и повторите попытку.';
+
+  @override
+  String get quranDownloadShortError => 'Не удалось завершить загрузку аудио.';
+
+  @override
+  String get quranDownloadedAudioPlaySubtitle =>
+      'Слушайте суру с сохраненным звуком.';
+
+  @override
+  String get quranDownloadedAudioRemoveSubtitle =>
+      'Освободите место и снова послушайте онлайн.';
+
+  @override
+  String get quranDownloadedAudioRemoved => 'Эта загрузка суры была удалена.';
+
+  @override
+  String get quranDownloadedFavoriteAdded =>
+      'Сура сохранена среди загруженных вами избранных.';
+
+  @override
+  String get quranDownloadedFavoriteRemoved =>
+      'Сура удалена из загруженного избранного.';
+
+  @override
+  String get quranAyahAudioUnavailable => 'Звук для этой аяты недоступен.';
+
+  @override
+  String get quranAyahAudioDownloaded =>
+      'Аудио уже загружено на это устройство.';
+
+  @override
+  String get quranAyahAudioAvailable => 'Вы можете послушать этот аят.';
+
+  @override
+  String get quranAyahAudioRequiresConnection =>
+      'Вы можете послушать этот аят, если у вас есть связь.';
+
+  @override
+  String get quranSurahRecitationUnavailable =>
+      'Полное чтение этой суры невозможно.';
+
+  @override
+  String quranSurahAudioDownloading(int downloaded, int total) {
+    return 'Мы загружаем аудио, чтобы вы могли слушать эту суру в автономном режиме. $downloaded/$total ая готов.';
+  }
+
+  @override
+  String get quranSurahAudioDownloaded =>
+      'Аудио уже загружено на это устройство. Вы можете слушать эту суру в автономном режиме.';
+
+  @override
+  String quranSurahAudioMissingAyahs(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count аята без аудио будут пропущены.',
+      many: '$count аятов без аудио будут пропущены.',
+      few: '$count аята без аудио будут пропущены.',
+      one: '$count аят без аудио будет пропущен.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String quranSurahAudioPartialDownload(int downloaded, int total) {
+    return 'На этом устройстве уже сохранено $downloaded/$total аятов.';
+  }
+
+  @override
+  String get quranSurahAudioDownloadAvailable =>
+      'Вы также можете скачать его для прослушивания в автономном режиме.';
+
+  @override
+  String get quranSurahAudioPlayOnline =>
+      'Вы можете слушать эту суру прямо в режиме непрерывного воспроизведения.';
+
+  @override
+  String get quranSurahAudioPlayWithConnection =>
+      'Вы можете прослушать эту суру полностью, если у вас есть соединение.';
+
+  @override
+  String get quranAyahPlaybackError =>
+      'Мы не смогли воспроизвести звук. Проверьте подключение и повторите попытку.';
+
+  @override
+  String get quranSurahPlaybackError => 'Мы не смогли начать полное чтение.';
+
+  @override
+  String get quranLastReadingBadge => 'Последнее чтение';
+
+  @override
+  String get quranPauseAudio => 'Пауза звука';
+
+  @override
+  String get quranResumeAudio => 'Возобновить аудио';
+
+  @override
+  String get quranPlayAudio => 'Воспроизвести аудио';
+
+  @override
+  String get quranAudioUnavailable => 'Аудио недоступно';
+
+  @override
+  String get quranRemoveBookmark => 'Удалить закладку';
+
+  @override
+  String get quranSaveBookmark => 'Сохранить закладку';
+
+  @override
+  String quranAyahFooterHint(Object status) {
+    return '$status Нажмите на этот аят, чтобы сохранить здесь свою точку зрения. Нажмите и удерживайте, чтобы поделиться.';
+  }
+
+  @override
+  String get quranDetailLoadError =>
+      'Мы не смогли загрузить эту суру. Проверьте подключение и повторите попытку.';
+
+  @override
+  String quranTopBannerResume(int ayah) {
+    return 'Возобновление с аята $ayah.';
+  }
+
+  @override
+  String get quranTopBannerOnline =>
+      'Контент загружен онлайн. Вы можете слушать каждую аудиозапись аята, пока у вас есть соединение.';
+
+  @override
+  String get quranTopBannerOffline =>
+      'Текст загружен офлайн. Аудио для некоторых аятов может по-прежнему требовать подключения.';
+
+  @override
+  String get quranTopBannerPlaceholder =>
+      'Частичный контент загружен офлайн. Аудио пока недоступно.';
+
+  @override
+  String get quranSurahAudioCardTitle => 'СЛУШАЙТЕ СУРУ';
+
+  @override
+  String quranAvailableAyahs(int available, int total) {
+    return '$available/$total аяты';
+  }
+
+  @override
+  String get quranPauseSurah => 'Пауза сура';
+
+  @override
+  String get quranResumeSurah => 'Возобновить суру';
+
+  @override
+  String get quranListenSurah => 'Слушайте суру';
+
+  @override
+  String get quranStop => 'Останавливаться';
+
+  @override
+  String get quranCheckingAudio => 'Проверка звука';
+
+  @override
+  String quranDownloadingProgress(int downloaded, int total) {
+    return 'Загрузка $downloaded/$total';
+  }
+
+  @override
+  String get quranDownloaded => 'Скачано';
+
+  @override
+  String get quranDownloadAudio => 'Скачать аудио';
+
+  @override
+  String get quranDownloadedFavoriteLabel => 'Скачал избранное';
+
+  @override
+  String get quranMarkFavorite => 'Отметить как избранное';
+
+  @override
+  String quranPlayingSurahAyah(int ayah) {
+    return 'Воспроизведение суры · аята $ayah';
+  }
+
+  @override
+  String quranPausedSurahAyah(int ayah) {
+    return 'Сура сделала паузу · ая $ayah';
+  }
+
+  @override
+  String quranPlayingAyah(int ayah) {
+    return 'Играю ая $ayah';
+  }
+
+  @override
+  String quranPausedAyah(int ayah) {
+    return 'Ая $ayah приостановлено';
+  }
+
+  @override
+  String get quranActiveAudioSurahHint =>
+      'Сура автоматически продолжится следующим аятом.';
+
+  @override
+  String get quranActiveAudioAyahHint =>
+      'Вы можете приостановить, возобновить или остановить это чтение.';
+
+  @override
+  String get quranStopAudio => 'Остановить звук';
+
+  @override
+  String get commonAuthenticity => 'Подлинность';
+
+  @override
+  String get commonBooks => 'Книги';
+
+  @override
+  String get commonCancel => 'Отмена';
+
+  @override
+  String get commonCategory => 'Категория';
+
+  @override
+  String get commonClose => 'Закрывать';
+
+  @override
+  String get commonCollection => 'Коллекция';
+
+  @override
+  String get commonCopy => 'Копировать';
+
+  @override
+  String get commonDone => 'Сделанный';
+
+  @override
+  String get commonDownload => 'Скачать';
+
+  @override
+  String get commonFeatured => 'Рекомендуемые';
+
+  @override
+  String get commonFilter => 'Фильтр';
+
+  @override
+  String get commonGeneral => 'Общий';
+
+  @override
+  String get commonHadiths => '__ХАДИТ__s';
+
+  @override
+  String get commonInformation => 'Информация';
+
+  @override
+  String get commonNext => 'Следующий';
+
+  @override
+  String get commonOther => 'Другой';
+
+  @override
+  String get commonPause => 'Пауза';
+
+  @override
+  String get commonPrayers => 'молитвы';
+
+  @override
+  String get commonQuran => '__КОРАН__';
+
+  @override
+  String get commonRead => 'Читать';
+
+  @override
+  String get commonReference => 'Ссылка';
+
+  @override
+  String get commonResume => 'Резюме';
+
+  @override
+  String get commonSave => 'Сохранять';
+
+  @override
+  String get commonSaved => 'Сохранено';
+
+  @override
+  String get commonStatistics => 'Статистика';
+
+  @override
+  String get commonTotal => 'Общий';
+
+  @override
+  String get achievementFirstPrayerTitle => 'Первая молитва';
+
+  @override
+  String get achievementFirstPrayerDescription =>
+      'Вы отметили свою первую молитву в приложении.';
+
+  @override
+  String get achievementFullDayTitle => 'Полный день';
+
+  @override
+  String get achievementFullDayDescription =>
+      'Вы совершили все пять молитв за один день.';
+
+  @override
+  String get achievementStreak3Title => '3-дневная серия';
+
+  @override
+  String get achievementStreak3Description =>
+      'Вы сохраняли последовательность три дня подряд.';
+
+  @override
+  String get achievementStreak7Title => '7-дневная серия';
+
+  @override
+  String get achievementStreak7Description =>
+      'Семь дней слежения подряд. Отличный ритм.';
+
+  @override
+  String get achievementStreak30Title => '30-дневная серия';
+
+  @override
+  String get achievementStreak30Description =>
+      'Тридцать дней подряд. Необычайная консистенция.';
+
+  @override
+  String get achievementTotal100Title => '100 молитв';
+
+  @override
+  String get achievementTotal100Description =>
+      'Вы записали 100 завершенных молитв.';
+
+  @override
+  String get achievementFirstRamadanTitle => 'Первый __РАМАДАН__';
+
+  @override
+  String get achievementFirstRamadanDescription =>
+      'Вы завершили свой первый активный день __РАМАДАН__.';
+
+  @override
+  String get analyticsAchievementsTitle => 'Достижения';
+
+  @override
+  String get analyticsAchievementsEmpty => 'Достижения пока не разблокированы.';
+
+  @override
+  String get analyticsAchievementsLoadError =>
+      'Нам не удалось загрузить ваши достижения.';
+
+  @override
+  String get analyticsBestDayLabel => 'Лучший день';
+
+  @override
+  String analyticsBestStreakHint(Object count) {
+    return 'Ваша лучшая серия: $count дней';
+  }
+
+  @override
+  String get analyticsBestStreakLabel => 'Лучшая серия';
+
+  @override
+  String get analyticsByPrayerTitle => 'По молитве';
+
+  @override
+  String get analyticsCollectionsLabel => 'Коллекции';
+
+  @override
+  String get analyticsCompletedPrayersLabel => 'Завершенные молитвы';
+
+  @override
+  String get analyticsCurrentStreakLabel => 'Текущая серия';
+
+  @override
+  String analyticsDaysValue(Object count) {
+    return '$count дней';
+  }
+
+  @override
+  String get analyticsEmptyBody =>
+      'Начните отмечать свои молитвы, и вы увидите здесь свою последовательность.';
+
+  @override
+  String get analyticsEmptyHint =>
+      'Завершите свою первую молитву, чтобы разблокировать эту панель.';
+
+  @override
+  String get analyticsEmptyTitle => 'Статистики пока нет';
+
+  @override
+  String get analyticsFavoritesLabel => 'Избранное';
+
+  @override
+  String get analyticsFullDaysLabel => 'Полные дни';
+
+  @override
+  String get analyticsGradesLabel => 'Оценки';
+
+  @override
+  String get analyticsHadithStatsLoadError =>
+      'Не удалось загрузить статистику хадисов.';
+
+  @override
+  String get analyticsLast30DaysTitle => 'Последние 30 дней';
+
+  @override
+  String get analyticsLessLabel => 'Меньше';
+
+  @override
+  String get analyticsMoreLabel => 'Более';
+
+  @override
+  String get analyticsNoActiveStreak => 'Нет активной полосы';
+
+  @override
+  String get analyticsRecordBadge => 'Записывать';
+
+  @override
+  String get analyticsSavedFavoritesLabel => 'Сохраненные избранные';
+
+  @override
+  String get analyticsShareError => 'Мы не смогли поделиться вашим прогрессом.';
+
+  @override
+  String get analyticsShareImage => 'Поделиться изображением';
+
+  @override
+  String get analyticsShareProgressTooltip => 'Поделитесь прогрессом';
+
+  @override
+  String get analyticsShareText => 'Поделиться текстом';
+
+  @override
+  String get analyticsStartStreakHint => 'Начните новую серию сегодня.';
+
+  @override
+  String analyticsStreakDays(Object count) {
+    return '$count дней подряд';
+  }
+
+  @override
+  String get analyticsThisWeekLabel => 'На этой неделе';
+
+  @override
+  String get analyticsWeekInterpretationEmpty =>
+      'На этой неделе еще недостаточно активности.';
+
+  @override
+  String get analyticsWeekInterpretationEncouragement =>
+      'Продолжайте понемногу. Каждая молитва имеет значение.';
+
+  @override
+  String get analyticsWeekInterpretationGood =>
+      'У тебя все хорошо на этой неделе. Немного большей последовательности будет иметь значение.';
+
+  @override
+  String get analyticsWeekInterpretationStrong =>
+      'Очень сильная неделя. Вы держите отличный ритм.';
+
+  @override
+  String get analyticsWeeklySummaryTitle => 'Еженедельный обзор';
+
+  @override
+  String get booksAboutBody =>
+      'Эта библиотека объединяет книги исламского дома для быстрого чтения внутри приложения.';
+
+  @override
+  String get booksAboutBulletCatalog =>
+      'Кураторский каталог, который легко изучить.';
+
+  @override
+  String get booksAboutBulletCategories =>
+      'Категории, чтобы быстрее найти нужное чтиво';
+
+  @override
+  String get booksAboutBulletVerified =>
+      'Содержимое признанной исламской библиотеки';
+
+  @override
+  String get booksAllCategories => 'Все категории';
+
+  @override
+  String get booksCategoriesTab => 'Категории';
+
+  @override
+  String get booksDescription => 'Описание';
+
+  @override
+  String get booksEmptyCategories => 'Нет доступных категорий.';
+
+  @override
+  String get booksEmptyFeatured => 'Избранных книг пока нет.';
+
+  @override
+  String get booksEmptySearch => 'Мы не смогли найти книги по этому запросу.';
+
+  @override
+  String get booksLibraryTitle => 'Книги';
+
+  @override
+  String get booksLoadErrorTitle => 'Не удалось загрузить библиотеку';
+
+  @override
+  String get booksMainCategoryAcademicLessons => 'Академические уроки';
+
+  @override
+  String get booksMainCategoryArabicLanguage => 'арабский язык';
+
+  @override
+  String get booksMainCategoryCallToIslam => 'Призыв к Исламу';
+
+  @override
+  String get booksMainCategoryHistory => 'История';
+
+  @override
+  String get booksMainCategoryIslamicBelief => 'Исламская вера';
+
+  @override
+  String get booksMainCategoryIslamicCulture => 'Исламская культура';
+
+  @override
+  String get booksMainCategoryIslamicJurisprudence => 'Исламская юриспруденция';
+
+  @override
+  String get booksMainCategoryMajorSins => 'Главные грехи';
+
+  @override
+  String get booksMainCategoryNobleQuran => 'Благородный __КОРАН__';
+
+  @override
+  String get booksMainCategoryPresentingIslam => 'Представляя Ислам';
+
+  @override
+  String get booksMainCategoryPropheticBiography => 'Пророческая биография';
+
+  @override
+  String get booksMainCategoryProphetSunnah => 'Сунна Пророка';
+
+  @override
+  String get booksMainCategorySermons => 'Проповеди';
+
+  @override
+  String get booksMainCategoryVirtues => 'Достоинства';
+
+  @override
+  String booksPageCount(Object pages) {
+    return '$pages страниц';
+  }
+
+  @override
+  String get booksPlaceholderDescription => 'Книги скоро здесь появятся.';
+
+  @override
+  String get booksPlaceholderTitle => 'Библиотека в разработке';
+
+  @override
+  String get booksSearchHint => 'Поиск книги или автора';
+
+  @override
+  String get booksUnnamedCategory => 'Безымянная категория';
+
+  @override
+  String get booksUntitled => 'Без названия';
+
+  @override
+  String get booksVisitIslamHouse => 'Посетите ИсламХаус';
+
+  @override
+  String get calendarCurrentMonth => 'В ЭТОМ МЕСЯЦЕ';
+
+  @override
+  String get calendarEventAshura => 'Ашура';
+
+  @override
+  String get calendarEventDayOfArafah => 'День Арафа';
+
+  @override
+  String get calendarEventEidAdha => 'Ид аль-Адха';
+
+  @override
+  String get calendarEventEidFitr => 'Ид аль-Фитр';
+
+  @override
+  String get calendarEventIslamicNewYear => 'Исламский Новый год';
+
+  @override
+  String get calendarEventRamadanStart => 'Начало __РАМАДАНА__';
+
+  @override
+  String calendarImportantDatesTitle(Object year) {
+    return 'Важные даты $year';
+  }
+
+  @override
+  String get calendarSelectDate => 'Выберите дату';
+
+  @override
+  String get calendarSelectedDateUppercase => 'ВЫБРАННАЯ ДАТА';
+
+  @override
+  String get calendarTitle => 'Исламский календарь';
+
+  @override
+  String calendarTodayLabel(Object date) {
+    return 'Сегодня · $date';
+  }
+
+  @override
+  String get dhikrChooseCustomValue => 'Выберите пользовательское значение';
+
+  @override
+  String get dhikrDailyGoalCompletedMessage =>
+      'Вы выполнили цель ежедневного зикра.';
+
+  @override
+  String get dhikrDailyGoalHelper =>
+      'Выберите, сколько повторений вы хотите достичь сегодня.';
+
+  @override
+  String get dhikrDailyGoalShort => 'Ежедневная цель';
+
+  @override
+  String get dhikrDailyGoalTitle => 'Ежедневная цель';
+
+  @override
+  String dhikrDailyGoalUpdated(Object value) {
+    return 'Ежедневная цель обновлена ​​до $value.';
+  }
+
+  @override
+  String get dhikrFeedbackAlmostThere =>
+      'У тебя все очень хорошо. Вы близки к своей ежедневной цели.';
+
+  @override
+  String get dhikrFeedbackCompleted =>
+      'Ежедневная цель выполнена. Пусть __АЛЛАХ__ примет ваш зикр.';
+
+  @override
+  String get dhikrFeedbackCycleCompleted =>
+      'Цикл завершен. Вы можете продолжать идти спокойно.';
+
+  @override
+  String get dhikrFeedbackGoodPace =>
+      'Хороший темп. Сохраняйте эти повторения спокойно.';
+
+  @override
+  String get dhikrFeedbackStart =>
+      'Начните с нескольких плавных и устойчивых повторений.';
+
+  @override
+  String get dhikrFeedbackTakeYourTime =>
+      'Не торопись. Каждое повторение имеет значение.';
+
+  @override
+  String get dhikrGoalsSection => 'ЦЕЛИ';
+
+  @override
+  String get dhikrHistoryEmptyBody =>
+      'Для этой точки зрения еще недостаточно истории.';
+
+  @override
+  String get dhikrHistorySavedBody =>
+      'Ваш недавний прогресс сохраняется автоматически.';
+
+  @override
+  String get dhikrLast7Days => '7 дней';
+
+  @override
+  String get dhikrMeaningAlhamdulillah => 'Хвала __АЛЛАХ__';
+
+  @override
+  String get dhikrMeaningAllahuAkbar => '__АЛЛАХ__ Величайший';
+
+  @override
+  String get dhikrMeaningSubhanAllah => 'Слава __АЛЛАХ__';
+
+  @override
+  String get dhikrRepetitionsFieldHint => 'Пример: 100';
+
+  @override
+  String get dhikrRepetitionsFieldLabel => 'Повторения';
+
+  @override
+  String get dhikrResetSession => 'Сбросить сеанс';
+
+  @override
+  String dhikrSessionCountOf(Object count) {
+    return 'из $count';
+  }
+
+  @override
+  String get dhikrSessionCycleCompleted => 'Вы завершили этот цикл зикра.';
+
+  @override
+  String get dhikrSessionGoalHelper =>
+      'Установите, сколько повторений вы хотите за цикл.';
+
+  @override
+  String get dhikrSessionGoalShort => 'Цель сеанса';
+
+  @override
+  String get dhikrSessionGoalTitle => 'Цель сеанса';
+
+  @override
+  String dhikrSessionGoalUpdated(Object value) {
+    return 'Цель сеанса изменена на $value.';
+  }
+
+  @override
+  String get dhikrSessionResetMessage => 'Сеанс сброшен.';
+
+  @override
+  String get dhikrSubtitle => 'Внимательное воспоминание о вашем дне';
+
+  @override
+  String get dhikrSummarySection => 'КРАТКОЕ СОДЕРЖАНИЕ';
+
+  @override
+  String get dhikrTitle => '__ДХИКР__';
+
+  @override
+  String dhikrTodayCycle(Object current, Object today, Object total) {
+    return 'Сегодня: $today · цикл $current/$total';
+  }
+
+  @override
+  String get hadithDailyBadge => 'ХАДИС ДНЯ';
+
+  @override
+  String get hadithDailyOpenLibrary => 'Открытые хадисы';
+
+  @override
+  String get hadithDailyUnavailable => 'Нам не удалось загрузить хадис дня.';
+
+  @override
+  String get hadithDetailArabicText => 'арабский текст';
+
+  @override
+  String get hadithDetailCopied => '__ХАДИТ__ скопировано';
+
+  @override
+  String get hadithDetailCopyText => 'Копировать текст';
+
+  @override
+  String hadithDetailGrade(Object grade) {
+    return 'Оценка: $grade';
+  }
+
+  @override
+  String get hadithDetailHideArabic => 'Скрыть арабский';
+
+  @override
+  String get hadithDetailHideTranslation => 'Скрыть перевод';
+
+  @override
+  String hadithDetailId(Object id) {
+    return 'Идентификатор: $id';
+  }
+
+  @override
+  String get hadithDetailInfoBody =>
+      'Этот хадис может варьироваться в зависимости от сборника, уровня и доступного перевода.';
+
+  @override
+  String get hadithDetailNoCategory => 'Нет категории';
+
+  @override
+  String get hadithDetailRemovedFromFavorites => 'Хадис удалён из избранного';
+
+  @override
+  String get hadithDetailSavedToFavorites => '__ХАДИТ__ сохранен в избранном';
+
+  @override
+  String get hadithDetailShowArabic => 'Показать арабский';
+
+  @override
+  String get hadithDetailShowTranslation => 'Показать перевод';
+
+  @override
+  String get hadithDetailTitle => '__ХАДИТ__ подробнее';
+
+  @override
+  String get hadithDetailTranslation => 'Перевод';
+
+  @override
+  String get hadithLibraryAllCollections => 'Все коллекции';
+
+  @override
+  String get hadithLibraryAllGrades => 'Все оценки';
+
+  @override
+  String get hadithLibraryAllCategories => 'Все категории';
+
+  @override
+  String hadithLibraryAllHadiths(Object count) {
+    return '$count хадисов';
+  }
+
+  @override
+  String get hadithLibraryEmptyBody => 'На данный момент хадисов нет.';
+
+  @override
+  String get hadithLibraryEmptySearchBody =>
+      'Попробуйте другой поиск или удалите фильтры.';
+
+  @override
+  String hadithLibraryEmptySearchTitle(Object query) {
+    return 'Нет результатов по запросу «$query»';
+  }
+
+  @override
+  String get hadithLibraryEmptyTitle => 'Нет доступных хадисов';
+
+  @override
+  String get hadithLibraryFiltersError => 'Не удалось загрузить фильтры.';
+
+  @override
+  String get hadithLibraryFiltersLoading => 'Загрузка фильтров…';
+
+  @override
+  String hadithLibraryLoadError(Object error) {
+    return 'Нам не удалось загрузить хадисы.\n$error';
+  }
+
+  @override
+  String hadithLibraryResultsCount(Object count) {
+    return '$count результатов';
+  }
+
+  @override
+  String get hadithLibrarySearchHint => 'Поиск хадисов или ссылок';
+
+  @override
+  String get hadithLibraryTitle => '__ХАДИТ__s';
+
+  @override
+  String hadithOfflineAvailability(Object progress) {
+    return '$progress доступен офлайн';
+  }
+
+  @override
+  String get hadithOfflineAvailable => 'Доступный';
+
+  @override
+  String get hadithOfflineCollectionsTitle => 'Включенные коллекции';
+
+  @override
+  String get hadithOfflineIncludedSubtitle =>
+      'Весь контент встроен в приложение';
+
+  @override
+  String get hadithOfflineIncludedTitle => 'Оффлайн с самого начала';
+
+  @override
+  String get hadithOfflineInfoBody =>
+      'Показанные здесь хадисы уже доступны без дополнительной загрузки.';
+
+  @override
+  String get hadithOfflineTitle => 'Офлайн хадисы';
+
+  @override
+  String get hafizActivePlans => 'Активные планы';
+
+  @override
+  String hafizAyahRange(Object end, Object start) {
+    return 'Ая $start-$end';
+  }
+
+  @override
+  String get hafizConfigureSession => 'Настроить сеанс';
+
+  @override
+  String get hafizEmptyBody => 'Вы еще не создали ни одного плана запоминания.';
+
+  @override
+  String get hafizEmptyHint =>
+      'Выберите суру и для начала определите небольшой диапазон.';
+
+  @override
+  String get hafizEmptyTitle => 'Начать обзор';
+
+  @override
+  String hafizEndAyah(Object ayah) {
+    return 'Окончание аята: $ayah';
+  }
+
+  @override
+  String get hafizLoadError => 'Мы не смогли загрузить эту суру.';
+
+  @override
+  String get hafizLogRepetition => 'Повторение журнала';
+
+  @override
+  String get hafizPlanSaved => 'План сохранен.';
+
+  @override
+  String get hafizRepetitionLogged => 'Повторение зарегистрировано';
+
+  @override
+  String get hafizReviewedSurahs => 'Пересмотренные суры';
+
+  @override
+  String get hafizSavePlan => 'Сохранить план';
+
+  @override
+  String get hafizSelectedSegment => 'Выбранный сегмент';
+
+  @override
+  String hafizStartAyah(Object ayah) {
+    return 'Начало ая: $ayah';
+  }
+
+  @override
+  String get hafizSubtitle => 'Организуйте короткие и последовательные обзоры';
+
+  @override
+  String hafizSurahNoPlan(Object count) {
+    return '$count ая · нет плана';
+  }
+
+  @override
+  String hafizSurahProgress(Object end, Object percent, Object start) {
+    return '$start-$end · $percent% выполнено';
+  }
+
+  @override
+  String hafizTargetRepetitions(Object count) {
+    return 'Цель: $count';
+  }
+
+  @override
+  String get homeCalendarStripTitle => 'СВЯЩЕННЫЙ КАЛЕНДАРЬ';
+
+  @override
+  String get homeGoalCompleted => 'сделанный';
+
+  @override
+  String get homeGoalInProgress => 'в ходе выполнения';
+
+  @override
+  String get homeInsightAlmostCompleteTodayMessage =>
+      'Вы очень близки к закрытию сильного дня.';
+
+  @override
+  String get homeInsightAlmostCompleteTodayTitle => 'Почти завершено сегодня';
+
+  @override
+  String homeInsightBetterThanLastWeekMessage(Object delta) {
+    return 'Вы совершили на $delta больше молитв, чем на прошлой неделе.';
+  }
+
+  @override
+  String get homeInsightBetterThanLastWeekTitle =>
+      'Лучше, чем на прошлой неделе';
+
+  @override
+  String homeInsightDhikrDoneMessage(Object count) {
+    return 'Сегодня вы сделали $count повторений. Очень сильный финиш.';
+  }
+
+  @override
+  String get homeInsightDhikrDoneTitle => 'Зикр завершён';
+
+  @override
+  String homeInsightDhikrGoodPaceMessage(Object current, Object goal) {
+    return 'Сегодня у вас $current/$goal повторений.';
+  }
+
+  @override
+  String get homeInsightDhikrGoodPaceTitle => 'Хороший темп зикра';
+
+  @override
+  String homeInsightGoodPaceTodayMessage(Object count) {
+    return 'Сегодня вы совершили $count молитв.';
+  }
+
+  @override
+  String get homeInsightGoodPaceTodayTitle => 'Хороший темп сегодня';
+
+  @override
+  String homeInsightMostConsistentPrayerMessage(Object prayer) {
+    return '$prayer на данный момент — ваш самый стабильный момент.';
+  }
+
+  @override
+  String get homeInsightMostConsistentPrayerTitle =>
+      'Ваша самая последовательная молитва';
+
+  @override
+  String homeInsightPrayerToStrengthenMessage(Object prayer) {
+    return '$prayer нужно немного больше внимания.';
+  }
+
+  @override
+  String get homeInsightPrayerToStrengthenTitle => 'Молитва об укреплении';
+
+  @override
+  String get homeInsightRamadanConsistencyMessage =>
+      'Ваша сегодняшняя практика уже показывает хороший баланс.';
+
+  @override
+  String get homeInsightRamadanConsistencyTitle =>
+      '__РАМАДАН__ последовательность';
+
+  @override
+  String get homeInsightRamadanMomentumMessage =>
+      'Используйте эту часть дня, чтобы сохранить импульс.';
+
+  @override
+  String get homeInsightRamadanMomentumTitle => '__РАМАДАН__ импульс';
+
+  @override
+  String get homeInsightRamadanSmallStepsMessage =>
+      'В __РАМАДАНЕ__ большое значение имеют маленькие и уверенные шаги.';
+
+  @override
+  String get homeInsightStartTodayFirstMessage =>
+      'Ваш день еще открыт. Отметьте свою первую молитву и придайте импульс.';
+
+  @override
+  String get homeInsightStartTodayMoreMessage =>
+      'У вас еще есть время спокойно начать.';
+
+  @override
+  String get homeInsightStartTodayTitle => 'Начни сегодня';
+
+  @override
+  String get homeInsightStillCanStartMessage =>
+      'Один маленький шаг сейчас может изменить тон вашего дня.';
+
+  @override
+  String get homeInsightStillCanStartTitle => 'Вы все еще можете начать';
+
+  @override
+  String homeInsightStreakInMotionMessage(Object streak) {
+    return 'У вас $streak дней подряд. Берегите эту последовательность.';
+  }
+
+  @override
+  String get homeInsightStreakInMotionTitle => 'Полоса в движении';
+
+  @override
+  String get homeInsightTodayLabel => 'СЕГОДНЯШНИЙ ИНФОРМАЦИЯ';
+
+  @override
+  String get homeLoadingScheduleBody => 'Подготовка следующей молитвы';
+
+  @override
+  String get homeLoadingScheduleTitle => 'Время загрузки';
+
+  @override
+  String get homeLocationCachedBody =>
+      'Мы подготавливаем ваше время, используя ваше последнее сохраненное местоположение.';
+
+  @override
+  String get homeLocationEnableDeviceLocation =>
+      'Включить местоположение устройства';
+
+  @override
+  String get homeLocationGpsDisabledBody =>
+      'Без GPS мы не можем рассчитать точное время молитвы или выровнять Киблу.';
+
+  @override
+  String get homeLocationPendingBody =>
+      'Главный экран остается видимым, даже если время молитвы еще не готово.';
+
+  @override
+  String get homeLocationPermissionBlocked =>
+      'Разрешение на определение местоположения заблокировано';
+
+  @override
+  String get homeLocationPermissionBlockedBody =>
+      'Вы можете включить местоположение для Qibla Time позже в настройках вашей системы.';
+
+  @override
+  String get homeLocationPermissionNeeded =>
+      'Разрешить местонахождению видеть время вашей молитвы';
+
+  @override
+  String get homeLocationPermissionNeededBody =>
+      'Приложению Qibla Time требуется ваше местоположение, чтобы показывать точное время для вашего города.';
+
+  @override
+  String get homeLocationPreparingTitle => 'Подготовка времени для молитвы';
+
+  @override
+  String homeNextPrayerStartsAt(Object time) {
+    return 'Начинается в $time';
+  }
+
+  @override
+  String get homeNotificationPaused =>
+      'Общие молитвенные оповещения сейчас приостановлены.';
+
+  @override
+  String get homeNotificationPermissionPending =>
+      'Ваши напоминания о азане настроены, но разрешение системы все еще не получено.';
+
+  @override
+  String get homePrayerDescriptionCompleted =>
+      'Вы уже отметили эту молитву как завершенную.';
+
+  @override
+  String get homePrayerDescriptionNext =>
+      'Это следующая молитва в сегодняшнем ритме.';
+
+  @override
+  String get homePrayerDescriptionNow =>
+      'Эта молитва в настоящее время находится в стадии выполнения.';
+
+  @override
+  String get homePrayerDescriptionPendingToday =>
+      'Все еще ожидает рассмотрения в сегодняшнем потоке.';
+
+  @override
+  String get homePrayerDescriptionReviewDate =>
+      'Доступно для просмотра на эту дату.';
+
+  @override
+  String homePrayerSectionSelectedDaySubtitle(Object date) {
+    return 'Проверьте и отметьте время для $date.';
+  }
+
+  @override
+  String get homePrayerSectionSelectedDayTitle => 'РАСПИСАНИЕ ДНЯ';
+
+  @override
+  String get homePrayerSectionTodaySubtitle =>
+      'Полный ритм ваших пяти ежедневных молитв';
+
+  @override
+  String get homePrayerSectionTodayTitle => 'СЕГОДНЯШНИЕ МОЛИТВЫ';
+
+  @override
+  String get homePrayerStatusCompleted => 'Завершенный';
+
+  @override
+  String get homePrayerStatusNext => 'Следующий';
+
+  @override
+  String get homePrayerStatusNow => 'Сейчас';
+
+  @override
+  String get homePrayerStatusUpcoming => 'Предстоящие';
+
+  @override
+  String get homeQuickActionsTitle => 'СВЯЩЕННЫЕ ПУТИ';
+
+  @override
+  String get homeRamadanClosingSoon => 'скоро закроется';
+
+  @override
+  String get homeRamadanContinueReading => 'Продолжить чтение';
+
+  @override
+  String homeRamadanCountdownIftar(Object duration) {
+    return '$duration до ифтара';
+  }
+
+  @override
+  String homeRamadanCountdownImsak(Object duration) {
+    return '$duration до имсака';
+  }
+
+  @override
+  String homeRamadanCountdownTomorrowImsak(Object duration) {
+    return '$duration до завтрашнего имсака';
+  }
+
+  @override
+  String homeRamadanDhikrCompletedBody(Object current, Object goal) {
+    return 'Сегодня $current/$goal повторений. Ежедневная цель выполнена.';
+  }
+
+  @override
+  String homeRamadanDhikrInProgressBody(Object current, Object goal) {
+    return 'Сегодня $current/$goal повторений. Вы уже начали.';
+  }
+
+  @override
+  String get homeRamadanDhikrPreparingBody =>
+      'Подготовка прогресса вашего ежедневного зикра.';
+
+  @override
+  String homeRamadanDhikrStartBody(Object goal) {
+    return 'Ваша цель сегодня — $goal. Даже несколько повторений уже засчитываются.';
+  }
+
+  @override
+  String homeRamadanFastingCompleted(Object time) {
+    return 'Вы можете приготовить ифтар из $time.';
+  }
+
+  @override
+  String homeRamadanFastingInProgress(Object time) {
+    return 'Разгрузочный день продолжается до $time.';
+  }
+
+  @override
+  String get homeRamadanFastingLabel => 'Пост';
+
+  @override
+  String get homeRamadanFastingTitle => 'Пост';
+
+  @override
+  String get homeRamadanGoalsCompleteMessage =>
+      'Очень насыщенный день __РАМАДАНА__. Сохраняйте этот ритм спокойно.';
+
+  @override
+  String get homeRamadanGoalsProgressMessage =>
+      'У тебя сегодня все хорошо. Еще один маленький шаг может окончательно завершить ваш день.';
+
+  @override
+  String homeRamadanGoalsReady(Object completed, Object total) {
+    return '$completed/$total готово';
+  }
+
+  @override
+  String get homeRamadanGoalsStartMessage =>
+      'Начните с чего-то малого: одной молитвы, нескольких аятов или нескольких минут зикра.';
+
+  @override
+  String get homeRamadanGoalsTitle => 'ЦЕЛИ РАМАДАН';
+
+  @override
+  String get homeRamadanModeTitle => 'РЕЖИМ РАМАДАН';
+
+  @override
+  String get homeRamadanNextFocus => 'следующий фокус';
+
+  @override
+  String get homeRamadanNightLabel => 'Ночь';
+
+  @override
+  String get homeRamadanOpenQuran => 'Открыть __КОРАН__';
+
+  @override
+  String get homeRamadanOpenTasbih => 'Открыть тасбих';
+
+  @override
+  String homeRamadanPrayerGoal(Object count) {
+    return '$count/5 завершено сегодня';
+  }
+
+  @override
+  String homeRamadanQuranRecentProgress(Object ayah, Object surah) {
+    return 'Возобновите $surah, ага $ayah. У вас есть недавний прогресс.';
+  }
+
+  @override
+  String homeRamadanQuranReturnBody(Object ayah, Object surah) {
+    return 'Ваше последнее замечание было $surah, ага $ayah. Сегодня стоит вернуться к этому.';
+  }
+
+  @override
+  String homeRamadanQuranSavedToday(Object ayah, Object surah) {
+    return 'Чтение сохранено сегодня в $surah, ага $ayah.';
+  }
+
+  @override
+  String get homeRamadanQuranStartBody =>
+      'Прочтите сегодня небольшой отрывок, и вы легко сможете продолжить его позже.';
+
+  @override
+  String get homeRamadanStartAction => 'Начинать';
+
+  @override
+  String get homeRamadanSuhoorLabel => 'Сухур';
+
+  @override
+  String get homeRamadanUntilIftar => 'до ифтара';
+
+  @override
+  String get homeSelectedDateCustomBody =>
+      'Полное время молитв для выбранного дня смотрите ниже.';
+
+  @override
+  String get homeSelectedDateTodayBody =>
+      'Полное время молитв на сегодня смотрите ниже.';
+
+  @override
+  String homeWeeklyBestDayHelper(Object count) {
+    return '$count/5 в твой лучший день';
+  }
+
+  @override
+  String get qiblaCompassInitError => 'Мы не смогли запустить компас.';
+
+  @override
+  String get qiblaCompassReadError =>
+      'Мы не смогли прочитать показания датчика компаса.';
+
+  @override
+  String get qiblaDirectionEast => 'Восток';
+
+  @override
+  String get qiblaDirectionLoadError =>
+      'Не удалось загрузить направление на Каабу.';
+
+  @override
+  String get qiblaDirectionNorth => 'Север';
+
+  @override
+  String get qiblaDirectionNorthEast => 'Северо-восток';
+
+  @override
+  String get qiblaDirectionNorthWest => 'Северо-Запад';
+
+  @override
+  String get qiblaDirectionSouth => 'Юг';
+
+  @override
+  String get qiblaDirectionSouthEast => 'Юго-восток';
+
+  @override
+  String get qiblaDirectionSouthWest => 'Юго-запад';
+
+  @override
+  String qiblaDirectionSummary(Object direction) {
+    return 'Направление к Каабе: $direction.';
+  }
+
+  @override
+  String get qiblaDirectionWest => 'Запад';
+
+  @override
+  String get qiblaDistanceLabel => 'Расстояние';
+
+  @override
+  String get qiblaEnableLocationMessage =>
+      'Включите местоположение, чтобы рассчитать направление к Каабе.';
+
+  @override
+  String get qiblaGpsDisabledMessage =>
+      'Включите GPS вашего устройства, чтобы определить надежное направление.';
+
+  @override
+  String get qiblaGuidanceBody =>
+      'Держите устройство ровно и осторожно поворачивайте его, пока индикатор не совместится.';
+
+  @override
+  String get qiblaHowToUseAvoidMagnetsBody =>
+      'Держите его подальше от магнитов, металлических корпусов или устройств, которые могут помешать работе датчика.';
+
+  @override
+  String get qiblaHowToUseAvoidMagnetsTitle => 'Избегайте помех';
+
+  @override
+  String get qiblaHowToUseCalibrateBody =>
+      'Если компас вышел из строя, переместите телефон в форме восьмерки, чтобы откалибровать его заново.';
+
+  @override
+  String get qiblaHowToUseCalibrateTitle => 'Калибровка при необходимости';
+
+  @override
+  String get qiblaHowToUseKeepFlatBody =>
+      'Держите устройство ровно, чтобы повысить точность компаса.';
+
+  @override
+  String get qiblaHowToUseKeepFlatTitle => 'Держите устройство ровно';
+
+  @override
+  String get qiblaHowToUseTitle => 'Как пользоваться компасом';
+
+  @override
+  String get qiblaLoading => 'Вычисление направления…';
+
+  @override
+  String get qiblaPermissionBlockedMessage =>
+      'Разрешение на определение местоположения заблокировано. Включите его в настройках системы.';
+
+  @override
+  String get qiblaPermissionNeededMessage =>
+      'Нам нужно разрешение на определение местоположения, чтобы провести вас к Каабе.';
+
+  @override
+  String get qiblaPrecisionLabel => 'Точность';
+
+  @override
+  String get qiblaSubtitle => 'Направление к Каабе';
+
+  @override
+  String get qiblaTitle => '__КИБЛА__';
+
+  @override
+  String get adhanSelectorHeaderBody =>
+      'Прослушайте короткий предварительный просмотр, прежде чем выбирать азан, который будет использоваться для напоминаний.';
+
+  @override
+  String get adhanSelectorHeaderTitle => 'Выберите свой призыв к молитве';
+
+  @override
+  String get adhanSelectorListenPreview => 'Прослушать превью';
+
+  @override
+  String get adhanSelectorPausePreview =>
+      'Приостановить предварительный просмотр';
+
+  @override
+  String get adhanSelectorPreviewError =>
+      'Не удалось воспроизвести предварительный просмотр азана.';
+
+  @override
+  String get adhanSelectorPreviewIdle =>
+      'Нажмите, чтобы прослушать предварительный просмотр';
+
+  @override
+  String get adhanSelectorPreviewPaused =>
+      'Предварительный просмотр приостановлен';
+
+  @override
+  String get adhanSelectorPreviewPlaying =>
+      'Воспроизведение предварительного просмотра';
+
+  @override
+  String get adhanSelectorResumePreview =>
+      'Возобновить предварительный просмотр';
+
+  @override
+  String adhanSelectorSelected(Object name) {
+    return 'Вы выбрали $name';
+  }
+
+  @override
+  String get adhanSelectorTitle => '__АДХАН__';
+
+  @override
+  String get navHome => 'Дом';
+
+  @override
+  String get navQibla => '__КИБЛА__';
+
+  @override
+  String get navTasbih => 'Тасбих';
+
+  @override
+  String get navDua => 'Дуа';
+
+  @override
+  String get navQuran => '__КОРАН__';
+
+  @override
+  String travelModeBannerLocationDetected(Object label, int distanceKm) {
+    return 'Обнаружено новое местоположение: $label – $distanceKm км.';
+  }
+
+  @override
+  String get travelModeNotificationTitle => 'Qibla Time - Новая локация';
+
+  @override
+  String travelModeNotificationBody(Object label) {
+    return '$label – обновлено время молитвы.';
+  }
+
+  @override
+  String get analyticsAchievementUnlocked => 'Разблокировано';
+
+  @override
+  String navigationMiniPlayerAyah(Object surah, int ayah) {
+    return '$surah · Ая $ayah';
+  }
+
+  @override
+  String get onboardingGatePreparing => 'Подготовка Qibla Time';
+
+  @override
+  String get supportScreenTitle => 'Поддержка Qibla Time';
+
+  @override
+  String get supportScreenThankYou => 'Спасибо, что вы здесь';
+
+  @override
+  String get supportScreenBody =>
+      'Ваша поддержка помогает нам заботиться о Qibla Time, поддерживать работу приложения и продолжать создавать полезные инструменты для вашей повседневной жизни.';
+
+  @override
+  String get supportScreenRateTitle => 'Оцените приложение';
+
+  @override
+  String get supportScreenRateBody =>
+      'Хороший рейтинг поможет большему количеству людей узнать Qibla Time.';
+
+  @override
+  String get supportScreenShareTitle => 'Поделиться Qibla Time';
+
+  @override
+  String get supportScreenShareBody =>
+      'Рекомендация приложения семье и друзьям также является формой садака.';
+
+  @override
+  String get supportScreenSadaqahTitle => 'Поддержка намерением';
+
+  @override
+  String get supportScreenSadaqahBody =>
+      'Если Qibla Time вам поможет, вы можете поддержать проект небольшим искренним вкладом.';
+
+  @override
+  String get supportScreenQuote =>
+      'Тот, кто помогает другим достичь чего-то хорошего, также разделяет это вознаграждение, если пожелает __АЛЛАХ__.';
+
+  @override
+  String get allahNamesTitle => '99 имен __АЛЛАХ__';
+
+  @override
+  String get allahNamesIntro =>
+      'Изучите тщательно подобранную подборку имен __АЛЛАХ__ с транслитерацией и значением, чтобы вы могли спокойно их запомнить.';
+
+  @override
+  String get allahNamesLoadError => 'Не удалось загрузить имена __АЛЛАХ__.';
+
+  @override
+  String get allahNamesUseInTasbih => 'Использование в тасбихе';
+
+  @override
+  String get downloadedSurahsTitle => 'Скачанные суры';
+
+  @override
+  String get downloadedSurahsEmpty => 'Вы еще не загрузили ни одной суры.';
+
+  @override
+  String get downloadedSurahsFavorite => 'Любимый';
+
+  @override
+  String get downloadedSurahsMarkFavorite => 'Отметить как избранное';
+
+  @override
+  String get downloadedSurahsRemoveDownload => 'Удалить загрузку';
+
+  @override
+  String get downloadedSurahsLoadError =>
+      'Нам не удалось загрузить загруженные вами суры.';
+
+  @override
+  String get focusModeDndActive => 'РАКАХА АКТИВНО · НЕ БЕСПОКОИТЬ';
+
+  @override
+  String get focusModeOpenDndSettings =>
+      'Включите режим «Не беспокоить» в настройках';
+
+  @override
+  String get focusModeTitle => 'РАКАХА';
+
+  @override
+  String get focusModeSujudCount => '+ суджуд';
+
+  @override
+  String get focusModeDndHint =>
+      'БЕЗ ПЕРЕРЫВОВ, ЧУВСТВУЕТ ЛУЧШЕ, ЕСЛИ НЕ БЕСПОКОИТЬ';
+
+  @override
+  String get focusModeReleaseToCancel => 'Отпустите, чтобы отменить';
+
+  @override
+  String get focusModeHoldToExit => 'Удерживайте, чтобы выйти';
+
+  @override
+  String get settingsMadhabAsr => '__МАДХАБ__ (АСР)';
+
+  @override
+  String get settingsManualAdjustment => 'Ручная регулировка';
+
+  @override
+  String get settingsOpenSourceLicenses => 'Лицензии с открытым исходным кодом';
+
+  @override
+  String get settingsProfileUser => 'Пользователь';
+
+  @override
+  String get settingsProfileStreak => 'полоса';
+
+  @override
+  String get settingsProfilePrayers => 'молитвы';
+
+  @override
+  String get settingsProfileTasbih => 'тасбих';
+
+  @override
+  String get commonShafii => 'Шафииты';
+
+  @override
+  String get commonRestore => 'Восстановить';
+
+  @override
+  String get settingsRestoreBackupPasteHint =>
+      'Вставьте сюда экспортированный JSON.';
+
+  @override
+  String get dailyBookBadge => 'КНИГА ДНЯ';
+
+  @override
+  String get dailyBookUnavailable => 'Библиотека сейчас недоступна.';
+
+  @override
+  String get dailyBookOpenLibrary => 'Открытые книги';
+
+  @override
+  String get hadithOfflineIncludedInApp => 'Включено в приложение';
+
+  @override
+  String hadithOfflineAgoDays(int count) {
+    return '$count дней назад';
+  }
+
+  @override
+  String hadithOfflineAgoHours(int count) {
+    return '$count часов назад';
+  }
+
+  @override
+  String hadithOfflineAgoMinutes(int count) {
+    return '$count минут назад';
+  }
+
+  @override
+  String get hadithOfflineNow => 'Прямо сейчас';
+
+  @override
+  String get analyticsShareWeekTitle => 'Еженедельный обзор';
+
+  @override
+  String analyticsShareCurrentStreak(int count) {
+    return 'Текущая серия: $count';
+  }
+
+  @override
+  String analyticsShareThisWeek(int completed, int maxPossible) {
+    return 'На этой неделе: $completed/$maxPossible молитв.';
+  }
+
+  @override
+  String analyticsShareBestDay(Object day) {
+    return 'Лучший день: $day';
+  }
+
+  @override
+  String get analyticsShareWeekHeading => 'ЕЖЕНЕДЕЛЬНЫЙ ОБЗОР';
+
+  @override
+  String get analyticsShareStreakDaySingular => 'дневная полоса';
+
+  @override
+  String get analyticsShareStreakDayPlural => 'полоса дней';
+
+  @override
+  String get analyticsShareWeeklyPrayersLabel => 'Молитвы на этой неделе';
+
+  @override
+  String analyticsShareBestDayLabel(int count) {
+    return 'Лучший день · $count/5';
+  }
+
+  @override
+  String get analyticsShareFullDaysLabel => 'Полные дни';
+
+  @override
+  String get analyticsShareFooter => 'Ваш прогресс за Qibla Time';
+
+  @override
+  String get analyticsShareImageError =>
+      'Нам не удалось создать изображение прогресса.';
+
+  @override
+  String quranDownloadAyahAudioError(int ayah) {
+    return 'Не удалось скачать аудиозапись ая $ayah.';
+  }
+
+  @override
+  String get recentLocationUnknown => 'Неизвестное местоположение';
+
+  @override
+  String get cloudSyncRestoreInvalid => 'Неверная резервная копия';
+
+  @override
+  String get cloudSyncRestoreFailed =>
+      'Нам не удалось восстановить резервную копию';
+
+  @override
+  String get bookLinkUnavailable => 'Эта ссылка недоступна.';
+
+  @override
+  String get bookLinkOpenError => 'Мы не смогли открыть ссылку.';
+
+  @override
+  String ramadanStatusHeaderDay(int day) {
+    return '__РАМАДАН__ день $day';
+  }
+
+  @override
+  String get ramadanStatusHeaderManual => 'Ручной режим __РАМАДАН__';
+
+  @override
+  String get ramadanStatusBlessingDetected =>
+      'Пусть __АЛЛАХ__ примет сегодня ваш пост и ваши дела.';
+
+  @override
+  String get ramadanStatusBlessingManual =>
+      'Специальное оформление Рамадана включено вручную для тестирования.';
+
+  @override
+  String get ramadanStatusSuggestionDhikr =>
+      'Не забудьте увеличить свой зикр сегодня.';
+
+  @override
+  String get ramadanStatusSuggestionQuran =>
+      'Постарайтесь сегодня прочитать ещё немного Корана.';
+
+  @override
+  String get ramadanStatusSuggestionDua =>
+      'Используйте этот день, чтобы спокойно совершить дуа.';
+
+  @override
+  String get ramadanStatusSuggestionSadaqah =>
+      'Даже небольшая садака имеет значение во время __РАМАДАНА__.';
+
+  @override
+  String adhanSelectorOptionDescription(int number) {
+    return 'Призыв к молитве $number';
+  }
+
+  @override
+  String get prayerNotificationImsakTitle => 'Имсак идет';
+
+  @override
+  String get prayerNotificationImsakBody =>
+      'До имсака осталось 15 минут. Если у вас все еще есть сухур, сейчас самое время подвести итоги.';
+
+  @override
+  String get prayerNotificationIftarTitle => 'Ифтар приближается';
+
+  @override
+  String get prayerNotificationIftarBody =>
+      'До ифтара осталось 15 минут. Пусть __АЛЛАХ__ примет ваш сегодняшний пост.';
+
+  @override
+  String get prayerNotificationJumuahTitle => 'Джума сегодня';
+
+  @override
+  String get prayerNotificationJumuahBody =>
+      'Подготовьтесь к Джума до __ЗУХР__ и выделите спокойный момент, чтобы отправиться в мечеть.';
+
+  @override
+  String get settingsLanguageOptionIndonesian => 'Индонезийский';
+
+  @override
+  String get settingsLanguageOptionRussian => 'Русский';
+}

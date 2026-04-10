@@ -37,6 +37,8 @@ class SpanishDateLabels {
         return DateFormat('EEEE, d MMM yyyy', 'id').format(date);
       case 'nl':
         return DateFormat('EEEE d MMM yyyy', 'nl').format(date);
+      case 'ru':
+        return DateFormat('EEEE, d MMM yyyy', 'ru').format(date);
       case 'en':
         return DateFormat('EEEE, MMM d yyyy', 'en').format(date);
       case 'fr':
@@ -56,6 +58,8 @@ class SpanishDateLabels {
         return DateFormat('EEEE, d MMMM', 'id').format(date);
       case 'nl':
         return DateFormat('EEEE d MMMM', 'nl').format(date);
+      case 'ru':
+        return DateFormat('EEEE, d MMMM', 'ru').format(date);
       case 'en':
         return DateFormat('EEEE, MMMM d', 'en').format(date);
       case 'fr':
@@ -75,6 +79,8 @@ class SpanishDateLabels {
         return DateFormat('EEEE, d MMMM yyyy', 'id').format(date);
       case 'nl':
         return DateFormat('EEEE d MMMM yyyy', 'nl').format(date);
+      case 'ru':
+        return DateFormat('EEEE, d MMMM yyyy', 'ru').format(date);
       case 'en':
         return DateFormat('EEEE, MMMM d, yyyy', 'en').format(date);
       case 'fr':
