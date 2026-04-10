@@ -4884,8 +4884,218 @@ abstract class AppLocalizations {
   /// No description provided for @purificationGuideWuduBody.
   ///
   /// In es, this message translates to:
-  /// **'Qu? es:\nEl wudu es la abluci?n ritual menor. Prepara para el salah cuando no existe impureza mayor.\n\nCu?ndo se necesita:\n? Antes de rezar si el wudu anterior se ha roto.\n? Despu?s de orinar, defecar, expulsar gases, dormir profundamente o perder la conciencia.\n\nC?mo se hace:\n1. Haz la intenci?n en el coraz?n.\n2. Di Bismillah.\n3. Lava ambas manos.\n4. Enjuaga la boca.\n5. Limpia la nariz con agua.\n6. Lava la cara.\n7. Lava el brazo derecho hasta el codo y luego el izquierdo.\n8. Pasa las manos mojadas por la cabeza una vez.\n9. Limpia las orejas.\n10. Lava el pie derecho hasta el tobillo y luego el izquierdo.\n\nQu? lo invalida:\nTodo lo que salga por las partes ?ntimas, el sue?o profundo o la p?rdida de conciencia. Si el wudu sigue v?lido, puedes rezar m?s de una oraci?n con ?l.'**
+  /// **'Qu? es:\nEl wudu es la purificaci?n ritual menor que se hace antes del salah cuando no hay impureza mayor.\n\nCu?ndo se necesita:\n? Antes de la oraci?n si no tienes un wudu v?lido.\n? Despu?s de ir al ba?o.\n? Despu?s de perder el estado de pureza, como al expulsar gases, dormir profundamente o perder la conciencia.\n\nPasos del wudu:\n1. Haz la intenci?n en tu coraz?n.\n2. Di \"Bismillah\".\n3. Lava las manos 3 veces, empezando normalmente por la derecha.\n4. Enjuaga la boca 3 veces.\n5. Limpia la nariz con agua 3 veces.\n6. Lava toda la cara 3 veces.\n7. Lava los brazos hasta los codos 3 veces, empezando por el derecho y luego el izquierdo.\n8. Pasa las manos h?medas por la cabeza 1 vez.\n9. Limpia las orejas 1 vez.\n10. Lava los pies hasta los tobillos 3 veces, empezando por el derecho y luego el izquierdo.\n\nNotas importantes:\n? Lo habitual es lavar 3 veces, aunque 1 vez es suficiente para que sea v?lido.\n? Aseg?rate de que el agua llegue bien a toda la zona.\n? Mant?n el orden correcto.\n? Evita obst?culos que bloqueen el agua, como suciedad o capas sobre la piel.'**
   String get purificationGuideWuduBody;
+
+  /// No description provided for @purificationGuideWuduWhatIsLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Qué es'**
+  String get purificationGuideWuduWhatIsLabel;
+
+  /// No description provided for @purificationGuideWuduWhatIsBody.
+  ///
+  /// In es, this message translates to:
+  /// **'El wudu es la purificación ritual menor que se hace antes del salah cuando no hay impureza mayor.'**
+  String get purificationGuideWuduWhatIsBody;
+
+  /// No description provided for @purificationGuideWuduWhenNeededLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Cuándo se necesita'**
+  String get purificationGuideWuduWhenNeededLabel;
+
+  /// No description provided for @purificationGuideWuduWhenNeededPrayer.
+  ///
+  /// In es, this message translates to:
+  /// **'Antes de la oración si no tienes un wudu válido.'**
+  String get purificationGuideWuduWhenNeededPrayer;
+
+  /// No description provided for @purificationGuideWuduWhenNeededBathroom.
+  ///
+  /// In es, this message translates to:
+  /// **'Después de ir al baño.'**
+  String get purificationGuideWuduWhenNeededBathroom;
+
+  /// No description provided for @purificationGuideWuduWhenNeededPurityLoss.
+  ///
+  /// In es, this message translates to:
+  /// **'Después de perder el estado de pureza, como al expulsar gases, dormir profundamente o perder la conciencia.'**
+  String get purificationGuideWuduWhenNeededPurityLoss;
+
+  /// No description provided for @purificationGuideWuduStepsTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Pasos del wudu'**
+  String get purificationGuideWuduStepsTitle;
+
+  /// No description provided for @purificationGuideWuduStepsSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Lo habitual es lavar tres veces cada parte lavable, aunque una vez basta para que sea válido.'**
+  String get purificationGuideWuduStepsSubtitle;
+
+  /// No description provided for @purificationGuideWuduNotesTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Notas importantes'**
+  String get purificationGuideWuduNotesTitle;
+
+  /// No description provided for @purificationGuideWuduNoteModeration.
+  ///
+  /// In es, this message translates to:
+  /// **'No hace falta exagerar repeticiones ni convertir el wudu en una carga.'**
+  String get purificationGuideWuduNoteModeration;
+
+  /// No description provided for @purificationGuideWuduNoteWater.
+  ///
+  /// In es, this message translates to:
+  /// **'Asegúrate de que el agua llegue bien a toda la zona.'**
+  String get purificationGuideWuduNoteWater;
+
+  /// No description provided for @purificationGuideWuduNoteOrder.
+  ///
+  /// In es, this message translates to:
+  /// **'Mantén el orden correcto de principio a fin.'**
+  String get purificationGuideWuduNoteOrder;
+
+  /// No description provided for @purificationGuideWuduNoteObstacles.
+  ///
+  /// In es, this message translates to:
+  /// **'Evita obstáculos que bloqueen el agua, como suciedad o capas sobre la piel.'**
+  String get purificationGuideWuduNoteObstacles;
+
+  /// No description provided for @purificationGuideWuduRepeatOnce.
+  ///
+  /// In es, this message translates to:
+  /// **'1 vez'**
+  String get purificationGuideWuduRepeatOnce;
+
+  /// No description provided for @purificationGuideWuduRepeatThreeTimes.
+  ///
+  /// In es, this message translates to:
+  /// **'3 veces'**
+  String get purificationGuideWuduRepeatThreeTimes;
+
+  /// No description provided for @purificationGuideWuduStep1Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Intención'**
+  String get purificationGuideWuduStep1Title;
+
+  /// No description provided for @purificationGuideWuduStep1Body.
+  ///
+  /// In es, this message translates to:
+  /// **'Haz la intención en tu corazón de realizar el wudu para la oración.'**
+  String get purificationGuideWuduStep1Body;
+
+  /// No description provided for @purificationGuideWuduStep2Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Bismillah'**
+  String get purificationGuideWuduStep2Title;
+
+  /// No description provided for @purificationGuideWuduStep2Body.
+  ///
+  /// In es, this message translates to:
+  /// **'Di Bismillah antes de empezar a lavar.'**
+  String get purificationGuideWuduStep2Body;
+
+  /// No description provided for @purificationGuideWuduStep3Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Lavar las manos'**
+  String get purificationGuideWuduStep3Title;
+
+  /// No description provided for @purificationGuideWuduStep3Body.
+  ///
+  /// In es, this message translates to:
+  /// **'Lava bien ambas manos, empezando normalmente por la derecha.'**
+  String get purificationGuideWuduStep3Body;
+
+  /// No description provided for @purificationGuideWuduStep4Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Enjuagar la boca'**
+  String get purificationGuideWuduStep4Title;
+
+  /// No description provided for @purificationGuideWuduStep4Body.
+  ///
+  /// In es, this message translates to:
+  /// **'Enjuaga bien la boca para que el agua llegue al interior.'**
+  String get purificationGuideWuduStep4Body;
+
+  /// No description provided for @purificationGuideWuduStep5Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Limpiar la nariz'**
+  String get purificationGuideWuduStep5Title;
+
+  /// No description provided for @purificationGuideWuduStep5Body.
+  ///
+  /// In es, this message translates to:
+  /// **'Introduce el agua suavemente en la nariz y límpiala.'**
+  String get purificationGuideWuduStep5Body;
+
+  /// No description provided for @purificationGuideWuduStep6Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Lavar la cara'**
+  String get purificationGuideWuduStep6Title;
+
+  /// No description provided for @purificationGuideWuduStep6Body.
+  ///
+  /// In es, this message translates to:
+  /// **'Lava toda la cara, desde la frente hasta la barbilla y de oreja a oreja.'**
+  String get purificationGuideWuduStep6Body;
+
+  /// No description provided for @purificationGuideWuduStep7Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Lavar los brazos hasta los codos'**
+  String get purificationGuideWuduStep7Title;
+
+  /// No description provided for @purificationGuideWuduStep7Body.
+  ///
+  /// In es, this message translates to:
+  /// **'Lava primero el brazo derecho y luego el izquierdo, incluyendo bien los codos.'**
+  String get purificationGuideWuduStep7Body;
+
+  /// No description provided for @purificationGuideWuduStep8Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Pasar las manos por la cabeza'**
+  String get purificationGuideWuduStep8Title;
+
+  /// No description provided for @purificationGuideWuduStep8Body.
+  ///
+  /// In es, this message translates to:
+  /// **'Pasa las manos húmedas por la cabeza con suavidad, de delante hacia atrás.'**
+  String get purificationGuideWuduStep8Body;
+
+  /// No description provided for @purificationGuideWuduStep9Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Limpiar las orejas'**
+  String get purificationGuideWuduStep9Title;
+
+  /// No description provided for @purificationGuideWuduStep9Body.
+  ///
+  /// In es, this message translates to:
+  /// **'Limpia las orejas con la misma humedad, sin necesidad de coger agua nueva.'**
+  String get purificationGuideWuduStep9Body;
+
+  /// No description provided for @purificationGuideWuduStep10Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Lavar los pies hasta los tobillos'**
+  String get purificationGuideWuduStep10Title;
+
+  /// No description provided for @purificationGuideWuduStep10Body.
+  ///
+  /// In es, this message translates to:
+  /// **'Lava primero el pie derecho y luego el izquierdo, asegurándote de incluir los tobillos.'**
+  String get purificationGuideWuduStep10Body;
 
   /// No description provided for @purificationGuideGhuslTitle.
   ///

@@ -2799,7 +2799,132 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get purificationGuideWuduBody =>
-      'Apa itu:\nWudu adalah bersuci ritual kecil. Ini mempersiapkan seseorang untuk salah ketika tidak ada hadas besar.\n\nKapan diperlukan:\n? Sebelum salat jika wudu sebelumnya telah batal.\n? Setelah buang air kecil, buang air besar, kentut, tidur nyenyak, atau kehilangan kesadaran.\n\nCara melakukannya:\n1. Niatkan dalam hati.\n2. Ucapkan Bismillah.\n3. Cuci kedua tangan.\n4. Berkumur.\n5. Bersihkan hidung dengan air.\n6. Cuci wajah.\n7. Cuci tangan kanan sampai siku lalu tangan kiri.\n8. Usap kepala sekali dengan tangan yang basah.\n9. Usap telinga.\n10. Cuci kaki kanan sampai mata kaki lalu kaki kiri.\n\nYang membatalkannya:\nSegala sesuatu yang keluar dari kemaluan, tidur nyenyak, atau hilang kesadaran. Jika wudu masih sah, kamu dapat salat lebih dari satu salat dengannya.';
+      'Apa itu:\nWudu adalah penyucian ritual kecil yang dilakukan sebelum salah ketika tidak ada hadas besar.\n\nKapan diperlukan:\n? Sebelum salat jika kamu tidak memiliki wudu yang masih sah.\n? Setelah pergi ke kamar mandi.\n? Setelah kehilangan keadaan suci, seperti karena kentut, tidur nyenyak, atau kehilangan kesadaran.\n\nLangkah-langkah wudu:\n1. Niatkan di dalam hati.\n2. Ucapkan \"Bismillah\".\n3. Cuci kedua tangan 3 kali, biasanya dimulai dari yang kanan.\n4. Berkumur 3 kali.\n5. Bersihkan hidung dengan air 3 kali.\n6. Cuci seluruh wajah 3 kali.\n7. Cuci kedua lengan sampai siku 3 kali, dimulai dari lengan kanan lalu kiri.\n8. Usap kepala 1 kali dengan tangan yang basah.\n9. Usap telinga 1 kali.\n10. Cuci kedua kaki sampai mata kaki 3 kali, dimulai dari kaki kanan lalu kiri.\n\nCatatan penting:\n? Yang biasa dilakukan adalah 3 kali, tetapi 1 kali sudah cukup agar sah.\n? Pastikan air mengenai seluruh bagian dengan baik.\n? Jaga urutannya dengan benar.\n? Hindari sesuatu yang menghalangi air, seperti kotoran atau lapisan yang menutup kulit.';
+
+  @override
+  String get purificationGuideWuduWhatIsLabel => 'Apa itu';
+
+  @override
+  String get purificationGuideWuduWhatIsBody =>
+      'Wudu adalah penyucian ritual kecil sebelum salah ketika tidak ada hadas besar.';
+
+  @override
+  String get purificationGuideWuduWhenNeededLabel => 'Kapan diperlukan';
+
+  @override
+  String get purificationGuideWuduWhenNeededPrayer =>
+      'Sebelum salat jika kamu tidak memiliki wudu yang masih sah.';
+
+  @override
+  String get purificationGuideWuduWhenNeededBathroom =>
+      'Setelah pergi ke kamar mandi.';
+
+  @override
+  String get purificationGuideWuduWhenNeededPurityLoss =>
+      'Setelah kehilangan keadaan suci, misalnya karena kentut, tidur nyenyak, atau kehilangan kesadaran.';
+
+  @override
+  String get purificationGuideWuduStepsTitle => 'Langkah-langkah wudu';
+
+  @override
+  String get purificationGuideWuduStepsSubtitle =>
+      'Biasanya setiap basuhan dilakukan 3 kali, tetapi 1 kali sudah cukup agar sah.';
+
+  @override
+  String get purificationGuideWuduNotesTitle => 'Catatan penting';
+
+  @override
+  String get purificationGuideWuduNoteModeration =>
+      'Tidak perlu berlebihan dalam pengulangan atau menjadikan wudu terasa berat.';
+
+  @override
+  String get purificationGuideWuduNoteWater =>
+      'Pastikan air mengenai seluruh bagian dengan baik.';
+
+  @override
+  String get purificationGuideWuduNoteOrder =>
+      'Jaga urutannya dengan benar dari awal sampai akhir.';
+
+  @override
+  String get purificationGuideWuduNoteObstacles =>
+      'Hilangkan apa pun yang menghalangi air, seperti kotoran atau lapisan yang menutup kulit.';
+
+  @override
+  String get purificationGuideWuduRepeatOnce => '1 kali';
+
+  @override
+  String get purificationGuideWuduRepeatThreeTimes => '3 kali';
+
+  @override
+  String get purificationGuideWuduStep1Title => 'Niat';
+
+  @override
+  String get purificationGuideWuduStep1Body =>
+      'Niatkan di dalam hati untuk melakukan wudu demi salat.';
+
+  @override
+  String get purificationGuideWuduStep2Title => 'Bismillah';
+
+  @override
+  String get purificationGuideWuduStep2Body =>
+      'Ucapkan Bismillah sebelum mulai membasuh.';
+
+  @override
+  String get purificationGuideWuduStep3Title => 'Mencuci tangan';
+
+  @override
+  String get purificationGuideWuduStep3Body =>
+      'Cuci kedua tangan dengan baik, biasanya dimulai dari yang kanan.';
+
+  @override
+  String get purificationGuideWuduStep4Title => 'Berkumur';
+
+  @override
+  String get purificationGuideWuduStep4Body =>
+      'Berkumurlah dengan baik agar air mencapai bagian dalam mulut.';
+
+  @override
+  String get purificationGuideWuduStep5Title => 'Membersihkan hidung';
+
+  @override
+  String get purificationGuideWuduStep5Body =>
+      'Masukkan air ke hidung dengan lembut lalu bersihkan.';
+
+  @override
+  String get purificationGuideWuduStep6Title => 'Mencuci wajah';
+
+  @override
+  String get purificationGuideWuduStep6Body =>
+      'Cuci seluruh wajah, dari dahi sampai dagu dan dari telinga ke telinga.';
+
+  @override
+  String get purificationGuideWuduStep7Title => 'Mencuci lengan sampai siku';
+
+  @override
+  String get purificationGuideWuduStep7Body =>
+      'Cuci lengan kanan lebih dulu lalu kiri, sambil memastikan siku ikut terkena air.';
+
+  @override
+  String get purificationGuideWuduStep8Title => 'Mengusap kepala';
+
+  @override
+  String get purificationGuideWuduStep8Body =>
+      'Usap kepala dengan tangan yang basah secara lembut dari depan ke belakang.';
+
+  @override
+  String get purificationGuideWuduStep9Title => 'Mengusap telinga';
+
+  @override
+  String get purificationGuideWuduStep9Body =>
+      'Usap telinga dengan sisa basah yang sama, tanpa perlu mengambil air baru.';
+
+  @override
+  String get purificationGuideWuduStep10Title =>
+      'Mencuci kaki sampai mata kaki';
+
+  @override
+  String get purificationGuideWuduStep10Body =>
+      'Cuci kaki kanan lebih dulu lalu kiri, sambil memastikan mata kaki ikut terkena air.';
 
   @override
   String get purificationGuideGhuslTitle => 'Ghusl';

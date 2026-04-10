@@ -2805,7 +2805,132 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get purificationGuideWuduBody =>
-      'Wat het is:\nWudu is de kleine rituele wassing. Het bereidt je voor op de salah wanneer er geen grote onreinheid is.\n\nWanneer het nodig is:\n? V??r het gebed als je vorige wudu ongeldig is geworden.\n? Na urineren, ontlasting, het laten van wind, diepe slaap of bewusteloosheid.\n\nHoe je het doet:\n1. Maak de intentie in je hart.\n2. Zeg Bismillah.\n3. Was beide handen.\n4. Spoel de mond.\n5. Reinig de neus met water.\n6. Was het gezicht.\n7. Was de rechterarm tot de elleboog en daarna de linker.\n8. Veeg eenmaal met natte handen over het hoofd.\n9. Veeg de oren af.\n10. Was de rechtervoet tot de enkel en daarna de linker.\n\nWat het verbreekt:\nAlles wat uit de intieme delen komt, diepe slaap of bewusteloosheid. Als je wudu nog geldig is, kun je er meer dan ??n gebed mee verrichten.';
+      'Wat het is:\nWudu is de kleine rituele reiniging die v??r de salah wordt verricht wanneer er geen grote onreinheid is.\n\nWanneer het nodig is:\n? V??r het gebed als je geen geldige wudu hebt.\n? Na een toiletbezoek.\n? Nadat je de staat van reinheid hebt verloren, zoals bij het laten van wind, diepe slaap of bewusteloosheid.\n\nStappen van de wudu:\n1. Maak de intentie in je hart.\n2. Zeg \"Bismillah\".\n3. Was de handen 3 keer, meestal beginnend met de rechterhand.\n4. Spoel de mond 3 keer.\n5. Reinig de neus met water 3 keer.\n6. Was het hele gezicht 3 keer.\n7. Was de armen tot de ellebogen 3 keer, eerst de rechterarm en daarna de linker.\n8. Veeg 1 keer met natte handen over het hoofd.\n9. Veeg de oren 1 keer af.\n10. Was de voeten tot de enkels 3 keer, eerst de rechtervoet en daarna de linker.\n\nBelangrijke opmerkingen:\n? Gewoonlijk wordt 3 keer gewassen, maar 1 keer is voldoende voor geldigheid.\n? Zorg ervoor dat het water het hele gebied goed bereikt.\n? Houd de juiste volgorde aan.\n? Vermijd alles wat het water blokkeert, zoals vuil of een laag op de huid.';
+
+  @override
+  String get purificationGuideWuduWhatIsLabel => 'Wat het is';
+
+  @override
+  String get purificationGuideWuduWhatIsBody =>
+      'Wudu is de kleine rituele reiniging vóór de salah wanneer er geen grote onreinheid is.';
+
+  @override
+  String get purificationGuideWuduWhenNeededLabel => 'Wanneer het nodig is';
+
+  @override
+  String get purificationGuideWuduWhenNeededPrayer =>
+      'Vóór het gebed als je geen geldige wudu hebt.';
+
+  @override
+  String get purificationGuideWuduWhenNeededBathroom => 'Na een toiletbezoek.';
+
+  @override
+  String get purificationGuideWuduWhenNeededPurityLoss =>
+      'Nadat je de staat van reinheid hebt verloren, bijvoorbeeld door het laten van wind, diepe slaap of bewusteloosheid.';
+
+  @override
+  String get purificationGuideWuduStepsTitle => 'Stappen van de wudu';
+
+  @override
+  String get purificationGuideWuduStepsSubtitle =>
+      'Gewoonlijk wordt elke wassing 3 keer gedaan, maar 1 keer is voldoende voor geldigheid.';
+
+  @override
+  String get purificationGuideWuduNotesTitle => 'Belangrijke opmerkingen';
+
+  @override
+  String get purificationGuideWuduNoteModeration =>
+      'Overdrijf de herhalingen niet en maak de wudu niet zwaarder dan nodig.';
+
+  @override
+  String get purificationGuideWuduNoteWater =>
+      'Zorg ervoor dat het water het hele gebied goed bereikt.';
+
+  @override
+  String get purificationGuideWuduNoteOrder =>
+      'Houd de juiste volgorde van begin tot eind aan.';
+
+  @override
+  String get purificationGuideWuduNoteObstacles =>
+      'Verwijder alles wat het water blokkeert, zoals vuil of een laag op de huid.';
+
+  @override
+  String get purificationGuideWuduRepeatOnce => '1 keer';
+
+  @override
+  String get purificationGuideWuduRepeatThreeTimes => '3 keer';
+
+  @override
+  String get purificationGuideWuduStep1Title => 'Intentie';
+
+  @override
+  String get purificationGuideWuduStep1Body =>
+      'Maak in je hart de intentie om wudu voor het gebed te verrichten.';
+
+  @override
+  String get purificationGuideWuduStep2Title => 'Bismillah';
+
+  @override
+  String get purificationGuideWuduStep2Body =>
+      'Zeg Bismillah voordat je begint met wassen.';
+
+  @override
+  String get purificationGuideWuduStep3Title => 'De handen wassen';
+
+  @override
+  String get purificationGuideWuduStep3Body =>
+      'Was beide handen goed, meestal beginnend met de rechterhand.';
+
+  @override
+  String get purificationGuideWuduStep4Title => 'De mond spoelen';
+
+  @override
+  String get purificationGuideWuduStep4Body =>
+      'Spoel de mond goed zodat het water de binnenkant bereikt.';
+
+  @override
+  String get purificationGuideWuduStep5Title => 'De neus reinigen';
+
+  @override
+  String get purificationGuideWuduStep5Body =>
+      'Laat zachtjes water in de neus komen en reinig deze daarna.';
+
+  @override
+  String get purificationGuideWuduStep6Title => 'Het gezicht wassen';
+
+  @override
+  String get purificationGuideWuduStep6Body =>
+      'Was het hele gezicht, van het voorhoofd tot de kin en van oor tot oor.';
+
+  @override
+  String get purificationGuideWuduStep7Title =>
+      'De armen tot de ellebogen wassen';
+
+  @override
+  String get purificationGuideWuduStep7Body =>
+      'Was eerst de rechterarm en daarna de linker, en zorg dat de ellebogen goed worden meegenomen.';
+
+  @override
+  String get purificationGuideWuduStep8Title => 'Over het hoofd strijken';
+
+  @override
+  String get purificationGuideWuduStep8Body =>
+      'Strijk met natte handen zacht over het hoofd, van voren naar achteren.';
+
+  @override
+  String get purificationGuideWuduStep9Title => 'De oren afwissen';
+
+  @override
+  String get purificationGuideWuduStep9Body =>
+      'Veeg de oren af met dezelfde vochtigheid, zonder extra water te nemen.';
+
+  @override
+  String get purificationGuideWuduStep10Title =>
+      'De voeten tot de enkels wassen';
+
+  @override
+  String get purificationGuideWuduStep10Body =>
+      'Was eerst de rechtervoet en daarna de linker, en zorg dat de enkels worden meegenomen.';
 
   @override
   String get purificationGuideGhuslTitle => 'Ghusl';
