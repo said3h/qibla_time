@@ -90,7 +90,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get commonMethod => 'Метод';
 
   @override
-  String get commonMadhab => '__МАДХАБ__';
+  String get commonMadhab => 'Мазхаб';
 
   @override
   String get commonLocation => 'Расположение';
@@ -152,8 +152,7 @@ class AppLocalizationsRu extends AppLocalizations {
       'Рассчитывается с учетом вашего местоположения и предпочтительного метода.';
 
   @override
-  String get onboardingFeaturePracticeTitle =>
-      '__КИБЛА__ и ежедневная практика';
+  String get onboardingFeaturePracticeTitle => 'Кибла и ежедневная практика';
 
   @override
   String get onboardingFeaturePracticeBody =>
@@ -232,7 +231,7 @@ class AppLocalizationsRu extends AppLocalizations {
       'Используйте ханафитский расчёт для асра.';
 
   @override
-  String get onboardingAdhanTitle => '__АДХАН__ и оповещения';
+  String get onboardingAdhanTitle => 'Азан и оповещения';
 
   @override
   String get onboardingAdhanSubtitle =>
@@ -380,16 +379,16 @@ class AppLocalizationsRu extends AppLocalizations {
   String get settingsSectionAccessibility => 'Доступность';
 
   @override
-  String get settingsSectionAdhanNotifications => '__АДХАН__ уведомления';
+  String get settingsSectionAdhanNotifications => 'Уведомления азана';
 
   @override
   String get settingsSectionScheduleCalculation => 'Расчет времени молитвы';
 
   @override
-  String get settingsSectionRamadanMode => 'Режим __РАМАДАН__';
+  String get settingsSectionRamadanMode => 'Режим Рамадана';
 
   @override
-  String get settingsSectionHadith => '__ХАДИТ__';
+  String get settingsSectionHadith => 'Хадисы';
 
   @override
   String get settingsSectionTravelerMode => 'Режим путешествия';
@@ -504,7 +503,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get settingsLanguageOptionDutch => 'Нидерландский';
 
   @override
-  String get settingsAdhanSound => '__АДХАН__ звук';
+  String get settingsAdhanSound => 'Звук азана';
 
   @override
   String get settingsAdhanSoundAction => 'Выберите и просмотрите';
@@ -528,10 +527,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get settingsRamadanAutomaticSubtitle =>
-      'Включается автоматически, когда по исламскому календарю наступает __РАМАДАН__.';
+      'Включается автоматически, когда по исламскому календарю наступает Рамадан.';
 
   @override
-  String get settingsRamadanForced => 'Принудительный режим __РАМАДАН__';
+  String get settingsRamadanForced => 'Принудительный режим Рамадана';
 
   @override
   String get settingsRamadanForcedSubtitle =>
@@ -698,7 +697,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get shareSubjectDua => 'Дуа';
 
   @override
-  String get shareSubjectHadithOfDay => '__ХАДИТ__ дня - Qibla Time';
+  String get shareSubjectHadithOfDay => 'Хадис дня - Qibla Time';
 
   @override
   String get shareSubjectHadithShared => 'Хадис опубликован из Qibla Time';
@@ -800,7 +799,7 @@ class AppLocalizationsRu extends AppLocalizations {
       'Нам не удалось создать видео для этого аята.';
 
   @override
-  String get notificationAdhanChannelName => '__АДХАН__';
+  String get notificationAdhanChannelName => 'Азан';
 
   @override
   String get notificationAdhanChannelDescription =>
@@ -819,14 +818,14 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get notificationReminderChannelDescription =>
-      'Контекстные напоминания о __РАМАДАНЕ__ и Джумуа';
+      'Контекстные напоминания о Рамадане и Джумуа';
 
   @override
   String get notificationDailyReflectionChannelName => 'Ежедневное размышление';
 
   @override
   String get notificationDailyReflectionChannelDescription =>
-      'Аят __КОРАНА__ и хадис дня';
+      'Аят Корана и хадис дня';
 
   @override
   String get notificationDailyReflectionTitle => 'Отражение дня';
@@ -844,7 +843,7 @@ class AppLocalizationsRu extends AppLocalizations {
       'Ваше духовное напоминание на сегодня';
 
   @override
-  String get notificationHadithReminderChannelName => '__ХАДИТ__ напоминания';
+  String get notificationHadithReminderChannelName => 'Напоминания о хадисах';
 
   @override
   String get notificationHadithReminderChannelDescription =>
@@ -855,14 +854,14 @@ class AppLocalizationsRu extends AppLocalizations {
       'Напоминание: прочтите хадис Пророка ﷺ';
 
   @override
-  String get notificationHadithReminderTitle => '📖 __ХАДИС__ на этот момент';
+  String get notificationHadithReminderTitle => '📖 Хадис на этот момент';
 
   @override
   String get notificationHadithReminderTestBody =>
       'Тестовое напоминание о хадисах';
 
   @override
-  String get notificationHadithReminderTestTitle => '📖 __ХАДИТ__ напоминание';
+  String get notificationHadithReminderTestTitle => '📖 Напоминание о хадисе';
 
   @override
   String get notificationWeeklySummaryTitle =>
@@ -876,17 +875,17 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get quranDailyVerseFallbackTranslation =>
-      '__АЛЛАХ__: нет божества, кроме Него, Вечно-Живого, Вседержителя. Ни сонливость, ни сон не одолевают Его.';
+      'Аллах: нет божества, кроме Него, Вечно-Живого, Вседержителя. Ни сонливость, ни сон не одолевают Его.';
 
   @override
   String get quranDailyVerseFallbackTransliteration =>
-      '__АЛЛАХ__у ля иляха илля хуваль хайюль каюм...';
+      'Аллаху ля иляха илля хуваль хайюль каюм...';
 
   @override
   String get quranDailyVerseFallbackReference => 'Аль-Бакара [2:255]';
 
   @override
-  String get quranTitle => '__КОРАН__';
+  String get quranTitle => 'Коран';
 
   @override
   String get quranSubtitle => '114 сур · непрерывное чтение';
@@ -1303,7 +1302,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get commonGeneral => 'Общий';
 
   @override
-  String get commonHadiths => '__ХАДИТ__s';
+  String get commonHadiths => 'Хадисы';
 
   @override
   String get commonInformation => 'Информация';
@@ -1321,7 +1320,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get commonPrayers => 'молитвы';
 
   @override
-  String get commonQuran => '__КОРАН__';
+  String get commonQuran => 'Коран';
 
   @override
   String get commonRead => 'Читать';
@@ -1387,11 +1386,11 @@ class AppLocalizationsRu extends AppLocalizations {
       'Вы записали 100 завершенных молитв.';
 
   @override
-  String get achievementFirstRamadanTitle => 'Первый __РАМАДАН__';
+  String get achievementFirstRamadanTitle => 'Первый Рамадан';
 
   @override
   String get achievementFirstRamadanDescription =>
-      'Вы завершили свой первый активный день __РАМАДАН__.';
+      'Вы завершили свой первый активный день Рамадана.';
 
   @override
   String get analyticsAchievementsTitle => 'Достижения';
@@ -1580,7 +1579,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get booksMainCategoryMajorSins => 'Главные грехи';
 
   @override
-  String get booksMainCategoryNobleQuran => 'Благородный __КОРАН__';
+  String get booksMainCategoryNobleQuran => 'Благородный Коран';
 
   @override
   String get booksMainCategoryPresentingIslam => 'Представляя Ислам';
@@ -1639,7 +1638,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get calendarEventIslamicNewYear => 'Исламский Новый год';
 
   @override
-  String get calendarEventRamadanStart => 'Начало __РАМАДАНА__';
+  String get calendarEventRamadanStart => 'Начало Рамадана';
 
   @override
   String calendarImportantDatesTitle(Object year) {
@@ -1688,7 +1687,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get dhikrFeedbackCompleted =>
-      'Ежедневная цель выполнена. Пусть __АЛЛАХ__ примет ваш зикр.';
+      'Ежедневная цель выполнена. Пусть Аллах примет ваш зикр.';
 
   @override
   String get dhikrFeedbackCycleCompleted =>
@@ -1721,13 +1720,13 @@ class AppLocalizationsRu extends AppLocalizations {
   String get dhikrLast7Days => '7 дней';
 
   @override
-  String get dhikrMeaningAlhamdulillah => 'Хвала __АЛЛАХ__';
+  String get dhikrMeaningAlhamdulillah => 'Хвала Аллаху';
 
   @override
-  String get dhikrMeaningAllahuAkbar => '__АЛЛАХ__ Величайший';
+  String get dhikrMeaningAllahuAkbar => 'Аллах Велик';
 
   @override
-  String get dhikrMeaningSubhanAllah => 'Слава __АЛЛАХ__';
+  String get dhikrMeaningSubhanAllah => 'Слава Аллаху';
 
   @override
   String get dhikrRepetitionsFieldHint => 'Пример: 100';
@@ -1771,7 +1770,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get dhikrSummarySection => 'КРАТКОЕ СОДЕРЖАНИЕ';
 
   @override
-  String get dhikrTitle => '__ДХИКР__';
+  String get dhikrTitle => 'Зикр';
 
   @override
   String dhikrTodayCycle(Object current, Object today, Object total) {
@@ -1791,7 +1790,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get hadithDetailArabicText => 'арабский текст';
 
   @override
-  String get hadithDetailCopied => '__ХАДИТ__ скопировано';
+  String get hadithDetailCopied => 'Хадис скопирован';
 
   @override
   String get hadithDetailCopyText => 'Копировать текст';
@@ -1823,7 +1822,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get hadithDetailRemovedFromFavorites => 'Хадис удалён из избранного';
 
   @override
-  String get hadithDetailSavedToFavorites => '__ХАДИТ__ сохранен в избранном';
+  String get hadithDetailSavedToFavorites => 'Хадис сохранен в избранном';
 
   @override
   String get hadithDetailShowArabic => 'Показать арабский';
@@ -1832,7 +1831,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get hadithDetailShowTranslation => 'Показать перевод';
 
   @override
-  String get hadithDetailTitle => '__ХАДИТ__ подробнее';
+  String get hadithDetailTitle => 'Подробности хадиса';
 
   @override
   String get hadithDetailTranslation => 'Перевод';
@@ -1886,7 +1885,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get hadithLibrarySearchHint => 'Поиск хадисов или ссылок';
 
   @override
-  String get hadithLibraryTitle => '__ХАДИТ__s';
+  String get hadithLibraryTitle => 'Хадисы';
 
   @override
   String hadithOfflineAvailability(Object progress) {
@@ -2055,18 +2054,18 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get homeInsightRamadanConsistencyTitle =>
-      '__РАМАДАН__ последовательность';
+      'Последовательность в Рамадане';
 
   @override
   String get homeInsightRamadanMomentumMessage =>
       'Используйте эту часть дня, чтобы сохранить импульс.';
 
   @override
-  String get homeInsightRamadanMomentumTitle => '__РАМАДАН__ импульс';
+  String get homeInsightRamadanMomentumTitle => 'Ритм Рамадана';
 
   @override
   String get homeInsightRamadanSmallStepsMessage =>
-      'В __РАМАДАНЕ__ большое значение имеют маленькие и уверенные шаги.';
+      'В Рамадане большое значение имеют маленькие и уверенные шаги.';
 
   @override
   String get homeInsightStartTodayFirstMessage =>
@@ -2259,7 +2258,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get homeRamadanGoalsCompleteMessage =>
-      'Очень насыщенный день __РАМАДАНА__. Сохраняйте этот ритм спокойно.';
+      'Очень насыщенный день Рамадана. Сохраняйте этот ритм спокойно.';
 
   @override
   String get homeRamadanGoalsProgressMessage =>
@@ -2287,7 +2286,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get homeRamadanNightLabel => 'Ночь';
 
   @override
-  String get homeRamadanOpenQuran => 'Открыть __КОРАН__';
+  String get homeRamadanOpenQuran => 'Открыть Коран';
 
   @override
   String get homeRamadanOpenTasbih => 'Открыть тасбих';
@@ -2435,7 +2434,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get qiblaSubtitle => 'Направление к Каабе';
 
   @override
-  String get qiblaTitle => '__КИБЛА__';
+  String get qiblaTitle => 'Кибла';
 
   @override
   String get adhanSelectorHeaderBody =>
@@ -2477,13 +2476,13 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String get adhanSelectorTitle => '__АДХАН__';
+  String get adhanSelectorTitle => 'Азан';
 
   @override
   String get navHome => 'Дом';
 
   @override
-  String get navQibla => '__КИБЛА__';
+  String get navQibla => 'Кибла';
 
   @override
   String get navTasbih => 'Тасбих';
@@ -2492,7 +2491,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get navDua => 'Дуа';
 
   @override
-  String get navQuran => '__КОРАН__';
+  String get navQuran => 'Коран';
 
   @override
   String travelModeBannerLocationDetected(Object label, int distanceKm) {
@@ -2551,17 +2550,17 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get supportScreenQuote =>
-      'Тот, кто помогает другим достичь чего-то хорошего, также разделяет это вознаграждение, если пожелает __АЛЛАХ__.';
+      'Тот, кто помогает другим достичь чего-то хорошего, также разделяет это вознаграждение, если пожелает Аллах.';
 
   @override
-  String get allahNamesTitle => '99 имен __АЛЛАХ__';
+  String get allahNamesTitle => '99 имен Аллаха';
 
   @override
   String get allahNamesIntro =>
-      'Изучите тщательно подобранную подборку имен __АЛЛАХ__ с транслитерацией и значением, чтобы вы могли спокойно их запомнить.';
+      'Изучите тщательно подобранную подборку имен Аллаха с транслитерацией и значением, чтобы вы могли спокойно их запомнить.';
 
   @override
-  String get allahNamesLoadError => 'Не удалось загрузить имена __АЛЛАХ__.';
+  String get allahNamesLoadError => 'Не удалось загрузить имена Аллаха.';
 
   @override
   String get allahNamesUseInTasbih => 'Использование в тасбихе';
@@ -2609,7 +2608,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get focusModeHoldToExit => 'Удерживайте, чтобы выйти';
 
   @override
-  String get settingsMadhabAsr => '__МАДХАБ__ (АСР)';
+  String get settingsMadhabAsr => 'Мазхаб (Аср)';
 
   @override
   String get settingsManualAdjustment => 'Ручная регулировка';
@@ -2737,15 +2736,15 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String ramadanStatusHeaderDay(int day) {
-    return '__РАМАДАН__ день $day';
+    return 'Рамадан, день $day';
   }
 
   @override
-  String get ramadanStatusHeaderManual => 'Ручной режим __РАМАДАН__';
+  String get ramadanStatusHeaderManual => 'Ручной режим Рамадана';
 
   @override
   String get ramadanStatusBlessingDetected =>
-      'Пусть __АЛЛАХ__ примет сегодня ваш пост и ваши дела.';
+      'Пусть Аллах примет сегодня ваш пост и ваши дела.';
 
   @override
   String get ramadanStatusBlessingManual =>
@@ -2765,7 +2764,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get ramadanStatusSuggestionSadaqah =>
-      'Даже небольшая садака имеет значение во время __РАМАДАНА__.';
+      'Даже небольшая садака имеет значение во время Рамадана.';
 
   @override
   String adhanSelectorOptionDescription(int number) {
@@ -2784,14 +2783,14 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get prayerNotificationIftarBody =>
-      'До ифтара осталось 15 минут. Пусть __АЛЛАХ__ примет ваш сегодняшний пост.';
+      'До ифтара осталось 15 минут. Пусть Аллах примет ваш сегодняшний пост.';
 
   @override
   String get prayerNotificationJumuahTitle => 'Джума сегодня';
 
   @override
   String get prayerNotificationJumuahBody =>
-      'Подготовьтесь к Джума до __ЗУХР__ и выделите спокойный момент, чтобы отправиться в мечеть.';
+      'Подготовьтесь к Джума до Зухра и выделите спокойный момент, чтобы отправиться в мечеть.';
 
   @override
   String get settingsLanguageOptionIndonesian => 'Индонезийский';
