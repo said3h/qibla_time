@@ -142,35 +142,56 @@ class HadithService {
     final refLower = reference.toLowerCase();
     if (refLower.contains('bujari') ||
         refLower.contains('bukhari') ||
-        refLower.contains('boukhari')) {
+        refLower.contains('boukhari') ||
+        refLower.contains('бухар')) {
       return 'Sahih al-Bukhari';
     }
-    if (refLower.contains('muslim') || refLower.contains('mouslim')) {
+    if (refLower.contains('muslim') ||
+        refLower.contains('mouslim') ||
+        refLower.contains('муслим')) {
       return 'Sahih Muslim';
     }
-    if (refLower.contains('riyad') || refLower.contains('salihin')) {
+    if (refLower.contains('riyad') ||
+        refLower.contains('salihin') ||
+        refLower.contains('рияд') ||
+        refLower.contains('салих')) {
       return 'Riyad as-Salihin';
     }
-    if (refLower.contains('nawawi') || refLower.contains('40 hadith')) return '40 Hadith Nawawi';
-    if (refLower.contains('tirmidhi')) return 'Jami\' at-Tirmidhi';
+    if (refLower.contains('nawawi') ||
+        refLower.contains('40 hadith') ||
+        refLower.contains('навави')) {
+      return '40 Hadith Nawawi';
+    }
+    if (refLower.contains('tirmidhi') ||
+        refLower.contains('тирмиз') ||
+        refLower.contains('термед')) {
+      return 'Jami\' at-Tirmidhi';
+    }
     if (refLower.contains('abu dawud') ||
         refLower.contains('abu-dawud') ||
         refLower.contains('abudawud') ||
-        refLower.contains('abou dawoud')) {
+        refLower.contains('abou dawoud') ||
+        refLower.contains('абу дауд') ||
+        refLower.contains('дауд')) {
       return 'Sunan Abu Dawud';
     }
     if (refLower.contains('nasai') ||
         refLower.contains("nasa'i") ||
         refLower.contains('nsaa') ||
-        refLower.contains('nasaa')) {
+        refLower.contains('nasaa') ||
+        refLower.contains('насаи')) {
       return "Sunan an-Nasa'i";
     }
     if (refLower.contains('ibn majah') ||
         refLower.contains('ibnmajah') ||
-        refLower.contains('ibn mayah')) {
+        refLower.contains('ibn mayah') ||
+        refLower.contains('ибн мадж')) {
       return 'Sunan Ibn Majah';
     }
-    if (refLower.contains('malik') || refLower.contains('muwatta')) {
+    if (refLower.contains('malik') ||
+        refLower.contains('muwatta') ||
+        refLower.contains('малик') ||
+        refLower.contains('муватт')) {
       return 'Muwatta Malik';
     }
     return 'Otros';
