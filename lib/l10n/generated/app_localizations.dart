@@ -5109,6 +5109,234 @@ abstract class AppLocalizations {
   /// **'Qu? es:\nEl ghusl es el ba?o ritual completo. Es obligatorio despu?s de una impureza mayor.\n\nCu?ndo es obligatorio:\n? Despu?s de relaciones ?ntimas.\n? Despu?s de la eyaculaci?n.\n? Cuando termina la menstruaci?n.\n? Cuando termina el sangrado posparto.\n\nC?mo se hace:\n1. Haz la intenci?n en el coraz?n.\n2. Di Bismillah.\n3. Lava las manos y las partes ?ntimas.\n4. Elimina cualquier impureza visible.\n5. Haz wudu.\n6. Echa agua sobre la cabeza hasta que llegue al cuero cabelludo.\n7. Lava todo el cuerpo, empezando por el lado derecho y luego el izquierdo, asegur?ndote de que el agua llegue a todas las partes.\n\nNota importante:\nUn ghusl completo elimina la impureza mayor. Si despu?s no ocurre nada que rompa el wudu, puedes rezar sin hacer otro wudu aparte.'**
   String get purificationGuideGhuslBody;
 
+  /// No description provided for @purificationGuideGhuslWhatIsLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Qué es'**
+  String get purificationGuideGhuslWhatIsLabel;
+
+  /// No description provided for @purificationGuideGhuslWhatIsBody.
+  ///
+  /// In es, this message translates to:
+  /// **'El ghusl es el baño ritual completo que se hace después de una impureza mayor.'**
+  String get purificationGuideGhuslWhatIsBody;
+
+  /// No description provided for @purificationGuideGhuslWhenNeededLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Cuándo se necesita'**
+  String get purificationGuideGhuslWhenNeededLabel;
+
+  /// No description provided for @purificationGuideGhuslWhenNeededRelations.
+  ///
+  /// In es, this message translates to:
+  /// **'Después de relaciones íntimas.'**
+  String get purificationGuideGhuslWhenNeededRelations;
+
+  /// No description provided for @purificationGuideGhuslWhenNeededMenstruation.
+  ///
+  /// In es, this message translates to:
+  /// **'Cuando termina la menstruación.'**
+  String get purificationGuideGhuslWhenNeededMenstruation;
+
+  /// No description provided for @purificationGuideGhuslWhenNeededPostnatal.
+  ///
+  /// In es, this message translates to:
+  /// **'Cuando termina el sangrado posparto.'**
+  String get purificationGuideGhuslWhenNeededPostnatal;
+
+  /// No description provided for @purificationGuideGhuslWhenNeededDischarge.
+  ///
+  /// In es, this message translates to:
+  /// **'Después de una emisión sexual.'**
+  String get purificationGuideGhuslWhenNeededDischarge;
+
+  /// No description provided for @purificationGuideGhuslStepsTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Pasos del ghusl'**
+  String get purificationGuideGhuslStepsTitle;
+
+  /// No description provided for @purificationGuideGhuslStepsSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'El ghusl no tiene un número fijo de repeticiones como el wudu. Lo importante es que el agua alcance todo el cuerpo, aunque algunas partes se pueden lavar más de una vez de forma recomendada.'**
+  String get purificationGuideGhuslStepsSubtitle;
+
+  /// No description provided for @purificationGuideGhuslValidityTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Forma completa y mínimo válido'**
+  String get purificationGuideGhuslValidityTitle;
+
+  /// No description provided for @purificationGuideGhuslValidityRecommended.
+  ///
+  /// In es, this message translates to:
+  /// **'La forma completa recomendada sigue el modo enseñado en la Sunnah, paso a paso y con cuidado.'**
+  String get purificationGuideGhuslValidityRecommended;
+
+  /// No description provided for @purificationGuideGhuslValidityMinimum.
+  ///
+  /// In es, this message translates to:
+  /// **'El mínimo válido es simple: intención y que el agua cubra todo el cuerpo.'**
+  String get purificationGuideGhuslValidityMinimum;
+
+  /// No description provided for @purificationGuideGhuslNotesTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Notas importantes'**
+  String get purificationGuideGhuslNotesTitle;
+
+  /// No description provided for @purificationGuideGhuslNoteDrySpots.
+  ///
+  /// In es, this message translates to:
+  /// **'Asegúrate de que no queden zonas secas.'**
+  String get purificationGuideGhuslNoteDrySpots;
+
+  /// No description provided for @purificationGuideGhuslNoteScalp.
+  ///
+  /// In es, this message translates to:
+  /// **'Haz que el agua llegue bien al cuero cabelludo.'**
+  String get purificationGuideGhuslNoteScalp;
+
+  /// No description provided for @purificationGuideGhuslNoteBarriers.
+  ///
+  /// In es, this message translates to:
+  /// **'Quita lo que bloquee el agua, como suciedad o capas sobre la piel.'**
+  String get purificationGuideGhuslNoteBarriers;
+
+  /// No description provided for @purificationGuideGhuslNoteSimplicity.
+  ///
+  /// In es, this message translates to:
+  /// **'No lo compliques innecesariamente.'**
+  String get purificationGuideGhuslNoteSimplicity;
+
+  /// No description provided for @purificationGuideGhuslBadgeEssential.
+  ///
+  /// In es, this message translates to:
+  /// **'Esencial'**
+  String get purificationGuideGhuslBadgeEssential;
+
+  /// No description provided for @purificationGuideGhuslBadgeRecommended.
+  ///
+  /// In es, this message translates to:
+  /// **'Recomendado'**
+  String get purificationGuideGhuslBadgeRecommended;
+
+  /// No description provided for @purificationGuideGhuslBadgeUntilClean.
+  ///
+  /// In es, this message translates to:
+  /// **'Hasta limpiar'**
+  String get purificationGuideGhuslBadgeUntilClean;
+
+  /// No description provided for @purificationGuideGhuslBadgeUsuallyThreeTimes.
+  ///
+  /// In es, this message translates to:
+  /// **'Suele ser 3 veces'**
+  String get purificationGuideGhuslBadgeUsuallyThreeTimes;
+
+  /// No description provided for @purificationGuideGhuslBadgeNoFixedCount.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin número fijo'**
+  String get purificationGuideGhuslBadgeNoFixedCount;
+
+  /// No description provided for @purificationGuideGhuslStep1Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Intención'**
+  String get purificationGuideGhuslStep1Title;
+
+  /// No description provided for @purificationGuideGhuslStep1Body.
+  ///
+  /// In es, this message translates to:
+  /// **'Haz la intención en tu corazón de quitar la impureza mayor y realizar el ghusl.'**
+  String get purificationGuideGhuslStep1Body;
+
+  /// No description provided for @purificationGuideGhuslStep2Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Bismillah'**
+  String get purificationGuideGhuslStep2Title;
+
+  /// No description provided for @purificationGuideGhuslStep2Body.
+  ///
+  /// In es, this message translates to:
+  /// **'Di Bismillah antes de empezar el lavado.'**
+  String get purificationGuideGhuslStep2Body;
+
+  /// No description provided for @purificationGuideGhuslStep3Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Lavar las manos'**
+  String get purificationGuideGhuslStep3Title;
+
+  /// No description provided for @purificationGuideGhuslStep3Body.
+  ///
+  /// In es, this message translates to:
+  /// **'Lava bien ambas manos antes de continuar con el resto del cuerpo.'**
+  String get purificationGuideGhuslStep3Body;
+
+  /// No description provided for @purificationGuideGhuslStep4Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Lavar las partes íntimas y quitar impurezas visibles'**
+  String get purificationGuideGhuslStep4Title;
+
+  /// No description provided for @purificationGuideGhuslStep4Body.
+  ///
+  /// In es, this message translates to:
+  /// **'Limpia las partes íntimas y elimina cualquier impureza visible hasta dejar la zona limpia.'**
+  String get purificationGuideGhuslStep4Body;
+
+  /// No description provided for @purificationGuideGhuslStep5Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Realizar el wudu'**
+  String get purificationGuideGhuslStep5Title;
+
+  /// No description provided for @purificationGuideGhuslStep5Body.
+  ///
+  /// In es, this message translates to:
+  /// **'Haz el wudu, o al menos su forma básica, antes de lavar todo el cuerpo.'**
+  String get purificationGuideGhuslStep5Body;
+
+  /// No description provided for @purificationGuideGhuslStep6Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Verter agua sobre la cabeza'**
+  String get purificationGuideGhuslStep6Title;
+
+  /// No description provided for @purificationGuideGhuslStep6Body.
+  ///
+  /// In es, this message translates to:
+  /// **'Vierte agua sobre la cabeza y asegúrate de que llegue bien al cuero cabelludo. Suele hacerse varias veces, por ejemplo 3.'**
+  String get purificationGuideGhuslStep6Body;
+
+  /// No description provided for @purificationGuideGhuslStep7Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Lavar todo el cuerpo'**
+  String get purificationGuideGhuslStep7Title;
+
+  /// No description provided for @purificationGuideGhuslStep7Body.
+  ///
+  /// In es, this message translates to:
+  /// **'Lava todo el cuerpo, empezando normalmente por el lado derecho y luego el izquierdo. No hay un número fijo mientras el agua llegue a todas partes.'**
+  String get purificationGuideGhuslStep7Body;
+
+  /// No description provided for @purificationGuideGhuslStep8Title.
+  ///
+  /// In es, this message translates to:
+  /// **'Asegurarse de que el agua llega a todo'**
+  String get purificationGuideGhuslStep8Title;
+
+  /// No description provided for @purificationGuideGhuslStep8Body.
+  ///
+  /// In es, this message translates to:
+  /// **'Comprueba con cuidado que no quede ninguna zona seca, especialmente en partes ocultas o pliegues del cuerpo.'**
+  String get purificationGuideGhuslStep8Body;
+
   /// No description provided for @purificationGuideFinalNoteTitle.
   ///
   /// In es, this message translates to:

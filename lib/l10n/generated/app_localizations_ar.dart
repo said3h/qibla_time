@@ -2869,6 +2869,143 @@ class AppLocalizationsAr extends AppLocalizations {
       '?? ??:\n????? ?? ??????? ??????? ???? ??? ???? ????? ??????.\n\n??? ???:\n? ??? ??????.\n? ??? ???? ?????.\n? ??? ?????? ?????.\n? ??? ?????? ?? ??????.\n\n??? ????:\n1. ???? ????? ?? ????.\n2. ????: ??? ????.\n3. ???? ?????? ??????.\n4. ???? ?? ????? ?????.\n5. ????? ???? ??????.\n6. ???? ????? ?????? ??? ??? ??? ???? ?????.\n7. ???? ???? ?????? ??????? ????? ?????? ?? ??????? ?? ?????? ?? ???? ????? ??? ?? ????.\n\n?????? ????:\n????? ?????? ???? ????? ??????. ???? ?? ???? ???? ?? ???? ?????? ??? ?? ?? ???? ?? ??? ???? ????? ????.';
 
   @override
+  String get purificationGuideGhuslWhatIsLabel => 'ما هو الغسل';
+
+  @override
+  String get purificationGuideGhuslWhatIsBody =>
+      'الغسل هو التطهر الكامل الذي يجب بعد الحدث الأكبر.';
+
+  @override
+  String get purificationGuideGhuslWhenNeededLabel => 'متى تحتاج إليه';
+
+  @override
+  String get purificationGuideGhuslWhenNeededRelations =>
+      'بعد العلاقة الزوجية أو الجماع.';
+
+  @override
+  String get purificationGuideGhuslWhenNeededMenstruation =>
+      'بعد انتهاء الحيض.';
+
+  @override
+  String get purificationGuideGhuslWhenNeededPostnatal =>
+      'بعد انتهاء دم النفاس.';
+
+  @override
+  String get purificationGuideGhuslWhenNeededDischarge =>
+      'بعد خروج المني أو الإفراز الجنسي.';
+
+  @override
+  String get purificationGuideGhuslStepsTitle => 'خطوات الغسل';
+
+  @override
+  String get purificationGuideGhuslStepsSubtitle =>
+      'الغسل ليس له عدد ثابت من التكرارات مثل الوضوء. المهم أن يصل الماء إلى جميع الجسد، مع أن بعض المواضع قد تُغسل أكثر من مرة على وجه الاستحباب.';
+
+  @override
+  String get purificationGuideGhuslValidityTitle =>
+      'الصفة الكاملة والحد الأدنى الصحيح';
+
+  @override
+  String get purificationGuideGhuslValidityRecommended =>
+      'الصفة الكاملة المستحبة تتبع ما ورد في السنة خطوة خطوة وبعناية.';
+
+  @override
+  String get purificationGuideGhuslValidityMinimum =>
+      'الحد الأدنى الصحيح بسيط: النية ووصول الماء إلى جميع الجسد.';
+
+  @override
+  String get purificationGuideGhuslNotesTitle => 'ملاحظات مهمة';
+
+  @override
+  String get purificationGuideGhuslNoteDrySpots =>
+      'تأكد من عدم بقاء أي موضع جاف.';
+
+  @override
+  String get purificationGuideGhuslNoteScalp =>
+      'احرص على أن يصل الماء جيدًا إلى فروة الرأس.';
+
+  @override
+  String get purificationGuideGhuslNoteBarriers =>
+      'أزل كل ما يمنع وصول الماء، مثل الأوساخ أو الطبقات التي تغطي الجلد.';
+
+  @override
+  String get purificationGuideGhuslNoteSimplicity =>
+      'لا تجعله معقدًا بلا حاجة.';
+
+  @override
+  String get purificationGuideGhuslBadgeEssential => 'أساسي';
+
+  @override
+  String get purificationGuideGhuslBadgeRecommended => 'مستحب';
+
+  @override
+  String get purificationGuideGhuslBadgeUntilClean => 'حتى تزول النجاسة';
+
+  @override
+  String get purificationGuideGhuslBadgeUsuallyThreeTimes => 'غالبًا 3 مرات';
+
+  @override
+  String get purificationGuideGhuslBadgeNoFixedCount => 'بلا عدد ثابت';
+
+  @override
+  String get purificationGuideGhuslStep1Title => 'النية';
+
+  @override
+  String get purificationGuideGhuslStep1Body =>
+      'استحضر في قلبك نية إزالة الحدث الأكبر وأداء الغسل.';
+
+  @override
+  String get purificationGuideGhuslStep2Title => 'بسم الله';
+
+  @override
+  String get purificationGuideGhuslStep2Body =>
+      'قل بسم الله قبل البدء في الاغتسال.';
+
+  @override
+  String get purificationGuideGhuslStep3Title => 'غسل اليدين';
+
+  @override
+  String get purificationGuideGhuslStep3Body =>
+      'اغسل اليدين جيدًا قبل الانتقال إلى بقية الجسد.';
+
+  @override
+  String get purificationGuideGhuslStep4Title =>
+      'غسل الفرج وإزالة النجاسة الظاهرة';
+
+  @override
+  String get purificationGuideGhuslStep4Body =>
+      'اغسل الفرج وأزل أي نجاسة ظاهرة حتى تصبح المنطقة نظيفة.';
+
+  @override
+  String get purificationGuideGhuslStep5Title => 'الوضوء';
+
+  @override
+  String get purificationGuideGhuslStep5Body =>
+      'توضأ، أو افعل صورته الأساسية على الأقل، قبل غسل الجسد كله.';
+
+  @override
+  String get purificationGuideGhuslStep6Title => 'إفاضة الماء على الرأس';
+
+  @override
+  String get purificationGuideGhuslStep6Body =>
+      'أفض الماء على الرأس مع التأكد من وصوله إلى فروة الرأس. وغالبًا يُفعل ذلك عدة مرات، مثل 3 مرات.';
+
+  @override
+  String get purificationGuideGhuslStep7Title => 'غسل الجسد كله';
+
+  @override
+  String get purificationGuideGhuslStep7Body =>
+      'اغسل الجسد كله، ويبدأ عادة بالجانب الأيمن ثم الأيسر. ولا يوجد عدد ثابت ما دام الماء يصل إلى جميع المواضع.';
+
+  @override
+  String get purificationGuideGhuslStep8Title =>
+      'التأكد من وصول الماء إلى كل المواضع';
+
+  @override
+  String get purificationGuideGhuslStep8Body =>
+      'تفقد جيدًا حتى لا يبقى أي موضع جاف، خاصة المواضع الخفية وثنيات الجسد.';
+
+  @override
   String get purificationGuideFinalNoteTitle => '????? ???????';
 
   @override

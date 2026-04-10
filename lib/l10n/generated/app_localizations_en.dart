@@ -2923,6 +2923,143 @@ class AppLocalizationsEn extends AppLocalizations {
       'What it is:\nGhusl is the full ritual bath. It is required after major impurity.\n\nWhen it is required:\n? After sexual relations.\n? After ejaculation.\n? After menstruation ends.\n? After postnatal bleeding ends.\n\nHow to do it:\n1. Make the intention in your heart.\n2. Say Bismillah.\n3. Wash the hands and private parts.\n4. Remove any visible impurity.\n5. Perform wudu.\n6. Pour water over the head so it reaches the scalp.\n7. Wash the whole body, starting with the right side and then the left, making sure water reaches every part.\n\nImportant note:\nA complete ghusl removes major impurity. If nothing happens afterwards to break wudu, you may pray without making a separate wudu again.';
 
   @override
+  String get purificationGuideGhuslWhatIsLabel => 'What it is';
+
+  @override
+  String get purificationGuideGhuslWhatIsBody =>
+      'Ghusl is the full ritual bath required after major impurity.';
+
+  @override
+  String get purificationGuideGhuslWhenNeededLabel => 'When you need it';
+
+  @override
+  String get purificationGuideGhuslWhenNeededRelations =>
+      'After intimate relations.';
+
+  @override
+  String get purificationGuideGhuslWhenNeededMenstruation =>
+      'After menstruation ends.';
+
+  @override
+  String get purificationGuideGhuslWhenNeededPostnatal =>
+      'After postnatal bleeding ends.';
+
+  @override
+  String get purificationGuideGhuslWhenNeededDischarge =>
+      'After sexual discharge.';
+
+  @override
+  String get purificationGuideGhuslStepsTitle => 'Steps of ghusl';
+
+  @override
+  String get purificationGuideGhuslStepsSubtitle =>
+      'Ghusl does not have a fixed number of repetitions like wudu. The important thing is that water reaches the whole body, though some parts may be washed more than once in the recommended way.';
+
+  @override
+  String get purificationGuideGhuslValidityTitle =>
+      'Complete form and minimum valid form';
+
+  @override
+  String get purificationGuideGhuslValidityRecommended =>
+      'The complete recommended form follows the Sunnah pattern step by step, with careful washing and order.';
+
+  @override
+  String get purificationGuideGhuslValidityMinimum =>
+      'The minimum valid form is simple: make the intention and ensure water covers the whole body.';
+
+  @override
+  String get purificationGuideGhuslNotesTitle => 'Important notes';
+
+  @override
+  String get purificationGuideGhuslNoteDrySpots =>
+      'Make sure no area is left dry.';
+
+  @override
+  String get purificationGuideGhuslNoteScalp =>
+      'Ensure the water reaches the scalp well.';
+
+  @override
+  String get purificationGuideGhuslNoteBarriers =>
+      'Remove anything that blocks the water, such as dirt or a layer on the skin.';
+
+  @override
+  String get purificationGuideGhuslNoteSimplicity =>
+      'Do not make it unnecessarily complicated.';
+
+  @override
+  String get purificationGuideGhuslBadgeEssential => 'Essential';
+
+  @override
+  String get purificationGuideGhuslBadgeRecommended => 'Recommended';
+
+  @override
+  String get purificationGuideGhuslBadgeUntilClean => 'Until clean';
+
+  @override
+  String get purificationGuideGhuslBadgeUsuallyThreeTimes => 'Often 3 times';
+
+  @override
+  String get purificationGuideGhuslBadgeNoFixedCount => 'No fixed count';
+
+  @override
+  String get purificationGuideGhuslStep1Title => 'Intention';
+
+  @override
+  String get purificationGuideGhuslStep1Body =>
+      'Make the intention in your heart to remove major impurity and perform ghusl.';
+
+  @override
+  String get purificationGuideGhuslStep2Title => 'Bismillah';
+
+  @override
+  String get purificationGuideGhuslStep2Body =>
+      'Say Bismillah before starting the washing.';
+
+  @override
+  String get purificationGuideGhuslStep3Title => 'Wash the hands';
+
+  @override
+  String get purificationGuideGhuslStep3Body =>
+      'Wash both hands well before moving to the rest of the body.';
+
+  @override
+  String get purificationGuideGhuslStep4Title =>
+      'Wash the private parts and remove visible impurity';
+
+  @override
+  String get purificationGuideGhuslStep4Body =>
+      'Clean the private parts and remove any visible impurity until the area is clean.';
+
+  @override
+  String get purificationGuideGhuslStep5Title => 'Perform wudu';
+
+  @override
+  String get purificationGuideGhuslStep5Body =>
+      'Perform wudu, or at least its basic form, before washing the whole body.';
+
+  @override
+  String get purificationGuideGhuslStep6Title => 'Pour water over the head';
+
+  @override
+  String get purificationGuideGhuslStep6Body =>
+      'Pour water over the head and make sure it reaches the scalp. This is often done several times, such as 3.';
+
+  @override
+  String get purificationGuideGhuslStep7Title => 'Wash the whole body';
+
+  @override
+  String get purificationGuideGhuslStep7Body =>
+      'Wash the whole body, usually starting with the right side and then the left. There is no fixed number as long as the water reaches everywhere.';
+
+  @override
+  String get purificationGuideGhuslStep8Title =>
+      'Make sure the water reaches every part';
+
+  @override
+  String get purificationGuideGhuslStep8Body =>
+      'Check carefully that no area stays dry, especially hidden or folded parts of the body.';
+
+  @override
   String get purificationGuideFinalNoteTitle => 'Key difference';
 
   @override

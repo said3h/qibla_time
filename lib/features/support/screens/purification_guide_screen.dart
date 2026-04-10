@@ -44,10 +44,7 @@ class PurificationGuideScreen extends StatelessWidget {
             isArabicOnly: isArabicOnly,
           ),
           const SizedBox(height: 12),
-          _GuideSectionCard(
-            icon: Icons.shower_outlined,
-            title: l10n.purificationGuideGhuslTitle,
-            body: l10n.purificationGuideGhuslBody,
+          _GhuslGuideCard(
             isArabicOnly: isArabicOnly,
           ),
           const SizedBox(height: 12),
@@ -248,31 +245,205 @@ class _WuduGuideCard extends StatelessWidget {
   }
 
   TextStyle _sectionHeadingStyle(QiblaTokens tokens) {
-    return isArabicOnly
-        ? GoogleFonts.amiri(
-            fontSize: 21,
-            fontWeight: FontWeight.w700,
-            color: tokens.textPrimary,
-          )
-        : GoogleFonts.dmSans(
-            fontSize: 16,
-            fontWeight: FontWeight.w700,
-            color: tokens.textPrimary,
-          );
+    return _guideSectionHeadingStyle(tokens, isArabicOnly);
   }
 
   TextStyle _sectionBodyStyle(QiblaTokens tokens) {
-    return isArabicOnly
-        ? GoogleFonts.amiri(
-            fontSize: 18,
-            height: 1.75,
-            color: tokens.textSecondary,
-          )
-        : GoogleFonts.dmSans(
-            fontSize: 14,
-            height: 1.7,
-            color: tokens.textSecondary,
-          );
+    return _guideSectionBodyStyle(tokens, isArabicOnly);
+  }
+}
+
+class _GhuslGuideCard extends StatelessWidget {
+  const _GhuslGuideCard({
+    required this.isArabicOnly,
+  });
+
+  final bool isArabicOnly;
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = QiblaThemes.current;
+    final l10n = context.l10n;
+    final steps = <_PurificationStep>[
+      _PurificationStep(
+        number: 1,
+        title: l10n.purificationGuideGhuslStep1Title,
+        body: l10n.purificationGuideGhuslStep1Body,
+        badge: l10n.purificationGuideGhuslBadgeEssential,
+      ),
+      _PurificationStep(
+        number: 2,
+        title: l10n.purificationGuideGhuslStep2Title,
+        body: l10n.purificationGuideGhuslStep2Body,
+        badge: l10n.purificationGuideGhuslBadgeRecommended,
+      ),
+      _PurificationStep(
+        number: 3,
+        title: l10n.purificationGuideGhuslStep3Title,
+        body: l10n.purificationGuideGhuslStep3Body,
+        badge: l10n.purificationGuideGhuslBadgeRecommended,
+      ),
+      _PurificationStep(
+        number: 4,
+        title: l10n.purificationGuideGhuslStep4Title,
+        body: l10n.purificationGuideGhuslStep4Body,
+        badge: l10n.purificationGuideGhuslBadgeUntilClean,
+      ),
+      _PurificationStep(
+        number: 5,
+        title: l10n.purificationGuideGhuslStep5Title,
+        body: l10n.purificationGuideGhuslStep5Body,
+        badge: l10n.purificationGuideGhuslBadgeRecommended,
+      ),
+      _PurificationStep(
+        number: 6,
+        title: l10n.purificationGuideGhuslStep6Title,
+        body: l10n.purificationGuideGhuslStep6Body,
+        badge: l10n.purificationGuideGhuslBadgeUsuallyThreeTimes,
+      ),
+      _PurificationStep(
+        number: 7,
+        title: l10n.purificationGuideGhuslStep7Title,
+        body: l10n.purificationGuideGhuslStep7Body,
+        badge: l10n.purificationGuideGhuslBadgeNoFixedCount,
+      ),
+      _PurificationStep(
+        number: 8,
+        title: l10n.purificationGuideGhuslStep8Title,
+        body: l10n.purificationGuideGhuslStep8Body,
+        badge: l10n.purificationGuideGhuslBadgeEssential,
+      ),
+    ];
+
+    return Container(
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        color: tokens.bgSurface,
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(color: tokens.border),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _GuideSectionHeader(
+            icon: Icons.shower_outlined,
+            title: l10n.purificationGuideGhuslTitle,
+            isArabicOnly: isArabicOnly,
+          ),
+          const SizedBox(height: 14),
+          _GuideMiniSection(
+            title: l10n.purificationGuideGhuslWhatIsLabel,
+            isArabicOnly: isArabicOnly,
+            child: Text(
+              l10n.purificationGuideGhuslWhatIsBody,
+              textAlign: isArabicOnly ? TextAlign.right : TextAlign.left,
+              style: _guideSectionBodyStyle(tokens, isArabicOnly),
+            ),
+          ),
+          const SizedBox(height: 12),
+          _GuideMiniSection(
+            title: l10n.purificationGuideGhuslWhenNeededLabel,
+            isArabicOnly: isArabicOnly,
+            child: Column(
+              children: [
+                _GuideBulletLine(
+                  text: l10n.purificationGuideGhuslWhenNeededRelations,
+                  isArabicOnly: isArabicOnly,
+                ),
+                _GuideBulletLine(
+                  text: l10n.purificationGuideGhuslWhenNeededMenstruation,
+                  isArabicOnly: isArabicOnly,
+                ),
+                _GuideBulletLine(
+                  text: l10n.purificationGuideGhuslWhenNeededPostnatal,
+                  isArabicOnly: isArabicOnly,
+                ),
+                _GuideBulletLine(
+                  text: l10n.purificationGuideGhuslWhenNeededDischarge,
+                  isArabicOnly: isArabicOnly,
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 14),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+            decoration: BoxDecoration(
+              color: tokens.primaryBg,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: tokens.primaryBorder),
+            ),
+            child: Text(
+              l10n.purificationGuideGhuslStepsSubtitle,
+              textAlign: isArabicOnly ? TextAlign.right : TextAlign.left,
+              style: _guideSectionBodyStyle(tokens, isArabicOnly).copyWith(
+                color: tokens.textPrimary,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+          const SizedBox(height: 12),
+          _GuideMiniSection(
+            title: l10n.purificationGuideGhuslValidityTitle,
+            isArabicOnly: isArabicOnly,
+            child: Column(
+              children: [
+                _GuideBulletLine(
+                  text: l10n.purificationGuideGhuslValidityRecommended,
+                  isArabicOnly: isArabicOnly,
+                ),
+                _GuideBulletLine(
+                  text: l10n.purificationGuideGhuslValidityMinimum,
+                  isArabicOnly: isArabicOnly,
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 18),
+          Text(
+            l10n.purificationGuideGhuslStepsTitle,
+            textAlign: isArabicOnly ? TextAlign.right : TextAlign.left,
+            style: _guideSectionHeadingStyle(tokens, isArabicOnly),
+          ),
+          const SizedBox(height: 12),
+          ...steps.map(
+            (step) => Padding(
+              padding: const EdgeInsets.only(bottom: 12),
+              child: _PurificationStepCard(
+                step: step,
+                isArabicOnly: isArabicOnly,
+              ),
+            ),
+          ),
+          const SizedBox(height: 4),
+          _GuideMiniSection(
+            title: l10n.purificationGuideGhuslNotesTitle,
+            isArabicOnly: isArabicOnly,
+            child: Column(
+              children: [
+                _GuideBulletLine(
+                  text: l10n.purificationGuideGhuslNoteDrySpots,
+                  isArabicOnly: isArabicOnly,
+                ),
+                _GuideBulletLine(
+                  text: l10n.purificationGuideGhuslNoteScalp,
+                  isArabicOnly: isArabicOnly,
+                ),
+                _GuideBulletLine(
+                  text: l10n.purificationGuideGhuslNoteBarriers,
+                  isArabicOnly: isArabicOnly,
+                ),
+                _GuideBulletLine(
+                  text: l10n.purificationGuideGhuslNoteSimplicity,
+                  isArabicOnly: isArabicOnly,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 
@@ -335,6 +506,40 @@ class _GuideIntroCard extends StatelessWidget {
       ),
     );
   }
+}
+
+TextStyle _guideSectionHeadingStyle(
+  QiblaTokens tokens,
+  bool isArabicOnly,
+) {
+  return isArabicOnly
+      ? GoogleFonts.amiri(
+          fontSize: 21,
+          fontWeight: FontWeight.w700,
+          color: tokens.textPrimary,
+        )
+      : GoogleFonts.dmSans(
+          fontSize: 16,
+          fontWeight: FontWeight.w700,
+          color: tokens.textPrimary,
+        );
+}
+
+TextStyle _guideSectionBodyStyle(
+  QiblaTokens tokens,
+  bool isArabicOnly,
+) {
+  return isArabicOnly
+      ? GoogleFonts.amiri(
+          fontSize: 18,
+          height: 1.75,
+          color: tokens.textSecondary,
+        )
+      : GoogleFonts.dmSans(
+          fontSize: 14,
+          height: 1.7,
+          color: tokens.textSecondary,
+        );
 }
 
 class _GuideSectionHeader extends StatelessWidget {

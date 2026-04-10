@@ -2934,6 +2934,143 @@ class AppLocalizationsId extends AppLocalizations {
       'Apa itu:\nGhusl adalah mandi ritual penuh. Ini wajib setelah hadas besar.\n\nKapan diwajibkan:\n? Setelah hubungan suami istri.\n? Setelah keluar mani.\n? Setelah haid selesai.\n? Setelah nifas selesai.\n\nCara melakukannya:\n1. Niatkan dalam hati.\n2. Ucapkan Bismillah.\n3. Cuci tangan dan kemaluan.\n4. Hilangkan najis yang terlihat.\n5. Lakukan wudu.\n6. Guyur kepala sampai air mencapai kulit kepala.\n7. Basuh seluruh tubuh, mulai dari sisi kanan lalu kiri, dan pastikan air mencapai semua bagian.\n\nCatatan penting:\nGhusl yang sempurna menghilangkan hadas besar. Jika setelah itu tidak terjadi sesuatu yang membatalkan wudu, kamu dapat salat tanpa membuat wudu terpisah lagi.';
 
   @override
+  String get purificationGuideGhuslWhatIsLabel => 'Apa itu';
+
+  @override
+  String get purificationGuideGhuslWhatIsBody =>
+      'Ghusl adalah mandi ritual penuh yang dilakukan setelah hadas besar.';
+
+  @override
+  String get purificationGuideGhuslWhenNeededLabel => 'Kapan diperlukan';
+
+  @override
+  String get purificationGuideGhuslWhenNeededRelations =>
+      'Setelah hubungan suami istri.';
+
+  @override
+  String get purificationGuideGhuslWhenNeededMenstruation =>
+      'Setelah haid selesai.';
+
+  @override
+  String get purificationGuideGhuslWhenNeededPostnatal =>
+      'Setelah nifas selesai.';
+
+  @override
+  String get purificationGuideGhuslWhenNeededDischarge =>
+      'Setelah keluar mani atau cairan seksual.';
+
+  @override
+  String get purificationGuideGhuslStepsTitle => 'Langkah-langkah ghusl';
+
+  @override
+  String get purificationGuideGhuslStepsSubtitle =>
+      'Ghusl tidak memiliki jumlah pengulangan tetap seperti wudu. Yang penting adalah air mencapai seluruh tubuh, meskipun beberapa bagian boleh dibasuh lebih dari sekali sebagai bentuk yang dianjurkan.';
+
+  @override
+  String get purificationGuideGhuslValidityTitle =>
+      'Bentuk lengkap dan minimum yang sah';
+
+  @override
+  String get purificationGuideGhuslValidityRecommended =>
+      'Bentuk lengkap yang dianjurkan mengikuti cara yang diajarkan dalam Sunnah, langkah demi langkah dan dengan teliti.';
+
+  @override
+  String get purificationGuideGhuslValidityMinimum =>
+      'Batas minimum yang sah itu sederhana: niat dan memastikan air membasahi seluruh tubuh.';
+
+  @override
+  String get purificationGuideGhuslNotesTitle => 'Catatan penting';
+
+  @override
+  String get purificationGuideGhuslNoteDrySpots =>
+      'Pastikan tidak ada bagian yang tetap kering.';
+
+  @override
+  String get purificationGuideGhuslNoteScalp =>
+      'Pastikan air benar-benar mencapai kulit kepala.';
+
+  @override
+  String get purificationGuideGhuslNoteBarriers =>
+      'Hilangkan apa pun yang menghalangi air, seperti kotoran atau lapisan pada kulit.';
+
+  @override
+  String get purificationGuideGhuslNoteSimplicity =>
+      'Jangan dibuat rumit tanpa perlu.';
+
+  @override
+  String get purificationGuideGhuslBadgeEssential => 'Esensial';
+
+  @override
+  String get purificationGuideGhuslBadgeRecommended => 'Dianjurkan';
+
+  @override
+  String get purificationGuideGhuslBadgeUntilClean => 'Sampai bersih';
+
+  @override
+  String get purificationGuideGhuslBadgeUsuallyThreeTimes => 'Sering 3 kali';
+
+  @override
+  String get purificationGuideGhuslBadgeNoFixedCount => 'Tanpa jumlah tetap';
+
+  @override
+  String get purificationGuideGhuslStep1Title => 'Niat';
+
+  @override
+  String get purificationGuideGhuslStep1Body =>
+      'Niatkan di dalam hati untuk menghilangkan hadas besar dan melakukan ghusl.';
+
+  @override
+  String get purificationGuideGhuslStep2Title => 'Bismillah';
+
+  @override
+  String get purificationGuideGhuslStep2Body =>
+      'Ucapkan Bismillah sebelum mulai membasuh.';
+
+  @override
+  String get purificationGuideGhuslStep3Title => 'Mencuci tangan';
+
+  @override
+  String get purificationGuideGhuslStep3Body =>
+      'Cuci kedua tangan dengan baik sebelum lanjut ke bagian tubuh lainnya.';
+
+  @override
+  String get purificationGuideGhuslStep4Title =>
+      'Mencuci kemaluan dan membersihkan najis yang terlihat';
+
+  @override
+  String get purificationGuideGhuslStep4Body =>
+      'Bersihkan kemaluan dan hilangkan najis yang terlihat sampai area tersebut benar-benar bersih.';
+
+  @override
+  String get purificationGuideGhuslStep5Title => 'Melakukan wudu';
+
+  @override
+  String get purificationGuideGhuslStep5Body =>
+      'Lakukan wudu, atau setidaknya bentuk dasarnya, sebelum membasuh seluruh tubuh.';
+
+  @override
+  String get purificationGuideGhuslStep6Title => 'Menyiram air ke kepala';
+
+  @override
+  String get purificationGuideGhuslStep6Body =>
+      'Siram air ke kepala dan pastikan air mencapai kulit kepala dengan baik. Ini sering dilakukan beberapa kali, misalnya 3 kali.';
+
+  @override
+  String get purificationGuideGhuslStep7Title => 'Membasuh seluruh tubuh';
+
+  @override
+  String get purificationGuideGhuslStep7Body =>
+      'Basuh seluruh tubuh, biasanya dimulai dari sisi kanan lalu kiri. Tidak ada jumlah tetap selama air mencapai semua bagian.';
+
+  @override
+  String get purificationGuideGhuslStep8Title =>
+      'Memastikan air mencapai semua bagian';
+
+  @override
+  String get purificationGuideGhuslStep8Body =>
+      'Periksa dengan teliti agar tidak ada bagian yang tetap kering, terutama bagian tersembunyi atau lipatan tubuh.';
+
+  @override
   String get purificationGuideFinalNoteTitle => 'Perbedaan utama';
 
   @override

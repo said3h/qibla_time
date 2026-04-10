@@ -2940,6 +2940,143 @@ class AppLocalizationsNl extends AppLocalizations {
       'Wat het is:\nGhusl is het volledige rituele bad. Het is verplicht na grote onreinheid.\n\nWanneer het verplicht is:\n? Na intieme gemeenschap.\n? Na ejaculatie.\n? Na het einde van de menstruatie.\n? Na het einde van de kraambloeding.\n\nHoe je het doet:\n1. Maak de intentie in je hart.\n2. Zeg Bismillah.\n3. Was de handen en de intieme delen.\n4. Verwijder elke zichtbare onreinheid.\n5. Verricht wudu.\n6. Giet water over het hoofd zodat het de hoofdhuid bereikt.\n7. Was het hele lichaam, beginnend met de rechterkant en daarna de linkerkant, en zorg ervoor dat het water elk deel bereikt.\n\nBelangrijke opmerking:\nEen volledige ghusl verwijdert grote onreinheid. Als daarna niets gebeurt dat de wudu verbreekt, kun je bidden zonder opnieuw een aparte wudu te doen.';
 
   @override
+  String get purificationGuideGhuslWhatIsLabel => 'Wat het is';
+
+  @override
+  String get purificationGuideGhuslWhatIsBody =>
+      'Ghusl is het volledige rituele bad dat nodig is na grote onreinheid.';
+
+  @override
+  String get purificationGuideGhuslWhenNeededLabel => 'Wanneer het nodig is';
+
+  @override
+  String get purificationGuideGhuslWhenNeededRelations =>
+      'Na intieme gemeenschap.';
+
+  @override
+  String get purificationGuideGhuslWhenNeededMenstruation =>
+      'Na het einde van de menstruatie.';
+
+  @override
+  String get purificationGuideGhuslWhenNeededPostnatal =>
+      'Na het einde van de kraambloeding.';
+
+  @override
+  String get purificationGuideGhuslWhenNeededDischarge =>
+      'Na seksuele afscheiding.';
+
+  @override
+  String get purificationGuideGhuslStepsTitle => 'Stappen van de ghusl';
+
+  @override
+  String get purificationGuideGhuslStepsSubtitle =>
+      'Ghusl heeft geen vast aantal herhalingen zoals wudu. Het belangrijkste is dat het water het hele lichaam bereikt, ook al kunnen sommige delen op aanbevolen wijze meer dan één keer worden gewassen.';
+
+  @override
+  String get purificationGuideGhuslValidityTitle =>
+      'Volledige vorm en geldig minimum';
+
+  @override
+  String get purificationGuideGhuslValidityRecommended =>
+      'De volledige aanbevolen vorm volgt de manier die in de Sunnah is overgeleverd, stap voor stap en met zorg.';
+
+  @override
+  String get purificationGuideGhuslValidityMinimum =>
+      'Het geldige minimum is eenvoudig: maak de intentie en zorg dat het water het hele lichaam bedekt.';
+
+  @override
+  String get purificationGuideGhuslNotesTitle => 'Belangrijke opmerkingen';
+
+  @override
+  String get purificationGuideGhuslNoteDrySpots =>
+      'Zorg ervoor dat er geen enkele plek droog blijft.';
+
+  @override
+  String get purificationGuideGhuslNoteScalp =>
+      'Zorg dat het water de hoofdhuid goed bereikt.';
+
+  @override
+  String get purificationGuideGhuslNoteBarriers =>
+      'Verwijder alles wat het water blokkeert, zoals vuil of een laag op de huid.';
+
+  @override
+  String get purificationGuideGhuslNoteSimplicity =>
+      'Maak het niet onnodig ingewikkeld.';
+
+  @override
+  String get purificationGuideGhuslBadgeEssential => 'Essentieel';
+
+  @override
+  String get purificationGuideGhuslBadgeRecommended => 'Aanbevolen';
+
+  @override
+  String get purificationGuideGhuslBadgeUntilClean => 'Tot schoon';
+
+  @override
+  String get purificationGuideGhuslBadgeUsuallyThreeTimes => 'Vaak 3 keer';
+
+  @override
+  String get purificationGuideGhuslBadgeNoFixedCount => 'Geen vast aantal';
+
+  @override
+  String get purificationGuideGhuslStep1Title => 'Intentie';
+
+  @override
+  String get purificationGuideGhuslStep1Body =>
+      'Maak in je hart de intentie om de grote onreinheid weg te nemen en ghusl te verrichten.';
+
+  @override
+  String get purificationGuideGhuslStep2Title => 'Bismillah';
+
+  @override
+  String get purificationGuideGhuslStep2Body =>
+      'Zeg Bismillah voordat je met het wassen begint.';
+
+  @override
+  String get purificationGuideGhuslStep3Title => 'De handen wassen';
+
+  @override
+  String get purificationGuideGhuslStep3Body =>
+      'Was beide handen goed voordat je doorgaat naar de rest van het lichaam.';
+
+  @override
+  String get purificationGuideGhuslStep4Title =>
+      'De intieme delen wassen en zichtbare onreinheid verwijderen';
+
+  @override
+  String get purificationGuideGhuslStep4Body =>
+      'Reinig de intieme delen en verwijder zichtbare onreinheid totdat het gebied schoon is.';
+
+  @override
+  String get purificationGuideGhuslStep5Title => 'Wudu verrichten';
+
+  @override
+  String get purificationGuideGhuslStep5Body =>
+      'Verricht wudu, of ten minste de basisvorm ervan, voordat je het hele lichaam wast.';
+
+  @override
+  String get purificationGuideGhuslStep6Title => 'Water over het hoofd gieten';
+
+  @override
+  String get purificationGuideGhuslStep6Body =>
+      'Giet water over het hoofd en zorg dat het de hoofdhuid goed bereikt. Dit wordt vaak meerdere keren gedaan, bijvoorbeeld 3 keer.';
+
+  @override
+  String get purificationGuideGhuslStep7Title => 'Het hele lichaam wassen';
+
+  @override
+  String get purificationGuideGhuslStep7Body =>
+      'Was het hele lichaam, meestal beginnend met de rechterkant en daarna de linkerkant. Er is geen vast aantal zolang het water overal komt.';
+
+  @override
+  String get purificationGuideGhuslStep8Title =>
+      'Controleren dat het water overal komt';
+
+  @override
+  String get purificationGuideGhuslStep8Body =>
+      'Controleer zorgvuldig dat er geen plek droog blijft, vooral niet op verborgen plaatsen of in huidplooien.';
+
+  @override
   String get purificationGuideFinalNoteTitle => 'Belangrijk verschil';
 
   @override
