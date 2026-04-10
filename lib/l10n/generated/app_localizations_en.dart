@@ -2769,4 +2769,39 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsLanguageOptionRussian => 'Russian';
+
+  @override
+  String get homeQuickActionPurification => 'Wudu & Ghusl';
+
+  @override
+  String get purificationGuideTitle => 'Wudu & Ghusl';
+
+  @override
+  String get purificationGuideSubtitle =>
+      'Guide to ritual purification before prayer';
+
+  @override
+  String get purificationGuideIntro =>
+      'Before salah, a Muslim may need ritual purification. The two main forms are wudu (minor ablution) and ghusl (full ritual bath). This guide explains what each one is, when it is needed, and how to perform it.';
+
+  @override
+  String get purificationGuideWuduTitle => 'Wudu';
+
+  @override
+  String get purificationGuideWuduBody =>
+      'What it is:\nWudu is the minor ritual ablution. It prepares you for salah when you do not have major impurity.\n\nWhen you need it:\n? Before prayer if your previous wudu has been broken.\n? After urinating, defecating, passing wind, deep sleep, or losing consciousness.\n\nHow to do it:\n1. Make the intention in your heart.\n2. Say Bismillah.\n3. Wash both hands.\n4. Rinse the mouth.\n5. Clean the nose with water.\n6. Wash the face.\n7. Wash the right arm to the elbow, then the left.\n8. Wipe the head once with wet hands.\n9. Wipe the ears.\n10. Wash the right foot to the ankle, then the left.\n\nWhat breaks it:\nAnything that exits from the private parts, deep sleep, or loss of consciousness. If your wudu is still valid, you may pray more than one prayer with it.';
+
+  @override
+  String get purificationGuideGhuslTitle => 'Ghusl';
+
+  @override
+  String get purificationGuideGhuslBody =>
+      'What it is:\nGhusl is the full ritual bath. It is required after major impurity.\n\nWhen it is required:\n? After sexual relations.\n? After ejaculation.\n? After menstruation ends.\n? After postnatal bleeding ends.\n\nHow to do it:\n1. Make the intention in your heart.\n2. Say Bismillah.\n3. Wash the hands and private parts.\n4. Remove any visible impurity.\n5. Perform wudu.\n6. Pour water over the head so it reaches the scalp.\n7. Wash the whole body, starting with the right side and then the left, making sure water reaches every part.\n\nImportant note:\nA complete ghusl removes major impurity. If nothing happens afterwards to break wudu, you may pray without making a separate wudu again.';
+
+  @override
+  String get purificationGuideFinalNoteTitle => 'Key difference';
+
+  @override
+  String get purificationGuideFinalNoteBody =>
+      'Wudu is for minor impurity. Ghusl is for major impurity. If you only need wudu, ghusl is not required. If ghusl is required, wudu alone is not enough.';
 }

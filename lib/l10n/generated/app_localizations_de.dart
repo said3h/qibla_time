@@ -2792,4 +2792,39 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get settingsLanguageOptionRussian => 'Russisch';
+
+  @override
+  String get homeQuickActionPurification => 'Wudu und Ghusl';
+
+  @override
+  String get purificationGuideTitle => 'Wudu und Ghusl';
+
+  @override
+  String get purificationGuideSubtitle =>
+      'Leitfaden zur rituellen Reinigung vor dem Gebet';
+
+  @override
+  String get purificationGuideIntro =>
+      'Vor dem Salah kann ein Muslim rituelle Reinigung brauchen. Die zwei wichtigsten Formen sind Wudu (kleine Waschung) und Ghusl (vollst?ndiges rituelles Bad). Dieser Leitfaden erkl?rt, was beides ist, wann es n?tig ist und wie man es ausf?hrt.';
+
+  @override
+  String get purificationGuideWuduTitle => 'Wudu';
+
+  @override
+  String get purificationGuideWuduBody =>
+      'Was es ist:\nWudu ist die kleine rituelle Waschung. Sie bereitet auf das Salah vor, wenn keine gro?e Unreinheit vorliegt.\n\nWann es n?tig ist:\n? Vor dem Gebet, wenn der vorherige Wudu ung?ltig geworden ist.\n? Nach dem Urinieren, Stuhlgang, dem Abgang von Wind, tiefem Schlaf oder Bewusstlosigkeit.\n\nSo wird es gemacht:\n1. Fasse die Absicht im Herzen.\n2. Sage Bismillah.\n3. Wasche beide H?nde.\n4. Sp?le den Mund.\n5. Reinige die Nase mit Wasser.\n6. Wasche das Gesicht.\n7. Wasche den rechten Arm bis zum Ellbogen, dann den linken.\n8. Streiche einmal mit nassen H?nden ?ber den Kopf.\n9. Wische die Ohren aus.\n10. Wasche den rechten Fu? bis zum Kn?chel, dann den linken.\n\nWas ihn ung?ltig macht:\nAlles, was aus den Schamteilen austritt, tiefer Schlaf oder Bewusstlosigkeit. Wenn dein Wudu noch g?ltig ist, kannst du damit mehr als ein Gebet verrichten.';
+
+  @override
+  String get purificationGuideGhuslTitle => 'Ghusl';
+
+  @override
+  String get purificationGuideGhuslBody =>
+      'Was es ist:\nGhusl ist das vollst?ndige rituelle Bad. Es ist nach gro?er Unreinheit verpflichtend.\n\nWann es verpflichtend ist:\n? Nach ehelichen Beziehungen.\n? Nach einer Ejakulation.\n? Nach dem Ende der Menstruation.\n? Nach dem Ende der Nachgeburtsblutung.\n\nSo wird es gemacht:\n1. Fasse die Absicht im Herzen.\n2. Sage Bismillah.\n3. Wasche die H?nde und den Intimbereich.\n4. Entferne jede sichtbare Unreinheit.\n5. F?hre Wudu aus.\n6. Gie?e Wasser ?ber den Kopf, sodass es die Kopfhaut erreicht.\n7. Wasche den ganzen K?rper, beginnend mit der rechten Seite und dann der linken, und achte darauf, dass das Wasser jede Stelle erreicht.\n\nWichtiger Hinweis:\nEin vollst?ndiger Ghusl entfernt die gro?e Unreinheit. Wenn danach nichts geschieht, was den Wudu bricht, kannst du ohne einen weiteren separaten Wudu beten.';
+
+  @override
+  String get purificationGuideFinalNoteTitle => 'Wichtiger Unterschied';
+
+  @override
+  String get purificationGuideFinalNoteBody =>
+      'Wudu ist f?r kleine Unreinheit. Ghusl ist f?r gro?e Unreinheit. Wenn du nur Wudu brauchst, ist Ghusl nicht erforderlich. Wenn Ghusl erforderlich ist, reicht Wudu allein nicht aus.';
 }

@@ -20,6 +20,7 @@ import '../../quran/models/quran_models.dart';
 import '../../quran/screens/quran_screen.dart';
 import '../../quran/services/quran_reading_service.dart';
 import '../../support/screens/settings_screen.dart';
+import '../../support/screens/purification_guide_screen.dart';
 import '../../tracking/models/tracking_models.dart';
 import '../../tracking/screens/analytics_screen.dart';
 import '../../tracking/services/tracking_service.dart';
@@ -2375,12 +2376,37 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   Widget _buildQuickActions(QiblaTokens tokens) {
     final l10n = context.l10n;
-    final actions = [
-      (Icons.auto_stories_outlined, l10n.commonHadiths, const HadithLibraryScreen()),
-      (Icons.library_books_outlined, l10n.commonBooks, const IslamicBooksScreen()),
-      (Icons.self_improvement_rounded, 'Rakaha', const FocusModeScreen()),
-      (Icons.calendar_month_outlined, l10n.calendarTitle, const CalendarScreen()),
-      (Icons.insights_outlined, l10n.commonStatistics, const AnalyticsScreen()),
+    final actions = <({IconData icon, String label, Widget destination})>[
+      (
+        icon: Icons.auto_stories_outlined,
+        label: l10n.commonHadiths,
+        destination: const HadithLibraryScreen(),
+      ),
+      (
+        icon: Icons.library_books_outlined,
+        label: l10n.commonBooks,
+        destination: const IslamicBooksScreen(),
+      ),
+      (
+        icon: Icons.water_drop_outlined,
+        label: l10n.homeQuickActionPurification,
+        destination: const PurificationGuideScreen(),
+      ),
+      (
+        icon: Icons.self_improvement_rounded,
+        label: 'Rakaha',
+        destination: const FocusModeScreen(),
+      ),
+      (
+        icon: Icons.calendar_month_outlined,
+        label: l10n.calendarTitle,
+        destination: const CalendarScreen(),
+      ),
+      (
+        icon: Icons.insights_outlined,
+        label: l10n.commonStatistics,
+        destination: const AnalyticsScreen(),
+      ),
     ];
 
     return Padding(
@@ -2413,7 +2439,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               return InkWell(
                 onTap: () async {
                   await Navigator.of(context).push(
-                    MaterialPageRoute(builder: (_) => action.$3 as Widget),
+                    MaterialPageRoute(builder: (_) => action.destination),
                   );
                   ref.invalidate(lastReadingProvider);
                   ref.invalidate(dhikrSnapshotProvider);
@@ -2442,11 +2468,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           color: _blend(tokens.primary, tokens.bgSurface, 0.14),
                           shape: BoxShape.circle,
                         ),
-                        child: Icon(action.$1, size: 20, color: tokens.primary),
+                        child: Icon(action.icon, size: 20, color: tokens.primary),
                       ),
                       const SizedBox(height: 10),
                       Text(
-                        action.$2,
+                        action.label,
                         textAlign: TextAlign.center,
                         style: GoogleFonts.dmSans(
                           fontSize: 10,

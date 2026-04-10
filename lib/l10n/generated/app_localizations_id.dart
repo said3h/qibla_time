@@ -2780,4 +2780,38 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get settingsLanguageOptionRussian => 'Rusia';
+
+  @override
+  String get homeQuickActionPurification => 'Wudu dan ghusl';
+
+  @override
+  String get purificationGuideTitle => 'Wudu dan ghusl';
+
+  @override
+  String get purificationGuideSubtitle => 'Panduan bersuci sebelum salat';
+
+  @override
+  String get purificationGuideIntro =>
+      'Sebelum salah, seorang Muslim mungkin memerlukan penyucian ritual. Dua bentuk utamanya adalah wudu (bersuci kecil) dan ghusl (mandi ritual penuh). Panduan ini menjelaskan apa itu keduanya, kapan diperlukan, dan bagaimana melakukannya.';
+
+  @override
+  String get purificationGuideWuduTitle => 'Wudu';
+
+  @override
+  String get purificationGuideWuduBody =>
+      'Apa itu:\nWudu adalah bersuci ritual kecil. Ini mempersiapkan seseorang untuk salah ketika tidak ada hadas besar.\n\nKapan diperlukan:\n? Sebelum salat jika wudu sebelumnya telah batal.\n? Setelah buang air kecil, buang air besar, kentut, tidur nyenyak, atau kehilangan kesadaran.\n\nCara melakukannya:\n1. Niatkan dalam hati.\n2. Ucapkan Bismillah.\n3. Cuci kedua tangan.\n4. Berkumur.\n5. Bersihkan hidung dengan air.\n6. Cuci wajah.\n7. Cuci tangan kanan sampai siku lalu tangan kiri.\n8. Usap kepala sekali dengan tangan yang basah.\n9. Usap telinga.\n10. Cuci kaki kanan sampai mata kaki lalu kaki kiri.\n\nYang membatalkannya:\nSegala sesuatu yang keluar dari kemaluan, tidur nyenyak, atau hilang kesadaran. Jika wudu masih sah, kamu dapat salat lebih dari satu salat dengannya.';
+
+  @override
+  String get purificationGuideGhuslTitle => 'Ghusl';
+
+  @override
+  String get purificationGuideGhuslBody =>
+      'Apa itu:\nGhusl adalah mandi ritual penuh. Ini wajib setelah hadas besar.\n\nKapan diwajibkan:\n? Setelah hubungan suami istri.\n? Setelah keluar mani.\n? Setelah haid selesai.\n? Setelah nifas selesai.\n\nCara melakukannya:\n1. Niatkan dalam hati.\n2. Ucapkan Bismillah.\n3. Cuci tangan dan kemaluan.\n4. Hilangkan najis yang terlihat.\n5. Lakukan wudu.\n6. Guyur kepala sampai air mencapai kulit kepala.\n7. Basuh seluruh tubuh, mulai dari sisi kanan lalu kiri, dan pastikan air mencapai semua bagian.\n\nCatatan penting:\nGhusl yang sempurna menghilangkan hadas besar. Jika setelah itu tidak terjadi sesuatu yang membatalkan wudu, kamu dapat salat tanpa membuat wudu terpisah lagi.';
+
+  @override
+  String get purificationGuideFinalNoteTitle => 'Perbedaan utama';
+
+  @override
+  String get purificationGuideFinalNoteBody =>
+      'Wudu untuk hadas kecil. Ghusl untuk hadas besar. Jika kamu hanya memerlukan wudu, ghusl tidak wajib. Jika ghusl diwajibkan, wudu saja tidak cukup.';
 }

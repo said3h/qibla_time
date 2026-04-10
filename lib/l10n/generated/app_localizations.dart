@@ -4850,6 +4850,66 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Ruso'**
   String get settingsLanguageOptionRussian;
+
+  /// No description provided for @homeQuickActionPurification.
+  ///
+  /// In es, this message translates to:
+  /// **'Wudu y ghusl'**
+  String get homeQuickActionPurification;
+
+  /// No description provided for @purificationGuideTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Wudu y ghusl'**
+  String get purificationGuideTitle;
+
+  /// No description provided for @purificationGuideSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Gu?a de purificaci?n ritual antes de la oraci?n'**
+  String get purificationGuideSubtitle;
+
+  /// No description provided for @purificationGuideIntro.
+  ///
+  /// In es, this message translates to:
+  /// **'Antes del salah, un musulm?n puede necesitar purificaci?n ritual. Las dos formas principales son el wudu (abluci?n menor) y el ghusl (ba?o ritual completo). Esta gu?a explica qu? es cada uno, cu?ndo se necesita y c?mo se realiza.'**
+  String get purificationGuideIntro;
+
+  /// No description provided for @purificationGuideWuduTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Wudu'**
+  String get purificationGuideWuduTitle;
+
+  /// No description provided for @purificationGuideWuduBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Qu? es:\nEl wudu es la abluci?n ritual menor. Prepara para el salah cuando no existe impureza mayor.\n\nCu?ndo se necesita:\n? Antes de rezar si el wudu anterior se ha roto.\n? Despu?s de orinar, defecar, expulsar gases, dormir profundamente o perder la conciencia.\n\nC?mo se hace:\n1. Haz la intenci?n en el coraz?n.\n2. Di Bismillah.\n3. Lava ambas manos.\n4. Enjuaga la boca.\n5. Limpia la nariz con agua.\n6. Lava la cara.\n7. Lava el brazo derecho hasta el codo y luego el izquierdo.\n8. Pasa las manos mojadas por la cabeza una vez.\n9. Limpia las orejas.\n10. Lava el pie derecho hasta el tobillo y luego el izquierdo.\n\nQu? lo invalida:\nTodo lo que salga por las partes ?ntimas, el sue?o profundo o la p?rdida de conciencia. Si el wudu sigue v?lido, puedes rezar m?s de una oraci?n con ?l.'**
+  String get purificationGuideWuduBody;
+
+  /// No description provided for @purificationGuideGhuslTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Ghusl'**
+  String get purificationGuideGhuslTitle;
+
+  /// No description provided for @purificationGuideGhuslBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Qu? es:\nEl ghusl es el ba?o ritual completo. Es obligatorio despu?s de una impureza mayor.\n\nCu?ndo es obligatorio:\n? Despu?s de relaciones ?ntimas.\n? Despu?s de la eyaculaci?n.\n? Cuando termina la menstruaci?n.\n? Cuando termina el sangrado posparto.\n\nC?mo se hace:\n1. Haz la intenci?n en el coraz?n.\n2. Di Bismillah.\n3. Lava las manos y las partes ?ntimas.\n4. Elimina cualquier impureza visible.\n5. Haz wudu.\n6. Echa agua sobre la cabeza hasta que llegue al cuero cabelludo.\n7. Lava todo el cuerpo, empezando por el lado derecho y luego el izquierdo, asegur?ndote de que el agua llegue a todas las partes.\n\nNota importante:\nUn ghusl completo elimina la impureza mayor. Si despu?s no ocurre nada que rompa el wudu, puedes rezar sin hacer otro wudu aparte.'**
+  String get purificationGuideGhuslBody;
+
+  /// No description provided for @purificationGuideFinalNoteTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Diferencia clave'**
+  String get purificationGuideFinalNoteTitle;
+
+  /// No description provided for @purificationGuideFinalNoteBody.
+  ///
+  /// In es, this message translates to:
+  /// **'El wudu es para la impureza menor. El ghusl es para la impureza mayor. Si solo necesitas wudu, no hace falta ghusl. Si se requiere ghusl, el wudu solo no es suficiente.'**
+  String get purificationGuideFinalNoteBody;
 }
 
 class _AppLocalizationsDelegate

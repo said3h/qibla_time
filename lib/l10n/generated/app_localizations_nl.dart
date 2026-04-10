@@ -2785,4 +2785,39 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get settingsLanguageOptionRussian => 'Russisch';
+
+  @override
+  String get homeQuickActionPurification => 'Wudu en ghusl';
+
+  @override
+  String get purificationGuideTitle => 'Wudu en ghusl';
+
+  @override
+  String get purificationGuideSubtitle =>
+      'Gids voor rituele reiniging v??r het gebed';
+
+  @override
+  String get purificationGuideIntro =>
+      'V??r de salah kan een moslim rituele reiniging nodig hebben. De twee belangrijkste vormen zijn wudu (kleine wassing) en ghusl (volledig ritueel bad). Deze gids legt uit wat elk van beide is, wanneer het nodig is en hoe je het uitvoert.';
+
+  @override
+  String get purificationGuideWuduTitle => 'Wudu';
+
+  @override
+  String get purificationGuideWuduBody =>
+      'Wat het is:\nWudu is de kleine rituele wassing. Het bereidt je voor op de salah wanneer er geen grote onreinheid is.\n\nWanneer het nodig is:\n? V??r het gebed als je vorige wudu ongeldig is geworden.\n? Na urineren, ontlasting, het laten van wind, diepe slaap of bewusteloosheid.\n\nHoe je het doet:\n1. Maak de intentie in je hart.\n2. Zeg Bismillah.\n3. Was beide handen.\n4. Spoel de mond.\n5. Reinig de neus met water.\n6. Was het gezicht.\n7. Was de rechterarm tot de elleboog en daarna de linker.\n8. Veeg eenmaal met natte handen over het hoofd.\n9. Veeg de oren af.\n10. Was de rechtervoet tot de enkel en daarna de linker.\n\nWat het verbreekt:\nAlles wat uit de intieme delen komt, diepe slaap of bewusteloosheid. Als je wudu nog geldig is, kun je er meer dan ??n gebed mee verrichten.';
+
+  @override
+  String get purificationGuideGhuslTitle => 'Ghusl';
+
+  @override
+  String get purificationGuideGhuslBody =>
+      'Wat het is:\nGhusl is het volledige rituele bad. Het is verplicht na grote onreinheid.\n\nWanneer het verplicht is:\n? Na intieme gemeenschap.\n? Na ejaculatie.\n? Na het einde van de menstruatie.\n? Na het einde van de kraambloeding.\n\nHoe je het doet:\n1. Maak de intentie in je hart.\n2. Zeg Bismillah.\n3. Was de handen en de intieme delen.\n4. Verwijder elke zichtbare onreinheid.\n5. Verricht wudu.\n6. Giet water over het hoofd zodat het de hoofdhuid bereikt.\n7. Was het hele lichaam, beginnend met de rechterkant en daarna de linkerkant, en zorg ervoor dat het water elk deel bereikt.\n\nBelangrijke opmerking:\nEen volledige ghusl verwijdert grote onreinheid. Als daarna niets gebeurt dat de wudu verbreekt, kun je bidden zonder opnieuw een aparte wudu te doen.';
+
+  @override
+  String get purificationGuideFinalNoteTitle => 'Belangrijk verschil';
+
+  @override
+  String get purificationGuideFinalNoteBody =>
+      'Wudu is voor kleine onreinheid. Ghusl is voor grote onreinheid. Als je alleen wudu nodig hebt, is ghusl niet verplicht. Als ghusl verplicht is, is wudu alleen niet voldoende.';
 }

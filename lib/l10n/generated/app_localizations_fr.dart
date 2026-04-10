@@ -2804,4 +2804,39 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get settingsLanguageOptionRussian => 'Russe';
+
+  @override
+  String get homeQuickActionPurification => 'Wudu et ghusl';
+
+  @override
+  String get purificationGuideTitle => 'Wudu et ghusl';
+
+  @override
+  String get purificationGuideSubtitle =>
+      'Guide de purification rituelle avant la pri?re';
+
+  @override
+  String get purificationGuideIntro =>
+      'Avant le salah, un musulman peut avoir besoin d?une purification rituelle. Les deux formes principales sont le wudu (ablution mineure) et le ghusl (bain rituel complet). Ce guide explique ce qu?est chacun d?eux, quand il est n?cessaire et comment l?accomplir.';
+
+  @override
+  String get purificationGuideWuduTitle => 'Wudu';
+
+  @override
+  String get purificationGuideWuduBody =>
+      'Ce que c?est :\nLe wudu est l?ablution rituelle mineure. Il pr?pare au salah lorsqu?il n?y a pas d?impuret? majeure.\n\nQuand il est n?cessaire :\n? Avant la pri?re si le wudu pr?c?dent a ?t? annul?.\n? Apr?s avoir urin?, d?f?qu?, ?mis des gaz, dormi profond?ment ou perdu connaissance.\n\nComment le faire :\n1. Forme l?intention dans ton c?ur.\n2. Dis Bismillah.\n3. Lave les deux mains.\n4. Rince la bouche.\n5. Nettoie le nez avec de l?eau.\n6. Lave le visage.\n7. Lave le bras droit jusqu?au coude, puis le gauche.\n8. Passe une fois les mains mouill?es sur la t?te.\n9. Essuie les oreilles.\n10. Lave le pied droit jusqu?? la cheville, puis le gauche.\n\nCe qui l?annule :\nTout ce qui sort des parties intimes, le sommeil profond ou la perte de conscience. Si ton wudu est toujours valide, tu peux accomplir plus d?une pri?re avec lui.';
+
+  @override
+  String get purificationGuideGhuslTitle => 'Ghusl';
+
+  @override
+  String get purificationGuideGhuslBody =>
+      'Ce que c?est :\nLe ghusl est le bain rituel complet. Il est obligatoire apr?s une impuret? majeure.\n\nQuand il est obligatoire :\n? Apr?s les relations intimes.\n? Apr?s l??jaculation.\n? ? la fin des menstruations.\n? ? la fin des saignements post-partum.\n\nComment le faire :\n1. Forme l?intention dans ton c?ur.\n2. Dis Bismillah.\n3. Lave les mains et les parties intimes.\n4. Retire toute impuret? visible.\n5. Fais le wudu.\n6. Verse de l?eau sur la t?te jusqu?? atteindre le cuir chevelu.\n7. Lave tout le corps, en commen?ant par le c?t? droit puis le gauche, en veillant ? ce que l?eau atteigne chaque partie.\n\nNote importante :\nUn ghusl complet enl?ve l?impuret? majeure. Si rien ensuite ne rompt le wudu, tu peux prier sans refaire un wudu s?par?.';
+
+  @override
+  String get purificationGuideFinalNoteTitle => 'Diff?rence essentielle';
+
+  @override
+  String get purificationGuideFinalNoteBody =>
+      'Le wudu concerne l?impuret? mineure. Le ghusl concerne l?impuret? majeure. Si tu n?as besoin que du wudu, le ghusl n?est pas requis. Si le ghusl est requis, le wudu seul ne suffit pas.';
 }
