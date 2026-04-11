@@ -146,6 +146,23 @@
           "Аллах"
         ],
         "isFeatured": true
+      },
+      "it": {
+        "title": "All'inizio della giornata",
+        "translation": "Siamo albeggiati e il dominio appartiene a Allah.",
+        "category": "Mattina",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 3186, Muslim 2723",
+        "count": 1,
+        "times": [
+          "morning"
+        ],
+        "tags": [
+          "alba",
+          "dominio",
+          "Allah"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -294,6 +311,23 @@
           "жизнь",
           "смерть",
           "Воскресение"
+        ],
+        "isFeatured": true
+      },
+      "it": {
+        "title": "Al risveglio dal sonno",
+        "translation": "Sia lodato Allah, che ci ha restituito la vita dopo averci fatto morire, e a Lui sarà il ritorno.",
+        "category": "Mattina",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6312",
+        "count": 1,
+        "times": [
+          "despertar"
+        ],
+        "tags": [
+          "vita",
+          "morte",
+          "Risurrezione"
         ],
         "isFeatured": true
       }
@@ -453,6 +487,24 @@
           "плохой"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Protezione mattutina",
+        "translation": "Cerco rifugio nelle parole complete di Allah dal male di ciò che ha creato.",
+        "category": "Mattina",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 2709",
+        "count": 3,
+        "times": [
+          "morning",
+          "night"
+        ],
+        "tags": [
+          "protezione",
+          "protezione",
+          "cattivo"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -610,6 +662,24 @@
           "сила"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Quando esco di casa la mattina",
+        "translation": "Nel nome di Allah. Ho riposto la mia fiducia in Allah. Non c'è forza o potere tranne che in Allah.",
+        "category": "Mattina",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 5095",
+        "count": 1,
+        "times": [
+          "salir_casa",
+          "morning"
+        ],
+        "tags": [
+          "esci",
+          "Fiducia",
+          "forza"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -758,6 +828,23 @@
           "одежда",
           "одежда",
           "обеспечение"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Quando si veste",
+        "translation": "Sia lode a Allah che mi ha rivestito di questo e me lo ha fornito senza sforzo o potere da parte mia.",
+        "category": "Mattina",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 4023",
+        "count": 1,
+        "times": [
+          "vestirse"
+        ],
+        "tags": [
+          "vestiti",
+          "vestito",
+          "disposizione"
         ],
         "isFeatured": false
       }
@@ -910,6 +997,23 @@
           "примесь"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Quando si entra in bagno",
+        "translation": "Oh Allah, cerco la tua protezione dagli impuri uomini e donne.",
+        "category": "Mattina",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6322",
+        "count": 1,
+        "times": [
+          "baño"
+        ],
+        "tags": [
+          "bagno",
+          "protezione",
+          "impurità"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -1050,6 +1154,22 @@
         "tags": [
           "извини",
           "ванная комната"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Quando esci dal bagno",
+        "translation": "Ti chiedo perdono.",
+        "category": "Mattina",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 30",
+        "count": 1,
+        "times": [
+          "baño"
+        ],
+        "tags": [
+          "Scusa",
+          "bagno"
         ],
         "isFeatured": false
       }
@@ -1200,6 +1320,23 @@
           "вечер",
           "домен",
           "Аллах"
+        ],
+        "isFeatured": true
+      },
+      "it": {
+        "title": "Come inizia la notte",
+        "translation": "Adesso è buio e il dominio appartiene a Allah.",
+        "category": "Sera",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 2723",
+        "count": 1,
+        "times": [
+          "night"
+        ],
+        "tags": [
+          "sera",
+          "dominio",
+          "Allah"
         ],
         "isFeatured": true
       }
@@ -1359,6 +1496,24 @@
           "трон"
         ],
         "isFeatured": true
+      },
+      "it": {
+        "title": "Affidati a Allah quando dormi",
+        "translation": "Allah mi basta. Non c'è divinità all'infuori di Lui. Confido in Lui ed Egli è il Signore del Grande Trono.",
+        "category": "Sera",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 3193, At-Tirmidhi 3394",
+        "count": 1,
+        "times": [
+          "dormir",
+          "night"
+        ],
+        "tags": [
+          "Fiducia",
+          "sogno",
+          "trono"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -1516,6 +1671,24 @@
           "Воскресение"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Quando vado a letto",
+        "translation": "O Allah, concedimi protezione dalla Tua punizione nel giorno in cui resusciterai i Tuoi servi.",
+        "category": "Sera",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 5045",
+        "count": 1,
+        "times": [
+          "dormir",
+          "night"
+        ],
+        "tags": [
+          "protezione",
+          "punizione",
+          "Risurrezione"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -1664,6 +1837,23 @@
           "извини",
           "вечер",
           "ценить"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Laylatul Qadr Dua",
+        "translation": "Oh Allah, sei davvero indulgente e generoso, ti piace il perdono, perdonami.",
+        "category": "Sera",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 3513",
+        "count": 1,
+        "times": [
+          "laylatul_qadr"
+        ],
+        "tags": [
+          "Scusa",
+          "sera",
+          "qadr"
         ],
         "isFeatured": false
       }
@@ -1816,6 +2006,23 @@
           "смерть"
         ],
         "isFeatured": true
+      },
+      "it": {
+        "title": "prima di dormire",
+        "translation": "Nel tuo nome, oh Allah, muoio e vivo.",
+        "category": "Sonno",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6324",
+        "count": 1,
+        "times": [
+          "dormir"
+        ],
+        "tags": [
+          "nome",
+          "vita",
+          "morte"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -1956,6 +2163,22 @@
         "tags": [
           "уникальность",
           "домен"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Quando si gira nel letto",
+        "translation": "Non esiste divinità se non Allah, l'Unico, il Dominatore.",
+        "category": "Sonno",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 3397",
+        "count": 1,
+        "times": [
+          "dormir"
+        ],
+        "tags": [
+          "unicità",
+          "dominio"
         ],
         "isFeatured": false
       }
@@ -2108,6 +2331,23 @@
           "плохой"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Protezione del sonno",
+        "translation": "Cerco rifugio nel potere e nella forza di Allah dal male che mi colpisce.",
+        "category": "Sonno",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 3894",
+        "count": 1,
+        "times": [
+          "dormir"
+        ],
+        "tags": [
+          "protezione",
+          "forza",
+          "cattivo"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -2250,6 +2490,22 @@
           "мечеть"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Quando dormo nella moschea",
+        "translation": "Oh Allah, Signore del dominio.",
+        "category": "Sonno",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6321",
+        "count": 1,
+        "times": [
+          "dormir"
+        ],
+        "tags": [
+          "dominio",
+          "moschea"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -2390,6 +2646,22 @@
         "tags": [
           "жизнь",
           "смерть"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Dua prima di svegliarsi",
+        "translation": "Lode a Allah che ci ha dato la vita dopo averci fatto morire.",
+        "category": "Sonno",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6312",
+        "count": 1,
+        "times": [
+          "despertar"
+        ],
+        "tags": [
+          "vita",
+          "morte"
         ],
         "isFeatured": false
       }
@@ -2542,6 +2814,23 @@
           "возвращаться"
         ],
         "isFeatured": true
+      },
+      "it": {
+        "title": "Durante la guida del veicolo",
+        "translation": "Sia glorificato Colui che ha messo tutto questo al nostro servizio. Non saremmo stati in grado di controllarlo e ritorneremo a nostro Signore.",
+        "category": "Viaggio",
+        "source": "Hisnul Muslim",
+        "reference": "Az-Zukhruf 43:13-14",
+        "count": 1,
+        "times": [
+          "viaje"
+        ],
+        "tags": [
+          "veicolo",
+          "servizio",
+          "ritorno"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -2692,6 +2981,23 @@
           "путешествие"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Quando si parte per un viaggio",
+        "translation": "Oh Allah, cerco la tua protezione contro le difficoltà del viaggio, la tristezza del ritorno e il male del destino.",
+        "category": "Viaggio",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 2597",
+        "count": 1,
+        "times": [
+          "viaje"
+        ],
+        "tags": [
+          "difficoltà",
+          "tristezza",
+          "viaggio"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -2832,6 +3138,22 @@
         "tags": [
           "благодарность",
           "Сьюдад"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Quando si entra in una città",
+        "translation": "Oh Allah, benedicici.",
+        "category": "Viaggio",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 3930",
+        "count": 1,
+        "times": [
+          "viaje"
+        ],
+        "tags": [
+          "gratitudine",
+          "città"
         ],
         "isFeatured": false
       }
@@ -2978,6 +3300,22 @@
           "услуга"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Quando sali sull'aereo",
+        "translation": "Sia glorificato Colui che lo ha messo al nostro servizio quando non avremmo potuto controllarlo.",
+        "category": "Viaggio",
+        "source": "Hisnul Muslim",
+        "reference": "Az-Zukhruf 43:13",
+        "count": 1,
+        "times": [
+          "viaje"
+        ],
+        "tags": [
+          "aereo",
+          "servizio"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -3120,6 +3458,22 @@
           "путешествие"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Il dua del viaggiatore",
+        "translation": "Oh Allah, facci avere un'uscita, un'entrata sicura e una destinazione.",
+        "category": "Viaggio",
+        "source": "Hisnul Muslim",
+        "reference": "Ibn As-Sunni 269",
+        "count": 1,
+        "times": [
+          "viaje"
+        ],
+        "tags": [
+          "sicurezza",
+          "viaggio"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -3260,6 +3614,22 @@
         "tags": [
           "имя",
           "еда"
+        ],
+        "isFeatured": true
+      },
+      "it": {
+        "title": "prima di mangiare",
+        "translation": "Nel nome di Allah.",
+        "category": "Cibo",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 1858",
+        "count": 1,
+        "times": [
+          "antes_comer"
+        ],
+        "tags": [
+          "nome",
+          "pasto"
         ],
         "isFeatured": true
       }
@@ -3412,6 +3782,23 @@
           "благодарность"
         ],
         "isFeatured": true
+      },
+      "it": {
+        "title": "dopo aver mangiato",
+        "translation": "Sia lode a Allah che mi ha nutrito con questo e me lo ha fornito senza sforzo o potere da parte mia.",
+        "category": "Cibo",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 4023",
+        "count": 1,
+        "times": [
+          "después_comer"
+        ],
+        "tags": [
+          "cibo",
+          "disposizione",
+          "gratitudine"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -3552,6 +3939,22 @@
         "tags": [
           "вода",
           "благодарность"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Quando si beve acqua",
+        "translation": "Lode Allah.",
+        "category": "Cibo",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 3456",
+        "count": 1,
+        "times": [
+          "beber"
+        ],
+        "tags": [
+          "acqua",
+          "gratitudine"
         ],
         "isFeatured": false
       }
@@ -3704,6 +4107,23 @@
           "ифтар"
         ],
         "isFeatured": true
+      },
+      "it": {
+        "title": "Quando si rompe il digiuno",
+        "translation": "O Allah, per Te ho digiunato, ho creduto in Te, ho confidato in Te e con la Tua benedizione ho rotto il digiuno.",
+        "category": "Cibo",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 2045",
+        "count": 1,
+        "times": [
+          "romper_ayuno"
+        ],
+        "tags": [
+          "veloce",
+          "Ramadan",
+          "iftar"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -3844,6 +4264,22 @@
         "tags": [
           "Ид",
           "еда"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Prima di mangiare l'Eid",
+        "translation": "Oh Allah, nutri chi ha perdonato e vesti chi ha perdonato.",
+        "category": "Cibo",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 1020",
+        "count": 1,
+        "times": [
+          "eid"
+        ],
+        "tags": [
+          "eid",
+          "pasto"
         ],
         "isFeatured": false
       }
@@ -3996,6 +4432,23 @@
           "болезнь"
         ],
         "isFeatured": true
+      },
+      "it": {
+        "title": "Chiedere la guarigione",
+        "translation": "Oh Allah, Signore dell'umanità, rimuovi il danno, guarisci. Tu sei il Guaritore, non c'è guarigione se non la tua.",
+        "category": "Malattia",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 5742",
+        "count": 1,
+        "times": [
+          "enfermo"
+        ],
+        "tags": [
+          "guarigione",
+          "salute",
+          "malattia"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -4146,6 +4599,23 @@
           "очищение"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Quando si visita una persona malata",
+        "translation": "Non c'è nulla di male, sarà una purificazione, se Allah vorrà.",
+        "category": "Malattia",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 5662",
+        "count": 1,
+        "times": [
+          "visitar_enfermo"
+        ],
+        "tags": [
+          "visita",
+          "malato",
+          "purificazione"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -4288,6 +4758,22 @@
         "tags": [
           "выздоровление",
           "здоровье"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "La preghiera degli ammalati",
+        "translation": "Mio Signore, guariscilo e donagli la salute.",
+        "category": "Malattia",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 5641",
+        "count": 1,
+        "times": [
+          "enfermo"
+        ],
+        "tags": [
+          "guarigione",
+          "salute"
         ],
         "isFeatured": false
       }
@@ -4440,6 +4926,23 @@
           "плохой"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Quando ti senti male",
+        "translation": "Nel nome di Allah. Cerco rifugio nel potere e nella forza di Allah dal male che mi colpisce.",
+        "category": "Malattia",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 3894",
+        "count": 1,
+        "times": [
+          "enfermo"
+        ],
+        "tags": [
+          "protezione",
+          "forza",
+          "cattivo"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -4588,6 +5091,23 @@
           "уход",
           "завидовать",
           "защита"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Dua per il mal di testa",
+        "translation": "Nel nome di Allah ti scongiuro contro tutto ciò che ti danneggia e contro il male di ogni inviAllahso.",
+        "category": "Malattia",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 5740",
+        "count": 1,
+        "times": [
+          "enfermo"
+        ],
+        "tags": [
+          "guarigione",
+          "invidia",
+          "protezione"
         ],
         "isFeatured": false
       }
@@ -4748,6 +5268,24 @@
           "плохой"
         ],
         "isFeatured": true
+      },
+      "it": {
+        "title": "Protezione generale",
+        "translation": "Cerco rifugio nelle parole complete di Allah dal male di ciò che ha creato.",
+        "category": "Protezione",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 2709",
+        "count": 3,
+        "times": [
+          "morning",
+          "night"
+        ],
+        "tags": [
+          "protezione",
+          "protezione",
+          "cattivo"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -4883,6 +5421,21 @@
           "дети",
           "защита",
           "зло"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Protezione per i bambini",
+        "translation": "Ti metto sotto la protezione delle parole complete di Allah contro ogni demone, ogni creatura dannosa e ogni sguardo dannoso.",
+        "category": "Protezione",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 3371",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "bambini",
+          "protezione",
+          "cattivo"
         ],
         "isFeatured": false
       }
@@ -5043,6 +5596,24 @@
           "плохой"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Protezione contro il male",
+        "translation": "Cerco rifugio nei Suoi nobili attributi e nella sua potenza contro il male che discende dal cielo.",
+        "category": "Protezione",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 3428",
+        "count": 1,
+        "times": [
+          "morning",
+          "night"
+        ],
+        "tags": [
+          "protezione",
+          "Tesoro",
+          "cattivo"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -5195,6 +5766,23 @@
           "защита"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Contro l'invidia",
+        "translation": "Nel nome di Allah, cerco la tua protezione dal male di ciò che ha creato.",
+        "category": "Protezione",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 2714",
+        "count": 1,
+        "times": [
+          "morning",
+          "night"
+        ],
+        "tags": [
+          "invidia",
+          "protezione"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -5342,6 +5930,23 @@
         "tags": [
           "демоны",
           "верующие"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Contro i cattivi pensieri",
+        "translation": "Oh Allah, scaccia i demoni e libera i credenti.",
+        "category": "Protezione",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6326",
+        "count": 1,
+        "times": [
+          "morning",
+          "night"
+        ],
+        "tags": [
+          "demoni",
+          "credenti"
         ],
         "isFeatured": false
       }
@@ -5495,6 +6100,23 @@
           "завет"
         ],
         "isFeatured": true
+      },
+      "it": {
+        "title": "Sayyid al-Istighfar",
+        "translation": "Oh Allah, tu sei il mio Signore. Non c'è divinità all'infuori di Te. Mi hai creato e io sono il tuo servitore. Adempirò il Tuo patto e la Tua promessa nella misura del possibile.",
+        "category": "Pentimento",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6306",
+        "count": 1,
+        "times": [
+          "repentir"
+        ],
+        "tags": [
+          "Scusa",
+          "servitore",
+          "patto"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -5645,6 +6267,23 @@
           "несчастье"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "perdono semplice",
+        "translation": "Mio Signore, perdonami e accetta il mio pentimento. Certamente accetti il ​​pentimento e sei misericorAllahso.",
+        "category": "Pentimento",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 3434",
+        "count": 1,
+        "times": [
+          "repentir"
+        ],
+        "tags": [
+          "Scusa",
+          "Scusa",
+          "misericordia"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -5787,6 +6426,22 @@
           "извини"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Astaghfirullah al-Azim",
+        "translation": "Chiedo perdono a Allah il Grande, non c'è divinità all'infuori di Lui, il Vivente, il Susistente, e mi pento con Lui.",
+        "category": "Pentimento",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 3577",
+        "count": 3,
+        "times": [
+          "repentir"
+        ],
+        "tags": [
+          "Scusa",
+          "Scusa"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -5927,6 +6582,22 @@
         "tags": [
           "извини",
           "Рамадан"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Tarawih Dua",
+        "translation": "Oh Allah, sei davvero indulgente e generoso, ti piace il perdono, perdonami.",
+        "category": "Pentimento",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 3513",
+        "count": 1,
+        "times": [
+          "tarawih"
+        ],
+        "tags": [
+          "Scusa",
+          "Ramadan"
         ],
         "isFeatured": false
       }
@@ -6079,6 +6750,23 @@
           "несчастье"
         ],
         "isFeatured": true
+      },
+      "it": {
+        "title": "Entrando nella moschea",
+        "translation": "Oh Allah, aprimi le porte della Tua misericordia.",
+        "category": "Moschea",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 713",
+        "count": 1,
+        "times": [
+          "entrar_mesquita"
+        ],
+        "tags": [
+          "moschea",
+          "porte",
+          "misericordia"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -6219,6 +6907,22 @@
         "tags": [
           "услуга",
           "петиция"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Quando si lascia la moschea",
+        "translation": "Oh Allah, chiedo il tuo favore.",
+        "category": "Moschea",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 713",
+        "count": 1,
+        "times": [
+          "salir_mesquita"
+        ],
+        "tags": [
+          "favore",
+          "richiesta"
         ],
         "isFeatured": false
       }
@@ -6371,6 +7075,23 @@
           "пророк"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Ascoltare l'adhan",
+        "translation": "E attesto che non esiste divinità se non Allah e che Maometto è il messaggero di Allah.",
+        "category": "Moschea",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 385",
+        "count": 1,
+        "times": [
+          "adhan"
+        ],
+        "tags": [
+          "adhan",
+          "testimonianza",
+          "profeta"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -6515,6 +7236,22 @@
           "приглашение"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Quando si fa duaa nella moschea",
+        "translation": "Oh Allah, Signore di questo invito perfetto.",
+        "category": "Moschea",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 720",
+        "count": 1,
+        "times": [
+          "mezquita"
+        ],
+        "tags": [
+          "duaa",
+          "invito"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -6657,6 +7394,22 @@
           "Аллах"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Shadak",
+        "translation": "Allah ha detto la verità, il Grande.",
+        "category": "Moschea",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 738",
+        "count": 1,
+        "times": [
+          "adhan"
+        ],
+        "tags": [
+          "VERO",
+          "Allah"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -6797,6 +7550,22 @@
         "tags": [
           "дождь",
           "благодарность"
+        ],
+        "isFeatured": true
+      },
+      "it": {
+        "title": "Vedere la pioggia",
+        "translation": "Oh Allah, concedici una pioggia benefica.",
+        "category": "Pioggia",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 1032",
+        "count": 1,
+        "times": [
+          "lluvia"
+        ],
+        "tags": [
+          "piovere",
+          "gratitudine"
         ],
         "isFeatured": true
       }
@@ -6943,6 +7712,22 @@
           "несчастье"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "dopo la pioggia",
+        "translation": "Ha piovuto grazie al favore e alla misericordia di Allah.",
+        "category": "Pioggia",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 846",
+        "count": 1,
+        "times": [
+          "lluvia"
+        ],
+        "tags": [
+          "piovere",
+          "misericordia"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -7085,6 +7870,22 @@
           "дождь"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Dua durante la siccità",
+        "translation": "Oh Allah, donaci una pioggia abbondante, rinfrescante, nutriente e benefica.",
+        "category": "Pioggia",
+        "source": "Hisnul Muslim",
+        "reference": "Ibn Majah 2269",
+        "count": 1,
+        "times": [
+          "lluvia"
+        ],
+        "tags": [
+          "siccità",
+          "piovere"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -7225,6 +8026,21 @@
           "Юнус"
         ],
         "isFeatured": true
+      },
+      "it": {
+        "title": "Yunus Dua",
+        "translation": "Non c'è divinità all'infuori di Te. Glorificato sii tu. Sicuramente sono stato uno degli ingiusti.",
+        "category": "Difficolta",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Anbiya 21:87",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "angoscia",
+          "ingiustizia",
+          "Yunus"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -7361,6 +8177,21 @@
           "трудность"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Facilità nelle difficoltà",
+        "translation": "Oh Allah, non c'è facilità se non ciò che Tu rendi facile, e rendi facile la tristezza quando vuoi.",
+        "category": "Difficolta",
+        "source": "Hisnul Muslim",
+        "reference": "Ibn Hibban 2427",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "sollievo",
+          "tristezza",
+          "difficoltà"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -7493,6 +8324,20 @@
         "tags": [
           "доверять",
           "достаточность"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Nei momenti difficili",
+        "translation": "Allah mi basta ed è sufficiente.",
+        "category": "Difficolta",
+        "source": "Hisnul Muslim",
+        "reference": "Az-Zumar 39:38",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "Fiducia",
+          "sufficienza"
         ],
         "isFeatured": false
       }
@@ -7635,6 +8480,21 @@
           "ХОРОШИЙ"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "quando qualcosa va storto",
+        "translation": "Mio Signore, ho proprio bisogno di ogni cosa buona che mi mandi.",
+        "category": "Difficolta",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Qasas 28:24",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "povertà",
+          "Bisogno",
+          "Bene"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -7775,6 +8635,21 @@
           "Муса"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Dua delle Muse",
+        "translation": "Mio Signore, sono stato ingiusto con me stesso. Perdonami.",
+        "category": "Difficolta",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Qasas 28:16",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "ingiustizia",
+          "Scusa",
+          "Musa"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -7907,6 +8782,20 @@
         "tags": [
           "благодарность",
           "добрые дела"
+        ],
+        "isFeatured": true
+      },
+      "it": {
+        "title": "Gratitudine per i benefici",
+        "translation": "Lode sia a Allah, per il cui favore vengono completate le buone opere.",
+        "category": "Gratitudine",
+        "source": "Hisnul Muslim",
+        "reference": "Ibn Majah 3803",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "gratitudine",
+          "buone opere"
         ],
         "isFeatured": true
       }
@@ -8049,6 +8938,21 @@
           "вдохновение"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Chiedere di essere grato",
+        "translation": "Mio Signore, ispirami a ringraziare il favore che mi hai concesso.",
+        "category": "Gratitudine",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Ankabut 27:19",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "gratitudine",
+          "favore",
+          "ispirazione"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -8177,6 +9081,20 @@
           "удовлетворение"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Quando si riceve una benedizione",
+        "translation": "Oh Allah, a Te appartiene la lode finché non sei soddisfatto.",
+        "category": "Gratitudine",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 2732",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "lode",
+          "soddisfazione"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -8303,6 +9221,20 @@
         "tags": [
           "благодарность",
           "благодарность"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Shukran liLlah",
+        "translation": "Grazie a Allah.",
+        "category": "Gratitudine",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6042",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "gratitudine",
+          "gratitudine"
         ],
         "isFeatured": false
       }
@@ -8455,6 +9387,23 @@
           "поклонение"
         ],
         "isFeatured": true
+      },
+      "it": {
+        "title": "dopo la preghiera",
+        "translation": "Oh Allah, aiutami a ricordarti, ringraziarti e adorarti in modo eccellente.",
+        "category": "Dopo la preghiera",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 1422",
+        "count": 1,
+        "times": [
+          "después_oración"
+        ],
+        "tags": [
+          "preghiera",
+          "dhikr",
+          "culto"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -8599,6 +9548,22 @@
           "Глория"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "SubhanAllah",
+        "translation": "Sia glorificato Allah.",
+        "category": "Dopo la preghiera",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6405",
+        "count": 33,
+        "times": [
+          "después_oración"
+        ],
+        "tags": [
+          "tasbih",
+          "gloria"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -8741,6 +9706,22 @@
           "благодарность"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "AlhamduLillah",
+        "translation": "Lode Allah.",
+        "category": "Dopo la preghiera",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6405",
+        "count": 33,
+        "times": [
+          "después_oración"
+        ],
+        "tags": [
+          "hamd",
+          "gratitudine"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -8881,6 +9862,22 @@
         "tags": [
           "такбир",
           "величие"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Allahu Akbar",
+        "translation": "Allah è il più grande.",
+        "category": "Dopo la preghiera",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6405",
+        "count": 34,
+        "times": [
+          "después_oración"
+        ],
+        "tags": [
+          "takbir",
+          "grandezza"
         ],
         "isFeatured": false
       }
@@ -9033,6 +10030,23 @@
           "может"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Shahada finale",
+        "translation": "Non c'è divinità se non Allah, Unico, senza compagno. Suo è dominio e lode, ed Egli ha potere su tutte le cose.",
+        "category": "Dopo la preghiera",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6406",
+        "count": 1,
+        "times": [
+          "después_oración"
+        ],
+        "tags": [
+          "Shahada",
+          "dominio",
+          "Potere"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -9173,6 +10187,22 @@
         "tags": [
           "суждение",
           "унижение"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Protezione contro l'ipocrisia",
+        "translation": "Oh Allah, non umiliarmi nel Giorno del Giudizio.",
+        "category": "Dopo la preghiera",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 767",
+        "count": 1,
+        "times": [
+          "después_oración"
+        ],
+        "tags": [
+          "sentenza",
+          "umiliazione"
         ],
         "isFeatured": false
       }
@@ -9325,6 +10355,23 @@
           "защита"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Ingresso al Paradiso",
+        "translation": "Oh Allah, salvami dal fuoco.",
+        "category": "Dopo la preghiera",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6328",
+        "count": 1,
+        "times": [
+          "después_oración"
+        ],
+        "tags": [
+          "paradiso",
+          "fuoco",
+          "protezione"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -9461,6 +10508,21 @@
           "пуреза"
         ],
         "isFeatured": true
+      },
+      "it": {
+        "title": "Quando fai wudu",
+        "translation": "Attesto che non esiste divinità se non Allah, Unica, senza compagno. E attesto che Muhammad è il Suo servitore e messaggero.",
+        "category": "Wudu",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 234",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "wudu",
+          "testimonianza",
+          "purezza"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -9589,6 +10651,20 @@
           "извини"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Dopo il Wudu",
+        "translation": "Oh Allah, includimi tra coloro che si pentono e tra coloro che sono purificati.",
+        "category": "Wudu",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 55",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "purezza",
+          "Scusa"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -9715,6 +10791,20 @@
         "tags": [
           "показания",
           "пуреза"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Completa Wudu",
+        "translation": "Attesto che non esiste divinità se non Allah e che Muhammad è il Suo servitore e messaggero.",
+        "category": "Wudu",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6296",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "testimonianza",
+          "purezza"
         ],
         "isFeatured": false
       }
@@ -9851,6 +10941,21 @@
           "хадж",
           "телевидение",
           "путешествие"
+        ],
+        "isFeatured": true
+      },
+      "it": {
+        "title": "Talbija",
+        "translation": "Al tuo servizio, Allah, al tuo servizio. Al tuo servizio non hai compagno. Al tuo servizio. Sicuramente la lode, il favore e il dominio sono tuoi, non hai compagno.",
+        "category": "Hajj e Umrah",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6149",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "hajj",
+          "talbiya",
+          "viaggio"
         ],
         "isFeatured": true
       }
@@ -9993,6 +11098,21 @@
           "честь"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Vedere la Ka'ba",
+        "translation": "O Allah, aumenta l'onore, la grandezza e la riverenza di questa Casa.",
+        "category": "Hajj e Umrah",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 1333",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "kaaba",
+          "casa",
+          "onore"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -10127,6 +11247,20 @@
           "молитва"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Al Tawaf",
+        "translation": "Mio Signore, rendi me persistente nella preghiera e anche la mia discendenza.",
+        "category": "Hajj e Umrah",
+        "source": "Hisnul Muslim",
+        "reference": "Ibrahim 14:40",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "tawaf",
+          "preghiera"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -10253,6 +11387,20 @@
         "tags": [
           "рвать",
           "Лус"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Dua di Sa'i",
+        "translation": "Oh Allah, metti luce nel mio cuore e luce nei miei occhi.",
+        "category": "Hajj e Umrah",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6316",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "saei",
+          "leggero"
         ],
         "isFeatured": false
       }
@@ -10395,6 +11543,21 @@
           "благодарность"
         ],
         "isFeatured": true
+      },
+      "it": {
+        "title": "Preghiera per i genitori",
+        "translation": "Mio Signore, abbi pietà di loro poiché mi hanno cresciuto da bambino.",
+        "category": "Famiglia",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Isra 17:24",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "genitori",
+          "misericordia",
+          "gratitudine"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -10535,6 +11698,21 @@
           "благодарность"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Benedizione dei genitori",
+        "translation": "Nostro Signore, donaci come mogli e discendenti la gioia dei nostri occhi.",
+        "category": "Famiglia",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Furqan 25:74",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "famiglia",
+          "bambini",
+          "gratitudine"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -10661,6 +11839,20 @@
         "tags": [
           "благодарность",
           "семья"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "benedizione dei bambini",
+        "translation": "Oh Allah, benedici la mia famiglia.",
+        "category": "Famiglia",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6332",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "gratitudine",
+          "famiglia"
         ],
         "isFeatured": false
       }
@@ -10797,6 +11989,21 @@
           "родители",
           "извини",
           "несчастье"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Per i genitori deceduti",
+        "translation": "Oh Allah, perdona i miei genitori e abbi pietà di loro perché mi hanno cresciuto da bambino.",
+        "category": "Famiglia",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 2472",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "genitori",
+          "Scusa",
+          "misericordia"
         ],
         "isFeatured": false
       }
@@ -10949,6 +12156,23 @@
           "хвалить"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Tasbih al mattino",
+        "translation": "Sia glorificato Allah e lodato con Lui.",
+        "category": "Dhikr",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 2692",
+        "count": 100,
+        "times": [
+          "morning",
+          "night"
+        ],
+        "tags": [
+          "tasbih",
+          "lode"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -11096,6 +12320,23 @@
         "tags": [
           "хвалить",
           "миры"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Tahmid",
+        "translation": "Sia lodato Allah, Signore dei mondi.",
+        "category": "Dhikr",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Fatiha 1:2",
+        "count": 1,
+        "times": [
+          "morning",
+          "night"
+        ],
+        "tags": [
+          "lode",
+          "mondi"
         ],
         "isFeatured": false
       }
@@ -11247,6 +12488,23 @@
           "величие"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Takbir",
+        "translation": "Allah è fantastico.",
+        "category": "Dhikr",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6406",
+        "count": 1,
+        "times": [
+          "morning",
+          "night"
+        ],
+        "tags": [
+          "takbir",
+          "grandezza"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -11396,6 +12654,23 @@
           "Астагфир"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Astaghfirullah",
+        "translation": "Mi scuso con Allah il Grande.",
+        "category": "Dhikr",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6407",
+        "count": 3,
+        "times": [
+          "morning",
+          "night"
+        ],
+        "tags": [
+          "Scusa",
+          "astaghfir"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -11543,6 +12818,23 @@
         "tags": [
           "таухид",
           "показания"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "La ilaha illa Allah",
+        "translation": "Non c'è divinità se non Allah.",
+        "category": "Dhikr",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6408",
+        "count": 10,
+        "times": [
+          "morning",
+          "night"
+        ],
+        "tags": [
+          "tawhid",
+          "testimonianza"
         ],
         "isFeatured": false
       }
@@ -11700,6 +12992,24 @@
           "пророк"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Kalima Tawhid",
+        "translation": "Non c'è divinità se non Allah e Muhammad è il messaggero di Allah.",
+        "category": "Dhikr",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 190",
+        "count": 1,
+        "times": [
+          "morning",
+          "night"
+        ],
+        "tags": [
+          "tawhid",
+          "Shahada",
+          "profeta"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -11855,6 +13165,24 @@
           "Фуэго"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Rabana Atina",
+        "translation": "Nostro Signore, donaci ciò che è buono in questo mondo e ciò che è buono nell'altro e proteggici dal castigo del Fuoco.",
+        "category": "Dhikr",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bakarah 2:201",
+        "count": 1,
+        "times": [
+          "morning",
+          "night"
+        ],
+        "tags": [
+          "richiesta",
+          "mondo",
+          "fuoco"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -12004,6 +13332,23 @@
           "Глория"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "SubhanAllah wa biHamdihi",
+        "translation": "Sia glorificato Allah e con la Sua lode. Sia glorificato Allah, il Grande.",
+        "category": "Dhikr",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 2732",
+        "count": 1,
+        "times": [
+          "morning",
+          "night"
+        ],
+        "tags": [
+          "tasbih",
+          "gloria"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -12148,6 +13493,22 @@
           "решение"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Istikhara Dua",
+        "translation": "Oh Allah, ti chiedo di darmi il meglio, con la tua conoscenza, e di darmi capacità con il tuo potere.",
+        "category": "Dhikr",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6382",
+        "count": 1,
+        "times": [
+          "istikahara"
+        ],
+        "tags": [
+          "scelta",
+          "decisione"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -12282,6 +13643,20 @@
           "сила"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Rabana wa la takna",
+        "translation": "Nostro Signore, non imporci un peso che non possiamo sopportare.",
+        "category": "Difficolta",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bakarah 2:286",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "fardello",
+          "forza"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -12408,6 +13783,20 @@
         "tags": [
           "знание",
           "Лус"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Studente Dua",
+        "translation": "Oh Allah, illumina i nostri cuori con la luce della conoscenza.",
+        "category": "Dhikr",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 5766",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "conoscenza",
+          "leggero"
         ],
         "isFeatured": false
       }
@@ -12554,6 +13943,22 @@
           "обрезать"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Dua per la pioggia",
+        "translation": "Oh Allah, fai germogliare la terra per noi.",
+        "category": "Pioggia",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 1773",
+        "count": 1,
+        "times": [
+          "lluvia"
+        ],
+        "tags": [
+          "terra",
+          "raccolto"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -12680,6 +14085,20 @@
         "tags": [
           "средства к существованию",
           "благодарность"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Dua del commerciante",
+        "translation": "Oh Allah, benedici il mio sostentamento.",
+        "category": "Gratitudine",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 3588",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "mezzi di sostentamento",
+          "gratitudine"
         ],
         "isFeatured": false
       }
@@ -12810,6 +14229,20 @@
           "пас"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Dua per la pace",
+        "translation": "Oh Allah, guarisci la mia religione, che è la garanzia dei miei affari.",
+        "category": "Dhikr",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 2420",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "religione",
+          "pace"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -12938,6 +14371,20 @@
           "прямота"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Dua per la guida",
+        "translation": "Oh Allah, guidami alla rettitudine.",
+        "category": "Dhikr",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 1539",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "guida",
+          "rettitudine"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -13064,6 +14511,20 @@
         "tags": [
           "терпение",
           "сила"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Dua per la pazienza",
+        "translation": "Oh Allah, rendimi paziente.",
+        "category": "Difficolta",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 5819",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "pazienza",
+          "forza"
         ],
         "isFeatured": false
       }
@@ -13208,6 +14669,22 @@
           "природа"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Buongiorno perfetto Dua",
+        "translation": "Abbiamo capito la natura dell’Islam.",
+        "category": "Mattina",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 2809",
+        "count": 1,
+        "times": [
+          "morning"
+        ],
+        "tags": [
+          "Islam",
+          "natura"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -13350,6 +14827,22 @@
           "природа"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Dua del tramonto",
+        "translation": "Siamo caduti nell’oscurità della natura dell’Islam.",
+        "category": "Sera",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 2809",
+        "count": 1,
+        "times": [
+          "night"
+        ],
+        "tags": [
+          "Islam",
+          "natura"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -13478,6 +14971,20 @@
           "дни"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Gratitudine quotidiana Dua",
+        "translation": "Loda Allah, Signore dei mondi, ogni giorno.",
+        "category": "Gratitudine",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Fatiha 1:2",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "lode",
+          "giorni"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -13604,6 +15111,20 @@
         "tags": [
           "память",
           "знание"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Dua per la memoria",
+        "translation": "Oh Allah, non farmi dimenticare quello che mi hai insegnato.",
+        "category": "Dhikr",
+        "source": "Hisnul Muslim",
+        "reference": "Ibn As-Sunni 245",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "memoria",
+          "conoscenza"
         ],
         "isFeatured": false
       }
@@ -13750,6 +15271,22 @@
           "простота"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Dua del viaggiatore breve",
+        "translation": "Oh Allah, rendi facile il nostro viaggio.",
+        "category": "Viaggio",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 2600",
+        "count": 1,
+        "times": [
+          "viaje"
+        ],
+        "tags": [
+          "viaggio",
+          "sollievo"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -13876,6 +15413,20 @@
         "tags": [
           "защита",
           "слова"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Dua per la protezione dal male",
+        "translation": "Cerco rifugio nelle parole complete di Allah.",
+        "category": "Protezione",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 2709",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "protezione",
+          "parole"
         ],
         "isFeatured": false
       }
@@ -14010,6 +15561,20 @@
         "tags": [
           "страх",
           "защита"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Dua per paura",
+        "translation": "Oh Allah, cerco la tua protezione dalla paura.",
+        "category": "Difficolta",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6377",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "Paura",
+          "protezione"
         ],
         "isFeatured": false
       }
@@ -14154,6 +15719,22 @@
           "благодарность"
         ],
         "isFeatured": false
+      },
+      "it": {
+        "title": "Dua per la fame",
+        "translation": "Oh Allah, benedici il nostro cibo.",
+        "category": "Cibo",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 1801",
+        "count": 1,
+        "times": [
+          "comida"
+        ],
+        "tags": [
+          "pasto",
+          "gratitudine"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -14296,6 +15877,22 @@
         "tags": [
           "напиток",
           "благодарность"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Dua per la sete",
+        "translation": "Oh Allah, benedici il nostro drink.",
+        "category": "Cibo",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 1802",
+        "count": 1,
+        "times": [
+          "bebida"
+        ],
+        "tags": [
+          "bere",
+          "gratitudine"
         ],
         "isFeatured": false
       }

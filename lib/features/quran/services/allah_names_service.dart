@@ -46,6 +46,7 @@ class AllahNamesService {
       'en' => 'en',
       'fr' => 'fr',
       'de' || 'de_DE' || 'de-DE' => 'de',
+      'it' || 'it_IT' || 'it-IT' => 'it',
       'nl' || 'nl_NL' || 'nl-NL' => 'nl',
       'id' || 'id_ID' || 'id-ID' => 'id',
       'ru' || 'ru_RU' || 'ru-RU' => 'ru',
@@ -57,6 +58,7 @@ class AllahNamesService {
     return switch (_normalizeLanguageCode(languageCode)) {
       'de' => 'en',
       'fr' => 'en',
+      'it' => 'en',
       'nl' => 'en',
       'id' => 'en',
       'ru' => 'en',

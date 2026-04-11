@@ -1,4 +1,4 @@
-﻿{
+{
   "@@locale": "ar",
   "appTitle": "قبلة تايم",
   "commonSkip": "تخطي",
@@ -1020,6 +1020,7 @@
   "dailyBookOpenLibrary": "فتح الكتب",
   "settingsLanguageOptionIndonesian": "الإندونيسية",
   "settingsLanguageOptionRussian": "???????",
+  "settingsLanguageOptionItalian": "الإيطالية",
   "homeQuickActionPurification": "الوضوء والغسل",
   "purificationGuideTitle": "الوضوء والغسل",
   "purificationGuideSubtitle": "دليل الطهارة قبل الصلاة",

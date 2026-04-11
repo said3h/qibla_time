@@ -2718,6 +2718,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get settingsLanguageOptionRussian => '???????';
 
   @override
+  String get settingsLanguageOptionItalian => 'الإيطالية';
+
+  @override
   String get homeQuickActionPurification => 'الوضوء والغسل';
 
   @override

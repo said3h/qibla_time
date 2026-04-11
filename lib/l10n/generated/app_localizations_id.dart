@@ -2782,6 +2782,9 @@ class AppLocalizationsId extends AppLocalizations {
   String get settingsLanguageOptionRussian => 'Rusia';
 
   @override
+  String get settingsLanguageOptionItalian => 'Italia';
+
+  @override
   String get homeQuickActionPurification => 'Wudu dan ghusl';
 
   @override

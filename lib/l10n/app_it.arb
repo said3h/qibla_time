@@ -1,0 +1,1240 @@
+{
+  "@@locale": "it",
+  "appTitle": "Qibla Time",
+  "commonSkip": "Saltare",
+  "commonBack": "Indietro",
+  "commonContinue": "Continuare",
+  "commonEnter": "Entra",
+  "commonAllow": "Permettere",
+  "commonActivate": "Attivare",
+  "commonEnable": "Abilitare",
+  "commonEnableGps": "Attiva il GPS",
+  "commonOpenSettings": "Apri le impostazioni",
+  "commonPending": "In attesa di",
+  "commonGranted": "Concesso",
+  "commonBlocked": "Bloccato",
+  "commonReady": "Pronto",
+  "commonDisabled": "Disabilitato",
+  "commonUnavailable": "Non disponibile",
+  "commonToday": "Oggi",
+  "commonYesterday": "Ieri",
+  "commonLoading": "Caricamento...",
+  "commonShare": "Condividere",
+  "commonManual": "Manuale",
+  "commonImportJson": "Importa JSON",
+  "commonExport": "Esportare",
+  "commonOpen": "Aprire",
+  "commonVersion": "Versione",
+  "commonAbout": "Di",
+  "commonMethod": "Metodo",
+  "commonMadhab": "Madhab",
+  "commonLocation": "Posizione",
+  "commonNotifications": "Notifiche",
+  "commonNoData": "Nessun dato",
+  "commonNever": "Mai",
+  "commonGenerating": "Generazione...",
+  "commonChecking": "Controllo...",
+  "commonDelete": "Eliminare",
+  "commonSystemStatus": "Stato del sistema",
+  "commonCurrentStatus": "Stato attuale",
+  "commonOffset": "Offset",
+  "commonAutomatic": "Automatico",
+  "commonPrepared": "Preparato",
+  "commonActivated": "Abilitato",
+  "commonPaused": "In pausa",
+  "commonSystem": "Sistema",
+  "onboardingWelcomeTitle": "Benvenuti in Qibla Time",
+  "onboardingWelcomeSubtitle": "Tempi di preghiera, Qibla, Corano e promemoria in un'app leggera per la tua routine quotidiana.",
+  "onboardingFeatureSchedulesTitle": "Tempi di preghiera affidabili",
+  "onboardingFeatureSchedulesBody": "Calcolato dalla tua posizione e dal metodo preferito.",
+  "onboardingFeaturePracticeTitle": "Qibla e la pratica quotidiana",
+  "onboardingFeaturePracticeBody": "Bussola, tasbih, tracciamento e altro in un unico flusso fluido.",
+  "onboardingFeatureRemindersTitle": "Promemoria utili",
+  "onboardingFeatureRemindersBody": "Notifiche Adhan e impostazioni chiave pronte fin dal primo giorno.",
+  "onboardingPermissionsTitle": "Autorizzazioni importanti",
+  "onboardingPermissionsSubtitle": "Chiediamo solo l'occorrente per calcolare i tempi di preghiera, utilizzare Qibla e avvisarti in tempo.",
+  "onboardingLocationReadyBody": "Pronto per calcolare i tempi di preghiera e Qibla.",
+  "onboardingLocationBlockedBody": "L'accesso alla posizione è bloccato. Puoi abilitarlo in seguito dalle impostazioni di sistema.",
+  "onboardingLocationGpsOffBody": "Il GPS del tuo dispositivo è disattivato. Puoi continuare e attivarlo più tardi.",
+  "onboardingLocationPendingBody": "Necessario per tempi di preghiera accurati e indicazioni per la Mecca.",
+  "onboardingNotificationsReadyBody": "Pronto a ricordarti ogni preghiera.",
+  "onboardingNotificationsPendingBody": "Ciò ti consente di ricevere avvisi e promemoria adhan in un secondo momento.",
+  "onboardingMethodTitle": "Metodo di calcolo",
+  "onboardingMethodSubtitle": "Puoi cambiarlo in seguito, ma questo mantiene i tuoi tempi di preghiera configurati correttamente da oggi.",
+  "onboardingSelectedNow": "Selezionato ora",
+  "onboardingTapToChooseMethod": "Tocca per scegliere questo metodo",
+  "onboardingMadhabTitle": "Madhab per Asr",
+  "onboardingMadhabSubtitle": "Ciò influisce solo sul calcolo di Asr. Se non sei sicuro, puoi mantenere Shafi e modificarlo in seguito.",
+  "onboardingMadhabCommonTitle": "Shafi/Maliki/Hanbali",
+  "onboardingMadhabCommonSubtitle": "L'opzione più comune con cui iniziare",
+  "onboardingMadhabHanafiTitle": "Hanafi",
+  "onboardingMadhabHanafiSubtitle": "Utilizza il calcolo Hanafi per Asr",
+  "onboardingAdhanTitle": "Adhan e avvisi",
+  "onboardingAdhanSubtitle": "Qibla Time può avvisarti per ogni preghiera con un gentile adhan per impostazione predefinita. Puoi cambiarlo più tardi.",
+  "onboardingPrayerNotificationsTitle": "Notifiche di preghiera",
+  "onboardingPrayerNotificationsSubtitle": "Puoi abilitarli ora o continuare senza di loro per il momento.",
+  "onboardingAdhanPreviewTitle": "Anteprima rapida di Adhan",
+  "onboardingAdhanPreviewSubtitle": "Verrà utilizzato il suono selezionato. Puoi modificarlo in seguito in Impostazioni.",
+  "onboardingAdhanStopPreview": "Interrompi l'anteprima",
+  "onboardingAdhanListenPreview": "Ascolta l'anteprima",
+  "onboardingDoneTitle": "Tutto pronto",
+  "onboardingDoneSubtitle": "Ora puoi iniziare con i tuoi tempi di preghiera, Qibla e il monitoraggio giornaliero. Tutto può essere modificato in seguito.",
+  "onboardingSummaryLocationBlocked": "Bloccato per ora",
+  "onboardingSummaryNotificationsPrepared": "Preparato",
+  "methodMuslimWorldLeague": "Lega mondiale musulmana",
+  "methodNorthAmerica": "ISNA/America del Nord",
+  "methodUmmAlQura": "Umm al-Qura",
+  "methodEgyptian": "Autorità egiziana",
+  "homeHeaderOnline": "In linea",
+  "homeHeaderOffline": "Non in linea",
+  "homeHeaderLocationUnavailable": "Posizione non disponibile",
+  "homeHeaderStatusLine": "{networkStatus} · {location}",
+  "@homeHeaderStatusLine": {
+    "placeholders": {
+      "networkStatus": {},
+      "location": {}
+    }
+  },
+  "homeHeroNextPrayer": "PROSSIMA PREGHIERA",
+  "homeHeroTodayOverview": "La vista principale di oggi",
+  "homeHeroUsingSavedLocation": "Utilizzando la tua ultima posizione salvata",
+  "homeSelectedDateToday": "OGGI",
+  "homeSelectedDateCustom": "DATA SELEZIONATA",
+  "homeCountdownUnavailable": "Conto alla rovescia non disponibile",
+  "homeCountdownActive": "Conto alla rovescia attivo",
+  "homeCountdownUntil": "fino a {prayer}",
+  "@homeCountdownUntil": {
+    "placeholders": {
+      "prayer": {}
+    }
+  },
+  "homeCountdownLabelUppercase": "CONTO ALLA ROVESCIA",
+  "homeDurationUntil": "in {hours}h {minutes}min",
+  "@homeDurationUntil": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      },
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "homeDurationHoursMinutes": "{hours} h {minutes} min",
+  "@homeDurationHoursMinutes": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      },
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "homeDurationMinutes": "{minutes} min",
+  "@homeDurationMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "homeDurationSeconds": "{seconds} s",
+  "@homeDurationSeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "String"
+      }
+    }
+  },
+  "homePrayerSectionToday": "Le preghiere di oggi",
+  "homePrayerSectionForDate": "Tempi per {date}",
+  "@homePrayerSectionForDate": {
+    "placeholders": {
+      "date": {}
+    }
+  },
+  "homePrayerSectionWorshipDay": "{weekday}, giorno di culto",
+  "@homePrayerSectionWorshipDay": {
+    "placeholders": {
+      "weekday": {}
+    }
+  },
+  "homePrayerSectionMarkedCount": "Marchio {count}/5",
+  "@homePrayerSectionMarkedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsTitle": "Impostazioni",
+  "settingsTitleArabic": "إعدادات",
+  "settingsSectionAppearance": "Aspetto",
+  "settingsSectionAccessibility": "Accessibilità",
+  "settingsSectionAdhanNotifications": "Notifiche Adhan",
+  "settingsSectionScheduleCalculation": "Calcolo del tempo di preghiera",
+  "settingsSectionRamadanMode": "Modalità Ramadan",
+  "settingsSectionHadith": "Hadith",
+  "settingsSectionTravelerMode": "Modalità viaggio",
+  "settingsSectionRecentPlaces": "POSTI RECENTI",
+  "settingsSectionSmartCache": "Cache intelligente",
+  "settingsSectionSupport": "Sadaqah · Supporto",
+  "settingsSectionCloudBackup": "Backup nel cloud (beta)",
+  "settingsTextSize": "Dimensione del testo",
+  "settingsCurrentScale": "Scala attuale: {scale}x",
+  "@settingsCurrentScale": {
+    "placeholders": {
+      "scale": {}
+    }
+  },
+  "settingsHighContrast": "Contrasto elevato",
+  "settingsHighContrastSubtitle": "Migliora la leggibilità nell'app",
+  "settingsUseSystemBold": "Utilizza il testo in grassetto di sistema",
+  "settingsUseSystemBoldSubtitle": "Rispetta la preferenza VoiceOver/TalkBack",
+  "settingsResetAccessibility": "Reimposta l'accessibilità",
+  "settingsReset": "Reset",
+  "settingsThemeDarkTitle": "Buio",
+  "settingsThemeDarkSubtitle": "Cielo prima di Fajr",
+  "settingsThemeLightTitle": "Leggero",
+  "settingsThemeLightSubtitle": "Per uso esterno",
+  "settingsThemeAmoledTitle": "AMOLED",
+  "settingsThemeAmoledSubtitle": "Nero puro, risparmia la batteria",
+  "settingsThemeDeuteranopiaTitle": "Deuteranopia",
+  "settingsThemeDeuteranopiaSubtitle": "Niente rosso/verde",
+  "settingsThemeMonochromeTitle": "Monocromo",
+  "settingsThemeMonochromeSubtitle": "Per acromatopsia e ipovisione",
+  "settingsLanguage": "Lingua dell'app",
+  "settingsLanguageSubtitle": "Scegli se l'app deve seguire la lingua del tuo dispositivo o utilizzare una lingua fissa ovunque.",
+  "settingsLanguageDialogTitle": "Lingua dell'app",
+  "settingsLanguageOptionSystem": "Segui la lingua del dispositivo",
+  "settingsLanguageSystemValue": "Automatico ({language})",
+  "@settingsLanguageSystemValue": {
+    "placeholders": {
+      "language": {}
+    }
+  },
+  "settingsLanguageOptionSpanish": "Español",
+  "settingsLanguageOptionEnglish": "Inglese",
+  "settingsLanguageOptionFrench": "Francese",
+  "settingsLanguageOptionGerman": "tedesco",
+  "settingsLanguageOptionArabic": "العربية",
+  "settingsLanguageOptionDutch": "Paesi Bassi",
+  "settingsAdhanSound": "Suono Adhan",
+  "settingsAdhanSoundAction": "Scegli e visualizza l'anteprima",
+  "settingsGeneralNotifications": "Avvisi generali",
+  "settingsGeneralNotificationsSubtitle": "Abilita o metti in pausa tutti gli avvisi di preghiera",
+  "settingsSystemPermissionPendingBody": "Gli avvisi Adhan sono configurati, ma l'autorizzazione del sistema è ancora in sospeso.",
+  "settingsHapticFeedback": "Feedback tattile",
+  "settingsRamadanAutomatic": "Modalità Ramadan automatica",
+  "settingsRamadanAutomaticSubtitle": "Si accende automaticamente quando il calendario islamico entra nel Ramadan",
+  "settingsRamadanForced": "Forza la modalità Ramadan",
+  "settingsRamadanForcedSubtitle": "Abilita manualmente la vista Ramadan",
+  "settingsDailyNotification": "Notifica quotidiana",
+  "settingsDailyNotificationSubtitle": "Ricevi un hadith o un versetto ogni giorno",
+  "settingsNotificationHour": "Orario di notifica",
+  "settingsTravelerMode": "Modalità viaggio",
+  "settingsTravelerModeSubtitle": "Rileva automaticamente i cambi di città (>50 km)",
+  "settingsTravelerModeLoadError": "Impossibile caricare la modalità viaggio",
+  "settingsRecentPlaces": "Luoghi recenti",
+  "settingsNoRecentTrips": "Nessun viaggio recente",
+  "settingsLoadError": "Non siamo riusciti a caricarlo",
+  "settingsCacheValidUntil": "Cache valida fino al",
+  "settingsCacheEntries": "Voci della cache",
+  "settingsClearCache": "Svuota cache",
+  "settingsSupportInfo": "Informazioni di supporto",
+  "settingsSupportCardTitle": "Sostenere lo sviluppo",
+  "settingsSupportCardSubtitle": "Ogni donazione può diventare una sadaqah jariyah",
+  "settingsBackupMode": "Modalità di backup",
+  "settingsAnonymousId": "Identità anonima",
+  "settingsLastBackup": "Ultimo backup",
+  "settingsExportBackup": "Esporta backup",
+  "settingsRestoreBackup": "Ripristina il backup",
+  "settingsBackupInfoBody": "Puoi salvare e condividere un backup manuale in formato JSON. L'automazione e la sincronizzazione tra dispositivi non sono ancora disponibili.",
+  "settingsRestoreBackupDialogTitle": "Ripristina il backup",
+  "settingsRestoreBackupSuccess": "Backup ripristinato",
+  "settingsRestoreBackupError": "Non è stato possibile ripristinare il backup.",
+  "settingsDailyNotificationEnabled": "Notifica giornaliera abilitata",
+  "settingsDailyNotificationDisabled": "Notifica giornaliera disabilitata",
+  "settingsSelectHourTitle": "Seleziona l'ora",
+  "settingsToday": "Oggi",
+  "settingsYesterday": "Ieri",
+  "settingsDaysAgo": "{count} giorni fa",
+  "@settingsDaysAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsRamadanManualActive": "Attivo manualmente",
+  "settingsLocationBlocked": "Bloccato",
+  "settingsLocationPendingPermission": "Autorizzazione in sospeso",
+  "settingsLocationAutomatic": "Automatico",
+  "settingsLocationSavedUnavailable": "Nessuna posizione salvata",
+  "settingsLocationStatus": "Stato della posizione",
+  "settingsGpsOff": "GPS spento",
+  "settingsScheduleSource": "Origine pianificazione",
+  "settingsScheduleSourceReady": "Cache pronta",
+  "settingsNotificationSystem": "Notifica di sistema.",
+  "settingsNotificationApp": "Notifica dell'app.",
+  "settingsNotificationsGranted": "Concesso",
+  "commonPlay": "Giocare",
+  "commonText": "Testo",
+  "commonVideo": "Video",
+  "commonRemove": "Rimuovere",
+  "shareBranding": "Applicazione: Qibla Time",
+  "shareReferenceLabel": "Riferimento: {reference}",
+  "@shareReferenceLabel": {
+    "placeholders": {
+      "reference": {}
+    }
+  },
+  "shareSubjectDua": "Dua",
+  "shareSubjectHadithOfDay": "Hadith del giorno - Qibla Time",
+  "shareSubjectHadithShared": "Hadith condiviso da Qibla Time",
+  "shareBadgeHadith": "HADITH",
+  "shareBadgeDua": "DUA",
+  "shareBadgeQuran": "CORANO",
+  "shareSectionStyle": "Stile / sfondo",
+  "shareSectionContent": "Contenuto",
+  "shareLayoutCard": "Carta",
+  "shareLayoutStory": "Storia",
+  "shareContentBilingual": "Arabo + traduzione",
+  "shareContentArabicOnly": "Solo arabo",
+  "shareContentTranslationOnly": "Solo traduzione",
+  "shareActionShareImage": "Condividi l'immagine",
+  "shareActionShareText": "Condividi testo",
+  "shareHadithTitle": "Condividi l'hadith",
+  "shareHadithSubtitle": "Scegli il formato e il contenuto prima della condivisione.",
+  "shareHadithTextError": "Non abbiamo potuto condividere il testo dell'hadith.",
+  "shareHadithImageError": "Non siamo riusciti a generare l'immagine dell'hadith.",
+  "shareDuaTitle": "Condividi dua",
+  "shareDuaTitleNamed": "Condividi {title}",
+  "@shareDuaTitleNamed": {
+    "placeholders": {
+      "title": {}
+    }
+  },
+  "shareDuaSubtitle": "Usa lo stesso trattamento visivo dell'hadith per dua e adhkar.",
+  "shareDuaTextError": "Non è stato possibile condividere il testo del dua.",
+  "shareDuaImageError": "Non è stato possibile generare l'immagine dua.",
+  "shareAyahTitle": "Condividi ayah {number}",
+  "@shareAyahTitle": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "shareAyahSubtitle": "Mantieni la stessa presentazione visiva per testo, immagini e video.",
+  "shareAyahTextError": "Non è stato possibile condividere questa ayah come testo.",
+  "shareAyahImageError": "Non è stato possibile generare questa immagine di ayah.",
+  "shareAyahVideoNoAudio": "Non è disponibile auAllah per generare un video per questa ayah.",
+  "shareAyahVideoGenerating": "Generazione del video ayah...",
+  "shareAyahVideoError": "Non è stato possibile generare il video per questa ayah.",
+  "notificationAdhanChannelName": "Adhan",
+  "notificationAdhanChannelDescription": "Notifiche sul tempo di preghiera",
+  "notificationAdhanTitle": "Qibla Time - {prayerName}",
+  "@notificationAdhanTitle": {
+    "placeholders": {
+      "prayerName": {}
+    }
+  },
+  "notificationAdhanBody": "È il momento della preghiera",
+  "notificationReminderChannelName": "Qibla Time - Promemoria",
+  "notificationReminderChannelDescription": "Promemoria contestuali per Ramadan e Jumu'ah",
+  "notificationDailyReflectionChannelName": "Riflessione quotidiana",
+  "notificationDailyReflectionChannelDescription": "Versetto del Corano e hadith del giorno",
+  "notificationDailyReflectionTitle": "Riflessione del giorno",
+  "notificationDailyReflectionFallbackBody": "La tua riflessione spirituale quotidiana in Qibla Time.",
+  "notificationDailyReflectionErrorTitle": "Qibla Time · Riflessione quotidiana",
+  "notificationDailyReflectionErrorBody": "Il tuo promemoria spirituale per oggi",
+  "notificationHadithReminderChannelName": "Promemoria Hadith",
+  "notificationHadithReminderChannelDescription": "Promemoria hadith orari",
+  "notificationHadithReminderFallbackBody": "Promemoria: leggi un hadith del Profeta ﷺ",
+  "notificationHadithReminderTitle": "📖 Hadith per questo momento",
+  "notificationHadithReminderTestBody": "Prova il promemoria degli hadith",
+  "notificationHadithReminderTestTitle": "📖 Promemoria Hadith",
+  "notificationWeeklySummaryTitle": "Il tuo riepilogo settimanale è pronto",
+  "notificationWeeklySummaryBody": "Questa settimana hai completato le preghiere {prayersCompleted}/{maxPossible}. La tua giornata migliore è stata {strongestDay}.",
+  "@notificationWeeklySummaryBody": {
+    "placeholders": {
+      "prayersCompleted": {
+        "type": "int"
+      },
+      "maxPossible": {
+        "type": "int"
+      },
+      "strongestDay": {}
+    }
+  },
+  "quranDailyVerseFallbackTranslation": "Allah: non esiste divinità all'infuori di Lui, il Sempre Vivente, il Sostenitore di tutto. Né la sonnolenza né il sonno lo colgono.",
+  "quranDailyVerseFallbackTransliteration": "Allahu la ilaha illa huwal hayyul qayyum...",
+  "quranDailyVerseFallbackReference": "Al-Baqara [2:255]",
+  "quranTitle": "Corano",
+  "quranSubtitle": "114 sure · lettura continua",
+  "quranHafizLabel": "Hafiz",
+  "quranUtilityAyatAlKursi": "Ayat al-Kursi",
+  "quranUtilityAllahNames": "99 nomi",
+  "quranUtilityDownloaded": "Scaricato",
+  "quranProtectionTitle": "PROTEZIONE QUOTIDIANA",
+  "quranProtectionSubtitle": "Accesso rapido ad Ayat al-Kursi e alle sure di protezione. Aprili per leggere o ascoltare, quindi segna le tue tre ripetizioni.",
+  "quranProtectionAyatAlKursiHelper": "Al-Baqara 2:255",
+  "quranProtectionSurahHelper": "Sura {number}",
+  "@quranProtectionSurahHelper": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "quranProtectionIkhlasTitle": "Al-Ikhlas",
+  "quranProtectionFalaqTitle": "Al-Falaq",
+  "quranProtectionNasTitle": "An-Nas",
+  "quranProtectionRepeatCount": "{helper} · {count}/3 ripetizioni",
+  "@quranProtectionRepeatCount": {
+    "placeholders": {
+      "helper": {},
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quranProtectionCompleteTooltip": "Completare",
+  "quranProtectionIncrementTooltip": "+1 ripetizione",
+  "quranReadingHintTitle": "LETTURA CONTINUA",
+  "quranReadingHintBody": "Apri qualsiasi sura e salveremo la tua ultima ayah in modo che tu possa tornare più tardi.",
+  "quranReadingHintSecondary": "Puoi anche salvare i segnalibri toccando l'icona del segnalibro durante la lettura.",
+  "quranContinueReadingTitle": "CONTINUA A LEGGERE",
+  "quranBookmarksTitle": "SEGNALIBRI",
+  "quranRevelationMecca": "La Mecca",
+  "quranRevelationMedina": "Medina",
+  "quranAyahCount": "{count, plural, =1{1 versetto} other{{count} versetti}}",
+  "@quranAyahCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quranLastReadingAyah": "Ultima lettura: ayah {ayah}",
+  "@quranLastReadingAyah": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranBookmarkCount": "{count, plural, =1{1 segnalibro salvato} other{{count} segnalibri salvati}}",
+  "@quranBookmarkCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quranDownloadedFavoriteOffline": "AuAllah scaricato · preferito offline",
+  "quranDownloadedAudio": "AuAllah scaricato",
+  "quranReadingPointSaved": "Punto di lettura salvato in ayah {ayah}",
+  "@quranReadingPointSaved": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranBookmarkSaved": "Segnalibro salvato su ayah {ayah}",
+  "@quranBookmarkSaved": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranBookmarkRemoved": "Segnalibro rimosso da ayah {ayah}",
+  "@quranBookmarkRemoved": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranShareAyahTitle": "Condividi ayah {ayah}",
+  "@quranShareAyahTitle": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranShareTextSubtitle": "Include il testo arabo, la traduzione e il riferimento.",
+  "quranShareImageSubtitle": "Crea un'immagine con la ayah.",
+  "quranShareVideoSubtitle": "Crea un video con la scheda e la recitazione.",
+  "quranAyahImageError": "Non è stato possibile generare l'immagine per questa ayah.",
+  "quranAyahVideoNoAudio": "Questa ayah non ha auAllah disponibile per generare un video.",
+  "quranAyahVideoGenerating": "Stiamo generando il video di ayah...",
+  "quranAyahVideoShareText": "Sì, {ayah} da {surah}",
+  "@quranAyahVideoShareText": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      },
+      "surah": {}
+    }
+  },
+  "quranAyahVideoError": "Non è stato possibile generare il video per questa ayah.",
+  "quranDownloadCheckError": "Non è stato possibile verificare il download su questo dispositivo.",
+  "quranDownloadSuccess": "AuAllah scaricato. Ora puoi ascoltare questa sura offline.",
+  "quranDownloadDetailedError": "Non è stato possibile completare il download. Controlla la connessione e riprova.",
+  "quranDownloadShortError": "Non è stato possibile completare il download dell'auAllah.",
+  "quranDownloadedAudioPlaySubtitle": "Ascolta la sura con l'auAllah salvato.",
+  "quranDownloadedAudioRemoveSubtitle": "Libera spazio e ascoltalo di nuovo online.",
+  "quranDownloadedAudioRemoved": "Questo download della Sura è stato rimosso.",
+  "quranDownloadedFavoriteAdded": "Sura salvata tra i tuoi preferiti scaricati.",
+  "quranDownloadedFavoriteRemoved": "Sura rimossa dai preferiti scaricati.",
+  "quranAyahAudioUnavailable": "L'auAllah non è disponibile per questo ayah.",
+  "quranAyahAudioDownloaded": "L'auAllah è già scaricato su questo dispositivo.",
+  "quranAyahAudioAvailable": "Puoi ascoltare questa ayah.",
+  "quranAyahAudioRequiresConnection": "Puoi ascoltare questa ayah se hai una connessione.",
+  "quranSurahRecitationUnavailable": "La recitazione completa non è disponibile per questa sura.",
+  "quranSurahAudioDownloading": "Stiamo scaricando l'auAllah in modo che tu possa ascoltare questa sura offline. {downloaded}/{total} è pronto.",
+  "@quranSurahAudioDownloading": {
+    "placeholders": {
+      "downloaded": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "quranSurahAudioDownloaded": "L'auAllah è già scaricato su questo dispositivo. Puoi ascoltare questa sura offline.",
+  "quranSurahAudioMissingAyahs": "{count, plural, =1{1 versetto senza audio verra saltato.} other{{count} versetti senza audio verranno saltati.}}",
+  "@quranSurahAudioMissingAyahs": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quranSurahAudioPartialDownload": "Hai già degli ayah {downloaded}/{total} salvati su questo dispositivo.",
+  "@quranSurahAudioPartialDownload": {
+    "placeholders": {
+      "downloaded": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "quranSurahAudioDownloadAvailable": "Puoi anche scaricarlo per ascoltarlo offline.",
+  "quranSurahAudioPlayOnline": "Puoi ascoltare questa sura direttamente in riproduzione continua.",
+  "quranSurahAudioPlayWithConnection": "Puoi ascoltare questa sura completa se hai una connessione.",
+  "quranAyahPlaybackError": "Non è stato possibile riprodurre l'auAllah. Controlla la connessione e riprova.",
+  "quranSurahPlaybackError": "Non è stato possibile iniziare la recitazione completa.",
+  "quranLastReadingBadge": "Ultima lettura",
+  "quranPauseAudio": "Metti in pausa l'auAllah",
+  "quranResumeAudio": "Riprendi l'auAllah",
+  "quranPlayAudio": "Riproduci l'auAllah",
+  "quranAudioUnavailable": "AuAllah non disponibile",
+  "quranRemoveBookmark": "Rimuovi segnalibro",
+  "quranSaveBookmark": "Salva segnalibro",
+  "quranAyahFooterHint": "{status} Tocca questo versetto per salvare qui il punto di lettura. Premi a lungo per condividerlo.",
+  "@quranAyahFooterHint": {
+    "placeholders": {
+      "status": {}
+    }
+  },
+  "quranDetailLoadError": "Non è stato possibile caricare questa sura. Controlla la connessione e riprova.",
+  "quranTopBannerResume": "Riprendendo da ayah {ayah}.",
+  "@quranTopBannerResume": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranTopBannerOnline": "Contenuto caricato online. Puoi ascoltare l'auAllah di ogni ayah mentre sei connesso.",
+  "quranTopBannerOffline": "Testo caricato offline. L'auAllah per alcuni versetti potrebbe comunque richiedere una connessione.",
+  "quranTopBannerPlaceholder": "Contenuto parziale caricato offline. L'auAllah non è disponibile per ora.",
+  "quranSurahAudioCardTitle": "ASCOLTA SURA",
+  "quranAvailableAyahs": "{available}/{total} sì",
+  "@quranAvailableAyahs": {
+    "placeholders": {
+      "available": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "quranPauseSurah": "Metti in pausa la sura",
+  "quranResumeSurah": "Riprendi la sura",
+  "quranListenSurah": "Ascolta la sura",
+  "quranStop": "Fermare",
+  "quranCheckingAudio": "Controllo dell'auAllah",
+  "quranDownloadingProgress": "Download di {downloaded}/{total}",
+  "@quranDownloadingProgress": {
+    "placeholders": {
+      "downloaded": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "quranDownloaded": "Scaricato",
+  "quranDownloadAudio": "Scarica l'auAllah",
+  "quranDownloadedFavoriteLabel": "Preferito scaricato",
+  "quranMarkFavorite": "Segna come preferito",
+  "quranPlayingSurahAyah": "Riproduzione di sura · ayah {ayah}",
+  "@quranPlayingSurahAyah": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranPausedSurahAyah": "Sura in pausa · ayah {ayah}",
+  "@quranPausedSurahAyah": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranPlayingAyah": "Sto giocando ayah {ayah}",
+  "@quranPlayingAyah": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranPausedAyah": "Ayah {ayah} fece una pausa",
+  "@quranPausedAyah": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranActiveAudioSurahHint": "La sura continuerà automaticamente con il versetto successivo.",
+  "quranActiveAudioAyahHint": "Puoi mettere in pausa, riprendere o interrompere questa recitazione.",
+  "quranStopAudio": "Interrompi l'auAllah",
+  "commonAuthenticity": "Autenticità",
+  "commonBooks": "Libri",
+  "commonCancel": "Cancellare",
+  "commonCategory": "Categoria",
+  "commonClose": "Vicino",
+  "commonCollection": "Collezione",
+  "commonCopy": "Copia",
+  "commonDone": "Fatto",
+  "commonDownload": "Scaricamento",
+  "commonFeatured": "In primo piano",
+  "commonFilter": "Filtro",
+  "commonGeneral": "Generale",
+  "commonHadiths": "Hadiths",
+  "commonInformation": "Informazioni",
+  "commonNext": "Prossimo",
+  "commonOther": "Altro",
+  "commonPause": "Pausa",
+  "commonPrayers": "preghiere",
+  "commonQuran": "Corano",
+  "commonRead": "Leggere",
+  "commonReference": "Riferimento",
+  "commonResume": "Riprendere",
+  "commonSave": "Salva",
+  "commonSaved": "Salvato",
+  "commonStatistics": "Statistiche",
+  "commonTotal": "Totale",
+  "achievementFirstPrayerTitle": "Prima preghiera",
+  "achievementFirstPrayerDescription": "Hai segnato la tua prima preghiera nell'app.",
+  "achievementFullDayTitle": "Giornata intera",
+  "achievementFullDayDescription": "Hai completato tutte e cinque le preghiere in un solo giorno.",
+  "achievementStreak3Title": "Serie di 3 giorni",
+  "achievementStreak3Description": "Hai mantenuto la tua coerenza per tre giorni di seguito.",
+  "achievementStreak7Title": "Serie di 7 giorni",
+  "achievementStreak7Description": "Sette giorni consecutivi di monitoraggio. Ottimo ritmo.",
+  "achievementStreak30Title": "Serie di 30 giorni",
+  "achievementStreak30Description": "Trenta giorni consecutivi. Consistenza straordinaria.",
+  "achievementTotal100Title": "100 preghiere",
+  "achievementTotal100Description": "Hai registrato 100 preghiere completate.",
+  "achievementFirstRamadanTitle": "Primo Ramadan",
+  "achievementFirstRamadanDescription": "Hai completato il tuo primo giorno di Ramadan attivo.",
+  "analyticsAchievementsTitle": "Risultati",
+  "analyticsAchievementsEmpty": "Nessun obiettivo ancora sbloccato.",
+  "analyticsAchievementsLoadError": "Non è stato possibile caricare i tuoi risultati.",
+  "analyticsBestDayLabel": "Il giorno migliore",
+  "analyticsBestStreakHint": "La tua serie migliore: giorni {count}",
+  "analyticsBestStreakLabel": "Miglior serie di vittorie",
+  "analyticsByPrayerTitle": "Con la preghiera",
+  "analyticsCollectionsLabel": "Collezioni",
+  "analyticsCompletedPrayersLabel": "Preghiere completate",
+  "analyticsCurrentStreakLabel": "Serie attuale",
+  "analyticsDaysValue": "{count} giorni",
+  "analyticsEmptyBody": "Inizia a segnare le tue preghiere e vedrai la tua coerenza qui.",
+  "analyticsEmptyHint": "Completa la tua prima preghiera per sbloccare questo pannello.",
+  "analyticsEmptyTitle": "Nessuna statistica ancora",
+  "analyticsFavoritesLabel": "Preferiti",
+  "analyticsFullDaysLabel": "Giornate intere",
+  "analyticsGradesLabel": "Gradi",
+  "analyticsHadithStatsLoadError": "Impossibile caricare le statistiche Hadith.",
+  "analyticsLast30DaysTitle": "Ultimi 30 giorni",
+  "analyticsLessLabel": "Meno",
+  "analyticsMoreLabel": "Di più",
+  "analyticsNoActiveStreak": "Nessuna serie attiva",
+  "analyticsRecordBadge": "Documentazione",
+  "analyticsSavedFavoritesLabel": "Preferiti salvati",
+  "analyticsShareError": "Non è stato possibile condividere i tuoi progressi.",
+  "analyticsShareImage": "Condividi l'immagine",
+  "analyticsShareProgressTooltip": "Condividi i progressi",
+  "analyticsShareText": "Condividi testo",
+  "analyticsStartStreakHint": "Inizia una nuova serie di vittorie oggi.",
+  "analyticsStreakDays": "Giorni di serie per {count}",
+  "analyticsThisWeekLabel": "Questa settimana",
+  "analyticsWeekInterpretationEmpty": "Non c'è ancora abbastanza attività questa settimana.",
+  "analyticsWeekInterpretationEncouragement": "Continua a poco a poco. Ogni preghiera conta.",
+  "analyticsWeekInterpretationGood": "Stai andando bene questa settimana. Un po’ più di coerenza farà la differenza.",
+  "analyticsWeekInterpretationStrong": "Settimana molto forte. Stai mantenendo un ottimo ritmo.",
+  "analyticsWeeklySummaryTitle": "Riepilogo settimanale",
+  "booksAboutBody": "Questa libreria riunisce i libri di IslamHouse per una lettura rapida all'interno dell'app.",
+  "booksAboutBulletCatalog": "Un catalogo curato e facile da esplorare",
+  "booksAboutBulletCategories": "Categorie per trovare più velocemente la lettura giusta",
+  "booksAboutBulletVerified": "Contenuto di una biblioteca islamica riconosciuta",
+  "booksAllCategories": "Tutte le categorie",
+  "booksCategoriesTab": "Categorie",
+  "booksDescription": "Descrizione",
+  "booksEmptyCategories": "Nessuna categoria disponibile",
+  "booksEmptyFeatured": "Nessun libro in evidenza per ora.",
+  "booksEmptySearch": "Non siamo riusciti a trovare libri per quella ricerca.",
+  "booksLibraryTitle": "Libri",
+  "booksLoadErrorTitle": "Non è stato possibile caricare la libreria",
+  "booksMainCategoryAcademicLessons": "Lezioni accademiche",
+  "booksMainCategoryArabicLanguage": "Lingua araba",
+  "booksMainCategoryCallToIslam": "Appello all'Islam",
+  "booksMainCategoryHistory": "Storia",
+  "booksMainCategoryIslamicBelief": "Credenza islamica",
+  "booksMainCategoryIslamicCulture": "Cultura islamica",
+  "booksMainCategoryIslamicJurisprudence": "Giurisprudenza islamica",
+  "booksMainCategoryMajorSins": "Peccati maggiori",
+  "booksMainCategoryNobleQuran": "Nobile Corano",
+  "booksMainCategoryPresentingIslam": "Presentare l'Islam",
+  "booksMainCategoryPropheticBiography": "Biografia profetica",
+  "booksMainCategoryProphetSunnah": "Sunnah del Profeta",
+  "booksMainCategorySermons": "Sermoni",
+  "booksMainCategoryVirtues": "Virtù",
+  "booksPageCount": "{pages} pagine",
+  "booksPlaceholderDescription": "I libri appariranno qui presto.",
+  "booksPlaceholderTitle": "Biblioteca in corso",
+  "booksSearchHint": "Cerca libro o autore",
+  "booksUnnamedCategory": "Categoria senza nome",
+  "booksUntitled": "Senza titolo",
+  "booksVisitIslamHouse": "Visita IslamHouse",
+  "calendarCurrentMonth": "QUESTO MESE",
+  "calendarEventAshura": "Ashura",
+  "calendarEventDayOfArafah": "Giorno di Arafah",
+  "calendarEventEidAdha": "Eid al-Adha",
+  "calendarEventEidFitr": "Eid al-Fitr",
+  "calendarEventIslamicNewYear": "Capodanno islamico",
+  "calendarEventRamadanStart": "Inizio del Ramadan",
+  "calendarImportantDatesTitle": "Date importanti di {year}",
+  "calendarSelectDate": "Seleziona una data",
+  "calendarSelectedDateUppercase": "DATA SELEZIONATA",
+  "calendarTitle": "Calendario islamico",
+  "calendarTodayLabel": "Oggi · {date}",
+  "dhikrChooseCustomValue": "Scegli un valore personalizzato",
+  "dhikrDailyGoalCompletedMessage": "Hai completato il tuo obiettivo dhikr giornaliero.",
+  "dhikrDailyGoalHelper": "Scegli quante ripetizioni vuoi raggiungere oggi.",
+  "dhikrDailyGoalShort": "Obiettivo quotidiano",
+  "dhikrDailyGoalTitle": "Obiettivo quotidiano",
+  "dhikrDailyGoalUpdated": "Obiettivo giornaliero aggiornato a {value}",
+  "dhikrFeedbackAlmostThere": "Stai andando molto bene. Sei vicino al tuo obiettivo quotidiano.",
+  "dhikrFeedbackCompleted": "Obiettivo giornaliero completato. Possa Allah accettare il tuo dhikr.",
+  "dhikrFeedbackCycleCompleted": "Ciclo completato. Puoi andare avanti con calma.",
+  "dhikrFeedbackGoodPace": "Buon ritmo. Mantieni queste ripetizioni con serenità.",
+  "dhikrFeedbackStart": "Inizia con alcune ripetizioni delicate e costanti.",
+  "dhikrFeedbackTakeYourTime": "Prenditi il ​​​​tuo tempo. Ogni ripetizione conta.",
+  "dhikrGoalsSection": "OBIETTIVI",
+  "dhikrHistoryEmptyBody": "La cronologia non è ancora sufficiente per questa visualizzazione.",
+  "dhikrHistorySavedBody": "I tuoi progressi recenti vengono salvati automaticamente.",
+  "dhikrLast7Days": "7 giorni",
+  "dhikrMeaningAlhamdulillah": "Lode a Allah",
+  "dhikrMeaningAllahuAkbar": "Allah è il più grande",
+  "dhikrMeaningSubhanAllah": "Gloria a Allah",
+  "dhikrRepetitionsFieldHint": "Esempio: 100",
+  "dhikrRepetitionsFieldLabel": "Ripetizioni",
+  "dhikrResetSession": "Reimposta sessione",
+  "dhikrSessionCountOf": "di {count}",
+  "dhikrSessionCycleCompleted": "Hai completato questo ciclo dhikr.",
+  "dhikrSessionGoalHelper": "Imposta quante ripetizioni desideri per ciclo.",
+  "dhikrSessionGoalShort": "Obiettivo della sessione",
+  "dhikrSessionGoalTitle": "Obiettivo della sessione",
+  "dhikrSessionGoalUpdated": "Obiettivo della sessione aggiornato a {value}",
+  "dhikrSessionResetMessage": "La sessione è stata reimpostata.",
+  "dhikrSubtitle": "Ricordo consapevole della tua giornata",
+  "dhikrSummarySection": "RIEPILOGO",
+  "dhikrTitle": "Dhikr",
+  "dhikrTodayCycle": "Oggi: {today} · ciclo {current}/{total}",
+  "hadithDailyBadge": "HADITH DEL GIORNO",
+  "hadithDailyOpenLibrary": "Hadith aperti",
+  "hadithDailyUnavailable": "Non siamo riusciti a caricare l'hadith del giorno.",
+  "hadithDetailArabicText": "Testo arabo",
+  "hadithDetailCopied": "Hadith copiato",
+  "hadithDetailCopyText": "Copia testo",
+  "hadithDetailGrade": "Grado: {grade}",
+  "hadithDetailHideArabic": "Nascondi l'arabo",
+  "hadithDetailHideTranslation": "Nascondi traduzione",
+  "hadithDetailId": "ID: {id}",
+  "hadithDetailInfoBody": "Questo hadith può variare a seconda della raccolta, del grado e della traduzione disponibile.",
+  "hadithDetailNoCategory": "Nessuna categoria",
+  "hadithDetailRemovedFromFavorites": "Hadith rimosso dai preferiti",
+  "hadithDetailSavedToFavorites": "Hadith salvato nei preferiti",
+  "hadithDetailShowArabic": "Mostra l'arabo",
+  "hadithDetailShowTranslation": "Mostra la traduzione",
+  "hadithDetailTitle": "Dettagli Hadith",
+  "hadithDetailTranslation": "Traduzione",
+  "hadithLibraryAllCollections": "Tutte le collezioni",
+  "hadithLibraryAllGrades": "Tutti i gradi",
+  "hadithLibraryAllCategories": "Tutte le categorie",
+  "hadithLibraryAllHadiths": "Hadith {count}",
+  "hadithLibraryEmptyBody": "Non ci sono hadith disponibili in questo momento.",
+  "hadithLibraryEmptySearchBody": "Prova un'altra ricerca o rimuovi i filtri.",
+  "hadithLibraryEmptySearchTitle": "Nessun risultato per “{query}”",
+  "hadithLibraryEmptyTitle": "Nessun hadith disponibile",
+  "hadithLibraryFiltersError": "Non è stato possibile caricare i filtri.",
+  "hadithLibraryFiltersLoading": "Caricamento filtri…",
+  "hadithLibraryLoadError": "Non siamo riusciti a caricare gli hadith. {error}",
+  "hadithLibraryResultsCount": "Risultati {count}",
+  "hadithLibrarySearchHint": "Cerca hadith o riferimento",
+  "hadithLibraryTitle": "Hadiths",
+  "hadithOfflineAvailability": "{progress} disponibile offline",
+  "hadithOfflineAvailable": "Disponibile",
+  "hadithOfflineCollectionsTitle": "Collezioni incluse",
+  "hadithOfflineIncludedSubtitle": "Tutti i contenuti sono integrati nell'app",
+  "hadithOfflineIncludedTitle": "Offline dall'inizio",
+  "hadithOfflineInfoBody": "Gli hadith mostrati qui sono già disponibili senza alcun download aggiuntivo.",
+  "hadithOfflineTitle": "Hadith offline",
+  "hafizActivePlans": "Piani attivi",
+  "hafizAyahRange": "Sì, {start}-{end}",
+  "hafizConfigureSession": "Configura sessione",
+  "hafizEmptyBody": "Non hai ancora creato alcun piano di memorizzazione.",
+  "hafizEmptyHint": "Scegli una sura e definisci un breve intervallo per iniziare.",
+  "hafizEmptyTitle": "Inizia la tua recensione",
+  "hafizEndAyah": "Fine della strofa: {ayah}",
+  "hafizLoadError": "Non è stato possibile caricare questa sura.",
+  "hafizLogRepetition": "Ripetizione del registro",
+  "hafizPlanSaved": "Piano salvato",
+  "hafizRepetitionLogged": "Ripetizione registrata",
+  "hafizReviewedSurahs": "Sura riviste",
+  "hafizSavePlan": "Salva piano",
+  "hafizSelectedSegment": "Segmento selezionato",
+  "hafizStartAyah": "Inizio: {ayah}",
+  "hafizSubtitle": "Organizzare revisioni brevi e coerenti",
+  "hafizSurahNoPlan": "{count} ayah · nessun piano",
+  "hafizSurahProgress": "{start}-{end} · {percent}% completato",
+  "hafizTargetRepetitions": "Obiettivo: {count}",
+  "homeCalendarStripTitle": "CALENDARIO SACRO",
+  "homeGoalCompleted": "Fatto",
+  "homeGoalInProgress": "in corso",
+  "homeInsightAlmostCompleteTodayMessage": "Sei molto vicino a chiudere una giornata forte.",
+  "homeInsightAlmostCompleteTodayTitle": "Quasi completo oggi",
+  "homeInsightBetterThanLastWeekMessage": "Hai completato {delta} più preghiere rispetto alla settimana scorsa.",
+  "homeInsightBetterThanLastWeekTitle": "Meglio della settimana scorsa",
+  "homeInsightDhikrDoneMessage": "Oggi hai eseguito ripetizioni {count}. Finitura molto forte.",
+  "homeInsightDhikrDoneTitle": "Dhikr completato",
+  "homeInsightDhikrGoodPaceMessage": "Oggi ti trovi alle ripetizioni {current}/{goal}.",
+  "homeInsightDhikrGoodPaceTitle": "Buon ritmo dhikr",
+  "homeInsightGoodPaceTodayMessage": "Hai completato le preghiere {count} oggi.",
+  "homeInsightGoodPaceTodayTitle": "Buon ritmo oggi",
+  "homeInsightMostConsistentPrayerMessage": "{prayer} è attualmente il tuo momento più stabile.",
+  "homeInsightMostConsistentPrayerTitle": "La tua preghiera più coerente",
+  "homeInsightPrayerToStrengthenMessage": "{prayer} necessita di un po' più di attenzione.",
+  "homeInsightPrayerToStrengthenTitle": "Preghiera per rafforzare",
+  "homeInsightRamadanConsistencyMessage": "La tua pratica oggi mostra già un buon equilibrio.",
+  "homeInsightRamadanConsistencyTitle": "Consistenza del Ramadan",
+  "homeInsightRamadanMomentumMessage": "Usa questa parte della giornata per mantenere vivo il tuo slancio.",
+  "homeInsightRamadanMomentumTitle": "Slancio del Ramadan",
+  "homeInsightRamadanSmallStepsMessage": "Durante il Ramadan, i passi piccoli e costanti contano molto.",
+  "homeInsightStartTodayFirstMessage": "La tua giornata è ancora aperta. Segna la tua prima preghiera e crea slancio.",
+  "homeInsightStartTodayMoreMessage": "Sei ancora in tempo per iniziare con calma.",
+  "homeInsightStartTodayTitle": "Inizia oggi",
+  "homeInsightStillCanStartMessage": "Un piccolo passo adesso può cambiare il tono della tua giornata.",
+  "homeInsightStillCanStartTitle": "Puoi ancora iniziare",
+  "homeInsightStreakInMotionMessage": "Sei su {streak} giorni consecutivi. Proteggi quella coerenza.",
+  "homeInsightStreakInMotionTitle": "Striscia in movimento",
+  "homeInsightTodayLabel": "L'APPROCCIO DI OGGI",
+  "homeLoadingScheduleBody": "Preparare la tua prossima preghiera",
+  "homeLoadingScheduleTitle": "Tempi di caricamento",
+  "homeLocationCachedBody": "Stiamo preparando i tuoi orari utilizzando la tua ultima posizione salvata.",
+  "homeLocationEnableDeviceLocation": "Abilita la localizzazione del dispositivo",
+  "homeLocationGpsDisabledBody": "Senza GPS non possiamo calcolare tempi di preghiera accurati o allineare Qibla.",
+  "homeLocationPendingBody": "La schermata iniziale rimane visibile anche quando i tempi di preghiera non sono ancora pronti.",
+  "homeLocationPermissionBlocked": "Autorizzazione alla posizione bloccata",
+  "homeLocationPermissionBlockedBody": "Puoi abilitare la posizione per Qibla Time in un secondo momento nelle impostazioni del sistema.",
+  "homeLocationPermissionNeeded": "Consenti alla posizione di visualizzare i tuoi orari di preghiera",
+  "homeLocationPermissionNeededBody": "Qibla Time ha bisogno della tua posizione per mostrare orari affidabili per la tua città.",
+  "homeLocationPreparingTitle": "Preparare i tempi di preghiera",
+  "homeNextPrayerStartsAt": "Inizia alle {time}",
+  "homeNotificationPaused": "Gli avvisi di preghiera generali sono in pausa in questo momento.",
+  "homeNotificationPermissionPending": "I tuoi promemoria Adhan sono configurati, ma l'autorizzazione del sistema è ancora in sospeso.",
+  "homePrayerDescriptionCompleted": "Hai già contrassegnato questa preghiera come completata.",
+  "homePrayerDescriptionNext": "Questa è la prossima preghiera nel ritmo di oggi.",
+  "homePrayerDescriptionNow": "Questa preghiera è attualmente in corso.",
+  "homePrayerDescriptionPendingToday": "Ancora in sospeso nel flusso di oggi.",
+  "homePrayerDescriptionReviewDate": "Disponibile per la revisione per questa data.",
+  "homePrayerSectionSelectedDaySubtitle": "Controlla e segna i tempi per {date}",
+  "homePrayerSectionSelectedDayTitle": "PROGRAMMA DEL GIORNO",
+  "homePrayerSectionTodaySubtitle": "Ritmo completo delle tue cinque preghiere quotidiane",
+  "homePrayerSectionTodayTitle": "LE PREGHIERE DI OGGI",
+  "homePrayerStatusCompleted": "Completato",
+  "homePrayerStatusNext": "Prossimo",
+  "homePrayerStatusNow": "Ora",
+  "homePrayerStatusUpcoming": "Prossimamente",
+  "homeQuickActionsTitle": "SCORCIATOIE SACRE",
+  "homeRamadanClosingSoon": "chiudendo presto",
+  "homeRamadanContinueReading": "Continua a leggere",
+  "homeRamadanCountdownIftar": "{duration} fino all'iftar",
+  "homeRamadanCountdownImsak": "{duration} fino all'imsak",
+  "homeRamadanCountdownTomorrowImsak": "{duration} fino all'imsak di domani",
+  "homeRamadanDhikrCompletedBody": "Ripetizioni {current}/{goal} oggi. Obiettivo giornaliero completato.",
+  "homeRamadanDhikrInProgressBody": "Ripetizioni {current}/{goal} oggi. Hai già iniziato.",
+  "homeRamadanDhikrPreparingBody": "Preparare i tuoi progressi quotidiani nel dhikr.",
+  "homeRamadanDhikrStartBody": "Il tuo obiettivo oggi è {goal}. Anche poche ripetizioni contano già.",
+  "homeRamadanFastingCompleted": "Puoi creare iftar da {time}.",
+  "homeRamadanFastingInProgress": "Giornata di digiuno in corso fino a {time}.",
+  "homeRamadanFastingLabel": "Digiuno",
+  "homeRamadanFastingTitle": "Digiuno",
+  "homeRamadanGoalsCompleteMessage": "Una giornata di Ramadan davvero completa. Mantieni questo ritmo con calma.",
+  "homeRamadanGoalsProgressMessage": "Stai andando bene oggi. Un piccolo passo in più può chiudere definitivamente la giornata.",
+  "homeRamadanGoalsReady": "{completed}/{total} pronto",
+  "homeRamadanGoalsStartMessage": "Inizia con qualcosa di piccolo: una preghiera, qualche ayah o qualche minuto di dhikr.",
+  "homeRamadanGoalsTitle": "OBIETTIVI DEL RAMADAN",
+  "homeRamadanModeTitle": "MODALITÀ RAMADAN",
+  "homeRamadanNextFocus": "focus successivo",
+  "homeRamadanNightLabel": "Notte",
+  "homeRamadanOpenQuran": "Apri il Corano",
+  "homeRamadanOpenTasbih": "Apri tasbih",
+  "homeRamadanPrayerGoal": "{count}/5 completato oggi",
+  "homeRamadanQuranRecentProgress": "Riprendi {surah}, sì {ayah}. Hai progressi recenti.",
+  "homeRamadanQuranReturnBody": "Il tuo ultimo punto era {surah}, ayah {ayah}. Vale la pena ritornarci oggi.",
+  "homeRamadanQuranSavedToday": "Lettura salvata oggi in {surah}, ayah {ayah}.",
+  "homeRamadanQuranStartBody": "Leggi un breve passaggio oggi e potrai continuarlo facilmente più tardi.",
+  "homeRamadanStartAction": "Inizio",
+  "homeRamadanSuhoorLabel": "Suhur",
+  "homeRamadanUntilIftar": "fino all'iftar",
+  "homeSelectedDateCustomBody": "Vedi di seguito gli orari completi di preghiera per il giorno selezionato.",
+  "homeSelectedDateTodayBody": "Vedi di seguito gli orari completi della preghiera per oggi.",
+  "homeWeeklyBestDayHelper": "{count}/5 nel tuo giorno più bello",
+  "qiblaCompassInitError": "Non siamo riusciti ad avviare la bussola.",
+  "qiblaCompassReadError": "Non siamo riusciti a leggere il sensore della bussola.",
+  "qiblaDirectionEast": "Est",
+  "qiblaDirectionLoadError": "Non siamo riusciti a caricare la direzione per la Kaaba.",
+  "qiblaDirectionNorth": "Nord",
+  "qiblaDirectionNorthEast": "Nord-est",
+  "qiblaDirectionNorthWest": "Nord-ovest",
+  "qiblaDirectionSouth": "Sud",
+  "qiblaDirectionSouthEast": "Sud-est",
+  "qiblaDirectionSouthWest": "Sud-ovest",
+  "qiblaDirectionSummary": "Direzione per la Kaaba: {direction}",
+  "qiblaDirectionWest": "Ovest",
+  "qiblaDistanceLabel": "Distanza",
+  "qiblaEnableLocationMessage": "Abilita la posizione per calcolare la direzione verso la Kaaba.",
+  "qiblaGpsDisabledMessage": "Abilita il GPS del tuo dispositivo per ottenere una direzione affidabile.",
+  "qiblaGuidanceBody": "Mantieni il dispositivo piatto e ruotalo delicatamente finché l'indicatore non si allinea.",
+  "qiblaHowToUseAvoidMagnetsBody": "Tenerlo lontano da magneti, custodie metalliche o dispositivi che potrebbero disturbare il sensore.",
+  "qiblaHowToUseAvoidMagnetsTitle": "Evitare interferenze",
+  "qiblaHowToUseCalibrateBody": "Se la bussola non funziona, spostare il telefono con un movimento a forma di otto per ricalibrarlo.",
+  "qiblaHowToUseCalibrateTitle": "Calibrare se necessario",
+  "qiblaHowToUseKeepFlatBody": "Mantieni il dispositivo piatto per migliorare la precisione della bussola.",
+  "qiblaHowToUseKeepFlatTitle": "Mantenere il dispositivo piatto",
+  "qiblaHowToUseTitle": "Come usare la bussola",
+  "qiblaLoading": "Calcolo della direzione…",
+  "qiblaPermissionBlockedMessage": "L'autorizzazione alla posizione è bloccata. Abilitalo nelle impostazioni di sistema.",
+  "qiblaPermissionNeededMessage": "Abbiamo bisogno dell'autorizzazione alla localizzazione per guidarti verso la Kaaba.",
+  "qiblaPrecisionLabel": "Precisione",
+  "qiblaSubtitle": "Direzione verso la Kaaba",
+  "qiblaTitle": "Qibla",
+  "adhanSelectorHeaderBody": "Ascolta una breve anteprima prima di scegliere l'adhan utilizzato per i tuoi promemoria.",
+  "adhanSelectorHeaderTitle": "Scegli la tua chiamata alla preghiera",
+  "adhanSelectorListenPreview": "Ascolta l'anteprima",
+  "adhanSelectorPausePreview": "Metti in pausa l'anteprima",
+  "adhanSelectorPreviewError": "Non è stato possibile riprodurre l'anteprima di Adhan.",
+  "adhanSelectorPreviewIdle": "Tocca per ascoltare un'anteprima",
+  "adhanSelectorPreviewPaused": "Anteprima in pausa",
+  "adhanSelectorPreviewPlaying": "Riproduzione dell'anteprima",
+  "adhanSelectorResumePreview": "Riprendi l'anteprima",
+  "adhanSelectorSelected": "Hai selezionato {name}",
+  "adhanSelectorTitle": "Adhan",
+  "navHome": "Casa",
+  "navQibla": "Qibla",
+  "navTasbih": "Tasbih",
+  "navDua": "Dua",
+  "navQuran": "Corano",
+  "travelModeBannerLocationDetected": "Nuova posizione rilevata: {label} - {distanceKm} km",
+  "@travelModeBannerLocationDetected": {
+    "placeholders": {
+      "label": {},
+      "distanceKm": {
+        "type": "int"
+      }
+    }
+  },
+  "travelModeNotificationTitle": "Qibla Time - Nuova posizione",
+  "travelModeNotificationBody": "{label} - Orari di preghiera aggiornati",
+  "@travelModeNotificationBody": {
+    "placeholders": {
+      "label": {}
+    }
+  },
+  "analyticsAchievementUnlocked": "Sbloccato",
+  "navigationMiniPlayerAyah": "{surah} · Sì, {ayah}",
+  "@navigationMiniPlayerAyah": {
+    "placeholders": {
+      "surah": {},
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "onboardingGatePreparing": "Preparazione di Qibla Time",
+  "supportScreenTitle": "Supporta Qibla Time",
+  "supportScreenThankYou": "Grazie per essere qui",
+  "supportScreenBody": "Il tuo supporto ci aiuta a prenderci cura di Qibla Time, a mantenere viva l'app e a continuare a creare strumenti utili per la tua vita quotidiana.",
+  "supportScreenRateTitle": "Valuta l'app",
+  "supportScreenRateBody": "Una buona valutazione aiuta più persone a scoprire Qibla Time.",
+  "supportScreenShareTitle": "Condividi Qibla Time",
+  "supportScreenShareBody": "Anche raccomandare l'app a familiari e amici è una forma di sadaqah.",
+  "supportScreenSadaqahTitle": "Sostenere con intenzione",
+  "supportScreenSadaqahBody": "Se Qibla Time ti aiuta, puoi sostenere il progetto con un piccolo contributo sincero.",
+  "supportScreenQuote": "Chi aiuta gli altri a raggiungere qualcosa di buono partecipa anche alla sua ricompensa, se Allah lo vuole.",
+  "allahNamesTitle": "I 99 nomi di Allah",
+  "allahNamesIntro": "Esplora una selezione curata dei nomi di Allah, con traslitterazione e significato in modo da poterli ricordare con calma.",
+  "allahNamesLoadError": "Non è stato possibile caricare i nomi di Allah.",
+  "allahNamesUseInTasbih": "Utilizzare in tasbih",
+  "downloadedSurahsTitle": "Sura scaricate",
+  "downloadedSurahsEmpty": "Non hai ancora scaricato alcuna sura.",
+  "downloadedSurahsFavorite": "Preferito",
+  "downloadedSurahsMarkFavorite": "Segna come preferito",
+  "downloadedSurahsRemoveDownload": "Rimuovi il download",
+  "downloadedSurahsLoadError": "Non è stato possibile caricare le tue Sura scaricate.",
+  "focusModeDndActive": "RAKAHA ATTIVO · NON DISTURBARE",
+  "focusModeOpenDndSettings": "Abilita Non disturbare nelle impostazioni",
+  "focusModeTitle": "RAKAHA",
+  "focusModeSujudCount": "+ sujud",
+  "focusModeDndHint": "SENZA INTERRUZIONI È MEGLIO CON NON DISTURBARE",
+  "focusModeReleaseToCancel": "Rilascia per annullare",
+  "focusModeHoldToExit": "Tieni premuto per uscire",
+  "settingsMadhabAsr": "Madhab (Asr)",
+  "settingsManualAdjustment": "Regolazione manuale",
+  "settingsOpenSourceLicenses": "Licenze open source",
+  "settingsProfileUser": "Utente",
+  "settingsProfileStreak": "strisciante",
+  "settingsProfilePrayers": "preghiere",
+  "settingsProfileTasbih": "tasbih",
+  "commonShafii": "Shafi'i",
+  "commonRestore": "Ripristinare",
+  "settingsRestoreBackupPasteHint": "Incolla qui il JSON esportato",
+  "dailyBookBadge": "LIBRO DEL GIORNO",
+  "dailyBookUnavailable": "La libreria non è disponibile al momento.",
+  "dailyBookOpenLibrary": "Libri aperti",
+  "hadithOfflineIncludedInApp": "Incluso nell'app",
+  "hadithOfflineAgoDays": "{count} giorni fa",
+  "@hadithOfflineAgoDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hadithOfflineAgoHours": "{count} ore fa",
+  "@hadithOfflineAgoHours": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hadithOfflineAgoMinutes": "{count} minuti fa",
+  "@hadithOfflineAgoMinutes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hadithOfflineNow": "Proprio adesso",
+  "analyticsShareWeekTitle": "Riepilogo settimanale",
+  "analyticsShareCurrentStreak": "Serie attuale: {count}",
+  "@analyticsShareCurrentStreak": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "analyticsShareThisWeek": "Questa settimana: preghiere {completed}/{maxPossible}",
+  "@analyticsShareThisWeek": {
+    "placeholders": {
+      "completed": {
+        "type": "int"
+      },
+      "maxPossible": {
+        "type": "int"
+      }
+    }
+  },
+  "analyticsShareBestDay": "Giorno migliore: {day}",
+  "@analyticsShareBestDay": {
+    "placeholders": {
+      "day": {}
+    }
+  },
+  "analyticsShareWeekHeading": "SOMMARIO SETTIMANALE",
+  "analyticsShareStreakDaySingular": "serie di giorni",
+  "analyticsShareStreakDayPlural": "giorni consecutivi",
+  "analyticsShareWeeklyPrayersLabel": "Preghiere questa settimana",
+  "analyticsShareBestDayLabel": "Giorno migliore · {count}/5",
+  "@analyticsShareBestDayLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "analyticsShareFullDaysLabel": "Giornate intere",
+  "analyticsShareFooter": "I tuoi progressi in Qibla Time",
+  "analyticsShareImageError": "Non è stato possibile generare l'immagine di avanzamento.",
+  "quranDownloadAyahAudioError": "Non è stato possibile scaricare l'auAllah per ayah {ayah}.",
+  "@quranDownloadAyahAudioError": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "recentLocationUnknown": "Posizione sconosciuta",
+  "cloudSyncRestoreInvalid": "Backup non valido",
+  "cloudSyncRestoreFailed": "Non è stato possibile ripristinare il backup",
+  "bookLinkUnavailable": "Questo collegamento non è disponibile",
+  "bookLinkOpenError": "Non è stato possibile aprire il collegamento.",
+  "ramadanStatusHeaderDay": "Giorno del Ramadan {day}",
+  "@ramadanStatusHeaderDay": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      }
+    }
+  },
+  "ramadanStatusHeaderManual": "Modalità Ramadan manuale",
+  "ramadanStatusBlessingDetected": "Possa Allah accettare il tuo digiuno e le tue azioni oggi.",
+  "ramadanStatusBlessingManual": "Vista speciale del Ramadan abilitata manualmente per i test.",
+  "ramadanStatusSuggestionDhikr": "Ricordati di aumentare il tuo dhikr oggi.",
+  "ramadanStatusSuggestionQuran": "Prova a leggere un po' di più il Corano oggi.",
+  "ramadanStatusSuggestionDua": "Usa questa giornata per fare dua con calma.",
+  "ramadanStatusSuggestionSadaqah": "Anche una piccola sadaqah conta durante il Ramadan.",
+  "adhanSelectorOptionDescription": "Chiamata alla preghiera {number}",
+  "@adhanSelectorOptionDescription": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "prayerNotificationImsakTitle": "Imsak sta arrivando",
+  "prayerNotificationImsakBody": "Mancano 15 minuti all'imsak. Se stai ancora mangiando il suhoor, ora è il momento giusto per concludere.",
+  "prayerNotificationIftarTitle": "L'Iftar sta arrivando",
+  "prayerNotificationIftarBody": "Mancano 15 minuti all'iftar. Possa Allah accettare il tuo digiuno oggi.",
+  "prayerNotificationJumuahTitle": "Jumu'ah oggi",
+  "prayerNotificationJumuahBody": "Preparati per Jumu'ah prima di Dhuhr e prenditi un momento di calma per dirigerti alla moschea.",
+  "settingsLanguageOptionIndonesian": "indonesiano",
+  "settingsLanguageOptionRussian": "russo",
+  "settingsLanguageOptionItalian": "Italiano",
+  "homeQuickActionPurification": "Wudu e Ghusl",
+  "purificationGuideTitle": "Wudu e Ghusl",
+  "purificationGuideSubtitle": "Guida alla purificazione rituale prima della preghiera",
+  "purificationGuideIntro": "Prima della salah, un musulmano potrebbe aver bisogno di una purificazione rituale. Le due forme principali sono wudu (abluzione minore) e ghusl (bagno rituale completo). Questa guida spiega cos'è ciascuno, quando è necessario e come eseguirlo.",
+  "purificationGuideWuduTitle": "Wudu",
+  "purificationGuideWuduBody": "Cos'è: Wudu è la purificazione rituale minore usata prima della salah quando non è presente l'impurità maggiore. Quando ne hai bisogno: ? Prima della preghiera se non hai un wudu valido. ? Dopo essere andato in bagno. ? Dopo qualsiasi cosa che interrompa il tuo stato di purezza, come la mancanza di respiro, il sonno profondo o la perdita di coscienza. Passi del wudu: 1. Crea l'intenzione nel tuo cuore. 2. Di' \"Bismillah\". 3. Lavare entrambe le mani 3 volte, solitamente iniziando dalla destra. 4. Sciacquare la bocca 3 volte. 5. Pulisci il naso con acqua 3 volte. 6. Lavare tutto il viso 3 volte. 7. Lavare le braccia fino ai gomiti 3 volte, iniziando con il braccio destro e poi con il sinistro. 8. Pulisci la testa una volta con le mani bagnate. 9. Pulisci le orecchie una volta. 10. Lavare i piedi fino alle caviglie 3 volte, iniziando con il piede destro e poi con il sinistro. Note importanti: ? La pratica abituale è 3 volte, ma 1 volta è sufficiente per la validità. ? Assicurati che l'acqua raggiunga correttamente l'intera area. ? Mantieni l'ordine corretto. ? Evita tutto ciò che blocca l'acqua, come lo sporco o uno strato che copre la pelle.",
+  "purificationGuideWuduWhatIsLabel": "Di cosa si tratta",
+  "purificationGuideWuduWhatIsBody": "Wudu è la purificazione rituale minore prima della salah quando non è presente l'impurità maggiore.",
+  "purificationGuideWuduWhenNeededLabel": "Quando ne hai bisogno",
+  "purificationGuideWuduWhenNeededPrayer": "Prima della preghiera se non hai un wudu valido.",
+  "purificationGuideWuduWhenNeededBathroom": "Dopo essere andato in bagno.",
+  "purificationGuideWuduWhenNeededPurityLoss": "Dopo aver perso il tuo stato di purezza, ad esempio a causa di vento transitorio, sonno profondo o perdita di coscienza.",
+  "purificationGuideWuduStepsTitle": "Passi di wudu",
+  "purificationGuideWuduStepsSubtitle": "Solitamente ogni lavaggio viene effettuato 3 volte, anche se 1 volta è sufficiente per la validità.",
+  "purificationGuideWuduNotesTitle": "Note importanti",
+  "purificationGuideWuduNoteModeration": "Non andare oltre il necessario e non trasformare il bucato in un peso.",
+  "purificationGuideWuduNoteWater": "Assicurati che l'acqua raggiunga correttamente l'intera area.",
+  "purificationGuideWuduNoteOrder": "Mantieni l'ordine corretto dall'inizio alla fine.",
+  "purificationGuideWuduNoteObstacles": "Rimuovi tutto ciò che blocca l'acqua, come lo sporco o uno strato che copre la pelle.",
+  "purificationGuideWuduRepeatOnce": "1 volta",
+  "purificationGuideWuduRepeatThreeTimes": "3 volte",
+  "purificationGuideWuduStep1Title": "Intenzione",
+  "purificationGuideWuduStep1Body": "Crea l'intenzione nel tuo cuore di eseguire il wudu per la salah.",
+  "purificationGuideWuduStep2Title": "Bismillah",
+  "purificationGuideWuduStep2Body": "Di' Bismillah prima di iniziare il lavaggio.",
+  "purificationGuideWuduStep3Title": "Lavarsi le mani",
+  "purificationGuideWuduStep3Body": "Lavare accuratamente entrambe le mani, di solito iniziando dalla destra.",
+  "purificationGuideWuduStep4Title": "Sciacquare la bocca",
+  "purificationGuideWuduStep4Body": "Sciacquare bene la bocca in modo che l'acqua raggiunga l'interno.",
+  "purificationGuideWuduStep5Title": "Pulisci il naso",
+  "purificationGuideWuduStep5Body": "Aspirare delicatamente l'acqua nel naso e pulirla.",
+  "purificationGuideWuduStep6Title": "Lavare il viso",
+  "purificationGuideWuduStep6Body": "Lavare tutto il viso, dalla fronte al mento e da un orecchio all'altro.",
+  "purificationGuideWuduStep7Title": "Lavare le braccia fino ai gomiti",
+  "purificationGuideWuduStep7Body": "Lavare prima il braccio destro, poi il sinistro, assicurandosi che i gomiti siano inclusi.",
+  "purificationGuideWuduStep8Title": "Pulisci la testa",
+  "purificationGuideWuduStep8Body": "Passare delicatamente le mani bagnate sopra la testa da davanti a dietro.",
+  "purificationGuideWuduStep9Title": "Pulisci le orecchie",
+  "purificationGuideWuduStep9Body": "Pulisci le orecchie con la stessa umidità, senza bisogno di acqua extra.",
+  "purificationGuideWuduStep10Title": "Lavare i piedi fino alle caviglie",
+  "purificationGuideWuduStep10Body": "Lavare prima il piede destro, poi il sinistro, assicurandosi che le caviglie siano incluse.",
+  "purificationGuideGhuslTitle": "Ghusl",
+  "purificationGuideGhuslBody": "Cos'è: Ghusl è il bagno rituale completo. È richiesto dopo una grande impurità. Quando è richiesto: ? Dopo i rapporti sessuali. ? Dopo l'eiaculazione. ? Al termine delle mestruazioni. ? Al termine del sanguinamento postnatale. Come farlo: 1. Crea l'intenzione nel tuo cuore. 2. Di' Bismillah. 3. Lavare le mani e le parti intime. 4. Rimuovere ogni impurità visibile. 5. Esegui il wudu. 6. Versare l'acqua sulla testa in modo che raggiunga il cuoio capelluto. 7. Lavare tutto il corpo, iniziando dal lato destro e poi dal sinistro, assicurandosi che l'acqua raggiunga ogni parte. Nota importante: Un ghusl completo rimuove le principali impurità. Se in seguito non accade nulla che rompa il wudu, puoi pregare senza ripetere un wudu separato.",
+  "purificationGuideGhuslWhatIsLabel": "Di cosa si tratta",
+  "purificationGuideGhuslWhatIsBody": "Ghusl è il bagno rituale completo richiesto dopo una grave impurità.",
+  "purificationGuideGhuslWhenNeededLabel": "Quando ne hai bisogno",
+  "purificationGuideGhuslWhenNeededRelations": "Dopo le relazioni intime.",
+  "purificationGuideGhuslWhenNeededMenstruation": "Al termine delle mestruazioni.",
+  "purificationGuideGhuslWhenNeededPostnatal": "Al termine del sanguinamento postnatale.",
+  "purificationGuideGhuslWhenNeededDischarge": "Dopo la scarica sessuale.",
+  "purificationGuideGhuslStepsTitle": "Passi di ghusl",
+  "purificationGuideGhuslStepsSubtitle": "Ghusl non ha un numero fisso di ripetizioni come il wudu. L'importante è che l'acqua arrivi a tutto il corpo, anche se alcune parti possono essere lavate più di una volta secondo le modalità consigliate.",
+  "purificationGuideGhuslValidityTitle": "Modulo completo e modulo minimo valido",
+  "purificationGuideGhuslValidityRecommended": "La forma completa consigliata segue passo dopo passo il modello Sunnah, con lavaggio e ordine accurati.",
+  "purificationGuideGhuslValidityMinimum": "La forma minima valida è semplice: formulare l'intenzione e assicurarsi che l'acqua copra tutto il corpo.",
+  "purificationGuideGhuslNotesTitle": "Note importanti",
+  "purificationGuideGhuslNoteDrySpots": "Assicurati che nessuna zona venga lasciata asciutta.",
+  "purificationGuideGhuslNoteScalp": "Assicurarsi che l'acqua raggiunga bene il cuoio capelluto.",
+  "purificationGuideGhuslNoteBarriers": "Rimuovi tutto ciò che blocca l'acqua, come lo sporco o uno strato sulla pelle.",
+  "purificationGuideGhuslNoteSimplicity": "Non renderlo inutilmente complicato.",
+  "purificationGuideGhuslBadgeEssential": "Essenziale",
+  "purificationGuideGhuslBadgeRecommended": "Raccomandato",
+  "purificationGuideGhuslBadgeUntilClean": "Fino a quando non è pulito",
+  "purificationGuideGhuslBadgeUsuallyThreeTimes": "Spesso 3 volte",
+  "purificationGuideGhuslBadgeNoFixedCount": "Nessun conteggio fisso",
+  "purificationGuideGhuslStep1Title": "Intenzione",
+  "purificationGuideGhuslStep1Body": "Crea l'intenzione nel tuo cuore di rimuovere le principali impurità ed eseguire il ghusl.",
+  "purificationGuideGhuslStep2Title": "Bismillah",
+  "purificationGuideGhuslStep2Body": "Di' Bismillah prima di iniziare il lavaggio.",
+  "purificationGuideGhuslStep3Title": "Lavarsi le mani",
+  "purificationGuideGhuslStep3Body": "Lavare bene entrambe le mani prima di passare al resto del corpo.",
+  "purificationGuideGhuslStep4Title": "Lavare le parti intime ed eliminare le impurità visibili",
+  "purificationGuideGhuslStep4Body": "Pulisci le parti intime e rimuovi ogni impurità visibile fino a quando la zona sarà pulita.",
+  "purificationGuideGhuslStep5Title": "Esegui il wudu",
+  "purificationGuideGhuslStep5Body": "Esegui il wudu, o almeno la sua forma base, prima di lavare tutto il corpo.",
+  "purificationGuideGhuslStep6Title": "Versare l'acqua sulla testa",
+  "purificationGuideGhuslStep6Body": "Versare l'acqua sulla testa e assicurarsi che raggiunga il cuoio capelluto. Questo viene spesso fatto più volte, ad esempio 3.",
+  "purificationGuideGhuslStep7Title": "Lavare tutto il corpo",
+  "purificationGuideGhuslStep7Body": "Lavare tutto il corpo, solitamente iniziando dal lato destro e poi dal sinistro. Non esiste un numero fisso purché l'acqua arrivi ovunque.",
+  "purificationGuideGhuslStep8Title": "Assicurati che l'acqua raggiunga ogni parte",
+  "purificationGuideGhuslStep8Body": "Controllare attentamente che nessuna zona rimanga asciutta, soprattutto le parti nascoste o piegate del corpo.",
+  "purificationGuideFinalNoteTitle": "Differenza fondamentale",
+  "purificationGuideFinalNoteBody": "Wudu è per impurità minori. Ghusl indica la maggiore impurità. Se hai solo bisogno del wudu, il ghusl non è richiesto. Se è richiesto il ghusl, il wudu da solo non è sufficiente."
+}

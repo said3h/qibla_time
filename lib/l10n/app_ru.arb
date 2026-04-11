@@ -1,4 +1,4 @@
-﻿{
+{
   "@@locale": "ru",
   "appTitle": "Qibla Time",
   "commonSkip": "Пропускать",
@@ -1153,6 +1153,7 @@
   "prayerNotificationJumuahBody": "Подготовьтесь к Джума до Зухра и выделите спокойный момент, чтобы отправиться в мечеть.",
   "settingsLanguageOptionIndonesian": "Индонезийский",
   "settingsLanguageOptionRussian": "Русский",
+  "settingsLanguageOptionItalian": "Итальянский",
   "homeQuickActionPurification": "Вуду и гусль",
   "purificationGuideTitle": "Вуду и гусль",
   "purificationGuideSubtitle": "Руководство по ритуальной чистоте перед молитвой",

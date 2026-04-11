@@ -2799,6 +2799,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get settingsLanguageOptionRussian => 'Русский';
 
   @override
+  String get settingsLanguageOptionItalian => 'Итальянский';
+
+  @override
   String get homeQuickActionPurification => 'Вуду и гусль';
 
   @override

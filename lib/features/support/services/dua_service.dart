@@ -109,6 +109,7 @@ class DuaService {
       'en' => 'en',
       'fr' => 'fr',
       'de' => 'de',
+      'it' => 'it',
       'nl' => 'nl',
       'id' => 'id',
       'ru' => 'ru',
@@ -132,6 +133,7 @@ class DuaService {
     return switch (_normalizeLanguageCode(languageCode)) {
       'de' => const ['de', 'en', 'es'],
       'fr' => const ['fr', 'en', 'es'],
+      'it' => const ['it', 'en', 'es'],
       'nl' => const ['nl', 'en', 'es'],
       'id' => const ['id', 'en', 'es'],
       'ru' => const ['ru', 'en', 'es'],

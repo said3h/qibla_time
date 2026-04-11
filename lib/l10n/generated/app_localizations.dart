@@ -11,6 +11,7 @@ import 'app_localizations_en.dart';
 import 'app_localizations_es.dart';
 import 'app_localizations_fr.dart';
 import 'app_localizations_id.dart';
+import 'app_localizations_it.dart';
 import 'app_localizations_nl.dart';
 import 'app_localizations_ru.dart';
 
@@ -106,6 +107,7 @@ abstract class AppLocalizations {
     Locale('es'),
     Locale('fr'),
     Locale('id'),
+    Locale('it'),
     Locale('nl'),
     Locale('ru')
   ];
@@ -4851,6 +4853,12 @@ abstract class AppLocalizations {
   /// **'Ruso'**
   String get settingsLanguageOptionRussian;
 
+  /// No description provided for @settingsLanguageOptionItalian.
+  ///
+  /// In es, this message translates to:
+  /// **'Italiano'**
+  String get settingsLanguageOptionItalian;
+
   /// No description provided for @homeQuickActionPurification.
   ///
   /// In es, this message translates to:
@@ -5367,6 +5375,7 @@ class _AppLocalizationsDelegate
         'es',
         'fr',
         'id',
+        'it',
         'nl',
         'ru'
       ].contains(locale.languageCode);
@@ -5390,6 +5399,8 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
       return AppLocalizationsFr();
     case 'id':
       return AppLocalizationsId();
+    case 'it':
+      return AppLocalizationsIt();
     case 'nl':
       return AppLocalizationsNl();
     case 'ru':

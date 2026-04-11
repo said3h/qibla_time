@@ -11,6 +11,7 @@ export 'generated/app_localizations_de.dart';
 export 'generated/app_localizations_en.dart';
 export 'generated/app_localizations_es.dart';
 export 'generated/app_localizations_id.dart';
+export 'generated/app_localizations_it.dart';
 export 'generated/app_localizations_nl.dart';
 export 'generated/app_localizations_ru.dart';
 

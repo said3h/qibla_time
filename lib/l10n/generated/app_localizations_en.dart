@@ -2771,6 +2771,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsLanguageOptionRussian => 'Russian';
 
   @override
+  String get settingsLanguageOptionItalian => 'Italian';
+
+  @override
   String get homeQuickActionPurification => 'Wudu & Ghusl';
 
   @override

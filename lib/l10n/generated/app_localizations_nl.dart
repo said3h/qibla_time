@@ -2787,6 +2787,9 @@ class AppLocalizationsNl extends AppLocalizations {
   String get settingsLanguageOptionRussian => 'Russisch';
 
   @override
+  String get settingsLanguageOptionItalian => 'Italiaans';
+
+  @override
   String get homeQuickActionPurification => 'Wudu en ghusl';
 
   @override

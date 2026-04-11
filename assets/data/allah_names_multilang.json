@@ -35,6 +35,10 @@
       "ru": {
         "name": "Самый Милостивый",
         "description": ""
+      },
+      "it": {
+        "name": "Il più gentile",
+        "description": ""
       }
     }
   },
@@ -73,6 +77,10 @@
       },
       "ru": {
         "name": "Самый Милосердный",
+        "description": ""
+      },
+      "it": {
+        "name": "Il più misericorAllahso",
         "description": ""
       }
     }
@@ -113,6 +121,10 @@
       "ru": {
         "name": "Король",
         "description": ""
+      },
+      "it": {
+        "name": "Il Re",
+        "description": ""
       }
     }
   },
@@ -151,6 +163,10 @@
       },
       "ru": {
         "name": "Самый Святой",
+        "description": ""
+      },
+      "it": {
+        "name": "Il Santissimo",
         "description": ""
       }
     }
@@ -191,6 +207,10 @@
       "ru": {
         "name": "Источник мира",
         "description": ""
+      },
+      "it": {
+        "name": "La Fonte della Pace",
+        "description": ""
       }
     }
   },
@@ -229,6 +249,10 @@
       },
       "ru": {
         "name": "Хранитель веры",
+        "description": ""
+      },
+      "it": {
+        "name": "Il guardiano della fede",
         "description": ""
       }
     }
@@ -269,6 +293,10 @@
       "ru": {
         "name": "Защитник",
         "description": ""
+      },
+      "it": {
+        "name": "Il Protettore",
+        "description": ""
       }
     }
   },
@@ -307,6 +335,10 @@
       },
       "ru": {
         "name": "Всемогущий",
+        "description": ""
+      },
+      "it": {
+        "name": "L'Onnipotente",
         "description": ""
       }
     }
@@ -347,6 +379,10 @@
       "ru": {
         "name": "Компеллер",
         "description": ""
+      },
+      "it": {
+        "name": "Il Compeller",
+        "description": ""
       }
     }
   },
@@ -385,6 +421,10 @@
       },
       "ru": {
         "name": "Величественный",
+        "description": ""
+      },
+      "it": {
+        "name": "Il Maestoso",
         "description": ""
       }
     }
@@ -425,6 +465,10 @@
       "ru": {
         "name": "Создатель",
         "description": ""
+      },
+      "it": {
+        "name": "Il Creatore",
+        "description": ""
       }
     }
   },
@@ -463,6 +507,10 @@
       },
       "ru": {
         "name": "Создатель",
+        "description": ""
+      },
+      "it": {
+        "name": "L'Originatore",
         "description": ""
       }
     }
@@ -503,6 +551,10 @@
       "ru": {
         "name": "Модник",
         "description": ""
+      },
+      "it": {
+        "name": "Il Fashionista",
+        "description": ""
       }
     }
   },
@@ -541,6 +593,10 @@
       },
       "ru": {
         "name": "Великий прощающий",
+        "description": ""
+      },
+      "it": {
+        "name": "Il Grande Perdonatore",
         "description": ""
       }
     }
@@ -581,6 +637,10 @@
       "ru": {
         "name": "Покоритель",
         "description": ""
+      },
+      "it": {
+        "name": "Il Sottomesso",
+        "description": ""
       }
     }
   },
@@ -619,6 +679,10 @@
       },
       "ru": {
         "name": "Даритель",
+        "description": ""
+      },
+      "it": {
+        "name": "Il Donatore",
         "description": ""
       }
     }
@@ -659,6 +723,10 @@
       "ru": {
         "name": "Поставщик",
         "description": ""
+      },
+      "it": {
+        "name": "Il fornitore",
+        "description": ""
       }
     }
   },
@@ -697,6 +765,10 @@
       },
       "ru": {
         "name": "Открывалка",
+        "description": ""
+      },
+      "it": {
+        "name": "L'Apertore",
         "description": ""
       }
     }
@@ -737,6 +809,10 @@
       "ru": {
         "name": "Всезнающий",
         "description": ""
+      },
+      "it": {
+        "name": "L'Onnisciente",
+        "description": ""
       }
     }
   },
@@ -775,6 +851,10 @@
       },
       "ru": {
         "name": "Констриктор",
+        "description": ""
+      },
+      "it": {
+        "name": "Il costrittore",
         "description": ""
       }
     }
@@ -815,6 +895,10 @@
       "ru": {
         "name": "Расширитель",
         "description": ""
+      },
+      "it": {
+        "name": "L'espansore",
+        "description": ""
       }
     }
   },
@@ -853,6 +937,10 @@
       },
       "ru": {
         "name": "Абасер",
+        "description": ""
+      },
+      "it": {
+        "name": "L'Abbassatore",
         "description": ""
       }
     }
@@ -893,6 +981,10 @@
       "ru": {
         "name": "Экзальтёр",
         "description": ""
+      },
+      "it": {
+        "name": "L'Esaltatore",
+        "description": ""
       }
     }
   },
@@ -931,6 +1023,10 @@
       },
       "ru": {
         "name": "Почетный",
+        "description": ""
+      },
+      "it": {
+        "name": "L'Onorevole",
         "description": ""
       }
     }
@@ -971,6 +1067,10 @@
       "ru": {
         "name": "Унизитель",
         "description": ""
+      },
+      "it": {
+        "name": "L'Umiliatore",
+        "description": ""
       }
     }
   },
@@ -1009,6 +1109,10 @@
       },
       "ru": {
         "name": "Всеслышащий",
+        "description": ""
+      },
+      "it": {
+        "name": "L'Onniudiente",
         "description": ""
       }
     }
@@ -1049,6 +1153,10 @@
       "ru": {
         "name": "Всевидящий",
         "description": ""
+      },
+      "it": {
+        "name": "L'onniveggente",
+        "description": ""
       }
     }
   },
@@ -1087,6 +1195,10 @@
       },
       "ru": {
         "name": "Судья",
+        "description": ""
+      },
+      "it": {
+        "name": "Il giudice",
         "description": ""
       }
     }
@@ -1127,6 +1239,10 @@
       "ru": {
         "name": "Справедливый",
         "description": ""
+      },
+      "it": {
+        "name": "Il Giusto",
+        "description": ""
       }
     }
   },
@@ -1165,6 +1281,10 @@
       },
       "ru": {
         "name": "Тонкий и добрый",
+        "description": ""
+      },
+      "it": {
+        "name": "Il Sottile e Gentile",
         "description": ""
       }
     }
@@ -1205,6 +1325,10 @@
       "ru": {
         "name": "Всезнающий",
         "description": ""
+      },
+      "it": {
+        "name": "L'Onnisciente",
+        "description": ""
       }
     }
   },
@@ -1243,6 +1367,10 @@
       },
       "ru": {
         "name": "Терпеливый",
+        "description": ""
+      },
+      "it": {
+        "name": "Il tollerante",
         "description": ""
       }
     }
@@ -1283,6 +1411,10 @@
       "ru": {
         "name": "Великолепный",
         "description": ""
+      },
+      "it": {
+        "name": "Il Magnifico",
+        "description": ""
       }
     }
   },
@@ -1321,6 +1453,10 @@
       },
       "ru": {
         "name": "Прощающий",
+        "description": ""
+      },
+      "it": {
+        "name": "Il Perdonatore",
         "description": ""
       }
     }
@@ -1361,6 +1497,10 @@
       "ru": {
         "name": "Благодарный",
         "description": ""
+      },
+      "it": {
+        "name": "Il Grato",
+        "description": ""
       }
     }
   },
@@ -1399,6 +1539,10 @@
       },
       "ru": {
         "name": "Самый Высокий",
+        "description": ""
+      },
+      "it": {
+        "name": "L'Altissimo",
         "description": ""
       }
     }
@@ -1439,6 +1583,10 @@
       "ru": {
         "name": "Величайший",
         "description": ""
+      },
+      "it": {
+        "name": "Il più grande",
+        "description": ""
       }
     }
   },
@@ -1477,6 +1625,10 @@
       },
       "ru": {
         "name": "Хранитель",
+        "description": ""
+      },
+      "it": {
+        "name": "Il conservatore",
         "description": ""
       }
     }
@@ -1517,6 +1669,10 @@
       "ru": {
         "name": "Питатель",
         "description": ""
+      },
+      "it": {
+        "name": "Il nutriente",
+        "description": ""
       }
     }
   },
@@ -1555,6 +1711,10 @@
       },
       "ru": {
         "name": "Счетчик",
+        "description": ""
+      },
+      "it": {
+        "name": "Il calcolatore",
         "description": ""
       }
     }
@@ -1595,6 +1755,10 @@
       "ru": {
         "name": "Величественный",
         "description": ""
+      },
+      "it": {
+        "name": "Il Maestoso",
+        "description": ""
       }
     }
   },
@@ -1633,6 +1797,10 @@
       },
       "ru": {
         "name": "Самый щедрый",
+        "description": ""
+      },
+      "it": {
+        "name": "Il più generoso",
         "description": ""
       }
     }
@@ -1673,6 +1841,10 @@
       "ru": {
         "name": "Бдительный",
         "description": ""
+      },
+      "it": {
+        "name": "Il Vigile",
+        "description": ""
       }
     }
   },
@@ -1711,6 +1883,10 @@
       },
       "ru": {
         "name": "Отзывчивый",
+        "description": ""
+      },
+      "it": {
+        "name": "Il reattivo",
         "description": ""
       }
     }
@@ -1751,6 +1927,10 @@
       "ru": {
         "name": "Всеохватывающее",
         "description": ""
+      },
+      "it": {
+        "name": "L'onnicomprensivo",
+        "description": ""
       }
     }
   },
@@ -1789,6 +1969,10 @@
       },
       "ru": {
         "name": "Мудрый",
+        "description": ""
+      },
+      "it": {
+        "name": "Il saggio",
         "description": ""
       }
     }
@@ -1829,6 +2013,10 @@
       "ru": {
         "name": "Любящий",
         "description": ""
+      },
+      "it": {
+        "name": "L'Amore",
+        "description": ""
       }
     }
   },
@@ -1867,6 +2055,10 @@
       },
       "ru": {
         "name": "Славный",
+        "description": ""
+      },
+      "it": {
+        "name": "Il Glorioso",
         "description": ""
       }
     }
@@ -1907,6 +2099,10 @@
       "ru": {
         "name": "Воскреситель",
         "description": ""
+      },
+      "it": {
+        "name": "Il Resuscitatore",
+        "description": ""
       }
     }
   },
@@ -1945,6 +2141,10 @@
       },
       "ru": {
         "name": "Свидетель",
+        "description": ""
+      },
+      "it": {
+        "name": "Il testimone",
         "description": ""
       }
     }
@@ -1985,6 +2185,10 @@
       "ru": {
         "name": "Правда",
         "description": ""
+      },
+      "it": {
+        "name": "La verità",
+        "description": ""
       }
     }
   },
@@ -2023,6 +2227,10 @@
       },
       "ru": {
         "name": "Попечитель",
+        "description": ""
+      },
+      "it": {
+        "name": "Il fiduciario",
         "description": ""
       }
     }
@@ -2063,6 +2271,10 @@
       "ru": {
         "name": "Сильный",
         "description": ""
+      },
+      "it": {
+        "name": "Il Forte",
+        "description": ""
       }
     }
   },
@@ -2101,6 +2313,10 @@
       },
       "ru": {
         "name": "Фирма",
+        "description": ""
+      },
+      "it": {
+        "name": "L'azienda",
         "description": ""
       }
     }
@@ -2141,6 +2357,10 @@
       "ru": {
         "name": "Защищающий друг",
         "description": ""
+      },
+      "it": {
+        "name": "L'amico protettore",
+        "description": ""
       }
     }
   },
@@ -2179,6 +2399,10 @@
       },
       "ru": {
         "name": "Похвальный",
+        "description": ""
+      },
+      "it": {
+        "name": "Il lodevole",
         "description": ""
       }
     }
@@ -2219,6 +2443,10 @@
       "ru": {
         "name": "Счетчик",
         "description": ""
+      },
+      "it": {
+        "name": "Il contatore",
+        "description": ""
       }
     }
   },
@@ -2257,6 +2485,10 @@
       },
       "ru": {
         "name": "Создатель",
+        "description": ""
+      },
+      "it": {
+        "name": "L'Originatore",
         "description": ""
       }
     }
@@ -2297,6 +2529,10 @@
       "ru": {
         "name": "Реставратор",
         "description": ""
+      },
+      "it": {
+        "name": "Il Restauratore",
+        "description": ""
       }
     }
   },
@@ -2335,6 +2571,10 @@
       },
       "ru": {
         "name": "Даритель жизни",
+        "description": ""
+      },
+      "it": {
+        "name": "Il Donatore di Vita",
         "description": ""
       }
     }
@@ -2375,6 +2615,10 @@
       "ru": {
         "name": "Создатель смерти",
         "description": ""
+      },
+      "it": {
+        "name": "Il Creatore della Morte",
+        "description": ""
       }
     }
   },
@@ -2413,6 +2657,10 @@
       },
       "ru": {
         "name": "Вечноживущий",
+        "description": ""
+      },
+      "it": {
+        "name": "Il sempre vivo",
         "description": ""
       }
     }
@@ -2453,6 +2701,10 @@
       "ru": {
         "name": "Самостоятельный",
         "description": ""
+      },
+      "it": {
+        "name": "L'autosussistente",
+        "description": ""
       }
     }
   },
@@ -2491,6 +2743,10 @@
       },
       "ru": {
         "name": "Искатель",
+        "description": ""
+      },
+      "it": {
+        "name": "Il Trovatore",
         "description": ""
       }
     }
@@ -2531,6 +2787,10 @@
       "ru": {
         "name": "Благородный и славный",
         "description": ""
+      },
+      "it": {
+        "name": "Il Nobile e il Glorioso",
+        "description": ""
       }
     }
   },
@@ -2569,6 +2829,10 @@
       },
       "ru": {
         "name": "Тот самый",
+        "description": ""
+      },
+      "it": {
+        "name": "L'Uno",
         "description": ""
       }
     }
@@ -2609,6 +2873,10 @@
       "ru": {
         "name": "Уникальный",
         "description": ""
+      },
+      "it": {
+        "name": "L'Unico",
+        "description": ""
       }
     }
   },
@@ -2647,6 +2915,10 @@
       },
       "ru": {
         "name": "Вечное убежище",
+        "description": ""
+      },
+      "it": {
+        "name": "Il rifugio eterno",
         "description": ""
       }
     }
@@ -2687,6 +2959,10 @@
       "ru": {
         "name": "Способность",
         "description": ""
+      },
+      "it": {
+        "name": "L'Abile",
+        "description": ""
       }
     }
   },
@@ -2725,6 +3001,10 @@
       },
       "ru": {
         "name": "Создатель всей силы",
+        "description": ""
+      },
+      "it": {
+        "name": "Il Creatore di ogni potere",
         "description": ""
       }
     }
@@ -2765,6 +3045,10 @@
       "ru": {
         "name": "Экспедитор",
         "description": ""
+      },
+      "it": {
+        "name": "L'espediente",
+        "description": ""
       }
     }
   },
@@ -2803,6 +3087,10 @@
       },
       "ru": {
         "name": "Замедлитель",
+        "description": ""
+      },
+      "it": {
+        "name": "Il Ritardatore",
         "description": ""
       }
     }
@@ -2843,6 +3131,10 @@
       "ru": {
         "name": "Первый",
         "description": ""
+      },
+      "it": {
+        "name": "Il primo",
+        "description": ""
       }
     }
   },
@@ -2881,6 +3173,10 @@
       },
       "ru": {
         "name": "Последний",
+        "description": ""
+      },
+      "it": {
+        "name": "L'ultimo",
         "description": ""
       }
     }
@@ -2921,6 +3217,10 @@
       "ru": {
         "name": "Манифест",
         "description": ""
+      },
+      "it": {
+        "name": "Il manifesto",
+        "description": ""
       }
     }
   },
@@ -2959,6 +3259,10 @@
       },
       "ru": {
         "name": "Скрытый",
+        "description": ""
+      },
+      "it": {
+        "name": "Il nascosto",
         "description": ""
       }
     }
@@ -2999,6 +3303,10 @@
       "ru": {
         "name": "Губернатор",
         "description": ""
+      },
+      "it": {
+        "name": "Il Governatore",
+        "description": ""
       }
     }
   },
@@ -3037,6 +3345,10 @@
       },
       "ru": {
         "name": "Самый возвышенный",
+        "description": ""
+      },
+      "it": {
+        "name": "Il più esaltato",
         "description": ""
       }
     }
@@ -3077,6 +3389,10 @@
       "ru": {
         "name": "Источник всего добра",
         "description": ""
+      },
+      "it": {
+        "name": "La fonte di ogni bontà",
+        "description": ""
       }
     }
   },
@@ -3115,6 +3431,10 @@
       },
       "ru": {
         "name": "Принимающий покаяние",
+        "description": ""
+      },
+      "it": {
+        "name": "L'accettatore del pentimento",
         "description": ""
       }
     }
@@ -3155,6 +3475,10 @@
       "ru": {
         "name": "Мститель",
         "description": ""
+      },
+      "it": {
+        "name": "Il Vendicatore",
+        "description": ""
       }
     }
   },
@@ -3193,6 +3517,10 @@
       },
       "ru": {
         "name": "Прощающий",
+        "description": ""
+      },
+      "it": {
+        "name": "Il perdonatore",
         "description": ""
       }
     }
@@ -3233,6 +3561,10 @@
       "ru": {
         "name": "Сострадательный",
         "description": ""
+      },
+      "it": {
+        "name": "Il Compassionevole",
+        "description": ""
       }
     }
   },
@@ -3271,6 +3603,10 @@
       },
       "ru": {
         "name": "Владелец суверенитета",
+        "description": ""
+      },
+      "it": {
+        "name": "Il detentore della sovranità",
         "description": ""
       }
     }
@@ -3311,6 +3647,10 @@
       "ru": {
         "name": "Лорд Величия и Щедрости",
         "description": ""
+      },
+      "it": {
+        "name": "Signore di maestà e generosità",
+        "description": ""
       }
     }
   },
@@ -3349,6 +3689,10 @@
       },
       "ru": {
         "name": "Справедливый",
+        "description": ""
+      },
+      "it": {
+        "name": "L'Equo",
         "description": ""
       }
     }
@@ -3389,6 +3733,10 @@
       "ru": {
         "name": "Собиратель",
         "description": ""
+      },
+      "it": {
+        "name": "Il Raccoglitore",
+        "description": ""
       }
     }
   },
@@ -3427,6 +3775,10 @@
       },
       "ru": {
         "name": "Самодостаточный",
+        "description": ""
+      },
+      "it": {
+        "name": "L'Autosufficiente",
         "description": ""
       }
     }
@@ -3467,6 +3819,10 @@
       "ru": {
         "name": "Обогатитель",
         "description": ""
+      },
+      "it": {
+        "name": "L'arricchitore",
+        "description": ""
       }
     }
   },
@@ -3505,6 +3861,10 @@
       },
       "ru": {
         "name": "Предотвращение",
+        "description": ""
+      },
+      "it": {
+        "name": "Il Preventivo",
         "description": ""
       }
     }
@@ -3545,6 +3905,10 @@
       "ru": {
         "name": "Создатель вреда",
         "description": ""
+      },
+      "it": {
+        "name": "Il creatore del danno",
+        "description": ""
       }
     }
   },
@@ -3583,6 +3947,10 @@
       },
       "ru": {
         "name": "Создатель добра",
+        "description": ""
+      },
+      "it": {
+        "name": "Il Creatore del bene",
         "description": ""
       }
     }
@@ -3623,6 +3991,10 @@
       "ru": {
         "name": "Свет",
         "description": ""
+      },
+      "it": {
+        "name": "La luce",
+        "description": ""
       }
     }
   },
@@ -3661,6 +4033,10 @@
       },
       "ru": {
         "name": "Руководство",
+        "description": ""
+      },
+      "it": {
+        "name": "La Guida",
         "description": ""
       }
     }
@@ -3701,6 +4077,10 @@
       "ru": {
         "name": "Несравненный создатель",
         "description": ""
+      },
+      "it": {
+        "name": "L'incomparabile creatore",
+        "description": ""
       }
     }
   },
@@ -3739,6 +4119,10 @@
       },
       "ru": {
         "name": "Вечный",
+        "description": ""
+      },
+      "it": {
+        "name": "L'Eterno",
         "description": ""
       }
     }
@@ -3779,6 +4163,10 @@
       "ru": {
         "name": "Наследник всего",
         "description": ""
+      },
+      "it": {
+        "name": "L'erede di tutto",
+        "description": ""
       }
     }
   },
@@ -3818,6 +4206,10 @@
       "ru": {
         "name": "Путеводитель по правильному пути",
         "description": ""
+      },
+      "it": {
+        "name": "La guida alla retta via",
+        "description": ""
       }
     }
   },
@@ -3856,6 +4248,10 @@
       },
       "ru": {
         "name": "Пациент",
+        "description": ""
+      },
+      "it": {
+        "name": "Il paziente",
         "description": ""
       }
     }
