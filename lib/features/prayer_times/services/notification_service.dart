@@ -69,7 +69,7 @@ class NotificationService {
           enableVibration: true,
         ),
         iOS: DarwinNotificationDetails(
-          sound: adhanFile,
+          sound: adhanFile.replaceAll('.mp3', '.caf'),
           presentAlert: true,
           presentBadge: true,
           presentSound: true,
