@@ -379,6 +379,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsSectionAdhanNotifications => 'Adhan notifications';
 
   @override
+  String get settingsSectionPeriodMode => 'Period Mode';
+
+  @override
   String get settingsSectionScheduleCalculation => 'Prayer time calculation';
 
   @override
@@ -542,6 +545,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsNotificationHour => 'Notification time';
 
   @override
+  String get settingsPeriodMode => 'Period Mode';
+
+  @override
+  String get settingsPeriodModeSubtitle =>
+      'Pause prayer notifications during your period';
+
+  @override
   String get settingsTravelerMode => 'Travel mode';
 
   @override
@@ -550,6 +560,51 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsTravelerModeLoadError => 'We couldn\'t load travel mode';
+
+  @override
+  String get periodGuideTitle => 'Period Guide';
+
+  @override
+  String get periodGuideAllowed => 'Permitted';
+
+  @override
+  String get periodGuidePaused => 'Paused';
+
+  @override
+  String get periodGuideNote => 'Important note';
+
+  @override
+  String get periodGuideIntro =>
+      'This guide is a simple reminder of what is usually permitted and what is paused during your period.';
+
+  @override
+  String get periodGuideAllowedDhikr => 'Dhikr and remembrance of Allah';
+
+  @override
+  String get periodGuideAllowedDua => 'Dua and personal supplication';
+
+  @override
+  String get periodGuideAllowedListenQuran => 'Listening to the Quran';
+
+  @override
+  String get periodGuideAllowedReadTranslation =>
+      'Reading a translation of the Quran';
+
+  @override
+  String get periodGuidePausedPrayer => 'Obligatory prayer';
+
+  @override
+  String get periodGuidePausedFasting => 'Obligatory fasting';
+
+  @override
+  String get periodGuidePausedTawaf => 'Tawaf around the Kaaba';
+
+  @override
+  String get periodGuidePausedTouchQuran => 'Touching the Quran directly';
+
+  @override
+  String get periodGuideNoteBody =>
+      'Obligatory fasts paused during the period should be made up afterwards.';
 
   @override
   String get settingsRecentPlaces => 'Recent places';

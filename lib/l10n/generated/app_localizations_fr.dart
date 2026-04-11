@@ -381,6 +381,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settingsSectionAdhanNotifications => 'Notifications d\'adhan';
 
   @override
+  String get settingsSectionPeriodMode => 'Mode menstruel';
+
+  @override
   String get settingsSectionScheduleCalculation => 'Calcul des horaires';
 
   @override
@@ -544,6 +547,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settingsNotificationHour => 'Heure de notification';
 
   @override
+  String get settingsPeriodMode => 'Mode menstruel';
+
+  @override
+  String get settingsPeriodModeSubtitle =>
+      'Mettre en pause les notifications de pri?re pendant vos r?gles';
+
+  @override
   String get settingsTravelerMode => 'Mode voyageur';
 
   @override
@@ -553,6 +563,51 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get settingsTravelerModeLoadError =>
       'Nous n\'avons pas pu charger le mode voyageur';
+
+  @override
+  String get periodGuideTitle => 'Guide des r?gles';
+
+  @override
+  String get periodGuideAllowed => 'Permis';
+
+  @override
+  String get periodGuidePaused => 'En pause';
+
+  @override
+  String get periodGuideNote => 'Note importante';
+
+  @override
+  String get periodGuideIntro =>
+      'Ce guide rappelle simplement ce qui reste g?n?ralement permis et ce qui est mis en pause pendant les r?gles.';
+
+  @override
+  String get periodGuideAllowedDhikr => 'Dhikr et rappel d?Allah';
+
+  @override
+  String get periodGuideAllowedDua => 'Doua et invocation personnelle';
+
+  @override
+  String get periodGuideAllowedListenQuran => '?couter le Coran';
+
+  @override
+  String get periodGuideAllowedReadTranslation =>
+      'Lire une traduction du Coran';
+
+  @override
+  String get periodGuidePausedPrayer => 'Pri?re obligatoire';
+
+  @override
+  String get periodGuidePausedFasting => 'Je?ne obligatoire';
+
+  @override
+  String get periodGuidePausedTawaf => 'Tawaf autour de la Kaaba';
+
+  @override
+  String get periodGuidePausedTouchQuran => 'Toucher directement le Coran';
+
+  @override
+  String get periodGuideNoteBody =>
+      'Les jours de je?ne obligatoire interrompus pendant les r?gles doivent ?tre rattrap?s ensuite.';
 
   @override
   String get settingsRecentPlaces => 'Lieux récents';

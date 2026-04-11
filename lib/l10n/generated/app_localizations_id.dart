@@ -380,6 +380,9 @@ class AppLocalizationsId extends AppLocalizations {
   String get settingsSectionAdhanNotifications => 'Notifikasi adzan';
 
   @override
+  String get settingsSectionPeriodMode => 'Mode Haid';
+
+  @override
   String get settingsSectionScheduleCalculation => 'Perhitungan waktu shalat';
 
   @override
@@ -543,6 +546,12 @@ class AppLocalizationsId extends AppLocalizations {
   String get settingsNotificationHour => 'Waktu notifikasi';
 
   @override
+  String get settingsPeriodMode => 'Mode Haid';
+
+  @override
+  String get settingsPeriodModeSubtitle => 'Jeda notifikasi salat selama haid';
+
+  @override
   String get settingsTravelerMode => 'Mode bepergian';
 
   @override
@@ -552,6 +561,51 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get settingsTravelerModeLoadError =>
       'Kami tidak dapat memuat mode bepergian';
+
+  @override
+  String get periodGuideTitle => 'Panduan haid';
+
+  @override
+  String get periodGuideAllowed => 'Yang diperbolehkan';
+
+  @override
+  String get periodGuidePaused => 'Dijeda';
+
+  @override
+  String get periodGuideNote => 'Catatan penting';
+
+  @override
+  String get periodGuideIntro =>
+      'Panduan ini merangkum secara sederhana apa yang biasanya tetap diperbolehkan dan apa yang dijeda selama haid.';
+
+  @override
+  String get periodGuideAllowedDhikr => 'Dzikir dan mengingat Allah';
+
+  @override
+  String get periodGuideAllowedDua => 'Doa dan munajat pribadi';
+
+  @override
+  String get periodGuideAllowedListenQuran => 'Mendengarkan Al-Quran';
+
+  @override
+  String get periodGuideAllowedReadTranslation => 'Membaca terjemahan Al-Quran';
+
+  @override
+  String get periodGuidePausedPrayer => 'Salat wajib';
+
+  @override
+  String get periodGuidePausedFasting => 'Puasa wajib';
+
+  @override
+  String get periodGuidePausedTawaf => 'Tawaf di sekitar Ka\'bah';
+
+  @override
+  String get periodGuidePausedTouchQuran =>
+      'Menyentuh Al-Quran secara langsung';
+
+  @override
+  String get periodGuideNoteBody =>
+      'Puasa wajib yang dijeda selama haid harus diganti setelahnya.';
 
   @override
   String get settingsRecentPlaces => 'Tempat terbaru';

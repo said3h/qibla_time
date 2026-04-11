@@ -380,6 +380,9 @@ class AppLocalizationsNl extends AppLocalizations {
   String get settingsSectionAdhanNotifications => 'Adhan-meldingen';
 
   @override
+  String get settingsSectionPeriodMode => 'Menstruatiemodus';
+
+  @override
   String get settingsSectionScheduleCalculation => 'Gebedstijd-berekening';
 
   @override
@@ -543,6 +546,13 @@ class AppLocalizationsNl extends AppLocalizations {
   String get settingsNotificationHour => 'Meldingstijd';
 
   @override
+  String get settingsPeriodMode => 'Menstruatiemodus';
+
+  @override
+  String get settingsPeriodModeSubtitle =>
+      'Pauzeer gebedsmeldingen tijdens je menstruatie';
+
+  @override
   String get settingsTravelerMode => 'Reismodus';
 
   @override
@@ -552,6 +562,51 @@ class AppLocalizationsNl extends AppLocalizations {
   @override
   String get settingsTravelerModeLoadError =>
       'We konden de reismodus niet laden';
+
+  @override
+  String get periodGuideTitle => 'Menstruatiegids';
+
+  @override
+  String get periodGuideAllowed => 'Toegestaan';
+
+  @override
+  String get periodGuidePaused => 'Gepauzeerd';
+
+  @override
+  String get periodGuideNote => 'Belangrijke opmerking';
+
+  @override
+  String get periodGuideIntro =>
+      'Deze gids vat eenvoudig samen wat tijdens de menstruatie meestal toegestaan blijft en wat wordt gepauzeerd.';
+
+  @override
+  String get periodGuideAllowedDhikr => 'Dhikr en het gedenken van Allah';
+
+  @override
+  String get periodGuideAllowedDua => 'Dua en persoonlijke smeekbede';
+
+  @override
+  String get periodGuideAllowedListenQuran => 'Naar de Koran luisteren';
+
+  @override
+  String get periodGuideAllowedReadTranslation =>
+      'Een vertaling van de Koran lezen';
+
+  @override
+  String get periodGuidePausedPrayer => 'Verplicht gebed';
+
+  @override
+  String get periodGuidePausedFasting => 'Verplicht vasten';
+
+  @override
+  String get periodGuidePausedTawaf => 'Tawaf rond de Ka\'aba';
+
+  @override
+  String get periodGuidePausedTouchQuran => 'De Koran direct aanraken';
+
+  @override
+  String get periodGuideNoteBody =>
+      'Verplichte vastendagen die tijdens de menstruatie worden onderbroken, moeten later worden ingehaald.';
 
   @override
   String get settingsRecentPlaces => 'Recente plaatsen';

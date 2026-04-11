@@ -2,6 +2,7 @@
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../period/services/period_mode_service.dart';
 import '../../tracking/services/weekly_summary_notification_service.dart';
 import '../presentation/providers/prayer_times_providers.dart';
 import 'notification_service.dart';
@@ -14,6 +15,13 @@ class AdhanManager {
   final Ref _ref;
 
   Future<void> scheduleTodayAdhans() async {
+    final periodModeEnabled =
+        await _ref.read(periodModeServiceProvider).isEnabled();
+    if (periodModeEnabled) {
+      await NotificationService.instance.cancelAll();
+      return;
+    }
+
     final resolvedSchedule = await _ref.read(getPrayerScheduleUseCaseProvider).call();
     if (resolvedSchedule == null) {
       await NotificationService.instance.cancelAll();

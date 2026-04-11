@@ -778,6 +778,12 @@ abstract class AppLocalizations {
   /// **'Notificaciones de adhan'**
   String get settingsSectionAdhanNotifications;
 
+  /// No description provided for @settingsSectionPeriodMode.
+  ///
+  /// In es, this message translates to:
+  /// **'Modo per?odo'**
+  String get settingsSectionPeriodMode;
+
   /// No description provided for @settingsSectionScheduleCalculation.
   ///
   /// In es, this message translates to:
@@ -1078,6 +1084,18 @@ abstract class AppLocalizations {
   /// **'Hora de notificación'**
   String get settingsNotificationHour;
 
+  /// No description provided for @settingsPeriodMode.
+  ///
+  /// In es, this message translates to:
+  /// **'Modo per?odo'**
+  String get settingsPeriodMode;
+
+  /// No description provided for @settingsPeriodModeSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Pausa las notificaciones de oraci?n durante tu per?odo'**
+  String get settingsPeriodModeSubtitle;
+
   /// No description provided for @settingsTravelerMode.
   ///
   /// In es, this message translates to:
@@ -1095,6 +1113,90 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'No hemos podido cargar el modo viajero'**
   String get settingsTravelerModeLoadError;
+
+  /// No description provided for @periodGuideTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Gu?a del per?odo'**
+  String get periodGuideTitle;
+
+  /// No description provided for @periodGuideAllowed.
+  ///
+  /// In es, this message translates to:
+  /// **'Permitido'**
+  String get periodGuideAllowed;
+
+  /// No description provided for @periodGuidePaused.
+  ///
+  /// In es, this message translates to:
+  /// **'En pausa'**
+  String get periodGuidePaused;
+
+  /// No description provided for @periodGuideNote.
+  ///
+  /// In es, this message translates to:
+  /// **'Nota importante'**
+  String get periodGuideNote;
+
+  /// No description provided for @periodGuideIntro.
+  ///
+  /// In es, this message translates to:
+  /// **'Esta gu?a resume de forma simple qu? suele estar permitido y qu? queda en pausa durante el per?odo.'**
+  String get periodGuideIntro;
+
+  /// No description provided for @periodGuideAllowedDhikr.
+  ///
+  /// In es, this message translates to:
+  /// **'Dhikr y recuerdo de Allah'**
+  String get periodGuideAllowedDhikr;
+
+  /// No description provided for @periodGuideAllowedDua.
+  ///
+  /// In es, this message translates to:
+  /// **'Dua y s?plica personal'**
+  String get periodGuideAllowedDua;
+
+  /// No description provided for @periodGuideAllowedListenQuran.
+  ///
+  /// In es, this message translates to:
+  /// **'Escuchar el Cor?n'**
+  String get periodGuideAllowedListenQuran;
+
+  /// No description provided for @periodGuideAllowedReadTranslation.
+  ///
+  /// In es, this message translates to:
+  /// **'Leer una traducci?n del Cor?n'**
+  String get periodGuideAllowedReadTranslation;
+
+  /// No description provided for @periodGuidePausedPrayer.
+  ///
+  /// In es, this message translates to:
+  /// **'La oraci?n obligatoria'**
+  String get periodGuidePausedPrayer;
+
+  /// No description provided for @periodGuidePausedFasting.
+  ///
+  /// In es, this message translates to:
+  /// **'El ayuno obligatorio'**
+  String get periodGuidePausedFasting;
+
+  /// No description provided for @periodGuidePausedTawaf.
+  ///
+  /// In es, this message translates to:
+  /// **'El tawaf alrededor de la Kaaba'**
+  String get periodGuidePausedTawaf;
+
+  /// No description provided for @periodGuidePausedTouchQuran.
+  ///
+  /// In es, this message translates to:
+  /// **'Tocar el Cor?n directamente'**
+  String get periodGuidePausedTouchQuran;
+
+  /// No description provided for @periodGuideNoteBody.
+  ///
+  /// In es, this message translates to:
+  /// **'El ayuno obligatorio pausado durante el per?odo debe recuperarse despu?s.'**
+  String get periodGuideNoteBody;
 
   /// No description provided for @settingsRecentPlaces.
   ///

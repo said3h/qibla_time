@@ -381,6 +381,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsSectionAdhanNotifications => 'Adhan-Benachrichtigungen';
 
   @override
+  String get settingsSectionPeriodMode => 'Periodenmodus';
+
+  @override
   String get settingsSectionScheduleCalculation =>
       'Berechnung der Gebetszeiten';
 
@@ -545,6 +548,13 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsNotificationHour => 'Benachrichtigungszeit';
 
   @override
+  String get settingsPeriodMode => 'Periodenmodus';
+
+  @override
+  String get settingsPeriodModeSubtitle =>
+      'Gebetsbenachrichtigungen w?hrend deiner Periode pausieren';
+
+  @override
   String get settingsTravelerMode => 'Reisemodus';
 
   @override
@@ -554,6 +564,51 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get settingsTravelerModeLoadError =>
       'Wir konnten den Reisemodus nicht laden';
+
+  @override
+  String get periodGuideTitle => 'Leitfaden f?r die Periode';
+
+  @override
+  String get periodGuideAllowed => 'Erlaubt';
+
+  @override
+  String get periodGuidePaused => 'Pausiert';
+
+  @override
+  String get periodGuideNote => 'Wichtiger Hinweis';
+
+  @override
+  String get periodGuideIntro =>
+      'Dieser Leitfaden fasst einfach zusammen, was w?hrend der Periode gew?hnlich erlaubt bleibt und was pausiert wird.';
+
+  @override
+  String get periodGuideAllowedDhikr => 'Dhikr und Gedenken an Allah';
+
+  @override
+  String get periodGuideAllowedDua => 'Dua und pers?nliches Bittgebet';
+
+  @override
+  String get periodGuideAllowedListenQuran => 'Den Quran anh?ren';
+
+  @override
+  String get periodGuideAllowedReadTranslation =>
+      'Eine ?bersetzung des Quran lesen';
+
+  @override
+  String get periodGuidePausedPrayer => 'Das Pflichtgebet';
+
+  @override
+  String get periodGuidePausedFasting => 'Das Pflichtfasten';
+
+  @override
+  String get periodGuidePausedTawaf => 'Tawaf um die Kaaba';
+
+  @override
+  String get periodGuidePausedTouchQuran => 'Den Quran direkt ber?hren';
+
+  @override
+  String get periodGuideNoteBody =>
+      'Pflichtfasten, das w?hrend der Periode ausgesetzt wurde, sollte danach nachgeholt werden.';
 
   @override
   String get settingsRecentPlaces => 'Letzte Orte';

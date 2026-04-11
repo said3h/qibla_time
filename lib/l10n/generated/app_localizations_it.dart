@@ -380,6 +380,9 @@ class AppLocalizationsIt extends AppLocalizations {
   String get settingsSectionAdhanNotifications => 'Notifiche Adhan';
 
   @override
+  String get settingsSectionPeriodMode => 'Modalit? ciclo';
+
+  @override
   String get settingsSectionScheduleCalculation =>
       'Calcolo del tempo di preghiera';
 
@@ -544,6 +547,13 @@ class AppLocalizationsIt extends AppLocalizations {
   String get settingsNotificationHour => 'Orario di notifica';
 
   @override
+  String get settingsPeriodMode => 'Modalit? ciclo';
+
+  @override
+  String get settingsPeriodModeSubtitle =>
+      'Sospendi le notifiche della preghiera durante il ciclo';
+
+  @override
   String get settingsTravelerMode => 'Modalità viaggio';
 
   @override
@@ -553,6 +563,51 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get settingsTravelerModeLoadError =>
       'Impossibile caricare la modalità viaggio';
+
+  @override
+  String get periodGuideTitle => 'Guida sul ciclo';
+
+  @override
+  String get periodGuideAllowed => 'Consentito';
+
+  @override
+  String get periodGuidePaused => 'In pausa';
+
+  @override
+  String get periodGuideNote => 'Nota importante';
+
+  @override
+  String get periodGuideIntro =>
+      'Questa guida riassume in modo semplice ci? che di solito rimane consentito e ci? che viene messo in pausa durante il ciclo.';
+
+  @override
+  String get periodGuideAllowedDhikr => 'Dhikr e ricordo di Allah';
+
+  @override
+  String get periodGuideAllowedDua => 'Dua e supplica personale';
+
+  @override
+  String get periodGuideAllowedListenQuran => 'Ascoltare il Corano';
+
+  @override
+  String get periodGuideAllowedReadTranslation =>
+      'Leggere una traduzione del Corano';
+
+  @override
+  String get periodGuidePausedPrayer => 'La preghiera obbligatoria';
+
+  @override
+  String get periodGuidePausedFasting => 'Il digiuno obbligatorio';
+
+  @override
+  String get periodGuidePausedTawaf => 'Il tawaf intorno alla Kaaba';
+
+  @override
+  String get periodGuidePausedTouchQuran => 'Toccare direttamente il Corano';
+
+  @override
+  String get periodGuideNoteBody =>
+      'I digiuni obbligatori sospesi durante il ciclo devono essere recuperati in seguito.';
 
   @override
   String get settingsRecentPlaces => 'Luoghi recenti';

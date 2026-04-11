@@ -22,6 +22,8 @@ import '../../dhikr/services/dhikr_service.dart';
 import '../../hafiz/services/hafiz_service.dart';
 import '../../hadith/services/hadith_hourly_reminder_service.dart';
 import '../../hadith/services/hadith_service.dart';
+import '../../period/screens/period_guide_screen.dart';
+import '../../period/services/period_mode_service.dart';
 import '../../prayer_times/domain/entities/prayer_cache_status.dart';
 import '../../prayer_times/domain/entities/prayer_location_diagnostic.dart';
 import '../../prayer_times/domain/entities/prayer_name.dart';
@@ -29,6 +31,7 @@ import '../../prayer_times/domain/entities/ramadan_status.dart';
 import '../../prayer_times/presentation/providers/ramadan_providers.dart';
 import '../../prayer_times/services/adhan_manager.dart';
 import '../../prayer_times/services/daily_inspiration_notification_service.dart';
+import '../../prayer_times/services/notification_service.dart';
 import '../../prayer_times/presentation/providers/prayer_times_providers.dart';
 import '../../prayer_times/services/quran_service.dart';
 import '../../prayer_times/services/travel_mode_service.dart';
@@ -187,6 +190,18 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     ref.invalidate(isRamadanProvider);
     if (!mounted) return;
     setState(() => ramadanForced = value);
+  }
+
+  Future<void> _togglePeriodMode(bool value) async {
+    await ref.read(periodModeServiceProvider).setEnabled(value);
+    ref.invalidate(periodModeEnabledProvider);
+
+    if (value) {
+      await NotificationService.instance.cancelAll();
+      return;
+    }
+
+    await ref.read(adhanManagerProvider).scheduleTodayAdhans();
   }
 
   // ── Funciones para Hadices ────────────────────────────────────────
@@ -597,6 +612,51 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               tokens,
               l10n.settingsHapticFeedback,
               l10n.commonUnavailable,
+            ),
+            const SizedBox(height: 14),
+            _buildSectionTitle(tokens, l10n.settingsSectionPeriodMode),
+            Consumer(
+              builder: (context, ref, _) {
+                final enabledAsync = ref.watch(periodModeEnabledProvider);
+                return enabledAsync.when(
+                  data: (enabled) => _buildSimpleToggleTile(
+                    tokens,
+                    l10n.settingsPeriodMode,
+                    l10n.settingsPeriodModeSubtitle,
+                    enabled,
+                    _togglePeriodMode,
+                  ),
+                  loading: () => _buildSimpleToggleTile(
+                    tokens,
+                    l10n.settingsPeriodMode,
+                    l10n.commonLoading,
+                    false,
+                    (_) {},
+                  ),
+                  error: (_, __) => _buildSettingRow(
+                    label: l10n.settingsPeriodMode,
+                    subtitle: l10n.settingsLoadError,
+                    trailing: Icon(
+                      Icons.info_outline,
+                      color: tokens.textMuted,
+                      size: 18,
+                    ),
+                    tokens: tokens,
+                  ),
+                );
+              },
+            ),
+            _buildValueTile(
+              tokens,
+              l10n.periodGuideTitle,
+              l10n.commonOpen,
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => const PeriodGuideScreen(),
+                  ),
+                );
+              },
             ),
             const SizedBox(height: 14),
             _buildSectionTitle(tokens, l10n.settingsSectionScheduleCalculation),
@@ -1102,7 +1162,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           Switch.adaptive(
             value: value,
             onChanged: onChanged,
-            activeColor: tokens.bgPage,
+            activeThumbColor: tokens.bgPage,
             activeTrackColor: tokens.primary,
             inactiveTrackColor: tokens.bgSurface2,
           ),

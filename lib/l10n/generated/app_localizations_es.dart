@@ -379,6 +379,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get settingsSectionAdhanNotifications => 'Notificaciones de adhan';
 
   @override
+  String get settingsSectionPeriodMode => 'Modo per?odo';
+
+  @override
   String get settingsSectionScheduleCalculation => 'Cálculo de horarios';
 
   @override
@@ -542,6 +545,13 @@ class AppLocalizationsEs extends AppLocalizations {
   String get settingsNotificationHour => 'Hora de notificación';
 
   @override
+  String get settingsPeriodMode => 'Modo per?odo';
+
+  @override
+  String get settingsPeriodModeSubtitle =>
+      'Pausa las notificaciones de oraci?n durante tu per?odo';
+
+  @override
   String get settingsTravelerMode => 'Modo viajero';
 
   @override
@@ -551,6 +561,51 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get settingsTravelerModeLoadError =>
       'No hemos podido cargar el modo viajero';
+
+  @override
+  String get periodGuideTitle => 'Gu?a del per?odo';
+
+  @override
+  String get periodGuideAllowed => 'Permitido';
+
+  @override
+  String get periodGuidePaused => 'En pausa';
+
+  @override
+  String get periodGuideNote => 'Nota importante';
+
+  @override
+  String get periodGuideIntro =>
+      'Esta gu?a resume de forma simple qu? suele estar permitido y qu? queda en pausa durante el per?odo.';
+
+  @override
+  String get periodGuideAllowedDhikr => 'Dhikr y recuerdo de Allah';
+
+  @override
+  String get periodGuideAllowedDua => 'Dua y s?plica personal';
+
+  @override
+  String get periodGuideAllowedListenQuran => 'Escuchar el Cor?n';
+
+  @override
+  String get periodGuideAllowedReadTranslation =>
+      'Leer una traducci?n del Cor?n';
+
+  @override
+  String get periodGuidePausedPrayer => 'La oraci?n obligatoria';
+
+  @override
+  String get periodGuidePausedFasting => 'El ayuno obligatorio';
+
+  @override
+  String get periodGuidePausedTawaf => 'El tawaf alrededor de la Kaaba';
+
+  @override
+  String get periodGuidePausedTouchQuran => 'Tocar el Cor?n directamente';
+
+  @override
+  String get periodGuideNoteBody =>
+      'El ayuno obligatorio pausado durante el per?odo debe recuperarse despu?s.';
 
   @override
   String get settingsRecentPlaces => 'Lugares recientes';
