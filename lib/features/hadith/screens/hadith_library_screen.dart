@@ -1139,52 +1139,79 @@ String _extractHadithCollection(String reference) {
   final refLower = reference.toLowerCase();
   if (refLower.contains('bujari') ||
       refLower.contains('bukhari') ||
+      refLower.contains('bukhar') ||
       refLower.contains('boukhari') ||
-      refLower.contains('бухар')) {
+      refLower.contains('buḫ') ||
+      refLower.contains('бухар') ||
+      refLower.contains('البخار') ||
+      refLower.contains('بخاري') ||
+      refLower.contains('متفق عليه')) {
     return 'Sahih al-Bukhari';
   }
   if (refLower.contains('muslim') ||
       refLower.contains('mouslim') ||
-      refLower.contains('муслим')) {
+      refLower.contains('муслим') ||
+      refLower.contains('مسلم')) {
     return 'Sahih Muslim';
   }
   if (refLower.contains('riyad') ||
       refLower.contains('salihin') ||
       refLower.contains('рияд') ||
-      refLower.contains('салих')) {
+      refLower.contains('салих') ||
+      refLower.contains('رياض') ||
+      refLower.contains('صالحين')) {
     return 'Riyad as-Salihin';
   }
   if (refLower.contains('nawawi') ||
       refLower.contains('40 hadith') ||
+      refLower.contains('الأربعين') ||
+      refLower.contains('نووي') ||
       refLower.contains('навави')) {
     return '40 Hadith Nawawi';
   }
   if (refLower.contains('tirmidhi') ||
+      refLower.contains('termed') ||
+      refLower.contains('termedh') ||
       refLower.contains('тирмиз') ||
-      refLower.contains('термед')) {
+      refLower.contains('термед') ||
+      refLower.contains('ترمذ')) {
     return 'Jami\' at-Tirmidhi';
   }
   if (refLower.contains('abu dawud') ||
+      refLower.contains('abu daoud') ||
+      refLower.contains('abu dawood') ||
       refLower.contains('abudawud') ||
+      refLower.contains('abudaoud') ||
       refLower.contains('abou dawoud') ||
       refLower.contains('абу дауд') ||
-      refLower.contains('дауд')) {
+      refLower.contains('дауд') ||
+      refLower.contains('أبو داود') ||
+      refLower.contains('داود')) {
     return 'Sunan Abu Dawud';
   }
   if (refLower.contains('nasai') ||
       refLower.contains('nasa\'i') ||
-      refLower.contains('насаи')) {
+      refLower.contains('nasaai') ||
+      refLower.contains('nsaa') ||
+      refLower.contains('nasaa') ||
+      refLower.contains('насаи') ||
+      refLower.contains('نسائي')) {
     return 'Sunan an-Nasa\'i';
   }
   if (refLower.contains('ibn majah') ||
       refLower.contains('ibnmajah') ||
-      refLower.contains('ибн мадж')) {
+      refLower.contains('ibn mayah') ||
+      refLower.contains('ибн мадж') ||
+      refLower.contains('ابن ماجه')) {
     return 'Sunan Ibn Majah';
   }
   if (refLower.contains('malik') ||
+      refLower.contains('maalik') ||
       refLower.contains('muwatta') ||
       refLower.contains('малик') ||
-      refLower.contains('муватт')) {
+      refLower.contains('муватт') ||
+      refLower.contains('موطأ') ||
+      refLower.contains('مالك')) {
     return 'Muwatta Malik';
   }
   return 'Otros';
