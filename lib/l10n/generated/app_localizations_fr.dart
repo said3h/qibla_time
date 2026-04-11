@@ -2816,18 +2816,18 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get purificationGuideSubtitle =>
-      'Guide de purification rituelle avant la pri?re';
+      'Guide de purification rituelle avant la prière';
 
   @override
   String get purificationGuideIntro =>
-      'Avant le salah, un musulman peut avoir besoin d?une purification rituelle. Les deux formes principales sont le wudu (ablution mineure) et le ghusl (bain rituel complet). Ce guide explique ce qu?est chacun d?eux, quand il est n?cessaire et comment l?accomplir.';
+      'Avant le salah, un musulman peut avoir besoin d\'une purification rituelle. Les deux formes principales sont le wudu (ablution mineure) et le ghusl (bain rituel complet). Ce guide explique ce qu\'est chacun d\'eux, quand il est nécessaire et comment l\'accomplir.';
 
   @override
   String get purificationGuideWuduTitle => 'Wudu';
 
   @override
   String get purificationGuideWuduBody =>
-      'Ce que c?est :\nLe wudu est la purification rituelle mineure qui se fait avant le salah lorsqu?il n?y a pas d?impuret? majeure.\n\nQuand il est n?cessaire :\n? Avant la pri?re si tu n?as pas un wudu valide.\n? Apr?s ?tre all? aux toilettes.\n? Apr?s avoir perdu l??tat de puret?, comme apr?s l??mission de gaz, un sommeil profond ou une perte de connaissance.\n\n?tapes du wudu :\n1. Forme l?intention dans ton c?ur.\n2. Dis ? Bismillah ?.\n3. Lave les mains 3 fois, en commen?ant habituellement par la droite.\n4. Rince la bouche 3 fois.\n5. Nettoie le nez avec de l?eau 3 fois.\n6. Lave tout le visage 3 fois.\n7. Lave les bras jusqu?aux coudes 3 fois, en commen?ant par le droit puis le gauche.\n8. Passe les mains mouill?es sur la t?te 1 fois.\n9. Essuie les oreilles 1 fois.\n10. Lave les pieds jusqu?aux chevilles 3 fois, en commen?ant par le droit puis le gauche.\n\nNotes importantes :\n? La pratique habituelle est de laver 3 fois, mais 1 fois suffit pour que ce soit valide.\n? Assure-toi que l?eau atteigne correctement toute la zone.\n? Garde le bon ordre.\n? ?vite tout obstacle qui bloque l?eau, comme la salet? ou une couche sur la peau.';
+      'Ce que c\'est :\nLe wudu est la purification rituelle mineure qui se fait avant le salah lorsqu\'il n\'y a pas d\'impureté majeure.\n\nQuand il est nécessaire :\n• Avant la prière si tu n\'as pas un wudu valide.\n• Après être allé aux toilettes.\n• Après avoir perdu l\'état de pureté, comme après l\'émission de gaz, un sommeil profond ou une perte de connaissance.\n\nÉtapes du wudu :\n1. Forme l\'intention dans ton cœur.\n2. Dis \"Bismillah\".\n3. Lave les mains 3 fois, en commençant habituellement par la droite.\n4. Rince la bouche 3 fois.\n5. Nettoie le nez avec de l\'eau 3 fois.\n6. Lave tout le visage 3 fois.\n7. Lave les bras jusqu\'aux coudes 3 fois, en commençant par le droit puis le gauche.\n8. Passe les mains mouillées sur la tête 1 fois.\n9. Essuie les oreilles 1 fois.\n10. Lave les pieds jusqu\'aux chevilles 3 fois, en commençant par le droit puis le gauche.\n\nNotes importantes :\n• La pratique habituelle est de laver 3 fois, mais 1 fois suffit pour que ce soit valide.\n• Assure-toi que l\'eau atteigne correctement toute la zone.\n• Garde le bon ordre.\n• Évite tout obstacle qui bloque l\'eau, comme la saleté ou une couche sur la peau.';
 
   @override
   String get purificationGuideWuduWhatIsLabel => 'Ce que c\'est';
@@ -2960,7 +2960,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get purificationGuideGhuslBody =>
-      'Ce que c?est :\nLe ghusl est le bain rituel complet. Il est obligatoire apr?s une impuret? majeure.\n\nQuand il est obligatoire :\n? Apr?s les relations intimes.\n? Apr?s l??jaculation.\n? ? la fin des menstruations.\n? ? la fin des saignements post-partum.\n\nComment le faire :\n1. Forme l?intention dans ton c?ur.\n2. Dis Bismillah.\n3. Lave les mains et les parties intimes.\n4. Retire toute impuret? visible.\n5. Fais le wudu.\n6. Verse de l?eau sur la t?te jusqu?? atteindre le cuir chevelu.\n7. Lave tout le corps, en commen?ant par le c?t? droit puis le gauche, en veillant ? ce que l?eau atteigne chaque partie.\n\nNote importante :\nUn ghusl complet enl?ve l?impuret? majeure. Si rien ensuite ne rompt le wudu, tu peux prier sans refaire un wudu s?par?.';
+      'Ce que c\'est :\nLe ghusl est le bain rituel complet. Il est obligatoire après une impureté majeure.\n\nQuand il est obligatoire :\n• Après les relations intimes.\n• Après l\'éjaculation.\n• À la fin des menstruations.\n• À la fin des saignements post-partum.\n\nComment le faire :\n1. Forme l\'intention dans ton cœur.\n2. Dis Bismillah.\n3. Lave les mains et les parties intimes.\n4. Retire toute impureté visible.\n5. Fais le wudu.\n6. Verse de l\'eau sur la tête jusqu\'à atteindre le cuir chevelu.\n7. Lave tout le corps, en commençant par le côté droit puis le gauche, en veillant à ce que l\'eau atteigne chaque partie.\n\nNote importante :\nUn ghusl complet enlève l\'impureté majeure. Si rien ensuite ne rompt le wudu, tu peux prier sans refaire un wudu séparé.';
 
   @override
   String get purificationGuideGhuslWhatIsLabel => 'Ce que c\'est';
@@ -3100,9 +3100,9 @@ class AppLocalizationsFr extends AppLocalizations {
       'Vérifie avec soin qu\'aucune zone ne reste sèche, surtout dans les parties cachées ou les plis du corps.';
 
   @override
-  String get purificationGuideFinalNoteTitle => 'Diff?rence essentielle';
+  String get purificationGuideFinalNoteTitle => 'Différence essentielle';
 
   @override
   String get purificationGuideFinalNoteBody =>
-      'Le wudu concerne l?impuret? mineure. Le ghusl concerne l?impuret? majeure. Si tu n?as besoin que du wudu, le ghusl n?est pas requis. Si le ghusl est requis, le wudu seul ne suffit pas.';
+      'Le wudu concerne l\'impureté mineure. Le ghusl concerne l\'impureté majeure. Si tu n\'as besoin que du wudu, le ghusl n\'est pas requis. Si le ghusl est requis, le wudu seul ne suffit pas.';
 }

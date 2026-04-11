@@ -4874,13 +4874,13 @@ abstract class AppLocalizations {
   /// No description provided for @purificationGuideSubtitle.
   ///
   /// In es, this message translates to:
-  /// **'Gu?a de purificaci?n ritual antes de la oraci?n'**
+  /// **'Guía de purificación ritual antes de la oración'**
   String get purificationGuideSubtitle;
 
   /// No description provided for @purificationGuideIntro.
   ///
   /// In es, this message translates to:
-  /// **'Antes del salah, un musulm?n puede necesitar purificaci?n ritual. Las dos formas principales son el wudu (abluci?n menor) y el ghusl (ba?o ritual completo). Esta gu?a explica qu? es cada uno, cu?ndo se necesita y c?mo se realiza.'**
+  /// **'Antes del salah, un musulmán puede necesitar purificación ritual. Las dos formas principales son el wudu (ablución menor) y el ghusl (baño ritual completo). Esta guía explica qué es cada uno, cuándo se necesita y cómo se realiza.'**
   String get purificationGuideIntro;
 
   /// No description provided for @purificationGuideWuduTitle.
@@ -4892,7 +4892,7 @@ abstract class AppLocalizations {
   /// No description provided for @purificationGuideWuduBody.
   ///
   /// In es, this message translates to:
-  /// **'Qu? es:\nEl wudu es la purificaci?n ritual menor que se hace antes del salah cuando no hay impureza mayor.\n\nCu?ndo se necesita:\n? Antes de la oraci?n si no tienes un wudu v?lido.\n? Despu?s de ir al ba?o.\n? Despu?s de perder el estado de pureza, como al expulsar gases, dormir profundamente o perder la conciencia.\n\nPasos del wudu:\n1. Haz la intenci?n en tu coraz?n.\n2. Di \"Bismillah\".\n3. Lava las manos 3 veces, empezando normalmente por la derecha.\n4. Enjuaga la boca 3 veces.\n5. Limpia la nariz con agua 3 veces.\n6. Lava toda la cara 3 veces.\n7. Lava los brazos hasta los codos 3 veces, empezando por el derecho y luego el izquierdo.\n8. Pasa las manos h?medas por la cabeza 1 vez.\n9. Limpia las orejas 1 vez.\n10. Lava los pies hasta los tobillos 3 veces, empezando por el derecho y luego el izquierdo.\n\nNotas importantes:\n? Lo habitual es lavar 3 veces, aunque 1 vez es suficiente para que sea v?lido.\n? Aseg?rate de que el agua llegue bien a toda la zona.\n? Mant?n el orden correcto.\n? Evita obst?culos que bloqueen el agua, como suciedad o capas sobre la piel.'**
+  /// **'Qué es:\nEl wudu es la purificación ritual menor que se hace antes del salah cuando no hay impureza mayor.\n\nCuándo se necesita:\n• Antes de la oración si no tienes un wudu válido.\n• Después de ir al baño.\n• Después de perder el estado de pureza, como al expulsar gases, dormir profundamente o perder la conciencia.\n\nPasos del wudu:\n1. Haz la intención en tu corazón.\n2. Di \"Bismillah\".\n3. Lava las manos 3 veces, empezando normalmente por la derecha.\n4. Enjuaga la boca 3 veces.\n5. Limpia la nariz con agua 3 veces.\n6. Lava toda la cara 3 veces.\n7. Lava los brazos hasta los codos 3 veces, empezando por el derecho y luego el izquierdo.\n8. Pasa las manos húmedas por la cabeza 1 vez.\n9. Limpia las orejas 1 vez.\n10. Lava los pies hasta los tobillos 3 veces, empezando por el derecho y luego el izquierdo.\n\nNotas importantes:\n• Lo habitual es lavar 3 veces, aunque 1 vez es suficiente para que sea válido.\n• Asegúrate de que el agua llegue bien a toda la zona.\n• Mantén el orden correcto.\n• Evita obstáculos que bloqueen el agua, como suciedad o capas sobre la piel.'**
   String get purificationGuideWuduBody;
 
   /// No description provided for @purificationGuideWuduWhatIsLabel.
@@ -5114,7 +5114,7 @@ abstract class AppLocalizations {
   /// No description provided for @purificationGuideGhuslBody.
   ///
   /// In es, this message translates to:
-  /// **'Qu? es:\nEl ghusl es el ba?o ritual completo. Es obligatorio despu?s de una impureza mayor.\n\nCu?ndo es obligatorio:\n? Despu?s de relaciones ?ntimas.\n? Despu?s de la eyaculaci?n.\n? Cuando termina la menstruaci?n.\n? Cuando termina el sangrado posparto.\n\nC?mo se hace:\n1. Haz la intenci?n en el coraz?n.\n2. Di Bismillah.\n3. Lava las manos y las partes ?ntimas.\n4. Elimina cualquier impureza visible.\n5. Haz wudu.\n6. Echa agua sobre la cabeza hasta que llegue al cuero cabelludo.\n7. Lava todo el cuerpo, empezando por el lado derecho y luego el izquierdo, asegur?ndote de que el agua llegue a todas las partes.\n\nNota importante:\nUn ghusl completo elimina la impureza mayor. Si despu?s no ocurre nada que rompa el wudu, puedes rezar sin hacer otro wudu aparte.'**
+  /// **'Qué es:\nEl ghusl es el baño ritual completo. Es obligatorio después de una impureza mayor.\n\nCuándo es obligatorio:\n• Después de relaciones íntimas.\n• Después de la eyaculación.\n• Cuando termina la menstruación.\n• Cuando termina el sangrado posparto.\n\nCómo se hace:\n1. Haz la intención en el corazón.\n2. Di Bismillah.\n3. Lava las manos y las partes íntimas.\n4. Elimina cualquier impureza visible.\n5. Haz wudu.\n6. Echa agua sobre la cabeza hasta que llegue al cuero cabelludo.\n7. Lava todo el cuerpo, empezando por el lado derecho y luego el izquierdo, asegurándote de que el agua llegue a todas las partes.\n\nNota importante:\nUn ghusl completo elimina la impureza mayor. Si después no ocurre nada que rompa el wudu, puedes rezar sin hacer otro wudu aparte.'**
   String get purificationGuideGhuslBody;
 
   /// No description provided for @purificationGuideGhuslWhatIsLabel.

@@ -2808,14 +2808,14 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get purificationGuideIntro =>
-      'Vor dem Salah kann ein Muslim rituelle Reinigung brauchen. Die zwei wichtigsten Formen sind Wudu (kleine Waschung) und Ghusl (vollst?ndiges rituelles Bad). Dieser Leitfaden erkl?rt, was beides ist, wann es n?tig ist und wie man es ausf?hrt.';
+      'Vor dem Salah kann ein Muslim rituelle Reinigung brauchen. Die zwei wichtigsten Formen sind Wudu (kleine Waschung) und Ghusl (vollständiges rituelles Bad). Dieser Leitfaden erklärt, was beides ist, wann es nötig ist und wie man es ausführt.';
 
   @override
   String get purificationGuideWuduTitle => 'Wudu';
 
   @override
   String get purificationGuideWuduBody =>
-      'Was es ist:\nWudu ist die kleine rituelle Reinigung vor dem Salah, wenn keine gro?e Unreinheit vorliegt.\n\nWann es n?tig ist:\n? Vor dem Gebet, wenn du keinen g?ltigen Wudu hast.\n? Nach dem Toilettengang.\n? Nachdem der Zustand der Reinheit verloren wurde, etwa durch Windabgang, tiefen Schlaf oder Bewusstlosigkeit.\n\nSchritte des Wudu:\n1. Fasse die Absicht im Herzen.\n2. Sage ?Bismillah?.\n3. Wasche die H?nde 3 Mal, gew?hnlich beginnend mit der rechten.\n4. Sp?le den Mund 3 Mal aus.\n5. Reinige die Nase mit Wasser 3 Mal.\n6. Wasche das ganze Gesicht 3 Mal.\n7. Wasche die Arme bis zu den Ellbogen 3 Mal, zuerst den rechten und dann den linken.\n8. Streiche mit nassen H?nden 1 Mal ?ber den Kopf.\n9. Wische die Ohren 1 Mal ab.\n10. Wasche die F??e bis zu den Kn?cheln 3 Mal, zuerst den rechten und dann den linken.\n\nWichtige Hinweise:\n? ?blicherweise wird 3 Mal gewaschen, aber 1 Mal gen?gt f?r die G?ltigkeit.\n? Achte darauf, dass das Wasser den ganzen Bereich richtig erreicht.\n? Halte die richtige Reihenfolge ein.\n? Vermeide alles, was das Wasser blockiert, wie Schmutz oder eine Schicht auf der Haut.';
+      'Was es ist:\nWudu ist die kleine rituelle Reinigung vor dem Salah, wenn keine große Unreinheit vorliegt.\n\nWann es nötig ist:\n• Vor dem Gebet, wenn du keinen gültigen Wudu hast.\n• Nach dem Toilettengang.\n• Nachdem der Zustand der Reinheit verloren wurde, etwa durch Windabgang, tiefen Schlaf oder Bewusstlosigkeit.\n\nSchritte des Wudu:\n1. Fasse die Absicht im Herzen.\n2. Sage \"Bismillah\".\n3. Wasche die Hände 3 Mal, gewöhnlich beginnend mit der rechten.\n4. Spüle den Mund 3 Mal aus.\n5. Reinige die Nase mit Wasser 3 Mal.\n6. Wasche das ganze Gesicht 3 Mal.\n7. Wasche die Arme bis zu den Ellbogen 3 Mal, zuerst den rechten und dann den linken.\n8. Streiche mit nassen Händen 1 Mal über den Kopf.\n9. Wische die Ohren 1 Mal ab.\n10. Wasche die Füße bis zu den Knöcheln 3 Mal, zuerst den rechten und dann den linken.\n\nWichtige Hinweise:\n• Üblicherweise wird 3 Mal gewaschen, aber 1 Mal genügt für die Gültigkeit.\n• Achte darauf, dass das Wasser den ganzen Bereich richtig erreicht.\n• Halte die richtige Reihenfolge ein.\n• Vermeide alles, was das Wasser blockiert, wie Schmutz oder eine Schicht auf der Haut.';
 
   @override
   String get purificationGuideWuduWhatIsLabel => 'Was es ist';
@@ -2948,7 +2948,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get purificationGuideGhuslBody =>
-      'Was es ist:\nGhusl ist das vollst?ndige rituelle Bad. Es ist nach gro?er Unreinheit verpflichtend.\n\nWann es verpflichtend ist:\n? Nach ehelichen Beziehungen.\n? Nach einer Ejakulation.\n? Nach dem Ende der Menstruation.\n? Nach dem Ende der Nachgeburtsblutung.\n\nSo wird es gemacht:\n1. Fasse die Absicht im Herzen.\n2. Sage Bismillah.\n3. Wasche die H?nde und den Intimbereich.\n4. Entferne jede sichtbare Unreinheit.\n5. F?hre Wudu aus.\n6. Gie?e Wasser ?ber den Kopf, sodass es die Kopfhaut erreicht.\n7. Wasche den ganzen K?rper, beginnend mit der rechten Seite und dann der linken, und achte darauf, dass das Wasser jede Stelle erreicht.\n\nWichtiger Hinweis:\nEin vollst?ndiger Ghusl entfernt die gro?e Unreinheit. Wenn danach nichts geschieht, was den Wudu bricht, kannst du ohne einen weiteren separaten Wudu beten.';
+      'Was es ist:\nGhusl ist das vollständige rituelle Bad. Es ist nach großer Unreinheit verpflichtend.\n\nWann es verpflichtend ist:\n• Nach ehelichen Beziehungen.\n• Nach einer Ejakulation.\n• Nach dem Ende der Menstruation.\n• Nach dem Ende der Nachgeburtsblutung.\n\nSo wird es gemacht:\n1. Fasse die Absicht im Herzen.\n2. Sage Bismillah.\n3. Wasche die Hände und den Intimbereich.\n4. Entferne jede sichtbare Unreinheit.\n5. Führe Wudu aus.\n6. Gieße Wasser über den Kopf, sodass es die Kopfhaut erreicht.\n7. Wasche den ganzen Körper, beginnend mit der rechten Seite und dann der linken, und achte darauf, dass das Wasser jede Stelle erreicht.\n\nWichtiger Hinweis:\nEin vollständiger Ghusl entfernt die große Unreinheit. Wenn danach nichts geschieht, was den Wudu bricht, kannst du ohne einen weiteren separaten Wudu beten.';
 
   @override
   String get purificationGuideGhuslWhatIsLabel => 'Was es ist';
@@ -3092,5 +3092,5 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get purificationGuideFinalNoteBody =>
-      'Wudu ist f?r kleine Unreinheit. Ghusl ist f?r gro?e Unreinheit. Wenn du nur Wudu brauchst, ist Ghusl nicht erforderlich. Wenn Ghusl erforderlich ist, reicht Wudu allein nicht aus.';
+      'Wudu ist für kleine Unreinheit. Ghusl ist für große Unreinheit. Wenn du nur Wudu brauchst, ist Ghusl nicht erforderlich. Wenn Ghusl erforderlich ist, reicht Wudu allein nicht aus.';
 }
