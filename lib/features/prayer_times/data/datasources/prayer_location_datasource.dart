@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -6,9 +8,34 @@ import '../../domain/entities/prayer_location.dart';
 import '../../domain/entities/prayer_location_diagnostic.dart';
 
 class PrayerLocationDataSource {
+  Future<void>? _backgroundRefreshTask;
+
   Future<LocationAccessResult?> getLocation({
     bool allowCachedFallbackWhenUnavailable = true,
     bool persistOnSuccess = true,
+  }) async {
+    final cachedResult = allowCachedFallbackWhenUnavailable
+        ? await _getLastKnownLocationResult()
+        : null;
+
+    if (cachedResult != null) {
+      _backgroundRefreshTask ??=
+          _refreshLocationInBackground(
+            cachedLocation: cachedResult.location,
+            persistOnSuccess: persistOnSuccess,
+          ).whenComplete(() => _backgroundRefreshTask = null);
+      return cachedResult;
+    }
+
+    return _getLiveLocation(
+      allowCachedFallbackWhenUnavailable: allowCachedFallbackWhenUnavailable,
+      persistOnSuccess: persistOnSuccess,
+    );
+  }
+
+  Future<LocationAccessResult?> _getLiveLocation({
+    required bool allowCachedFallbackWhenUnavailable,
+    required bool persistOnSuccess,
   }) async {
     final serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
@@ -36,7 +63,7 @@ class PrayerLocationDataSource {
     try {
       final position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.medium,
-        timeLimit: const Duration(seconds: 8),
+        timeLimit: const Duration(seconds: 5),
       );
       final location = PrayerLocation(
         latitude: position.latitude,
@@ -66,6 +93,32 @@ class PrayerLocationDataSource {
       }
 
       return _getLastKnownLocationResult();
+    }
+  }
+
+  Future<void> _refreshLocationInBackground({
+    required PrayerLocation cachedLocation,
+    required bool persistOnSuccess,
+  }) async {
+    try {
+      final liveResult = await _getLiveLocation(
+        allowCachedFallbackWhenUnavailable: false,
+        persistOnSuccess: false,
+      );
+      if (liveResult == null || liveResult.isFromCache) {
+        return;
+      }
+
+      final distanceKm = _distanceKm(cachedLocation, liveResult.location);
+      if (distanceKm <= 10) {
+        return;
+      }
+
+      if (persistOnSuccess) {
+        await persistLastKnownLocation(liveResult.location);
+      }
+    } catch (_) {
+      // Mantener la carga inicial rápida aunque falle el refresco en segundo plano.
     }
   }
 
@@ -106,6 +159,12 @@ class PrayerLocationDataSource {
       location: PrayerLocation(latitude: lat, longitude: lng),
       source: LocationAccessSource.cache,
     );
+  }
+
+  double _distanceKm(PrayerLocation a, PrayerLocation b) {
+    final latDistance = (a.latitude - b.latitude).abs();
+    final lonDistance = (a.longitude - b.longitude).abs();
+    return (latDistance * 111.0) + (lonDistance * 111.0);
   }
 
   PrayerLocationPermissionStatus _mapPermission(

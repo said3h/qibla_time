@@ -1766,13 +1766,19 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  l10n.homeCountdownLabelUppercase,
-                  style: GoogleFonts.dmSans(
-                    fontSize: 9,
-                    color: tokens.textSecondary,
-                    letterSpacing: 1.5,
-                    fontWeight: FontWeight.w600,
+                SizedBox(
+                  width: 130,
+                  child: Text(
+                    l10n.homeCountdownLabelUppercase,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.dmSans(
+                      fontSize: 9,
+                      color: tokens.textSecondary,
+                      letterSpacing: 1.5,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -1805,13 +1811,21 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                 ],
                 const SizedBox(height: 8),
-                Text(
-                  contextLabel,
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.dmSans(
-                    fontSize: 10,
-                    color: tokens.textSecondary,
-                    fontWeight: FontWeight.w500,
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: SizedBox(
+                    width: 120,
+                    child: Text(
+                      contextLabel,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.dmSans(
+                        fontSize: 10,
+                        color: tokens.textSecondary,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
                   ),
                 ),
               ],
