@@ -380,7 +380,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get settingsSectionAdhanNotifications => 'Notifiche Adhan';
 
   @override
-  String get settingsSectionPeriodMode => 'Modalit? ciclo';
+  String get settingsSectionPeriodMode => 'Modalità ciclo';
 
   @override
   String get settingsSectionScheduleCalculation =>
@@ -547,7 +547,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get settingsNotificationHour => 'Orario di notifica';
 
   @override
-  String get settingsPeriodMode => 'Modalit? ciclo';
+  String get settingsPeriodMode => 'Modalità ciclo';
 
   @override
   String get settingsPeriodModeSubtitle =>
@@ -578,7 +578,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get periodGuideIntro =>
-      'Questa guida riassume in modo semplice ci? che di solito rimane consentito e ci? che viene messo in pausa durante il ciclo.';
+      'Questa guida riassume in modo semplice ciò che di solito rimane consentito e ciò che viene messo in pausa durante il ciclo.';
 
   @override
   String get periodGuideAllowedDhikr => 'Dhikr e ricordo di Allah';

@@ -551,7 +551,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get settingsPeriodModeSubtitle =>
-      'Mettre en pause les notifications de pri?re pendant vos r?gles';
+      'Mettre en pause les notifications de prière pendant vos règles';
 
   @override
   String get settingsTravelerMode => 'Mode voyageur';
@@ -565,7 +565,7 @@ class AppLocalizationsFr extends AppLocalizations {
       'Nous n\'avons pas pu charger le mode voyageur';
 
   @override
-  String get periodGuideTitle => 'Guide des r?gles';
+  String get periodGuideTitle => 'Guide des règles';
 
   @override
   String get periodGuideAllowed => 'Permis';
@@ -578,26 +578,26 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get periodGuideIntro =>
-      'Ce guide rappelle simplement ce qui reste g?n?ralement permis et ce qui est mis en pause pendant les r?gles.';
+      'Ce guide rappelle simplement ce qui reste généralement permis et ce qui est mis en pause pendant les règles.';
 
   @override
-  String get periodGuideAllowedDhikr => 'Dhikr et rappel d?Allah';
+  String get periodGuideAllowedDhikr => 'Dhikr et rappel d’Allah';
 
   @override
   String get periodGuideAllowedDua => 'Doua et invocation personnelle';
 
   @override
-  String get periodGuideAllowedListenQuran => '?couter le Coran';
+  String get periodGuideAllowedListenQuran => 'Écouter le Coran';
 
   @override
   String get periodGuideAllowedReadTranslation =>
       'Lire une traduction du Coran';
 
   @override
-  String get periodGuidePausedPrayer => 'Pri?re obligatoire';
+  String get periodGuidePausedPrayer => 'Prière obligatoire';
 
   @override
-  String get periodGuidePausedFasting => 'Je?ne obligatoire';
+  String get periodGuidePausedFasting => 'Jeûne obligatoire';
 
   @override
   String get periodGuidePausedTawaf => 'Tawaf autour de la Kaaba';
@@ -607,7 +607,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get periodGuideNoteBody =>
-      'Les jours de je?ne obligatoire interrompus pendant les r?gles doivent ?tre rattrap?s ensuite.';
+      'Les jours de jeûne obligatoire interrompus pendant les règles doivent être rattrapés ensuite.';
 
   @override
   String get settingsRecentPlaces => 'Lieux récents';

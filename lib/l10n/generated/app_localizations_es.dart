@@ -379,7 +379,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get settingsSectionAdhanNotifications => 'Notificaciones de adhan';
 
   @override
-  String get settingsSectionPeriodMode => 'Modo per?odo';
+  String get settingsSectionPeriodMode => 'Modo período';
 
   @override
   String get settingsSectionScheduleCalculation => 'Cálculo de horarios';
@@ -545,11 +545,11 @@ class AppLocalizationsEs extends AppLocalizations {
   String get settingsNotificationHour => 'Hora de notificación';
 
   @override
-  String get settingsPeriodMode => 'Modo per?odo';
+  String get settingsPeriodMode => 'Modo período';
 
   @override
   String get settingsPeriodModeSubtitle =>
-      'Pausa las notificaciones de oraci?n durante tu per?odo';
+      'Pausa las notificaciones de oración durante tu período';
 
   @override
   String get settingsTravelerMode => 'Modo viajero';
@@ -563,7 +563,7 @@ class AppLocalizationsEs extends AppLocalizations {
       'No hemos podido cargar el modo viajero';
 
   @override
-  String get periodGuideTitle => 'Gu?a del per?odo';
+  String get periodGuideTitle => 'Guía del período';
 
   @override
   String get periodGuideAllowed => 'Permitido';
@@ -576,23 +576,23 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get periodGuideIntro =>
-      'Esta gu?a resume de forma simple qu? suele estar permitido y qu? queda en pausa durante el per?odo.';
+      'Esta guía resume de forma simple qué suele estar permitido y qué queda en pausa durante el período.';
 
   @override
   String get periodGuideAllowedDhikr => 'Dhikr y recuerdo de Allah';
 
   @override
-  String get periodGuideAllowedDua => 'Dua y s?plica personal';
+  String get periodGuideAllowedDua => 'Dua y súplica personal';
 
   @override
-  String get periodGuideAllowedListenQuran => 'Escuchar el Cor?n';
+  String get periodGuideAllowedListenQuran => 'Escuchar el Corán';
 
   @override
   String get periodGuideAllowedReadTranslation =>
-      'Leer una traducci?n del Cor?n';
+      'Leer una traducción del Corán';
 
   @override
-  String get periodGuidePausedPrayer => 'La oraci?n obligatoria';
+  String get periodGuidePausedPrayer => 'La oración obligatoria';
 
   @override
   String get periodGuidePausedFasting => 'El ayuno obligatorio';
@@ -601,11 +601,11 @@ class AppLocalizationsEs extends AppLocalizations {
   String get periodGuidePausedTawaf => 'El tawaf alrededor de la Kaaba';
 
   @override
-  String get periodGuidePausedTouchQuran => 'Tocar el Cor?n directamente';
+  String get periodGuidePausedTouchQuran => 'Tocar el Corán directamente';
 
   @override
   String get periodGuideNoteBody =>
-      'El ayuno obligatorio pausado durante el per?odo debe recuperarse despu?s.';
+      'El ayuno obligatorio pausado durante el período debe recuperarse después.';
 
   @override
   String get settingsRecentPlaces => 'Lugares recientes';

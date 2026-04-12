@@ -781,7 +781,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsSectionPeriodMode.
   ///
   /// In es, this message translates to:
-  /// **'Modo per?odo'**
+  /// **'Modo período'**
   String get settingsSectionPeriodMode;
 
   /// No description provided for @settingsSectionScheduleCalculation.
@@ -1087,13 +1087,13 @@ abstract class AppLocalizations {
   /// No description provided for @settingsPeriodMode.
   ///
   /// In es, this message translates to:
-  /// **'Modo per?odo'**
+  /// **'Modo período'**
   String get settingsPeriodMode;
 
   /// No description provided for @settingsPeriodModeSubtitle.
   ///
   /// In es, this message translates to:
-  /// **'Pausa las notificaciones de oraci?n durante tu per?odo'**
+  /// **'Pausa las notificaciones de oración durante tu período'**
   String get settingsPeriodModeSubtitle;
 
   /// No description provided for @settingsTravelerMode.
@@ -1117,7 +1117,7 @@ abstract class AppLocalizations {
   /// No description provided for @periodGuideTitle.
   ///
   /// In es, this message translates to:
-  /// **'Gu?a del per?odo'**
+  /// **'Guía del período'**
   String get periodGuideTitle;
 
   /// No description provided for @periodGuideAllowed.
@@ -1141,7 +1141,7 @@ abstract class AppLocalizations {
   /// No description provided for @periodGuideIntro.
   ///
   /// In es, this message translates to:
-  /// **'Esta gu?a resume de forma simple qu? suele estar permitido y qu? queda en pausa durante el per?odo.'**
+  /// **'Esta guía resume de forma simple qué suele estar permitido y qué queda en pausa durante el período.'**
   String get periodGuideIntro;
 
   /// No description provided for @periodGuideAllowedDhikr.
@@ -1153,25 +1153,25 @@ abstract class AppLocalizations {
   /// No description provided for @periodGuideAllowedDua.
   ///
   /// In es, this message translates to:
-  /// **'Dua y s?plica personal'**
+  /// **'Dua y súplica personal'**
   String get periodGuideAllowedDua;
 
   /// No description provided for @periodGuideAllowedListenQuran.
   ///
   /// In es, this message translates to:
-  /// **'Escuchar el Cor?n'**
+  /// **'Escuchar el Corán'**
   String get periodGuideAllowedListenQuran;
 
   /// No description provided for @periodGuideAllowedReadTranslation.
   ///
   /// In es, this message translates to:
-  /// **'Leer una traducci?n del Cor?n'**
+  /// **'Leer una traducción del Corán'**
   String get periodGuideAllowedReadTranslation;
 
   /// No description provided for @periodGuidePausedPrayer.
   ///
   /// In es, this message translates to:
-  /// **'La oraci?n obligatoria'**
+  /// **'La oración obligatoria'**
   String get periodGuidePausedPrayer;
 
   /// No description provided for @periodGuidePausedFasting.
@@ -1189,13 +1189,13 @@ abstract class AppLocalizations {
   /// No description provided for @periodGuidePausedTouchQuran.
   ///
   /// In es, this message translates to:
-  /// **'Tocar el Cor?n directamente'**
+  /// **'Tocar el Corán directamente'**
   String get periodGuidePausedTouchQuran;
 
   /// No description provided for @periodGuideNoteBody.
   ///
   /// In es, this message translates to:
-  /// **'El ayuno obligatorio pausado durante el per?odo debe recuperarse despu?s.'**
+  /// **'El ayuno obligatorio pausado durante el período debe recuperarse después.'**
   String get periodGuideNoteBody;
 
   /// No description provided for @settingsRecentPlaces.
