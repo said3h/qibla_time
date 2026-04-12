@@ -13,6 +13,7 @@ import 'app_localizations_fr.dart';
 import 'app_localizations_id.dart';
 import 'app_localizations_it.dart';
 import 'app_localizations_nl.dart';
+import 'app_localizations_pt.dart';
 import 'app_localizations_ru.dart';
 
 // ignore_for_file: type=lint
@@ -109,6 +110,7 @@ abstract class AppLocalizations {
     Locale('id'),
     Locale('it'),
     Locale('nl'),
+    Locale('pt'),
     Locale('ru')
   ];
 
@@ -5009,6 +5011,12 @@ abstract class AppLocalizations {
   /// **'Ruso'**
   String get settingsLanguageOptionRussian;
 
+  /// No description provided for @settingsLanguageOptionPortuguese.
+  ///
+  /// In es, this message translates to:
+  /// **'Portugués'**
+  String get settingsLanguageOptionPortuguese;
+
   /// No description provided for @settingsLanguageOptionItalian.
   ///
   /// In es, this message translates to:
@@ -5917,6 +5925,7 @@ class _AppLocalizationsDelegate
         'id',
         'it',
         'nl',
+        'pt',
         'ru'
       ].contains(locale.languageCode);
 
@@ -5943,6 +5952,8 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
       return AppLocalizationsIt();
     case 'nl':
       return AppLocalizationsNl();
+    case 'pt':
+      return AppLocalizationsPt();
     case 'ru':
       return AppLocalizationsRu();
   }

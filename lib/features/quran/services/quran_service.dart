@@ -416,6 +416,7 @@ class QuranService {
     if (normalizedLanguage != 'ar' &&
         normalizedLanguage != 'de' &&
         normalizedLanguage != 'it' &&
+        normalizedLanguage != 'pt' &&
         normalizedLanguage != 'ru') {
       return detail;
     }
@@ -478,6 +479,7 @@ class QuranService {
       'id' => 'id',
       'it' => 'it',
       'nl' => 'nl',
+      'pt' => 'pt',
       'ru' => 'ru',
       _ => 'es',
     };
@@ -492,6 +494,7 @@ class QuranService {
       'id' => 'id.indonesian',
       'it' => 'it.piccardo',
       'nl' => 'nl.keyzer',
+      'pt' => 'pt.elhayek',
       'ru' => 'ru.kuliev',
       _ => 'es.garcia',
     };
@@ -506,6 +509,7 @@ class QuranService {
       'id' => 'Konten tidak tersedia tanpa koneksi internet.',
       'it' => 'Il contenuto non e disponibile senza connessione a internet.',
       'nl' => 'Inhoud is niet beschikbaar zonder internetverbinding.',
+      'pt' => 'O conteúdo não está disponível sem conexão à internet.',
       'ru' => 'Содержимое недоступно без подключения к интернету.',
       _ => 'Contenido no disponible sin conexión a internet.',
     };

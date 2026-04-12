@@ -2881,6 +2881,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get settingsLanguageOptionRussian => 'Русский';
 
   @override
+  String get settingsLanguageOptionPortuguese => 'Португальский';
+
+  @override
   String get settingsLanguageOptionItalian => 'Итальянский';
 
   @override
@@ -3294,7 +3297,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get prayerGuideCycleIsha =>
-      'Повторите фарз-рак\'ат четыре раза. Прочитайте ташаххуд после второй рак\'ат и завершите молитву таслимом в четвертой. Затем совершите ٢ сунны и ١ витр по той же основной последовательности.';
+      'Повторите фарз-рак\'ат четыре раза. Прочитайте ташаххуд после второй рак\'ат и завершите молитву таслимом в четвертой. Затем совершите 2 сунны и 1 витр по той же основной последовательности.';
 
   @override
   String get prayerGuideOpenFatiha => 'Аль-Фатиха';
@@ -3307,7 +3310,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get prayerGuideChooseSurahSubtitle =>
-      'Откройте любую суру, начиная со ٢-й, для чтения после Аль-Фатихи.';
+      'Откройте любую суру, начиная со 2-й, для чтения после Аль-Фатихи.';
 
   @override
   String get prayerGuideNiyyahRecitationNote =>

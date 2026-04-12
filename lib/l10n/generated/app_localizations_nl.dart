@@ -2870,6 +2870,9 @@ class AppLocalizationsNl extends AppLocalizations {
   String get settingsLanguageOptionRussian => 'Russisch';
 
   @override
+  String get settingsLanguageOptionPortuguese => 'Portugees';
+
+  @override
   String get settingsLanguageOptionItalian => 'Italiaans';
 
   @override

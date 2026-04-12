@@ -38,6 +38,7 @@ class TravelLocationLabelDataSource {
       'ar' => 'ar',
       'en' => 'en',
       'fr' => 'fr',
+      'pt' => 'pt',
       _ => 'es',
     };
   }

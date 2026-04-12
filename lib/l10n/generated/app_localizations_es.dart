@@ -2871,6 +2871,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get settingsLanguageOptionRussian => 'Ruso';
 
   @override
+  String get settingsLanguageOptionPortuguese => 'Portugués';
+
+  @override
   String get settingsLanguageOptionItalian => 'Italiano';
 
   @override

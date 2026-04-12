@@ -2864,6 +2864,9 @@ class AppLocalizationsId extends AppLocalizations {
   String get settingsLanguageOptionRussian => 'Rusia';
 
   @override
+  String get settingsLanguageOptionPortuguese => 'Portugis';
+
+  @override
   String get settingsLanguageOptionItalian => 'Italia';
 
   @override

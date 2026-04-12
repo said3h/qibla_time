@@ -72,6 +72,7 @@ class HadithCollectionPresentation {
       'en' => 'en',
       'fr' => 'fr',
       'it' => 'it',
+      'pt' => 'pt',
       'ru' => 'ru',
       _ => 'default',
     };
@@ -82,6 +83,7 @@ class HadithCollectionPresentation {
             'en' => 'Other',
             'fr' => 'Autres',
             'it' => 'Altri',
+            'pt' => 'Outros',
             'ru' => _russianLabels[normalizedCollection] ?? 'Другие',
             _ => 'Otros',
           }
@@ -135,6 +137,7 @@ class HadithCollectionPresentation {
         return 'Muwatta Malik';
       case 'other':
       case 'altri':
+      case 'outros':
       case 'otros':
         return 'Otros';
       default:

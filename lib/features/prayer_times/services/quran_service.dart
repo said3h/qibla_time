@@ -76,6 +76,7 @@ class QuranVerseService {
       'id' => 'id',
       'it' => 'it',
       'nl' => 'nl',
+      'pt' => 'pt',
       'ru' => 'ru',
       _ => 'es',
     };
@@ -90,6 +91,7 @@ class QuranVerseService {
       'id' => 'id.indonesian',
       'it' => 'it.piccardo',
       'nl' => 'nl.keyzer',
+      'pt' => 'pt.elhayek',
       'ru' => 'ru.kuliev',
       _ => 'es.garcia',
     };

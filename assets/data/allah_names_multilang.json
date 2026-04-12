@@ -39,6 +39,10 @@
       "it": {
         "name": "Il più gentile",
         "description": ""
+      },
+      "pt": {
+        "name": "O Mais Gracioso",
+        "description": ""
       }
     }
   },
@@ -81,6 +85,10 @@
       },
       "it": {
         "name": "Il più misericorAllahso",
+        "description": ""
+      },
+      "pt": {
+        "name": "O Mais Misericordioso",
         "description": ""
       }
     }
@@ -125,6 +133,10 @@
       "it": {
         "name": "Il Re",
         "description": ""
+      },
+      "pt": {
+        "name": "O rei",
+        "description": ""
       }
     }
   },
@@ -167,6 +179,10 @@
       },
       "it": {
         "name": "Il Santissimo",
+        "description": ""
+      },
+      "pt": {
+        "name": "O Santíssimo",
         "description": ""
       }
     }
@@ -211,6 +227,10 @@
       "it": {
         "name": "La Fonte della Pace",
         "description": ""
+      },
+      "pt": {
+        "name": "A fonte da paz",
+        "description": ""
       }
     }
   },
@@ -253,6 +273,10 @@
       },
       "it": {
         "name": "Il guardiano della fede",
+        "description": ""
+      },
+      "pt": {
+        "name": "O Guardião da Fé",
         "description": ""
       }
     }
@@ -297,6 +321,10 @@
       "it": {
         "name": "Il Protettore",
         "description": ""
+      },
+      "pt": {
+        "name": "O Protetor",
+        "description": ""
       }
     }
   },
@@ -339,6 +367,10 @@
       },
       "it": {
         "name": "L'Onnipotente",
+        "description": ""
+      },
+      "pt": {
+        "name": "O Todo-Poderoso",
         "description": ""
       }
     }
@@ -383,6 +415,10 @@
       "it": {
         "name": "Il Compeller",
         "description": ""
+      },
+      "pt": {
+        "name": "O Compulsor",
+        "description": ""
       }
     }
   },
@@ -425,6 +461,10 @@
       },
       "it": {
         "name": "Il Maestoso",
+        "description": ""
+      },
+      "pt": {
+        "name": "O Majestoso",
         "description": ""
       }
     }
@@ -469,6 +509,10 @@
       "it": {
         "name": "Il Creatore",
         "description": ""
+      },
+      "pt": {
+        "name": "O Criador",
+        "description": ""
       }
     }
   },
@@ -511,6 +555,10 @@
       },
       "it": {
         "name": "L'Originatore",
+        "description": ""
+      },
+      "pt": {
+        "name": "O Originador",
         "description": ""
       }
     }
@@ -555,6 +603,10 @@
       "it": {
         "name": "Il Fashionista",
         "description": ""
+      },
+      "pt": {
+        "name": "O fashionista",
+        "description": ""
       }
     }
   },
@@ -597,6 +649,10 @@
       },
       "it": {
         "name": "Il Grande Perdonatore",
+        "description": ""
+      },
+      "pt": {
+        "name": "O Grande Perdoador",
         "description": ""
       }
     }
@@ -641,6 +697,10 @@
       "it": {
         "name": "Il Sottomesso",
         "description": ""
+      },
+      "pt": {
+        "name": "O Subjugador",
+        "description": ""
       }
     }
   },
@@ -683,6 +743,10 @@
       },
       "it": {
         "name": "Il Donatore",
+        "description": ""
+      },
+      "pt": {
+        "name": "O Doador",
         "description": ""
       }
     }
@@ -727,6 +791,10 @@
       "it": {
         "name": "Il fornitore",
         "description": ""
+      },
+      "pt": {
+        "name": "O provedor",
+        "description": ""
       }
     }
   },
@@ -769,6 +837,10 @@
       },
       "it": {
         "name": "L'Apertore",
+        "description": ""
+      },
+      "pt": {
+        "name": "O abridor",
         "description": ""
       }
     }
@@ -813,6 +885,10 @@
       "it": {
         "name": "L'Onnisciente",
         "description": ""
+      },
+      "pt": {
+        "name": "O Onisciente",
+        "description": ""
       }
     }
   },
@@ -855,6 +931,10 @@
       },
       "it": {
         "name": "Il costrittore",
+        "description": ""
+      },
+      "pt": {
+        "name": "O Constritor",
         "description": ""
       }
     }
@@ -899,6 +979,10 @@
       "it": {
         "name": "L'espansore",
         "description": ""
+      },
+      "pt": {
+        "name": "O expansor",
+        "description": ""
       }
     }
   },
@@ -941,6 +1025,10 @@
       },
       "it": {
         "name": "L'Abbassatore",
+        "description": ""
+      },
+      "pt": {
+        "name": "O Abasteiro",
         "description": ""
       }
     }
@@ -985,6 +1073,10 @@
       "it": {
         "name": "L'Esaltatore",
         "description": ""
+      },
+      "pt": {
+        "name": "O Exaltador",
+        "description": ""
       }
     }
   },
@@ -1027,6 +1119,10 @@
       },
       "it": {
         "name": "L'Onorevole",
+        "description": ""
+      },
+      "pt": {
+        "name": "O homenageado",
         "description": ""
       }
     }
@@ -1071,6 +1167,10 @@
       "it": {
         "name": "L'Umiliatore",
         "description": ""
+      },
+      "pt": {
+        "name": "O humilhador",
+        "description": ""
       }
     }
   },
@@ -1113,6 +1213,10 @@
       },
       "it": {
         "name": "L'Onniudiente",
+        "description": ""
+      },
+      "pt": {
+        "name": "O Todo-Ouvinte",
         "description": ""
       }
     }
@@ -1157,6 +1261,10 @@
       "it": {
         "name": "L'onniveggente",
         "description": ""
+      },
+      "pt": {
+        "name": "O que tudo vê",
+        "description": ""
       }
     }
   },
@@ -1199,6 +1307,10 @@
       },
       "it": {
         "name": "Il giudice",
+        "description": ""
+      },
+      "pt": {
+        "name": "O Juiz",
         "description": ""
       }
     }
@@ -1243,6 +1355,10 @@
       "it": {
         "name": "Il Giusto",
         "description": ""
+      },
+      "pt": {
+        "name": "O Justo",
+        "description": ""
       }
     }
   },
@@ -1285,6 +1401,10 @@
       },
       "it": {
         "name": "Il Sottile e Gentile",
+        "description": ""
+      },
+      "pt": {
+        "name": "O sutil e gentil",
         "description": ""
       }
     }
@@ -1329,6 +1449,10 @@
       "it": {
         "name": "L'Onnisciente",
         "description": ""
+      },
+      "pt": {
+        "name": "O Todo-Consciente",
+        "description": ""
       }
     }
   },
@@ -1371,6 +1495,10 @@
       },
       "it": {
         "name": "Il tollerante",
+        "description": ""
+      },
+      "pt": {
+        "name": "O tolerante",
         "description": ""
       }
     }
@@ -1415,6 +1543,10 @@
       "it": {
         "name": "Il Magnifico",
         "description": ""
+      },
+      "pt": {
+        "name": "O Magnífico",
+        "description": ""
       }
     }
   },
@@ -1457,6 +1589,10 @@
       },
       "it": {
         "name": "Il Perdonatore",
+        "description": ""
+      },
+      "pt": {
+        "name": "O perdão",
         "description": ""
       }
     }
@@ -1501,6 +1637,10 @@
       "it": {
         "name": "Il Grato",
         "description": ""
+      },
+      "pt": {
+        "name": "O Grato",
+        "description": ""
       }
     }
   },
@@ -1543,6 +1683,10 @@
       },
       "it": {
         "name": "L'Altissimo",
+        "description": ""
+      },
+      "pt": {
+        "name": "O Altíssimo",
         "description": ""
       }
     }
@@ -1587,6 +1731,10 @@
       "it": {
         "name": "Il più grande",
         "description": ""
+      },
+      "pt": {
+        "name": "O maior",
+        "description": ""
       }
     }
   },
@@ -1629,6 +1777,10 @@
       },
       "it": {
         "name": "Il conservatore",
+        "description": ""
+      },
+      "pt": {
+        "name": "O Preservador",
         "description": ""
       }
     }
@@ -1673,6 +1825,10 @@
       "it": {
         "name": "Il nutriente",
         "description": ""
+      },
+      "pt": {
+        "name": "O Nutridor",
+        "description": ""
       }
     }
   },
@@ -1715,6 +1871,10 @@
       },
       "it": {
         "name": "Il calcolatore",
+        "description": ""
+      },
+      "pt": {
+        "name": "O Contador",
         "description": ""
       }
     }
@@ -1759,6 +1919,10 @@
       "it": {
         "name": "Il Maestoso",
         "description": ""
+      },
+      "pt": {
+        "name": "O Majestoso",
+        "description": ""
       }
     }
   },
@@ -1801,6 +1965,10 @@
       },
       "it": {
         "name": "Il più generoso",
+        "description": ""
+      },
+      "pt": {
+        "name": "O mais generoso",
         "description": ""
       }
     }
@@ -1845,6 +2013,10 @@
       "it": {
         "name": "Il Vigile",
         "description": ""
+      },
+      "pt": {
+        "name": "O Vigilante",
+        "description": ""
       }
     }
   },
@@ -1887,6 +2059,10 @@
       },
       "it": {
         "name": "Il reattivo",
+        "description": ""
+      },
+      "pt": {
+        "name": "O Responsivo",
         "description": ""
       }
     }
@@ -1931,6 +2107,10 @@
       "it": {
         "name": "L'onnicomprensivo",
         "description": ""
+      },
+      "pt": {
+        "name": "O Todo-Abrangente",
+        "description": ""
       }
     }
   },
@@ -1973,6 +2153,10 @@
       },
       "it": {
         "name": "Il saggio",
+        "description": ""
+      },
+      "pt": {
+        "name": "O Sábio",
         "description": ""
       }
     }
@@ -2017,6 +2201,10 @@
       "it": {
         "name": "L'Amore",
         "description": ""
+      },
+      "pt": {
+        "name": "O amoroso",
+        "description": ""
       }
     }
   },
@@ -2059,6 +2247,10 @@
       },
       "it": {
         "name": "Il Glorioso",
+        "description": ""
+      },
+      "pt": {
+        "name": "O Glorioso",
         "description": ""
       }
     }
@@ -2103,6 +2295,10 @@
       "it": {
         "name": "Il Resuscitatore",
         "description": ""
+      },
+      "pt": {
+        "name": "O Ressuscitador",
+        "description": ""
       }
     }
   },
@@ -2145,6 +2341,10 @@
       },
       "it": {
         "name": "Il testimone",
+        "description": ""
+      },
+      "pt": {
+        "name": "A testemunha",
         "description": ""
       }
     }
@@ -2189,6 +2389,10 @@
       "it": {
         "name": "La verità",
         "description": ""
+      },
+      "pt": {
+        "name": "A verdade",
+        "description": ""
       }
     }
   },
@@ -2231,6 +2435,10 @@
       },
       "it": {
         "name": "Il fiduciario",
+        "description": ""
+      },
+      "pt": {
+        "name": "O administrador",
         "description": ""
       }
     }
@@ -2275,6 +2483,10 @@
       "it": {
         "name": "Il Forte",
         "description": ""
+      },
+      "pt": {
+        "name": "O Forte",
+        "description": ""
       }
     }
   },
@@ -2317,6 +2529,10 @@
       },
       "it": {
         "name": "L'azienda",
+        "description": ""
+      },
+      "pt": {
+        "name": "A empresa",
         "description": ""
       }
     }
@@ -2361,6 +2577,10 @@
       "it": {
         "name": "L'amico protettore",
         "description": ""
+      },
+      "pt": {
+        "name": "O amigo protetor",
+        "description": ""
       }
     }
   },
@@ -2403,6 +2623,10 @@
       },
       "it": {
         "name": "Il lodevole",
+        "description": ""
+      },
+      "pt": {
+        "name": "O Louvável",
         "description": ""
       }
     }
@@ -2447,6 +2671,10 @@
       "it": {
         "name": "Il contatore",
         "description": ""
+      },
+      "pt": {
+        "name": "O contador",
+        "description": ""
       }
     }
   },
@@ -2489,6 +2717,10 @@
       },
       "it": {
         "name": "L'Originatore",
+        "description": ""
+      },
+      "pt": {
+        "name": "O Originador",
         "description": ""
       }
     }
@@ -2533,6 +2765,10 @@
       "it": {
         "name": "Il Restauratore",
         "description": ""
+      },
+      "pt": {
+        "name": "O Restaurador",
+        "description": ""
       }
     }
   },
@@ -2575,6 +2811,10 @@
       },
       "it": {
         "name": "Il Donatore di Vita",
+        "description": ""
+      },
+      "pt": {
+        "name": "O Doador da Vida",
         "description": ""
       }
     }
@@ -2619,6 +2859,10 @@
       "it": {
         "name": "Il Creatore della Morte",
         "description": ""
+      },
+      "pt": {
+        "name": "O Criador da Morte",
+        "description": ""
       }
     }
   },
@@ -2661,6 +2905,10 @@
       },
       "it": {
         "name": "Il sempre vivo",
+        "description": ""
+      },
+      "pt": {
+        "name": "O Sempre Vivo",
         "description": ""
       }
     }
@@ -2705,6 +2953,10 @@
       "it": {
         "name": "L'autosussistente",
         "description": ""
+      },
+      "pt": {
+        "name": "O Auto-Subsistente",
+        "description": ""
       }
     }
   },
@@ -2747,6 +2999,10 @@
       },
       "it": {
         "name": "Il Trovatore",
+        "description": ""
+      },
+      "pt": {
+        "name": "O localizador",
         "description": ""
       }
     }
@@ -2791,6 +3047,10 @@
       "it": {
         "name": "Il Nobile e il Glorioso",
         "description": ""
+      },
+      "pt": {
+        "name": "O Nobre e Glorioso",
+        "description": ""
       }
     }
   },
@@ -2833,6 +3093,10 @@
       },
       "it": {
         "name": "L'Uno",
+        "description": ""
+      },
+      "pt": {
+        "name": "O Único",
         "description": ""
       }
     }
@@ -2877,6 +3141,10 @@
       "it": {
         "name": "L'Unico",
         "description": ""
+      },
+      "pt": {
+        "name": "O único",
+        "description": ""
       }
     }
   },
@@ -2919,6 +3187,10 @@
       },
       "it": {
         "name": "Il rifugio eterno",
+        "description": ""
+      },
+      "pt": {
+        "name": "O Refúgio Eterno",
         "description": ""
       }
     }
@@ -2963,6 +3235,10 @@
       "it": {
         "name": "L'Abile",
         "description": ""
+      },
+      "pt": {
+        "name": "O Capaz",
+        "description": ""
       }
     }
   },
@@ -3005,6 +3281,10 @@
       },
       "it": {
         "name": "Il Creatore di ogni potere",
+        "description": ""
+      },
+      "pt": {
+        "name": "O Criador de Todo Poder",
         "description": ""
       }
     }
@@ -3049,6 +3329,10 @@
       "it": {
         "name": "L'espediente",
         "description": ""
+      },
+      "pt": {
+        "name": "O Expedidor",
+        "description": ""
       }
     }
   },
@@ -3091,6 +3375,10 @@
       },
       "it": {
         "name": "Il Ritardatore",
+        "description": ""
+      },
+      "pt": {
+        "name": "O retardador",
         "description": ""
       }
     }
@@ -3135,6 +3423,10 @@
       "it": {
         "name": "Il primo",
         "description": ""
+      },
+      "pt": {
+        "name": "O primeiro",
+        "description": ""
       }
     }
   },
@@ -3177,6 +3469,10 @@
       },
       "it": {
         "name": "L'ultimo",
+        "description": ""
+      },
+      "pt": {
+        "name": "O último",
         "description": ""
       }
     }
@@ -3221,6 +3517,10 @@
       "it": {
         "name": "Il manifesto",
         "description": ""
+      },
+      "pt": {
+        "name": "O Manifesto",
+        "description": ""
       }
     }
   },
@@ -3263,6 +3563,10 @@
       },
       "it": {
         "name": "Il nascosto",
+        "description": ""
+      },
+      "pt": {
+        "name": "O oculto",
         "description": ""
       }
     }
@@ -3307,6 +3611,10 @@
       "it": {
         "name": "Il Governatore",
         "description": ""
+      },
+      "pt": {
+        "name": "O Governador",
+        "description": ""
       }
     }
   },
@@ -3349,6 +3657,10 @@
       },
       "it": {
         "name": "Il più esaltato",
+        "description": ""
+      },
+      "pt": {
+        "name": "O mais exaltado",
         "description": ""
       }
     }
@@ -3393,6 +3705,10 @@
       "it": {
         "name": "La fonte di ogni bontà",
         "description": ""
+      },
+      "pt": {
+        "name": "A fonte de toda bondade",
+        "description": ""
       }
     }
   },
@@ -3435,6 +3751,10 @@
       },
       "it": {
         "name": "L'accettatore del pentimento",
+        "description": ""
+      },
+      "pt": {
+        "name": "O Aceitador do Arrependimento",
         "description": ""
       }
     }
@@ -3479,6 +3799,10 @@
       "it": {
         "name": "Il Vendicatore",
         "description": ""
+      },
+      "pt": {
+        "name": "O Vingador",
+        "description": ""
       }
     }
   },
@@ -3521,6 +3845,10 @@
       },
       "it": {
         "name": "Il perdonatore",
+        "description": ""
+      },
+      "pt": {
+        "name": "O perdoador",
         "description": ""
       }
     }
@@ -3565,6 +3893,10 @@
       "it": {
         "name": "Il Compassionevole",
         "description": ""
+      },
+      "pt": {
+        "name": "O Compassivo",
+        "description": ""
       }
     }
   },
@@ -3607,6 +3939,10 @@
       },
       "it": {
         "name": "Il detentore della sovranità",
+        "description": ""
+      },
+      "pt": {
+        "name": "O Dono da Soberania",
         "description": ""
       }
     }
@@ -3651,6 +3987,10 @@
       "it": {
         "name": "Signore di maestà e generosità",
         "description": ""
+      },
+      "pt": {
+        "name": "Senhor da Majestade e da Generosidade",
+        "description": ""
       }
     }
   },
@@ -3693,6 +4033,10 @@
       },
       "it": {
         "name": "L'Equo",
+        "description": ""
+      },
+      "pt": {
+        "name": "O Equitativo",
         "description": ""
       }
     }
@@ -3737,6 +4081,10 @@
       "it": {
         "name": "Il Raccoglitore",
         "description": ""
+      },
+      "pt": {
+        "name": "O coletor",
+        "description": ""
       }
     }
   },
@@ -3779,6 +4127,10 @@
       },
       "it": {
         "name": "L'Autosufficiente",
+        "description": ""
+      },
+      "pt": {
+        "name": "O Autossuficiente",
         "description": ""
       }
     }
@@ -3823,6 +4175,10 @@
       "it": {
         "name": "L'arricchitore",
         "description": ""
+      },
+      "pt": {
+        "name": "O Enriquecedor",
+        "description": ""
       }
     }
   },
@@ -3865,6 +4221,10 @@
       },
       "it": {
         "name": "Il Preventivo",
+        "description": ""
+      },
+      "pt": {
+        "name": "O preventivo",
         "description": ""
       }
     }
@@ -3909,6 +4269,10 @@
       "it": {
         "name": "Il creatore del danno",
         "description": ""
+      },
+      "pt": {
+        "name": "O Criador do Dano",
+        "description": ""
       }
     }
   },
@@ -3951,6 +4315,10 @@
       },
       "it": {
         "name": "Il Creatore del bene",
+        "description": ""
+      },
+      "pt": {
+        "name": "O Criador do Bem",
         "description": ""
       }
     }
@@ -3995,6 +4363,10 @@
       "it": {
         "name": "La luce",
         "description": ""
+      },
+      "pt": {
+        "name": "A luz",
+        "description": ""
       }
     }
   },
@@ -4037,6 +4409,10 @@
       },
       "it": {
         "name": "La Guida",
+        "description": ""
+      },
+      "pt": {
+        "name": "O Guia",
         "description": ""
       }
     }
@@ -4081,6 +4457,10 @@
       "it": {
         "name": "L'incomparabile creatore",
         "description": ""
+      },
+      "pt": {
+        "name": "O Originador Incomparável",
+        "description": ""
       }
     }
   },
@@ -4123,6 +4503,10 @@
       },
       "it": {
         "name": "L'Eterno",
+        "description": ""
+      },
+      "pt": {
+        "name": "O Eterno",
         "description": ""
       }
     }
@@ -4167,6 +4551,10 @@
       "it": {
         "name": "L'erede di tutto",
         "description": ""
+      },
+      "pt": {
+        "name": "O herdeiro de tudo",
+        "description": ""
       }
     }
   },
@@ -4210,6 +4598,10 @@
       "it": {
         "name": "La guida alla retta via",
         "description": ""
+      },
+      "pt": {
+        "name": "O guia para o caminho certo",
+        "description": ""
       }
     }
   },
@@ -4252,6 +4644,10 @@
       },
       "it": {
         "name": "Il paziente",
+        "description": ""
+      },
+      "pt": {
+        "name": "O Paciente",
         "description": ""
       }
     }

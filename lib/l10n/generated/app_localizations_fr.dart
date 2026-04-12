@@ -2889,6 +2889,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settingsLanguageOptionRussian => 'Russe';
 
   @override
+  String get settingsLanguageOptionPortuguese => 'Portugais';
+
+  @override
   String get settingsLanguageOptionItalian => 'Italien';
 
   @override
