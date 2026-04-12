@@ -267,13 +267,15 @@ class QuranMiniPlayerController extends StateNotifier<QuranMiniPlayerState> {
     int surahNumber,
     int currentIndex,
   ) async {
-    const prefetchCount = 5;
+    const prefetchCount = 3;
     final lastIndexToPrefetch = currentIndex + prefetchCount;
+    final futures = <Future<void>>[];
     for (var index = currentIndex + 1;
         index < _surahQueue.length && index <= lastIndexToPrefetch;
         index++) {
-      await _prefetchAyahForGaplessPlayback(surahNumber, index);
+      futures.add(_prefetchAyahForGaplessPlayback(surahNumber, index));
     }
+    unawaited(Future.wait(futures));
   }
 
   Future<void> _prefetchAyahForGaplessPlayback(
@@ -393,6 +395,7 @@ class QuranMiniPlayerController extends StateNotifier<QuranMiniPlayerState> {
     final sourceKey = 'quran:surah:${summary.number}:${ayah.numberInSurah}';
 
     _surahQueueIndex = index;
+    unawaited(_prefetchAyahForGaplessPlayback(summary.number, index + 1));
 
     final resolved = await _primeSurahQueueAudio(summary.number, index);
     if (resolved == null) {

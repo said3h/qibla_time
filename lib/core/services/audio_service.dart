@@ -98,11 +98,18 @@ class AudioService {
       return;
     }
     if (isLocalFile) {
-      await player.setSourceDeviceFile(fileName);
+      await player.play(
+        DeviceFileSource(fileName),
+        mode: PlayerMode.mediaPlayer,
+        ctx: _defaultAudioContext,
+      );
     } else {
-      await player.setSource(AssetSource('audio/$fileName'));
+      await player.play(
+        AssetSource('audio/$fileName'),
+        mode: PlayerMode.mediaPlayer,
+        ctx: _defaultAudioContext,
+      );
     }
-    await player.resume();
   }
 
   Future<void> playUrl(
