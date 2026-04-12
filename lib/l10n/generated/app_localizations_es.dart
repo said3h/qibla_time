@@ -3221,17 +3221,114 @@ class AppLocalizationsEs extends AppLocalizations {
       'Gira la cabeza hacia la izquierda y completa el salam.';
 
   @override
-  String get prayerGuideRakaatsFajr => '2 sunnah + 2 fard';
+  String get prayerGuideRakaatsFajr => '2 sunnah antes + 2 fard';
 
   @override
-  String get prayerGuideRakaatsDhuhr => '4 sunnah + 4 fard + 2 sunnah';
+  String get prayerGuideRakaatsDhuhr =>
+      '4 sunnah antes + 4 fard + 2 sunnah después';
 
   @override
   String get prayerGuideRakaatsAsr => '4 fard';
 
   @override
-  String get prayerGuideRakaatsMaghrib => '3 fard + 2 sunnah';
+  String get prayerGuideRakaatsMaghrib => '3 fard + 2 sunnah después';
 
   @override
-  String get prayerGuideRakaatsIsha => '4 fard + 2 sunnah + 1 witr';
+  String get prayerGuideRakaatsIsha => '4 fard + 2 sunnah después + 1 witr';
+
+  @override
+  String get prayerGuideOneRakaatIntro =>
+      'Esta guía muestra una rakaat completa. Repite el mismo proceso según la oración que estás realizando.';
+
+  @override
+  String get prayerGuideCycleFajr =>
+      'Repite esta rakaat dos veces. En la segunda rakaat haces el tashahhud y luego terminas con el taslim.';
+
+  @override
+  String get prayerGuideCycleDhuhr =>
+      'Repite la rakaat fard cuatro veces. Haz el tashahhud tras la segunda rakaat y termina con taslim en la cuarta. Las rakaats sunnah siguen el mismo flujo básico.';
+
+  @override
+  String get prayerGuideCycleAsr =>
+      'Repite esta rakaat cuatro veces. Haz el tashahhud tras la segunda rakaat y termina con taslim en la cuarta.';
+
+  @override
+  String get prayerGuideCycleMaghrib =>
+      'Repite esta rakaat tres veces. Haz el tashahhud tras la segunda rakaat y completa la oración con tashahhud y taslim en la tercera.';
+
+  @override
+  String get prayerGuideCycleIsha =>
+      'Repite la rakaat fard cuatro veces. Haz el tashahhud tras la segunda rakaat y termina con taslim en la cuarta. Después reza 2 sunnah y 1 witr con el mismo flujo básico.';
+
+  @override
+  String get prayerGuideOpenFatiha => 'Al-Fatiha';
+
+  @override
+  String get prayerGuideChooseSurah => 'Elegir sura';
+
+  @override
+  String get prayerGuideChooseSurahTitle => 'Elegir una sura adicional';
+
+  @override
+  String get prayerGuideChooseSurahSubtitle =>
+      'Abre cualquier sura desde la número 2 en adelante para la recitación después de Al-Fatiha.';
+
+  @override
+  String get prayerGuideNiyyahRecitationNote =>
+      'La niyyah se mantiene en el corazón y no se pronuncia en voz alta.';
+
+  @override
+  String get prayerGuideTimesHeart => 'En el corazón';
+
+  @override
+  String get prayerGuideTimesOnce => '1 vez';
+
+  @override
+  String get prayerGuideTimesThree => '3 veces';
+
+  @override
+  String get prayerGuideTimesOneToThree => '1-3 veces';
+
+  @override
+  String get prayerGuideDirectionRight => 'Hacia la derecha';
+
+  @override
+  String get prayerGuideDirectionLeft => 'Hacia la izquierda';
+
+  @override
+  String get prayerGuideWhileRising => 'Al levantarse';
+
+  @override
+  String get prayerGuideWhenStanding => 'Ya de pie';
+
+  @override
+  String get prayerGuideTakbirMeaning => 'Allah es el más grande.';
+
+  @override
+  String get prayerGuideQiyamMeaning =>
+      'Gloria a Ti, oh Allah, y toda alabanza es para Ti. Bendito es Tu nombre, exaltada es Tu majestad y no hay divinidad fuera de Ti.';
+
+  @override
+  String get prayerGuideRukuMeaning => 'Gloria a mi Señor, el Grandioso.';
+
+  @override
+  String get prayerGuideItidalRiseMeaning => 'Allah escucha a quien Le alaba.';
+
+  @override
+  String get prayerGuideItidalStandMeaning =>
+      'Señor nuestro, a Ti toda la alabanza.';
+
+  @override
+  String get prayerGuideSujudMeaning => 'Gloria a mi Señor, el Altísimo.';
+
+  @override
+  String get prayerGuideJalsaMeaning => 'Señor mío, perdóname.';
+
+  @override
+  String get prayerGuideTashahhudMeaning =>
+      'Todos los saludos, las oraciones y las buenas palabras son para Allah... Testifico que no hay divinidad salvo Allah y que Muhammad es Su siervo y Mensajero.';
+
+  @override
+  String get prayerGuideTaslimMeaning =>
+      'La paz y la misericordia de Allah sean con vosotros.';
 }

@@ -3202,17 +3202,115 @@ class AppLocalizationsEn extends AppLocalizations {
       'Turn your head to the left and complete the salam.';
 
   @override
-  String get prayerGuideRakaatsFajr => '2 sunnah + 2 fard';
+  String get prayerGuideRakaatsFajr => '2 sunnah before + 2 fard';
 
   @override
-  String get prayerGuideRakaatsDhuhr => '4 sunnah + 4 fard + 2 sunnah';
+  String get prayerGuideRakaatsDhuhr =>
+      '4 sunnah before + 4 fard + 2 sunnah after';
 
   @override
   String get prayerGuideRakaatsAsr => '4 fard';
 
   @override
-  String get prayerGuideRakaatsMaghrib => '3 fard + 2 sunnah';
+  String get prayerGuideRakaatsMaghrib => '3 fard + 2 sunnah after';
 
   @override
-  String get prayerGuideRakaatsIsha => '4 fard + 2 sunnah + 1 witr';
+  String get prayerGuideRakaatsIsha => '4 fard + 2 sunnah after + 1 witr';
+
+  @override
+  String get prayerGuideOneRakaatIntro =>
+      'This guide shows one complete rak\'ah. Repeat the same flow according to the prayer you are performing.';
+
+  @override
+  String get prayerGuideCycleFajr =>
+      'Repeat this rak\'ah twice. Read tashahhud in the second rak\'ah, then finish with taslim.';
+
+  @override
+  String get prayerGuideCycleDhuhr =>
+      'Repeat the fard rak\'ah four times. Read tashahhud after the second rak\'ah and finish with taslim in the fourth. The sunnah rak\'ahs follow the same basic flow.';
+
+  @override
+  String get prayerGuideCycleAsr =>
+      'Repeat this rak\'ah four times. Read tashahhud after the second rak\'ah and finish with taslim in the fourth.';
+
+  @override
+  String get prayerGuideCycleMaghrib =>
+      'Repeat this rak\'ah three times. Read tashahhud after the second rak\'ah, then complete the prayer with tashahhud and taslim in the third.';
+
+  @override
+  String get prayerGuideCycleIsha =>
+      'Repeat the fard rak\'ah four times. Read tashahhud after the second rak\'ah and finish with taslim in the fourth. Then pray 2 sunnah and 1 witr with the same basic flow.';
+
+  @override
+  String get prayerGuideOpenFatiha => 'Al-Fatiha';
+
+  @override
+  String get prayerGuideChooseSurah => 'Choose Surah';
+
+  @override
+  String get prayerGuideChooseSurahTitle => 'Choose an additional surah';
+
+  @override
+  String get prayerGuideChooseSurahSubtitle =>
+      'Open any surah from number 2 onward for the recitation after Al-Fatiha.';
+
+  @override
+  String get prayerGuideNiyyahRecitationNote =>
+      'The niyyah stays in the heart and is not spoken aloud.';
+
+  @override
+  String get prayerGuideTimesHeart => 'In the heart';
+
+  @override
+  String get prayerGuideTimesOnce => '1 time';
+
+  @override
+  String get prayerGuideTimesThree => '3 times';
+
+  @override
+  String get prayerGuideTimesOneToThree => '1-3 times';
+
+  @override
+  String get prayerGuideDirectionRight => 'To the right';
+
+  @override
+  String get prayerGuideDirectionLeft => 'To the left';
+
+  @override
+  String get prayerGuideWhileRising => 'While rising';
+
+  @override
+  String get prayerGuideWhenStanding => 'When standing';
+
+  @override
+  String get prayerGuideTakbirMeaning => 'Allah is the Greatest.';
+
+  @override
+  String get prayerGuideQiyamMeaning =>
+      'Glory is to You, O Allah, and praise is to You. Blessed is Your name, exalted is Your majesty, and there is no god but You.';
+
+  @override
+  String get prayerGuideRukuMeaning => 'Glory be to my Lord, the Magnificent.';
+
+  @override
+  String get prayerGuideItidalRiseMeaning =>
+      'Allah hears the one who praises Him.';
+
+  @override
+  String get prayerGuideItidalStandMeaning =>
+      'Our Lord, and to You belongs all praise.';
+
+  @override
+  String get prayerGuideSujudMeaning => 'Glory be to my Lord, the Most High.';
+
+  @override
+  String get prayerGuideJalsaMeaning => 'My Lord, forgive me.';
+
+  @override
+  String get prayerGuideTashahhudMeaning =>
+      'All greetings, prayers, and pure words are for Allah... I bear witness that there is no god but Allah and that Muhammad is His servant and Messenger.';
+
+  @override
+  String get prayerGuideTaslimMeaning =>
+      'Peace and the mercy of Allah be upon you.';
 }

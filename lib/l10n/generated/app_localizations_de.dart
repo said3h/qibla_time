@@ -3227,17 +3227,115 @@ class AppLocalizationsDe extends AppLocalizations {
       'Drehe den Kopf nach links und vervollständige den Salam.';
 
   @override
-  String get prayerGuideRakaatsFajr => '2 sunnah + 2 fard';
+  String get prayerGuideRakaatsFajr => '2 Sunnah davor + 2 Fard';
 
   @override
-  String get prayerGuideRakaatsDhuhr => '4 sunnah + 4 fard + 2 sunnah';
+  String get prayerGuideRakaatsDhuhr =>
+      '4 Sunnah davor + 4 Fard + 2 Sunnah danach';
 
   @override
-  String get prayerGuideRakaatsAsr => '4 fard';
+  String get prayerGuideRakaatsAsr => '4 Fard';
 
   @override
-  String get prayerGuideRakaatsMaghrib => '3 fard + 2 sunnah';
+  String get prayerGuideRakaatsMaghrib => '3 Fard + 2 Sunnah danach';
 
   @override
-  String get prayerGuideRakaatsIsha => '4 fard + 2 sunnah + 1 witr';
+  String get prayerGuideRakaatsIsha => '4 Fard + 2 Sunnah danach + 1 Witr';
+
+  @override
+  String get prayerGuideOneRakaatIntro =>
+      'Diese Anleitung zeigt eine vollständige Rak\'ah. Wiederhole denselben Ablauf je nach Gebet, das du verrichtest.';
+
+  @override
+  String get prayerGuideCycleFajr =>
+      'Wiederhole diese Rak\'ah zweimal. Im zweiten Rak\'ah liest du den Tashahhud und beendest dann das Gebet mit Taslim.';
+
+  @override
+  String get prayerGuideCycleDhuhr =>
+      'Wiederhole die Fard-Rak\'ah viermal. Lies den Tashahhud nach der zweiten Rak\'ah und beende das Gebet mit Taslim in der vierten. Die Sunnah-Rak\'ahs folgen demselben Grundablauf.';
+
+  @override
+  String get prayerGuideCycleAsr =>
+      'Wiederhole diese Rak\'ah viermal. Lies den Tashahhud nach der zweiten Rak\'ah und beende das Gebet mit Taslim in der vierten.';
+
+  @override
+  String get prayerGuideCycleMaghrib =>
+      'Wiederhole diese Rak\'ah dreimal. Lies den Tashahhud nach der zweiten Rak\'ah und vollende das Gebet mit Tashahhud und Taslim in der dritten.';
+
+  @override
+  String get prayerGuideCycleIsha =>
+      'Wiederhole die Fard-Rak\'ah viermal. Lies den Tashahhud nach der zweiten Rak\'ah und beende das Gebet mit Taslim in der vierten. Danach bete 2 Sunnah und 1 Witr im selben Grundablauf.';
+
+  @override
+  String get prayerGuideOpenFatiha => 'Al-Fatiha';
+
+  @override
+  String get prayerGuideChooseSurah => 'Sure wählen';
+
+  @override
+  String get prayerGuideChooseSurahTitle => 'Eine zusätzliche Sure wählen';
+
+  @override
+  String get prayerGuideChooseSurahSubtitle =>
+      'Öffne eine beliebige Sure ab Nummer 2 für die Rezitation nach Al-Fatiha.';
+
+  @override
+  String get prayerGuideNiyyahRecitationNote =>
+      'Die Niyyah bleibt im Herzen und wird nicht laut ausgesprochen.';
+
+  @override
+  String get prayerGuideTimesHeart => 'Im Herzen';
+
+  @override
+  String get prayerGuideTimesOnce => '1 Mal';
+
+  @override
+  String get prayerGuideTimesThree => '3 Mal';
+
+  @override
+  String get prayerGuideTimesOneToThree => '1 bis 3 Mal';
+
+  @override
+  String get prayerGuideDirectionRight => 'Nach rechts';
+
+  @override
+  String get prayerGuideDirectionLeft => 'Nach links';
+
+  @override
+  String get prayerGuideWhileRising => 'Beim Aufrichten';
+
+  @override
+  String get prayerGuideWhenStanding => 'Im Stehen';
+
+  @override
+  String get prayerGuideTakbirMeaning => 'Allah ist der Größte.';
+
+  @override
+  String get prayerGuideQiyamMeaning =>
+      'Gepriesen seist Du, o Allah, und Dir gebührt alles Lob. Gesegnet ist Dein Name, erhaben ist Deine Majestät, und es gibt keine Gottheit außer Dir.';
+
+  @override
+  String get prayerGuideRukuMeaning => 'Gepriesen sei mein Herr, der Erhabene.';
+
+  @override
+  String get prayerGuideItidalRiseMeaning => 'Allah hört den, der Ihn lobt.';
+
+  @override
+  String get prayerGuideItidalStandMeaning =>
+      'Unser Herr, Dir gebührt alles Lob.';
+
+  @override
+  String get prayerGuideSujudMeaning =>
+      'Gepriesen sei mein Herr, der Allerhöchste.';
+
+  @override
+  String get prayerGuideJalsaMeaning => 'Mein Herr, vergib mir.';
+
+  @override
+  String get prayerGuideTashahhudMeaning =>
+      'Alle Grüße, Gebete und guten Worte gehören Allah... Ich bezeuge, dass es keine Gottheit außer Allah gibt und dass Muhammad Sein Diener und Gesandter ist.';
+
+  @override
+  String get prayerGuideTaslimMeaning =>
+      'Der Friede und die Barmherzigkeit Allahs seien mit euch.';
 }

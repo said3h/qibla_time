@@ -3230,17 +3230,112 @@ class AppLocalizationsRu extends AppLocalizations {
       'Поверните голову налево и завершите салам.';
 
   @override
-  String get prayerGuideRakaatsFajr => '2 сунна + 2 фард';
+  String get prayerGuideRakaatsFajr => '2 сунны до + 2 фарда';
 
   @override
-  String get prayerGuideRakaatsDhuhr => '4 сунна + 4 фард + 2 сунна';
+  String get prayerGuideRakaatsDhuhr => '4 сунны до + 4 фарда + 2 сунны после';
 
   @override
-  String get prayerGuideRakaatsAsr => '4 фард';
+  String get prayerGuideRakaatsAsr => '4 фарда';
 
   @override
-  String get prayerGuideRakaatsMaghrib => '3 фард + 2 сунна';
+  String get prayerGuideRakaatsMaghrib => '3 фарда + 2 сунны после';
 
   @override
-  String get prayerGuideRakaatsIsha => '4 фард + 2 сунна + 1 витр';
+  String get prayerGuideRakaatsIsha => '4 фарда + 2 сунны после + 1 витр';
+
+  @override
+  String get prayerGuideOneRakaatIntro =>
+      'Это руководство показывает одну полную рак\'ат. Повторяйте тот же порядок в зависимости от молитвы, которую совершаете.';
+
+  @override
+  String get prayerGuideCycleFajr =>
+      'Повторите эту рак\'ат два раза. Прочитайте ташаххуд во второй рак\'ат, затем завершите молитву таслимом.';
+
+  @override
+  String get prayerGuideCycleDhuhr =>
+      'Повторите фарз-рак\'ат четыре раза. Прочитайте ташаххуд после второй рак\'ат и завершите молитву таслимом в четвертой. Сунна-рак\'аты следуют той же основной последовательности.';
+
+  @override
+  String get prayerGuideCycleAsr =>
+      'Повторите эту рак\'ат четыре раза. Прочитайте ташаххуд после второй рак\'ат и завершите молитву таслимом в четвертой.';
+
+  @override
+  String get prayerGuideCycleMaghrib =>
+      'Повторите эту рак\'ат три раза. Прочитайте ташаххуд после второй рак\'ат, затем завершите молитву ташаххудом и таслимом в третьей.';
+
+  @override
+  String get prayerGuideCycleIsha =>
+      'Повторите фарз-рак\'ат четыре раза. Прочитайте ташаххуд после второй рак\'ат и завершите молитву таслимом в четвертой. Затем совершите ٢ сунны и ١ витр по той же основной последовательности.';
+
+  @override
+  String get prayerGuideOpenFatiha => 'Аль-Фатиха';
+
+  @override
+  String get prayerGuideChooseSurah => 'Выбрать суру';
+
+  @override
+  String get prayerGuideChooseSurahTitle => 'Выберите дополнительную суру';
+
+  @override
+  String get prayerGuideChooseSurahSubtitle =>
+      'Откройте любую суру, начиная со ٢-й, для чтения после Аль-Фатихи.';
+
+  @override
+  String get prayerGuideNiyyahRecitationNote =>
+      'Намерение остается в сердце и не произносится вслух.';
+
+  @override
+  String get prayerGuideTimesHeart => 'В сердце';
+
+  @override
+  String get prayerGuideTimesOnce => '1 раз';
+
+  @override
+  String get prayerGuideTimesThree => '3 раза';
+
+  @override
+  String get prayerGuideTimesOneToThree => '1-3 раза';
+
+  @override
+  String get prayerGuideDirectionRight => 'Направо';
+
+  @override
+  String get prayerGuideDirectionLeft => 'Налево';
+
+  @override
+  String get prayerGuideWhileRising => 'При подъеме';
+
+  @override
+  String get prayerGuideWhenStanding => 'Стоя прямо';
+
+  @override
+  String get prayerGuideTakbirMeaning => 'Аллах — Величайший.';
+
+  @override
+  String get prayerGuideQiyamMeaning =>
+      'Пречист Ты, о Аллах, и хвала Тебе. Благословенно Твое имя, возвышено Твое величие, и нет божества, кроме Тебя.';
+
+  @override
+  String get prayerGuideRukuMeaning => 'Пречист мой Господь, Великий.';
+
+  @override
+  String get prayerGuideItidalRiseMeaning =>
+      'Аллах слышит того, кто восхваляет Его.';
+
+  @override
+  String get prayerGuideItidalStandMeaning => 'Господь наш, Тебе вся хвала.';
+
+  @override
+  String get prayerGuideSujudMeaning => 'Пречист мой Господь, Всевышний.';
+
+  @override
+  String get prayerGuideJalsaMeaning => 'Господь мой, прости меня.';
+
+  @override
+  String get prayerGuideTashahhudMeaning =>
+      'Все приветствия, молитвы и благие слова принадлежат Аллаху... Свидетельствую, что нет божества, кроме Аллаха, и что Мухаммад — Его раб и Посланник.';
+
+  @override
+  String get prayerGuideTaslimMeaning => 'Мир вам и милость Аллаха.';
 }

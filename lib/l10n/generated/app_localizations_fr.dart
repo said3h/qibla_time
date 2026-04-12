@@ -3239,17 +3239,115 @@ class AppLocalizationsFr extends AppLocalizations {
       'Tournez la tête vers la gauche et complétez le salam.';
 
   @override
-  String get prayerGuideRakaatsFajr => '2 sunnah + 2 fard';
+  String get prayerGuideRakaatsFajr => '2 sunnah avant + 2 fard';
 
   @override
-  String get prayerGuideRakaatsDhuhr => '4 sunnah + 4 fard + 2 sunnah';
+  String get prayerGuideRakaatsDhuhr =>
+      '4 sunnah avant + 4 fard + 2 sunnah après';
 
   @override
   String get prayerGuideRakaatsAsr => '4 fard';
 
   @override
-  String get prayerGuideRakaatsMaghrib => '3 fard + 2 sunnah';
+  String get prayerGuideRakaatsMaghrib => '3 fard + 2 sunnah après';
 
   @override
-  String get prayerGuideRakaatsIsha => '4 fard + 2 sunnah + 1 witr';
+  String get prayerGuideRakaatsIsha => '4 fard + 2 sunnah après + 1 witr';
+
+  @override
+  String get prayerGuideOneRakaatIntro =>
+      'Ce guide montre une rak\'ah complète. Répétez le même déroulement selon la prière que vous accomplissez.';
+
+  @override
+  String get prayerGuideCycleFajr =>
+      'Répétez cette rak\'ah deux fois. Faites le tachahhud dans la deuxième rak\'ah puis terminez par le taslim.';
+
+  @override
+  String get prayerGuideCycleDhuhr =>
+      'Répétez la rak\'ah fard quatre fois. Faites le tachahhud après la deuxième rak\'ah puis terminez par le taslim à la quatrième. Les rak\'ahs sunnah suivent le même déroulement de base.';
+
+  @override
+  String get prayerGuideCycleAsr =>
+      'Répétez cette rak\'ah quatre fois. Faites le tachahhud après la deuxième rak\'ah puis terminez par le taslim à la quatrième.';
+
+  @override
+  String get prayerGuideCycleMaghrib =>
+      'Répétez cette rak\'ah trois fois. Faites le tachahhud après la deuxième rak\'ah puis terminez la prière avec tachahhud et taslim à la troisième.';
+
+  @override
+  String get prayerGuideCycleIsha =>
+      'Répétez la rak\'ah fard quatre fois. Faites le tachahhud après la deuxième rak\'ah puis terminez par le taslim à la quatrième. Ensuite priez 2 sunnah et 1 witr avec le même déroulement de base.';
+
+  @override
+  String get prayerGuideOpenFatiha => 'Al-Fatiha';
+
+  @override
+  String get prayerGuideChooseSurah => 'Choisir une sourate';
+
+  @override
+  String get prayerGuideChooseSurahTitle =>
+      'Choisir une sourate supplémentaire';
+
+  @override
+  String get prayerGuideChooseSurahSubtitle =>
+      'Ouvrez n’importe quelle sourate à partir du numéro 2 pour la récitation après Al-Fatiha.';
+
+  @override
+  String get prayerGuideNiyyahRecitationNote =>
+      'La niyyah reste dans le cœur et ne se prononce pas à voix haute.';
+
+  @override
+  String get prayerGuideTimesHeart => 'Dans le cœur';
+
+  @override
+  String get prayerGuideTimesOnce => '1 fois';
+
+  @override
+  String get prayerGuideTimesThree => '3 fois';
+
+  @override
+  String get prayerGuideTimesOneToThree => '1 à 3 fois';
+
+  @override
+  String get prayerGuideDirectionRight => 'Vers la droite';
+
+  @override
+  String get prayerGuideDirectionLeft => 'Vers la gauche';
+
+  @override
+  String get prayerGuideWhileRising => 'En se relevant';
+
+  @override
+  String get prayerGuideWhenStanding => 'Une fois debout';
+
+  @override
+  String get prayerGuideTakbirMeaning => 'Allah est le plus grand.';
+
+  @override
+  String get prayerGuideQiyamMeaning =>
+      'Gloire à Toi, ô Allah, et à Toi la louange. Béni est Ton nom, exaltée est Ta majesté et il n’y a pas de divinité en dehors de Toi.';
+
+  @override
+  String get prayerGuideRukuMeaning => 'Gloire à mon Seigneur, le Très Grand.';
+
+  @override
+  String get prayerGuideItidalRiseMeaning => 'Allah entend celui qui Le loue.';
+
+  @override
+  String get prayerGuideItidalStandMeaning =>
+      'Notre Seigneur, à Toi toute la louange.';
+
+  @override
+  String get prayerGuideSujudMeaning => 'Gloire à mon Seigneur, le Très Haut.';
+
+  @override
+  String get prayerGuideJalsaMeaning => 'Seigneur, pardonne-moi.';
+
+  @override
+  String get prayerGuideTashahhudMeaning =>
+      'Toutes les salutations, prières et bonnes paroles appartiennent à Allah... J’atteste qu’il n’y a de divinité qu’Allah et que Muhammad est Son serviteur et Son Messager.';
+
+  @override
+  String get prayerGuideTaslimMeaning =>
+      'Que la paix et la miséricorde d’Allah soient sur vous.';
 }

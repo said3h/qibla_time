@@ -5594,13 +5594,13 @@ abstract class AppLocalizations {
   /// No description provided for @prayerGuideRakaatsFajr.
   ///
   /// In es, this message translates to:
-  /// **'2 sunnah + 2 fard'**
+  /// **'2 sunnah antes + 2 fard'**
   String get prayerGuideRakaatsFajr;
 
   /// No description provided for @prayerGuideRakaatsDhuhr.
   ///
   /// In es, this message translates to:
-  /// **'4 sunnah + 4 fard + 2 sunnah'**
+  /// **'4 sunnah antes + 4 fard + 2 sunnah después'**
   String get prayerGuideRakaatsDhuhr;
 
   /// No description provided for @prayerGuideRakaatsAsr.
@@ -5612,14 +5612,182 @@ abstract class AppLocalizations {
   /// No description provided for @prayerGuideRakaatsMaghrib.
   ///
   /// In es, this message translates to:
-  /// **'3 fard + 2 sunnah'**
+  /// **'3 fard + 2 sunnah después'**
   String get prayerGuideRakaatsMaghrib;
 
   /// No description provided for @prayerGuideRakaatsIsha.
   ///
   /// In es, this message translates to:
-  /// **'4 fard + 2 sunnah + 1 witr'**
+  /// **'4 fard + 2 sunnah después + 1 witr'**
   String get prayerGuideRakaatsIsha;
+
+  /// No description provided for @prayerGuideOneRakaatIntro.
+  ///
+  /// In es, this message translates to:
+  /// **'Esta guía muestra una rakaat completa. Repite el mismo proceso según la oración que estás realizando.'**
+  String get prayerGuideOneRakaatIntro;
+
+  /// No description provided for @prayerGuideCycleFajr.
+  ///
+  /// In es, this message translates to:
+  /// **'Repite esta rakaat dos veces. En la segunda rakaat haces el tashahhud y luego terminas con el taslim.'**
+  String get prayerGuideCycleFajr;
+
+  /// No description provided for @prayerGuideCycleDhuhr.
+  ///
+  /// In es, this message translates to:
+  /// **'Repite la rakaat fard cuatro veces. Haz el tashahhud tras la segunda rakaat y termina con taslim en la cuarta. Las rakaats sunnah siguen el mismo flujo básico.'**
+  String get prayerGuideCycleDhuhr;
+
+  /// No description provided for @prayerGuideCycleAsr.
+  ///
+  /// In es, this message translates to:
+  /// **'Repite esta rakaat cuatro veces. Haz el tashahhud tras la segunda rakaat y termina con taslim en la cuarta.'**
+  String get prayerGuideCycleAsr;
+
+  /// No description provided for @prayerGuideCycleMaghrib.
+  ///
+  /// In es, this message translates to:
+  /// **'Repite esta rakaat tres veces. Haz el tashahhud tras la segunda rakaat y completa la oración con tashahhud y taslim en la tercera.'**
+  String get prayerGuideCycleMaghrib;
+
+  /// No description provided for @prayerGuideCycleIsha.
+  ///
+  /// In es, this message translates to:
+  /// **'Repite la rakaat fard cuatro veces. Haz el tashahhud tras la segunda rakaat y termina con taslim en la cuarta. Después reza 2 sunnah y 1 witr con el mismo flujo básico.'**
+  String get prayerGuideCycleIsha;
+
+  /// No description provided for @prayerGuideOpenFatiha.
+  ///
+  /// In es, this message translates to:
+  /// **'Al-Fatiha'**
+  String get prayerGuideOpenFatiha;
+
+  /// No description provided for @prayerGuideChooseSurah.
+  ///
+  /// In es, this message translates to:
+  /// **'Elegir sura'**
+  String get prayerGuideChooseSurah;
+
+  /// No description provided for @prayerGuideChooseSurahTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Elegir una sura adicional'**
+  String get prayerGuideChooseSurahTitle;
+
+  /// No description provided for @prayerGuideChooseSurahSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Abre cualquier sura desde la número 2 en adelante para la recitación después de Al-Fatiha.'**
+  String get prayerGuideChooseSurahSubtitle;
+
+  /// No description provided for @prayerGuideNiyyahRecitationNote.
+  ///
+  /// In es, this message translates to:
+  /// **'La niyyah se mantiene en el corazón y no se pronuncia en voz alta.'**
+  String get prayerGuideNiyyahRecitationNote;
+
+  /// No description provided for @prayerGuideTimesHeart.
+  ///
+  /// In es, this message translates to:
+  /// **'En el corazón'**
+  String get prayerGuideTimesHeart;
+
+  /// No description provided for @prayerGuideTimesOnce.
+  ///
+  /// In es, this message translates to:
+  /// **'1 vez'**
+  String get prayerGuideTimesOnce;
+
+  /// No description provided for @prayerGuideTimesThree.
+  ///
+  /// In es, this message translates to:
+  /// **'3 veces'**
+  String get prayerGuideTimesThree;
+
+  /// No description provided for @prayerGuideTimesOneToThree.
+  ///
+  /// In es, this message translates to:
+  /// **'1-3 veces'**
+  String get prayerGuideTimesOneToThree;
+
+  /// No description provided for @prayerGuideDirectionRight.
+  ///
+  /// In es, this message translates to:
+  /// **'Hacia la derecha'**
+  String get prayerGuideDirectionRight;
+
+  /// No description provided for @prayerGuideDirectionLeft.
+  ///
+  /// In es, this message translates to:
+  /// **'Hacia la izquierda'**
+  String get prayerGuideDirectionLeft;
+
+  /// No description provided for @prayerGuideWhileRising.
+  ///
+  /// In es, this message translates to:
+  /// **'Al levantarse'**
+  String get prayerGuideWhileRising;
+
+  /// No description provided for @prayerGuideWhenStanding.
+  ///
+  /// In es, this message translates to:
+  /// **'Ya de pie'**
+  String get prayerGuideWhenStanding;
+
+  /// No description provided for @prayerGuideTakbirMeaning.
+  ///
+  /// In es, this message translates to:
+  /// **'Allah es el más grande.'**
+  String get prayerGuideTakbirMeaning;
+
+  /// No description provided for @prayerGuideQiyamMeaning.
+  ///
+  /// In es, this message translates to:
+  /// **'Gloria a Ti, oh Allah, y toda alabanza es para Ti. Bendito es Tu nombre, exaltada es Tu majestad y no hay divinidad fuera de Ti.'**
+  String get prayerGuideQiyamMeaning;
+
+  /// No description provided for @prayerGuideRukuMeaning.
+  ///
+  /// In es, this message translates to:
+  /// **'Gloria a mi Señor, el Grandioso.'**
+  String get prayerGuideRukuMeaning;
+
+  /// No description provided for @prayerGuideItidalRiseMeaning.
+  ///
+  /// In es, this message translates to:
+  /// **'Allah escucha a quien Le alaba.'**
+  String get prayerGuideItidalRiseMeaning;
+
+  /// No description provided for @prayerGuideItidalStandMeaning.
+  ///
+  /// In es, this message translates to:
+  /// **'Señor nuestro, a Ti toda la alabanza.'**
+  String get prayerGuideItidalStandMeaning;
+
+  /// No description provided for @prayerGuideSujudMeaning.
+  ///
+  /// In es, this message translates to:
+  /// **'Gloria a mi Señor, el Altísimo.'**
+  String get prayerGuideSujudMeaning;
+
+  /// No description provided for @prayerGuideJalsaMeaning.
+  ///
+  /// In es, this message translates to:
+  /// **'Señor mío, perdóname.'**
+  String get prayerGuideJalsaMeaning;
+
+  /// No description provided for @prayerGuideTashahhudMeaning.
+  ///
+  /// In es, this message translates to:
+  /// **'Todos los saludos, las oraciones y las buenas palabras son para Allah... Testifico que no hay divinidad salvo Allah y que Muhammad es Su siervo y Mensajero.'**
+  String get prayerGuideTashahhudMeaning;
+
+  /// No description provided for @prayerGuideTaslimMeaning.
+  ///
+  /// In es, this message translates to:
+  /// **'La paz y la misericordia de Allah sean con vosotros.'**
+  String get prayerGuideTaslimMeaning;
 }
 
 class _AppLocalizationsDelegate

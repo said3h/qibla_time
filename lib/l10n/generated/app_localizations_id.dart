@@ -3212,17 +3212,115 @@ class AppLocalizationsId extends AppLocalizations {
       'Palingkan kepala ke kiri dan sempurnakan salam.';
 
   @override
-  String get prayerGuideRakaatsFajr => '2 sunnah + 2 fard';
+  String get prayerGuideRakaatsFajr => '2 sunnah sebelum + 2 fard';
 
   @override
-  String get prayerGuideRakaatsDhuhr => '4 sunnah + 4 fard + 2 sunnah';
+  String get prayerGuideRakaatsDhuhr =>
+      '4 sunnah sebelum + 4 fard + 2 sunnah sesudah';
 
   @override
   String get prayerGuideRakaatsAsr => '4 fard';
 
   @override
-  String get prayerGuideRakaatsMaghrib => '3 fard + 2 sunnah';
+  String get prayerGuideRakaatsMaghrib => '3 fard + 2 sunnah sesudah';
 
   @override
-  String get prayerGuideRakaatsIsha => '4 fard + 2 sunnah + 1 witr';
+  String get prayerGuideRakaatsIsha => '4 fard + 2 sunnah sesudah + 1 witir';
+
+  @override
+  String get prayerGuideOneRakaatIntro =>
+      'Panduan ini menampilkan satu rakaat lengkap. Ulangi alur yang sama sesuai salat yang sedang kamu kerjakan.';
+
+  @override
+  String get prayerGuideCycleFajr =>
+      'Ulangi rakaat ini dua kali. Pada rakaat kedua baca tasyahud lalu akhiri dengan salam.';
+
+  @override
+  String get prayerGuideCycleDhuhr =>
+      'Ulangi rakaat fard empat kali. Baca tasyahud setelah rakaat kedua lalu akhiri dengan salam pada rakaat keempat. Rakaat sunnah mengikuti alur dasar yang sama.';
+
+  @override
+  String get prayerGuideCycleAsr =>
+      'Ulangi rakaat ini empat kali. Baca tasyahud setelah rakaat kedua lalu akhiri dengan salam pada rakaat keempat.';
+
+  @override
+  String get prayerGuideCycleMaghrib =>
+      'Ulangi rakaat ini tiga kali. Baca tasyahud setelah rakaat kedua lalu sempurnakan salat dengan tasyahud dan salam pada rakaat ketiga.';
+
+  @override
+  String get prayerGuideCycleIsha =>
+      'Ulangi rakaat fard empat kali. Baca tasyahud setelah rakaat kedua lalu akhiri dengan salam pada rakaat keempat. Setelah itu salat 2 sunnah dan 1 witir dengan alur dasar yang sama.';
+
+  @override
+  String get prayerGuideOpenFatiha => 'Al-Fatiha';
+
+  @override
+  String get prayerGuideChooseSurah => 'Pilih surah';
+
+  @override
+  String get prayerGuideChooseSurahTitle => 'Pilih surah tambahan';
+
+  @override
+  String get prayerGuideChooseSurahSubtitle =>
+      'Buka surah mana saja mulai nomor 2 untuk bacaan setelah Al-Fatiha.';
+
+  @override
+  String get prayerGuideNiyyahRecitationNote =>
+      'Niat berada di dalam hati dan tidak dibaca keras.';
+
+  @override
+  String get prayerGuideTimesHeart => 'Di dalam hati';
+
+  @override
+  String get prayerGuideTimesOnce => '1 kali';
+
+  @override
+  String get prayerGuideTimesThree => '3 kali';
+
+  @override
+  String get prayerGuideTimesOneToThree => '1-3 kali';
+
+  @override
+  String get prayerGuideDirectionRight => 'Ke kanan';
+
+  @override
+  String get prayerGuideDirectionLeft => 'Ke kiri';
+
+  @override
+  String get prayerGuideWhileRising => 'Saat bangkit';
+
+  @override
+  String get prayerGuideWhenStanding => 'Saat berdiri';
+
+  @override
+  String get prayerGuideTakbirMeaning => 'Allah Maha Besar.';
+
+  @override
+  String get prayerGuideQiyamMeaning =>
+      'Mahasuci Engkau ya Allah, segala puji untuk-Mu. Diberkahi nama-Mu, Mahatinggi keagungan-Mu, dan tidak ada sesembahan selain Engkau.';
+
+  @override
+  String get prayerGuideRukuMeaning => 'Mahasuci Tuhanku Yang Maha Agung.';
+
+  @override
+  String get prayerGuideItidalRiseMeaning =>
+      'Allah mendengar siapa yang memuji-Nya.';
+
+  @override
+  String get prayerGuideItidalStandMeaning =>
+      'Wahai Tuhan kami, bagi-Mu segala puji.';
+
+  @override
+  String get prayerGuideSujudMeaning => 'Mahasuci Tuhanku Yang Maha Tinggi.';
+
+  @override
+  String get prayerGuideJalsaMeaning => 'Wahai Tuhanku, ampunilah aku.';
+
+  @override
+  String get prayerGuideTashahhudMeaning =>
+      'Segala penghormatan, doa, dan kebaikan adalah milik Allah... Aku bersaksi bahwa tidak ada sesembahan selain Allah dan Muhammad adalah hamba serta utusan-Nya.';
+
+  @override
+  String get prayerGuideTaslimMeaning =>
+      'Semoga keselamatan dan rahmat Allah tercurah atas kalian.';
 }

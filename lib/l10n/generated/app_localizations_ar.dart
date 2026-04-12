@@ -3146,17 +3146,111 @@ class AppLocalizationsAr extends AppLocalizations {
       'التفت برأسك إلى اليسار وأكمل السلام.';
 
   @override
-  String get prayerGuideRakaatsFajr => '2 سنة + 2 فرض';
+  String get prayerGuideRakaatsFajr => '٢ سنة قبل + ٢ فرض';
 
   @override
-  String get prayerGuideRakaatsDhuhr => '4 سنة + 4 فرض + 2 سنة';
+  String get prayerGuideRakaatsDhuhr => '٤ سنة قبل + ٤ فرض + ٢ سنة بعد';
 
   @override
-  String get prayerGuideRakaatsAsr => '4 فرض';
+  String get prayerGuideRakaatsAsr => '٤ فرض';
 
   @override
-  String get prayerGuideRakaatsMaghrib => '3 فرض + 2 سنة';
+  String get prayerGuideRakaatsMaghrib => '٣ فرض + ٢ سنة بعد';
 
   @override
-  String get prayerGuideRakaatsIsha => '4 فرض + 2 سنة + 1 وتر';
+  String get prayerGuideRakaatsIsha => '٤ فرض + ٢ سنة بعد + ١ وتر';
+
+  @override
+  String get prayerGuideOneRakaatIntro =>
+      'يوضح هذا الدليل ركعة كاملة واحدة. كرر نفس التسلسل بحسب الصلاة التي تؤديها.';
+
+  @override
+  String get prayerGuideCycleFajr =>
+      'كرر هذه الركعة مرتين. اقرأ التشهد في الركعة الثانية ثم اختم بالتسليم.';
+
+  @override
+  String get prayerGuideCycleDhuhr =>
+      'كرر ركعة الفرض أربع مرات. اقرأ التشهد بعد الركعة الثانية ثم اختم بالتسليم في الرابعة. وركعات السنة تتبع نفس التسلسل الأساسي.';
+
+  @override
+  String get prayerGuideCycleAsr =>
+      'كرر هذه الركعة أربع مرات. اقرأ التشهد بعد الركعة الثانية واختم بالتسليم في الرابعة.';
+
+  @override
+  String get prayerGuideCycleMaghrib =>
+      'كرر هذه الركعة ثلاث مرات. اقرأ التشهد بعد الركعة الثانية ثم أكمل الصلاة بالتشهد والتسليم في الثالثة.';
+
+  @override
+  String get prayerGuideCycleIsha =>
+      'كرر ركعة الفرض أربع مرات. اقرأ التشهد بعد الركعة الثانية واختم بالتسليم في الرابعة. ثم صل ركعتي سنة وركعة وتر بنفس التسلسل الأساسي.';
+
+  @override
+  String get prayerGuideOpenFatiha => 'الفاتحة';
+
+  @override
+  String get prayerGuideChooseSurah => 'اختر سورة';
+
+  @override
+  String get prayerGuideChooseSurahTitle => 'اختر سورة إضافية';
+
+  @override
+  String get prayerGuideChooseSurahSubtitle =>
+      'افتح أي سورة تبدأ من رقم ٢ فما بعد لتلاوتها بعد الفاتحة.';
+
+  @override
+  String get prayerGuideNiyyahRecitationNote =>
+      'النية تكون في القلب ولا تُنطق بصوت مرتفع.';
+
+  @override
+  String get prayerGuideTimesHeart => 'في القلب';
+
+  @override
+  String get prayerGuideTimesOnce => 'مرة واحدة';
+
+  @override
+  String get prayerGuideTimesThree => '٣ مرات';
+
+  @override
+  String get prayerGuideTimesOneToThree => '١-٣ مرات';
+
+  @override
+  String get prayerGuideDirectionRight => 'إلى اليمين';
+
+  @override
+  String get prayerGuideDirectionLeft => 'إلى اليسار';
+
+  @override
+  String get prayerGuideWhileRising => 'أثناء الرفع';
+
+  @override
+  String get prayerGuideWhenStanding => 'بعد الاعتدال';
+
+  @override
+  String get prayerGuideTakbirMeaning => 'الله أكبر.';
+
+  @override
+  String get prayerGuideQiyamMeaning =>
+      'تنزيه لك يا الله، ولك الحمد كله، واسمك مبارك، وجلالك عظيم، ولا معبود بحق غيرك.';
+
+  @override
+  String get prayerGuideRukuMeaning => 'سبحان ربي العظيم.';
+
+  @override
+  String get prayerGuideItidalRiseMeaning => 'سمع الله لمن حمده.';
+
+  @override
+  String get prayerGuideItidalStandMeaning => 'ربنا ولك الحمد.';
+
+  @override
+  String get prayerGuideSujudMeaning => 'سبحان ربي الأعلى.';
+
+  @override
+  String get prayerGuideJalsaMeaning => 'رب اغفر لي.';
+
+  @override
+  String get prayerGuideTashahhudMeaning =>
+      'كل التحيات والصلوات والكلمات الطيبة لله... أشهد أن لا إله إلا الله وأشهد أن محمدًا عبده ورسوله.';
+
+  @override
+  String get prayerGuideTaslimMeaning => 'السلام عليكم ورحمة الله.';
 }

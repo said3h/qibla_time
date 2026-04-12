@@ -3219,17 +3219,116 @@ class AppLocalizationsNl extends AppLocalizations {
       'Draai je hoofd naar links en maak de salam af.';
 
   @override
-  String get prayerGuideRakaatsFajr => '2 sunnah + 2 fard';
+  String get prayerGuideRakaatsFajr => '2 sunnah ervoor + 2 fard';
 
   @override
-  String get prayerGuideRakaatsDhuhr => '4 sunnah + 4 fard + 2 sunnah';
+  String get prayerGuideRakaatsDhuhr =>
+      '4 sunnah ervoor + 4 fard + 2 sunnah erna';
 
   @override
   String get prayerGuideRakaatsAsr => '4 fard';
 
   @override
-  String get prayerGuideRakaatsMaghrib => '3 fard + 2 sunnah';
+  String get prayerGuideRakaatsMaghrib => '3 fard + 2 sunnah erna';
 
   @override
-  String get prayerGuideRakaatsIsha => '4 fard + 2 sunnah + 1 witr';
+  String get prayerGuideRakaatsIsha => '4 fard + 2 sunnah erna + 1 witr';
+
+  @override
+  String get prayerGuideOneRakaatIntro =>
+      'Deze gids laat één volledige rak\'ah zien. Herhaal dezelfde volgorde volgens het gebed dat je verricht.';
+
+  @override
+  String get prayerGuideCycleFajr =>
+      'Herhaal deze rak\'ah twee keer. In de tweede rak\'ah lees je de tashahhud en sluit je af met taslim.';
+
+  @override
+  String get prayerGuideCycleDhuhr =>
+      'Herhaal de fard-rak\'ah vier keer. Lees de tashahhud na de tweede rak\'ah en beëindig het gebed met taslim in de vierde. De sunnah-rak\'ahs volgen dezelfde basisvolgorde.';
+
+  @override
+  String get prayerGuideCycleAsr =>
+      'Herhaal deze rak\'ah vier keer. Lees de tashahhud na de tweede rak\'ah en beëindig het gebed met taslim in de vierde.';
+
+  @override
+  String get prayerGuideCycleMaghrib =>
+      'Herhaal deze rak\'ah drie keer. Lees de tashahhud na de tweede rak\'ah en voltooi het gebed met tashahhud en taslim in de derde.';
+
+  @override
+  String get prayerGuideCycleIsha =>
+      'Herhaal de fard-rak\'ah vier keer. Lees de tashahhud na de tweede rak\'ah en beëindig het gebed met taslim in de vierde. Bid daarna 2 sunnah en 1 witr met dezelfde basisvolgorde.';
+
+  @override
+  String get prayerGuideOpenFatiha => 'Al-Fatiha';
+
+  @override
+  String get prayerGuideChooseSurah => 'Soera kiezen';
+
+  @override
+  String get prayerGuideChooseSurahTitle => 'Kies een extra soera';
+
+  @override
+  String get prayerGuideChooseSurahSubtitle =>
+      'Open een willekeurige soera vanaf nummer 2 voor de recitatie na Al-Fatiha.';
+
+  @override
+  String get prayerGuideNiyyahRecitationNote =>
+      'De niyyah blijft in het hart en wordt niet hardop uitgesproken.';
+
+  @override
+  String get prayerGuideTimesHeart => 'In het hart';
+
+  @override
+  String get prayerGuideTimesOnce => '1 keer';
+
+  @override
+  String get prayerGuideTimesThree => '3 keer';
+
+  @override
+  String get prayerGuideTimesOneToThree => '1-3 keer';
+
+  @override
+  String get prayerGuideDirectionRight => 'Naar rechts';
+
+  @override
+  String get prayerGuideDirectionLeft => 'Naar links';
+
+  @override
+  String get prayerGuideWhileRising => 'Bij het omhoogkomen';
+
+  @override
+  String get prayerGuideWhenStanding => 'Wanneer je staat';
+
+  @override
+  String get prayerGuideTakbirMeaning => 'Allah is de Grootste.';
+
+  @override
+  String get prayerGuideQiyamMeaning =>
+      'Glorie zij U, o Allah, en alle lof is voor U. Gezegend is Uw naam, verheven is Uw majesteit en er is geen god behalve U.';
+
+  @override
+  String get prayerGuideRukuMeaning => 'Glorie zij mijn Heer, de Machtige.';
+
+  @override
+  String get prayerGuideItidalRiseMeaning =>
+      'Allah hoort degene die Hem prijst.';
+
+  @override
+  String get prayerGuideItidalStandMeaning =>
+      'Onze Heer, aan U behoort alle lof.';
+
+  @override
+  String get prayerGuideSujudMeaning =>
+      'Glorie zij mijn Heer, de Allerhoogste.';
+
+  @override
+  String get prayerGuideJalsaMeaning => 'Mijn Heer, vergeef mij.';
+
+  @override
+  String get prayerGuideTashahhudMeaning =>
+      'Alle begroetingen, gebeden en goede woorden zijn voor Allah... Ik getuig dat er geen god is behalve Allah en dat Mohammed Zijn dienaar en boodschapper is.';
+
+  @override
+  String get prayerGuideTaslimMeaning =>
+      'De vrede en barmhartigheid van Allah zij met jullie.';
 }
