@@ -48,6 +48,9 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
     final surahs = ref.watch(quranSurahsProvider);
     final fatiha = _findSurahByNumber(surahs, 1);
     final steps = _buildSteps(l10n);
+    final prayerLabel = _localizedPrayerName(widget.prayerName, languageCode);
+    final rakaatSummary = _rakaatsSummary(l10n, widget.prayerName);
+    final flowNote = _rakaatFlowNote(l10n, widget.prayerName);
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
@@ -70,18 +73,6 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
-              child: _PrayerGuideHeader(
-                prayerLabel: _localizedPrayerName(widget.prayerName, languageCode),
-                prayerArabic: widget.prayerName.displayNameArabic,
-                rakaatSummary: _rakaatsSummary(l10n, widget.prayerName),
-                flowNote: _rakaatFlowNote(l10n, widget.prayerName),
-                overview: l10n.prayerGuideOneRakaatIntro,
-                isArabicOnly: isArabicOnly,
-              ),
-            ),
-            const SizedBox(height: 12),
             Expanded(
               child: PageView.builder(
                 controller: _pageController,
@@ -92,11 +83,16 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
                 itemBuilder: (context, index) {
                   final step = steps[index];
                   return Padding(
-                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+                    padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
                     child: _PrayerGuideStepPage(
                       step: step,
                       totalSteps: steps.length,
                       isArabicOnly: isArabicOnly,
+                      prayerLabel: prayerLabel,
+                      prayerArabic: widget.prayerName.displayNameArabic,
+                      rakaatSummary: rakaatSummary,
+                      flowNote: flowNote,
+                      overview: l10n.prayerGuideOneRakaatIntro,
                       onOpenFatiha: step.showsSurahActions && fatiha != null
                           ? () => _openSurah(context, fatiha)
                           : null,
@@ -652,6 +648,11 @@ class _PrayerGuideStepPage extends StatelessWidget {
     required this.step,
     required this.totalSteps,
     required this.isArabicOnly,
+    required this.prayerLabel,
+    required this.prayerArabic,
+    required this.rakaatSummary,
+    required this.flowNote,
+    required this.overview,
     this.onOpenFatiha,
     this.onChooseSurah,
   });
@@ -659,6 +660,11 @@ class _PrayerGuideStepPage extends StatelessWidget {
   final _PrayerGuideStepData step;
   final int totalSteps;
   final bool isArabicOnly;
+  final String prayerLabel;
+  final String prayerArabic;
+  final String rakaatSummary;
+  final String flowNote;
+  final String overview;
   final VoidCallback? onOpenFatiha;
   final VoidCallback? onChooseSurah;
 
@@ -678,6 +684,15 @@ class _PrayerGuideStepPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            _PrayerGuideHeader(
+              prayerLabel: prayerLabel,
+              prayerArabic: prayerArabic,
+              rakaatSummary: rakaatSummary,
+              flowNote: flowNote,
+              overview: overview,
+              isArabicOnly: isArabicOnly,
+            ),
+            const SizedBox(height: 16),
             Row(
               children: [
                 Container(
