@@ -88,6 +88,7 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
                       step: step,
                       totalSteps: steps.length,
                       isArabicOnly: isArabicOnly,
+                      showHeader: index == 0,
                       prayerLabel: prayerLabel,
                       prayerArabic: widget.prayerName.displayNameArabic,
                       rakaatSummary: rakaatSummary,
@@ -648,6 +649,7 @@ class _PrayerGuideStepPage extends StatelessWidget {
     required this.step,
     required this.totalSteps,
     required this.isArabicOnly,
+    required this.showHeader,
     required this.prayerLabel,
     required this.prayerArabic,
     required this.rakaatSummary,
@@ -660,6 +662,7 @@ class _PrayerGuideStepPage extends StatelessWidget {
   final _PrayerGuideStepData step;
   final int totalSteps;
   final bool isArabicOnly;
+  final bool showHeader;
   final String prayerLabel;
   final String prayerArabic;
   final String rakaatSummary;
@@ -684,15 +687,17 @@ class _PrayerGuideStepPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _PrayerGuideHeader(
-              prayerLabel: prayerLabel,
-              prayerArabic: prayerArabic,
-              rakaatSummary: rakaatSummary,
-              flowNote: flowNote,
-              overview: overview,
-              isArabicOnly: isArabicOnly,
-            ),
-            const SizedBox(height: 16),
+            if (showHeader) ...[
+              _PrayerGuideHeader(
+                prayerLabel: prayerLabel,
+                prayerArabic: prayerArabic,
+                rakaatSummary: rakaatSummary,
+                flowNote: flowNote,
+                overview: overview,
+                isArabicOnly: isArabicOnly,
+              ),
+              const SizedBox(height: 16),
+            ],
             Row(
               children: [
                 Container(
