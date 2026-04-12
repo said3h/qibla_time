@@ -24,6 +24,9 @@ class AppLocalizationsIt extends AppLocalizations {
   String get commonEnter => 'Entra';
 
   @override
+  String get commonStart => 'Inizia';
+
+  @override
   String get commonAllow => 'Permettere';
 
   @override
@@ -136,6 +139,25 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get commonSystem => 'Sistema';
+
+  @override
+  String get onboardingIntroNoAds => 'Nessuna pubblicità';
+
+  @override
+  String get onboardingIntroNoAdsBody => 'Esperienza pulita senza distrazioni';
+
+  @override
+  String get onboardingIntroPrivacy => 'Privacy completa';
+
+  @override
+  String get onboardingIntroPrivacyBody =>
+      'I tuoi dati non lasciano mai il tuo dispositivo';
+
+  @override
+  String get onboardingIntroLanguages => '9 lingue';
+
+  @override
+  String get onboardingIntroLanguagesBody => 'Disponibile nella tua lingua';
 
   @override
   String get onboardingWelcomeTitle => 'Benvenuti in Qibla Time';
@@ -554,6 +576,9 @@ class AppLocalizationsIt extends AppLocalizations {
       'Sospendi le notifiche della preghiera durante il ciclo';
 
   @override
+  String get periodModeActive => 'Modalità periodo attiva';
+
+  @override
   String get settingsTravelerMode => 'Modalità viaggio';
 
   @override
@@ -636,6 +661,9 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get settingsSupportCardSubtitle =>
       'Ogni donazione può diventare una sadaqah jariyah';
+
+  @override
+  String get rateApp => 'Valuta l\'app';
 
   @override
   String get settingsBackupMode => 'Modalità di backup';

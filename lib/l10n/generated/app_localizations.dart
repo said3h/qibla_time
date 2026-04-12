@@ -142,6 +142,12 @@ abstract class AppLocalizations {
   /// **'Entrar'**
   String get commonEnter;
 
+  /// No description provided for @commonStart.
+  ///
+  /// In es, this message translates to:
+  /// **'Comenzar'**
+  String get commonStart;
+
   /// No description provided for @commonAllow.
   ///
   /// In es, this message translates to:
@@ -369,6 +375,42 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Sistema'**
   String get commonSystem;
+
+  /// No description provided for @onboardingIntroNoAds.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin anuncios'**
+  String get onboardingIntroNoAds;
+
+  /// No description provided for @onboardingIntroNoAdsBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Experiencia limpia y sin distracciones'**
+  String get onboardingIntroNoAdsBody;
+
+  /// No description provided for @onboardingIntroPrivacy.
+  ///
+  /// In es, this message translates to:
+  /// **'Privacidad total'**
+  String get onboardingIntroPrivacy;
+
+  /// No description provided for @onboardingIntroPrivacyBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Tus datos nunca salen de tu dispositivo'**
+  String get onboardingIntroPrivacyBody;
+
+  /// No description provided for @onboardingIntroLanguages.
+  ///
+  /// In es, this message translates to:
+  /// **'9 idiomas'**
+  String get onboardingIntroLanguages;
+
+  /// No description provided for @onboardingIntroLanguagesBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Disponible en tu idioma'**
+  String get onboardingIntroLanguagesBody;
 
   /// No description provided for @onboardingWelcomeTitle.
   ///
@@ -1096,6 +1138,12 @@ abstract class AppLocalizations {
   /// **'Pausa las notificaciones de oración durante tu período'**
   String get settingsPeriodModeSubtitle;
 
+  /// No description provided for @periodModeActive.
+  ///
+  /// In es, this message translates to:
+  /// **'Modo período activo'**
+  String get periodModeActive;
+
   /// No description provided for @settingsTravelerMode.
   ///
   /// In es, this message translates to:
@@ -1251,6 +1299,12 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Cada donación puede ser una sadaqah jariyah'**
   String get settingsSupportCardSubtitle;
+
+  /// No description provided for @rateApp.
+  ///
+  /// In es, this message translates to:
+  /// **'Valorar la app'**
+  String get rateApp;
 
   /// No description provided for @settingsBackupMode.
   ///

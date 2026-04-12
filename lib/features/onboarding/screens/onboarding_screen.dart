@@ -131,7 +131,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
   }
 
   Future<void> _next() async {
-    if (_step == 5) {
+    if (_step == 6) {
       await widget.onCompleted();
       return;
     }
@@ -250,7 +250,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(999),
                       child: LinearProgressIndicator(
-                        value: (_step + 1) / 6,
+                        value: (_step + 1) / 7,
                         minHeight: 6,
                         color: tokens.primary,
                         backgroundColor: tokens.bgSurface2,
@@ -271,6 +271,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                   physics: const NeverScrollableScrollPhysics(),
                   onPageChanged: (value) => setState(() => _step = value),
                   children: [
+                    _buildIntro(tokens),
                     _buildWelcome(tokens),
                     _buildPermissions(tokens),
                     _buildMethod(tokens),
@@ -293,7 +294,11 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                     child: ElevatedButton(
                       onPressed: _busy ? null : _next,
                       child: Text(
-                        _step == 5 ? l10n.commonEnter : l10n.commonContinue,
+                        _step == 0
+                            ? l10n.commonStart
+                            : _step == 6
+                                ? l10n.commonEnter
+                                : l10n.commonContinue,
                       ),
                     ),
                   ),
@@ -303,6 +308,74 @@ class _OnboardingScreenState extends State<OnboardingScreen>
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildIntro(QiblaTokens tokens) {
+    final l10n = context.l10n;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 8),
+        Center(
+          child: Column(
+            children: [
+              Container(
+                width: 72,
+                height: 72,
+                decoration: BoxDecoration(
+                  color: tokens.primaryBg,
+                  borderRadius: BorderRadius.circular(24),
+                  border: Border.all(color: tokens.primaryBorder, width: 1.5),
+                ),
+                child: Icon(
+                  Icons.nights_stay_rounded,
+                  color: tokens.primary,
+                  size: 34,
+                ),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'Qibla Time',
+                style: GoogleFonts.dmSerifDisplay(
+                  fontSize: 34,
+                  fontWeight: FontWeight.bold,
+                  color: tokens.primary,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                'وقت القبلة',
+                style: GoogleFonts.amiri(
+                  fontSize: 18,
+                  color: tokens.textSecondary,
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 32),
+        _FeatureCard(
+          icon: Icons.block_rounded,
+          title: l10n.onboardingIntroNoAds,
+          body: l10n.onboardingIntroNoAdsBody,
+          tokens: tokens,
+        ),
+        const SizedBox(height: 10),
+        _FeatureCard(
+          icon: Icons.shield_outlined,
+          title: l10n.onboardingIntroPrivacy,
+          body: l10n.onboardingIntroPrivacyBody,
+          tokens: tokens,
+        ),
+        const SizedBox(height: 10),
+        _FeatureCard(
+          icon: Icons.language_rounded,
+          title: l10n.onboardingIntroLanguages,
+          body: l10n.onboardingIntroLanguagesBody,
+          tokens: tokens,
+        ),
+      ],
     );
   }
 

@@ -24,6 +24,9 @@ class AppLocalizationsId extends AppLocalizations {
   String get commonEnter => 'Masuk';
 
   @override
+  String get commonStart => 'Mulai';
+
+  @override
   String get commonAllow => 'Izinkan';
 
   @override
@@ -136,6 +139,25 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get commonSystem => 'Sistem';
+
+  @override
+  String get onboardingIntroNoAds => 'Tanpa iklan';
+
+  @override
+  String get onboardingIntroNoAdsBody => 'Pengalaman bersih tanpa gangguan';
+
+  @override
+  String get onboardingIntroPrivacy => 'Privasi penuh';
+
+  @override
+  String get onboardingIntroPrivacyBody =>
+      'Data Anda tidak pernah meninggalkan perangkat';
+
+  @override
+  String get onboardingIntroLanguages => '9 bahasa';
+
+  @override
+  String get onboardingIntroLanguagesBody => 'Tersedia dalam bahasa Anda';
 
   @override
   String get onboardingWelcomeTitle => 'Selamat datang di Qibla Time';
@@ -552,6 +574,9 @@ class AppLocalizationsId extends AppLocalizations {
   String get settingsPeriodModeSubtitle => 'Jeda notifikasi salat selama haid';
 
   @override
+  String get periodModeActive => 'Mode periode aktif';
+
+  @override
   String get settingsTravelerMode => 'Mode bepergian';
 
   @override
@@ -634,6 +659,9 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get settingsSupportCardSubtitle =>
       'Setiap donasi dapat menjadi sadaqah jariyah';
+
+  @override
+  String get rateApp => 'Beri nilai aplikasi';
 
   @override
   String get settingsBackupMode => 'Mode cadangan';

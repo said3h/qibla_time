@@ -24,6 +24,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get commonEnter => 'Входить';
 
   @override
+  String get commonStart => 'Начать';
+
+  @override
   String get commonAllow => 'Позволять';
 
   @override
@@ -136,6 +139,25 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get commonSystem => 'Система';
+
+  @override
+  String get onboardingIntroNoAds => 'Без рекламы';
+
+  @override
+  String get onboardingIntroNoAdsBody => 'Чистый опыт без отвлечений';
+
+  @override
+  String get onboardingIntroPrivacy => 'Полная приватность';
+
+  @override
+  String get onboardingIntroPrivacyBody =>
+      'Ваши данные никогда не покидают устройство';
+
+  @override
+  String get onboardingIntroLanguages => '9 языков';
+
+  @override
+  String get onboardingIntroLanguagesBody => 'Доступно на вашем языке';
 
   @override
   String get onboardingWelcomeTitle => 'Добро пожаловать в Qibla Time';
@@ -557,6 +579,9 @@ class AppLocalizationsRu extends AppLocalizations {
       'Приостановить уведомления о молитве во время менструации';
 
   @override
+  String get periodModeActive => 'Режим менструации активен';
+
+  @override
   String get settingsTravelerMode => 'Режим путешествия';
 
   @override
@@ -638,6 +663,9 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get settingsSupportCardSubtitle =>
       'Каждое пожертвование может стать садака-джариятом.';
+
+  @override
+  String get rateApp => 'Оценить приложение';
 
   @override
   String get settingsBackupMode => 'Резервный режим';

@@ -24,6 +24,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get commonEnter => 'دخول';
 
   @override
+  String get commonStart => 'ابدأ';
+
+  @override
   String get commonAllow => 'السماح';
 
   @override
@@ -136,6 +139,24 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get commonSystem => 'النظام';
+
+  @override
+  String get onboardingIntroNoAds => 'بدون إعلانات';
+
+  @override
+  String get onboardingIntroNoAdsBody => 'تجربة نظيفة وبدون مشتتات';
+
+  @override
+  String get onboardingIntroPrivacy => 'خصوصية تامة';
+
+  @override
+  String get onboardingIntroPrivacyBody => 'بياناتك لا تغادر جهازك أبدًا';
+
+  @override
+  String get onboardingIntroLanguages => '٩ لغات';
+
+  @override
+  String get onboardingIntroLanguagesBody => 'متاح بلغتك';
 
   @override
   String get onboardingWelcomeTitle => 'مرحبًا بك في قبلة تايم';
@@ -544,6 +565,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get settingsPeriodModeSubtitle => 'إيقاف إشعارات الصلاة أثناء الدورة';
 
   @override
+  String get periodModeActive => 'وضع الدورة نشط';
+
+  @override
   String get settingsTravelerMode => 'وضع السفر';
 
   @override
@@ -623,6 +647,9 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get settingsSupportCardSubtitle => 'كل تبرع قد يكون صدقة جارية';
+
+  @override
+  String get rateApp => 'تقييم التطبيق';
 
   @override
   String get settingsBackupMode => 'وضع النسخ الاحتياطي';

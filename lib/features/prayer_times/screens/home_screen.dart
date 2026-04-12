@@ -35,6 +35,7 @@ import '../domain/entities/resolved_prayer_schedule.dart';
 import '../domain/usecases/generate_home_insights.dart';
 import '../presentation/providers/ramadan_providers.dart';
 import '../presentation/providers/prayer_times_providers.dart';
+import '../../period/services/period_mode_service.dart';
 import '../services/adhan_manager.dart';
 import '../services/travel_mode_service.dart';
 
@@ -133,6 +134,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   locationLabelAsync.valueOrNull,
                   connectivityAsync.valueOrNull ?? true,
                 ),
+                _buildPeriodModeBanner(context, tokens),
                 _buildCalendarStrip(tokens),
                 const SizedBox(height: 12),
                 Padding(
@@ -280,6 +282,47 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildPeriodModeBanner(BuildContext context, QiblaTokens tokens) {
+    final periodEnabledAsync = ref.watch(periodModeEnabledProvider);
+    final isEnabled = periodEnabledAsync.valueOrNull ?? false;
+    if (!isEnabled) return const SizedBox.shrink();
+
+    final l10n = context.l10n;
+    final color = const Color(0xFFD17B8A);
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+      child: GestureDetector(
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => const SettingsScreen()),
+        ),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+          decoration: BoxDecoration(
+            color: color.withOpacity(0.10),
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: color.withOpacity(0.30)),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(Icons.pause_circle_outline, size: 14, color: color),
+              const SizedBox(width: 6),
+              Text(
+                l10n.periodModeActive,
+                style: GoogleFonts.dmSans(
+                  fontSize: 11,
+                  color: color,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

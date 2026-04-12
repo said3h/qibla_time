@@ -8,6 +8,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/services/cloud_sync_service.dart';
 import '../../../core/services/settings_service.dart';
@@ -874,6 +875,21 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     builder: (_) => const SupportScreen(),
                   ),
                 );
+              },
+            ),
+            _buildValueTile(
+              tokens,
+              l10n.rateApp,
+              l10n.commonOpen,
+              trailing: Icon(Icons.star_rounded, size: 16, color: tokens.primary),
+              onTap: () async {
+                final uri = Uri.parse('market://details?id=com.qiblatime.qibla_time');
+                if (await canLaunchUrl(uri)) {
+                  await launchUrl(uri, mode: LaunchMode.externalApplication);
+                } else {
+                  final fallback = Uri.parse('https://play.google.com/store/apps/details?id=com.qiblatime.qibla_time');
+                  await launchUrl(fallback, mode: LaunchMode.externalApplication);
+                }
               },
             ),
             const SizedBox(height: 14),
