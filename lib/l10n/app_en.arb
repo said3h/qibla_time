@@ -1290,7 +1290,7 @@
   "prayerGuideRakaatsAsr": "4 fard",
   "prayerGuideRakaatsMaghrib": "3 fard + 2 sunnah after",
   "prayerGuideRakaatsIsha": "4 fard + 2 sunnah after + 1 witr",
-  "prayerGuideOneRakaatIntro": "This guide shows one complete rak'ah. Repeat the same flow according to the prayer you are performing.",
+  "prayerGuideOneRakaatIntro": "This guide shows the full fard prayer. Swipe through each rak'ah in order and follow the prayer step by step.",
   "prayerGuideCycleFajr": "Repeat this rak'ah twice. Read tashahhud in the second rak'ah, then finish with taslim.",
   "prayerGuideCycleDhuhr": "Repeat the fard rak'ah four times. Read tashahhud after the second rak'ah and finish with taslim in the fourth. The sunnah rak'ahs follow the same basic flow.",
   "prayerGuideCycleAsr": "Repeat this rak'ah four times. Read tashahhud after the second rak'ah and finish with taslim in the fourth.",
@@ -1317,5 +1317,19 @@
   "prayerGuideSujudMeaning": "Glory be to my Lord, the Most High.",
   "prayerGuideJalsaMeaning": "My Lord, forgive me.",
   "prayerGuideTashahhudMeaning": "All greetings, prayers, and pure words are for Allah... I bear witness that there is no god but Allah and that Muhammad is His servant and Messenger.",
-  "prayerGuideTaslimMeaning": "Peace and the mercy of Allah be upon you."
+  "prayerGuideTaslimMeaning": "Peace and the mercy of Allah be upon you.",
+  "prayerGuideRakaatTitle": "Rak'ah {number}",
+  "@prayerGuideRakaatTitle": {
+    "placeholders": {
+      "number": {}
+    }
+  },
+  "prayerGuideSubhanaka": "Subhanaka",
+  "prayerGuideSubhanakaDescription": "Recite the opening supplication after takbir in the first rak'ah only.",
+  "prayerGuideQiyamWithSurahDescription": "Stand and recite Al-Fatihah, then another surah or verses from the Quran.",
+  "prayerGuideQiyamFatihaOnlyDescription": "Stand and recite Al-Fatihah only in this rak'ah.",
+  "prayerGuideTashahhudShortDescription": "Sit and recite At-Tahiyyat before standing for the next rak'ah.",
+  "prayerGuideTashahhudCompleteDescription": "Sit for the final tashahhud, recite At-Tahiyyat and Salawat Ibrahimiyyah, then make a brief dua before taslim.",
+  "prayerGuideTashahhudCompleteNote": "After the salawat, you may add a brief dua before ending the prayer with taslim.",
+  "prayerGuideSalawatMeaning": "O Allah, send blessings upon Muhammad and upon the family of Muhammad, just as You sent blessings upon Ibrahim and upon the family of Ibrahim. Indeed, You are Praiseworthy, Glorious."
 }

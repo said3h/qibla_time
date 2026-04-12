@@ -3247,7 +3247,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get prayerGuideOneRakaatIntro =>
-      'This guide shows one complete rak\'ah. Repeat the same flow according to the prayer you are performing.';
+      'This guide shows the full fard prayer. Swipe through each rak\'ah in order and follow the prayer step by step.';
 
   @override
   String get prayerGuideCycleFajr =>
@@ -3341,4 +3341,40 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get prayerGuideTaslimMeaning =>
       'Peace and the mercy of Allah be upon you.';
+
+  @override
+  String prayerGuideRakaatTitle(Object number) {
+    return 'Rak\'ah $number';
+  }
+
+  @override
+  String get prayerGuideSubhanaka => 'Subhanaka';
+
+  @override
+  String get prayerGuideSubhanakaDescription =>
+      'Recite the opening supplication after takbir in the first rak\'ah only.';
+
+  @override
+  String get prayerGuideQiyamWithSurahDescription =>
+      'Stand and recite Al-Fatihah, then another surah or verses from the Quran.';
+
+  @override
+  String get prayerGuideQiyamFatihaOnlyDescription =>
+      'Stand and recite Al-Fatihah only in this rak\'ah.';
+
+  @override
+  String get prayerGuideTashahhudShortDescription =>
+      'Sit and recite At-Tahiyyat before standing for the next rak\'ah.';
+
+  @override
+  String get prayerGuideTashahhudCompleteDescription =>
+      'Sit for the final tashahhud, recite At-Tahiyyat and Salawat Ibrahimiyyah, then make a brief dua before taslim.';
+
+  @override
+  String get prayerGuideTashahhudCompleteNote =>
+      'After the salawat, you may add a brief dua before ending the prayer with taslim.';
+
+  @override
+  String get prayerGuideSalawatMeaning =>
+      'O Allah, send blessings upon Muhammad and upon the family of Muhammad, just as You sent blessings upon Ibrahim and upon the family of Ibrahim. Indeed, You are Praiseworthy, Glorious.';
 }

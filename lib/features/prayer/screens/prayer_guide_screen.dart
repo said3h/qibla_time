@@ -47,10 +47,11 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
     final isArabicOnly = languageCode == 'ar';
     final surahs = ref.watch(quranSurahsProvider);
     final fatiha = _findSurahByNumber(surahs, 1);
-    final steps = _buildSteps(l10n);
+    final pages = _buildPages(l10n);
     final prayerLabel = _localizedPrayerName(widget.prayerName, languageCode);
     final rakaatSummary = _rakaatsSummary(l10n, widget.prayerName);
     final flowNote = _rakaatFlowNote(l10n, widget.prayerName);
+    final currentPageData = pages[_currentPage.clamp(0, pages.length - 1)];
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
@@ -76,35 +77,44 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
             Expanded(
               child: PageView.builder(
                 controller: _pageController,
-                itemCount: steps.length,
+                itemCount: pages.length,
                 onPageChanged: (value) {
                   setState(() => _currentPage = value);
                 },
                 itemBuilder: (context, index) {
-                  final step = steps[index];
+                  final page = pages[index];
                   return Padding(
                     padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
-                    child: _PrayerGuideStepPage(
-                      step: step,
-                      totalSteps: steps.length,
-                      isArabicOnly: isArabicOnly,
-                      showHeader: index == 0,
-                      prayerLabel: prayerLabel,
-                      prayerArabic: widget.prayerName.displayNameArabic,
-                      rakaatSummary: rakaatSummary,
-                      flowNote: flowNote,
-                      overview: l10n.prayerGuideOneRakaatIntro,
-                      onOpenFatiha: step.showsSurahActions && fatiha != null
-                          ? () => _openSurah(context, fatiha)
-                          : null,
-                      onChooseSurah: step.showsSurahActions
-                          ? () => _showSurahPicker(
-                                context,
-                                surahs,
-                                isArabicOnly,
-                              )
-                          : null,
-                    ),
+                    child: page.isSeparator
+                        ? _PrayerGuideSeparatorPage(
+                            rakaatNumber: page.rakaatNumber,
+                            pagePosition: index + 1,
+                            totalPages: pages.length,
+                            showHeader: page.rakaatNumber == 1,
+                            prayerLabel: prayerLabel,
+                            prayerArabic: widget.prayerName.displayNameArabic,
+                            rakaatSummary: rakaatSummary,
+                            flowNote: flowNote,
+                            overview: l10n.prayerGuideOneRakaatIntro,
+                            isArabicOnly: isArabicOnly,
+                          )
+                        : _PrayerGuideStepPage(
+                            step: page.step!,
+                            pagePosition: index + 1,
+                            totalPages: pages.length,
+                            isArabicOnly: isArabicOnly,
+                            onOpenFatiha:
+                                page.step!.showsOpenFatiha && fatiha != null
+                                ? () => _openSurah(context, fatiha)
+                                : null,
+                            onChooseSurah: page.step!.showsChooseSurah
+                                ? () => _showSurahPicker(
+                                      context,
+                                      surahs,
+                                      isArabicOnly,
+                                    )
+                                : null,
+                          ),
                   );
                 },
               ),
@@ -114,7 +124,12 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
               child: Column(
                 children: [
                   Text(
-                    '${l10n.prayerGuideStep} ${_currentPage + 1} / ${steps.length}',
+                    _pageIndicatorLabel(
+                      l10n,
+                      currentPageData,
+                      _currentPage + 1,
+                      pages.length,
+                    ),
                     style: GoogleFonts.dmSans(
                       fontSize: 12,
                       fontWeight: FontWeight.w700,
@@ -122,21 +137,29 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  Wrap(
-                    alignment: WrapAlignment.center,
-                    spacing: 8,
-                    runSpacing: 8,
-                    children: List.generate(
-                      steps.length,
-                      (index) => AnimatedContainer(
-                        duration: const Duration(milliseconds: 220),
-                        width: index == _currentPage ? 22 : 8,
-                        height: 8,
-                        decoration: BoxDecoration(
-                          color: index == _currentPage
-                              ? tokens.primaryLight
-                              : tokens.border,
-                          borderRadius: BorderRadius.circular(999),
+                  SizedBox(
+                    height: 8,
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: List.generate(
+                          pages.length,
+                          (index) => Padding(
+                            padding: EdgeInsets.only(
+                              right: index == pages.length - 1 ? 0 : 8,
+                            ),
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 220),
+                              width: index == _currentPage ? 22 : 8,
+                              height: 8,
+                              decoration: BoxDecoration(
+                                color: index == _currentPage
+                                    ? tokens.primaryLight
+                                    : tokens.border,
+                                borderRadius: BorderRadius.circular(999),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -278,10 +301,68 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
     );
   }
 
-  List<_PrayerGuideStepData> _buildSteps(AppLocalizations l10n) {
-    return [
-      _PrayerGuideStepData(
-        number: 1,
+  List<_PrayerGuidePageData> _buildPages(AppLocalizations l10n) {
+    final pages = <_PrayerGuidePageData>[];
+    var stepNumber = 1;
+
+    const atTahiyyatRecitation = _PrayerGuideRecitationData(
+      arabic:
+          'التَّحِيَّاتُ لِلَّهِ وَالصَّلَوَاتُ وَالطَّيِّبَاتُ، السَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ، السَّلَامُ عَلَيْنَا وَعَلَى عِبَادِ اللَّهِ الصَّالِحِينَ، أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ',
+      transliteration:
+          'At-Tahiyyatu lillahi was-salawatu wat-tayyibat, as-salamu alayka ayyuhan-nabiyyu wa rahmatullahi wa barakatuh, as-salamu alayna wa ala ibadillahis-salihin, ashhadu an la ilaha illa Allah wa ashhadu anna Muhammadan abduhu wa rasuluh',
+      translationKey: _PrayerGuideTranslationKey.atTahiyyat,
+    );
+    const salawatRecitation = _PrayerGuideRecitationData(
+      arabic:
+          'اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ',
+      transliteration:
+          'Allahumma salli ala Muhammadin wa ala ali Muhammad, kama sallayta ala Ibrahima wa ala ali Ibrahima, innaka Hamidun Majid',
+      translationKey: _PrayerGuideTranslationKey.salawat,
+    );
+
+    void addSeparator(int rakaatNumber) {
+      pages.add(_PrayerGuidePageData.separator(rakaatNumber: rakaatNumber));
+    }
+
+    void addStep({
+      required int rakaatNumber,
+      required String title,
+      required String description,
+      required String positionArabicName,
+      required String positionTransliteration,
+      required String assetPath,
+      required String repetitionLabel,
+      String? directionLabel,
+      String? note,
+      List<_PrayerGuideRecitationData> recitations = const [],
+      bool showsOpenFatiha = false,
+      bool showsChooseSurah = false,
+    }) {
+      pages.add(
+        _PrayerGuidePageData.step(
+          rakaatNumber: rakaatNumber,
+          step: _PrayerGuideStepData(
+            number: stepNumber++,
+            rakaatNumber: rakaatNumber,
+            title: title,
+            description: description,
+            positionArabicName: positionArabicName,
+            positionTransliteration: positionTransliteration,
+            assetPath: assetPath,
+            repetitionLabel: repetitionLabel,
+            directionLabel: directionLabel,
+            note: note,
+            recitations: recitations,
+            showsOpenFatiha: showsOpenFatiha,
+            showsChooseSurah: showsChooseSurah,
+          ),
+        ),
+      );
+    }
+
+    void addNiyyah(int rakaatNumber) {
+      addStep(
+        rakaatNumber: rakaatNumber,
         title: l10n.prayerGuideNiyyah,
         description: l10n.prayerGuideNiyyahDescription,
         positionArabicName: 'النِّيَّة',
@@ -289,9 +370,12 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
         assetPath: 'assets/images/prayer_positions/niyyah.png',
         repetitionLabel: l10n.prayerGuideTimesHeart,
         note: l10n.prayerGuideNiyyahRecitationNote,
-      ),
-      _PrayerGuideStepData(
-        number: 2,
+      );
+    }
+
+    void addTakbir(int rakaatNumber) {
+      addStep(
+        rakaatNumber: rakaatNumber,
         title: l10n.prayerGuideTakbir,
         description: l10n.prayerGuideTakbirDescription,
         positionArabicName: 'تكبيرة الإحرام',
@@ -305,28 +389,52 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
             translationKey: _PrayerGuideTranslationKey.takbir,
           ),
         ],
-      ),
-      _PrayerGuideStepData(
-        number: 3,
-        title: l10n.prayerGuideQiyam,
-        description: l10n.prayerGuideQiyamDescription,
-        positionArabicName: 'القيام',
-        positionTransliteration: 'Qiyam',
+      );
+    }
+
+    void addSubhanaka(int rakaatNumber) {
+      addStep(
+        rakaatNumber: rakaatNumber,
+        title: l10n.prayerGuideSubhanaka,
+        description: l10n.prayerGuideSubhanakaDescription,
+        positionArabicName: 'دعاء الاستفتاح',
+        positionTransliteration: 'Subhanaka',
         assetPath: 'assets/images/prayer_positions/qiyam.png',
         repetitionLabel: l10n.prayerGuideTimesOnce,
-        showsSurahActions: true,
         recitations: const [
           _PrayerGuideRecitationData(
             arabic:
                 'سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ وَتَبَارَكَ اسْمُكَ وَتَعَالَى جَدُّكَ وَلَا إِلَهَ غَيْرُكَ',
             transliteration:
                 "Subhanaka Allahumma wa bihamdika wa tabaraka ismuka wa ta'ala jadduka wa la ilaha ghairuk",
-            translationKey: _PrayerGuideTranslationKey.qiyam,
+            translationKey: _PrayerGuideTranslationKey.subhanaka,
           ),
         ],
-      ),
-      _PrayerGuideStepData(
-        number: 4,
+      );
+    }
+
+    void addQiyam(
+      int rakaatNumber, {
+      required bool includeAdditionalSurah,
+    }) {
+      addStep(
+        rakaatNumber: rakaatNumber,
+        title: l10n.prayerGuideQiyam,
+        description: includeAdditionalSurah
+            ? l10n.prayerGuideQiyamWithSurahDescription
+            : l10n.prayerGuideQiyamFatihaOnlyDescription,
+        positionArabicName: 'القيام',
+        positionTransliteration: 'Qiyam',
+        assetPath: 'assets/images/prayer_positions/qiyam.png',
+        repetitionLabel: l10n.prayerGuideTimesOnce,
+        showsOpenFatiha: true,
+        showsChooseSurah: includeAdditionalSurah,
+      );
+    }
+
+    void addRuku(int rakaatNumber) {
+      addStep(
+        rakaatNumber: rakaatNumber,
         title: l10n.prayerGuideRuku,
         description: l10n.prayerGuideRukuDescription,
         positionArabicName: 'الركوع',
@@ -340,9 +448,12 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
             translationKey: _PrayerGuideTranslationKey.ruku,
           ),
         ],
-      ),
-      _PrayerGuideStepData(
-        number: 5,
+      );
+    }
+
+    void addItidal(int rakaatNumber) {
+      addStep(
+        rakaatNumber: rakaatNumber,
         title: l10n.prayerGuideItidal,
         description: l10n.prayerGuideItidalDescription,
         positionArabicName: 'الاعتدال',
@@ -363,9 +474,12 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
             translationKey: _PrayerGuideTranslationKey.itidalStand,
           ),
         ],
-      ),
-      _PrayerGuideStepData(
-        number: 6,
+      );
+    }
+
+    void addSujudOne(int rakaatNumber) {
+      addStep(
+        rakaatNumber: rakaatNumber,
         title: l10n.prayerGuideSujud,
         description: l10n.prayerGuideSujudDescription,
         positionArabicName: 'السجود',
@@ -379,9 +493,12 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
             translationKey: _PrayerGuideTranslationKey.sujud,
           ),
         ],
-      ),
-      _PrayerGuideStepData(
-        number: 7,
+      );
+    }
+
+    void addJalsa(int rakaatNumber) {
+      addStep(
+        rakaatNumber: rakaatNumber,
         title: l10n.prayerGuideJalsa,
         description: l10n.prayerGuideJalsaDescription,
         positionArabicName: 'الجلسة',
@@ -395,9 +512,12 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
             translationKey: _PrayerGuideTranslationKey.jalsa,
           ),
         ],
-      ),
-      _PrayerGuideStepData(
-        number: 8,
+      );
+    }
+
+    void addSujudTwo(int rakaatNumber) {
+      addStep(
+        rakaatNumber: rakaatNumber,
         title: l10n.prayerGuideSujud,
         description: l10n.prayerGuideSecondSujudDescription,
         positionArabicName: 'السجود الثاني',
@@ -411,27 +531,42 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
             translationKey: _PrayerGuideTranslationKey.sujud,
           ),
         ],
-      ),
-      _PrayerGuideStepData(
-        number: 9,
+      );
+    }
+
+    void addShortTashahhud(int rakaatNumber) {
+      addStep(
+        rakaatNumber: rakaatNumber,
         title: l10n.prayerGuideTashahhud,
-        description: l10n.prayerGuideTashahhudDescription,
+        description: l10n.prayerGuideTashahhudShortDescription,
         positionArabicName: 'التشهد',
         positionTransliteration: 'Tashahhud',
         assetPath: 'assets/images/prayer_positions/tashahhud.png',
         repetitionLabel: l10n.prayerGuideTimesOnce,
+        recitations: const [atTahiyyatRecitation],
+      );
+    }
+
+    void addCompleteTashahhud(int rakaatNumber) {
+      addStep(
+        rakaatNumber: rakaatNumber,
+        title: l10n.prayerGuideTashahhud,
+        description: l10n.prayerGuideTashahhudCompleteDescription,
+        positionArabicName: 'التشهد الأخير',
+        positionTransliteration: 'Complete Tashahhud',
+        assetPath: 'assets/images/prayer_positions/tashahhud.png',
+        repetitionLabel: l10n.prayerGuideTimesOnce,
+        note: l10n.prayerGuideTashahhudCompleteNote,
         recitations: const [
-          _PrayerGuideRecitationData(
-            arabic:
-                'التَّحِيَّاتُ لِلَّهِ وَالصَّلَوَاتُ وَالطَّيِّبَاتُ، السَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ، السَّلَامُ عَلَيْنَا وَعَلَى عِبَادِ اللَّهِ الصَّالِحِينَ، أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ',
-            transliteration:
-                'At-Tahiyyatu lillahi was-salawatu wat-tayyibat... Ashhadu an la ilaha illa Allah wa ashhadu anna Muhammadan abduhu wa rasuluh',
-            translationKey: _PrayerGuideTranslationKey.tashahhud,
-          ),
+          atTahiyyatRecitation,
+          salawatRecitation,
         ],
-      ),
-      _PrayerGuideStepData(
-        number: 10,
+      );
+    }
+
+    void addTaslims(int rakaatNumber) {
+      addStep(
+        rakaatNumber: rakaatNumber,
         title: l10n.prayerGuideTaslim,
         description: l10n.prayerGuideTaslimRightDescription,
         positionArabicName: 'التسليم',
@@ -446,9 +581,9 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
             translationKey: _PrayerGuideTranslationKey.taslim,
           ),
         ],
-      ),
-      _PrayerGuideStepData(
-        number: 11,
+      );
+      addStep(
+        rakaatNumber: rakaatNumber,
         title: l10n.prayerGuideTaslim,
         description: l10n.prayerGuideTaslimLeftDescription,
         positionArabicName: 'التسليم',
@@ -463,8 +598,77 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
             translationKey: _PrayerGuideTranslationKey.taslim,
           ),
         ],
-      ),
-    ];
+      );
+    }
+
+    void addRakaatCore(
+      int rakaatNumber, {
+      required bool includeExtraSurah,
+      required bool isOpeningRakaat,
+    }) {
+      if (isOpeningRakaat) {
+        addNiyyah(rakaatNumber);
+        addTakbir(rakaatNumber);
+        addSubhanaka(rakaatNumber);
+      }
+      addQiyam(
+        rakaatNumber,
+        includeAdditionalSurah: includeExtraSurah,
+      );
+      addRuku(rakaatNumber);
+      addItidal(rakaatNumber);
+      addSujudOne(rakaatNumber);
+      addJalsa(rakaatNumber);
+      addSujudTwo(rakaatNumber);
+    }
+
+    switch (widget.prayerName) {
+      case PrayerName.fajr:
+        addSeparator(1);
+        addRakaatCore(1, includeExtraSurah: true, isOpeningRakaat: true);
+        addSeparator(2);
+        addRakaatCore(2, includeExtraSurah: true, isOpeningRakaat: false);
+        addCompleteTashahhud(2);
+        addTaslims(2);
+      case PrayerName.dhuhr:
+      case PrayerName.asr:
+      case PrayerName.isha:
+        addSeparator(1);
+        addRakaatCore(1, includeExtraSurah: true, isOpeningRakaat: true);
+        addSeparator(2);
+        addRakaatCore(2, includeExtraSurah: true, isOpeningRakaat: false);
+        addShortTashahhud(2);
+        addSeparator(3);
+        addRakaatCore(3, includeExtraSurah: false, isOpeningRakaat: false);
+        addSeparator(4);
+        addRakaatCore(4, includeExtraSurah: false, isOpeningRakaat: false);
+        addCompleteTashahhud(4);
+        addTaslims(4);
+      case PrayerName.maghrib:
+        addSeparator(1);
+        addRakaatCore(1, includeExtraSurah: true, isOpeningRakaat: true);
+        addSeparator(2);
+        addRakaatCore(2, includeExtraSurah: true, isOpeningRakaat: false);
+        addShortTashahhud(2);
+        addSeparator(3);
+        addRakaatCore(3, includeExtraSurah: false, isOpeningRakaat: false);
+        addCompleteTashahhud(3);
+        addTaslims(3);
+    }
+
+    return pages;
+  }
+
+  String _pageIndicatorLabel(
+    AppLocalizations l10n,
+    _PrayerGuidePageData page,
+    int pagePosition,
+    int totalPages,
+  ) {
+    final primaryLabel = page.isSeparator
+        ? l10n.prayerGuideRakaatTitle(page.rakaatNumber)
+        : '${l10n.prayerGuideStep} ${page.step!.number}';
+    return '$primaryLabel · $pagePosition / $totalPages';
   }
 
   String _localizedPrayerName(PrayerName prayer, String languageCode) {
@@ -644,30 +848,138 @@ class _HeaderNote extends StatelessWidget {
   }
 }
 
-class _PrayerGuideStepPage extends StatelessWidget {
-  const _PrayerGuideStepPage({
-    required this.step,
-    required this.totalSteps,
-    required this.isArabicOnly,
+class _PrayerGuideSeparatorPage extends StatelessWidget {
+  const _PrayerGuideSeparatorPage({
+    required this.rakaatNumber,
+    required this.pagePosition,
+    required this.totalPages,
     required this.showHeader,
     required this.prayerLabel,
     required this.prayerArabic,
     required this.rakaatSummary,
     required this.flowNote,
     required this.overview,
-    this.onOpenFatiha,
-    this.onChooseSurah,
+    required this.isArabicOnly,
   });
 
-  final _PrayerGuideStepData step;
-  final int totalSteps;
-  final bool isArabicOnly;
+  final int rakaatNumber;
+  final int pagePosition;
+  final int totalPages;
   final bool showHeader;
   final String prayerLabel;
   final String prayerArabic;
   final String rakaatSummary;
   final String flowNote;
   final String overview;
+  final bool isArabicOnly;
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = QiblaThemes.current;
+    final l10n = context.l10n;
+
+    return Container(
+      decoration: BoxDecoration(
+        color: tokens.bgSurface,
+        borderRadius: BorderRadius.circular(28),
+        border: Border.all(color: tokens.border),
+      ),
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.fromLTRB(18, 18, 18, 24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (showHeader) ...[
+              _PrayerGuideHeader(
+                prayerLabel: prayerLabel,
+                prayerArabic: prayerArabic,
+                rakaatSummary: rakaatSummary,
+                flowNote: flowNote,
+                overview: overview,
+                isArabicOnly: isArabicOnly,
+              ),
+              const SizedBox(height: 16),
+            ],
+            Align(
+              alignment: Alignment.centerRight,
+              child: Text(
+                '$pagePosition/$totalPages',
+                style: GoogleFonts.dmSans(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: tokens.textSecondary,
+                ),
+              ),
+            ),
+            const SizedBox(height: 12),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 28),
+              decoration: BoxDecoration(
+                color: tokens.primaryBg,
+                borderRadius: BorderRadius.circular(24),
+                border: Border.all(color: tokens.primaryBorder),
+              ),
+              child: Column(
+                children: [
+                  Container(
+                    width: 68,
+                    height: 68,
+                    decoration: BoxDecoration(
+                      color: tokens.bgSurface,
+                      shape: BoxShape.circle,
+                      border: Border.all(color: tokens.primaryBorder),
+                    ),
+                    alignment: Alignment.center,
+                    child: Text(
+                      '$rakaatNumber',
+                      style: GoogleFonts.dmSans(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w800,
+                        color: tokens.primaryLight,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 18),
+                  Text(
+                    l10n.prayerGuideRakaatTitle(rakaatNumber),
+                    textAlign: TextAlign.center,
+                    style: isArabicOnly
+                        ? GoogleFonts.amiri(
+                            fontSize: 34,
+                            fontWeight: FontWeight.w700,
+                            color: tokens.primaryLight,
+                          )
+                        : GoogleFonts.dmSerifDisplay(
+                            fontSize: 30,
+                            fontWeight: FontWeight.w700,
+                            color: tokens.primaryLight,
+                          ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _PrayerGuideStepPage extends StatelessWidget {
+  const _PrayerGuideStepPage({
+    required this.step,
+    required this.pagePosition,
+    required this.totalPages,
+    required this.isArabicOnly,
+    this.onOpenFatiha,
+    this.onChooseSurah,
+  });
+
+  final _PrayerGuideStepData step;
+  final int pagePosition;
+  final int totalPages;
+  final bool isArabicOnly;
   final VoidCallback? onOpenFatiha;
   final VoidCallback? onChooseSurah;
 
@@ -687,42 +999,24 @@ class _PrayerGuideStepPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (showHeader) ...[
-              _PrayerGuideHeader(
-                prayerLabel: prayerLabel,
-                prayerArabic: prayerArabic,
-                rakaatSummary: rakaatSummary,
-                flowNote: flowNote,
-                overview: overview,
-                isArabicOnly: isArabicOnly,
-              ),
-              const SizedBox(height: 16),
-            ],
             Row(
               children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 8,
-                  ),
-                  decoration: BoxDecoration(
-                    color: tokens.primaryBg,
-                    borderRadius: BorderRadius.circular(999),
-                    border: Border.all(color: tokens.primaryBorder),
-                  ),
-                  child: Text(
-                    '${l10n.prayerGuideStep} ${step.number}',
-                    style: GoogleFonts.dmSans(
-                      fontSize: 11,
-                      fontWeight: FontWeight.w700,
-                      color: tokens.primaryLight,
-                      letterSpacing: 0.3,
-                    ),
+                Expanded(
+                  child: Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    children: [
+                      _StepChip(text: '${l10n.prayerGuideStep} ${step.number}'),
+                      _StepChip(
+                        text: l10n.prayerGuideRakaatTitle(step.rakaatNumber),
+                        usePrimary: false,
+                      ),
+                    ],
                   ),
                 ),
-                const Spacer(),
+                const SizedBox(width: 12),
                 Text(
-                  '${step.number}/$totalSteps',
+                  '$pagePosition/$totalPages',
                   style: GoogleFonts.dmSans(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
@@ -814,22 +1108,24 @@ class _PrayerGuideStepPage extends StatelessWidget {
                 ),
               ),
             ],
-            if (step.showsSurahActions) ...[
+            if (step.showsOpenFatiha || step.showsChooseSurah) ...[
               const SizedBox(height: 4),
               Wrap(
                 spacing: 10,
                 runSpacing: 10,
                 children: [
-                  FilledButton.icon(
-                    onPressed: onOpenFatiha,
-                    icon: const Icon(Icons.menu_book_rounded),
-                    label: Text(l10n.prayerGuideOpenFatiha),
-                  ),
-                  OutlinedButton.icon(
-                    onPressed: onChooseSurah,
-                    icon: const Icon(Icons.auto_stories_rounded),
-                    label: Text(l10n.prayerGuideChooseSurah),
-                  ),
+                  if (step.showsOpenFatiha)
+                    FilledButton.icon(
+                      onPressed: onOpenFatiha,
+                      icon: const Icon(Icons.menu_book_rounded),
+                      label: Text(l10n.prayerGuideOpenFatiha),
+                    ),
+                  if (step.showsChooseSurah)
+                    OutlinedButton.icon(
+                      onPressed: onChooseSurah,
+                      icon: const Icon(Icons.auto_stories_rounded),
+                      label: Text(l10n.prayerGuideChooseSurah),
+                    ),
                 ],
               ),
             ],
@@ -919,7 +1215,7 @@ class _PrayerRecitationCard extends StatelessWidget {
   ) {
     return switch (key) {
       _PrayerGuideTranslationKey.takbir => l10n.prayerGuideTakbirMeaning,
-      _PrayerGuideTranslationKey.qiyam => l10n.prayerGuideQiyamMeaning,
+      _PrayerGuideTranslationKey.subhanaka => l10n.prayerGuideQiyamMeaning,
       _PrayerGuideTranslationKey.ruku => l10n.prayerGuideRukuMeaning,
       _PrayerGuideTranslationKey.itidalRise =>
         l10n.prayerGuideItidalRiseMeaning,
@@ -927,8 +1223,10 @@ class _PrayerRecitationCard extends StatelessWidget {
         l10n.prayerGuideItidalStandMeaning,
       _PrayerGuideTranslationKey.sujud => l10n.prayerGuideSujudMeaning,
       _PrayerGuideTranslationKey.jalsa => l10n.prayerGuideJalsaMeaning,
-      _PrayerGuideTranslationKey.tashahhud =>
+      _PrayerGuideTranslationKey.atTahiyyat =>
         l10n.prayerGuideTashahhudMeaning,
+      _PrayerGuideTranslationKey.salawat =>
+        l10n.prayerGuideSalawatMeaning,
       _PrayerGuideTranslationKey.taslim => l10n.prayerGuideTaslimMeaning,
     };
   }
@@ -998,13 +1296,14 @@ class _StepChip extends StatelessWidget {
 
 enum _PrayerGuideTranslationKey {
   takbir,
-  qiyam,
+  subhanaka,
   ruku,
   itidalRise,
   itidalStand,
   sujud,
   jalsa,
-  tashahhud,
+  atTahiyyat,
+  salawat,
   taslim,
 }
 
@@ -1013,9 +1312,26 @@ enum _PrayerGuideLabelKey {
   whenStanding,
 }
 
+class _PrayerGuidePageData {
+  const _PrayerGuidePageData.separator({
+    required this.rakaatNumber,
+  }) : step = null;
+
+  const _PrayerGuidePageData.step({
+    required this.rakaatNumber,
+    required this.step,
+  });
+
+  final int rakaatNumber;
+  final _PrayerGuideStepData? step;
+
+  bool get isSeparator => step == null;
+}
+
 class _PrayerGuideStepData {
   const _PrayerGuideStepData({
     required this.number,
+    required this.rakaatNumber,
     required this.title,
     required this.description,
     required this.positionArabicName,
@@ -1025,10 +1341,12 @@ class _PrayerGuideStepData {
     this.directionLabel,
     this.note,
     this.recitations = const [],
-    this.showsSurahActions = false,
+    this.showsOpenFatiha = false,
+    this.showsChooseSurah = false,
   });
 
   final int number;
+  final int rakaatNumber;
   final String title;
   final String description;
   final String positionArabicName;
@@ -1038,7 +1356,8 @@ class _PrayerGuideStepData {
   final String? directionLabel;
   final String? note;
   final List<_PrayerGuideRecitationData> recitations;
-  final bool showsSurahActions;
+  final bool showsOpenFatiha;
+  final bool showsChooseSurah;
 }
 
 class _PrayerGuideRecitationData {

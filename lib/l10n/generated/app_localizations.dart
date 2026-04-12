@@ -5678,7 +5678,7 @@ abstract class AppLocalizations {
   /// No description provided for @prayerGuideOneRakaatIntro.
   ///
   /// In es, this message translates to:
-  /// **'Esta guía muestra una rakaat completa. Repite el mismo proceso según la oración que estás realizando.'**
+  /// **'Esta gu?a muestra toda la oraci?n fard. Desliza por cada rakaat en orden y sigue la oraci?n paso a paso.'**
   String get prayerGuideOneRakaatIntro;
 
   /// No description provided for @prayerGuideCycleFajr.
@@ -5842,6 +5842,60 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'La paz y la misericordia de Allah sean con vosotros.'**
   String get prayerGuideTaslimMeaning;
+
+  /// No description provided for @prayerGuideRakaatTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Rakaat {number}'**
+  String prayerGuideRakaatTitle(Object number);
+
+  /// No description provided for @prayerGuideSubhanaka.
+  ///
+  /// In es, this message translates to:
+  /// **'Subhanaka'**
+  String get prayerGuideSubhanaka;
+
+  /// No description provided for @prayerGuideSubhanakaDescription.
+  ///
+  /// In es, this message translates to:
+  /// **'Recita la s?plica de apertura despu?s del takbir solo en la primera rakaat.'**
+  String get prayerGuideSubhanakaDescription;
+
+  /// No description provided for @prayerGuideQiyamWithSurahDescription.
+  ///
+  /// In es, this message translates to:
+  /// **'Ponte de pie y recita Al-Fatiha, luego otra sura o algunos vers?culos del Quran.'**
+  String get prayerGuideQiyamWithSurahDescription;
+
+  /// No description provided for @prayerGuideQiyamFatihaOnlyDescription.
+  ///
+  /// In es, this message translates to:
+  /// **'Ponte de pie y recita solo Al-Fatiha en esta rakaat.'**
+  String get prayerGuideQiyamFatihaOnlyDescription;
+
+  /// No description provided for @prayerGuideTashahhudShortDescription.
+  ///
+  /// In es, this message translates to:
+  /// **'Si?ntate y recita At-Tahiyyat antes de ponerte de pie para la siguiente rakaat.'**
+  String get prayerGuideTashahhudShortDescription;
+
+  /// No description provided for @prayerGuideTashahhudCompleteDescription.
+  ///
+  /// In es, this message translates to:
+  /// **'Si?ntate para el tashahhud final, recita At-Tahiyyat y Salawat Ibrahimiyyah, y luego haz una dua breve antes del taslim.'**
+  String get prayerGuideTashahhudCompleteDescription;
+
+  /// No description provided for @prayerGuideTashahhudCompleteNote.
+  ///
+  /// In es, this message translates to:
+  /// **'Despu?s del salawat, puedes a?adir una dua breve antes de terminar la oraci?n con el taslim.'**
+  String get prayerGuideTashahhudCompleteNote;
+
+  /// No description provided for @prayerGuideSalawatMeaning.
+  ///
+  /// In es, this message translates to:
+  /// **'Oh Allah, bendice a Muhammad y a la familia de Muhammad, como bendijiste a Ibrahim y a la familia de Ibrahim. En verdad, T? eres digno de alabanza y majestuoso.'**
+  String get prayerGuideSalawatMeaning;
 }
 
 class _AppLocalizationsDelegate

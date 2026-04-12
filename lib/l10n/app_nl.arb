@@ -1290,7 +1290,7 @@
   "prayerGuideRakaatsAsr": "4 fard",
   "prayerGuideRakaatsMaghrib": "3 fard + 2 sunnah erna",
   "prayerGuideRakaatsIsha": "4 fard + 2 sunnah erna + 1 witr",
-  "prayerGuideOneRakaatIntro": "Deze gids laat één volledige rak'ah zien. Herhaal dezelfde volgorde volgens het gebed dat je verricht.",
+  "prayerGuideOneRakaatIntro": "Deze gids toont het volledige verplichte gebed. Veeg door elke rakaat op volgorde en volg het gebed stap voor stap.",
   "prayerGuideCycleFajr": "Herhaal deze rak'ah twee keer. In de tweede rak'ah lees je de tashahhud en sluit je af met taslim.",
   "prayerGuideCycleDhuhr": "Herhaal de fard-rak'ah vier keer. Lees de tashahhud na de tweede rak'ah en beëindig het gebed met taslim in de vierde. De sunnah-rak'ahs volgen dezelfde basisvolgorde.",
   "prayerGuideCycleAsr": "Herhaal deze rak'ah vier keer. Lees de tashahhud na de tweede rak'ah en beëindig het gebed met taslim in de vierde.",
@@ -1317,5 +1317,19 @@
   "prayerGuideSujudMeaning": "Glorie zij mijn Heer, de Allerhoogste.",
   "prayerGuideJalsaMeaning": "Mijn Heer, vergeef mij.",
   "prayerGuideTashahhudMeaning": "Alle begroetingen, gebeden en goede woorden zijn voor Allah... Ik getuig dat er geen god is behalve Allah en dat Mohammed Zijn dienaar en boodschapper is.",
-  "prayerGuideTaslimMeaning": "De vrede en barmhartigheid van Allah zij met jullie."
+  "prayerGuideTaslimMeaning": "De vrede en barmhartigheid van Allah zij met jullie.",
+  "prayerGuideRakaatTitle": "Rakaat {number}",
+  "@prayerGuideRakaatTitle": {
+    "placeholders": {
+      "number": {}
+    }
+  },
+  "prayerGuideSubhanaka": "Subhanaka",
+  "prayerGuideSubhanakaDescription": "Reciteer de openingssmeekbede na de takbir alleen in de eerste rakaat.",
+  "prayerGuideQiyamWithSurahDescription": "Blijf staan en reciteer Al-Fatiha, daarna nog een soera of enkele verzen uit de Koran.",
+  "prayerGuideQiyamFatihaOnlyDescription": "Blijf staan en reciteer in deze rakaat alleen Al-Fatiha.",
+  "prayerGuideTashahhudShortDescription": "Ga zitten en reciteer At-Tahiyyat voordat je opstaat voor de volgende rakaat.",
+  "prayerGuideTashahhudCompleteDescription": "Ga zitten voor de laatste tashahhud, reciteer At-Tahiyyat en Salawat Ibrahimiyyah, en verricht daarna een korte dua voor de taslim.",
+  "prayerGuideTashahhudCompleteNote": "Na de salawat kun je een korte dua toevoegen voordat je het gebed afsluit met taslim.",
+  "prayerGuideSalawatMeaning": "O Allah, zend zegeningen over Muhammad en over de familie van Muhammad, zoals U zegeningen zond over Ibrahim en over de familie van Ibrahim. Voorwaar, U bent Prijzenswaardig en Glorieus."
 }

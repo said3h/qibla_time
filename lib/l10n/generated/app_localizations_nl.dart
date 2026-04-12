@@ -3264,7 +3264,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get prayerGuideOneRakaatIntro =>
-      'Deze gids laat één volledige rak\'ah zien. Herhaal dezelfde volgorde volgens het gebed dat je verricht.';
+      'Deze gids toont het volledige verplichte gebed. Veeg door elke rakaat op volgorde en volg het gebed stap voor stap.';
 
   @override
   String get prayerGuideCycleFajr =>
@@ -3359,4 +3359,40 @@ class AppLocalizationsNl extends AppLocalizations {
   @override
   String get prayerGuideTaslimMeaning =>
       'De vrede en barmhartigheid van Allah zij met jullie.';
+
+  @override
+  String prayerGuideRakaatTitle(Object number) {
+    return 'Rakaat $number';
+  }
+
+  @override
+  String get prayerGuideSubhanaka => 'Subhanaka';
+
+  @override
+  String get prayerGuideSubhanakaDescription =>
+      'Reciteer de openingssmeekbede na de takbir alleen in de eerste rakaat.';
+
+  @override
+  String get prayerGuideQiyamWithSurahDescription =>
+      'Blijf staan en reciteer Al-Fatiha, daarna nog een soera of enkele verzen uit de Koran.';
+
+  @override
+  String get prayerGuideQiyamFatihaOnlyDescription =>
+      'Blijf staan en reciteer in deze rakaat alleen Al-Fatiha.';
+
+  @override
+  String get prayerGuideTashahhudShortDescription =>
+      'Ga zitten en reciteer At-Tahiyyat voordat je opstaat voor de volgende rakaat.';
+
+  @override
+  String get prayerGuideTashahhudCompleteDescription =>
+      'Ga zitten voor de laatste tashahhud, reciteer At-Tahiyyat en Salawat Ibrahimiyyah, en verricht daarna een korte dua voor de taslim.';
+
+  @override
+  String get prayerGuideTashahhudCompleteNote =>
+      'Na de salawat kun je een korte dua toevoegen voordat je het gebed afsluit met taslim.';
+
+  @override
+  String get prayerGuideSalawatMeaning =>
+      'O Allah, zend zegeningen over Muhammad en over de familie van Muhammad, zoals U zegeningen zond over Ibrahim en over de familie van Ibrahim. Voorwaar, U bent Prijzenswaardig en Glorieus.';
 }

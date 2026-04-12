@@ -1290,7 +1290,7 @@
   "prayerGuideRakaatsAsr": "4 fard",
   "prayerGuideRakaatsMaghrib": "3 fard + 2 sunnah sesudah",
   "prayerGuideRakaatsIsha": "4 fard + 2 sunnah sesudah + 1 witir",
-  "prayerGuideOneRakaatIntro": "Panduan ini menampilkan satu rakaat lengkap. Ulangi alur yang sama sesuai salat yang sedang kamu kerjakan.",
+  "prayerGuideOneRakaatIntro": "Panduan ini menampilkan seluruh salat fardu. Geser setiap rakaat secara berurutan dan ikuti salat langkah demi langkah.",
   "prayerGuideCycleFajr": "Ulangi rakaat ini dua kali. Pada rakaat kedua baca tasyahud lalu akhiri dengan salam.",
   "prayerGuideCycleDhuhr": "Ulangi rakaat fard empat kali. Baca tasyahud setelah rakaat kedua lalu akhiri dengan salam pada rakaat keempat. Rakaat sunnah mengikuti alur dasar yang sama.",
   "prayerGuideCycleAsr": "Ulangi rakaat ini empat kali. Baca tasyahud setelah rakaat kedua lalu akhiri dengan salam pada rakaat keempat.",
@@ -1317,5 +1317,19 @@
   "prayerGuideSujudMeaning": "Mahasuci Tuhanku Yang Maha Tinggi.",
   "prayerGuideJalsaMeaning": "Wahai Tuhanku, ampunilah aku.",
   "prayerGuideTashahhudMeaning": "Segala penghormatan, doa, dan kebaikan adalah milik Allah... Aku bersaksi bahwa tidak ada sesembahan selain Allah dan Muhammad adalah hamba serta utusan-Nya.",
-  "prayerGuideTaslimMeaning": "Semoga keselamatan dan rahmat Allah tercurah atas kalian."
+  "prayerGuideTaslimMeaning": "Semoga keselamatan dan rahmat Allah tercurah atas kalian.",
+  "prayerGuideRakaatTitle": "Rakaat {number}",
+  "@prayerGuideRakaatTitle": {
+    "placeholders": {
+      "number": {}
+    }
+  },
+  "prayerGuideSubhanaka": "Subhanaka",
+  "prayerGuideSubhanakaDescription": "Baca doa pembuka setelah takbir hanya pada rakaat pertama.",
+  "prayerGuideQiyamWithSurahDescription": "Berdirilah dan baca Al-Fatihah, lalu satu surah lain atau beberapa ayat dari Al-Quran.",
+  "prayerGuideQiyamFatihaOnlyDescription": "Berdirilah dan baca Al-Fatihah saja pada rakaat ini.",
+  "prayerGuideTashahhudShortDescription": "Duduklah dan baca At-Tahiyyat sebelum berdiri untuk rakaat berikutnya.",
+  "prayerGuideTashahhudCompleteDescription": "Duduk untuk tasyahhud terakhir, baca At-Tahiyyat dan Salawat Ibrahimiyyah, lalu baca doa singkat sebelum taslim.",
+  "prayerGuideTashahhudCompleteNote": "Setelah salawat, Anda bisa menambahkan doa singkat sebelum menutup salat dengan taslim.",
+  "prayerGuideSalawatMeaning": "Ya Allah, limpahkanlah shalawat kepada Muhammad dan keluarga Muhammad, sebagaimana Engkau telah melimpahkan shalawat kepada Ibrahim dan keluarga Ibrahim. Sesungguhnya Engkau Maha Terpuji lagi Maha Mulia."
 }

@@ -3257,7 +3257,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get prayerGuideOneRakaatIntro =>
-      'Panduan ini menampilkan satu rakaat lengkap. Ulangi alur yang sama sesuai salat yang sedang kamu kerjakan.';
+      'Panduan ini menampilkan seluruh salat fardu. Geser setiap rakaat secara berurutan dan ikuti salat langkah demi langkah.';
 
   @override
   String get prayerGuideCycleFajr =>
@@ -3351,4 +3351,40 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get prayerGuideTaslimMeaning =>
       'Semoga keselamatan dan rahmat Allah tercurah atas kalian.';
+
+  @override
+  String prayerGuideRakaatTitle(Object number) {
+    return 'Rakaat $number';
+  }
+
+  @override
+  String get prayerGuideSubhanaka => 'Subhanaka';
+
+  @override
+  String get prayerGuideSubhanakaDescription =>
+      'Baca doa pembuka setelah takbir hanya pada rakaat pertama.';
+
+  @override
+  String get prayerGuideQiyamWithSurahDescription =>
+      'Berdirilah dan baca Al-Fatihah, lalu satu surah lain atau beberapa ayat dari Al-Quran.';
+
+  @override
+  String get prayerGuideQiyamFatihaOnlyDescription =>
+      'Berdirilah dan baca Al-Fatihah saja pada rakaat ini.';
+
+  @override
+  String get prayerGuideTashahhudShortDescription =>
+      'Duduklah dan baca At-Tahiyyat sebelum berdiri untuk rakaat berikutnya.';
+
+  @override
+  String get prayerGuideTashahhudCompleteDescription =>
+      'Duduk untuk tasyahhud terakhir, baca At-Tahiyyat dan Salawat Ibrahimiyyah, lalu baca doa singkat sebelum taslim.';
+
+  @override
+  String get prayerGuideTashahhudCompleteNote =>
+      'Setelah salawat, Anda bisa menambahkan doa singkat sebelum menutup salat dengan taslim.';
+
+  @override
+  String get prayerGuideSalawatMeaning =>
+      'Ya Allah, limpahkanlah shalawat kepada Muhammad dan keluarga Muhammad, sebagaimana Engkau telah melimpahkan shalawat kepada Ibrahim dan keluarga Ibrahim. Sesungguhnya Engkau Maha Terpuji lagi Maha Mulia.';
 }

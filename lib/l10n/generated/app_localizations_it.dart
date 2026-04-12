@@ -3282,7 +3282,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get prayerGuideOneRakaatIntro =>
-      'Questa guida mostra una rakaat completa. Ripeti lo stesso ordine secondo la preghiera che stai svolgendo.';
+      'Questa guida mostra l\'intera preghiera fard. Scorri ogni rakaat nell\'ordine corretto e segui la preghiera passo dopo passo.';
 
   @override
   String get prayerGuideCycleFajr =>
@@ -3375,4 +3375,40 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get prayerGuideTaslimMeaning =>
       'La pace e la misericordia di Allah siano su di voi.';
+
+  @override
+  String prayerGuideRakaatTitle(Object number) {
+    return 'Rakaat $number';
+  }
+
+  @override
+  String get prayerGuideSubhanaka => 'Subhanaka';
+
+  @override
+  String get prayerGuideSubhanakaDescription =>
+      'Recita l\'invocazione iniziale dopo il takbir solo nella prima rakaat.';
+
+  @override
+  String get prayerGuideQiyamWithSurahDescription =>
+      'Rimani in piedi e recita Al-Fatiha, poi un\'altra sura o alcuni versetti del Corano.';
+
+  @override
+  String get prayerGuideQiyamFatihaOnlyDescription =>
+      'Rimani in piedi e recita solo Al-Fatiha in questa rakaat.';
+
+  @override
+  String get prayerGuideTashahhudShortDescription =>
+      'Siediti e recita At-Tahiyyat prima di alzarti per la rakaat successiva.';
+
+  @override
+  String get prayerGuideTashahhudCompleteDescription =>
+      'Siediti per il tashahhud finale, recita At-Tahiyyat e Salawat Ibrahimiyyah, poi fai una breve dua prima del taslim.';
+
+  @override
+  String get prayerGuideTashahhudCompleteNote =>
+      'Dopo la salawat puoi aggiungere una breve dua prima di concludere la preghiera con il taslim.';
+
+  @override
+  String get prayerGuideSalawatMeaning =>
+      'O Allah, invia benedizioni su Muhammad e sulla famiglia di Muhammad, come hai inviato benedizioni su Ibrahim e sulla famiglia di Ibrahim. In verit? Tu sei Degno di lode e Glorioso.';
 }
