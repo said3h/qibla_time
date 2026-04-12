@@ -2714,6 +2714,35 @@ class AppLocalizationsIt extends AppLocalizations {
   String get settingsProfileTasbih => 'tasbih';
 
   @override
+  String get settingsProfileEditTitle => 'Modifica profilo';
+
+  @override
+  String get settingsProfileEditSubtitle =>
+      'Cambia il tuo nome e la tua nazionalit? facoltativa';
+
+  @override
+  String get settingsProfileNameLabel => 'Nome';
+
+  @override
+  String get settingsProfileNameHint => 'Come dobbiamo chiamarti?';
+
+  @override
+  String get settingsProfileNationalityLabel => 'Nazionalit?';
+
+  @override
+  String get settingsProfileNationalityOptional => 'Facoltativo';
+
+  @override
+  String get settingsProfileNationalityNone =>
+      'Nessuna nazionalit? selezionata';
+
+  @override
+  String get settingsProfileChooseCountry => 'Scegli un paese';
+
+  @override
+  String get settingsProfileCountrySearchHint => 'Cerca un paese';
+
+  @override
   String get commonShafii => 'Shafi\'i';
 
   @override
@@ -3414,4 +3443,25 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get prayerGuideSalawatMeaning =>
       'O Allah, invia benedizioni su Muhammad e sulla famiglia di Muhammad, come hai inviato benedizioni su Ibrahim e sulla famiglia di Ibrahim. In verità Tu sei Degno di lode e Glorioso.';
+
+  @override
+  String get bookDownload => 'Scaricare';
+
+  @override
+  String get bookDownloading => 'Download in corso...';
+
+  @override
+  String get bookReadOffline => 'Leggere offline';
+
+  @override
+  String get bookDeleteDownload => 'Elimina download';
+
+  @override
+  String get bookDeleteConfirm => 'Eliminare il libro scaricato?';
+
+  @override
+  String get bookDeleteConfirmBody => 'Il file verr? rimosso dal dispositivo';
+
+  @override
+  String get bookDownloadError => 'Errore durante il download';
 }

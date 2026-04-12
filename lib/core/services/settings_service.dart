@@ -103,6 +103,45 @@ class SettingsService {
     return prefs.getBool(AppConstants.keyRamadanModeForced) ?? false;
   }
 
+  Future<void> saveProfileDisplayName(String? value) async {
+    final prefs = await SharedPreferences.getInstance();
+    final normalized = value?.trim();
+    if (normalized == null || normalized.isEmpty) {
+      await prefs.remove(AppConstants.keyProfileDisplayName);
+      return;
+    }
+    await prefs.setString(AppConstants.keyProfileDisplayName, normalized);
+  }
+
+  Future<String?> getProfileDisplayName() async {
+    final prefs = await SharedPreferences.getInstance();
+    final value = prefs.getString(AppConstants.keyProfileDisplayName)?.trim();
+    if (value == null || value.isEmpty) {
+      return null;
+    }
+    return value;
+  }
+
+  Future<void> saveProfileNationalityCode(String? value) async {
+    final prefs = await SharedPreferences.getInstance();
+    final normalized = value?.trim().toUpperCase();
+    if (normalized == null || normalized.isEmpty) {
+      await prefs.remove(AppConstants.keyProfileNationalityCode);
+      return;
+    }
+    await prefs.setString(AppConstants.keyProfileNationalityCode, normalized);
+  }
+
+  Future<String?> getProfileNationalityCode() async {
+    final prefs = await SharedPreferences.getInstance();
+    final value =
+        prefs.getString(AppConstants.keyProfileNationalityCode)?.trim();
+    if (value == null || value.isEmpty) {
+      return null;
+    }
+    return value.toUpperCase();
+  }
+
   Future<void> resetAll() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.clear();

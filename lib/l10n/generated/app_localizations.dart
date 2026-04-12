@@ -4735,6 +4735,60 @@ abstract class AppLocalizations {
   /// **'tasbih'**
   String get settingsProfileTasbih;
 
+  /// No description provided for @settingsProfileEditTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Editar perfil'**
+  String get settingsProfileEditTitle;
+
+  /// No description provided for @settingsProfileEditSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Cambia tu nombre y tu nacionalidad opcional'**
+  String get settingsProfileEditSubtitle;
+
+  /// No description provided for @settingsProfileNameLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Nombre'**
+  String get settingsProfileNameLabel;
+
+  /// No description provided for @settingsProfileNameHint.
+  ///
+  /// In es, this message translates to:
+  /// **'?C?mo quieres que te llamemos?'**
+  String get settingsProfileNameHint;
+
+  /// No description provided for @settingsProfileNationalityLabel.
+  ///
+  /// In es, this message translates to:
+  /// **'Nacionalidad'**
+  String get settingsProfileNationalityLabel;
+
+  /// No description provided for @settingsProfileNationalityOptional.
+  ///
+  /// In es, this message translates to:
+  /// **'Opcional'**
+  String get settingsProfileNationalityOptional;
+
+  /// No description provided for @settingsProfileNationalityNone.
+  ///
+  /// In es, this message translates to:
+  /// **'No has seleccionado ninguna nacionalidad'**
+  String get settingsProfileNationalityNone;
+
+  /// No description provided for @settingsProfileChooseCountry.
+  ///
+  /// In es, this message translates to:
+  /// **'Elige un pa?s'**
+  String get settingsProfileChooseCountry;
+
+  /// No description provided for @settingsProfileCountrySearchHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Buscar pa?s'**
+  String get settingsProfileCountrySearchHint;
+
   /// No description provided for @commonShafii.
   ///
   /// In es, this message translates to:
@@ -5904,6 +5958,48 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Oh Allah, bendice a Muhammad y a la familia de Muhammad, como bendijiste a Ibrahim y a la familia de Ibrahim. En verdad, Tú eres digno de alabanza y majestuoso.'**
   String get prayerGuideSalawatMeaning;
+
+  /// No description provided for @bookDownload.
+  ///
+  /// In es, this message translates to:
+  /// **'Descargar'**
+  String get bookDownload;
+
+  /// No description provided for @bookDownloading.
+  ///
+  /// In es, this message translates to:
+  /// **'Descargando...'**
+  String get bookDownloading;
+
+  /// No description provided for @bookReadOffline.
+  ///
+  /// In es, this message translates to:
+  /// **'Leer offline'**
+  String get bookReadOffline;
+
+  /// No description provided for @bookDeleteDownload.
+  ///
+  /// In es, this message translates to:
+  /// **'Borrar descarga'**
+  String get bookDeleteDownload;
+
+  /// No description provided for @bookDeleteConfirm.
+  ///
+  /// In es, this message translates to:
+  /// **'?Borrar el libro descargado?'**
+  String get bookDeleteConfirm;
+
+  /// No description provided for @bookDeleteConfirmBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Se eliminar? el archivo del dispositivo'**
+  String get bookDeleteConfirmBody;
+
+  /// No description provided for @bookDownloadError.
+  ///
+  /// In es, this message translates to:
+  /// **'Error al descargar'**
+  String get bookDownloadError;
 }
 
 class _AppLocalizationsDelegate

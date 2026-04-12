@@ -30,4 +30,6 @@ class AppConstants {
   static const String keyDhikrDailyGoal = 'dhikr_daily_goal';
   static const String keyRamadanModeAutomatic = 'ramadan_mode_automatic';
   static const String keyRamadanModeForced = 'ramadan_mode_forced';
+  static const String keyProfileDisplayName = 'profile_display_name';
+  static const String keyProfileNationalityCode = 'profile_nationality_code';
 }

@@ -10,6 +10,7 @@ import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../core/data/country_catalog.dart';
 import '../../../core/services/cloud_sync_service.dart';
 import '../../../core/services/settings_service.dart';
 import '../../../core/constants/app_constants.dart';
@@ -72,6 +73,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   bool dailyInspirationEnabled = false;
   int dailyInspirationHour = 8;
   int hadithFavoritesCount = 0;
+  String? _profileDisplayName;
+  String? _profileNationalityCode;
 
   static const _languageOptions = <Locale?>[
     null,
@@ -121,6 +124,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     adhanIsha = await _settingsService.getPrayerNotificationEnabled('isha');
     prayerNotificationsEnabled = await _settingsService.getNotificationsEnabled();
     selectedAdhanName = _getAdhanName(await _settingsService.getAdhan());
+    _profileDisplayName = await _settingsService.getProfileDisplayName();
+    _profileNationalityCode =
+        await _settingsService.getProfileNationalityCode();
 
     // Cargar configuración de hadices
     final inspirationService = ref.read(
@@ -441,6 +447,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     final prayerNotificationsStatus =
         ref.watch(prayerNotificationsEnabledProvider).valueOrNull ??
         prayerNotificationsEnabled;
+    final profileDisplayName = _currentProfileDisplayName(l10n);
+    final profileCountry = findCountryOption(_profileNationalityCode);
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
@@ -453,6 +461,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             const SizedBox(height: 16),
             _buildProfileCard(
               tokens,
+              profileDisplayName: profileDisplayName,
+              profileNationalityCode: _profileNationalityCode,
+              profileNationalityName: profileCountry?.name,
               streakValue: tracking.hasAnyCompletedPrayer
                   ? '${tracking.currentStreak}'
                   : '—',
@@ -956,49 +967,109 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
   Widget _buildProfileCard(
     QiblaTokens tokens, {
+    required String profileDisplayName,
+    required String? profileNationalityCode,
+    required String? profileNationalityName,
     required String streakValue,
     required String prayersValue,
     required String dhikrValue,
   }) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: tokens.bgSurface,
+    final l10n = context.l10n;
+    final flag = countryFlagEmoji(profileNationalityCode);
+
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: tokens.border),
-      ),
-      child: Row(
-        children: [
-          Container(
-            width: 52,
-            height: 52,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: tokens.primaryBg,
-              border: Border.all(color: tokens.primaryBorder, width: 2),
-            ),
-            child: const Center(child: Text('🕌', style: TextStyle(fontSize: 24))),
+        onTap: _showProfileEditorSheet,
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: tokens.bgSurface,
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: tokens.border),
           ),
-          const SizedBox(width: 14),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(context.l10n.settingsProfileUser, style: GoogleFonts.dmSans(fontSize: 15, color: tokens.textPrimary, fontWeight: FontWeight.w500)),
-                const SizedBox(height: 4),
-                Row(
+          child: Row(
+            children: [
+              Container(
+                width: 52,
+                height: 52,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: tokens.primaryBg,
+                  border: Border.all(color: tokens.primaryBorder, width: 2),
+                ),
+                child: Center(
+                  child: Text(
+                    profileDisplayName.trim().isEmpty
+                        ? 'U'
+                        : profileDisplayName.trim().substring(0, 1).toUpperCase(),
+                    style: GoogleFonts.dmSans(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w700,
+                      color: tokens.primary,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _stat(tokens, streakValue, context.l10n.settingsProfileStreak),
-                    const SizedBox(width: 12),
-                    _stat(tokens, prayersValue, context.l10n.settingsProfilePrayers),
-                    const SizedBox(width: 12),
-                    _stat(tokens, dhikrValue, context.l10n.settingsProfileTasbih),
+                    Row(
+                      children: [
+                        if (flag.isNotEmpty) ...[
+                          Text(flag, style: const TextStyle(fontSize: 18)),
+                          const SizedBox(width: 8),
+                        ],
+                        Expanded(
+                          child: Text(
+                            profileDisplayName,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: GoogleFonts.dmSans(
+                              fontSize: 15,
+                              color: tokens.textPrimary,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Icon(
+                          Icons.edit_outlined,
+                          size: 18,
+                          color: tokens.textSecondary,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      profileNationalityName ??
+                          l10n.settingsProfileEditSubtitle,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.dmSans(
+                        fontSize: 11,
+                        color: tokens.textSecondary,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Row(
+                      children: [
+                        _stat(tokens, streakValue, l10n.settingsProfileStreak),
+                        const SizedBox(width: 12),
+                        _stat(tokens, prayersValue, l10n.settingsProfilePrayers),
+                        const SizedBox(width: 12),
+                        _stat(tokens, dhikrValue, l10n.settingsProfileTasbih),
+                      ],
+                    ),
                   ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
@@ -1011,6 +1082,286 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         Text(label, style: GoogleFonts.dmSans(fontSize: 9, color: tokens.textSecondary)),
       ],
     );
+  }
+
+  String _currentProfileDisplayName(AppLocalizations l10n) {
+    final name = _profileDisplayName?.trim();
+    if (name == null || name.isEmpty) {
+      return l10n.settingsProfileUser;
+    }
+    return name;
+  }
+
+  Future<void> _showProfileEditorSheet() async {
+    final tokens = QiblaThemes.current;
+    final l10n = context.l10n;
+    final nameController = TextEditingController(text: _profileDisplayName ?? '');
+    String? selectedCountryCode = _profileNationalityCode;
+
+    final result = await showModalBottomSheet<_ProfileDraft>(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: tokens.bgSurface,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setModalState) {
+            final selectedCountry = findCountryOption(selectedCountryCode);
+            final flag = countryFlagEmoji(selectedCountryCode);
+
+            return Padding(
+              padding: EdgeInsets.fromLTRB(
+                20,
+                20,
+                20,
+                MediaQuery.of(context).viewInsets.bottom + 20,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    l10n.settingsProfileEditTitle,
+                    style: GoogleFonts.dmSans(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
+                      color: tokens.textPrimary,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    l10n.settingsProfileEditSubtitle,
+                    style: GoogleFonts.dmSans(
+                      fontSize: 12,
+                      color: tokens.textSecondary,
+                    ),
+                  ),
+                  const SizedBox(height: 18),
+                  TextField(
+                    controller: nameController,
+                    textCapitalization: TextCapitalization.words,
+                    decoration: InputDecoration(
+                      labelText: l10n.settingsProfileNameLabel,
+                      hintText: l10n.settingsProfileNameHint,
+                    ),
+                  ),
+                  const SizedBox(height: 14),
+                  ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    tileColor: tokens.bgSurface2,
+                    leading: Container(
+                      width: 40,
+                      height: 40,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: tokens.bgSurface,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: flag.isEmpty
+                          ? Icon(
+                              Icons.public,
+                              color: tokens.textSecondary,
+                            )
+                          : Text(
+                              flag,
+                              style: const TextStyle(fontSize: 20),
+                            ),
+                    ),
+                    title: Text(
+                      l10n.settingsProfileNationalityLabel,
+                      style: GoogleFonts.dmSans(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: tokens.textPrimary,
+                      ),
+                    ),
+                    subtitle: Text(
+                      selectedCountry?.name ??
+                          l10n.settingsProfileNationalityNone,
+                      style: GoogleFonts.dmSans(
+                        fontSize: 11,
+                        color: tokens.textSecondary,
+                      ),
+                    ),
+                    trailing: const Icon(Icons.chevron_right),
+                    onTap: () async {
+                      final pickedCountryCode = await _showCountryPickerSheet(
+                        initialCountryCode: selectedCountryCode,
+                      );
+                      if (pickedCountryCode == null) {
+                        return;
+                      }
+                      setModalState(() {
+                        selectedCountryCode = pickedCountryCode.isEmpty
+                            ? null
+                            : pickedCountryCode;
+                      });
+                    },
+                  ),
+                  const SizedBox(height: 18),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: OutlinedButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: Text(l10n.commonCancel),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: FilledButton(
+                          onPressed: () {
+                            Navigator.of(context).pop(
+                              _ProfileDraft(
+                                displayName: nameController.text.trim(),
+                                nationalityCode: selectedCountryCode,
+                              ),
+                            );
+                          },
+                          child: Text(l10n.commonSave),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+
+    nameController.dispose();
+
+    if (result == null) {
+      return;
+    }
+
+    final normalizedName = result.displayName.trim();
+    await _settingsService.saveProfileDisplayName(
+      normalizedName.isEmpty ? null : normalizedName,
+    );
+    await _settingsService.saveProfileNationalityCode(result.nationalityCode);
+
+    if (!mounted) {
+      return;
+    }
+
+    setState(() {
+      _profileDisplayName = normalizedName.isEmpty ? null : normalizedName;
+      _profileNationalityCode = result.nationalityCode;
+    });
+  }
+
+  Future<String?> _showCountryPickerSheet({
+    required String? initialCountryCode,
+  }) async {
+    final tokens = QiblaThemes.current;
+    final l10n = context.l10n;
+    final searchController = TextEditingController();
+    String query = '';
+
+    final result = await showModalBottomSheet<String>(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: tokens.bgSurface,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setModalState) {
+            final filteredCountries = countryCatalog.where((country) {
+              if (query.isEmpty) {
+                return true;
+              }
+              final normalizedQuery = query.toLowerCase();
+              return country.name.toLowerCase().contains(normalizedQuery) ||
+                  country.code.toLowerCase().contains(normalizedQuery);
+            }).toList();
+
+            return Padding(
+              padding: EdgeInsets.fromLTRB(
+                20,
+                20,
+                20,
+                MediaQuery.of(context).viewInsets.bottom + 12,
+              ),
+              child: SizedBox(
+                height: 520,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      l10n.settingsProfileChooseCountry,
+                      style: GoogleFonts.dmSans(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                        color: tokens.textPrimary,
+                      ),
+                    ),
+                    const SizedBox(height: 14),
+                    TextField(
+                      controller: searchController,
+                      decoration: InputDecoration(
+                        hintText: l10n.settingsProfileCountrySearchHint,
+                        prefixIcon: const Icon(Icons.search),
+                      ),
+                      onChanged: (value) {
+                        setModalState(() => query = value.trim());
+                      },
+                    ),
+                    const SizedBox(height: 14),
+                    Expanded(
+                      child: ListView(
+                        children: [
+                          ListTile(
+                            leading: Icon(
+                              Icons.public,
+                              color: tokens.textSecondary,
+                            ),
+                            title: Text(l10n.settingsProfileNationalityNone),
+                            trailing: initialCountryCode == null
+                                ? Icon(Icons.check, color: tokens.primary)
+                                : null,
+                            onTap: () => Navigator.of(context).pop(''),
+                          ),
+                          ...filteredCountries.map((country) {
+                            final isSelected =
+                                country.code == initialCountryCode;
+                            return ListTile(
+                              leading: Text(
+                                countryFlagEmoji(country.code),
+                                style: const TextStyle(fontSize: 20),
+                              ),
+                              title: Text(country.name),
+                              subtitle: Text(country.code),
+                              trailing: isSelected
+                                  ? Icon(Icons.check, color: tokens.primary)
+                                  : null,
+                              onTap: () =>
+                                  Navigator.of(context).pop(country.code),
+                            );
+                          }),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+
+    searchController.dispose();
+    return result;
   }
 
   String _getAdhanName(String file) {
@@ -1458,6 +1809,16 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ),
     );
   }
+}
+
+class _ProfileDraft {
+  const _ProfileDraft({
+    required this.displayName,
+    required this.nationalityCode,
+  });
+
+  final String displayName;
+  final String? nationalityCode;
 }
 
 final _lastBackupProvider = FutureProvider<DateTime?>((ref) async {
