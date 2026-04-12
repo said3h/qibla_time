@@ -3151,4 +3151,96 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get purificationGuideFinalNoteBody =>
       'Вуду относится к малому осквернению, а гусль — к большому. Если тебе нужен только вуду, гусль не требуется. Если же обязателен гусль, одного вуду недостаточно.';
+
+  @override
+  String get prayerGuideTitle => 'Руководство по молитве';
+
+  @override
+  String get prayerGuideStep => 'Шаг';
+
+  @override
+  String get prayerGuideNiyyah => 'Намерение';
+
+  @override
+  String get prayerGuideTakbir => 'Такбир аль-ихрам';
+
+  @override
+  String get prayerGuideQiyam => 'Стояние';
+
+  @override
+  String get prayerGuideRuku => 'Поясной поклон';
+
+  @override
+  String get prayerGuideItidal => 'И\'тидаль';
+
+  @override
+  String get prayerGuideSujud => 'Земной поклон';
+
+  @override
+  String get prayerGuideJalsa => 'Сидение';
+
+  @override
+  String get prayerGuideTashahhud => 'Ташаххуд';
+
+  @override
+  String get prayerGuideTaslim => 'Таслим';
+
+  @override
+  String get prayerGuideNiyyahDescription =>
+      'Сделайте намерение для этой молитвы в сердце перед началом.';
+
+  @override
+  String get prayerGuideTakbirDescription =>
+      'Поднимите руки и скажите «Аллаху Акбар», чтобы войти в молитву.';
+
+  @override
+  String get prayerGuideQiyamDescription =>
+      'Стойте и читайте Аль-Фатиху и то, что вам легко из Корана.';
+
+  @override
+  String get prayerGuideRukuDescription =>
+      'Совершите поясной поклон, положите руки на колени и прославляйте Аллаха в руку.';
+
+  @override
+  String get prayerGuideItidalDescription =>
+      'Поднимитесь из руку и снова встаньте прямо.';
+
+  @override
+  String get prayerGuideSujudDescription =>
+      'Совершите земной поклон, коснувшись лбом и носом земли, и прочитайте адзкар суджуда.';
+
+  @override
+  String get prayerGuideJalsaDescription =>
+      'Спокойно сядьте между двумя земными поклонами и попросите у Аллаха прощения.';
+
+  @override
+  String get prayerGuideSecondSujudDescription =>
+      'Совершите второй земной поклон спокойно, прежде чем встать или продолжить ракаат.';
+
+  @override
+  String get prayerGuideTashahhudDescription =>
+      'Сядьте и прочитайте ташаххуд в той сидячей части молитвы, где он предусмотрен.';
+
+  @override
+  String get prayerGuideTaslimRightDescription =>
+      'Поверните голову направо и произнесите салам, завершая молитву.';
+
+  @override
+  String get prayerGuideTaslimLeftDescription =>
+      'Поверните голову налево и завершите салам.';
+
+  @override
+  String get prayerGuideRakaatsFajr => '2 сунна + 2 фард';
+
+  @override
+  String get prayerGuideRakaatsDhuhr => '4 сунна + 4 фард + 2 сунна';
+
+  @override
+  String get prayerGuideRakaatsAsr => '4 фард';
+
+  @override
+  String get prayerGuideRakaatsMaghrib => '3 фард + 2 сунна';
+
+  @override
+  String get prayerGuideRakaatsIsha => '4 фард + 2 сунна + 1 витр';
 }

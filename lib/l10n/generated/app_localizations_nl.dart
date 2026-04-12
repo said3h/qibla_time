@@ -3140,4 +3140,96 @@ class AppLocalizationsNl extends AppLocalizations {
   @override
   String get purificationGuideFinalNoteBody =>
       'Wudu is voor kleine onreinheid. Ghusl is voor grote onreinheid. Als je alleen wudu nodig hebt, is ghusl niet verplicht. Als ghusl verplicht is, is wudu alleen niet voldoende.';
+
+  @override
+  String get prayerGuideTitle => 'Gebedsgids';
+
+  @override
+  String get prayerGuideStep => 'Stap';
+
+  @override
+  String get prayerGuideNiyyah => 'Intentie';
+
+  @override
+  String get prayerGuideTakbir => 'Openingstakbir';
+
+  @override
+  String get prayerGuideQiyam => 'Staande houding';
+
+  @override
+  String get prayerGuideRuku => 'Buiging';
+
+  @override
+  String get prayerGuideItidal => 'I\'tidal';
+
+  @override
+  String get prayerGuideSujud => 'Neerwerping';
+
+  @override
+  String get prayerGuideJalsa => 'Zithouding';
+
+  @override
+  String get prayerGuideTashahhud => 'Tashahhud';
+
+  @override
+  String get prayerGuideTaslim => 'Taslim';
+
+  @override
+  String get prayerGuideNiyyahDescription =>
+      'Maak de intentie voor dit gebed in je hart voordat je begint.';
+
+  @override
+  String get prayerGuideTakbirDescription =>
+      'Hef je handen op en zeg Allahu Akbar om het gebed te beginnen.';
+
+  @override
+  String get prayerGuideQiyamDescription =>
+      'Blijf staan en reciteer Al-Fatihah en wat voor jou gemakkelijk is uit de Koran.';
+
+  @override
+  String get prayerGuideRukuDescription =>
+      'Buig voorover, leg je handen op je kniën en verheerlijk Allah in de ruku.';
+
+  @override
+  String get prayerGuideItidalDescription =>
+      'Kom omhoog uit de ruku totdat je weer rechtop staat.';
+
+  @override
+  String get prayerGuideSujudDescription =>
+      'Verricht de neerwerping met je voorhoofd en neus op de grond en zeg de adhkar van sujud.';
+
+  @override
+  String get prayerGuideJalsaDescription =>
+      'Ga rustig zitten tussen de twee neerwerpingen en vraag Allah om vergeving.';
+
+  @override
+  String get prayerGuideSecondSujudDescription =>
+      'Verricht de tweede neerwerping rustig voordat je opstaat of de rak’ah vervolgt.';
+
+  @override
+  String get prayerGuideTashahhudDescription =>
+      'Ga zitten en reciteer de tashahhud in het zitgedeelte van het gebed waar dit hoort.';
+
+  @override
+  String get prayerGuideTaslimRightDescription =>
+      'Draai je hoofd naar rechts en zeg de salam om het gebed af te sluiten.';
+
+  @override
+  String get prayerGuideTaslimLeftDescription =>
+      'Draai je hoofd naar links en maak de salam af.';
+
+  @override
+  String get prayerGuideRakaatsFajr => '2 sunnah + 2 fard';
+
+  @override
+  String get prayerGuideRakaatsDhuhr => '4 sunnah + 4 fard + 2 sunnah';
+
+  @override
+  String get prayerGuideRakaatsAsr => '4 fard';
+
+  @override
+  String get prayerGuideRakaatsMaghrib => '3 fard + 2 sunnah';
+
+  @override
+  String get prayerGuideRakaatsIsha => '4 fard + 2 sunnah + 1 witr';
 }

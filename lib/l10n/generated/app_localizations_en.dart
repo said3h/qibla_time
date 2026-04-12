@@ -3123,4 +3123,96 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get purificationGuideFinalNoteBody =>
       'Wudu is for minor impurity. Ghusl is for major impurity. If you only need wudu, ghusl is not required. If ghusl is required, wudu alone is not enough.';
+
+  @override
+  String get prayerGuideTitle => 'Prayer Guide';
+
+  @override
+  String get prayerGuideStep => 'Step';
+
+  @override
+  String get prayerGuideNiyyah => 'Niyyah';
+
+  @override
+  String get prayerGuideTakbir => 'Takbiratul Ihram';
+
+  @override
+  String get prayerGuideQiyam => 'Qiyam';
+
+  @override
+  String get prayerGuideRuku => 'Ruku';
+
+  @override
+  String get prayerGuideItidal => 'I\'tidal';
+
+  @override
+  String get prayerGuideSujud => 'Sujud';
+
+  @override
+  String get prayerGuideJalsa => 'Jalsa';
+
+  @override
+  String get prayerGuideTashahhud => 'Tashahhud';
+
+  @override
+  String get prayerGuideTaslim => 'Taslim';
+
+  @override
+  String get prayerGuideNiyyahDescription =>
+      'Make the intention in your heart for this prayer before you begin.';
+
+  @override
+  String get prayerGuideTakbirDescription =>
+      'Raise your hands and say Allahu Akbar to enter the prayer.';
+
+  @override
+  String get prayerGuideQiyamDescription =>
+      'Stand and recite Al-Fatihah and what is easy for you from the Quran.';
+
+  @override
+  String get prayerGuideRukuDescription =>
+      'Bow, place your hands on your knees, and glorify Allah in ruku.';
+
+  @override
+  String get prayerGuideItidalDescription =>
+      'Rise from ruku until you are standing straight again.';
+
+  @override
+  String get prayerGuideSujudDescription =>
+      'Prostrate with your forehead and nose on the ground and say the adhkar of sujud.';
+
+  @override
+  String get prayerGuideJalsaDescription =>
+      'Sit calmly between the two sujuds and ask Allah for forgiveness.';
+
+  @override
+  String get prayerGuideSecondSujudDescription =>
+      'Perform the second sujud calmly before standing or continuing the rakah.';
+
+  @override
+  String get prayerGuideTashahhudDescription =>
+      'Sit and recite the tashahhud in the sitting of the prayer that requires it.';
+
+  @override
+  String get prayerGuideTaslimRightDescription =>
+      'Turn your head to the right and say the salam to end the prayer.';
+
+  @override
+  String get prayerGuideTaslimLeftDescription =>
+      'Turn your head to the left and complete the salam.';
+
+  @override
+  String get prayerGuideRakaatsFajr => '2 sunnah + 2 fard';
+
+  @override
+  String get prayerGuideRakaatsDhuhr => '4 sunnah + 4 fard + 2 sunnah';
+
+  @override
+  String get prayerGuideRakaatsAsr => '4 fard';
+
+  @override
+  String get prayerGuideRakaatsMaghrib => '3 fard + 2 sunnah';
+
+  @override
+  String get prayerGuideRakaatsIsha => '4 fard + 2 sunnah + 1 witr';
 }

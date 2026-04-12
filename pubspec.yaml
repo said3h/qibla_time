@@ -38,7 +38,7 @@ dependencies:
   geocoding: 2.2.2
   home_widget: 0.9.0
   # proximity_sensor removido - usando EventChannel nativo para sensor de proximidad
-  
+
   cached_network_image: ^3.3.1
   device_info_plus: 10.1.0
   google_fonts: 8.0.2
@@ -61,6 +61,7 @@ flutter:
     - assets/audio/
     - assets/hadiths/
     - assets/data/
+    - assets/images/prayer_positions/
 
   # Fuentes personalizadas Amiri
   fonts:

@@ -3068,4 +3068,96 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get purificationGuideFinalNoteBody =>
       'الوضوء يكون للحدث الأصغر، والغسل يكون للحدث الأكبر. فإذا كنت تحتاج إلى الوضوء فقط فلا يلزمك الغسل، وإذا وجب الغسل فلا يكفي الوضوء وحده.';
+
+  @override
+  String get prayerGuideTitle => 'دليل الصلاة';
+
+  @override
+  String get prayerGuideStep => 'الخطوة';
+
+  @override
+  String get prayerGuideNiyyah => 'النية';
+
+  @override
+  String get prayerGuideTakbir => 'تكبيرة الإحرام';
+
+  @override
+  String get prayerGuideQiyam => 'القيام';
+
+  @override
+  String get prayerGuideRuku => 'الركوع';
+
+  @override
+  String get prayerGuideItidal => 'الاعتدال';
+
+  @override
+  String get prayerGuideSujud => 'السجود';
+
+  @override
+  String get prayerGuideJalsa => 'الجلسة';
+
+  @override
+  String get prayerGuideTashahhud => 'التشهد';
+
+  @override
+  String get prayerGuideTaslim => 'التسليم';
+
+  @override
+  String get prayerGuideNiyyahDescription =>
+      'استحضر نية هذه الصلاة في قلبك قبل أن تبدأ.';
+
+  @override
+  String get prayerGuideTakbirDescription =>
+      'ارفع يديك وقل الله أكبر للدخول في الصلاة.';
+
+  @override
+  String get prayerGuideQiyamDescription =>
+      'قف واقرأ الفاتحة وما تيسر من القرآن.';
+
+  @override
+  String get prayerGuideRukuDescription =>
+      'انحن وضع يديك على ركبتيك وسبح الله في الركوع.';
+
+  @override
+  String get prayerGuideItidalDescription =>
+      'ارفع من الركوع حتى تستقيم قائماً من جديد.';
+
+  @override
+  String get prayerGuideSujudDescription =>
+      'اسجد واجعل الجبهة والأنف على الأرض وقل أذكار السجود.';
+
+  @override
+  String get prayerGuideJalsaDescription =>
+      'اجلس بهدوء بين السجدتين واسأل الله المغفرة.';
+
+  @override
+  String get prayerGuideSecondSujudDescription =>
+      'اسجد السجدة الثانية بهدوء قبل القيام أو متابعة الركعة.';
+
+  @override
+  String get prayerGuideTashahhudDescription =>
+      'اجلس واقرأ التشهد في الجلسة التي يشرع فيها.';
+
+  @override
+  String get prayerGuideTaslimRightDescription =>
+      'التفت برأسك إلى اليمين وقل السلام لإنهاء الصلاة.';
+
+  @override
+  String get prayerGuideTaslimLeftDescription =>
+      'التفت برأسك إلى اليسار وأكمل السلام.';
+
+  @override
+  String get prayerGuideRakaatsFajr => '2 سنة + 2 فرض';
+
+  @override
+  String get prayerGuideRakaatsDhuhr => '4 سنة + 4 فرض + 2 سنة';
+
+  @override
+  String get prayerGuideRakaatsAsr => '4 فرض';
+
+  @override
+  String get prayerGuideRakaatsMaghrib => '3 فرض + 2 سنة';
+
+  @override
+  String get prayerGuideRakaatsIsha => '4 فرض + 2 سنة + 1 وتر';
 }

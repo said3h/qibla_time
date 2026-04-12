@@ -3133,4 +3133,96 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get purificationGuideFinalNoteBody =>
       'Wudu untuk hadas kecil. Ghusl untuk hadas besar. Jika kamu hanya memerlukan wudu, ghusl tidak wajib. Jika ghusl diwajibkan, wudu saja tidak cukup.';
+
+  @override
+  String get prayerGuideTitle => 'Panduan salat';
+
+  @override
+  String get prayerGuideStep => 'Langkah';
+
+  @override
+  String get prayerGuideNiyyah => 'Niat';
+
+  @override
+  String get prayerGuideTakbir => 'Takbiratul ihram';
+
+  @override
+  String get prayerGuideQiyam => 'Berdiri';
+
+  @override
+  String get prayerGuideRuku => 'Rukuk';
+
+  @override
+  String get prayerGuideItidal => 'I\'tidal';
+
+  @override
+  String get prayerGuideSujud => 'Sujud';
+
+  @override
+  String get prayerGuideJalsa => 'Duduk di antara dua sujud';
+
+  @override
+  String get prayerGuideTashahhud => 'Tasyahud';
+
+  @override
+  String get prayerGuideTaslim => 'Salam';
+
+  @override
+  String get prayerGuideNiyyahDescription =>
+      'Niatkan salat ini di dalam hati sebelum memulai.';
+
+  @override
+  String get prayerGuideTakbirDescription =>
+      'Angkat kedua tangan dan ucapkan Allahu Akbar untuk memulai salat.';
+
+  @override
+  String get prayerGuideQiyamDescription =>
+      'Berdirilah dan baca Al-Fatihah serta ayat yang mudah bagimu dari Al-Quran.';
+
+  @override
+  String get prayerGuideRukuDescription =>
+      'Rukuklah, letakkan tangan di atas lutut, dan agungkan Allah dalam rukuk.';
+
+  @override
+  String get prayerGuideItidalDescription =>
+      'Bangkit dari rukuk hingga kembali berdiri tegak.';
+
+  @override
+  String get prayerGuideSujudDescription =>
+      'Bersujudlah dengan dahi dan hidung menyentuh lantai lalu baca dzikir sujud.';
+
+  @override
+  String get prayerGuideJalsaDescription =>
+      'Duduklah dengan tenang di antara dua sujud dan mohon ampun kepada Allah.';
+
+  @override
+  String get prayerGuideSecondSujudDescription =>
+      'Lakukan sujud kedua dengan tenang sebelum berdiri atau melanjutkan rakaat.';
+
+  @override
+  String get prayerGuideTashahhudDescription =>
+      'Duduk dan baca tasyahud pada duduk salat yang memang memerlukannya.';
+
+  @override
+  String get prayerGuideTaslimRightDescription =>
+      'Palingkan kepala ke kanan dan ucapkan salam untuk mengakhiri salat.';
+
+  @override
+  String get prayerGuideTaslimLeftDescription =>
+      'Palingkan kepala ke kiri dan sempurnakan salam.';
+
+  @override
+  String get prayerGuideRakaatsFajr => '2 sunnah + 2 fard';
+
+  @override
+  String get prayerGuideRakaatsDhuhr => '4 sunnah + 4 fard + 2 sunnah';
+
+  @override
+  String get prayerGuideRakaatsAsr => '4 fard';
+
+  @override
+  String get prayerGuideRakaatsMaghrib => '3 fard + 2 sunnah';
+
+  @override
+  String get prayerGuideRakaatsIsha => '4 fard + 2 sunnah + 1 witr';
 }

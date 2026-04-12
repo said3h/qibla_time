@@ -3142,4 +3142,96 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get purificationGuideFinalNoteBody =>
       'El wudu es para la impureza menor. El ghusl es para la impureza mayor. Si solo necesitas wudu, no hace falta ghusl. Si se requiere ghusl, el wudu solo no es suficiente.';
+
+  @override
+  String get prayerGuideTitle => 'Guía de oración';
+
+  @override
+  String get prayerGuideStep => 'Paso';
+
+  @override
+  String get prayerGuideNiyyah => 'Intención';
+
+  @override
+  String get prayerGuideTakbir => 'Takbir de apertura';
+
+  @override
+  String get prayerGuideQiyam => 'De pie';
+
+  @override
+  String get prayerGuideRuku => 'Rukú';
+
+  @override
+  String get prayerGuideItidal => 'I\'tidal';
+
+  @override
+  String get prayerGuideSujud => 'Suyud';
+
+  @override
+  String get prayerGuideJalsa => 'Yalsa';
+
+  @override
+  String get prayerGuideTashahhud => 'Tashahhud';
+
+  @override
+  String get prayerGuideTaslim => 'Taslim';
+
+  @override
+  String get prayerGuideNiyyahDescription =>
+      'Haz la intención en tu corazón para esta oración antes de comenzar.';
+
+  @override
+  String get prayerGuideTakbirDescription =>
+      'Levanta las manos y di Allahu Akbar para entrar en la oración.';
+
+  @override
+  String get prayerGuideQiyamDescription =>
+      'Permanece de pie y recita Al-Fatihah y lo que te resulte fácil del Corán.';
+
+  @override
+  String get prayerGuideRukuDescription =>
+      'Inclínate, coloca las manos sobre las rodillas y glorifica a Allah en el rukú.';
+
+  @override
+  String get prayerGuideItidalDescription =>
+      'Levántate del rukú hasta quedar nuevamente erguido.';
+
+  @override
+  String get prayerGuideSujudDescription =>
+      'Prostérnate con la frente y la nariz en el suelo y di los adhkar del suyud.';
+
+  @override
+  String get prayerGuideJalsaDescription =>
+      'Siéntate con calma entre las dos prosternaciones y pide perdón a Allah.';
+
+  @override
+  String get prayerGuideSecondSujudDescription =>
+      'Haz la segunda prosternación con calma antes de levantarte o continuar la rakaah.';
+
+  @override
+  String get prayerGuideTashahhudDescription =>
+      'Siéntate y recita el tashahhud en la parte de la oración que lo requiere.';
+
+  @override
+  String get prayerGuideTaslimRightDescription =>
+      'Gira la cabeza hacia la derecha y di el salam para cerrar la oración.';
+
+  @override
+  String get prayerGuideTaslimLeftDescription =>
+      'Gira la cabeza hacia la izquierda y completa el salam.';
+
+  @override
+  String get prayerGuideRakaatsFajr => '2 sunnah + 2 fard';
+
+  @override
+  String get prayerGuideRakaatsDhuhr => '4 sunnah + 4 fard + 2 sunnah';
+
+  @override
+  String get prayerGuideRakaatsAsr => '4 fard';
+
+  @override
+  String get prayerGuideRakaatsMaghrib => '3 fard + 2 sunnah';
+
+  @override
+  String get prayerGuideRakaatsIsha => '4 fard + 2 sunnah + 1 witr';
 }

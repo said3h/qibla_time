@@ -5458,6 +5458,168 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'El wudu es para la impureza menor. El ghusl es para la impureza mayor. Si solo necesitas wudu, no hace falta ghusl. Si se requiere ghusl, el wudu solo no es suficiente.'**
   String get purificationGuideFinalNoteBody;
+
+  /// No description provided for @prayerGuideTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Guía de oración'**
+  String get prayerGuideTitle;
+
+  /// No description provided for @prayerGuideStep.
+  ///
+  /// In es, this message translates to:
+  /// **'Paso'**
+  String get prayerGuideStep;
+
+  /// No description provided for @prayerGuideNiyyah.
+  ///
+  /// In es, this message translates to:
+  /// **'Intención'**
+  String get prayerGuideNiyyah;
+
+  /// No description provided for @prayerGuideTakbir.
+  ///
+  /// In es, this message translates to:
+  /// **'Takbir de apertura'**
+  String get prayerGuideTakbir;
+
+  /// No description provided for @prayerGuideQiyam.
+  ///
+  /// In es, this message translates to:
+  /// **'De pie'**
+  String get prayerGuideQiyam;
+
+  /// No description provided for @prayerGuideRuku.
+  ///
+  /// In es, this message translates to:
+  /// **'Rukú'**
+  String get prayerGuideRuku;
+
+  /// No description provided for @prayerGuideItidal.
+  ///
+  /// In es, this message translates to:
+  /// **'I\'tidal'**
+  String get prayerGuideItidal;
+
+  /// No description provided for @prayerGuideSujud.
+  ///
+  /// In es, this message translates to:
+  /// **'Suyud'**
+  String get prayerGuideSujud;
+
+  /// No description provided for @prayerGuideJalsa.
+  ///
+  /// In es, this message translates to:
+  /// **'Yalsa'**
+  String get prayerGuideJalsa;
+
+  /// No description provided for @prayerGuideTashahhud.
+  ///
+  /// In es, this message translates to:
+  /// **'Tashahhud'**
+  String get prayerGuideTashahhud;
+
+  /// No description provided for @prayerGuideTaslim.
+  ///
+  /// In es, this message translates to:
+  /// **'Taslim'**
+  String get prayerGuideTaslim;
+
+  /// No description provided for @prayerGuideNiyyahDescription.
+  ///
+  /// In es, this message translates to:
+  /// **'Haz la intención en tu corazón para esta oración antes de comenzar.'**
+  String get prayerGuideNiyyahDescription;
+
+  /// No description provided for @prayerGuideTakbirDescription.
+  ///
+  /// In es, this message translates to:
+  /// **'Levanta las manos y di Allahu Akbar para entrar en la oración.'**
+  String get prayerGuideTakbirDescription;
+
+  /// No description provided for @prayerGuideQiyamDescription.
+  ///
+  /// In es, this message translates to:
+  /// **'Permanece de pie y recita Al-Fatihah y lo que te resulte fácil del Corán.'**
+  String get prayerGuideQiyamDescription;
+
+  /// No description provided for @prayerGuideRukuDescription.
+  ///
+  /// In es, this message translates to:
+  /// **'Inclínate, coloca las manos sobre las rodillas y glorifica a Allah en el rukú.'**
+  String get prayerGuideRukuDescription;
+
+  /// No description provided for @prayerGuideItidalDescription.
+  ///
+  /// In es, this message translates to:
+  /// **'Levántate del rukú hasta quedar nuevamente erguido.'**
+  String get prayerGuideItidalDescription;
+
+  /// No description provided for @prayerGuideSujudDescription.
+  ///
+  /// In es, this message translates to:
+  /// **'Prostérnate con la frente y la nariz en el suelo y di los adhkar del suyud.'**
+  String get prayerGuideSujudDescription;
+
+  /// No description provided for @prayerGuideJalsaDescription.
+  ///
+  /// In es, this message translates to:
+  /// **'Siéntate con calma entre las dos prosternaciones y pide perdón a Allah.'**
+  String get prayerGuideJalsaDescription;
+
+  /// No description provided for @prayerGuideSecondSujudDescription.
+  ///
+  /// In es, this message translates to:
+  /// **'Haz la segunda prosternación con calma antes de levantarte o continuar la rakaah.'**
+  String get prayerGuideSecondSujudDescription;
+
+  /// No description provided for @prayerGuideTashahhudDescription.
+  ///
+  /// In es, this message translates to:
+  /// **'Siéntate y recita el tashahhud en la parte de la oración que lo requiere.'**
+  String get prayerGuideTashahhudDescription;
+
+  /// No description provided for @prayerGuideTaslimRightDescription.
+  ///
+  /// In es, this message translates to:
+  /// **'Gira la cabeza hacia la derecha y di el salam para cerrar la oración.'**
+  String get prayerGuideTaslimRightDescription;
+
+  /// No description provided for @prayerGuideTaslimLeftDescription.
+  ///
+  /// In es, this message translates to:
+  /// **'Gira la cabeza hacia la izquierda y completa el salam.'**
+  String get prayerGuideTaslimLeftDescription;
+
+  /// No description provided for @prayerGuideRakaatsFajr.
+  ///
+  /// In es, this message translates to:
+  /// **'2 sunnah + 2 fard'**
+  String get prayerGuideRakaatsFajr;
+
+  /// No description provided for @prayerGuideRakaatsDhuhr.
+  ///
+  /// In es, this message translates to:
+  /// **'4 sunnah + 4 fard + 2 sunnah'**
+  String get prayerGuideRakaatsDhuhr;
+
+  /// No description provided for @prayerGuideRakaatsAsr.
+  ///
+  /// In es, this message translates to:
+  /// **'4 fard'**
+  String get prayerGuideRakaatsAsr;
+
+  /// No description provided for @prayerGuideRakaatsMaghrib.
+  ///
+  /// In es, this message translates to:
+  /// **'3 fard + 2 sunnah'**
+  String get prayerGuideRakaatsMaghrib;
+
+  /// No description provided for @prayerGuideRakaatsIsha.
+  ///
+  /// In es, this message translates to:
+  /// **'4 fard + 2 sunnah + 1 witr'**
+  String get prayerGuideRakaatsIsha;
 }
 
 class _AppLocalizationsDelegate

@@ -16,6 +16,7 @@ import '../../hadith/screens/hadith_library_screen.dart';
 import '../../hadith/widgets/daily_hadith_widget.dart';
 import '../../library/screens/islamic_books_screen.dart';
 import '../../library/widgets/daily_book_widget.dart';
+import '../../prayer/screens/prayer_guide_screen.dart';
 import '../../quran/models/quran_models.dart';
 import '../../quran/screens/quran_screen.dart';
 import '../../quran/services/quran_reading_service.dart';
@@ -1861,7 +1862,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ...prayers.map((prayer) {
             final isCurrent = prayer.$1.key == nextPrayerName;
             final isDone = _isPrayerDone(completed, prayer.$1.key);
-            return Container(
+            return GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => PrayerGuideScreen(prayerName: prayer.$1),
+                  ),
+                );
+              },
+              child: Container(
               margin: const EdgeInsets.only(bottom: 10),
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
               decoration: BoxDecoration(
@@ -1958,6 +1967,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                 ],
               ),
+            ),
             );
           }),
         ],
@@ -2138,7 +2148,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             );
             final style = _premiumPrayerCardStyle(tokens, tone);
 
-            return Container(
+            return GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => PrayerGuideScreen(prayerName: prayer.$1),
+                  ),
+                );
+              },
+              child: Container(
               margin: const EdgeInsets.only(bottom: 12),
               padding: const EdgeInsets.fromLTRB(16, 15, 16, 15),
               decoration: BoxDecoration(
@@ -2301,6 +2319,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                 ],
               ),
+            ),
             );
           }),
         ],
