@@ -3272,7 +3272,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get prayerGuideOneRakaatIntro =>
-      'Diese Anleitung zeigt das vollst?ndige Fard-Gebet. Wische durch jede Rak\'ah der Reihe nach und folge dem Gebet Schritt f?r Schritt.';
+      'Diese Anleitung zeigt das vollständige Fard-Gebet. Wische durch jede Rak\'ah der Reihe nach und folge dem Gebet Schritt für Schritt.';
 
   @override
   String get prayerGuideCycleFajr =>
@@ -3377,7 +3377,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get prayerGuideSubhanakaDescription =>
-      'Sprich das Er?ffnungsbittgebet nach dem Takbir nur in der ersten Rak\'ah.';
+      'Sprich das Eröffnungsbittgebet nach dem Takbir nur in der ersten Rak\'ah.';
 
   @override
   String get prayerGuideQiyamWithSurahDescription =>
@@ -3389,11 +3389,11 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get prayerGuideTashahhudShortDescription =>
-      'Setze dich und rezitiere At-Tahiyyat, bevor du zur n?chsten Rak\'ah aufstehst.';
+      'Setze dich und rezitiere At-Tahiyyat, bevor du zur nächsten Rak\'ah aufstehst.';
 
   @override
   String get prayerGuideTashahhudCompleteDescription =>
-      'Setze dich f?r den abschlie?enden Tashahhud, rezitiere At-Tahiyyat und Salawat Ibrahimiyyah und sprich dann vor dem Taslim noch eine kurze Dua.';
+      'Setze dich für den abschließenden Tashahhud, rezitiere At-Tahiyyat und Salawat Ibrahimiyyah und sprich dann vor dem Taslim noch eine kurze Dua.';
 
   @override
   String get prayerGuideTashahhudCompleteNote =>
@@ -3401,5 +3401,5 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get prayerGuideSalawatMeaning =>
-      'O Allah, sende Segen auf Muhammad und auf die Familie Muhammads, so wie Du Segen auf Ibrahim und auf die Familie Ibrahims gesandt hast. Du bist wahrlich Lobensw?rdig und Erhaben.';
+      'O Allah, sende Segen auf Muhammad und auf die Familie Muhammads, so wie Du Segen auf Ibrahim und auf die Familie Ibrahims gesandt hast. Du bist wahrlich Lobenswürdig und Erhaben.';
 }

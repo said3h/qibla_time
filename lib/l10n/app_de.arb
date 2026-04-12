@@ -1290,7 +1290,7 @@
   "prayerGuideRakaatsAsr": "4 Fard",
   "prayerGuideRakaatsMaghrib": "3 Fard + 2 Sunnah danach",
   "prayerGuideRakaatsIsha": "4 Fard + 2 Sunnah danach + 1 Witr",
-  "prayerGuideOneRakaatIntro": "Diese Anleitung zeigt das vollst?ndige Fard-Gebet. Wische durch jede Rak'ah der Reihe nach und folge dem Gebet Schritt f?r Schritt.",
+  "prayerGuideOneRakaatIntro": "Diese Anleitung zeigt das vollständige Fard-Gebet. Wische durch jede Rak'ah der Reihe nach und folge dem Gebet Schritt für Schritt.",
   "prayerGuideCycleFajr": "Wiederhole diese Rak'ah zweimal. Im zweiten Rak'ah liest du den Tashahhud und beendest dann das Gebet mit Taslim.",
   "prayerGuideCycleDhuhr": "Wiederhole die Fard-Rak'ah viermal. Lies den Tashahhud nach der zweiten Rak'ah und beende das Gebet mit Taslim in der vierten. Die Sunnah-Rak'ahs folgen demselben Grundablauf.",
   "prayerGuideCycleAsr": "Wiederhole diese Rak'ah viermal. Lies den Tashahhud nach der zweiten Rak'ah und beende das Gebet mit Taslim in der vierten.",
@@ -1325,11 +1325,11 @@
     }
   },
   "prayerGuideSubhanaka": "Subhanaka",
-  "prayerGuideSubhanakaDescription": "Sprich das Er?ffnungsbittgebet nach dem Takbir nur in der ersten Rak'ah.",
+  "prayerGuideSubhanakaDescription": "Sprich das Eröffnungsbittgebet nach dem Takbir nur in der ersten Rak'ah.",
   "prayerGuideQiyamWithSurahDescription": "Stehe und rezitiere Al-Fatiha, dann eine weitere Sure oder einige Verse aus dem Quran.",
   "prayerGuideQiyamFatihaOnlyDescription": "Stehe und rezitiere in dieser Rak'ah nur Al-Fatiha.",
-  "prayerGuideTashahhudShortDescription": "Setze dich und rezitiere At-Tahiyyat, bevor du zur n?chsten Rak'ah aufstehst.",
-  "prayerGuideTashahhudCompleteDescription": "Setze dich f?r den abschlie?enden Tashahhud, rezitiere At-Tahiyyat und Salawat Ibrahimiyyah und sprich dann vor dem Taslim noch eine kurze Dua.",
+  "prayerGuideTashahhudShortDescription": "Setze dich und rezitiere At-Tahiyyat, bevor du zur nächsten Rak'ah aufstehst.",
+  "prayerGuideTashahhudCompleteDescription": "Setze dich für den abschließenden Tashahhud, rezitiere At-Tahiyyat und Salawat Ibrahimiyyah und sprich dann vor dem Taslim noch eine kurze Dua.",
   "prayerGuideTashahhudCompleteNote": "Nach der Salawat kannst du vor dem Taslim noch eine kurze Dua sprechen.",
-  "prayerGuideSalawatMeaning": "O Allah, sende Segen auf Muhammad und auf die Familie Muhammads, so wie Du Segen auf Ibrahim und auf die Familie Ibrahims gesandt hast. Du bist wahrlich Lobensw?rdig und Erhaben."
+  "prayerGuideSalawatMeaning": "O Allah, sende Segen auf Muhammad und auf die Familie Muhammads, so wie Du Segen auf Ibrahim und auf die Familie Ibrahims gesandt hast. Du bist wahrlich Lobenswürdig und Erhaben."
 }

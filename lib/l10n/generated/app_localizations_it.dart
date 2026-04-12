@@ -3410,5 +3410,5 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get prayerGuideSalawatMeaning =>
-      'O Allah, invia benedizioni su Muhammad e sulla famiglia di Muhammad, come hai inviato benedizioni su Ibrahim e sulla famiglia di Ibrahim. In verit? Tu sei Degno di lode e Glorioso.';
+      'O Allah, invia benedizioni su Muhammad e sulla famiglia di Muhammad, come hai inviato benedizioni su Ibrahim e sulla famiglia di Ibrahim. In verità Tu sei Degno di lode e Glorioso.';
 }

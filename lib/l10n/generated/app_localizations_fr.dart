@@ -3284,7 +3284,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get prayerGuideOneRakaatIntro =>
-      'Ce guide montre toute la pri?re obligatoire. Faites glisser chaque rakaat dans l?ordre et suivez la pri?re ?tape par ?tape.';
+      'Ce guide montre toute la prière obligatoire. Faites glisser chaque rakaat dans l’ordre et suivez la prière étape par étape.';
 
   @override
   String get prayerGuideCycleFajr =>
@@ -3389,29 +3389,29 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get prayerGuideSubhanakaDescription =>
-      'R?citez l?invocation d?ouverture apr?s le takbir uniquement dans la premi?re rak\'a.';
+      'Récitez l’invocation d’ouverture après le takbir uniquement dans la première rak\'a.';
 
   @override
   String get prayerGuideQiyamWithSurahDescription =>
-      'Restez debout et r?citez Al-Fatiha, puis une autre sourate ou quelques versets du Coran.';
+      'Restez debout et récitez Al-Fatiha, puis une autre sourate ou quelques versets du Coran.';
 
   @override
   String get prayerGuideQiyamFatihaOnlyDescription =>
-      'Restez debout et r?citez uniquement Al-Fatiha dans cette rak\'a.';
+      'Restez debout et récitez uniquement Al-Fatiha dans cette rak\'a.';
 
   @override
   String get prayerGuideTashahhudShortDescription =>
-      'Restez assis et r?citez At-Tahiyyat avant de vous relever pour la rak\'a suivante.';
+      'Restez assis et récitez At-Tahiyyat avant de vous relever pour la rak\'a suivante.';
 
   @override
   String get prayerGuideTashahhudCompleteDescription =>
-      'Asseyez-vous pour le tashahhud final, r?citez At-Tahiyyat et la Salawat Ibrahimiyyah, puis faites une br?ve invocation avant le taslim.';
+      'Asseyez-vous pour le tashahhud final, récitez At-Tahiyyat et la Salawat Ibrahimiyyah, puis faites une brève invocation avant le taslim.';
 
   @override
   String get prayerGuideTashahhudCompleteNote =>
-      'Apr?s la salawat, vous pouvez ajouter une br?ve invocation avant de terminer la pri?re avec le taslim.';
+      'Après la salawat, vous pouvez ajouter une brève invocation avant de terminer la prière avec le taslim.';
 
   @override
   String get prayerGuideSalawatMeaning =>
-      '? Allah, accorde Tes b?n?dictions ? Muhammad et ? la famille de Muhammad, comme Tu les as accord?es ? Ibrahim et ? la famille d?Ibrahim. Tu es vraiment Digne de louange et Glorieux.';
+      'Ô Allah, accorde Tes bénédictions à Muhammad et à la famille de Muhammad, comme Tu les as accordées à Ibrahim et à la famille d’Ibrahim. Tu es vraiment Digne de louange et Glorieux.';
 }

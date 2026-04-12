@@ -5678,7 +5678,7 @@ abstract class AppLocalizations {
   /// No description provided for @prayerGuideOneRakaatIntro.
   ///
   /// In es, this message translates to:
-  /// **'Esta gu?a muestra toda la oraci?n fard. Desliza por cada rakaat en orden y sigue la oraci?n paso a paso.'**
+  /// **'Esta guía muestra toda la oración fard. Desliza por cada rakaat en orden y sigue la oración paso a paso.'**
   String get prayerGuideOneRakaatIntro;
 
   /// No description provided for @prayerGuideCycleFajr.
@@ -5858,13 +5858,13 @@ abstract class AppLocalizations {
   /// No description provided for @prayerGuideSubhanakaDescription.
   ///
   /// In es, this message translates to:
-  /// **'Recita la s?plica de apertura despu?s del takbir solo en la primera rakaat.'**
+  /// **'Recita la súplica de apertura después del takbir solo en la primera rakaat.'**
   String get prayerGuideSubhanakaDescription;
 
   /// No description provided for @prayerGuideQiyamWithSurahDescription.
   ///
   /// In es, this message translates to:
-  /// **'Ponte de pie y recita Al-Fatiha, luego otra sura o algunos vers?culos del Quran.'**
+  /// **'Ponte de pie y recita Al-Fatiha, luego otra sura o algunos versículos del Quran.'**
   String get prayerGuideQiyamWithSurahDescription;
 
   /// No description provided for @prayerGuideQiyamFatihaOnlyDescription.
@@ -5876,25 +5876,25 @@ abstract class AppLocalizations {
   /// No description provided for @prayerGuideTashahhudShortDescription.
   ///
   /// In es, this message translates to:
-  /// **'Si?ntate y recita At-Tahiyyat antes de ponerte de pie para la siguiente rakaat.'**
+  /// **'Siéntate y recita At-Tahiyyat antes de ponerte de pie para la siguiente rakaat.'**
   String get prayerGuideTashahhudShortDescription;
 
   /// No description provided for @prayerGuideTashahhudCompleteDescription.
   ///
   /// In es, this message translates to:
-  /// **'Si?ntate para el tashahhud final, recita At-Tahiyyat y Salawat Ibrahimiyyah, y luego haz una dua breve antes del taslim.'**
+  /// **'Siéntate para el tashahhud final, recita At-Tahiyyat y Salawat Ibrahimiyyah, y luego haz una dua breve antes del taslim.'**
   String get prayerGuideTashahhudCompleteDescription;
 
   /// No description provided for @prayerGuideTashahhudCompleteNote.
   ///
   /// In es, this message translates to:
-  /// **'Despu?s del salawat, puedes a?adir una dua breve antes de terminar la oraci?n con el taslim.'**
+  /// **'Después del salawat, puedes añadir una dua breve antes de terminar la oración con el taslim.'**
   String get prayerGuideTashahhudCompleteNote;
 
   /// No description provided for @prayerGuideSalawatMeaning.
   ///
   /// In es, this message translates to:
-  /// **'Oh Allah, bendice a Muhammad y a la familia de Muhammad, como bendijiste a Ibrahim y a la familia de Ibrahim. En verdad, T? eres digno de alabanza y majestuoso.'**
+  /// **'Oh Allah, bendice a Muhammad y a la familia de Muhammad, como bendijiste a Ibrahim y a la familia de Ibrahim. En verdad, Tú eres digno de alabanza y majestuoso.'**
   String get prayerGuideSalawatMeaning;
 }
 
