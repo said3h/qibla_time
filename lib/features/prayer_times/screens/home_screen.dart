@@ -1738,7 +1738,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     return SizedBox(
       width: 188,
-      height: 214,
+      height: 230,
       child: Stack(
         alignment: Alignment.center,
         children: [
