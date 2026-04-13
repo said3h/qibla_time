@@ -1,4 +1,4 @@
-/// Modelo para representar un Adhan (llamada a la oración)
+/// Modelo para representar un Adhan (llamada a la oracion)
 class AdhanModel {
   final String name;
   final String file;
@@ -15,32 +15,42 @@ class AdhanModel {
         AdhanModel(
           name: 'Adhan 1',
           file: 'azan1.mp3',
-          description: 'Llamada a la oración 1',
+          description: 'Llamada a la oracion 1',
         ),
         AdhanModel(
           name: 'Adhan 2',
           file: 'azan2.mp3',
-          description: 'Llamada a la oración 2',
+          description: 'Llamada a la oracion 2',
         ),
         AdhanModel(
           name: 'Adhan 3',
           file: 'azan3.mp3',
-          description: 'Llamada a la oración 3',
+          description: 'Llamada a la oracion 3',
         ),
         AdhanModel(
           name: 'Adhan 4',
           file: 'azan4.mp3',
-          description: 'Llamada a la oración 4',
+          description: 'Llamada a la oracion 4',
         ),
         AdhanModel(
           name: 'Adhan 5',
           file: 'azan5.mp3',
-          description: 'Llamada a la oración 5',
+          description: 'Llamada a la oracion 5',
         ),
         AdhanModel(
           name: 'Adhan 6',
           file: 'azan6.mp3',
-          description: 'Llamada a la oración 6',
+          description: 'Llamada a la oracion 6',
+        ),
+        AdhanModel(
+          name: 'Adhan Madinah',
+          file: 'azan_madinah.mp3',
+          description: 'Short Madinah adhan',
+        ),
+        AdhanModel(
+          name: 'Adhan Makkah',
+          file: 'azan_makkah.mp3',
+          description: 'Short Makkah adhan',
         ),
       ];
 
