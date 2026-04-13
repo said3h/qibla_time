@@ -24,6 +24,7 @@ import '../../dhikr/services/dhikr_service.dart';
 import '../../hafiz/services/hafiz_service.dart';
 import '../../hadith/services/hadith_hourly_reminder_service.dart';
 import '../../hadith/services/hadith_service.dart';
+import '../../library/services/islamhouse_book_service.dart';
 import '../../period/screens/period_guide_screen.dart';
 import '../../period/services/period_mode_service.dart';
 import '../../prayer_times/domain/entities/prayer_cache_status.dart';
@@ -291,6 +292,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     ref.invalidate(allHadithsProvider);
     ref.invalidate(allDuasProvider);
     ref.invalidate(duaCategoriesProvider);
+    ref.invalidate(islamHouseBooksProvider);
+    ref.invalidate(islamHouseCategoriesProvider);
+    ref.invalidate(islamHouseFeaturedBooksProvider);
 
     final dailyInspirationService =
         ref.read(dailyInspirationNotificationServiceProvider);

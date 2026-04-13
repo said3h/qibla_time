@@ -242,7 +242,7 @@ final islamHouseBookServiceProvider = Provider<IslamHouseBookService>((ref) {
 });
 
 final islamHouseBooksProvider = FutureProvider<List<IslamHouseBook>>((ref) async {
-  final service = ref.read(islamHouseBookServiceProvider);
+  final service = ref.watch(islamHouseBookServiceProvider);
   final books = await service.getBooks(limit: 50);
   if (books.isNotEmpty) {
     await service.cacheBooks(books);
@@ -252,15 +252,15 @@ final islamHouseBooksProvider = FutureProvider<List<IslamHouseBook>>((ref) async
 
 final islamHouseCategoriesProvider =
     FutureProvider<List<IslamHouseCategory>>((ref) async {
-  return ref.read(islamHouseBookServiceProvider).getCategories();
+  return ref.watch(islamHouseBookServiceProvider).getCategories();
 });
 
 final islamHouseFeaturedBooksProvider =
     FutureProvider<List<IslamHouseBook>>((ref) async {
-  return ref.read(islamHouseBookServiceProvider).getFeaturedBooks(limit: 10);
+  return ref.watch(islamHouseBookServiceProvider).getFeaturedBooks(limit: 10);
 });
 
 final islamHouseSearchProvider =
     FutureProvider.family<List<IslamHouseBook>, String>((ref, query) async {
-  return ref.read(islamHouseBookServiceProvider).searchBooks(query);
+  return ref.watch(islamHouseBookServiceProvider).searchBooks(query);
 });
