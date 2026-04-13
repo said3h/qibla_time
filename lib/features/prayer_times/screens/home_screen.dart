@@ -1738,23 +1738,26 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     return SizedBox(
       width: 188,
-      height: 188,
+      height: 214,
       child: Stack(
         alignment: Alignment.center,
         children: [
-          SizedBox(
-            width: 188,
-            height: 188,
-            child: CustomPaint(
-              painter: _CountdownRingPainter(
-                trackColor: _blend(tokens.bgSurface2, Colors.black, 0.7),
-                progressColor: tokens.primary,
-                progress: progress,
+          Positioned(
+            bottom: 0,
+            child: SizedBox(
+              width: 188,
+              height: 188,
+              child: CustomPaint(
+                painter: _CountdownRingPainter(
+                  trackColor: _blend(tokens.bgSurface2, Colors.black, 0.7),
+                  progressColor: tokens.primary,
+                  progress: progress,
+                ),
               ),
             ),
           ),
           Positioned(
-            top: 6,
+            top: 0,
             child: Container(
               constraints: const BoxConstraints(maxWidth: 136),
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
@@ -1782,66 +1785,69 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               ),
             ),
           ),
-          Container(
-            width: 154,
-            height: 154,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: _blend(tokens.bgSurface, Colors.black, 0.82),
-              border: Border.all(
-                color: _blend(tokens.primary, tokens.borderMed, 0.12),
+          Positioned(
+            bottom: 17,
+            child: Container(
+              width: 154,
+              height: 154,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: _blend(tokens.bgSurface, Colors.black, 0.82),
+                border: Border.all(
+                  color: _blend(tokens.primary, tokens.borderMed, 0.12),
+                ),
               ),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 14),
-                  child: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: Text(
-                      countdownDisplay.$1,
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.dmSans(
-                        fontSize: countdownDisplay.$3 ? 26 : 30,
-                        fontWeight: FontWeight.w600,
-                        color: tokens.textPrimary,
-                        letterSpacing: -0.7,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 14),
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        countdownDisplay.$1,
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.dmSans(
+                          fontSize: countdownDisplay.$3 ? 26 : 30,
+                          fontWeight: FontWeight.w600,
+                          color: tokens.textPrimary,
+                          letterSpacing: -0.7,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                if (countdownDisplay.$2 != null) ...[
-                  const SizedBox(height: 4),
-                  Text(
-                    countdownDisplay.$2!,
-                    style: GoogleFonts.dmSans(
-                      fontSize: 11,
-                      color: tokens.primaryLight,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 0.2,
+                  if (countdownDisplay.$2 != null) ...[
+                    const SizedBox(height: 4),
+                    Text(
+                      countdownDisplay.$2!,
+                      style: GoogleFonts.dmSans(
+                        fontSize: 11,
+                        color: tokens.primaryLight,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 0.2,
+                      ),
+                    ),
+                  ],
+                  const SizedBox(height: 8),
+                  FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: SizedBox(
+                      width: 120,
+                      child: Text(
+                        contextLabel,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.dmSans(
+                          fontSize: 10,
+                          color: tokens.textSecondary,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
                     ),
                   ),
                 ],
-                const SizedBox(height: 8),
-                FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: SizedBox(
-                    width: 120,
-                    child: Text(
-                      contextLabel,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.dmSans(
-                        fontSize: 10,
-                        color: tokens.textSecondary,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
         ],
