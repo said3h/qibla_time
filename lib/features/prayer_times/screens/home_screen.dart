@@ -1753,6 +1753,35 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               ),
             ),
           ),
+          Positioned(
+            top: 6,
+            child: Container(
+              constraints: const BoxConstraints(maxWidth: 136),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              decoration: BoxDecoration(
+                color: _blend(tokens.bgSurface, Colors.black, 0.9),
+                borderRadius: BorderRadius.circular(999),
+                border: Border.all(
+                  color: _blend(tokens.primary, tokens.borderMed, 0.18),
+                ),
+              ),
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  l10n.homeCountdownLabelUppercase,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.dmSans(
+                    fontSize: 9,
+                    color: tokens.textSecondary,
+                    letterSpacing: 1.2,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ),
+          ),
           Container(
             width: 154,
             height: 154,
@@ -1766,22 +1795,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
-                  width: 130,
-                  child: Text(
-                    l10n.homeCountdownLabelUppercase,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.dmSans(
-                      fontSize: 9,
-                      color: tokens.textSecondary,
-                      letterSpacing: 1.5,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 8),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 14),
                   child: FittedBox(
