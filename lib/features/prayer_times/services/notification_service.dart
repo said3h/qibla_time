@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:timezone/data/latest.dart' as tz;
@@ -9,7 +10,7 @@ import '../../../l10n/l10n.dart';
 class NotificationService {
   NotificationService._();
   static final NotificationService instance = NotificationService._();
-  static const _androidAdhanChannelPrefix = 'adhan_channel_v2_';
+  static const _androidAdhanChannelPrefix = 'adhan_channel_v3_';
 
   final FlutterLocalNotificationsPlugin _plugin =
       FlutterLocalNotificationsPlugin();
@@ -29,7 +30,9 @@ class NotificationService {
             requestSoundPermission: true,
           ),
         ),
+        onDidReceiveNotificationResponse: (_) {},
       );
+      await _deleteOldAdhanChannels();
     } catch (e, stackTrace) {
       AppLogger.error(
         'Failed to initialize notifications',
@@ -185,6 +188,35 @@ class NotificationService {
   Future<void> cancel(int id) async => _plugin.cancel(id: id);
 
   Future<void> cancelAll() async => _plugin.cancelAll();
+
+  Future<void> _deleteOldAdhanChannels() async {
+    if (defaultTargetPlatform != TargetPlatform.android) return;
+
+    final android = _plugin.resolvePlatformSpecificImplementation<
+        AndroidFlutterLocalNotificationsPlugin>();
+    if (android == null) return;
+
+    const oldPrefixes = ['adhan_channel_v1_', 'adhan_channel_v2_'];
+    const adhanFiles = [
+      'azan1.mp3',
+      'azan2.mp3',
+      'azan3.mp3',
+      'azan4.mp3',
+      'azan5.mp3',
+      'azan6.mp3',
+      'azan_madinah.mp3',
+      'azan_makkah.mp3',
+    ];
+
+    for (final prefix in oldPrefixes) {
+      for (final file in adhanFiles) {
+        final channelId = '$prefix${_androidSoundNameFor(file)}';
+        try {
+          await android.deleteNotificationChannel(channelId);
+        } catch (_) {}
+      }
+    }
+  }
 
   String _androidSoundNameFor(String adhanFile) {
     return 'adhan_${adhanFile.replaceAll('.mp3', '')}';
