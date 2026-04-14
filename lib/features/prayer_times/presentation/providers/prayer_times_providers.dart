@@ -21,6 +21,8 @@ import '../../domain/usecases/get_prayer_schedule.dart';
 import '../../domain/usecases/reschedule_prayer_notifications.dart';
 import '../../services/travel_mode_service.dart';
 
+final homeScrollToTopSignalProvider = StateProvider<int>((ref) => 0);
+
 final prayerLocationDataSourceProvider = Provider<PrayerLocationDataSource>((ref) {
   return PrayerLocationDataSource();
 });

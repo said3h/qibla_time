@@ -112,6 +112,10 @@ class _MainNavigationState extends ConsumerState<MainNavigation>
                 indicatorColor: navigationIndicator,
                 selectedIndex: _currentIndex,
                 onDestinationSelected: (index) {
+                  if (index == 0 && _currentIndex == 0) {
+                    ref.read(homeScrollToTopSignalProvider.notifier).state++;
+                    return;
+                  }
                   setState(() {
                     _currentIndex = index;
                   });

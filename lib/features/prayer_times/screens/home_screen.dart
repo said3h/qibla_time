@@ -59,12 +59,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   static const _generateHomeInsights = GenerateHomeInsightsUseCase();
 
   late DateTime _selectedDate;
+  late final ScrollController _scrollController;
   late final ScrollController _calendarController;
 
   @override
   void initState() {
     super.initState();
     _selectedDate = _dateOnly(DateTime.now());
+    _scrollController = ScrollController();
     _calendarController = ScrollController(initialScrollOffset: 6 * 62.0);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(adhanManagerProvider).scheduleTodayAdhans();
@@ -73,12 +75,24 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   void dispose() {
+    _scrollController.dispose();
     _calendarController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    ref.listen<int>(homeScrollToTopSignalProvider, (_, __) {
+      if (!_scrollController.hasClients) {
+        return;
+      }
+      _scrollController.animateTo(
+        0,
+        duration: const Duration(milliseconds: 360),
+        curve: Curves.easeOutCubic,
+      );
+    });
+
     final tokens = QiblaThemes.current;
     final today = _dateOnly(DateTime.now());
     final isSelectedToday = _isSameDay(_selectedDate, today);
@@ -126,6 +140,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             color: tokens.primary,
             backgroundColor: tokens.bgSurface,
             child: ListView(
+              controller: _scrollController,
               padding: EdgeInsets.zero,
               children: [
                 _buildHeader(
