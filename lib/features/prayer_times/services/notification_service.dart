@@ -212,7 +212,7 @@ class NotificationService {
       for (final file in adhanFiles) {
         final channelId = '$prefix${_androidSoundNameFor(file)}';
         try {
-          await android.deleteNotificationChannel(channelId);
+          await android.deleteNotificationChannel(channelId: channelId);
         } catch (_) {}
       }
     }
