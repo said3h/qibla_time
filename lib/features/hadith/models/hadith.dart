@@ -86,7 +86,7 @@ class HadithMultilenguaje {
     final translation = translations[languageCode] ?? translations[fallbackLanguage];
     
     if (translation == null) {
-      throw Exception('No se encontró traducción para el hadiz $id en $languageCode ni en fallback $fallbackLanguage');
+      throw Exception('No translation found for hadith $id in $languageCode');
     }
 
     return Hadith(
