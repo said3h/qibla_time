@@ -311,7 +311,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String homeHeaderStatusLine(Object networkStatus, Object location) {
-    return '$networkStatus · $location';
+    return '$location · $networkStatus';
   }
 
   @override
@@ -385,7 +385,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get settingsTitle => 'الإعدادات';
 
   @override
-  String get settingsTitleArabic => 'الإعدادات';
+  String get settingsTitleArabic => 'إعدادات';
 
   @override
   String get settingsSectionAppearance => 'المظهر';
@@ -499,19 +499,19 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get settingsLanguageOptionSpanish => 'Español';
+  String get settingsLanguageOptionSpanish => 'الإسبانية';
 
   @override
-  String get settingsLanguageOptionEnglish => 'English';
+  String get settingsLanguageOptionEnglish => 'الإنجليزية';
 
   @override
-  String get settingsLanguageOptionFrench => 'Français';
+  String get settingsLanguageOptionFrench => 'الفرنسية';
 
   @override
   String get settingsLanguageOptionGerman => 'الألمانية';
 
   @override
-  String get settingsLanguageOptionArabic => 'العربية';
+  String get settingsLanguageOptionArabic => 'اللغة العربية';
 
   @override
   String get settingsLanguageOptionDutch => 'الهولندية';
@@ -931,7 +931,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get quranDailyVerseFallbackTransliteration =>
-      'Allahu la ilaha illa huwal hayyul qayyum...';
+      'اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ...';
 
   @override
   String get quranDailyVerseFallbackReference => 'البقرة [2:255]';
@@ -2518,56 +2518,55 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get onboardingGatePreparing => 'Preparando Qibla Time';
+  String get onboardingGatePreparing => 'جارٍ إعداد قبلة تايم';
 
   @override
-  String get supportScreenTitle => 'Apoyar Qibla Time';
+  String get supportScreenTitle => 'ادعم قبلة تايم';
 
   @override
-  String get supportScreenThankYou => 'Gracias por estar aquí';
+  String get supportScreenThankYou => 'شكرًا لوجودك معنا';
 
   @override
   String get supportScreenBody =>
-      'Tu apoyo nos ayuda a cuidar Qibla Time, mantener la app viva y seguir creando herramientas útiles para tu día a día.';
+      'دعمك يساعدنا على رعاية قبلة تايم، والحفاظ على استمراره، ومواصلة بناء أدوات نافعة لحياتك اليومية.';
 
   @override
-  String get supportScreenRateTitle => 'Valora la app';
+  String get supportScreenRateTitle => 'قيّم التطبيق';
 
   @override
   String get supportScreenRateBody =>
-      'Una buena valoración ayuda a que más personas descubran Qibla Time.';
+      'التقييم الجيد يساعد مزيدًا من الناس على اكتشاف قبلة تايم.';
 
   @override
-  String get supportScreenShareTitle => 'Comparte Qibla Time';
+  String get supportScreenShareTitle => 'شارك قبلة تايم';
 
   @override
   String get supportScreenShareBody =>
-      'Recomendar la app a familia y amistades también es una forma de sadaqah.';
+      'التوصية بالتطبيق للعائلة والأصدقاء هي أيضًا صورة من صور الصدقة.';
 
   @override
-  String get supportScreenSadaqahTitle => 'Apoya con intención';
+  String get supportScreenSadaqahTitle => 'ادعم بنية صالحة';
 
   @override
   String get supportScreenSadaqahBody =>
-      'Si Qibla Time te sirve, puedes apoyar el proyecto con una pequeña ayuda sincera.';
+      'إذا كان قبلة تايم ينفعك، يمكنك دعم المشروع بمساهمة صغيرة مخلصة.';
 
   @override
   String get supportScreenQuote =>
-      'Quien facilita un bien para otros también participa en su recompensa, si Allah quiere.';
+      'من أعان غيره على الخير نال من أجره، إن شاء الله.';
 
   @override
-  String get allahNamesTitle => 'Los 99 nombres de Allah';
+  String get allahNamesTitle => 'أسماء الله الحسنى';
 
   @override
   String get allahNamesIntro =>
-      'Explora una selección cuidada de los nombres de Allah, con transliteración y significado para recordarlos con calma.';
+      'استكشف مجموعة مختارة من أسماء الله الحسنى مع الكتابة الصوتية والمعنى لتتذكرها بسكينة.';
 
   @override
-  String get allahNamesLoadError =>
-      'No hemos podido cargar los nombres de Allah.';
+  String get allahNamesLoadError => 'تعذر تحميل أسماء الله.';
 
   @override
-  String get allahNamesUseInTasbih => 'Usar en tasbih';
+  String get allahNamesUseInTasbih => 'استخدمه في التسبيح';
 
   @override
   String get downloadedSurahsTitle => 'السور المنزلة';
@@ -2588,83 +2587,83 @@ class AppLocalizationsAr extends AppLocalizations {
   String get downloadedSurahsLoadError => 'تعذر علينا تحميل السور المنزلة.';
 
   @override
-  String get focusModeDndActive => 'RAKAHA ACTIVA · NO MOLESTAR ENCENDIDO';
+  String get focusModeDndActive => 'راكها مفعّل · عدم الإزعاج قيد التشغيل';
 
   @override
-  String get focusModeOpenDndSettings => 'Activa No molestar en ajustes';
+  String get focusModeOpenDndSettings => 'فعّل عدم الإزعاج من الإعدادات';
 
   @override
-  String get focusModeTitle => 'RAKAHA';
+  String get focusModeTitle => 'راكها';
 
   @override
-  String get focusModeSujudCount => '+ sujud';
+  String get focusModeSujudCount => '+ سجدات';
 
   @override
   String get focusModeDndHint =>
-      'SIN INTERRUPCIONES SUENA MEJOR CON NO MOLESTAR';
+      'تكون التجربة أفضل من دون مقاطعات عند تفعيل عدم الإزعاج';
 
   @override
-  String get focusModeReleaseToCancel => 'Suelta para cancelar';
+  String get focusModeReleaseToCancel => 'اترك للإلغاء';
 
   @override
-  String get focusModeHoldToExit => 'Mantén pulsado para salir';
+  String get focusModeHoldToExit => 'اضغط مطولًا للخروج';
 
   @override
-  String get settingsMadhabAsr => 'Madhab (Asr)';
+  String get settingsMadhabAsr => 'المذهب (العصر)';
 
   @override
-  String get settingsManualAdjustment => 'Ajuste manual';
+  String get settingsManualAdjustment => 'الضبط اليدوي';
 
   @override
-  String get settingsOpenSourceLicenses => 'Licencias de código abierto';
+  String get settingsOpenSourceLicenses => 'تراخيص المصادر المفتوحة';
 
   @override
-  String get settingsProfileUser => 'Usuario';
+  String get settingsProfileUser => 'المستخدم';
 
   @override
-  String get settingsProfileStreak => 'racha';
+  String get settingsProfileStreak => 'مواظبة';
 
   @override
-  String get settingsProfilePrayers => 'oraciones';
+  String get settingsProfilePrayers => 'صلوات';
 
   @override
-  String get settingsProfileTasbih => 'tasbih';
+  String get settingsProfileTasbih => 'تسبيح';
 
   @override
-  String get settingsProfileEditTitle => '????? ????? ??????';
+  String get settingsProfileEditTitle => 'تعديل الملف الشخصي';
 
   @override
-  String get settingsProfileEditSubtitle => '???? ???? ??????? ??????????';
+  String get settingsProfileEditSubtitle => 'غيّر اسمك والجنسية الاختيارية';
 
   @override
-  String get settingsProfileNameLabel => '?????';
+  String get settingsProfileNameLabel => 'الاسم';
 
   @override
-  String get settingsProfileNameHint => '??? ??? ?? ???????';
+  String get settingsProfileNameHint => 'بماذا تحب أن نناديك؟';
 
   @override
-  String get settingsProfileNationalityLabel => '???????';
+  String get settingsProfileNationalityLabel => 'الجنسية';
 
   @override
-  String get settingsProfileNationalityOptional => '???????';
+  String get settingsProfileNationalityOptional => 'اختياري';
 
   @override
-  String get settingsProfileNationalityNone => '?? ??? ?????? ?????';
+  String get settingsProfileNationalityNone => 'لم يتم اختيار جنسية';
 
   @override
-  String get settingsProfileChooseCountry => '???? ????';
+  String get settingsProfileChooseCountry => 'اختر دولة';
 
   @override
-  String get settingsProfileCountrySearchHint => '???? ?? ????';
+  String get settingsProfileCountrySearchHint => 'ابحث عن دولة';
 
   @override
-  String get commonShafii => 'Shafi\'i';
+  String get commonShafii => 'الشافعي';
 
   @override
-  String get commonRestore => 'Restaurar';
+  String get commonRestore => 'استعادة';
 
   @override
-  String get settingsRestoreBackupPasteHint => 'Pega aquí el JSON exportado';
+  String get settingsRestoreBackupPasteHint => 'ألصق ملف JSON المُصدَّر هنا';
 
   @override
   String get dailyBookBadge => 'كتاب اليوم';
@@ -2676,70 +2675,69 @@ class AppLocalizationsAr extends AppLocalizations {
   String get dailyBookOpenLibrary => 'فتح الكتب';
 
   @override
-  String get hadithOfflineIncludedInApp => 'Incluidos en la app';
+  String get hadithOfflineIncludedInApp => 'مضمّن في التطبيق';
 
   @override
   String hadithOfflineAgoDays(int count) {
-    return 'Hace $count días';
+    return 'منذ $count يومًا';
   }
 
   @override
   String hadithOfflineAgoHours(int count) {
-    return 'Hace $count horas';
+    return 'منذ $count ساعة';
   }
 
   @override
   String hadithOfflineAgoMinutes(int count) {
-    return 'Hace $count minutos';
+    return 'منذ $count دقيقة';
   }
 
   @override
-  String get hadithOfflineNow => 'Ahora mismo';
+  String get hadithOfflineNow => 'الآن';
 
   @override
-  String get analyticsShareWeekTitle => 'Resumen semanal';
+  String get analyticsShareWeekTitle => 'ملخص الأسبوع';
 
   @override
   String analyticsShareCurrentStreak(int count) {
-    return 'Racha actual: $count';
+    return 'المواظبة الحالية: $count';
   }
 
   @override
   String analyticsShareThisWeek(int completed, int maxPossible) {
-    return 'Esta semana: $completed/$maxPossible oraciones';
+    return 'هذا الأسبوع: $completed/$maxPossible صلاة';
   }
 
   @override
   String analyticsShareBestDay(Object day) {
-    return 'Mejor día: $day';
+    return 'أفضل يوم: $day';
   }
 
   @override
-  String get analyticsShareWeekHeading => 'RESUMEN SEMANAL';
+  String get analyticsShareWeekHeading => 'ملخص الأسبوع';
 
   @override
-  String get analyticsShareStreakDaySingular => 'día de racha';
+  String get analyticsShareStreakDaySingular => 'يوم متواصل';
 
   @override
-  String get analyticsShareStreakDayPlural => 'días de racha';
+  String get analyticsShareStreakDayPlural => 'أيام متواصلة';
 
   @override
-  String get analyticsShareWeeklyPrayersLabel => 'Oraciones de esta semana';
+  String get analyticsShareWeeklyPrayersLabel => 'صلوات هذا الأسبوع';
 
   @override
   String analyticsShareBestDayLabel(int count) {
-    return 'Mejor día · $count/5';
+    return 'أفضل يوم · $count/5';
   }
 
   @override
-  String get analyticsShareFullDaysLabel => 'Días completos';
+  String get analyticsShareFullDaysLabel => 'أيام مكتملة';
 
   @override
-  String get analyticsShareFooter => 'Tu progreso en Qibla Time';
+  String get analyticsShareFooter => 'تقدمك في قبلة تايم';
 
   @override
-  String get analyticsShareImageError =>
-      'No hemos podido generar la imagen de progreso.';
+  String get analyticsShareImageError => 'تعذر إنشاء صورة التقدم.';
 
   @override
   String quranDownloadAyahAudioError(int ayah) {
@@ -2747,82 +2745,80 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get recentLocationUnknown => 'Ubicación desconocida';
+  String get recentLocationUnknown => 'موقع غير معروف';
 
   @override
-  String get cloudSyncRestoreInvalid => 'Copia no válida';
+  String get cloudSyncRestoreInvalid => 'نسخة احتياطية غير صالحة';
 
   @override
-  String get cloudSyncRestoreFailed => 'No se pudo restaurar la copia';
+  String get cloudSyncRestoreFailed => 'تعذر استعادة النسخة الاحتياطية';
 
   @override
-  String get bookLinkUnavailable => 'Este enlace no está disponible.';
+  String get bookLinkUnavailable => 'هذا الرابط غير متاح.';
 
   @override
-  String get bookLinkOpenError => 'No hemos podido abrir el enlace.';
+  String get bookLinkOpenError => 'تعذر فتح الرابط.';
 
   @override
   String ramadanStatusHeaderDay(int day) {
-    return 'Ramadán día $day';
+    return 'اليوم $day من رمضان';
   }
 
   @override
-  String get ramadanStatusHeaderManual => 'Modo Ramadán manual';
+  String get ramadanStatusHeaderManual => 'وضع رمضان اليدوي';
 
   @override
-  String get ramadanStatusBlessingDetected =>
-      'Que Allah acepte tu ayuno y tus obras de hoy.';
+  String get ramadanStatusBlessingDetected => 'تقبل الله صيامك وأعمالك اليوم.';
 
   @override
   String get ramadanStatusBlessingManual =>
-      'Vista especial de Ramadán activada manualmente para pruebas.';
+      'تم تفعيل عرض رمضان الخاص يدويًا لأغراض الاختبار.';
 
   @override
-  String get ramadanStatusSuggestionDhikr => 'Recuerda aumentar el dhikr hoy.';
+  String get ramadanStatusSuggestionDhikr => 'احرص على الإكثار من الذكر اليوم.';
 
   @override
   String get ramadanStatusSuggestionQuran =>
-      'Intenta leer un poco más de Corán hoy.';
+      'حاول أن تقرأ قدرًا أكبر من القرآن اليوم.';
 
   @override
-  String get ramadanStatusSuggestionDua =>
-      'Aprovecha este día para hacer dua con calma.';
+  String get ramadanStatusSuggestionDua => 'اجعل هذا اليوم وقتًا للدعاء بهدوء.';
 
   @override
   String get ramadanStatusSuggestionSadaqah =>
-      'Una pequeña sadaqah también cuenta durante Ramadán.';
+      'حتى الصدقة اليسيرة لها أثر في رمضان.';
 
   @override
   String adhanSelectorOptionDescription(int number) {
-    return 'Llamada a la oración $number';
+    return 'الأذان $number';
   }
 
   @override
-  String get prayerNotificationImsakTitle => 'Imsak se acerca';
+  String get prayerNotificationImsakTitle => 'اقترب الإمساك';
 
   @override
   String get prayerNotificationImsakBody =>
-      'Faltan 15 minutos para Imsak. Si aún vas a hacer suhoor, es buen momento para cerrar.';
+      'بقي 15 دقيقة على الإمساك. إن كنت لا تزال تتسحّر فهذه فرصة مناسبة لإنهائه.';
 
   @override
-  String get prayerNotificationIftarTitle => 'Iftar se acerca';
+  String get prayerNotificationIftarTitle => 'اقترب الإفطار';
 
   @override
   String get prayerNotificationIftarBody =>
-      'Faltan 15 minutos para Iftar. Que Allah acepte tu ayuno de hoy.';
+      'بقي 15 دقيقة على الإفطار. تقبل الله صيامك اليوم.';
 
   @override
-  String get prayerNotificationJumuahTitle => 'Jumu\'ah hoy';
+  String get prayerNotificationJumuahTitle => 'الجمعة اليوم';
 
   @override
   String get prayerNotificationJumuahBody =>
-      'Prepárate para Jumu\'ah antes de Dhuhr y reserva un momento para ir con calma a la mezquita.';
+      'استعد للجمعة قبل الظهر، وخصص لحظة هادئة للذهاب إلى المسجد.';
 
   @override
   String get settingsLanguageOptionIndonesian => 'الإندونيسية';
 
   @override
-  String get settingsLanguageOptionRussian => '???????';
+  String get settingsLanguageOptionRussian => 'الروسية';
 
   @override
   String get settingsLanguageOptionPortuguese => 'البرتغالية';
@@ -3348,23 +3344,23 @@ class AppLocalizationsAr extends AppLocalizations {
       'اللهم أثنِ على محمد وعلى آل محمد كما أثنيت على إبراهيم وعلى آل إبراهيم، إنك حميد مجيد.';
 
   @override
-  String get bookDownload => '?????';
+  String get bookDownload => 'تنزيل';
 
   @override
-  String get bookDownloading => '???? ???????...';
+  String get bookDownloading => 'جارٍ التنزيل...';
 
   @override
-  String get bookReadOffline => '????? ???? ??????';
+  String get bookReadOffline => 'قراءة دون اتصال';
 
   @override
-  String get bookDeleteDownload => '??? ???????';
+  String get bookDeleteDownload => 'حذف التنزيل';
 
   @override
-  String get bookDeleteConfirm => '?? ???? ??? ?????? ???? ?? ???????';
+  String get bookDeleteConfirm => 'هل تريد حذف الكتاب الذي تم تنزيله؟';
 
   @override
-  String get bookDeleteConfirmBody => '???? ??? ????? ?? ??????';
+  String get bookDeleteConfirmBody => 'سيُزال الملف من الجهاز';
 
   @override
-  String get bookDownloadError => '??? ??? ????? ???????';
+  String get bookDownloadError => 'فشل التنزيل';
 }
