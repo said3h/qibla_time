@@ -8,6 +8,8 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/utils/religious_reference_formatter.dart';
 import '../../../l10n/l10n.dart';
+import '../../hadith/models/hadith.dart';
+import '../../hadith/screens/hadith_detail_screen.dart';
 import '../../hadith/screens/hadith_library_screen.dart';
 import '../../hadith/services/hadith_service.dart';
 import '../../hadith/services/hadith_share_service.dart';
@@ -81,31 +83,36 @@ class DailyHadithWidget extends ConsumerWidget {
         );
         final gradeChipColor = _accentBackground(tokens, gradeBaseColor);
 
-        return Container(
-          margin: const EdgeInsets.fromLTRB(16, 12, 16, 8),
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: tokens.bgSurface,
-            gradient: LinearGradient(
-              colors: [
-                cardTopColor,
-                cardBottomColor,
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+        return Material(
+          color: Colors.transparent,
+          child: InkWell(
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(
-              color: _blend(
-                tokens.primary,
-                tokens.borderMed,
-                isLightTheme ? 0.16 : 0.26,
+            onTap: () => _openHadithDetail(context, hadith),
+            child: Container(
+              margin: const EdgeInsets.fromLTRB(16, 12, 16, 8),
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: tokens.bgSurface,
+                gradient: LinearGradient(
+                  colors: [
+                    cardTopColor,
+                    cardBottomColor,
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(
+                  color: _blend(
+                    tokens.primary,
+                    tokens.borderMed,
+                    isLightTheme ? 0.16 : 0.26,
+                  ),
+                ),
               ),
-            ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
               // Header con título y colección
               Row(
                 children: [
@@ -389,7 +396,9 @@ class DailyHadithWidget extends ConsumerWidget {
                   ),
                 ],
               ),
-            ],
+                ],
+              ),
+            ),
           ),
         );
       },
@@ -409,6 +418,12 @@ class DailyHadithWidget extends ConsumerWidget {
   void _openHadithLibrary(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(builder: (_) => const HadithLibraryScreen()),
+    );
+  }
+
+  void _openHadithDetail(BuildContext context, Hadith hadith) {
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (_) => HadithDetailScreen(hadith: hadith)),
     );
   }
 
