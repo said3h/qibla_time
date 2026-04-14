@@ -1,5 +1,5 @@
 name: qibla_time
-description: "A new Flutter project."
+description: "Horarios de oración, Qibla, Corán, Dhikr — sin anuncios ni rastreo de datos."
 publish_to: 'none'
 
 version: 1.3.0+1
