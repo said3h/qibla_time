@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">QiblaTime</string>
-    <string name="widget_description">Muestra la próxima oración y el tiempo restante</string>
+    <string name="widget_description">Shows the next prayer and remaining time</string>
+    <string name="widget_next_prayer">Next prayer</string>
+    <string name="widget_open_app">Open QiblaTime</string>
+    <string name="widget_countdown_prefix"></string>
 </resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="widget_next_prayer">Sholat berikutnya</string>
+    <string name="widget_open_app">Buka QiblaTime</string>
+    <string name="widget_countdown_prefix">Dalam</string>
+</resources>
