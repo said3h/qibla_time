@@ -4,7 +4,7 @@
 // o si ya tienes código en configureFlutterEngine, añade solo
 // el bloque del MethodChannel dentro.
 
-package com.qiblatime.qibla_time
+package com.qiblatime.app
 
 import android.app.NotificationManager
 import android.content.Context

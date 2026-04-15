@@ -22,7 +22,7 @@ struct PrayerProvider: TimelineProvider {
 
     // App Group ID — debe coincidir con el configurado en Xcode
     // y con el que uses en WidgetSyncService de Flutter
-    private let appGroupId = "group.com.qiblatime.qibla_time"
+    private let appGroupId = "group.com.qiblatime.app"
 
     func placeholder(in context: Context) -> PrayerEntry {
         PrayerEntry(

@@ -50,7 +50,7 @@ def hasValidReleaseSigning =
     !isPlaceholderSigningValue(keyProperties['storePassword'])
 
 android {
-    namespace "com.qiblatime.qibla_time"
+    namespace "com.qiblatime.app"
     compileSdk 36
     ndkVersion "27.0.12077973"
 
@@ -69,7 +69,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.qiblatime.qibla_time"
+        applicationId "com.qiblatime.app"
         minSdkVersion flutter.minSdkVersion
         targetSdk 35
         versionCode flutterVersionCode.toInteger()

@@ -1,4 +1,4 @@
-package com.qiblatime.qibla_time
+package com.qiblatime.app
 
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
