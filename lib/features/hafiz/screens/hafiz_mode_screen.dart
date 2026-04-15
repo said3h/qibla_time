@@ -10,6 +10,9 @@ import '../../quran/services/quran_service.dart';
 import '../models/hafiz_models.dart';
 import '../services/hafiz_service.dart';
 
+bool _isArabicOnly(BuildContext context) =>
+    Localizations.localeOf(context).languageCode == 'ar';
+
 class HafizModeScreen extends ConsumerWidget {
   const HafizModeScreen({super.key});
 
@@ -17,6 +20,7 @@ class HafizModeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final tokens = QiblaThemes.current;
     final l10n = context.l10n;
+    final isArabicOnly = _isArabicOnly(context);
     final surahs = ref.watch(quranSurahsProvider);
     final progress = ref.watch(hafizProgressProvider);
 
@@ -27,12 +31,16 @@ class HafizModeScreen extends ConsumerWidget {
           padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
           children: [
             Text('Hafiz', style: GoogleFonts.amiri(fontSize: 26, fontWeight: FontWeight.bold, color: tokens.primary)),
-            Text(l10n.hafizSubtitle, style: GoogleFonts.dmSans(fontSize: 11, color: tokens.textSecondary)),
+            Text(
+              l10n.hafizSubtitle,
+              textAlign: isArabicOnly ? TextAlign.right : TextAlign.left,
+              style: GoogleFonts.dmSans(fontSize: 11, color: tokens.textSecondary),
+            ),
             const SizedBox(height: 16),
-            _buildSummary(tokens, progress),
+            _buildSummary(tokens, progress, isArabicOnly),
             if (progress.isEmpty) ...[
               const SizedBox(height: 12),
-              _buildEmptyState(tokens),
+              _buildEmptyState(tokens, isArabicOnly),
             ],
             const SizedBox(height: 16),
             ...surahs.take(20).map((surah) {
@@ -59,9 +67,17 @@ class HafizModeScreen extends ConsumerWidget {
                             plan.endAyah,
                             (plan.completion * 100).round(),
                           ),
+                    textAlign: isArabicOnly ? TextAlign.right : TextAlign.left,
                     style: GoogleFonts.dmSans(fontSize: 11, color: tokens.textSecondary),
                   ),
-                  trailing: Text(surah.nameArabic, style: GoogleFonts.amiri(fontSize: 20, color: tokens.primaryLight)),
+                  trailing: Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: Text(
+                      surah.nameArabic,
+                      textAlign: TextAlign.right,
+                      style: GoogleFonts.amiri(fontSize: 20, color: tokens.primaryLight),
+                    ),
+                  ),
                 ),
               );
             }),
@@ -71,7 +87,11 @@ class HafizModeScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildSummary(QiblaTokens tokens, List<HafizProgress> progress) {
+  Widget _buildSummary(
+    QiblaTokens tokens,
+    List<HafizProgress> progress,
+    bool isArabicOnly,
+  ) {
     final l10n = appLocalizationsForCurrentLocale();
     final completed = progress.where((item) => item.completedRepetitions >= item.targetRepetitions).length;
     return Container(
@@ -83,14 +103,28 @@ class HafizModeScreen extends ConsumerWidget {
       ),
       child: Row(
         children: [
-          Expanded(child: _stat(tokens, '${progress.length}', l10n.hafizActivePlans)),
-          Expanded(child: _stat(tokens, '$completed', l10n.hafizReviewedSurahs)),
+          Expanded(
+            child: _stat(
+              tokens,
+              '${progress.length}',
+              l10n.hafizActivePlans,
+              isArabicOnly,
+            ),
+          ),
+          Expanded(
+            child: _stat(
+              tokens,
+              '$completed',
+              l10n.hafizReviewedSurahs,
+              isArabicOnly,
+            ),
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildEmptyState(QiblaTokens tokens) {
+  Widget _buildEmptyState(QiblaTokens tokens, bool isArabicOnly) {
     final l10n = appLocalizationsForCurrentLocale();
     return Container(
       width: double.infinity,
@@ -101,10 +135,12 @@ class HafizModeScreen extends ConsumerWidget {
         border: Border.all(color: tokens.border),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment:
+            isArabicOnly ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
           Text(
             l10n.hafizEmptyTitle,
+            textAlign: isArabicOnly ? TextAlign.right : TextAlign.left,
             style: GoogleFonts.dmSans(
               fontSize: 14,
               fontWeight: FontWeight.w600,
@@ -114,6 +150,7 @@ class HafizModeScreen extends ConsumerWidget {
           const SizedBox(height: 6),
           Text(
             l10n.hafizEmptyBody,
+            textAlign: isArabicOnly ? TextAlign.right : TextAlign.left,
             style: GoogleFonts.dmSans(
               fontSize: 11,
               height: 1.6,
@@ -130,6 +167,7 @@ class HafizModeScreen extends ConsumerWidget {
             ),
             child: Text(
               l10n.hafizEmptyHint,
+              textAlign: isArabicOnly ? TextAlign.right : TextAlign.left,
               style: GoogleFonts.dmSans(
                 fontSize: 11,
                 color: tokens.textPrimary,
@@ -141,11 +179,20 @@ class HafizModeScreen extends ConsumerWidget {
     );
   }
 
-  Widget _stat(QiblaTokens tokens, String value, String label) {
+  Widget _stat(
+    QiblaTokens tokens,
+    String value,
+    String label,
+    bool isArabicOnly,
+  ) {
     return Column(
       children: [
         Text(value, style: GoogleFonts.dmSans(fontSize: 22, fontWeight: FontWeight.w600, color: tokens.primaryLight)),
-        Text(label, style: GoogleFonts.dmSans(fontSize: 10, color: tokens.textSecondary)),
+        Text(
+          label,
+          textAlign: isArabicOnly ? TextAlign.right : TextAlign.left,
+          style: GoogleFonts.dmSans(fontSize: 10, color: tokens.textSecondary),
+        ),
       ],
     );
   }
@@ -187,6 +234,7 @@ class _HafizPracticeScreenState extends ConsumerState<HafizPracticeScreen> {
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
     final l10n = context.l10n;
+    final isArabicOnly = _isArabicOnly(context);
     final detailAsync = ref.watch(surahDetailProvider(widget.summary));
 
     return Scaffold(
@@ -209,16 +257,54 @@ class _HafizPracticeScreenState extends ConsumerState<HafizPracticeScreen> {
                   border: Border.all(color: tokens.border),
                 ),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: isArabicOnly
+                      ? CrossAxisAlignment.end
+                      : CrossAxisAlignment.start,
                   children: [
-                    Text(l10n.hafizSelectedSegment, style: GoogleFonts.dmSans(fontSize: 10, letterSpacing: 1.2, color: tokens.textSecondary)),
+                    Text(
+                      l10n.hafizSelectedSegment,
+                      textAlign:
+                          isArabicOnly ? TextAlign.right : TextAlign.left,
+                      style: GoogleFonts.dmSans(fontSize: 10, letterSpacing: 1.2, color: tokens.textSecondary),
+                    ),
                     const SizedBox(height: 8),
-                    Text(l10n.hafizAyahRange(_startAyah, _endAyah), style: GoogleFonts.dmSans(fontSize: 18, fontWeight: FontWeight.w600, color: tokens.primaryLight)),
+                    Text(
+                      l10n.hafizAyahRange(_startAyah, _endAyah),
+                      textAlign:
+                          isArabicOnly ? TextAlign.right : TextAlign.left,
+                      style: GoogleFonts.dmSans(fontSize: 18, fontWeight: FontWeight.w600, color: tokens.primaryLight),
+                    ),
                     const SizedBox(height: 12),
                     if (currentAyah != null) ...[
-                      Text(currentAyah.arabic, textAlign: TextAlign.right, style: GoogleFonts.amiri(fontSize: 24, height: 1.8, color: tokens.textPrimary)),
+                      Directionality(
+                        textDirection: TextDirection.rtl,
+                        child: Text(
+                          currentAyah.arabic,
+                          textAlign: TextAlign.right,
+                          style: GoogleFonts.amiri(fontSize: 24, height: 1.8, color: tokens.textPrimary),
+                        ),
+                      ),
+                      if (currentAyah.transliteration.trim().isNotEmpty) ...[
+                        const SizedBox(height: 8),
+                        Text(
+                          currentAyah.transliteration,
+                          textAlign:
+                              isArabicOnly ? TextAlign.right : TextAlign.left,
+                          style: GoogleFonts.dmSans(
+                            fontSize: 13,
+                            height: 1.7,
+                            fontStyle: FontStyle.italic,
+                            color: tokens.textSecondary,
+                          ),
+                        ),
+                      ],
                       const SizedBox(height: 10),
-                      Text(currentAyah.translation, style: GoogleFonts.dmSans(fontSize: 13, height: 1.7, color: tokens.textPrimary)),
+                      Text(
+                        currentAyah.translation,
+                        textAlign:
+                            isArabicOnly ? TextAlign.right : TextAlign.left,
+                        style: GoogleFonts.dmSans(fontSize: 13, height: 1.7, color: tokens.textPrimary),
+                      ),
                     ],
                     const SizedBox(height: 14),
                     Row(
@@ -290,6 +376,7 @@ class _HafizPracticeScreenState extends ConsumerState<HafizPracticeScreen> {
 
   Widget _buildControls(QiblaTokens tokens, SurahDetail detail) {
     final l10n = context.l10n;
+    final isArabicOnly = _isArabicOnly(context);
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -298,11 +385,20 @@ class _HafizPracticeScreenState extends ConsumerState<HafizPracticeScreen> {
         border: Border.all(color: tokens.border),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment:
+            isArabicOnly ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
-          Text(l10n.hafizConfigureSession, style: GoogleFonts.dmSans(fontSize: 14, fontWeight: FontWeight.w600, color: tokens.textPrimary)),
+          Text(
+            l10n.hafizConfigureSession,
+            textAlign: isArabicOnly ? TextAlign.right : TextAlign.left,
+            style: GoogleFonts.dmSans(fontSize: 14, fontWeight: FontWeight.w600, color: tokens.textPrimary),
+          ),
           const SizedBox(height: 10),
-          Text(l10n.hafizStartAyah(_startAyah), style: GoogleFonts.dmSans(color: tokens.textSecondary)),
+          Text(
+            l10n.hafizStartAyah(_startAyah),
+            textAlign: isArabicOnly ? TextAlign.right : TextAlign.left,
+            style: GoogleFonts.dmSans(color: tokens.textSecondary),
+          ),
           Slider(
             value: _startAyah.toDouble(),
             min: 1,
@@ -315,7 +411,11 @@ class _HafizPracticeScreenState extends ConsumerState<HafizPracticeScreen> {
               });
             },
           ),
-          Text(l10n.hafizEndAyah(_endAyah), style: GoogleFonts.dmSans(color: tokens.textSecondary)),
+          Text(
+            l10n.hafizEndAyah(_endAyah),
+            textAlign: isArabicOnly ? TextAlign.right : TextAlign.left,
+            style: GoogleFonts.dmSans(color: tokens.textSecondary),
+          ),
           Slider(
             value: _endAyah.toDouble(),
             min: _startAyah.toDouble(),
@@ -327,7 +427,11 @@ class _HafizPracticeScreenState extends ConsumerState<HafizPracticeScreen> {
               });
             },
           ),
-          Text(l10n.hafizTargetRepetitions(_targetRepetitions), style: GoogleFonts.dmSans(color: tokens.textSecondary)),
+          Text(
+            l10n.hafizTargetRepetitions(_targetRepetitions),
+            textAlign: isArabicOnly ? TextAlign.right : TextAlign.left,
+            style: GoogleFonts.dmSans(color: tokens.textSecondary),
+          ),
           Slider(
             value: _targetRepetitions.toDouble(),
             min: 3,

@@ -26,6 +26,8 @@ class OnboardingScreen extends StatefulWidget {
 
 class _OnboardingScreenState extends State<OnboardingScreen>
     with WidgetsBindingObserver {
+  static const int _pageCount = 6;
+
   final PageController _controller = PageController();
   final SettingsService _settingsService = SettingsService.instance;
   final AudioService _audioService = AudioService.instance;
@@ -130,17 +132,6 @@ class _OnboardingScreenState extends State<OnboardingScreen>
     super.dispose();
   }
 
-  Future<void> _next() async {
-    if (_step == 6) {
-      await widget.onCompleted();
-      return;
-    }
-    await _controller.nextPage(
-      duration: const Duration(milliseconds: 250),
-      curve: Curves.easeOut,
-    );
-  }
-
   Future<void> _back() async {
     if (_step == 0) return;
     await _controller.previousPage(
@@ -236,6 +227,8 @@ class _OnboardingScreenState extends State<OnboardingScreen>
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
     final l10n = context.l10n;
+    final isArabicOnly = Localizations.localeOf(context).languageCode == 'ar';
+    final isLastStep = _step == _pageCount - 1;
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
@@ -250,7 +243,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(999),
                       child: LinearProgressIndicator(
-                        value: (_step + 1) / 7,
+                        value: (_step + 1) / _pageCount,
                         minHeight: 6,
                         color: tokens.primary,
                         backgroundColor: tokens.bgSurface2,
@@ -268,42 +261,41 @@ class _OnboardingScreenState extends State<OnboardingScreen>
               Expanded(
                 child: PageView(
                   controller: _controller,
-                  physics: const NeverScrollableScrollPhysics(),
+                  physics: _busy
+                      ? const NeverScrollableScrollPhysics()
+                      : const ClampingScrollPhysics(),
                   onPageChanged: (value) => setState(() => _step = value),
                   children: [
-                    _buildIntro(tokens),
-                    _buildWelcome(tokens),
-                    _buildPermissions(tokens),
-                    _buildMethod(tokens),
-                    _buildMadhab(tokens),
-                    _buildAdhan(tokens),
-                    _buildDone(tokens),
+                    _buildWelcome(tokens, isArabicOnly),
+                    _buildPermissions(tokens, isArabicOnly),
+                    _buildMethod(tokens, isArabicOnly),
+                    _buildMadhab(tokens, isArabicOnly),
+                    _buildAdhan(tokens, isArabicOnly),
+                    _buildDone(tokens, isArabicOnly),
                   ],
                 ),
               ),
-              Row(
-                children: [
-                  Expanded(
-                    child: OutlinedButton(
-                      onPressed: _step == 0 || _busy ? null : _back,
-                      child: Text(l10n.commonBack),
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: _busy ? null : _next,
-                      child: Text(
-                        _step == 0
-                            ? l10n.commonStart
-                            : _step == 6
-                                ? l10n.commonEnter
-                                : l10n.commonContinue,
+              const SizedBox(height: 12),
+              if (_step != 0 || isLastStep)
+                Row(
+                  children: [
+                    if (_step != 0)
+                      Expanded(
+                        child: OutlinedButton(
+                          onPressed: _busy ? null : _back,
+                          child: Text(l10n.commonBack),
+                        ),
                       ),
-                    ),
-                  ),
-                ],
-              ),
+                    if (_step != 0 && isLastStep) const SizedBox(width: 10),
+                    if (isLastStep)
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: _busy ? null : widget.onCompleted,
+                          child: Text(l10n.commonEnter),
+                        ),
+                      ),
+                  ],
+                ),
             ],
           ),
         ),
@@ -311,6 +303,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
     );
   }
 
+  // ignore: unused_element
   Widget _buildIntro(QiblaTokens tokens) {
     final l10n = context.l10n;
     return Column(
@@ -360,6 +353,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
           title: l10n.onboardingIntroNoAds,
           body: l10n.onboardingIntroNoAdsBody,
           tokens: tokens,
+          isArabicOnly: false,
         ),
         const SizedBox(height: 10),
         _FeatureCard(
@@ -367,6 +361,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
           title: l10n.onboardingIntroPrivacy,
           body: l10n.onboardingIntroPrivacyBody,
           tokens: tokens,
+          isArabicOnly: false,
         ),
         const SizedBox(height: 10),
         _FeatureCard(
@@ -374,16 +369,18 @@ class _OnboardingScreenState extends State<OnboardingScreen>
           title: l10n.onboardingIntroLanguages,
           body: l10n.onboardingIntroLanguagesBody,
           tokens: tokens,
+          isArabicOnly: false,
         ),
       ],
     );
   }
 
-  Widget _buildWelcome(QiblaTokens tokens) {
+  Widget _buildWelcome(QiblaTokens tokens, bool isArabicOnly) {
     final l10n = context.l10n;
     return _StepScaffold(
       title: l10n.onboardingWelcomeTitle,
       subtitle: l10n.onboardingWelcomeSubtitle,
+      isArabicOnly: isArabicOnly,
       child: Column(
         children: [
           _FeatureCard(
@@ -391,6 +388,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
             title: l10n.onboardingFeatureSchedulesTitle,
             body: l10n.onboardingFeatureSchedulesBody,
             tokens: tokens,
+            isArabicOnly: isArabicOnly,
           ),
           const SizedBox(height: 10),
           _FeatureCard(
@@ -398,6 +396,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
             title: l10n.onboardingFeaturePracticeTitle,
             body: l10n.onboardingFeaturePracticeBody,
             tokens: tokens,
+            isArabicOnly: isArabicOnly,
           ),
           const SizedBox(height: 10),
           _FeatureCard(
@@ -405,13 +404,14 @@ class _OnboardingScreenState extends State<OnboardingScreen>
             title: l10n.onboardingFeatureRemindersTitle,
             body: l10n.onboardingFeatureRemindersBody,
             tokens: tokens,
+            isArabicOnly: isArabicOnly,
           ),
         ],
       ),
     );
   }
 
-  Widget _buildPermissions(QiblaTokens tokens) {
+  Widget _buildPermissions(QiblaTokens tokens, bool isArabicOnly) {
     final l10n = context.l10n;
     final locationReady = _locationServiceEnabled && _hasLocationPermission;
     final locationActionLabel = _locationPermission ==
@@ -431,6 +431,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
     return _StepScaffold(
       title: l10n.onboardingPermissionsTitle,
       subtitle: l10n.onboardingPermissionsSubtitle,
+      isArabicOnly: isArabicOnly,
       child: Column(
         children: [
           _PermissionCard(
@@ -449,6 +450,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
             tokens: tokens,
             completed: locationReady,
             loading: _busy,
+            isArabicOnly: isArabicOnly,
           ),
           const SizedBox(height: 12),
           _PermissionCard(
@@ -465,17 +467,19 @@ class _OnboardingScreenState extends State<OnboardingScreen>
             tokens: tokens,
             completed: _notificationsGranted,
             loading: _busy,
+            isArabicOnly: isArabicOnly,
           ),
         ],
       ),
     );
   }
 
-  Widget _buildMethod(QiblaTokens tokens) {
+  Widget _buildMethod(QiblaTokens tokens, bool isArabicOnly) {
     final l10n = context.l10n;
     return _StepScaffold(
       title: l10n.onboardingMethodTitle,
       subtitle: l10n.onboardingMethodSubtitle,
+      isArabicOnly: isArabicOnly,
       child: Column(
         children: _recommendedMethods.map((method) {
           final selected = method == _method;
@@ -486,6 +490,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                 : l10n.onboardingTapToChooseMethod,
             selected: selected,
             tokens: tokens,
+            isArabicOnly: isArabicOnly,
             onTap: () => _persistMethod(method),
           );
         }).toList(),
@@ -493,11 +498,12 @@ class _OnboardingScreenState extends State<OnboardingScreen>
     );
   }
 
-  Widget _buildMadhab(QiblaTokens tokens) {
+  Widget _buildMadhab(QiblaTokens tokens, bool isArabicOnly) {
     final l10n = context.l10n;
     return _StepScaffold(
       title: l10n.onboardingMadhabTitle,
       subtitle: l10n.onboardingMadhabSubtitle,
+      isArabicOnly: isArabicOnly,
       child: Column(
         children: [
           _SelectableTile(
@@ -505,6 +511,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
             subtitle: l10n.onboardingMadhabCommonSubtitle,
             selected: !_isHanafi,
             tokens: tokens,
+            isArabicOnly: isArabicOnly,
             onTap: () => _persistMadhab(false),
           ),
           _SelectableTile(
@@ -512,6 +519,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
             subtitle: l10n.onboardingMadhabHanafiSubtitle,
             selected: _isHanafi,
             tokens: tokens,
+            isArabicOnly: isArabicOnly,
             onTap: () => _persistMadhab(true),
           ),
         ],
@@ -519,11 +527,12 @@ class _OnboardingScreenState extends State<OnboardingScreen>
     );
   }
 
-  Widget _buildAdhan(QiblaTokens tokens) {
+  Widget _buildAdhan(QiblaTokens tokens, bool isArabicOnly) {
     final l10n = context.l10n;
     return _StepScaffold(
       title: l10n.onboardingAdhanTitle,
       subtitle: l10n.onboardingAdhanSubtitle,
+      isArabicOnly: isArabicOnly,
       child: Column(
         children: [
           Container(
@@ -538,10 +547,14 @@ class _OnboardingScreenState extends State<OnboardingScreen>
               children: [
                 Expanded(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: isArabicOnly
+                        ? CrossAxisAlignment.end
+                        : CrossAxisAlignment.start,
                     children: [
                       Text(
                         l10n.onboardingPrayerNotificationsTitle,
+                        textAlign:
+                            isArabicOnly ? TextAlign.right : TextAlign.left,
                         style: GoogleFonts.dmSans(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
@@ -551,6 +564,8 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                       const SizedBox(height: 4),
                       Text(
                         l10n.onboardingPrayerNotificationsSubtitle,
+                        textAlign:
+                            isArabicOnly ? TextAlign.right : TextAlign.left,
                         style: GoogleFonts.dmSans(
                           fontSize: 11,
                           color: tokens.textSecondary,
@@ -578,10 +593,14 @@ class _OnboardingScreenState extends State<OnboardingScreen>
               border: Border.all(color: tokens.primaryBorder),
             ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: isArabicOnly
+                  ? CrossAxisAlignment.end
+                  : CrossAxisAlignment.start,
               children: [
                 Text(
                   l10n.onboardingAdhanPreviewTitle,
+                  textAlign:
+                      isArabicOnly ? TextAlign.right : TextAlign.left,
                   style: GoogleFonts.dmSans(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
@@ -591,6 +610,8 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                 const SizedBox(height: 4),
                 Text(
                   l10n.onboardingAdhanPreviewSubtitle,
+                  textAlign:
+                      isArabicOnly ? TextAlign.right : TextAlign.left,
                   style: GoogleFonts.dmSans(
                     fontSize: 11,
                     color: tokens.textSecondary,
@@ -614,11 +635,12 @@ class _OnboardingScreenState extends State<OnboardingScreen>
     );
   }
 
-  Widget _buildDone(QiblaTokens tokens) {
+  Widget _buildDone(QiblaTokens tokens, bool isArabicOnly) {
     final l10n = context.l10n;
     return _StepScaffold(
       title: l10n.onboardingDoneTitle,
       subtitle: l10n.onboardingDoneSubtitle,
+      isArabicOnly: isArabicOnly,
       child: Container(
         width: double.infinity,
         padding: const EdgeInsets.all(18),
@@ -628,13 +650,21 @@ class _OnboardingScreenState extends State<OnboardingScreen>
           border: Border.all(color: tokens.border),
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: isArabicOnly
+              ? CrossAxisAlignment.end
+              : CrossAxisAlignment.start,
           children: [
-            _summaryRow(tokens, l10n.commonMethod, _methodLabel(_method)),
+            _summaryRow(
+              tokens,
+              l10n.commonMethod,
+              _methodLabel(_method),
+              isArabicOnly,
+            ),
             _summaryRow(
               tokens,
               l10n.commonMadhab,
               _isHanafi ? l10n.onboardingMadhabHanafiTitle : 'Shafi',
+              isArabicOnly,
             ),
             _summaryRow(
               tokens,
@@ -644,6 +674,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                   : _locationServiceEnabled
                       ? l10n.commonReady
                       : l10n.commonPending,
+              isArabicOnly,
             ),
             _summaryRow(
               tokens,
@@ -653,6 +684,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                       ? l10n.commonActivated
                       : l10n.onboardingSummaryNotificationsPrepared)
                   : l10n.commonDisabled,
+              isArabicOnly,
             ),
           ],
       ),
@@ -660,7 +692,12 @@ class _OnboardingScreenState extends State<OnboardingScreen>
     );
   }
 
-  Widget _summaryRow(QiblaTokens tokens, String label, String value) {
+  Widget _summaryRow(
+    QiblaTokens tokens,
+    String label,
+    String value,
+    bool isArabicOnly,
+  ) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: Row(
@@ -668,6 +705,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
           Expanded(
             child: Text(
               label,
+              textAlign: isArabicOnly ? TextAlign.right : TextAlign.left,
               style: GoogleFonts.dmSans(
                 fontSize: 12,
                 color: tokens.textSecondary,
@@ -676,6 +714,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
           ),
           Text(
             value,
+            textAlign: isArabicOnly ? TextAlign.right : TextAlign.left,
             style: GoogleFonts.dmSans(
               fontSize: 13,
               fontWeight: FontWeight.w600,
@@ -709,22 +748,26 @@ class _StepScaffold extends StatelessWidget {
     required this.title,
     required this.subtitle,
     required this.child,
+    required this.isArabicOnly,
   });
 
   final String title;
   final String subtitle;
   final Widget child;
+  final bool isArabicOnly;
 
   @override
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment:
+          isArabicOnly ? CrossAxisAlignment.end : CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 8),
         Text(
           title,
+          textAlign: isArabicOnly ? TextAlign.right : TextAlign.left,
           style: GoogleFonts.amiri(
             fontSize: 30,
             fontWeight: FontWeight.bold,
@@ -734,6 +777,7 @@ class _StepScaffold extends StatelessWidget {
         const SizedBox(height: 6),
         Text(
           subtitle,
+          textAlign: isArabicOnly ? TextAlign.right : TextAlign.left,
           style: GoogleFonts.dmSans(
             fontSize: 13,
             height: 1.6,
@@ -753,12 +797,14 @@ class _FeatureCard extends StatelessWidget {
     required this.title,
     required this.body,
     required this.tokens,
+    required this.isArabicOnly,
   });
 
   final IconData icon;
   final String title;
   final String body;
   final QiblaTokens tokens;
+  final bool isArabicOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -785,10 +831,13 @@ class _FeatureCard extends StatelessWidget {
           const SizedBox(width: 12),
           Expanded(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: isArabicOnly
+                  ? CrossAxisAlignment.end
+                  : CrossAxisAlignment.start,
               children: [
                 Text(
                   title,
+                  textAlign: isArabicOnly ? TextAlign.right : TextAlign.left,
                   style: GoogleFonts.dmSans(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
@@ -798,6 +847,7 @@ class _FeatureCard extends StatelessWidget {
                 const SizedBox(height: 4),
                 Text(
                   body,
+                  textAlign: isArabicOnly ? TextAlign.right : TextAlign.left,
                   style: GoogleFonts.dmSans(
                     fontSize: 11,
                     height: 1.5,
@@ -824,6 +874,7 @@ class _PermissionCard extends StatelessWidget {
     required this.tokens,
     required this.completed,
     required this.loading,
+    required this.isArabicOnly,
   });
 
   final IconData icon;
@@ -835,6 +886,7 @@ class _PermissionCard extends StatelessWidget {
   final QiblaTokens tokens;
   final bool completed;
   final bool loading;
+  final bool isArabicOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -856,6 +908,7 @@ class _PermissionCard extends StatelessWidget {
               Expanded(
                 child: Text(
                   title,
+                  textAlign: isArabicOnly ? TextAlign.right : TextAlign.left,
                   style: GoogleFonts.dmSans(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
@@ -865,6 +918,7 @@ class _PermissionCard extends StatelessWidget {
               ),
               Text(
                 status,
+                textAlign: isArabicOnly ? TextAlign.right : TextAlign.left,
                 style: GoogleFonts.dmSans(
                   fontSize: 11,
                   color: completed ? tokens.primary : tokens.textSecondary,
@@ -875,6 +929,7 @@ class _PermissionCard extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             body,
+            textAlign: isArabicOnly ? TextAlign.right : TextAlign.left,
             style: GoogleFonts.dmSans(
               fontSize: 11,
               height: 1.5,
@@ -900,6 +955,7 @@ class _SelectableTile extends StatelessWidget {
     required this.selected,
     required this.tokens,
     required this.onTap,
+    required this.isArabicOnly,
   });
 
   final String title;
@@ -907,6 +963,7 @@ class _SelectableTile extends StatelessWidget {
   final bool selected;
   final QiblaTokens tokens;
   final VoidCallback onTap;
+  final bool isArabicOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -928,10 +985,13 @@ class _SelectableTile extends StatelessWidget {
           children: [
             Expanded(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: isArabicOnly
+                    ? CrossAxisAlignment.end
+                    : CrossAxisAlignment.start,
                 children: [
                   Text(
                     title,
+                    textAlign: isArabicOnly ? TextAlign.right : TextAlign.left,
                     style: GoogleFonts.dmSans(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
@@ -941,6 +1001,7 @@ class _SelectableTile extends StatelessWidget {
                   const SizedBox(height: 4),
                   Text(
                     subtitle,
+                    textAlign: isArabicOnly ? TextAlign.right : TextAlign.left,
                     style: GoogleFonts.dmSans(
                       fontSize: 11,
                       color: tokens.textSecondary,
