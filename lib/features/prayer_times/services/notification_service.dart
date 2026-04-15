@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -339,6 +342,15 @@ class NotificationService {
     }
 
     return false;
+  }
+
+  Future<bool> needsManufacturerBatterySettings() async {
+    if (!Platform.isAndroid) return false;
+    final manufacturer =
+        (await DeviceInfoPlugin().androidInfo).manufacturer.toLowerCase();
+    return ['huawei', 'samsung', 'xiaomi', 'oppo', 'vivo', 'oneplus'].any(
+      (m) => manufacturer.contains(m),
+    );
   }
 
   Future<bool> areNotificationsEnabled() async {

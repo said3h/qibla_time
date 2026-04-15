@@ -42,6 +42,7 @@ import '../../tracking/services/tracking_service.dart';
 import '../../tracking/services/weekly_summary_notification_service.dart';
 import '../services/dua_service.dart';
 import 'adhan_selector_screen.dart';
+import 'manufacturer_guide_screen.dart';
 import 'support_screen.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
@@ -69,6 +70,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   String selectedAdhanName = '';
 
   bool _exactAlarmPermissionGranted = true;
+  bool _needsManufacturerBatterySettings = false;
+  String? _manufacturerName;
 
   // Hadices settings
   bool dailyInspirationEnabled = false;
@@ -140,6 +143,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
     if (Platform.isAndroid) {
       final androidInfo = await DeviceInfoPlugin().androidInfo;
+      final needsManufacturerBatterySettings =
+          await NotificationService.instance.needsManufacturerBatterySettings();
+      _manufacturerName = androidInfo.manufacturer;
+      _needsManufacturerBatterySettings = needsManufacturerBatterySettings;
       if (androidInfo.version.sdkInt >= 31) {
         final status = await Permission.scheduleExactAlarm.status;
         if (mounted) setState(() => _exactAlarmPermissionGranted = status.isGranted);
@@ -629,6 +636,57 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         await _loadSettings();
                       },
                       child: const Text('Activar'),
+                    ),
+                  ],
+                ),
+              ),
+            if (_needsManufacturerBatterySettings &&
+                (_manufacturerName?.trim().isNotEmpty ?? false))
+              Container(
+                margin: const EdgeInsets.only(bottom: 8),
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: tokens.primaryBg,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: tokens.primaryBorder),
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(
+                      Icons.battery_alert_outlined,
+                      color: tokens.primary,
+                      size: 18,
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Para que el adhan suene correctamente en tu dispositivo ${_manufacturerLabel(_manufacturerName)}, debes permitir que QiblaTime se ejecute en segundo plano.',
+                            style: GoogleFonts.dmSans(
+                              fontSize: 11,
+                              height: 1.5,
+                              color: tokens.textPrimary,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (_) => ManufacturerGuideScreen(
+                                    manufacturer:
+                                        _manufacturerLabel(_manufacturerName),
+                                  ),
+                                ),
+                              );
+                            },
+                            child: const Text('Cómo activarlo'),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -1783,6 +1841,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       PrayerLocationPermissionStatus.deniedForever => l10n.settingsLocationBlocked,
       _ => l10n.commonUnavailable,
     };
+  }
+
+  String _manufacturerLabel(String? manufacturer) {
+    final trimmed = manufacturer?.trim() ?? '';
+    if (trimmed.isEmpty) return 'Android';
+    return trimmed[0].toUpperCase() + trimmed.substring(1);
   }
 
   Widget _buildSettingRow({
