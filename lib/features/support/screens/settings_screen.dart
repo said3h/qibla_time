@@ -556,6 +556,19 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               l10n.settingsAdhanSoundAction,
               onTap: _openAdhanSelector,
             ),
+            // TODO: remove before release
+            Container(
+              width: double.infinity,
+              margin: const EdgeInsets.only(bottom: 8),
+              child: OutlinedButton.icon(
+                onPressed: () async {
+                  final adhanFile = await SettingsService.instance.getAdhan();
+                  await NotificationService.instance.testAdhanSound(adhanFile);
+                },
+                icon: const Icon(Icons.campaign_outlined),
+                label: const Text('Probar sonido'),
+              ),
+            ),
             _buildSimpleToggleTile(
               tokens,
               l10n.settingsGeneralNotifications,
