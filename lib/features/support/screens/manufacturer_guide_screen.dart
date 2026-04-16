@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../../../core/theme/app_theme.dart';
 
@@ -16,6 +17,7 @@ class ManufacturerGuideScreen extends StatelessWidget {
     final tokens = QiblaThemes.current;
     final brand = _normalizeManufacturer(manufacturer);
     final steps = _stepsForBrand(brand);
+    final isHuawei = brand.toLowerCase() == 'huawei';
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
@@ -43,6 +45,64 @@ class ManufacturerGuideScreen extends StatelessWidget {
                 color: tokens.textSecondary,
               ),
             ),
+            if (isHuawei) ...[
+              const SizedBox(height: 16),
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: tokens.primaryBg,
+                  borderRadius: BorderRadius.circular(14),
+                  border: Border.all(color: tokens.primaryBorder),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.settings_power,
+                          color: tokens.primary,
+                          size: 24,
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Text(
+                            'Abre los ajustes directamente',
+                            style: GoogleFonts.dmSans(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                              color: tokens.textPrimary,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+                    ElevatedButton(
+                      onPressed: () => openAppSettings(),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: tokens.primary,
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: const Text('Abrir ajustes de la app'),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      'Luego ve a Batería > Inicio de aplicaciones y activa QiblaTime',
+                      style: GoogleFonts.dmSans(
+                        fontSize: 11,
+                        color: tokens.textSecondary,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              ),
+            ],
             const SizedBox(height: 16),
             ...steps.indexed.map(
               (entry) => Container(
