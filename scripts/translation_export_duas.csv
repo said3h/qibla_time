@@ -1,0 +1,301 @@
+id,lang,title,arabicText,transliteration,translation,category,reference,source,count,isFeatured
+morning_1,es,Al comenzar el día,أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ,Asbahna wa asbaha l-mulku lillah,Hemos amanecido y el dominio pertenece a Allah.,morning,"Al-Bukhari 3186, Muslim 2723",Hisnul Muslim,1,true
+morning_1,en,,,,,,,,,false
+morning_1,ar,أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ,أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ,,,morning,"Al-Bukhari 3186, Muslim 2723",Hisnul Muslim,1,true
+morning_2,es,Al despertar del sueño,الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ,Alhamdu lillahi alladhi ahyana ba'da ma amatana wa ilayhi n-nushur,"Alabado sea Allah, que nos devolvió la vida después de habernos hecho morir, y hacia Él será el retorno.",morning,Al-Bukhari 6312,Hisnul Muslim,1,true
+morning_2,en,,,,,,,,,false
+morning_2,ar,الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ,الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ,,,morning,Al-Bukhari 6312,Hisnul Muslim,1,true
+morning_3,es,Protección de la mañana,أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ,A'udhu bi kalimati llahi t-tammati min sharri ma khalaq,Busco refugio en las palabras completas de Allah del mal de lo que ha creado.,morning,Muslim 2709,Hisnul Muslim,3,false
+morning_3,en,,,,,,,,,false
+morning_3,ar,أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ,أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ,,,morning,Muslim 2709,Hisnul Muslim,3,false
+morning_4,es,Al salir de casa por la mañana,بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ لاَ حَوْلَ وَلاَ قُوَّةَ إِلاَّ بِاللَّهِ,Bismillah tawakkaltu alallah wa la hawla wa la quwwata illa billah,En el nombre de Allah. En Allah pongo mi confianza. No hay fuerza ni poder sino en Allah.,morning,Abu Dawud 5095,Hisnul Muslim,1,false
+morning_4,en,,,,,,,,,false
+morning_4,ar,بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ لاَ حَوْلَ وَلاَ قُوَّةَ إِلاَّ بِاللَّهِ,بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ لاَ حَوْلَ وَلاَ قُوَّةَ إِلاَّ بِاللَّهِ,,,morning,Abu Dawud 5095,Hisnul Muslim,1,false
+morning_5,es,Al vestirse,الْحَمْدُ لِلَّهِ الَّذِي كَسَانِي هَذَا وَرَزَقَنِيهِ مِنْ غَيْرِ حَوْلٍ مِنِّي وَلاَ قُوَّةٍ,Alhamdu lillahi alladhi kasani hadha wa razaqanihi min ghayri hawlin minni wa la quwwah,Alabado sea Allah que me ha vestido esto y me lo ha proveído sin esfuerzo ni poder mío.,morning,Abu Dawud 4023,Hisnul Muslim,1,false
+morning_5,en,,,,,,,,,false
+morning_5,ar,الْحَمْدُ لِلَّهِ الَّذِي كَسَانِي هَذَا وَرَزَقَنِيهِ مِنْ غَيْرِ حَوْلٍ مِنِّي وَلاَ قُوَّةٍ,الْحَمْدُ لِلَّهِ الَّذِي كَسَانِي هَذَا وَرَزَقَنِيهِ مِنْ غَيْرِ حَوْلٍ مِنِّي وَلاَ قُوَّةٍ,,,morning,Abu Dawud 4023,Hisnul Muslim,1,false
+morning_6,es,Al entrar al baño,اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ,Allahumma inni a'udhu minal-khuthuthi wa l-khaba'ith,"Oh Allah, busco Tu protección de los masculinos y femeninos inmundos.",morning,Al-Bukhari 6322,Hisnul Muslim,1,false
+morning_6,en,,,,,,,,,false
+morning_6,ar,اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ,اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ,,,morning,Al-Bukhari 6322,Hisnul Muslim,1,false
+morning_7,es,Al salir del baño,غُفْرَانَكَ,Ghufranaka,Te pidoTu perdón.,morning,Abu Dawud 30,Hisnul Muslim,1,false
+morning_7,en,,,,,,,,,false
+morning_7,ar,غُفْرَانَكَ,غُفْرَانَكَ,,,morning,Abu Dawud 30,Hisnul Muslim,1,false
+night_1,es,Al comenzar la noche,أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ,Amsayna wa amsa l-mulku lillah,Hemos anochecido y el dominio pertenece a Allah.,night,Muslim 2723,Hisnul Muslim,1,true
+night_1,en,,,,,,,,,false
+night_1,ar,أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ,أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ,,,night,Muslim 2723,Hisnul Muslim,1,true
+night_2,es,Confianza en Allah al dormir,حَسْبِيَ اللَّهُ لاَ إِلَهَ إِلاَّ هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ,Hasbiya Allahu la ilaha illa huwa alayhi tawakkaltu wa huwa rabbu l-arshi l-azim,Allah me basta. No hay divinidad sino Él. En Él confío y Él es el Señor del Trono Grande.,night,"Al-Bukhari 3193, At-Tirmidhi 3394",Hisnul Muslim,1,true
+night_2,en,,,,,,,,,false
+night_2,ar,حَسْبِيَ اللَّهُ لاَ إِلَهَ إِلاَّ هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ,حَسْبِيَ اللَّهُ لاَ إِلَهَ إِلاَّ هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ,,,night,"Al-Bukhari 3193, At-Tirmidhi 3394",Hisnul Muslim,1,true
+night_3,es,Al acostarse,اللَّهُمَّ قِنِي عَذَابَكَ يَوْمَ تَبْعَثُ عِبَادَكَ,Allahumma qini adhaba-ka yawma tab'athu ibadaka,"Oh Allah, concédeme protección contra Tu castigo el día en que resucites a Tus siervos.",night,Abu Dawud 5045,Hisnul Muslim,1,false
+night_3,en,,,,,,,,,false
+night_3,ar,اللَّهُمَّ قِنِي عَذَابَكَ يَوْمَ تَبْعَثُ عِبَادَكَ,اللَّهُمَّ قِنِي عَذَابَكَ يَوْمَ تَبْعَثُ عِبَادَكَ,,,night,Abu Dawud 5045,Hisnul Muslim,1,false
+night_4,es,Dua de Laylatul Qadr,اللَّهُمَّ إِنَّكَ عَفُوٌّ كَرِيمٌ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي,Allahumma innaka 'afuwwun karimun tuhibbu l-'afwa fa'fu 'anni,"Oh Allah, realmente eres Perdonador y Generoso, Te gusta el perdón, perdóname.",night,At-Tirmidhi 3513,Hisnul Muslim,1,false
+night_4,en,,,,,,,,,false
+night_4,ar,اللَّهُمَّ إِنَّكَ عَفُوٌّ كَرِيمٌ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي,اللَّهُمَّ إِنَّكَ عَفُوٌّ كَرِيمٌ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي,,,night,At-Tirmidhi 3513,Hisnul Muslim,1,false
+sleep_1,es,Antes de dormir,بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا,Bismika Allahumma amutu wa ahya,"En Tu nombre, oh Allah, muero y vivo.",sleep,Al-Bukhari 6324,Hisnul Muslim,1,true
+sleep_1,en,,,,,,,,,false
+sleep_1,ar,بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا,بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا,,,sleep,Al-Bukhari 6324,Hisnul Muslim,1,true
+sleep_2,es,Al darse la vuelta en la cama,لاَ إِلَهَ إِلاَّ اللَّهُ الْوَاحِدُ الْقَهَّارُ,La ilaha illa Allahu l-wahidu l-qahhar,"No hay divinidad sino Allah, el Único, el Dominador.",sleep,At-Tirmidhi 3397,Hisnul Muslim,1,false
+sleep_2,en,,,,,,,,,false
+sleep_2,ar,لاَ إِلَهَ إِلاَّ اللَّهُ الْوَاحِدُ الْقَهَّارُ,لاَ إِلَهَ إِلاَّ اللَّهُ الْوَاحِدُ الْقَهَّارُ,,,sleep,At-Tirmidhi 3397,Hisnul Muslim,1,false
+sleep_3,es,Protección al dormir,أَعُوذُ بِعِزَّةِ اللَّهِ وَقُدْرَتِهِ مِنْ شَرِّ مَا أَجِدُ,A'udhu bi-izzati Allahi wa qudratihi min sharri ma ajidu,Busco refugio en el poder y fuerza de Allah del mal que me afecta.,sleep,Abu Dawud 3894,Hisnul Muslim,1,false
+sleep_3,en,,,,,,,,,false
+sleep_3,ar,أَعُوذُ بِعِزَّةِ اللَّهِ وَقُدْرَتِهِ مِنْ شَرِّ مَا أَجِدُ,أَعُوذُ بِعِزَّةِ اللَّهِ وَقُدْرَتِهِ مِنْ شَرِّ مَا أَجِدُ,,,sleep,Abu Dawud 3894,Hisnul Muslim,1,false
+sleep_4,es,Al dormir en la mezquita,اللَّهُمَّ رَبَّ الْمَلَكُوتِ,,"Oh Allah, Señor del dominio.",sleep,Al-Bukhari 6321,Hisnul Muslim,1,false
+sleep_4,en,,,,,,,,,false
+sleep_4,ar,اللَّهُمَّ رَبَّ الْمَلَكُوتِ,اللَّهُمَّ رَبَّ الْمَلَكُوتِ,,,sleep,Al-Bukhari 6321,Hisnul Muslim,1,false
+sleep_5,es,Dua antes de despertar,الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا,,Alabado sea Allah que nos dio vida después de habernos hecho morir.,sleep,Al-Bukhari 6312,Hisnul Muslim,1,false
+sleep_5,en,,,,,,,,,false
+sleep_5,ar,الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا,الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا,,,sleep,Al-Bukhari 6312,Hisnul Muslim,1,false
+travel_1,es,Al montar en el vehículo,سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ,Subhana alladhi sakhkhara lana hadha wa ma kunna lahu muqrinin wa inna ila Rabbina lamunqalibun,Glorificado sea Quien nos ha puesto esto a nuestro servicio. No hubiéramos podido controlarlo y hacia nuestro Señor retornaremos.,travel,Az-Zukhruf 43:13-14,Hisnul Muslim,1,true
+travel_1,en,,,,,,,,,false
+travel_1,ar,سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ,سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ,,,travel,Az-Zukhruf 43:13-14,Hisnul Muslim,1,true
+travel_2,es,Al salir de viaje,اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ وَعْثَاءِ السَّفَرِ وَكَآبَةِ الْمَنْظَرِ وَسُوءِ الْمُنْقَلَبِ,Allahumma inni a'udhu min wathaa'i s-safari wa kabatati l-manzari wa su'i l-munqalib,"Oh Allah, busco Tu protección contra las dificultades del viaje, la tristeza del retorno y el mal del destino.",travel,Abu Dawud 2597,Hisnul Muslim,1,false
+travel_2,en,,,,,,,,,false
+travel_2,ar,اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ وَعْثَاءِ السَّفَرِ وَكَآبَةِ الْمَنْظَرِ وَسُوءِ الْمُنْقَلَبِ,اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ وَعْثَاءِ السَّفَرِ وَكَآبَةِ الْمَنْظَرِ وَسُوءِ الْمُنْقَلَبِ,,,travel,Abu Dawud 2597,Hisnul Muslim,1,false
+travel_3,es,Al entrar en una ciudad,اللَّهُمَّ بَارِكْ لَنَا فِيهِ,Allahumma barik lana fihi,"Oh Allah, bendícenos en él.",travel,Abu Dawud 3930,Hisnul Muslim,1,false
+travel_3,en,,,,,,,,,false
+travel_3,ar,اللَّهُمَّ بَارِكْ لَنَا فِيهِ,اللَّهُمَّ بَارِكْ لَنَا فِيهِ,,,travel,Abu Dawud 3930,Hisnul Muslim,1,false
+travel_4,es,Al montar en el avión,سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ,Subhana alladhi sakhkhara lana hadha wa ma kunna lahu muqrinin,Glorificado sea Quien puso esto a nuestro servicio cuando noi hubiéramos podido controlarlo.,travel,Az-Zukhruf 43:13,Hisnul Muslim,1,false
+travel_4,en,,,,,,,,,false
+travel_4,ar,سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ,سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ,,,travel,Az-Zukhruf 43:13,Hisnul Muslim,1,false
+travel_5,es,Dua del viajero,اللَّهُمَّ اجْعَلْ لَنَا مِنْهُ خَارِجًا وَمَدْخَلًا وَاجْعَلْ لَنَا مِنْهُ وَجْهًا,Allahumma ja'lana minhu kharijan wa madkhalan wa ja'lana minhu wajhan,"Oh Allah, haz que tengamos una salida y entrada seguras y un destino.",travel,Ibn As-Sunni 269,Hisnul Muslim,1,false
+travel_5,en,,,,,,,,,false
+travel_5,ar,اللَّهُمَّ اجْعَلْ لَنَا مِنْهُ خَارِجًا وَمَدْخَلًا وَاجْعَلْ لَنَا مِنْهُ وَجْهًا,اللَّهُمَّ اجْعَلْ لَنَا مِنْهُ خَارِجًا وَمَدْخَلًا وَاجْعَلْ لَنَا مِنْهُ وَجْهًا,,,travel,Ibn As-Sunni 269,Hisnul Muslim,1,false
+food_1,es,Antes de comer,بِسْمِ اللَّهِ,Bismillah,En el nombre de Allah.,food,At-Tirmidhi 1858,Hisnul Muslim,1,true
+food_1,en,,,,,,,,,false
+food_1,ar,بِسْمِ اللَّهِ,بِسْمِ اللَّهِ,,,food,At-Tirmidhi 1858,Hisnul Muslim,1,true
+food_2,es,Después de comer,الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنِي هَذَا وَرَزَقَنِيهِ مِنْ غَيْرِ حَوْلٍ مِنِّي وَلاَ قُوَّةٍ,Alhamdu lillahi alladhi at'amani hadha wa razaqanihi min ghayri hawlin minni wa la quwwah,Alabado sea Allah que me alimentó con esto y me lo proveyó sin esfuerzo ni poder mío.,food,Abu Dawud 4023,Hisnul Muslim,1,true
+food_2,en,,,,,,,,,false
+food_2,ar,الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنِي هَذَا وَرَزَقَنِيهِ مِنْ غَيْرِ حَوْلٍ مِنِّي وَلاَ قُوَّةٍ,الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنِي هَذَا وَرَزَقَنِيهِ مِنْ غَيْرِ حَوْلٍ مِنِّي وَلاَ قُوَّةٍ,,,food,Abu Dawud 4023,Hisnul Muslim,1,true
+food_3,es,Al beber agua,الْحَمْدُ لِلَّهِ,Alhamdu lillah,Alabado sea Allah.,food,At-Tirmidhi 3456,Hisnul Muslim,1,false
+food_3,en,,,,,,,,,false
+food_3,ar,الْحَمْدُ لِلَّهِ,الْحَمْدُ لِلَّهِ,,,food,At-Tirmidhi 3456,Hisnul Muslim,1,false
+food_4,es,Al romper el ayuno,اللَّهُمَّ لَكَ صُمْتُ وَبِكَ آمَنْتُ وَعَلَيْكَ تَوَكَّلْتُ وَبِرَّكَ أَفْطَرْتُ,Allahumma laka sumtu wa bika amantu wa alayka tawakkaltu wa bi-ka afartu,"Oh Allah, por Ti he ayunado, en Ti he creído, en Ti he confiado y con Tu bendición he roto el ayuno.",food,Abu Dawud 2045,Hisnul Muslim,1,true
+food_4,en,,,,,,,,,false
+food_4,ar,اللَّهُمَّ لَكَ صُمْتُ وَبِكَ آمَنْتُ وَعَلَيْكَ تَوَكَّلْتُ وَبِرَّكَ أَفْطَرْتُ,اللَّهُمَّ لَكَ صُمْتُ وَبِكَ آمَنْتُ وَعَلَيْكَ تَوَكَّلْتُ وَبِرَّكَ أَفْطَرْتُ,,,food,Abu Dawud 2045,Hisnul Muslim,1,true
+food_5,es,Antes de comer el Eid,اللَّهُمَّ أَطْعِمْ مَنْ عَفَا وَاكْسُ مَنْ عَفَا,,"Oh Allah, alimenta a quien ha perdonado y viste a quien ha perdonado.",food,At-Tirmidhi 1020,Hisnul Muslim,1,false
+food_5,en,,,,,,,,,false
+food_5,ar,اللَّهُمَّ أَطْعِمْ مَنْ عَفَا وَاكْسُ مَنْ عَفَا,اللَّهُمَّ أَطْعِمْ مَنْ عَفَا وَاكْسُ مَنْ عَفَا,,,food,At-Tirmidhi 1020,Hisnul Muslim,1,false
+sickness_1,es,Pidiendo curación,اللَّهُمَّ رَبَّ النَّاسِ أَذْهِبِ الْبَأْسَ اشْفِ أَنْتَ الشَّافِي لاَ شِفَاءَ إِلاَّ شِفَاؤُكَ,"Allahumma Rabba n-nas, adhhibi l-ba'sa, ishfi anta sh-Shafi, la shifa'a illa shifa'uk","Oh Allah, Señor de la humanidad, elimina el daño, sana Tu eres el Sanador, no hay sanación sino la Tuya.",sickness,Al-Bukhari 5742,Hisnul Muslim,1,true
+sickness_1,en,,,,,,,,,false
+sickness_1,ar,اللَّهُمَّ رَبَّ النَّاسِ أَذْهِبِ الْبَأْسَ اشْفِ أَنْتَ الشَّافِي لاَ شِفَاءَ إِلاَّ شِفَاؤُكَ,اللَّهُمَّ رَبَّ النَّاسِ أَذْهِبِ الْبَأْسَ اشْفِ أَنْتَ الشَّافِي لاَ شِفَاءَ إِلاَّ شِفَاؤُكَ,,,sickness,Al-Bukhari 5742,Hisnul Muslim,1,true
+sickness_2,es,Al visitar a un enfermo,لاَ بَأْسَ طَهُورٌ إِنْ شَاءَ اللَّهُ,La ba'sa tahurun in sha' Allah,"No hay mal, será una purificación, si Allah quiere.",sickness,Al-Bukhari 5662,Hisnul Muslim,1,false
+sickness_2,en,,,,,,,,,false
+sickness_2,ar,لاَ بَأْسَ طَهُورٌ إِنْ شَاءَ اللَّهُ,لاَ بَأْسَ طَهُورٌ إِنْ شَاءَ اللَّهُ,,,sickness,Al-Bukhari 5662,Hisnul Muslim,1,false
+sickness_3,es,Oración del enfermo,رَبِّ اشْفِهِ وَعَافِهِ,Rabbi ishfi-hi wa 'afihi,"Señor mío, sanalo y dale salud.",sickness,Al-Bukhari 5641,Hisnul Muslim,1,false
+sickness_3,en,,,,,,,,,false
+sickness_3,ar,رَبِّ اشْفِهِ وَعَافِهِ,رَبِّ اشْفِهِ وَعَافِهِ,,,sickness,Al-Bukhari 5641,Hisnul Muslim,1,false
+sickness_4,es,Al sentirse mal,بِسْمِ اللَّهِ أَعُوذُ بِعِزَّةِ اللَّهِ وَقُدْرَتِهِ مِنْ شَرِّ مَا أَجِدُ,Bismillah a'udhu bi-izzati Allahi wa qudratihi min sharri ma ajidu,En el nombre de Allah. Busco refugio en el poder y fuerza de Allah del mal que me afecta.,sickness,Abu Dawud 3894,Hisnul Muslim,1,false
+sickness_4,en,,,,,,,,,false
+sickness_4,ar,بِسْمِ اللَّهِ أَعُوذُ بِعِزَّةِ اللَّهِ وَقُدْرَتِهِ مِنْ شَرِّ مَا أَجِدُ,بِسْمِ اللَّهِ أَعُوذُ بِعِزَّةِ اللَّهِ وَقُدْرَتِهِ مِنْ شَرِّ مَا أَجِدُ,,,sickness,Abu Dawud 3894,Hisnul Muslim,1,false
+sickness_5,es,Dua para el dolor de cabeza,بِسْمِ اللَّهِ أَرْقيكَ مِنْ كُلِّ شَيْءٍ يُؤْذِيكَ وَمِنْ شَرِّ كُلِّ نَفْسٍ أَوْ عَيْنٍ حَاسِدٍ,Bismillah arqika min kulli shay'in yudhika wa min sharri kulli nafsin aw 'aynin hasidin,En el nombre de Allah te conjuro contra todo lo que te daña y contra el mal de toda persona envidiosa.,sickness,Al-Bukhari 5740,Hisnul Muslim,1,false
+sickness_5,en,,,,,,,,,false
+sickness_5,ar,بِسْمِ اللَّهِ أَرْقيكَ مِنْ كُلِّ شَيْءٍ يُؤْذِيكَ وَمِنْ شَرِّ كُلِّ نَفْسٍ أَوْ عَيْنٍ حَاسِدٍ,بِسْمِ اللَّهِ أَرْقيكَ مِنْ كُلِّ شَيْءٍ يُؤْذِيكَ وَمِنْ شَرِّ كُلِّ نَفْسٍ أَوْ عَيْنٍ حَاسِدٍ,,,sickness,Al-Bukhari 5740,Hisnul Muslim,1,false
+protection_1,es,Protección general,أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ,A'udhu bi kalimati llahi t-tammati min sharri ma khalaq,Busco refugio en las palabras completas de Allah del mal de lo que ha creado.,protection,Muslim 2709,Hisnul Muslim,3,true
+protection_1,en,,,,,,,,,false
+protection_1,ar,أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ,أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ,,,protection,Muslim 2709,Hisnul Muslim,3,true
+protection_2,es,Protección para los hijos,أُعِيذُكُمَا بِكَلِمَاتِ اللَّهِ التَّامَّةِ مِنْ كُلِّ شَيْطَانٍ وَهَامَّةٍ وَمِنْ كُلِّ عَيْنٍ لَامَّةٍ,U'idhukuma bi kalimati llahi t-tammati min kulli shaytanin wa hammah wa min kulli 'aynin lammah,"Os pongo bajo la protección de las palabras completas de Allah contra todo demonio, toda criatura dañina y toda mirada perjudicial.",protection,Al-Bukhari 3371,Hisnul Muslim,1,false
+protection_2,en,,,,,,,,,false
+protection_2,ar,أُعِيذُكُمَا بِكَلِمَاتِ اللَّهِ التَّامَّةِ مِنْ كُلِّ شَيْطَانٍ وَهَامَّةٍ وَمِنْ كُلِّ عَيْنٍ لَامَّةٍ,أُعِيذُكُمَا بِكَلِمَاتِ اللَّهِ التَّامَّةِ مِنْ كُلِّ شَيْطَانٍ وَهَامَّةٍ وَمِنْ كُلِّ عَيْنٍ لَامَّةٍ,,,protection,Al-Bukhari 3371,Hisnul Muslim,1,false
+protection_3,es,Protección contra el mal,أَعُوذُ بِكَرَامَاتِهِ وَقُدْرَتِهِ مِنْ شَرِّ مَا يَنْزِلُ مِنْ السَّمَاءِ,A'udhu bi karamatihi wa qudratihi min sharri ma yanzilu min as-sama',Busco refugio en Sus nobles atributos y poder contra el mal que desciende del cielo.,protection,At-Tirmidhi 3428,Hisnul Muslim,1,false
+protection_3,en,,,,,,,,,false
+protection_3,ar,أَعُوذُ بِكَرَامَاتِهِ وَقُدْرَتِهِ مِنْ شَرِّ مَا يَنْزِلُ مِنْ السَّمَاءِ,أَعُوذُ بِكَرَامَاتِهِ وَقُدْرَتِهِ مِنْ شَرِّ مَا يَنْزِلُ مِنْ السَّمَاءِ,,,protection,At-Tirmidhi 3428,Hisnul Muslim,1,false
+protection_4,es,Contra la envidia,بِسْمِ اللَّهِ أَعُوذُ بِكَ مِنْ شَرِّ مَا خَلَقَ,Bismillah a'udhu ka min sharri ma khalaq,"En el nombre de Allah, busco Tu protección del mal de lo que ha creado.",protection,Muslim 2714,Hisnul Muslim,1,false
+protection_4,en,,,,,,,,,false
+protection_4,ar,بِسْمِ اللَّهِ أَعُوذُ بِكَ مِنْ شَرِّ مَا خَلَقَ,بِسْمِ اللَّهِ أَعُوذُ بِكَ مِنْ شَرِّ مَا خَلَقَ,,,protection,Muslim 2714,Hisnul Muslim,1,false
+protection_5,es,Contra los malos pensamientos,اللَّهُمَّ مُنَفِّرَ الشَّيَاطِينِ وَمُخَلِّصِ الْمُؤْمِنِينَ,Allahumma munaffiri sh-shayatin wa mukhalasi l-mu'minin,"Oh Allah, aleja a los demonios y libera a los creyentes.",protection,Al-Bukhari 6326,Hisnul Muslim,1,false
+protection_5,en,,,,,,,,,false
+protection_5,ar,اللَّهُمَّ مُنَفِّرَ الشَّيَاطِينِ وَمُخَلِّصِ الْمُؤْمِنِينَ,اللَّهُمَّ مُنَفِّرَ الشَّيَاطِينِ وَمُخَلِّصِ الْمُؤْمِنِينَ,,,protection,Al-Bukhari 6326,Hisnul Muslim,1,false
+repentance_1,es,Sayyid al-Istighfar,اللَّهُمَّ أَنْتَ رَبِّي لاَ إِلَهَ إِلاَّ أَنْتَ خَلَقْتَنِي وَأَنَا عَبْدُكَ وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ,"Allahumma anta Rabbi la ilaha illa anta, khalaqtani wa ana abduka wa ana ala ahdika wa wa'dika ma-stata't","Oh Allah, Tú eres mi Señor. No hay divinidad sino Tú. Me creaste y soy Tu siervo. Cumpliré Tu pacto y promesa en la medida de lo posible.",repentance,Al-Bukhari 6306,Hisnul Muslim,1,true
+repentance_1,en,,,,,,,,,false
+repentance_1,ar,اللَّهُمَّ أَنْتَ رَبِّي لاَ إِلَهَ إِلاَّ أَنْتَ خَلَقْتَنِي وَأَنَا عَبْدُكَ وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ,اللَّهُمَّ أَنْتَ رَبِّي لاَ إِلَهَ إِلاَّ أَنْتَ خَلَقْتَنِي وَأَنَا عَبْدُكَ وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ,,,repentance,Al-Bukhari 6306,Hisnul Muslim,1,true
+repentance_2,es,Perdón sencillo,رَبِّ اغْفِرْ لِي وَتُبْ عَلَيَّ إِنَّكَ أَنْتَ التَّوَّابُ الرَّحِيمُ,"Rabbighfir li wa tub alayya, innaka anta t-Tawwabu r-Rahim","Señor mío, perdóname y acepta mi arrepentimiento. Ciertamente Tú acceptas el arrepentimiento y eres Misericordioso.",repentance,At-Tirmidhi 3434,Hisnul Muslim,1,false
+repentance_2,en,,,,,,,,,false
+repentance_2,ar,رَبِّ اغْفِرْ لِي وَتُبْ عَلَيَّ إِنَّكَ أَنْتَ التَّوَّابُ الرَّحِيمُ,رَبِّ اغْفِرْ لِي وَتُبْ عَلَيَّ إِنَّكَ أَنْتَ التَّوَّابُ الرَّحِيمُ,,,repentance,At-Tirmidhi 3434,Hisnul Muslim,1,false
+repentance_3,es,Astaghfirullah al-azim,أَسْتَغْفِرُ اللَّهَ الْعَظِيمَ الَّذِي لَا إِلَهَ إِلاَّ هُوَ الْحَيُّ الْقَيُّومُ وَأَتُوبُ إِلَيْهِ,,"Pido perdón a Allah el Grandioso, no hay divinidad sino Él, el Viviente, el Subsistente, y me arrepiento a Él.",repentance,At-Tirmidhi 3577,Hisnul Muslim,3,false
+repentance_3,en,,,,,,,,,false
+repentance_3,ar,أَسْتَغْفِرُ اللَّهَ الْعَظِيمَ الَّذِي لَا إِلَهَ إِلاَّ هُوَ الْحَيُّ الْقَيُّومُ وَأَتُوبُ إِلَيْهِ,أَسْتَغْفِرُ اللَّهَ الْعَظِيمَ الَّذِي لَا إِلَهَ إِلاَّ هُوَ الْحَيُّ الْقَيُّومُ وَأَتُوبُ إِلَيْهِ,,,repentance,At-Tirmidhi 3577,Hisnul Muslim,3,false
+repentance_4,es,Dua de Tarawih,اللَّهُمَّ إِنَّكَ عُفُوٌّ كَرِيمٌ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي,,"Oh Allah, realmente eres Perdonador y Generoso, Te gusta el perdón, perdóname.",repentance,At-Tirmidhi 3513,Hisnul Muslim,1,false
+repentance_4,en,,,,,,,,,false
+repentance_4,ar,اللَّهُمَّ إِنَّكَ عُفُوٌّ كَرِيمٌ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي,اللَّهُمَّ إِنَّكَ عُفُوٌّ كَرِيمٌ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي,,,repentance,At-Tirmidhi 3513,Hisnul Muslim,1,false
+mosque_1,es,Al entrar en la mezquita,اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ,Allahumma iftah li abwaba rahmatik,"Oh Allah, ábreme las puertas de Tu misericordia.",mosque,Muslim 713,Hisnul Muslim,1,true
+mosque_1,en,,,,,,,,,false
+mosque_1,ar,اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ,اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ,,,mosque,Muslim 713,Hisnul Muslim,1,true
+mosque_2,es,Al salir de la mezquita,اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ,Allahumma inni as'aluka min fadlik,"Oh Allah, te pido de Tu favor.",mosque,Muslim 713,Hisnul Muslim,1,false
+mosque_2,en,,,,,,,,,false
+mosque_2,ar,اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ,اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ,,,mosque,Muslim 713,Hisnul Muslim,1,false
+mosque_3,es,Al escuchar el adhan,وَأَنَا أَشْهَدُ أَنْ لاَ إِلَهَ إِلاَّ اللَّهُ وَأَنَّ مُحَمَّدًا رَسُولُ اللَّهِ,Wa ana ashhadu an la ilaha illa Allah wa anna Muhammadan rasul Allah,Y yo testifico que no hay divinidad sino Allah y que Muhammad es el mensajero de Allah.,mosque,Muslim 385,Hisnul Muslim,1,false
+mosque_3,en,,,,,,,,,false
+mosque_3,ar,وَأَنَا أَشْهَدُ أَنْ لاَ إِلَهَ إِلاَّ اللَّهُ وَأَنَّ مُحَمَّدًا رَسُولُ اللَّهِ,وَأَنَا أَشْهَدُ أَنْ لاَ إِلَهَ إِلاَّ اللَّهُ وَأَنَّ مُحَمَّدًا رَسُولُ اللَّهِ,,,mosque,Muslim 385,Hisnul Muslim,1,false
+mosque_4,es,Al hacer duaa en la mezquita,اللَّهُمَّ رَبَّ هَذِهِ الدَّعْوَةِ التَّامَّةِ,,"Oh Allah, Señor de esta invitación perfecta.",mosque,Al-Bukhari 720,Hisnul Muslim,1,false
+mosque_4,en,,,,,,,,,false
+mosque_4,ar,اللَّهُمَّ رَبَّ هَذِهِ الدَّعْوَةِ التَّامَّةِ,اللَّهُمَّ رَبَّ هَذِهِ الدَّعْوَةِ التَّامَّةِ,,,mosque,Al-Bukhari 720,Hisnul Muslim,1,false
+mosque_5,es,Shadak,صَدَقَ اللَّهُ الْكَبِيرُ,,"Allah ha dicho la verdad, el Grandioso.",mosque,Al-Bukhari 738,Hisnul Muslim,1,false
+mosque_5,en,,,,,,,,,false
+mosque_5,ar,صَدَقَ اللَّهُ الْكَبِيرُ,صَدَقَ اللَّهُ الْكَبِيرُ,,,mosque,Al-Bukhari 738,Hisnul Muslim,1,false
+rain_1,es,Al ver la lluvia,اللَّهُمَّ صَيِّبًا نَافِعًا,Allahumma sayyiban nafi'an,"Oh Allah, concédenos lluvia beneficiosa.",rain,Al-Bukhari 1032,Hisnul Muslim,1,true
+rain_1,en,,,,,,,,,false
+rain_1,ar,اللَّهُمَّ صَيِّبًا نَافِعًا,اللَّهُمَّ صَيِّبًا نَافِعًا,,,rain,Al-Bukhari 1032,Hisnul Muslim,1,true
+rain_2,es,Después de la lluvia,مُطِرْنَا بِفَضْلِ اللَّهِ وَرَحْمَتِهِ,Mutirna bi fadli llahi wa rahmatih,Ha llovido por el favor y la misericordia de Allah.,rain,Al-Bukhari 846,Hisnul Muslim,1,false
+rain_2,en,,,,,,,,,false
+rain_2,ar,مُطِرْنَا بِفَضْلِ اللَّهِ وَرَحْمَتِهِ,مُطِرْنَا بِفَضْلِ اللَّهِ وَرَحْمَتِهِ,,,rain,Al-Bukhari 846,Hisnul Muslim,1,false
+rain_3,es,Dua durante la sequía,اللَّهُمَّ اسْقِنَا غَيْثًا مُغِيثًا مَرِيئًا نَافِعًا,,"Oh Allah, danos lluvia abundante, que瑞 refresque, sea nutritiva y beneficiosa.",rain,Ibn Majah 2269,Hisnul Muslim,1,false
+rain_3,en,,,,,,,,,false
+rain_3,ar,اللَّهُمَّ اسْقِنَا غَيْثًا مُغِيثًا مَرِيئًا نَافِعًا,اللَّهُمَّ اسْقِنَا غَيْثًا مُغِيثًا مَرِيئًا نَافِعًا,,,rain,Ibn Majah 2269,Hisnul Muslim,1,false
+stress_1,es,Dua de Yunus,لاَ إِلَهَ إِلاَّ أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ,La ilaha illa anta subhanaka inni kuntu mina z-zalimin,No hay divinidad sino Tú. Glorificado seas. Ciertamente he sido de los injustos.,stress,Al-Anbiya 21:87,Hisnul Muslim,1,true
+stress_1,en,,,,,,,,,false
+stress_1,ar,لاَ إِلَهَ إِلاَّ أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ,لاَ إِلَهَ إِلاَّ أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ,,,stress,Al-Anbiya 21:87,Hisnul Muslim,1,true
+stress_2,es,Facilidad en las dificultades,اللَّهُمَّ لاَ سَهْلَ إِلاَّ مَا جَعَلْتَهُ سَهْلاً وَأَنْتَ تَجْعَلُ الْحُزْنَ إِذَا شِئْتَ سَهْلاً,"Allahumma la sahla illa ma ja'altahu sahla, wa anta taj'alu l-hazna idha shi'ta sahla","Oh Allah, no hay facilidad sino la que Tú haces fácil, y Tú haces la tristeza fácil cuando quieres.",stress,Ibn Hibban 2427,Hisnul Muslim,1,false
+stress_2,en,,,,,,,,,false
+stress_2,ar,اللَّهُمَّ لاَ سَهْلَ إِلاَّ مَا جَعَلْتَهُ سَهْلاً وَأَنْتَ تَجْعَلُ الْحُزْنَ إِذَا شِئْتَ سَهْلاً,اللَّهُمَّ لاَ سَهْلَ إِلاَّ مَا جَعَلْتَهُ سَهْلاً وَأَنْتَ تَجْعَلُ الْحُزْنَ إِذَا شِئْتَ سَهْلاً,,,stress,Ibn Hibban 2427,Hisnul Muslim,1,false
+stress_3,es,En momentos difíciles,حَسْبِيَ اللَّهُ وَكَفَى,Hasbiya Allahu wa kafa,Allah me basta y es suficiente.,stress,Az-Zumar 39:38,Hisnul Muslim,1,false
+stress_3,en,,,,,,,,,false
+stress_3,ar,حَسْبِيَ اللَّهُ وَكَفَى,حَسْبِيَ اللَّهُ وَكَفَى,,,stress,Az-Zumar 39:38,Hisnul Muslim,1,false
+stress_4,es,Cuando algo sale mal,رَبِّ إِنِّي لِمَا أَنْزَلْتَ إِلَيَّ مِنْ خَيْرٍ فَقِيرٌ,Rabbi inni lima anzalta ilayya min khayrin faqir,"Señor mío, realmente estoy necesitado de todo bien que Tú me envíes.",stress,Al-Qasas 28:24,Hisnul Muslim,1,false
+stress_4,en,,,,,,,,,false
+stress_4,ar,رَبِّ إِنِّي لِمَا أَنْزَلْتَ إِلَيَّ مِنْ خَيْرٍ فَقِيرٌ,رَبِّ إِنِّي لِمَا أَنْزَلْتَ إِلَيَّ مِنْ خَيْرٍ فَقِيرٌ,,,stress,Al-Qasas 28:24,Hisnul Muslim,1,false
+stress_5,es,Dua de Musa,رَبِّ إِنِّي ظَلَمْتُ نَفْسِي فَاغْفِرْ لِي,,"Señor mío, he sido injusto conmigo mismo. Perdóname.",stress,Al-Qasas 28:16,Hisnul Muslim,1,false
+stress_5,en,,,,,,,,,false
+stress_5,ar,رَبِّ إِنِّي ظَلَمْتُ نَفْسِي فَاغْفِرْ لِي,رَبِّ إِنِّي ظَلَمْتُ نَفْسِي فَاغْفِرْ لِي,,,stress,Al-Qasas 28:16,Hisnul Muslim,1,false
+gratitude_1,es,Gratitud por los beneficios,الْحَمْدُ لِلَّهِ الَّذِي بِنِعْمَتِهِ تَتِمُّ الصَّالِحَاتُ,Alhamdu lillahi alladhi bi ni'matihi tatimmu s-salihat,"Alabado sea Allah, por cuyo favor se completan las buenas obras.",gratitude,Ibn Majah 3803,Hisnul Muslim,1,true
+gratitude_1,en,,,,,,,,,false
+gratitude_1,ar,الْحَمْدُ لِلَّهِ الَّذِي بِنِعْمَتِهِ تَتِمُّ الصَّالِحَاتُ,الْحَمْدُ لِلَّهِ الَّذِي بِنِعْمَتِهِ تَتِمُّ الصَّالِحَاتُ,,,gratitude,Ibn Majah 3803,Hisnul Muslim,1,true
+gratitude_2,es,Pidiendo ser agradecido,رَبِّ أَوْزِعْنِي أَنْ أَشْكُرَ نِعْمَتَكَ الَّتِي أَنْعَمْتَ عَلَيَّ,Rabbi awzi'ni an ashkura ni'mataka allati an'amta alayya,"Señor mío, inspírame a agradecerTu favor que me has concesiónado.",gratitude,Al-Ankabut 27:19,Hisnul Muslim,1,false
+gratitude_2,en,,,,,,,,,false
+gratitude_2,ar,رَبِّ أَوْزِعْنِي أَنْ أَشْكُرَ نِعْمَتَكَ الَّتِي أَنْعَمْتَ عَلَيَّ,رَبِّ أَوْزِعْنِي أَنْ أَشْكُرَ نِعْمَتَكَ الَّتِي أَنْعَمْتَ عَلَيَّ,,,gratitude,Al-Ankabut 27:19,Hisnul Muslim,1,false
+gratitude_3,es,Al recibir una bendición,اللَّهُمَّ لَكَ الْحَمْدُ حَتَّى تَرْضَى,,"Oh Allah, a Ti pertenece la alabanza hasta que estés satisfecho.",gratitude,At-Tirmidhi 2732,Hisnul Muslim,1,false
+gratitude_3,en,,,,,,,,,false
+gratitude_3,ar,اللَّهُمَّ لَكَ الْحَمْدُ حَتَّى تَرْضَى,اللَّهُمَّ لَكَ الْحَمْدُ حَتَّى تَرْضَى,,,gratitude,At-Tirmidhi 2732,Hisnul Muslim,1,false
+gratitude_4,es,Shukran liLlah,شُكْرًا لِلَّهِ,,Gracias a Allah.,gratitude,Al-Bukhari 6042,Hisnul Muslim,1,false
+gratitude_4,en,,,,,,,,,false
+gratitude_4,ar,شُكْرًا لِلَّهِ,شُكْرًا لِلَّهِ,,,gratitude,Al-Bukhari 6042,Hisnul Muslim,1,false
+after_prayer_1,es,Después de la oración,اللَّهُمَّ أَعِنِّي عَلَى ذِكْرِكَ وَشُكْرِكَ وَحُسْنِ عِبَادَتِكَ,Allahumma a'inni ala dhikrika wa shukrika wa husni 'ibadatika,"Oh Allah, ayúdame a recordarte, agradecerte y adorarte excelentemente.",after_prayer,Abu Dawud 1422,Hisnul Muslim,1,true
+after_prayer_1,en,,,,,,,,,false
+after_prayer_1,ar,اللَّهُمَّ أَعِنِّي عَلَى ذِكْرِكَ وَشُكْرِكَ وَحُسْنِ عِبَادَتِكَ,اللَّهُمَّ أَعِنِّي عَلَى ذِكْرِكَ وَشُكْرِكَ وَحُسْنِ عِبَادَتِكَ,,,after_prayer,Abu Dawud 1422,Hisnul Muslim,1,true
+after_prayer_2,es,SubhanAllah,سُبْحَانَ اللَّهِ,SubhanAllah,Glorificado sea Allah.,after_prayer,Al-Bukhari 6405,Hisnul Muslim,33,false
+after_prayer_2,en,,,,,,,,,false
+after_prayer_2,ar,سُبْحَانَ اللَّهِ,سُبْحَانَ اللَّهِ,,,after_prayer,Al-Bukhari 6405,Hisnul Muslim,33,false
+after_prayer_3,es,AlhamduLillah,الْحَمْدُ لِلَّهِ,AlhamduLillah,Alabado sea Allah.,after_prayer,Al-Bukhari 6405,Hisnul Muslim,33,false
+after_prayer_3,en,,,,,,,,,false
+after_prayer_3,ar,الْحَمْدُ لِلَّهِ,الْحَمْدُ لِلَّهِ,,,after_prayer,Al-Bukhari 6405,Hisnul Muslim,33,false
+after_prayer_4,es,Allahu Akbar,اللَّهُ أَكْبَرُ,Allahu Akbar,Allah es el Más Grande.,after_prayer,Al-Bukhari 6405,Hisnul Muslim,34,false
+after_prayer_4,en,,,,,,,,,false
+after_prayer_4,ar,اللَّهُ أَكْبَرُ,اللَّهُ أَكْبَرُ,,,after_prayer,Al-Bukhari 6405,Hisnul Muslim,34,false
+after_prayer_5,es,Shahada final,لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ,"La ilaha illa Allahu wahdahu la sharika lahu, lahu l-mulku wa lahu l-hamdu wa huwa ala kulli shay'in qadir","No hay divinidad sino Allah, Único, sin compañero. Suyo es el dominio y la alabanza, y Él tiene poder sobre todas las cosas.",after_prayer,Al-Bukhari 6406,Hisnul Muslim,1,false
+after_prayer_5,en,,,,,,,,,false
+after_prayer_5,ar,لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ,لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ,,,after_prayer,Al-Bukhari 6406,Hisnul Muslim,1,false
+after_prayer_6,es,Protección contra la hipocresía,اللَّهُمَّ لَا تُخْزِنِي يَوْمَ الْقِيَامَةِ,,"Oh Allah, no me humilles el Día del Juicio.",after_prayer,Abu Dawud 767,Hisnul Muslim,1,false
+after_prayer_6,en,,,,,,,,,false
+after_prayer_6,ar,اللَّهُمَّ لَا تُخْزِنِي يَوْمَ الْقِيَامَةِ,اللَّهُمَّ لَا تُخْزِنِي يَوْمَ الْقِيَامَةِ,,,after_prayer,Abu Dawud 767,Hisnul Muslim,1,false
+after_prayer_7,es,Entrada al Paraíso,اللَّهُمَّ أَجِرْنِي مِنَ النَّارِ,,"Oh Allah,guárdame del Fuego.",after_prayer,Al-Bukhari 6328,Hisnul Muslim,1,false
+after_prayer_7,en,,,,,,,,,false
+after_prayer_7,ar,اللَّهُمَّ أَجِرْنِي مِنَ النَّارِ,اللَّهُمَّ أَجِرْنِي مِنَ النَّارِ,,,after_prayer,Al-Bukhari 6328,Hisnul Muslim,1,false
+wudu_1,es,Al hacer wudu,أَشْهَدُ أَنْ لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ,Ashhadu an la ilaha illa Allahu wahdahu la sharika lahu wa ashhadu anna Muhammadan 'abduhu wa rasuluhu,"Testifico que no hay divinidad sino Allah, Único, sin compañero. Y testifico que Muhammad es Su siervo y mensajero.",wudu,Muslim 234,Hisnul Muslim,1,true
+wudu_1,en,,,,,,,,,false
+wudu_1,ar,أَشْهَدُ أَنْ لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ,أَشْهَدُ أَنْ لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ,,,wudu,Muslim 234,Hisnul Muslim,1,true
+wudu_2,es,Después del wudu,اللَّهُمَّ اجْعَلْنِي مِنَ التَّوَّابِينَ وَاجْعَلْنِي مِنَ الْمُتَطَهِّرِينَ,Allahumma ja'ali mina t-tawwabina wa ja'ali mina l-mutatahhirin,"Oh Allah, inclúyeme entre los que se arrepienten y entre los purificados.",wudu,At-Tirmidhi 55,Hisnul Muslim,1,false
+wudu_2,en,,,,,,,,,false
+wudu_2,ar,اللَّهُمَّ اجْعَلْنِي مِنَ التَّوَّابِينَ وَاجْعَلْنِي مِنَ الْمُتَطَهِّرِينَ,اللَّهُمَّ اجْعَلْنِي مِنَ التَّوَّابِينَ وَاجْعَلْنِي مِنَ الْمُتَطَهِّرِينَ,,,wudu,At-Tirmidhi 55,Hisnul Muslim,1,false
+wudu_3,es,Wudu completo,شَهِدْتُ أَنْ لاَ إِلَهَ إِلاَّ اللَّهُ وَأَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ,,Testifico que no hay divinidad sino Allah y que Muhammad es Su siervo y mensajero.,wudu,Al-Bukhari 6296,Hisnul Muslim,1,false
+wudu_3,en,,,,,,,,,false
+wudu_3,ar,شَهِدْتُ أَنْ لاَ إِلَهَ إِلاَّ اللَّهُ وَأَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ,شَهِدْتُ أَنْ لاَ إِلَهَ إِلاَّ اللَّهُ وَأَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ,,,wudu,Al-Bukhari 6296,Hisnul Muslim,1,false
+hajj_1,es,Talbiya,لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ، لَبَّيْكَ لاَ شَرِيكَ لَكَ لَبَّيْكَ، إِنَّ الْحَمْدَ وَالنِّعْمَةَ لَكَ وَالْمُلْكَ لاَ شَرِيكَ لَكَ,"Labbayka Allahumma labbayka, labbayka la sharika laka labbayka, inna l-hamda wa n-ni'mata laka wa l-mulka la sharika laka","A tu servicio, Allah, a tu servicio. A tu servicio no tienes compañero. A tu servicio. Ciertamente la alabanza, el favor y el dominio son Tuyos, no tienes compañero.",hajj,Al-Bukhari 6149,Hisnul Muslim,1,true
+hajj_1,en,,,,,,,,,false
+hajj_1,ar,لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ، لَبَّيْكَ لاَ شَرِيكَ لَكَ لَبَّيْكَ، إِنَّ الْحَمْدَ وَالنِّعْمَةَ لَكَ وَالْمُلْكَ لاَ شَرِيكَ لَكَ,لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ، لَبَّيْكَ لاَ شَرِيكَ لَكَ لَبَّيْكَ، إِنَّ الْحَمْدَ وَالنِّعْمَةَ لَكَ وَالْمُلْكَ لاَ شَرِيكَ لَكَ,,,hajj,Al-Bukhari 6149,Hisnul Muslim,1,true
+hajj_2,es,Al ver la Ka'ba,اللَّهُمَّ زِدْ هَذَا الْبَيْتَ تَكْرِيمًا وَتَعْظِيمًا وَمَهَابَةً,Allahumma zid hadha l-bayta takriman wa ta'ziman wa mahabatan,"Oh Allah, aumenta el honor, grandeza y reverencia de esta Casa.",hajj,Al-Bukhari 1333,Hisnul Muslim,1,false
+hajj_2,en,,,,,,,,,false
+hajj_2,ar,اللَّهُمَّ زِدْ هَذَا الْبَيْتَ تَكْرِيمًا وَتَعْظِيمًا وَمَهَابَةً,اللَّهُمَّ زِدْ هَذَا الْبَيْتَ تَكْرِيمًا وَتَعْظِيمًا وَمَهَابَةً,,,hajj,Al-Bukhari 1333,Hisnul Muslim,1,false
+hajj_3,es,Al Tawaf,رَبِّ اجْعَلْنِي مُقِيمَ الصَّلَاةِ وَمِنْ ذُرِّيَّتِي,,"Señor mío, haz que yo sea persistente en la oración y también de mi descendencia.",hajj,Ibrahim 14:40,Hisnul Muslim,1,false
+hajj_3,en,,,,,,,,,false
+hajj_3,ar,رَبِّ اجْعَلْنِي مُقِيمَ الصَّلَاةِ وَمِنْ ذُرِّيَّتِي,رَبِّ اجْعَلْنِي مُقِيمَ الصَّلَاةِ وَمِنْ ذُرِّيَّتِي,,,hajj,Ibrahim 14:40,Hisnul Muslim,1,false
+hajj_4,es,Dua de Sa'i,اللَّهُمَّ اجْعَلْ فِي قَلْبِي نُورًا وَفِي بَصَرِي نُورًا,,"Oh Allah, pon luz en mi corazón y luz en mi vista.",hajj,Al-Bukhari 6316,Hisnul Muslim,1,false
+hajj_4,en,,,,,,,,,false
+hajj_4,ar,اللَّهُمَّ اجْعَلْ فِي قَلْبِي نُورًا وَفِي بَصَرِي نُورًا,اللَّهُمَّ اجْعَلْ فِي قَلْبِي نُورًا وَفِي بَصَرِي نُورًا,,,hajj,Al-Bukhari 6316,Hisnul Muslim,1,false
+parents_1,es,Oración por los padres,رَبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا,Rabbi irhamhuma kama rabbayani saghira,"Señor mío, ten misericordia de ellos como me criaron de pequeño.",parents,Al-Isra 17:24,Hisnul Muslim,1,true
+parents_1,en,,,,,,,,,false
+parents_1,ar,رَبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا,رَبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا,,,parents,Al-Isra 17:24,Hisnul Muslim,1,true
+parents_2,es,Bendición de los padres,رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ,Rabbana hab lana min azwajina wa dhurriyyatina qurra a'yunin,"Señor nuestro, concédenos de esposas y descendientes la alegría de nuestros ojos.",parents,Al-Furqan 25:74,Hisnul Muslim,1,false
+parents_2,en,,,,,,,,,false
+parents_2,ar,رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ,رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ,,,parents,Al-Furqan 25:74,Hisnul Muslim,1,false
+parents_3,es,Bendición de los hijos,اللَّهُمَّ بَارِكْ لِي فِي أَهْلِي,,"Oh Allah, bendice a mi familia.",parents,Al-Bukhari 6332,Hisnul Muslim,1,false
+parents_3,en,,,,,,,,,false
+parents_3,ar,اللَّهُمَّ بَارِكْ لِي فِي أَهْلِي,اللَّهُمَّ بَارِكْ لِي فِي أَهْلِي,,,parents,Al-Bukhari 6332,Hisnul Muslim,1,false
+parents_4,es,Por los padres difuntos,اللَّهُمَّ اغْفِرْ لِوَالِدَيَّ وَارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا,,"Oh Allah, perdona a mis padres y ten misericordia de ellos como me criaron de pequeño.",parents,Al-Bukhari 2472,Hisnul Muslim,1,false
+parents_4,en,,,,,,,,,false
+parents_4,ar,اللَّهُمَّ اغْفِرْ لِوَالِدَيَّ وَارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا,اللَّهُمَّ اغْفِرْ لِوَالِدَيَّ وَارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا,,,parents,Al-Bukhari 2472,Hisnul Muslim,1,false
+zikr_1,es,Tasbih por la mañana,سُبْحَانَ اللَّهِ وَبِحَمْدِهِ,Subhana Allahi wa bi-hamdihi,Glorificado sea Allah y con Él la alabanza.,zikr,Muslim 2692,Hisnul Muslim,100,false
+zikr_1,en,,,,,,,,,false
+zikr_1,ar,سُبْحَانَ اللَّهِ وَبِحَمْدِهِ,سُبْحَانَ اللَّهِ وَبِحَمْدِهِ,,,zikr,Muslim 2692,Hisnul Muslim,100,false
+zikr_2,es,Tahmid,الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ,Alhamdu lillahi Rabbi l-alamin,"Alabado sea Allah, Señor de los mundos.",zikr,Al-Fatiha 1:2,Hisnul Muslim,1,false
+zikr_2,en,,,,,,,,,false
+zikr_2,ar,الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ,الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ,,,zikr,Al-Fatiha 1:2,Hisnul Muslim,1,false
+zikr_3,es,Takbir,اللَّهُ أَكْبَرُ كَبِيرًا,Allahu Akbar kabiran,Allah es grandísimo.,zikr,Al-Bukhari 6406,Hisnul Muslim,1,false
+zikr_3,en,,,,,,,,,false
+zikr_3,ar,اللَّهُ أَكْبَرُ كَبِيرًا,اللَّهُ أَكْبَرُ كَبِيرًا,,,zikr,Al-Bukhari 6406,Hisnul Muslim,1,false
+zikr_4,es,Astaghfirullah,أَسْتَغْفِرُ اللَّهَ الْعَظِيمَ,Astaghfirullah al-'azim,Pido perdón a Allah el Grandioso.,zikr,Al-Bukhari 6407,Hisnul Muslim,3,false
+zikr_4,en,,,,,,,,,false
+zikr_4,ar,أَسْتَغْفِرُ اللَّهَ الْعَظِيمَ,أَسْتَغْفِرُ اللَّهَ الْعَظِيمَ,,,zikr,Al-Bukhari 6407,Hisnul Muslim,3,false
+zikr_5,es,La ilaha illa Allah,لَا إِلَهَ إِلَّا اللَّهُ,La ilaha illa Allah,No hay divinidad sino Allah.,zikr,Al-Bukhari 6408,Hisnul Muslim,10,false
+zikr_5,en,,,,,,,,,false
+zikr_5,ar,لَا إِلَهَ إِلَّا اللَّهُ,لَا إِلَهَ إِلَّا اللَّهُ,,,zikr,Al-Bukhari 6408,Hisnul Muslim,10,false
+zikr_6,es,Kalima Tawhid,لَا إِلَهَ إِلَّا اللَّهُ مُحَمَّدٌ رَسُولُ اللَّهِ,La ilaha illa Allah Muhammadun rasul Allah,No hay divinidad sino Allah y Muhammad es el mensajero de Allah.,zikr,Muslim 190,Hisnul Muslim,1,false
+zikr_6,en,,,,,,,,,false
+zikr_6,ar,لَا إِلَهَ إِلَّا اللَّهُ مُحَمَّدٌ رَسُولُ اللَّهِ,لَا إِلَهَ إِلَّا اللَّهُ مُحَمَّدٌ رَسُولُ اللَّهِ,,,zikr,Muslim 190,Hisnul Muslim,1,false
+zikr_7,es,Rabana atina,رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ,Rabbanaatina fil-dunya hasanatan wa fil-akhirati hasanatan wa qina 'adhab an-nar,"Señor nuestro, danos lo bueno en este mundo y lo bueno en el otro y guárdanos del castigo del Fuego.",zikr,Al-Bakarah 2:201,Hisnul Muslim,1,false
+zikr_7,en,,,,,,,,,false
+zikr_7,ar,رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ,رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ,,,zikr,Al-Bakarah 2:201,Hisnul Muslim,1,false
+zikr_8,es,SubhanAllah wa biHamdihi,سُبْحَانَ اللَّهِ وَبِحَمْدِهِ سُبْحَانَ اللَّهِ الْعَظِيمِ,"Subhana Allahi wa bi-hamdihi, subhana Allahi l-azim","Glorificado sea Allah y con Su alabanza. Glorificado sea Allah, el Grandioso.",zikr,Muslim 2732,Hisnul Muslim,1,false
+zikr_8,en,,,,,,,,,false
+zikr_8,ar,سُبْحَانَ اللَّهِ وَبِحَمْدِهِ سُبْحَانَ اللَّهِ الْعَظِيمِ,سُبْحَانَ اللَّهِ وَبِحَمْدِهِ سُبْحَانَ اللَّهِ الْعَظِيمِ,,,zikr,Muslim 2732,Hisnul Muslim,1,false
+zikr_14,es,Dua de Istikhara,اللَّهُمَّ إِنِّي أَسْتَخِيرُكَ بِعِلْمِكَ وَأَسْتَقْدِرُكَ بِقُدْرَتِكَ,Allahumma inni astakhiruka bi-ilmika wa astaqdiruka bi-qudratika,"Oh Allah, Te pido que me des lo mejor, con Tu conocimiento, y me des capacidad con Tu poder.",zikr,Al-Bukhari 6382,Hisnul Muslim,1,false
+zikr_14,en,,,,,,,,,false
+zikr_14,ar,اللَّهُمَّ إِنِّي أَسْتَخِيرُكَ بِعِلْمِكَ وَأَسْتَقْدِرُكَ بِقُدْرَتِكَ,اللَّهُمَّ إِنِّي أَسْتَخِيرُكَ بِعِلْمِكَ وَأَسْتَقْدِرُكَ بِقُدْرَتِكَ,,,zikr,Al-Bukhari 6382,Hisnul Muslim,1,false
+stress_9,es,Rabana wa la takna,رَبَّنَا وَلَا تُحَمِّلْنَا مَا لَا طَاقَةَ لَنَا بِهِ,Rabbana wa la tuhammilna ma la taqata lana bihi,"Señor nuestro, no nos impongas una carga que no podamos soportar.",stress,Al-Bakarah 2:286,Hisnul Muslim,1,false
+stress_9,en,,,,,,,,,false
+stress_9,ar,رَبَّنَا وَلَا تُحَمِّلْنَا مَا لَا طَاقَةَ لَنَا بِهِ,رَبَّنَا وَلَا تُحَمِّلْنَا مَا لَا طَاقَةَ لَنَا بِهِ,,,stress,Al-Bakarah 2:286,Hisnul Muslim,1,false
+zikr_15,es,Dua del estudiante,اللَّهُمَّ نَوِّرْ قُلُوبَنَا بِنُورِ الْعِلْمِ,Allahumma nawwir qulubuna bi-nuri l-ilm,"Oh Allah, ilumina nuestros corazones con la luz del conocimiento.",zikr,Al-Bukhari 5766,Hisnul Muslim,1,false
+zikr_15,en,,,,,,,,,false
+zikr_15,ar,اللَّهُمَّ نَوِّرْ قُلُوبَنَا بِنُورِ الْعِلْمِ,اللَّهُمَّ نَوِّرْ قُلُوبَنَا بِنُورِ الْعِلْمِ,,,zikr,Al-Bukhari 5766,Hisnul Muslim,1,false
+rain_5,es,Dua para la lluvia,اللَّهُمَّ أَنْبِتْ لَنَا الْأَرْضَ,Allahumma ambit lana l-ard,"Oh Allah, haz que la tierra germine para nosotros.",rain,Al-Bukhari 1773,Hisnul Muslim,1,false
+rain_5,en,,,,,,,,,false
+rain_5,ar,اللَّهُمَّ أَنْبِتْ لَنَا الْأَرْضَ,اللَّهُمَّ أَنْبِتْ لَنَا الْأَرْضَ,,,rain,Al-Bukhari 1773,Hisnul Muslim,1,false
+gratitude_7,es,Dua del comerciante,اللَّهُمَّ بَارِكْ لِي فِي رِزْقِي,Allahumma barik li fi rizqi,"Oh Allah, bendice mi sustento.",gratitude,At-Tirmidhi 3588,Hisnul Muslim,1,false
+gratitude_7,en,,,,,,,,,false
+gratitude_7,ar,اللَّهُمَّ بَارِكْ لِي فِي رِزْقِي,اللَّهُمَّ بَارِكْ لِي فِي رِزْقِي,,,gratitude,At-Tirmidhi 3588,Hisnul Muslim,1,false
+zikr_16,es,Dua para la paz,اللَّهُمَّ أَصْلِحْ لِي دِينِي الَّذِي هُوَ عِصْمَةُ أَمْرِي,Allahumma aslih li dini alladhi huwa ismatu amri,"Oh Allah, sana mi religión, que es la garantía de mis asuntos.",zikr,Al-Bukhari 2420,Hisnul Muslim,1,false
+zikr_16,en,,,,,,,,,false
+zikr_16,ar,اللَّهُمَّ أَصْلِحْ لِي دِينِي الَّذِي هُوَ عِصْمَةُ أَمْرِي,اللَّهُمَّ أَصْلِحْ لِي دِينِي الَّذِي هُوَ عِصْمَةُ أَمْرِي,,,zikr,Al-Bukhari 2420,Hisnul Muslim,1,false
+zikr_17,es,Dua para la guía,اللَّهُمَّ اهْدِنِي سَدَادًا,Allahumma hdini sadaan,"Oh Allah, guíame hacia la rectitud.",zikr,Abu Dawud 1539,Hisnul Muslim,1,false
+zikr_17,en,,,,,,,,,false
+zikr_17,ar,اللَّهُمَّ اهْدِنِي سَدَادًا,اللَّهُمَّ اهْدِنِي سَدَادًا,,,zikr,Abu Dawud 1539,Hisnul Muslim,1,false
+stress_10,es,Dua para la paciencia,اللَّهُمَّ اجْعَلْنِي صَابِرًا,Allahumma j'alni shabiran,"Oh Allah, hazme paciente.",stress,Al-Bukhari 5819,Hisnul Muslim,1,false
+stress_10,en,,,,,,,,,false
+stress_10,ar,اللَّهُمَّ اجْعَلْنِي صَابِرًا,اللَّهُمَّ اجْعَلْنِي صَابِرًا,,,stress,Al-Bukhari 5819,Hisnul Muslim,1,false
+morning_10,es,Dua de la mañana perfecto,أَصْبَحْنَا عَلَى فِطْرَةِ الْإِسْلَامِ,Asbahna ala fitratil Islam,Hemos amanecido en la naturaleza del Islam.,morning,Al-Bukhari 2809,Hisnul Muslim,1,false
+morning_10,en,,,,,,,,,false
+morning_10,ar,أَصْبَحْنَا عَلَى فِطْرَةِ الْإِسْلَامِ,أَصْبَحْنَا عَلَى فِطْرَةِ الْإِسْلَامِ,,,morning,Al-Bukhari 2809,Hisnul Muslim,1,false
+night_6,es,Dua del atardecer,أَمْسَيْنَا عَلَى فِطْرَةِ الْإِسْلَامِ,Amsayna ala fitratil Islam,Hemos anochecido en la naturaleza del Islam.,night,Al-Bukhari 2809,Hisnul Muslim,1,false
+night_6,en,,,,,,,,,false
+night_6,ar,أَمْسَيْنَا عَلَى فِطْرَةِ الْإِسْلَامِ,أَمْسَيْنَا عَلَى فِطْرَةِ الْإِسْلَامِ,,,night,Al-Bukhari 2809,Hisnul Muslim,1,false
+gratitude_8,es,Dua de gratitud diaria,الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ فِي كُلِّ يَوْمٍ,Alhamdu lillahi rabbi l-alamin fi kulli yawm,"Alabado sea Allah, Señor de los mundos, todos los días.",gratitude,Al-Fatiha 1:2,Hisnul Muslim,1,false
+gratitude_8,en,,,,,,,,,false
+gratitude_8,ar,الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ فِي كُلِّ يَوْمٍ,الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ فِي كُلِّ يَوْمٍ,,,gratitude,Al-Fatiha 1:2,Hisnul Muslim,1,false
+zikr_18,es,Dua para la memoria,اللَّهُمَّ لَا تُنْسِنِي مَا عَلَّمْتَنِي,Allahumma la tunsini ma allamttani,"Oh Allah, no me hagas olvidar lo que me has enseñado.",zikr,Ibn As-Sunni 245,Hisnul Muslim,1,false
+zikr_18,en,,,,,,,,,false
+zikr_18,ar,اللَّهُمَّ لَا تُنْسِنِي مَا عَلَّمْتَنِي,اللَّهُمَّ لَا تُنْسِنِي مَا عَلَّمْتَنِي,,,zikr,Ibn As-Sunni 245,Hisnul Muslim,1,false
+travel_7,es,Dua del viajero corto,اللَّهُمَّ هَوِّنْ عَلَيْنَا السَّفَرَ,Allahumma hawwin alayna as-safar,"Oh Allah, haznos fácil el viaje.",travel,Abu Dawud 2600,Hisnul Muslim,1,false
+travel_7,en,,,,,,,,,false
+travel_7,ar,اللَّهُمَّ هَوِّنْ عَلَيْنَا السَّفَرَ,اللَّهُمَّ هَوِّنْ عَلَيْنَا السَّفَرَ,,,travel,Abu Dawud 2600,Hisnul Muslim,1,false
+protection_7,es,Dua para la protección del mal,أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ,A'udhu bi kalimati llahi t-tammat,Busco refugio en las palabras completas de Allah.,protection,Muslim 2709,Hisnul Muslim,1,false
+protection_7,en,,,,,,,,,false
+protection_7,ar,أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ,أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ,,,protection,Muslim 2709,Hisnul Muslim,1,false
+stress_11,es,Dua para el miedo,اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ وَجَدٍ,Allahumma inni a'udhu ka min wajd,"Oh Allah, busco Tu protección del miedo.",stress,Al-Bukhari 6377,Hisnul Muslim,1,false
+stress_11,en,,,,,,,,,false
+stress_11,ar,اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ وَجَدٍ,اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ وَجَدٍ,,,stress,Al-Bukhari 6377,Hisnul Muslim,1,false
+food_8,es,Dua para el hambre,اللَّهُمَّ بَارِكْ لَنَا فِي طَعَامِنَا,Allahumma bariklana fi ta'amin,"Oh Allah, bendice nuestra comida.",food,At-Tirmidhi 1801,Hisnul Muslim,1,false
+food_8,en,,,,,,,,,false
+food_8,ar,اللَّهُمَّ بَارِكْ لَنَا فِي طَعَامِنَا,اللَّهُمَّ بَارِكْ لَنَا فِي طَعَامِنَا,,,food,At-Tirmidhi 1801,Hisnul Muslim,1,false
+food_9,es,Dua para la sed,اللَّهُمَّ بَارِكْ لَنَا فِي شَرَابِنَا,Allahumma bariklana fi sharabin,"Oh Allah, bendice nuestra bebida.",food,At-Tirmidhi 1802,Hisnul Muslim,1,false
+food_9,en,,,,,,,,,false
+food_9,ar,اللَّهُمَّ بَارِكْ لَنَا فِي شَرَابِنَا,اللَّهُمَّ بَارِكْ لَنَا فِي شَرَابِنَا,,,food,At-Tirmidhi 1802,Hisnul Muslim,1,false

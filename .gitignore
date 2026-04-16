@@ -41,3 +41,75 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Keystore files
+*.keystore
+*.jks
+key.properties
+
+# Local AI/tool directories
+.backup/
+.claude/
+.qwen/
+.dartappdata/
+.vscode/
+
+# Node / JS dependencies
+node_modules/
+package-lock.json
+
+# Windows reserved device name accidentally created at root
+nul
+
+# Scratch / CI repos and build artifacts
+_codex_build_*/
+
+# Design prototypes
+_design_stitch3/
+
+# Temporary data migration and utility scripts (underscore-prefixed)
+_*.py
+_*.md
+_*.txt
+_*.json
+_*.html
+_*.xlsx
+_*.bin
+_*.docx
+
+# Loose utility/translation scripts at root (not part of app)
+add_*.py
+check_*.py
+debug_*.py
+download_riyad.py
+download_french_nawawi.py
+extract_*.py
+fetch_*.py
+get_batch*.py
+inspect_*.py
+merge_*.py
+search_*.py
+translate_*.py
+trim_*.py
+try_*.py
+verify_*.py
+
+# Loose output/data files at root
+dump*.txt
+collections_output.txt
+output_*.txt
+refs*.txt
+refs2.txt
+terminology_*.txt
+new_hadiths.json
+riyad_assalihin_raw.json
+merge_*.json
+
+# Backup data files inside assets
+assets/data/*.backup
+
+# Temporary implementation notes
+IMPLEMENTACION_*.md
+INTEGRACION_*.md
+ISLAMHOUSE_*.md
+WIDGET_*.md

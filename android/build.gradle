@@ -5,6 +5,25 @@ allprojects {
     }
 }
 
+// Workaround: Flutter 3.19.x does not propagate the flutter extension to plugin
+// subprojects when using newer plugin versions (e.g. path_provider_android 2.2.19).
+// Setting ext.flutter on all projects provides a fallback for flutter.compileSdkVersion.
+// On :app the real FlutterExtension (registered by dev.flutter.flutter-gradle-plugin)
+// takes precedence over ext, so there is no conflict.
+class FlutterSdkStub {
+    int compileSdkVersion = 36
+    int minSdkVersion    = 21
+    int targetSdkVersion = 34
+}
+
+// Apply only to plugin sub-projects; :app uses the real FlutterExtension from
+// dev.flutter.flutter-gradle-plugin, which must not be shadowed.
+subprojects { project ->
+    if (project.name != 'app') {
+        project.ext.flutter = new FlutterSdkStub()
+    }
+}
+
 rootProject.buildDir = '../build'
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"

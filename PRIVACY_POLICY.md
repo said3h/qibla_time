@@ -1,4 +1,4 @@
-# Privacy Policy — Qibla Time
+# Privacy Policy — QiblaTime
 
 **Last updated:** April 12, 2026
 **Effective date:** April 12, 2026
@@ -7,7 +7,7 @@
 
 ## 1. Overview
 
-Qibla Time ("the App", "we", "our") is developed and maintained by an individual developer based in Spain and is therefore subject to the **General Data Protection Regulation (GDPR)** (EU) 2016/679.
+QiblaTime ("the App", "we", "our") is developed and maintained by an individual developer based in Spain and is therefore subject to the **General Data Protection Regulation (GDPR)** (EU) 2016/679.
 
 This Privacy Policy explains what information the App accesses, how it is used, and your rights as a user. The short version: **we collect nothing. All data stays on your device.**
 
@@ -15,7 +15,7 @@ This Privacy Policy explains what information the App accesses, how it is used, 
 
 ## 2. Data We Do Not Collect
 
-Qibla Time does **not**:
+QiblaTime does **not**:
 
 - Collect, store, or transmit any personally identifiable information (PII)
 - Use advertising networks or display advertisements of any kind
@@ -128,8 +128,8 @@ If you have any questions or concerns about this Privacy Policy, please contact:
 
 **Developer:** Said (individual developer, Spain)
 **Email:** contact@qiblatime.app
-**Google Play:** [Qibla Time on Google Play](https://play.google.com/store/apps/details?id=com.qiblatime.qibla_time)
+**Google Play:** [QiblaTime on Google Play](https://play.google.com/store/apps/details?id=com.qiblatime.app)
 
 ---
 
-*This privacy policy was written in plain language with the intent of being fully transparent. Qibla Time is built for the community, not for data collection.*
+*This privacy policy was written in plain language with the intent of being fully transparent. QiblaTime is built for the community, not for data collection.*

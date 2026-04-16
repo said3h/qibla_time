@@ -2,10 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/theme/app_theme.dart';
 import '../../../l10n/l10n.dart';
 import '../models/book_model.dart';
+import '../services/book_download_service.dart';
 import '../services/islamhouse_book_service.dart';
 import '../utils/book_link_launcher.dart';
 
@@ -25,7 +27,6 @@ class _IslamicBooksScreenState extends ConsumerState<IslamicBooksScreen>
   late TabController _tabController;
 
   String _selectedCategory = _allCategoriesValue;
-  bool _showFilters = false;
 
   @override
   void initState() {
@@ -343,7 +344,6 @@ class _BookCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
-    final l10n = context.l10n;
 
     return GestureDetector(
       onTap: () => _openBook(context),
@@ -592,15 +592,132 @@ class _BookListCard extends StatelessWidget {
   }
 }
 
-class _BookDetailSheet extends StatelessWidget {
+class _BookDetailSheet extends ConsumerStatefulWidget {
   const _BookDetailSheet({required this.book});
 
   final IslamHouseBook book;
 
   @override
+  ConsumerState<_BookDetailSheet> createState() => _BookDetailSheetState();
+}
+
+class _BookDetailSheetState extends ConsumerState<_BookDetailSheet> {
+  bool _isCheckingDownload = true;
+  bool _isDownloaded = false;
+  bool _isDownloading = false;
+  double? _downloadProgress;
+  String? _localPath;
+
+  @override
+  void initState() {
+    super.initState();
+    _refreshDownloadState();
+  }
+
+  Future<void> _refreshDownloadState() async {
+    final service = ref.read(bookDownloadServiceProvider);
+    final localPath = await service.getLocalPath(widget.book);
+    final isDownloaded = await service.isDownloaded(widget.book);
+    if (!mounted) return;
+    setState(() {
+      _localPath = localPath;
+      _isDownloaded = isDownloaded;
+      _isCheckingDownload = false;
+      if (!isDownloaded && !_isDownloading) {
+        _downloadProgress = null;
+      }
+    });
+  }
+
+  Future<void> _handleDownload() async {
+    if (_isDownloading) {
+      return;
+    }
+
+    final l10n = context.l10n;
+    setState(() {
+      _isDownloading = true;
+      _downloadProgress = 0;
+    });
+
+    try {
+      await ref.read(bookDownloadServiceProvider).downloadBook(
+            widget.book,
+            onProgress: (progress) {
+              if (!mounted) return;
+              setState(() {
+                _downloadProgress = progress;
+              });
+            },
+          );
+      if (!mounted) return;
+      setState(() {
+        _isDownloading = false;
+        _downloadProgress = 1;
+      });
+      await _refreshDownloadState();
+    } catch (_) {
+      if (!mounted) return;
+      setState(() {
+        _isDownloading = false;
+        _downloadProgress = null;
+      });
+      _showSnackBar(l10n.bookDownloadError);
+    }
+  }
+
+  Future<void> _handleOpenOffline() async {
+    final l10n = context.l10n;
+    final service = ref.read(bookDownloadServiceProvider);
+    final localPath = _localPath ?? await service.getLocalPath(widget.book);
+    final file = Uri.file(localPath);
+    final launched = await launchUrl(file);
+    if (!mounted) return;
+    if (!launched) {
+      _showSnackBar(l10n.bookLinkOpenError);
+    }
+  }
+
+  Future<void> _handleDeleteDownload() async {
+    final l10n = context.l10n;
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Text(l10n.bookDeleteConfirm),
+        content: Text(l10n.bookDeleteConfirmBody),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(false),
+            child: Text(l10n.commonCancel),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(true),
+            child: Text(l10n.commonDelete),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed != true) {
+      return;
+    }
+
+    await ref.read(bookDownloadServiceProvider).deleteBook(widget.book);
+    if (!mounted) return;
+    await _refreshDownloadState();
+  }
+
+  void _showSnackBar(String message) {
+    final messenger = ScaffoldMessenger.of(context);
+    messenger.hideCurrentSnackBar();
+    messenger.showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  @override
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
     final l10n = context.l10n;
+    final book = widget.book;
 
     return DraggableScrollableSheet(
       initialChildSize: 0.7,
@@ -610,7 +727,6 @@ class _BookDetailSheet extends StatelessWidget {
         controller: controller,
         padding: const EdgeInsets.all(20),
         children: [
-          // Handle
           Center(
             child: Container(
               width: 40,
@@ -622,8 +738,6 @@ class _BookDetailSheet extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20),
-
-          // Title
           Text(
             book.title,
             style: GoogleFonts.amiri(
@@ -645,52 +759,51 @@ class _BookDetailSheet extends StatelessWidget {
             const SizedBox(height: 16),
           ] else
             const SizedBox(height: 16),
-
-          // Author
           Row(
             children: [
               const Icon(Icons.person, size: 16),
               const SizedBox(width: 8),
-              Text(
-                book.author,
-                style: GoogleFonts.dmSans(
-                  fontSize: 13,
-                  color: tokens.textPrimary,
+              Expanded(
+                child: Text(
+                  book.author,
+                  style: GoogleFonts.dmSans(
+                    fontSize: 13,
+                    color: tokens.textPrimary,
+                  ),
                 ),
               ),
             ],
           ),
           const SizedBox(height: 8),
-
-          // Category
           Row(
             children: [
               const Icon(Icons.folder, size: 16),
               const SizedBox(width: 8),
-              Text(
-                book.category,
-                style: GoogleFonts.dmSans(
-                  fontSize: 13,
-                  color: tokens.textPrimary,
+              Expanded(
+                child: Text(
+                  book.category,
+                  style: GoogleFonts.dmSans(
+                    fontSize: 13,
+                    color: tokens.textPrimary,
+                  ),
                 ),
               ),
             ],
           ),
           const SizedBox(height: 8),
-
-          // Info
-          Row(
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
             children: [
-              _InfoChip(icon: Icons.description, label: l10n.booksPageCount(book.pages)),
-              const SizedBox(width: 8),
+              _InfoChip(
+                icon: Icons.description,
+                label: l10n.booksPageCount(book.pages),
+              ),
               _InfoChip(icon: Icons.storage, label: book.size),
-              const SizedBox(width: 8),
               _InfoChip(icon: Icons.star, label: book.rating.toStringAsFixed(1)),
             ],
           ),
           const SizedBox(height: 20),
-
-          // Description
           Text(
             l10n.booksDescription,
             style: GoogleFonts.dmSans(
@@ -709,9 +822,8 @@ class _BookDetailSheet extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 24),
-
-          // Actions
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                 child: ElevatedButton.icon(
@@ -727,24 +839,108 @@ class _BookDetailSheet extends StatelessWidget {
               ),
               const SizedBox(width: 12),
               Expanded(
-                child: OutlinedButton.icon(
-                  onPressed: () => openBookUrl(context, book.downloadUrl),
-                  icon: const Icon(Icons.download),
-                  label: Text(l10n.commonDownload),
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: tokens.primary,
-                    padding: const EdgeInsets.symmetric(vertical: 14),
-                  ),
-                ),
+                child: _buildDownloadAction(context, tokens, l10n),
               ),
             ],
           ),
+          if (_isDownloading) ...[
+            const SizedBox(height: 14),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  l10n.bookDownloading,
+                  style: GoogleFonts.dmSans(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: tokens.textPrimary,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                LinearProgressIndicator(
+                  value: _downloadProgress,
+                  minHeight: 6,
+                  backgroundColor: tokens.border,
+                  color: tokens.primary,
+                  borderRadius: BorderRadius.circular(999),
+                ),
+                if (_downloadProgress != null) ...[
+                  const SizedBox(height: 6),
+                  Text(
+                    '${(_downloadProgress! * 100).clamp(0, 100).toStringAsFixed(0)}%',
+                    style: GoogleFonts.dmSans(
+                      fontSize: 11,
+                      color: tokens.textSecondary,
+                    ),
+                  ),
+                ],
+              ],
+            ),
+          ],
           const SizedBox(height: 32),
         ],
       ),
     );
   }
 
+  Widget _buildDownloadAction(
+    BuildContext context,
+    QiblaTokens tokens,
+    AppLocalizations l10n,
+  ) {
+    if (_isDownloaded) {
+      return Row(
+        children: [
+          Expanded(
+            child: OutlinedButton.icon(
+              onPressed: _handleOpenOffline,
+              icon: const Icon(Icons.menu_book_outlined),
+              label: Text(l10n.bookReadOffline),
+              style: OutlinedButton.styleFrom(
+                foregroundColor: tokens.primary,
+                padding: const EdgeInsets.symmetric(vertical: 14),
+              ),
+            ),
+          ),
+          const SizedBox(width: 8),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: tokens.border),
+            ),
+            child: IconButton(
+              onPressed: _handleDeleteDownload,
+              tooltip: l10n.bookDeleteDownload,
+              icon: const Icon(Icons.delete_outline),
+              color: tokens.textSecondary,
+            ),
+          ),
+        ],
+      );
+    }
+
+    final isBusy = _isCheckingDownload || _isDownloading;
+    return OutlinedButton.icon(
+      onPressed: isBusy ? null : _handleDownload,
+      icon: _isCheckingDownload || _isDownloading
+          ? SizedBox(
+              width: 18,
+              height: 18,
+              child: CircularProgressIndicator(
+                strokeWidth: 2,
+                color: tokens.primary,
+              ),
+            )
+          : const Icon(Icons.download_outlined),
+      label: Text(
+        _isDownloading ? l10n.bookDownloading : l10n.bookDownload,
+      ),
+      style: OutlinedButton.styleFrom(
+        foregroundColor: tokens.primary,
+        padding: const EdgeInsets.symmetric(vertical: 14),
+      ),
+    );
+  }
 }
 
 class _InfoChip extends StatelessWidget {

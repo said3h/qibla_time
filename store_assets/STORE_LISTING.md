@@ -9,7 +9,7 @@
 
 | Field | Value |
 |-------|-------|
-| Package name | `com.qiblatime.qibla_time` |
+| Package name | `com.qiblatime.app` |
 | Category | **Lifestyle** |
 | Content rating | Everyone |
 | Target audience | Muslims worldwide |

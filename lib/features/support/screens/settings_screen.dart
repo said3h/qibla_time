@@ -992,11 +992,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               l10n.commonOpen,
               trailing: Icon(Icons.star_rounded, size: 16, color: tokens.primary),
               onTap: () async {
-                final uri = Uri.parse('market://details?id=com.qiblatime.qibla_time');
+                final uri = Uri.parse('market://details?id=com.qiblatime.app');
                 if (await canLaunchUrl(uri)) {
                   await launchUrl(uri, mode: LaunchMode.externalApplication);
                 } else {
-                  final fallback = Uri.parse('https://play.google.com/store/apps/details?id=com.qiblatime.qibla_time');
+                  final fallback = Uri.parse('https://play.google.com/store/apps/details?id=com.qiblatime.app');
                   await launchUrl(fallback, mode: LaunchMode.externalApplication);
                 }
               },

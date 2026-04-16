@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="widget_next_prayer">Следующий намаз</string>
+    <string name="widget_open_app">Открыть QiblaTime</string>
+    <string name="widget_countdown_prefix">Через</string>
+</resources>
