@@ -83,62 +83,24 @@ class NotificationService {
       );
 
       final tzDate = tz.TZDateTime.from(scheduledAt, tz.local);
+      final exactAlarmPermission = await Permission.scheduleExactAlarm.status;
+      final canUseExactAlarm = exactAlarmPermission.isGranted;
 
-      // Cascade: alarmClock (best, needs SCHEDULE_EXACT_ALARM) →
-      // exactAllowWhileIdle (good, needs exact alarm) →
-      // inexact (always works, may fire up to ~15 min late but guaranteed).
-      bool scheduled = false;
-
-      try {
-        // alarmClock usa setAlarmClock(): resistente a Doze y a la gestión
-        // agresiva de batería de Xiaomi/Samsung/Huawei.
-        await _plugin.zonedSchedule(
-          id: id,
-          title: l10n.notificationAdhanTitle(prayerName),
-          body: l10n.notificationAdhanBody,
-          scheduledDate: tzDate,
-          notificationDetails: details,
-          androidScheduleMode: AndroidScheduleMode.alarmClock,
-        );
-        scheduled = true;
-      } catch (e) {
-        AppLogger.warning(
-          'alarmClock scheduling failed for id=$id, trying exactAllowWhileIdle',
-          error: e,
-        );
+      AndroidScheduleMode scheduleMode;
+      if (canUseExactAlarm) {
+        scheduleMode = AndroidScheduleMode.alarmClock;
+      } else {
+        scheduleMode = AndroidScheduleMode.inexact;
       }
 
-      if (!scheduled) {
-        try {
-          await _plugin.zonedSchedule(
-            id: id,
-            title: l10n.notificationAdhanTitle(prayerName),
-            body: l10n.notificationAdhanBody,
-            scheduledDate: tzDate,
-            notificationDetails: details,
-            androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-          );
-          scheduled = true;
-        } catch (e) {
-          AppLogger.warning(
-            'exactAllowWhileIdle scheduling failed for id=$id, falling back to inexact',
-            error: e,
-          );
-        }
-      }
-
-      if (!scheduled) {
-        // Fallback sin permiso: puede llegar hasta ~15 min tarde pero garantiza
-        // que el adhan suene aunque el usuario haya revocado las alarmas exactas.
-        await _plugin.zonedSchedule(
-          id: id,
-          title: l10n.notificationAdhanTitle(prayerName),
-          body: l10n.notificationAdhanBody,
-          scheduledDate: tzDate,
-          notificationDetails: details,
-          androidScheduleMode: AndroidScheduleMode.inexact,
-        );
-      }
+      await _plugin.zonedSchedule(
+        id: id,
+        title: l10n.notificationAdhanTitle(prayerName),
+        body: l10n.notificationAdhanBody,
+        scheduledDate: tzDate,
+        notificationDetails: details,
+        androidScheduleMode: scheduleMode,
+      );
     } catch (e, stackTrace) {
       AppLogger.error(
         'Failed to schedule adhan notification',
@@ -309,7 +271,11 @@ class NotificationService {
         AndroidFlutterLocalNotificationsPlugin>();
     if (android == null) return;
 
-    const oldPrefixes = ['adhan_channel_v1_', 'adhan_channel_v2_', 'adhan_channel_v3_'];
+    const oldPrefixes = [
+      'adhan_channel_v1_',
+      'adhan_channel_v2_',
+      'adhan_channel_v3_'
+    ];
     const adhanFiles = [
       'azan1.mp3',
       'azan2.mp3',
@@ -385,16 +351,14 @@ class NotificationService {
       return true;
     }
 
-    final android = _plugin
-        .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>();
+    final android = _plugin.resolvePlatformSpecificImplementation<
+        AndroidFlutterLocalNotificationsPlugin>();
     if (android != null) {
       return await android.requestNotificationsPermission() ?? false;
     }
 
-    final ios = _plugin
-        .resolvePlatformSpecificImplementation<
-            IOSFlutterLocalNotificationsPlugin>();
+    final ios = _plugin.resolvePlatformSpecificImplementation<
+        IOSFlutterLocalNotificationsPlugin>();
     if (ios != null) {
       return await ios.requestPermissions(
             alert: true,
@@ -419,5 +383,25 @@ class NotificationService {
   Future<bool> areNotificationsEnabled() async {
     final status = await Permission.notification.status;
     return status.isGranted || status.isLimited || status.isProvisional;
+  }
+
+  Future<bool> isExactAlarmPermissionGranted() async {
+    if (!Platform.isAndroid) return true;
+    final status = await Permission.scheduleExactAlarm.status;
+    return status.isGranted;
+  }
+
+  Future<bool> requestExactAlarmPermission() async {
+    if (!Platform.isAndroid) return true;
+
+    final status = await Permission.scheduleExactAlarm.status;
+    if (status.isGranted) return true;
+    if (status.isPermanentlyDenied) {
+      await openAppSettings();
+      return false;
+    }
+
+    final result = await Permission.scheduleExactAlarm.request();
+    return result.isGranted;
   }
 }
