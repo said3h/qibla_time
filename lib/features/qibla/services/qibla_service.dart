@@ -5,10 +5,15 @@ import '../../../core/constants/app_constants.dart';
 import 'package:geolocator/geolocator.dart';
 import '../../prayer_times/presentation/providers/prayer_times_providers.dart';
 
-// Stream of compass heading events
+final _compassEventStream = FlutterCompass.events;
+
 final compassProvider = StreamProvider<CompassEvent>((ref) {
-  // Ensure we are listening only to valid events
-  return FlutterCompass.events?.where((event) => event.heading != null) ?? const Stream.empty();
+  if (_compassEventStream == null) {
+    return Stream.error(
+      StateError('Compass not available on this device'),
+    );
+  }
+  return _compassEventStream!.where((event) => event.heading != null);
 });
 
 // Provides the precise bearing to Mecca from the user's location
@@ -31,6 +36,6 @@ final distanceToMeccaProvider = FutureProvider<double?>((ref) async {
     AppConstants.kaabaLatitude,
     AppConstants.kaabaLongitude,
   );
-  
+
   return distanceInMeters / 1000; // Return in kilometers
 });

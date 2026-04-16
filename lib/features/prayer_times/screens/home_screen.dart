@@ -111,7 +111,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final dhikrSnapshotAsync = ref.watch(dhikrSnapshotProvider);
     final tracking = ref.watch(prayerTrackingProvider);
     final streak = tracking.currentStreak;
-    final selectedCompletedPrayers = tracking.completedPrayersFor(_selectedDate);
+    final selectedCompletedPrayers =
+        tracking.completedPrayersFor(_selectedDate);
     final selectedNextPrayerInfo = isSelectedToday ? nextPrayerInfo : null;
     final selectedCountdown = isSelectedToday ? countdownAsync.value : null;
 
@@ -121,9 +122,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              _blend(tokens.primary, tokens.bgPage, _isLightTheme(tokens) ? 0.03 : 0.06),
+              _blend(tokens.primary, tokens.bgPage,
+                  _isLightTheme(tokens) ? 0.03 : 0.06),
               tokens.bgPage,
-              _blend(tokens.accent, tokens.bgApp, _isLightTheme(tokens) ? 0.02 : 0.04),
+              _blend(tokens.accent, tokens.bgApp,
+                  _isLightTheme(tokens) ? 0.02 : 0.04),
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -234,9 +237,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             width: 40,
             height: 40,
             decoration: BoxDecoration(
-              color: _blend(tokens.primary, tokens.bgSurface, _isLightTheme(tokens) ? 0.08 : 0.14),
+              color: _blend(tokens.primary, tokens.bgSurface,
+                  _isLightTheme(tokens) ? 0.08 : 0.14),
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: _blend(tokens.primary, tokens.border, 0.18)),
+              border: Border.all(
+                  color: _blend(tokens.primary, tokens.border, 0.18)),
             ),
             child: Icon(
               Icons.auto_awesome_rounded,
@@ -250,7 +255,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Qibla Time',
+                  l10n.appTitle,
                   style: GoogleFonts.dmSerifDisplay(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
@@ -275,12 +280,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ),
           Container(
             decoration: BoxDecoration(
-              color: _blend(tokens.bgSurface2, tokens.bgSurface, _isLightTheme(tokens) ? 0.7 : 0.88),
+              color: _blend(tokens.bgSurface2, tokens.bgSurface,
+                  _isLightTheme(tokens) ? 0.7 : 0.88),
               borderRadius: BorderRadius.circular(18),
-              border: Border.all(color: _blend(tokens.primary, tokens.border, 0.12)),
+              border: Border.all(
+                  color: _blend(tokens.primary, tokens.border, 0.12)),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(_isLightTheme(tokens) ? 0.04 : 0.16),
+                  color: Colors.black
+                      .withOpacity(_isLightTheme(tokens) ? 0.04 : 0.16),
                   blurRadius: 18,
                   offset: const Offset(0, 8),
                 ),
@@ -439,7 +447,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     duration: const Duration(milliseconds: 220),
                     curve: Curves.easeOutCubic,
                     width: 78,
-                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: isSelected
@@ -448,7 +457,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                 _blend(tokens.primary, tokens.bgSurface, 0.08),
                               ]
                             : [
-                                _blend(tokens.bgSurface2, tokens.bgSurface, 0.86),
+                                _blend(
+                                    tokens.bgSurface2, tokens.bgSurface, 0.86),
                                 tokens.bgSurface,
                               ],
                         begin: Alignment.topCenter,
@@ -481,7 +491,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           style: GoogleFonts.dmSans(
                             fontSize: 9,
                             fontWeight: FontWeight.w600,
-                            color: isSelected ? tokens.primaryLight : tokens.textSecondary,
+                            color: isSelected
+                                ? tokens.primaryLight
+                                : tokens.textSecondary,
                           ),
                         ),
                         SizedBox(
@@ -493,7 +505,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               style: GoogleFonts.amiri(
                                 fontSize: 11,
                                 fontWeight: FontWeight.w700,
-                                color: isSelected ? tokens.primary : tokens.textMuted,
+                                color: isSelected
+                                    ? tokens.primary
+                                    : tokens.textMuted,
                                 height: 1,
                               ),
                             ),
@@ -512,7 +526,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           '${hijri.hDay} ${hijri.getShortMonthName()}',
                           style: GoogleFonts.dmSans(
                             fontSize: 8,
-                            color: isSelected ? tokens.primaryLight : tokens.textMuted,
+                            color: isSelected
+                                ? tokens.primaryLight
+                                : tokens.textMuted,
                           ),
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -585,7 +601,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       decoration: BoxDecoration(
         color: _blend(hero.bg, tokens.bgSurface, 0.78),
         borderRadius: BorderRadius.circular(30),
-        border: Border.all(color: _blend(tokens.primary, tokens.borderMed, 0.22)),
+        border:
+            Border.all(color: _blend(tokens.primary, tokens.borderMed, 0.22)),
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -644,85 +661,88 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-              Text(
-                l10n.homeHeroNextPrayer,
-                style: GoogleFonts.dmSans(
-                  fontSize: 9,
-                  color: tokens.primary.withOpacity(0.65),
-                  letterSpacing: 1.8,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              const SizedBox(height: 6),
-              Text(
-                names.$1,
-                textAlign: TextAlign.center,
-                style: GoogleFonts.dmSerifDisplay(
-                  fontSize: 42,
-                  color: tokens.primary,
-                  height: 1.0,
-                ),
-              ),
-              if (names.$2.isNotEmpty) ...[
-                const SizedBox(height: 2),
-                Text(
-                  names.$2,
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.amiri(
-                    fontSize: 24,
-                    color: tokens.primaryLight,
-                    height: 1.05,
-                  ),
-                ),
-              ],
-              const SizedBox(height: 4),
-              Text(
-                _selectedDate == _dateOnly(DateTime.now())
-                    ? l10n.homeHeroTodayOverview
-                    : _formatHeroDate(_selectedDate),
-                style: GoogleFonts.dmSans(
-                  fontSize: 11,
-                  color: tokens.textSecondary,
-                ),
-              ),
-              if (resolvedSchedule?.fromCache == true) ...[
-                const SizedBox(height: 10),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                  decoration: BoxDecoration(
-                    color: tokens.primaryBg,
-                    borderRadius: BorderRadius.circular(999),
-                    border: Border.all(color: tokens.primaryBorder),
-                  ),
-                  child: Text(
-                    l10n.homeHeroUsingSavedLocation,
+                  Text(
+                    l10n.homeHeroNextPrayer,
                     style: GoogleFonts.dmSans(
-                      fontSize: 10,
-                      color: tokens.textPrimary,
+                      fontSize: 9,
+                      color: tokens.primary.withOpacity(0.65),
+                      letterSpacing: 1.8,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
-                ),
-              ],
-              const SizedBox(height: 16),
-              _buildCountdown(tokens, remaining, names.$1),
-              const SizedBox(height: 14),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: BoxDecoration(
-                  color: _blend(tokens.primary, tokens.bgSurface, 0.12),
-                  borderRadius: BorderRadius.circular(999),
-                  border: Border.all(color: _blend(tokens.primary, tokens.borderMed, 0.2)),
-                ),
-                child: Text(
-                  nextPrayerSubtitle,
-                  style: GoogleFonts.dmSans(
-                    fontSize: 10,
-                    color: tokens.primary,
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: 0.2,
+                  const SizedBox(height: 6),
+                  Text(
+                    names.$1,
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.dmSerifDisplay(
+                      fontSize: 42,
+                      color: tokens.primary,
+                      height: 1.0,
+                    ),
                   ),
-                ),
-              ),
+                  if (names.$2.isNotEmpty) ...[
+                    const SizedBox(height: 2),
+                    Text(
+                      names.$2,
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.amiri(
+                        fontSize: 24,
+                        color: tokens.primaryLight,
+                        height: 1.05,
+                      ),
+                    ),
+                  ],
+                  const SizedBox(height: 4),
+                  Text(
+                    _selectedDate == _dateOnly(DateTime.now())
+                        ? l10n.homeHeroTodayOverview
+                        : _formatHeroDate(_selectedDate),
+                    style: GoogleFonts.dmSans(
+                      fontSize: 11,
+                      color: tokens.textSecondary,
+                    ),
+                  ),
+                  if (resolvedSchedule?.fromCache == true) ...[
+                    const SizedBox(height: 10),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 6),
+                      decoration: BoxDecoration(
+                        color: tokens.primaryBg,
+                        borderRadius: BorderRadius.circular(999),
+                        border: Border.all(color: tokens.primaryBorder),
+                      ),
+                      child: Text(
+                        l10n.homeHeroUsingSavedLocation,
+                        style: GoogleFonts.dmSans(
+                          fontSize: 10,
+                          color: tokens.textPrimary,
+                        ),
+                      ),
+                    ),
+                  ],
+                  const SizedBox(height: 16),
+                  _buildCountdown(tokens, remaining, names.$1),
+                  const SizedBox(height: 14),
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: _blend(tokens.primary, tokens.bgSurface, 0.12),
+                      borderRadius: BorderRadius.circular(999),
+                      border: Border.all(
+                          color: _blend(tokens.primary, tokens.borderMed, 0.2)),
+                    ),
+                    child: Text(
+                      nextPrayerSubtitle,
+                      style: GoogleFonts.dmSans(
+                        fontSize: 10,
+                        color: tokens.primary,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 0.2,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -751,7 +771,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            _blend(tokens.primary, tokens.bgSurface, _isLightTheme(tokens) ? 0.06 : 0.1),
+            _blend(tokens.primary, tokens.bgSurface,
+                _isLightTheme(tokens) ? 0.06 : 0.1),
             _blend(tokens.bgSurface2, tokens.bgSurface, 0.9),
           ],
         ),
@@ -825,8 +846,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 borderRadius: BorderRadius.circular(999),
                 border: Border.all(color: tokens.primaryBorder),
               ),
-                  child: Text(
-                    l10n.homeHeroUsingSavedLocation,
+              child: Text(
+                l10n.homeHeroUsingSavedLocation,
                 style: GoogleFonts.dmSans(
                   fontSize: 10,
                   color: tokens.textPrimary,
@@ -949,7 +970,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Icon(Icons.notifications_off_outlined, color: tokens.primary, size: 18),
+            Icon(Icons.notifications_off_outlined,
+                color: tokens.primary, size: 18),
             const SizedBox(width: 10),
             Expanded(
               child: Text(
@@ -997,8 +1019,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final countdownLabel = beforeImsak
         ? l10n.homeRamadanCountdownImsak(countdownValue)
         : beforeIftar
-        ? l10n.homeRamadanCountdownIftar(countdownValue)
-        : l10n.homeRamadanCountdownTomorrowImsak(countdownValue);
+            ? l10n.homeRamadanCountdownIftar(countdownValue)
+            : l10n.homeRamadanCountdownTomorrowImsak(countdownValue);
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
@@ -1354,16 +1376,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         state: prayerCount >= 5
             ? _RamadanGoalState.completed
             : prayerCount > 0
-            ? _RamadanGoalState.inProgress
-            : _RamadanGoalState.pending,
+                ? _RamadanGoalState.inProgress
+                : _RamadanGoalState.pending,
       ),
       quranGoal,
       dhikrGoal,
       fastingGoal,
     ];
-    final completedCount = items
-        .where((item) => item.state == _RamadanGoalState.completed)
-        .length;
+    final completedCount =
+        items.where((item) => item.state == _RamadanGoalState.completed).length;
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
@@ -1406,8 +1427,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               completedCount == items.length
                   ? l10n.homeRamadanGoalsCompleteMessage
                   : completedCount >= 2
-                  ? l10n.homeRamadanGoalsProgressMessage
-                  : l10n.homeRamadanGoalsStartMessage,
+                      ? l10n.homeRamadanGoalsProgressMessage
+                      : l10n.homeRamadanGoalsStartMessage,
               style: GoogleFonts.dmSans(
                 fontSize: 11,
                 height: 1.5,
@@ -1425,7 +1446,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     QiblaTokens tokens,
     _RamadanGoalItem item,
   ) {
-    final (iconColor, chipLabel, chipBg, chipBorder) = _goalStyle(tokens, item.state);
+    final (iconColor, chipLabel, chipBg, chipBorder) =
+        _goalStyle(tokens, item.state);
 
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
@@ -1482,7 +1504,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ref.invalidate(lastReadingProvider);
                 ref.invalidate(dhikrSnapshotProvider);
               },
-              icon: Icon(Icons.arrow_forward, size: 18, color: tokens.textMuted),
+              icon:
+                  Icon(Icons.arrow_forward, size: 18, color: tokens.textMuted),
             ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
@@ -1930,7 +1953,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 child: Text(
                   (isToday
                           ? l10n.homePrayerSectionToday
-                          : l10n.homePrayerSectionForDate(_formatCompactDate(date)))
+                          : l10n.homePrayerSectionForDate(
+                              _formatCompactDate(date)))
                       .toUpperCase(),
                   style: GoogleFonts.dmSans(
                     fontSize: 9,
@@ -1945,7 +1969,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         SpanishDateLabels.longWeekday(date),
                       )
                     : l10n.homePrayerSectionMarkedCount(completed.length),
-                style: GoogleFonts.dmSans(fontSize: 10, color: tokens.primaryLight),
+                style: GoogleFonts.dmSans(
+                    fontSize: 10, color: tokens.primaryLight),
               ),
             ],
           ),
@@ -1962,103 +1987,109 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 );
               },
               child: Container(
-              margin: const EdgeInsets.only(bottom: 10),
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-              decoration: BoxDecoration(
-                color: isCurrent
-                    ? _blend(tokens.primary, tokens.bgSurface, 0.12)
-                    : isDone
-                        ? _blend(tokens.bgSurface, tokens.bgPage, 0.9)
-                        : tokens.bgSurface,
-                borderRadius: BorderRadius.circular(22),
-                border: Border.all(
+                margin: const EdgeInsets.only(bottom: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                decoration: BoxDecoration(
                   color: isCurrent
-                      ? _blend(tokens.primary, tokens.primaryBorder, 0.18)
-                      : tokens.border,
-                ),
-                boxShadow: [
-                  BoxShadow(
+                      ? _blend(tokens.primary, tokens.bgSurface, 0.12)
+                      : isDone
+                          ? _blend(tokens.bgSurface, tokens.bgPage, 0.9)
+                          : tokens.bgSurface,
+                  borderRadius: BorderRadius.circular(22),
+                  border: Border.all(
                     color: isCurrent
-                        ? tokens.primary.withOpacity(0.12)
-                        : Colors.black.withOpacity(0.06),
-                    blurRadius: isCurrent ? 18 : 10,
-                    offset: const Offset(0, 8),
+                        ? _blend(tokens.primary, tokens.primaryBorder, 0.18)
+                        : tokens.border,
                   ),
-                ],
-              ),
-              child: Row(
-                children: [
-                  Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color: isCurrent ? tokens.primary.withOpacity(0.14) : tokens.bgSurface2,
-                      shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: isCurrent
+                          ? tokens.primary.withOpacity(0.12)
+                          : Colors.black.withOpacity(0.06),
+                      blurRadius: isCurrent ? 18 : 10,
+                      offset: const Offset(0, 8),
                     ),
-                    child: Icon(
-                      _prayerIcon(prayer.$1),
-                      size: 18,
-                      color: isCurrent ? tokens.primary : tokens.textSecondary,
+                  ],
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: isCurrent
+                            ? tokens.primary.withOpacity(0.14)
+                            : tokens.bgSurface2,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        _prayerIcon(prayer.$1),
+                        size: 18,
+                        color:
+                            isCurrent ? tokens.primary : tokens.textSecondary,
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: 14),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          prayer.$2,
-                          style: GoogleFonts.dmSans(
-                            fontSize: 14,
-                            fontWeight: isCurrent ? FontWeight.w700 : FontWeight.w600,
-                            color: isCurrent ? tokens.primary : tokens.textPrimary,
-                          ),
-                        ),
-                        if (prayer.$3.isNotEmpty)
+                    const SizedBox(width: 14),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
                           Text(
-                            prayer.$3,
-                            style: GoogleFonts.amiri(
-                              fontSize: 13,
-                              color: tokens.textSecondary,
+                            prayer.$2,
+                            style: GoogleFonts.dmSans(
+                              fontSize: 14,
+                              fontWeight:
+                                  isCurrent ? FontWeight.w700 : FontWeight.w600,
+                              color: isCurrent
+                                  ? tokens.primary
+                                  : tokens.textPrimary,
                             ),
                           ),
-                      ],
-                    ),
-                  ),
-                  Text(
-                    _formatTime(prayer.$4),
-                    style: GoogleFonts.dmSans(
-                      fontSize: 14,
-                      fontWeight: isCurrent ? FontWeight.w700 : FontWeight.w500,
-                      color: isCurrent
-                          ? tokens.primary
-                          : tokens.textPrimary,
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  GestureDetector(
-                    onTap: () => ref
-                        .read(prayerTrackingProvider.notifier)
-                        .togglePrayer(prayer.$2, date: date),
-                    child: Container(
-                      width: 22,
-                      height: 22,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: isDone ? tokens.accent : Colors.transparent,
-                        border: Border.all(
-                          color: isDone ? tokens.accent : tokens.textMuted,
-                          width: 1.5,
-                        ),
+                          if (prayer.$3.isNotEmpty)
+                            Text(
+                              prayer.$3,
+                              style: GoogleFonts.amiri(
+                                fontSize: 13,
+                                color: tokens.textSecondary,
+                              ),
+                            ),
+                        ],
                       ),
-                      child: isDone
-                          ? Icon(Icons.check, size: 12, color: tokens.bgPage)
-                          : null,
                     ),
-                  ),
-                ],
+                    Text(
+                      _formatTime(prayer.$4),
+                      style: GoogleFonts.dmSans(
+                        fontSize: 14,
+                        fontWeight:
+                            isCurrent ? FontWeight.w700 : FontWeight.w500,
+                        color: isCurrent ? tokens.primary : tokens.textPrimary,
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    GestureDetector(
+                      onTap: () => ref
+                          .read(prayerTrackingProvider.notifier)
+                          .togglePrayer(prayer.$2, date: date),
+                      child: Container(
+                        width: 22,
+                        height: 22,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: isDone ? tokens.accent : Colors.transparent,
+                          border: Border.all(
+                            color: isDone ? tokens.accent : tokens.textMuted,
+                            width: 1.5,
+                          ),
+                        ),
+                        child: isDone
+                            ? Icon(Icons.check, size: 12, color: tokens.bgPage)
+                            : null,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
             );
           }),
         ],
@@ -2198,7 +2229,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               ),
               const SizedBox(width: 12),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                 decoration: BoxDecoration(
                   color: _blend(tokens.primary, tokens.bgSurface, 0.1),
                   borderRadius: BorderRadius.circular(999),
@@ -2224,8 +2256,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             final prayer = prayers[index];
             final isNext = isToday && prayer.$1.key == nextPrayerName;
             final isDone = _isPrayerDone(completed, prayer.$1.key);
-            final isNow =
-                isToday &&
+            final isNow = isToday &&
                 !isNext &&
                 !isDone &&
                 _isPremiumCurrentPrayerWindow(prayers, index, now);
@@ -2248,169 +2279,176 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 );
               },
               child: Container(
-              margin: const EdgeInsets.only(bottom: 12),
-              padding: const EdgeInsets.fromLTRB(16, 15, 16, 15),
-              decoration: BoxDecoration(
-                color: style.surfaceColor,
-                borderRadius: BorderRadius.circular(26),
-                border: Border.all(color: style.borderColor),
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    _blend(style.surfaceColor, tokens.bgSurface2, 0.22),
-                    style.surfaceColor,
+                margin: const EdgeInsets.only(bottom: 12),
+                padding: const EdgeInsets.fromLTRB(16, 15, 16, 15),
+                decoration: BoxDecoration(
+                  color: style.surfaceColor,
+                  borderRadius: BorderRadius.circular(26),
+                  border: Border.all(color: style.borderColor),
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      _blend(style.surfaceColor, tokens.bgSurface2, 0.22),
+                      style.surfaceColor,
+                    ],
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: style.shadowColor,
+                      blurRadius: tone == _PremiumPrayerCardTone.idle ? 10 : 16,
+                      offset: const Offset(0, 8),
+                    ),
                   ],
                 ),
-                boxShadow: [
-                  BoxShadow(
-                    color: style.shadowColor,
-                    blurRadius: tone == _PremiumPrayerCardTone.idle ? 10 : 16,
-                    offset: const Offset(0, 8),
-                  ),
-                ],
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    width: 46,
-                    height: 46,
-                    decoration: BoxDecoration(
-                      color: style.iconBackground,
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(
-                        color: _blend(style.iconColor, tokens.border, 0.14),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 46,
+                      height: 46,
+                      decoration: BoxDecoration(
+                        color: style.iconBackground,
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(
+                          color: _blend(style.iconColor, tokens.border, 0.14),
+                        ),
+                      ),
+                      child: Icon(
+                        _prayerIcon(prayer.$1),
+                        size: 20,
+                        color: style.iconColor,
                       ),
                     ),
-                    child: Icon(
-                      _prayerIcon(prayer.$1),
-                      size: 20,
-                      color: style.iconColor,
-                    ),
-                  ),
-                  const SizedBox(width: 14),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Expanded(
+                    const SizedBox(width: 14),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  prayer.$2,
+                                  style: GoogleFonts.dmSans(
+                                    fontSize: 15,
+                                    fontWeight:
+                                        tone == _PremiumPrayerCardTone.idle
+                                            ? FontWeight.w600
+                                            : FontWeight.w700,
+                                    color: tone == _PremiumPrayerCardTone.next
+                                        ? tokens.primary
+                                        : tokens.textPrimary,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 10),
+                              _buildPremiumPrayerStatusChip(style),
+                            ],
+                          ),
+                          if (prayer.$3.isNotEmpty) ...[
+                            const SizedBox(height: 4),
+                            Directionality(
+                              textDirection: TextDirection.rtl,
                               child: Text(
-                                prayer.$2,
-                                style: GoogleFonts.dmSans(
+                                prayer.$3,
+                                style: GoogleFonts.amiri(
                                   fontSize: 15,
-                                  fontWeight: tone == _PremiumPrayerCardTone.idle
-                                      ? FontWeight.w600
-                                      : FontWeight.w700,
-                                  color: tone == _PremiumPrayerCardTone.next
-                                      ? tokens.primary
-                                      : tokens.textPrimary,
+                                  color: tone == _PremiumPrayerCardTone.now
+                                      ? style.iconColor
+                                      : tokens.textSecondary,
+                                  height: 1.1,
                                 ),
                               ),
                             ),
-                            const SizedBox(width: 10),
-                            _buildPremiumPrayerStatusChip(style),
                           ],
-                        ),
-                        if (prayer.$3.isNotEmpty) ...[
-                          const SizedBox(height: 4),
-                          Directionality(
-                            textDirection: TextDirection.rtl,
-                            child: Text(
-                              prayer.$3,
-                              style: GoogleFonts.amiri(
-                                fontSize: 15,
-                                color: tone == _PremiumPrayerCardTone.now
-                                    ? style.iconColor
-                                    : tokens.textSecondary,
-                                height: 1.1,
-                              ),
+                          const SizedBox(height: 10),
+                          Text(
+                            isDone
+                                ? l10n.homePrayerDescriptionCompleted
+                                : isNow
+                                    ? l10n.homePrayerDescriptionNow
+                                    : isNext
+                                        ? l10n.homePrayerDescriptionNext
+                                        : isToday
+                                            ? l10n
+                                                .homePrayerDescriptionPendingToday
+                                            : l10n
+                                                .homePrayerDescriptionReviewDate,
+                            style: GoogleFonts.dmSans(
+                              fontSize: 10,
+                              color: tokens.textSecondary,
+                              height: 1.45,
                             ),
                           ),
                         ],
-                        const SizedBox(height: 10),
-                        Text(
-                          isDone
-                              ? l10n.homePrayerDescriptionCompleted
-                              : isNow
-                              ? l10n.homePrayerDescriptionNow
-                              : isNext
-                              ? l10n.homePrayerDescriptionNext
-                              : isToday
-                              ? l10n.homePrayerDescriptionPendingToday
-                              : l10n.homePrayerDescriptionReviewDate,
-                          style: GoogleFonts.dmSans(
-                            fontSize: 10,
-                            color: tokens.textSecondary,
-                            height: 1.45,
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 10,
+                          ),
+                          decoration: BoxDecoration(
+                            color: style.timeBackground,
+                            borderRadius: BorderRadius.circular(18),
+                            border: Border.all(
+                              color:
+                                  _blend(style.timeColor, tokens.border, 0.12),
+                            ),
+                          ),
+                          child: Text(
+                            _formatTime(prayer.$4),
+                            style: GoogleFonts.dmSans(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700,
+                              color: style.timeColor,
+                              letterSpacing: -0.2,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        GestureDetector(
+                          onTap: () => ref
+                              .read(prayerTrackingProvider.notifier)
+                              .togglePrayer(prayer.$1.key, date: date),
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 180),
+                            width: 30,
+                            height: 30,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(999),
+                              color: isDone
+                                  ? tokens.accent
+                                  : _blend(tokens.bgSurface2, tokens.bgSurface,
+                                      0.82),
+                              border: Border.all(
+                                color: isDone
+                                    ? tokens.accent
+                                    : _blend(
+                                        tokens.textMuted, tokens.border, 0.22),
+                                width: 1.4,
+                              ),
+                            ),
+                            child: Icon(
+                              isDone
+                                  ? Icons.check_rounded
+                                  : Icons.add_task_rounded,
+                              size: 16,
+                              color:
+                                  isDone ? tokens.bgPage : tokens.textSecondary,
+                            ),
                           ),
                         ),
                       ],
                     ),
-                  ),
-                  const SizedBox(width: 12),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 10,
-                        ),
-                        decoration: BoxDecoration(
-                          color: style.timeBackground,
-                          borderRadius: BorderRadius.circular(18),
-                          border: Border.all(
-                            color: _blend(style.timeColor, tokens.border, 0.12),
-                          ),
-                        ),
-                        child: Text(
-                          _formatTime(prayer.$4),
-                          style: GoogleFonts.dmSans(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                            color: style.timeColor,
-                            letterSpacing: -0.2,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 12),
-                      GestureDetector(
-                        onTap: () => ref
-                            .read(prayerTrackingProvider.notifier)
-                            .togglePrayer(prayer.$1.key, date: date),
-                        child: AnimatedContainer(
-                          duration: const Duration(milliseconds: 180),
-                          width: 30,
-                          height: 30,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(999),
-                            color: isDone
-                                ? tokens.accent
-                                : _blend(tokens.bgSurface2, tokens.bgSurface, 0.82),
-                            border: Border.all(
-                              color: isDone
-                                  ? tokens.accent
-                                  : _blend(tokens.textMuted, tokens.border, 0.22),
-                              width: 1.4,
-                            ),
-                          ),
-                          child: Icon(
-                            isDone
-                                ? Icons.check_rounded
-                                : Icons.add_task_rounded,
-                            size: 16,
-                            color: isDone ? tokens.bgPage : tokens.textSecondary,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
             );
           }),
         ],
@@ -2559,7 +2597,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   decoration: BoxDecoration(
                     color: _blend(tokens.bgSurface2, tokens.bgSurface, 0.88),
                     borderRadius: BorderRadius.circular(24),
-                    border: Border.all(color: _blend(tokens.primary, tokens.border, 0.08)),
+                    border: Border.all(
+                        color: _blend(tokens.primary, tokens.border, 0.08)),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.08),
@@ -2578,7 +2617,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           color: _blend(tokens.primary, tokens.bgSurface, 0.14),
                           shape: BoxShape.circle,
                         ),
-                        child: Icon(action.icon, size: 20, color: tokens.primary),
+                        child:
+                            Icon(action.icon, size: 20, color: tokens.primary),
                       ),
                       const SizedBox(height: 10),
                       Text(
@@ -2812,7 +2852,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   bool _isLightTheme(QiblaTokens tokens) {
-    return ThemeData.estimateBrightnessForColor(tokens.bgPage) == Brightness.light;
+    return ThemeData.estimateBrightnessForColor(tokens.bgPage) ==
+        Brightness.light;
   }
 
   Color _blend(Color foreground, Color background, double amount) {

@@ -123,6 +123,14 @@ class AyahShareVideoService {
       fileStem: fileStem,
     );
 
+    final audioDurationSeconds = await _getAudioDuration(audioFile);
+
+    if (audioDurationSeconds <= 0) {
+      throw StateError(
+        'Could not determine audio duration for ayah video.',
+      );
+    }
+
     final outputFile = File('${workingDirectory.path}/${fileStem}_video.mp4');
     if (await outputFile.exists()) {
       await outputFile.delete();
@@ -132,6 +140,7 @@ class AyahShareVideoService {
       imageFile: imageFile,
       audioFile: audioFile,
       outputFile: outputFile,
+      audioDurationSeconds: audioDurationSeconds,
     );
 
     final session = await FFmpegKit.execute(command);
@@ -148,6 +157,31 @@ class AyahShareVideoService {
     }
 
     return outputFile;
+  }
+
+  Future<double> _getAudioDuration(File audioFile) async {
+    final session = await FFmpegKit.execute(
+      '-i ${_quoteForFfmpeg(audioFile.path)} -f null -',
+    );
+    final output = await session.getOutput();
+
+    if (output == null || output.isEmpty) {
+      return 0;
+    }
+
+    final durationRegex = RegExp(r'Duration: (\d{2}):(\d{2}):(\d{2})\.(\d{2})');
+    final match = durationRegex.firstMatch(output);
+
+    if (match == null) {
+      return 0;
+    }
+
+    final hours = int.parse(match.group(1)!);
+    final minutes = int.parse(match.group(2)!);
+    final seconds = int.parse(match.group(3)!);
+    final centiseconds = int.parse(match.group(4)!);
+
+    return hours * 3600 + minutes * 60 + seconds + centiseconds / 100;
   }
 
   Future<File> _ensureAudioFile({
@@ -193,6 +227,7 @@ class AyahShareVideoService {
     required File imageFile,
     required File audioFile,
     required File outputFile,
+    required double audioDurationSeconds,
   }) {
     final backgroundColor = _ffmpegColor(QiblaThemes.current.bgPage);
     final width = _videoSize.width.round();
@@ -212,7 +247,8 @@ class AyahShareVideoService {
         '-c:v libx264 -preset veryfast -tune stillimage '
         '-c:a aac -b:a 192k '
         '-pix_fmt yuv420p -r $_videoFps '
-        '-shortest -movflags +faststart '
+        '-t $audioDurationSeconds '
+        '-movflags +faststart '
         '$outputPath';
   }
 
