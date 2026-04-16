@@ -69,7 +69,7 @@ class NotificationService {
           l10n.notificationAdhanChannelName,
           channelDescription: l10n.notificationAdhanChannelDescription,
           importance: Importance.max,
-          priority: Priority.high,
+          priority: Priority.max,
           sound: RawResourceAndroidNotificationSound(androidSound),
           playSound: true,
           enableVibration: true,
