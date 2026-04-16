@@ -82,13 +82,16 @@ class NotificationService {
         ),
       );
 
+      // alarmClock usa setAlarmClock() de Android: resistente a Doze mode y a la
+      // gestión agresiva de batería de Xiaomi/Samsung/Huawei. Requiere
+      // USE_EXACT_ALARM o SCHEDULE_EXACT_ALARM (ambos declarados en el manifest).
       await _plugin.zonedSchedule(
         id: id,
         title: l10n.notificationAdhanTitle(prayerName),
         body: l10n.notificationAdhanBody,
         scheduledDate: tz.TZDateTime.from(scheduledAt, tz.local),
         notificationDetails: details,
-        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+        androidScheduleMode: AndroidScheduleMode.alarmClock,
       );
     } catch (e, stackTrace) {
       AppLogger.error(
@@ -243,6 +246,15 @@ class NotificationService {
   Future<void> cancel(int id) async => _plugin.cancel(id: id);
 
   Future<void> cancelAll() async => _plugin.cancelAll();
+
+  /// Cancela únicamente las notificaciones relacionadas con oraciones:
+  /// hoy (0-4), mañana (5-9), Ramadán imsak/iftar (100-101), Jumu'ah (102).
+  /// No cancela la inspiración diaria (10001) ni los hadiths horarios (20000+).
+  Future<void> cancelPrayerNotifications() async {
+    for (final id in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 100, 101, 102]) {
+      await _plugin.cancel(id: id);
+    }
+  }
 
   Future<void> _deleteOldAdhanChannels() async {
     if (defaultTargetPlatform != TargetPlatform.android) return;

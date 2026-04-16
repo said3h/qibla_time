@@ -1,4 +1,5 @@
 import '../../../../core/localization/locale_controller.dart';
+import '../../../../core/services/logger_service.dart';
 import '../../../../core/services/settings_service.dart';
 import '../../../../l10n/l10n.dart';
 import '../../domain/entities/prayer_name.dart';
@@ -16,12 +17,23 @@ class PrayerNotificationsDataSource {
   final SettingsService _settingsService;
   final NotificationService _notificationService;
 
+  // IDs 0-4: oraciones de hoy
   static const Map<PrayerName, int> _prayerIds = {
     PrayerName.fajr: 0,
     PrayerName.dhuhr: 1,
     PrayerName.asr: 2,
     PrayerName.maghrib: 3,
     PrayerName.isha: 4,
+  };
+
+  // IDs 5-9: oraciones de mañana — garantizan adhan aunque el usuario no abra
+  // la app antes del primer salah del día siguiente.
+  static const Map<PrayerName, int> _tomorrowPrayerIds = {
+    PrayerName.fajr: 5,
+    PrayerName.dhuhr: 6,
+    PrayerName.asr: 7,
+    PrayerName.maghrib: 8,
+    PrayerName.isha: 9,
   };
 
   static const int _ramadanImsakReminderId = 100;
@@ -32,7 +44,9 @@ class PrayerNotificationsDataSource {
   static const Duration _jumuahReminderLead = Duration(minutes: 45);
 
   Future<void> rescheduleToday(PrayerSchedule schedule) async {
-    await _notificationService.cancelAll();
+    // Cancelamos solo los IDs de oración para no tocar las notificaciones de
+    // inspiración diaria (10001) ni de hadiths horarios (20000+).
+    await _notificationService.cancelPrayerNotifications();
 
     if (!await _settingsService.getNotificationsEnabled()) {
       return;
@@ -53,18 +67,71 @@ class PrayerNotificationsDataSource {
         continue;
       }
 
-      await _notificationService.scheduleAdhan(
-        id: _prayerIds[prayer.key]!,
-        prayerName: prayer.key.localizedDisplayName(
-          AppLocaleController.effectiveLanguageCode(),
-        ),
-        scheduledAt: prayer.value,
-        adhanFile: adhanFile,
-      );
+      // Try-catch por iteración: si una oración falla (p. ej. permiso de alarma
+      // exacta revocado), las demás se siguen programando.
+      try {
+        await _notificationService.scheduleAdhan(
+          id: _prayerIds[prayer.key]!,
+          prayerName: prayer.key.localizedDisplayName(
+            AppLocaleController.effectiveLanguageCode(),
+          ),
+          scheduledAt: prayer.value,
+          adhanFile: adhanFile,
+        );
+      } catch (e, stackTrace) {
+        AppLogger.error(
+          'Failed to schedule adhan for ${prayer.key.key}',
+          error: e,
+          stackTrace: stackTrace,
+        );
+      }
     }
 
     await _scheduleRamadanReminders(schedule, now: now);
     await _scheduleJumuahReminder(schedule, now: now);
+  }
+
+  /// Programa todas las oraciones del día siguiente con IDs 5-9.
+  /// Se llama justo después de [rescheduleToday] para garantizar que el adhan
+  /// suene aunque el usuario no abra la app antes del primer salah de mañana.
+  Future<void> scheduleTomorrow(PrayerSchedule tomorrowSchedule) async {
+    if (!await _settingsService.getNotificationsEnabled()) {
+      return;
+    }
+
+    final adhanFile = await _settingsService.getAdhan();
+    final now = DateTime.now();
+
+    for (final prayer in tomorrowSchedule.times.entries) {
+      // Salvaguarda: no programar si por alguna razón el tiempo ya pasó
+      if (!prayer.value.isAfter(now)) {
+        continue;
+      }
+
+      final enabled = await _settingsService.getPrayerNotificationEnabled(
+        prayer.key.key,
+      );
+      if (!enabled) {
+        continue;
+      }
+
+      try {
+        await _notificationService.scheduleAdhan(
+          id: _tomorrowPrayerIds[prayer.key]!,
+          prayerName: prayer.key.localizedDisplayName(
+            AppLocaleController.effectiveLanguageCode(),
+          ),
+          scheduledAt: prayer.value,
+          adhanFile: adhanFile,
+        );
+      } catch (e, stackTrace) {
+        AppLogger.error(
+          'Failed to schedule tomorrow adhan for ${prayer.key.key}',
+          error: e,
+          stackTrace: stackTrace,
+        );
+      }
+    }
   }
 
   Future<bool> areNotificationsEnabled() {

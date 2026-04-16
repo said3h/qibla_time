@@ -5,6 +5,7 @@ import '../localization/locale_controller.dart';
 import '../../features/dhikr/screens/dhikr_screen.dart';
 import '../../features/prayer_times/presentation/providers/prayer_times_providers.dart';
 import '../../features/prayer_times/screens/home_screen.dart';
+import '../../features/prayer_times/services/adhan_manager.dart';
 import '../../features/prayer_times/services/travel_mode_service.dart';
 import '../../features/qibla/screens/qibla_screen.dart';
 import '../../features/quran/screens/quran_screen.dart';
@@ -54,6 +55,9 @@ class _MainNavigationState extends ConsumerState<MainNavigation>
 
     _lastForegroundRefreshAt = now;
     _refreshLocationDrivenState();
+    // Reprogramar adhans al volver al frente: cubre el caso de que la app haya
+    // cruzado la medianoche en segundo plano y necesite el horario del nuevo día.
+    ref.read(adhanManagerProvider).scheduleTodayAdhans();
   }
 
   void _refreshLocationDrivenState() {
