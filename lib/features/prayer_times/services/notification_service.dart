@@ -190,6 +190,11 @@ class NotificationService {
 
   Future<void> testAdhanSound(String adhanFile) async {
     try {
+      final permissionGranted = await requestPermission();
+      if (!permissionGranted) {
+        return;
+      }
+
       final l10n = appLocalizationsForDevice();
       final androidSound = _androidSoundNameFor(adhanFile);
       final androidChannelId = _androidChannelIdFor(adhanFile);

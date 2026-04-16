@@ -592,19 +592,41 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(color: tokens.primaryBorder),
                 ),
-                child: Row(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Icon(Icons.notifications_off_outlined, color: tokens.primary, size: 18),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: Text(
-                        l10n.settingsSystemPermissionPendingBody,
-                        style: GoogleFonts.dmSans(
-                          fontSize: 11,
-                          height: 1.5,
-                          color: tokens.textPrimary,
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Icon(
+                          Icons.notifications_off_outlined,
+                          color: tokens.primary,
+                          size: 18,
                         ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Text(
+                            l10n.settingsSystemPermissionPendingBody,
+                            style: GoogleFonts.dmSans(
+                              fontSize: 11,
+                              height: 1.5,
+                              color: tokens.textPrimary,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
+                        onPressed: () async {
+                          await NotificationService.instance.requestPermission();
+                          ref.invalidate(systemNotificationPermissionProvider);
+                          if (!mounted) return;
+                          await _loadSettings();
+                        },
+                        child: Text(l10n.commonAllow),
                       ),
                     ),
                   ],
