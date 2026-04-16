@@ -13,7 +13,7 @@ import '../../../l10n/l10n.dart';
 class NotificationService {
   NotificationService._();
   static final NotificationService instance = NotificationService._();
-  static const _androidAdhanChannelPrefix = 'adhan_channel_v3_';
+  static const _androidAdhanChannelPrefix = 'adhan_channel_v4_';
 
   final FlutterLocalNotificationsPlugin _plugin =
       FlutterLocalNotificationsPlugin();
@@ -82,17 +82,63 @@ class NotificationService {
         ),
       );
 
-      // alarmClock usa setAlarmClock() de Android: resistente a Doze mode y a la
-      // gestión agresiva de batería de Xiaomi/Samsung/Huawei. Requiere
-      // USE_EXACT_ALARM o SCHEDULE_EXACT_ALARM (ambos declarados en el manifest).
-      await _plugin.zonedSchedule(
-        id: id,
-        title: l10n.notificationAdhanTitle(prayerName),
-        body: l10n.notificationAdhanBody,
-        scheduledDate: tz.TZDateTime.from(scheduledAt, tz.local),
-        notificationDetails: details,
-        androidScheduleMode: AndroidScheduleMode.alarmClock,
-      );
+      final tzDate = tz.TZDateTime.from(scheduledAt, tz.local);
+
+      // Cascade: alarmClock (best, needs SCHEDULE_EXACT_ALARM) →
+      // exactAllowWhileIdle (good, needs exact alarm) →
+      // inexact (always works, may fire up to ~15 min late but guaranteed).
+      bool scheduled = false;
+
+      try {
+        // alarmClock usa setAlarmClock(): resistente a Doze y a la gestión
+        // agresiva de batería de Xiaomi/Samsung/Huawei.
+        await _plugin.zonedSchedule(
+          id: id,
+          title: l10n.notificationAdhanTitle(prayerName),
+          body: l10n.notificationAdhanBody,
+          scheduledDate: tzDate,
+          notificationDetails: details,
+          androidScheduleMode: AndroidScheduleMode.alarmClock,
+        );
+        scheduled = true;
+      } catch (e) {
+        AppLogger.warning(
+          'alarmClock scheduling failed for id=$id, trying exactAllowWhileIdle',
+          error: e,
+        );
+      }
+
+      if (!scheduled) {
+        try {
+          await _plugin.zonedSchedule(
+            id: id,
+            title: l10n.notificationAdhanTitle(prayerName),
+            body: l10n.notificationAdhanBody,
+            scheduledDate: tzDate,
+            notificationDetails: details,
+            androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+          );
+          scheduled = true;
+        } catch (e) {
+          AppLogger.warning(
+            'exactAllowWhileIdle scheduling failed for id=$id, falling back to inexact',
+            error: e,
+          );
+        }
+      }
+
+      if (!scheduled) {
+        // Fallback sin permiso: puede llegar hasta ~15 min tarde pero garantiza
+        // que el adhan suene aunque el usuario haya revocado las alarmas exactas.
+        await _plugin.zonedSchedule(
+          id: id,
+          title: l10n.notificationAdhanTitle(prayerName),
+          body: l10n.notificationAdhanBody,
+          scheduledDate: tzDate,
+          notificationDetails: details,
+          androidScheduleMode: AndroidScheduleMode.inexact,
+        );
+      }
     } catch (e, stackTrace) {
       AppLogger.error(
         'Failed to schedule adhan notification',
@@ -263,7 +309,7 @@ class NotificationService {
         AndroidFlutterLocalNotificationsPlugin>();
     if (android == null) return;
 
-    const oldPrefixes = ['adhan_channel_v1_', 'adhan_channel_v2_'];
+    const oldPrefixes = ['adhan_channel_v1_', 'adhan_channel_v2_', 'adhan_channel_v3_'];
     const adhanFiles = [
       'azan1.mp3',
       'azan2.mp3',
