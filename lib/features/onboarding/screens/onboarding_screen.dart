@@ -140,6 +140,14 @@ class _OnboardingScreenState extends State<OnboardingScreen>
     );
   }
 
+  Future<void> _next() async {
+    if (_step >= _pageCount - 1) return;
+    await _controller.nextPage(
+      duration: const Duration(milliseconds: 250),
+      curve: Curves.easeOut,
+    );
+  }
+
   Future<void> _requestLocation() async {
     if (_busy) return;
     setState(() => _busy = true);
@@ -229,6 +237,9 @@ class _OnboardingScreenState extends State<OnboardingScreen>
     final l10n = context.l10n;
     final isArabicOnly = Localizations.localeOf(context).languageCode == 'ar';
     final isLastStep = _step == _pageCount - 1;
+    final primaryActionLabel =
+        isLastStep ? l10n.commonEnter : l10n.commonNext;
+    final primaryAction = isLastStep ? widget.onCompleted : _next;
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
@@ -261,9 +272,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
               Expanded(
                 child: PageView(
                   controller: _controller,
-                  physics: _busy
-                      ? const NeverScrollableScrollPhysics()
-                      : const ClampingScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   onPageChanged: (value) => setState(() => _step = value),
                   children: [
                     _buildWelcome(tokens, isArabicOnly),
@@ -276,26 +285,25 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                 ),
               ),
               const SizedBox(height: 12),
-              if (_step != 0 || isLastStep)
-                Row(
-                  children: [
-                    if (_step != 0)
-                      Expanded(
-                        child: OutlinedButton(
-                          onPressed: _busy ? null : _back,
-                          child: Text(l10n.commonBack),
-                        ),
+              Row(
+                children: [
+                  if (_step != 0) ...[
+                    Expanded(
+                      child: OutlinedButton(
+                        onPressed: _busy ? null : _back,
+                        child: Text(l10n.commonBack),
                       ),
-                    if (_step != 0 && isLastStep) const SizedBox(width: 10),
-                    if (isLastStep)
-                      Expanded(
-                        child: ElevatedButton(
-                          onPressed: _busy ? null : widget.onCompleted,
-                          child: Text(l10n.commonEnter),
-                        ),
-                      ),
+                    ),
+                    const SizedBox(width: 10),
                   ],
-                ),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: _busy ? null : primaryAction,
+                      child: Text(primaryActionLabel),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
