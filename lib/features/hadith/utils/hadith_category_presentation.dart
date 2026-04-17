@@ -272,6 +272,43 @@ class HadithCategoryPresentation {
     'zuhd': 'Зухд',
   };
 
+  static const _turkishLabels = <String, String>{
+    'adab': 'Adab',
+    'love_allah': 'Allah sevgisi',
+    'self_reflection': 'Nefis muhasebesi',
+    'fasting': 'Oruç',
+    'character': 'Ahlak',
+    'charity': 'Sadaka',
+    'compassion': 'Merhamet',
+    'knowledge': 'İlim',
+    'consistency': 'İstikrar',
+    'heart': 'Kalp',
+    'dhikr': 'Zikir',
+    'dua': 'Dua',
+    'family': 'Aile',
+    'brotherhood': 'Kardeşlik',
+    'gratitude': 'Şükür',
+    'haya': 'Hayâ',
+    'honesty': 'Dürüstlük',
+    'ihsan': 'İhsan',
+    'intentions': 'Niyetler',
+    'istighfar': 'İstiğfar',
+    'justice': 'Adalet',
+    'tongue': 'Dil',
+    'mosque': 'Mescit',
+    'mercy': 'Rahmet',
+    'patience': 'Sabır',
+    'purification': 'Temizlik',
+    'quran': "Kur'an",
+    'provision': 'Rızık',
+    'salah': 'Namaz',
+    'safety': 'Güvenlik',
+    'service': 'Hizmet',
+    'sincerity': 'İhlas',
+    'taqwa': 'Takva',
+    'zuhd': 'Zühd',
+  };
+
   static const _arabicLabels = <String, String>{
     'adab': 'الادب',
     'love_allah': 'محبة الله',
@@ -318,6 +355,7 @@ class HadithCategoryPresentation {
       'it' => 'it',
       'pt' => 'pt',
       'ru' => 'ru',
+      'tr' => 'tr',
       _ => 'es',
     };
 
@@ -336,6 +374,7 @@ class HadithCategoryPresentation {
       'it' => _italianLabels[key] ?? category,
       'pt' => _portugueseLabels[key] ?? category,
       'ru' => _russianLabels[key] ?? category,
+      'tr' => _turkishLabels[key] ?? category,
       _ => _spanishLabels[key] ?? category,
     };
 

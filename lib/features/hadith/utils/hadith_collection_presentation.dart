@@ -74,6 +74,7 @@ class HadithCollectionPresentation {
       'it' => 'it',
       'pt' => 'pt',
       'ru' => 'ru',
+      'tr' => 'tr',
       _ => 'default',
     };
 
@@ -85,6 +86,7 @@ class HadithCollectionPresentation {
             'it' => 'Altri',
             'pt' => 'Outros',
             'ru' => _russianLabels[normalizedCollection] ?? 'Другие',
+            'tr' => 'Diğer',
             _ => 'Otros',
           }
         : switch (normalizedLanguage) {

@@ -135,6 +135,46 @@ class DuaLocalePresentation {
     'hajj': 'Pilgrimage',
   };
 
+  static const _categoryTurkishLabels = <String, String>{
+    'morning': 'Sabah',
+    'night': 'Gece',
+    'sleep': 'Uyku',
+    'wudu': 'Abdest',
+    'after_prayer': 'Namazdan sonra',
+    'zikr': 'Zikir',
+    'travel': 'Yolculuk',
+    'food': 'Yemek',
+    'sickness': 'Hastalık',
+    'protection': 'Korunma',
+    'repentance': 'Tövbe',
+    'mosque': 'Mescit',
+    'rain': 'Yağmur',
+    'stress': 'Sıkıntı',
+    'gratitude': 'Şükür',
+    'parents': 'Aile',
+    'hajj': 'Hac ve Umre',
+  };
+
+  static const _categoryTurkishHints = <String, String>{
+    'morning': 'Günün başlangıcı',
+    'night': 'Günün sonu',
+    'sleep': 'Uyumadan önce',
+    'wudu': 'Abdest ve temizlik',
+    'after_prayer': 'Her namazdan sonra',
+    'zikr': 'Hamd ve zikir',
+    'travel': 'Yola çıkış ve yolculuk',
+    'food': 'Yemekten önce ve sonra',
+    'sickness': 'Şifa ve ziyaret',
+    'protection': 'Sığınma ve korunma',
+    'repentance': 'Bağışlanma ve dönüş',
+    'mosque': 'Mescide giriş ve çıkış',
+    'rain': 'Yağmur sırasında',
+    'stress': 'Hüzün ve yük',
+    'gratitude': 'Şükretmek',
+    'parents': 'Anne baba ve çocuklar',
+    'hajj': 'Hac ve umre',
+  };
+
   static const _categoryFrenchLabels = <String, String>{
     'morning': 'Matin',
     'night': 'Nuit',
@@ -446,6 +486,7 @@ class DuaLocalePresentation {
       'nl' => 'nl',
       'pt' => 'pt',
       'ru' => 'ru',
+      'tr' => 'tr',
       _ => 'es',
     };
   }
@@ -514,6 +555,12 @@ class DuaLocalePresentation {
           hint: _categoryEnglishHints[key] ?? 'Category',
           arabicLabel: arabicLabel,
         ),
+      'tr' => DuaCategoryMeta(
+          icon: icon,
+          label: _categoryTurkishLabels[key] ?? _categoryEnglishLabels[key] ?? key,
+          hint: _categoryTurkishHints[key] ?? 'Kategori',
+          arabicLabel: arabicLabel,
+        ),
       'fr' => DuaCategoryMeta(
           icon: icon,
           label: _categoryFrenchLabels[key] ?? key,
@@ -546,6 +593,7 @@ class DuaLocalePresentation {
       'de' => 'Dua und Adhkar',
       'id' => 'Doa dan Adhkar',
       'nl' => 'Dua en adhkar',
+      'tr' => 'Dua ve ezkâr',
       _ => 'Dua y adhkar',
     };
   }
@@ -561,6 +609,7 @@ class DuaLocalePresentation {
       'de' => 'Tägliche Bittgebete für deinen Tag',
       'id' => 'Doa harian untuk menemanimu',
       'nl' => 'Dagelijkse smeekbeden om je dag te begeleiden',
+      'tr' => 'Gününe eşlik eden günlük dualar',
       _ => 'Invocaciones diarias para acompañar tu día',
     };
   }
@@ -583,6 +632,8 @@ class DuaLocalePresentation {
         'Koleksi doa dan adhkar pilihan untuk kehidupan sehari-hari. Ketuk kategori untuk melihat semua doa yang tersedia.',
       'nl' =>
         "Een zorgvuldige verzameling dua's en adhkar voor het dagelijks leven. Tik op een categorie om alle beschikbare dua's te zien.",
+      'tr' =>
+        'Günlük hayat için özenle seçilmiş dua ve ezkâr koleksiyonu. Tüm duaları görmek için bir kategoriye dokun.',
       'ar' =>
         'مجموعة مختارة من الأدعية والأذكار لليوم والليلة. افتح أي قسم لرؤية جميع الأدعية المتاحة.',
       _ =>
@@ -601,6 +652,7 @@ class DuaLocalePresentation {
       'ar' => 'ابحث عن دعاء أو ذكر',
       'id' => 'Cari doa atau adhkar',
       'nl' => 'Zoek dua of adhkar',
+      'tr' => 'Dua veya zikir ara',
       _ => 'Buscar dua o adhkar',
     };
   }
@@ -616,6 +668,7 @@ class DuaLocalePresentation {
       'ar' => 'مسح البحث',
       'id' => 'Hapus pencarian',
       'nl' => 'Zoekopdracht wissen',
+      'tr' => 'Aramayı temizle',
       _ => 'Limpiar búsqueda',
     };
   }
@@ -637,6 +690,7 @@ class DuaLocalePresentation {
         'ar' => 'لم نجد نتائج لعبارة "$query".',
         'id' => 'Tidak ada hasil untuk "$query".',
         'nl' => 'Geen resultaten gevonden voor "$query".',
+        'tr' => '"$query" için sonuç bulunamadı.',
         _ => 'No encontramos resultados para "$query".',
       };
     }
@@ -651,6 +705,7 @@ class DuaLocalePresentation {
       'ar' => '$count نتيجة لعبارة "$query".',
       'id' => '$count hasil untuk "$query".',
       'nl' => '$count resultaat${count == 1 ? '' : 's'} voor "$query".',
+      'tr' => '"$query" için $count sonuç.',
       _ => '$count resultado${count == 1 ? '' : 's'} para "$query".',
     };
   }
@@ -666,6 +721,7 @@ class DuaLocalePresentation {
       'ar' => 'لا توجد نتائج',
       'id' => 'Tidak ada hasil',
       'nl' => 'Geen resultaten',
+      'tr' => 'Sonuç yok',
       _ => 'Sin resultados',
     };
   }
@@ -690,6 +746,8 @@ class DuaLocalePresentation {
         'Coba kata-kata seperti hujan, perjalanan, perlindungan, tidur atau rasa syukur.',
       'nl' =>
         'Probeer woorden als regen, reizen, bescherming, slaap of dankbaarheid.',
+      'tr' =>
+        'Yağmur, yolculuk, korunma, uyku veya şükür gibi kelimeler dene.',
       _ =>
         'Prueba con palabras como lluvia, viaje, protección, sueño o gratitud.',
     };
@@ -706,6 +764,7 @@ class DuaLocalePresentation {
       'ar' => 'الأقسام',
       'id' => 'KATEGORI',
       'nl' => 'CATEGORIEËN',
+      'tr' => 'KATEGORİLER',
       _ => 'CATEGORÍAS',
     };
   }
@@ -721,6 +780,7 @@ class DuaLocalePresentation {
       'ar' => 'مختارات',
       'id' => 'UNGGULAN',
       'nl' => 'AANBEVOLEN',
+      'tr' => 'ÖNE ÇIKANLAR',
       _ => 'DESTACADAS',
     };
   }
@@ -740,6 +800,7 @@ class DuaLocalePresentation {
       'ar' => '$count ذكر · $hint',
       'id' => '$count adhkar · $hint',
       'nl' => '$count adhkar · $hint',
+      'tr' => '$count ezkâr · $hint',
       _ => '$count adhkar · $hint',
     };
   }
@@ -755,6 +816,7 @@ class DuaLocalePresentation {
       'ar' => 'تعذر علينا تحميل محتوى الدعاء.',
       'id' => 'Konten Doa tidak dapat dimuat.',
       'nl' => 'We konden de dua-inhoud niet laden.',
+      'tr' => 'Dua içeriği yüklenemedi.',
       _ => 'No hemos podido cargar el contenido de Dua.',
     };
   }
@@ -770,6 +832,7 @@ class DuaLocalePresentation {
       'ar' => 'لا توجد أدعية في هذا القسم.',
       'id' => 'Tidak ada doa dalam kategori ini',
       'nl' => "Er zijn geen dua's in deze categorie.",
+      'tr' => 'Bu kategoride dua yok.',
       _ => 'No hay duas en esta categoría',
     };
   }
@@ -785,6 +848,7 @@ class DuaLocalePresentation {
       'ar' => 'حدث خطأ أثناء تحميل الأدعية.',
       'id' => 'Gagal memuat doa',
       'nl' => "Fout bij het laden van dua's.",
+      'tr' => 'Dualar yüklenirken hata oluştu.',
       _ => 'Error al cargar las duas',
     };
   }
@@ -800,6 +864,7 @@ class DuaLocalePresentation {
       'ar' => '$count مرات',
       'id' => '$count kali',
       'nl' => '$count keer',
+      'tr' => '$count kez',
       _ => '$count veces',
     };
   }
@@ -815,6 +880,7 @@ class DuaLocalePresentation {
       'ar' => 'مشاركة',
       'id' => 'Bagikan',
       'nl' => 'Delen',
+      'tr' => 'Paylaş',
       _ => 'Compartir',
     };
   }

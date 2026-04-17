@@ -154,7 +154,7 @@ class AppLocalizationsNl extends AppLocalizations {
       'Jouw gegevens verlaten nooit je apparaat';
 
   @override
-  String get onboardingIntroLanguages => '9 talen';
+  String get onboardingIntroLanguages => '11 talen';
 
   @override
   String get onboardingIntroLanguagesBody => 'Beschikbaar in jouw taal';
@@ -2903,6 +2903,9 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get settingsLanguageOptionItalian => 'Italiaans';
+
+  @override
+  String get settingsLanguageOptionTurkish => 'Turks';
 
   @override
   String get homeQuickActionPurification => 'Wudu en ghusl';

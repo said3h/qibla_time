@@ -117,7 +117,7 @@ Tab Duas/Adhkar → seleccionar categoria → ver dua
 **Que debe mostrar:**
 - Pantalla de ajustes (Settings) abierta
 - El selector de idioma visible y expandido o con la lista de idiomas disponibles
-- Los 10 idiomas soportados visibles: Arabic, German, English, Spanish, French, Indonesian, Italian, Dutch, Portuguese, Russian
+- Los 11 idiomas soportados visibles: Arabic, German, English, Spanish, French, Indonesian, Italian, Dutch, Portuguese, Russian, Turkish
 - Idioma actualmente seleccionado marcado claramente (check o resaltado)
 - Aspecto limpio y organizado
 

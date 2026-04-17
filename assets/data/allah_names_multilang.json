@@ -43,6 +43,10 @@
       "pt": {
         "name": "O Mais Gracioso",
         "description": ""
+      },
+      "tr": {
+        "name": "Çok merhametli",
+        "description": ""
       }
     }
   },
@@ -89,6 +93,10 @@
       },
       "pt": {
         "name": "O Mais Misericordioso",
+        "description": ""
+      },
+      "tr": {
+        "name": "Çok esirgeyen",
         "description": ""
       }
     }
@@ -137,6 +145,10 @@
       "pt": {
         "name": "O rei",
         "description": ""
+      },
+      "tr": {
+        "name": "Mutlak hükümdar",
+        "description": ""
       }
     }
   },
@@ -183,6 +195,10 @@
       },
       "pt": {
         "name": "O Santíssimo",
+        "description": ""
+      },
+      "tr": {
+        "name": "Eksikliklerden uzak olan",
         "description": ""
       }
     }
@@ -231,6 +247,10 @@
       "pt": {
         "name": "A fonte da paz",
         "description": ""
+      },
+      "tr": {
+        "name": "Esenlik veren",
+        "description": ""
       }
     }
   },
@@ -277,6 +297,10 @@
       },
       "pt": {
         "name": "O Guardião da Fé",
+        "description": ""
+      },
+      "tr": {
+        "name": "Güven veren",
         "description": ""
       }
     }
@@ -325,6 +349,10 @@
       "pt": {
         "name": "O Protetor",
         "description": ""
+      },
+      "tr": {
+        "name": "Gözetip koruyan",
+        "description": ""
       }
     }
   },
@@ -371,6 +399,10 @@
       },
       "pt": {
         "name": "O Todo-Poderoso",
+        "description": ""
+      },
+      "tr": {
+        "name": "Mutlak güçlü",
         "description": ""
       }
     }
@@ -419,6 +451,10 @@
       "pt": {
         "name": "O Compulsor",
         "description": ""
+      },
+      "tr": {
+        "name": "Dilediğini yaptıran",
+        "description": ""
       }
     }
   },
@@ -465,6 +501,10 @@
       },
       "pt": {
         "name": "O Majestoso",
+        "description": ""
+      },
+      "tr": {
+        "name": "Azamet sahibi",
         "description": ""
       }
     }
@@ -513,6 +553,10 @@
       "pt": {
         "name": "O Criador",
         "description": ""
+      },
+      "tr": {
+        "name": "Yaratan",
+        "description": ""
       }
     }
   },
@@ -559,6 +603,10 @@
       },
       "pt": {
         "name": "O Originador",
+        "description": ""
+      },
+      "tr": {
+        "name": "Kusursuzca var eden",
         "description": ""
       }
     }
@@ -607,6 +655,10 @@
       "pt": {
         "name": "O fashionista",
         "description": ""
+      },
+      "tr": {
+        "name": "Şekil veren",
+        "description": ""
       }
     }
   },
@@ -653,6 +705,10 @@
       },
       "pt": {
         "name": "O Grande Perdoador",
+        "description": ""
+      },
+      "tr": {
+        "name": "Çok bağışlayan",
         "description": ""
       }
     }
@@ -701,6 +757,10 @@
       "pt": {
         "name": "O Subjugador",
         "description": ""
+      },
+      "tr": {
+        "name": "Kahreden",
+        "description": ""
       }
     }
   },
@@ -747,6 +807,10 @@
       },
       "pt": {
         "name": "O Doador",
+        "description": ""
+      },
+      "tr": {
+        "name": "Karşılıksız veren",
         "description": ""
       }
     }
@@ -795,6 +859,10 @@
       "pt": {
         "name": "O provedor",
         "description": ""
+      },
+      "tr": {
+        "name": "Rızık veren",
+        "description": ""
       }
     }
   },
@@ -841,6 +909,10 @@
       },
       "pt": {
         "name": "O abridor",
+        "description": ""
+      },
+      "tr": {
+        "name": "Kapıları açan",
         "description": ""
       }
     }
@@ -889,6 +961,10 @@
       "pt": {
         "name": "O Onisciente",
         "description": ""
+      },
+      "tr": {
+        "name": "Her şeyi bilen",
+        "description": ""
       }
     }
   },
@@ -935,6 +1011,10 @@
       },
       "pt": {
         "name": "O Constritor",
+        "description": ""
+      },
+      "tr": {
+        "name": "Daraltan",
         "description": ""
       }
     }
@@ -983,6 +1063,10 @@
       "pt": {
         "name": "O expansor",
         "description": ""
+      },
+      "tr": {
+        "name": "Genişleten",
+        "description": ""
       }
     }
   },
@@ -1029,6 +1113,10 @@
       },
       "pt": {
         "name": "O Abasteiro",
+        "description": ""
+      },
+      "tr": {
+        "name": "Alçaltan",
         "description": ""
       }
     }
@@ -1077,6 +1165,10 @@
       "pt": {
         "name": "O Exaltador",
         "description": ""
+      },
+      "tr": {
+        "name": "Yücelten",
+        "description": ""
       }
     }
   },
@@ -1123,6 +1215,10 @@
       },
       "pt": {
         "name": "O homenageado",
+        "description": ""
+      },
+      "tr": {
+        "name": "İzzet veren",
         "description": ""
       }
     }
@@ -1171,6 +1267,10 @@
       "pt": {
         "name": "O humilhador",
         "description": ""
+      },
+      "tr": {
+        "name": "Zelil kılan",
+        "description": ""
       }
     }
   },
@@ -1217,6 +1317,10 @@
       },
       "pt": {
         "name": "O Todo-Ouvinte",
+        "description": ""
+      },
+      "tr": {
+        "name": "Her şeyi işiten",
         "description": ""
       }
     }
@@ -1265,6 +1369,10 @@
       "pt": {
         "name": "O que tudo vê",
         "description": ""
+      },
+      "tr": {
+        "name": "Her şeyi gören",
+        "description": ""
       }
     }
   },
@@ -1311,6 +1419,10 @@
       },
       "pt": {
         "name": "O Juiz",
+        "description": ""
+      },
+      "tr": {
+        "name": "Hüküm veren",
         "description": ""
       }
     }
@@ -1359,6 +1471,10 @@
       "pt": {
         "name": "O Justo",
         "description": ""
+      },
+      "tr": {
+        "name": "Adalet sahibi",
+        "description": ""
       }
     }
   },
@@ -1405,6 +1521,10 @@
       },
       "pt": {
         "name": "O sutil e gentil",
+        "description": ""
+      },
+      "tr": {
+        "name": "Lütuf sahibi",
         "description": ""
       }
     }
@@ -1453,6 +1573,10 @@
       "pt": {
         "name": "O Todo-Consciente",
         "description": ""
+      },
+      "tr": {
+        "name": "Her şeyden haberdar",
+        "description": ""
       }
     }
   },
@@ -1499,6 +1623,10 @@
       },
       "pt": {
         "name": "O tolerante",
+        "description": ""
+      },
+      "tr": {
+        "name": "Çok yumuşak davranan",
         "description": ""
       }
     }
@@ -1547,6 +1675,10 @@
       "pt": {
         "name": "O Magnífico",
         "description": ""
+      },
+      "tr": {
+        "name": "Pek yüce",
+        "description": ""
       }
     }
   },
@@ -1593,6 +1725,10 @@
       },
       "pt": {
         "name": "O perdão",
+        "description": ""
+      },
+      "tr": {
+        "name": "Çok bağışlayan",
         "description": ""
       }
     }
@@ -1641,6 +1777,10 @@
       "pt": {
         "name": "O Grato",
         "description": ""
+      },
+      "tr": {
+        "name": "Şükrü karşılıksız bırakmayan",
+        "description": ""
       }
     }
   },
@@ -1687,6 +1827,10 @@
       },
       "pt": {
         "name": "O Altíssimo",
+        "description": ""
+      },
+      "tr": {
+        "name": "Çok yüce",
         "description": ""
       }
     }
@@ -1735,6 +1879,10 @@
       "pt": {
         "name": "O maior",
         "description": ""
+      },
+      "tr": {
+        "name": "Pek büyük",
+        "description": ""
       }
     }
   },
@@ -1781,6 +1929,10 @@
       },
       "pt": {
         "name": "O Preservador",
+        "description": ""
+      },
+      "tr": {
+        "name": "Koruyup gözeten",
         "description": ""
       }
     }
@@ -1829,6 +1981,10 @@
       "pt": {
         "name": "O Nutridor",
         "description": ""
+      },
+      "tr": {
+        "name": "Besleyen ve güç veren",
+        "description": ""
       }
     }
   },
@@ -1875,6 +2031,10 @@
       },
       "pt": {
         "name": "O Contador",
+        "description": ""
+      },
+      "tr": {
+        "name": "Hesaba çeken",
         "description": ""
       }
     }
@@ -1923,6 +2083,10 @@
       "pt": {
         "name": "O Majestoso",
         "description": ""
+      },
+      "tr": {
+        "name": "Celal sahibi",
+        "description": ""
       }
     }
   },
@@ -1969,6 +2133,10 @@
       },
       "pt": {
         "name": "O mais generoso",
+        "description": ""
+      },
+      "tr": {
+        "name": "Çok cömert",
         "description": ""
       }
     }
@@ -2017,6 +2185,10 @@
       "pt": {
         "name": "O Vigilante",
         "description": ""
+      },
+      "tr": {
+        "name": "Gözetleyen",
+        "description": ""
       }
     }
   },
@@ -2063,6 +2235,10 @@
       },
       "pt": {
         "name": "O Responsivo",
+        "description": ""
+      },
+      "tr": {
+        "name": "Dualara karşılık veren",
         "description": ""
       }
     }
@@ -2111,6 +2287,10 @@
       "pt": {
         "name": "O Todo-Abrangente",
         "description": ""
+      },
+      "tr": {
+        "name": "İlmi ve rahmeti geniş olan",
+        "description": ""
       }
     }
   },
@@ -2157,6 +2337,10 @@
       },
       "pt": {
         "name": "O Sábio",
+        "description": ""
+      },
+      "tr": {
+        "name": "Hikmet sahibi",
         "description": ""
       }
     }
@@ -2205,6 +2389,10 @@
       "pt": {
         "name": "O amoroso",
         "description": ""
+      },
+      "tr": {
+        "name": "Çok seven",
+        "description": ""
       }
     }
   },
@@ -2251,6 +2439,10 @@
       },
       "pt": {
         "name": "O Glorioso",
+        "description": ""
+      },
+      "tr": {
+        "name": "Şanı çok yüce",
         "description": ""
       }
     }
@@ -2299,6 +2491,10 @@
       "pt": {
         "name": "O Ressuscitador",
         "description": ""
+      },
+      "tr": {
+        "name": "Dirilten",
+        "description": ""
       }
     }
   },
@@ -2345,6 +2541,10 @@
       },
       "pt": {
         "name": "A testemunha",
+        "description": ""
+      },
+      "tr": {
+        "name": "Şahit olan",
         "description": ""
       }
     }
@@ -2393,6 +2593,10 @@
       "pt": {
         "name": "A verdade",
         "description": ""
+      },
+      "tr": {
+        "name": "Gerçek olan",
+        "description": ""
       }
     }
   },
@@ -2439,6 +2643,10 @@
       },
       "pt": {
         "name": "O administrador",
+        "description": ""
+      },
+      "tr": {
+        "name": "Vekil olan",
         "description": ""
       }
     }
@@ -2487,6 +2695,10 @@
       "pt": {
         "name": "O Forte",
         "description": ""
+      },
+      "tr": {
+        "name": "Çok güçlü",
+        "description": ""
       }
     }
   },
@@ -2533,6 +2745,10 @@
       },
       "pt": {
         "name": "A empresa",
+        "description": ""
+      },
+      "tr": {
+        "name": "Sarsılmaz kuvvet sahibi",
         "description": ""
       }
     }
@@ -2581,6 +2797,10 @@
       "pt": {
         "name": "O amigo protetor",
         "description": ""
+      },
+      "tr": {
+        "name": "Dost ve yardımcı",
+        "description": ""
       }
     }
   },
@@ -2627,6 +2847,10 @@
       },
       "pt": {
         "name": "O Louvável",
+        "description": ""
+      },
+      "tr": {
+        "name": "Övgüye layık",
         "description": ""
       }
     }
@@ -2675,6 +2899,10 @@
       "pt": {
         "name": "O contador",
         "description": ""
+      },
+      "tr": {
+        "name": "Her şeyi sayıp bilen",
+        "description": ""
       }
     }
   },
@@ -2721,6 +2949,10 @@
       },
       "pt": {
         "name": "O Originador",
+        "description": ""
+      },
+      "tr": {
+        "name": "İlk defa yaratan",
         "description": ""
       }
     }
@@ -2769,6 +3001,10 @@
       "pt": {
         "name": "O Restaurador",
         "description": ""
+      },
+      "tr": {
+        "name": "Yeniden dirilten",
+        "description": ""
       }
     }
   },
@@ -2815,6 +3051,10 @@
       },
       "pt": {
         "name": "O Doador da Vida",
+        "description": ""
+      },
+      "tr": {
+        "name": "Hayat veren",
         "description": ""
       }
     }
@@ -2863,6 +3103,10 @@
       "pt": {
         "name": "O Criador da Morte",
         "description": ""
+      },
+      "tr": {
+        "name": "Ölümü yaratan",
+        "description": ""
       }
     }
   },
@@ -2909,6 +3153,10 @@
       },
       "pt": {
         "name": "O Sempre Vivo",
+        "description": ""
+      },
+      "tr": {
+        "name": "Diri olan",
         "description": ""
       }
     }
@@ -2957,6 +3205,10 @@
       "pt": {
         "name": "O Auto-Subsistente",
         "description": ""
+      },
+      "tr": {
+        "name": "Her şeyi ayakta tutan",
+        "description": ""
       }
     }
   },
@@ -3003,6 +3255,10 @@
       },
       "pt": {
         "name": "O localizador",
+        "description": ""
+      },
+      "tr": {
+        "name": "Dilediğini bulan",
         "description": ""
       }
     }
@@ -3051,6 +3307,10 @@
       "pt": {
         "name": "O Nobre e Glorioso",
         "description": ""
+      },
+      "tr": {
+        "name": "Şanı yüce",
+        "description": ""
       }
     }
   },
@@ -3097,6 +3357,10 @@
       },
       "pt": {
         "name": "O Único",
+        "description": ""
+      },
+      "tr": {
+        "name": "Tek olan",
         "description": ""
       }
     }
@@ -3145,6 +3409,10 @@
       "pt": {
         "name": "O único",
         "description": ""
+      },
+      "tr": {
+        "name": "Eşi benzeri olmayan",
+        "description": ""
       }
     }
   },
@@ -3191,6 +3459,10 @@
       },
       "pt": {
         "name": "O Refúgio Eterno",
+        "description": ""
+      },
+      "tr": {
+        "name": "Hiçbir şeye muhtaç olmayan",
         "description": ""
       }
     }
@@ -3239,6 +3511,10 @@
       "pt": {
         "name": "O Capaz",
         "description": ""
+      },
+      "tr": {
+        "name": "Her şeye gücü yeten",
+        "description": ""
       }
     }
   },
@@ -3285,6 +3561,10 @@
       },
       "pt": {
         "name": "O Criador de Todo Poder",
+        "description": ""
+      },
+      "tr": {
+        "name": "Mutlak kudret sahibi",
         "description": ""
       }
     }
@@ -3333,6 +3613,10 @@
       "pt": {
         "name": "O Expedidor",
         "description": ""
+      },
+      "tr": {
+        "name": "Öne geçiren",
+        "description": ""
       }
     }
   },
@@ -3379,6 +3663,10 @@
       },
       "pt": {
         "name": "O retardador",
+        "description": ""
+      },
+      "tr": {
+        "name": "Geri bırakan",
         "description": ""
       }
     }
@@ -3427,6 +3715,10 @@
       "pt": {
         "name": "O primeiro",
         "description": ""
+      },
+      "tr": {
+        "name": "İlk olan",
+        "description": ""
       }
     }
   },
@@ -3473,6 +3765,10 @@
       },
       "pt": {
         "name": "O último",
+        "description": ""
+      },
+      "tr": {
+        "name": "Son olan",
         "description": ""
       }
     }
@@ -3521,6 +3817,10 @@
       "pt": {
         "name": "O Manifesto",
         "description": ""
+      },
+      "tr": {
+        "name": "Varlığı açık olan",
+        "description": ""
       }
     }
   },
@@ -3567,6 +3867,10 @@
       },
       "pt": {
         "name": "O oculto",
+        "description": ""
+      },
+      "tr": {
+        "name": "Gizli olan",
         "description": ""
       }
     }
@@ -3615,6 +3919,10 @@
       "pt": {
         "name": "O Governador",
         "description": ""
+      },
+      "tr": {
+        "name": "Yönetip koruyan",
+        "description": ""
       }
     }
   },
@@ -3661,6 +3969,10 @@
       },
       "pt": {
         "name": "O mais exaltado",
+        "description": ""
+      },
+      "tr": {
+        "name": "Pek yüce",
         "description": ""
       }
     }
@@ -3709,6 +4021,10 @@
       "pt": {
         "name": "A fonte de toda bondade",
         "description": ""
+      },
+      "tr": {
+        "name": "İyiliği bol olan",
+        "description": ""
       }
     }
   },
@@ -3755,6 +4071,10 @@
       },
       "pt": {
         "name": "O Aceitador do Arrependimento",
+        "description": ""
+      },
+      "tr": {
+        "name": "Tövbeleri kabul eden",
         "description": ""
       }
     }
@@ -3803,6 +4123,10 @@
       "pt": {
         "name": "O Vingador",
         "description": ""
+      },
+      "tr": {
+        "name": "İntikam alan",
+        "description": ""
       }
     }
   },
@@ -3849,6 +4173,10 @@
       },
       "pt": {
         "name": "O perdoador",
+        "description": ""
+      },
+      "tr": {
+        "name": "Affeden",
         "description": ""
       }
     }
@@ -3897,6 +4225,10 @@
       "pt": {
         "name": "O Compassivo",
         "description": ""
+      },
+      "tr": {
+        "name": "Çok şefkatli",
+        "description": ""
       }
     }
   },
@@ -3943,6 +4275,10 @@
       },
       "pt": {
         "name": "O Dono da Soberania",
+        "description": ""
+      },
+      "tr": {
+        "name": "Mülkün sahibi",
         "description": ""
       }
     }
@@ -3991,6 +4327,10 @@
       "pt": {
         "name": "Senhor da Majestade e da Generosidade",
         "description": ""
+      },
+      "tr": {
+        "name": "Celal ve ikram sahibi",
+        "description": ""
       }
     }
   },
@@ -4037,6 +4377,10 @@
       },
       "pt": {
         "name": "O Equitativo",
+        "description": ""
+      },
+      "tr": {
+        "name": "Adaletle davranan",
         "description": ""
       }
     }
@@ -4085,6 +4429,10 @@
       "pt": {
         "name": "O coletor",
         "description": ""
+      },
+      "tr": {
+        "name": "Toplayıp bir araya getiren",
+        "description": ""
       }
     }
   },
@@ -4131,6 +4479,10 @@
       },
       "pt": {
         "name": "O Autossuficiente",
+        "description": ""
+      },
+      "tr": {
+        "name": "Hiçbir şeye muhtaç olmayan",
         "description": ""
       }
     }
@@ -4179,6 +4531,10 @@
       "pt": {
         "name": "O Enriquecedor",
         "description": ""
+      },
+      "tr": {
+        "name": "Zengin eden",
+        "description": ""
       }
     }
   },
@@ -4225,6 +4581,10 @@
       },
       "pt": {
         "name": "O preventivo",
+        "description": ""
+      },
+      "tr": {
+        "name": "Engel olan",
         "description": ""
       }
     }
@@ -4273,6 +4633,10 @@
       "pt": {
         "name": "O Criador do Dano",
         "description": ""
+      },
+      "tr": {
+        "name": "Zarar veren şeyleri yaratan",
+        "description": ""
       }
     }
   },
@@ -4319,6 +4683,10 @@
       },
       "pt": {
         "name": "O Criador do Bem",
+        "description": ""
+      },
+      "tr": {
+        "name": "Fayda sağlayan",
         "description": ""
       }
     }
@@ -4367,6 +4735,10 @@
       "pt": {
         "name": "A luz",
         "description": ""
+      },
+      "tr": {
+        "name": "Nur",
+        "description": ""
       }
     }
   },
@@ -4413,6 +4785,10 @@
       },
       "pt": {
         "name": "O Guia",
+        "description": ""
+      },
+      "tr": {
+        "name": "Hidayet veren",
         "description": ""
       }
     }
@@ -4461,6 +4837,10 @@
       "pt": {
         "name": "O Originador Incomparável",
         "description": ""
+      },
+      "tr": {
+        "name": "Benzersiz yaratan",
+        "description": ""
       }
     }
   },
@@ -4507,6 +4887,10 @@
       },
       "pt": {
         "name": "O Eterno",
+        "description": ""
+      },
+      "tr": {
+        "name": "Baki kalan",
         "description": ""
       }
     }
@@ -4555,6 +4939,10 @@
       "pt": {
         "name": "O herdeiro de tudo",
         "description": ""
+      },
+      "tr": {
+        "name": "Mirasçı olan",
+        "description": ""
       }
     }
   },
@@ -4602,6 +4990,10 @@
       "pt": {
         "name": "O guia para o caminho certo",
         "description": ""
+      },
+      "tr": {
+        "name": "Doğru yolu gösteren",
+        "description": ""
       }
     }
   },
@@ -4648,6 +5040,10 @@
       },
       "pt": {
         "name": "O Paciente",
+        "description": ""
+      },
+      "tr": {
+        "name": "Çok sabırlı",
         "description": ""
       }
     }

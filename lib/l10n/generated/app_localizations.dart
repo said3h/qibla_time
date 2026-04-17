@@ -15,6 +15,7 @@ import 'app_localizations_it.dart';
 import 'app_localizations_nl.dart';
 import 'app_localizations_pt.dart';
 import 'app_localizations_ru.dart';
+import 'app_localizations_tr.dart';
 
 // ignore_for_file: type=lint
 
@@ -111,7 +112,8 @@ abstract class AppLocalizations {
     Locale('it'),
     Locale('nl'),
     Locale('pt'),
-    Locale('ru')
+    Locale('ru'),
+    Locale('tr')
   ];
 
   /// No description provided for @appTitle.
@@ -405,7 +407,7 @@ abstract class AppLocalizations {
   /// No description provided for @onboardingIntroLanguages.
   ///
   /// In es, this message translates to:
-  /// **'9 idiomas'**
+  /// **'11 idiomas'**
   String get onboardingIntroLanguages;
 
   /// No description provided for @onboardingIntroLanguagesBody.
@@ -5077,6 +5079,12 @@ abstract class AppLocalizations {
   /// **'Italiano'**
   String get settingsLanguageOptionItalian;
 
+  /// No description provided for @settingsLanguageOptionTurkish.
+  ///
+  /// In es, this message translates to:
+  /// **'Turco'**
+  String get settingsLanguageOptionTurkish;
+
   /// No description provided for @homeQuickActionPurification.
   ///
   /// In es, this message translates to:
@@ -6022,7 +6030,8 @@ class _AppLocalizationsDelegate
         'it',
         'nl',
         'pt',
-        'ru'
+        'ru',
+        'tr'
       ].contains(locale.languageCode);
 
   @override
@@ -6052,6 +6061,8 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
       return AppLocalizationsPt();
     case 'ru':
       return AppLocalizationsRu();
+    case 'tr':
+      return AppLocalizationsTr();
   }
 
   throw FlutterError(

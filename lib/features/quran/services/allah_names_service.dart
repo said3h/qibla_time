@@ -51,6 +51,7 @@ class AllahNamesService {
       'pt' || 'pt_PT' || 'pt-BR' || 'pt_BR' || 'pt-PT' => 'pt',
       'id' || 'id_ID' || 'id-ID' => 'id',
       'ru' || 'ru_RU' || 'ru-RU' => 'ru',
+      'tr' || 'tr_TR' || 'tr-TR' => 'tr',
       _ => 'es',
     };
   }
@@ -64,6 +65,7 @@ class AllahNamesService {
       'pt' => 'en',
       'id' => 'en',
       'ru' => 'en',
+      'tr' => 'en',
       _ => 'es',
     };
   }

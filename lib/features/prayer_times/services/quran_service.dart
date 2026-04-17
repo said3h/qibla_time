@@ -78,6 +78,7 @@ class QuranVerseService {
       'nl' => 'nl',
       'pt' => 'pt',
       'ru' => 'ru',
+      'tr' => 'tr',
       _ => 'es',
     };
   }
@@ -93,6 +94,7 @@ class QuranVerseService {
       'nl' => 'nl.keyzer',
       'pt' => 'pt.elhayek',
       'ru' => 'ru.kuliev',
+      'tr' => 'tr.diyanet',
       _ => 'es.garcia',
     };
   }

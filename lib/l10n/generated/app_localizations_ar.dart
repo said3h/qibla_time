@@ -153,7 +153,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get onboardingIntroPrivacyBody => 'بياناتك لا تغادر جهازك أبدًا';
 
   @override
-  String get onboardingIntroLanguages => '٩ لغات';
+  String get onboardingIntroLanguages => '11 ???';
 
   @override
   String get onboardingIntroLanguagesBody => 'متاح بلغتك';
@@ -2825,6 +2825,9 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get settingsLanguageOptionItalian => 'الإيطالية';
+
+  @override
+  String get settingsLanguageOptionTurkish => 'التركية';
 
   @override
   String get homeQuickActionPurification => 'الوضوء والغسل';

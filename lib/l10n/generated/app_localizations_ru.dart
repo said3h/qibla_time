@@ -154,7 +154,7 @@ class AppLocalizationsRu extends AppLocalizations {
       'Ваши данные никогда не покидают устройство';
 
   @override
-  String get onboardingIntroLanguages => '9 языков';
+  String get onboardingIntroLanguages => '11 ??????';
 
   @override
   String get onboardingIntroLanguagesBody => 'Доступно на вашем языке';
@@ -2913,6 +2913,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get settingsLanguageOptionItalian => 'Итальянский';
+
+  @override
+  String get settingsLanguageOptionTurkish => 'Турецкий';
 
   @override
   String get homeQuickActionPurification => 'Вуду и гусль';

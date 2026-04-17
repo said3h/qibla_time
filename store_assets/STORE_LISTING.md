@@ -44,7 +44,7 @@ QiblaTime - Prayer & Quran
 
 ## Short Description
 ```
-Prayer times, Quran, Hadiths & Qibla. No ads. No tracking. 10 languages.
+Prayer times, Quran, Hadiths & Qibla. No ads. No tracking. 11 languages.
 ```
 > 73 characters — within the 80-character limit.
 
@@ -70,11 +70,11 @@ Read the full Quran with Arabic text in the Amiri font, transliteration, and
 translation side by side. Listen to recitations, bookmark your favourite ayahs,
 and share verses as beautiful images or videos.
 
-━━━ 2196 HADITHS IN 10 LANGUAGES ━━━
+━━━ 2196 HADITHS IN 11 LANGUAGES ━━━
 
 Explore an extensive hadith library covering the most important collections:
 Sahih Bukhari, Sahih Muslim, 40 Hadith Nawawi, and more. Every hadith is
-available in 10 languages. Search, bookmark, and share hadiths with a single tap.
+available in 11 languages. Search, bookmark, and share hadiths with a single tap.
 
 ━━━ PRAYER GUIDE FOR BEGINNERS ━━━
 
@@ -113,10 +113,10 @@ and certain reminders adjust automatically — with full respect for privacy.
 No ads. No analytics. No third-party SDKs that track your behavior.
 No account required. No data leaves your device. Ever.
 
-━━━ 10 LANGUAGES ━━━
+━━━ 11 LANGUAGES ━━━
 
 Arabic · English · Spanish · French · German ·
-Dutch · Indonesian · Russian · Italian · Portuguese
+Dutch · Indonesian · Russian · Italian · Portuguese · Turkish
 
 ━━━ WORKS OFFLINE ━━━
 
@@ -160,7 +160,7 @@ QiblaTime - Oración y Corán
 
 ## Descripción corta
 ```
-Horarios de oración, Corán, Hadiths y Qibla. Sin anuncios. 10 idiomas.
+Horarios de oración, Corán, Hadiths y Qibla. Sin anuncios. 11 idiomas.
 ```
 > 71 caracteres — dentro del límite de 80.
 
@@ -192,7 +192,7 @@ comparte versículos como imágenes o vídeos.
 
 Explora una extensa biblioteca de hadiths que incluye las colecciones más
 importantes: Sahih Bujari, Sahih Muslim, 40 Hadiths de Nawawi y más. Cada
-hadith está disponible en 10 idiomas. Busca, guarda y comparte hadiths con
+hadith está disponible en 11 idiomas. Busca, guarda y comparte hadiths con
 un solo toque.
 
 ━━━ GUÍA DE ORACIÓN PARA PRINCIPIANTES ━━━
@@ -237,7 +237,7 @@ Sin cuenta requerida. Ningún dato sale de tu dispositivo. Nunca.
 ━━━ 10 IDIOMAS ━━━
 
 Árabe · Inglés · Español · Francés · Alemán ·
-Neerlandés · Indonesio · Ruso · Italiano · Portugués
+Neerlandés · Indonesio · Ruso · Italiano · Portugués · Turco
 
 ━━━ FUNCIONA SIN CONEXIÓN ━━━
 
@@ -281,7 +281,7 @@ Ver instrucciones detalladas en [`screenshots/README_SCREENSHOTS.md`](screenshot
 | 3 | `03_quran_transliteration.png` | Feature premium — Coran con transliteracion |
 | 4 | `04_hadiths_collection.png` | Amplitud de contenido — 2196 hadiths |
 | 5 | `05_duas_category.png` | Contenido diario — adhkar y duas |
-| 6 | `06_settings_language.png` | Alcance global — 10 idiomas visibles |
+| 6 | `06_settings_language.png` | Alcance global — 11 idiomas visibles |
 | 7 | `07_qibla_compass.png` | (Opcional) Funcion unica reconocible |
 | 8 | `08_analytics_prayers.png` | (Opcional) Engagement y fidelizacion |
 
@@ -294,9 +294,9 @@ Si se añaden marcos o texto encima de las capturas (con Canva, Figma, etc.):
 | 1 | "5 prayers. Always on time." | "5 oraciones. Siempre a tiempo." |
 | 2 | "Learn to pray, step by step." | "Aprende a orar, paso a paso." |
 | 3 | "Read. Listen. Understand." | "Lee. Escucha. Comprende." |
-| 4 | "2196 hadiths. 10 languages." | "2196 hadiths. 10 idiomas." |
+| 4 | "2196 hadiths. 11 languages." | "2196 hadiths. 11 idiomas." |
 | 5 | "Your daily adhkar, never missed." | "Tus adhkar diarios, nunca olvidados." |
-| 6 | "One app. 10 languages." | "Una app. 10 idiomas." |
+| 6 | "One app. 11 languages." | "Una app. 11 idiomas." |
 
 ---
 

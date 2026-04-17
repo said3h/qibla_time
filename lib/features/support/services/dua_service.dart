@@ -114,6 +114,7 @@ class DuaService {
       'pt' => 'pt',
       'id' => 'id',
       'ru' => 'ru',
+      'tr' => 'tr',
       _ => 'es',
     };
   }
@@ -139,6 +140,7 @@ class DuaService {
       'pt' => const ['pt', 'en', 'es'],
       'id' => const ['id', 'en', 'es'],
       'ru' => const ['ru', 'en', 'es'],
+      'tr' => const ['tr', 'en', 'es'],
       'en' => const ['en', 'es'],
       'ar' => const ['ar', 'es'],
       _ => const ['es', 'en'],

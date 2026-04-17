@@ -154,7 +154,7 @@ class AppLocalizationsIt extends AppLocalizations {
       'I tuoi dati non lasciano mai il tuo dispositivo';
 
   @override
-  String get onboardingIntroLanguages => '9 lingue';
+  String get onboardingIntroLanguages => '11 lingue';
 
   @override
   String get onboardingIntroLanguagesBody => 'Disponibile nella tua lingua';
@@ -2918,6 +2918,9 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get settingsLanguageOptionItalian => 'Italiano';
+
+  @override
+  String get settingsLanguageOptionTurkish => 'Turco';
 
   @override
   String get homeQuickActionPurification => 'Wudu e Ghusl';

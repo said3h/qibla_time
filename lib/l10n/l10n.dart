@@ -15,6 +15,7 @@ export 'generated/app_localizations_it.dart';
 export 'generated/app_localizations_nl.dart';
 export 'generated/app_localizations_pt.dart';
 export 'generated/app_localizations_ru.dart';
+export 'generated/app_localizations_tr.dart';
 
 extension AppLocalizationsX on BuildContext {
   AppLocalizations get l10n => AppLocalizations.of(this);

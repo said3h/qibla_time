@@ -91,6 +91,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     Locale('nl'),
     Locale('pt'),
     Locale('ru'),
+    Locale('tr'),
     Locale('ar'),
   ];
 
@@ -1533,6 +1534,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       'nl' => l10n.settingsLanguageOptionDutch,
       'pt' => l10n.settingsLanguageOptionPortuguese,
       'ru' => l10n.settingsLanguageOptionRussian,
+      'tr' => l10n.settingsLanguageOptionTurkish,
       'ar' => l10n.settingsLanguageOptionArabic,
       _ => languageCode.toUpperCase(),
     };

@@ -180,6 +180,23 @@
           "Allah"
         ],
         "isFeatured": true
+      },
+      "tr": {
+        "title": "Günün başında",
+        "translation": "Uyandık ve bütün egemenlik Allah'ındır.",
+        "category": "Sabah",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 3186, Muslim 2723",
+        "count": 1,
+        "times": [
+          "morning"
+        ],
+        "tags": [
+          "amatör",
+          "dominio",
+          "Allah"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -362,6 +379,23 @@
           "vida",
           "morte",
           "Ressurreição"
+        ],
+        "isFeatured": true
+      },
+      "tr": {
+        "title": "Uykudan uyanınca",
+        "translation": "Bizi öldürdükten sonra dirilten Allah'a hamdolsun, dönüş O'nadır.",
+        "category": "Sabah",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6312",
+        "count": 1,
+        "times": [
+          "despertar"
+        ],
+        "tags": [
+          "hayat",
+          "mürte",
+          "diriliş"
         ],
         "isFeatured": true
       }
@@ -557,6 +591,24 @@
           "mal"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Sabah koruması",
+        "translation": "Yarattığı şeylerin şerrinden Allah'ın mükemmel sözlerine sığınırım.",
+        "category": "Sabah",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 2709",
+        "count": 3,
+        "times": [
+          "morning",
+          "night"
+        ],
+        "tags": [
+          "koruma",
+          "koruma",
+          "kötü"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -750,6 +802,24 @@
           "vigor"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Sabah evden çıkarken",
+        "translation": "Allah'ın adıyla. Ben Allah'a güveniyorum. Allah'tan başka güç ve kudret yoktur.",
+        "category": "Sabah",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 5095",
+        "count": 1,
+        "times": [
+          "salir_casa",
+          "morning"
+        ],
+        "tags": [
+          "salir",
+          "güven",
+          "tüylü"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -932,6 +1002,23 @@
           "roupas",
           "roupa",
           "provisão"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Giyinirken",
+        "translation": "Hiçbir çabam ve gücüm olmadan bunu bana giydiren ve onu bana rızıklandıran Allah'a hamd olsun.",
+        "category": "Sabah",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 4023",
+        "count": 1,
+        "times": [
+          "vestirse"
+        ],
+        "tags": [
+          "ropa",
+          "elbise",
+          "karşılık"
         ],
         "isFeatured": false
       }
@@ -1118,6 +1205,23 @@
           "impureza"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Tuvalete girerken",
+        "translation": "Allah'ım, erkek ve dişi şeytani varlıkların şerrinden sana sığınırım.",
+        "category": "Sabah",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6322",
+        "count": 1,
+        "times": [
+          "baño"
+        ],
+        "tags": [
+          "baño",
+          "koruma",
+          "impureza"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -1290,6 +1394,22 @@
         "tags": [
           "desculpe",
           "banheiro"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Tuvaletten çıkarken",
+        "translation": "Senden bağışlanma diliyorum.",
+        "category": "Sabah",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 30",
+        "count": 1,
+        "times": [
+          "baño"
+        ],
+        "tags": [
+          "perdon",
+          "baño"
         ],
         "isFeatured": false
       }
@@ -1473,6 +1593,23 @@
         "tags": [
           "noite",
           "domínio",
+          "Allah"
+        ],
+        "isFeatured": true
+      },
+      "tr": {
+        "title": "Gecenin başında",
+        "translation": "Akşama ulaştık ve bütün egemenlik Allah'ındır.",
+        "category": "Gece",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 2723",
+        "count": 1,
+        "times": [
+          "night"
+        ],
+        "tags": [
+          "gece",
+          "dominio",
           "Allah"
         ],
         "isFeatured": true
@@ -1669,6 +1806,24 @@
           "trono"
         ],
         "isFeatured": true
+      },
+      "tr": {
+        "title": "Uyurken Allah'a güvenin",
+        "translation": "Allah bana yeter. O'ndan başka ilah yoktur. Ben O'na güvendim ve O, Büyük Arş'ın Rabbidir.",
+        "category": "Gece",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 3193, At-Tirmidhi 3394",
+        "count": 1,
+        "times": [
+          "dormir",
+          "night"
+        ],
+        "tags": [
+          "güven",
+          "sueno",
+          "trono"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -1862,6 +2017,24 @@
           "Ressurreição"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Uyumak için uzanırken",
+        "translation": "Allah'ım, kullarını dirilteceğin günde beni azabından koru.",
+        "category": "Gece",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 5045",
+        "count": 1,
+        "times": [
+          "dormir",
+          "night"
+        ],
+        "tags": [
+          "koruma",
+          "castigo",
+          "diriliş"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -2044,6 +2217,23 @@
           "desculpe",
           "noite",
           "qadr"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Kadir Gecesi Duası",
+        "translation": "Allah'ım sen çok affedicisin, cömertsin. Sen affetmeyi seversin, o yüzden beni affet.",
+        "category": "Gece",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 3513",
+        "count": 1,
+        "times": [
+          "laylatul_qadr"
+        ],
+        "tags": [
+          "perdon",
+          "gece",
+          "kader"
         ],
         "isFeatured": false
       }
@@ -2230,6 +2420,23 @@
           "morte"
         ],
         "isFeatured": true
+      },
+      "tr": {
+        "title": "Uyumadan önce",
+        "translation": "Senin isminle Allah'ım ölürüm ve yaşarım.",
+        "category": "Uyku",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6324",
+        "count": 1,
+        "times": [
+          "dormir"
+        ],
+        "tags": [
+          "isim",
+          "hayat",
+          "mürte"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -2402,6 +2609,22 @@
         "tags": [
           "singularidade",
           "domínio"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Yatakta dönerken",
+        "translation": "Bir ve galip olan Allah'tan başka ilah yoktur.",
+        "category": "Uyku",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 3397",
+        "count": 1,
+        "times": [
+          "dormir"
+        ],
+        "tags": [
+          "tek kişilik",
+          "dominio"
         ],
         "isFeatured": false
       }
@@ -2588,6 +2811,23 @@
           "mal"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Uyurken koruma",
+        "translation": "Hissettiğim kötülüklerden Allah'ın izzet ve kudretine sığınırım.",
+        "category": "Uyku",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 3894",
+        "count": 1,
+        "times": [
+          "dormir"
+        ],
+        "tags": [
+          "koruma",
+          "tüylü",
+          "kötü"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -2762,6 +3002,22 @@
           "mesquita"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Camide uyurken",
+        "translation": "Ey bütün mülklerin Rabbi olan Allah'ım.",
+        "category": "Uyku",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6321",
+        "count": 1,
+        "times": [
+          "dormir"
+        ],
+        "tags": [
+          "dominio",
+          "Mezquita"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -2934,6 +3190,22 @@
         "tags": [
           "vida",
           "morte"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Uyanmadan önce okunacak dua",
+        "translation": "Bizi öldürdükten sonra dirilten Allah'a hamd olsun.",
+        "category": "Uyku",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6312",
+        "count": 1,
+        "times": [
+          "despertar"
+        ],
+        "tags": [
+          "hayat",
+          "mürte"
         ],
         "isFeatured": false
       }
@@ -3120,6 +3392,23 @@
           "retornar"
         ],
         "isFeatured": true
+      },
+      "tr": {
+        "title": "Bir araca binerken",
+        "translation": "Bunu bize bahşeden Allah'a hamd olsun ki, biz çabalarımızla buna asla sahip olamadık. Ve biz Rabbimize döneceğiz.",
+        "category": "Yolculuk",
+        "source": "Hisnul Muslim",
+        "reference": "Az-Zukhruf 43:13-14",
+        "count": 1,
+        "times": [
+          "viaje"
+        ],
+        "tags": [
+          "araç",
+          "hizmet",
+          "geri dönüş"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -3304,6 +3593,23 @@
           "jornada"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Bir yolculuğa çıkarken",
+        "translation": "Allah'ım, yolculuğun zorluklarından, dönüşün üzüntüsünden ve varış yerinin şerrinden sana sığınırım.",
+        "category": "Yolculuk",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 2597",
+        "count": 1,
+        "times": [
+          "viaje"
+        ],
+        "tags": [
+          "zor",
+          "tristeza",
+          "yol"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -3476,6 +3782,22 @@
         "tags": [
           "gratidão",
           "cidade"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Bir şehre girerken",
+        "translation": "Allah'ım bu konuda bize bereket ver.",
+        "category": "Yolculuk",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 3930",
+        "count": 1,
+        "times": [
+          "viaje"
+        ],
+        "tags": [
+          "minnettarlık",
+          "şehir"
         ],
         "isFeatured": false
       }
@@ -3654,6 +3976,22 @@
           "serviço"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Uçağa binerken",
+        "translation": "Çabalarımızla asla elde edemeyeceğimiz bu durumu bize nasip eden Allah'ın şanı yücedir.",
+        "category": "Yolculuk",
+        "source": "Hisnul Muslim",
+        "reference": "Az-Zukhruf 43:13",
+        "count": 1,
+        "times": [
+          "viaje"
+        ],
+        "tags": [
+          "havacılık",
+          "hizmet"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -3828,6 +4166,22 @@
           "jornada"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Gezginin duası",
+        "translation": "Allah'ım bize selametle gidiş ve varış ve güzel bir varış yeri nasip eyle.",
+        "category": "Yolculuk",
+        "source": "Hisnul Muslim",
+        "reference": "Ibn As-Sunni 269",
+        "count": 1,
+        "times": [
+          "viaje"
+        ],
+        "tags": [
+          "güvenlik",
+          "yol"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -4000,6 +4354,22 @@
         "tags": [
           "nome",
           "refeição"
+        ],
+        "isFeatured": true
+      },
+      "tr": {
+        "title": "Yemekten önce",
+        "translation": "Allah'ın adıyla.",
+        "category": "Yemek",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 1858",
+        "count": 1,
+        "times": [
+          "antes_comer"
+        ],
+        "tags": [
+          "isim",
+          "komik"
         ],
         "isFeatured": true
       }
@@ -4186,6 +4556,23 @@
           "gratidão"
         ],
         "isFeatured": true
+      },
+      "tr": {
+        "title": "Yemekten sonra",
+        "translation": "Hiçbir çabam ve gücüm olmadan beni bununla doyuran ve onu bana rızık kılan Allah'a hamd olsun.",
+        "category": "Yemek",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 4023",
+        "count": 1,
+        "times": [
+          "después_comer"
+        ],
+        "tags": [
+          "beslenme",
+          "karşılık",
+          "minnettarlık"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -4358,6 +4745,22 @@
         "tags": [
           "água",
           "gratidão"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Su içerken",
+        "translation": "Hamd Allah'a mahsustur.",
+        "category": "Yemek",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 3456",
+        "count": 1,
+        "times": [
+          "beber"
+        ],
+        "tags": [
+          "agua",
+          "minnettarlık"
         ],
         "isFeatured": false
       }
@@ -4544,6 +4947,23 @@
           "iftar"
         ],
         "isFeatured": true
+      },
+      "tr": {
+        "title": "Orucu bozarken",
+        "translation": "Allah'ım, senin için oruç tuttum, sana inandım, sana güvendim ve senin rızkınla orucumu açtım.",
+        "category": "Yemek",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 2045",
+        "count": 1,
+        "times": [
+          "romper_ayuno"
+        ],
+        "tags": [
+          "ayuno",
+          "Ramezan",
+          "iftar"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -4716,6 +5136,22 @@
         "tags": [
           "eid",
           "refeição"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Bayramda yemek yemeden önce",
+        "translation": "Allah'ım, affedenleri doyur, affedenleri giydir.",
+        "category": "Yemek",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 1020",
+        "count": 1,
+        "times": [
+          "eid"
+        ],
+        "tags": [
+          "bayram",
+          "komik"
         ],
         "isFeatured": false
       }
@@ -4902,6 +5338,23 @@
           "doença"
         ],
         "isFeatured": true
+      },
+      "tr": {
+        "title": "Şifa aramak",
+        "translation": "Ey insanların Rabbi olan Allah'ım, belayı gider. Şifa ver, çünkü Şifa veren Sensin. Senin şifandan başka şifa yoktur.",
+        "category": "Hastalık",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 5742",
+        "count": 1,
+        "times": [
+          "enfermo"
+        ],
+        "tags": [
+          "küratörlük",
+          "selam",
+          "Enfermedad"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -5086,6 +5539,23 @@
           "purificação"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Hasta birini ziyaret ederken",
+        "translation": "Zararı yok, Allah'ın izniyle arınma olur.",
+        "category": "Hastalık",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 5662",
+        "count": 1,
+        "times": [
+          "visitar_enfermo"
+        ],
+        "tags": [
+          "ziyaret",
+          "enfermo",
+          "arınma"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -5260,6 +5730,22 @@
         "tags": [
           "cura",
           "saúde"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Hastaların namazsı",
+        "translation": "Rabbim ona şifa ver, sıhhat ver.",
+        "category": "Hastalık",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 5641",
+        "count": 1,
+        "times": [
+          "enfermo"
+        ],
+        "tags": [
+          "sanación",
+          "selam"
         ],
         "isFeatured": false
       }
@@ -5446,6 +5932,23 @@
           "mal"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Kendini iyi hissetmediğinde",
+        "translation": "Allah'ın adıyla. Hissettiğim kötülüklerden Allah'ın izzet ve kudretine sığınırım.",
+        "category": "Hastalık",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 3894",
+        "count": 1,
+        "times": [
+          "enfermo"
+        ],
+        "tags": [
+          "koruma",
+          "tüylü",
+          "kötü"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -5628,6 +6131,23 @@
           "cura",
           "inveja",
           "proteção"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Baş ağrısı için dua",
+        "translation": "Sana zarar veren her şeyden ve her hasetçinin şerrinden Allah'ın adıyla seni korumanı dilerim.",
+        "category": "Hastalık",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 5740",
+        "count": 1,
+        "times": [
+          "enfermo"
+        ],
+        "tags": [
+          "küra",
+          "Envidia",
+          "koruma"
         ],
         "isFeatured": false
       }
@@ -5824,6 +6344,24 @@
           "mal"
         ],
         "isFeatured": true
+      },
+      "tr": {
+        "title": "Genel koruma",
+        "translation": "Yarattığı şeylerin şerrinden Allah'ın mükemmel sözlerine sığınırım.",
+        "category": "Korunma",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 2709",
+        "count": 3,
+        "times": [
+          "morning",
+          "night"
+        ],
+        "tags": [
+          "koruma",
+          "koruma",
+          "kötü"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -5989,6 +6527,21 @@
           "crianças",
           "proteção",
           "mal"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Çocuklar için koruma",
+        "translation": "Seni her şeytandan, her zararlı mahlûktan, her zararlı bakıştan Allah'ın mükemmel sözlerinin koruması altına alıyorum.",
+        "category": "Korunma",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 3371",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "kızlar",
+          "koruma",
+          "maldad"
         ],
         "isFeatured": false
       }
@@ -6185,6 +6738,24 @@
           "mal"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Kötülüğe karşı koruma",
+        "translation": "Gökten inen şerlerden O'nun yüce sıfatlarına ve kudretine sığınırım.",
+        "category": "Korunma",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 3428",
+        "count": 1,
+        "times": [
+          "morning",
+          "night"
+        ],
+        "tags": [
+          "koruma",
+          "çello",
+          "kötü"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -6371,6 +6942,23 @@
           "proteção"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Kıskançlığa karşı",
+        "translation": "Allah'ın adıyla, yarattığı şeylerin şerrinden Sana sığınırım.",
+        "category": "Korunma",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 2714",
+        "count": 1,
+        "times": [
+          "morning",
+          "night"
+        ],
+        "tags": [
+          "Envidia",
+          "koruma"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -6552,6 +7140,23 @@
         "tags": [
           "demônios",
           "crentes"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Kötü düşüncelere karşı",
+        "translation": "Allah'ım şeytanları defet ve mü'minleri serbest bırak.",
+        "category": "Korunma",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6326",
+        "count": 1,
+        "times": [
+          "morning",
+          "night"
+        ],
+        "tags": [
+          "şeytanlar",
+          "creyentes"
         ],
         "isFeatured": false
       }
@@ -6739,6 +7344,23 @@
           "pacto"
         ],
         "isFeatured": true
+      },
+      "tr": {
+        "title": "Seyyid el-İstiğfar",
+        "translation": "Allah'ım sen benim Rabbimsin. Senden başka ilah yoktur. Beni sen yarattın, ben de senin kulunum. Gücüm yettiğince antlaşmanı ve sözünü yerine getireceğim.",
+        "category": "Tövbe",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6306",
+        "count": 1,
+        "times": [
+          "repentir"
+        ],
+        "tags": [
+          "perdon",
+          "siervo",
+          "pakto"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -6923,6 +7545,23 @@
           "misericórdia"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Basit bağışlama",
+        "translation": "Rabbim beni bağışla ve tövbemi kabul et. Şüphesiz Sen tövbeleri kabul edensin, Rahimsin.",
+        "category": "Tövbe",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 3434",
+        "count": 1,
+        "times": [
+          "repentir"
+        ],
+        "tags": [
+          "perdon",
+          "perdon",
+          "misericordia"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -7097,6 +7736,22 @@
           "desculpe"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Estağfirullah el-Azim",
+        "translation": "O'ndan başka ilah olmayan, diri ve rızık veren Yüce Allah'tan bağışlanma diler ve O'na tövbe ederim.",
+        "category": "Tövbe",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 3577",
+        "count": 3,
+        "times": [
+          "repentir"
+        ],
+        "tags": [
+          "perdon",
+          "perdon"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -7269,6 +7924,22 @@
         "tags": [
           "desculpe",
           "Ramadã"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Teravih Duası",
+        "translation": "Allah'ım sen çok affedicisin, cömertsin. Sen affetmeyi seversin, o yüzden beni affet.",
+        "category": "Tövbe",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 3513",
+        "count": 1,
+        "times": [
+          "tarawih"
+        ],
+        "tags": [
+          "perdon",
+          "Ramezan"
         ],
         "isFeatured": false
       }
@@ -7455,6 +8126,23 @@
           "misericórdia"
         ],
         "isFeatured": true
+      },
+      "tr": {
+        "title": "Camiye girerken",
+        "translation": "Allah'ım bana rahmetinin kapılarını aç.",
+        "category": "Mescit",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 713",
+        "count": 1,
+        "times": [
+          "entrar_mesquita"
+        ],
+        "tags": [
+          "Mezquita",
+          "puertalar",
+          "misericordia"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -7627,6 +8315,22 @@
         "tags": [
           "favor",
           "solicitar"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Camiden çıkarken",
+        "translation": "Allah'ım senden lütfunu isterim.",
+        "category": "Mescit",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 713",
+        "count": 1,
+        "times": [
+          "salir_mesquita"
+        ],
+        "tags": [
+          "iyilik",
+          "dilekçe"
         ],
         "isFeatured": false
       }
@@ -7813,6 +8517,23 @@
           "profeta"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Ezanı duyunca",
+        "translation": "Ve şehadet ederim ki Allah'tan başka ilah yoktur ve Muhammed Allah'ın Resulü'dür.",
+        "category": "Mescit",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 385",
+        "count": 1,
+        "times": [
+          "adhan"
+        ],
+        "tags": [
+          "ezan",
+          "tanıklık",
+          "profeta"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -7989,6 +8710,22 @@
           "convite"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Camide dua ederken",
+        "translation": "Ey bu mükemmel davetin Rabbi olan Allah'ım.",
+        "category": "Mescit",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 720",
+        "count": 1,
+        "times": [
+          "mezquita"
+        ],
+        "tags": [
+          "dua",
+          "davetiye"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -8160,6 +8897,22 @@
         ],
         "tags": [
           "verdadeiro",
+          "Allah"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Şadak",
+        "translation": "Yüce Allah doğru söylemiş.",
+        "category": "Mescit",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 738",
+        "count": 1,
+        "times": [
+          "adhan"
+        ],
+        "tags": [
+          "yeşil",
           "Allah"
         ],
         "isFeatured": false
@@ -8335,6 +9088,22 @@
         "tags": [
           "chuva",
           "gratidão"
+        ],
+        "isFeatured": true
+      },
+      "tr": {
+        "title": "Yağmuru görünce",
+        "translation": "Allah'ım bize faydalı yağmurlar nasip et.",
+        "category": "Yağmur",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 1032",
+        "count": 1,
+        "times": [
+          "lluvia"
+        ],
+        "tags": [
+          "llüvia",
+          "minnettarlık"
         ],
         "isFeatured": true
       }
@@ -8513,6 +9282,22 @@
           "misericórdia"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Yağmurdan sonra",
+        "translation": "Allah'ın lütfu ve rahmeti sayesinde bize yağmur verildi.",
+        "category": "Yağmur",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 846",
+        "count": 1,
+        "times": [
+          "lluvia"
+        ],
+        "tags": [
+          "llüvia",
+          "misericordia"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -8687,6 +9472,22 @@
           "chuva"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Kuraklık sırasında dua",
+        "translation": "Allah'ım bizlere ferahlatan, besleyen, fayda sağlayan bol yağmurlar ver.",
+        "category": "Yağmur",
+        "source": "Hisnul Muslim",
+        "reference": "Ibn Majah 2269",
+        "count": 1,
+        "times": [
+          "lluvia"
+        ],
+        "tags": [
+          "devamı",
+          "llüvia"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -8857,6 +9658,21 @@
           "Yunus"
         ],
         "isFeatured": true
+      },
+      "tr": {
+        "title": "Yunus'un Duası",
+        "translation": "Senden başka ilah yoktur. Yücelik Sana olsun. Gerçekten ben zalimlerden oldum.",
+        "category": "Sıkıntı",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Anbiya 21:87",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "Angustia",
+          "adaletsizlik",
+          "Yunus"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -9023,6 +9839,21 @@
           "dificuldade"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Zorluklarda kolaylık",
+        "translation": "Allah'ım senin kolaylaştırdığından başka kolaylık yoktur ve dilediğin zaman zorluğu da kolaylaştırırsın.",
+        "category": "Sıkıntı",
+        "source": "Hisnul Muslim",
+        "reference": "Ibn Hibban 2427",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "kolaylaştırıcı",
+          "tristeza",
+          "zor"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -9183,6 +10014,20 @@
         "tags": [
           "confiar",
           "suficiência"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Zor anlarda",
+        "translation": "Allah bana yeter ve O yeter.",
+        "category": "Sıkıntı",
+        "source": "Hisnul Muslim",
+        "reference": "Az-Zumar 39:38",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "güven",
+          "yeterlilik"
         ],
         "isFeatured": false
       }
@@ -9355,6 +10200,21 @@
           "bom"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Bir şeyler ters gittiğinde",
+        "translation": "Rabbim, bana indireceğin her hayra gerçekten muhtacım.",
+        "category": "Sıkıntı",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Qasas 28:24",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "pobreza",
+          "gerekli",
+          "bien"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -9525,6 +10385,21 @@
           "Musa"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Musa'nın Duası",
+        "translation": "Rabbim ben nefsime zulmettim. Beni affet.",
+        "category": "Sıkıntı",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Qasas 28:16",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "adaletsizlik",
+          "perdon",
+          "Musa"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -9685,6 +10560,20 @@
         "tags": [
           "gratidão",
           "boas obras"
+        ],
+        "isFeatured": true
+      },
+      "tr": {
+        "title": "Nimetlere şükür",
+        "translation": "Nimetiyle salih amelleri tamamlayan Allah'a hamd olsun.",
+        "category": "Şükür",
+        "source": "Hisnul Muslim",
+        "reference": "Ibn Majah 3803",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "minnettarlık",
+          "buenas obras"
         ],
         "isFeatured": true
       }
@@ -9857,6 +10746,21 @@
           "inspiração"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Minnettar olmayı istemek",
+        "translation": "Rabbim, bana verdiğin nimete şükretmeyi bana ilham et.",
+        "category": "Şükür",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Ankabut 27:19",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "agradecimiento",
+          "iyilik",
+          "ilham"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -10013,6 +10917,20 @@
           "satisfação"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Bir nimet alırken",
+        "translation": "Allah'ım, Sen razı oluncaya kadar hamd sana mahsustur.",
+        "category": "Şükür",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 2732",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "alabanza",
+          "memnuniyet"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -10167,6 +11085,20 @@
         "tags": [
           "gratidão",
           "gratidão"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Şükran liLlah",
+        "translation": "Allah'a şükürler olsun.",
+        "category": "Şükür",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6042",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "minnettarlık",
+          "agradecimiento"
         ],
         "isFeatured": false
       }
@@ -10353,6 +11285,23 @@
           "adorar"
         ],
         "isFeatured": true
+      },
+      "tr": {
+        "title": "Namazdan sonra",
+        "translation": "Allah'ım, Seni anmak, Sana şükretmek ve Sana en güzel şekilde ibadet etmek için bana yardım et.",
+        "category": "Namazdan sonra",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 1422",
+        "count": 1,
+        "times": [
+          "después_oración"
+        ],
+        "tags": [
+          "vaaz",
+          "zikir",
+          "hayranlık"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -10529,6 +11478,22 @@
           "glória"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "SübhanAllah",
+        "translation": "Allah'a hamd olsun.",
+        "category": "Namazdan sonra",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6405",
+        "count": 33,
+        "times": [
+          "después_oración"
+        ],
+        "tags": [
+          "tesbih",
+          "gloria"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -10703,6 +11668,22 @@
           "gratidão"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Elhamdulillah",
+        "translation": "Hamd Allah'a mahsustur.",
+        "category": "Namazdan sonra",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6405",
+        "count": 33,
+        "times": [
+          "después_oración"
+        ],
+        "tags": [
+          "hamd",
+          "minnettarlık"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -10875,6 +11856,22 @@
         "tags": [
           "takbir",
           "grandeza"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Allahu Ekber",
+        "translation": "Allah en büyüktür.",
+        "category": "Namazdan sonra",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6405",
+        "count": 34,
+        "times": [
+          "después_oración"
+        ],
+        "tags": [
+          "tekbir",
+          "görkemli"
         ],
         "isFeatured": false
       }
@@ -11061,6 +12058,23 @@
           "pode"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Son şehadet",
+        "translation": "Tek ve ortağı olmayan Allah'tan başka ilah yoktur. Mülk ve hamd O'nundur ve O, her şeye kadirdir.",
+        "category": "Namazdan sonra",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6406",
+        "count": 1,
+        "times": [
+          "después_oración"
+        ],
+        "tags": [
+          "şehadet",
+          "dominio",
+          "Poder"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -11233,6 +12247,22 @@
         "tags": [
           "julgamento",
           "humilhação"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "İkiyüzlülüğe karşı koruma",
+        "translation": "Allah'ım, kıyamet gününde beni küçük düşürme.",
+        "category": "Namazdan sonra",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 767",
+        "count": 1,
+        "times": [
+          "después_oración"
+        ],
+        "tags": [
+          "meyve suyu",
+          "aşağılama"
         ],
         "isFeatured": false
       }
@@ -11419,6 +12449,23 @@
           "proteção"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Cennete giriş",
+        "translation": "Allah'ım beni ateşten koru.",
+        "category": "Namazdan sonra",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6328",
+        "count": 1,
+        "times": [
+          "después_oración"
+        ],
+        "tags": [
+          "paraíso",
+          "ateş",
+          "koruma"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -11585,6 +12632,21 @@
           "pureza"
         ],
         "isFeatured": true
+      },
+      "tr": {
+        "title": "Abdest alırken",
+        "translation": "Şahadet ederim ki, tek ve ortağı olmayan Allah'tan başka ilah yoktur. Ve şehadet ederim ki Muhammed O'nun kulu ve elçisidir.",
+        "category": "Abdest",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 234",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "abdest",
+          "tanıklık",
+          "püresi"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -11741,6 +12803,20 @@
           "desculpe"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Abdestten sonra",
+        "translation": "Allah'ım beni tevbe edenlerden ve temizlenenlerden eyle.",
+        "category": "Abdest",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 55",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "püresi",
+          "perdon"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -11895,6 +12971,20 @@
         "tags": [
           "testemunho",
           "pureza"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Abdesti tamamla",
+        "translation": "Allah'tan başka ilah olmadığına ve Muhammed'in O'nun kulu ve elçisi olduğuna şehadet ederim.",
+        "category": "Abdest",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6296",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "tanıklık",
+          "püresi"
         ],
         "isFeatured": false
       }
@@ -12061,6 +13151,21 @@
           "hajj",
           "talbiya",
           "jornada"
+        ],
+        "isFeatured": true
+      },
+      "tr": {
+        "title": "Telbiye",
+        "translation": "İşte buradayım Allah'ım buradayım. İşte buradayım, ortağın yok, işte buradayım. Şüphesiz hamd, lütuf ve hükümranlık Sana aittir, Senin ortağın yoktur.",
+        "category": "Hac ve Umre",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6149",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "hac",
+          "telbiye",
+          "yol"
         ],
         "isFeatured": true
       }
@@ -12233,6 +13338,21 @@
           "honra"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Kabe'yi görünce",
+        "translation": "Allah'ım bu Beyt'in şerefini, büyüklüğünü ve hürmetini artır.",
+        "category": "Hac ve Umre",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 1333",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "Kabe",
+          "ev",
+          "onur"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -12395,6 +13515,20 @@
           "oração"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Tavaf sırasında",
+        "translation": "Rabbim beni ve nesillerimi namazda ısrarcı eyle.",
+        "category": "Hac ve Umre",
+        "source": "Hisnul Muslim",
+        "reference": "Ibrahim 14:40",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "tavaf",
+          "vaaz"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -12542,6 +13676,20 @@
         "title": "Dua de Sa'i",
         "translation": "Oh Allah, coloque luz em meu coração e luz em minha visão.",
         "category": "Hajj e Umrah",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6316",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "saei",
+          "luz"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Sa'i Duası",
+        "translation": "Allah'ım kalbime nur, gözüme nur ver.",
+        "category": "Hac ve Umre",
         "source": "Hisnul Muslim",
         "reference": "Al-Bukhari 6316",
         "count": 1,
@@ -12721,6 +13869,21 @@
           "gratidão"
         ],
         "isFeatured": true
+      },
+      "tr": {
+        "title": "Ebeveynler için namaz",
+        "translation": "Rabbim, küçüklüğümde beni yetiştirdikleri gibi sen de onlara merhamet et.",
+        "category": "Aile",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Isra 17:24",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "pederler",
+          "misericordia",
+          "minnettarlık"
+        ],
+        "isFeatured": true
       }
     }
   },
@@ -12891,6 +14054,21 @@
           "gratidão"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Ebeveynlerin kutsaması",
+        "translation": "Rabbimiz bize eşlerimizden ve evlatlarımızdan gözümüze ferahlık nasip eyle.",
+        "category": "Aile",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Furqan 25:74",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "aile",
+          "kızlar",
+          "minnettarlık"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -13045,6 +14223,20 @@
         "tags": [
           "gratidão",
           "família"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Çocukların kutsaması",
+        "translation": "Allah'ım aileme bereket ver.",
+        "category": "Aile",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6332",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "minnettarlık",
+          "aile"
         ],
         "isFeatured": false
       }
@@ -13211,6 +14403,21 @@
           "pais",
           "desculpe",
           "misericórdia"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Ölen ebeveynler için",
+        "translation": "Allah'ım, küçüklüğümde beni yetiştirdikleri için anne ve babamı bağışla ve onlara merhamet et.",
+        "category": "Aile",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 2472",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "pederler",
+          "perdon",
+          "misericordia"
         ],
         "isFeatured": false
       }
@@ -13397,6 +14604,23 @@
           "louvar"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Sabah tesbih",
+        "translation": "Allah'ı tesbih ederim ve hamd O'na mahsustur.",
+        "category": "Zikir",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 2692",
+        "count": 100,
+        "times": [
+          "morning",
+          "night"
+        ],
+        "tags": [
+          "tesbih",
+          "alabanza"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -13578,6 +14802,23 @@
         "tags": [
           "louvar",
           "mundos"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Tahmid",
+        "translation": "Hamd alemlerin Rabbi olan Allah'a mahsustur.",
+        "category": "Zikir",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Fatiha 1:2",
+        "count": 1,
+        "times": [
+          "morning",
+          "night"
+        ],
+        "tags": [
+          "alabanza",
+          "Mundos"
         ],
         "isFeatured": false
       }
@@ -13763,6 +15004,23 @@
           "grandeza"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Tekbir",
+        "translation": "Allah en büyüktür.",
+        "category": "Zikir",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6406",
+        "count": 1,
+        "times": [
+          "morning",
+          "night"
+        ],
+        "tags": [
+          "tekbir",
+          "görkemli"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -13946,6 +15204,23 @@
           "astaghfir"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Estağfirullah",
+        "translation": "Yüce Allah'tan mağfiret dilerim.",
+        "category": "Zikir",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6407",
+        "count": 3,
+        "times": [
+          "morning",
+          "night"
+        ],
+        "tags": [
+          "perdon",
+          "estağfir"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -14127,6 +15402,23 @@
         "tags": [
           "tawhid",
           "testemunho"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "La ilahe illallah",
+        "translation": "Allah'tan başka ilah yoktur.",
+        "category": "Zikir",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6408",
+        "count": 10,
+        "times": [
+          "morning",
+          "night"
+        ],
+        "tags": [
+          "tevhid",
+          "tanıklık"
         ],
         "isFeatured": false
       }
@@ -14317,6 +15609,24 @@
         "tags": [
           "tawhid",
           "Shahada",
+          "profeta"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Kelime Tevhid",
+        "translation": "Allah'tan başka ilah yoktur ve Muhammed Allah'ın elçisidir.",
+        "category": "Zikir",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 190",
+        "count": 1,
+        "times": [
+          "morning",
+          "night"
+        ],
+        "tags": [
+          "tevhid",
+          "şehadet",
           "profeta"
         ],
         "isFeatured": false
@@ -14511,6 +15821,24 @@
           "fogo"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Rabana Latina",
+        "translation": "Rabbimiz, bize dünyada da iyilik ver, ahirette de iyilik ver ve bizi ateş azabından koru.",
+        "category": "Zikir",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bakarah 2:201",
+        "count": 1,
+        "times": [
+          "morning",
+          "night"
+        ],
+        "tags": [
+          "dilekçe",
+          "dünya",
+          "ateş"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -14694,6 +16022,23 @@
           "glória"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "SübhanAllah ve bihamdihi",
+        "translation": "Allah'ı tesbih ederim ve hamd O'na mahsustur. Yüce Allah'ın şanı yücedir.",
+        "category": "Zikir",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 2732",
+        "count": 1,
+        "times": [
+          "morning",
+          "night"
+        ],
+        "tags": [
+          "tesbih",
+          "gloria"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -14870,6 +16215,22 @@
           "decisão"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "İstikhara Duası",
+        "translation": "Allah'ım, senin ilminle senden en hayırlısını, kudretinle yetenek isterim.",
+        "category": "Zikir",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6382",
+        "count": 1,
+        "times": [
+          "istikahara"
+        ],
+        "tags": [
+          "seçim",
+          "karar"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -15032,6 +16393,20 @@
           "vigor"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Rabana ve la takna",
+        "translation": "Rabbimiz bize taşıyamayacağımız şeyleri yükleme.",
+        "category": "Sıkıntı",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bakarah 2:286",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "kargo",
+          "tüylü"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -15185,6 +16560,20 @@
         "times": [],
         "tags": [
           "conhecimento",
+          "luz"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Öğrencinin duası",
+        "translation": "Allah'ım kalplerimizi ilmin nuruyla aydınlat.",
+        "category": "Zikir",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 5766",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "conocimiento",
           "luz"
         ],
         "isFeatured": false
@@ -15364,6 +16753,22 @@
           "cortar"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Yağmur için dua",
+        "translation": "Allah'ım, bizim için toprağı yeşert.",
+        "category": "Yağmur",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 1773",
+        "count": 1,
+        "times": [
+          "lluvia"
+        ],
+        "tags": [
+          "kademeli",
+          "yetiştirici"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -15520,6 +16925,20 @@
           "gratidão"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Tüccarın duası",
+        "translation": "Allah'ım rızkımı bereketlendir.",
+        "category": "Şükür",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 3588",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "geçimini sağlamak",
+          "minnettarlık"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -15673,6 +17092,20 @@
         "times": [],
         "tags": [
           "religião",
+          "paz"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Barış için dua",
+        "translation": "Allah'ım, işlerimin koruyucusu olan dinimi ıslah et.",
+        "category": "Zikir",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 2420",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "din",
           "paz"
         ],
         "isFeatured": false
@@ -15832,6 +17265,20 @@
           "retidão"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Rehberlik için dua",
+        "translation": "Allah'ım beni doğru yola ilet.",
+        "category": "Zikir",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 1539",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "guía",
+          "dürüst"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -15986,6 +17433,20 @@
         "tags": [
           "paciência",
           "vigor"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Sabır için dua",
+        "translation": "Allah'ım beni sabırlı kıl.",
+        "category": "Sıkıntı",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 5819",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "Pasifik",
+          "tüylü"
         ],
         "isFeatured": false
       }
@@ -16162,6 +17623,22 @@
           "natureza"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Mükemmel sabah duası",
+        "translation": "İslam'ın doğal fıtratına uyandık.",
+        "category": "Sabah",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 2809",
+        "count": 1,
+        "times": [
+          "morning"
+        ],
+        "tags": [
+          "İslâm",
+          "doğal"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -16336,6 +17813,22 @@
           "natureza"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Gün batımında dua",
+        "translation": "İslam'ın tabiî fıtratı üzerine akşama ulaştık.",
+        "category": "Gece",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 2809",
+        "count": 1,
+        "times": [
+          "night"
+        ],
+        "tags": [
+          "İslâm",
+          "doğal"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -16492,6 +17985,20 @@
           "dias"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Günlük şükran duası",
+        "translation": "Alemlerin Rabbi olan Allah'a her gün hamd olsun.",
+        "category": "Şükür",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Fatiha 1:2",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "alabanza",
+          "gün"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -16646,6 +18153,20 @@
         "tags": [
           "memória",
           "conhecimento"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Hafıza için dua",
+        "translation": "Allah'ım bana öğrettiklerini unutturma.",
+        "category": "Zikir",
+        "source": "Hisnul Muslim",
+        "reference": "Ibn As-Sunni 245",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "hatıra",
+          "conocimiento"
         ],
         "isFeatured": false
       }
@@ -16824,6 +18345,22 @@
           "facilidade"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Kısa yolcunun duası",
+        "translation": "Allah'ım yolculuğumuzu bize kolaylaştır.",
+        "category": "Yolculuk",
+        "source": "Hisnul Muslim",
+        "reference": "Abu Dawud 2600",
+        "count": 1,
+        "times": [
+          "viaje"
+        ],
+        "tags": [
+          "yol",
+          "kolaylaştırıcı"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -16978,6 +18515,20 @@
         "tags": [
           "proteção",
           "palavras"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Kötülüklerden korunmak için dua",
+        "translation": "Allah'ın mükemmel sözlerine sığınırım.",
+        "category": "Korunma",
+        "source": "Hisnul Muslim",
+        "reference": "Muslim 2709",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "koruma",
+          "Palabralar"
         ],
         "isFeatured": false
       }
@@ -17140,6 +18691,20 @@
         "tags": [
           "temer",
           "proteção"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Korku için dua",
+        "translation": "Allah'ım korkudan sana sığınırım.",
+        "category": "Sıkıntı",
+        "source": "Hisnul Muslim",
+        "reference": "Al-Bukhari 6377",
+        "count": 1,
+        "times": [],
+        "tags": [
+          "miedo",
+          "koruma"
         ],
         "isFeatured": false
       }
@@ -17316,6 +18881,22 @@
           "gratidão"
         ],
         "isFeatured": false
+      },
+      "tr": {
+        "title": "Açlık için dua",
+        "translation": "Allah'ım yemeğimizi bereketli kıl.",
+        "category": "Yemek",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 1801",
+        "count": 1,
+        "times": [
+          "comida"
+        ],
+        "tags": [
+          "komik",
+          "minnettarlık"
+        ],
+        "isFeatured": false
       }
     }
   },
@@ -17490,6 +19071,22 @@
         "tags": [
           "bebida",
           "gratidão"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Susuzluk için dua",
+        "translation": "Allah'ım, içkimizi bereketli kıl.",
+        "category": "Yemek",
+        "source": "Hisnul Muslim",
+        "reference": "At-Tirmidhi 1802",
+        "count": 1,
+        "times": [
+          "bebida"
+        ],
+        "tags": [
+          "bebida",
+          "minnettarlık"
         ],
         "isFeatured": false
       }

@@ -36,7 +36,7 @@
 
 ## Supported Languages
 
-The app is fully localized in **10 languages**:
+The app is fully localized in **11 languages**:
 
 | Code | Language |
 |---|---|
@@ -48,6 +48,7 @@ The app is fully localized in **10 languages**:
 | `id` | Indonesian (Bahasa Indonesia) |
 | `it` | Italian (Italiano) |
 | `nl` | Dutch (Nederlands) |
+| `pt` | Portuguese (Português) |
 | `ru` | Russian (Русский) |
 | `tr` | Turkish (Türkçe) |
 

@@ -1,0 +1,1353 @@
+{
+  "@@locale": "tr",
+  "appTitle": "Qibla Time",
+  "commonSkip": "Atla",
+  "commonBack": "Geri",
+  "commonContinue": "Devam et",
+  "commonEnter": "Giriş",
+  "commonStart": "Başla",
+  "commonAllow": "İzin ver",
+  "commonActivate": "Etkinleştir",
+  "commonEnable": "Etkinleştir",
+  "commonEnableGps": "GPS'i aç",
+  "commonOpenSettings": "Ayarları aç",
+  "commonPending": "Beklemede",
+  "commonGranted": "İzin verildi",
+  "commonBlocked": "Engellendi",
+  "commonReady": "Hazır",
+  "commonDisabled": "Devre dışı",
+  "commonUnavailable": "Kullanılamıyor",
+  "commonToday": "Bugün",
+  "commonYesterday": "Dün",
+  "commonLoading": "Yükleniyor",
+  "commonShare": "Paylaşmak",
+  "commonManual": "Manuel",
+  "commonImportJson": "JSON'u içe aktar",
+  "commonExport": "İhracat",
+  "commonOpen": "Açık",
+  "commonVersion": "Sürüm",
+  "commonAbout": "Hakkında",
+  "commonMethod": "Yöntem",
+  "commonMadhab": "Mezhep",
+  "commonLocation": "Konum",
+  "commonNotifications": "Bildirimler",
+  "commonNoData": "Veri yok",
+  "commonNever": "Asla",
+  "commonGenerating": "Oluşturuluyor...",
+  "commonChecking": "Kontrol ediliyor...",
+  "commonDelete": "Sil",
+  "commonSystemStatus": "Sistem durumu",
+  "commonCurrentStatus": "Mevcut durum",
+  "commonOffset": "Telafi etmek",
+  "commonAutomatic": "Otomatik",
+  "commonPrepared": "Tedarikli",
+  "commonActivated": "Etkinleştirilmiş",
+  "commonPaused": "Duraklatıldı",
+  "commonSystem": "Sistem",
+  "onboardingIntroNoAds": "Reklam yok",
+  "onboardingIntroNoAdsBody": "Dikkat dağıtmayan temiz, odaklanmış deneyim",
+  "onboardingIntroPrivacy": "Tam gizlilik",
+  "onboardingIntroPrivacyBody": "Verileriniz asla cihazınızdan ayrılmaz",
+  "onboardingIntroLanguages": "11 dil",
+  "onboardingIntroLanguagesBody": "Dilinizde mevcut",
+  "onboardingWelcomeTitle": "Kıble Saati'ne hoş geldiniz",
+  "onboardingWelcomeSubtitle": "Günlük rutininiz için hafif bir uygulamada namaz vakitleri, kıble, Kur'an ve hatırlatmalar.",
+  "onboardingFeatureSchedulesTitle": "Güvenilir namaz vakitleri",
+  "onboardingFeatureSchedulesBody": "Bulunduğunuz yere ve tercih ettiğiniz yönteme göre hesaplanır.",
+  "onboardingFeaturePracticeTitle": "Kıble ve günlük pratik",
+  "onboardingFeaturePracticeBody": "Pusula, tesbih, takip ve daha fazlası tek bir akıcı akışta.",
+  "onboardingFeatureRemindersTitle": "Yararlı hatırlatıcılar",
+  "onboardingFeatureRemindersBody": "Ezan bildirimleri ve temel ayarlar ilk günden itibaren hazır.",
+  "onboardingPermissionsTitle": "Önemli izinler",
+  "onboardingPermissionsSubtitle": "Sadece namaz vakitlerini hesaplamak, kıbleyi kullanmak ve zamanında bildirimde bulunmak için gerekenleri istiyoruz.",
+  "onboardingLocationReadyBody": "Namaz vakitlerini ve kıbleyi hesaplamaya hazır.",
+  "onboardingLocationBlockedBody": "Konum erişimi engellendi. Daha sonra sistem ayarlarından etkinleştirebilirsiniz.",
+  "onboardingLocationGpsOffBody": "Cihazınızın GPS'i kapalı. Daha sonra devam edip açabilirsiniz.",
+  "onboardingLocationPendingBody": "Doğru namaz vakitleri ve Mekke'ye yön bilgisi için gereklidir.",
+  "onboardingNotificationsReadyBody": "Her namazyı size hatırlatmaya hazır.",
+  "onboardingNotificationsPendingBody": "Bu, daha sonra ezan uyarıları ve hatırlatıcıları almanızı sağlar.",
+  "onboardingMethodTitle": "Hesaplama yöntemi",
+  "onboardingMethodSubtitle": "Daha sonra değiştirebilirsiniz ancak bu, namaz vakitlerinizin bugünden itibaren doğru şekilde yapılandırılmasını sağlar.",
+  "onboardingSelectedNow": "Şimdi seçildi",
+  "onboardingTapToChooseMethod": "Bu yöntemi seçmek için dokunun",
+  "onboardingMadhabTitle": "İkindi için mezhep",
+  "onboardingMadhabSubtitle": "Bu yalnızca İkindi hesaplamasını etkiler. Emin değilseniz Şafi'yi saklayıp daha sonra değiştirebilirsiniz.",
+  "onboardingMadhabCommonTitle": "Şafi / Maliki / Hanbeli",
+  "onboardingMadhabCommonSubtitle": "Başlangıç ​​için en yaygın seçenek",
+  "onboardingMadhabHanafiTitle": "Hanefi",
+  "onboardingMadhabHanafiSubtitle": "İkindi için Hanefi hesaplamasını kullanın",
+  "onboardingAdhanTitle": "Ezan ve uyarılar",
+  "onboardingAdhanSubtitle": "Kıble Saati, varsayılan olarak hafif bir ezanla sizi her namaz için uyarabilir. Daha sonra değiştirebilirsiniz.",
+  "onboardingPrayerNotificationsTitle": "Namaz bildirimleri",
+  "onboardingPrayerNotificationsSubtitle": "Bunları şimdi etkinleştirebilir veya şimdilik onlarsız devam edebilirsiniz.",
+  "onboardingAdhanPreviewTitle": "Hızlı ezan önizlemesi",
+  "onboardingAdhanPreviewSubtitle": "Seçtiğiniz ses kullanılacaktır. Bunu daha sonra Ayarlar'dan değiştirebilirsiniz.",
+  "onboardingAdhanStopPreview": "Önizlemeyi durdur",
+  "onboardingAdhanListenPreview": "Önizlemeyi dinle",
+  "onboardingDoneTitle": "Her şey hazır",
+  "onboardingDoneSubtitle": "Artık namaz vakitlerinizi, kıblenizi ve günlük takibinizi yapmaya başlayabilirsiniz. Her şey daha sonra ayarlanabilir.",
+  "onboardingSummaryLocationBlocked": "Şimdilik engellendi",
+  "onboardingSummaryNotificationsPrepared": "Tedarikli",
+  "methodMuslimWorldLeague": "Müslüman Dünya Ligi",
+  "methodNorthAmerica": "ISNA / Kuzey Amerika",
+  "methodUmmAlQura": "Ümmü'l-Kura",
+  "methodEgyptian": "Mısır Otoritesi",
+  "homeHeaderOnline": "Çevrimiçi",
+  "homeHeaderOffline": "Çevrimdışı",
+  "homeHeaderLocationUnavailable": "Konum kullanılamıyor",
+  "homeHeaderStatusLine": "{networkStatus} · {location}",
+  "@homeHeaderStatusLine": {
+    "placeholders": {
+      "networkStatus": {},
+      "location": {}
+    }
+  },
+  "homeHeroNextPrayer": "SONRAKİ DUA",
+  "homeHeroTodayOverview": "Bugünün ana görünümü",
+  "homeHeroUsingSavedLocation": "Son kayıtlı konumunuzu kullanma",
+  "homeSelectedDateToday": "BUGÜN",
+  "homeSelectedDateCustom": "SEÇİLEN TARİH",
+  "homeCountdownUnavailable": "Geri sayım kullanılamıyor",
+  "homeCountdownActive": "Geri sayım aktif",
+  "homeCountdownUntil": "{prayer}'ye kadar",
+  "@homeCountdownUntil": {
+    "placeholders": {
+      "prayer": {}
+    }
+  },
+  "homeCountdownLabelUppercase": "GERİ SAYIM",
+  "homeDurationUntil": "{hours}h {minutes}min cinsinden",
+  "@homeDurationUntil": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      },
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "homeDurationHoursMinutes": "{hours} h {minutes} dk.",
+  "@homeDurationHoursMinutes": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      },
+      "minutes": {
+        "type": "String"
+      }
+    }
+  },
+  "homeDurationMinutes": "{minutes} dk.",
+  "@homeDurationMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "homeDurationSeconds": "{seconds}'ler",
+  "@homeDurationSeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "String"
+      }
+    }
+  },
+  "homePrayerSectionToday": "Bugünkü namazlar",
+  "homePrayerSectionForDate": "{date} süreleri",
+  "@homePrayerSectionForDate": {
+    "placeholders": {
+      "date": {}
+    }
+  },
+  "homePrayerSectionWorshipDay": "{weekday}, ibadet günü",
+  "@homePrayerSectionWorshipDay": {
+    "placeholders": {
+      "weekday": {}
+    }
+  },
+  "homePrayerSectionMarkedCount": "{count}/5 işaretli",
+  "@homePrayerSectionMarkedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsTitle": "Ayarlar",
+  "settingsTitleArabic": "الإعدادات",
+  "settingsSectionAppearance": "Dış görünüş",
+  "settingsSectionAccessibility": "Erişilebilirlik",
+  "settingsSectionAdhanNotifications": "Ezan bildirimleri",
+  "settingsSectionPeriodMode": "Regl Modu",
+  "settingsSectionScheduleCalculation": "Namaz vakti hesaplaması",
+  "settingsSectionRamadanMode": "Ramezan modu",
+  "settingsSectionHadith": "Hadis",
+  "settingsSectionTravelerMode": "Seyahat modu",
+  "settingsSectionRecentPlaces": "SON YERLER",
+  "settingsSectionSmartCache": "Akıllı önbellek",
+  "settingsSectionSupport": "Sadaka · Destek",
+  "settingsSectionCloudBackup": "Bulut yedekleme (beta)",
+  "settingsTextSize": "Metin boyutu",
+  "settingsCurrentScale": "Mevcut ölçek: {scale}x",
+  "@settingsCurrentScale": {
+    "placeholders": {
+      "scale": {}
+    }
+  },
+  "settingsHighContrast": "Yüksek kontrast",
+  "settingsHighContrastSubtitle": "Uygulama genelinde okunabilirliği artırır",
+  "settingsUseSystemBold": "Sistem kalın metnini kullan",
+  "settingsUseSystemBoldSubtitle": "VoiceOver/TalkBack tercihine saygı duyar",
+  "settingsResetAccessibility": "Erişilebilirliği sıfırla",
+  "settingsReset": "Sıfırla",
+  "settingsThemeDarkTitle": "Karanlık",
+  "settingsThemeDarkSubtitle": "Sabah namazından önce gökyüzü",
+  "settingsThemeLightTitle": "Işık",
+  "settingsThemeLightSubtitle": "Dış mekan kullanımı için",
+  "settingsThemeAmoledTitle": "AMOLED",
+  "settingsThemeAmoledSubtitle": "Saf siyah, pil tasarrufu sağlar",
+  "settingsThemeDeuteranopiaTitle": "Döteranopi",
+  "settingsThemeDeuteranopiaSubtitle": "Kırmızı/yeşil yok",
+  "settingsThemeMonochromeTitle": "Tek renkli",
+  "settingsThemeMonochromeSubtitle": "Akromatopsi ve az görme için",
+  "settingsLanguage": "Uygulama dili",
+  "settingsLanguageSubtitle": "Uygulamanın cihazınızın dilini mi takip edeceğini yoksa her yerde sabit bir dil mi kullanacağını seçin.",
+  "settingsLanguageDialogTitle": "Uygulama dili",
+  "settingsLanguageOptionSystem": "Cihaz dilini takip et",
+  "settingsLanguageSystemValue": "Otomatik ({language})",
+  "@settingsLanguageSystemValue": {
+    "placeholders": {
+      "language": {}
+    }
+  },
+  "settingsLanguageOptionSpanish": "İspanyolca",
+  "settingsLanguageOptionEnglish": "İngilizce",
+  "settingsLanguageOptionFrench": "Fransızca",
+  "settingsLanguageOptionGerman": "Almanca",
+  "settingsLanguageOptionArabic": "Arapça",
+  "settingsLanguageOptionDutch": "Felemenkçe",
+  "settingsAdhanSound": "Ezan sesi",
+  "settingsAdhanSoundAction": "Seçin ve önizleyin",
+  "settingsGeneralNotifications": "Genel bildirimler",
+  "settingsGeneralNotificationsSubtitle": "Tüm namaz uyarılarını etkinleştirin veya duraklatın",
+  "settingsSystemPermissionPendingBody": "Ezan uyarıları yapılandırıldı ancak sistem izni hâlâ beklemede.",
+  "settingsHapticFeedback": "Dokunsal geribildirim",
+  "settingsRamadanAutomatic": "Otomatik Ramezan modu",
+  "settingsRamadanAutomaticSubtitle": "İslami takvim Ramezan ayına girdiğinde otomatik olarak açılır",
+  "settingsRamadanForced": "Ramezan modunu zorla",
+  "settingsRamadanForcedSubtitle": "Ramezan görünümünü manuel olarak etkinleştirme",
+  "settingsDailyNotification": "Günlük bildirim",
+  "settingsDailyNotificationSubtitle": "Her gün bir hadis veya ayet alın",
+  "settingsNotificationHour": "Bildirim zamanı",
+  "settingsPeriodMode": "Regl Modu",
+  "settingsPeriodModeSubtitle": "Regl döneminde namaz bildirimlerini duraklat",
+  "periodModeActive": "Dönem modu etkin",
+  "settingsTravelerMode": "Seyahat modu",
+  "settingsTravelerModeSubtitle": "Şehir değişikliklerini otomatik olarak algılar (>50 km)",
+  "settingsTravelerModeLoadError": "Seyahat modunu yükleyemedik",
+  "periodGuideTitle": "Regl Rehberi",
+  "periodGuideAllowed": "İzin verilenler",
+  "periodGuidePaused": "Ara verilenler",
+  "periodGuideNote": "Önemli not",
+  "periodGuideIntro": "Bu kılavuz adet döneminiz boyunca genellikle neye izin verildiğini ve nelere ara verildiğini hatırlatan basit bir kılavuzdur.",
+  "periodGuideAllowedDhikr": "Zikir ve Allah'ı anmak",
+  "periodGuideAllowedDua": "Dua ve kişisel dua",
+  "periodGuideAllowedListenQuran": "Kur'an dinlemek",
+  "periodGuideAllowedReadTranslation": "Kur'an'ın tercümesini okumak",
+  "periodGuidePausedPrayer": "Zorunlu namaz",
+  "periodGuidePausedFasting": "Zorunlu oruç",
+  "periodGuidePausedTawaf": "Kabe çevresinde tavaf",
+  "periodGuidePausedTouchQuran": "Kur'an'a doğrudan dokunmak",
+  "periodGuideNoteBody": "Adet döneminde ara verilen farz oruçların daha sonra kaza edilmesi gerekir.",
+  "settingsRecentPlaces": "Son yerler",
+  "settingsNoRecentTrips": "Yakın zamanda seyahat yok",
+  "settingsLoadError": "Yükleyemedik",
+  "settingsCacheValidUntil": "Önbellek şu tarihe kadar geçerlidir:",
+  "settingsCacheEntries": "Önbellek girişleri",
+  "settingsClearCache": "Önbelleği temizle",
+  "settingsSupportInfo": "Destek bilgileri",
+  "settingsSupportCardTitle": "Geliştirmeyi destekleyin",
+  "settingsSupportCardSubtitle": "Her bağış bir sadaka jariyah olabilir",
+  "rateApp": "Uygulamayı derecelendirin",
+  "settingsBackupMode": "Yedekleme modu",
+  "settingsAnonymousId": "Anonim Kimlik",
+  "settingsLastBackup": "Son yedekleme",
+  "settingsExportBackup": "Yedeği dışa aktar",
+  "settingsRestoreBackup": "Yedeği geri yükle",
+  "settingsBackupInfoBody": "Manuel bir yedeklemeyi JSON formatında kaydedebilir ve paylaşabilirsiniz. Otomasyon ve cihazlar arası senkronizasyon henüz kullanılamıyor.",
+  "settingsRestoreBackupDialogTitle": "Yedeği geri yükle",
+  "settingsRestoreBackupSuccess": "Yedekleme geri yüklendi",
+  "settingsRestoreBackupError": "Yedeği geri yükleyemedik.",
+  "settingsDailyNotificationEnabled": "Günlük bildirim etkin",
+  "settingsDailyNotificationDisabled": "Günlük bildirim devre dışı bırakıldı",
+  "settingsSelectHourTitle": "Zamanı seçin",
+  "settingsToday": "Bugün",
+  "settingsYesterday": "Dün",
+  "settingsDaysAgo": "{count} gün önce",
+  "@settingsDaysAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsRamadanManualActive": "Manuel olarak aktif",
+  "settingsLocationBlocked": "Engellendi",
+  "settingsLocationPendingPermission": "İzin bekleniyor",
+  "settingsLocationAutomatic": "Otomatik",
+  "settingsLocationSavedUnavailable": "Kayıtlı konum yok",
+  "settingsLocationStatus": "Konum durumu",
+  "settingsGpsOff": "GPS kapalı",
+  "settingsScheduleSource": "Planlama kaynağı",
+  "settingsScheduleSourceReady": "Önbellek hazır",
+  "settingsNotificationSystem": "Sistem bildirimi",
+  "settingsNotificationApp": "Uygulama bildirimi.",
+  "settingsNotificationsGranted": "İmtiyazlı",
+  "commonPlay": "Oynamak",
+  "commonText": "Metin",
+  "commonVideo": "Video",
+  "commonRemove": "Kaldırmak",
+  "shareBranding": "Uygulama: Kıble Saati",
+  "shareReferenceLabel": "Referans: {reference}",
+  "@shareReferenceLabel": {
+    "placeholders": {
+      "reference": {}
+    }
+  },
+  "shareSubjectDua": "dua",
+  "shareSubjectHadithOfDay": "Günün Hadisi - Kıble Vakti",
+  "shareSubjectHadithShared": "Kıble Saatinden paylaşılan hadisler",
+  "shareBadgeHadith": "HADİS",
+  "shareBadgeDua": "DUA",
+  "shareBadgeQuran": "KUR'AN",
+  "shareSectionStyle": "Stil / arka plan",
+  "shareSectionContent": "İçerik",
+  "shareLayoutCard": "Kart",
+  "shareLayoutStory": "Hikaye",
+  "shareContentBilingual": "Arapça + çeviri",
+  "shareContentArabicOnly": "Yalnızca Arapça",
+  "shareContentTranslationOnly": "Yalnızca çeviri",
+  "shareActionShareImage": "Resmi paylaş",
+  "shareActionShareText": "Metni paylaş",
+  "shareHadithTitle": "Hadis paylaş",
+  "shareHadithSubtitle": "Paylaşmadan önce formatı ve içeriği seçin.",
+  "shareHadithTextError": "Hadis metnini paylaşamadık.",
+  "shareHadithImageError": "Hadis görselini oluşturamadık.",
+  "shareDuaTitle": "Duayı paylaş",
+  "shareDuaTitleNamed": "{title}'yi paylaşın",
+  "@shareDuaTitleNamed": {
+    "placeholders": {
+      "title": {}
+    }
+  },
+  "shareDuaSubtitle": "Dua ve ezkar için hadislerdekiyle aynı görsel yöntemi kullanın.",
+  "shareDuaTextError": "Dua metnini paylaşamadık.",
+  "shareDuaImageError": "Dua görüntüsünü oluşturamadık.",
+  "shareAyahTitle": "{number} ayetini paylaş",
+  "@shareAyahTitle": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "shareAyahSubtitle": "Metin, resim ve video için aynı görsel sunumu koruyun.",
+  "shareAyahTextError": "Bu ayeti metin olarak paylaşamadık.",
+  "shareAyahImageError": "Bu ayet görselini oluşturamadık.",
+  "shareAyahVideoNoAudio": "Bu ayet için video oluşturulacak ses mevcut değil.",
+  "shareAyahVideoGenerating": "Ayet videosu oluşturuluyor...",
+  "shareAyahVideoError": "Bu ayetin videosunu oluşturamadık.",
+  "notificationAdhanChannelName": "Ezan bildirimleri",
+  "notificationAdhanChannelDescription": "Namaz vakitleri için ezan bildirimi",
+  "notificationAdhanTitle": "Qibla Time - {prayerName}",
+  "@notificationAdhanTitle": {
+    "placeholders": {
+      "prayerName": {}
+    }
+  },
+  "notificationAdhanBody": "Namaz vakti geldi",
+  "notificationReminderChannelName": "Kıble Saati - Hatırlatmalar",
+  "notificationReminderChannelDescription": "Ramezan ve Jumu'ah için bağlamsal hatırlatmalar",
+  "notificationDailyReflectionChannelName": "Günlük yansıma",
+  "notificationDailyReflectionChannelDescription": "Kur'an ayetleri ve günün hadisleri",
+  "notificationDailyReflectionTitle": "Günün yansıması",
+  "notificationDailyReflectionFallbackBody": "Qibla Timendaki günlük manevi yansımanız.",
+  "notificationDailyReflectionErrorTitle": "Kıble Saati · Günlük yansıma",
+  "notificationDailyReflectionErrorBody": "Bugünkü manevi hatırlatıcınız",
+  "notificationHadithReminderChannelName": "Hadis hatırlatmaları",
+  "notificationHadithReminderChannelDescription": "Saatlik hadis hatırlatmaları",
+  "notificationHadithReminderFallbackBody": "Hatırlatma: Peygamber Efendimiz'in bir hadisini okuyun",
+  "notificationHadithReminderTitle": "📖 Bu an için hadis",
+  "notificationHadithReminderTestBody": "Hadis hatırlatıcısını test edin",
+  "notificationHadithReminderTestTitle": "📖 Hadis hatırlatması",
+  "notificationWeeklySummaryTitle": "Haftalık özetiniz hazır",
+  "notificationWeeklySummaryBody": "Bu hafta {prayersCompleted} / {maxPossible} namazlarını tamamladınız. En güçlü gününüz {strongestDay}'di.",
+  "@notificationWeeklySummaryBody": {
+    "placeholders": {
+      "prayersCompleted": {
+        "type": "int"
+      },
+      "maxPossible": {
+        "type": "int"
+      },
+      "strongestDay": {}
+    }
+  },
+  "quranDailyVerseFallbackTranslation": "Allah: O'ndan başka ilah yoktur, diridir, her şeyin Rabbidir. O'na ne uyku ne de uyku gelir.",
+  "quranDailyVerseFallbackTransliteration": "Allahu la ilahe illa hüvel hayyul kayyum...",
+  "quranDailyVerseFallbackReference": "El-Bakara [2:255]",
+  "quranTitle": "Kur'an",
+  "quranSubtitle": "114 sure · sürekli okuma",
+  "quranHafizLabel": "Hafız",
+  "quranUtilityAyatAlKursi": "Ayetel Kürsi",
+  "quranUtilityAllahNames": "99 isim",
+  "quranUtilityDownloaded": "İndirildi",
+  "quranProtectionTitle": "GÜNLÜK KORUMA",
+  "quranProtectionSubtitle": "Ayetel Kürsi ve koruma surelerine hızlı erişim. Okumak veya dinlemek için bunları açın, ardından üç tekrarınızı işaretleyin.",
+  "quranProtectionAyatAlKursiHelper": "Bakara 2:255",
+  "quranProtectionSurahHelper": "{number} Suresi",
+  "@quranProtectionSurahHelper": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "quranProtectionIkhlasTitle": "İhlas",
+  "quranProtectionFalaqTitle": "El Felak",
+  "quranProtectionNasTitle": "An-Nas",
+  "quranProtectionRepeatCount": "{helper} · {count} / 3 tekrar",
+  "@quranProtectionRepeatCount": {
+    "placeholders": {
+      "helper": {},
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quranProtectionCompleteTooltip": "Tamamlamak",
+  "quranProtectionIncrementTooltip": "+1 tekrar",
+  "quranReadingHintTitle": "SÜREKLİ OKUMA",
+  "quranReadingHintBody": "Herhangi bir sureyi açtığınızda, daha sonra tekrar gelebilmeniz için son ayetinizi kaydedeceğiz.",
+  "quranReadingHintSecondary": "Okurken yer imi simgesine dokunarak da yer imlerini kaydedebilirsiniz.",
+  "quranContinueReadingTitle": "OKUMAYA DEVAM ET",
+  "quranBookmarksTitle": "YER İMLERİ",
+  "quranRevelationMecca": "Mekke",
+  "quranRevelationMedina": "Medine",
+  "quranAyahCount": "{count, plural, =1{1 ayet} other{{count} ayet}}",
+  "@quranAyahCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quranLastReadingAyah": "Son okuma: ayet {ayah}",
+  "@quranLastReadingAyah": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranBookmarkCount": "{count, plural, =1{1 kayıtlı ayet} other{{count} kayıtlı ayet}}",
+  "@quranBookmarkCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quranDownloadedFavoriteOffline": "Ses indirildi · çevrimdışı favori",
+  "quranDownloadedAudio": "Ses indirildi",
+  "quranReadingPointSaved": "{ayah} ayetinde okuma noktası kaydedildi",
+  "@quranReadingPointSaved": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranBookmarkSaved": "Ayet {ayah} konumunda yer işareti kaydedildi",
+  "@quranBookmarkSaved": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranBookmarkRemoved": "Ayet {ayah}'den yer işareti kaldırıldı",
+  "@quranBookmarkRemoved": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranShareAyahTitle": "{ayah} ayetini paylaş",
+  "@quranShareAyahTitle": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranShareTextSubtitle": "Arapça metni, çeviriyi ve referansı içerir.",
+  "quranShareImageSubtitle": "Ayet ile bir resim oluşturun.",
+  "quranShareVideoSubtitle": "Kart ve okumayla bir video oluşturun.",
+  "quranAyahImageError": "Bu ayetin görselini oluşturamadık.",
+  "quranAyahVideoNoAudio": "Bu ayette video oluşturacak ses yok.",
+  "quranAyahVideoGenerating": "Ayet videosunu oluşturuyoruz...",
+  "quranAyahVideoShareText": "{surah}'den Ayet {ayah}",
+  "@quranAyahVideoShareText": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      },
+      "surah": {}
+    }
+  },
+  "quranAyahVideoError": "Bu ayetin videosunu oluşturamadık.",
+  "quranDownloadCheckError": "Bu cihazdaki indirmeyi doğrulayamadık.",
+  "quranDownloadSuccess": "Ses indirildi. Artık bu sureyi çevrimdışı dinleyebilirsiniz.",
+  "quranDownloadDetailedError": "İndirme işlemini tamamlayamadık. Bağlantınızı kontrol edip tekrar deneyin.",
+  "quranDownloadShortError": "Ses indirme işlemini tamamlayamadık.",
+  "quranDownloadedAudioPlaySubtitle": "Kaydedilen ses ile sureyi dinleyin.",
+  "quranDownloadedAudioRemoveSubtitle": "Yer açın ve şarkıyı tekrar çevrimiçi dinleyin.",
+  "quranDownloadedAudioRemoved": "Bu sure indirmesi kaldırıldı.",
+  "quranDownloadedFavoriteAdded": "İndirilen favorileriniz arasına kaydedilen sure.",
+  "quranDownloadedFavoriteRemoved": "Sure indirilen favorilerinizden kaldırıldı.",
+  "quranAyahAudioUnavailable": "Bu ayet için ses kullanılamıyor.",
+  "quranAyahAudioDownloaded": "Ses bu cihaza zaten indirildi.",
+  "quranAyahAudioAvailable": "Bu ayeti dinleyebilirsiniz.",
+  "quranAyahAudioRequiresConnection": "Bağlantınız varsa bu ayeti dinleyebilirsiniz.",
+  "quranSurahRecitationUnavailable": "Bu surenin tam okunuşu mevcut değildir.",
+  "quranSurahAudioDownloading": "Bu sureyi çevrimdışı dinleyebilmeniz için sesi indiriyoruz. {downloaded} / {total} ayetler hazır.",
+  "@quranSurahAudioDownloading": {
+    "placeholders": {
+      "downloaded": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "quranSurahAudioDownloaded": "Ses bu cihaza zaten indirildi. Bu sureyi çevrimdışı dinleyebilirsiniz.",
+  "quranSurahAudioMissingAyahs": "{count, plural, =1{Ses dosyası olmayan 1 ayet atlanacak.} other{Ses dosyası olmayan {count} ayet atlanacak.}}",
+  "@quranSurahAudioMissingAyahs": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quranSurahAudioPartialDownload": "Bu cihazda zaten kayıtlı {downloaded} / {total} ayetleriniz var.",
+  "@quranSurahAudioPartialDownload": {
+    "placeholders": {
+      "downloaded": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "quranSurahAudioDownloadAvailable": "Çevrimdışı dinlemek için de indirebilirsiniz.",
+  "quranSurahAudioPlayOnline": "Bu sureyi kesintisiz olarak baştan sona dinleyebilirsiniz.",
+  "quranSurahAudioPlayWithConnection": "Bağlantınız varsa bu surenin tamamını dinleyebilirsiniz.",
+  "quranAyahPlaybackError": "Sesi çalamadık. Bağlantınızı kontrol edip tekrar deneyin.",
+  "quranSurahPlaybackError": "Tam okumaya başlayamadık.",
+  "quranLastReadingBadge": "Son okuma",
+  "quranPauseAudio": "Sesi duraklat",
+  "quranResumeAudio": "Sesi devam ettir",
+  "quranPlayAudio": "Sesi çal",
+  "quranAudioUnavailable": "Ses kullanılamıyor",
+  "quranRemoveBookmark": "Yer işaretini kaldır",
+  "quranSaveBookmark": "Yer işaretini kaydet",
+  "quranAyahFooterHint": "{status} Okuma noktanızı buraya kaydetmek için bu ayete dokunun. Paylaşmak için uzun basın.",
+  "@quranAyahFooterHint": {
+    "placeholders": {
+      "status": {}
+    }
+  },
+  "quranDetailLoadError": "Bu sureyi yükleyemedik. Bağlantınızı kontrol edip tekrar deneyin.",
+  "quranTopBannerResume": "{ayah} ayetinden devam ediyorum.",
+  "@quranTopBannerResume": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranTopBannerOnline": "İçerik çevrimiçi olarak yüklendi. Bağlantınız varken her ayetin sesini dinleyebilirsiniz.",
+  "quranTopBannerOffline": "Metin çevrimdışı yüklendi. Bazı ayetlerin sesi yine de bağlantı gerektirebilir.",
+  "quranTopBannerPlaceholder": "Kısmi içerik çevrimdışı olarak yüklendi. Ses şimdilik kullanılamıyor.",
+  "quranSurahAudioCardTitle": "SURESİ DİNLE",
+  "quranAvailableAyahs": "{available} / {total} ayetler",
+  "@quranAvailableAyahs": {
+    "placeholders": {
+      "available": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "quranPauseSurah": "Sureyi duraklat",
+  "quranResumeSurah": "Sureyi devam ettir",
+  "quranListenSurah": "Sureyi dinle",
+  "quranStop": "Durmak",
+  "quranCheckingAudio": "Ses kontrol ediliyor",
+  "quranDownloadingProgress": "İndiriliyor {downloaded} / {total}",
+  "@quranDownloadingProgress": {
+    "placeholders": {
+      "downloaded": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "quranDownloaded": "İndirildi",
+  "quranDownloadAudio": "Sesi indir",
+  "quranDownloadedFavoriteLabel": "İndirilen favori",
+  "quranMarkFavorite": "Favori olarak işaretle",
+  "quranPlayingSurahAyah": "Sure · ayet {ayah} çalınıyor",
+  "@quranPlayingSurahAyah": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranPausedSurahAyah": "Sure duraklatıldı · ayet {ayah}",
+  "@quranPausedSurahAyah": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranPlayingAyah": "Ayet {ayah} çalınıyor",
+  "@quranPlayingAyah": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranPausedAyah": "Ayet {ayah} duraklatıldı",
+  "@quranPausedAyah": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "quranActiveAudioSurahHint": "Sure bir sonraki ayetle otomatik olarak devam edecektir.",
+  "quranActiveAudioAyahHint": "Bu okumayı duraklatabilir, devam ettirebilir veya durdurabilirsiniz.",
+  "quranStopAudio": "Sesi durdur",
+  "commonAuthenticity": "Özgünlük",
+  "commonBooks": "Kitaplar",
+  "commonCancel": "İptal",
+  "commonCategory": "Kategori",
+  "commonClose": "Kapat",
+  "commonCollection": "Koleksiyon",
+  "commonCopy": "Kopyala",
+  "commonDone": "Tamam",
+  "commonDownload": "İndirmek",
+  "commonFeatured": "Öne Çıkanlar",
+  "commonFilter": "Filtre",
+  "commonGeneral": "Genel",
+  "commonHadiths": "Hadisler",
+  "commonInformation": "Bilgi",
+  "commonNext": "İleri",
+  "commonOther": "Diğer",
+  "commonPause": "Duraklat",
+  "commonPrayers": "namazlar",
+  "commonQuran": "Kur'an",
+  "commonRead": "Okumak",
+  "commonReference": "Referans",
+  "commonResume": "Sürdürmek",
+  "commonSave": "Kaydet",
+  "commonSaved": "Kaydedildi",
+  "commonStatistics": "İstatistikler",
+  "commonTotal": "Toplam",
+  "achievementFirstPrayerTitle": "İlk namaz",
+  "achievementFirstPrayerDescription": "Uygulamada ilk namaznızı işaretlediniz.",
+  "achievementFullDayTitle": "Tam gün",
+  "achievementFullDayDescription": "Beş namazın hepsini bir günde kıldın.",
+  "achievementStreak3Title": "3 günlük seri",
+  "achievementStreak3Description": "Tutarlılığınızı üst üste üç gün korudunuz.",
+  "achievementStreak7Title": "7 günlük seri",
+  "achievementStreak7Description": "Yedi gün aralıksız takip. Harika ritim.",
+  "achievementStreak30Title": "30 günlük seri",
+  "achievementStreak30Description": "Art arda otuz gün. Olağanüstü tutarlılık.",
+  "achievementTotal100Title": "100 namaz",
+  "achievementTotal100Description": "Tamamlanan 100 namazyı kaydettiniz.",
+  "achievementFirstRamadanTitle": "İlk Ramezan",
+  "achievementFirstRamadanDescription": "İlk aktif Ramezan gününüzü tamamladınız.",
+  "analyticsAchievementsTitle": "Başarılar",
+  "analyticsAchievementsEmpty": "Henüz hiçbir başarının kilidi açılmadı.",
+  "analyticsAchievementsLoadError": "Başarılarınızı yükleyemedik.",
+  "analyticsBestDayLabel": "En iyi gün",
+  "analyticsBestStreakHint": "En iyi seriniz: {count} gün",
+  "analyticsBestStreakLabel": "En iyi seri",
+  "analyticsByPrayerTitle": "Namaz ederek",
+  "analyticsCollectionsLabel": "Koleksiyonlar",
+  "analyticsCompletedPrayersLabel": "Tamamlanan namazlar",
+  "analyticsCurrentStreakLabel": "Mevcut seri",
+  "analyticsDaysValue": "{count} gün",
+  "analyticsEmptyBody": "Namazlarınızı işaretlemeye başlayın ve burada tutarlılığınızı göreceksiniz.",
+  "analyticsEmptyHint": "Bu panelin kilidini açmak için ilk namaznızı tamamlayın.",
+  "analyticsEmptyTitle": "Henüz istatistik yok",
+  "analyticsFavoritesLabel": "Favoriler",
+  "analyticsFullDaysLabel": "Tam günler",
+  "analyticsGradesLabel": "Notlar",
+  "analyticsHadithStatsLoadError": "Hadis istatistikleri yüklenemedi.",
+  "analyticsLast30DaysTitle": "Son 30 gün",
+  "analyticsLessLabel": "Az",
+  "analyticsMoreLabel": "Daha",
+  "analyticsNoActiveStreak": "Aktif seri yok",
+  "analyticsRecordBadge": "Kayıt",
+  "analyticsSavedFavoritesLabel": "Favoriler kaydedildi",
+  "analyticsShareError": "İlerlemenizi paylaşamadık.",
+  "analyticsShareImage": "Resmi paylaş",
+  "analyticsShareProgressTooltip": "İlerlemeyi paylaş",
+  "analyticsShareText": "Metni paylaş",
+  "analyticsStartStreakHint": "Bugün yeni bir seriye başlayın.",
+  "analyticsStreakDays": "{count} galibiyet serisi günleri",
+  "analyticsThisWeekLabel": "Bu hafta",
+  "analyticsWeekInterpretationEmpty": "Bu hafta henüz yeterli aktivite yok.",
+  "analyticsWeekInterpretationEncouragement": "Azar azar devam edin. Her namaz önemlidir.",
+  "analyticsWeekInterpretationGood": "Bu hafta iyi gidiyorsun. Biraz daha tutarlılık fark yaratacaktır.",
+  "analyticsWeekInterpretationStrong": "Çok güçlü bir hafta. Mükemmel bir ritim tutturuyorsun.",
+  "analyticsWeeklySummaryTitle": "Haftalık özet",
+  "booksAboutBody": "Bu kütüphane, uygulama içinde hızlı okuma için IslamHouse kitaplarını bir araya getirir.",
+  "booksAboutBulletCatalog": "Keşfedilmesi kolay, özel olarak hazırlanmış bir katalog",
+  "booksAboutBulletCategories": "Doğru okumayı daha hızlı bulmanızı sağlayacak kategoriler",
+  "booksAboutBulletVerified": "Tanınmış bir İslami kütüphaneden içerik",
+  "booksAllCategories": "Tüm kategoriler",
+  "booksCategoriesTab": "Kategoriler",
+  "booksDescription": "Tanım",
+  "booksEmptyCategories": "Hiçbir kategori mevcut değil.",
+  "booksEmptyFeatured": "Şimdilik öne çıkan kitap yok.",
+  "booksEmptySearch": "Bu aramaya uygun kitap bulamadık.",
+  "booksLibraryTitle": "Kitaplar",
+  "booksLoadErrorTitle": "Kütüphaneyi yükleyemedik",
+  "booksMainCategoryAcademicLessons": "Akademik dersler",
+  "booksMainCategoryArabicLanguage": "Arapça dili",
+  "booksMainCategoryCallToIslam": "İslam'a çağrı",
+  "booksMainCategoryHistory": "Tarih",
+  "booksMainCategoryIslamicBelief": "İslam inancı",
+  "booksMainCategoryIslamicCulture": "İslam kültürü",
+  "booksMainCategoryIslamicJurisprudence": "İslam hukuku",
+  "booksMainCategoryMajorSins": "Büyük günahlar",
+  "booksMainCategoryNobleQuran": "Kur'an-ı Kerim",
+  "booksMainCategoryPresentingIslam": "İslam'ı Tanıtmak",
+  "booksMainCategoryPropheticBiography": "Peygamberlik biyografisi",
+  "booksMainCategoryProphetSunnah": "Peygamber'in sünneti",
+  "booksMainCategorySermons": "Vaazlar",
+  "booksMainCategoryVirtues": "Erdemler",
+  "booksPageCount": "{pages} sayfalar",
+  "booksPlaceholderDescription": "Kitaplar yakında burada görünecek.",
+  "booksPlaceholderTitle": "Kütüphane devam ediyor",
+  "booksSearchHint": "Kitap veya yazar arayın",
+  "booksUnnamedCategory": "Adsız kategori",
+  "booksUntitled": "İsimsiz",
+  "booksVisitIslamHouse": "IslamHouse'u ziyaret edin",
+  "calendarCurrentMonth": "BU AY",
+  "calendarEventAshura": "Aşure",
+  "calendarEventDayOfArafah": "Arefe Günü",
+  "calendarEventEidAdha": "Kurban Bayramı",
+  "calendarEventEidFitr": "Ramezan Bayramı",
+  "calendarEventIslamicNewYear": "İslami Yeni Yıl",
+  "calendarEventRamadanStart": "Ramezan başlangıcı",
+  "calendarImportantDatesTitle": "{year}'nin önemli tarihleri",
+  "calendarSelectDate": "Bir tarih seçin",
+  "calendarSelectedDateUppercase": "SEÇİLEN TARİH",
+  "calendarTitle": "İslami takvim",
+  "calendarTodayLabel": "Bugün · {date}",
+  "dhikrChooseCustomValue": "Özel değer seçin",
+  "dhikrDailyGoalCompletedMessage": "Günlük zikir hedefinizi tamamladınız.",
+  "dhikrDailyGoalHelper": "Bugün kaç tekrara ulaşmak istediğinizi seçin.",
+  "dhikrDailyGoalShort": "Günlük hedef",
+  "dhikrDailyGoalTitle": "Günlük hedef",
+  "dhikrDailyGoalUpdated": "Günlük hedef {value} olarak güncellendi",
+  "dhikrFeedbackAlmostThere": "Çok iyi gidiyorsun. Günlük hedefinize yaklaştınız.",
+  "dhikrFeedbackCompleted": "Günlük hedef tamamlandı. Allah zikirlerinizi kabul etsin.",
+  "dhikrFeedbackCycleCompleted": "Döngü tamamlandı. Sakin bir şekilde yola devam edebilirsiniz.",
+  "dhikrFeedbackGoodPace": "İyi hız. Bu tekrarları sükunetle sürdürün.",
+  "dhikrFeedbackStart": "Birkaç yumuşak ve istikrarlı tekrarla başlayın.",
+  "dhikrFeedbackTakeYourTime": "Acele etmeyin. Her tekrar önemlidir.",
+  "dhikrGoalsSection": "HEDEFLER",
+  "dhikrHistoryEmptyBody": "Bu görüş için henüz yeterli tarih yok.",
+  "dhikrHistorySavedBody": "Son ilerlemeniz otomatik olarak kaydedilir.",
+  "dhikrLast7Days": "7 gün",
+  "dhikrMeaningAlhamdulillah": "Allah'a hamdolsun",
+  "dhikrMeaningAllahuAkbar": "Allah en büyüktür",
+  "dhikrMeaningSubhanAllah": "Allah'a hamd olsun",
+  "dhikrRepetitionsFieldHint": "Örnek: 100",
+  "dhikrRepetitionsFieldLabel": "Tekrarlar",
+  "dhikrResetSession": "Oturumu sıfırla",
+  "dhikrSessionCountOf": "{count}'nin",
+  "dhikrSessionCycleCompleted": "Bu zikir döngüsünü tamamladınız.",
+  "dhikrSessionGoalHelper": "Döngü başına kaç tekrar istediğinizi ayarlayın.",
+  "dhikrSessionGoalShort": "Oturum hedefi",
+  "dhikrSessionGoalTitle": "Oturum hedefi",
+  "dhikrSessionGoalUpdated": "Oturum hedefi {value} olarak güncellendi",
+  "dhikrSessionResetMessage": "Oturum sıfırlandı.",
+  "dhikrSubtitle": "Gününüz için dikkatli bir hatırlama",
+  "dhikrSummarySection": "ÖZET",
+  "dhikrTitle": "Zikir",
+  "dhikrTodayCycle": "Bugün: {today} · döngü {current} / {total}",
+  "hadithDailyBadge": "GÜNÜN HADİSLERİ",
+  "hadithDailyOpenLibrary": "Açık hadisler",
+  "hadithDailyUnavailable": "Günün hadislerini yükleyemedik.",
+  "hadithDetailArabicText": "Arapça metin",
+  "hadithDetailCopied": "Hadis kopyalandı",
+  "hadithDetailCopyText": "Metni kopyala",
+  "hadithDetailGrade": "Sınıf: {grade}",
+  "hadithDetailHideArabic": "Arapçayı Gizle",
+  "hadithDetailHideTranslation": "Çeviriyi gizle",
+  "hadithDetailId": "Kimlik: {id}",
+  "hadithDetailInfoBody": "Bu hadis, mecmua, derece ve mevcut tercümeye göre değişiklik gösterebilir.",
+  "hadithDetailNoCategory": "Kategori yok",
+  "hadithDetailRemovedFromFavorites": "Hadisler favorilerden kaldırıldı",
+  "hadithDetailSavedToFavorites": "Hadis favorilere kaydedildi",
+  "hadithDetailShowArabic": "Arapçayı Göster",
+  "hadithDetailShowTranslation": "Çeviriyi göster",
+  "hadithDetailTitle": "Hadis detayları",
+  "hadithDetailTranslation": "Çeviri",
+  "hadithLibraryAllCollections": "Tüm koleksiyonlar",
+  "hadithLibraryAllGrades": "Tüm sınıflar",
+  "hadithLibraryAllCategories": "Tüm kategoriler",
+  "hadithLibraryAllHadiths": "{count} hadisler",
+  "hadithLibraryEmptyBody": "Şu anda elimizde herhangi bir hadis bulunmamaktadır.",
+  "hadithLibraryEmptySearchBody": "Başka bir arama yapmayı deneyin veya filtreleri kaldırın.",
+  "hadithLibraryEmptySearchTitle": "“{query}” için sonuç yok",
+  "hadithLibraryEmptyTitle": "elimizde hadis yok",
+  "hadithLibraryFiltersError": "Filtreleri yükleyemedik.",
+  "hadithLibraryFiltersLoading": "Filtreler yükleniyor…",
+  "hadithLibraryLoadError": "Hadisleri yükleyemedik. \n {error}",
+  "hadithLibraryResultsCount": "{count} sonuçlar",
+  "hadithLibrarySearchHint": "Hadis veya referans arayın",
+  "hadithLibraryTitle": "Hadisler",
+  "hadithOfflineAvailability": "{progress} çevrimdışı kullanılabilir",
+  "hadithOfflineAvailable": "Mevcut",
+  "hadithOfflineCollectionsTitle": "Dahil edilen koleksiyonlar",
+  "hadithOfflineIncludedSubtitle": "Tüm içerik uygulamada yerleşik olarak gelir",
+  "hadithOfflineIncludedTitle": "Başlangıçtan itibaren çevrimdışı",
+  "hadithOfflineInfoBody": "Burada gösterilen hadisler zaten herhangi bir ekstra indirmeye gerek kalmadan mevcuttur.",
+  "hadithOfflineTitle": "Çevrimdışı hadisler",
+  "hafizActivePlans": "Aktif planlar",
+  "hafizAyahRange": "Ayetlar {start}-{end}",
+  "hafizConfigureSession": "Oturumu yapılandır",
+  "hafizEmptyBody": "Henüz bir ezberleme planı oluşturmadınız.",
+  "hafizEmptyHint": "Bir sure seçin ve başlamak için kısa bir aralık tanımlayın.",
+  "hafizEmptyTitle": "İncelemenizi başlatın",
+  "hafizEndAyah": "Ayetin bitişi: {ayah}",
+  "hafizLoadError": "Bu sureyi yükleyemedik.",
+  "hafizLogRepetition": "Günlük tekrarı",
+  "hafizPlanSaved": "Plan kaydedildi",
+  "hafizRepetitionLogged": "Tekrarlama günlüğe kaydedildi",
+  "hafizReviewedSurahs": "İncelenen sureler",
+  "hafizSavePlan": "Planı kaydet",
+  "hafizSelectedSegment": "Seçilen segment",
+  "hafizStartAyah": "Başlangıç ​​ayeti: {ayah}",
+  "hafizSubtitle": "Kısa ve tutarlı incelemeler düzenleyin",
+  "hafizSurahNoPlan": "{count} ayetler · plan yok",
+  "hafizSurahProgress": "{start}-{end} · %{percent} tamamlandı",
+  "hafizTargetRepetitions": "Hedef: {count}",
+  "homeCalendarStripTitle": "KUTSAL TAKVİM",
+  "homeGoalCompleted": "Tamamlandı",
+  "homeGoalInProgress": "devam etmekte",
+  "homeInsightAlmostCompleteTodayMessage": "Güçlü bir günü kapatmaya çok yakınsınız.",
+  "homeInsightAlmostCompleteTodayTitle": "Bugün neredeyse tamamlandı",
+  "homeInsightBetterThanLastWeekMessage": "Geçen haftaya göre {delta} daha fazla namazyı tamamladınız.",
+  "homeInsightBetterThanLastWeekTitle": "Geçen haftaya göre daha iyi",
+  "homeInsightDhikrDoneMessage": "Bugün {count} tekrarlar yaptınız. Çok güçlü bir bitiş.",
+  "homeInsightDhikrDoneTitle": "Zikir tamamlandı",
+  "homeInsightDhikrGoodPaceMessage": "Bugün {current} / {goal} tekrarlarındasınız.",
+  "homeInsightDhikrGoodPaceTitle": "İyi zikir temposu",
+  "homeInsightGoodPaceTodayMessage": "Bugün {count} namazlarını tamamladınız.",
+  "homeInsightGoodPaceTodayTitle": "Bugün tempom iyi",
+  "homeInsightMostConsistentPrayerMessage": "{prayer} şu anda en istikrarlı anınızdır.",
+  "homeInsightMostConsistentPrayerTitle": "En tutarlı namaznız",
+  "homeInsightPrayerToStrengthenMessage": "{prayer}'nin biraz daha ilgiye ihtiyacı var.",
+  "homeInsightPrayerToStrengthenTitle": "Güçlendirmek için namaz",
+  "homeInsightRamadanConsistencyMessage": "Bugünkü antrenmanınız zaten iyi bir denge gösteriyor.",
+  "homeInsightRamadanConsistencyTitle": "Ramezan tutarlılığı",
+  "homeInsightRamadanMomentumMessage": "İvmenizi sürdürmek için günün bu bölümünü kullanın.",
+  "homeInsightRamadanMomentumTitle": "Ramezan ivmesi",
+  "homeInsightRamadanSmallStepsMessage": "Ramezan ayında küçük ve istikrarlı adımlar çok önemlidir.",
+  "homeInsightStartTodayFirstMessage": "Günün hala açık. İlk namaznızı işaretleyin ve ivme kezanın.",
+  "homeInsightStartTodayMoreMessage": "Sakin bir şekilde başlamak için hâlâ vaktiniz var.",
+  "homeInsightStartTodayTitle": "Bugün başla",
+  "homeInsightStillCanStartMessage": "Artık küçük bir adım günün gidişatını değiştirebilir.",
+  "homeInsightStillCanStartTitle": "Hala başlayabilirsiniz",
+  "homeInsightStreakInMotionMessage": "{streak} düz günlerdesiniz. Bu tutarlılığı koruyun.",
+  "homeInsightStreakInMotionTitle": "Hareket halindeki çizgi",
+  "homeInsightTodayLabel": "BUGÜNÜN GÖRÜŞÜ",
+  "homeLoadingScheduleBody": "Bir sonraki namaznızı hazırlamak",
+  "homeLoadingScheduleTitle": "Yükleme süreleri",
+  "homeLocationCachedBody": "Sürelerinizi son kayıtlı konumunuzu kullanarak hazırlıyoruz.",
+  "homeLocationEnableDeviceLocation": "Cihaz konumunu etkinleştir",
+  "homeLocationGpsDisabledBody": "GPS olmadan doğru namaz vakitlerini hesaplayamayız veya kıbleyi hizalayamayız.",
+  "homeLocationPendingBody": "Namaz vakitleri henüz hazır olmasa bile ana ekran görünür durumda kalır.",
+  "homeLocationPermissionBlocked": "Konum izni engellendi",
+  "homeLocationPermissionBlockedBody": "Kıble Saati için konumu daha sonra sistem ayarlarınızdan etkinleştirebilirsiniz.",
+  "homeLocationPermissionNeeded": "Konumun namaz vakitlerinizi görüntülemesine izin verin",
+  "homeLocationPermissionNeededBody": "Kıble Saati'nin şehriniz için güvenilir saatleri göstermesi için konumunuza ihtiyacı var.",
+  "homeLocationPreparingTitle": "Namaz vakitlerinizi hazırlamak",
+  "homeNextPrayerStartsAt": "{time}'de başlıyor",
+  "homeNotificationPaused": "Genel namaz uyarıları şu anda duraklatıldı.",
+  "homeNotificationPermissionPending": "Ezan hatırlatmalarınız yapılandırıldı ancak sistem izni hala beklemede.",
+  "homePrayerDescriptionCompleted": "Bu namazyı zaten tamamlandı olarak işaretlediniz.",
+  "homePrayerDescriptionNext": "Bu, bugünkü ritimdeki bir sonraki namazdır.",
+  "homePrayerDescriptionNow": "Bu namaz şu anda yapılıyor.",
+  "homePrayerDescriptionPendingToday": "Bugünkü akışta hala beklemede.",
+  "homePrayerDescriptionReviewDate": "Bu tarih için incelemeye hazır.",
+  "homePrayerSectionSelectedDaySubtitle": "{date} zamanlarını kontrol edin ve işaretleyin",
+  "homePrayerSectionSelectedDayTitle": "GÜN TAKVİMİ",
+  "homePrayerSectionTodaySubtitle": "Beş günlük namaznızın tam ritmi",
+  "homePrayerSectionTodayTitle": "BUGÜNÜN DUALARI",
+  "homePrayerStatusCompleted": "Tamamlanmış",
+  "homePrayerStatusNext": "Sonraki",
+  "homePrayerStatusNow": "Şimdi",
+  "homePrayerStatusUpcoming": "Yaklaşan",
+  "homeQuickActionsTitle": "KUTSAL KISAYOLLAR",
+  "homeRamadanClosingSoon": "yakında kapanıyor",
+  "homeRamadanContinueReading": "Okumaya devam et",
+  "homeRamadanCountdownIftar": "İftara kadar {duration}",
+  "homeRamadanCountdownImsak": "{duration} imsak'a kadar",
+  "homeRamadanCountdownTomorrowImsak": "{duration} yarın imsak'a kadar",
+  "homeRamadanDhikrCompletedBody": "{current} / {goal} bugünkü tekrarlar. Günlük hedef tamamlandı.",
+  "homeRamadanDhikrInProgressBody": "{current} / {goal} bugünkü tekrarlar. Zaten başladın.",
+  "homeRamadanDhikrPreparingBody": "Günlük zikir ilerlemenizi hazırlamak.",
+  "homeRamadanDhikrStartBody": "Bugünkü hedefiniz {goal}. Birkaç tekrar bile zaten sayılır.",
+  "homeRamadanFastingCompleted": "{time}'den iftar yapabilirsiniz.",
+  "homeRamadanFastingInProgress": "{time}'ye kadar oruç günü devam ediyor.",
+  "homeRamadanFastingLabel": "Oruç",
+  "homeRamadanFastingTitle": "Oruç",
+  "homeRamadanGoalsCompleteMessage": "Tam bir Ramezan günü. Bu ritmi sakin bir şekilde koruyun.",
+  "homeRamadanGoalsProgressMessage": "Bugün iyi gidiyorsun. Küçük bir adım daha, gününüzü güçlü bir şekilde kapatabilir.",
+  "homeRamadanGoalsReady": "{completed} / {total} hazır",
+  "homeRamadanGoalsStartMessage": "Küçük bir şeyle başlayın: bir namaz, birkaç ayet veya birkaç dakikalık zikir.",
+  "homeRamadanGoalsTitle": "RAMAZAN HEDEFLERİ",
+  "homeRamadanModeTitle": "RAMAZAN MODU",
+  "homeRamadanNextFocus": "sonraki odak",
+  "homeRamadanNightLabel": "Gece",
+  "homeRamadanOpenQuran": "Kur'an'ı aç",
+  "homeRamadanOpenTasbih": "Tesbihi aç",
+  "homeRamadanPrayerGoal": "{count} / 5 bugün tamamlandı",
+  "homeRamadanQuranRecentProgress": "{surah}'ye devam edin, ayet {ayah}. Son zamanlarda ilerleme kaydettiniz.",
+  "homeRamadanQuranReturnBody": "Son noktanız {surah} idi, ayet {ayah}. Bugün buna geri dönmeye değer.",
+  "homeRamadanQuranSavedToday": "Okuma bugün {surah}'ye kaydedildi, ayet {ayah}.",
+  "homeRamadanQuranStartBody": "Bugün kısa bir pasaj okuyun ve daha sonra kolayca devam edebilirsiniz.",
+  "homeRamadanStartAction": "Başlangıç",
+  "homeRamadanSuhoorLabel": "Sahur",
+  "homeRamadanUntilIftar": "iftara kadar",
+  "homeSelectedDateCustomBody": "Aşağıda seçilen günün namaz vakitlerinin tamamını görebilirsiniz.",
+  "homeSelectedDateTodayBody": "Bugünün tam namaz vakitlerini aşağıda görebilirsiniz.",
+  "homeWeeklyBestDayHelper": "{count} / 5 en iyi gününüzde",
+  "qiblaCompassInitError": "Pusulayı çalıştıramadık.",
+  "qiblaCompassReadError": "Pusula sensörünü okuyamadık.",
+  "qiblaDirectionEast": "Doğu",
+  "qiblaDirectionLoadError": "Kabe yönünü yükleyemedik.",
+  "qiblaDirectionNorth": "Kuzey",
+  "qiblaDirectionNorthEast": "Kuzeydoğu",
+  "qiblaDirectionNorthWest": "Kuzeybatı",
+  "qiblaDirectionSouth": "Güney",
+  "qiblaDirectionSouthEast": "Güneydoğu",
+  "qiblaDirectionSouthWest": "Güneybatı",
+  "qiblaDirectionSummary": "Kabe yönü: {direction}",
+  "qiblaDirectionWest": "Batı",
+  "qiblaDistanceLabel": "Mesafe",
+  "qiblaEnableLocationMessage": "Kabe'nin yönünü hesaplamak için konumu etkinleştirin.",
+  "qiblaGpsDisabledMessage": "Güvenilir bir yön almak için cihazınızın GPS'sini etkinleştirin.",
+  "qiblaGuidanceBody": "Cihazı düz tutun ve gösterge hizalanana kadar yavaşça çevirin.",
+  "qiblaHowToUseAvoidMagnetsBody": "Sensörü bozabilecek mıknatıslardan, metal kasalardan veya cihazlardan uzak tutun.",
+  "qiblaHowToUseAvoidMagnetsTitle": "Paraziti önleyin",
+  "qiblaHowToUseCalibrateBody": "Pusula başarısız olursa, yeniden kalibre etmek için telefonu sekiz rakamı hareketiyle hareket ettirin.",
+  "qiblaHowToUseCalibrateTitle": "Gerekirse kalibre edin",
+  "qiblaHowToUseKeepFlatBody": "Pusula doğruluğunu artırmak için cihazı düz tutun.",
+  "qiblaHowToUseKeepFlatTitle": "Cihazı düz tutun",
+  "qiblaHowToUseTitle": "Pusula nasıl kullanılır?",
+  "qiblaLoading": "Yön hesaplanıyor…",
+  "qiblaPermissionBlockedMessage": "Konum izni engellendi. Sistem ayarlarında etkinleştirin.",
+  "qiblaPermissionNeededMessage": "Sizi Kabe'ye doğru yönlendirmek için konum iznine ihtiyacımız var.",
+  "qiblaPrecisionLabel": "Kesinlik",
+  "qiblaSubtitle": "Kabe'ye yön",
+  "qiblaTitle": "Kıble",
+  "adhanSelectorHeaderBody": "Hatırlatmalarınız için kullanılacak ezanı seçmeden önce kısa bir ön izlemeyi dinleyin.",
+  "adhanSelectorHeaderTitle": "Ezanınızı seçin",
+  "adhanSelectorListenPreview": "Önizlemeyi dinle",
+  "adhanSelectorPausePreview": "Önizlemeyi duraklat",
+  "adhanSelectorPreviewError": "Ezan önizlemesini oynatamadık.",
+  "adhanSelectorPreviewIdle": "Önizlemeyi dinlemek için dokunun",
+  "adhanSelectorPreviewPaused": "Önizleme duraklatıldı",
+  "adhanSelectorPreviewPlaying": "Önizleme oynatılıyor",
+  "adhanSelectorResumePreview": "Önizlemeyi devam ettir",
+  "adhanSelectorSelected": "{name}'yi seçtiniz",
+  "adhanSelectorTitle": "Ezan",
+  "navHome": "Ev",
+  "navQibla": "Kıble",
+  "navTasbih": "tesbih",
+  "navDua": "dua",
+  "navQuran": "Kur'an",
+  "travelModeBannerLocationDetected": "Yeni konum algılandı: {label} - {distanceKm} km",
+  "@travelModeBannerLocationDetected": {
+    "placeholders": {
+      "label": {},
+      "distanceKm": {
+        "type": "int"
+      }
+    }
+  },
+  "travelModeNotificationTitle": "Kıble Saati - Yeni konum",
+  "travelModeNotificationBody": "{label} - Namaz vakitleri güncellendi",
+  "@travelModeNotificationBody": {
+    "placeholders": {
+      "label": {}
+    }
+  },
+  "analyticsAchievementUnlocked": "Kilitli değil",
+  "navigationMiniPlayerAyah": "{surah} · Ayet {ayah}",
+  "@navigationMiniPlayerAyah": {
+    "placeholders": {
+      "surah": {},
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "onboardingGatePreparing": "Kıble Vaktinin Hazırlanması",
+  "supportScreenTitle": "Qibla Timenı Destekleyin",
+  "supportScreenThankYou": "Burada olduğunuz için teşekkür ederiz",
+  "supportScreenBody": "Desteğiniz, Kıble Saati'ne önem vermemize, uygulamayı canlı tutmamıza ve günlük yaşamınız için yararlı araçlar geliştirmeye devam etmemize yardımcı oluyor.",
+  "supportScreenRateTitle": "Uygulamayı derecelendirin",
+  "supportScreenRateBody": "İyi bir derecelendirme, daha fazla kişinin Kıble Saati'ni keşfetmesine yardımcı olur.",
+  "supportScreenShareTitle": "Kıble Saatini Paylaş",
+  "supportScreenShareBody": "Uygulamayı ailenize ve arkadaşlarınıza tavsiye etmek de bir çeşit sadakadır.",
+  "supportScreenSadaqahTitle": "Niyetle destek",
+  "supportScreenSadaqahBody": "Kıble Saati size yardımcı oluyorsa küçük bir samimi katkıyla projeye destek olabilirsiniz.",
+  "supportScreenQuote": "Kim başkalarının hayırlara ulaşmasına yardım ederse, Allah'ın dilerse onun sevabından da payı vardır.",
+  "allahNamesTitle": "Allah'ın 99 İsmi",
+  "allahNamesIntro": "Allah'ın isimlerinden seçilmiş bir seçkiyi harf çevirisi ve anlamlarıyla keşfedin, böylece onları sakin bir şekilde hatırlayabilirsiniz.",
+  "allahNamesLoadError": "Allah'ın isimlerini yükleyemedik.",
+  "allahNamesUseInTasbih": "Tesbihte kullanın",
+  "downloadedSurahsTitle": "İndirilen sureler",
+  "downloadedSurahsEmpty": "Henüz herhangi bir sure indirmediniz.",
+  "downloadedSurahsFavorite": "Favori",
+  "downloadedSurahsMarkFavorite": "Favori olarak işaretle",
+  "downloadedSurahsRemoveDownload": "İndirmeyi kaldır",
+  "downloadedSurahsLoadError": "İndirdiğiniz sureleri yükleyemedik.",
+  "focusModeDndActive": "RAKAHA AKTİF · RAHATSIZ ETMEYİN",
+  "focusModeOpenDndSettings": "Ayarlarda Rahatsız Etmeyin özelliğini etkinleştirin",
+  "focusModeTitle": "RAKAHA",
+  "focusModeSujudCount": "+ secde",
+  "focusModeDndHint": "KESİNTİSİZ, RAHATSIZ OLMAYAN BİR ŞEKİLDE DAHA İYİ HİSSETTİRİR",
+  "focusModeReleaseToCancel": "İptal etmek için bırakın",
+  "focusModeHoldToExit": "Çıkmak için basılı tutun",
+  "settingsMadhabAsr": "Mezhep (İkindi)",
+  "settingsManualAdjustment": "Manuel ayar",
+  "settingsOpenSourceLicenses": "Açık kaynak lisansları",
+  "settingsProfileUser": "Kullanıcı",
+  "settingsProfileStreak": "rüzgâr gibi geçmek",
+  "settingsProfilePrayers": "namazlar",
+  "settingsProfileTasbih": "tesbih",
+  "settingsProfileEditTitle": "Profili düzenle",
+  "settingsProfileEditSubtitle": "Adınızı ve isteğe bağlı uyruğunuzu değiştirin",
+  "settingsProfileNameLabel": "İsim",
+  "settingsProfileNameHint": "Seni nasıl aramalıyız?",
+  "settingsProfileNationalityLabel": "Milliyet",
+  "settingsProfileNationalityOptional": "İsteğe bağlı",
+  "settingsProfileNationalityNone": "Uyruk seçilmedi",
+  "settingsProfileChooseCountry": "Bir ülke seçin",
+  "settingsProfileCountrySearchHint": "Ülkeyi ara",
+  "commonShafii": "Şafii",
+  "commonRestore": "Eski haline getirmek",
+  "settingsRestoreBackupPasteHint": "Dışa aktarılan JSON'u buraya yapıştırın",
+  "dailyBookBadge": "GÜNÜN KİTABI",
+  "dailyBookUnavailable": "Kütüphane şu anda kullanılamıyor.",
+  "dailyBookOpenLibrary": "Kitapları aç",
+  "hadithOfflineIncludedInApp": "Uygulamaya dahil",
+  "hadithOfflineAgoDays": "{count} gün önce",
+  "@hadithOfflineAgoDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hadithOfflineAgoHours": "{count} saat önce",
+  "@hadithOfflineAgoHours": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hadithOfflineAgoMinutes": "{count} dakika önce",
+  "@hadithOfflineAgoMinutes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hadithOfflineNow": "Şu anda",
+  "analyticsShareWeekTitle": "Haftalık özet",
+  "analyticsShareCurrentStreak": "Şu andaki galibiyet serisi: {count}",
+  "@analyticsShareCurrentStreak": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "analyticsShareThisWeek": "Bu hafta: {completed} / {maxPossible} namazları",
+  "@analyticsShareThisWeek": {
+    "placeholders": {
+      "completed": {
+        "type": "int"
+      },
+      "maxPossible": {
+        "type": "int"
+      }
+    }
+  },
+  "analyticsShareBestDay": "En iyi gün: {day}",
+  "@analyticsShareBestDay": {
+    "placeholders": {
+      "day": {}
+    }
+  },
+  "analyticsShareWeekHeading": "HAFTALIK ÖZET",
+  "analyticsShareStreakDaySingular": "gün serisi",
+  "analyticsShareStreakDayPlural": "gün serisi",
+  "analyticsShareWeeklyPrayersLabel": "Bu hafta namazlar",
+  "analyticsShareBestDayLabel": "En iyi gün · {count} / 5",
+  "@analyticsShareBestDayLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "analyticsShareFullDaysLabel": "Tam günler",
+  "analyticsShareFooter": "Kıble Saatindeki ilerlemeniz",
+  "analyticsShareImageError": "İlerleme görüntüsünü oluşturamadık.",
+  "quranDownloadAyahAudioError": "{ayah} ayetinin sesini indiremedik.",
+  "@quranDownloadAyahAudioError": {
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "recentLocationUnknown": "Bilinmeyen konum",
+  "cloudSyncRestoreInvalid": "Geçersiz yedekleme",
+  "cloudSyncRestoreFailed": "Yedeği geri yükleyemedik",
+  "bookLinkUnavailable": "Bu bağlantı mevcut değil.",
+  "bookLinkOpenError": "Bağlantıyı açamadık.",
+  "ramadanStatusHeaderDay": "Ramezan günü {day}",
+  "@ramadanStatusHeaderDay": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      }
+    }
+  },
+  "ramadanStatusHeaderManual": "Manuel Ramezan modu",
+  "ramadanStatusBlessingDetected": "Allah bugün tuttuğunuz orucu ve amellerinizi kabul etsin.",
+  "ramadanStatusBlessingManual": "Özel Ramezan görünümü test için manuel olarak etkinleştirildi.",
+  "ramadanStatusSuggestionDhikr": "Bugün zikirinizi arttırmayı unutmayın.",
+  "ramadanStatusSuggestionQuran": "Bugün biraz daha Kur'an okumaya çalışın.",
+  "ramadanStatusSuggestionDua": "Bu günü sakin bir şekilde dua etmek için kullanın.",
+  "ramadanStatusSuggestionSadaqah": "Ramezan ayında küçük bir sadaka bile sayılır.",
+  "adhanSelectorOptionDescription": "Namaza çağrı {number}",
+  "@adhanSelectorOptionDescription": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "prayerNotificationImsakTitle": "İmsak geliyor",
+  "prayerNotificationImsakBody": "İmsak'a 15 dakika kaldı. Eğer hala sahur yapıyorsanız, şimdi toparlamanın tam zamanı.",
+  "prayerNotificationIftarTitle": "İftar yaklaşıyor",
+  "prayerNotificationIftarBody": "İftara 15 dakika kaldı. Allah bugün tuttuğunuz orucu kabul etsin.",
+  "prayerNotificationJumuahTitle": "Cuma'ah bugün",
+  "prayerNotificationJumuahBody": "Öğleden önce Cum'a için hazırlanın ve camiye gitmek için sakin bir an ayırın.",
+  "settingsLanguageOptionIndonesian": "Endonezce",
+  "settingsLanguageOptionRussian": "Rusça",
+  "settingsLanguageOptionPortuguese": "Portekizce",
+  "settingsLanguageOptionItalian": "İtalyanca",
+  "settingsLanguageOptionTurkish": "Türkçe",
+  "homeQuickActionPurification": "Abdest ve Gusül",
+  "purificationGuideTitle": "Abdest ve Gusül",
+  "purificationGuideSubtitle": "Namaz öncesi ritüel arınma rehberi",
+  "purificationGuideIntro": "Bir Müslümanın namazdan önce ritüel arınmaya ihtiyacı olabilir. İki ana form, abdest (küçük abdest) ve gusldür (tam ritüel banyo). Bu kılavuzda her birinin ne olduğu, ne zaman gerekli olduğu ve nasıl gerçekleştirileceği açıklanmaktadır.",
+  "purificationGuideWuduTitle": "Abdest",
+  "purificationGuideWuduBody": "Nedir? \n Abdest, büyük bir kirlilik olmadığında namazdan önce yapılan küçük bir arınma ritüelidir. \n \n İhtiyaç duyduğunuzda: \n • Geçerli bir abdestiniz yoksa namazdan önce. \n • Tuvalete gittikten sonra. \n • Rüzgar, derin uyku veya bilinç kaybı gibi saflık durumunuzu bozan herhangi bir şeyden sonra. \n \n Abdestin adımları: \n 1. Niyetinizi kalbinizde yapın. \n 2. \"Bismillah\" deyin. \n 3. Genellikle sağdan başlayarak her iki elinizi 3 kez yıkayın. \n 4. Ağzınızı 3 kez çalkalayın. \n 5. Burnu 3 kez suyla temizleyin. \n 6. Yüzün tamamını 3 kez yıkayın. \n 7. Sağ koldan başlayıp sol koldan başlayarak kolları dirseklere kadar 3 defa yıkayın. \n 8. Başlığı ıslak ellerle bir kez silin. \n 9. Kulakları bir kez silin. \n 10. Sağ ayaktan başlayıp sol ayaktan başlayarak ayak bileklerine kadar 3 defa yıkayın. \n \n Önemli notlar: \n • Olağan uygulama 3 defadır ancak geçerlilik için 1 defa yeterlidir. \n • Suyun tüm alana düzgün bir şekilde ulaştığından emin olun. \n • Doğru sırayı koruyun. \n • Kir veya cildi kaplayan tabaka gibi suyu tıkayan herhangi bir şeyden kaçının.",
+  "purificationGuideWuduWhatIsLabel": "Bu ne",
+  "purificationGuideWuduWhatIsBody": "Abdest, büyük bir kirlilik olmadığında, namazdan önce yapılan küçük bir arınmadır.",
+  "purificationGuideWuduWhenNeededLabel": "İhtiyacın olduğunda",
+  "purificationGuideWuduWhenNeededPrayer": "Geçerli bir abdestiniz yoksa namazdan önce.",
+  "purificationGuideWuduWhenNeededBathroom": "Tuvalete gittikten sonra.",
+  "purificationGuideWuduWhenNeededPurityLoss": "Rüzgârın geçmesi, derin uyku veya bilinç kaybı gibi nedenlerle saflık durumunuzu kaybettikten sonra.",
+  "purificationGuideWuduStepsTitle": "Abdest adımları",
+  "purificationGuideWuduStepsSubtitle": "Genellikle her yıkama 3 kez yapılır, ancak geçerlilik için 1 kez yeterlidir.",
+  "purificationGuideWuduNotesTitle": "Önemli notlar",
+  "purificationGuideWuduNoteModeration": "İhtiyaç duyulanın dışına çıkmayın ve çamaşırları yük haline getirmeyin.",
+  "purificationGuideWuduNoteWater": "Suyun tüm alana düzgün bir şekilde ulaştığından emin olun.",
+  "purificationGuideWuduNoteOrder": "Baştan sona doğru sırayı koruyun.",
+  "purificationGuideWuduNoteObstacles": "Kir veya cildi kaplayan tabaka gibi suyu engelleyen her şeyi çıkarın.",
+  "purificationGuideWuduRepeatOnce": "1 kez",
+  "purificationGuideWuduRepeatThreeTimes": "3 kez",
+  "purificationGuideWuduStep1Title": "Niyet",
+  "purificationGuideWuduStep1Body": "Namaz için abdest almaya kalbinizden niyet edin.",
+  "purificationGuideWuduStep2Title": "Bismillah",
+  "purificationGuideWuduStep2Body": "Yıkamaya başlamadan önce Bismillah deyin.",
+  "purificationGuideWuduStep3Title": "Ellerini yıka",
+  "purificationGuideWuduStep3Body": "Her iki elinizi de genellikle sağdan başlayarak iyice yıkayın.",
+  "purificationGuideWuduStep4Title": "Ağzı çalkalayın",
+  "purificationGuideWuduStep4Body": "Suyun içeriye ulaşması için ağzınızı iyice çalkalayın.",
+  "purificationGuideWuduStep5Title": "Burnunu temizle",
+  "purificationGuideWuduStep5Body": "Suyu yavaşça burnunuza çekin ve temizleyin.",
+  "purificationGuideWuduStep6Title": "Yüzü yıka",
+  "purificationGuideWuduStep6Body": "Yüzün tamamını alından çeneye ve kulaktan kulağa kadar yıkayın.",
+  "purificationGuideWuduStep7Title": "Kolları dirseklere kadar yıkayın",
+  "purificationGuideWuduStep7Body": "Dirseklerin de dahil olduğundan emin olarak önce sağ kolu, sonra sol kolu yıkayın.",
+  "purificationGuideWuduStep8Title": "Kafanı sil",
+  "purificationGuideWuduStep8Body": "Islak ellerinizi başınızın üzerinden önden arkaya doğru yavaşça geçirin.",
+  "purificationGuideWuduStep9Title": "Kulakları silin",
+  "purificationGuideWuduStep9Body": "Ekstra suya ihtiyaç duymadan kulakları aynı ıslaklıkla silin.",
+  "purificationGuideWuduStep10Title": "Ayakları bileklere kadar yıkayın",
+  "purificationGuideWuduStep10Body": "Ayak bileklerinin de dahil olduğundan emin olarak önce sağ ayağı, sonra sol ayağı yıkayın.",
+  "purificationGuideGhuslTitle": "Gusül",
+  "purificationGuideGhuslBody": "Nedir: \n Gusül tam bir ritüel banyodur. Büyük kirlilikten sonra gereklidir. \n \n Gerektiğinde: \n • Cinsel ilişkilerden sonra. \n • Boşalmadan sonra. \n • Adet sona erdikten sonra. \n • Doğum sonrası kanama bittikten sonra. \n \n Nasıl yapılır: \n 1. Niyetinizi kalbinizde yapın. \n 2. Bismillah deyin. \n 3. Ellerinizi ve özel yerlerinizi yıkayın. \n 4. Görünür yabancı maddeleri giderin. \n 5. Abdest alın. \n 6. Kafa derisine ulaşacak şekilde suyu başınıza dökün. \n 7. Sağ taraftan başlayıp sol taraftan başlayarak suyun her yere ulaşmasını sağlayacak şekilde tüm bedeni yıkayın. \n \n Önemli not: \n Tam bir gusül, büyük kirleri giderir. Daha sonra abdesti bozacak bir şey olmazsa, tekrar ayrı abdest almadan namaz kılabilirsiniz.",
+  "purificationGuideGhuslWhatIsLabel": "Bu ne",
+  "purificationGuideGhuslWhatIsBody": "Gusül, büyük bir kirlilikten sonra yapılması gereken tam bir ritüel banyodur.",
+  "purificationGuideGhuslWhenNeededLabel": "İhtiyacın olduğunda",
+  "purificationGuideGhuslWhenNeededRelations": "Yakın ilişkilerden sonra.",
+  "purificationGuideGhuslWhenNeededMenstruation": "Menstruasyon bittikten sonra.",
+  "purificationGuideGhuslWhenNeededPostnatal": "Doğum sonrası kanama bittikten sonra.",
+  "purificationGuideGhuslWhenNeededDischarge": "Cinsel akıntıdan sonra.",
+  "purificationGuideGhuslStepsTitle": "Gusül adımları",
+  "purificationGuideGhuslStepsSubtitle": "Guslün abdest gibi belirli bir tekrar sayısı yoktur. Önemli olan suyun tüm vücuda ulaşmasıdır, ancak bazı kısımlar tavsiye edildiği şekilde birden fazla kez yıkanabilir.",
+  "purificationGuideGhuslValidityTitle": "Tam form ve minimum geçerli form",
+  "purificationGuideGhuslValidityRecommended": "Önerilen formun tamamı, dikkatli bir yıkama ve düzen ile Sünnet modelini adım adım takip etmektedir.",
+  "purificationGuideGhuslValidityMinimum": "Minimum geçerli form basittir: Niyet edin ve suyun tüm vücudu kapladığından emin olun.",
+  "purificationGuideGhuslNotesTitle": "Önemli notlar",
+  "purificationGuideGhuslNoteDrySpots": "Hiçbir alanın kuru kalmadığından emin olun.",
+  "purificationGuideGhuslNoteScalp": "Suyun kafa derisine iyice ulaştığından emin olun.",
+  "purificationGuideGhuslNoteBarriers": "Kir veya cilt üzerindeki tabaka gibi suyu engelleyen her şeyi çıkarın.",
+  "purificationGuideGhuslNoteSimplicity": "Gereksiz yere karmaşık hale getirmeyin.",
+  "purificationGuideGhuslBadgeEssential": "Gerekli",
+  "purificationGuideGhuslBadgeRecommended": "Tavsiye edilen",
+  "purificationGuideGhuslBadgeUntilClean": "Temizlenene kadar",
+  "purificationGuideGhuslBadgeUsuallyThreeTimes": "Çoğu zaman 3 kez",
+  "purificationGuideGhuslBadgeNoFixedCount": "Sabit sayım yok",
+  "purificationGuideGhuslStep1Title": "Niyet",
+  "purificationGuideGhuslStep1Body": "Büyük kirlilikleri gidermeye ve gusül etmeye kalbinizden niyet edin.",
+  "purificationGuideGhuslStep2Title": "Bismillah",
+  "purificationGuideGhuslStep2Body": "Yıkamaya başlamadan önce Bismillah deyin.",
+  "purificationGuideGhuslStep3Title": "Ellerini yıka",
+  "purificationGuideGhuslStep3Body": "Vücudun geri kalanına geçmeden önce her iki elinizi de iyice yıkayın.",
+  "purificationGuideGhuslStep4Title": "Mahrem yerleri yıkayın ve görünür kirleri giderin",
+  "purificationGuideGhuslStep4Body": "Mahrem yerleri temizleyin ve bölge temizlenene kadar görünür yabancı maddeleri giderin.",
+  "purificationGuideGhuslStep5Title": "Abdest al",
+  "purificationGuideGhuslStep5Body": "Tüm bedeni yıkamadan önce abdest alın veya en azından temel şeklini alın.",
+  "purificationGuideGhuslStep6Title": "Başına su dök",
+  "purificationGuideGhuslStep6Body": "Suyu başınıza dökün ve kafa derisine ulaştığından emin olun. Bu genellikle birkaç kez yapılır, örneğin 3.",
+  "purificationGuideGhuslStep7Title": "Tüm vücudu yıkayın",
+  "purificationGuideGhuslStep7Body": "Wash the whole body, usually starting with the right side and then the left. Su her yere ulaştığı sürece sabit bir rakam yoktur.",
+  "purificationGuideGhuslStep8Title": "Suyun her yere ulaştığından emin olun",
+  "purificationGuideGhuslStep8Body": "Hiçbir alanın, özellikle de vücudun gizli veya katlanmış kısımlarının kuru kalmadığından emin olun.",
+  "purificationGuideFinalNoteTitle": "Anahtar fark",
+  "purificationGuideFinalNoteBody": "Abdest küçük kirlilikler içindir. Gusül büyük pislikler içindir. Sadece abdest gerekiyorsa gusül gerekmez. Gusül gerekiyorsa sadece abdest almak yetmez.",
+  "prayerGuideTitle": "Namaz rehberi",
+  "prayerGuideStep": "Adım",
+  "prayerGuideNiyyah": "Niyet",
+  "prayerGuideTakbir": "Tekbiratü'l ihram",
+  "prayerGuideQiyam": "Kıyam",
+  "prayerGuideRuku": "Rükû",
+  "prayerGuideItidal": "İ'tidal",
+  "prayerGuideSujud": "Secde",
+  "prayerGuideJalsa": "Oturuş",
+  "prayerGuideTashahhud": "Tahiyyat",
+  "prayerGuideTaslim": "Selam",
+  "prayerGuideNiyyahDescription": "Başlamadan önce bu namazya kalbinizde niyet edin.",
+  "prayerGuideTakbirDescription": "Ellerinizi kaldırın ve Allahu Ekber diyerek namaza girin.",
+  "prayerGuideQiyamDescription": "Kalkın, Fatiha'yı ve Kur'an'dan size kolay geleni okuyun.",
+  "prayerGuideRukuDescription": "Eğilin, ellerinizi dizlerinizin üzerine koyun ve rükuda Allah'ı tesbih edin.",
+  "prayerGuideItidalDescription": "Tekrar doğruluncaya kadar rükudan kalkın.",
+  "prayerGuideSujudDescription": "Alnınız ve burnunuz yere dayalı olarak secdeye varın ve secde ezkarını söyleyin.",
+  "prayerGuideJalsaDescription": "İki secde arasında sakince oturun ve Allah'tan bağışlanma dileyin.",
+  "prayerGuideSecondSujudDescription": "Ayağa kalkmadan veya rekâta devam etmeden önce ikinci secdeyi sakin bir şekilde yapın.",
+  "prayerGuideTashahhudDescription": "Oturup teşehhüdü, farz olan namazın oturuşunda okuyun.",
+  "prayerGuideTaslimRightDescription": "Başınızı sağa çevirin ve selam vererek namazı bitirin.",
+  "prayerGuideTaslimLeftDescription": "Başınızı sola çevirin ve selamı tamamlayın.",
+  "prayerGuideRakaatsFajr": "Önce 2 sünnet + 2 farz",
+  "prayerGuideRakaatsDhuhr": "Önce 4 sünnet + 4 farz + sonra 2 sünnet",
+  "prayerGuideRakaatsAsr": "4 farz",
+  "prayerGuideRakaatsMaghrib": "Sonra 3 farz + 2 sünnet",
+  "prayerGuideRakaatsIsha": "4 farz + 2 sünnet + 1 vitir",
+  "prayerGuideOneRakaatIntro": "Bu kılavuz farz namazın tamamını göstermektedir. Her rek'atı sırayla kaydırın ve namazı adım adım takip edin.",
+  "prayerGuideCycleFajr": "Bu rekatı iki kez tekrarlayın. İkinci rekatta teşehhüd okuyun, ardından teşehhüt ile bitirin.",
+  "prayerGuideCycleDhuhr": "Farz rekatını dört defa tekrarlayın. İkinci rek'attan sonra teşehhüd okuyun ve dördüncü rek'atte teşehhüdü bitirin. Sünnet rekatları da aynı temel akışı takip eder.",
+  "prayerGuideCycleAsr": "Bu rekatı dört defa tekrarlayın. İkinci rek'attan sonra teşehhüd okuyun ve dördüncü rek'atte teşehhüdü bitirin.",
+  "prayerGuideCycleMaghrib": "Bu rekatı üç defa tekrarlayın. İkinci rek'attan sonra teşehhüd okuyun, üçüncü rekatta teşehhüt ve selâm vererek namazı tamamlayın.",
+  "prayerGuideCycleIsha": "Farz rekatını dört defa tekrarlayın. İkinci rek'attan sonra teşehhüd okuyun ve dördüncü rek'atte teşehhüdü bitirin. Daha sonra aynı temel akışla 2 sünnet ve 1 vitir namazı kılın.",
+  "prayerGuideOpenFatiha": "El-Fatiha",
+  "prayerGuideChooseSurah": "Sureyi seçin",
+  "prayerGuideChooseSurahTitle": "İlave bir sure seçin",
+  "prayerGuideChooseSurahSubtitle": "Fatiha'dan sonra okumak için 2 numaradan itibaren herhangi bir sureyi açın.",
+  "prayerGuideNiyyahRecitationNote": "Niyet kalpte kalır ve yüksek sesle söylenmez.",
+  "prayerGuideTimesHeart": "Kalpte",
+  "prayerGuideTimesOnce": "1 kez",
+  "prayerGuideTimesThree": "3 kez",
+  "prayerGuideTimesOneToThree": "1-3 kez",
+  "prayerGuideDirectionRight": "Sağa",
+  "prayerGuideDirectionLeft": "Sola",
+  "prayerGuideWhileRising": "Yükselirken",
+  "prayerGuideWhenStanding": "Ayaktayken",
+  "prayerGuideTakbirMeaning": "Allah en büyüktür.",
+  "prayerGuideQiyamMeaning": "Allah'ım, sen yücesin, hamd sana mahsustur. Senin ismin mübarektir, azametin yücedir ve senden başka ilah yoktur.",
+  "prayerGuideRukuMeaning": "Yüce olan Rabbimin şanı yücedir.",
+  "prayerGuideItidalRiseMeaning": "Allah kendisine hamd edeni işitir.",
+  "prayerGuideItidalStandMeaning": "Rabbimiz ve hamd sana mahsustur.",
+  "prayerGuideSujudMeaning": "Yüce olan Rabbimi tesbih ederim.",
+  "prayerGuideJalsaMeaning": "Rabbim beni bağışla.",
+  "prayerGuideTashahhudMeaning": "Bütün selamlar, namazlar, temiz sözler Allah içindir... Allah'tan başka ilah olmadığına ve Muhammed'in O'nun kulu ve elçisi olduğuna şahitlik ederim.",
+  "prayerGuideTaslimMeaning": "Allah'ın selamı ve rahmeti üzerinize olsun.",
+  "prayerGuideRakaatTitle": "Rekât {number}",
+  "@prayerGuideRakaatTitle": {
+    "placeholders": {
+      "number": {}
+    }
+  },
+  "prayerGuideSubhanaka": "Sübhanaka",
+  "prayerGuideSubhanakaDescription": "Açılış duasını tekbirden sonra sadece birinci rekatta okuyun.",
+  "prayerGuideQiyamWithSurahDescription": "Ayağa kalkın ve Fatiha'yı okuyun, ardından başka bir sure veya Kur'an'dan ayetler okuyun.",
+  "prayerGuideQiyamFatihaOnlyDescription": "Sadece bu rekatta ayağa kalkın ve Fatiha okuyun.",
+  "prayerGuideTashahhudShortDescription": "Bir sonraki rek'ata kalkmadan önce oturun ve Tahiyyat'ı okuyun.",
+  "prayerGuideTashahhudCompleteDescription": "Son teşehhüt için oturun, Tahiyyat ve Salavat İbrahimiyye'yi okuyun, ardından selâm vermeden önce kısa bir namaz yapın.",
+  "prayerGuideTashahhudCompleteNote": "Salavattan sonra, namazı teslim ile bitirmeden önce kısa bir namaz ekleyebilirsiniz.",
+  "prayerGuideSalawatMeaning": "Allah'ım, İbrahim'e ve İbrahim'in ailesine salat ettiğin gibi, Muhammed'e ve Muhammed'in ailesine de salât eyle. Şüphesiz sen övülmeye layıksın, yücesin.",
+  "bookDownload": "İndir",
+  "bookDownloading": "İndiriliyor...",
+  "bookReadOffline": "Çevrimdışı oku",
+  "bookDeleteDownload": "İndirmeyi sil",
+  "bookDeleteConfirm": "İndirilen kitap silinsin mi?",
+  "bookDeleteConfirmBody": "Dosya cihazdan silinecek",
+  "bookDownloadError": "İndirme hatası"
+}

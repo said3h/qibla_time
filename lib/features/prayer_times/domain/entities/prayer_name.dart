@@ -54,10 +54,26 @@ extension PrayerNameX on PrayerName {
     }
   }
 
+  String get displayNameTurkish {
+    switch (this) {
+      case PrayerName.fajr:
+        return 'Sabah';
+      case PrayerName.dhuhr:
+        return 'Öğle';
+      case PrayerName.asr:
+        return 'İkindi';
+      case PrayerName.maghrib:
+        return 'Akşam';
+      case PrayerName.isha:
+        return 'Yatsı';
+    }
+  }
+
   String localizedDisplayName(String languageCode) {
     return switch (languageCode) {
       'ar' => displayNameArabic,
       'ru' => displayNameRussian,
+      'tr' => displayNameTurkish,
       _ => displayName,
     };
   }

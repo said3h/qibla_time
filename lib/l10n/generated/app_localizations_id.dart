@@ -154,7 +154,7 @@ class AppLocalizationsId extends AppLocalizations {
       'Data Anda tidak pernah meninggalkan perangkat';
 
   @override
-  String get onboardingIntroLanguages => '9 bahasa';
+  String get onboardingIntroLanguages => '11 bahasa';
 
   @override
   String get onboardingIntroLanguagesBody => 'Tersedia dalam bahasa Anda';
@@ -2897,6 +2897,9 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get settingsLanguageOptionItalian => 'Italia';
+
+  @override
+  String get settingsLanguageOptionTurkish => 'Turki';
 
   @override
   String get homeQuickActionPurification => 'Wudu dan ghusl';
