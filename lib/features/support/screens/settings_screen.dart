@@ -120,8 +120,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
-      ref.invalidate(systemNotificationPermissionProvider);
-      _loadSettings();
+      _refreshAndroidAdhanStatus();
     }
   }
 
@@ -244,6 +243,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
     ref.invalidate(systemNotificationPermissionProvider);
     if (!mounted) return;
     await _loadSettings();
+    if (Platform.isAndroid) {
+      await ref.read(adhanManagerProvider).scheduleTodayAdhans();
+    }
   }
 
   Future<void> _toggleRamadanAutomatic(bool value) async {
@@ -656,7 +658,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
               prayerNotificationsStatus,
               _togglePrayerNotificationsEnabled,
             ),
-            if (notificationPermissionGranted == false)
+            if (Platform.isAndroid && notificationPermissionGranted == false)
               _buildAndroidAdhanActionCard(
                 tokens,
                 icon: Icons.notifications_active_outlined,
