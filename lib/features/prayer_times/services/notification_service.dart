@@ -102,14 +102,14 @@ class NotificationService {
         final exactAlarmPermission = await Permission.scheduleExactAlarm.status;
         final canUseExactAlarm = exactAlarmPermission.isGranted;
         scheduleMode = canUseExactAlarm
-            ? AndroidScheduleMode.alarmClock
-            : AndroidScheduleMode.inexact;
+            ? AndroidScheduleMode.inexactAllowWhileIdle
+            : AndroidScheduleMode.inexactAllowWhileIdle;
         AppLogger.info(
           'scheduleAdhan: exactAlarm=${exactAlarmPermission.name} '
           'mode=${canUseExactAlarm ? "alarmClock" : "inexact"}',
         );
       } else {
-        scheduleMode = AndroidScheduleMode.alarmClock;
+        scheduleMode = AndroidScheduleMode.inexactAllowWhileIdle;
       }
 
       await _plugin.zonedSchedule(
@@ -161,13 +161,13 @@ class NotificationService {
 
       // En Android 12+ exactAllowWhileIdle lanza SecurityException si el permiso
       // SCHEDULE_EXACT_ALARM no está concedido. Aplicamos el mismo guard que scheduleAdhan.
-      AndroidScheduleMode scheduleMode = AndroidScheduleMode.inexact;
+      AndroidScheduleMode scheduleMode = AndroidScheduleMode.inexactAllowWhileIdle;
       if (Platform.isAndroid) {
         final exactAlarmPermission = await Permission.scheduleExactAlarm.status;
         final canUseExactAlarm = exactAlarmPermission.isGranted;
         scheduleMode = canUseExactAlarm
-            ? AndroidScheduleMode.exactAllowWhileIdle
-            : AndroidScheduleMode.inexact;
+            ? AndroidScheduleMode.inexactAllowWhileIdle
+            : AndroidScheduleMode.inexactAllowWhileIdle;
         AppLogger.info(
           'scheduleReminder: exactAlarm=${exactAlarmPermission.name} '
           'mode=${canUseExactAlarm ? "exactAllowWhileIdle" : "inexact"}',
