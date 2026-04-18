@@ -6,16 +6,38 @@ on:
   workflow_dispatch:
 
 jobs:
-  android-apk:
-    name: Android APK
-    runs-on: ubuntu-latest
+  build:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Android APK
+            os: ubuntu-latest
+            platform: android
+          - name: iOS IPA
+            os: macos-latest
+            platform: ios
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-java@v4
+        if: matrix.platform == 'android'
         with:
           java-version: '17'
           distribution: 'temurin'
+          cache: 'gradle'
+
+      - name: Cache Gradle wrapper
+        if: matrix.platform == 'android'
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/wrapper
+            ~/.gradle/caches
+          key: gradle-${{ runner.os }}-${{ hashFiles('android/gradle/wrapper/gradle-wrapper.properties') }}
+          restore-keys: gradle-${{ runner.os }}-
 
       - uses: subosito/flutter-action@v2
         with:
@@ -33,12 +55,15 @@ jobs:
         run: flutter test
 
       - name: Build debug APK
+        if: matrix.platform == 'android'
         run: flutter build apk --debug
 
       - name: Build release APK
+        if: matrix.platform == 'android'
         run: flutter build apk --release
 
       - name: Upload debug APK
+        if: matrix.platform == 'android'
         uses: actions/upload-artifact@v4
         with:
           name: qiblatime-android-debug
@@ -47,6 +72,7 @@ jobs:
           retention-days: 14
 
       - name: Upload release APK
+        if: matrix.platform == 'android'
         uses: actions/upload-artifact@v4
         with:
           name: qiblatime-android-release
@@ -54,35 +80,20 @@ jobs:
           if-no-files-found: error
           retention-days: 14
 
-  ios-ipa:
-    name: iOS IPA
-    needs: android-apk
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.41.6'
-          channel: 'stable'
-          cache: true
-
-      - name: Verify Flutter version
-        run: flutter --version
-
-      - name: Get dependencies
-        run: flutter pub get
-
       - name: Install CocoaPods
+        if: matrix.platform == 'ios'
         run: sudo gem install cocoapods
 
       - name: Install pods
+        if: matrix.platform == 'ios'
         run: cd ios && pod install
 
       - name: Prepare iOS build config
+        if: matrix.platform == 'ios'
         run: flutter build ios --release --no-codesign --config-only
 
       - name: Build unsigned Runner archive
+        if: matrix.platform == 'ios'
         run: |
           xcodebuild \
             -workspace ios/Runner.xcworkspace \
@@ -103,6 +114,7 @@ jobs:
             archive
 
       - name: Package .app as .ipa
+        if: matrix.platform == 'ios'
         run: |
           mkdir -p build/ios/ipa/Payload
           cp -r build/ios/archive/Runner.xcarchive/Products/Applications/Runner.app build/ios/ipa/Payload/Runner.app
@@ -110,6 +122,7 @@ jobs:
           zip -r QiblaTime.ipa Payload
 
       - name: Upload Runner.app
+        if: matrix.platform == 'ios'
         uses: actions/upload-artifact@v4
         with:
           name: qiblatime-ios-app
@@ -118,10 +131,10 @@ jobs:
           retention-days: 14
 
       - name: Upload IPA
+        if: matrix.platform == 'ios'
         uses: actions/upload-artifact@v4
         with:
           name: qiblatime-ios-ipa
           path: build/ios/ipa/QiblaTime.ipa
           if-no-files-found: error
           retention-days: 14
-
