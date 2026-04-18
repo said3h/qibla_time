@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:adhan/adhan.dart';
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -696,8 +695,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
                   _openBatterySettings();
                 },
               ),
-            if (kDebugMode)
-              Padding(
+            Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: ElevatedButton.icon(
                   icon: const Icon(Icons.notifications_active),
