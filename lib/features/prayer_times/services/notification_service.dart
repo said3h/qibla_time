@@ -13,7 +13,10 @@ import '../../../l10n/l10n.dart';
 class NotificationService {
   NotificationService._();
   static final NotificationService instance = NotificationService._();
-  static const _androidAdhanChannelPrefix = 'adhan_channel_v4_';
+
+  // v5: bump forzado para eliminar canales v4 que podían estar corruptos
+  // (sin sonido si el canal fue creado antes de que res/raw/ existiera).
+  static const _androidAdhanChannelPrefix = 'adhan_channel_v5_';
 
   final FlutterLocalNotificationsPlugin _plugin =
       FlutterLocalNotificationsPlugin();
@@ -23,6 +26,8 @@ class NotificationService {
   Future<void> initialize() async {
     try {
       tz.initializeTimeZones();
+
+      AppLogger.info('NotificationService: initializing...');
 
       await _plugin.initialize(
         settings: const InitializationSettings(
@@ -35,10 +40,13 @@ class NotificationService {
         ),
         onDidReceiveNotificationResponse: (_) {},
       );
+
       await _deleteOldAdhanChannels();
+
+      AppLogger.info('NotificationService: initialized OK');
     } catch (e, stackTrace) {
       AppLogger.error(
-        'Failed to initialize notifications',
+        'NotificationService: FAILED to initialize',
         error: e,
         stackTrace: stackTrace,
       );
@@ -56,6 +64,11 @@ class NotificationService {
       final l10n = appLocalizationsForDevice();
       final androidSound = _androidSoundNameFor(adhanFile);
       final androidChannelId = _androidChannelIdFor(adhanFile);
+
+      AppLogger.info(
+        'scheduleAdhan: id=$id prayer=$prayerName at=$scheduledAt '
+        'sound=$androidSound channel=$androidChannelId',
+      );
 
       await _ensureAndroidAdhanChannel(
         channelId: androidChannelId,
@@ -83,14 +96,20 @@ class NotificationService {
       );
 
       final tzDate = tz.TZDateTime.from(scheduledAt, tz.local);
-      final exactAlarmPermission = await Permission.scheduleExactAlarm.status;
-      final canUseExactAlarm = exactAlarmPermission.isGranted;
 
       AndroidScheduleMode scheduleMode;
-      if (canUseExactAlarm) {
-        scheduleMode = AndroidScheduleMode.alarmClock;
+      if (Platform.isAndroid) {
+        final exactAlarmPermission = await Permission.scheduleExactAlarm.status;
+        final canUseExactAlarm = exactAlarmPermission.isGranted;
+        scheduleMode = canUseExactAlarm
+            ? AndroidScheduleMode.alarmClock
+            : AndroidScheduleMode.inexact;
+        AppLogger.info(
+          'scheduleAdhan: exactAlarm=${exactAlarmPermission.name} '
+          'mode=${canUseExactAlarm ? "alarmClock" : "inexact"}',
+        );
       } else {
-        scheduleMode = AndroidScheduleMode.inexact;
+        scheduleMode = AndroidScheduleMode.alarmClock;
       }
 
       await _plugin.zonedSchedule(
@@ -101,9 +120,11 @@ class NotificationService {
         notificationDetails: details,
         androidScheduleMode: scheduleMode,
       );
+
+      AppLogger.info('scheduleAdhan: SCHEDULED id=$id OK');
     } catch (e, stackTrace) {
       AppLogger.error(
-        'Failed to schedule adhan notification',
+        'scheduleAdhan: FAILED id=$id prayer=$prayerName',
         error: e,
         stackTrace: stackTrace,
       );
@@ -119,6 +140,9 @@ class NotificationService {
   }) async {
     try {
       final l10n = appLocalizationsForDevice();
+
+      AppLogger.info('scheduleReminder: id=$id title="$title" at=$scheduledAt');
+
       final details = NotificationDetails(
         android: AndroidNotificationDetails(
           'qiblatime_reminders',
@@ -135,17 +159,34 @@ class NotificationService {
         ),
       );
 
+      // En Android 12+ exactAllowWhileIdle lanza SecurityException si el permiso
+      // SCHEDULE_EXACT_ALARM no está concedido. Aplicamos el mismo guard que scheduleAdhan.
+      AndroidScheduleMode scheduleMode = AndroidScheduleMode.inexact;
+      if (Platform.isAndroid) {
+        final exactAlarmPermission = await Permission.scheduleExactAlarm.status;
+        final canUseExactAlarm = exactAlarmPermission.isGranted;
+        scheduleMode = canUseExactAlarm
+            ? AndroidScheduleMode.exactAllowWhileIdle
+            : AndroidScheduleMode.inexact;
+        AppLogger.info(
+          'scheduleReminder: exactAlarm=${exactAlarmPermission.name} '
+          'mode=${canUseExactAlarm ? "exactAllowWhileIdle" : "inexact"}',
+        );
+      }
+
       await _plugin.zonedSchedule(
         id: id,
         title: title,
         body: body,
         scheduledDate: tz.TZDateTime.from(scheduledAt, tz.local),
         notificationDetails: details,
-        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+        androidScheduleMode: scheduleMode,
       );
+
+      AppLogger.info('scheduleReminder: SCHEDULED id=$id OK');
     } catch (e, stackTrace) {
       AppLogger.error(
-        'Failed to schedule reminder notification',
+        'scheduleReminder: FAILED id=$id title="$title"',
         error: e,
         stackTrace: stackTrace,
       );
@@ -222,7 +263,8 @@ class NotificationService {
     const oldPrefixes = [
       'adhan_channel_v1_',
       'adhan_channel_v2_',
-      'adhan_channel_v3_'
+      'adhan_channel_v3_',
+      'adhan_channel_v4_', // eliminado en v5: canales creados sin sonido válido
     ];
     const adhanFiles = [
       'azan1.mp3',
@@ -262,8 +304,13 @@ class NotificationService {
       final android = _plugin.resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin>();
       if (android == null) {
+        AppLogger.info('_ensureAndroidAdhanChannel: not Android, skipping');
         return;
       }
+
+      AppLogger.info(
+        '_ensureAndroidAdhanChannel: creating channel=$channelId sound=$soundName',
+      );
 
       // Android 8+ fija el sonido al crear el canal. Usamos un canal por adhan
       // para evitar que un canal previo contaminado siga reproduciendo el sonido
@@ -279,9 +326,11 @@ class NotificationService {
           sound: RawResourceAndroidNotificationSound(soundName),
         ),
       );
+
+      AppLogger.info('_ensureAndroidAdhanChannel: channel=$channelId created OK');
     } catch (e, stackTrace) {
       AppLogger.error(
-        'Failed to create Android adhan notification channel',
+        '_ensureAndroidAdhanChannel: FAILED channel=$channelId',
         error: e,
         stackTrace: stackTrace,
       );
@@ -351,5 +400,71 @@ class NotificationService {
 
     final result = await Permission.scheduleExactAlarm.request();
     return result.isGranted;
+  }
+
+  /// Dispara una notificación inmediata para verificar que el sistema funciona.
+  /// Solo usar en debug/QA. Llama esto desde Settings o desde un botón temporal
+  /// para confirmar que el canal, el sonido y los permisos están bien.
+  Future<void> sendTestNotification() async {
+    try {
+      AppLogger.info('sendTestNotification: starting...');
+
+      final notifPermission = await Permission.notification.status;
+      AppLogger.info('sendTestNotification: notification=${notifPermission.name}');
+
+      if (Platform.isAndroid) {
+        final exactAlarm = await Permission.scheduleExactAlarm.status;
+        AppLogger.info('sendTestNotification: scheduleExactAlarm=${exactAlarm.name}');
+
+        final android = _plugin.resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>();
+        final channels = await android?.getNotificationChannels();
+        AppLogger.info(
+          'sendTestNotification: active channels=${channels?.map((c) => c.id).toList()}',
+        );
+      }
+
+      const testAdhanFile = 'azan1.mp3';
+      final androidSound = _androidSoundNameFor(testAdhanFile);
+      final androidChannelId = _androidChannelIdFor(testAdhanFile);
+      final l10n = appLocalizationsForDevice();
+
+      await _ensureAndroidAdhanChannel(
+        channelId: androidChannelId,
+        soundName: androidSound,
+        l10n: l10n,
+      );
+
+      await _plugin.show(
+        id: 9999,
+        title: '🔔 Test QiblaTime',
+        body: 'Si ves esto, las notificaciones funcionan',
+        notificationDetails: NotificationDetails(
+          android: AndroidNotificationDetails(
+            androidChannelId,
+            l10n.notificationAdhanChannelName,
+            importance: Importance.max,
+            priority: Priority.max,
+            sound: RawResourceAndroidNotificationSound(androidSound),
+            playSound: true,
+            enableVibration: true,
+          ),
+          iOS: const DarwinNotificationDetails(
+            sound: 'azan1.caf',
+            presentAlert: true,
+            presentSound: true,
+          ),
+        ),
+      );
+
+      AppLogger.info('sendTestNotification: FIRED OK');
+    } catch (e, stackTrace) {
+      AppLogger.error(
+        'sendTestNotification: FAILED',
+        error: e,
+        stackTrace: stackTrace,
+      );
+      rethrow;
+    }
   }
 }

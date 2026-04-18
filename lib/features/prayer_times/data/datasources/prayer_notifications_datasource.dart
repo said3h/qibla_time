@@ -44,24 +44,38 @@ class PrayerNotificationsDataSource {
   static const Duration _jumuahReminderLead = Duration(minutes: 45);
 
   Future<void> rescheduleToday(PrayerSchedule schedule) async {
+    AppLogger.info('PrayerNotificationsDataSource.rescheduleToday: start');
+
     // Cancelamos solo los IDs de oración para no tocar las notificaciones de
     // inspiración diaria (10001) ni de hadiths horarios (20000+).
     await _notificationService.cancelPrayerNotifications();
 
-    if (!await _settingsService.getNotificationsEnabled()) {
+    final notificationsEnabled = await _settingsService.getNotificationsEnabled();
+    AppLogger.info(
+      'rescheduleToday: globalNotificationsEnabled=$notificationsEnabled',
+    );
+    if (!notificationsEnabled) {
       return;
     }
 
     final adhanFile = await _settingsService.getAdhan();
+    AppLogger.info('rescheduleToday: adhanFile=$adhanFile');
     final now = DateTime.now();
+    int scheduled = 0;
 
     for (final prayer in schedule.times.entries) {
       if (prayer.value.isBefore(now)) {
+        AppLogger.info(
+          'rescheduleToday: SKIP ${prayer.key.key} (past: ${prayer.value})',
+        );
         continue;
       }
 
       final enabled = await _settingsService.getPrayerNotificationEnabled(
         prayer.key.key,
+      );
+      AppLogger.info(
+        'rescheduleToday: ${prayer.key.key} enabled=$enabled at=${prayer.value}',
       );
       if (!enabled) {
         continue;
@@ -78,14 +92,19 @@ class PrayerNotificationsDataSource {
           scheduledAt: prayer.value,
           adhanFile: adhanFile,
         );
+        scheduled++;
       } catch (e, stackTrace) {
         AppLogger.error(
-          'Failed to schedule adhan for ${prayer.key.key}',
+          'rescheduleToday: FAILED ${prayer.key.key}',
           error: e,
           stackTrace: stackTrace,
         );
       }
     }
+
+    AppLogger.info(
+      'rescheduleToday: done. $scheduled prayers scheduled.',
+    );
 
     await _scheduleRamadanReminders(schedule, now: now);
     await _scheduleJumuahReminder(schedule, now: now);
