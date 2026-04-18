@@ -199,58 +199,6 @@ class NotificationService {
     }
   }
 
-  Future<void> testAdhanSound(String adhanFile) async {
-    try {
-      final permissionGranted = await requestPermission();
-      if (!permissionGranted) {
-        return;
-      }
-
-      final l10n = appLocalizationsForDevice();
-      final androidSound = _androidSoundNameFor(adhanFile);
-      final androidChannelId = _androidChannelIdFor(adhanFile);
-
-      await _ensureAndroidAdhanChannel(
-        channelId: androidChannelId,
-        soundName: androidSound,
-        l10n: l10n,
-      );
-
-      final details = NotificationDetails(
-        android: AndroidNotificationDetails(
-          androidChannelId,
-          l10n.notificationAdhanChannelName,
-          channelDescription: l10n.notificationAdhanChannelDescription,
-          importance: Importance.max,
-          priority: Priority.high,
-          sound: RawResourceAndroidNotificationSound(androidSound),
-          playSound: true,
-          enableVibration: true,
-        ),
-        iOS: DarwinNotificationDetails(
-          sound: adhanFile.replaceAll('.mp3', '.caf'),
-          presentAlert: true,
-          presentBadge: true,
-          presentSound: true,
-        ),
-      );
-
-      await _plugin.show(
-        id: 999,
-        title: 'Test Adhan',
-        body: 'Testing adhan sound',
-        notificationDetails: details,
-      );
-    } catch (e, stackTrace) {
-      AppLogger.error(
-        'Failed to test adhan sound',
-        error: e,
-        stackTrace: stackTrace,
-      );
-      rethrow;
-    }
-  }
-
   Future<void> cancel(int id) async => _plugin.cancel(id: id);
 
   Future<void> cancelAll() async => _plugin.cancelAll();

@@ -7,12 +7,14 @@
 package com.qiblatime.app
 
 import android.app.NotificationManager
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import android.net.Uri
 import android.os.Build
 import android.provider.Settings
 import android.util.Log
@@ -20,11 +22,13 @@ import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.MethodChannel
+import java.util.Locale
 
 class MainActivity : FlutterActivity(), EventChannel.StreamHandler, SensorEventListener {
 
     private val DND_CHANNEL = "com.qiblatime/dnd"
     private val PROXIMITY_CHANNEL = "com.qiblatime/proximity"
+    private val SETTINGS_CHANNEL = "com.qiblatime/android_settings"
     private val TAG = "QiblaProximity"
 
     private var sensorManager: SensorManager? = null
@@ -54,6 +58,29 @@ class MainActivity : FlutterActivity(), EventChannel.StreamHandler, SensorEventL
                 "disableDnd" -> {
                     disableDnd()
                     result.success(null)
+                }
+
+                else -> result.notImplemented()
+            }
+        }
+
+        MethodChannel(
+            flutterEngine.dartExecutor.binaryMessenger,
+            SETTINGS_CHANNEL
+        ).setMethodCallHandler { call, result ->
+            when (call.method) {
+                "openNotificationSettings" -> {
+                    result.success(openNotificationSettings())
+                }
+
+                "openExactAlarmSettings" -> {
+                    result.success(openExactAlarmSettings())
+                }
+
+                "openBatterySettings" -> {
+                    val manufacturer =
+                        call.argument<String>("manufacturer").orEmpty()
+                    result.success(openBatterySettings(manufacturer))
                 }
 
                 else -> result.notImplemented()
@@ -165,5 +192,131 @@ class MainActivity : FlutterActivity(), EventChannel.StreamHandler, SensorEventL
         nm.setInterruptionFilter(
             NotificationManager.INTERRUPTION_FILTER_ALL
         )
+    }
+
+    private fun openNotificationSettings(): Boolean {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val intent = Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS).apply {
+                putExtra(Settings.EXTRA_APP_PACKAGE, packageName)
+            }
+            if (startSettingsIntent(intent)) return true
+        }
+
+        return openAppDetails()
+    }
+
+    private fun openExactAlarmSettings(): Boolean {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            val intent = Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM).apply {
+                data = Uri.parse("package:$packageName")
+            }
+            if (startSettingsIntent(intent)) return true
+        }
+
+        return openAppDetails()
+    }
+
+    private fun openBatterySettings(manufacturer: String): Boolean {
+        val brand = manufacturer.lowercase(Locale.ROOT)
+        val appLabel = applicationInfo.loadLabel(packageManager).toString()
+        val intents = mutableListOf<Intent>()
+
+        when {
+            brand.contains("xiaomi") || brand.contains("redmi") || brand.contains("poco") -> {
+                intents += Intent().apply {
+                    setClassName(
+                        "com.miui.powerkeeper",
+                        "com.miui.powerkeeper.ui.HiddenAppsConfigActivity"
+                    )
+                    putExtra("package_name", packageName)
+                    putExtra("package_label", appLabel)
+                }
+                intents += Intent("miui.intent.action.APP_PERM_EDITOR").apply {
+                    putExtra("extra_pkgname", packageName)
+                }
+                intents += Intent().apply {
+                    setClassName(
+                        "com.miui.securitycenter",
+                        "com.miui.permcenter.autostart.AutoStartManagementActivity"
+                    )
+                }
+            }
+
+            brand.contains("huawei") || brand.contains("honor") -> {
+                intents += Intent().apply {
+                    setClassName(
+                        "com.huawei.systemmanager",
+                        "com.huawei.systemmanager.startupmgr.ui.StartupNormalAppListActivity"
+                    )
+                }
+                intents += Intent().apply {
+                    setClassName(
+                        "com.huawei.systemmanager",
+                        "com.huawei.systemmanager.optimize.process.ProtectActivity"
+                    )
+                }
+            }
+
+            brand.contains("samsung") -> {
+                intents += Intent("com.samsung.android.sm.ACTION_BATTERY")
+                intents += Intent().apply {
+                    setClassName(
+                        "com.samsung.android.lool",
+                        "com.samsung.android.sm.ui.battery.BatteryActivity"
+                    )
+                }
+            }
+
+            brand.contains("oppo") || brand.contains("realme") || brand.contains("oneplus") -> {
+                intents += Intent().apply {
+                    setClassName(
+                        "com.coloros.safecenter",
+                        "com.coloros.safecenter.startupapp.StartupAppListActivity"
+                    )
+                }
+                intents += Intent().apply {
+                    setClassName(
+                        "com.oplus.safecenter",
+                        "com.oplus.safecenter.startupapp.StartupAppListActivity"
+                    )
+                }
+            }
+
+            brand.contains("vivo") || brand.contains("iqoo") -> {
+                intents += Intent().apply {
+                    setClassName(
+                        "com.iqoo.secure",
+                        "com.iqoo.secure.ui.phoneoptimize.BgStartUpManager"
+                    )
+                }
+            }
+        }
+
+        intents += Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)
+        intents += Intent(Settings.ACTION_BATTERY_SAVER_SETTINGS)
+
+        for (intent in intents) {
+            if (startSettingsIntent(intent)) return true
+        }
+
+        return openAppDetails()
+    }
+
+    private fun openAppDetails(): Boolean {
+        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+            data = Uri.parse("package:$packageName")
+        }
+        return startSettingsIntent(intent)
+    }
+
+    private fun startSettingsIntent(intent: Intent): Boolean {
+        return try {
+            startActivity(intent)
+            true
+        } catch (_: ActivityNotFoundException) {
+            false
+        } catch (_: SecurityException) {
+            false
+        }
     }
 }
