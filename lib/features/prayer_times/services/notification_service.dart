@@ -418,16 +418,36 @@ class NotificationService {
 
         final android = _plugin.resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>();
-        final channels = await android?.getNotificationChannels();
+
+        if (android == null) {
+          AppLogger.error(
+            'sendTestNotification: AndroidFlutterLocalNotificationsPlugin es NULL. '
+            'R8/ProGuard puede haber eliminado la clase en release.',
+          );
+          return;
+        }
+
+        final channels = await android.getNotificationChannels();
         AppLogger.info(
-          'sendTestNotification: active channels=${channels?.map((c) => c.id).toList()}',
+          'sendTestNotification: active channels=${channels?.map((c) => '${c.id}(sound=${c.sound})').toList()}',
         );
+
+        if (notifPermission.isDenied || notifPermission.isPermanentlyDenied) {
+          AppLogger.error(
+            'sendTestNotification: ABORTED — permiso de notificación denegado',
+          );
+          return;
+        }
       }
 
       const testAdhanFile = 'azan1.mp3';
       final androidSound = _androidSoundNameFor(testAdhanFile);
       final androidChannelId = _androidChannelIdFor(testAdhanFile);
       final l10n = appLocalizationsForDevice();
+
+      AppLogger.info(
+        'sendTestNotification: usando channel=$androidChannelId sound=$androidSound',
+      );
 
       await _ensureAndroidAdhanChannel(
         channelId: androidChannelId,
@@ -457,10 +477,10 @@ class NotificationService {
         ),
       );
 
-      AppLogger.info('sendTestNotification: FIRED OK');
+      AppLogger.info('sendTestNotification: FIRED OK — debería aparecer ahora');
     } catch (e, stackTrace) {
       AppLogger.error(
-        'sendTestNotification: FAILED',
+        'sendTestNotification: FAILED — error=${e.runtimeType}: $e',
         error: e,
         stackTrace: stackTrace,
       );
