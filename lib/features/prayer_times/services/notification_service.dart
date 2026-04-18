@@ -102,14 +102,14 @@ class NotificationService {
         final exactAlarmPermission = await Permission.scheduleExactAlarm.status;
         final canUseExactAlarm = exactAlarmPermission.isGranted;
         scheduleMode = canUseExactAlarm
-            ? AndroidScheduleMode.inexactAllowWhileIdle
+            ? AndroidScheduleMode.exactAllowWhileIdle
             : AndroidScheduleMode.inexactAllowWhileIdle;
         AppLogger.info(
           'scheduleAdhan: exactAlarm=${exactAlarmPermission.name} '
-          'mode=${canUseExactAlarm ? "alarmClock" : "inexact"}',
+          'mode=${canUseExactAlarm ? "exactAllowWhileIdle" : "inexactAllowWhileIdle"}',
         );
       } else {
-        scheduleMode = AndroidScheduleMode.inexactAllowWhileIdle;
+        scheduleMode = AndroidScheduleMode.exactAllowWhileIdle;
       }
 
       await _plugin.zonedSchedule(
@@ -166,11 +166,11 @@ class NotificationService {
         final exactAlarmPermission = await Permission.scheduleExactAlarm.status;
         final canUseExactAlarm = exactAlarmPermission.isGranted;
         scheduleMode = canUseExactAlarm
-            ? AndroidScheduleMode.inexactAllowWhileIdle
+            ? AndroidScheduleMode.exactAllowWhileIdle
             : AndroidScheduleMode.inexactAllowWhileIdle;
         AppLogger.info(
           'scheduleReminder: exactAlarm=${exactAlarmPermission.name} '
-          'mode=${canUseExactAlarm ? "exactAllowWhileIdle" : "inexact"}',
+          'mode=${canUseExactAlarm ? "exactAllowWhileIdle" : "inexactAllowWhileIdle"}',
         );
       }
 
