@@ -182,24 +182,33 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
   }
 
   Future<void> _shareVideo() async {
-    debugPrint('_shareVideo CALLED — isBusy=$_isBusy arabic=$_includeArabic translation=$_includeTranslation');
+    debugPrint('ONSHAREVIDEO INICIADO — isBusy=$_isBusy arabic=$_includeArabic translation=$_includeTranslation');
+    final messenger = widget.rootMessenger;
+    messenger.hideCurrentSnackBar();
+    messenger.showSnackBar(const SnackBar(
+      duration: Duration(seconds: 8),
+      content: Text('ONSHAREVIDEO INICIADO'),
+    ));
+
     if (_isBusy || (!_includeArabic && !_includeTranslation)) {
       debugPrint('_shareVideo BLOCKED — isBusy=$_isBusy');
+      messenger.hideCurrentSnackBar();
+      messenger.showSnackBar(SnackBar(
+        duration: const Duration(seconds: 8),
+        content: Text('BLOQUEADO isBusy=$_isBusy arabic=$_includeArabic translation=$_includeTranslation'),
+      ));
       return;
     }
 
-    final messenger = widget.rootMessenger;
     final l10n = context.l10n;
     setState(() => _activeAction = _AyahShareAction.video);
 
     try {
       messenger.hideCurrentSnackBar();
-      messenger.showSnackBar(
-        const SnackBar(
-          duration: Duration(seconds: 10),
-          content: Text('Paso 1'),
-        ),
-      );
+      messenger.showSnackBar(const SnackBar(
+        duration: Duration(seconds: 8),
+        content: Text('SERVICIO VIDEO INICIADO — llamando prepareDraft'),
+      ));
       final draft = await widget.videoService.prepareDraft(
         summary: widget.summary,
         ayah: widget.ayah,
@@ -368,12 +377,12 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
         onShareText: _shareText,
         onShareImage: _shareImage,
         onShareVideo: () {
-          debugPrint('BOTON VIDEO PULSADO');
+          debugPrint('ENTRANDO A ONSHAREVIDEO');
           widget.rootMessenger
             ..hideCurrentSnackBar()
             ..showSnackBar(const SnackBar(
-              duration: Duration(seconds: 5),
-              content: Text('BOTON VIDEO PULSADO'),
+              duration: Duration(seconds: 8),
+              content: Text('ENTRANDO A ONSHAREVIDEO'),
             ));
           _shareVideo();
         },
