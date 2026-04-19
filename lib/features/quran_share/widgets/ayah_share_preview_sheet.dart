@@ -470,31 +470,39 @@ class _AyahShareFooter extends StatelessWidget {
             const SizedBox(width: 10),
             Expanded(
               child: OutlinedButton(
-                onPressed: isBusy ? null : onShareVideo,
+                onPressed: () {
+                  debugPrint('VIDEO DEBUG B PULSADO — isBusy=$isBusy');
+                  showDialog<void>(
+                    context: context,
+                    builder: (_) => AlertDialog(
+                      title: const Text('PULSACIÓN DETECTADA'),
+                      content: Text('isBusy=$isBusy'),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: const Text('OK'),
+                        ),
+                      ],
+                    ),
+                  );
+                },
                 style: OutlinedButton.styleFrom(
-                  foregroundColor: tokens.textPrimary,
-                  side: BorderSide(color: tokens.borderMed),
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.red,
+                  side: const BorderSide(color: Colors.red, width: 4),
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
                   ),
                 ),
-                child: activeAction == _AyahShareAction.video
-                    ? SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2.2,
-                          valueColor: AlwaysStoppedAnimation(tokens.primary),
-                        ),
-                      )
-                    : Text(
-                        'VIDEO DEBUG B',
-                        style: GoogleFonts.dmSans(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
+                child: const Text(
+                  'VIDEO DEBUG B',
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w900,
+                    color: Colors.white,
+                  ),
+                ),
               ),
             ),
           ],
