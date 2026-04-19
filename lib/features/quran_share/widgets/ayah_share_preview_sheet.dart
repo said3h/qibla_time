@@ -23,6 +23,11 @@ Future<void> showAyahSharePreviewSheet({
   required AyahShareVideoService videoService,
   required QiblaTokens tokens,
 }) {
+  // El ScaffoldMessenger del bottom sheet está desconectado del Scaffold
+  // principal. Se captura aquí, antes de abrir el sheet, para que los
+  // snackbars aparezcan en la pantalla real y no se pierdan.
+  final rootMessenger = ScaffoldMessenger.of(context);
+
   return showModalBottomSheet<void>(
     context: context,
     isScrollControlled: true,
@@ -36,6 +41,7 @@ Future<void> showAyahSharePreviewSheet({
         shareService: shareService,
         videoService: videoService,
         tokens: tokens,
+        rootMessenger: rootMessenger,
       ),
     ),
   );
@@ -50,6 +56,7 @@ class _AyahSharePreviewSheet extends StatefulWidget {
     required this.shareService,
     required this.videoService,
     required this.tokens,
+    required this.rootMessenger,
   });
 
   final SurahSummary summary;
@@ -57,6 +64,7 @@ class _AyahSharePreviewSheet extends StatefulWidget {
   final AyahShareService shareService;
   final AyahShareVideoService videoService;
   final QiblaTokens tokens;
+  final ScaffoldMessengerState rootMessenger;
 
   @override
   State<_AyahSharePreviewSheet> createState() => _AyahSharePreviewSheetState();
@@ -129,7 +137,7 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
       Navigator.of(context).pop();
     } catch (_) {
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
+      widget.rootMessenger.showSnackBar(
         SnackBar(
           content: Text(context.l10n.shareAyahTextError),
         ),
@@ -161,7 +169,7 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
       Navigator.of(context).pop();
     } catch (_) {
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
+      widget.rootMessenger.showSnackBar(
         SnackBar(
           content: Text(context.l10n.shareAyahImageError),
         ),
@@ -178,7 +186,7 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
       return;
     }
 
-    final messenger = ScaffoldMessenger.of(context);
+    final messenger = widget.rootMessenger;
     final l10n = context.l10n;
     setState(() => _activeAction = _AyahShareAction.video);
 
