@@ -8,7 +8,7 @@ import Foundation
 import audioplayers_darwin
 import connectivity_plus
 import device_info_plus
-import ffmpeg_kit_flutter_min
+import ffmpeg_kit_flutter_minimal
 import flutter_local_notifications
 import geolocator_apple
 import package_info_plus
