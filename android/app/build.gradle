@@ -91,9 +91,9 @@ android {
     buildTypes {
         release {
             signingConfig hasValidReleaseSigning ? signingConfigs.release : signingConfigs.debug
-            minifyEnabled true
-            shrinkResources true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            // TEMP: disable R8/Proguard & resource shrinking to verify if minification breaks notifications
+            minifyEnabled false
+            shrinkResources false
         }
     }
 }
