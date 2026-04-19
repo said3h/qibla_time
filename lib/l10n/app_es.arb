@@ -188,7 +188,7 @@
   "settingsSectionRecentPlaces": "LUGARES RECIENTES",
   "settingsSectionSmartCache": "Caché inteligente",
   "settingsSectionSupport": "Sadaqah · Apoyo",
-  "settingsSectionCloudBackup": "Copia de seguridad en la nube (beta)",
+  "settingsSectionCloudBackup": "Copia de seguridad (manual)",
   "settingsTextSize": "Tamaño de texto",
   "settingsCurrentScale": "Escala actual: {scale}x",
   "@settingsCurrentScale": {

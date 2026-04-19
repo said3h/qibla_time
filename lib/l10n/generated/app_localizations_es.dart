@@ -426,8 +426,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get settingsSectionSupport => 'Sadaqah · Apoyo';
 
   @override
-  String get settingsSectionCloudBackup =>
-      'Copia de seguridad en la nube (beta)';
+  String get settingsSectionCloudBackup => 'Copia de seguridad (manual)';
 
   @override
   String get settingsTextSize => 'Tamaño de texto';

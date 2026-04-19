@@ -875,7 +875,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsSectionCloudBackup.
   ///
   /// In es, this message translates to:
-  /// **'Copia de seguridad en la nube (beta)'**
+  /// **'Copia de seguridad (manual)'**
   String get settingsSectionCloudBackup;
 
   /// No description provided for @settingsTextSize.

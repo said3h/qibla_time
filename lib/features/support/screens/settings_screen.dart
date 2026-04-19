@@ -697,15 +697,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
                   _openBatterySettings();
                 },
               ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: ElevatedButton.icon(
-                icon: const Icon(Icons.notifications_active),
-                label: const Text('Test notificación'),
-                onPressed: () =>
-                    NotificationService.instance.sendTestNotification(),
-              ),
-            ),
             _buildToggleTile(
                 tokens,
                 _prayerSettingLabel('fajr', context),
@@ -1120,9 +1111,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
             _buildValueTile(
               tokens,
               l10n.commonVersion,
-              packageInfo == null
-                  ? l10n.commonGenerating
-                  : packageInfo.version,
+              packageInfo == null ? l10n.commonGenerating : packageInfo.version,
             ),
             _buildValueTile(tokens, l10n.settingsOpenSourceLicenses, '→'),
           ],
