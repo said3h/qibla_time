@@ -481,19 +481,14 @@ class _AyahShareFooter extends StatelessWidget {
               child: OutlinedButton(
                 onPressed: () {
                   debugPrint('VIDEO DEBUG B PULSADO — isBusy=$isBusy');
-                  showDialog<void>(
-                    context: context,
-                    builder: (_) => AlertDialog(
-                      title: const Text('PULSACIÓN DETECTADA'),
-                      content: Text('isBusy=$isBusy'),
-                      actions: [
-                        TextButton(
-                          onPressed: () => Navigator.of(context).pop(),
-                          child: const Text('OK'),
-                        ),
-                      ],
-                    ),
-                  );
+                  ScaffoldMessenger.of(context)
+                    ..hideCurrentSnackBar()
+                    ..showSnackBar(const SnackBar(
+                      duration: Duration(seconds: 8),
+                      content: Text('LLAMANDO A ONSHAREVIDEO'),
+                    ));
+                  debugPrint('LLAMANDO A ONSHAREVIDEO');
+                  onShareVideo();
                 },
                 style: OutlinedButton.styleFrom(
                   foregroundColor: Colors.white,
