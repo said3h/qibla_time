@@ -374,18 +374,10 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
         tokens: tokens,
         isBusy: _isBusy,
         activeAction: _activeAction,
+        rootMessenger: widget.rootMessenger,
         onShareText: _shareText,
         onShareImage: _shareImage,
-        onShareVideo: () {
-          debugPrint('ENTRANDO A ONSHAREVIDEO');
-          widget.rootMessenger
-            ..hideCurrentSnackBar()
-            ..showSnackBar(const SnackBar(
-              duration: Duration(seconds: 8),
-              content: Text('ENTRANDO A ONSHAREVIDEO'),
-            ));
-          _shareVideo();
-        },
+        onShareVideo: _shareVideo,
       ),
     );
   }
@@ -399,6 +391,7 @@ class _AyahShareFooter extends StatelessWidget {
     required this.onShareText,
     required this.onShareImage,
     required this.onShareVideo,
+    required this.rootMessenger,
   });
 
   final QiblaTokens tokens;
@@ -407,6 +400,7 @@ class _AyahShareFooter extends StatelessWidget {
   final VoidCallback onShareText;
   final VoidCallback onShareImage;
   final VoidCallback onShareVideo;
+  final ScaffoldMessengerState rootMessenger;
 
   @override
   Widget build(BuildContext context) {
@@ -480,27 +474,45 @@ class _AyahShareFooter extends StatelessWidget {
             Expanded(
               child: OutlinedButton(
                 onPressed: () {
-                  debugPrint('VIDEO DEBUG B PULSADO — isBusy=$isBusy');
-                  ScaffoldMessenger.of(context)
+                  debugPrint('VIDEO REAL PULSADO');
+                  rootMessenger
                     ..hideCurrentSnackBar()
                     ..showSnackBar(const SnackBar(
-                      duration: Duration(seconds: 8),
-                      content: Text('LLAMANDO A ONSHAREVIDEO'),
+                      duration: Duration(seconds: 10),
+                      content: Text('VIDEO REAL PULSADO — llamando _shareVideo'),
                     ));
-                  debugPrint('LLAMANDO A ONSHAREVIDEO');
-                  onShareVideo();
+                  showDialog<void>(
+                    context: context,
+                    builder: (_) => AlertDialog(
+                      title: const Text('VIDEO REAL PULSADO'),
+                      content: Text('isBusy=$isBusy\nAhora llama a _shareVideo'),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(_).pop();
+                            onShareVideo();
+                          },
+                          child: const Text('EJECUTAR VIDEO'),
+                        ),
+                        TextButton(
+                          onPressed: () => Navigator.of(_).pop(),
+                          child: const Text('CANCELAR'),
+                        ),
+                      ],
+                    ),
+                  );
                 },
                 style: OutlinedButton.styleFrom(
                   foregroundColor: Colors.white,
-                  backgroundColor: Colors.red,
-                  side: const BorderSide(color: Colors.red, width: 4),
+                  backgroundColor: const Color(0xFF6B21A8),
+                  side: const BorderSide(color: Color(0xFF6B21A8), width: 4),
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
                   ),
                 ),
                 child: const Text(
-                  'VIDEO DEBUG B',
+                  'VIDEO REAL',
                   style: TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w900,
