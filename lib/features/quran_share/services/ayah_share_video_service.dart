@@ -89,105 +89,128 @@ class AyahShareVideoService {
     );
   }
 
-  Future<File> exportVideo(AyahShareVideoDraft draft) async {
-    final l10n = appLocalizationsForDevice();
-    final tempDirectory = await getTemporaryDirectory();
-    final workingDirectory = await Directory(
-      '${tempDirectory.path}/ayah_share_video',
-    ).create(recursive: true);
-    final fileStem = _fileStemFor(draft);
+  Future<File> exportVideo(
+    AyahShareVideoDraft draft, {
+    void Function(String message)? onDebugStep,
+  }) async {
+    try {
+      final l10n = appLocalizationsForDevice();
+      final tempDirectory = await getTemporaryDirectory();
+      final workingDirectory = await Directory(
+        '${tempDirectory.path}/ayah_share_video',
+      ).create(recursive: true);
+      final fileStem = _fileStemFor(draft);
 
-    final imageFile = await AyahShareImageService.savePng(
-      data: AyahShareData(
-        surahNumber: draft.surahNumber,
-        surahNameLatin: draft.surahNameLatin,
-        surahNameArabic: draft.surahNameArabic,
-        ayahNumber: draft.ayahNumber,
-        arabicText: draft.arabicText,
-        translation: draft.translation,
-        badgeLabel: l10n.shareBadgeQuran,
-        branding: l10n.shareBranding,
-      ),
-      theme: AyahShareThemeData.fromTokens(
-        QiblaThemes.current,
+      final imageFile = await AyahShareImageService.savePng(
+        data: AyahShareData(
+          surahNumber: draft.surahNumber,
+          surahNameLatin: draft.surahNameLatin,
+          surahNameArabic: draft.surahNameArabic,
+          ayahNumber: draft.ayahNumber,
+          arabicText: draft.arabicText,
+          translation: draft.translation,
+          badgeLabel: l10n.shareBadgeQuran,
+          branding: l10n.shareBranding,
+        ),
+        theme: AyahShareThemeData.fromTokens(
+          QiblaThemes.current,
+          transparentBackground:
+              draft.exportMode == AyahShareExportMode.cardOnly,
+        ),
         transparentBackground: draft.exportMode == AyahShareExportMode.cardOnly,
-      ),
-      transparentBackground: draft.exportMode == AyahShareExportMode.cardOnly,
-      mode: draft.exportMode,
-      fileName: '${fileStem}_card',
-      directory: workingDirectory,
-    );
-
-    final audioFile = await _ensureAudioFile(
-      draft: draft,
-      directory: workingDirectory,
-      fileStem: fileStem,
-    );
-
-    final audioDurationSeconds = await _getAudioDuration(audioFile);
-
-    if (audioDurationSeconds <= 0) {
-      throw StateError(
-        'Could not determine audio duration for ayah video.',
+        mode: draft.exportMode,
+        fileName: '${fileStem}_card',
+        directory: workingDirectory,
       );
-    }
 
-    final outputFile = File('${workingDirectory.path}/${fileStem}_video.mp4');
-    if (await outputFile.exists()) {
-      await outputFile.delete();
-    }
+      final audioFile = await _ensureAudioFile(
+        draft: draft,
+        directory: workingDirectory,
+        fileStem: fileStem,
+      );
 
-    final command = _buildFfmpegCommand(
-      imageFile: imageFile,
-      audioFile: audioFile,
-      outputFile: outputFile,
-      audioDurationSeconds: audioDurationSeconds,
-    );
+      onDebugStep?.call('Paso 2');
+      final audioDurationSeconds = await _getAudioDuration(audioFile);
+      onDebugStep?.call('Paso 3');
 
-    AppLogger.info('exportVideo: running FFmpeg command:\n$command');
+      if (audioDurationSeconds <= 0) {
+        throw StateError(
+          'Could not determine audio duration for ayah video.',
+        );
+      }
 
-    final session = await FFmpegKit.execute(command);
-    final returnCode = await session.getReturnCode();
-    // getAllLogsAsString captura tanto stdout como stderr — necesario porque
-    // FFmpeg escribe la mayor parte del diagnóstico en stderr.
-    final logs = await session.getAllLogsAsString() ?? '';
-    AppLogger.info('exportVideo: FFmpeg returnCode=${returnCode?.getValue()} logs:\n$logs');
+      final outputFile = File('${workingDirectory.path}/${fileStem}_video.mp4');
+      if (await outputFile.exists()) {
+        await outputFile.delete();
+      }
 
-    if (!ReturnCode.isSuccess(returnCode)) {
-      // Retry always with the software fallback encoder. No esperamos a que
-      // los logs contengan una palabra clave específica, porque en builds
-      // minimal de FFmpeg el mensaje de error varía según la plataforma.
-      AppLogger.info('exportVideo: primary encoder failed, retrying with mpeg4 fallback...');
-
-      final fallbackCommand = _buildFfmpegCommand(
+      final command = _buildFfmpegCommand(
         imageFile: imageFile,
         audioFile: audioFile,
         outputFile: outputFile,
         audioDurationSeconds: audioDurationSeconds,
-        forceFallbackEncoder: true,
       );
 
-      AppLogger.info('exportVideo: fallback command:\n$fallbackCommand');
+      AppLogger.info('exportVideo: running FFmpeg command:\n$command');
 
-      final retrySession = await FFmpegKit.execute(fallbackCommand);
-      final retryCode = await retrySession.getReturnCode();
-      final retryLogs = await retrySession.getAllLogsAsString() ?? '';
-      AppLogger.info('exportVideo: fallback returnCode=${retryCode?.getValue()} logs:\n$retryLogs');
+      onDebugStep?.call('Paso 4');
+      final session = await FFmpegKit.execute(command);
+      final returnCode = await session.getReturnCode();
+      // getAllLogsAsString captura tanto stdout como stderr — necesario porque
+      // FFmpeg escribe la mayor parte del diagnóstico en stderr.
+      final logs = await session.getAllLogsAsString() ?? '';
+      AppLogger.info(
+          'exportVideo: FFmpeg returnCode=${returnCode?.getValue()} logs:\n$logs');
+      onDebugStep?.call('Paso 5');
 
-      if (!ReturnCode.isSuccess(retryCode)) {
-        throw StateError(
-          'FFmpeg failed (primary + fallback).\n'
-          'Primary logs: $logs\n'
-          'Fallback logs: $retryLogs',
+      if (!ReturnCode.isSuccess(returnCode)) {
+        // Retry always with the software fallback encoder. No esperamos a que
+        // los logs contengan una palabra clave específica, porque en builds
+        // minimal de FFmpeg el mensaje de error varía según la plataforma.
+        onDebugStep?.call('Fallback');
+        AppLogger.info(
+            'exportVideo: primary encoder failed, retrying with mpeg4 fallback...');
+
+        final fallbackCommand = _buildFfmpegCommand(
+          imageFile: imageFile,
+          audioFile: audioFile,
+          outputFile: outputFile,
+          audioDurationSeconds: audioDurationSeconds,
+          forceFallbackEncoder: true,
         );
+
+        AppLogger.info('exportVideo: fallback command:\n$fallbackCommand');
+
+        final retrySession = await FFmpegKit.execute(fallbackCommand);
+        final retryCode = await retrySession.getReturnCode();
+        final retryLogs = await retrySession.getAllLogsAsString() ?? '';
+        AppLogger.info(
+            'exportVideo: fallback returnCode=${retryCode?.getValue()} logs:\n$retryLogs');
+
+        if (!ReturnCode.isSuccess(retryCode)) {
+          throw StateError(
+            'FFmpeg failed (primary + fallback).\n'
+            'Primary logs: $logs\n'
+            'Fallback logs: $retryLogs',
+          );
+        }
       }
-    }
 
-    if (!await outputFile.exists()) {
-      throw StateError('FFmpeg finished without creating the ayah video file.');
-    }
+      if (!await outputFile.exists()) {
+        throw StateError(
+            'FFmpeg finished without creating the ayah video file.');
+      }
 
-    return outputFile;
+      return outputFile;
+    } catch (e, stackTrace) {
+      AppLogger.error(
+        'exportVideo: FAILED ${e.runtimeType}: $e',
+        error: e,
+        stackTrace: stackTrace,
+      );
+      onDebugStep?.call('ERROR: $e');
+      rethrow;
+    }
   }
 
   Future<double> _getAudioDuration(File audioFile) async {
@@ -202,7 +225,8 @@ class AyahShareVideoService {
     AppLogger.info('_getAudioDuration: logs=$logs');
 
     if (logs == null || logs.isEmpty) {
-      AppLogger.error('_getAudioDuration: no logs from FFmpeg — cannot determine duration');
+      AppLogger.error(
+          '_getAudioDuration: no logs from FFmpeg — cannot determine duration');
       return 0;
     }
 

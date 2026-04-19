@@ -183,6 +183,13 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
     setState(() => _activeAction = _AyahShareAction.video);
 
     try {
+      messenger.hideCurrentSnackBar();
+      messenger.showSnackBar(
+        const SnackBar(
+          duration: Duration(seconds: 10),
+          content: Text('Paso 1'),
+        ),
+      );
       final draft = await widget.videoService.prepareDraft(
         summary: widget.summary,
         ayah: widget.ayah,
@@ -210,7 +217,19 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
         ),
       );
 
-      final file = await widget.videoService.exportVideo(draft);
+      final file = await widget.videoService.exportVideo(
+        draft,
+        onDebugStep: (message) {
+          if (!mounted) return;
+          messenger.hideCurrentSnackBar();
+          messenger.showSnackBar(
+            SnackBar(
+              duration: const Duration(seconds: 10),
+              content: Text(message),
+            ),
+          );
+        },
+      );
       if (!mounted) return;
 
       messenger.hideCurrentSnackBar();
@@ -290,8 +309,7 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
           children: [
             ShareSelectionChip(
               label: l10n.shareContentBilingual,
-              selected:
-                  _selectedContent == SharePreviewContentOption.bilingual,
+              selected: _selectedContent == SharePreviewContentOption.bilingual,
               enabled: SharePreviewContentOption.bilingual.isAvailable(
                 hasArabic: _hasArabicText,
                 hasTranslation: _hasTranslation,

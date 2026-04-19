@@ -8,6 +8,7 @@ import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../core/services/audio_service.dart';
+import '../../../core/services/logger_service.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../l10n/l10n.dart';
 import '../../hafiz/screens/hafiz_mode_screen.dart';
@@ -490,7 +491,8 @@ class _ContinueReadingCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Icon(Icons.bookmark_added_outlined, color: tokens.primary, size: 22),
+            Icon(Icons.bookmark_added_outlined,
+                color: tokens.primary, size: 22),
             const SizedBox(width: 12),
             Expanded(
               child: Column(
@@ -516,7 +518,8 @@ class _ContinueReadingCard extends StatelessWidget {
                 ],
               ),
             ),
-            Icon(Icons.arrow_forward_ios_rounded, size: 16, color: tokens.primary),
+            Icon(Icons.arrow_forward_ios_rounded,
+                size: 16, color: tokens.primary),
           ],
         ),
       ),
@@ -557,34 +560,35 @@ class _BookmarksCard extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           ...bookmarks.take(3).map(
-            (bookmark) => InkWell(
-              onTap: () => onTap(bookmark),
-              borderRadius: BorderRadius.circular(12),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                child: Row(
-                  children: [
-                    Icon(Icons.bookmark_outline, size: 16, color: tokens.primary),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: Text(
-                        _readingPointLabel(context, bookmark),
-                        style: GoogleFonts.dmSans(
-                          fontSize: 12,
-                          color: tokens.textPrimary,
+                (bookmark) => InkWell(
+                  onTap: () => onTap(bookmark),
+                  borderRadius: BorderRadius.circular(12),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: Row(
+                      children: [
+                        Icon(Icons.bookmark_outline,
+                            size: 16, color: tokens.primary),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Text(
+                            _readingPointLabel(context, bookmark),
+                            style: GoogleFonts.dmSans(
+                              fontSize: 12,
+                              color: tokens.textPrimary,
+                            ),
+                          ),
                         ),
-                      ),
+                        Icon(
+                          Icons.arrow_forward_ios_rounded,
+                          size: 14,
+                          color: tokens.textMuted,
+                        ),
+                      ],
                     ),
-                    Icon(
-                      Icons.arrow_forward_ios_rounded,
-                      size: 14,
-                      color: tokens.textMuted,
-                    ),
-                  ],
+                  ),
                 ),
               ),
-            ),
-          ),
         ],
       ),
     );
@@ -633,7 +637,8 @@ class _SurahTile extends StatelessWidget {
       decoration: BoxDecoration(
         color: tokens.bgSurface,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: isLastRead ? tokens.activeBorder : tokens.border),
+        border:
+            Border.all(color: isLastRead ? tokens.activeBorder : tokens.border),
       ),
       child: ListTile(
         onTap: () {
@@ -859,7 +864,8 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                   l10n.quranShareTextSubtitle,
                   style: GoogleFonts.dmSans(fontSize: 12),
                 ),
-                onTap: () => Navigator.of(sheetContext).pop(_AyahShareAction.text),
+                onTap: () =>
+                    Navigator.of(sheetContext).pop(_AyahShareAction.text),
               ),
               ListTile(
                 leading: const Icon(Icons.image_outlined),
@@ -926,6 +932,13 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     final l10n = context.l10n;
 
     try {
+      messenger.hideCurrentSnackBar();
+      messenger.showSnackBar(
+        const SnackBar(
+          duration: Duration(seconds: 10),
+          content: Text('Paso 1'),
+        ),
+      );
       final draft = await videoService.prepareDraft(
         summary: widget.summary,
         ayah: ayah,
@@ -952,7 +965,19 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
         ),
       );
 
-      final file = await videoService.exportVideo(draft);
+      final file = await videoService.exportVideo(
+        draft,
+        onDebugStep: (message) {
+          if (!mounted) return;
+          messenger.hideCurrentSnackBar();
+          messenger.showSnackBar(
+            SnackBar(
+              duration: const Duration(seconds: 10),
+              content: Text(message),
+            ),
+          );
+        },
+      );
       if (!mounted) return;
 
       messenger.hideCurrentSnackBar();
@@ -963,14 +988,19 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
           widget.summary.nameLatin,
         ),
       );
-    } catch (_) {
+    } catch (e, stackTrace) {
+      AppLogger.error(
+        '_shareAyahAsVideo: FAILED ${e.runtimeType}: $e',
+        error: e,
+        stackTrace: stackTrace,
+      );
       if (!mounted) return;
 
       messenger.hideCurrentSnackBar();
       messenger.showSnackBar(
         SnackBar(
           content: Text(
-            l10n.quranAyahVideoError,
+            '${l10n.quranAyahVideoError}\n$e',
           ),
         ),
       );
@@ -1091,9 +1121,9 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                   downloadedAyahs: 0,
                 ))
             .copyWith(
-              status: SurahAudioDownloadStatus.error,
-              errorMessage: l10n.quranDownloadDetailedError,
-            );
+          status: SurahAudioDownloadStatus.error,
+          errorMessage: l10n.quranDownloadDetailedError,
+        );
       });
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -1125,7 +1155,8 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                 onTap: () => Navigator.of(sheetContext).pop('play'),
               ),
               ListTile(
-                leading: Icon(Icons.cloud_off_outlined, color: tokens.textSecondary),
+                leading:
+                    Icon(Icons.cloud_off_outlined, color: tokens.textSecondary),
                 title: Text(l10n.commonRemove),
                 subtitle: Text(l10n.quranDownloadedAudioRemoveSubtitle),
                 onTap: () => Navigator.of(sheetContext).pop('remove'),
@@ -1243,10 +1274,9 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
         ? ' ${l10n.quranSurahAudioMissingAyahs(missingCount)}'
         : '';
 
-    final downloadNote =
-        downloadState?.hasPartialDownload == true
-            ? ' ${l10n.quranSurahAudioPartialDownload(downloadState!.downloadedAyahs, downloadState.availableAyahs)}'
-            : ' ${l10n.quranSurahAudioDownloadAvailable}';
+    final downloadNote = downloadState?.hasPartialDownload == true
+        ? ' ${l10n.quranSurahAudioPartialDownload(downloadState!.downloadedAyahs, downloadState.availableAyahs)}'
+        : ' ${l10n.quranSurahAudioDownloadAvailable}';
 
     switch (source) {
       case SurahLoadSource.online:
@@ -1324,7 +1354,9 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
 
   Future<void> _toggleActiveAudioFromIndicator() async {
     if (_activeAyahNumber == null) return;
-    await ref.read(quranMiniPlayerControllerProvider.notifier).togglePlayPause();
+    await ref
+        .read(quranMiniPlayerControllerProvider.notifier)
+        .togglePlayPause();
   }
 
   Future<void> _stopActiveAudio() async {
@@ -1382,7 +1414,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
               final canPlayAudio = _canPlayAyahAudio(ayah, result.source);
               final isLastRead =
                   lastReading?.surahNumber == widget.summary.number &&
-                  lastReading?.ayahNumber == ayah.numberInSurah;
+                      lastReading?.ayahNumber == ayah.numberInSurah;
               final isActiveAudio = _activeAyahNumber == ayah.numberInSurah;
               final isPlayingAudio = isActiveAudio && _isAudioPlaying;
               final isBookmarked = bookmarks.any(
@@ -1456,10 +1488,10 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                           IconButton(
                             tooltip: canPlayAudio
                                 ? (isPlayingAudio
-                                      ? l10n.quranPauseAudio
-                                      : isActiveAudio
-                                          ? l10n.quranResumeAudio
-                                          : l10n.quranPlayAudio)
+                                    ? l10n.quranPauseAudio
+                                    : isActiveAudio
+                                        ? l10n.quranResumeAudio
+                                        : l10n.quranPlayAudio)
                                 : l10n.quranAudioUnavailable,
                             onPressed: canPlayAudio
                                 ? () => _toggleAyahAudio(ayah, result.source)
@@ -1479,7 +1511,8 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                             tooltip: isBookmarked
                                 ? l10n.quranRemoveBookmark
                                 : l10n.quranSaveBookmark,
-                            onPressed: () => _toggleBookmark(ayah.numberInSurah),
+                            onPressed: () =>
+                                _toggleBookmark(ayah.numberInSurah),
                             icon: Icon(
                               isBookmarked
                                   ? Icons.bookmark
@@ -1541,7 +1574,8 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
             },
           );
         },
-        loading: () => Center(child: CircularProgressIndicator(color: tokens.primary)),
+        loading: () =>
+            Center(child: CircularProgressIndicator(color: tokens.primary)),
         error: (error, _) => Center(
           child: Padding(
             padding: const EdgeInsets.all(24),
@@ -1568,12 +1602,9 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       textParts.add(l10n.quranTopBannerResume(initialAyah));
     }
     final sourceMessage = switch (source) {
-      SurahLoadSource.online =>
-        l10n.quranTopBannerOnline,
-      SurahLoadSource.offline =>
-        l10n.quranTopBannerOffline,
-      SurahLoadSource.placeholder =>
-        l10n.quranTopBannerPlaceholder,
+      SurahLoadSource.online => l10n.quranTopBannerOnline,
+      SurahLoadSource.offline => l10n.quranTopBannerOffline,
+      SurahLoadSource.placeholder => l10n.quranTopBannerPlaceholder,
     };
     textParts.add(sourceMessage);
 
@@ -1618,7 +1649,8 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     final isDownloading = downloadState?.isDownloading == true;
     final isDownloaded = downloadState?.isDownloaded == true;
     final canDownload = availableAyahs > 0;
-    final isCheckingDownloadState = _isCheckingDownloadState && downloadState == null;
+    final isCheckingDownloadState =
+        _isCheckingDownloadState && downloadState == null;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
@@ -1699,34 +1731,36 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                     : isCheckingDownloadState
                         ? null
                         : isDownloading
-                        ? null
-                        : isDownloaded
-                            ? () => _showDownloadedAudioOptions(detail, source)
-                            : () => _downloadSurahAudio(detail),
+                            ? null
+                            : isDownloaded
+                                ? () =>
+                                    _showDownloadedAudioOptions(detail, source)
+                                : () => _downloadSurahAudio(detail),
                 icon: Icon(
                   !canDownload
                       ? Icons.volume_off_outlined
                       : isCheckingDownloadState
                           ? Icons.cloud_queue_outlined
-                      : isDownloading
-                          ? Icons.downloading_outlined
-                          : isDownloaded
-                              ? Icons.download_done_outlined
-                              : Icons.download_outlined,
+                          : isDownloading
+                              ? Icons.downloading_outlined
+                              : isDownloaded
+                                  ? Icons.download_done_outlined
+                                  : Icons.download_outlined,
                 ),
                 label: Text(
                   !canDownload
                       ? l10n.quranAudioUnavailable
                       : isCheckingDownloadState
                           ? l10n.quranCheckingAudio
-                      : isDownloading
-                          ? l10n.quranDownloadingProgress(
-                              downloadState?.downloadedAyahs ?? 0,
-                              downloadState?.availableAyahs ?? availableAyahs,
-                            )
-                          : isDownloaded
-                              ? l10n.quranDownloaded
-                              : l10n.quranDownloadAudio,
+                          : isDownloading
+                              ? l10n.quranDownloadingProgress(
+                                  downloadState?.downloadedAyahs ?? 0,
+                                  downloadState?.availableAyahs ??
+                                      availableAyahs,
+                                )
+                              : isDownloaded
+                                  ? l10n.quranDownloaded
+                                  : l10n.quranDownloadAudio,
                 ),
               ),
               if (isDownloaded)
@@ -1807,9 +1841,8 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
             ),
           ),
           IconButton(
-            tooltip: _isAudioPlaying
-                ? l10n.quranPauseAudio
-                : l10n.quranResumeAudio,
+            tooltip:
+                _isAudioPlaying ? l10n.quranPauseAudio : l10n.quranResumeAudio,
             onPressed: _toggleActiveAudioFromIndicator,
             icon: Icon(
               _isAudioPlaying
