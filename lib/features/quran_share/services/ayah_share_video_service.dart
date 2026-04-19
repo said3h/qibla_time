@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:ffmpeg_kit_min_gpl/ffmpeg_kit.dart';
-import 'package:ffmpeg_kit_min_gpl/return_code.dart';
+import 'package:ffmpeg_kit_flutter_min/ffmpeg_kit.dart';
+import 'package:ffmpeg_kit_flutter_min/return_code.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
@@ -146,10 +146,31 @@ class AyahShareVideoService {
     final session = await FFmpegKit.execute(command);
     final returnCode = await session.getReturnCode();
     if (!ReturnCode.isSuccess(returnCode)) {
-      final output = await session.getOutput();
-      throw StateError(
-        'FFmpeg failed to export the ayah video.${output == null || output.trim().isEmpty ? '' : '\n$output'}',
-      );
+      final output = await session.getOutput() ?? '';
+
+      // Retry once with a safer software encoder if the platform encoder isn't
+      // available or fails to initialize on this device/runtime.
+      if (_shouldRetryWithFallbackEncoder(output)) {
+        final fallbackCommand = _buildFfmpegCommand(
+          imageFile: imageFile,
+          audioFile: audioFile,
+          outputFile: outputFile,
+          audioDurationSeconds: audioDurationSeconds,
+          forceFallbackEncoder: true,
+        );
+        final retrySession = await FFmpegKit.execute(fallbackCommand);
+        final retryCode = await retrySession.getReturnCode();
+        if (!ReturnCode.isSuccess(retryCode)) {
+          final retryOutput = await retrySession.getOutput();
+          throw StateError(
+            'FFmpeg failed to export the ayah video.${retryOutput == null || retryOutput.trim().isEmpty ? '' : '\n$retryOutput'}',
+          );
+        }
+      } else {
+        throw StateError(
+          'FFmpeg failed to export the ayah video.${output.trim().isEmpty ? '' : '\n$output'}',
+        );
+      }
     }
 
     if (!await outputFile.exists()) {
@@ -157,6 +178,18 @@ class AyahShareVideoService {
     }
 
     return outputFile;
+  }
+
+  bool _shouldRetryWithFallbackEncoder(String output) {
+    if (output.trim().isEmpty) return false;
+    final lowered = output.toLowerCase();
+    return lowered.contains('unknown encoder') ||
+        lowered.contains('could not find encoder') ||
+        lowered.contains('error while opening encoder') ||
+        lowered.contains('failed to open encoder') ||
+        lowered.contains('encoder not found') ||
+        lowered.contains('videotoolbox') ||
+        lowered.contains('mediacodec');
   }
 
   Future<double> _getAudioDuration(File audioFile) async {
@@ -228,6 +261,7 @@ class AyahShareVideoService {
     required File audioFile,
     required File outputFile,
     required double audioDurationSeconds,
+    bool forceFallbackEncoder = false,
   }) {
     final backgroundColor = _ffmpegColor(QiblaThemes.current.bgPage);
     final width = _videoSize.width.round();
@@ -244,12 +278,31 @@ class AyahShareVideoService {
         '-i $audioPath '
         '-filter_complex "$filter" '
         '-map "[v]" -map 1:a:0 '
-        '-c:v libx264 -preset veryfast -tune stillimage '
+        '${_videoEncoderArgs(forceFallbackEncoder: forceFallbackEncoder)} '
         '-c:a aac -b:a 192k '
         '-pix_fmt yuv420p -r $_videoFps '
         '-t $audioDurationSeconds '
         '-movflags +faststart '
         '$outputPath';
+  }
+
+  String _videoEncoderArgs({required bool forceFallbackEncoder}) {
+    if (forceFallbackEncoder) {
+      // Baseline encoder that should exist in non-GPL builds.
+      return '-c:v mpeg4 -q:v 5 -tag:v mp4v';
+    }
+
+    if (Platform.isIOS) {
+      // Hardware H.264 encoder (non-GPL).
+      return '-c:v h264_videotoolbox -b:v 2500k';
+    }
+    if (Platform.isAndroid) {
+      // Hardware H.264 encoder (non-GPL). Availability varies by device.
+      return '-c:v h264_mediacodec -b:v 2500k';
+    }
+
+    // Desktop/dev fallback.
+    return '-c:v mpeg4 -q:v 5 -tag:v mp4v';
   }
 
   String _fileStemFor(AyahShareVideoDraft draft) {
