@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -504,6 +505,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
     final cacheStatus = ref.watch(prayerCacheStatusProvider);
     final lastBackup = ref.watch(_lastBackupProvider).valueOrNull;
     final deviceId = ref.watch(_deviceIdProvider).valueOrNull;
+    final packageInfo = ref.watch(_packageInfoProvider).valueOrNull;
     final locationDiagnostic =
         ref.watch(prayerLocationDiagnosticProvider).valueOrNull;
     final locationLabel = ref.watch(lastLocationLabelProvider).valueOrNull;
@@ -696,13 +698,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
                 },
               ),
             Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: ElevatedButton.icon(
-                  icon: const Icon(Icons.notifications_active),
-                  label: const Text('Test notificación'),
-                  onPressed: () => NotificationService.instance.sendTestNotification(),
-                ),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: ElevatedButton.icon(
+                icon: const Icon(Icons.notifications_active),
+                label: const Text('Test notificación'),
+                onPressed: () =>
+                    NotificationService.instance.sendTestNotification(),
               ),
+            ),
             _buildToggleTile(
                 tokens,
                 _prayerSettingLabel('fajr', context),
@@ -1114,7 +1117,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
               ),
             ),
             _buildSectionTitle(tokens, l10n.commonAbout),
-            _buildValueTile(tokens, l10n.commonVersion, '3.0.0'),
+            _buildValueTile(
+              tokens,
+              l10n.commonVersion,
+              packageInfo == null
+                  ? l10n.commonGenerating
+                  : '${packageInfo.version}+${packageInfo.buildNumber}',
+            ),
             _buildValueTile(tokens, l10n.settingsOpenSourceLicenses, '→'),
           ],
         ),
@@ -2230,4 +2239,8 @@ final _lastBackupProvider = FutureProvider<DateTime?>((ref) async {
 
 final _deviceIdProvider = FutureProvider<String>((ref) async {
   return ref.watch(cloudSyncServiceProvider).getDeviceId();
+});
+
+final _packageInfoProvider = FutureProvider<PackageInfo>((ref) async {
+  return PackageInfo.fromPlatform();
 });
