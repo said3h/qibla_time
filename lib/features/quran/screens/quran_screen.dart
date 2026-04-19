@@ -879,7 +879,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
               ),
               ListTile(
                 leading: const Icon(Icons.movie_outlined),
-                title: Text(l10n.commonVideo),
+                title: const Text('VIDEO DEBUG A'),
                 subtitle: Text(
                   l10n.quranShareVideoSubtitle,
                   style: GoogleFonts.dmSans(fontSize: 12),

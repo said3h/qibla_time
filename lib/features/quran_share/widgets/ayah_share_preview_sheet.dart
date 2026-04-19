@@ -489,7 +489,7 @@ class _AyahShareFooter extends StatelessWidget {
                         ),
                       )
                     : Text(
-                        l10n.commonVideo,
+                        'VIDEO DEBUG B',
                         style: GoogleFonts.dmSans(
                           fontSize: 13,
                           fontWeight: FontWeight.w700,
