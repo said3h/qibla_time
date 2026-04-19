@@ -1122,7 +1122,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
               l10n.commonVersion,
               packageInfo == null
                   ? l10n.commonGenerating
-                  : '${packageInfo.version}+${packageInfo.buildNumber}',
+                  : packageInfo.version,
             ),
             _buildValueTile(tokens, l10n.settingsOpenSourceLicenses, '→'),
           ],
