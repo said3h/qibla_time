@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:share_plus/share_plus.dart';
 
+import '../../../core/services/logger_service.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../l10n/l10n.dart';
 import '../../quran/models/quran_models.dart';
@@ -224,13 +225,19 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
       );
       if (!mounted) return;
       Navigator.of(context).pop();
-    } catch (_) {
+    } catch (e, stackTrace) {
+      AppLogger.error(
+        'shareVideo: FAILED — ${e.runtimeType}: $e',
+        error: e,
+        stackTrace: stackTrace,
+      );
       if (!mounted) return;
 
       messenger.hideCurrentSnackBar();
       messenger.showSnackBar(
         SnackBar(
-          content: Text(l10n.shareAyahVideoError),
+          duration: const Duration(seconds: 6),
+          content: Text('${l10n.shareAyahVideoError}\n$e'),
         ),
       );
     } finally {

@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 
+import '../../../core/services/logger_service.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../l10n/l10n.dart';
 import '../../quran/models/quran_models.dart';
@@ -143,32 +144,41 @@ class AyahShareVideoService {
       audioDurationSeconds: audioDurationSeconds,
     );
 
+    AppLogger.info('exportVideo: running FFmpeg command:\n$command');
+
     final session = await FFmpegKit.execute(command);
     final returnCode = await session.getReturnCode();
-    if (!ReturnCode.isSuccess(returnCode)) {
-      final output = await session.getOutput() ?? '';
+    // getAllLogsAsString captura tanto stdout como stderr — necesario porque
+    // FFmpeg escribe la mayor parte del diagnóstico en stderr.
+    final logs = await session.getAllLogsAsString() ?? '';
+    AppLogger.info('exportVideo: FFmpeg returnCode=${returnCode?.getValue()} logs:\n$logs');
 
-      // Retry once with a safer software encoder if the platform encoder isn't
-      // available or fails to initialize on this device/runtime.
-      if (_shouldRetryWithFallbackEncoder(output)) {
-        final fallbackCommand = _buildFfmpegCommand(
-          imageFile: imageFile,
-          audioFile: audioFile,
-          outputFile: outputFile,
-          audioDurationSeconds: audioDurationSeconds,
-          forceFallbackEncoder: true,
-        );
-        final retrySession = await FFmpegKit.execute(fallbackCommand);
-        final retryCode = await retrySession.getReturnCode();
-        if (!ReturnCode.isSuccess(retryCode)) {
-          final retryOutput = await retrySession.getOutput();
-          throw StateError(
-            'FFmpeg failed to export the ayah video.${retryOutput == null || retryOutput.trim().isEmpty ? '' : '\n$retryOutput'}',
-          );
-        }
-      } else {
+    if (!ReturnCode.isSuccess(returnCode)) {
+      // Retry always with the software fallback encoder. No esperamos a que
+      // los logs contengan una palabra clave específica, porque en builds
+      // minimal de FFmpeg el mensaje de error varía según la plataforma.
+      AppLogger.info('exportVideo: primary encoder failed, retrying with mpeg4 fallback...');
+
+      final fallbackCommand = _buildFfmpegCommand(
+        imageFile: imageFile,
+        audioFile: audioFile,
+        outputFile: outputFile,
+        audioDurationSeconds: audioDurationSeconds,
+        forceFallbackEncoder: true,
+      );
+
+      AppLogger.info('exportVideo: fallback command:\n$fallbackCommand');
+
+      final retrySession = await FFmpegKit.execute(fallbackCommand);
+      final retryCode = await retrySession.getReturnCode();
+      final retryLogs = await retrySession.getAllLogsAsString() ?? '';
+      AppLogger.info('exportVideo: fallback returnCode=${retryCode?.getValue()} logs:\n$retryLogs');
+
+      if (!ReturnCode.isSuccess(retryCode)) {
         throw StateError(
-          'FFmpeg failed to export the ayah video.${output.trim().isEmpty ? '' : '\n$output'}',
+          'FFmpeg failed (primary + fallback).\n'
+          'Primary logs: $logs\n'
+          'Fallback logs: $retryLogs',
         );
       }
     }
@@ -180,32 +190,27 @@ class AyahShareVideoService {
     return outputFile;
   }
 
-  bool _shouldRetryWithFallbackEncoder(String output) {
-    if (output.trim().isEmpty) return false;
-    final lowered = output.toLowerCase();
-    return lowered.contains('unknown encoder') ||
-        lowered.contains('could not find encoder') ||
-        lowered.contains('error while opening encoder') ||
-        lowered.contains('failed to open encoder') ||
-        lowered.contains('encoder not found') ||
-        lowered.contains('videotoolbox') ||
-        lowered.contains('mediacodec');
-  }
-
   Future<double> _getAudioDuration(File audioFile) async {
+    // FFmpeg escribe la info de duración en stderr, no en stdout.
+    // getOutput() solo captura stdout → siempre devolvía null/vacío.
+    // getAllLogsAsString() captura ambos streams.
     final session = await FFmpegKit.execute(
       '-i ${_quoteForFfmpeg(audioFile.path)} -f null -',
     );
-    final output = await session.getOutput();
+    final logs = await session.getAllLogsAsString();
 
-    if (output == null || output.isEmpty) {
+    AppLogger.info('_getAudioDuration: logs=$logs');
+
+    if (logs == null || logs.isEmpty) {
+      AppLogger.error('_getAudioDuration: no logs from FFmpeg — cannot determine duration');
       return 0;
     }
 
     final durationRegex = RegExp(r'Duration: (\d{2}):(\d{2}):(\d{2})\.(\d{2})');
-    final match = durationRegex.firstMatch(output);
+    final match = durationRegex.firstMatch(logs);
 
     if (match == null) {
+      AppLogger.error('_getAudioDuration: Duration not found in logs:\n$logs');
       return 0;
     }
 
@@ -213,8 +218,10 @@ class AyahShareVideoService {
     final minutes = int.parse(match.group(2)!);
     final seconds = int.parse(match.group(3)!);
     final centiseconds = int.parse(match.group(4)!);
+    final total = hours * 3600 + minutes * 60 + seconds + centiseconds / 100;
 
-    return hours * 3600 + minutes * 60 + seconds + centiseconds / 100;
+    AppLogger.info('_getAudioDuration: parsed duration=$total s');
+    return total;
   }
 
   Future<File> _ensureAudioFile({
