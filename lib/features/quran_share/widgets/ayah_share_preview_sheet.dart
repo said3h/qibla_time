@@ -367,7 +367,16 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
         activeAction: _activeAction,
         onShareText: _shareText,
         onShareImage: _shareImage,
-        onShareVideo: _shareVideo,
+        onShareVideo: () {
+          debugPrint('BOTON VIDEO PULSADO');
+          widget.rootMessenger
+            ..hideCurrentSnackBar()
+            ..showSnackBar(const SnackBar(
+              duration: Duration(seconds: 5),
+              content: Text('BOTON VIDEO PULSADO'),
+            ));
+          _shareVideo();
+        },
       ),
     );
   }
@@ -461,17 +470,7 @@ class _AyahShareFooter extends StatelessWidget {
             const SizedBox(width: 10),
             Expanded(
               child: OutlinedButton(
-                onPressed: () {
-                  debugPrint('BOTON VIDEO PULSADO — isBusy=$isBusy');
-                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      duration: const Duration(seconds: 5),
-                      content: Text('BOTON VIDEO PULSADO — isBusy=$isBusy'),
-                    ),
-                  );
-                  if (!isBusy) onShareVideo();
-                },
+                onPressed: isBusy ? null : onShareVideo,
                 style: OutlinedButton.styleFrom(
                   foregroundColor: tokens.textPrimary,
                   side: BorderSide(color: tokens.borderMed),
