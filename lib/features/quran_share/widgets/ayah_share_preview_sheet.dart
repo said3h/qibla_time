@@ -182,7 +182,9 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
   }
 
   Future<void> _shareVideo() async {
+    debugPrint('_shareVideo CALLED — isBusy=$_isBusy arabic=$_includeArabic translation=$_includeTranslation');
     if (_isBusy || (!_includeArabic && !_includeTranslation)) {
+      debugPrint('_shareVideo BLOCKED — isBusy=$_isBusy');
       return;
     }
 
@@ -459,7 +461,17 @@ class _AyahShareFooter extends StatelessWidget {
             const SizedBox(width: 10),
             Expanded(
               child: OutlinedButton(
-                onPressed: isBusy ? null : onShareVideo,
+                onPressed: () {
+                  debugPrint('BOTON VIDEO PULSADO — isBusy=$isBusy');
+                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      duration: const Duration(seconds: 5),
+                      content: Text('BOTON VIDEO PULSADO — isBusy=$isBusy'),
+                    ),
+                  );
+                  if (!isBusy) onShareVideo();
+                },
                 style: OutlinedButton.styleFrom(
                   foregroundColor: tokens.textPrimary,
                   side: BorderSide(color: tokens.borderMed),
