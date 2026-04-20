@@ -65,7 +65,6 @@ object StillVideoExporter {
     val audioDecoder = createAudioDecoder(params.audioPath)
     val audioDecoderInputBuffers = audioDecoder.inputBuffers
     val audioDecoderOutputBuffers = audioDecoder.outputBuffers
-    val audioEncoderInputBuffers = audioEncoder.inputBuffers
     val audioEncoderBufferInfo = MediaCodec.BufferInfo()
 
     val extractor = MediaExtractor()
@@ -88,6 +87,7 @@ object StillVideoExporter {
       }
 
     val audioEncoder = createAudioEncoder(params, sampleRate, channelCount)
+    val audioEncoderInputBuffers = audioEncoder.inputBuffers
 
     // Start codecs.
     videoEncoder.start()
