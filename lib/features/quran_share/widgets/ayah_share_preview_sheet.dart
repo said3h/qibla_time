@@ -183,18 +183,23 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
 
   Future<void> _shareVideo() async {
     debugPrint('DENTRO DE _shareVideo — isBusy=$_isBusy arabic=$_includeArabic translation=$_includeTranslation');
-    widget.rootMessenger
-      ..hideCurrentSnackBar()
-      ..showSnackBar(const SnackBar(
-        duration: Duration(seconds: 10),
-        content: Text('DENTRO DE _shareVideo'),
-      ));
+    // Confirm we are here with a dialog (context del sheet, siempre visible)
+    if (mounted) {
+      await showDialog<void>(
+        context: context,
+        builder: (_) => AlertDialog(
+          title: const Text('ACCION VIDEO AISLADA'),
+          content: Text('_shareVideo() ejecutado\nisBusy=$_isBusy'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(_).pop(),
+              child: const Text('OK — CONTINUAR'),
+            ),
+          ],
+        ),
+      );
+    }
     final messenger = widget.rootMessenger;
-    messenger.hideCurrentSnackBar();
-    messenger.showSnackBar(const SnackBar(
-      duration: Duration(seconds: 8),
-      content: Text('ONSHAREVIDEO INICIADO'),
-    ));
 
     if (_isBusy || (!_includeArabic && !_includeTranslation)) {
       debugPrint('_shareVideo BLOCKED — isBusy=$_isBusy');
