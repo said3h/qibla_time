@@ -932,13 +932,6 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     final l10n = context.l10n;
 
     try {
-      messenger.hideCurrentSnackBar();
-      messenger.showSnackBar(
-        const SnackBar(
-          duration: Duration(seconds: 10),
-          content: Text('Paso 1'),
-        ),
-      );
       final draft = await videoService.prepareDraft(
         summary: widget.summary,
         ayah: ayah,
@@ -965,19 +958,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
         ),
       );
 
-      final file = await videoService.exportVideo(
-        draft,
-        onDebugStep: (message) {
-          if (!mounted) return;
-          messenger.hideCurrentSnackBar();
-          messenger.showSnackBar(
-            SnackBar(
-              duration: const Duration(seconds: 10),
-              content: Text(message),
-            ),
-          );
-        },
-      );
+      final file = await videoService.exportVideo(draft);
       if (!mounted) return;
 
       messenger.hideCurrentSnackBar();
@@ -1000,7 +981,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       messenger.showSnackBar(
         SnackBar(
           content: Text(
-            '${l10n.quranAyahVideoError}\n$e',
+            l10n.quranAyahVideoError,
           ),
         ),
       );

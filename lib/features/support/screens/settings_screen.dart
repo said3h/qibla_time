@@ -72,7 +72,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
   String selectedAdhanName = '';
 
   bool _exactAlarmPermissionGranted = true;
-  bool _needsManufacturerBatterySettings = false;
   String? _manufacturerName;
 
   // Hadices settings
@@ -163,10 +162,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
 
     if (Platform.isAndroid) {
       final androidInfo = await DeviceInfoPlugin().androidInfo;
-      final needsManufacturerBatterySettings =
-          await NotificationService.instance.needsManufacturerBatterySettings();
       _manufacturerName = androidInfo.manufacturer;
-      _needsManufacturerBatterySettings = needsManufacturerBatterySettings;
       if (androidInfo.version.sdkInt >= 31) {
         final status = await Permission.scheduleExactAlarm.status;
         if (mounted) {
@@ -230,13 +226,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
 
   Future<void> _openExactAlarmSettings() async {
     await AndroidSettingsLauncher.openExactAlarmSettings();
-    await _refreshAndroidAdhanStatus();
-  }
-
-  Future<void> _openBatterySettings() async {
-    await AndroidSettingsLauncher.openBatterySettings(
-      manufacturer: _manufacturerName,
-    );
     await _refreshAndroidAdhanStatus();
   }
 
@@ -682,20 +671,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
                 actionLabel: 'Permitir',
                 onTap: () {
                   _openExactAlarmSettings();
-                },
-              ),
-            if (_needsManufacturerBatterySettings &&
-                (_manufacturerName?.trim().isNotEmpty ?? false))
-              _buildAndroidAdhanActionCard(
-                tokens,
-                icon: Icons.battery_saver_outlined,
-                title:
-                    'Permitir que la app funcione en segundo plano para recibir notificaciones correctamente',
-                subtitle:
-                    'Toca aqui. Abriremos el ajuste mas directo disponible para ${_manufacturerLabel(_manufacturerName)}.',
-                actionLabel: 'Abrir bateria',
-                onTap: () {
-                  _openBatterySettings();
                 },
               ),
             _buildToggleTile(

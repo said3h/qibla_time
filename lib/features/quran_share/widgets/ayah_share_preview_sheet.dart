@@ -184,19 +184,11 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
   }
 
   Future<void> _shareVideo() async {
-    debugPrint(
-        '_shareVideo: START isBusy=$_isBusy arabic=$_includeArabic translation=$_includeTranslation');
-
     if (_isBusy || (!_includeArabic && !_includeTranslation)) {
-      debugPrint('_shareVideo: BLOCKED');
       return;
     }
 
     setState(() => _activeAction = _AyahShareAction.video);
-
-    String? debugError;
-    String debugLog = '';
-    File? resultFile;
 
     try {
       final draft = await widget.videoService.prepareDraft(
@@ -206,90 +198,52 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
         includeTranslation: _includeTranslation,
         exportMode: _exportMode,
       );
-      debugPrint(
-          '_shareVideo: prepareDraft done, draft=${draft == null ? "NULL" : "OK audio=${draft.audioPathOrUrl}"}');
       if (!mounted) return;
 
       if (draft == null) {
-        if (mounted) {
-          await showDialog<void>(
-            context: context,
-            builder: (_) => AlertDialog(
-              title: const Text('VIDEO ERROR'),
-              content: const Text('No hay audio para este ayah (draft null)'),
-              actions: [
-                TextButton(
-                    onPressed: () => Navigator.of(_).pop(),
-                    child: const Text('OK'))
-              ],
-            ),
-          );
-        }
+        widget.rootMessenger.hideCurrentSnackBar();
+        widget.rootMessenger.showSnackBar(
+          SnackBar(
+            content: Text(context.l10n.shareAyahVideoNoAudio),
+          ),
+        );
         return;
       }
 
-      resultFile = await widget.videoService.exportVideo(draft);
-      debugPrint('_shareVideo: exportVideo done, file=${resultFile.path}');
+      widget.rootMessenger.hideCurrentSnackBar();
+      widget.rootMessenger.showSnackBar(
+        SnackBar(
+          duration: const Duration(seconds: 45),
+          content: Text(context.l10n.shareAyahVideoGenerating),
+        ),
+      );
+
+      final file = await widget.videoService.exportVideo(draft);
       if (!mounted) return;
+
+      widget.rootMessenger.hideCurrentSnackBar();
+      await Share.shareXFiles(
+        [XFile(file.path)],
+        text: widget.shareService.buildShareText(
+          widget.summary,
+          widget.ayah,
+          includeArabic: _includeArabic,
+          includeTranslation: _includeTranslation,
+        ),
+      );
+      if (!mounted) return;
+      Navigator.of(context).pop();
     } catch (e, stackTrace) {
       AppLogger.error('shareVideo: FAILED — ${e.runtimeType}: $e',
           error: e, stackTrace: stackTrace);
-      debugPrint('_shareVideo: CATCH $e');
-      debugError = '$e';
-      debugLog = stackTrace.toString().split('\n').take(6).join('\n');
+      widget.rootMessenger.hideCurrentSnackBar();
+      widget.rootMessenger.showSnackBar(
+        SnackBar(
+          content: Text(context.l10n.shareAyahVideoError),
+        ),
+      );
     } finally {
       if (mounted) setState(() => _activeAction = null);
-    }
-
-    if (!mounted) return;
-
-    if (debugError != null) {
-      await showDialog<void>(
-        context: context,
-        builder: (_) => AlertDialog(
-          title: const Text('VIDEO EXPORT ERROR'),
-          content: SingleChildScrollView(
-              child: Text(debugError! + '\n\n' + debugLog)),
-          actions: [
-            TextButton(
-                onPressed: () => Navigator.of(_).pop(), child: const Text('OK'))
-          ],
-        ),
-      );
-      return;
-    }
-
-    if (resultFile != null) {
-      await showDialog<void>(
-        context: context,
-        builder: (_) => AlertDialog(
-          title: const Text('VIDEO OK'),
-          content: Text(
-              'Archivo generado:\n${resultFile!.path}\n${resultFile.lengthSync()} bytes'),
-          actions: [
-            TextButton(
-              onPressed: () async {
-                Navigator.of(_).pop();
-                if (!mounted) return;
-                await Share.shareXFiles(
-                  [XFile(resultFile!.path)],
-                  text: widget.shareService.buildShareText(
-                    widget.summary,
-                    widget.ayah,
-                    includeArabic: _includeArabic,
-                    includeTranslation: _includeTranslation,
-                  ),
-                );
-                if (mounted) Navigator.of(context).pop();
-              },
-              child: const Text('COMPARTIR'),
-            ),
-            TextButton(
-                onPressed: () => Navigator.of(_).pop(),
-                child: const Text('CANCELAR')),
-          ],
-        ),
-      );
     }
   }
 

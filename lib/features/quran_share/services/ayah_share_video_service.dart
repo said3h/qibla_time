@@ -89,10 +89,7 @@ class AyahShareVideoService {
     );
   }
 
-  Future<File> exportVideo(
-    AyahShareVideoDraft draft, {
-    void Function(String message)? onDebugStep,
-  }) async {
+  Future<File> exportVideo(AyahShareVideoDraft draft) async {
     try {
       final l10n = appLocalizationsForDevice();
       final tempDirectory = await getTemporaryDirectory();
@@ -129,12 +126,9 @@ class AyahShareVideoService {
         fileStem: fileStem,
       );
 
-      onDebugStep?.call('Paso 2');
       final audioDurationSeconds = await _getAudioDuration(audioFile);
-      onDebugStep?.call('Paso 3: duracion=${audioDurationSeconds}s');
 
       if (audioDurationSeconds <= 0) {
-        onDebugStep?.call('ERROR: duracion=0, FFmpeg no pudo leer el audio');
         throw StateError(
           'Could not determine audio duration for ayah video.',
         );
@@ -153,7 +147,6 @@ class AyahShareVideoService {
       );
 
       AppLogger.info('exportVideo: running FFmpeg command:\n$command');
-      onDebugStep?.call('Paso 4: ejecutando FFmpeg...');
 
       final session = await FFmpegKit.execute(command);
       final returnCode = await session.getReturnCode();
@@ -164,9 +157,7 @@ class AyahShareVideoService {
           'exportVideo: FFmpeg returnCode=${returnCode?.getValue()} logs:\n$logs');
 
       if (!ReturnCode.isSuccess(returnCode)) {
-        onDebugStep?.call('FFMPEG ERROR rc=${returnCode?.getValue()} — iniciando fallback');
         // Retry always with the software fallback encoder.
-        onDebugStep?.call('Fallback');
         AppLogger.info(
             'exportVideo: primary encoder failed, retrying with mpeg4 fallback...');
 
@@ -187,20 +178,15 @@ class AyahShareVideoService {
             'exportVideo: fallback returnCode=${retryCode?.getValue()} logs:\n$retryLogs');
 
         if (!ReturnCode.isSuccess(retryCode)) {
-          onDebugStep?.call('FALLBACK ERROR rc=${retryCode?.getValue()}');
           throw StateError(
             'FFmpeg failed (primary + fallback).\n'
             'Primary logs: $logs\n'
             'Fallback logs: $retryLogs',
           );
         }
-        onDebugStep?.call('Fallback OK rc=${retryCode?.getValue()}');
-      } else {
-        onDebugStep?.call('Paso 5: FFmpeg OK rc=${returnCode?.getValue()}');
       }
 
       if (!await outputFile.exists()) {
-        onDebugStep?.call('ERROR: output file no existe tras FFmpeg');
         throw StateError(
             'FFmpeg finished without creating the ayah video file.');
       }
@@ -212,7 +198,6 @@ class AyahShareVideoService {
         error: e,
         stackTrace: stackTrace,
       );
-      onDebugStep?.call('ERROR: $e');
       rethrow;
     }
   }
