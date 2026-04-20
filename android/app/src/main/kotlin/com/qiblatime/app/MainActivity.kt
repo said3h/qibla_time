@@ -22,13 +22,17 @@ import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.MethodChannel
+import java.util.concurrent.Executors
 import java.util.Locale
+
+import com.qiblatime.app.video.StillVideoExporter
 
 class MainActivity : FlutterActivity(), EventChannel.StreamHandler, SensorEventListener {
 
     private val DND_CHANNEL = "com.qiblatime/dnd"
     private val PROXIMITY_CHANNEL = "com.qiblatime/proximity"
     private val SETTINGS_CHANNEL = "com.qiblatime/android_settings"
+    private val VIDEO_EXPORT_CHANNEL = "com.qiblatime/video_export"
     private val TAG = "QiblaProximity"
 
     private var sensorManager: SensorManager? = null
@@ -83,6 +87,57 @@ class MainActivity : FlutterActivity(), EventChannel.StreamHandler, SensorEventL
                     result.success(openBatterySettings(manufacturer))
                 }
 
+                else -> result.notImplemented()
+            }
+        }
+
+        val videoExecutor = Executors.newSingleThreadExecutor()
+        MethodChannel(
+            flutterEngine.dartExecutor.binaryMessenger,
+            VIDEO_EXPORT_CHANNEL
+        ).setMethodCallHandler { call, result ->
+            when (call.method) {
+                "exportStillVideo" -> {
+                    val imagePath = call.argument<String>("imagePath")
+                    val audioPath = call.argument<String>("audioPath")
+                    val outputPath = call.argument<String>("outputPath")
+                    val width = call.argument<Int>("width") ?: 1080
+                    val height = call.argument<Int>("height") ?: 1920
+                    val fps = call.argument<Int>("fps") ?: 30
+                    val videoBitrate = call.argument<Int>("videoBitrate") ?: 2_500_000
+                    val audioBitrate = call.argument<Int>("audioBitrate") ?: 192_000
+
+                    if (imagePath.isNullOrBlank() || audioPath.isNullOrBlank() || outputPath.isNullOrBlank()) {
+                        result.error("INVALID_ARGS", "Missing imagePath/audioPath/outputPath", null)
+                        return@setMethodCallHandler
+                    }
+
+                    videoExecutor.execute {
+                        try {
+                            StillVideoExporter.export(
+                                StillVideoExporter.Params(
+                                    imagePath = imagePath,
+                                    audioPath = audioPath,
+                                    outputPath = outputPath,
+                                    width = width,
+                                    height = height,
+                                    fps = fps,
+                                    videoBitrate = videoBitrate,
+                                    audioBitrate = audioBitrate,
+                                )
+                            )
+                            runOnUiThread { result.success(outputPath) }
+                        } catch (e: Throwable) {
+                            runOnUiThread {
+                                result.error(
+                                    "EXPORT_FAILED",
+                                    e.message ?: "Video export failed",
+                                    null
+                                )
+                            }
+                        }
+                    }
+                }
                 else -> result.notImplemented()
             }
         }

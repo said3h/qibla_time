@@ -5,6 +5,7 @@ import 'package:ffmpeg_kit_min_gpl/return_code.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../../../core/services/logger_service.dart';
@@ -49,6 +50,7 @@ class AyahShareVideoDraft {
 class AyahShareVideoService {
   static const Size _videoSize = Size(1080, 1920);
   static const int _videoFps = 30;
+  static const _nativeChannel = MethodChannel('com.qiblatime/video_export');
 
   AyahShareVideoService(this._ref);
 
@@ -90,6 +92,9 @@ class AyahShareVideoService {
   }
 
   Future<File> exportVideo(AyahShareVideoDraft draft) async {
+    if (Platform.isAndroid) {
+      return _exportVideoNativeAndroid(draft);
+    }
     try {
       final l10n = appLocalizationsForDevice();
       final tempDirectory = await getTemporaryDirectory();
@@ -197,6 +202,80 @@ class AyahShareVideoService {
         'exportVideo: FAILED ${e.runtimeType}: $e',
         error: e,
         stackTrace: stackTrace,
+      );
+      rethrow;
+    }
+  }
+
+  Future<File> _exportVideoNativeAndroid(AyahShareVideoDraft draft) async {
+    debugPrint('AyahShareVideoService.exportVideo: native android start');
+
+    final l10n = appLocalizationsForDevice();
+    final tempDirectory = await getTemporaryDirectory();
+    final workingDirectory = await Directory(
+      '${tempDirectory.path}/ayah_share_video',
+    ).create(recursive: true);
+    final fileStem = _fileStemFor(draft);
+
+    final imageFile = await AyahShareImageService.savePng(
+      data: AyahShareData(
+        surahNumber: draft.surahNumber,
+        surahNameLatin: draft.surahNameLatin,
+        surahNameArabic: draft.surahNameArabic,
+        ayahNumber: draft.ayahNumber,
+        arabicText: draft.arabicText,
+        translation: draft.translation,
+        badgeLabel: l10n.shareBadgeQuran,
+        branding: l10n.shareBranding,
+      ),
+      theme: AyahShareThemeData.fromTokens(
+        QiblaThemes.current,
+        transparentBackground: draft.exportMode == AyahShareExportMode.cardOnly,
+      ),
+      transparentBackground: draft.exportMode == AyahShareExportMode.cardOnly,
+      mode: draft.exportMode,
+      fileName: '${fileStem}_card',
+      directory: workingDirectory,
+    );
+
+    final audioFile = await _ensureAudioFile(
+      draft: draft,
+      directory: workingDirectory,
+      fileStem: fileStem,
+    );
+
+    final outputFile = File('${workingDirectory.path}/${fileStem}_video.mp4');
+    if (await outputFile.exists()) {
+      await outputFile.delete();
+    }
+
+    try {
+      final resultPath = await _nativeChannel.invokeMethod<String>(
+        'exportStillVideo',
+        <String, Object?>{
+          'imagePath': imageFile.path,
+          'audioPath': audioFile.path,
+          'outputPath': outputFile.path,
+          'width': _videoSize.width.round(),
+          'height': _videoSize.height.round(),
+          'fps': _videoFps,
+          'videoBitrate': 2500000,
+          'audioBitrate': 192000,
+        },
+      );
+      if (resultPath == null || resultPath.isEmpty) {
+        throw StateError('Native exporter returned empty path.');
+      }
+      final out = File(resultPath);
+      if (!await out.exists()) {
+        throw StateError('Native exporter finished without creating output.');
+      }
+      return out;
+    } on PlatformException catch (e, st) {
+      AppLogger.error(
+        'Native Android video export failed: ${e.code} ${e.message}',
+        error: e,
+        stackTrace: st,
       );
       rethrow;
     }
