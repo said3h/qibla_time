@@ -47,6 +47,15 @@ class AyahShareVideoDraft {
   String get referenceLabel => '$surahNameLatin ($surahNumber:$ayahNumber)';
 }
 
+class NativeVideoExportException implements Exception {
+  const NativeVideoExportException(this.message);
+
+  final String message;
+
+  @override
+  String toString() => message;
+}
+
 class AyahShareVideoService {
   static const Size _videoSize = Size(1080, 1920);
   static const int _videoFps = 30;
@@ -264,21 +273,65 @@ class AyahShareVideoService {
         },
       );
       if (resultPath == null || resultPath.isEmpty) {
-        throw StateError('Native exporter returned empty path.');
+        throw const NativeVideoExportException(
+          'Native exporter returned empty path.',
+        );
       }
       final out = File(resultPath);
       if (!await out.exists()) {
-        throw StateError('Native exporter finished without creating output.');
+        throw NativeVideoExportException(
+          'Native exporter finished without creating output: ${out.path}',
+        );
+      }
+      final outputLength = await out.length();
+      if (outputLength <= 0) {
+        throw NativeVideoExportException(
+          'Native exporter created an empty output file: ${out.path}',
+        );
       }
       return out;
     } on PlatformException catch (e, st) {
+      final message = _nativePlatformErrorMessage(e);
       AppLogger.error(
-        'Native Android video export failed: ${e.code} ${e.message}',
+        message,
         error: e,
         stackTrace: st,
       );
-      rethrow;
+      throw NativeVideoExportException(message);
     }
+  }
+
+  String _nativePlatformErrorMessage(PlatformException error) {
+    final buffer = StringBuffer()
+      ..writeln('Native Android video export failed')
+      ..writeln('code: ${error.code}');
+
+    final message = error.message;
+    if (message != null && message.trim().isNotEmpty) {
+      buffer.writeln('message: $message');
+    }
+
+    final details = error.details;
+    if (details is Map) {
+      final type = details['type'];
+      final nativeMessage = details['message'];
+      final stackTrace = details['stackTrace'];
+
+      if (type != null) {
+        buffer.writeln('nativeType: $type');
+      }
+      if (nativeMessage != null) {
+        buffer.writeln('nativeMessage: $nativeMessage');
+      }
+      if (stackTrace != null) {
+        buffer.writeln('nativeStackTrace:');
+        buffer.write(stackTrace);
+      }
+    } else if (details != null) {
+      buffer.writeln('details: $details');
+    }
+
+    return buffer.toString().trim();
   }
 
   Future<double> _getAudioDuration(File audioFile) async {

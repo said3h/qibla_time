@@ -9,6 +9,7 @@ import android.media.MediaFormat
 import android.media.MediaMetadataRetriever
 import android.media.MediaMuxer
 import android.os.Build
+import android.util.Log
 import java.io.File
 import java.nio.ByteBuffer
 import kotlin.math.max
@@ -24,6 +25,7 @@ import kotlin.math.max
 object StillVideoExporter {
   private const val MIME_VIDEO_AVC = "video/avc"
   private const val MIME_AUDIO_AAC = "audio/mp4a-latm"
+  private const val TAG = "QiblaVideoExport"
 
   data class Params(
     val imagePath: String,
@@ -37,36 +39,66 @@ object StillVideoExporter {
   )
 
   fun export(params: Params) {
+    Log.i(
+      TAG,
+      "start export image=${params.imagePath} audio=${params.audioPath} output=${params.outputPath} size=${params.width}x${params.height} fps=${params.fps}",
+    )
+
+    try {
+      exportInternal(params)
+    } catch (e: Throwable) {
+      Log.e(TAG, "export failed", e)
+      throw e
+    }
+  }
+
+  private fun exportInternal(params: Params) {
     val imageFile = File(params.imagePath)
     require(imageFile.exists()) { "Image not found: ${params.imagePath}" }
     val audioFile = File(params.audioPath)
     require(audioFile.exists()) { "Audio not found: ${params.audioPath}" }
+    Log.i(
+      TAG,
+      "input files ok imageBytes=${imageFile.length()} audioBytes=${audioFile.length()}",
+    )
 
     val outputFile = File(params.outputPath)
     outputFile.parentFile?.mkdirs()
     if (outputFile.exists()) outputFile.delete()
 
+    Log.i(TAG, "reading audio duration")
     val durationUs = readAudioDurationUs(params.audioPath)
     require(durationUs > 0) { "Could not read audio duration." }
+    Log.i(TAG, "audio duration read durationUs=$durationUs")
 
+    Log.i(TAG, "reading image bitmap")
     val bitmap = BitmapFactory.decodeFile(params.imagePath)
       ?: throw IllegalStateException("Could not decode image.")
     val scaledBitmap = scaleToFit(bitmap, params.width, params.height)
+    val yuvFrame = bitmapToNV21(scaledBitmap, params.width, params.height)
+    Log.i(
+      TAG,
+      "image decoded bitmap=${bitmap.width}x${bitmap.height} scaled=${scaledBitmap.width}x${scaledBitmap.height} yuvBytes=${yuvFrame.size}",
+    )
 
+    Log.i(TAG, "creating MediaMuxer output=${params.outputPath}")
     val muxer = MediaMuxer(params.outputPath, MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4)
     var videoTrackIndex = -1
     var audioTrackIndex = -1
     var started = false
 
+    Log.i(TAG, "creating video MediaCodec")
     val videoEncoder = createVideoEncoder(params, durationUs)
-    val videoInputBuffers = videoEncoder.inputBuffers
     val videoBufferInfo = MediaCodec.BufferInfo()
+    Log.i(TAG, "video MediaCodec created codec=${videoEncoder.name}")
 
+    Log.i(TAG, "creating audio decoder MediaCodec")
     val audioDecoder = createAudioDecoder(params.audioPath)
-    val audioDecoderInputBuffers = audioDecoder.inputBuffers
-    val audioDecoderOutputBuffers = audioDecoder.outputBuffers
+    Log.i(TAG, "audio decoder MediaCodec created codec=${audioDecoder.name}")
+    val audioDecoderBufferInfo = MediaCodec.BufferInfo()
     val audioEncoderBufferInfo = MediaCodec.BufferInfo()
 
+    Log.i(TAG, "opening audio extractor")
     val extractor = MediaExtractor()
     extractor.setDataSource(params.audioPath)
     val audioTrack = selectAudioTrack(extractor)
@@ -85,18 +117,30 @@ object StillVideoExporter {
       } else {
         2
       }
+    Log.i(
+      TAG,
+      "audio extractor ready track=$audioTrack sampleRate=$sampleRate channels=$channelCount format=$inputAudioFormat",
+    )
 
+    Log.i(TAG, "creating audio encoder MediaCodec")
     val audioEncoder = createAudioEncoder(params, sampleRate, channelCount)
-    val audioEncoderInputBuffers = audioEncoder.inputBuffers
+    Log.i(TAG, "audio encoder MediaCodec created codec=${audioEncoder.name}")
 
     // Start codecs.
+    Log.i(TAG, "starting MediaCodecs")
     videoEncoder.start()
     audioDecoder.start()
     audioEncoder.start()
+    val videoInputBuffers = videoEncoder.inputBuffers
+    val audioDecoderInputBuffers = audioDecoder.inputBuffers
+    val audioDecoderOutputBuffers = audioDecoder.outputBuffers
+    val audioEncoderInputBuffers = audioEncoder.inputBuffers
+    Log.i(TAG, "MediaCodecs started")
 
     // Feed video frames ASAP; feed audio in parallel-ish inside a single loop.
     val frameCount = max(1, (durationUs * params.fps / 1_000_000L).toInt())
     val frameDurationUs = 1_000_000L / params.fps.toLong()
+    Log.i(TAG, "writing frames frameCount=$frameCount frameDurationUs=$frameDurationUs")
     var nextFrameIndex = 0
 
     var extractorDone = false
@@ -109,6 +153,7 @@ object StillVideoExporter {
     // Audio PCM staging buffer
     var pendingPcm: ByteArray? = null
     var pendingPcmOffset = 0
+    var loggedFirstAudioSample = false
 
     while (!videoOutputDone || !encoderDone) {
       // 1) Feed video encoder with repeated still frames (YUV420).
@@ -121,11 +166,14 @@ object StillVideoExporter {
           if (nextFrameIndex >= frameCount) {
             videoEncoder.queueInputBuffer(inIndex, 0, 0, ptsUs, MediaCodec.BUFFER_FLAG_END_OF_STREAM)
             videoInputDone = true
+            Log.i(TAG, "queued video end of stream ptsUs=$ptsUs")
           } else {
-            val yuv = bitmapToNV21(scaledBitmap, params.width, params.height)
-            buffer.put(yuv)
-            videoEncoder.queueInputBuffer(inIndex, 0, yuv.size, ptsUs, 0)
+            buffer.put(yuvFrame)
+            videoEncoder.queueInputBuffer(inIndex, 0, yuvFrame.size, ptsUs, 0)
             nextFrameIndex++
+            if (nextFrameIndex == 1 || nextFrameIndex % (params.fps * 2) == 0 || nextFrameIndex == frameCount) {
+              Log.d(TAG, "queued video frame=$nextFrameIndex/$frameCount ptsUs=$ptsUs")
+            }
           }
         }
       }
@@ -137,9 +185,11 @@ object StillVideoExporter {
           outIndex == MediaCodec.INFO_OUTPUT_FORMAT_CHANGED -> {
             val newFormat = videoEncoder.outputFormat
             videoTrackIndex = muxer.addTrack(newFormat)
+            Log.i(TAG, "video output format changed track=$videoTrackIndex format=$newFormat")
             if (audioTrackIndex >= 0 && !started) {
               muxer.start()
               started = true
+              Log.i(TAG, "MediaMuxer started after video format")
             }
           }
           outIndex >= 0 -> {
@@ -156,6 +206,7 @@ object StillVideoExporter {
             videoEncoder.releaseOutputBuffer(outIndex, false)
             if ((videoBufferInfo.flags and MediaCodec.BUFFER_FLAG_END_OF_STREAM) != 0) {
               videoOutputDone = true
+              Log.i(TAG, "video encoder reached end of stream")
             }
           }
         }
@@ -171,9 +222,14 @@ object StillVideoExporter {
           if (sampleSize < 0) {
             audioDecoder.queueInputBuffer(inIndex, 0, 0, 0, MediaCodec.BUFFER_FLAG_END_OF_STREAM)
             extractorDone = true
+            Log.i(TAG, "audio extractor reached end of stream")
           } else {
             val presentationTimeUs = extractor.sampleTime
             audioDecoder.queueInputBuffer(inIndex, 0, sampleSize, presentationTimeUs, 0)
+            if (!loggedFirstAudioSample) {
+              loggedFirstAudioSample = true
+              Log.i(TAG, "first audio sample read size=$sampleSize ptsUs=$presentationTimeUs")
+            }
             extractor.advance()
           }
         }
@@ -181,10 +237,10 @@ object StillVideoExporter {
 
       // 4) Drain audio decoder and feed audio encoder.
       if (!decoderDone) {
-        val outIndex = audioDecoder.dequeueOutputBuffer(audioEncoderBufferInfo, 0)
+        val outIndex = audioDecoder.dequeueOutputBuffer(audioDecoderBufferInfo, 0)
         when {
           outIndex == MediaCodec.INFO_OUTPUT_FORMAT_CHANGED -> {
-            // not used
+            Log.i(TAG, "audio decoder output format changed format=${audioDecoder.outputFormat}")
           }
           outIndex >= 0 -> {
             val outBuffer = if (Build.VERSION.SDK_INT >= 21) {
@@ -192,17 +248,18 @@ object StillVideoExporter {
             } else {
               audioDecoderOutputBuffers[outIndex]
             }
-            if (outBuffer != null && audioEncoderBufferInfo.size > 0) {
-              val pcmBytes = ByteArray(audioEncoderBufferInfo.size)
-              outBuffer.position(audioEncoderBufferInfo.offset)
-              outBuffer.limit(audioEncoderBufferInfo.offset + audioEncoderBufferInfo.size)
+            if (outBuffer != null && audioDecoderBufferInfo.size > 0) {
+              val pcmBytes = ByteArray(audioDecoderBufferInfo.size)
+              outBuffer.position(audioDecoderBufferInfo.offset)
+              outBuffer.limit(audioDecoderBufferInfo.offset + audioDecoderBufferInfo.size)
               outBuffer.get(pcmBytes)
               pendingPcm = pcmBytes
               pendingPcmOffset = 0
             }
             audioDecoder.releaseOutputBuffer(outIndex, false)
-            if ((audioEncoderBufferInfo.flags and MediaCodec.BUFFER_FLAG_END_OF_STREAM) != 0) {
+            if ((audioDecoderBufferInfo.flags and MediaCodec.BUFFER_FLAG_END_OF_STREAM) != 0) {
               decoderDone = true
+              Log.i(TAG, "audio decoder reached end of stream")
             }
           }
         }
@@ -229,7 +286,7 @@ object StillVideoExporter {
             if (pendingPcmOffset >= pcm.size) {
               pendingPcm = null
             }
-            audioEncoder.queueInputBuffer(inIndex, 0, toWrite, audioEncoderBufferInfo.presentationTimeUs, 0)
+            audioEncoder.queueInputBuffer(inIndex, 0, toWrite, audioDecoderBufferInfo.presentationTimeUs, 0)
           }
         }
       }
@@ -240,9 +297,11 @@ object StillVideoExporter {
         outIndex == MediaCodec.INFO_OUTPUT_FORMAT_CHANGED -> {
           val newFormat = audioEncoder.outputFormat
           audioTrackIndex = muxer.addTrack(newFormat)
+          Log.i(TAG, "audio encoder output format changed track=$audioTrackIndex format=$newFormat")
           if (videoTrackIndex >= 0 && !started) {
             muxer.start()
             started = true
+            Log.i(TAG, "MediaMuxer started after audio format")
           }
         }
         outIndex >= 0 -> {
@@ -259,11 +318,13 @@ object StillVideoExporter {
           audioEncoder.releaseOutputBuffer(outIndex, false)
           if ((audioEncoderBufferInfo.flags and MediaCodec.BUFFER_FLAG_END_OF_STREAM) != 0) {
             encoderDone = true
+            Log.i(TAG, "audio encoder reached end of stream")
           }
         }
       }
     }
 
+    Log.i(TAG, "closing native exporter resources")
     extractor.release()
     audioDecoder.stop()
     audioDecoder.release()
@@ -273,6 +334,14 @@ object StillVideoExporter {
     videoEncoder.release()
     if (started) muxer.stop()
     muxer.release()
+
+    if (!outputFile.exists()) {
+      throw IllegalStateException("Output file was not generated: ${outputFile.absolutePath}")
+    }
+    if (outputFile.length() <= 0L) {
+      throw IllegalStateException("Output file was generated but is empty: ${outputFile.absolutePath}")
+    }
+    Log.i(TAG, "final output ready path=${outputFile.absolutePath} bytes=${outputFile.length()}")
   }
 
   private fun createVideoEncoder(params: Params, durationUs: Long): MediaCodec {

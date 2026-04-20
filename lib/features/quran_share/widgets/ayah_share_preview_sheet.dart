@@ -1,6 +1,3 @@
-import 'dart:io';
-
-import 'package:cross_file/cross_file.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:share_plus/share_plus.dart';
@@ -249,14 +246,31 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
       AppLogger.error('shareVideo: FAILED — ${e.runtimeType}: $e',
           error: e, stackTrace: stackTrace);
       widget.rootMessenger.hideCurrentSnackBar();
-      widget.rootMessenger.showSnackBar(
-        SnackBar(
-          content: Text(context.l10n.shareAyahVideoError),
-        ),
-      );
+      await _showVideoExportError(e);
     } finally {
       if (mounted) setState(() => _activeAction = null);
     }
+  }
+
+  Future<void> _showVideoExportError(Object error) async {
+    if (!mounted) return;
+
+    final l10n = context.l10n;
+    await showDialog<void>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Text(l10n.shareAyahVideoError),
+        content: SingleChildScrollView(
+          child: SelectableText(error.toString()),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(),
+            child: Text(l10n.commonClose),
+          ),
+        ],
+      ),
+    );
   }
 
   @override

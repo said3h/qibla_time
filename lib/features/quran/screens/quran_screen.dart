@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:cross_file/cross_file.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -978,14 +977,29 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       if (!mounted) return;
 
       messenger.hideCurrentSnackBar();
-      messenger.showSnackBar(
-        SnackBar(
-          content: Text(
-            l10n.quranAyahVideoError,
-          ),
-        ),
-      );
+      await _showVideoExportError(l10n.quranAyahVideoError, e);
     }
+  }
+
+  Future<void> _showVideoExportError(String title, Object error) async {
+    if (!mounted) return;
+
+    final l10n = context.l10n;
+    await showDialog<void>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Text(title),
+        content: SingleChildScrollView(
+          child: SelectableText(error.toString()),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(),
+            child: Text(l10n.commonClose),
+          ),
+        ],
+      ),
+    );
   }
 
   Future<void> _jumpToInitialAyah(SurahDetail detail) async {

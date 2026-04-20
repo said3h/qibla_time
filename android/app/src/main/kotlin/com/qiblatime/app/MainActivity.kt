@@ -22,6 +22,8 @@ import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.MethodChannel
+import java.io.PrintWriter
+import java.io.StringWriter
 import java.util.concurrent.Executors
 import java.util.Locale
 
@@ -34,6 +36,7 @@ class MainActivity : FlutterActivity(), EventChannel.StreamHandler, SensorEventL
     private val SETTINGS_CHANNEL = "com.qiblatime/android_settings"
     private val VIDEO_EXPORT_CHANNEL = "com.qiblatime/video_export"
     private val TAG = "QiblaProximity"
+    private val VIDEO_TAG = "QiblaVideoExport"
 
     private var sensorManager: SensorManager? = null
     private var proximitySensor: Sensor? = null
@@ -112,8 +115,14 @@ class MainActivity : FlutterActivity(), EventChannel.StreamHandler, SensorEventL
                         return@setMethodCallHandler
                     }
 
+                    Log.i(
+                        VIDEO_TAG,
+                        "MethodChannel exportStillVideo requested image=$imagePath audio=$audioPath output=$outputPath size=${width}x$height fps=$fps"
+                    )
+
                     videoExecutor.execute {
                         try {
+                            Log.i(VIDEO_TAG, "Native export worker started")
                             StillVideoExporter.export(
                                 StillVideoExporter.Params(
                                     imagePath = imagePath,
@@ -126,13 +135,20 @@ class MainActivity : FlutterActivity(), EventChannel.StreamHandler, SensorEventL
                                     audioBitrate = audioBitrate,
                                 )
                             )
+                            Log.i(VIDEO_TAG, "Native export worker finished successfully output=$outputPath")
                             runOnUiThread { result.success(outputPath) }
                         } catch (e: Throwable) {
+                            val fullError = e.fullStackTrace()
+                            Log.e(VIDEO_TAG, "Native export failed:\n$fullError", e)
                             runOnUiThread {
                                 result.error(
                                     "EXPORT_FAILED",
-                                    e.message ?: "Video export failed",
-                                    null
+                                    fullError,
+                                    mapOf(
+                                        "type" to e.javaClass.name,
+                                        "message" to (e.message ?: "Video export failed"),
+                                        "stackTrace" to fullError
+                                    )
                                 )
                             }
                         }
@@ -373,5 +389,13 @@ class MainActivity : FlutterActivity(), EventChannel.StreamHandler, SensorEventL
         } catch (_: SecurityException) {
             false
         }
+    }
+
+    private fun Throwable.fullStackTrace(): String {
+        val stringWriter = StringWriter()
+        val printWriter = PrintWriter(stringWriter)
+        printStackTrace(printWriter)
+        printWriter.flush()
+        return stringWriter.toString()
     }
 }
