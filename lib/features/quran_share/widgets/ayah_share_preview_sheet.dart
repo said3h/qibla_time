@@ -184,7 +184,8 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
   }
 
   Future<void> _shareVideo() async {
-    debugPrint('_shareVideo: START isBusy=$_isBusy arabic=$_includeArabic translation=$_includeTranslation');
+    debugPrint(
+        '_shareVideo: START isBusy=$_isBusy arabic=$_includeArabic translation=$_includeTranslation');
 
     if (_isBusy || (!_includeArabic && !_includeTranslation)) {
       debugPrint('_shareVideo: BLOCKED');
@@ -205,7 +206,8 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
         includeTranslation: _includeTranslation,
         exportMode: _exportMode,
       );
-      debugPrint('_shareVideo: prepareDraft done, draft=${draft == null ? "NULL" : "OK audio=${draft.audioPathOrUrl}"}');
+      debugPrint(
+          '_shareVideo: prepareDraft done, draft=${draft == null ? "NULL" : "OK audio=${draft.audioPathOrUrl}"}');
       if (!mounted) return;
 
       if (draft == null) {
@@ -215,7 +217,11 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
             builder: (_) => AlertDialog(
               title: const Text('VIDEO ERROR'),
               content: const Text('No hay audio para este ayah (draft null)'),
-              actions: [TextButton(onPressed: () => Navigator.of(_).pop(), child: const Text('OK'))],
+              actions: [
+                TextButton(
+                    onPressed: () => Navigator.of(_).pop(),
+                    child: const Text('OK'))
+              ],
             ),
           );
         }
@@ -225,9 +231,9 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
       resultFile = await widget.videoService.exportVideo(draft);
       debugPrint('_shareVideo: exportVideo done, file=${resultFile.path}');
       if (!mounted) return;
-
     } catch (e, stackTrace) {
-      AppLogger.error('shareVideo: FAILED — ${e.runtimeType}: $e', error: e, stackTrace: stackTrace);
+      AppLogger.error('shareVideo: FAILED — ${e.runtimeType}: $e',
+          error: e, stackTrace: stackTrace);
       debugPrint('_shareVideo: CATCH $e');
       debugError = '$e';
       debugLog = stackTrace.toString().split('\n').take(6).join('\n');
@@ -242,8 +248,12 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
         context: context,
         builder: (_) => AlertDialog(
           title: const Text('VIDEO EXPORT ERROR'),
-          content: SingleChildScrollView(child: Text(debugError! + '\n\n' + debugLog)),
-          actions: [TextButton(onPressed: () => Navigator.of(_).pop(), child: const Text('OK'))],
+          content: SingleChildScrollView(
+              child: Text(debugError! + '\n\n' + debugLog)),
+          actions: [
+            TextButton(
+                onPressed: () => Navigator.of(_).pop(), child: const Text('OK'))
+          ],
         ),
       );
       return;
@@ -254,7 +264,8 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
         context: context,
         builder: (_) => AlertDialog(
           title: const Text('VIDEO OK'),
-          content: Text('Archivo generado:\n${resultFile!.path}\n${resultFile.lengthSync()} bytes'),
+          content: Text(
+              'Archivo generado:\n${resultFile!.path}\n${resultFile.lengthSync()} bytes'),
           actions: [
             TextButton(
               onPressed: () async {
@@ -273,7 +284,9 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
               },
               child: const Text('COMPARTIR'),
             ),
-            TextButton(onPressed: () => Navigator.of(_).pop(), child: const Text('CANCELAR')),
+            TextButton(
+                onPressed: () => Navigator.of(_).pop(),
+                child: const Text('CANCELAR')),
           ],
         ),
       );
@@ -369,7 +382,6 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
         tokens: tokens,
         isBusy: _isBusy,
         activeAction: _activeAction,
-        rootMessenger: widget.rootMessenger,
         onShareText: _shareText,
         onShareImage: _shareImage,
         onShareVideo: _shareVideo,
@@ -386,7 +398,6 @@ class _AyahShareFooter extends StatelessWidget {
     required this.onShareText,
     required this.onShareImage,
     required this.onShareVideo,
-    required this.rootMessenger,
   });
 
   final QiblaTokens tokens;
@@ -395,7 +406,6 @@ class _AyahShareFooter extends StatelessWidget {
   final VoidCallback onShareText;
   final VoidCallback onShareImage;
   final VoidCallback onShareVideo;
-  final ScaffoldMessengerState rootMessenger;
 
   @override
   Widget build(BuildContext context) {
@@ -468,65 +478,31 @@ class _AyahShareFooter extends StatelessWidget {
             const SizedBox(width: 10),
             Expanded(
               child: OutlinedButton(
-                onPressed: () {
-                  debugPrint('VIDEO REAL PULSADO');
-                  rootMessenger
-                    ..hideCurrentSnackBar()
-                    ..showSnackBar(const SnackBar(
-                      duration: Duration(seconds: 10),
-                      content: Text('VIDEO REAL PULSADO — llamando _shareVideo'),
-                    ));
-                  showDialog<void>(
-                    context: context,
-                    builder: (_) => AlertDialog(
-                      title: const Text('VIDEO REAL PULSADO'),
-                      content: Text('isBusy=$isBusy\nAhora llama a _shareVideo'),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            rootMessenger
-                              ..hideCurrentSnackBar()
-                              ..showSnackBar(const SnackBar(
-                                duration: Duration(seconds: 10),
-                                content: Text('EJECUTAR VIDEO PULSADO'),
-                              ));
-                            Navigator.of(_).pop();
-                            rootMessenger
-                              ..hideCurrentSnackBar()
-                              ..showSnackBar(const SnackBar(
-                                duration: Duration(seconds: 10),
-                                content: Text('DIALOG CERRADO — llamando onShareVideo'),
-                              ));
-                            debugPrint('ANTES DE onShareVideo — onShareVideo hashCode=${onShareVideo.hashCode}');
-                            onShareVideo();
-                          },
-                          child: const Text('EJECUTAR VIDEO'),
-                        ),
-                        TextButton(
-                          onPressed: () => Navigator.of(_).pop(),
-                          child: const Text('CANCELAR'),
-                        ),
-                      ],
-                    ),
-                  );
-                },
+                onPressed: isBusy ? null : onShareVideo,
                 style: OutlinedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: const Color(0xFF6B21A8),
-                  side: const BorderSide(color: Color(0xFF6B21A8), width: 4),
+                  foregroundColor: tokens.textPrimary,
+                  side: BorderSide(color: tokens.borderMed),
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
                   ),
                 ),
-                child: const Text(
-                  'VIDEO REAL',
-                  style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w900,
-                    color: Colors.white,
-                  ),
-                ),
+                child: activeAction == _AyahShareAction.video
+                    ? SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2.2,
+                          valueColor: AlwaysStoppedAnimation(tokens.primary),
+                        ),
+                      )
+                    : Text(
+                        l10n.commonVideo,
+                        style: GoogleFonts.dmSans(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
               ),
             ),
           ],

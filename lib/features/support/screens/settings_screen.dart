@@ -689,7 +689,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
               _buildAndroidAdhanActionCard(
                 tokens,
                 icon: Icons.battery_saver_outlined,
-                title: 'Paso 3: quitar limite de bateria',
+                title:
+                    'Permitir que la app funcione en segundo plano para recibir notificaciones correctamente',
                 subtitle:
                     'Toca aqui. Abriremos el ajuste mas directo disponible para ${_manufacturerLabel(_manufacturerName)}.',
                 actionLabel: 'Abrir bateria',
