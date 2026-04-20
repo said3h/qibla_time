@@ -51,6 +51,9 @@ jobs:
       - name: Get dependencies
         run: flutter pub get
 
+      - name: Clean build artifacts
+        run: flutter clean
+
       - name: Run tests
         run: flutter test
 
