@@ -182,7 +182,13 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
   }
 
   Future<void> _shareVideo() async {
-    debugPrint('ONSHAREVIDEO INICIADO — isBusy=$_isBusy arabic=$_includeArabic translation=$_includeTranslation');
+    debugPrint('DENTRO DE _shareVideo — isBusy=$_isBusy arabic=$_includeArabic translation=$_includeTranslation');
+    widget.rootMessenger
+      ..hideCurrentSnackBar()
+      ..showSnackBar(const SnackBar(
+        duration: Duration(seconds: 10),
+        content: Text('DENTRO DE _shareVideo'),
+      ));
     final messenger = widget.rootMessenger;
     messenger.hideCurrentSnackBar();
     messenger.showSnackBar(const SnackBar(
@@ -489,7 +495,20 @@ class _AyahShareFooter extends StatelessWidget {
                       actions: [
                         TextButton(
                           onPressed: () {
+                            rootMessenger
+                              ..hideCurrentSnackBar()
+                              ..showSnackBar(const SnackBar(
+                                duration: Duration(seconds: 10),
+                                content: Text('EJECUTAR VIDEO PULSADO'),
+                              ));
                             Navigator.of(_).pop();
+                            rootMessenger
+                              ..hideCurrentSnackBar()
+                              ..showSnackBar(const SnackBar(
+                                duration: Duration(seconds: 10),
+                                content: Text('DIALOG CERRADO — llamando onShareVideo'),
+                              ));
+                            debugPrint('ANTES DE onShareVideo — onShareVideo hashCode=${onShareVideo.hashCode}');
                             onShareVideo();
                           },
                           child: const Text('EJECUTAR VIDEO'),
