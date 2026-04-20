@@ -184,7 +184,19 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
   }
 
   Future<void> _shareVideo() async {
-    if (_isBusy || (!_includeArabic && !_includeTranslation)) {
+    debugPrint('_shareVideo: tapped');
+
+    if (_isBusy) {
+      return;
+    }
+
+    if (!_includeArabic && !_includeTranslation) {
+      widget.rootMessenger.hideCurrentSnackBar();
+      widget.rootMessenger.showSnackBar(
+        SnackBar(
+          content: Text(context.l10n.shareAyahVideoError),
+        ),
+      );
       return;
     }
 
