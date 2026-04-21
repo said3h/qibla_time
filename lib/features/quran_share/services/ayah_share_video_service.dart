@@ -16,9 +16,8 @@ import '../../../l10n/l10n.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../quran/models/quran_models.dart';
 import '../../quran/services/quran_audio_download_service.dart';
-import '../models/ayah_share_data.dart';
-import '../models/ayah_share_theme.dart';
 import 'ayah_share_image_service.dart';
+import 'ayah_share_service.dart';
 
 final ayahShareVideoServiceProvider = Provider<AyahShareVideoService>((ref) {
   return AyahShareVideoService(ref);
@@ -335,27 +334,30 @@ class AyahShareVideoService {
     required Directory workingDirectory,
   }) async {
     final tokens = QiblaThemes.current;
-    final transparentBackground =
-        draft.exportMode == AyahShareExportMode.cardOnly;
-    return AyahShareImageService.savePng(
-      data: AyahShareData(
-        surahNumber: draft.surahNumber,
-        surahNameLatin: draft.surahNameLatin,
-        surahNameArabic: draft.surahNameArabic,
-        ayahNumber: draft.ayahNumber,
-        arabicText: draft.arabicText,
-        translation:
-            draft.translation.trim().isEmpty ? null : draft.translation,
-        badgeLabel: l10n.shareBadgeQuran,
-        branding: l10n.shareBranding,
-      ),
-      theme: AyahShareThemeData.fromTokens(
-        tokens,
-        transparentBackground: transparentBackground,
-      ),
-      transparentBackground: transparentBackground,
+
+    final summary = SurahSummary(
+      number: draft.surahNumber,
+      nameArabic: draft.surahNameArabic,
+      nameLatin: draft.surahNameLatin,
+      revelationType: '',
+      ayahCount: 0,
+    );
+    final ayah = SurahAyah(
+      number: 0,
+      numberInSurah: draft.ayahNumber,
+      arabic: draft.arabicText,
+      transliteration: draft.transliteration,
+      translation: draft.translation,
+      audioUrl: '',
+    );
+
+    return AyahShareService().exportAyahImagePng(
+      summary,
+      ayah,
+      tokens,
       mode: draft.exportMode,
-      fileName: '${fileStem}_card',
+      includeArabic: draft.arabicText.trim().isNotEmpty,
+      includeTranslation: draft.translation.trim().isNotEmpty,
       directory: workingDirectory,
     );
   }

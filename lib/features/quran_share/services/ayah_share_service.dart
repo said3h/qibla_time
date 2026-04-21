@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cross_file/cross_file.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
@@ -14,6 +16,40 @@ final ayahShareServiceProvider = Provider<AyahShareService>((ref) {
 });
 
 class AyahShareService {
+  Future<File> exportAyahImagePng(
+    SurahSummary summary,
+    SurahAyah ayah,
+    QiblaTokens tokens, {
+    required AyahShareExportMode mode,
+    required bool includeArabic,
+    required bool includeTranslation,
+    Directory? directory,
+  }) {
+    if (!includeArabic && !includeTranslation) {
+      throw ArgumentError(
+        'At least one of includeArabic or includeTranslation must be true.',
+      );
+    }
+
+    final transparentBackground = mode == AyahShareExportMode.cardOnly;
+    return AyahShareImageService.savePng(
+      data: buildShareData(
+        summary,
+        ayah,
+        includeArabic: includeArabic,
+        includeTranslation: includeTranslation,
+      ),
+      theme: AyahShareThemeData.fromTokens(
+        tokens,
+        transparentBackground: transparentBackground,
+      ),
+      transparentBackground: transparentBackground,
+      mode: mode,
+      fileName: 'ayah_${summary.number}_${ayah.numberInSurah}',
+      directory: directory,
+    );
+  }
+
   String buildShareText(
     SurahSummary summary,
     SurahAyah ayah, {
@@ -62,27 +98,13 @@ class AyahShareService {
     bool includeArabic = true,
     bool includeTranslation = true,
   }) async {
-    if (!includeArabic && !includeTranslation) {
-      throw ArgumentError(
-        'At least one of includeArabic or includeTranslation must be true.',
-      );
-    }
-
-    final transparentBackground = mode == AyahShareExportMode.cardOnly;
-    final file = await AyahShareImageService.savePng(
-      data: buildShareData(
-        summary,
-        ayah,
-        includeArabic: includeArabic,
-        includeTranslation: includeTranslation,
-      ),
-      theme: AyahShareThemeData.fromTokens(
-        tokens,
-        transparentBackground: transparentBackground,
-      ),
-      transparentBackground: transparentBackground,
+    final file = await exportAyahImagePng(
+      summary,
+      ayah,
+      tokens,
       mode: mode,
-      fileName: 'ayah_${summary.number}_${ayah.numberInSurah}',
+      includeArabic: includeArabic,
+      includeTranslation: includeTranslation,
     );
 
     await Share.shareXFiles(
