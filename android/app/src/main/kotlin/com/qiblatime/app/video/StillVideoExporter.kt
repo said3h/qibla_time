@@ -509,8 +509,11 @@ object StillVideoExporter {
     var lastAacPtsUs = -1L
     var audioSamplesWritten = 0
 
-    // Safety deadline: 90 s should be more than enough for any reasonable clip.
-    val deadlineMs = System.currentTimeMillis() + 90_000L
+    // Safety deadline: at least 5 minutes, or 10× the audio duration — whichever
+    // is larger. A fixed 90 s was too short for long ayahs (e.g. Ayat Al-Kursi
+    // ~2 min audio → ~3 600 frames to encode, which exceeded the old limit on
+    // slower devices and caused the export to produce a corrupt/empty file).
+    val deadlineMs = System.currentTimeMillis() + maxOf(300_000L, durationUs / 1000L * 10L)
 
     try {
       videoEncoder.start()

@@ -345,7 +345,7 @@ class AyahShareVideoService {
       summary,
       ayah,
       tokens,
-      mode: AyahShareExportMode.cardOnly,
+      mode: draft.exportMode,
       includeArabic: draft.arabicText.trim().isNotEmpty,
       includeTranslation: draft.translation.trim().isNotEmpty,
       directory: workingDirectory,
