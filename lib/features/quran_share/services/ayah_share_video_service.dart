@@ -21,6 +21,9 @@ final ayahShareVideoServiceProvider = Provider<AyahShareVideoService>((ref) {
   return AyahShareVideoService(ref);
 });
 
+const _ayahAudioUnavailableMessage =
+    'No se pudo obtener el audio para este ayah';
+
 class AyahShareVideoDraft {
   const AyahShareVideoDraft({
     required this.surahNumber,
@@ -56,10 +59,21 @@ class NativeVideoExportException implements Exception {
   String toString() => message;
 }
 
+class AyahAudioUnavailableException implements Exception {
+  const AyahAudioUnavailableException();
+
+  @override
+  String toString() => _ayahAudioUnavailableMessage;
+}
+
 class AyahShareVideoService {
   static const Size _videoSize = Size(1080, 1920);
   static const int _videoFps = 30;
   static const _nativeChannel = MethodChannel('com.qiblatime/video_export');
+  static const _alafasyAudioBaseUrl =
+      'https://everyayah.com/data/Alafasy_128kbps';
+  static const _legacyAlafasyAudioBaseUrl =
+      'https://cdn.islamic.network/quran/audio/128/ar.alafasy';
 
   AyahShareVideoService(this._ref);
 
@@ -82,9 +96,9 @@ class AyahShareVideoService {
         .read(quranAudioDownloadServiceProvider)
         .getDownloadedAyahPath(summary.number, ayah);
 
-    final preferredAudio = localPath ?? ayah.audioUrl;
+    final preferredAudio = localPath ?? _safeAudioUrlFor(summary.number, ayah);
     if (preferredAudio.isEmpty) {
-      return null;
+      throw const AyahAudioUnavailableException();
     }
 
     return AyahShareVideoDraft(
@@ -377,16 +391,14 @@ class AyahShareVideoService {
     if (draft.isLocalAudio) {
       final file = File(draft.audioPathOrUrl);
       if (!await file.exists()) {
-        throw StateError(
-          'The local recitation audio could not be found for this ayah.',
-        );
+        throw const AyahAudioUnavailableException();
       }
       return file;
     }
 
     final uri = Uri.tryParse(draft.audioPathOrUrl);
-    if (uri == null || !uri.hasScheme) {
-      throw StateError('The ayah audio URL is invalid.');
+    if (uri == null || !uri.hasScheme || uri.scheme != 'https') {
+      throw const AyahAudioUnavailableException();
     }
 
     final extension = _audioExtensionFromUri(uri);
@@ -394,18 +406,46 @@ class AyahShareVideoService {
       '${directory.path}/${fileStem}_audio$extension',
     );
 
-    final response = await http.get(uri);
-    if (response.statusCode < 200 || response.statusCode >= 300) {
-      throw StateError(
-        'Could not download the recitation audio (HTTP ${response.statusCode}).',
+    late final http.Response response;
+    try {
+      response = await http.get(uri);
+    } catch (e, stackTrace) {
+      AppLogger.error(
+        'Failed to download ayah audio for video: $uri',
+        error: e,
+        stackTrace: stackTrace,
       );
+      throw const AyahAudioUnavailableException();
+    }
+
+    if (response.statusCode < 200 || response.statusCode >= 300) {
+      AppLogger.error(
+        'Failed to download ayah audio for video: HTTP ${response.statusCode} $uri',
+      );
+      throw const AyahAudioUnavailableException();
     }
     if (response.bodyBytes.isEmpty) {
-      throw StateError('The downloaded recitation audio was empty.');
+      AppLogger.error('Downloaded ayah audio was empty: $uri');
+      throw const AyahAudioUnavailableException();
     }
 
     await downloadedFile.writeAsBytes(response.bodyBytes, flush: true);
     return downloadedFile;
+  }
+
+  String _safeAudioUrlFor(int surahNumber, SurahAyah ayah) {
+    final currentUrl = ayah.audioUrl.trim();
+    if (currentUrl.isEmpty ||
+        currentUrl.startsWith(_legacyAlafasyAudioBaseUrl)) {
+      return _alafasyAudioUrlFor(surahNumber, ayah.numberInSurah);
+    }
+    return currentUrl;
+  }
+
+  String _alafasyAudioUrlFor(int surahNumber, int numberInSurah) {
+    final surah = surahNumber.toString().padLeft(3, '0');
+    final ayah = numberInSurah.toString().padLeft(3, '0');
+    return '$_alafasyAudioBaseUrl/$surah$ayah.mp3';
   }
 
   String _buildFfmpegCommand({

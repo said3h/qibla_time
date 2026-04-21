@@ -56,6 +56,10 @@ class QuranService {
 
   static const _baseUrl = 'https://api.alquran.cloud/v1';
   static const _timeoutSeconds = 8;
+  static const _alafasyAudioBaseUrl =
+      'https://everyayah.com/data/Alafasy_128kbps';
+  static const _legacyAlafasyAudioBaseUrl =
+      'https://cdn.islamic.network/quran/audio/128/ar.alafasy';
 
   // Cache en memoria para no releer el JSON en cada petición
   static Map<int, SurahDetail>? _offlineCache;
@@ -160,8 +164,7 @@ class QuranService {
         translation: i < translationAyahs.length
             ? _readOptionalString(translationAyahs[i], 'text')
             : '',
-        audioUrl: 'https://cdn.islamic.network/quran/audio/128/ar.alafasy/'
-            '$ayahNumber.mp3',
+        audioUrl: _alafasyAudioUrlFor(summary.number, i + 1),
       );
     });
 
@@ -359,6 +362,24 @@ class QuranService {
     return value?.toString() ?? '';
   }
 
+  static String _safeAlafasyAudioUrl({
+    required int surahNumber,
+    required int numberInSurah,
+    required String currentUrl,
+  }) {
+    final trimmed = currentUrl.trim();
+    if (trimmed.isEmpty || trimmed.startsWith(_legacyAlafasyAudioBaseUrl)) {
+      return _alafasyAudioUrlFor(surahNumber, numberInSurah);
+    }
+    return trimmed;
+  }
+
+  static String _alafasyAudioUrlFor(int surahNumber, int numberInSurah) {
+    final surah = surahNumber.toString().padLeft(3, '0');
+    final ayah = numberInSurah.toString().padLeft(3, '0');
+    return '$_alafasyAudioBaseUrl/$surah$ayah.mp3';
+  }
+
   SurahDetail? _buildOfflineDetail({
     required SurahSummary summary,
     required Map<String, dynamic> surahData,
@@ -389,7 +410,11 @@ class QuranService {
           arabic: arabic,
           transliteration: _readOptionalString(ayahData, 'transliteration'),
           translation: _readOptionalString(ayahData, 'translation'),
-          audioUrl: _readOptionalString(ayahData, 'audioUrl'),
+          audioUrl: _safeAlafasyAudioUrl(
+            surahNumber: summary.number,
+            numberInSurah: numberInSurah,
+            currentUrl: _readOptionalString(ayahData, 'audioUrl'),
+          ),
         ),
       );
     }

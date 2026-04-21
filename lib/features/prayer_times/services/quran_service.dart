@@ -23,6 +23,9 @@ class QuranVerse {
 }
 
 class QuranVerseService {
+  static const _alafasyAudioBaseUrl =
+      'https://everyayah.com/data/Alafasy_128kbps';
+
   static Future<QuranVerse> getDailyVerse(String languageCode) async {
     final normalizedLanguage = _normalizedLanguageCode(languageCode);
     final translationEdition = _translationEditionFor(normalizedLanguage);
@@ -44,6 +47,8 @@ class QuranVerseService {
       }
 
       final data = json.decode(response.body)['data'];
+      final surahNumber = data[0]['surah']['number'] as int;
+      final numberInSurah = data[0]['numberInSurah'] as int;
 
       return QuranVerse(
         arabicText: data[0]['text'],
@@ -51,8 +56,7 @@ class QuranVerseService {
         transliterationText: data[2]['text'],
         reference:
             '${data[0]['surah'][referenceNameField]} [${data[0]['surah']['number']}:${data[0]['numberInSurah']}]',
-        audioUrl:
-            'https://cdn.islamic.network/quran/audio/128/ar.alafasy/$verseNumber.mp3',
+        audioUrl: _alafasyAudioUrlFor(surahNumber, numberInSurah),
       );
     } catch (_) {
       final l10n = appLocalizationsForLocaleCode(normalizedLanguage);
@@ -97,6 +101,12 @@ class QuranVerseService {
       'tr' => 'tr.diyanet',
       _ => 'es.garcia',
     };
+  }
+
+  static String _alafasyAudioUrlFor(int surahNumber, int numberInSurah) {
+    final surah = surahNumber.toString().padLeft(3, '0');
+    final ayah = numberInSurah.toString().padLeft(3, '0');
+    return '$_alafasyAudioBaseUrl/$surah$ayah.mp3';
   }
 }
 
