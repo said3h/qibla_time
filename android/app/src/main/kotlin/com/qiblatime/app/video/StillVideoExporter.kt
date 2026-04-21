@@ -421,7 +421,8 @@ object StillVideoExporter {
   }
 
   private fun exportVideoWithAacAudio(params: Params, outputFile: File) {
-    val durationUs = readAudioDurationUs(params.audioPath).takeIf { it > 0L } ?: 5_000_000L
+    val durationUs = readAudioDurationUs(params.audioPath)
+    require(durationUs > 0L) { "Could not read audio duration." }
 
     val bitmap = BitmapFactory.decodeFile(params.imagePath)
       ?: throw IllegalStateException("Could not decode image.")
@@ -494,7 +495,7 @@ object StillVideoExporter {
     var videoInputDone = false
     var videoOutputDone = false
     var nextFrameIndex = 0
-    val frameCount = max(1, (durationUs * params.fps / 1_000_000L).toInt())
+    val frameCount = frameCountForDuration(durationUs, params.fps)
     val frameDurationUs = 1_000_000L / params.fps.toLong()
 
     var extractorDone = false
@@ -996,19 +997,62 @@ object StillVideoExporter {
   }
 
   private fun readAudioDurationUs(audioPath: String): Long {
+    val extractorDurationUs = readAudioDurationWithExtractorUs(audioPath)
     val retriever = MediaMetadataRetriever()
-    return try {
+    val metadataDurationUs = try {
       retriever.setDataSource(audioPath)
       val durationMs = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION)?.toLongOrNull()
       (durationMs ?: 0L) * 1000L
     } finally {
       retriever.release()
     }
+    val durationUs = max(extractorDurationUs, metadataDurationUs)
+    Log.i(
+      TAG,
+      "audio duration extractorUs=$extractorDurationUs metadataUs=$metadataDurationUs selectedUs=$durationUs",
+    )
+    return durationUs
+  }
+
+  private fun readAudioDurationWithExtractorUs(audioPath: String): Long {
+    val extractor = MediaExtractor()
+    return try {
+      extractor.setDataSource(audioPath)
+      val trackIndex = selectAudioTrack(extractor)
+      if (trackIndex < 0) return 0L
+      extractor.selectTrack(trackIndex)
+      val format = extractor.getTrackFormat(trackIndex)
+      if (format.containsKey(MediaFormat.KEY_DURATION)) {
+        val durationUs = format.getLong(MediaFormat.KEY_DURATION)
+        if (durationUs > 0L) return durationUs
+      }
+
+      var lastSampleTimeUs = -1L
+      var previousSampleTimeUs = -1L
+      var lastDeltaUs = 0L
+      while (true) {
+        val sampleTimeUs = extractor.sampleTime
+        if (sampleTimeUs < 0L) break
+        if (previousSampleTimeUs >= 0L && sampleTimeUs > previousSampleTimeUs) {
+          lastDeltaUs = sampleTimeUs - previousSampleTimeUs
+        }
+        previousSampleTimeUs = sampleTimeUs
+        lastSampleTimeUs = sampleTimeUs
+        if (!extractor.advance()) break
+      }
+      if (lastSampleTimeUs >= 0L) lastSampleTimeUs + lastDeltaUs else 0L
+    } finally {
+      safeReleaseExtractor(extractor)
+    }
+  }
+
+  private fun frameCountForDuration(durationUs: Long, fps: Int): Int {
+    require(fps > 0) { "fps must be greater than zero." }
+    val frames = (durationUs * fps.toLong() + 999_999L) / 1_000_000L
+    return frames.coerceAtLeast(1L).coerceAtMost(Int.MAX_VALUE.toLong()).toInt()
   }
 
   private fun scaleToFit(bitmap: Bitmap, width: Int, height: Int): Bitmap {
-    if (bitmap.width == width && bitmap.height == height) return bitmap
-
     val srcW = bitmap.width.toFloat()
     val srcH = bitmap.height.toFloat()
     val dstW = width.toFloat()

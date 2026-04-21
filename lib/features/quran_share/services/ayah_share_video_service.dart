@@ -12,8 +12,6 @@ import 'package:permission_handler/permission_handler.dart';
 
 import '../../../core/services/logger_service.dart';
 import '../../../core/theme/app_theme.dart';
-import '../../../l10n/l10n.dart';
-import '../../../l10n/generated/app_localizations.dart';
 import '../../quran/models/quran_models.dart';
 import '../../quran/services/quran_audio_download_service.dart';
 import 'ayah_share_image_service.dart';
@@ -125,7 +123,6 @@ class AyahShareVideoService {
       return _exportVideoNativeAndroid(draft);
     }
     try {
-      final l10n = appLocalizationsForDevice();
       final tempDirectory = await getTemporaryDirectory();
       final workingDirectory = await Directory(
         '${tempDirectory.path}/ayah_share_video',
@@ -133,9 +130,7 @@ class AyahShareVideoService {
       final fileStem = _fileStemFor(draft);
 
       final imageFile = await _renderShareImageFrame(
-        l10n: l10n,
         draft: draft,
-        fileStem: fileStem,
         workingDirectory: workingDirectory,
       );
 
@@ -259,7 +254,6 @@ class AyahShareVideoService {
   Future<File> _exportVideoNativeAndroid(AyahShareVideoDraft draft) async {
     debugPrint('AyahShareVideoService.exportVideo: native android start');
 
-    final l10n = appLocalizationsForDevice();
     final tempDirectory = await getTemporaryDirectory();
     final workingDirectory = await Directory(
       '${tempDirectory.path}/ayah_share_video',
@@ -267,9 +261,7 @@ class AyahShareVideoService {
     final fileStem = _fileStemFor(draft);
 
     final imageFile = await _renderShareImageFrame(
-      l10n: l10n,
       draft: draft,
-      fileStem: fileStem,
       workingDirectory: workingDirectory,
     );
 
@@ -328,9 +320,7 @@ class AyahShareVideoService {
   }
 
   Future<File> _renderShareImageFrame({
-    required AppLocalizations l10n,
     required AyahShareVideoDraft draft,
-    required String fileStem,
     required Directory workingDirectory,
   }) async {
     final tokens = QiblaThemes.current;
@@ -355,7 +345,7 @@ class AyahShareVideoService {
       summary,
       ayah,
       tokens,
-      mode: draft.exportMode,
+      mode: AyahShareExportMode.cardOnly,
       includeArabic: draft.arabicText.trim().isNotEmpty,
       includeTranslation: draft.translation.trim().isNotEmpty,
       directory: workingDirectory,
