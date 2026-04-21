@@ -73,9 +73,11 @@ object StillVideoExporter {
   private fun exportInternal(params: Params) {
     val imageFile = File(params.imagePath)
     require(imageFile.exists()) { "Image not found: ${params.imagePath}" }
+    val audioFile = File(params.audioPath)
+    require(audioFile.exists()) { "Audio not found: ${params.audioPath}" }
     Log.i(
       TAG,
-      "temporary video-only export imageBytes=${imageFile.length()} audioIgnored=${params.audioPath}",
+      "video export imageBytes=${imageFile.length()} audioBytes=${audioFile.length()}",
     )
     checkCancelled()
 
@@ -83,7 +85,7 @@ object StillVideoExporter {
     outputFile.parentFile?.mkdirs()
     if (outputFile.exists()) outputFile.delete()
 
-    exportVideoOnlyForAudioIsolation(params, outputFile)
+    exportVideoWithCompressedAudio(params, outputFile)
     return
 
     Log.i(TAG, "reading audio duration")
@@ -413,22 +415,30 @@ object StillVideoExporter {
     step("export terminado", "path=${outputFile.absolutePath} bytes=${outputFile.length()}")
   }
 
-  private fun exportVideoOnlyForAudioIsolation(params: Params, outputFile: File) {
-    val durationUs = 5_000_000L
+  private fun exportVideoWithCompressedAudio(params: Params, outputFile: File) {
+    val durationUs = readAudioDurationUs(params.audioPath).takeIf { it > 0L } ?: 5_000_000L
 
-    Log.i(TAG, "temporary video-only export reading image bitmap")
+    Log.i(TAG, "export reading image bitmap")
     val bitmap = BitmapFactory.decodeFile(params.imagePath)
       ?: throw IllegalStateException("Could not decode image.")
     val scaledBitmap = scaleToFit(bitmap, params.width, params.height)
     val yuvFrame = bitmapToNV21(scaledBitmap, params.width, params.height)
     step(
       "imagen cargada",
-      "temporary video-only bitmap=${bitmap.width}x${bitmap.height} scaled=${scaledBitmap.width}x${scaledBitmap.height} durationUs=$durationUs",
+      "bitmap=${bitmap.width}x${bitmap.height} scaled=${scaledBitmap.width}x${scaledBitmap.height} durationUs=$durationUs",
     )
     checkCancelled()
 
+    val audioExtractor = MediaExtractor()
+    audioExtractor.setDataSource(params.audioPath)
+    val sourceAudioTrack = selectAudioTrack(audioExtractor)
+    require(sourceAudioTrack >= 0) { "No audio track found in input." }
+    audioExtractor.selectTrack(sourceAudioTrack)
+    val sourceAudioFormat = audioExtractor.getTrackFormat(sourceAudioTrack)
+
     val muxer = MediaMuxer(params.outputPath, MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4)
-    step("MediaMuxer creado", "temporary video-only output=${params.outputPath}")
+    val audioTrackIndex = muxer.addTrack(sourceAudioFormat)
+    step("MediaMuxer creado", "output=${params.outputPath} audioFormat=$sourceAudioFormat")
     checkCancelled()
 
     val videoEncoder = createVideoEncoder(params, durationUs)
@@ -447,7 +457,7 @@ object StillVideoExporter {
     try {
       videoEncoder.start()
       val videoInputBuffers = videoEncoder.inputBuffers
-      step("escritura de frames empezada", "temporary video-only frameCount=$frameCount")
+      step("escritura de frames empezada", "frameCount=$frameCount")
 
       while (!videoOutputDone) {
         checkCancelled()
@@ -461,7 +471,7 @@ object StillVideoExporter {
             if (nextFrameIndex >= frameCount) {
               videoEncoder.queueInputBuffer(inIndex, 0, 0, ptsUs, MediaCodec.BUFFER_FLAG_END_OF_STREAM)
               videoInputDone = true
-              Log.i(TAG, "temporary video-only queued video EOS ptsUs=$ptsUs")
+              Log.i(TAG, "queued video EOS ptsUs=$ptsUs")
             } else {
               buffer.put(yuvFrame)
               videoEncoder.queueInputBuffer(inIndex, 0, yuvFrame.size, ptsUs, 0)
@@ -476,7 +486,7 @@ object StillVideoExporter {
             videoTrackIndex = muxer.addTrack(videoEncoder.outputFormat)
             muxer.start()
             muxerStarted = true
-            Log.i(TAG, "temporary video-only muxer started track=$videoTrackIndex format=${videoEncoder.outputFormat}")
+            Log.i(TAG, "muxer started videoTrack=$videoTrackIndex audioTrack=$audioTrackIndex format=${videoEncoder.outputFormat}")
           }
           outIndex >= 0 -> {
             val outBuffer = videoEncoder.getOutputBuffer(outIndex) ?: ByteBuffer.allocate(0)
@@ -492,12 +502,19 @@ object StillVideoExporter {
             videoEncoder.releaseOutputBuffer(outIndex, false)
             if ((videoBufferInfo.flags and MediaCodec.BUFFER_FLAG_END_OF_STREAM) != 0) {
               videoOutputDone = true
-              Log.i(TAG, "temporary video-only encoder reached EOS frames=$nextFrameIndex")
+              Log.i(TAG, "video encoder reached EOS frames=$nextFrameIndex")
             }
           }
         }
       }
+      writeCompressedAudioSamples(
+        extractor = audioExtractor,
+        muxer = muxer,
+        trackIndex = audioTrackIndex,
+        durationUs = durationUs,
+      )
     } finally {
+      safeReleaseExtractor(audioExtractor)
       safeStopAndRelease("videoEncoder", videoEncoder)
       if (muxerStarted) {
         safeStopMuxer(muxer)
@@ -511,7 +528,63 @@ object StillVideoExporter {
     if (outputFile.length() <= 0L) {
       throw IllegalStateException("Output file was generated but is empty: ${outputFile.absolutePath}")
     }
-    step("export terminado", "temporary video-only path=${outputFile.absolutePath} bytes=${outputFile.length()}")
+    step("export terminado", "path=${outputFile.absolutePath} bytes=${outputFile.length()}")
+  }
+
+  private fun writeCompressedAudioSamples(
+    extractor: MediaExtractor,
+    muxer: MediaMuxer,
+    trackIndex: Int,
+    durationUs: Long,
+  ) {
+    val format = extractor.getTrackFormat(selectAudioTrack(extractor))
+    val maxInputSize =
+      if (format.containsKey(MediaFormat.KEY_MAX_INPUT_SIZE)) {
+        format.getInteger(MediaFormat.KEY_MAX_INPUT_SIZE)
+      } else {
+        256 * 1024
+      }
+    val buffer = ByteBuffer.allocate(maxInputSize)
+    val bufferInfo = MediaCodec.BufferInfo()
+    var lastPresentationTimeUs = -1L
+    var samplesWritten = 0
+
+    step("escritura de audio empezada", "compressed copy maxInputSize=$maxInputSize")
+
+    while (true) {
+      checkCancelled()
+      buffer.clear()
+      val sampleSize = extractor.readSampleData(buffer, 0)
+      if (sampleSize < 0) {
+        Log.i(TAG, "EOF audio alcanzado samplesWritten=$samplesWritten")
+        break
+      }
+
+      val presentationTimeUs = extractor.sampleTime
+      if (presentationTimeUs < 0 || presentationTimeUs > durationUs) {
+        Log.i(TAG, "EOF audio alcanzado ptsUs=$presentationTimeUs samplesWritten=$samplesWritten")
+        break
+      }
+      if (lastPresentationTimeUs >= 0 && presentationTimeUs <= lastPresentationTimeUs) {
+        Log.w(
+          TAG,
+          "EOF audio alcanzado por timestamp repetido current=$presentationTimeUs last=$lastPresentationTimeUs samplesWritten=$samplesWritten",
+        )
+        break
+      }
+
+      bufferInfo.set(0, sampleSize, presentationTimeUs, extractor.sampleFlags)
+      muxer.writeSampleData(trackIndex, buffer, bufferInfo)
+      samplesWritten++
+      lastPresentationTimeUs = presentationTimeUs
+
+      if (!extractor.advance()) {
+        Log.i(TAG, "EOF audio alcanzado tras advance samplesWritten=$samplesWritten")
+        break
+      }
+    }
+
+    Log.i(TAG, "audio samples written=$samplesWritten")
   }
 
   private fun step(name: String, details: String = "") {
