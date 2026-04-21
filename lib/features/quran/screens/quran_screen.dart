@@ -727,6 +727,7 @@ enum _AyahShareAction {
   text,
   image,
   video,
+  saveVideo,
 }
 
 class QuranDetailScreen extends ConsumerStatefulWidget {
@@ -886,6 +887,16 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                 onTap: () =>
                     Navigator.of(sheetContext).pop(_AyahShareAction.video),
               ),
+              ListTile(
+                leading: const Icon(Icons.save_outlined),
+                title: Text(l10n.commonSave),
+                subtitle: Text(
+                  l10n.videoSaveToGallerySubtitle,
+                  style: GoogleFonts.dmSans(fontSize: 12),
+                ),
+                onTap: () =>
+                    Navigator.of(sheetContext).pop(_AyahShareAction.saveVideo),
+              ),
             ],
           ),
         );
@@ -921,6 +932,9 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
         return;
       case _AyahShareAction.video:
         await _shareAyahAsVideo(ayah);
+        return;
+      case _AyahShareAction.saveVideo:
+        await _saveAyahAsVideo(ayah);
         return;
     }
   }
@@ -963,6 +977,47 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       if (!mounted) return;
 
       await _showVideoExportError(l10n.quranAyahVideoError, e);
+    }
+  }
+
+  Future<void> _saveAyahAsVideo(SurahAyah ayah) async {
+    final videoService = ref.read(ayahShareVideoServiceProvider);
+    final l10n = context.l10n;
+
+    try {
+      final draft = await videoService.prepareDraft(
+        summary: widget.summary,
+        ayah: ayah,
+      );
+      if (!mounted) return;
+
+      if (draft == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(l10n.videoSaveFailed),
+          ),
+        );
+        return;
+      }
+
+      final file = await videoService.exportVideo(draft);
+      if (!mounted) return;
+
+      await videoService.saveVideoToGallery(file);
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(l10n.videoSavedToGallery),
+        ),
+      );
+    } catch (_) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(l10n.videoSaveFailed),
+        ),
+      );
     }
   }
 

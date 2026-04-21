@@ -181,8 +181,6 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
   }
 
   Future<void> _shareVideo() async {
-    debugPrint('_shareVideo: tapped');
-
     if (_isBusy) {
       return;
     }
@@ -227,6 +225,64 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
       AppLogger.error('shareVideo: FAILED — ${e.runtimeType}: $e',
           error: e, stackTrace: stackTrace);
       await _showVideoExportError(e);
+    } finally {
+      if (mounted) setState(() => _activeAction = null);
+    }
+  }
+
+  Future<void> _saveVideo() async {
+    if (_isBusy) {
+      return;
+    }
+
+    if (!_includeArabic && !_includeTranslation) {
+      widget.rootMessenger.showSnackBar(
+        SnackBar(
+          content: Text(context.l10n.videoSaveFailed),
+        ),
+      );
+      return;
+    }
+
+    setState(() => _activeAction = _AyahShareAction.video);
+
+    try {
+      final draft = await widget.videoService.prepareDraft(
+        summary: widget.summary,
+        ayah: widget.ayah,
+        includeArabic: _includeArabic,
+        includeTranslation: _includeTranslation,
+        exportMode: _exportMode,
+      );
+      if (!mounted) return;
+
+      if (draft == null) {
+        widget.rootMessenger.showSnackBar(
+          SnackBar(
+            content: Text(context.l10n.videoSaveFailed),
+          ),
+        );
+        return;
+      }
+
+      final file = await widget.videoService.exportVideo(draft);
+      if (!mounted) return;
+
+      await widget.videoService.saveVideoToGallery(file);
+      if (!mounted) return;
+
+      widget.rootMessenger.showSnackBar(
+        SnackBar(
+          content: Text(context.l10n.videoSavedToGallery),
+        ),
+      );
+      Navigator.of(context).pop();
+    } catch (_) {
+      widget.rootMessenger.showSnackBar(
+        SnackBar(
+          content: Text(context.l10n.videoSaveFailed),
+        ),
+      );
     } finally {
       if (mounted) setState(() => _activeAction = null);
     }
@@ -345,6 +401,7 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
         onShareText: _shareText,
         onShareImage: _shareImage,
         onShareVideo: _shareVideo,
+        onSaveVideo: _saveVideo,
       ),
     );
   }
@@ -358,6 +415,7 @@ class _AyahShareFooter extends StatelessWidget {
     required this.onShareText,
     required this.onShareImage,
     required this.onShareVideo,
+    required this.onSaveVideo,
   });
 
   final QiblaTokens tokens;
@@ -366,6 +424,7 @@ class _AyahShareFooter extends StatelessWidget {
   final VoidCallback onShareText;
   final VoidCallback onShareImage;
   final VoidCallback onShareVideo;
+  final VoidCallback onSaveVideo;
 
   @override
   Widget build(BuildContext context) {
@@ -466,6 +525,28 @@ class _AyahShareFooter extends StatelessWidget {
               ),
             ),
           ],
+        ),
+        const SizedBox(height: 10),
+        SizedBox(
+          width: double.infinity,
+          child: OutlinedButton(
+            onPressed: isBusy ? null : onSaveVideo,
+            style: OutlinedButton.styleFrom(
+              foregroundColor: tokens.textPrimary,
+              side: BorderSide(color: tokens.borderMed),
+              padding: const EdgeInsets.symmetric(vertical: 14),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+            ),
+            child: Text(
+              l10n.commonSave,
+              style: GoogleFonts.dmSans(
+                fontSize: 13,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
         ),
       ],
     );

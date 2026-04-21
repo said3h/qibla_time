@@ -1,12 +1,15 @@
 import 'dart:io';
 
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:ffmpeg_kit_min_gpl/ffmpeg_kit.dart';
 import 'package:ffmpeg_kit_min_gpl/return_code.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../../../core/services/logger_service.dart';
 import '../../../core/theme/app_theme.dart';
@@ -227,6 +230,35 @@ class AyahShareVideoService {
         stackTrace: stackTrace,
       );
       rethrow;
+    }
+  }
+
+  Future<void> saveVideoToGallery(File file) async {
+    if (!await file.exists()) {
+      throw const NativeVideoExportException('Failed to save video.');
+    }
+
+    if (Platform.isIOS) {
+      final status = await Permission.photosAddOnly.request();
+      if (!status.isGranted) {
+        throw const NativeVideoExportException('Failed to save video.');
+      }
+    } else if (Platform.isAndroid) {
+      final sdkInt = (await DeviceInfoPlugin().androidInfo).version.sdkInt;
+      if (sdkInt <= 28) {
+        final status = await Permission.storage.request();
+        if (!status.isGranted) {
+          throw const NativeVideoExportException('Failed to save video.');
+        }
+      }
+    }
+
+    final saved = await GallerySaver.saveVideo(
+      file.path,
+      albumName: 'QiblaTime',
+    );
+    if (saved != true) {
+      throw const NativeVideoExportException('Failed to save video.');
     }
   }
 
