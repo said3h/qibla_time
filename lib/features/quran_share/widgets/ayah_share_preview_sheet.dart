@@ -48,6 +48,11 @@ Future<void> showAyahSharePreviewSheet({
 
 enum _AyahShareAction { text, image, video }
 
+enum _VideoExportAction {
+  share,
+  save,
+}
+
 class _AyahSharePreviewSheet extends StatefulWidget {
   const _AyahSharePreviewSheet({
     required this.summary,
@@ -230,6 +235,53 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
     }
   }
 
+  Future<void> _handleVideoAction() async {
+    final action = await _chooseVideoExportAction();
+    if (!mounted || action == null) return;
+
+    if (action == _VideoExportAction.share) {
+      await _shareVideo();
+    } else {
+      await _saveVideo();
+    }
+  }
+
+  Future<_VideoExportAction?> _chooseVideoExportAction() {
+    final l10n = context.l10n;
+    return showModalBottomSheet<_VideoExportAction>(
+      context: context,
+      builder: (sheetContext) {
+        return SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                leading: const Icon(Icons.ios_share_outlined),
+                title: Text('${l10n.commonShare} ${l10n.commonVideo}'),
+                subtitle: Text(
+                  l10n.quranShareVideoSubtitle,
+                  style: GoogleFonts.dmSans(fontSize: 12),
+                ),
+                onTap: () =>
+                    Navigator.of(sheetContext).pop(_VideoExportAction.share),
+              ),
+              ListTile(
+                leading: const Icon(Icons.save_outlined),
+                title: Text('${l10n.commonSave} ${l10n.commonVideo}'),
+                subtitle: Text(
+                  l10n.videoSaveToGallerySubtitle,
+                  style: GoogleFonts.dmSans(fontSize: 12),
+                ),
+                onTap: () =>
+                    Navigator.of(sheetContext).pop(_VideoExportAction.save),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   Future<void> _saveVideo() async {
     if (_isBusy) {
       return;
@@ -400,7 +452,7 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
         activeAction: _activeAction,
         onShareText: _shareText,
         onShareImage: _shareImage,
-        onShareVideo: _shareVideo,
+        onShareVideo: _handleVideoAction,
         onSaveVideo: _saveVideo,
       ),
     );

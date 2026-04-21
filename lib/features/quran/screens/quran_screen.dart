@@ -730,6 +730,11 @@ enum _AyahShareAction {
   saveVideo,
 }
 
+enum _VideoExportAction {
+  share,
+  save,
+}
+
 class QuranDetailScreen extends ConsumerStatefulWidget {
   const QuranDetailScreen({
     super.key,
@@ -931,12 +936,54 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
         }
         return;
       case _AyahShareAction.video:
-        await _shareAyahAsVideo(ayah);
+        final videoAction = await _chooseVideoExportAction();
+        if (!mounted || videoAction == null) return;
+        if (videoAction == _VideoExportAction.share) {
+          await _shareAyahAsVideo(ayah);
+        } else {
+          await _saveAyahAsVideo(ayah);
+        }
         return;
       case _AyahShareAction.saveVideo:
         await _saveAyahAsVideo(ayah);
         return;
     }
+  }
+
+  Future<_VideoExportAction?> _chooseVideoExportAction() {
+    final l10n = context.l10n;
+    return showModalBottomSheet<_VideoExportAction>(
+      context: context,
+      builder: (sheetContext) {
+        return SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                leading: const Icon(Icons.ios_share_outlined),
+                title: Text('${l10n.commonShare} ${l10n.commonVideo}'),
+                subtitle: Text(
+                  l10n.quranShareVideoSubtitle,
+                  style: GoogleFonts.dmSans(fontSize: 12),
+                ),
+                onTap: () =>
+                    Navigator.of(sheetContext).pop(_VideoExportAction.share),
+              ),
+              ListTile(
+                leading: const Icon(Icons.save_outlined),
+                title: Text('${l10n.commonSave} ${l10n.commonVideo}'),
+                subtitle: Text(
+                  l10n.videoSaveToGallerySubtitle,
+                  style: GoogleFonts.dmSans(fontSize: 12),
+                ),
+                onTap: () =>
+                    Navigator.of(sheetContext).pop(_VideoExportAction.save),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   Future<void> _shareAyahAsVideo(SurahAyah ayah) async {
