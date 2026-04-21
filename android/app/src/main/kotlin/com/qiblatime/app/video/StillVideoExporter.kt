@@ -505,6 +505,9 @@ object StillVideoExporter {
     var lastAacPtsUs = -1L
     var audioSamplesWritten = 0
 
+    // Safety deadline: 90 s should be more than enough for any reasonable clip.
+    val deadlineMs = System.currentTimeMillis() + 90_000L
+
     try {
       videoEncoder.start()
       audioDecoder.start()
@@ -513,10 +516,33 @@ object StillVideoExporter {
 
       while (!videoOutputDone || !encoderDone) {
         checkCancelled()
+        if (System.currentTimeMillis() > deadlineMs) {
+          Log.e(TAG, "export deadline exceeded — breaking loop videoOutputDone=$videoOutputDone encoderDone=$encoderDone")
+          break
+        }
 
-        // Prime / drain video format and output.
+        // Feed video encoder — pending output is buffered until muxer starts.
+        if (!videoInputDone) {
+          val inIndex = videoEncoder.dequeueInputBuffer(10_000L)
+          if (inIndex >= 0) {
+            val buffer = videoEncoder.inputBuffers[inIndex]
+            buffer.clear()
+            val ptsUs = nextFrameIndex * frameDurationUs
+            if (nextFrameIndex >= frameCount) {
+              videoEncoder.queueInputBuffer(inIndex, 0, 0, ptsUs, MediaCodec.BUFFER_FLAG_END_OF_STREAM)
+              videoInputDone = true
+              Log.i(TAG, "video EOS enviado ptsUs=$ptsUs frames=$nextFrameIndex/$frameCount")
+            } else {
+              buffer.put(yuvFrame)
+              videoEncoder.queueInputBuffer(inIndex, 0, yuvFrame.size, ptsUs, 0)
+              nextFrameIndex++
+            }
+          }
+        }
+
+        // Drain video encoder output.
         run {
-          val outIndex = videoEncoder.dequeueOutputBuffer(videoBufferInfo, 0)
+          val outIndex = videoEncoder.dequeueOutputBuffer(videoBufferInfo, 10_000L)
           when {
             outIndex == MediaCodec.INFO_OUTPUT_FORMAT_CHANGED -> {
               if (videoTrackIndex < 0) {
@@ -546,25 +572,8 @@ object StillVideoExporter {
               videoEncoder.releaseOutputBuffer(outIndex, false)
               if ((videoBufferInfo.flags and MediaCodec.BUFFER_FLAG_END_OF_STREAM) != 0) {
                 videoOutputDone = true
+                Log.i(TAG, "video EOS recibido frames=$nextFrameIndex")
               }
-            }
-          }
-        }
-
-        // Feed video encoder unconditionally — pending samples are buffered until muxer starts.
-        if (!videoInputDone) {
-          val inIndex = videoEncoder.dequeueInputBuffer(0)
-          if (inIndex >= 0) {
-            val buffer = videoEncoder.inputBuffers[inIndex]
-            buffer.clear()
-            val ptsUs = nextFrameIndex * frameDurationUs
-            if (nextFrameIndex >= frameCount) {
-              videoEncoder.queueInputBuffer(inIndex, 0, 0, ptsUs, MediaCodec.BUFFER_FLAG_END_OF_STREAM)
-              videoInputDone = true
-            } else {
-              buffer.put(yuvFrame)
-              videoEncoder.queueInputBuffer(inIndex, 0, yuvFrame.size, ptsUs, 0)
-              nextFrameIndex++
             }
           }
         }
@@ -590,7 +599,7 @@ object StillVideoExporter {
         // Drain decoder -> stage PCM (only keep one chunk at a time).
         if (!decoderDone && pendingPcm == null) {
           val info = MediaCodec.BufferInfo()
-          val outIndex = audioDecoder.dequeueOutputBuffer(info, 0)
+          val outIndex = audioDecoder.dequeueOutputBuffer(info, 10_000L)
           when {
             outIndex == MediaCodec.INFO_OUTPUT_FORMAT_CHANGED -> Unit
             outIndex >= 0 -> {
@@ -653,7 +662,7 @@ object StillVideoExporter {
         // Drain AAC encoder.
         run {
           val info = MediaCodec.BufferInfo()
-          val outIndex = audioEncoder.dequeueOutputBuffer(info, 0)
+          val outIndex = audioEncoder.dequeueOutputBuffer(info, 10_000L)
           when {
             outIndex == MediaCodec.INFO_OUTPUT_FORMAT_CHANGED -> {
               if (audioTrackIndex < 0) {
