@@ -453,7 +453,6 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
         onShareText: _shareText,
         onShareImage: _shareImage,
         onShareVideo: _handleVideoAction,
-        onSaveVideo: _saveVideo,
       ),
     );
   }
@@ -467,7 +466,6 @@ class _AyahShareFooter extends StatelessWidget {
     required this.onShareText,
     required this.onShareImage,
     required this.onShareVideo,
-    required this.onSaveVideo,
   });
 
   final QiblaTokens tokens;
@@ -476,7 +474,6 @@ class _AyahShareFooter extends StatelessWidget {
   final VoidCallback onShareText;
   final VoidCallback onShareImage;
   final VoidCallback onShareVideo;
-  final VoidCallback onSaveVideo;
 
   @override
   Widget build(BuildContext context) {
@@ -577,28 +574,6 @@ class _AyahShareFooter extends StatelessWidget {
               ),
             ),
           ],
-        ),
-        const SizedBox(height: 10),
-        SizedBox(
-          width: double.infinity,
-          child: OutlinedButton(
-            onPressed: isBusy ? null : onSaveVideo,
-            style: OutlinedButton.styleFrom(
-              foregroundColor: tokens.textPrimary,
-              side: BorderSide(color: tokens.borderMed),
-              padding: const EdgeInsets.symmetric(vertical: 14),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
-            ),
-            child: Text(
-              l10n.commonSave,
-              style: GoogleFonts.dmSans(
-                fontSize: 13,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ),
         ),
       ],
     );
