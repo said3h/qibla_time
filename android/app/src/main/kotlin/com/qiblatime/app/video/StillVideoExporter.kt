@@ -73,17 +73,18 @@ object StillVideoExporter {
   private fun exportInternal(params: Params) {
     val imageFile = File(params.imagePath)
     require(imageFile.exists()) { "Image not found: ${params.imagePath}" }
-    val audioFile = File(params.audioPath)
-    require(audioFile.exists()) { "Audio not found: ${params.audioPath}" }
     Log.i(
       TAG,
-      "input files ok imageBytes=${imageFile.length()} audioBytes=${audioFile.length()}",
+      "temporary video-only export imageBytes=${imageFile.length()} audioIgnored=${params.audioPath}",
     )
     checkCancelled()
 
     val outputFile = File(params.outputPath)
     outputFile.parentFile?.mkdirs()
     if (outputFile.exists()) outputFile.delete()
+
+    exportVideoOnlyForAudioIsolation(params, outputFile)
+    return
 
     Log.i(TAG, "reading audio duration")
     val durationUs = readAudioDurationUs(params.audioPath)
@@ -410,6 +411,107 @@ object StillVideoExporter {
       throw IllegalStateException("Output file was generated but is empty: ${outputFile.absolutePath}")
     }
     step("export terminado", "path=${outputFile.absolutePath} bytes=${outputFile.length()}")
+  }
+
+  private fun exportVideoOnlyForAudioIsolation(params: Params, outputFile: File) {
+    val durationUs = 5_000_000L
+
+    Log.i(TAG, "temporary video-only export reading image bitmap")
+    val bitmap = BitmapFactory.decodeFile(params.imagePath)
+      ?: throw IllegalStateException("Could not decode image.")
+    val scaledBitmap = scaleToFit(bitmap, params.width, params.height)
+    val yuvFrame = bitmapToNV21(scaledBitmap, params.width, params.height)
+    step(
+      "imagen cargada",
+      "temporary video-only bitmap=${bitmap.width}x${bitmap.height} scaled=${scaledBitmap.width}x${scaledBitmap.height} durationUs=$durationUs",
+    )
+    checkCancelled()
+
+    val muxer = MediaMuxer(params.outputPath, MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4)
+    step("MediaMuxer creado", "temporary video-only output=${params.outputPath}")
+    checkCancelled()
+
+    val videoEncoder = createVideoEncoder(params, durationUs)
+    val videoBufferInfo = MediaCodec.BufferInfo()
+    step("MediaCodec vÃ­deo creado", "temporary video-only codec=${videoEncoder.name}")
+    checkCancelled()
+
+    var muxerStarted = false
+    var videoTrackIndex = -1
+    var videoInputDone = false
+    var videoOutputDone = false
+    var nextFrameIndex = 0
+    val frameCount = max(1, (durationUs * params.fps / 1_000_000L).toInt())
+    val frameDurationUs = 1_000_000L / params.fps.toLong()
+
+    try {
+      videoEncoder.start()
+      val videoInputBuffers = videoEncoder.inputBuffers
+      step("escritura de frames empezada", "temporary video-only frameCount=$frameCount")
+
+      while (!videoOutputDone) {
+        checkCancelled()
+
+        if (!videoInputDone) {
+          val inIndex = videoEncoder.dequeueInputBuffer(0)
+          if (inIndex >= 0) {
+            val buffer = videoInputBuffers[inIndex]
+            buffer.clear()
+            val ptsUs = nextFrameIndex * frameDurationUs
+            if (nextFrameIndex >= frameCount) {
+              videoEncoder.queueInputBuffer(inIndex, 0, 0, ptsUs, MediaCodec.BUFFER_FLAG_END_OF_STREAM)
+              videoInputDone = true
+              Log.i(TAG, "temporary video-only queued video EOS ptsUs=$ptsUs")
+            } else {
+              buffer.put(yuvFrame)
+              videoEncoder.queueInputBuffer(inIndex, 0, yuvFrame.size, ptsUs, 0)
+              nextFrameIndex++
+            }
+          }
+        }
+
+        val outIndex = videoEncoder.dequeueOutputBuffer(videoBufferInfo, 0)
+        when {
+          outIndex == MediaCodec.INFO_OUTPUT_FORMAT_CHANGED -> {
+            videoTrackIndex = muxer.addTrack(videoEncoder.outputFormat)
+            muxer.start()
+            muxerStarted = true
+            Log.i(TAG, "temporary video-only muxer started track=$videoTrackIndex format=${videoEncoder.outputFormat}")
+          }
+          outIndex >= 0 -> {
+            val outBuffer = videoEncoder.getOutputBuffer(outIndex) ?: ByteBuffer.allocate(0)
+            if ((videoBufferInfo.flags and MediaCodec.BUFFER_FLAG_CODEC_CONFIG) != 0) {
+              videoBufferInfo.size = 0
+            }
+            if (videoBufferInfo.size > 0) {
+              require(muxerStarted) { "Muxer not started yet." }
+              outBuffer.position(videoBufferInfo.offset)
+              outBuffer.limit(videoBufferInfo.offset + videoBufferInfo.size)
+              muxer.writeSampleData(videoTrackIndex, outBuffer, videoBufferInfo)
+            }
+            videoEncoder.releaseOutputBuffer(outIndex, false)
+            if ((videoBufferInfo.flags and MediaCodec.BUFFER_FLAG_END_OF_STREAM) != 0) {
+              videoOutputDone = true
+              Log.i(TAG, "temporary video-only encoder reached EOS frames=$nextFrameIndex")
+            }
+          }
+        }
+      }
+    } finally {
+      safeStopAndRelease("videoEncoder", videoEncoder)
+      if (muxerStarted) {
+        safeStopMuxer(muxer)
+      }
+      safeReleaseMuxer(muxer)
+    }
+
+    if (!outputFile.exists()) {
+      throw IllegalStateException("Output file was not generated: ${outputFile.absolutePath}")
+    }
+    if (outputFile.length() <= 0L) {
+      throw IllegalStateException("Output file was generated but is empty: ${outputFile.absolutePath}")
+    }
+    step("export terminado", "temporary video-only path=${outputFile.absolutePath} bytes=${outputFile.length()}")
   }
 
   private fun step(name: String, details: String = "") {
