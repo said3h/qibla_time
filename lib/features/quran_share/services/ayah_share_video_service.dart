@@ -16,8 +16,9 @@ import '../../../l10n/l10n.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../quran/models/quran_models.dart';
 import '../../quran/services/quran_audio_download_service.dart';
+import '../models/ayah_share_data.dart';
+import '../models/ayah_share_theme.dart';
 import 'ayah_share_image_service.dart';
-import '../../quran/widgets/quran_ayah_card.dart';
 
 final ayahShareVideoServiceProvider = Provider<AyahShareVideoService>((ref) {
   return AyahShareVideoService(ref);
@@ -132,7 +133,7 @@ class AyahShareVideoService {
       ).create(recursive: true);
       final fileStem = _fileStemFor(draft);
 
-      final imageFile = await _renderQuranAyahCardCanvas(
+      final imageFile = await _renderShareImageFrame(
         l10n: l10n,
         draft: draft,
         fileStem: fileStem,
@@ -266,7 +267,7 @@ class AyahShareVideoService {
     ).create(recursive: true);
     final fileStem = _fileStemFor(draft);
 
-    final imageFile = await _renderQuranAyahCardCanvas(
+    final imageFile = await _renderShareImageFrame(
       l10n: l10n,
       draft: draft,
       fileStem: fileStem,
@@ -327,54 +328,35 @@ class AyahShareVideoService {
     }
   }
 
-  Future<File> _renderQuranAyahCardCanvas({
+  Future<File> _renderShareImageFrame({
     required AppLocalizations l10n,
     required AyahShareVideoDraft draft,
     required String fileStem,
     required Directory workingDirectory,
   }) async {
     final tokens = QiblaThemes.current;
-
-    // Render in a phone-like logical size, then scale to 1080x1920 output.
-    const logicalSize = Size(360, 640);
-    const pixelRatio = 3.0;
-
-    final ayahForCard = SurahAyah(
-      number: 0,
-      numberInSurah: draft.ayahNumber,
-      arabic: draft.arabicText,
-      transliteration: draft.transliteration,
-      translation: draft.translation,
-      audioUrl: '',
-    );
-
-    return AyahShareImageService.saveWidgetPng(
-      directory: workingDirectory,
-      fileName: '${fileStem}_card',
-      logicalSize: logicalSize,
-      pixelRatio: pixelRatio,
-      child: Material(
-        color: tokens.bgPage,
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Center(
-            child: QuranAyahCard(
-              tokens: tokens,
-              l10n: l10n,
-              ayah: ayahForCard,
-              canPlayAudio: true,
-              isLastRead: false,
-              isActiveAudio: false,
-              isPlayingAudio: false,
-              isBookmarked: false,
-              audioStatusLabel: l10n.quranAyahAudioAvailable,
-              onToggleAudio: () {},
-              onToggleBookmark: () {},
-              margin: EdgeInsets.zero,
-            ),
-          ),
-        ),
+    final transparentBackground =
+        draft.exportMode == AyahShareExportMode.cardOnly;
+    return AyahShareImageService.savePng(
+      data: AyahShareData(
+        surahNumber: draft.surahNumber,
+        surahNameLatin: draft.surahNameLatin,
+        surahNameArabic: draft.surahNameArabic,
+        ayahNumber: draft.ayahNumber,
+        arabicText: draft.arabicText,
+        translation:
+            draft.translation.trim().isEmpty ? null : draft.translation,
+        badgeLabel: l10n.shareBadgeQuran,
+        branding: l10n.shareBranding,
       ),
+      theme: AyahShareThemeData.fromTokens(
+        tokens,
+        transparentBackground: transparentBackground,
+      ),
+      transparentBackground: transparentBackground,
+      mode: draft.exportMode,
+      fileName: '${fileStem}_card',
+      directory: workingDirectory,
     );
   }
 
