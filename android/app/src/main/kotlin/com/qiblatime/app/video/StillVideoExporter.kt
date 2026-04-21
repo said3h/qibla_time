@@ -3,7 +3,6 @@ package com.qiblatime.app.video
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Rect
 import android.media.AudioFormat
@@ -1060,8 +1059,6 @@ object StillVideoExporter {
     val scale = minOf(dstW / srcW, dstH / srcH)
 
     val outBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-    val canvas = Canvas(outBitmap)
-    canvas.drawColor(Color.BLACK)
 
     val scaledW = (srcW * scale).toInt().coerceAtLeast(1)
     val scaledH = (srcH * scale).toInt().coerceAtLeast(1)
@@ -1070,6 +1067,7 @@ object StillVideoExporter {
 
     val srcRect = Rect(0, 0, bitmap.width, bitmap.height)
     val dstRect = Rect(left, top, left + scaledW, top + scaledH)
+    val canvas = Canvas(outBitmap)
     val paint = Paint(Paint.FILTER_BITMAP_FLAG)
     canvas.drawBitmap(bitmap, srcRect, dstRect, paint)
 
