@@ -345,7 +345,11 @@ class AyahShareVideoService {
       summary,
       ayah,
       tokens,
-      mode: draft.exportMode,
+      // Always use storyCanvas for video so the PNG has a fully opaque
+      // background. Android's bitmapToNV21 ignores the alpha channel, so any
+      // transparent pixel becomes black; storyCanvas fills the canvas with
+      // bgPage before drawing the card, giving MediaCodec correct ARGB data.
+      mode: AyahShareExportMode.storyCanvas,
       includeArabic: draft.arabicText.trim().isNotEmpty,
       includeTranslation: draft.translation.trim().isNotEmpty,
       directory: workingDirectory,

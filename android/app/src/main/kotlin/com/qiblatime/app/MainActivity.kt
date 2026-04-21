@@ -47,7 +47,10 @@ class MainActivity : FlutterActivity(), EventChannel.StreamHandler, SensorEventL
     private val TAG = "QiblaProximity"
     private val VIDEO_TAG = "QiblaVideoExport"
     private val GALLERY_TAG = "QiblaGallery"
-    private val VIDEO_TIMEOUT_MS = 20_000L
+    // Generous timeout: Ayat Al-Kursi is ~2 min audio → ~3 600 frames to encode
+    // plus AAC decode/re-encode in the same loop.  20 s was far too short and
+    // caused every long ayah to be cancelled before the export could finish.
+    private val VIDEO_TIMEOUT_MS = 300_000L
     private val VIDEO_TIMEOUT_MESSAGE = "El vídeo tardó demasiado y se canceló"
 
     private var sensorManager: SensorManager? = null
