@@ -1402,6 +1402,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get commonSaved => 'Saved';
 
   @override
+  String get videoSavedToGallery => 'Video saved to your gallery';
+
+  @override
+  String get videoSaveFailed => 'Couldn\'t save the video';
+
+  @override
+  String get videoSaveToGallerySubtitle => 'Save the video to your gallery';
+
+  @override
   String get commonStatistics => 'Statistics';
 
   @override

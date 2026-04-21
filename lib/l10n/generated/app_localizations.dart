@@ -2547,6 +2547,24 @@ abstract class AppLocalizations {
   /// **'Guardado'**
   String get commonSaved;
 
+  /// No description provided for @videoSavedToGallery.
+  ///
+  /// In es, this message translates to:
+  /// **'Video guardado en tu galería'**
+  String get videoSavedToGallery;
+
+  /// No description provided for @videoSaveFailed.
+  ///
+  /// In es, this message translates to:
+  /// **'No se pudo guardar el video'**
+  String get videoSaveFailed;
+
+  /// No description provided for @videoSaveToGallerySubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Guarda el video en tu galería'**
+  String get videoSaveToGallerySubtitle;
+
   /// No description provided for @commonStatistics.
   ///
   /// In es, this message translates to:

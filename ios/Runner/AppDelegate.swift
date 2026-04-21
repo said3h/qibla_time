@@ -1,6 +1,7 @@
 import UIKit
 import Flutter
 import AVFoundation
+import Photos
 
 final class QiblaProximityStreamHandler: NSObject, FlutterStreamHandler {
   private let notificationCenter = NotificationCenter.default
@@ -68,6 +69,90 @@ final class QiblaProximityStreamHandler: NSObject, FlutterStreamHandler {
       proximityChannel.setStreamHandler(proximityStreamHandler)
     }
 
+    configureGalleryChannel()
+
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+  }
+
+  private func configureGalleryChannel() {
+    guard let galleryRegistrar = registrar(forPlugin: "QiblaGalleryChannel") else {
+      return
+    }
+
+    let galleryChannel = FlutterMethodChannel(
+      name: "com.qiblatime/gallery",
+      binaryMessenger: galleryRegistrar.messenger()
+    )
+
+    galleryChannel.setMethodCallHandler { [weak self] (
+      call: FlutterMethodCall,
+      result: @escaping FlutterResult
+    ) in
+      switch call.method {
+      case "saveVideoToGallery":
+        guard
+          let arguments = call.arguments as? [String: Any],
+          let path = arguments["path"] as? String,
+          !path.isEmpty
+        else {
+          result(FlutterError(
+            code: "INVALID_ARGS",
+            message: "Missing video path",
+            details: nil
+          ))
+          return
+        }
+
+        guard let self = self else {
+          result(FlutterError(
+            code: "SAVE_VIDEO_FAILED",
+            message: "Failed to save video.",
+            details: nil
+          ))
+          return
+        }
+
+        self.saveVideoToGallery(path: path, result: result)
+      default:
+        result(FlutterMethodNotImplemented)
+      }
+    }
+  }
+
+  private func saveVideoToGallery(path: String, result: @escaping FlutterResult) {
+    let fileURL = URL(fileURLWithPath: path)
+    guard FileManager.default.fileExists(atPath: fileURL.path) else {
+      result(FlutterError(
+        code: "SAVE_VIDEO_FAILED",
+        message: "Video file does not exist.",
+        details: nil
+      ))
+      return
+    }
+
+    guard UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(fileURL.path) else {
+      result(FlutterError(
+        code: "SAVE_VIDEO_FAILED",
+        message: "Video file is not compatible with the photo library.",
+        details: nil
+      ))
+      return
+    }
+
+    PHPhotoLibrary.shared().performChanges({
+      _ = PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: fileURL)
+    }) { success, error in
+      DispatchQueue.main.async {
+        if success {
+          result(true)
+        } else {
+          result(FlutterError(
+            code: "SAVE_VIDEO_FAILED",
+            message: error?.localizedDescription ?? "Failed to save video.",
+            details: nil
+          ))
+        }
+      }
+    }
   }
 }

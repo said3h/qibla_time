@@ -8,22 +8,27 @@ package com.qiblatime.app
 
 import android.app.NotificationManager
 import android.content.ActivityNotFoundException
+import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Build
+import android.os.Environment
 import android.os.Handler
 import android.os.Looper
+import android.provider.MediaStore
 import android.provider.Settings
 import android.util.Log
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.MethodChannel
+import java.io.File
 import java.io.PrintWriter
 import java.io.StringWriter
 import java.util.concurrent.Executors
@@ -38,8 +43,10 @@ class MainActivity : FlutterActivity(), EventChannel.StreamHandler, SensorEventL
     private val PROXIMITY_CHANNEL = "com.qiblatime/proximity"
     private val SETTINGS_CHANNEL = "com.qiblatime/android_settings"
     private val VIDEO_EXPORT_CHANNEL = "com.qiblatime/video_export"
+    private val GALLERY_CHANNEL = "com.qiblatime/gallery"
     private val TAG = "QiblaProximity"
     private val VIDEO_TAG = "QiblaVideoExport"
+    private val GALLERY_TAG = "QiblaGallery"
     private val VIDEO_TIMEOUT_MS = 20_000L
     private val VIDEO_TIMEOUT_MESSAGE = "El vídeo tardó demasiado y se canceló"
 
@@ -100,6 +107,7 @@ class MainActivity : FlutterActivity(), EventChannel.StreamHandler, SensorEventL
         }
 
         val videoExecutor = Executors.newSingleThreadExecutor()
+        val galleryExecutor = Executors.newSingleThreadExecutor()
         MethodChannel(
             flutterEngine.dartExecutor.binaryMessenger,
             VIDEO_EXPORT_CHANNEL
@@ -195,6 +203,46 @@ class MainActivity : FlutterActivity(), EventChannel.StreamHandler, SensorEventL
                         }
                     }
                 }
+                else -> result.notImplemented()
+            }
+        }
+
+        MethodChannel(
+            flutterEngine.dartExecutor.binaryMessenger,
+            GALLERY_CHANNEL
+        ).setMethodCallHandler { call, result ->
+            when (call.method) {
+                "saveVideoToGallery" -> {
+                    val path = call.argument<String>("path")
+                    if (path.isNullOrBlank()) {
+                        result.error("INVALID_ARGS", "Missing video path", null)
+                        return@setMethodCallHandler
+                    }
+
+                    galleryExecutor.execute {
+                        try {
+                            val saved = saveVideoToGallery(path)
+                            runOnUiThread {
+                                result.success(saved)
+                            }
+                        } catch (e: Throwable) {
+                            val fullError = e.fullStackTrace()
+                            Log.e(GALLERY_TAG, "Failed to save video to gallery:\n$fullError", e)
+                            runOnUiThread {
+                                result.error(
+                                    "SAVE_VIDEO_FAILED",
+                                    e.message ?: "Failed to save video.",
+                                    mapOf(
+                                        "type" to e.javaClass.name,
+                                        "message" to (e.message ?: "Failed to save video."),
+                                        "stackTrace" to fullError
+                                    )
+                                )
+                            }
+                        }
+                    }
+                }
+
                 else -> result.notImplemented()
             }
         }
@@ -430,6 +478,87 @@ class MainActivity : FlutterActivity(), EventChannel.StreamHandler, SensorEventL
         } catch (_: SecurityException) {
             false
         }
+    }
+
+    private fun saveVideoToGallery(videoPath: String): Boolean {
+        val sourceFile = File(videoPath)
+        require(sourceFile.exists()) { "Video file does not exist." }
+        require(sourceFile.length() > 0L) { "Video file is empty." }
+
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            saveVideoWithMediaStore(sourceFile)
+        } else {
+            saveVideoLegacy(sourceFile)
+        }
+    }
+
+    private fun saveVideoWithMediaStore(sourceFile: File): Boolean {
+        val resolver = contentResolver
+        val displayName = galleryVideoFileName(sourceFile)
+        val values = ContentValues().apply {
+            put(MediaStore.Video.Media.DISPLAY_NAME, displayName)
+            put(MediaStore.Video.Media.MIME_TYPE, "video/mp4")
+            put(MediaStore.Video.Media.RELATIVE_PATH, "${Environment.DIRECTORY_MOVIES}/QiblaTime")
+            put(MediaStore.Video.Media.IS_PENDING, 1)
+        }
+
+        val uri = resolver.insert(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, values)
+            ?: error("Could not create gallery video entry.")
+
+        return try {
+            resolver.openOutputStream(uri)?.use { output ->
+                sourceFile.inputStream().use { input ->
+                    input.copyTo(output)
+                }
+            } ?: error("Could not open gallery output stream.")
+
+            values.clear()
+            values.put(MediaStore.Video.Media.IS_PENDING, 0)
+            resolver.update(uri, values, null, null)
+            Log.i(GALLERY_TAG, "Video saved to gallery uri=$uri")
+            true
+        } catch (e: Throwable) {
+            resolver.delete(uri, null, null)
+            throw e
+        }
+    }
+
+    private fun saveVideoLegacy(sourceFile: File): Boolean {
+        val moviesDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES)
+        val targetDirectory = File(moviesDirectory, "QiblaTime")
+        if (!targetDirectory.exists() && !targetDirectory.mkdirs()) {
+            error("Could not create gallery directory.")
+        }
+
+        val targetFile = uniqueLegacyVideoFile(targetDirectory, galleryVideoFileName(sourceFile))
+        sourceFile.copyTo(targetFile, overwrite = false)
+        MediaScannerConnection.scanFile(
+            this,
+            arrayOf(targetFile.absolutePath),
+            arrayOf("video/mp4"),
+            null
+        )
+        Log.i(GALLERY_TAG, "Video saved to gallery path=${targetFile.absolutePath}")
+        return true
+    }
+
+    private fun galleryVideoFileName(sourceFile: File): String {
+        val baseName = sourceFile.nameWithoutExtension
+            .takeIf { it.isNotBlank() }
+            ?: "qiblatime_video"
+        return "${baseName}_${System.currentTimeMillis()}.mp4"
+    }
+
+    private fun uniqueLegacyVideoFile(directory: File, fileName: String): File {
+        val baseName = fileName.substringBeforeLast('.', fileName)
+        val extension = fileName.substringAfterLast('.', "mp4")
+        var candidate = File(directory, fileName)
+        var index = 1
+        while (candidate.exists()) {
+            candidate = File(directory, "${baseName}_$index.$extension")
+            index += 1
+        }
+        return candidate
     }
 
     private fun Throwable.fullStackTrace(): String {

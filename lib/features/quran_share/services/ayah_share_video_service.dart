@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:ffmpeg_kit_min_gpl/ffmpeg_kit.dart';
 import 'package:ffmpeg_kit_min_gpl/return_code.dart';
-import 'package:gallery_saver/gallery_saver.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
@@ -73,6 +72,7 @@ class AyahShareVideoService {
   static const Size _videoSize = Size(1080, 1920);
   static const int _videoFps = 30;
   static const _nativeChannel = MethodChannel('com.qiblatime/video_export');
+  static const _galleryChannel = MethodChannel('com.qiblatime/gallery');
   static const _alafasyAudioBaseUrl =
       'https://everyayah.com/data/Alafasy_128kbps';
   static const _legacyAlafasyAudioBaseUrl =
@@ -253,12 +253,18 @@ class AyahShareVideoService {
       }
     }
 
-    final saved = await GallerySaver.saveVideo(
-      file.path,
-      albumName: 'QiblaTime',
-    );
-    if (saved != true) {
-      throw const NativeVideoExportException('Failed to save video.');
+    try {
+      final saved = await _galleryChannel.invokeMethod<bool>(
+        'saveVideoToGallery',
+        {'path': file.path},
+      );
+      if (saved != true) {
+        throw const NativeVideoExportException('Failed to save video.');
+      }
+    } on PlatformException catch (error) {
+      throw NativeVideoExportException(
+        error.message ?? 'Failed to save video.',
+      );
     }
   }
 

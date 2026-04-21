@@ -1378,6 +1378,15 @@ class AppLocalizationsAr extends AppLocalizations {
   String get commonSaved => 'محفوظ';
 
   @override
+  String get videoSavedToGallery => 'تم حفظ الفيديو في المعرض';
+
+  @override
+  String get videoSaveFailed => 'تعذر حفظ الفيديو';
+
+  @override
+  String get videoSaveToGallerySubtitle => 'احفظ الفيديو في المعرض';
+
+  @override
   String get commonStatistics => 'الإحصاءات';
 
   @override

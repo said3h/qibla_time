@@ -1396,6 +1396,15 @@ class AppLocalizationsTr extends AppLocalizations {
   String get commonSaved => 'Kaydedildi';
 
   @override
+  String get videoSavedToGallery => 'Video galeriye kaydedildi';
+
+  @override
+  String get videoSaveFailed => 'Video kaydedilemedi';
+
+  @override
+  String get videoSaveToGallerySubtitle => 'Videoyu galeriye kaydet';
+
+  @override
   String get commonStatistics => 'İstatistikler';
 
   @override

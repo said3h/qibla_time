@@ -1420,6 +1420,15 @@ class AppLocalizationsRu extends AppLocalizations {
   String get commonSaved => 'Сохранено';
 
   @override
+  String get videoSavedToGallery => 'Видео сохранено в галерее';
+
+  @override
+  String get videoSaveFailed => 'Не удалось сохранить видео';
+
+  @override
+  String get videoSaveToGallerySubtitle => 'Сохранить видео в галерею';
+
+  @override
   String get commonStatistics => 'Статистика';
 
   @override

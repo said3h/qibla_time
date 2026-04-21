@@ -1418,6 +1418,16 @@ class AppLocalizationsFr extends AppLocalizations {
   String get commonSaved => 'Enregistré';
 
   @override
+  String get videoSavedToGallery => 'Vidéo enregistrée dans votre galerie';
+
+  @override
+  String get videoSaveFailed => 'Impossible d\'enregistrer la vidéo';
+
+  @override
+  String get videoSaveToGallerySubtitle =>
+      'Enregistrer la vidéo dans votre galerie';
+
+  @override
   String get commonStatistics => 'Statistiques';
 
   @override

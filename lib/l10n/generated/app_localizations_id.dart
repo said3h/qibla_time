@@ -1409,6 +1409,15 @@ class AppLocalizationsId extends AppLocalizations {
   String get commonSaved => 'Tersimpan';
 
   @override
+  String get videoSavedToGallery => 'Video tersimpan di galeri';
+
+  @override
+  String get videoSaveFailed => 'Tidak bisa menyimpan video';
+
+  @override
+  String get videoSaveToGallerySubtitle => 'Simpan video ke galeri';
+
+  @override
   String get commonStatistics => 'Statistik';
 
   @override

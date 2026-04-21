@@ -1412,6 +1412,15 @@ class AppLocalizationsNl extends AppLocalizations {
   String get commonSaved => 'Opgeslagen';
 
   @override
+  String get videoSavedToGallery => 'Video opgeslagen in je galerij';
+
+  @override
+  String get videoSaveFailed => 'Kon de video niet opslaan';
+
+  @override
+  String get videoSaveToGallerySubtitle => 'Sla de video op in je galerij';
+
+  @override
   String get commonStatistics => 'Statistieken';
 
   @override

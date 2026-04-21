@@ -1417,6 +1417,15 @@ class AppLocalizationsEs extends AppLocalizations {
   String get commonSaved => 'Guardado';
 
   @override
+  String get videoSavedToGallery => 'Video guardado en tu galería';
+
+  @override
+  String get videoSaveFailed => 'No se pudo guardar el video';
+
+  @override
+  String get videoSaveToGallerySubtitle => 'Guarda el video en tu galería';
+
+  @override
   String get commonStatistics => 'Estadísticas';
 
   @override
