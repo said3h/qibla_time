@@ -534,7 +534,7 @@ object StillVideoExporter {
                 outBuffer.limit(videoBufferInfo.offset + videoBufferInfo.size)
                 if (muxerStarted) {
                   muxer.writeSampleData(videoTrackIndex, outBuffer, videoBufferInfo)
-                } else if (pendingVideoSamples.size < 16) {
+                } else if (pendingVideoSamples.size < 512) {
                   val data = ByteArray(videoBufferInfo.size)
                   outBuffer.get(data)
                   val infoCopy = MediaCodec.BufferInfo().apply {
@@ -551,8 +551,8 @@ object StillVideoExporter {
           }
         }
 
-        // Feed video encoder only after muxer started (so we don't build up output while waiting).
-        if (muxerStarted && !videoInputDone) {
+        // Feed video encoder unconditionally — pending samples are buffered until muxer starts.
+        if (!videoInputDone) {
           val inIndex = videoEncoder.dequeueInputBuffer(0)
           if (inIndex >= 0) {
             val buffer = videoEncoder.inputBuffers[inIndex]
@@ -674,7 +674,7 @@ object StillVideoExporter {
                 outBuffer.limit(info.offset + info.size)
                 if (muxerStarted) {
                   muxer.writeSampleData(audioTrackIndex, outBuffer, info)
-                } else if (pendingAudioSamples.size < 16) {
+                } else if (pendingAudioSamples.size < 512) {
                   val data = ByteArray(info.size)
                   outBuffer.get(data)
                   val infoCopy = MediaCodec.BufferInfo().apply {
