@@ -12,6 +12,7 @@ import android.os.Build
 import android.util.Log
 import java.io.File
 import java.nio.ByteBuffer
+import java.util.concurrent.CancellationException
 import kotlin.math.max
 
 /**
@@ -26,6 +27,13 @@ object StillVideoExporter {
   private const val MIME_VIDEO_AVC = "video/avc"
   private const val MIME_AUDIO_AAC = "audio/mp4a-latm"
   private const val TAG = "QiblaVideoExport"
+  private const val CANCELLED_MESSAGE = "El vídeo tardó demasiado y se canceló"
+
+  @Volatile
+  private var cancelRequested = false
+
+  @Volatile
+  private var activeStep = "sin iniciar"
 
   data class Params(
     val imagePath: String,
@@ -39,9 +47,10 @@ object StillVideoExporter {
   )
 
   fun export(params: Params) {
-    Log.i(
-      TAG,
-      "start export image=${params.imagePath} audio=${params.audioPath} output=${params.outputPath} size=${params.width}x${params.height} fps=${params.fps}",
+    cancelRequested = false
+    step(
+      "inicio del export",
+      "image=${params.imagePath} audio=${params.audioPath} output=${params.outputPath} size=${params.width}x${params.height} fps=${params.fps}",
     )
 
     try {
@@ -49,8 +58,17 @@ object StillVideoExporter {
     } catch (e: Throwable) {
       Log.e(TAG, "export failed", e)
       throw e
+    } finally {
+      cancelRequested = false
     }
   }
+
+  fun cancelActiveExport() {
+    cancelRequested = true
+    Log.w(TAG, "cancel requested lastStep=$activeStep")
+  }
+
+  fun lastActiveStep(): String = activeStep
 
   private fun exportInternal(params: Params) {
     val imageFile = File(params.imagePath)
@@ -61,6 +79,7 @@ object StillVideoExporter {
       TAG,
       "input files ok imageBytes=${imageFile.length()} audioBytes=${audioFile.length()}",
     )
+    checkCancelled()
 
     val outputFile = File(params.outputPath)
     outputFile.parentFile?.mkdirs()
@@ -69,20 +88,24 @@ object StillVideoExporter {
     Log.i(TAG, "reading audio duration")
     val durationUs = readAudioDurationUs(params.audioPath)
     require(durationUs > 0) { "Could not read audio duration." }
-    Log.i(TAG, "audio duration read durationUs=$durationUs")
+    step("audio abierto", "durationUs=$durationUs")
+    checkCancelled()
 
     Log.i(TAG, "reading image bitmap")
     val bitmap = BitmapFactory.decodeFile(params.imagePath)
       ?: throw IllegalStateException("Could not decode image.")
     val scaledBitmap = scaleToFit(bitmap, params.width, params.height)
     val yuvFrame = bitmapToNV21(scaledBitmap, params.width, params.height)
-    Log.i(
-      TAG,
+    step(
+      "imagen cargada",
       "image decoded bitmap=${bitmap.width}x${bitmap.height} scaled=${scaledBitmap.width}x${scaledBitmap.height} yuvBytes=${yuvFrame.size}",
     )
+    checkCancelled()
 
     Log.i(TAG, "creating MediaMuxer output=${params.outputPath}")
     val muxer = MediaMuxer(params.outputPath, MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4)
+    step("MediaMuxer creado", "output=${params.outputPath}")
+    checkCancelled()
     var videoTrackIndex = -1
     var audioTrackIndex = -1
     var started = false
@@ -90,11 +113,12 @@ object StillVideoExporter {
     Log.i(TAG, "creating video MediaCodec")
     val videoEncoder = createVideoEncoder(params, durationUs)
     val videoBufferInfo = MediaCodec.BufferInfo()
-    Log.i(TAG, "video MediaCodec created codec=${videoEncoder.name}")
+    step("MediaCodec vídeo creado", "codec=${videoEncoder.name}")
+    checkCancelled()
 
     Log.i(TAG, "creating audio decoder MediaCodec")
     val audioDecoder = createAudioDecoder(params.audioPath)
-    Log.i(TAG, "audio decoder MediaCodec created codec=${audioDecoder.name}")
+    step("MediaCodec audio creado", "decoder=${audioDecoder.name}")
     val audioDecoderBufferInfo = MediaCodec.BufferInfo()
     val audioEncoderBufferInfo = MediaCodec.BufferInfo()
 
@@ -121,10 +145,13 @@ object StillVideoExporter {
       TAG,
       "audio extractor ready track=$audioTrack sampleRate=$sampleRate channels=$channelCount format=$inputAudioFormat",
     )
+    step("MediaExtractor listo", "track=$audioTrack sampleRate=$sampleRate channels=$channelCount")
+    checkCancelled()
 
     Log.i(TAG, "creating audio encoder MediaCodec")
     val audioEncoder = createAudioEncoder(params, sampleRate, channelCount)
-    Log.i(TAG, "audio encoder MediaCodec created codec=${audioEncoder.name}")
+    step("MediaCodec audio creado", "decoder=${audioDecoder.name} encoder=${audioEncoder.name}")
+    checkCancelled()
 
     // Start codecs.
     Log.i(TAG, "starting MediaCodecs")
@@ -140,7 +167,7 @@ object StillVideoExporter {
     // Feed video frames ASAP; feed audio in parallel-ish inside a single loop.
     val frameCount = max(1, (durationUs * params.fps / 1_000_000L).toInt())
     val frameDurationUs = 1_000_000L / params.fps.toLong()
-    Log.i(TAG, "writing frames frameCount=$frameCount frameDurationUs=$frameDurationUs")
+    step("escritura de frames empezada", "frameCount=$frameCount frameDurationUs=$frameDurationUs")
     var nextFrameIndex = 0
 
     var extractorDone = false
@@ -155,7 +182,9 @@ object StillVideoExporter {
     var pendingPcmOffset = 0
     var loggedFirstAudioSample = false
 
-    while (!videoOutputDone || !encoderDone) {
+    try {
+      while (!videoOutputDone || !encoderDone) {
+      checkCancelled()
       // 1) Feed video encoder with repeated still frames (YUV420).
       if (!videoInputDone) {
         val inIndex = videoEncoder.dequeueInputBuffer(0)
@@ -228,7 +257,7 @@ object StillVideoExporter {
             audioDecoder.queueInputBuffer(inIndex, 0, sampleSize, presentationTimeUs, 0)
             if (!loggedFirstAudioSample) {
               loggedFirstAudioSample = true
-              Log.i(TAG, "first audio sample read size=$sampleSize ptsUs=$presentationTimeUs")
+              step("escritura de audio empezada", "firstSampleSize=$sampleSize ptsUs=$presentationTimeUs")
             }
             extractor.advance()
           }
@@ -322,18 +351,19 @@ object StillVideoExporter {
           }
         }
       }
-    }
 
-    Log.i(TAG, "closing native exporter resources")
-    extractor.release()
-    audioDecoder.stop()
-    audioDecoder.release()
-    audioEncoder.stop()
-    audioEncoder.release()
-    videoEncoder.stop()
-    videoEncoder.release()
-    if (started) muxer.stop()
-    muxer.release()
+      }
+    } finally {
+      Log.i(TAG, "closing native exporter resources lastStep=$activeStep")
+      safeReleaseExtractor(extractor)
+      safeStopAndRelease("audioDecoder", audioDecoder)
+      safeStopAndRelease("audioEncoder", audioEncoder)
+      safeStopAndRelease("videoEncoder", videoEncoder)
+      if (started) {
+        safeStopMuxer(muxer)
+      }
+      safeReleaseMuxer(muxer)
+    }
 
     if (!outputFile.exists()) {
       throw IllegalStateException("Output file was not generated: ${outputFile.absolutePath}")
@@ -341,7 +371,59 @@ object StillVideoExporter {
     if (outputFile.length() <= 0L) {
       throw IllegalStateException("Output file was generated but is empty: ${outputFile.absolutePath}")
     }
-    Log.i(TAG, "final output ready path=${outputFile.absolutePath} bytes=${outputFile.length()}")
+    step("export terminado", "path=${outputFile.absolutePath} bytes=${outputFile.length()}")
+  }
+
+  private fun step(name: String, details: String = "") {
+    activeStep = name
+    if (details.isBlank()) {
+      Log.i(TAG, "STEP $name")
+    } else {
+      Log.i(TAG, "STEP $name - $details")
+    }
+  }
+
+  private fun checkCancelled() {
+    if (cancelRequested) {
+      throw CancellationException("$CANCELLED_MESSAGE. Último paso nativo: $activeStep")
+    }
+  }
+
+  private fun safeReleaseExtractor(extractor: MediaExtractor) {
+    try {
+      extractor.release()
+    } catch (e: Throwable) {
+      Log.w(TAG, "Failed to release extractor", e)
+    }
+  }
+
+  private fun safeStopAndRelease(name: String, codec: MediaCodec) {
+    try {
+      codec.stop()
+    } catch (e: Throwable) {
+      Log.w(TAG, "Failed to stop $name", e)
+    }
+    try {
+      codec.release()
+    } catch (e: Throwable) {
+      Log.w(TAG, "Failed to release $name", e)
+    }
+  }
+
+  private fun safeStopMuxer(muxer: MediaMuxer) {
+    try {
+      muxer.stop()
+    } catch (e: Throwable) {
+      Log.w(TAG, "Failed to stop muxer", e)
+    }
+  }
+
+  private fun safeReleaseMuxer(muxer: MediaMuxer) {
+    try {
+      muxer.release()
+    } catch (e: Throwable) {
+      Log.w(TAG, "Failed to release muxer", e)
+    }
   }
 
   private fun createVideoEncoder(params: Params, durationUs: Long): MediaCodec {

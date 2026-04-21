@@ -16,6 +16,8 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.net.Uri
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import android.provider.Settings
 import android.util.Log
 import io.flutter.embedding.android.FlutterActivity
@@ -26,6 +28,7 @@ import java.io.PrintWriter
 import java.io.StringWriter
 import java.util.concurrent.Executors
 import java.util.Locale
+import java.util.concurrent.atomic.AtomicBoolean
 
 import com.qiblatime.app.video.StillVideoExporter
 
@@ -37,6 +40,8 @@ class MainActivity : FlutterActivity(), EventChannel.StreamHandler, SensorEventL
     private val VIDEO_EXPORT_CHANNEL = "com.qiblatime/video_export"
     private val TAG = "QiblaProximity"
     private val VIDEO_TAG = "QiblaVideoExport"
+    private val VIDEO_TIMEOUT_MS = 20_000L
+    private val VIDEO_TIMEOUT_MESSAGE = "El vídeo tardó demasiado y se canceló"
 
     private var sensorManager: SensorManager? = null
     private var proximitySensor: Sensor? = null
@@ -120,6 +125,29 @@ class MainActivity : FlutterActivity(), EventChannel.StreamHandler, SensorEventL
                         "MethodChannel exportStillVideo requested image=$imagePath audio=$audioPath output=$outputPath size=${width}x$height fps=$fps"
                     )
 
+                    val mainHandler = Handler(Looper.getMainLooper())
+                    val completed = AtomicBoolean(false)
+                    val timeoutRunnable = Runnable {
+                        if (completed.compareAndSet(false, true)) {
+                            val lastStep = StillVideoExporter.lastActiveStep()
+                            Log.e(
+                                VIDEO_TAG,
+                                "Native export timeout after ${VIDEO_TIMEOUT_MS}ms lastStep=$lastStep"
+                            )
+                            StillVideoExporter.cancelActiveExport()
+                            result.error(
+                                "EXPORT_TIMEOUT",
+                                "$VIDEO_TIMEOUT_MESSAGE\nÚltimo paso nativo: $lastStep",
+                                mapOf(
+                                    "type" to "ExportTimeout",
+                                    "message" to VIDEO_TIMEOUT_MESSAGE,
+                                    "lastStep" to lastStep
+                                )
+                            )
+                        }
+                    }
+                    mainHandler.postDelayed(timeoutRunnable, VIDEO_TIMEOUT_MS)
+
                     videoExecutor.execute {
                         try {
                             Log.i(VIDEO_TAG, "Native export worker started")
@@ -136,20 +164,33 @@ class MainActivity : FlutterActivity(), EventChannel.StreamHandler, SensorEventL
                                 )
                             )
                             Log.i(VIDEO_TAG, "Native export worker finished successfully output=$outputPath")
-                            runOnUiThread { result.success(outputPath) }
+                            runOnUiThread {
+                                if (completed.compareAndSet(false, true)) {
+                                    mainHandler.removeCallbacks(timeoutRunnable)
+                                    result.success(outputPath)
+                                } else {
+                                    Log.w(VIDEO_TAG, "Native export completed after timeout; result already sent")
+                                }
+                            }
                         } catch (e: Throwable) {
                             val fullError = e.fullStackTrace()
                             Log.e(VIDEO_TAG, "Native export failed:\n$fullError", e)
                             runOnUiThread {
-                                result.error(
-                                    "EXPORT_FAILED",
-                                    fullError,
-                                    mapOf(
-                                        "type" to e.javaClass.name,
-                                        "message" to (e.message ?: "Video export failed"),
-                                        "stackTrace" to fullError
+                                if (completed.compareAndSet(false, true)) {
+                                    mainHandler.removeCallbacks(timeoutRunnable)
+                                    result.error(
+                                        "EXPORT_FAILED",
+                                        fullError,
+                                        mapOf(
+                                            "type" to e.javaClass.name,
+                                            "message" to (e.message ?: "Video export failed"),
+                                            "stackTrace" to fullError,
+                                            "lastStep" to StillVideoExporter.lastActiveStep()
+                                        )
                                     )
-                                )
+                                } else {
+                                    Log.e(VIDEO_TAG, "Native export failed after timeout; result already sent", e)
+                                }
                             }
                         }
                     }

@@ -329,6 +329,7 @@ class AyahShareVideoService {
     if (details is Map) {
       final type = details['type'];
       final nativeMessage = details['message'];
+      final lastStep = details['lastStep'];
       final stackTrace = details['stackTrace'];
 
       if (type != null) {
@@ -336,6 +337,9 @@ class AyahShareVideoService {
       }
       if (nativeMessage != null) {
         buffer.writeln('nativeMessage: $nativeMessage');
+      }
+      if (lastStep != null) {
+        buffer.writeln('lastStep: $lastStep');
       }
       if (stackTrace != null) {
         buffer.writeln('nativeStackTrace:');

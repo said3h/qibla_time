@@ -188,12 +188,7 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
     }
 
     if (!_includeArabic && !_includeTranslation) {
-      widget.rootMessenger.hideCurrentSnackBar();
-      widget.rootMessenger.showSnackBar(
-        SnackBar(
-          content: Text(context.l10n.shareAyahVideoError),
-        ),
-      );
+      await _showVideoExportError(context.l10n.shareAyahVideoError);
       return;
     }
 
@@ -210,27 +205,13 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
       if (!mounted) return;
 
       if (draft == null) {
-        widget.rootMessenger.hideCurrentSnackBar();
-        widget.rootMessenger.showSnackBar(
-          SnackBar(
-            content: Text(context.l10n.shareAyahVideoNoAudio),
-          ),
-        );
+        await _showVideoExportError(context.l10n.shareAyahVideoNoAudio);
         return;
       }
-
-      widget.rootMessenger.hideCurrentSnackBar();
-      widget.rootMessenger.showSnackBar(
-        SnackBar(
-          duration: const Duration(seconds: 45),
-          content: Text(context.l10n.shareAyahVideoGenerating),
-        ),
-      );
 
       final file = await widget.videoService.exportVideo(draft);
       if (!mounted) return;
 
-      widget.rootMessenger.hideCurrentSnackBar();
       await Share.shareXFiles(
         [XFile(file.path)],
         text: widget.shareService.buildShareText(
@@ -245,7 +226,6 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
     } catch (e, stackTrace) {
       AppLogger.error('shareVideo: FAILED — ${e.runtimeType}: $e',
           error: e, stackTrace: stackTrace);
-      widget.rootMessenger.hideCurrentSnackBar();
       await _showVideoExportError(e);
     } finally {
       if (mounted) setState(() => _activeAction = null);

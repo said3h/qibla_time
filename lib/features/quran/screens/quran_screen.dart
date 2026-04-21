@@ -927,7 +927,6 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
 
   Future<void> _shareAyahAsVideo(SurahAyah ayah) async {
     final videoService = ref.read(ayahShareVideoServiceProvider);
-    final messenger = ScaffoldMessenger.of(context);
     final l10n = context.l10n;
 
     try {
@@ -938,29 +937,16 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       if (!mounted) return;
 
       if (draft == null) {
-        messenger.hideCurrentSnackBar();
-        messenger.showSnackBar(
-          SnackBar(
-            content: Text(
-              l10n.quranAyahVideoNoAudio,
-            ),
-          ),
+        await _showVideoExportError(
+          l10n.quranAyahVideoError,
+          l10n.quranAyahVideoNoAudio,
         );
         return;
       }
 
-      messenger.hideCurrentSnackBar();
-      messenger.showSnackBar(
-        SnackBar(
-          duration: const Duration(seconds: 45),
-          content: Text(l10n.quranAyahVideoGenerating),
-        ),
-      );
-
       final file = await videoService.exportVideo(draft);
       if (!mounted) return;
 
-      messenger.hideCurrentSnackBar();
       await Share.shareXFiles(
         [XFile(file.path)],
         text: l10n.quranAyahVideoShareText(
@@ -976,7 +962,6 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       );
       if (!mounted) return;
 
-      messenger.hideCurrentSnackBar();
       await _showVideoExportError(l10n.quranAyahVideoError, e);
     }
   }
