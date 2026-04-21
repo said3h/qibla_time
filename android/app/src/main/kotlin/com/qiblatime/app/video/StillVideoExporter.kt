@@ -185,8 +185,8 @@ object StillVideoExporter {
     var audioSamplesRead = 0
     var audioFramesWritten = 0
     var audioEncoderInputDone = false
+    var audioExtractorEofReached = false
     var lastExtractorSampleTimeUs = -1L
-    var repeatedExtractorPtsCount = 0
 
     try {
       while (!videoOutputDone || !encoderDone) {
@@ -253,43 +253,46 @@ object StillVideoExporter {
         if (inIndex >= 0) {
           val inputBuffer = audioDecoderInputBuffers[inIndex]
           inputBuffer.clear()
-          val sampleSize = extractor.readSampleData(inputBuffer, 0)
-          if (sampleSize < 0) {
+          if (audioExtractorEofReached) {
             audioDecoder.queueInputBuffer(inIndex, 0, 0, 0, MediaCodec.BUFFER_FLAG_END_OF_STREAM)
             extractorDone = true
-            Log.i(TAG, "audio extractor reached end of stream samplesRead=$audioSamplesRead")
+            Log.i(TAG, "EOF audio alcanzado samplesRead=$audioSamplesRead")
           } else {
-            val presentationTimeUs = extractor.sampleTime
-            if (presentationTimeUs < 0) {
-              throw IllegalStateException("Audio extractor returned invalid sampleTime=$presentationTimeUs")
-            }
-            if (lastExtractorSampleTimeUs >= 0 && presentationTimeUs <= lastExtractorSampleTimeUs) {
-              repeatedExtractorPtsCount++
-              Log.w(
-                TAG,
-                "audio extractor non-increasing pts current=$presentationTimeUs last=$lastExtractorSampleTimeUs repeats=$repeatedExtractorPtsCount",
-              )
-              if (repeatedExtractorPtsCount > 3) {
-                throw IllegalStateException(
-                  "Audio extractor sampleTime did not advance. last=$lastExtractorSampleTimeUs current=$presentationTimeUs",
-                )
-              }
+            val sampleSize = extractor.readSampleData(inputBuffer, 0)
+            if (sampleSize < 0) {
+              audioDecoder.queueInputBuffer(inIndex, 0, 0, 0, MediaCodec.BUFFER_FLAG_END_OF_STREAM)
+              extractorDone = true
+              Log.i(TAG, "EOF audio alcanzado samplesRead=$audioSamplesRead")
             } else {
-              repeatedExtractorPtsCount = 0
-            }
-            audioDecoder.queueInputBuffer(inIndex, 0, sampleSize, presentationTimeUs, 0)
-            audioSamplesRead++
-            if (!loggedFirstAudioSample) {
-              loggedFirstAudioSample = true
-              step("escritura de audio empezada", "firstSampleSize=$sampleSize ptsUs=$presentationTimeUs")
-            }
-            lastExtractorSampleTimeUs = presentationTimeUs
-            val advanced = extractor.advance()
-            if (!advanced) {
-              Log.i(
-                TAG,
-                "audio extractor advance returned false after sample=$audioSamplesRead ptsUs=$presentationTimeUs",
-              )
+              val presentationTimeUs = extractor.sampleTime
+              if (presentationTimeUs < 0) {
+                audioDecoder.queueInputBuffer(inIndex, 0, 0, 0, MediaCodec.BUFFER_FLAG_END_OF_STREAM)
+                extractorDone = true
+                Log.i(TAG, "EOF audio alcanzado sampleTime=$presentationTimeUs samplesRead=$audioSamplesRead")
+              } else if (lastExtractorSampleTimeUs >= 0 && presentationTimeUs <= lastExtractorSampleTimeUs) {
+                audioDecoder.queueInputBuffer(inIndex, 0, 0, 0, MediaCodec.BUFFER_FLAG_END_OF_STREAM)
+                extractorDone = true
+                Log.w(
+                  TAG,
+                  "EOF audio alcanzado por timestamp repetido current=$presentationTimeUs last=$lastExtractorSampleTimeUs samplesRead=$audioSamplesRead",
+                )
+              } else {
+                audioDecoder.queueInputBuffer(inIndex, 0, sampleSize, presentationTimeUs, 0)
+                audioSamplesRead++
+                if (!loggedFirstAudioSample) {
+                  loggedFirstAudioSample = true
+                  step("escritura de audio empezada", "firstSampleSize=$sampleSize ptsUs=$presentationTimeUs")
+                }
+                lastExtractorSampleTimeUs = presentationTimeUs
+                val advanced = extractor.advance()
+                if (!advanced) {
+                  audioExtractorEofReached = true
+                  Log.i(
+                    TAG,
+                    "EOF audio alcanzado tras advance samplesRead=$audioSamplesRead lastPtsUs=$presentationTimeUs",
+                  )
+                }
+              }
             }
           }
         }
