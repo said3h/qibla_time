@@ -2,6 +2,10 @@ package com.qiblatime.app.video
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.Rect
 import android.media.AudioFormat
 import android.media.MediaCodec
 import android.media.MediaCodecInfo
@@ -1004,7 +1008,28 @@ object StillVideoExporter {
 
   private fun scaleToFit(bitmap: Bitmap, width: Int, height: Int): Bitmap {
     if (bitmap.width == width && bitmap.height == height) return bitmap
-    return Bitmap.createScaledBitmap(bitmap, width, height, true)
+
+    val srcW = bitmap.width.toFloat()
+    val srcH = bitmap.height.toFloat()
+    val dstW = width.toFloat()
+    val dstH = height.toFloat()
+    val scale = minOf(dstW / srcW, dstH / srcH)
+
+    val outBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+    val canvas = Canvas(outBitmap)
+    canvas.drawColor(Color.BLACK)
+
+    val scaledW = (srcW * scale).toInt().coerceAtLeast(1)
+    val scaledH = (srcH * scale).toInt().coerceAtLeast(1)
+    val left = ((width - scaledW) / 2f).toInt()
+    val top = ((height - scaledH) / 2f).toInt()
+
+    val srcRect = Rect(0, 0, bitmap.width, bitmap.height)
+    val dstRect = Rect(left, top, left + scaledW, top + scaledH)
+    val paint = Paint(Paint.FILTER_BITMAP_FLAG)
+    canvas.drawBitmap(bitmap, srcRect, dstRect, paint)
+
+    return outBitmap
   }
 
   // Naive ARGB -> NV21 conversion. Good enough for still image frames.
