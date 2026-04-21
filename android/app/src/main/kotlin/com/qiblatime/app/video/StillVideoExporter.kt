@@ -180,7 +180,13 @@ object StillVideoExporter {
     // Audio PCM staging buffer
     var pendingPcm: ByteArray? = null
     var pendingPcmOffset = 0
+    var pendingPcmPresentationTimeUs = 0L
     var loggedFirstAudioSample = false
+    var audioSamplesRead = 0
+    var audioFramesWritten = 0
+    var audioEncoderInputDone = false
+    var lastExtractorSampleTimeUs = -1L
+    var repeatedExtractorPtsCount = 0
 
     try {
       while (!videoOutputDone || !encoderDone) {
@@ -251,21 +257,46 @@ object StillVideoExporter {
           if (sampleSize < 0) {
             audioDecoder.queueInputBuffer(inIndex, 0, 0, 0, MediaCodec.BUFFER_FLAG_END_OF_STREAM)
             extractorDone = true
-            Log.i(TAG, "audio extractor reached end of stream")
+            Log.i(TAG, "audio extractor reached end of stream samplesRead=$audioSamplesRead")
           } else {
             val presentationTimeUs = extractor.sampleTime
+            if (presentationTimeUs < 0) {
+              throw IllegalStateException("Audio extractor returned invalid sampleTime=$presentationTimeUs")
+            }
+            if (lastExtractorSampleTimeUs >= 0 && presentationTimeUs <= lastExtractorSampleTimeUs) {
+              repeatedExtractorPtsCount++
+              Log.w(
+                TAG,
+                "audio extractor non-increasing pts current=$presentationTimeUs last=$lastExtractorSampleTimeUs repeats=$repeatedExtractorPtsCount",
+              )
+              if (repeatedExtractorPtsCount > 3) {
+                throw IllegalStateException(
+                  "Audio extractor sampleTime did not advance. last=$lastExtractorSampleTimeUs current=$presentationTimeUs",
+                )
+              }
+            } else {
+              repeatedExtractorPtsCount = 0
+            }
             audioDecoder.queueInputBuffer(inIndex, 0, sampleSize, presentationTimeUs, 0)
+            audioSamplesRead++
             if (!loggedFirstAudioSample) {
               loggedFirstAudioSample = true
               step("escritura de audio empezada", "firstSampleSize=$sampleSize ptsUs=$presentationTimeUs")
             }
-            extractor.advance()
+            lastExtractorSampleTimeUs = presentationTimeUs
+            val advanced = extractor.advance()
+            if (!advanced) {
+              Log.i(
+                TAG,
+                "audio extractor advance returned false after sample=$audioSamplesRead ptsUs=$presentationTimeUs",
+              )
+            }
           }
         }
       }
 
       // 4) Drain audio decoder and feed audio encoder.
-      if (!decoderDone) {
+      if (!decoderDone && pendingPcm == null) {
         val outIndex = audioDecoder.dequeueOutputBuffer(audioDecoderBufferInfo, 0)
         when {
           outIndex == MediaCodec.INFO_OUTPUT_FORMAT_CHANGED -> {
@@ -284,11 +315,12 @@ object StillVideoExporter {
               outBuffer.get(pcmBytes)
               pendingPcm = pcmBytes
               pendingPcmOffset = 0
+              pendingPcmPresentationTimeUs = audioDecoderBufferInfo.presentationTimeUs
             }
             audioDecoder.releaseOutputBuffer(outIndex, false)
             if ((audioDecoderBufferInfo.flags and MediaCodec.BUFFER_FLAG_END_OF_STREAM) != 0) {
               decoderDone = true
-              Log.i(TAG, "audio decoder reached end of stream")
+              Log.i(TAG, "audio decoder reached end of stream samplesRead=$audioSamplesRead")
             }
           }
         }
@@ -302,8 +334,10 @@ object StillVideoExporter {
           inputBuffer.clear()
           val pcm = pendingPcm
           if (pcm == null) {
-            if (decoderDone) {
+            if (decoderDone && !audioEncoderInputDone) {
               audioEncoder.queueInputBuffer(inIndex, 0, 0, 0, MediaCodec.BUFFER_FLAG_END_OF_STREAM)
+              audioEncoderInputDone = true
+              Log.i(TAG, "audio encoder input reached end samplesRead=$audioSamplesRead framesWritten=$audioFramesWritten")
             } else {
               // No PCM ready yet; don't queue empty buffers.
             }
@@ -315,7 +349,7 @@ object StillVideoExporter {
             if (pendingPcmOffset >= pcm.size) {
               pendingPcm = null
             }
-            audioEncoder.queueInputBuffer(inIndex, 0, toWrite, audioDecoderBufferInfo.presentationTimeUs, 0)
+            audioEncoder.queueInputBuffer(inIndex, 0, toWrite, pendingPcmPresentationTimeUs, 0)
           }
         }
       }
@@ -343,11 +377,12 @@ object StillVideoExporter {
             outBuffer.position(audioEncoderBufferInfo.offset)
             outBuffer.limit(audioEncoderBufferInfo.offset + audioEncoderBufferInfo.size)
             muxer.writeSampleData(audioTrackIndex, outBuffer, audioEncoderBufferInfo)
+            audioFramesWritten++
           }
           audioEncoder.releaseOutputBuffer(outIndex, false)
           if ((audioEncoderBufferInfo.flags and MediaCodec.BUFFER_FLAG_END_OF_STREAM) != 0) {
             encoderDone = true
-            Log.i(TAG, "audio encoder reached end of stream")
+            Log.i(TAG, "audio encoder reached end of stream framesWritten=$audioFramesWritten samplesRead=$audioSamplesRead")
           }
         }
       }
