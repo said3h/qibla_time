@@ -17,6 +17,100 @@ enum AyahShareExportMode {
 }
 
 class AyahShareImageService {
+  static Future<Uint8List> captureWidgetPng({
+    required Widget child,
+    required Size logicalSize,
+    double pixelRatio = 1.0,
+  }) async {
+    if (pixelRatio <= 0) {
+      throw ArgumentError.value(
+        pixelRatio,
+        'pixelRatio',
+        'pixelRatio must be greater than zero.',
+      );
+    }
+
+    WidgetsFlutterBinding.ensureInitialized();
+
+    final repaintBoundary = RenderRepaintBoundary();
+    final view = _resolveFlutterView();
+    final renderView = RenderView(
+      view: view,
+      configuration: ViewConfiguration(
+        logicalConstraints: BoxConstraints.tight(logicalSize),
+        physicalConstraints: BoxConstraints.tight(logicalSize),
+        devicePixelRatio: 1.0,
+      ),
+      child: RenderPositionedBox(
+        alignment: Alignment.center,
+        child: repaintBoundary,
+      ),
+    );
+
+    final pipelineOwner = PipelineOwner()..rootNode = renderView;
+    final focusManager = FocusManager();
+    final buildOwner = BuildOwner(focusManager: focusManager);
+    renderView.prepareInitialFrame();
+
+    ui.Image? image;
+
+    try {
+      final rootElement = RenderObjectToWidgetAdapter<RenderBox>(
+        container: repaintBoundary,
+        child: Directionality(
+          textDirection: TextDirection.ltr,
+          child: MediaQuery(
+            data: MediaQueryData(
+              size: logicalSize,
+              devicePixelRatio: 1.0,
+            ),
+            child: child,
+          ),
+        ),
+      ).attachToRenderTree(buildOwner);
+
+      buildOwner
+        ..buildScope(rootElement)
+        ..finalizeTree();
+
+      pipelineOwner
+        ..flushLayout()
+        ..flushCompositingBits()
+        ..flushPaint();
+
+      image = await repaintBoundary.toImage(pixelRatio: pixelRatio);
+      return _pngBytes(image);
+    } finally {
+      image?.dispose();
+      renderView.child = null;
+      pipelineOwner.rootNode = null;
+      focusManager.dispose();
+    }
+  }
+
+  static Future<File> saveWidgetPng({
+    required Widget child,
+    required Size logicalSize,
+    double pixelRatio = 1.0,
+    String? fileName,
+    Directory? directory,
+  }) async {
+    final bytes = await captureWidgetPng(
+      child: child,
+      logicalSize: logicalSize,
+      pixelRatio: pixelRatio,
+    );
+    final targetDirectory = directory ?? await getTemporaryDirectory();
+    await targetDirectory.create(recursive: true);
+    final sanitizedName = (fileName ?? 'ayah_share_card')
+        .replaceAll(RegExp(r'[^a-zA-Z0-9_-]'), '_');
+    final resolvedFileName =
+        sanitizedName.trim().isEmpty ? 'ayah_share_card' : sanitizedName;
+    final file = File('${targetDirectory.path}/$resolvedFileName.png');
+    await file.writeAsBytes(bytes, flush: true);
+    return file;
+  }
+
   static Future<Uint8List> capturePng({
     required AyahShareData data,
     AyahShareThemeData? theme,

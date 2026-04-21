@@ -15,6 +15,7 @@ import '../../quran_share/services/ayah_share_service.dart';
 import '../../quran_share/services/ayah_share_video_service.dart';
 import '../../quran_share/widgets/ayah_share_preview_sheet.dart';
 import '../models/quran_models.dart';
+import '../widgets/quran_ayah_card.dart';
 import 'allah_names_screen.dart';
 import '../services/quran_audio_download_service.dart';
 import '../services/quran_mini_player_service.dart';
@@ -1509,148 +1510,18 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                 onTap: () => _saveReading(ayah.numberInSurah),
                 onLongPress: () => _openAyahSharePreview(ayah),
                 borderRadius: BorderRadius.circular(16),
-                child: Container(
-                  margin: const EdgeInsets.only(bottom: 10),
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: isPlayingAudio
-                        ? tokens.primaryBg
-                        : isActiveAudio
-                            ? tokens.activeBg
-                            : isLastRead
-                                ? tokens.activeBg
-                                : tokens.bgSurface,
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(
-                      color: isPlayingAudio
-                          ? tokens.primaryBorder
-                          : isActiveAudio || isLastRead
-                              ? tokens.activeBorder
-                              : tokens.border,
-                    ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          CircleAvatar(
-                            radius: 14,
-                            backgroundColor: tokens.primaryBg,
-                            foregroundColor: tokens.primary,
-                            child: Text(
-                              '${ayah.numberInSurah}',
-                              style: GoogleFonts.dmSans(
-                                fontSize: 10,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 10),
-                          if (isLastRead)
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 8,
-                                vertical: 4,
-                              ),
-                              decoration: BoxDecoration(
-                                color: tokens.primaryBg,
-                                borderRadius: BorderRadius.circular(999),
-                                border: Border.all(color: tokens.primaryBorder),
-                              ),
-                              child: Text(
-                                l10n.quranLastReadingBadge,
-                                style: GoogleFonts.dmSans(
-                                  fontSize: 10,
-                                  color: tokens.primaryLight,
-                                ),
-                              ),
-                            ),
-                          const Spacer(),
-                          IconButton(
-                            tooltip: canPlayAudio
-                                ? (isPlayingAudio
-                                    ? l10n.quranPauseAudio
-                                    : isActiveAudio
-                                        ? l10n.quranResumeAudio
-                                        : l10n.quranPlayAudio)
-                                : l10n.quranAudioUnavailable,
-                            onPressed: canPlayAudio
-                                ? () => _toggleAyahAudio(ayah, result.source)
-                                : null,
-                            icon: Icon(
-                              !canPlayAudio
-                                  ? Icons.volume_off_outlined
-                                  : isPlayingAudio
-                                      ? Icons.pause_circle_outline
-                                      : Icons.play_circle_outline,
-                              color: !canPlayAudio
-                                  ? tokens.textMuted
-                                  : tokens.primary,
-                            ),
-                          ),
-                          IconButton(
-                            tooltip: isBookmarked
-                                ? l10n.quranRemoveBookmark
-                                : l10n.quranSaveBookmark,
-                            onPressed: () =>
-                                _toggleBookmark(ayah.numberInSurah),
-                            icon: Icon(
-                              isBookmarked
-                                  ? Icons.bookmark
-                                  : Icons.bookmark_border,
-                              color: isBookmarked
-                                  ? tokens.primary
-                                  : tokens.textMuted,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 12),
-                      Text(
-                        ayah.arabic,
-                        textAlign: TextAlign.right,
-                        style: GoogleFonts.amiri(
-                          fontSize: 22,
-                          height: 1.8,
-                          color: tokens.textPrimary,
-                        ),
-                      ),
-                      if (ayah.transliteration.trim().isNotEmpty) ...[
-                        const SizedBox(height: 6),
-                        Text(
-                          ayah.transliteration,
-                          style: GoogleFonts.dmSans(
-                            fontSize: 13,
-                            height: 1.7,
-                            fontStyle: FontStyle.italic,
-                            color: tokens.textSecondary,
-                          ),
-                        ),
-                      ],
-                      if (ayah.translation.trim().isNotEmpty) ...[
-                        const SizedBox(height: 10),
-                        Text(
-                          ayah.translation,
-                          style: GoogleFonts.dmSans(
-                            fontSize: 13,
-                            height: 1.7,
-                            color: tokens.textPrimary,
-                          ),
-                        ),
-                      ],
-                      const SizedBox(height: 10),
-                      Text(
-                        l10n.quranAyahFooterHint(
-                          _audioStatusLabel(ayah, result.source),
-                        ),
-                        style: GoogleFonts.dmSans(
-                          fontSize: 10,
-                          color: tokens.textMuted,
-                        ),
-                      ),
-                    ],
-                  ),
+                child: QuranAyahCard(
+                  tokens: tokens,
+                  l10n: l10n,
+                  ayah: ayah,
+                  canPlayAudio: canPlayAudio,
+                  isLastRead: isLastRead,
+                  isActiveAudio: isActiveAudio,
+                  isPlayingAudio: isPlayingAudio,
+                  isBookmarked: isBookmarked,
+                  audioStatusLabel: _audioStatusLabel(ayah, result.source),
+                  onToggleAudio: () => _toggleAyahAudio(ayah, result.source),
+                  onToggleBookmark: () => _toggleBookmark(ayah.numberInSurah),
                 ),
               );
             },

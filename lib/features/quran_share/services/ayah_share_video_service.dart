@@ -13,11 +13,11 @@ import 'package:permission_handler/permission_handler.dart';
 import '../../../core/services/logger_service.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../l10n/l10n.dart';
+import '../../../l10n/generated/app_localizations.dart';
 import '../../quran/models/quran_models.dart';
 import '../../quran/services/quran_audio_download_service.dart';
-import '../models/ayah_share_data.dart';
-import '../models/ayah_share_theme.dart';
 import 'ayah_share_image_service.dart';
+import '../../quran/widgets/quran_ayah_card.dart';
 
 final ayahShareVideoServiceProvider = Provider<AyahShareVideoService>((ref) {
   return AyahShareVideoService(ref);
@@ -33,6 +33,7 @@ class AyahShareVideoDraft {
     required this.surahNameArabic,
     required this.ayahNumber,
     required this.arabicText,
+    required this.transliteration,
     required this.translation,
     required this.audioPathOrUrl,
     required this.isLocalAudio,
@@ -44,6 +45,7 @@ class AyahShareVideoDraft {
   final String surahNameArabic;
   final int ayahNumber;
   final String arabicText;
+  final String transliteration;
   final String translation;
   final String audioPathOrUrl;
   final bool isLocalAudio;
@@ -110,6 +112,7 @@ class AyahShareVideoService {
       surahNameArabic: summary.nameArabic,
       ayahNumber: ayah.numberInSurah,
       arabicText: includeArabic ? ayah.arabic : '',
+      transliteration: includeArabic ? ayah.transliteration : '',
       translation: includeTranslation ? ayah.translation : '',
       audioPathOrUrl: preferredAudio,
       isLocalAudio: localPath != null,
@@ -129,26 +132,11 @@ class AyahShareVideoService {
       ).create(recursive: true);
       final fileStem = _fileStemFor(draft);
 
-      final imageFile = await AyahShareImageService.savePng(
-        data: AyahShareData(
-          surahNumber: draft.surahNumber,
-          surahNameLatin: draft.surahNameLatin,
-          surahNameArabic: draft.surahNameArabic,
-          ayahNumber: draft.ayahNumber,
-          arabicText: draft.arabicText,
-          translation: draft.translation,
-          badgeLabel: l10n.shareBadgeQuran,
-          branding: l10n.shareBranding,
-        ),
-        theme: AyahShareThemeData.fromTokens(
-          QiblaThemes.current,
-          transparentBackground:
-              draft.exportMode == AyahShareExportMode.cardOnly,
-        ),
-        transparentBackground: draft.exportMode == AyahShareExportMode.cardOnly,
-        mode: draft.exportMode,
-        fileName: '${fileStem}_card',
-        directory: workingDirectory,
+      final imageFile = await _renderQuranAyahCardCanvas(
+        l10n: l10n,
+        draft: draft,
+        fileStem: fileStem,
+        workingDirectory: workingDirectory,
       );
 
       final audioFile = await _ensureAudioFile(
@@ -278,25 +266,11 @@ class AyahShareVideoService {
     ).create(recursive: true);
     final fileStem = _fileStemFor(draft);
 
-    final imageFile = await AyahShareImageService.savePng(
-      data: AyahShareData(
-        surahNumber: draft.surahNumber,
-        surahNameLatin: draft.surahNameLatin,
-        surahNameArabic: draft.surahNameArabic,
-        ayahNumber: draft.ayahNumber,
-        arabicText: draft.arabicText,
-        translation: draft.translation,
-        badgeLabel: l10n.shareBadgeQuran,
-        branding: l10n.shareBranding,
-      ),
-      theme: AyahShareThemeData.fromTokens(
-        QiblaThemes.current,
-        transparentBackground: draft.exportMode == AyahShareExportMode.cardOnly,
-      ),
-      transparentBackground: draft.exportMode == AyahShareExportMode.cardOnly,
-      mode: draft.exportMode,
-      fileName: '${fileStem}_card',
-      directory: workingDirectory,
+    final imageFile = await _renderQuranAyahCardCanvas(
+      l10n: l10n,
+      draft: draft,
+      fileStem: fileStem,
+      workingDirectory: workingDirectory,
     );
 
     final audioFile = await _ensureAudioFile(
@@ -351,6 +325,57 @@ class AyahShareVideoService {
       );
       throw NativeVideoExportException(message);
     }
+  }
+
+  Future<File> _renderQuranAyahCardCanvas({
+    required AppLocalizations l10n,
+    required AyahShareVideoDraft draft,
+    required String fileStem,
+    required Directory workingDirectory,
+  }) async {
+    final tokens = QiblaThemes.current;
+
+    // Render in a phone-like logical size, then scale to 1080x1920 output.
+    const logicalSize = Size(360, 640);
+    const pixelRatio = 3.0;
+
+    final ayahForCard = SurahAyah(
+      number: 0,
+      numberInSurah: draft.ayahNumber,
+      arabic: draft.arabicText,
+      transliteration: draft.transliteration,
+      translation: draft.translation,
+      audioUrl: '',
+    );
+
+    return AyahShareImageService.saveWidgetPng(
+      directory: workingDirectory,
+      fileName: '${fileStem}_card',
+      logicalSize: logicalSize,
+      pixelRatio: pixelRatio,
+      child: Material(
+        color: tokens.bgPage,
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Center(
+            child: QuranAyahCard(
+              tokens: tokens,
+              l10n: l10n,
+              ayah: ayahForCard,
+              canPlayAudio: true,
+              isLastRead: false,
+              isActiveAudio: false,
+              isPlayingAudio: false,
+              isBookmarked: false,
+              audioStatusLabel: l10n.quranAyahAudioAvailable,
+              onToggleAudio: () {},
+              onToggleBookmark: () {},
+              margin: EdgeInsets.zero,
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   String _nativePlatformErrorMessage(PlatformException error) {

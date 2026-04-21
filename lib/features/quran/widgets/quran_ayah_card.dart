@@ -1,0 +1,173 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../../../core/theme/app_theme.dart';
+import '../../../l10n/generated/app_localizations.dart';
+import '../models/quran_models.dart';
+
+class QuranAyahCard extends StatelessWidget {
+  const QuranAyahCard({
+    super.key,
+    required this.tokens,
+    required this.l10n,
+    required this.ayah,
+    required this.canPlayAudio,
+    required this.isLastRead,
+    required this.isActiveAudio,
+    required this.isPlayingAudio,
+    required this.isBookmarked,
+    required this.audioStatusLabel,
+    required this.onToggleAudio,
+    required this.onToggleBookmark,
+    this.margin = const EdgeInsets.only(bottom: 10),
+  });
+
+  final QiblaTokens tokens;
+  final AppLocalizations l10n;
+  final SurahAyah ayah;
+  final bool canPlayAudio;
+  final bool isLastRead;
+  final bool isActiveAudio;
+  final bool isPlayingAudio;
+  final bool isBookmarked;
+  final String audioStatusLabel;
+  final VoidCallback onToggleAudio;
+  final VoidCallback onToggleBookmark;
+  final EdgeInsets margin;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: margin,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: isPlayingAudio
+            ? tokens.primaryBg
+            : isActiveAudio
+                ? tokens.activeBg
+                : isLastRead
+                    ? tokens.activeBg
+                    : tokens.bgSurface,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: isPlayingAudio
+              ? tokens.primaryBorder
+              : isActiveAudio || isLastRead
+                  ? tokens.activeBorder
+                  : tokens.border,
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              CircleAvatar(
+                radius: 14,
+                backgroundColor: tokens.primaryBg,
+                foregroundColor: tokens.primary,
+                child: Text(
+                  '${ayah.numberInSurah}',
+                  style: GoogleFonts.dmSans(
+                    fontSize: 10,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 10),
+              if (isLastRead)
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
+                  decoration: BoxDecoration(
+                    color: tokens.primaryBg,
+                    borderRadius: BorderRadius.circular(999),
+                    border: Border.all(color: tokens.primaryBorder),
+                  ),
+                  child: Text(
+                    l10n.quranLastReadingBadge,
+                    style: GoogleFonts.dmSans(
+                      fontSize: 10,
+                      color: tokens.primaryLight,
+                    ),
+                  ),
+                ),
+              const Spacer(),
+              IconButton(
+                tooltip: canPlayAudio
+                    ? (isPlayingAudio
+                        ? l10n.quranPauseAudio
+                        : isActiveAudio
+                            ? l10n.quranResumeAudio
+                            : l10n.quranPlayAudio)
+                    : l10n.quranAudioUnavailable,
+                onPressed: canPlayAudio ? onToggleAudio : null,
+                icon: Icon(
+                  !canPlayAudio
+                      ? Icons.volume_off_outlined
+                      : isPlayingAudio
+                          ? Icons.pause_circle_outline
+                          : Icons.play_circle_outline,
+                  color: !canPlayAudio ? tokens.textMuted : tokens.primary,
+                ),
+              ),
+              IconButton(
+                tooltip: isBookmarked
+                    ? l10n.quranRemoveBookmark
+                    : l10n.quranSaveBookmark,
+                onPressed: onToggleBookmark,
+                icon: Icon(
+                  isBookmarked ? Icons.bookmark : Icons.bookmark_border,
+                  color: isBookmarked ? tokens.primary : tokens.textMuted,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Text(
+            ayah.arabic,
+            textAlign: TextAlign.right,
+            style: GoogleFonts.amiri(
+              fontSize: 22,
+              height: 1.8,
+              color: tokens.textPrimary,
+            ),
+          ),
+          if (ayah.transliteration.trim().isNotEmpty) ...[
+            const SizedBox(height: 6),
+            Text(
+              ayah.transliteration,
+              style: GoogleFonts.dmSans(
+                fontSize: 13,
+                height: 1.7,
+                fontStyle: FontStyle.italic,
+                color: tokens.textSecondary,
+              ),
+            ),
+          ],
+          if (ayah.translation.trim().isNotEmpty) ...[
+            const SizedBox(height: 10),
+            Text(
+              ayah.translation,
+              style: GoogleFonts.dmSans(
+                fontSize: 13,
+                height: 1.7,
+                color: tokens.textPrimary,
+              ),
+            ),
+          ],
+          const SizedBox(height: 10),
+          Text(
+            l10n.quranAyahFooterHint(audioStatusLabel),
+            style: GoogleFonts.dmSans(
+              fontSize: 10,
+              color: tokens.textMuted,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
