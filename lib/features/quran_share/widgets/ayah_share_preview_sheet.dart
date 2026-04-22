@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -84,6 +85,9 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
   bool get _hasTranslation => widget.ayah.translation.trim().isNotEmpty;
 
   bool get _isBusy => _activeAction != null;
+
+  bool get _supportsVideoExport =>
+      !kIsWeb && defaultTargetPlatform == TargetPlatform.android;
 
   @override
   void initState() {
@@ -452,7 +456,7 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
         activeAction: _activeAction,
         onShareText: _shareText,
         onShareImage: _shareImage,
-        onShareVideo: _handleVideoAction,
+        onShareVideo: _supportsVideoExport ? _handleVideoAction : null,
       ),
     );
   }
@@ -473,7 +477,7 @@ class _AyahShareFooter extends StatelessWidget {
   final _AyahShareAction? activeAction;
   final VoidCallback onShareText;
   final VoidCallback onShareImage;
-  final VoidCallback onShareVideo;
+  final VoidCallback? onShareVideo;
 
   @override
   Widget build(BuildContext context) {
@@ -512,69 +516,101 @@ class _AyahShareFooter extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 10),
-        Row(
-          children: [
-            Expanded(
-              child: OutlinedButton(
-                onPressed: isBusy ? null : onShareText,
-                style: OutlinedButton.styleFrom(
-                  foregroundColor: tokens.textPrimary,
-                  side: BorderSide(color: tokens.borderMed),
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
+        if (onShareVideo == null)
+          SizedBox(
+            width: double.infinity,
+            child: OutlinedButton(
+              onPressed: isBusy ? null : onShareText,
+              style: OutlinedButton.styleFrom(
+                foregroundColor: tokens.textPrimary,
+                side: BorderSide(color: tokens.borderMed),
+                padding: const EdgeInsets.symmetric(vertical: 14),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
                 ),
-                child: activeAction == _AyahShareAction.text
-                    ? SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2.2,
-                          valueColor: AlwaysStoppedAnimation(tokens.primary),
-                        ),
-                      )
-                    : Text(
-                        l10n.commonText,
-                        style: GoogleFonts.dmSans(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
               ),
+              child: activeAction == _AyahShareAction.text
+                  ? SizedBox(
+                      width: 20,
+                      height: 20,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2.2,
+                        valueColor: AlwaysStoppedAnimation(tokens.primary),
+                      ),
+                    )
+                  : Text(
+                      l10n.commonText,
+                      style: GoogleFonts.dmSans(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
             ),
-            const SizedBox(width: 10),
-            Expanded(
-              child: OutlinedButton(
-                onPressed: isBusy ? null : onShareVideo,
-                style: OutlinedButton.styleFrom(
-                  foregroundColor: tokens.textPrimary,
-                  side: BorderSide(color: tokens.borderMed),
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
+          )
+        else
+          Row(
+            children: [
+              Expanded(
+                child: OutlinedButton(
+                  onPressed: isBusy ? null : onShareText,
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: tokens.textPrimary,
+                    side: BorderSide(color: tokens.borderMed),
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
                   ),
+                  child: activeAction == _AyahShareAction.text
+                      ? SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2.2,
+                            valueColor: AlwaysStoppedAnimation(tokens.primary),
+                          ),
+                        )
+                      : Text(
+                          l10n.commonText,
+                          style: GoogleFonts.dmSans(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
                 ),
-                child: activeAction == _AyahShareAction.video
-                    ? SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2.2,
-                          valueColor: AlwaysStoppedAnimation(tokens.primary),
-                        ),
-                      )
-                    : Text(
-                        l10n.commonVideo,
-                        style: GoogleFonts.dmSans(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
               ),
-            ),
-          ],
-        ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: OutlinedButton(
+                  onPressed: isBusy ? null : onShareVideo,
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: tokens.textPrimary,
+                    side: BorderSide(color: tokens.borderMed),
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                  ),
+                  child: activeAction == _AyahShareAction.video
+                      ? SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2.2,
+                            valueColor: AlwaysStoppedAnimation(tokens.primary),
+                          ),
+                        )
+                      : Text(
+                          l10n.commonVideo,
+                          style: GoogleFonts.dmSans(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                ),
+              ),
+            ],
+          ),
       ],
     );
   }

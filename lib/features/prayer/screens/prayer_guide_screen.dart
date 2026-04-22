@@ -367,7 +367,7 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
         description: l10n.prayerGuideNiyyahDescription,
         positionArabicName: 'النِّيَّة',
         positionTransliteration: 'Niyyah',
-        assetPath: 'assets/images/prayer_positions/niyyah.png',
+        assetPath: 'assets/images/prayer_positions/niyyah.webp',
         repetitionLabel: l10n.prayerGuideTimesHeart,
         note: l10n.prayerGuideNiyyahRecitationNote,
       );
@@ -380,7 +380,7 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
         description: l10n.prayerGuideTakbirDescription,
         positionArabicName: 'تكبيرة الإحرام',
         positionTransliteration: 'Takbiratul Ihram',
-        assetPath: 'assets/images/prayer_positions/takbir.png',
+        assetPath: 'assets/images/prayer_positions/takbir.webp',
         repetitionLabel: l10n.prayerGuideTimesOnce,
         recitations: const [
           _PrayerGuideRecitationData(
@@ -399,7 +399,7 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
         description: l10n.prayerGuideSubhanakaDescription,
         positionArabicName: 'دعاء الاستفتاح',
         positionTransliteration: 'Subhanaka',
-        assetPath: 'assets/images/prayer_positions/qiyam.png',
+        assetPath: 'assets/images/prayer_positions/qiyam.webp',
         repetitionLabel: l10n.prayerGuideTimesOnce,
         recitations: const [
           _PrayerGuideRecitationData(
@@ -425,7 +425,7 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
             : l10n.prayerGuideQiyamFatihaOnlyDescription,
         positionArabicName: 'القيام',
         positionTransliteration: 'Qiyam',
-        assetPath: 'assets/images/prayer_positions/qiyam.png',
+        assetPath: 'assets/images/prayer_positions/qiyam.webp',
         repetitionLabel: l10n.prayerGuideTimesOnce,
         showsOpenFatiha: true,
         showsChooseSurah: includeAdditionalSurah,
@@ -439,7 +439,7 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
         description: l10n.prayerGuideRukuDescription,
         positionArabicName: 'الركوع',
         positionTransliteration: 'Ruku',
-        assetPath: 'assets/images/prayer_positions/ruku.png',
+        assetPath: 'assets/images/prayer_positions/ruku.webp',
         repetitionLabel: l10n.prayerGuideTimesThree,
         recitations: const [
           _PrayerGuideRecitationData(
@@ -458,7 +458,7 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
         description: l10n.prayerGuideItidalDescription,
         positionArabicName: 'الاعتدال',
         positionTransliteration: "I'tidal",
-        assetPath: 'assets/images/prayer_positions/itidal.png',
+        assetPath: 'assets/images/prayer_positions/itidal.webp',
         repetitionLabel: l10n.prayerGuideTimesOnce,
         recitations: const [
           _PrayerGuideRecitationData(
@@ -484,7 +484,7 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
         description: l10n.prayerGuideSujudDescription,
         positionArabicName: 'السجود',
         positionTransliteration: 'Sujud',
-        assetPath: 'assets/images/prayer_positions/sujud.png',
+        assetPath: 'assets/images/prayer_positions/sujud.webp',
         repetitionLabel: l10n.prayerGuideTimesThree,
         recitations: const [
           _PrayerGuideRecitationData(
@@ -503,7 +503,7 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
         description: l10n.prayerGuideJalsaDescription,
         positionArabicName: 'الجلسة',
         positionTransliteration: 'Jalsa',
-        assetPath: 'assets/images/prayer_positions/jalsa.png',
+        assetPath: 'assets/images/prayer_positions/jalsa.webp',
         repetitionLabel: l10n.prayerGuideTimesOneToThree,
         recitations: const [
           _PrayerGuideRecitationData(
@@ -522,7 +522,7 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
         description: l10n.prayerGuideSecondSujudDescription,
         positionArabicName: 'السجود الثاني',
         positionTransliteration: 'Second sujud',
-        assetPath: 'assets/images/prayer_positions/sujud.png',
+        assetPath: 'assets/images/prayer_positions/sujud.webp',
         repetitionLabel: l10n.prayerGuideTimesThree,
         recitations: const [
           _PrayerGuideRecitationData(
@@ -541,7 +541,7 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
         description: l10n.prayerGuideTashahhudShortDescription,
         positionArabicName: 'التشهد',
         positionTransliteration: 'Tashahhud',
-        assetPath: 'assets/images/prayer_positions/tashahhud.png',
+        assetPath: 'assets/images/prayer_positions/tashahhud.webp',
         repetitionLabel: l10n.prayerGuideTimesOnce,
         recitations: const [atTahiyyatRecitation],
       );
@@ -554,7 +554,7 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
         description: l10n.prayerGuideTashahhudCompleteDescription,
         positionArabicName: 'التشهد الأخير',
         positionTransliteration: 'Complete Tashahhud',
-        assetPath: 'assets/images/prayer_positions/tashahhud.png',
+        assetPath: 'assets/images/prayer_positions/tashahhud.webp',
         repetitionLabel: l10n.prayerGuideTimesOnce,
         note: l10n.prayerGuideTashahhudCompleteNote,
         recitations: const [
@@ -571,7 +571,7 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
         description: l10n.prayerGuideTaslimRightDescription,
         positionArabicName: 'التسليم',
         positionTransliteration: 'Taslim',
-        assetPath: 'assets/images/prayer_positions/taslim_right.png',
+        assetPath: 'assets/images/prayer_positions/taslim_right.webp',
         repetitionLabel: l10n.prayerGuideTimesOnce,
         directionLabel: l10n.prayerGuideDirectionRight,
         recitations: const [
@@ -588,7 +588,7 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
         description: l10n.prayerGuideTaslimLeftDescription,
         positionArabicName: 'التسليم',
         positionTransliteration: 'Taslim',
-        assetPath: 'assets/images/prayer_positions/taslim_left.png',
+        assetPath: 'assets/images/prayer_positions/taslim_left.webp',
         repetitionLabel: l10n.prayerGuideTimesOnce,
         directionLabel: l10n.prayerGuideDirectionLeft,
         recitations: const [

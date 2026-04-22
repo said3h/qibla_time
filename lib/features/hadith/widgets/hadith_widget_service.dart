@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:home_widget/home_widget.dart';
 
+import '../../../core/services/logger_service.dart';
 import '../models/hadith.dart';
 import '../services/hadith_service.dart';
 
@@ -19,10 +20,12 @@ class HadithWidgetService {
   Future<void> syncDailyHadith(HadithSnapshot snapshot) async {
     await Future.wait([
       HomeWidget.saveWidgetData<String>('hadith_arabic', snapshot.arabic),
-      HomeWidget.saveWidgetData<String>('hadith_translation', snapshot.translation),
+      HomeWidget.saveWidgetData<String>(
+          'hadith_translation', snapshot.translation),
       HomeWidget.saveWidgetData<String>('hadith_reference', snapshot.reference),
       HomeWidget.saveWidgetData<String>('hadith_grade', snapshot.grade),
-      HomeWidget.saveWidgetData<String>('hadith_collection', snapshot.collection),
+      HomeWidget.saveWidgetData<String>(
+          'hadith_collection', snapshot.collection),
     ]);
     await HomeWidget.updateWidget(
       iOSName: iOSWidgetName,
@@ -42,7 +45,12 @@ class HadithWidgetService {
       if (hadith == null) return null;
 
       return snapshotFromHadith(hadith);
-    } catch (_) {
+    } catch (e, stackTrace) {
+      AppLogger.warning(
+        'HadithWidgetService.getDailyHadithSnapshot failed',
+        error: e,
+        stackTrace: stackTrace,
+      );
       return null;
     }
   }
@@ -70,13 +78,17 @@ class HadithWidgetService {
 
   static String _extractCollection(String reference) {
     final refLower = reference.toLowerCase();
-    if (refLower.contains('bujari') || refLower.contains('bukhari')) return 'Bukhari';
+    if (refLower.contains('bujari') || refLower.contains('bukhari'))
+      return 'Bukhari';
     if (refLower.contains('muslim')) return 'Muslim';
     if (refLower.contains('tirmidhi')) return 'Tirmidhi';
-    if (refLower.contains('abu dawud') || refLower.contains('abudawud')) return 'Abu Dawud';
+    if (refLower.contains('abu dawud') || refLower.contains('abudawud'))
+      return 'Abu Dawud';
     if (refLower.contains('nasai')) return 'Nasai';
-    if (refLower.contains('ibn majah') || refLower.contains('ibnmajah')) return 'Ibn Majah';
-    if (refLower.contains('malik') || refLower.contains('muwatta')) return 'Malik';
+    if (refLower.contains('ibn majah') || refLower.contains('ibnmajah'))
+      return 'Ibn Majah';
+    if (refLower.contains('malik') || refLower.contains('muwatta'))
+      return 'Malik';
     if (refLower.contains('ahmad')) return 'Ahmad';
     return 'Hadiz';
   }
@@ -104,7 +116,8 @@ final hadithWidgetServiceProvider = Provider<HadithWidgetService>((ref) {
 });
 
 /// Provider que obtiene el snapshot del hadiz del día
-final dailyHadithSnapshotProvider = FutureProvider<HadithSnapshot?>((ref) async {
+final dailyHadithSnapshotProvider =
+    FutureProvider<HadithSnapshot?>((ref) async {
   final hadith = await ref.watch(dailyHadithProvider.future);
   if (hadith == null) {
     return null;

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:path_provider/path_provider.dart';
 
+import '../../../core/services/logger_service.dart';
 import '../../../core/theme/app_theme.dart';
 import '../models/hadith_share_data.dart';
 import '../models/hadith_share_theme.dart';
@@ -17,6 +18,13 @@ enum HadithShareExportMode {
 }
 
 class HadithShareImageService {
+  static const _temporaryMaxAge = Duration(days: 1);
+  static const _temporaryFilePrefixes = <String>[
+    'hadith_',
+    'hadith_share_card',
+    'dua_',
+  ];
+
   static Future<Uint8List> capturePng({
     required HadithShareData data,
     HadithShareThemeData? theme,
@@ -128,6 +136,7 @@ class HadithShareImageService {
     );
     final targetDirectory = directory ?? await getTemporaryDirectory();
     await targetDirectory.create(recursive: true);
+    await _deleteOldTemporaryFiles(targetDirectory);
     final sanitizedName = (fileName ?? 'hadith_share_card')
         .trim()
         .replaceAll(RegExp(r'[^a-zA-Z0-9_-]+'), '_')
@@ -138,6 +147,27 @@ class HadithShareImageService {
     final file = File('${targetDirectory.path}/$resolvedFileName.png');
     await file.writeAsBytes(bytes, flush: true);
     return file;
+  }
+
+  static Future<void> _deleteOldTemporaryFiles(Directory directory) async {
+    final cutoff = DateTime.now().subtract(_temporaryMaxAge);
+    try {
+      await for (final entity in directory.list(followLinks: false)) {
+        if (entity is! File) continue;
+        final name = entity.uri.pathSegments.last;
+        if (!_temporaryFilePrefixes.any(name.startsWith)) continue;
+        final modified = await entity.lastModified();
+        if (modified.isBefore(cutoff)) {
+          await entity.delete();
+        }
+      }
+    } catch (error, stackTrace) {
+      AppLogger.warning(
+        'Failed to clean old hadith share temporary files.',
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
   }
 
   static ui.FlutterView _resolveFlutterView() {

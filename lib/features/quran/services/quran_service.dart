@@ -14,6 +14,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../core/localization/locale_controller.dart';
+import '../../../core/services/logger_service.dart';
 import '../models/quran_models.dart';
 
 // ── Providers ──────────────────────────────────────────────────
@@ -255,7 +256,12 @@ class QuranService {
         }
       }
       _offlineCache = offlineCache;
-    } catch (e) {
+    } catch (error, stackTrace) {
+      AppLogger.error(
+        'Failed to load offline Quran cache.',
+        error: error,
+        stackTrace: stackTrace,
+      );
       _offlineCache = {}; // evita reintentar en bucle si el asset falta
     }
   }

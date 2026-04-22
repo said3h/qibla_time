@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../core/localization/locale_controller.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/utils/religious_reference_formatter.dart';
 import '../../../l10n/l10n.dart';
@@ -49,6 +50,7 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
   void dispose() {
     _searchController.removeListener(_onSearchChanged);
     _searchController.dispose();
+    _debouncer.cancel();
     super.dispose();
   }
 
@@ -101,7 +103,8 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
         ),
         actions: [
           IconButton(
-            icon: Icon(_showFilters ? Icons.filter_alt : Icons.filter_alt_outlined),
+            icon: Icon(
+                _showFilters ? Icons.filter_alt : Icons.filter_alt_outlined),
             onPressed: () => setState(() => _showFilters = !_showFilters),
             tooltip: l10n.commonFilter,
           ),
@@ -173,9 +176,15 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
                             child: _FilterDropdown(
                               label: l10n.commonCollection,
                               value: _selectedCollection,
-                              items: [_allCollectionsValue, ...collections.keys],
-                              itemLabelBuilder: (value) => _collectionLabel(context, value),
-                              onChanged: (v) => setState(() => _selectedCollection = v ?? _allCollectionsValue),
+                              items: [
+                                _allCollectionsValue,
+                                ...collections.keys
+                              ],
+                              itemLabelBuilder: (value) =>
+                                  _collectionLabel(context, value),
+                              onChanged: (v) => setState(() =>
+                                  _selectedCollection =
+                                      v ?? _allCollectionsValue),
                             ),
                           ),
                           const SizedBox(width: 8),
@@ -184,8 +193,10 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
                               label: l10n.commonAuthenticity,
                               value: _selectedGrade,
                               items: [_allGradesValue, ...grades],
-                              itemLabelBuilder: (value) => _gradeLabel(context, value),
-                              onChanged: (v) => setState(() => _selectedGrade = v ?? _allGradesValue),
+                              itemLabelBuilder: (value) =>
+                                  _gradeLabel(context, value),
+                              onChanged: (v) => setState(
+                                  () => _selectedGrade = v ?? _allGradesValue),
                             ),
                           ),
                         ],
@@ -196,10 +207,12 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
                           label: l10n.commonCategory,
                           value: _selectedCategory,
                           items: [_allCategoriesValue, ...categories.keys],
-                          itemLabelBuilder: (value) => value == _allCategoriesValue
-                              ? l10n.hadithLibraryAllCategories
-                              : value,
-                          onChanged: (v) => setState(() => _selectedCategory = v ?? _allCategoriesValue),
+                          itemLabelBuilder: (value) =>
+                              value == _allCategoriesValue
+                                  ? l10n.hadithLibraryAllCategories
+                                  : value,
+                          onChanged: (v) => setState(() =>
+                              _selectedCategory = v ?? _allCategoriesValue),
                         ),
                         loading: () => const SizedBox.shrink(),
                         error: (_, __) => const SizedBox.shrink(),
@@ -235,7 +248,8 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
                 if (_isSearching) {
                   // Mostrando resultados de búsqueda
                   displayHadiths = _applyFilters(_searchResults);
-                } else if (_searchResults.isNotEmpty && _searchController.text.isEmpty) {
+                } else if (_searchResults.isNotEmpty &&
+                    _searchController.text.isEmpty) {
                   // Búsqueda previa, volver a todos
                   displayHadiths = _applyFilters(hadiths);
                 } else {
@@ -245,77 +259,105 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
 
                 // Ordenar: hadiz del día primero si existe
                 final dailyHadith = dailyHadithAsync.valueOrNull;
-                if (dailyHadith != null && displayHadiths.any((h) => h.id == dailyHadith.id)) {
+                if (dailyHadith != null &&
+                    displayHadiths.any((h) => h.id == dailyHadith.id)) {
                   displayHadiths.removeWhere((h) => h.id == dailyHadith.id);
                   displayHadiths.insert(0, dailyHadith);
                 }
 
-                return ListView(
+                final showCollectionSection =
+                    _searchController.text.trim().isEmpty;
+                final showFeaturedHadith = dailyHadith != null && !_isSearching;
+                final leadingItemCount = (showCollectionSection ? 1 : 0) +
+                    (showFeaturedHadith ? 2 : 0) +
+                    1;
+                final contentItemCount =
+                    displayHadiths.isEmpty ? 1 : displayHadiths.length;
+
+                return ListView.builder(
                   padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-                  children: [
-                    if (_searchController.text.trim().isEmpty)
-                      collectionsAsync.when(
-                        data: (collections) => _buildCollectionSection(
-                          context: context,
-                          collections: collections,
-                        ),
-                        loading: () => const SizedBox.shrink(),
-                        error: (_, __) => const SizedBox.shrink(),
-                      ),
+                  itemCount: leadingItemCount + contentItemCount,
+                  itemBuilder: (context, index) {
+                    var currentIndex = index;
+
+                    if (showCollectionSection) {
+                      if (currentIndex == 0) {
+                        return collectionsAsync.when(
+                          data: (collections) => _buildCollectionSection(
+                            context: context,
+                            collections: collections,
+                          ),
+                          loading: () => const SizedBox.shrink(),
+                          error: (_, __) => const SizedBox.shrink(),
+                        );
+                      }
+                      currentIndex -= 1;
+                    }
 
                     // Hadiz del día destacado
-                    if (dailyHadith != null && !_isSearching)
-                      _FeaturedHadithCard(
-                        hadith: dailyHadith,
-                        isArabicOnly: isArabicOnly,
-                        isFavorite: favorites.contains(dailyHadith.id),
-                        onToggleFavorite: () => _toggleFavorite(dailyHadith.id),
-                        onShare: () => _shareImage(dailyHadith),
-                      ),
+                    if (showFeaturedHadith) {
+                      if (currentIndex == 0) {
+                        return _FeaturedHadithCard(
+                          hadith: dailyHadith,
+                          isArabicOnly: isArabicOnly,
+                          isFavorite: favorites.contains(dailyHadith.id),
+                          onToggleFavorite: () =>
+                              _toggleFavorite(dailyHadith.id),
+                          onShare: () => _shareImage(dailyHadith),
+                        );
+                      }
 
-                    if (dailyHadith != null && !_isSearching)
-                      const SizedBox(height: 16),
+                      if (currentIndex == 1) {
+                        return const SizedBox(height: 16);
+                      }
+                      currentIndex -= 2;
+                    }
 
                     // Contador de resultados
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 12),
-                      child: Row(
-                        children: [
-                          Text(
-                            _isSearching || _searchController.text.isNotEmpty
-                                ? l10n.hadithLibraryResultsCount(displayHadiths.length)
-                                : l10n.hadithLibraryAllHadiths(hadiths.length),
-                            style: GoogleFonts.dmSans(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w600,
-                              letterSpacing: 1.3,
-                              color: tokens.textSecondary,
+                    if (currentIndex == 0) {
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 12),
+                        child: Row(
+                          children: [
+                            Text(
+                              _isSearching || _searchController.text.isNotEmpty
+                                  ? l10n.hadithLibraryResultsCount(
+                                      displayHadiths.length)
+                                  : l10n
+                                      .hadithLibraryAllHadiths(hadiths.length),
+                              style: GoogleFonts.dmSans(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 1.3,
+                                color: tokens.textSecondary,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
+                          ],
+                        ),
+                      );
+                    }
+                    currentIndex -= 1;
 
                     // Lista de hadices
-                    if (displayHadiths.isEmpty)
-                      _EmptyState(
+                    if (displayHadiths.isEmpty) {
+                      return _EmptyState(
                         isSearch: _searchController.text.isNotEmpty,
                         query: _searchController.text,
-                      )
-                    else
-                      ...displayHadiths.map(
-                        (hadith) => Padding(
-                          padding: const EdgeInsets.only(bottom: 12),
-                          child: _HadithCard(
-                            hadith: hadith,
-                            isArabicOnly: isArabicOnly,
-                            isFavorite: favorites.contains(hadith.id),
-                            onToggleFavorite: () => _toggleFavorite(hadith.id),
-                            onShare: () => _shareImage(hadith),
-                          ),
-                        ),
+                      );
+                    }
+
+                    final hadith = displayHadiths[currentIndex];
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 12),
+                      child: _HadithCard(
+                        hadith: hadith,
+                        isArabicOnly: isArabicOnly,
+                        isFavorite: favorites.contains(hadith.id),
+                        onToggleFavorite: () => _toggleFavorite(hadith.id),
+                        onShare: () => _shareImage(hadith),
                       ),
-                  ],
+                    );
+                  },
                 );
               },
               loading: () => Center(
@@ -348,9 +390,7 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
     }
 
     if (_selectedGrade != _allGradesValue) {
-      filtered = filtered
-          .where((h) => h.grade == _selectedGrade)
-          .toList();
+      filtered = filtered.where((h) => h.grade == _selectedGrade).toList();
     }
 
     if (_selectedCategory != _allCategoriesValue) {
@@ -575,7 +615,8 @@ class _FilterDropdown extends StatelessWidget {
               .toList(),
           onChanged: onChanged,
           decoration: InputDecoration(
-            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
               borderSide: BorderSide(color: tokens.border),
@@ -1119,20 +1160,34 @@ class Debouncer {
     _timer?.cancel();
     _timer = Timer(delay, action);
   }
+
+  void cancel() {
+    _timer?.cancel();
+    _timer = null;
+  }
 }
 
 // ── Providers adicionales ───────────────────────────────────────
 
 final hadithCollectionsProvider = FutureProvider<Map<String, int>>((ref) async {
-  return ref.read(hadithServiceProvider).getCollections();
+  final language = ref.watch(currentLanguageCodeProvider);
+  return ref.watch(hadithServiceProvider).getCollections(
+        forcedLanguage: language,
+      );
 });
 
 final hadithCategoriesProvider = FutureProvider<Map<String, int>>((ref) async {
-  return ref.read(hadithServiceProvider).getCategories();
+  final language = ref.watch(currentLanguageCodeProvider);
+  return ref.watch(hadithServiceProvider).getCategories(
+        forcedLanguage: language,
+      );
 });
 
 final hadithGradesProvider = FutureProvider<List<String>>((ref) async {
-  return ref.read(hadithServiceProvider).getAvailableGrades();
+  final language = ref.watch(currentLanguageCodeProvider);
+  return ref.watch(hadithServiceProvider).getAvailableGrades(
+        forcedLanguage: language,
+      );
 });
 
 String _extractHadithCollection(String reference) {

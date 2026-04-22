@@ -5,7 +5,6 @@ import '../../../core/localization/locale_controller.dart';
 import '../../../l10n/l10n.dart';
 import '../data/datasources/travel_location_label_datasource.dart';
 import '../data/datasources/travel_mode_datasource.dart';
-import '../data/datasources/travel_mode_notification_datasource.dart';
 import '../domain/entities/prayer_location.dart';
 import '../domain/entities/recent_location.dart';
 import '../domain/entities/travel_pending_banner.dart';
@@ -16,19 +15,14 @@ class TravelModeService {
   TravelModeService({
     TravelModeDataSource? dataSource,
     TravelLocationLabelDataSource? labelDataSource,
-    TravelModeNotificationDataSource? notificationDataSource,
     DetectTravelModeChangeUseCase? detectTravelModeChangeUseCase,
   })  : _dataSource = dataSource ?? TravelModeDataSource(),
         _labelDataSource = labelDataSource ?? TravelLocationLabelDataSource(),
-        _notificationDataSource =
-            notificationDataSource ?? TravelModeNotificationDataSource(),
-        _detectTravelModeChangeUseCase =
-            detectTravelModeChangeUseCase ??
+        _detectTravelModeChangeUseCase = detectTravelModeChangeUseCase ??
             const DetectTravelModeChangeUseCase();
 
   final TravelModeDataSource _dataSource;
   final TravelLocationLabelDataSource _labelDataSource;
-  final TravelModeNotificationDataSource _notificationDataSource;
   final DetectTravelModeChangeUseCase _detectTravelModeChangeUseCase;
 
   Future<bool> isEnabled() {
@@ -63,7 +57,6 @@ class TravelModeService {
 
     if (pendingBanner != null) {
       await _dataSource.setPendingBanner(pendingBanner);
-      await _notificationDataSource.showTravelDetected(label);
     }
 
     await _dataSource.saveCurrentContext(
@@ -123,9 +116,8 @@ final travelerModeEnabledProvider = FutureProvider<bool>((ref) async {
 
 final travelBannerProvider = FutureProvider<String?>((ref) async {
   final languageCode = ref.watch(currentLanguageCodeProvider);
-  final pendingBanner = await ref
-      .watch(travelModeServiceProvider)
-      .getPendingBanner();
+  final pendingBanner =
+      await ref.watch(travelModeServiceProvider).getPendingBanner();
   if (pendingBanner == null) {
     return null;
   }
@@ -153,7 +145,8 @@ final recentLocationsProvider = FutureProvider<List<RecentLocation>>((
 
 final lastLocationLabelProvider = FutureProvider<String?>((ref) async {
   final languageCode = ref.watch(currentLanguageCodeProvider);
-  final label = await ref.watch(travelModeServiceProvider).getLastLocationLabel();
+  final label =
+      await ref.watch(travelModeServiceProvider).getLastLocationLabel();
   return _visibleLocationLabelForLanguage(label, languageCode);
 });
 

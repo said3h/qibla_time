@@ -1,8 +1,6 @@
 import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:ffmpeg_kit_min_gpl/ffmpeg_kit.dart';
-import 'package:ffmpeg_kit_min_gpl/return_code.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
@@ -71,6 +69,10 @@ class AyahAudioUnavailableException implements Exception {
 class AyahShareVideoService {
   static const Size _videoSize = Size(1080, 1920);
   static const int _videoFps = 30;
+  static const _temporaryMaxAge = Duration(days: 1);
+  static const _temporaryFilePrefixes = <String>[
+    'ayah_video_',
+  ];
   static const _nativeChannel = MethodChannel('com.qiblatime/video_export');
   static const _galleryChannel = MethodChannel('com.qiblatime/gallery');
   static const _alafasyAudioBaseUrl =
@@ -122,98 +124,11 @@ class AyahShareVideoService {
     if (Platform.isAndroid) {
       return _exportVideoNativeAndroid(draft);
     }
-    try {
-      final tempDirectory = await getTemporaryDirectory();
-      final workingDirectory = await Directory(
-        '${tempDirectory.path}/ayah_share_video',
-      ).create(recursive: true);
-      final fileStem = _fileStemFor(draft);
-
-      final imageFile = await _renderShareImageFrame(
-        draft: draft,
-        workingDirectory: workingDirectory,
-      );
-
-      final audioFile = await _ensureAudioFile(
-        draft: draft,
-        directory: workingDirectory,
-        fileStem: fileStem,
-      );
-
-      final audioDurationSeconds = await _getAudioDuration(audioFile);
-
-      if (audioDurationSeconds <= 0) {
-        throw StateError(
-          'Could not determine audio duration for ayah video.',
-        );
-      }
-
-      final outputFile = File('${workingDirectory.path}/${fileStem}_video.mp4');
-      if (await outputFile.exists()) {
-        await outputFile.delete();
-      }
-
-      final command = _buildFfmpegCommand(
-        imageFile: imageFile,
-        audioFile: audioFile,
-        outputFile: outputFile,
-        audioDurationSeconds: audioDurationSeconds,
-      );
-
-      AppLogger.info('exportVideo: running FFmpeg command:\n$command');
-
-      final session = await FFmpegKit.execute(command);
-      final returnCode = await session.getReturnCode();
-      // getAllLogsAsString captura tanto stdout como stderr — necesario porque
-      // FFmpeg escribe la mayor parte del diagnóstico en stderr.
-      final logs = await session.getAllLogsAsString() ?? '';
-      AppLogger.info(
-          'exportVideo: FFmpeg returnCode=${returnCode?.getValue()} logs:\n$logs');
-
-      if (!ReturnCode.isSuccess(returnCode)) {
-        // Retry always with the software fallback encoder.
-        AppLogger.info(
-            'exportVideo: primary encoder failed, retrying with mpeg4 fallback...');
-
-        final fallbackCommand = _buildFfmpegCommand(
-          imageFile: imageFile,
-          audioFile: audioFile,
-          outputFile: outputFile,
-          audioDurationSeconds: audioDurationSeconds,
-          forceFallbackEncoder: true,
-        );
-
-        AppLogger.info('exportVideo: fallback command:\n$fallbackCommand');
-
-        final retrySession = await FFmpegKit.execute(fallbackCommand);
-        final retryCode = await retrySession.getReturnCode();
-        final retryLogs = await retrySession.getAllLogsAsString() ?? '';
-        AppLogger.info(
-            'exportVideo: fallback returnCode=${retryCode?.getValue()} logs:\n$retryLogs');
-
-        if (!ReturnCode.isSuccess(retryCode)) {
-          throw StateError(
-            'FFmpeg failed (primary + fallback).\n'
-            'Primary logs: $logs\n'
-            'Fallback logs: $retryLogs',
-          );
-        }
-      }
-
-      if (!await outputFile.exists()) {
-        throw StateError(
-            'FFmpeg finished without creating the ayah video file.');
-      }
-
-      return outputFile;
-    } catch (e, stackTrace) {
-      AppLogger.error(
-        'exportVideo: FAILED ${e.runtimeType}: $e',
-        error: e,
-        stackTrace: stackTrace,
-      );
-      rethrow;
-    }
+    // Native video export is currently implemented only on Android. The old
+    // GPL fallback was removed to keep GPL code out of release builds.
+    throw const NativeVideoExportException(
+      'Video export is not available on this platform yet.',
+    );
   }
 
   Future<void> saveVideoToGallery(File file) async {
@@ -258,6 +173,7 @@ class AyahShareVideoService {
     final workingDirectory = await Directory(
       '${tempDirectory.path}/ayah_share_video',
     ).create(recursive: true);
+    await _deleteOldTemporaryFiles(workingDirectory);
     final fileStem = _fileStemFor(draft);
 
     final imageFile = await _renderShareImageFrame(
@@ -316,6 +232,27 @@ class AyahShareVideoService {
         stackTrace: st,
       );
       throw NativeVideoExportException(message);
+    }
+  }
+
+  Future<void> _deleteOldTemporaryFiles(Directory directory) async {
+    final cutoff = DateTime.now().subtract(_temporaryMaxAge);
+    try {
+      await for (final entity in directory.list(followLinks: false)) {
+        if (entity is! File) continue;
+        final name = entity.uri.pathSegments.last;
+        if (!_temporaryFilePrefixes.any(name.startsWith)) continue;
+        final modified = await entity.lastModified();
+        if (modified.isBefore(cutoff)) {
+          await entity.delete();
+        }
+      }
+    } catch (error, stackTrace) {
+      AppLogger.warning(
+        'Failed to clean old ayah video temporary files.',
+        error: error,
+        stackTrace: stackTrace,
+      );
     }
   }
 
@@ -393,41 +330,6 @@ class AyahShareVideoService {
     return buffer.toString().trim();
   }
 
-  Future<double> _getAudioDuration(File audioFile) async {
-    // FFmpeg escribe la info de duración en stderr, no en stdout.
-    // getOutput() solo captura stdout → siempre devolvía null/vacío.
-    // getAllLogsAsString() captura ambos streams.
-    final session = await FFmpegKit.execute(
-      '-i ${_quoteForFfmpeg(audioFile.path)} -f null -',
-    );
-    final logs = await session.getAllLogsAsString();
-
-    AppLogger.info('_getAudioDuration: logs=$logs');
-
-    if (logs == null || logs.isEmpty) {
-      AppLogger.error(
-          '_getAudioDuration: no logs from FFmpeg — cannot determine duration');
-      return 0;
-    }
-
-    final durationRegex = RegExp(r'Duration: (\d{2}):(\d{2}):(\d{2})\.(\d{2})');
-    final match = durationRegex.firstMatch(logs);
-
-    if (match == null) {
-      AppLogger.error('_getAudioDuration: Duration not found in logs:\n$logs');
-      return 0;
-    }
-
-    final hours = int.parse(match.group(1)!);
-    final minutes = int.parse(match.group(2)!);
-    final seconds = int.parse(match.group(3)!);
-    final centiseconds = int.parse(match.group(4)!);
-    final total = hours * 3600 + minutes * 60 + seconds + centiseconds / 100;
-
-    AppLogger.info('_getAudioDuration: parsed duration=$total s');
-    return total;
-  }
-
   Future<File> _ensureAudioFile({
     required AyahShareVideoDraft draft,
     required Directory directory,
@@ -493,55 +395,6 @@ class AyahShareVideoService {
     return '$_alafasyAudioBaseUrl/$surah$ayah.mp3';
   }
 
-  String _buildFfmpegCommand({
-    required File imageFile,
-    required File audioFile,
-    required File outputFile,
-    required double audioDurationSeconds,
-    bool forceFallbackEncoder = false,
-  }) {
-    final backgroundColor = _ffmpegColor(QiblaThemes.current.bgPage);
-    final width = _videoSize.width.round();
-    final height = _videoSize.height.round();
-    final imagePath = _quoteForFfmpeg(imageFile.path);
-    final audioPath = _quoteForFfmpeg(audioFile.path);
-    final outputPath = _quoteForFfmpeg(outputFile.path);
-    final filter =
-        'color=c=$backgroundColor:s=${width}x$height:r=$_videoFps[bg];'
-        '[bg][0:v]overlay=(W-w)/2:(H-h)/2:format=auto,format=yuv420p[v]';
-
-    return '-y '
-        '-loop 1 -framerate $_videoFps -i $imagePath '
-        '-i $audioPath '
-        '-filter_complex "$filter" '
-        '-map "[v]" -map 1:a:0 '
-        '${_videoEncoderArgs(forceFallbackEncoder: forceFallbackEncoder)} '
-        '-c:a aac -b:a 192k '
-        '-pix_fmt yuv420p -r $_videoFps '
-        '-t $audioDurationSeconds '
-        '-movflags +faststart '
-        '$outputPath';
-  }
-
-  String _videoEncoderArgs({required bool forceFallbackEncoder}) {
-    if (forceFallbackEncoder) {
-      // Baseline encoder that should exist in non-GPL builds.
-      return '-c:v mpeg4 -q:v 5 -tag:v mp4v';
-    }
-
-    if (Platform.isIOS) {
-      // Hardware H.264 encoder (non-GPL).
-      return '-c:v h264_videotoolbox -b:v 2500k';
-    }
-    if (Platform.isAndroid) {
-      // Hardware H.264 encoder (non-GPL). Availability varies by device.
-      return '-c:v h264_mediacodec -b:v 2500k';
-    }
-
-    // Desktop/dev fallback.
-    return '-c:v mpeg4 -q:v 5 -tag:v mp4v';
-  }
-
   String _fileStemFor(AyahShareVideoDraft draft) {
     final timestamp = DateTime.now().millisecondsSinceEpoch;
     return 'ayah_video_${draft.surahNumber}_${draft.ayahNumber}_$timestamp';
@@ -560,15 +413,5 @@ class AyahShareVideoService {
       return '.mp3';
     }
     return sanitized;
-  }
-
-  String _quoteForFfmpeg(String path) {
-    final normalized = path.replaceAll('\\', '/').replaceAll('"', '\\"');
-    return '"$normalized"';
-  }
-
-  String _ffmpegColor(Color color) {
-    final rgb = color.value & 0x00FFFFFF;
-    return '0x${rgb.toRadixString(16).padLeft(6, '0')}';
   }
 }

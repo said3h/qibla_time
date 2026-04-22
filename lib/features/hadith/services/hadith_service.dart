@@ -7,6 +7,7 @@ import 'package:hive/hive.dart';
 
 import '../../../core/constants/app_constants.dart';
 import '../../../core/localization/locale_controller.dart';
+import '../../../core/services/logger_service.dart';
 import '../../../core/services/storage_service.dart';
 import '../models/hadith.dart';
 
@@ -133,7 +134,8 @@ class HadithService {
     for (final hadith in all) {
       final normalizedCategory = hadith.category.trim().toLowerCase();
       if (normalizedCategory.isEmpty) continue;
-      categories[normalizedCategory] = (categories[normalizedCategory] ?? 0) + 1;
+      categories[normalizedCategory] =
+          (categories[normalizedCategory] ?? 0) + 1;
     }
     return categories;
   }
@@ -345,11 +347,19 @@ class HadithService {
           .toList();
 
       if (hadiths.length < minimumEntries) {
+        AppLogger.warning(
+          'Hadith dataset has ${hadiths.length} entries; expected at least $minimumEntries: $assetPath',
+        );
         return null;
       }
 
       return hadiths;
-    } catch (_) {
+    } catch (error, stackTrace) {
+      AppLogger.error(
+        'Failed to load hadith dataset: $assetPath',
+        error: error,
+        stackTrace: stackTrace,
+      );
       return null;
     }
   }

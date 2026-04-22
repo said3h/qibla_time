@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 
+import '../../../core/services/logger_service.dart';
 import '../../../l10n/l10n.dart';
 
 class HadithOfflineService {
@@ -44,7 +45,12 @@ class HadithOfflineService {
         'assets/hadiths/$collectionKey.json',
       );
       return json.decode(jsonString) as List<dynamic>;
-    } catch (_) {
+    } catch (error, stackTrace) {
+      AppLogger.error(
+        'Failed to load offline hadith collection: $collectionKey',
+        error: error,
+        stackTrace: stackTrace,
+      );
       return [];
     }
   }
