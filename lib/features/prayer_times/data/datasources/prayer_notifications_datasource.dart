@@ -12,7 +12,8 @@ class PrayerNotificationsDataSource {
     SettingsService? settingsService,
     NotificationService? notificationService,
   })  : _settingsService = settingsService ?? SettingsService.instance,
-        _notificationService = notificationService ?? NotificationService.instance;
+        _notificationService =
+            notificationService ?? NotificationService.instance;
 
   final SettingsService _settingsService;
   final NotificationService _notificationService;
@@ -50,7 +51,8 @@ class PrayerNotificationsDataSource {
     // inspiración diaria (10001) ni de hadiths horarios (20000+).
     await _notificationService.cancelPrayerNotifications();
 
-    final notificationsEnabled = await _settingsService.getNotificationsEnabled();
+    final notificationsEnabled =
+        await _settingsService.getNotificationsEnabled();
     AppLogger.info(
       'rescheduleToday: globalNotificationsEnabled=$notificationsEnabled',
     );
@@ -64,9 +66,12 @@ class PrayerNotificationsDataSource {
     int scheduled = 0;
 
     for (final prayer in schedule.times.entries) {
-      if (prayer.value.isBefore(now)) {
+      final scheduledAt = _adhanScheduledAt(prayer.value);
+
+      if (!scheduledAt.isAfter(now)) {
         AppLogger.info(
-          'rescheduleToday: SKIP ${prayer.key.key} (past: ${prayer.value})',
+          'rescheduleToday: SKIP ${prayer.key.key} '
+          '(past: raw=${prayer.value}, scheduled=$scheduledAt)',
         );
         continue;
       }
@@ -75,7 +80,9 @@ class PrayerNotificationsDataSource {
         prayer.key.key,
       );
       AppLogger.info(
-        'rescheduleToday: ${prayer.key.key} enabled=$enabled at=${prayer.value}',
+        'rescheduleToday: ${prayer.key.key} enabled=$enabled '
+        'raw=${prayer.value} scheduled=$scheduledAt '
+        'diffSeconds=${scheduledAt.difference(prayer.value).inSeconds}',
       );
       if (!enabled) {
         continue;
@@ -84,12 +91,17 @@ class PrayerNotificationsDataSource {
       // Try-catch por iteración: si una oración falla (p. ej. permiso de alarma
       // exacta revocado), las demás se siguen programando.
       try {
+        AppLogger.info(
+          'rescheduleToday: scheduling ${prayer.key.key} raw=${prayer.value} '
+          'scheduled=$scheduledAt '
+          'diffSeconds=${scheduledAt.difference(prayer.value).inSeconds}',
+        );
         await _notificationService.scheduleAdhan(
           id: _prayerIds[prayer.key]!,
           prayerName: prayer.key.localizedDisplayName(
             AppLocaleController.effectiveLanguageCode(),
           ),
-          scheduledAt: prayer.value,
+          scheduledAt: scheduledAt,
           adhanFile: adhanFile,
         );
         scheduled++;
@@ -122,8 +134,10 @@ class PrayerNotificationsDataSource {
     final now = DateTime.now();
 
     for (final prayer in tomorrowSchedule.times.entries) {
+      final scheduledAt = _adhanScheduledAt(prayer.value);
+
       // Salvaguarda: no programar si por alguna razón el tiempo ya pasó
-      if (!prayer.value.isAfter(now)) {
+      if (!scheduledAt.isAfter(now)) {
         continue;
       }
 
@@ -135,12 +149,17 @@ class PrayerNotificationsDataSource {
       }
 
       try {
+        AppLogger.info(
+          'scheduleTomorrow: scheduling ${prayer.key.key} raw=${prayer.value} '
+          'scheduled=$scheduledAt '
+          'diffSeconds=${scheduledAt.difference(prayer.value).inSeconds}',
+        );
         await _notificationService.scheduleAdhan(
           id: _tomorrowPrayerIds[prayer.key]!,
           prayerName: prayer.key.localizedDisplayName(
             AppLocaleController.effectiveLanguageCode(),
           ),
-          scheduledAt: prayer.value,
+          scheduledAt: scheduledAt,
           adhanFile: adhanFile,
         );
       } catch (e, stackTrace) {
@@ -151,6 +170,16 @@ class PrayerNotificationsDataSource {
         );
       }
     }
+  }
+
+  DateTime _adhanScheduledAt(DateTime prayerTime) {
+    return DateTime(
+      prayerTime.year,
+      prayerTime.month,
+      prayerTime.day,
+      prayerTime.hour,
+      prayerTime.minute,
+    );
   }
 
   Future<bool> areNotificationsEnabled() {
