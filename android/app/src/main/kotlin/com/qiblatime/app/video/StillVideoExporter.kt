@@ -1101,8 +1101,11 @@ object StillVideoExporter {
         yuv[yIndex++] = y.coerceIn(0, 255).toByte()
 
         if (j % 2 == 0 && i % 2 == 0) {
-          yuv[uvIndex++] = v.coerceIn(0, 255).toByte()
+          // NV12 layout (U before V) — matches COLOR_FormatYUV420Flexible
+          // ByteBuffer contract on Android. Writing V,U (NV21 order) caused
+          // the encoder to read swapped chroma, turning dark-navy into brown.
           yuv[uvIndex++] = u.coerceIn(0, 255).toByte()
+          yuv[uvIndex++] = v.coerceIn(0, 255).toByte()
         }
       }
     }
