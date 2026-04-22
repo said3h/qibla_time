@@ -323,11 +323,7 @@ class AyahShareVideoService {
     required AyahShareVideoDraft draft,
     required Directory workingDirectory,
   }) async {
-    // Always use the dark theme tokens for video so the canvas gets a
-    // consistent dark-navy background regardless of the user's current app
-    // theme. Using the current theme would give a warm-cream background in
-    // light mode, which looks "marrón" and mismatches the expected aesthetic.
-    final tokens = QiblaThemes.dark;
+    final tokens = QiblaThemes.current;
 
     final summary = SurahSummary(
       number: draft.surahNumber,
@@ -504,8 +500,7 @@ class AyahShareVideoService {
     required double audioDurationSeconds,
     bool forceFallbackEncoder = false,
   }) {
-    // Always use the dark theme background for video (same as _renderShareImageFrame).
-    final backgroundColor = _ffmpegColor(QiblaThemes.dark.bgPage);
+    final backgroundColor = _ffmpegColor(QiblaThemes.current.bgPage);
     final width = _videoSize.width.round();
     final height = _videoSize.height.round();
     final imagePath = _quoteForFfmpeg(imageFile.path);
