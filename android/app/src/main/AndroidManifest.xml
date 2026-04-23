@@ -2,6 +2,15 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="28"/>
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+    <!-- USE_EXACT_ALARM: auto-granted on Android 13+ (API 33) for qualifying apps
+         (alarm clocks, calendar). Covers prayer time apps without user interaction.
+         AlarmManager.canScheduleExactAlarms() returns true when this is present,
+         allowing exactAllowWhileIdle even if SCHEDULE_EXACT_ALARM was not user-granted. -->
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM"/>
+    <!-- Allows requesting direct battery optimization exemption via
+         ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, needed on OEM devices
+         (Samsung/Xiaomi/Huawei) that aggressively kill AlarmManager receivers. -->
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>

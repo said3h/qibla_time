@@ -87,7 +87,8 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
   bool get _isBusy => _activeAction != null;
 
   bool get _supportsVideoExport =>
-      !kIsWeb && defaultTargetPlatform == TargetPlatform.android;
+      !kIsWeb && (defaultTargetPlatform == TargetPlatform.android ||
+                  defaultTargetPlatform == TargetPlatform.iOS);
 
   @override
   void initState() {

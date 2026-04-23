@@ -124,8 +124,13 @@ class AyahShareVideoService {
     if (Platform.isAndroid) {
       return _exportVideoNativeAndroid(draft);
     }
-    // Native video export is currently implemented only on Android. The old
-    // GPL fallback was removed to keep GPL code out of release builds.
+    if (Platform.isIOS) {
+      // iOS uses the same MethodChannel contract as Android.
+      // Native implementation: ios/Runner/StillVideoExporter.swift (AVFoundation,
+      // no FFmpeg, no GPL). UI button is still hidden — see _supportsVideoExport
+      // in ayah_share_preview_sheet.dart. Enable it there once validated on device.
+      return _exportVideoNativeAndroid(draft);
+    }
     throw const NativeVideoExportException(
       'Video export is not available on this platform yet.',
     );

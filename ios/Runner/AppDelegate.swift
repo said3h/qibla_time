@@ -70,8 +70,14 @@ final class QiblaProximityStreamHandler: NSObject, FlutterStreamHandler {
     }
 
     configureGalleryChannel()
+    configureVideoExportChannel()
 
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+  }
+
+  private func configureVideoExportChannel() {
+    guard let registrar = registrar(forPlugin: "QiblaVideoExportChannel") else { return }
+    VideoExportChannel.register(with: registrar)
   }
 
   private func configureGalleryChannel() {

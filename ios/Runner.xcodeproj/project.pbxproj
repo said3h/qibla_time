@@ -18,6 +18,8 @@
 		613AE3898F7193A80F3783AD /* azan3.caf in Resources */ = {isa = PBXBuildFile; fileRef = 194E7782EE28AD0B2B14E4B1 /* azan3.caf */; };
 		6A0B423D69EF9F4FAF6F435B /* azan4.caf in Resources */ = {isa = PBXBuildFile; fileRef = DA2A47E4947F5D88D1CFF3CA /* azan4.caf */; };
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
+		C3D4E5F6A7B8C9D0E1F2A3B5 /* StillVideoExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D4E5F6A7B8C9D0E1F2A3B4 /* StillVideoExporter.swift */; };
+		D4E5F6A7B8C9D0E1F2A3B4C6 /* VideoExportChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E5F6A7B8C9D0E1F2A3B4C5 /* VideoExportChannel.swift */; };
 		75F3BB44A638FA569BF64F8B /* azan6.caf in Resources */ = {isa = PBXBuildFile; fileRef = B6C7F1CE6BDE7A1A5B65585F /* azan6.caf */; };
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
@@ -65,6 +67,8 @@
 		F2031425364758697A8B9C0D /* azan_makkah.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = azan_makkah.mp3; sourceTree = "<group>"; };
 		74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Runner-Bridging-Header.h"; sourceTree = "<group>"; };
 		74858FAE1ED2DC5600515810 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C3D4E5F6A7B8C9D0E1F2A3B4 /* StillVideoExporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StillVideoExporter.swift; sourceTree = "<group>"; };
+		D4E5F6A7B8C9D0E1F2A3B4C5 /* VideoExportChannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoExportChannel.swift; sourceTree = "<group>"; };
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = Flutter/Release.xcconfig; sourceTree = "<group>"; };
 		B6C7F1CE6BDE7A1A5B65585F /* azan6.caf */ = {isa = PBXFileReference; lastKnownFileType = audio.x-caf; path = azan6.caf; sourceTree = "<group>"; };
 		DA2A47E4947F5D88D1CFF3CA /* azan4.caf */ = {isa = PBXFileReference; lastKnownFileType = audio.x-caf; path = azan4.caf; sourceTree = "<group>"; };
@@ -146,6 +150,8 @@
 				1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */,
 				1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */,
 				74858FAE1ED2DC5600515810 /* AppDelegate.swift */,
+				C3D4E5F6A7B8C9D0E1F2A3B4 /* StillVideoExporter.swift */,
+				D4E5F6A7B8C9D0E1F2A3B4C5 /* VideoExportChannel.swift */,
 				74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */,
 			);
 			path = Runner;
@@ -309,6 +315,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */,
+				C3D4E5F6A7B8C9D0E1F2A3B5 /* StillVideoExporter.swift in Sources */,
+				D4E5F6A7B8C9D0E1F2A3B4C6 /* VideoExportChannel.swift in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
