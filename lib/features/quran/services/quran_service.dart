@@ -61,6 +61,10 @@ class QuranService {
       'https://everyayah.com/data/Alafasy_128kbps';
   static const _legacyAlafasyAudioBaseUrl =
       'https://cdn.islamic.network/quran/audio/128/ar.alafasy';
+  static const _bismillahWithTatweel =
+      'بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ';
+  static const _bismillahWithoutTatweel =
+      'بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ';
 
   // Cache en memoria para no releer el JSON en cada petición
   static Map<int, SurahDetail>? _offlineCache;
@@ -146,18 +150,23 @@ class QuranService {
         'number',
         context: 'aleya árabe ${i + 1}',
       );
+      final numberInSurah = _readRequiredInt(
+        arabicAyah,
+        'numberInSurah',
+        context: 'aleya árabe ${i + 1}',
+      );
 
       return SurahAyah(
         number: ayahNumber,
-        numberInSurah: _readRequiredInt(
-          arabicAyah,
-          'numberInSurah',
-          context: 'aleya árabe ${i + 1}',
-        ),
-        arabic: _readRequiredString(
-          arabicAyah,
-          'text',
-          context: 'aleya árabe ${i + 1}',
+        numberInSurah: numberInSurah,
+        arabic: _stripVisualBismillahFromAyah(
+          surahNumber: summary.number,
+          numberInSurah: numberInSurah,
+          arabic: _readRequiredString(
+            arabicAyah,
+            'text',
+            context: 'aleya árabe ${i + 1}',
+          ),
         ),
         transliteration: i < translitAyahs.length
             ? _readOptionalString(translitAyahs[i], 'text')
@@ -386,6 +395,31 @@ class QuranService {
     return '$_alafasyAudioBaseUrl/$surah$ayah.mp3';
   }
 
+  static String _stripVisualBismillahFromAyah({
+    required int surahNumber,
+    required int numberInSurah,
+    required String arabic,
+  }) {
+    var text = arabic.trim();
+    if (text.startsWith('\uFEFF')) {
+      text = text.substring(1).trimLeft();
+    }
+    if (surahNumber == 1 || numberInSurah != 1) {
+      return text;
+    }
+
+    for (final bismillah in const [
+      _bismillahWithTatweel,
+      _bismillahWithoutTatweel,
+    ]) {
+      if (text.startsWith(bismillah)) {
+        return text.substring(bismillah.length).trimLeft();
+      }
+    }
+
+    return text;
+  }
+
   SurahDetail? _buildOfflineDetail({
     required SurahSummary summary,
     required Map<String, dynamic> surahData,
@@ -413,7 +447,11 @@ class QuranService {
         SurahAyah(
           number: number,
           numberInSurah: numberInSurah,
-          arabic: arabic,
+          arabic: _stripVisualBismillahFromAyah(
+            surahNumber: summary.number,
+            numberInSurah: numberInSurah,
+            arabic: arabic,
+          ),
           transliteration: _readOptionalString(ayahData, 'transliteration'),
           translation: _readOptionalString(ayahData, 'translation'),
           audioUrl: _safeAlafasyAudioUrl(
