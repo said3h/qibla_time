@@ -1352,5 +1352,7 @@
   "bookDeleteDownload": "Elimina download",
   "bookDeleteConfirm": "Eliminare il libro scaricato?",
   "bookDeleteConfirmBody": "Il file verr? rimosso dal dispositivo",
-  "bookDownloadError": "Errore durante il download"
+  "bookDownloadError": "Errore durante il download",
+  "quranViewModeAyahs": "Vista versetti",
+  "quranViewModePage": "Lettura continua"
 }

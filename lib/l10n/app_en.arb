@@ -1352,5 +1352,7 @@
   "bookDeleteDownload": "Delete download",
   "bookDeleteConfirm": "Delete downloaded book?",
   "bookDeleteConfirmBody": "The file will be removed from the device",
-  "bookDownloadError": "Download failed"
+  "bookDownloadError": "Download failed",
+  "quranViewModeAyahs": "Ayah view",
+  "quranViewModePage": "Continuous reading"
 }

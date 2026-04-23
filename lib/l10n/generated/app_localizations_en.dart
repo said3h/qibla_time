@@ -1259,6 +1259,12 @@ class AppLocalizationsEn extends AppLocalizations {
       'Partial content loaded offline. Audio is not available for now.';
 
   @override
+  String get quranViewModeAyahs => 'Ayah view';
+
+  @override
+  String get quranViewModePage => 'Continuous reading';
+
+  @override
   String get quranSurahAudioCardTitle => 'LISTEN TO SURAH';
 
   @override

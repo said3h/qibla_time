@@ -16,6 +16,7 @@ import '../../quran_share/services/ayah_share_video_service.dart';
 import '../../quran_share/widgets/ayah_share_preview_sheet.dart';
 import '../models/quran_models.dart';
 import '../widgets/quran_ayah_card.dart';
+import '../widgets/quran_continuous_view.dart';
 import 'allah_names_screen.dart';
 import '../services/quran_audio_download_service.dart';
 import '../services/quran_mini_player_service.dart';
@@ -753,6 +754,7 @@ class QuranDetailScreen extends ConsumerStatefulWidget {
 class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   final ItemScrollController _itemScrollController = ItemScrollController();
   final AudioService _audioService = AudioService.instance;
+  bool _isPageView = false;
   bool _initialJumpDone = false;
   bool _initialReadingSaved = false;
   SurahAudioDownloadState? _downloadState;
@@ -1459,6 +1461,19 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       backgroundColor: tokens.bgPage,
       appBar: AppBar(
         title: Text(_surahPrimaryName(context, widget.summary)),
+        actions: [
+          IconButton(
+            tooltip: _isPageView
+                ? l10n.quranViewModeAyahs
+                : l10n.quranViewModePage,
+            icon: Icon(
+              _isPageView
+                  ? Icons.view_list_outlined
+                  : Icons.auto_stories_outlined,
+            ),
+            onPressed: () => setState(() => _isPageView = !_isPageView),
+          ),
+        ],
       ),
       body: detailAsync.when(
         data: (result) {
@@ -1475,6 +1490,22 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
             WidgetsBinding.instance.addPostFrameCallback((_) async {
               await _jumpToInitialAyah(detail);
             });
+          }
+
+          if (_isPageView) {
+            return QuranContinuousView(
+              tokens: tokens,
+              ayahs: detail.ayahs,
+              surahNumber: widget.summary.number,
+              header: Column(
+                children: [
+                  _buildTopBanner(tokens, result.source, widget.initialAyah),
+                  _buildSurahAudioCard(tokens, detail, result.source),
+                  if (_activeAyahNumber != null)
+                    _buildActiveAudioIndicator(tokens),
+                ],
+              ),
+            );
           }
 
           return ScrollablePositionedList.builder(

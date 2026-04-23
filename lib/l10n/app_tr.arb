@@ -1352,5 +1352,7 @@
   "bookDeleteDownload": "İndirmeyi sil",
   "bookDeleteConfirm": "İndirilen kitap silinsin mi?",
   "bookDeleteConfirmBody": "Dosya cihazdan silinecek",
-  "bookDownloadError": "İndirme hatası"
+  "bookDownloadError": "İndirme hatası",
+  "quranViewModeAyahs": "Ayet görünümü",
+  "quranViewModePage": "Sürekli okuma"
 }

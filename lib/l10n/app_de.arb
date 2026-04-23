@@ -1352,5 +1352,7 @@
   "bookDeleteDownload": "Download l?schen",
   "bookDeleteConfirm": "Heruntergeladenes Buch l?schen?",
   "bookDeleteConfirmBody": "Die Datei wird vom Ger?t entfernt",
-  "bookDownloadError": "Fehler beim Herunterladen"
+  "bookDownloadError": "Fehler beim Herunterladen",
+  "quranViewModeAyahs": "Einzelverse",
+  "quranViewModePage": "Fortlaufende Lesung"
 }

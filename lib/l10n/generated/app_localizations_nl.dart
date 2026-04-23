@@ -1269,6 +1269,12 @@ class AppLocalizationsNl extends AppLocalizations {
       'Gedeeltelijke inhoud offline geladen. Audio is voorlopig niet beschikbaar.';
 
   @override
+  String get quranViewModeAyahs => 'Ayah-weergave';
+
+  @override
+  String get quranViewModePage => 'Doorlopend lezen';
+
+  @override
   String get quranSurahAudioCardTitle => 'LUISTEREN NAAR SOERAH';
 
   @override

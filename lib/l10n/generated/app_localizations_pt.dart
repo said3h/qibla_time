@@ -1268,6 +1268,12 @@ class AppLocalizationsPt extends AppLocalizations {
       'Conteúdo parcial carregado off-line. O áudio não está disponível no momento.';
 
   @override
+  String get quranViewModeAyahs => 'Vista por versículo';
+
+  @override
+  String get quranViewModePage => 'Leitura contínua';
+
+  @override
   String get quranSurahAudioCardTitle => 'OUÇA A SURA';
 
   @override

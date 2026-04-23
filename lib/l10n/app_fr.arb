@@ -1352,5 +1352,7 @@
   "bookDeleteDownload": "Supprimer le t?l?chargement",
   "bookDeleteConfirm": "Supprimer le livre t?l?charg? ?",
   "bookDeleteConfirmBody": "Le fichier sera supprim? de l'appareil",
-  "bookDownloadError": "Erreur lors du t?l?chargement"
+  "bookDownloadError": "Erreur lors du t?l?chargement",
+  "quranViewModeAyahs": "Vue par verset",
+  "quranViewModePage": "Lecture continue"
 }

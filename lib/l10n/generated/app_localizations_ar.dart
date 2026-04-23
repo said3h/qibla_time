@@ -1235,6 +1235,12 @@ class AppLocalizationsAr extends AppLocalizations {
       'تم تحميل محتوى جزئي دون اتصال. الصوت غير متاح حاليًا.';
 
   @override
+  String get quranViewModeAyahs => 'عرض الآيات';
+
+  @override
+  String get quranViewModePage => 'القراءة المستمرة';
+
+  @override
   String get quranSurahAudioCardTitle => 'الاستماع إلى السورة';
 
   @override

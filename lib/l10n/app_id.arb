@@ -1352,5 +1352,7 @@
   "bookDeleteDownload": "Hapus unduhan",
   "bookDeleteConfirm": "Hapus buku yang diunduh?",
   "bookDeleteConfirmBody": "File akan dihapus dari perangkat",
-  "bookDownloadError": "Gagal mengunduh"
+  "bookDownloadError": "Gagal mengunduh",
+  "quranViewModeAyahs": "Tampilan ayat",
+  "quranViewModePage": "Bacaan berkelanjutan"
 }

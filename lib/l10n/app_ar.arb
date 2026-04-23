@@ -1288,5 +1288,7 @@
   "prayerNotificationIftarTitle": "اقترب الإفطار",
   "prayerNotificationIftarBody": "بقي 15 دقيقة على الإفطار. تقبل الله صيامك اليوم.",
   "prayerNotificationJumuahTitle": "الجمعة اليوم",
-  "prayerNotificationJumuahBody": "استعد للجمعة قبل الظهر، وخصص لحظة هادئة للذهاب إلى المسجد."
+  "prayerNotificationJumuahBody": "استعد للجمعة قبل الظهر، وخصص لحظة هادئة للذهاب إلى المسجد.",
+  "quranViewModeAyahs": "عرض الآيات",
+  "quranViewModePage": "القراءة المستمرة"
 }

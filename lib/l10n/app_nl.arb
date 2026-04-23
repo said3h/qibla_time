@@ -1352,5 +1352,7 @@
   "bookDeleteDownload": "Download verwijderen",
   "bookDeleteConfirm": "Gedownload boek verwijderen?",
   "bookDeleteConfirmBody": "Het bestand wordt van het apparaat verwijderd",
-  "bookDownloadError": "Fout bij downloaden"
+  "bookDownloadError": "Fout bij downloaden",
+  "quranViewModeAyahs": "Ayah-weergave",
+  "quranViewModePage": "Doorlopend lezen"
 }

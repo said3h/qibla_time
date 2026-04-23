@@ -1275,6 +1275,12 @@ class AppLocalizationsIt extends AppLocalizations {
       'Contenuto parziale caricato offline. L\'auAllah non è disponibile per ora.';
 
   @override
+  String get quranViewModeAyahs => 'Vista versetti';
+
+  @override
+  String get quranViewModePage => 'Lettura continua';
+
+  @override
   String get quranSurahAudioCardTitle => 'ASCOLTA SURA';
 
   @override

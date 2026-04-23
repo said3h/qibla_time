@@ -2289,6 +2289,18 @@ abstract class AppLocalizations {
   /// **'Contenido parcial sin conexión. El audio no está disponible por ahora.'**
   String get quranTopBannerPlaceholder;
 
+  /// No description provided for @quranViewModeAyahs.
+  ///
+  /// In es, this message translates to:
+  /// **'Vista por aleya'**
+  String get quranViewModeAyahs;
+
+  /// No description provided for @quranViewModePage.
+  ///
+  /// In es, this message translates to:
+  /// **'Lectura continua'**
+  String get quranViewModePage;
+
   /// No description provided for @quranSurahAudioCardTitle.
   ///
   /// In es, this message translates to:

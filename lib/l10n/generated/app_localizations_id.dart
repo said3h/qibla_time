@@ -1266,6 +1266,12 @@ class AppLocalizationsId extends AppLocalizations {
       'Konten parsial dimuat secara offline. Audio tidak tersedia untuk saat ini.';
 
   @override
+  String get quranViewModeAyahs => 'Tampilan ayat';
+
+  @override
+  String get quranViewModePage => 'Bacaan berkelanjutan';
+
+  @override
   String get quranSurahAudioCardTitle => 'DENGARKAN SURAH';
 
   @override

@@ -1253,6 +1253,12 @@ class AppLocalizationsTr extends AppLocalizations {
       'Kısmi içerik çevrimdışı olarak yüklendi. Ses şimdilik kullanılamıyor.';
 
   @override
+  String get quranViewModeAyahs => 'Ayet görünümü';
+
+  @override
+  String get quranViewModePage => 'Sürekli okuma';
+
+  @override
   String get quranSurahAudioCardTitle => 'SURESİ DİNLE';
 
   @override

@@ -1277,6 +1277,12 @@ class AppLocalizationsRu extends AppLocalizations {
       'Частичный контент загружен офлайн. Аудио пока недоступно.';
 
   @override
+  String get quranViewModeAyahs => 'Просмотр аятов';
+
+  @override
+  String get quranViewModePage => 'Непрерывное чтение';
+
+  @override
   String get quranSurahAudioCardTitle => 'СЛУШАЙТЕ СУРУ';
 
   @override
