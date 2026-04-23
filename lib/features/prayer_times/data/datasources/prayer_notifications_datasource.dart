@@ -60,6 +60,17 @@ class PrayerNotificationsDataSource {
       return;
     }
 
+    final systemPermissionGranted =
+        await _notificationService.areNotificationsEnabled();
+    AppLogger.info(
+      'rescheduleToday: systemNotificationPermissionGranted=$systemPermissionGranted',
+    );
+    if (!systemPermissionGranted) {
+      AppLogger.warning(
+        'rescheduleToday: system notification permission not granted; scheduling anyway',
+      );
+    }
+
     final adhanFile = await _settingsService.getAdhan();
     AppLogger.info('rescheduleToday: adhanFile=$adhanFile');
     final now = DateTime.now();

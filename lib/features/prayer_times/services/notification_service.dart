@@ -14,9 +14,11 @@ class NotificationService {
   NotificationService._();
   static final NotificationService instance = NotificationService._();
 
-  // v5: bump forzado para eliminar canales v4 que podían estar corruptos
-  // (sin sonido si el canal fue creado antes de que res/raw/ existiera).
-  static const _androidAdhanChannelPrefix = 'adhan_channel_v5_';
+  // v7: bump forzado para eliminar canales v6 que podían estar corruptos.
+  // Android ignora createNotificationChannel si el canal ya existe, por lo
+  // que un canal v6 creado sin sonido nunca se puede reparar in-situ;
+  // eliminarlo y recrear con el soundName correcto es la única solución.
+  static const _androidAdhanChannelPrefix = 'adhan_channel_v7_';
 
   final FlutterLocalNotificationsPlugin _plugin =
       FlutterLocalNotificationsPlugin();
@@ -161,7 +163,8 @@ class NotificationService {
 
       // En Android 12+ exactAllowWhileIdle lanza SecurityException si el permiso
       // SCHEDULE_EXACT_ALARM no está concedido. Aplicamos el mismo guard que scheduleAdhan.
-      AndroidScheduleMode scheduleMode = AndroidScheduleMode.inexactAllowWhileIdle;
+      AndroidScheduleMode scheduleMode =
+          AndroidScheduleMode.inexactAllowWhileIdle;
       if (Platform.isAndroid) {
         final exactAlarmPermission = await Permission.scheduleExactAlarm.status;
         final canUseExactAlarm = exactAlarmPermission.isGranted;
@@ -264,7 +267,9 @@ class NotificationService {
       'adhan_channel_v1_',
       'adhan_channel_v2_',
       'adhan_channel_v3_',
-      'adhan_channel_v4_', // eliminado en v5: canales creados sin sonido válido
+      'adhan_channel_v4_',
+      'adhan_channel_v5_',
+      'adhan_channel_v6_', // eliminado en v7: podía estar creado sin sonido válido
     ];
     const adhanFiles = [
       'azan1.mp3',
@@ -327,7 +332,14 @@ class NotificationService {
         ),
       );
 
-      AppLogger.info('_ensureAndroidAdhanChannel: channel=$channelId created OK');
+      // Readback: leer el canal creado para confirmar que el sonido quedó seteado.
+      // Visible en adb logcat -s flutter (release y debug).
+      final channels = await android.getNotificationChannels();
+      final created = channels?.where((c) => c.id == channelId).firstOrNull;
+      AppLogger.info(
+        '_ensureAndroidAdhanChannel: channel=$channelId created OK '
+        'readback_sound=${created?.sound} readback_importance=${created?.importance?.name}',
+      );
     } catch (e, stackTrace) {
       AppLogger.error(
         '_ensureAndroidAdhanChannel: FAILED channel=$channelId',
@@ -410,11 +422,13 @@ class NotificationService {
       AppLogger.info('sendTestNotification: starting...');
 
       final notifPermission = await Permission.notification.status;
-      AppLogger.info('sendTestNotification: notification=${notifPermission.name}');
+      AppLogger.info(
+          'sendTestNotification: notification=${notifPermission.name}');
 
       if (Platform.isAndroid) {
         final exactAlarm = await Permission.scheduleExactAlarm.status;
-        AppLogger.info('sendTestNotification: scheduleExactAlarm=${exactAlarm.name}');
+        AppLogger.info(
+            'sendTestNotification: scheduleExactAlarm=${exactAlarm.name}');
 
         final android = _plugin.resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>();

@@ -1,13 +1,16 @@
 import 'package:adhan/adhan.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/services/audio_service.dart';
+import '../../../core/services/logger_service.dart';
 import '../../../core/services/settings_service.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../l10n/l10n.dart';
+import '../../prayer_times/services/adhan_manager.dart';
 import '../../prayer_times/services/notification_service.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -41,6 +44,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
   LocationPermission _locationPermission = LocationPermission.unableToDetermine;
   bool _locationServiceEnabled = false;
   bool _notificationsGranted = false;
+  bool _didTriggerInitialSchedule = false;
 
   static const _recommendedMethods = [
     CalculationMethod.muslim_world_league,
@@ -115,6 +119,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
           _busy = false;
         }
       });
+      _maybeTriggerAdhanScheduling('refreshPermissionState');
     } catch (_) {
       if (!mounted || !clearBusy) return;
       setState(() => _busy = false);
@@ -124,6 +129,32 @@ class _OnboardingScreenState extends State<OnboardingScreen>
   bool get _hasLocationPermission =>
       _locationPermission == LocationPermission.always ||
       _locationPermission == LocationPermission.whileInUse;
+
+  void _maybeTriggerAdhanScheduling(String reason) {
+    if (!mounted || _didTriggerInitialSchedule) return;
+    if (!_hasLocationPermission || !_locationServiceEnabled) return;
+
+    // On clean installs, the first schedule attempt (startup) may run before
+    // permissions/services are ready and abort in AdhanManager. Once onboarding
+    // grants location and services are enabled, trigger a single background
+    // re-attempt so release users actually get notifications scheduled.
+    _didTriggerInitialSchedule = true;
+    AppLogger.info('Onboarding._maybeTriggerAdhanScheduling: triggering scheduleTodayAdhans reason=$reason');
+
+    Future<void>(() async {
+      try {
+        final container = ProviderScope.containerOf(context, listen: false);
+        await container.read(adhanManagerProvider).scheduleTodayAdhans();
+        AppLogger.info('Onboarding._maybeTriggerAdhanScheduling: scheduleTodayAdhans OK reason=$reason');
+      } catch (e, st) {
+        AppLogger.error(
+          'Onboarding._maybeTriggerAdhanScheduling: scheduleTodayAdhans FAILED reason=$reason',
+          error: e,
+          stackTrace: st,
+        );
+      }
+    });
+  }
 
   @override
   void dispose() {
@@ -172,6 +203,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
       }
     } finally {
       await _refreshPermissionState(clearBusy: true);
+      _maybeTriggerAdhanScheduling('requestLocation');
     }
   }
 
