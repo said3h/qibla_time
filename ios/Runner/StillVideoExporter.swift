@@ -336,10 +336,10 @@ final class StillVideoExporter {
             throw ExportError.pixelBufferCreationFailed
         }
 
-        // CGContext y-axis is flipped relative to UIKit
-        ctx.translateBy(x: 0, y: CGFloat(height))
-        ctx.scaleBy(x: 1.0, y: -1.0)
-
+        // No y-flip needed: ctx.draw(cgImage, in:) in a raw CVPixelBuffer-backed
+        // CGContext draws with the image's visual top at y=maxY (Quartz top),
+        // which maps to pixel-buffer row 0. Adding a y-flip would double-invert
+        // the image, producing a 180° upside-down video.
         if let cgImage = image.cgImage {
             let srcW = CGFloat(cgImage.width)
             let srcH = CGFloat(cgImage.height)

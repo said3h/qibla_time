@@ -220,6 +220,10 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
       final file = await widget.videoService.exportVideo(draft);
       if (!mounted) return;
 
+      // Export done — clear the loading state before the iOS share sheet opens,
+      // so the button shows its normal label while the system share UI is on screen.
+      setState(() => _activeAction = null);
+
       await Share.shareXFiles(
         [XFile(file.path)],
         text: widget.shareService.buildShareText(
@@ -324,6 +328,9 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
 
       final file = await widget.videoService.exportVideo(draft);
       if (!mounted) return;
+
+      // Export done — clear loading state before the permission/gallery flow.
+      setState(() => _activeAction = null);
 
       await widget.videoService.saveVideoToGallery(file);
       if (!mounted) return;
