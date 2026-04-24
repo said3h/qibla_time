@@ -139,13 +139,28 @@ jobs:
 
           APKSIGNER_OUT="$("${APKSIGNER}" verify --print-certs "${APK}")"
           echo "${APKSIGNER_OUT}"
-          ACTUAL="$(echo "${APKSIGNER_OUT}" | awk -F': ' '/Signer #1 certificate SHA-256 digest:/{print $2; exit}')"
+          # apksigner output format varies by version. Accept:
+          # - "Signer #1 certificate SHA-256 digest: ..."
+          # - "V2 Signer: certificate SHA-256 digest: ..."
+          ACTUAL_RAW="$(
+            echo \"${APKSIGNER_OUT}\" | awk -F': ' '
+              /Signer #[0-9]+ certificate SHA-256 digest:/{print $2; exit}
+              /V[0-9]+ Signer: certificate SHA-256 digest:/{print $2; exit}
+            '
+          )"
 
-          if [[ -z "${ACTUAL}" ]]; then
+          if [[ -z "${ACTUAL_RAW}" ]]; then
             echo "Failed to read SHA-256 from APK cert" >&2
             exit 1
           fi
 
+          # Normalize: apksigner may output hex without colons and in lowercase.
+          # Convert to uppercase and colon-separated to compare with EXPECTED.
+          ACTUAL_HEX="$(echo "${ACTUAL_RAW}" | tr -d '[:space:]:')"
+          ACTUAL_HEX="$(echo "${ACTUAL_HEX}" | tr '[:lower:]' '[:upper:]')"
+          ACTUAL="$(echo "${ACTUAL_HEX}" | sed -E 's/(..)(?=.)/\\1:/g')"
+
+          echo "APK cert SHA-256 (raw): ${ACTUAL_RAW}"
           echo "APK cert SHA-256: ${ACTUAL}"
           if [[ "${ACTUAL}" != "${EXPECTED}" ]]; then
             echo "ERROR: APK SHA-256 does not match expected upload key." >&2
