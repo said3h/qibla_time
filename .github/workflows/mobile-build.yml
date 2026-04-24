@@ -57,6 +57,43 @@ jobs:
       - name: Run tests
         run: flutter test
 
+      - name: Configure Android release signing (upload key)
+        if: matrix.platform == 'android'
+        shell: bash
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          ANDROID_KEYSTORE_FILENAME: ${{ secrets.ANDROID_KEYSTORE_FILENAME }}
+        run: |
+          set -euo pipefail
+
+          if [[ -z "${ANDROID_KEYSTORE_BASE64}" ]]; then
+            echo "Missing ANDROID_KEYSTORE_BASE64 secret" >&2
+            exit 1
+          fi
+          if [[ -z "${ANDROID_KEYSTORE_PASSWORD}" || -z "${ANDROID_KEY_ALIAS}" || -z "${ANDROID_KEY_PASSWORD}" || -z "${ANDROID_KEYSTORE_FILENAME}" ]]; then
+            echo "Missing one or more Android signing secrets" >&2
+            exit 1
+          fi
+
+          # Write keystore to android/app/<filename> (never committed).
+          mkdir -p android/app
+          echo "${ANDROID_KEYSTORE_BASE64}" | base64 --decode > "android/app/${ANDROID_KEYSTORE_FILENAME}"
+          chmod 600 "android/app/${ANDROID_KEYSTORE_FILENAME}"
+
+          # Create android/key.properties (read by android/app/build.gradle via rootProject.file("key.properties")).
+          cat > android/key.properties <<EOF
+          storePassword=${ANDROID_KEYSTORE_PASSWORD}
+          keyPassword=${ANDROID_KEY_PASSWORD}
+          keyAlias=${ANDROID_KEY_ALIAS}
+          storeFile=app/${ANDROID_KEYSTORE_FILENAME}
+          EOF
+          chmod 600 android/key.properties
+
+          echo "Android release signing configured."
+
       - name: Build debug APK
         if: matrix.platform == 'android'
         run: flutter build apk --debug
@@ -68,6 +105,34 @@ jobs:
       - name: Build release App Bundle (AAB)
         if: matrix.platform == 'android'
         run: flutter build appbundle --release
+
+      - name: Verify release APK signing certificate SHA-256
+        if: matrix.platform == 'android'
+        shell: bash
+        run: |
+          set -euo pipefail
+          APK="build/app/outputs/flutter-apk/app-release.apk"
+          if [[ ! -f "${APK}" ]]; then
+            echo "APK not found at ${APK}" >&2
+            exit 1
+          fi
+
+          # keytool output includes SHA-256; we assert it matches the expected upload key.
+          EXPECTED="58:E1:28:D0:D0:35:23:38:AB:3C:C0:66:CA:19:85:5D:77:56:AA:34:83:CF:50:41:4E:03:8F:F4:C7:24:06:9A"
+          ACTUAL="$(keytool -printcert -jarfile "${APK}" | awk -F': ' '/SHA256:/{print $2; exit}')"
+
+          if [[ -z "${ACTUAL}" ]]; then
+            echo "Failed to read SHA-256 from APK cert" >&2
+            exit 1
+          fi
+
+          echo "APK cert SHA-256: ${ACTUAL}"
+          if [[ "${ACTUAL}" != "${EXPECTED}" ]]; then
+            echo "ERROR: APK SHA-256 does not match expected upload key." >&2
+            echo "Expected: ${EXPECTED}" >&2
+            echo "Actual:   ${ACTUAL}" >&2
+            exit 1
+          fi
 
       - name: Upload debug APK
         if: matrix.platform == 'android'
