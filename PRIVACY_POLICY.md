@@ -128,7 +128,7 @@ If you have any questions or concerns about this Privacy Policy, please contact:
 
 **Developer:** Said (individual developer, Spain)
 **Email:** contact@qiblatime.app
-**Google Play:** [QiblaTime on Google Play](https://play.google.com/store/apps/details?id=com.qiblatime.app)
+**Google Play:** [QiblaTime on Google Play](https://play.google.com/store/apps/details?id=com.qiblatime.mobile)
 
 ---
 

@@ -1011,12 +1011,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
               trailing:
                   Icon(Icons.star_rounded, size: 16, color: tokens.primary),
               onTap: () async {
-                final uri = Uri.parse('market://details?id=com.qiblatime.app');
+                final uri = Uri.parse('market://details?id=com.qiblatime.mobile');
                 if (await canLaunchUrl(uri)) {
                   await launchUrl(uri, mode: LaunchMode.externalApplication);
                 } else {
                   final fallback = Uri.parse(
-                      'https://play.google.com/store/apps/details?id=com.qiblatime.app');
+                      'https://play.google.com/store/apps/details?id=com.qiblatime.mobile');
                   await launchUrl(fallback,
                       mode: LaunchMode.externalApplication);
                 }

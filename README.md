@@ -5,7 +5,7 @@
 [![Flutter](https://img.shields.io/badge/Flutter-3.x-blue?logo=flutter)](https://flutter.dev)
 [![Dart](https://img.shields.io/badge/Dart-3.x-blue?logo=dart)](https://dart.dev)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-[![Platform](https://img.shields.io/badge/Platform-Android-brightgreen?logo=android)](https://play.google.com/store/apps/details?id=com.qiblatime.app)
+[![Platform](https://img.shields.io/badge/Platform-Android-brightgreen?logo=android)](https://play.google.com/store/apps/details?id=com.qiblatime.mobile)
 
 ---
 
@@ -169,4 +169,4 @@ MIT License — see [LICENSE](LICENSE) for details.
 ## Contact
 
 Developed by **Said** — individual developer based in Spain.
-Google Play: [Qibla Time](https://play.google.com/store/apps/details?id=com.qiblatime.app)
+Google Play: [Qibla Time](https://play.google.com/store/apps/details?id=com.qiblatime.mobile)

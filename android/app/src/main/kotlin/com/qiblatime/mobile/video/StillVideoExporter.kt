@@ -1,4 +1,4 @@
-package com.qiblatime.app.video
+package com.qiblatime.mobile.video
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory

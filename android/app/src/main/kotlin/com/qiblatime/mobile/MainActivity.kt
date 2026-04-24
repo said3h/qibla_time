@@ -4,7 +4,7 @@
 // o si ya tienes código en configureFlutterEngine, añade solo
 // el bloque del MethodChannel dentro.
 
-package com.qiblatime.app
+package com.qiblatime.mobile
 
 import android.app.NotificationManager
 import android.content.ActivityNotFoundException
@@ -35,7 +35,7 @@ import java.util.concurrent.Executors
 import java.util.Locale
 import java.util.concurrent.atomic.AtomicBoolean
 
-import com.qiblatime.app.video.StillVideoExporter
+import com.qiblatime.mobile.video.StillVideoExporter
 
 class MainActivity : FlutterActivity(), EventChannel.StreamHandler, SensorEventListener {
 
