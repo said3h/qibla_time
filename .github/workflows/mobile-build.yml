@@ -143,9 +143,17 @@ jobs:
           # - "Signer #1 certificate SHA-256 digest: ..."
           # - "V2 Signer: certificate SHA-256 digest: ..."
           ACTUAL_RAW="$(
-            echo \"${APKSIGNER_OUT}\" | awk -F': ' '
-              /Signer #[0-9]+ certificate SHA-256 digest:/{print $2; exit}
-              /V[0-9]+ Signer: certificate SHA-256 digest:/{print $2; exit}
+            echo "${APKSIGNER_OUT}" | awk '
+              /Signer #[0-9]+ certificate SHA-256 digest:/ {
+                sub(/^.*certificate SHA-256 digest:[[:space:]]*/, "", $0);
+                print $0;
+                exit;
+              }
+              /V[0-9]+ Signer: certificate SHA-256 digest:/ {
+                sub(/^.*certificate SHA-256 digest:[[:space:]]*/, "", $0);
+                print $0;
+                exit;
+              }
             '
           )"
 
