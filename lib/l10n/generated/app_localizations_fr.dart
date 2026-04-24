@@ -1430,6 +1430,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get videoSaveFailed => 'Impossible d\'enregistrer la vidéo';
 
   @override
+  String get videoSavePermissionDenied => 'Permission refusée pour enregistrer la vidéo';
+
+  @override
   String get videoSaveToGallerySubtitle =>
       'Enregistrer la vidéo dans votre galerie';
 

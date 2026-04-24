@@ -1414,6 +1414,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get videoSaveFailed => 'Couldn\'t save the video';
 
   @override
+  String get videoSavePermissionDenied => 'Permission denied to save the video';
+
+  @override
   String get videoSaveToGallerySubtitle => 'Save the video to your gallery';
 
   @override

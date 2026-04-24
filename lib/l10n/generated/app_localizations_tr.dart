@@ -1408,6 +1408,9 @@ class AppLocalizationsTr extends AppLocalizations {
   String get videoSaveFailed => 'Video kaydedilemedi';
 
   @override
+  String get videoSavePermissionDenied => 'Video kaydetme izni reddedildi';
+
+  @override
   String get videoSaveToGallerySubtitle => 'Videoyu galeriye kaydet';
 
   @override

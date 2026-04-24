@@ -2571,6 +2571,12 @@ abstract class AppLocalizations {
   /// **'No se pudo guardar el video'**
   String get videoSaveFailed;
 
+  /// No description provided for @videoSavePermissionDenied.
+  ///
+  /// In es, this message translates to:
+  /// **"Permiso denegado para guardar el video"**
+  String get videoSavePermissionDenied;
+
   /// No description provided for @videoSaveToGallerySubtitle.
   ///
   /// In es, this message translates to:

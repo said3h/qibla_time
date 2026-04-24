@@ -1432,6 +1432,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get videoSaveFailed => 'Не удалось сохранить видео';
 
   @override
+  String get videoSavePermissionDenied => 'Разрешение на сохранение видео отклонено';
+
+  @override
   String get videoSaveToGallerySubtitle => 'Сохранить видео в галерею';
 
   @override

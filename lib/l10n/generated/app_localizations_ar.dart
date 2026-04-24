@@ -1390,6 +1390,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get videoSaveFailed => 'تعذر حفظ الفيديو';
 
   @override
+  String get videoSavePermissionDenied => 'تم رفض الإذن لحفظ الفيديو';
+
+  @override
   String get videoSaveToGallerySubtitle => 'احفظ الفيديو في المعرض';
 
   @override

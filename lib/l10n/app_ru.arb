@@ -678,6 +678,7 @@
   "commonSaved": "Сохранено",
   "videoSavedToGallery": "Видео сохранено в галерее",
   "videoSaveFailed": "Не удалось сохранить видео",
+  "videoSavePermissionDenied": "Разрешение на сохранение видео отклонено",
   "videoSaveToGallerySubtitle": "Сохранить видео в галерею",
   "commonStatistics": "Статистика",
   "commonTotal": "Общий",

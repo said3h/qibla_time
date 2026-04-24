@@ -677,6 +677,7 @@
   "commonSaved": "Enregistré",
   "videoSavedToGallery": "Vidéo enregistrée dans votre galerie",
   "videoSaveFailed": "Impossible d'enregistrer la vidéo",
+  "videoSavePermissionDenied": "Permission refusée pour enregistrer la vidéo",
   "videoSaveToGallerySubtitle": "Enregistrer la vidéo dans votre galerie",
   "commonStatistics": "Statistiques",
   "commonTotal": "Total",

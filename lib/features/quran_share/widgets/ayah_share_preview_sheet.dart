@@ -347,9 +347,17 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
         error: e,
         stackTrace: st,
       );
+
+      // Determine error message based on error type
+      final errorString = e.toString().toLowerCase();
+      final message = (errorString.contains('permission') ||
+              errorString.contains('denied'))
+          ? context.l10n.videoSavePermissionDenied
+          : context.l10n.videoSaveFailed;
+
       widget.rootMessenger.showSnackBar(
         SnackBar(
-          content: Text(context.l10n.videoSaveFailed),
+          content: Text(message),
         ),
       );
     } finally {

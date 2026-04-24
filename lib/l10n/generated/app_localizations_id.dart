@@ -1421,6 +1421,9 @@ class AppLocalizationsId extends AppLocalizations {
   String get videoSaveFailed => 'Tidak bisa menyimpan video';
 
   @override
+  String get videoSavePermissionDenied => 'Izin ditolak untuk menyimpan video';
+
+  @override
   String get videoSaveToGallerySubtitle => 'Simpan video ke galeri';
 
   @override

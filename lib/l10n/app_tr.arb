@@ -678,6 +678,7 @@
   "commonSaved": "Kaydedildi",
   "videoSavedToGallery": "Video galeriye kaydedildi",
   "videoSaveFailed": "Video kaydedilemedi",
+  "videoSavePermissionDenied": "Video kaydetme izni reddedildi",
   "videoSaveToGallerySubtitle": "Videoyu galeriye kaydet",
   "commonStatistics": "İstatistikler",
   "commonTotal": "Toplam",

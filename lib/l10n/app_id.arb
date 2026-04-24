@@ -679,6 +679,7 @@
   "commonSaved": "Tersimpan",
   "videoSavedToGallery": "Video tersimpan di galeri",
   "videoSaveFailed": "Tidak bisa menyimpan video",
+  "videoSavePermissionDenied": "Izin ditolak untuk menyimpan video",
   "videoSaveToGallerySubtitle": "Simpan video ke galeri",
   "commonStatistics": "Statistik",
   "commonTotal": "Total",

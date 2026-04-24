@@ -678,6 +678,7 @@
   "commonSaved": "Saved",
   "videoSavedToGallery": "Video saved to your gallery",
   "videoSaveFailed": "Couldn't save the video",
+  "videoSavePermissionDenied": "Permission denied to save the video",
   "videoSaveToGallerySubtitle": "Save the video to your gallery",
   "commonStatistics": "Statistics",
   "commonTotal": "Total",

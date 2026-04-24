@@ -1424,6 +1424,9 @@ class AppLocalizationsNl extends AppLocalizations {
   String get videoSaveFailed => 'Kon de video niet opslaan';
 
   @override
+  String get videoSavePermissionDenied => 'Toestemming geweigerd om de video op te slaan';
+
+  @override
   String get videoSaveToGallerySubtitle => 'Sla de video op in je galerij';
 
   @override

@@ -1427,6 +1427,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get videoSaveFailed => 'Video konnte nicht gespeichert werden';
 
   @override
+  String get videoSavePermissionDenied => 'Berechtigung zum Speichern des Videos verweigert';
+
+  @override
   String get videoSaveToGallerySubtitle => 'Video in der Galerie speichern';
 
   @override

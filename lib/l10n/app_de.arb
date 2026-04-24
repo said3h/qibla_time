@@ -678,6 +678,7 @@
   "commonSaved": "Gespeichert",
   "videoSavedToGallery": "Video in der Galerie gespeichert",
   "videoSaveFailed": "Video konnte nicht gespeichert werden",
+  "videoSavePermissionDenied": "Berechtigung zum Speichern des Videos verweigert",
   "videoSaveToGallerySubtitle": "Video in der Galerie speichern",
   "commonStatistics": "Statistiken",
   "commonTotal": "Gesamt",
