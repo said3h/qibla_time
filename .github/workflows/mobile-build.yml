@@ -65,6 +65,10 @@ jobs:
         if: matrix.platform == 'android'
         run: flutter build apk --release
 
+      - name: Build release App Bundle (AAB)
+        if: matrix.platform == 'android'
+        run: flutter build appbundle --release
+
       - name: Upload debug APK
         if: matrix.platform == 'android'
         uses: actions/upload-artifact@v4
@@ -80,6 +84,15 @@ jobs:
         with:
           name: qiblatime-android-release
           path: build/app/outputs/flutter-apk/app-release.apk
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload release App Bundle (AAB)
+        if: matrix.platform == 'android'
+        uses: actions/upload-artifact@v4
+        with:
+          name: qiblatime-android-release-aab
+          path: build/app/outputs/bundle/release/app-release.aab
           if-no-files-found: error
           retention-days: 14
 
