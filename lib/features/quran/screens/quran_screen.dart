@@ -859,6 +859,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   }
 
   Future<void> _openAyahSharePreview(SurahAyah ayah) async {
+    if (!mounted) return;
     await showAyahSharePreviewSheet(
       context: context,
       summary: widget.summary,
