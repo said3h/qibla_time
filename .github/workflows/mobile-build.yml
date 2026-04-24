@@ -117,11 +117,29 @@ jobs:
             exit 1
           fi
 
-          # keytool output includes SHA-256; we assert it matches the expected upload key.
+          # apksigner output includes the signer cert digest; assert it matches the expected upload key.
           EXPECTED="58:E1:28:D0:D0:35:23:38:AB:3C:C0:66:CA:19:85:5D:77:56:AA:34:83:CF:50:41:4E:03:8F:F4:C7:24:06:9A"
-          KEYTOOL_OUT="$(LANG=C keytool -printcert -jarfile "${APK}")"
-          echo "${KEYTOOL_OUT}"
-          ACTUAL="$(echo "${KEYTOOL_OUT}" | grep -Eio 'SHA-?256[^:]*:[[:space:]]*[0-9A-F:]+' | head -n 1 | sed -E 's/.*:[[:space:]]*//')"
+
+          if [[ -z "${ANDROID_HOME:-}" ]]; then
+            echo "ANDROID_HOME is not set" >&2
+            exit 1
+          fi
+
+          BUILD_TOOLS_DIR="$(ls -d "${ANDROID_HOME}/build-tools/"* 2>/dev/null | sort -V | tail -n 1)"
+          if [[ -z "${BUILD_TOOLS_DIR}" ]]; then
+            echo "Android build-tools not found under ${ANDROID_HOME}/build-tools" >&2
+            exit 1
+          fi
+
+          APKSIGNER="${BUILD_TOOLS_DIR}/apksigner"
+          if [[ ! -x "${APKSIGNER}" ]]; then
+            echo "apksigner not found/executable at ${APKSIGNER}" >&2
+            exit 1
+          fi
+
+          APKSIGNER_OUT="$("${APKSIGNER}" verify --print-certs "${APK}")"
+          echo "${APKSIGNER_OUT}"
+          ACTUAL="$(echo "${APKSIGNER_OUT}" | awk -F': ' '/Signer #1 certificate SHA-256 digest:/{print $2; exit}')"
 
           if [[ -z "${ACTUAL}" ]]; then
             echo "Failed to read SHA-256 from APK cert" >&2
