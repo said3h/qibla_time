@@ -88,9 +88,14 @@ jobs:
           storePassword=${ANDROID_KEYSTORE_PASSWORD}
           keyPassword=${ANDROID_KEY_PASSWORD}
           keyAlias=${ANDROID_KEY_ALIAS}
-          storeFile=app/${ANDROID_KEYSTORE_FILENAME}
+          storeFile=${ANDROID_KEYSTORE_FILENAME}
           EOF
           chmod 600 android/key.properties
+
+          if [[ ! -f "android/app/${ANDROID_KEYSTORE_FILENAME}" ]]; then
+            echo "Keystore file was not created where Gradle expects it" >&2
+            exit 1
+          fi
 
           echo "Android release signing configured."
 
