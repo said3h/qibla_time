@@ -119,7 +119,9 @@ jobs:
 
           # keytool output includes SHA-256; we assert it matches the expected upload key.
           EXPECTED="58:E1:28:D0:D0:35:23:38:AB:3C:C0:66:CA:19:85:5D:77:56:AA:34:83:CF:50:41:4E:03:8F:F4:C7:24:06:9A"
-          ACTUAL="$(keytool -printcert -jarfile "${APK}" | awk -F': ' '/SHA256:/{print $2; exit}')"
+          KEYTOOL_OUT="$(LANG=C keytool -printcert -jarfile "${APK}")"
+          echo "${KEYTOOL_OUT}"
+          ACTUAL="$(echo "${KEYTOOL_OUT}" | grep -Eio 'SHA-?256[^:]*:[[:space:]]*[0-9A-F:]+' | head -n 1 | sed -E 's/.*:[[:space:]]*//')"
 
           if [[ -z "${ACTUAL}" ]]; then
             echo "Failed to read SHA-256 from APK cert" >&2
