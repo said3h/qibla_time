@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/services/audio_service.dart';
 import '../../../core/services/logger_service.dart';
@@ -751,6 +752,8 @@ class QuranDetailScreen extends ConsumerStatefulWidget {
   ConsumerState<QuranDetailScreen> createState() => _QuranDetailScreenState();
 }
 
+const _kQuranViewModeKey = 'quran_view_mode_page';
+
 class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   final ItemScrollController _itemScrollController = ItemScrollController();
   final AudioService _audioService = AudioService.instance;
@@ -761,6 +764,29 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   bool _isCheckingDownloadState = true;
   bool _hasRequestedDownloadState = false;
   bool _isDownloadedFavorite = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadViewMode();
+  }
+
+  Future<void> _loadViewMode() async {
+    final prefs = await SharedPreferences.getInstance();
+    final saved = prefs.getBool(_kQuranViewModeKey);
+    if (mounted) {
+      setState(() {
+        _isPageView = saved ?? false;
+      });
+    }
+  }
+
+  Future<void> _toggleViewMode() async {
+    final newValue = !_isPageView;
+    setState(() => _isPageView = newValue);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_kQuranViewModeKey, newValue);
+  }
 
   QuranMiniPlayerState get _miniPlayerState =>
       ref.read(quranMiniPlayerControllerProvider);
@@ -1471,7 +1497,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                   ? Icons.view_list_outlined
                   : Icons.auto_stories_outlined,
             ),
-            onPressed: () => setState(() => _isPageView = !_isPageView),
+            onPressed: _toggleViewMode,
           ),
         ],
       ),
