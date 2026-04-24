@@ -158,7 +158,17 @@ jobs:
           # Convert to uppercase and colon-separated to compare with EXPECTED.
           ACTUAL_HEX="$(echo "${ACTUAL_RAW}" | tr -d '[:space:]:')"
           ACTUAL_HEX="$(echo "${ACTUAL_HEX}" | tr '[:lower:]' '[:upper:]')"
-          ACTUAL="$(echo "${ACTUAL_HEX}" | sed -E 's/(..)(?=.)/\\1:/g')"
+          ACTUAL="$(
+            echo "${ACTUAL_HEX}" | awk '{
+              s=toupper($0);
+              out="";
+              for (i=1; i<=length(s); i+=2) {
+                out = out substr(s, i, 2);
+                if (i+1 < length(s)) out = out ":";
+              }
+              print out;
+            }'
+          )"
 
           echo "APK cert SHA-256 (raw): ${ACTUAL_RAW}"
           echo "APK cert SHA-256: ${ACTUAL}"
