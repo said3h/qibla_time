@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart';
@@ -122,14 +121,13 @@ class AyahShareVideoService {
 
   Future<File> exportVideo(AyahShareVideoDraft draft) async {
     if (Platform.isAndroid) {
-      return _exportVideoNativeAndroid(draft);
+      return _exportVideoNative(draft);
     }
     if (Platform.isIOS) {
       // iOS uses the same MethodChannel contract as Android.
       // Native implementation: ios/Runner/StillVideoExporter.swift (AVFoundation,
-      // no FFmpeg, no GPL). UI button is still hidden — see _supportsVideoExport
-      // in ayah_share_preview_sheet.dart. Enable it there once validated on device.
-      return _exportVideoNativeAndroid(draft);
+      // no FFmpeg, no GPL).
+      return _exportVideoNative(draft);
     }
     throw const NativeVideoExportException(
       'Video export is not available on this platform yet.',
@@ -171,8 +169,9 @@ class AyahShareVideoService {
     }
   }
 
-  Future<File> _exportVideoNativeAndroid(AyahShareVideoDraft draft) async {
-    debugPrint('AyahShareVideoService.exportVideo: native android start');
+  Future<File> _exportVideoNative(AyahShareVideoDraft draft) async {
+    final platform = Platform.isIOS ? 'iOS' : 'Android';
+    AppLogger.info('AyahShareVideoService.exportVideo: native $platform start');
 
     final tempDirectory = await getTemporaryDirectory();
     final workingDirectory = await Directory(
@@ -299,8 +298,9 @@ class AyahShareVideoService {
   }
 
   String _nativePlatformErrorMessage(PlatformException error) {
+    final platform = Platform.isIOS ? 'iOS' : 'Android';
     final buffer = StringBuffer()
-      ..writeln('Native Android video export failed')
+      ..writeln('Native $platform video export failed')
       ..writeln('code: ${error.code}');
 
     final message = error.message;

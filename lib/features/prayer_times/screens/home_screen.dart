@@ -1501,6 +1501,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 await Navigator.of(context).push(
                   MaterialPageRoute(builder: (_) => item.destination!),
                 );
+                if (!mounted) return;
                 ref.invalidate(lastReadingProvider);
                 ref.invalidate(dhikrSnapshotProvider);
               },
@@ -2589,6 +2590,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   await Navigator.of(context).push(
                     MaterialPageRoute(builder: (_) => action.destination),
                   );
+                  if (!mounted) return;
                   ref.invalidate(lastReadingProvider);
                   ref.invalidate(dhikrSnapshotProvider);
                 },

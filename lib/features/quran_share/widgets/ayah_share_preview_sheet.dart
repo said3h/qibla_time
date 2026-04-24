@@ -341,7 +341,12 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
         ),
       );
       Navigator.of(context).pop();
-    } catch (_) {
+    } catch (e, st) {
+      AppLogger.error(
+        'saveVideo: FAILED — ${e.runtimeType}: $e',
+        error: e,
+        stackTrace: st,
+      );
       widget.rootMessenger.showSnackBar(
         SnackBar(
           content: Text(context.l10n.videoSaveFailed),

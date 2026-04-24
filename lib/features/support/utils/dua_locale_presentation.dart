@@ -871,6 +871,7 @@ class DuaLocalePresentation {
 
   static String shareTooltip(String languageCode) {
     return switch (normalizeLanguageCode(languageCode)) {
+      'es' => 'Compartir',
       'it' => 'Condividi',
       'pt' => 'Partilhar',
       'ru' => 'Поделиться',
@@ -881,7 +882,7 @@ class DuaLocalePresentation {
       'id' => 'Bagikan',
       'nl' => 'Delen',
       'tr' => 'Paylaş',
-      _ => 'Compartir',
+      _ => 'Share', // neutral English fallback for any unhandled locale
     };
   }
 }
