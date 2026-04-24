@@ -64,7 +64,7 @@ class QiblaScreen extends ConsumerWidget {
                       _buildCompass(tokens, dialRotation, needleRotation),
                       const SizedBox(height: 18),
                       Text(
-                        '${bearing.toStringAsFixed(0)}°',
+                        '${bearing.toStringAsFixed(0)}\u00B0',
                         style: GoogleFonts.amiri(
                           fontSize: 44,
                           fontWeight: FontWeight.w300,
@@ -184,7 +184,7 @@ class QiblaScreen extends ConsumerWidget {
           _buildStat(
             tokens,
             Icons.my_location,
-            '±3',
+            '\u00B13',
             'm',
             l10n.qiblaPrecisionLabel,
             valueColor: tokens.accent,
