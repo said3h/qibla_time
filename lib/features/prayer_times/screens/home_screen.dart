@@ -2542,7 +2542,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         destination: const PurificationGuideScreen(),
       ),
       (
-        icon: Icons.self_improvement_rounded,
+        icon: Icons.mosque_outlined,
         label: 'Rakaha',
         destination: const FocusModeScreen(),
       ),
