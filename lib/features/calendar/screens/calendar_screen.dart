@@ -202,7 +202,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
               label: Text(context.l10n.commonToday),
               style: TextButton.styleFrom(
                 foregroundColor: tokens.primary,
-                disabledForegroundColor: tokens.textTertiary,
+                disabledForegroundColor: tokens.textMuted,
                 padding:
                     const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
               ),
