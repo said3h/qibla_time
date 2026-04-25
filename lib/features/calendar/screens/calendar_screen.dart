@@ -304,7 +304,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
         ? _foregroundFor(tokens.primary).withOpacity(0.78)
         : isCurrentMonth
             ? tokens.textSecondary
-            : tokens.textTertiary;
+            : tokens.textMuted;
 
     Color background;
     Color border;
@@ -641,7 +641,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
   }
 
   List<String> _weekdayLabels() {
-    const baseMonday = DateTime(2024, 1, 1);
+    final baseMonday = DateTime(2024, 1, 1);
     return List.generate(7, (index) {
       final label =
           SpanishDateLabels.shortWeekday(baseMonday.add(Duration(days: index)));
