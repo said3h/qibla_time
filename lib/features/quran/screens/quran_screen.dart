@@ -1490,9 +1490,8 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
         title: Text(_surahPrimaryName(context, widget.summary)),
         actions: [
           IconButton(
-            tooltip: _isPageView
-                ? l10n.quranViewModeAyahs
-                : l10n.quranViewModePage,
+            tooltip:
+                _isPageView ? l10n.quranViewModeAyahs : l10n.quranViewModePage,
             icon: Icon(
               _isPageView
                   ? Icons.view_list_outlined
@@ -1519,11 +1518,15 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
             });
           }
 
+          final currentAyahIndex =
+              _activeAyahNumber == null ? null : _activeAyahNumber! - 1;
+
           if (_isPageView) {
             return QuranContinuousView(
               tokens: tokens,
               ayahs: detail.ayahs,
               surahNumber: widget.summary.number,
+              currentAyahIndex: currentAyahIndex,
               header: Column(
                 children: [
                   _buildTopBanner(tokens, result.source, widget.initialAyah),
