@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hijri/hijri_calendar.dart';
 
@@ -47,6 +48,9 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
+  static const _sujudIconAsset =
+      'assets/images/prayer_positions/sujud_icon.svg';
+
   static const _weekdaysArabic = [
     'الاثنين',
     'الثلاثاء',
@@ -2525,34 +2529,45 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   Widget _buildQuickActions(QiblaTokens tokens) {
     final l10n = context.l10n;
-    final actions = <({IconData icon, String label, Widget destination})>[
+    final actions = <({
+      IconData? icon,
+      String? svgAsset,
+      String label,
+      Widget destination
+    })>[
       (
         icon: Icons.auto_stories_outlined,
+        svgAsset: null,
         label: l10n.commonHadiths,
         destination: const HadithLibraryScreen(),
       ),
       (
         icon: Icons.library_books_outlined,
+        svgAsset: null,
         label: l10n.commonBooks,
         destination: const IslamicBooksScreen(),
       ),
       (
         icon: Icons.water_drop_outlined,
+        svgAsset: null,
         label: l10n.homeQuickActionPurification,
         destination: const PurificationGuideScreen(),
       ),
       (
-        icon: Icons.mosque_outlined,
+        icon: null,
+        svgAsset: _sujudIconAsset,
         label: 'Rakaha',
         destination: const FocusModeScreen(),
       ),
       (
         icon: Icons.calendar_month_outlined,
+        svgAsset: null,
         label: l10n.calendarTitle,
         destination: const CalendarScreen(),
       ),
       (
         icon: Icons.insights_outlined,
+        svgAsset: null,
         label: l10n.commonStatistics,
         destination: const AnalyticsScreen(),
       ),
@@ -2619,8 +2634,23 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           color: _blend(tokens.primary, tokens.bgSurface, 0.14),
                           shape: BoxShape.circle,
                         ),
-                        child:
-                            Icon(action.icon, size: 20, color: tokens.primary),
+                        child: Center(
+                          child: action.svgAsset == null
+                              ? Icon(
+                                  action.icon,
+                                  size: 20,
+                                  color: tokens.primary,
+                                )
+                              : SvgPicture.asset(
+                                  action.svgAsset!,
+                                  width: 24,
+                                  height: 24,
+                                  colorFilter: ColorFilter.mode(
+                                    tokens.primary,
+                                    BlendMode.srcIn,
+                                  ),
+                                ),
+                        ),
                       ),
                       const SizedBox(height: 10),
                       Text(
