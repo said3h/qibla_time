@@ -86,7 +86,7 @@ enum _VideoExportAction {
 }
 
 class _AyahSharePreviewSheet extends StatefulWidget {
-  const _AyahSharePreviewSheet({
+  _AyahSharePreviewSheet({
     required this.summary,
     SurahAyah? ayah,
     List<SurahAyah>? ayahs,
