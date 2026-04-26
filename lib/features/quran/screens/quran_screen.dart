@@ -816,6 +816,14 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
 
   bool get _isSelectionMode => _selectedAyahs.isNotEmpty;
 
+  int get _selectedRangeStart => _selectedAyahs.reduce(
+        (value, element) => value < element ? value : element,
+      );
+
+  int get _selectedRangeEnd => _selectedAyahs.reduce(
+        (value, element) => value > element ? value : element,
+      );
+
   _QuranPlaybackMode get _playbackMode {
     if (!_hasCurrentSurahPlayback) {
       return _QuranPlaybackMode.none;
@@ -882,6 +890,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     setState(_selectedAyahs.clear);
   }
 
+  // ignore: unused_element
   void _toggleAyahSelection(int ayahNumber) {
     if (!_selectedAyahs.contains(ayahNumber) &&
         _selectedAyahs.length >= _maxSelectedAyahs) {
@@ -899,6 +908,47 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
 
       _selectedAyahs.add(ayahNumber);
     });
+  }
+
+  void _toggleContiguousAyahSelection(int ayahNumber) {
+    if (_selectedAyahs.isEmpty) {
+      setState(() => _selectedAyahs.add(ayahNumber));
+      return;
+    }
+
+    if (_selectedAyahs.contains(ayahNumber)) {
+      final isRangeEdge =
+          ayahNumber == _selectedRangeStart || ayahNumber == _selectedRangeEnd;
+      if (!isRangeEdge && _selectedAyahs.length > 1) {
+        _showConsecutiveAyahWarning();
+        return;
+      }
+
+      setState(() => _selectedAyahs.remove(ayahNumber));
+      return;
+    }
+
+    final canExtendRange = ayahNumber == _selectedRangeStart - 1 ||
+        ayahNumber == _selectedRangeEnd + 1;
+    if (!canExtendRange) {
+      _showConsecutiveAyahWarning();
+      return;
+    }
+
+    if (_selectedAyahs.length >= _maxSelectedAyahs) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('M\u00E1ximo 5 aleyas')),
+      );
+      return;
+    }
+
+    setState(() => _selectedAyahs.add(ayahNumber));
+  }
+
+  void _showConsecutiveAyahWarning() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Selecciona aleyas consecutivas')),
+    );
   }
 
   Future<void> _showAyahShareOptions(SurahAyah ayah) async {
@@ -1609,10 +1659,10 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
 
                     return InkWell(
                       onTap: () => _isSelectionMode
-                          ? _toggleAyahSelection(ayah.numberInSurah)
+                          ? _toggleContiguousAyahSelection(ayah.numberInSurah)
                           : _saveReading(ayah.numberInSurah),
                       onLongPress: () =>
-                          _toggleAyahSelection(ayah.numberInSurah),
+                          _toggleContiguousAyahSelection(ayah.numberInSurah),
                       borderRadius: BorderRadius.circular(16),
                       child: QuranAyahCard(
                         tokens: tokens,

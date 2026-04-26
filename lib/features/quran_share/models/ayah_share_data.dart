@@ -26,20 +26,21 @@ class AyahShareData {
 
   String get _ayahRange => endAyahNumber == null || endAyahNumber == ayahNumber
       ? '$ayahNumber'
-      : '$ayahNumber–$endAyahNumber';
+      : '$ayahNumber\u2013$endAyahNumber';
 
-  String get _arabicAyahRange =>
-      endAyahNumber == null || endAyahNumber == ayahNumber
-          ? _toArabicDigits(ayahNumber)
-          : '${_toArabicDigits(ayahNumber)}–${_toArabicDigits(endAyahNumber!)}';
+  String get _arabicAyahRange => endAyahNumber == null ||
+          endAyahNumber == ayahNumber
+      ? _toArabicDigits(ayahNumber)
+      : '${_toArabicDigits(ayahNumber)}\u2013${_toArabicDigits(endAyahNumber!)}';
 
-  String get referenceLabel => '$surahNameLatin ($surahNumber:$_ayahRange)';
+  String get referenceLabel => '$surahNameLatin $surahNumber:$_ayahRange';
   String get arabicReferenceLabel =>
       '$surahNameArabic ${_toArabicDigits(surahNumber)}:$_arabicAyahRange';
 
   String _toArabicDigits(int value) {
     const westernDigits = '0123456789';
-    const arabicDigits = '٠١٢٣٤٥٦٧٨٩';
+    const arabicDigits =
+        '\u0660\u0661\u0662\u0663\u0664\u0665\u0666\u0667\u0668\u0669';
     final raw = '$value';
     final buffer = StringBuffer();
 
