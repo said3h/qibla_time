@@ -4,6 +4,7 @@ class AyahShareData {
     required this.surahNameLatin,
     required this.surahNameArabic,
     required this.ayahNumber,
+    this.endAyahNumber,
     required this.arabicText,
     this.translation,
     this.badgeLabel = 'QURAN',
@@ -14,6 +15,7 @@ class AyahShareData {
   final String surahNameLatin;
   final String surahNameArabic;
   final int ayahNumber;
+  final int? endAyahNumber;
   final String arabicText;
   final String? translation;
   final String badgeLabel;
@@ -22,9 +24,18 @@ class AyahShareData {
   bool get hasArabicText => arabicText.trim().isNotEmpty;
   bool get hasTranslation => (translation ?? '').trim().isNotEmpty;
 
-  String get referenceLabel => '$surahNameLatin ($surahNumber:$ayahNumber)';
+  String get _ayahRange => endAyahNumber == null || endAyahNumber == ayahNumber
+      ? '$ayahNumber'
+      : '$ayahNumber–$endAyahNumber';
+
+  String get _arabicAyahRange =>
+      endAyahNumber == null || endAyahNumber == ayahNumber
+          ? _toArabicDigits(ayahNumber)
+          : '${_toArabicDigits(ayahNumber)}–${_toArabicDigits(endAyahNumber!)}';
+
+  String get referenceLabel => '$surahNameLatin ($surahNumber:$_ayahRange)';
   String get arabicReferenceLabel =>
-      '$surahNameArabic ${_toArabicDigits(surahNumber)}:${_toArabicDigits(ayahNumber)}';
+      '$surahNameArabic ${_toArabicDigits(surahNumber)}:$_arabicAyahRange';
 
   String _toArabicDigits(int value) {
     const westernDigits = '0123456789';

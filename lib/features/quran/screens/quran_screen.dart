@@ -764,6 +764,9 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   bool _isCheckingDownloadState = true;
   bool _hasRequestedDownloadState = false;
   bool _isDownloadedFavorite = false;
+  final Set<int> _selectedAyahs = <int>{};
+
+  static const int _maxSelectedAyahs = 5;
 
   @override
   void initState() {
@@ -810,6 +813,8 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
 
   bool get _isAudioPlaying =>
       _hasCurrentSurahPlayback && _miniPlayerState.isPlaying;
+
+  bool get _isSelectionMode => _selectedAyahs.isNotEmpty;
 
   _QuranPlaybackMode get _playbackMode {
     if (!_hasCurrentSurahPlayback) {
@@ -858,16 +863,42 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     );
   }
 
-  Future<void> _openAyahSharePreview(SurahAyah ayah) async {
-    if (!mounted) return;
-    await showAyahSharePreviewSheet(
+  Future<void> _openSelectedAyahsSharePreview(List<SurahAyah> ayahs) async {
+    final selectedAyahs = ayahs
+        .where((ayah) => _selectedAyahs.contains(ayah.numberInSurah))
+        .toList()
+      ..sort((a, b) => a.numberInSurah.compareTo(b.numberInSurah));
+    if (selectedAyahs.isEmpty || !mounted) return;
+
+    await showAyahsSharePreviewSheet(
       context: context,
       summary: widget.summary,
-      ayah: ayah,
+      ayahs: selectedAyahs,
       shareService: ref.read(ayahShareServiceProvider),
       videoService: ref.read(ayahShareVideoServiceProvider),
       tokens: QiblaThemes.current,
     );
+    if (!mounted) return;
+    setState(_selectedAyahs.clear);
+  }
+
+  void _toggleAyahSelection(int ayahNumber) {
+    if (!_selectedAyahs.contains(ayahNumber) &&
+        _selectedAyahs.length >= _maxSelectedAyahs) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Máximo 5 aleyas')),
+      );
+      return;
+    }
+
+    setState(() {
+      if (_selectedAyahs.contains(ayahNumber)) {
+        _selectedAyahs.remove(ayahNumber);
+        return;
+      }
+
+      _selectedAyahs.add(ayahNumber);
+    });
   }
 
   Future<void> _showAyahShareOptions(SurahAyah ayah) async {
@@ -1530,6 +1561,8 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
               header: Column(
                 children: [
                   _buildTopBanner(tokens, result.source, widget.initialAyah),
+                  if (_isSelectionMode)
+                    _buildMultiSelectionToolbar(tokens, detail.ayahs),
                   _buildSurahAudioCard(tokens, detail, result.source),
                   if (_activeAyahNumber != null)
                     _buildActiveAudioIndicator(tokens),
@@ -1547,6 +1580,8 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                 return Column(
                   children: [
                     _buildTopBanner(tokens, result.source, widget.initialAyah),
+                    if (_isSelectionMode)
+                      _buildMultiSelectionToolbar(tokens, detail.ayahs),
                     _buildSurahAudioCard(tokens, detail, result.source),
                     if (_activeAyahNumber != null)
                       _buildActiveAudioIndicator(tokens),
@@ -1561,6 +1596,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                       lastReading?.ayahNumber == ayah.numberInSurah;
               final isActiveAudio = _activeAyahNumber == ayah.numberInSurah;
               final isPlayingAudio = isActiveAudio && _isAudioPlaying;
+              final isSelected = _selectedAyahs.contains(ayah.numberInSurah);
               final isBookmarked = bookmarks.any(
                 (bookmark) =>
                     bookmark.surahNumber == widget.summary.number &&
@@ -1568,8 +1604,10 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
               );
 
               return InkWell(
-                onTap: () => _saveReading(ayah.numberInSurah),
-                onLongPress: () => _openAyahSharePreview(ayah),
+                onTap: () => _isSelectionMode
+                    ? _toggleAyahSelection(ayah.numberInSurah)
+                    : _saveReading(ayah.numberInSurah),
+                onLongPress: () => _toggleAyahSelection(ayah.numberInSurah),
                 borderRadius: BorderRadius.circular(16),
                 child: QuranAyahCard(
                   tokens: tokens,
@@ -1580,6 +1618,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                   isActiveAudio: isActiveAudio,
                   isPlayingAudio: isPlayingAudio,
                   isBookmarked: isBookmarked,
+                  isSelected: isSelected,
                   audioStatusLabel: _audioStatusLabel(ayah, result.source),
                   onToggleAudio: () => _toggleAyahAudio(ayah, result.source),
                   onToggleBookmark: () => _toggleBookmark(ayah.numberInSurah),
@@ -1600,6 +1639,50 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildMultiSelectionToolbar(
+    QiblaTokens tokens,
+    List<SurahAyah> ayahs,
+  ) {
+    final l10n = context.l10n;
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: tokens.primaryBg,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: tokens.primaryBorder),
+      ),
+      child: Row(
+        children: [
+          Icon(Icons.check_circle_outline, color: tokens.primary, size: 20),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              '${_selectedAyahs.length}/$_maxSelectedAyahs',
+              style: GoogleFonts.dmSans(
+                fontSize: 13,
+                fontWeight: FontWeight.w700,
+                color: tokens.textPrimary,
+              ),
+            ),
+          ),
+          TextButton(
+            onPressed: () => setState(_selectedAyahs.clear),
+            child: Text(l10n.commonCancel),
+          ),
+          const SizedBox(width: 6),
+          FilledButton.icon(
+            onPressed: _selectedAyahs.isEmpty
+                ? null
+                : () => _openSelectedAyahsSharePreview(ayahs),
+            icon: const Icon(Icons.ios_share_outlined, size: 18),
+            label: Text(l10n.commonShare),
+          ),
+        ],
       ),
     );
   }
@@ -1681,7 +1764,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
         children: [
           Row(
             children: [
-              Icon(Icons.queue_music, color: tokens.primary, size: 18),
+              Icon(Icons.play_arrow, color: tokens.primary, size: 18),
               const SizedBox(width: 10),
               Expanded(
                 child: Text(

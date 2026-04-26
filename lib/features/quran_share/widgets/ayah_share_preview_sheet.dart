@@ -47,6 +47,37 @@ Future<void> showAyahSharePreviewSheet({
   );
 }
 
+Future<void> showAyahsSharePreviewSheet({
+  required BuildContext context,
+  required SurahSummary summary,
+  required List<SurahAyah> ayahs,
+  required AyahShareService shareService,
+  required AyahShareVideoService videoService,
+  required QiblaTokens tokens,
+}) {
+  final rootMessenger = ScaffoldMessenger.of(context);
+  final sortedAyahs = [...ayahs]
+    ..sort((a, b) => a.numberInSurah.compareTo(b.numberInSurah));
+
+  return showModalBottomSheet<void>(
+    context: context,
+    isScrollControlled: true,
+    useSafeArea: true,
+    backgroundColor: Colors.transparent,
+    builder: (_) => FractionallySizedBox(
+      heightFactor: 0.94,
+      child: _AyahSharePreviewSheet(
+        summary: summary,
+        ayahs: sortedAyahs,
+        shareService: shareService,
+        videoService: videoService,
+        tokens: tokens,
+        rootMessenger: rootMessenger,
+      ),
+    ),
+  );
+}
+
 enum _AyahShareAction { text, image, video }
 
 enum _VideoExportAction {
@@ -57,15 +88,16 @@ enum _VideoExportAction {
 class _AyahSharePreviewSheet extends StatefulWidget {
   const _AyahSharePreviewSheet({
     required this.summary,
-    required this.ayah,
+    SurahAyah? ayah,
+    List<SurahAyah>? ayahs,
     required this.shareService,
     required this.videoService,
     required this.tokens,
     required this.rootMessenger,
-  });
+  }) : ayahs = ayahs ?? (ayah == null ? const [] : <SurahAyah>[ayah]);
 
   final SurahSummary summary;
-  final SurahAyah ayah;
+  final List<SurahAyah> ayahs;
   final AyahShareService shareService;
   final AyahShareVideoService videoService;
   final QiblaTokens tokens;
@@ -80,15 +112,23 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
   late SharePreviewContentOption _selectedContent;
   _AyahShareAction? _activeAction;
 
-  bool get _hasArabicText => widget.ayah.arabic.trim().isNotEmpty;
+  bool get _isMultiAyah => widget.ayahs.length > 1;
 
-  bool get _hasTranslation => widget.ayah.translation.trim().isNotEmpty;
+  SurahAyah get _firstAyah => widget.ayahs.first;
+
+  bool get _hasArabicText =>
+      widget.ayahs.any((ayah) => ayah.arabic.trim().isNotEmpty);
+
+  bool get _hasTranslation =>
+      widget.ayahs.any((ayah) => ayah.translation.trim().isNotEmpty);
 
   bool get _isBusy => _activeAction != null;
 
   bool get _supportsVideoExport =>
-      !kIsWeb && (defaultTargetPlatform == TargetPlatform.android ||
-                  defaultTargetPlatform == TargetPlatform.iOS);
+      !_isMultiAyah &&
+      !kIsWeb &&
+      (defaultTargetPlatform == TargetPlatform.android ||
+          defaultTargetPlatform == TargetPlatform.iOS);
 
   @override
   void initState() {
@@ -121,12 +161,19 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
         transparentBackground: _selectedLayout == SharePreviewLayoutOption.card,
       );
 
-  AyahShareData get _previewData => widget.shareService.buildShareData(
-        widget.summary,
-        widget.ayah,
-        includeArabic: _includeArabic,
-        includeTranslation: _includeTranslation,
-      );
+  AyahShareData get _previewData => _isMultiAyah
+      ? widget.shareService.buildMultiAyahShareData(
+          widget.summary,
+          widget.ayahs,
+          includeArabic: _includeArabic,
+          includeTranslation: _includeTranslation,
+        )
+      : widget.shareService.buildShareData(
+          widget.summary,
+          _firstAyah,
+          includeArabic: _includeArabic,
+          includeTranslation: _includeTranslation,
+        );
 
   Future<void> _shareText() async {
     if (_isBusy || (!_includeArabic && !_includeTranslation)) {
@@ -136,12 +183,21 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
     setState(() => _activeAction = _AyahShareAction.text);
 
     try {
-      await widget.shareService.shareAyahAsText(
-        widget.summary,
-        widget.ayah,
-        includeArabic: _includeArabic,
-        includeTranslation: _includeTranslation,
-      );
+      if (_isMultiAyah) {
+        await widget.shareService.shareAyahsAsText(
+          widget.summary,
+          widget.ayahs,
+          includeArabic: _includeArabic,
+          includeTranslation: _includeTranslation,
+        );
+      } else {
+        await widget.shareService.shareAyahAsText(
+          widget.summary,
+          _firstAyah,
+          includeArabic: _includeArabic,
+          includeTranslation: _includeTranslation,
+        );
+      }
       if (!mounted) return;
       Navigator.of(context).pop();
     } catch (_) {
@@ -166,14 +222,25 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
     setState(() => _activeAction = _AyahShareAction.image);
 
     try {
-      await widget.shareService.shareAyahAsImage(
-        widget.summary,
-        widget.ayah,
-        widget.tokens,
-        mode: _exportMode,
-        includeArabic: _includeArabic,
-        includeTranslation: _includeTranslation,
-      );
+      if (_isMultiAyah) {
+        await widget.shareService.shareAyahsAsImage(
+          widget.summary,
+          widget.ayahs,
+          widget.tokens,
+          mode: _exportMode,
+          includeArabic: _includeArabic,
+          includeTranslation: _includeTranslation,
+        );
+      } else {
+        await widget.shareService.shareAyahAsImage(
+          widget.summary,
+          _firstAyah,
+          widget.tokens,
+          mode: _exportMode,
+          includeArabic: _includeArabic,
+          includeTranslation: _includeTranslation,
+        );
+      }
       if (!mounted) return;
       Navigator.of(context).pop();
     } catch (_) {
@@ -205,7 +272,7 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
     try {
       final draft = await widget.videoService.prepareDraft(
         summary: widget.summary,
-        ayah: widget.ayah,
+        ayah: _firstAyah,
         includeArabic: _includeArabic,
         includeTranslation: _includeTranslation,
         exportMode: _exportMode,
@@ -228,7 +295,7 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
         [XFile(file.path)],
         text: widget.shareService.buildShareText(
           widget.summary,
-          widget.ayah,
+          _firstAyah,
           includeArabic: _includeArabic,
           includeTranslation: _includeTranslation,
         ),
@@ -310,7 +377,7 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
     try {
       final draft = await widget.videoService.prepareDraft(
         summary: widget.summary,
-        ayah: widget.ayah,
+        ayah: _firstAyah,
         includeArabic: _includeArabic,
         includeTranslation: _includeTranslation,
         exportMode: _exportMode,
@@ -350,10 +417,10 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
 
       // Determine error message based on error type
       final errorString = e.toString().toLowerCase();
-      final message = (errorString.contains('permission') ||
-              errorString.contains('denied'))
-          ? context.l10n.videoSavePermissionDenied
-          : context.l10n.videoSaveFailed;
+      final message =
+          (errorString.contains('permission') || errorString.contains('denied'))
+              ? context.l10n.videoSavePermissionDenied
+              : context.l10n.videoSaveFailed;
 
       widget.rootMessenger.showSnackBar(
         SnackBar(
@@ -393,7 +460,9 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
 
     return SharePreviewBottomSheet(
       tokens: tokens,
-      title: l10n.shareAyahTitle(widget.ayah.numberInSurah),
+      title: _isMultiAyah
+          ? '${l10n.commonShare} ${widget.summary.number}:${_firstAyah.numberInSurah}–${widget.ayahs.last.numberInSurah}'
+          : l10n.shareAyahTitle(_firstAyah.numberInSurah),
       subtitle: l10n.shareAyahSubtitle,
       preview: AyahSharePreview(
         data: _previewData,

@@ -16,6 +16,7 @@ class QuranAyahCard extends StatelessWidget {
     required this.isActiveAudio,
     required this.isPlayingAudio,
     required this.isBookmarked,
+    this.isSelected = false,
     required this.audioStatusLabel,
     required this.onToggleAudio,
     required this.onToggleBookmark,
@@ -30,6 +31,7 @@ class QuranAyahCard extends StatelessWidget {
   final bool isActiveAudio;
   final bool isPlayingAudio;
   final bool isBookmarked;
+  final bool isSelected;
   final String audioStatusLabel;
   final VoidCallback onToggleAudio;
   final VoidCallback onToggleBookmark;
@@ -41,20 +43,24 @@ class QuranAyahCard extends StatelessWidget {
       margin: margin,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: isPlayingAudio
+        color: isSelected
             ? tokens.primaryBg
-            : isActiveAudio
-                ? tokens.activeBg
-                : isLastRead
+            : isPlayingAudio
+                ? tokens.primaryBg
+                : isActiveAudio
                     ? tokens.activeBg
-                    : tokens.bgSurface,
+                    : isLastRead
+                        ? tokens.activeBg
+                        : tokens.bgSurface,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: isPlayingAudio
+          color: isSelected
               ? tokens.primaryBorder
-              : isActiveAudio || isLastRead
-                  ? tokens.activeBorder
-                  : tokens.border,
+              : isPlayingAudio
+                  ? tokens.primaryBorder
+                  : isActiveAudio || isLastRead
+                      ? tokens.activeBorder
+                      : tokens.border,
         ),
       ),
       child: Column(
@@ -94,6 +100,10 @@ class QuranAyahCard extends StatelessWidget {
                     ),
                   ),
                 ),
+              if (isSelected) ...[
+                const SizedBox(width: 8),
+                Icon(Icons.check_circle, color: tokens.primary, size: 18),
+              ],
               const Spacer(),
               IconButton(
                 tooltip: canPlayAudio
