@@ -14,6 +14,7 @@ import '../models/hadith.dart';
 class HadithService {
   static const _primaryHadithAsset = 'assets/data/hadiths_multilang_v2.json';
   static const _minimumExpectedHadithCount = 1900;
+  static const _collectionReferenceLanguage = 'es';
 
   HadithService({String? initialLanguageCode})
       : _currentLanguage = _normalizeLanguageCode(
@@ -81,14 +82,9 @@ class HadithService {
     String? forcedLanguage,
   }) async {
     final language = forcedLanguage ?? _currentLanguage;
+    final collectionIds = await _baseCollectionHadithIds(collection);
     final all = await loadAll(forcedLanguage: language);
-    return all
-        .where(
-          (hadith) =>
-              _extractCollection(hadith.reference).toLowerCase() ==
-              collection.toLowerCase(),
-        )
-        .toList();
+    return all.where((hadith) => collectionIds.contains(hadith.id)).toList();
   }
 
   Future<List<Hadith>> searchHadiths(
@@ -115,8 +111,7 @@ class HadithService {
   }
 
   Future<Map<String, int>> getCollections({String? forcedLanguage}) async {
-    final language = forcedLanguage ?? _currentLanguage;
-    final all = await loadAll(forcedLanguage: language);
+    final all = await _baseCollectionHadiths();
     final collections = <String, int>{};
 
     for (final hadith in all) {
@@ -125,6 +120,36 @@ class HadithService {
     }
 
     return collections;
+  }
+
+  Future<List<Hadith>> _baseCollectionHadiths() async {
+    final fallbackLanguage = _fallbackContentLanguage(
+      _collectionReferenceLanguage,
+    );
+    final multilangList = await loadAllMultilenguaje();
+
+    // Collection membership must not depend on the active UI language.
+    return multilangList
+        .map(
+          (hadith) => hadith.getHadith(
+            _collectionReferenceLanguage,
+            fallbackLanguage: fallbackLanguage,
+          ),
+        )
+        .toList();
+  }
+
+  Future<Set<int>> _baseCollectionHadithIds(String collection) async {
+    final normalizedCollection = collection.toLowerCase();
+    final baseHadiths = await _baseCollectionHadiths();
+    return baseHadiths
+        .where(
+          (hadith) =>
+              _extractCollection(hadith.reference).toLowerCase() ==
+              normalizedCollection,
+        )
+        .map((hadith) => hadith.id)
+        .toSet();
   }
 
   Future<Map<String, int>> getCategories({String? forcedLanguage}) async {

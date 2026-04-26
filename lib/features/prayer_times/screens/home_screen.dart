@@ -154,6 +154,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   context,
                   tokens,
                   locationLabelAsync.valueOrNull,
+                  locationDiagnosticAsync.valueOrNull,
                   connectivityAsync.valueOrNull ?? true,
                 ),
                 _buildPeriodModeBanner(context, tokens),
@@ -229,9 +230,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     BuildContext context,
     QiblaTokens tokens,
     String? locationLabel,
+    PrayerLocationDiagnostic? locationDiagnostic,
     bool isOnline,
   ) {
     final l10n = context.l10n;
+    final statusLine = _buildHeaderLocationStatus(
+      l10n,
+      locationLabel,
+      locationDiagnostic,
+      isOnline,
+    );
     return Padding(
       padding: const EdgeInsets.fromLTRB(18, 14, 18, 10),
       child: Row(
@@ -269,10 +277,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  l10n.homeHeaderStatusLine(
-                    isOnline ? l10n.homeHeaderOnline : l10n.homeHeaderOffline,
-                    locationLabel ?? l10n.homeHeaderLocationUnavailable,
-                  ),
+                  statusLine,
                   style: GoogleFonts.dmSans(
                     fontSize: 10,
                     color: tokens.textSecondary,
@@ -311,6 +316,27 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ],
       ),
     );
+  }
+
+  String _buildHeaderLocationStatus(
+    AppLocalizations l10n,
+    String? locationLabel,
+    PrayerLocationDiagnostic? locationDiagnostic,
+    bool isOnline,
+  ) {
+    final visibleLocation = locationLabel?.trim();
+    if (visibleLocation != null && visibleLocation.isNotEmpty) {
+      return l10n.homeHeaderStatusLine(
+        isOnline ? l10n.homeHeaderOnline : l10n.homeHeaderOffline,
+        visibleLocation,
+      );
+    }
+
+    if (locationDiagnostic?.hasCachedLocation == true) {
+      return l10n.homeHeroUsingSavedLocation;
+    }
+
+    return l10n.homeHeaderLocationUnavailable;
   }
 
   Widget _buildPeriodModeBanner(BuildContext context, QiblaTokens tokens) {
