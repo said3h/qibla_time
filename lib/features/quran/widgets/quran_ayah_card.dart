@@ -17,6 +17,7 @@ class QuranAyahCard extends StatelessWidget {
     required this.isPlayingAudio,
     required this.isBookmarked,
     this.isSelected = false,
+    this.isSelectionMode = false,
     required this.audioStatusLabel,
     required this.onToggleAudio,
     required this.onToggleBookmark,
@@ -32,6 +33,7 @@ class QuranAyahCard extends StatelessWidget {
   final bool isPlayingAudio;
   final bool isBookmarked;
   final bool isSelected;
+  final bool isSelectionMode;
   final String audioStatusLabel;
   final VoidCallback onToggleAudio;
   final VoidCallback onToggleBookmark;
@@ -100,39 +102,44 @@ class QuranAyahCard extends StatelessWidget {
                     ),
                   ),
                 ),
-              if (isSelected) ...[
-                const SizedBox(width: 8),
-                Icon(Icons.check_circle, color: tokens.primary, size: 18),
-              ],
               const Spacer(),
-              IconButton(
-                tooltip: canPlayAudio
-                    ? (isPlayingAudio
-                        ? l10n.quranPauseAudio
-                        : isActiveAudio
-                            ? l10n.quranResumeAudio
-                            : l10n.quranPlayAudio)
-                    : l10n.quranAudioUnavailable,
-                onPressed: canPlayAudio ? onToggleAudio : null,
-                icon: Icon(
-                  !canPlayAudio
-                      ? Icons.volume_off_outlined
-                      : isPlayingAudio
-                          ? Icons.pause_circle_outline
-                          : Icons.play_circle_outline,
-                  color: !canPlayAudio ? tokens.textMuted : tokens.primary,
+              if (isSelectionMode)
+                Icon(
+                  isSelected
+                      ? Icons.check_circle
+                      : Icons.radio_button_unchecked,
+                  color: isSelected ? tokens.primary : tokens.textMuted,
+                )
+              else ...[
+                IconButton(
+                  tooltip: canPlayAudio
+                      ? (isPlayingAudio
+                          ? l10n.quranPauseAudio
+                          : isActiveAudio
+                              ? l10n.quranResumeAudio
+                              : l10n.quranPlayAudio)
+                      : l10n.quranAudioUnavailable,
+                  onPressed: canPlayAudio ? onToggleAudio : null,
+                  icon: Icon(
+                    !canPlayAudio
+                        ? Icons.volume_off_outlined
+                        : isPlayingAudio
+                            ? Icons.pause_circle_outline
+                            : Icons.play_circle_outline,
+                    color: !canPlayAudio ? tokens.textMuted : tokens.primary,
+                  ),
                 ),
-              ),
-              IconButton(
-                tooltip: isBookmarked
-                    ? l10n.quranRemoveBookmark
-                    : l10n.quranSaveBookmark,
-                onPressed: onToggleBookmark,
-                icon: Icon(
-                  isBookmarked ? Icons.bookmark : Icons.bookmark_border,
-                  color: isBookmarked ? tokens.primary : tokens.textMuted,
+                IconButton(
+                  tooltip: isBookmarked
+                      ? l10n.quranRemoveBookmark
+                      : l10n.quranSaveBookmark,
+                  onPressed: onToggleBookmark,
+                  icon: Icon(
+                    isBookmarked ? Icons.bookmark : Icons.bookmark_border,
+                    color: isBookmarked ? tokens.primary : tokens.textMuted,
+                  ),
                 ),
-              ),
+              ],
             ],
           ),
           const SizedBox(height: 12),
