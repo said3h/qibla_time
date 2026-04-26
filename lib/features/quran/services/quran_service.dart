@@ -81,7 +81,12 @@ class QuranService {
         ),
         source: SurahLoadSource.online,
       );
-    } catch (_) {
+    } catch (error, stackTrace) {
+      AppLogger.warning(
+        'Quran API unavailable or invalid for surah ${summary.number}; using offline fallback.',
+        error: error,
+        stackTrace: stackTrace,
+      );
       // API falló → fallback al JSON local
       return _fetchFromLocal(
         summary.number,
@@ -117,15 +122,15 @@ class QuranService {
     }
 
     final arabicData = _decodeApiData(
-      responses[0].body,
+      responses[0].bodyBytes,
       context: 'árabe',
     );
     final translationData = _decodeApiData(
-      responses[1].body,
+      responses[1].bodyBytes,
       context: 'traducción',
     );
     final translitData = _decodeApiData(
-      responses[2].body,
+      responses[2].bodyBytes,
       context: 'transliteración',
     );
 
@@ -141,6 +146,19 @@ class QuranService {
     final translitAyahs = _decodeAyahs(
       translitData,
       context: 'transliteración',
+    );
+
+    _validateApiAyahList(
+      arabicAyahs,
+      expectedCount: summary.ayahCount,
+      context: 'Arabic',
+      required: true,
+    );
+    _validateApiAyahList(
+      translationAyahs,
+      expectedCount: summary.ayahCount,
+      context: 'translation',
+      required: normalizedLanguage != 'ar',
     );
 
     final ayahs = List.generate(arabicAyahs.length, (i) {
@@ -178,7 +196,14 @@ class QuranService {
       );
     });
 
-    return SurahDetail(summary: summary, ayahs: ayahs);
+    final detail = SurahDetail(summary: summary, ayahs: ayahs);
+    _validateQuranDetail(
+      detail,
+      expectedAyahCount: summary.ayahCount,
+      languageCode: normalizedLanguage,
+      source: 'API',
+    );
+    return detail;
   }
 
   // ── JSON local (fallback) ───────────────────────────────────
@@ -278,9 +303,10 @@ class QuranService {
   // ── Lista completa de 114 suras ─────────────────────────────
 
   Map<String, dynamic> _decodeApiData(
-    String body, {
+    List<int> bodyBytes, {
     required String context,
   }) {
+    final body = utf8.decode(bodyBytes);
     final decoded = json.decode(body);
     if (decoded is! Map) {
       throw FormatException('Respuesta $context invalida: raiz no es objeto.');
@@ -293,6 +319,23 @@ class QuranService {
     }
 
     return Map<String, dynamic>.from(data);
+  }
+
+  void _validateApiAyahList(
+    List<Map<String, dynamic>> ayahs, {
+    required int expectedCount,
+    required String context,
+    required bool required,
+  }) {
+    if (!required && ayahs.isEmpty) {
+      return;
+    }
+
+    if (ayahs.length != expectedCount) {
+      throw FormatException(
+        'Invalid $context Quran response: ${ayahs.length} ayahs, expected $expectedCount.',
+      );
+    }
   }
 
   List<Map<String, dynamic>> _decodeAyahs(
@@ -469,12 +512,56 @@ class QuranService {
 
   bool _isValidOfflineDetail(SurahDetail detail) {
     if (detail.ayahs.isEmpty) return false;
+    if (detail.ayahs.length != detail.summary.ayahCount) return false;
     return detail.ayahs.every(
       (ayah) =>
           ayah.number > 0 &&
           ayah.numberInSurah > 0 &&
-          ayah.arabic.trim().isNotEmpty,
+          ayah.numberInSurah <= detail.summary.ayahCount &&
+          ayah.arabic.trim().isNotEmpty &&
+          !_isLikelyCorruptQuranText(ayah.arabic) &&
+          (ayah.translation.trim().isEmpty ||
+              !_isLikelyCorruptQuranText(ayah.translation)),
     );
+  }
+
+  void _validateQuranDetail(
+    SurahDetail detail, {
+    required int expectedAyahCount,
+    required String languageCode,
+    required String source,
+  }) {
+    if (detail.ayahs.length != expectedAyahCount) {
+      throw FormatException(
+        '$source Quran data invalid for surah ${detail.summary.number}: ${detail.ayahs.length} ayahs, expected $expectedAyahCount.',
+      );
+    }
+
+    for (final ayah in detail.ayahs) {
+      if (ayah.numberInSurah <= 0 ||
+          ayah.numberInSurah > expectedAyahCount ||
+          ayah.arabic.trim().isEmpty ||
+          _isLikelyCorruptQuranText(ayah.arabic)) {
+        throw FormatException(
+          '$source Quran Arabic text invalid at ${detail.summary.number}:${ayah.numberInSurah}.',
+        );
+      }
+
+      final translation = ayah.translation.trim();
+      if (languageCode != 'ar' &&
+          (translation.isEmpty || _isLikelyCorruptQuranText(translation))) {
+        throw FormatException(
+          '$source Quran translation invalid at ${detail.summary.number}:${ayah.numberInSurah}.',
+        );
+      }
+    }
+  }
+
+  static bool _isLikelyCorruptQuranText(String text) {
+    if (text.contains('\uFFFD')) return true;
+
+    const corruptMarkers = ['Ã', 'Â', 'â€', 'â€™', 'â€œ', 'â€', 'Ø', 'Ù'];
+    return corruptMarkers.any(text.contains);
   }
 
   SurahDetail _localizedOfflineDetail(
