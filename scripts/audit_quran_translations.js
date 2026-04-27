@@ -150,18 +150,6 @@ function auditText({ language, surah, ayah, text }) {
     });
   }
 
-  if (/[,;:،؛]$/u.test(trimmed)) {
-    pushIssue(issues, {
-      severity: 'medium',
-      language,
-      surah,
-      ayah,
-      text,
-      suspicious: trimmed.slice(-1),
-      reason: 'La traduccion termina con coma, punto y coma o dos puntos; puede ser frase cortada o continuacion entre aleyas.',
-    });
-  }
-
   const lastRawWord = cleanToken(trimmed.split(/\s+/u).at(-1) || '').toLowerCase();
   const endings = suspiciousEndings[normalizedLanguage] || suspiciousEndings.es;
   const acceptedTerminalPronouns = new Set(['él', 'el', 'mí', 'mi', 'ti', 'sí', 'si']);
