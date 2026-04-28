@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/services/audio_service.dart';
 import '../../../core/services/logger_service.dart';
+import '../../../core/services/settings_service.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../l10n/l10n.dart';
 import '../../hafiz/screens/hafiz_mode_screen.dart';
@@ -769,6 +770,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   bool _isDownloadedFavorite = false;
   DateTime? _lastUserListScrollAt;
   int? _lastAutoScrolledListAyahNumber;
+  int? _lastObservedPlayingAyahNumber;
   final Set<int> _selectedAyahs = <int>{};
 
   static const int _maxSelectedAyahs = 5;
@@ -794,6 +796,11 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     setState(() => _isPageView = newValue);
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(_kQuranViewModeKey, newValue);
+  }
+
+  Future<void> _toggleTajweed(bool value) async {
+    await SettingsService.instance.saveQuranTajweedEnabled(value);
+    ref.invalidate(quranTajweedEnabledProvider);
   }
 
   QuranMiniPlayerState get _miniPlayerState =>
@@ -1245,7 +1252,9 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     }
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!mounted || !_itemScrollController.isAttached) return;
+      if (!mounted || _isSelectionMode || !_itemScrollController.isAttached) {
+        return;
+      }
       if (_isAyahVisibleInList(ayahNumber)) return;
 
       _lastAutoScrolledListAyahNumber = ayahNumber;
@@ -1618,6 +1627,14 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
         title: Text(_surahPrimaryName(context, widget.summary)),
         actions: [
           IconButton(
+            tooltip: 'Tajweed',
+            icon: Icon(
+              Icons.color_lens_outlined,
+              color: showTajweed ? tokens.primary : null,
+            ),
+            onPressed: () => _toggleTajweed(!showTajweed),
+          ),
+          IconButton(
             tooltip:
                 _isPageView ? l10n.quranViewModeAyahs : l10n.quranViewModePage,
             icon: Icon(
@@ -1650,7 +1667,10 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
               _activeAyahNumber == null ? null : _activeAyahNumber! - 1;
           if (_activeAyahNumber == null) {
             _lastAutoScrolledListAyahNumber = null;
-          } else if (_isAudioPlaying) {
+            _lastObservedPlayingAyahNumber = null;
+          } else if (_isAudioPlaying &&
+              _activeAyahNumber != _lastObservedPlayingAyahNumber) {
+            _lastObservedPlayingAyahNumber = _activeAyahNumber;
             _scheduleActiveAyahListScroll(_activeAyahNumber!);
           }
 

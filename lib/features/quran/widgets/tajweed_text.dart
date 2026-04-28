@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 class TajweedText {
   const TajweedText._();
 
-  static const _ghunnahColor = Color(0xFF2E7D5B);
-  static const _maddColor = Color(0xFF2F6FA3);
-  static const _qalqalahColor = Color(0xFFB75B5B);
+  static const _ghunnahColor = Color(0xFF008A5A);
+  static const _maddColor = Color(0xFF006DCC);
+  static const _qalqalahColor = Color(0xFFD13F3F);
 
   static List<InlineSpan> buildSpans({
     required String html,
