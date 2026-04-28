@@ -56,16 +56,12 @@ class QuranService {
         );
 
   static const _baseUrl = 'https://api.alquran.cloud/v1';
+  static const _quranComBaseUrl = 'https://api.quran.com/api/v4';
   static const _timeoutSeconds = 8;
   static const _alafasyAudioBaseUrl =
       'https://everyayah.com/data/Alafasy_128kbps';
   static const _legacyAlafasyAudioBaseUrl =
       'https://cdn.islamic.network/quran/audio/128/ar.alafasy';
-  static const _bismillahWithTatweel =
-      'بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ';
-  static const _bismillahWithoutTatweel =
-      'بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ';
-
   // Cache en memoria para no releer el JSON en cada petición
   static Map<int, SurahDetail>? _offlineCache;
   String _currentLanguage;
@@ -104,10 +100,12 @@ class QuranService {
     final normalizedLanguage = _normalizeLanguageCode(languageCode);
     final translationEdition = _translationEditionFor(normalizedLanguage);
 
-    // Petición paralela: árabe + traducción según idioma + transliteración
+    // Petición paralela: árabe Uthmani Quran.com + traducción según idioma + transliteración
     final responses = await Future.wait([
       http.get(
-        Uri.parse('$_baseUrl/surah/${summary.number}/ar.alafasy'),
+        Uri.parse(
+          '$_quranComBaseUrl/quran/verses/uthmani?chapter_number=${summary.number}',
+        ),
       ).timeout(const Duration(seconds: _timeoutSeconds)),
       http.get(
         Uri.parse('$_baseUrl/surah/${summary.number}/$translationEdition'),
@@ -121,7 +119,7 @@ class QuranService {
       if (r.statusCode != 200) throw Exception('API error ${r.statusCode}');
     }
 
-    final arabicData = _decodeApiData(
+    final arabicAyahs = _decodeQuranComUthmaniAyahs(
       responses[0].bodyBytes,
       context: 'árabe',
     );
@@ -134,11 +132,6 @@ class QuranService {
       context: 'transliteración',
     );
 
-    final arabicAyahs = _decodeAyahs(
-      arabicData,
-      context: 'árabe',
-      required: true,
-    );
     final translationAyahs = _decodeAyahs(
       translationData,
       context: 'traducción',
@@ -177,14 +170,10 @@ class QuranService {
       return SurahAyah(
         number: ayahNumber,
         numberInSurah: numberInSurah,
-        arabic: _stripVisualBismillahFromAyah(
-          surahNumber: summary.number,
-          numberInSurah: numberInSurah,
-          arabic: _readRequiredString(
-            arabicAyah,
-            'text',
-            context: 'aleya árabe ${i + 1}',
-          ),
+        arabic: _readRequiredString(
+          arabicAyah,
+          'text',
+          context: 'aleya árabe ${i + 1}',
         ),
         transliteration: i < translitAyahs.length
             ? _readOptionalString(translitAyahs[i], 'text')
@@ -321,6 +310,62 @@ class QuranService {
     return Map<String, dynamic>.from(data);
   }
 
+  List<Map<String, dynamic>> _decodeQuranComUthmaniAyahs(
+    List<int> bodyBytes, {
+    required String context,
+  }) {
+    final body = utf8.decode(bodyBytes);
+    final decoded = json.decode(body);
+    if (decoded is! Map) {
+      throw FormatException('Respuesta $context invalida: raiz no es objeto.');
+    }
+
+    final payload = Map<String, dynamic>.from(decoded);
+    final rawVerses = payload['verses'];
+    if (rawVerses is! List || rawVerses.isEmpty) {
+      throw FormatException(
+        'Respuesta $context invalida: falta la lista de aleyas Quran.com.',
+      );
+    }
+
+    return rawVerses.map((rawVerse) {
+      if (rawVerse is! Map) {
+        throw FormatException(
+          'Respuesta $context invalida: una aleya Quran.com no es objeto.',
+        );
+      }
+
+      final verse = Map<String, dynamic>.from(rawVerse);
+      final verseKey = verse['verse_key']?.toString() ?? '';
+      final parts = verseKey.split(':');
+      if (parts.length != 2) {
+        throw FormatException(
+          'Respuesta $context invalida: verse_key Quran.com invalido.',
+        );
+      }
+
+      final numberInSurah = int.tryParse(parts[1]);
+      if (numberInSurah == null) {
+        throw FormatException(
+          'Respuesta $context invalida: numero de aleya Quran.com invalido.',
+        );
+      }
+
+      final text = verse['text_uthmani']?.toString().trim();
+      if (text == null || text.isEmpty) {
+        throw FormatException(
+          'Respuesta $context invalida: falta text_uthmani.',
+        );
+      }
+
+      return <String, dynamic>{
+        'number': verse['id'],
+        'numberInSurah': numberInSurah,
+        'text': text,
+      };
+    }).toList();
+  }
+
   void _validateApiAyahList(
     List<Map<String, dynamic>> ayahs, {
     required int expectedCount,
@@ -438,31 +483,6 @@ class QuranService {
     return '$_alafasyAudioBaseUrl/$surah$ayah.mp3';
   }
 
-  static String _stripVisualBismillahFromAyah({
-    required int surahNumber,
-    required int numberInSurah,
-    required String arabic,
-  }) {
-    var text = arabic.trim();
-    if (text.startsWith('\uFEFF')) {
-      text = text.substring(1).trimLeft();
-    }
-    if (surahNumber == 1 || numberInSurah != 1) {
-      return text;
-    }
-
-    for (final bismillah in const [
-      _bismillahWithTatweel,
-      _bismillahWithoutTatweel,
-    ]) {
-      if (text.startsWith(bismillah)) {
-        return text.substring(bismillah.length).trimLeft();
-      }
-    }
-
-    return text;
-  }
-
   SurahDetail? _buildOfflineDetail({
     required SurahSummary summary,
     required Map<String, dynamic> surahData,
@@ -490,11 +510,7 @@ class QuranService {
         SurahAyah(
           number: number,
           numberInSurah: numberInSurah,
-          arabic: _stripVisualBismillahFromAyah(
-            surahNumber: summary.number,
-            numberInSurah: numberInSurah,
-            arabic: arabic,
-          ),
+          arabic: arabic.trim(),
           transliteration: _readOptionalString(ayahData, 'transliteration'),
           translation: _readOptionalString(ayahData, 'translation'),
           audioUrl: _safeAlafasyAudioUrl(
