@@ -757,6 +757,8 @@ const _kQuranViewModeKey = 'quran_view_mode_page';
 
 class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   final ItemScrollController _itemScrollController = ItemScrollController();
+  final ItemPositionsListener _itemPositionsListener =
+      ItemPositionsListener.create();
   final AudioService _audioService = AudioService.instance;
   bool _isPageView = false;
   bool _initialJumpDone = false;
@@ -765,6 +767,8 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   bool _isCheckingDownloadState = true;
   bool _hasRequestedDownloadState = false;
   bool _isDownloadedFavorite = false;
+  DateTime? _lastUserListScrollAt;
+  int? _lastAutoScrolledListAyahNumber;
   final Set<int> _selectedAyahs = <int>{};
 
   static const int _maxSelectedAyahs = 5;
@@ -1225,6 +1229,46 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     );
   }
 
+  void _scheduleActiveAyahListScroll(int ayahNumber) {
+    if (_isPageView ||
+        _isSelectionMode ||
+        ayahNumber <= 0 ||
+        ayahNumber == _lastAutoScrolledListAyahNumber) {
+      return;
+    }
+
+    final lastUserScrollAt = _lastUserListScrollAt;
+    if (lastUserScrollAt != null &&
+        DateTime.now().difference(lastUserScrollAt) <
+            const Duration(milliseconds: 900)) {
+      return;
+    }
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted || !_itemScrollController.isAttached) return;
+      if (_isAyahVisibleInList(ayahNumber)) return;
+
+      _lastAutoScrolledListAyahNumber = ayahNumber;
+      unawaited(
+        _itemScrollController.scrollTo(
+          index: ayahNumber,
+          duration: const Duration(milliseconds: 360),
+          curve: Curves.easeOutCubic,
+          alignment: 0.18,
+        ),
+      );
+    });
+  }
+
+  bool _isAyahVisibleInList(int ayahNumber) {
+    final targetIndex = ayahNumber;
+    return _itemPositionsListener.itemPositions.value.any((position) {
+      return position.index == targetIndex &&
+          position.itemLeadingEdge >= 0.02 &&
+          position.itemTrailingEdge <= 0.98;
+    });
+  }
+
   void _ensureDownloadStateLoaded(SurahDetail detail) {
     if (_hasRequestedDownloadState) return;
     _hasRequestedDownloadState = true;
@@ -1604,6 +1648,11 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
 
           final currentAyahIndex =
               _activeAyahNumber == null ? null : _activeAyahNumber! - 1;
+          if (_activeAyahNumber == null) {
+            _lastAutoScrolledListAyahNumber = null;
+          } else if (_isAudioPlaying) {
+            _scheduleActiveAyahListScroll(_activeAyahNumber!);
+          }
 
           final content = _isPageView
               ? QuranContinuousView(
@@ -1625,72 +1674,80 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                     ],
                   ),
                 )
-              : ScrollablePositionedList.builder(
-                  itemScrollController: _itemScrollController,
-                  padding: const EdgeInsets.all(16),
-                  itemCount: detail.ayahs.length + 1,
-                  itemBuilder: (_, index) {
-                    if (index == 0) {
-                      return Column(
-                        children: [
-                          _buildTopBanner(
-                            tokens,
-                            result.source,
-                            widget.initialAyah,
-                          ),
-                          _buildSurahAudioCard(tokens, detail, result.source),
-                          if (_activeAyahNumber != null)
-                            _buildActiveAudioIndicator(tokens),
-                        ],
-                      );
-                    }
-
-                    final ayah = detail.ayahs[index - 1];
-                    final canPlayAudio = _canPlayAyahAudio(ayah, result.source);
-                    final isLastRead =
-                        lastReading?.surahNumber == widget.summary.number &&
-                            lastReading?.ayahNumber == ayah.numberInSurah;
-                    final isActiveAudio =
-                        _activeAyahNumber == ayah.numberInSurah;
-                    final isPlayingAudio = isActiveAudio && _isAudioPlaying;
-                    final isSelected =
-                        _selectedAyahs.contains(ayah.numberInSurah);
-                    final isBookmarked = bookmarks.any(
-                      (bookmark) =>
-                          bookmark.surahNumber == widget.summary.number &&
-                          bookmark.ayahNumber == ayah.numberInSurah,
-                    );
-
-                    return InkWell(
-                      onTap: () => _isSelectionMode
-                          ? _toggleContiguousAyahSelection(ayah.numberInSurah)
-                          : _saveReading(ayah.numberInSurah),
-                      onLongPress: () =>
-                          _toggleContiguousAyahSelection(ayah.numberInSurah),
-                      borderRadius: BorderRadius.circular(16),
-                      child: QuranAyahCard(
-                        tokens: tokens,
-                        l10n: l10n,
-                        ayah: ayah,
-                        canPlayAudio: canPlayAudio,
-                        isLastRead: isLastRead,
-                        isActiveAudio: isActiveAudio,
-                        isPlayingAudio: isPlayingAudio,
-                        isBookmarked: isBookmarked,
-                        isSelected: isSelected,
-                        isSelectionMode: _isSelectionMode,
-                        showTajweed: showTajweed,
-                        audioStatusLabel: _audioStatusLabel(
-                          ayah,
-                          result.source,
-                        ),
-                        onToggleAudio: () =>
-                            _toggleAyahAudio(ayah, result.source),
-                        onToggleBookmark: () =>
-                            _toggleBookmark(ayah.numberInSurah),
-                      ),
-                    );
+              : NotificationListener<UserScrollNotification>(
+                  onNotification: (notification) {
+                    _lastUserListScrollAt = DateTime.now();
+                    return false;
                   },
+                  child: ScrollablePositionedList.builder(
+                    itemScrollController: _itemScrollController,
+                    itemPositionsListener: _itemPositionsListener,
+                    padding: const EdgeInsets.all(16),
+                    itemCount: detail.ayahs.length + 1,
+                    itemBuilder: (_, index) {
+                      if (index == 0) {
+                        return Column(
+                          children: [
+                            _buildTopBanner(
+                              tokens,
+                              result.source,
+                              widget.initialAyah,
+                            ),
+                            _buildSurahAudioCard(tokens, detail, result.source),
+                            if (_activeAyahNumber != null)
+                              _buildActiveAudioIndicator(tokens),
+                          ],
+                        );
+                      }
+
+                      final ayah = detail.ayahs[index - 1];
+                      final canPlayAudio =
+                          _canPlayAyahAudio(ayah, result.source);
+                      final isLastRead =
+                          lastReading?.surahNumber == widget.summary.number &&
+                              lastReading?.ayahNumber == ayah.numberInSurah;
+                      final isActiveAudio =
+                          _activeAyahNumber == ayah.numberInSurah;
+                      final isPlayingAudio = isActiveAudio && _isAudioPlaying;
+                      final isSelected =
+                          _selectedAyahs.contains(ayah.numberInSurah);
+                      final isBookmarked = bookmarks.any(
+                        (bookmark) =>
+                            bookmark.surahNumber == widget.summary.number &&
+                            bookmark.ayahNumber == ayah.numberInSurah,
+                      );
+
+                      return InkWell(
+                        onTap: () => _isSelectionMode
+                            ? _toggleContiguousAyahSelection(ayah.numberInSurah)
+                            : _saveReading(ayah.numberInSurah),
+                        onLongPress: () =>
+                            _toggleContiguousAyahSelection(ayah.numberInSurah),
+                        borderRadius: BorderRadius.circular(16),
+                        child: QuranAyahCard(
+                          tokens: tokens,
+                          l10n: l10n,
+                          ayah: ayah,
+                          canPlayAudio: canPlayAudio,
+                          isLastRead: isLastRead,
+                          isActiveAudio: isActiveAudio,
+                          isPlayingAudio: isPlayingAudio,
+                          isBookmarked: isBookmarked,
+                          isSelected: isSelected,
+                          isSelectionMode: _isSelectionMode,
+                          showTajweed: showTajweed,
+                          audioStatusLabel: _audioStatusLabel(
+                            ayah,
+                            result.source,
+                          ),
+                          onToggleAudio: () =>
+                              _toggleAyahAudio(ayah, result.source),
+                          onToggleBookmark: () =>
+                              _toggleBookmark(ayah.numberInSurah),
+                        ),
+                      );
+                    },
+                  ),
                 );
 
           if (_isSelectionMode) {

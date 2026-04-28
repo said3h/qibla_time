@@ -203,14 +203,32 @@ class _QuranContinuousViewState extends State<QuranContinuousView> {
         backgroundColor: activeBackground,
         fontWeight: isActiveAyah ? FontWeight.w700 : FontWeight.w400,
       );
-      if (widget.showTajweed && ayah.tajweedHtml.trim().isNotEmpty) {
-        spans.addAll(
-          TajweedText.buildSpans(
-            html: ayah.tajweedHtml,
-            baseStyle: ayahStyle,
-            plainText: ayah.arabic,
+      if (isActiveAyah) {
+        spans.add(
+          WidgetSpan(
+            alignment: PlaceholderAlignment.middle,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4),
+              child: Icon(
+                Icons.graphic_eq_outlined,
+                size: 18,
+                color: widget.tokens.primary,
+              ),
+            ),
           ),
         );
+      }
+      if (widget.showTajweed && ayah.tajweedHtml.trim().isNotEmpty) {
+        final tajweedSpans = TajweedText.buildSpans(
+          html: ayah.tajweedHtml,
+          baseStyle: ayahStyle,
+          plainText: ayah.arabic,
+        );
+        if (tajweedSpans.isNotEmpty) {
+          spans.addAll(tajweedSpans);
+        } else {
+          spans.add(TextSpan(text: ayah.arabic, style: ayahStyle));
+        }
       } else {
         spans.add(
           TextSpan(

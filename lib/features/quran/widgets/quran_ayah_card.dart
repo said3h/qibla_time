@@ -50,11 +50,16 @@ class QuranAyahCard extends StatelessWidget {
     );
 
     if (!showTajweed || ayah.tajweedHtml.trim().isEmpty) {
-      return Text(
-        ayah.arabic,
-        textAlign: TextAlign.right,
-        style: style,
-      );
+      return _buildPlainArabicText(style);
+    }
+
+    final tajweedSpans = TajweedText.buildSpans(
+      html: ayah.tajweedHtml,
+      baseStyle: style,
+      plainText: ayah.arabic,
+    );
+    if (tajweedSpans.isEmpty) {
+      return _buildPlainArabicText(style);
     }
 
     return Directionality(
@@ -62,14 +67,16 @@ class QuranAyahCard extends StatelessWidget {
       child: RichText(
         textAlign: TextAlign.right,
         textDirection: TextDirection.rtl,
-        text: TextSpan(
-          children: TajweedText.buildSpans(
-            html: ayah.tajweedHtml,
-            baseStyle: style,
-            plainText: ayah.arabic,
-          ),
-        ),
+        text: TextSpan(children: tajweedSpans),
       ),
+    );
+  }
+
+  Widget _buildPlainArabicText(TextStyle style) {
+    return Text(
+      ayah.arabic,
+      textAlign: TextAlign.right,
+      style: style,
     );
   }
 
@@ -97,7 +104,17 @@ class QuranAyahCard extends StatelessWidget {
                   : isActiveAudio || isLastRead
                       ? tokens.activeBorder
                       : tokens.border,
+          width: isActiveAudio ? 1.6 : 1,
         ),
+        boxShadow: isActiveAudio
+            ? [
+                BoxShadow(
+                  color: tokens.primary.withOpacity(0.08),
+                  blurRadius: 16,
+                  offset: const Offset(0, 8),
+                ),
+              ]
+            : null,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -136,6 +153,24 @@ class QuranAyahCard extends StatelessWidget {
                     ),
                   ),
                 ),
+              if (isActiveAudio) ...[
+                const SizedBox(width: 8),
+                Container(
+                  padding: const EdgeInsets.all(6),
+                  decoration: BoxDecoration(
+                    color: tokens.primaryBg,
+                    shape: BoxShape.circle,
+                    border: Border.all(color: tokens.primaryBorder),
+                  ),
+                  child: Icon(
+                    isPlayingAudio
+                        ? Icons.graphic_eq_outlined
+                        : Icons.pause_circle_outline,
+                    size: 14,
+                    color: tokens.primary,
+                  ),
+                ),
+              ],
               const Spacer(),
               if (isSelectionMode)
                 Icon(
