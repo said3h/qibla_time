@@ -12,6 +12,7 @@ class QuranAyahCard extends StatelessWidget {
     required this.tokens,
     required this.l10n,
     required this.ayah,
+    this.surahNumber,
     required this.canPlayAudio,
     required this.isLastRead,
     required this.isActiveAudio,
@@ -29,6 +30,7 @@ class QuranAyahCard extends StatelessWidget {
   final QiblaTokens tokens;
   final AppLocalizations l10n;
   final SurahAyah ayah;
+  final int? surahNumber;
   final bool canPlayAudio;
   final bool isLastRead;
   final bool isActiveAudio;
@@ -57,6 +59,8 @@ class QuranAyahCard extends StatelessWidget {
       html: ayah.tajweedHtml,
       baseStyle: style,
       plainText: ayah.arabic,
+      surahNumber: surahNumber,
+      ayahNumber: ayah.numberInSurah,
     );
     if (tajweedSpans.isEmpty) {
       return _buildPlainArabicText(style);

@@ -223,6 +223,8 @@ class _QuranContinuousViewState extends State<QuranContinuousView> {
           html: ayah.tajweedHtml,
           baseStyle: ayahStyle,
           plainText: ayah.arabic,
+          surahNumber: widget.surahNumber,
+          ayahNumber: ayah.numberInSurah,
         );
         if (tajweedSpans.isNotEmpty) {
           spans.addAll(tajweedSpans);

@@ -1728,6 +1728,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                           tokens: tokens,
                           l10n: l10n,
                           ayah: ayah,
+                          surahNumber: widget.summary.number,
                           canPlayAudio: canPlayAudio,
                           isLastRead: isLastRead,
                           isActiveAudio: isActiveAudio,
