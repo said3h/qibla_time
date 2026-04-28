@@ -1,23 +1,24 @@
 {
   "summary": {
-    "total": 1,
-    "bySeverity": {
-      "pending": 1
-    },
-    "byLanguage": {
-      "es": 1
-    }
+    "total": 0,
+    "bySeverity": {},
+    "byLanguage": {}
   },
-  "issues": [
-    {
-      "severity": "pending",
-      "language": "es",
-      "surah": 40,
-      "ayah": 4,
-      "text": "No disputan los signos de Dios sino los que se niegan a creer. Que no te deslumbre la aparente prosperidad de sus negocios por la zona, ya que",
-      "suspicious": "que",
-      "reason": "Pendiente de fuente fiable: alquran.cloud es.garcia y Quran.com resource 83 tambien terminan en \"ya que\". No se completa automaticamente.",
-      "suggestion": "Regenerar o corregir manualmente desde una fuente española fiable antes de publicar."
-    }
-  ]
+  "issues": [],
+  "coranComparison": {
+    "corrected": [
+      {
+        "language": "es",
+        "surah": 40,
+        "ayah": 4,
+        "before": "No disputan los signos de Dios sino los que se niegan a creer. Que no te deslumbre la aparente prosperidad de sus negocios por la zona, ya que",
+        "after": "No discuten sobre los signos de Alá sino los infieles. ¡Que sus idas y venidas por el país no te turben!",
+        "source": "https://coran.org.ar/40-ghafir-que-perdona/",
+        "reason": "Texto cortado confirmado: la traduccion local termina en \"ya que\" y coran.org.ar contiene una aleya completa para la misma referencia."
+      }
+    ],
+    "differences": [],
+    "pendingManual": []
+  },
+  "referenceStatus": "coran.org.ar loaded (114 suras, 5919 translated ayahs)"
 }
