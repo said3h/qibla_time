@@ -22,6 +22,7 @@ import 'allah_names_screen.dart';
 import '../services/quran_audio_download_service.dart';
 import '../services/quran_mini_player_service.dart';
 import '../services/quran_reading_service.dart';
+import '../services/quran_reader_preferences.dart';
 import '../services/quran_service.dart';
 import 'downloaded_surahs_screen.dart';
 
@@ -1564,6 +1565,8 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     final detailAsync = ref.watch(surahLoadResultProvider(widget.summary));
     final bookmarks = ref.watch(quranBookmarksProvider).valueOrNull ?? const [];
     final lastReading = ref.watch(lastReadingProvider).valueOrNull;
+    final showTajweed =
+        ref.watch(quranTajweedEnabledProvider).valueOrNull ?? false;
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
@@ -1608,6 +1611,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                   ayahs: detail.ayahs,
                   surahNumber: widget.summary.number,
                   currentAyahIndex: currentAyahIndex,
+                  showTajweed: showTajweed,
                   header: Column(
                     children: [
                       _buildTopBanner(
@@ -1675,6 +1679,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                         isBookmarked: isBookmarked,
                         isSelected: isSelected,
                         isSelectionMode: _isSelectionMode,
+                        showTajweed: showTajweed,
                         audioStatusLabel: _audioStatusLabel(
                           ayah,
                           result.source,

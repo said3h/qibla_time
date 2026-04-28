@@ -1,11 +1,11 @@
 // lib/features/quran/models/quran_models.dart
 
 class SurahSummary {
-  final int    number;
+  final int number;
   final String nameArabic;
   final String nameLatin;
-  final String revelationType;  // 'Meccan' | 'Medinan'
-  final int    ayahCount;
+  final String revelationType; // 'Meccan' | 'Medinan'
+  final int ayahCount;
 
   const SurahSummary({
     required this.number,
@@ -17,12 +17,13 @@ class SurahSummary {
 }
 
 class SurahAyah {
-  final int    number;           // número global (1-6236)
-  final int    numberInSurah;    // número dentro de la sura
-  final String arabic;           // texto árabe
-  final String transliteration;  // transliteración latina
-  final String translation;      // traducción al español
-  final String audioUrl;         // URL de audio (Mishary Alafasy)
+  final int number; // número global (1-6236)
+  final int numberInSurah; // número dentro de la sura
+  final String arabic; // texto árabe
+  final String transliteration; // transliteración latina
+  final String translation; // traducción al español
+  final String audioUrl; // URL de audio (Mishary Alafasy)
+  final String tajweedHtml;
 
   const SurahAyah({
     required this.number,
@@ -31,11 +32,12 @@ class SurahAyah {
     required this.transliteration,
     required this.translation,
     required this.audioUrl,
+    this.tajweedHtml = '',
   });
 }
 
 class SurahDetail {
-  final SurahSummary  summary;
+  final SurahSummary summary;
   final List<SurahAyah> ayahs;
 
   const SurahDetail({
@@ -102,9 +104,8 @@ class SurahAudioDownloadState {
       status: status ?? this.status,
       availableAyahs: availableAyahs ?? this.availableAyahs,
       downloadedAyahs: downloadedAyahs ?? this.downloadedAyahs,
-      errorMessage: clearErrorMessage
-          ? null
-          : errorMessage ?? this.errorMessage,
+      errorMessage:
+          clearErrorMessage ? null : errorMessage ?? this.errorMessage,
     );
   }
 }
@@ -130,8 +131,8 @@ class QuranReadingPoint {
       surahNameLatin: json['surahNameLatin'] as String,
       surahNameArabic: json['surahNameArabic'] as String,
       ayahNumber: json['ayahNumber'] as int,
-      savedAt: DateTime.tryParse(json['savedAt'] as String? ?? '') ??
-          DateTime.now(),
+      savedAt:
+          DateTime.tryParse(json['savedAt'] as String? ?? '') ?? DateTime.now(),
     );
   }
 

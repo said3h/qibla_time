@@ -39,6 +39,7 @@ import '../../prayer_times/services/notification_service.dart';
 import '../../prayer_times/presentation/providers/prayer_times_providers.dart';
 import '../../prayer_times/services/quran_service.dart';
 import '../../prayer_times/services/travel_mode_service.dart';
+import '../../quran/services/quran_reader_preferences.dart';
 import '../../tracking/services/tracking_service.dart';
 import '../../tracking/services/weekly_summary_notification_service.dart';
 import '../services/dua_service.dart';
@@ -66,6 +67,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
   bool travelerMode = true;
   bool ramadanAutomatic = true;
   bool ramadanForced = false;
+  bool quranTajweedEnabled = false;
   int timeOffset = 0;
   bool isHanafi = false;
   CalculationMethod calculationMethod = CalculationMethod.muslim_world_league;
@@ -146,6 +148,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
     adhanIsha = await _settingsService.getPrayerNotificationEnabled('isha');
     prayerNotificationsEnabled =
         await _settingsService.getNotificationsEnabled();
+    quranTajweedEnabled = await _settingsService.getQuranTajweedEnabled();
     selectedAdhanName = _getAdhanName(await _settingsService.getAdhan());
     _profileDisplayName = await _settingsService.getProfileDisplayName();
     _profileNationalityCode =
@@ -254,6 +257,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
     ref.invalidate(isRamadanProvider);
     if (!mounted) return;
     setState(() => ramadanForced = value);
+  }
+
+  Future<void> _toggleQuranTajweed(bool value) async {
+    await _settingsService.saveQuranTajweedEnabled(value);
+    ref.invalidate(quranTajweedEnabledProvider);
+    if (!mounted) return;
+    setState(() => quranTajweedEnabled = value);
   }
 
   Future<void> _togglePeriodMode(bool value) async {
@@ -575,6 +585,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
               ),
               tokens: tokens,
               onTap: _showLanguageSheet,
+            ),
+            _buildSimpleToggleTile(
+              tokens,
+              'Mostrar tajweed',
+              'Colorea reglas de recitacion en el texto arabe.',
+              quranTajweedEnabled,
+              _toggleQuranTajweed,
             ),
             const SizedBox(height: 14),
             _buildSectionTitle(tokens, l10n.settingsSectionAccessibility),
@@ -1011,7 +1028,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
               trailing:
                   Icon(Icons.star_rounded, size: 16, color: tokens.primary),
               onTap: () async {
-                final uri = Uri.parse('market://details?id=com.qiblatime.mobile');
+                final uri =
+                    Uri.parse('market://details?id=com.qiblatime.mobile');
                 if (await canLaunchUrl(uri)) {
                   await launchUrl(uri, mode: LaunchMode.externalApplication);
                 } else {

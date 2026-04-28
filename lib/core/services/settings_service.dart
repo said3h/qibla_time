@@ -10,6 +10,7 @@ class SettingsService {
   static const _keyNotifications = 'prayer_notifications';
   static const _keyCalcMethod = 'calculation_method';
   static const _keyMadhab = 'prayer_madhab';
+  static const _keyQuranTajweedEnabled = 'quran_tajweed_enabled';
 
   Future<void> saveAdhan(String fileName) async {
     final prefs = await SharedPreferences.getInstance();
@@ -81,6 +82,16 @@ class SettingsService {
   Future<int> getMadhab() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getInt(_keyMadhab) ?? 0;
+  }
+
+  Future<void> saveQuranTajweedEnabled(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_keyQuranTajweedEnabled, value);
+  }
+
+  Future<bool> getQuranTajweedEnabled() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(_keyQuranTajweedEnabled) ?? false;
   }
 
   Future<void> saveRamadanModeAutomatic(bool value) async {

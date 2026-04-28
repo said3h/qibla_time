@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theme/app_theme.dart';
 import '../models/quran_models.dart';
+import 'tajweed_text.dart';
 
 /// Renders a surah as a single flowing Arabic text block, similar to Mushaf
 /// page layout. Each ayah ends with an inline number marker ﴿N﴾.
@@ -13,6 +14,7 @@ class QuranContinuousView extends StatefulWidget {
     required this.ayahs,
     required this.surahNumber,
     this.currentAyahIndex,
+    this.showTajweed = false,
     this.header,
   });
 
@@ -20,6 +22,7 @@ class QuranContinuousView extends StatefulWidget {
   final List<SurahAyah> ayahs;
   final int surahNumber;
   final int? currentAyahIndex;
+  final bool showTajweed;
 
   /// Optional header widget rendered above the Arabic text (e.g. the top
   /// banner and audio card from QuranDetailScreen).
@@ -193,18 +196,29 @@ class _QuranContinuousViewState extends State<QuranContinuousView> {
       final activeBackground =
           isActiveAyah ? widget.tokens.primary.withOpacity(0.13) : null;
 
-      spans.add(
-        TextSpan(
-          text: ayah.arabic,
-          style: GoogleFonts.amiri(
-            fontSize: 27,
-            height: 2.15,
-            color: widget.tokens.textPrimary,
-            backgroundColor: activeBackground,
-            fontWeight: isActiveAyah ? FontWeight.w700 : FontWeight.w400,
-          ),
-        ),
+      final ayahStyle = GoogleFonts.amiri(
+        fontSize: 27,
+        height: 2.15,
+        color: widget.tokens.textPrimary,
+        backgroundColor: activeBackground,
+        fontWeight: isActiveAyah ? FontWeight.w700 : FontWeight.w400,
       );
+      if (widget.showTajweed && ayah.tajweedHtml.trim().isNotEmpty) {
+        spans.addAll(
+          TajweedText.buildSpans(
+            html: ayah.tajweedHtml,
+            baseStyle: ayahStyle,
+            plainText: ayah.arabic,
+          ),
+        );
+      } else {
+        spans.add(
+          TextSpan(
+            text: ayah.arabic,
+            style: ayahStyle,
+          ),
+        );
+      }
 
       spans.add(
         TextSpan(

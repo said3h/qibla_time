@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../models/quran_models.dart';
+import 'tajweed_text.dart';
 
 class QuranAyahCard extends StatelessWidget {
   const QuranAyahCard({
@@ -18,6 +19,7 @@ class QuranAyahCard extends StatelessWidget {
     required this.isBookmarked,
     this.isSelected = false,
     this.isSelectionMode = false,
+    this.showTajweed = false,
     required this.audioStatusLabel,
     required this.onToggleAudio,
     required this.onToggleBookmark,
@@ -34,10 +36,42 @@ class QuranAyahCard extends StatelessWidget {
   final bool isBookmarked;
   final bool isSelected;
   final bool isSelectionMode;
+  final bool showTajweed;
   final String audioStatusLabel;
   final VoidCallback onToggleAudio;
   final VoidCallback onToggleBookmark;
   final EdgeInsets margin;
+
+  Widget _buildArabicText() {
+    final style = GoogleFonts.amiri(
+      fontSize: 22,
+      height: 1.8,
+      color: tokens.textPrimary,
+    );
+
+    if (!showTajweed || ayah.tajweedHtml.trim().isEmpty) {
+      return Text(
+        ayah.arabic,
+        textAlign: TextAlign.right,
+        style: style,
+      );
+    }
+
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: RichText(
+        textAlign: TextAlign.right,
+        textDirection: TextDirection.rtl,
+        text: TextSpan(
+          children: TajweedText.buildSpans(
+            html: ayah.tajweedHtml,
+            baseStyle: style,
+            plainText: ayah.arabic,
+          ),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -143,15 +177,7 @@ class QuranAyahCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 12),
-          Text(
-            ayah.arabic,
-            textAlign: TextAlign.right,
-            style: GoogleFonts.amiri(
-              fontSize: 22,
-              height: 1.8,
-              color: tokens.textPrimary,
-            ),
-          ),
+          _buildArabicText(),
           if (ayah.transliteration.trim().isNotEmpty) ...[
             const SizedBox(height: 6),
             Text(
