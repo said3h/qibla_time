@@ -71,8 +71,9 @@ class _QueuedAyahAudio {
   final bool isLocalFile;
 }
 
-final quranMiniPlayerControllerProvider = StateNotifierProvider<
-    QuranMiniPlayerController, QuranMiniPlayerState>((ref) {
+final quranMiniPlayerControllerProvider =
+    StateNotifierProvider<QuranMiniPlayerController, QuranMiniPlayerState>(
+        (ref) {
   return QuranMiniPlayerController(ref, AudioService.instance);
 });
 
@@ -229,6 +230,13 @@ class QuranMiniPlayerController extends StateNotifier<QuranMiniPlayerState> {
     final cached = _resolvedSurahQueue[ayah.numberInSurah];
     if (cached != null) return cached;
 
+    final existingTask = _prefetchingAyahTasks[ayah.numberInSurah];
+    if (existingTask != null) {
+      await existingTask;
+      final prefetched = _resolvedSurahQueue[ayah.numberInSurah];
+      if (prefetched != null) return prefetched;
+    }
+
     final resolved = await _resolveAyahAudioSource(surahNumber, ayah);
     if (resolved != null) {
       _resolvedSurahQueue[ayah.numberInSurah] = resolved;
@@ -267,7 +275,7 @@ class QuranMiniPlayerController extends StateNotifier<QuranMiniPlayerState> {
     int surahNumber,
     int currentIndex,
   ) async {
-    const prefetchCount = 3;
+    const prefetchCount = 8;
     final lastIndexToPrefetch = currentIndex + prefetchCount;
     final futures = <Future<void>>[];
     for (var index = currentIndex + 1;
