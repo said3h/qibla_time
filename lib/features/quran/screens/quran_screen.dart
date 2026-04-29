@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -963,6 +964,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     _listAutoScrollGeneration++;
     _lastAutoScrolledListAyahNumber = null;
     _lastObservedPlayingAyahNumber = null;
+    _logScrollAttempt('cancel pending list auto-scroll');
   }
 
   void _showConsecutiveAyahWarning() {
@@ -1221,7 +1223,10 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   }
 
   Future<void> _jumpToInitialAyah(SurahDetail detail) async {
-    if (_isSelectionMode) return;
+    if (_isSelectionMode) {
+      _logScrollAttempt('blocked initial ayah jump');
+      return;
+    }
     if (widget.initialAyah <= 1) return;
 
     final targetIndex = detail.ayahs.indexWhere(
@@ -1231,13 +1236,20 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
 
     if (!_itemScrollController.isAttached) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (!mounted || _isSelectionMode) return;
+        if (!mounted || _isSelectionMode) {
+          _logScrollAttempt('blocked deferred initial ayah jump');
+          return;
+        }
         unawaited(_jumpToInitialAyah(detail));
       });
       return;
     }
 
-    if (_isSelectionMode) return;
+    if (_isSelectionMode) {
+      _logScrollAttempt('blocked attached initial ayah jump');
+      return;
+    }
+    _logScrollAttempt('initial ayah jump');
     await _itemScrollController.scrollTo(
       index: targetIndex + 1,
       duration: const Duration(milliseconds: 280),
@@ -1251,6 +1263,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
         _isSelectionMode ||
         ayahNumber <= 0 ||
         ayahNumber == _lastAutoScrolledListAyahNumber) {
+      _logScrollAttempt('blocked list audio auto-scroll');
       return;
     }
 
@@ -1258,6 +1271,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     if (lastUserScrollAt != null &&
         DateTime.now().difference(lastUserScrollAt) <
             const Duration(milliseconds: 900)) {
+      _logScrollAttempt('blocked list auto-scroll after manual scroll');
       return;
     }
 
@@ -1267,11 +1281,13 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
           _isSelectionMode ||
           generation != _listAutoScrollGeneration ||
           !_itemScrollController.isAttached) {
+        _logScrollAttempt('blocked deferred list audio auto-scroll');
         return;
       }
       if (_isAyahVisibleInList(ayahNumber)) return;
 
       _lastAutoScrolledListAyahNumber = ayahNumber;
+      _logScrollAttempt('list audio auto-scroll');
       unawaited(
         _itemScrollController.scrollTo(
           index: ayahNumber,
@@ -1290,6 +1306,14 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
           position.itemLeadingEdge >= 0.02 &&
           position.itemTrailingEdge <= 0.98;
     });
+  }
+
+  void _logScrollAttempt(String reason) {
+    if (!kDebugMode) return;
+    debugPrint(
+      '[QuranScroll] $reason | selectionMode=$_isSelectionMode | '
+      'activeAyah=$_activeAyahNumber | pageView=$_isPageView',
+    );
   }
 
   void _ensureDownloadStateLoaded(SurahDetail detail) {
@@ -1696,6 +1720,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                   surahNumber: widget.summary.number,
                   currentAyahIndex: currentAyahIndex,
                   showTajweed: showTajweed,
+                  enableAutoScroll: !_isSelectionMode,
                   header: Column(
                     children: [
                       _buildTopBanner(
@@ -1787,10 +1812,15 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                 );
 
           if (_isSelectionMode) {
-            return Column(
+            return Stack(
               children: [
-                _buildMultiSelectionToolbar(tokens, detail.ayahs),
-                Expanded(child: content),
+                Positioned.fill(child: content),
+                Positioned(
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  child: _buildMultiSelectionToolbar(tokens, detail.ayahs),
+                ),
               ],
             );
           }

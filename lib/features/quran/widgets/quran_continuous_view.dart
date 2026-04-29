@@ -15,6 +15,7 @@ class QuranContinuousView extends StatefulWidget {
     required this.surahNumber,
     this.currentAyahIndex,
     this.showTajweed = false,
+    this.enableAutoScroll = true,
     this.header,
   });
 
@@ -23,6 +24,7 @@ class QuranContinuousView extends StatefulWidget {
   final int surahNumber;
   final int? currentAyahIndex;
   final bool showTajweed;
+  final bool enableAutoScroll;
 
   /// Optional header widget rendered above the Arabic text (e.g. the top
   /// banner and audio card from QuranDetailScreen).
@@ -52,7 +54,8 @@ class _QuranContinuousViewState extends State<QuranContinuousView> {
   @override
   void didUpdateWidget(covariant QuranContinuousView oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.currentAyahIndex != widget.currentAyahIndex ||
+    if (oldWidget.enableAutoScroll != widget.enableAutoScroll ||
+        oldWidget.currentAyahIndex != widget.currentAyahIndex ||
         oldWidget.ayahs.length != widget.ayahs.length) {
       _scheduleAutoScroll();
     }
@@ -65,6 +68,10 @@ class _QuranContinuousViewState extends State<QuranContinuousView> {
   }
 
   void _scheduleAutoScroll() {
+    if (!widget.enableAutoScroll) {
+      return;
+    }
+
     final currentAyahIndex = widget.currentAyahIndex;
     if (currentAyahIndex == null ||
         currentAyahIndex < 0 ||
