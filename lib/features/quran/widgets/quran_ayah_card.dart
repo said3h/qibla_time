@@ -176,43 +176,59 @@ class QuranAyahCard extends StatelessWidget {
                 ),
               ],
               const Spacer(),
-              if (isSelectionMode)
-                Icon(
-                  isSelected
-                      ? Icons.check_circle
-                      : Icons.radio_button_unchecked,
-                  color: isSelected ? tokens.primary : tokens.textMuted,
-                )
-              else ...[
-                IconButton(
-                  tooltip: canPlayAudio
-                      ? (isPlayingAudio
-                          ? l10n.quranPauseAudio
-                          : isActiveAudio
-                              ? l10n.quranResumeAudio
-                              : l10n.quranPlayAudio)
-                      : l10n.quranAudioUnavailable,
-                  onPressed: canPlayAudio ? onToggleAudio : null,
-                  icon: Icon(
-                    !canPlayAudio
-                        ? Icons.volume_off_outlined
-                        : isPlayingAudio
-                            ? Icons.pause_circle_outline
-                            : Icons.play_circle_outline,
-                    color: !canPlayAudio ? tokens.textMuted : tokens.primary,
-                  ),
-                ),
-                IconButton(
-                  tooltip: isBookmarked
-                      ? l10n.quranRemoveBookmark
-                      : l10n.quranSaveBookmark,
-                  onPressed: onToggleBookmark,
-                  icon: Icon(
-                    isBookmarked ? Icons.bookmark : Icons.bookmark_border,
-                    color: isBookmarked ? tokens.primary : tokens.textMuted,
-                  ),
-                ),
-              ],
+              SizedBox(
+                width: 96,
+                height: 48,
+                child: isSelectionMode
+                    ? Align(
+                        alignment: Alignment.centerRight,
+                        child: Icon(
+                          isSelected
+                              ? Icons.check_circle
+                              : Icons.radio_button_unchecked,
+                          color: isSelected ? tokens.primary : tokens.textMuted,
+                        ),
+                      )
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          IconButton(
+                            tooltip: canPlayAudio
+                                ? (isPlayingAudio
+                                    ? l10n.quranPauseAudio
+                                    : isActiveAudio
+                                        ? l10n.quranResumeAudio
+                                        : l10n.quranPlayAudio)
+                                : l10n.quranAudioUnavailable,
+                            onPressed: canPlayAudio ? onToggleAudio : null,
+                            icon: Icon(
+                              !canPlayAudio
+                                  ? Icons.volume_off_outlined
+                                  : isPlayingAudio
+                                      ? Icons.pause_circle_outline
+                                      : Icons.play_circle_outline,
+                              color: !canPlayAudio
+                                  ? tokens.textMuted
+                                  : tokens.primary,
+                            ),
+                          ),
+                          IconButton(
+                            tooltip: isBookmarked
+                                ? l10n.quranRemoveBookmark
+                                : l10n.quranSaveBookmark,
+                            onPressed: onToggleBookmark,
+                            icon: Icon(
+                              isBookmarked
+                                  ? Icons.bookmark
+                                  : Icons.bookmark_border,
+                              color: isBookmarked
+                                  ? tokens.primary
+                                  : tokens.textMuted,
+                            ),
+                          ),
+                        ],
+                      ),
+              ),
             ],
           ),
           const SizedBox(height: 12),
