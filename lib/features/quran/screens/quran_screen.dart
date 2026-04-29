@@ -901,7 +901,10 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       tokens: QiblaThemes.current,
     );
     if (!mounted) return;
-    setState(_selectedAyahs.clear);
+    setState(() {
+      _logSelectionMode('EXITING selection mode after share');
+      _selectedAyahs.clear();
+    });
   }
 
   // ignore: unused_element
@@ -925,8 +928,10 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   }
 
   void _toggleContiguousAyahSelection(int ayahNumber) {
+    final wasEmpty = _selectedAyahs.isEmpty;
     _cancelPendingListAutoScroll();
-    if (_selectedAyahs.isEmpty) {
+    if (wasEmpty) {
+      _logSelectionMode('ENTERING selection mode with ayah $ayahNumber');
       setState(() => _selectedAyahs.add(ayahNumber));
       return;
     }
@@ -1316,6 +1321,14 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     );
   }
 
+  void _logSelectionMode(String reason) {
+    if (!kDebugMode) return;
+    debugPrint(
+      '[QuranSelection] $reason | mode=$_isSelectionMode | '
+      'selectedCount=${_selectedAyahs.length}',
+    );
+  }
+
   void _ensureDownloadStateLoaded(SurahDetail detail) {
     if (_hasRequestedDownloadState) return;
     _hasRequestedDownloadState = true;
@@ -1697,6 +1710,10 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
           if (!_initialJumpDone && widget.initialAyah > 1) {
             _initialJumpDone = true;
             WidgetsBinding.instance.addPostFrameCallback((_) async {
+              if (_isSelectionMode) {
+                _logScrollAttempt('blocked deferred initial jump in build');
+                return;
+              }
               await _jumpToInitialAyah(detail);
             });
           }
@@ -1887,7 +1904,10 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
             ),
             const SizedBox(width: 6),
             TextButton(
-              onPressed: () => setState(_selectedAyahs.clear),
+              onPressed: () => setState(() {
+                _logSelectionMode('EXITING selection mode via cancel button');
+                _selectedAyahs.clear();
+              }),
               child: Text(l10n.commonCancel),
             ),
           ],
