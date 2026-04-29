@@ -110,7 +110,7 @@ class QuranMiniPlayerController extends StateNotifier<QuranMiniPlayerState> {
   bool _isAdvancingEarly = false;
   DateTime? _lastEarlyAdvanceAt;
 
-  static const _earlyAdvanceThreshold = Duration(milliseconds: 1200);
+  static const _earlyAdvanceThreshold = Duration(milliseconds: 800);
   static const _staleCompletionWindow = Duration(milliseconds: 900);
 
   bool get _isQuranSourceActive =>
