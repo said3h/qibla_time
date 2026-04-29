@@ -1828,10 +1828,11 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                   ),
                 );
 
-          if (_isSelectionMode) {
-            return Stack(
-              children: [
-                content,
+          return Stack(
+            fit: StackFit.expand,
+            children: [
+              content,
+              if (_isSelectionMode)
                 Positioned(
                   top: 0,
                   left: 0,
@@ -1841,11 +1842,8 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                     child: _buildMultiSelectionToolbar(tokens, detail.ayahs),
                   ),
                 ),
-              ],
-            );
-          }
-
-          return content;
+            ],
+          );
         },
         loading: () =>
             Center(child: CircularProgressIndicator(color: tokens.primary)),
