@@ -773,8 +773,6 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   int? _lastAutoScrolledListAyahNumber;
   int? _lastObservedPlayingAyahNumber;
   int _listAutoScrollGeneration = 0;
-  int? _guardIndex;
-  double? _guardLeading;
   final Set<int> _selectedAyahs = <int>{};
 
   static const int _maxSelectedAyahs = 5;
@@ -906,8 +904,6 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     setState(() {
       _logSelectionMode('EXITING selection mode after share');
       _selectedAyahs.clear();
-      _guardIndex = null;
-      _guardLeading = null;
     });
   }
 
@@ -933,22 +929,10 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
 
   void _toggleContiguousAyahSelection(int ayahNumber) {
     final wasEmpty = _selectedAyahs.isEmpty;
-    final pos = _itemPositionsListener.itemPositions.value;
-    final first = pos.isNotEmpty ? pos.first : null;
     _cancelPendingListAutoScroll();
     if (wasEmpty) {
-      _guardIndex = first?.index;
-      _guardLeading = first?.itemLeadingEdge;
       _logSelectionMode('ENTERING selection mode with ayah $ayahNumber');
       setState(() => _selectedAyahs.add(ayahNumber));
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (_isSelectionMode && _guardIndex != null) {
-          _itemScrollController.jumpTo(
-            index: _guardIndex!,
-            alignment: _guardLeading ?? 0,
-          );
-        }
-      });
       return;
     }
 
@@ -961,10 +945,6 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       }
 
       setState(() => _selectedAyahs.remove(ayahNumber));
-      if (_selectedAyahs.isEmpty) {
-        _guardIndex = null;
-        _guardLeading = null;
-      }
       return;
     }
 
@@ -1927,8 +1907,6 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
               onPressed: () => setState(() {
                 _logSelectionMode('EXITING selection mode via cancel button');
                 _selectedAyahs.clear();
-                _guardIndex = null;
-                _guardLeading = null;
               }),
               child: Text(l10n.commonCancel),
             ),
