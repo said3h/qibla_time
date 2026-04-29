@@ -1814,12 +1814,15 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
           if (_isSelectionMode) {
             return Stack(
               children: [
-                Positioned.fill(child: content),
+                content,
                 Positioned(
                   top: 0,
                   left: 0,
                   right: 0,
-                  child: _buildMultiSelectionToolbar(tokens, detail.ayahs),
+                  child: SafeArea(
+                    bottom: false,
+                    child: _buildMultiSelectionToolbar(tokens, detail.ayahs),
+                  ),
                 ),
               ],
             );
@@ -1849,41 +1852,46 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   ) {
     final l10n = context.l10n;
     final selectedCount = _selectedAyahs.length;
-    return Container(
-      padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
-      decoration: BoxDecoration(
-        color: tokens.primaryBg,
-        border: Border(
-          bottom: BorderSide(color: tokens.primaryBorder),
+
+    return Material(
+      elevation: 5,
+      color: tokens.bgSurface,
+      child: Container(
+        padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
+        decoration: BoxDecoration(
+          color: tokens.bgSurface,
+          border: Border(
+            bottom: BorderSide(color: tokens.border, width: 0.5),
+          ),
         ),
-      ),
-      child: Row(
-        children: [
-          Icon(Icons.check_circle_outline, color: tokens.primary, size: 20),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Text(
-              '$selectedCount aleyas seleccionadas',
-              style: GoogleFonts.dmSans(
-                fontSize: 13,
-                fontWeight: FontWeight.w700,
-                color: tokens.textPrimary,
+        child: Row(
+          children: [
+            Icon(Icons.check_circle_outline, color: tokens.primary, size: 20),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Text(
+                '$selectedCount aleyas seleccionadas',
+                style: GoogleFonts.dmSans(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w700,
+                  color: tokens.textPrimary,
+                ),
               ),
             ),
-          ),
-          FilledButton.icon(
-            onPressed: _selectedAyahs.isEmpty
-                ? null
-                : () => _openSelectedAyahsSharePreview(ayahs),
-            icon: const Icon(Icons.ios_share_outlined, size: 18),
-            label: Text(l10n.commonShare),
-          ),
-          const SizedBox(width: 6),
-          TextButton(
-            onPressed: () => setState(_selectedAyahs.clear),
-            child: Text(l10n.commonCancel),
-          ),
-        ],
+            FilledButton.icon(
+              onPressed: _selectedAyahs.isEmpty
+                  ? null
+                  : () => _openSelectedAyahsSharePreview(ayahs),
+              icon: const Icon(Icons.ios_share_outlined, size: 18),
+              label: Text(l10n.commonShare),
+            ),
+            const SizedBox(width: 6),
+            TextButton(
+              onPressed: () => setState(_selectedAyahs.clear),
+              child: Text(l10n.commonCancel),
+            ),
+          ],
+        ),
       ),
     );
   }
