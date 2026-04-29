@@ -86,18 +86,32 @@ class QuranMiniPlayerController extends StateNotifier<QuranMiniPlayerState> {
     _playerCompleteSubscription = _audioService.onPlayerComplete.listen((_) {
       unawaited(_handlePlaybackCompleted());
     });
+    _positionSubscription = _audioService.onPositionChanged.listen(
+      _handlePositionChanged,
+    );
+    _durationSubscription = _audioService.onDurationChanged.listen((duration) {
+      _currentDuration = duration;
+    });
   }
 
   final Ref _ref;
   final AudioService _audioService;
   StreamSubscription<PlayerState>? _playerStateSubscription;
   StreamSubscription<void>? _playerCompleteSubscription;
+  StreamSubscription<Duration>? _positionSubscription;
+  StreamSubscription<Duration?>? _durationSubscription;
 
   SurahSummary? _surahQueueSummary;
   List<SurahAyah> _surahQueue = const [];
   final Map<int, _QueuedAyahAudio> _resolvedSurahQueue = {};
   final Map<int, Future<void>> _prefetchingAyahTasks = {};
   int _surahQueueIndex = -1;
+  Duration? _currentDuration;
+  bool _isAdvancingEarly = false;
+  DateTime? _lastEarlyAdvanceAt;
+
+  static const _earlyAdvanceThreshold = Duration(milliseconds: 1200);
+  static const _staleCompletionWindow = Duration(milliseconds: 900);
 
   bool get _isQuranSourceActive =>
       (_audioService.currentSourceKey ?? '').startsWith('quran:');
@@ -174,6 +188,15 @@ class QuranMiniPlayerController extends StateNotifier<QuranMiniPlayerState> {
   }
 
   Future<void> _handlePlaybackCompleted() async {
+    if (_isAdvancingEarly) return;
+
+    final lastEarlyAdvanceAt = _lastEarlyAdvanceAt;
+    if (lastEarlyAdvanceAt != null &&
+        DateTime.now().difference(lastEarlyAdvanceAt) <
+            _staleCompletionWindow) {
+      return;
+    }
+
     if (state.playbackMode == QuranMiniPlaybackMode.surah &&
         _surahQueue.isNotEmpty &&
         _surahQueueIndex + 1 < _surahQueue.length) {
@@ -403,6 +426,7 @@ class QuranMiniPlayerController extends StateNotifier<QuranMiniPlayerState> {
     final sourceKey = 'quran:surah:${summary.number}:${ayah.numberInSurah}';
 
     _surahQueueIndex = index;
+    _currentDuration = null;
     unawaited(_prefetchAyahForGaplessPlayback(summary.number, index + 1));
 
     final resolved = await _primeSurahQueueAudio(summary.number, index);
@@ -425,10 +449,49 @@ class QuranMiniPlayerController extends StateNotifier<QuranMiniPlayerState> {
     unawaited(_prefetchUpcomingAyahsForPlayback(summary.number, index));
   }
 
+  void _handlePositionChanged(Duration position) {
+    if (state.playbackMode != QuranMiniPlaybackMode.surah ||
+        !state.isPlaying ||
+        _isAdvancingEarly ||
+        _surahQueue.isEmpty ||
+        _surahQueueIndex + 1 >= _surahQueue.length) {
+      return;
+    }
+
+    final duration = _currentDuration;
+    if (duration == null || duration <= _earlyAdvanceThreshold) return;
+
+    final remaining = duration - position;
+    if (remaining <= Duration.zero || remaining > _earlyAdvanceThreshold) {
+      return;
+    }
+
+    final summary = _surahQueueSummary;
+    if (summary == null) {
+      clear();
+      return;
+    }
+
+    _isAdvancingEarly = true;
+    _lastEarlyAdvanceAt = DateTime.now();
+    unawaited(() async {
+      try {
+        await _playSurahQueueIndex(summary, _surahQueueIndex + 1);
+      } catch (_) {
+        clear();
+      } finally {
+        _isAdvancingEarly = false;
+      }
+    }());
+  }
+
   void _clearQueueState() {
     _surahQueueSummary = null;
     _surahQueue = const [];
     _surahQueueIndex = -1;
+    _currentDuration = null;
+    _isAdvancingEarly = false;
+    _lastEarlyAdvanceAt = null;
     _resolvedSurahQueue.clear();
     _prefetchingAyahTasks.clear();
   }
@@ -461,6 +524,8 @@ class QuranMiniPlayerController extends StateNotifier<QuranMiniPlayerState> {
   void dispose() {
     _playerStateSubscription?.cancel();
     _playerCompleteSubscription?.cancel();
+    _positionSubscription?.cancel();
+    _durationSubscription?.cancel();
     super.dispose();
   }
 }
