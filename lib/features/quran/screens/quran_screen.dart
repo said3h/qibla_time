@@ -771,6 +771,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   DateTime? _lastUserListScrollAt;
   int? _lastAutoScrolledListAyahNumber;
   int? _lastObservedPlayingAyahNumber;
+  int _listAutoScrollGeneration = 0;
   final Set<int> _selectedAyahs = <int>{};
 
   static const int _maxSelectedAyahs = 5;
@@ -923,6 +924,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   }
 
   void _toggleContiguousAyahSelection(int ayahNumber) {
+    _cancelPendingListAutoScroll();
     if (_selectedAyahs.isEmpty) {
       setState(() => _selectedAyahs.add(ayahNumber));
       return;
@@ -955,6 +957,12 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     }
 
     setState(() => _selectedAyahs.add(ayahNumber));
+  }
+
+  void _cancelPendingListAutoScroll() {
+    _listAutoScrollGeneration++;
+    _lastAutoScrolledListAyahNumber = null;
+    _lastObservedPlayingAyahNumber = null;
   }
 
   void _showConsecutiveAyahWarning() {
@@ -1213,6 +1221,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   }
 
   Future<void> _jumpToInitialAyah(SurahDetail detail) async {
+    if (_isSelectionMode) return;
     if (widget.initialAyah <= 1) return;
 
     final targetIndex = detail.ayahs.indexWhere(
@@ -1222,12 +1231,13 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
 
     if (!_itemScrollController.isAttached) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (!mounted) return;
+        if (!mounted || _isSelectionMode) return;
         unawaited(_jumpToInitialAyah(detail));
       });
       return;
     }
 
+    if (_isSelectionMode) return;
     await _itemScrollController.scrollTo(
       index: targetIndex + 1,
       duration: const Duration(milliseconds: 280),
@@ -1251,8 +1261,12 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       return;
     }
 
+    final generation = _listAutoScrollGeneration;
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!mounted || _isSelectionMode || !_itemScrollController.isAttached) {
+      if (!mounted ||
+          _isSelectionMode ||
+          generation != _listAutoScrollGeneration ||
+          !_itemScrollController.isAttached) {
         return;
       }
       if (_isAyahVisibleInList(ayahNumber)) return;
@@ -1668,7 +1682,8 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
           if (_activeAyahNumber == null) {
             _lastAutoScrolledListAyahNumber = null;
             _lastObservedPlayingAyahNumber = null;
-          } else if (_isAudioPlaying &&
+          } else if (!_isSelectionMode &&
+              _isAudioPlaying &&
               _activeAyahNumber != _lastObservedPlayingAyahNumber) {
             _lastObservedPlayingAyahNumber = _activeAyahNumber;
             _scheduleActiveAyahListScroll(_activeAyahNumber!);

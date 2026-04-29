@@ -4,9 +4,12 @@ import 'package:flutter/material.dart';
 class TajweedText {
   const TajweedText._();
 
-  static const _ghunnahColor = Color(0xFF008A5A);
-  static const _maddColor = Color(0xFF006DCC);
-  static const _qalqalahColor = Color(0xFFD13F3F);
+  static const _darkGhunnahColor = Color(0xFF20C987);
+  static const _darkMaddColor = Color(0xFF5DA9FF);
+  static const _darkQalqalahColor = Color(0xFFFF6B6B);
+  static const _lightGhunnahColor = Color(0xFF006B43);
+  static const _lightMaddColor = Color(0xFF004E9A);
+  static const _lightQalqalahColor = Color(0xFFB42323);
 
   static List<InlineSpan> buildSpans({
     required String html,
@@ -56,7 +59,9 @@ class TajweedText {
         spans.add(
           TextSpan(
             text: text,
-            style: baseStyle.copyWith(color: _colorForClass(className)),
+            style: baseStyle.copyWith(
+              color: _colorForClass(className, baseStyle.color),
+            ),
           ),
         );
       }
@@ -84,14 +89,18 @@ class TajweedText {
     spans.add(TextSpan(text: text, style: baseStyle));
   }
 
-  static Color? _colorForClass(String className) {
+  static Color? _colorForClass(String className, Color? baseTextColor) {
     final normalized = className.toLowerCase().replaceAll('_', '-');
-    if (normalized.contains('ghunnah')) return _ghunnahColor;
+    final useLightPalette =
+        (baseTextColor ?? Colors.black).computeLuminance() < 0.45;
+    if (normalized.contains('ghunnah')) {
+      return useLightPalette ? _lightGhunnahColor : _darkGhunnahColor;
+    }
     if (normalized.contains('madd') || normalized.contains('madda')) {
-      return _maddColor;
+      return useLightPalette ? _lightMaddColor : _darkMaddColor;
     }
     if (normalized.contains('qalaqah') || normalized.contains('qalqalah')) {
-      return _qalqalahColor;
+      return useLightPalette ? _lightQalqalahColor : _darkQalqalahColor;
     }
     return null;
   }
