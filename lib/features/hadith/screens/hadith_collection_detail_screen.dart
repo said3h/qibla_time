@@ -104,8 +104,7 @@ class _HadithCollectionDetailScreenState
     final hadithsAsync = ref.watch(
       hadithCollectionDetailProvider(widget.collectionKey),
     );
-    final showArabicSubtitle =
-        widget.collectionArabicLabel.isNotEmpty &&
+    final showArabicSubtitle = widget.collectionArabicLabel.isNotEmpty &&
         widget.collectionArabicLabel != widget.collectionLabel;
 
     return Scaffold(
@@ -333,6 +332,7 @@ class _CollectionHadithCard extends StatelessWidget {
                           child: Text(
                             arabicReference,
                             textAlign: TextAlign.right,
+                            textDirection: TextDirection.rtl,
                             style: GoogleFonts.amiri(
                               fontSize: 11,
                               fontWeight: FontWeight.w700,
@@ -370,6 +370,7 @@ class _CollectionHadithCard extends StatelessWidget {
                         Text(
                           arabicGradeLabel,
                           textAlign: TextAlign.right,
+                          textDirection: TextDirection.rtl,
                           style: GoogleFonts.amiri(
                             fontSize: 10,
                             fontWeight: FontWeight.w700,
@@ -385,6 +386,7 @@ class _CollectionHadithCard extends StatelessWidget {
             Text(
               hadith.arabic,
               textAlign: TextAlign.right,
+              textDirection: TextDirection.rtl,
               style: GoogleFonts.amiri(
                 fontSize: 19,
                 height: 1.7,
@@ -500,9 +502,9 @@ class _CollectionHadithActions extends StatelessWidget {
 
 final hadithCollectionDetailProvider =
     FutureProvider.family<List<Hadith>, String>((ref, collection) async {
-      final language = ref.watch(currentLanguageCodeProvider);
-      return ref.watch(hadithServiceProvider).getHadithsByCollection(
+  final language = ref.watch(currentLanguageCodeProvider);
+  return ref.watch(hadithServiceProvider).getHadithsByCollection(
         collection,
         forcedLanguage: language,
       );
-    });
+});

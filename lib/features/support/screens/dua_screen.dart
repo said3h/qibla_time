@@ -185,7 +185,8 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
               fontSize: 13,
               color: tokens.textMuted,
             ),
-            prefixIcon: Icon(Icons.search, color: tokens.textSecondary, size: 20),
+            prefixIcon:
+                Icon(Icons.search, color: tokens.textSecondary, size: 20),
             suffixIcon: _searchQuery.isEmpty
                 ? null
                 : IconButton(
@@ -349,10 +350,10 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
                                       color: tokens.textPrimary,
                                     )
                                   : GoogleFonts.dmSans(
-                                fontSize: 12,
-                                color: tokens.textPrimary,
-                                fontWeight: FontWeight.w600,
-                              ),
+                                      fontSize: 12,
+                                      color: tokens.textPrimary,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                             ),
                             if (showArabicLabel)
                               Align(
@@ -360,6 +361,7 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
                                 child: Text(
                                   meta.arabicLabel,
                                   textAlign: TextAlign.right,
+                                  textDirection: TextDirection.rtl,
                                   style: GoogleFonts.amiri(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w700,
@@ -447,14 +449,12 @@ class _DuaCard extends StatelessWidget {
         ? null
         : ReligiousReferenceFormatter.buildArabicReference(dua.reference!);
     final isArabicOnly = DuaLocalePresentation.isArabicOnly(languageCode);
-    final primaryReference =
-        isArabicOnly ? arabicReference : dua.reference;
+    final primaryReference = isArabicOnly ? arabicReference : dua.reference;
     final hasArabicTitle = DuaLocalePresentation.containsArabicText(dua.title);
     final showTitle = !isArabicOnly || hasArabicTitle;
     final hasTransliteration =
         !isArabicOnly && dua.transliteration.trim().isNotEmpty;
-    final hasTranslation =
-        !isArabicOnly && dua.translation.trim().isNotEmpty;
+    final hasTranslation = !isArabicOnly && dua.translation.trim().isNotEmpty;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
@@ -503,6 +503,7 @@ class _DuaCard extends StatelessWidget {
                               child: Text(
                                 arabicReference,
                                 textAlign: TextAlign.right,
+                                textDirection: TextDirection.rtl,
                                 style: GoogleFonts.amiri(
                                   fontSize: 11,
                                   fontWeight: FontWeight.w700,
@@ -546,6 +547,7 @@ class _DuaCard extends StatelessWidget {
                     Text(
                       meta.arabicLabel,
                       textAlign: TextAlign.right,
+                      textDirection: TextDirection.rtl,
                       style: GoogleFonts.amiri(
                         fontSize: 12,
                         fontWeight: FontWeight.w700,
@@ -561,6 +563,7 @@ class _DuaCard extends StatelessWidget {
           Text(
             dua.arabicText,
             textAlign: TextAlign.right,
+            textDirection: TextDirection.rtl,
             style: GoogleFonts.amiri(
               fontSize: compact ? 17 : 19,
               color: tokens.textPrimary,

@@ -43,7 +43,8 @@ class DailyHadithWidget extends ConsumerWidget {
         final isFavorite =
             favoritesAsync.valueOrNull?.contains(hadith.id) ?? false;
         final arabicReference =
-            ReligiousReferenceFormatter.buildArabicReference(snapshot.reference);
+            ReligiousReferenceFormatter.buildArabicReference(
+                snapshot.reference);
         final arabicCollectionLabel =
             _getArabicCollectionLabel(snapshot.collection);
         final arabicGradeLabel = _getArabicGradeLabel(snapshot.grade);
@@ -54,9 +55,8 @@ class DailyHadithWidget extends ConsumerWidget {
         final gradeLabel = isArabicOnly
             ? (arabicGradeLabel ?? snapshot.grade)
             : snapshot.grade;
-        final primaryReference = isArabicOnly
-            ? (arabicReference ?? '')
-            : snapshot.reference;
+        final primaryReference =
+            isArabicOnly ? (arabicReference ?? '') : snapshot.reference;
         final isLightTheme = _isLightTheme(tokens);
         final collectionBaseColor = _getCollectionColor(snapshot.collection);
         final gradeBaseColor = _getGradeColor(snapshot.grade);
@@ -113,289 +113,291 @@ class DailyHadithWidget extends ConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-              // Header con título y colección
-              Row(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 6,
-                    ),
-                    decoration: BoxDecoration(
-                      color: _accentBackground(tokens, tokens.primary),
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(
-                        color: _blend(
-                          tokens.primary,
-                          tokens.borderMed,
-                          isLightTheme ? 0.14 : 0.2,
+                  // Header con título y colección
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 6,
                         ),
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          Icons.auto_stories_rounded,
-                          size: 14,
-                          color: tokens.primary,
-                        ),
-                        const SizedBox(width: 6),
-                        Text(
-                          l10n.hadithDailyBadge,
-                          style: GoogleFonts.dmSans(
-                            fontSize: 9,
-                            fontWeight: FontWeight.w700,
-                            letterSpacing: 0.8,
-                            color: tokens.primary,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const Spacer(),
-                  // Colección
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 6,
-                    ),
-                    decoration: BoxDecoration(
-                      color: collectionChipColor,
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(
-                        color: _blend(
-                          collectionBaseColor,
-                          tokens.borderMed,
-                          isLightTheme ? 0.16 : 0.24,
-                        ),
-                      ),
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text(
-                          collectionLabel,
-                          style: GoogleFonts.dmSans(
-                            fontSize: 9,
-                            fontWeight: FontWeight.w600,
-                            color: collectionColor,
-                          ),
-                        ),
-                        if (!isArabicOnly && arabicCollectionLabel != null)
-                          Text(
-                            arabicCollectionLabel,
-                            textAlign: TextAlign.right,
-                            style: GoogleFonts.amiri(
-                              fontSize: 11,
-                              fontWeight: FontWeight.w700,
-                              color: collectionColor,
-                            ),
-                          ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-
-              const SizedBox(height: 14),
-
-              // Texto en árabe
-              Text(
-                snapshot.arabic,
-                textAlign: TextAlign.right,
-                style: GoogleFonts.amiri(
-                  fontSize: 18,
-                  height: 1.8,
-                  color: tokens.textPrimary,
-                ),
-              ),
-
-              if (!isArabicOnly && hasTranslation)
-                const SizedBox(height: 12),
-
-              // Traducción
-              if (!isArabicOnly && hasTranslation) ...[
-                Text(
-                  snapshot.translation,
-                  style: GoogleFonts.dmSans(
-                    fontSize: 12,
-                    height: 1.5,
-                    color: tokens.textPrimary,
-                  ),
-                ),
-              ],
-
-              const SizedBox(height: 10),
-
-              // Referencia y grado de autenticidad
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        if (primaryReference.isNotEmpty)
-                          Text(
-                            primaryReference,
-                            style: GoogleFonts.dmSans(
-                              fontSize: 9,
-                              color: tokens.textSecondary,
-                            ),
-                          ),
-                        if (!isArabicOnly && arabicReference != null) ...[
-                          const SizedBox(height: 4),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: Text(
-                              arabicReference,
-                              textAlign: TextAlign.right,
-                              style: GoogleFonts.amiri(
-                                fontSize: 11,
-                                fontWeight: FontWeight.w700,
-                                color: tokens.textSecondary,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ],
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 5,
-                    ),
-                    decoration: BoxDecoration(
-                      color: gradeChipColor,
-                      borderRadius: BorderRadius.circular(6),
-                      border: Border.all(
-                        color: _blend(
-                          gradeBaseColor,
-                          tokens.borderMed,
-                          isLightTheme ? 0.16 : 0.24,
-                        ),
-                      ),
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text(
-                          gradeLabel,
-                          style: GoogleFonts.dmSans(
-                            fontSize: 8,
-                            fontWeight: FontWeight.w600,
-                            color: gradeColor,
-                          ),
-                        ),
-                        if (!isArabicOnly && arabicGradeLabel != null)
-                          Text(
-                            arabicGradeLabel,
-                            textAlign: TextAlign.right,
-                            style: GoogleFonts.amiri(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w700,
-                              color: gradeColor,
-                            ),
-                          ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-
-              const SizedBox(height: 12),
-
-              // Botones de acción
-              Row(
-                children: [
-                  Expanded(
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(10),
-                      onTap: () => showHadithSharePreviewSheet(
-                        context: context,
-                        hadith: hadith,
-                        shareService: hadithShareService,
-                        tokens: tokens,
-                      ),
-                      child: Container(
-                        height: 40,
                         decoration: BoxDecoration(
-                          color: actionSurfaceColor,
+                          color: _accentBackground(tokens, tokens.primary),
                           borderRadius: BorderRadius.circular(10),
                           border: Border.all(
                             color: _blend(
                               tokens.primary,
-                              tokens.border,
-                              isLightTheme ? 0.08 : 0.16,
+                              tokens.borderMed,
+                              isLightTheme ? 0.14 : 0.2,
                             ),
                           ),
                         ),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             Icon(
-                              Icons.share_outlined,
-                              size: 16,
-                              color: tokens.textPrimary,
+                              Icons.auto_stories_rounded,
+                              size: 14,
+                              color: tokens.primary,
                             ),
-                            const SizedBox(width: 8),
+                            const SizedBox(width: 6),
                             Text(
-                              l10n.commonShare,
+                              l10n.hadithDailyBadge,
                               style: GoogleFonts.dmSans(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w500,
-                                color: tokens.textPrimary,
+                                fontSize: 9,
+                                fontWeight: FontWeight.w700,
+                                letterSpacing: 0.8,
+                                color: tokens.primary,
                               ),
                             ),
                           ],
                         ),
                       ),
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  // Botón favoritos
-                  IconButton.filled(
-                    onPressed: () => _toggleFavorite(ref, hadith.id),
-                    icon: Icon(
-                      isFavorite
-                          ? Icons.favorite_rounded
-                          : Icons.favorite_border_rounded,
-                    ),
-                    style: IconButton.styleFrom(
-                      backgroundColor: isFavorite
-                          ? Colors.red
-                          : actionSurfaceColor,
-                      foregroundColor: isFavorite
-                          ? Colors.white
-                          : tokens.textPrimary,
-                    ),
-                  ),
-                  // Botón Hadices
-                  SizedBox(
-                    height: 40,
-                    child: FilledButton.icon(
-                      onPressed: () => _openHadithLibrary(context),
-                      icon: const Icon(
-                        Icons.auto_stories_outlined,
-                        size: 18,
-                      ),
-                      label: Text(l10n.commonHadiths),
-                      style: FilledButton.styleFrom(
-                        backgroundColor: tokens.primary,
-                        foregroundColor: Colors.white,
+                      const Spacer(),
+                      // Colección
+                      Container(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 12,
+                          horizontal: 8,
+                          vertical: 6,
+                        ),
+                        decoration: BoxDecoration(
+                          color: collectionChipColor,
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(
+                            color: _blend(
+                              collectionBaseColor,
+                              tokens.borderMed,
+                              isLightTheme ? 0.16 : 0.24,
+                            ),
+                          ),
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(
+                              collectionLabel,
+                              style: GoogleFonts.dmSans(
+                                fontSize: 9,
+                                fontWeight: FontWeight.w600,
+                                color: collectionColor,
+                              ),
+                            ),
+                            if (!isArabicOnly && arabicCollectionLabel != null)
+                              Text(
+                                arabicCollectionLabel,
+                                textAlign: TextAlign.right,
+                                textDirection: TextDirection.rtl,
+                                style: GoogleFonts.amiri(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w700,
+                                  color: collectionColor,
+                                ),
+                              ),
+                          ],
                         ),
                       ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 14),
+
+                  // Texto en árabe
+                  Text(
+                    snapshot.arabic,
+                    textAlign: TextAlign.right,
+                    textDirection: TextDirection.rtl,
+                    style: GoogleFonts.amiri(
+                      fontSize: 18,
+                      height: 1.8,
+                      color: tokens.textPrimary,
                     ),
                   ),
-                ],
-              ),
+
+                  if (!isArabicOnly && hasTranslation)
+                    const SizedBox(height: 12),
+
+                  // Traducción
+                  if (!isArabicOnly && hasTranslation) ...[
+                    Text(
+                      snapshot.translation,
+                      style: GoogleFonts.dmSans(
+                        fontSize: 12,
+                        height: 1.5,
+                        color: tokens.textPrimary,
+                      ),
+                    ),
+                  ],
+
+                  const SizedBox(height: 10),
+
+                  // Referencia y grado de autenticidad
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            if (primaryReference.isNotEmpty)
+                              Text(
+                                primaryReference,
+                                style: GoogleFonts.dmSans(
+                                  fontSize: 9,
+                                  color: tokens.textSecondary,
+                                ),
+                              ),
+                            if (!isArabicOnly && arabicReference != null) ...[
+                              const SizedBox(height: 4),
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: Text(
+                                  arabicReference,
+                                  textAlign: TextAlign.right,
+                                  textDirection: TextDirection.rtl,
+                                  style: GoogleFonts.amiri(
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w700,
+                                    color: tokens.textSecondary,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 5,
+                        ),
+                        decoration: BoxDecoration(
+                          color: gradeChipColor,
+                          borderRadius: BorderRadius.circular(6),
+                          border: Border.all(
+                            color: _blend(
+                              gradeBaseColor,
+                              tokens.borderMed,
+                              isLightTheme ? 0.16 : 0.24,
+                            ),
+                          ),
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(
+                              gradeLabel,
+                              style: GoogleFonts.dmSans(
+                                fontSize: 8,
+                                fontWeight: FontWeight.w600,
+                                color: gradeColor,
+                              ),
+                            ),
+                            if (!isArabicOnly && arabicGradeLabel != null)
+                              Text(
+                                arabicGradeLabel,
+                                textAlign: TextAlign.right,
+                                textDirection: TextDirection.rtl,
+                                style: GoogleFonts.amiri(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w700,
+                                  color: gradeColor,
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 12),
+
+                  // Botones de acción
+                  Row(
+                    children: [
+                      Expanded(
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(10),
+                          onTap: () => showHadithSharePreviewSheet(
+                            context: context,
+                            hadith: hadith,
+                            shareService: hadithShareService,
+                            tokens: tokens,
+                          ),
+                          child: Container(
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: actionSurfaceColor,
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                color: _blend(
+                                  tokens.primary,
+                                  tokens.border,
+                                  isLightTheme ? 0.08 : 0.16,
+                                ),
+                              ),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.share_outlined,
+                                  size: 16,
+                                  color: tokens.textPrimary,
+                                ),
+                                const SizedBox(width: 8),
+                                Text(
+                                  l10n.commonShare,
+                                  style: GoogleFonts.dmSans(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w500,
+                                    color: tokens.textPrimary,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      // Botón favoritos
+                      IconButton.filled(
+                        onPressed: () => _toggleFavorite(ref, hadith.id),
+                        icon: Icon(
+                          isFavorite
+                              ? Icons.favorite_rounded
+                              : Icons.favorite_border_rounded,
+                        ),
+                        style: IconButton.styleFrom(
+                          backgroundColor:
+                              isFavorite ? Colors.red : actionSurfaceColor,
+                          foregroundColor:
+                              isFavorite ? Colors.white : tokens.textPrimary,
+                        ),
+                      ),
+                      // Botón Hadices
+                      SizedBox(
+                        height: 40,
+                        child: FilledButton.icon(
+                          onPressed: () => _openHadithLibrary(context),
+                          icon: const Icon(
+                            Icons.auto_stories_outlined,
+                            size: 18,
+                          ),
+                          label: Text(l10n.commonHadiths),
+                          style: FilledButton.styleFrom(
+                            backgroundColor: tokens.primary,
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),

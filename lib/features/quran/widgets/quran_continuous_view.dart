@@ -168,7 +168,7 @@ class _QuranContinuousViewState extends State<QuranContinuousView> {
           Directionality(
             textDirection: TextDirection.rtl,
             child: RichText(
-              textAlign: TextAlign.justify,
+              textAlign: TextAlign.right,
               textDirection: TextDirection.rtl,
               text: TextSpan(children: _buildSpans()),
             ),

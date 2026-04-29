@@ -40,9 +40,8 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
   }
 
   Future<void> _checkFavorite() async {
-    final isFav = await ref
-        .read(hadithServiceProvider)
-        .isFavorite(widget.hadith.id);
+    final isFav =
+        await ref.read(hadithServiceProvider).isFavorite(widget.hadith.id);
     if (mounted) {
       setState(() => _isFavorite = isFav);
     }
@@ -182,9 +181,11 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
           Row(
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                 decoration: BoxDecoration(
-                  color: _getCollectionColor(hadith.reference).withOpacity(0.15),
+                  color:
+                      _getCollectionColor(hadith.reference).withOpacity(0.15),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Column(
@@ -216,6 +217,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
                         child: Text(
                           arabicCollectionLabel,
                           textAlign: TextAlign.right,
+                          textDirection: TextDirection.rtl,
                           style: GoogleFonts.amiri(
                             fontSize: 12,
                             fontWeight: FontWeight.w700,
@@ -249,6 +251,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
                       Text(
                         arabicGradeLabel,
                         textAlign: TextAlign.right,
+                        textDirection: TextDirection.rtl,
                         style: GoogleFonts.amiri(
                           fontSize: 11,
                           fontWeight: FontWeight.w700,
@@ -262,9 +265,9 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
           ),
           const SizedBox(height: 12),
           Text(
-                context.l10n.hadithDetailId(hadith.id),
-                style: GoogleFonts.dmSans(
-                  fontSize: 10,
+            context.l10n.hadithDetailId(hadith.id),
+            style: GoogleFonts.dmSans(
+              fontSize: 10,
               color: tokens.textSecondary,
             ),
           ),
@@ -314,6 +317,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
     return SelectableText(
       arabic,
       textAlign: TextAlign.right,
+      textDirection: TextDirection.rtl,
       style: GoogleFonts.amiri(
         fontSize: 24,
         height: 2.0,
@@ -385,6 +389,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
               child: Text(
                 arabicReference,
                 textAlign: TextAlign.right,
+                textDirection: TextDirection.rtl,
                 style: GoogleFonts.amiri(
                   fontSize: 13,
                   fontWeight: FontWeight.w700,
@@ -410,6 +415,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
                 Text(
                   arabicGradeLabel,
                   textAlign: TextAlign.right,
+                  textDirection: TextDirection.rtl,
                   style: GoogleFonts.amiri(
                     fontSize: 12,
                     fontWeight: FontWeight.w700,
@@ -469,6 +475,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
               child: Text(
                 arabicCategoryLabel,
                 textAlign: TextAlign.right,
+                textDirection: TextDirection.rtl,
                 style: GoogleFonts.amiri(
                   fontSize: 13,
                   fontWeight: FontWeight.w700,
@@ -505,7 +512,8 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
         ),
         _QuickActionButton(
           icon: _isFavorite ? Icons.favorite : Icons.favorite_border,
-          label: _isFavorite ? context.l10n.commonSaved : context.l10n.commonSave,
+          label:
+              _isFavorite ? context.l10n.commonSaved : context.l10n.commonSave,
           color: _isFavorite ? Colors.red : Colors.orange,
           onTap: _toggleFavorite,
         ),
@@ -671,7 +679,8 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
   }
 
   Future<void> _copyToClipboard(Hadith hadith) async {
-    final text = '${hadith.arabic}\n\n${hadith.translation}\n\n— ${hadith.reference}';
+    final text =
+        '${hadith.arabic}\n\n${hadith.translation}\n\n— ${hadith.reference}';
     await Clipboard.setData(ClipboardData(text: text));
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
@@ -732,8 +741,10 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
     if (refLower.contains('nasai') || refLower.contains('nasa\'i')) {
       return Colors.teal;
     }
-    if (refLower.contains('ibn majah') || refLower.contains('ibnmajah')) return Colors.indigo;
-    if (refLower.contains('malik') || refLower.contains('muwatta')) return Colors.amber;
+    if (refLower.contains('ibn majah') || refLower.contains('ibnmajah'))
+      return Colors.indigo;
+    if (refLower.contains('malik') || refLower.contains('muwatta'))
+      return Colors.amber;
     if (refLower.contains('ahmad')) return Colors.brown;
     return Colors.grey;
   }

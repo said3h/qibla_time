@@ -102,8 +102,7 @@ class _HadithCategoryDetailScreenState
         ref.watch(hadithFavoritesProvider).valueOrNull ?? const <int>{};
     final languageCode = Localizations.localeOf(context).languageCode;
     final isArabicOnly = languageCode == 'ar';
-    final showArabicSubtitle =
-        widget.categoryArabicLabel.isNotEmpty &&
+    final showArabicSubtitle = widget.categoryArabicLabel.isNotEmpty &&
         widget.categoryArabicLabel != widget.categoryLabel;
 
     return Scaffold(
@@ -173,7 +172,8 @@ class _HadithCategoryDetailScreenState
                     ],
                     const SizedBox(height: 8),
                     Text(
-                      context.l10n.hadithLibraryAllHadiths(widget.hadiths.length),
+                      context.l10n
+                          .hadithLibraryAllHadiths(widget.hadiths.length),
                       style: GoogleFonts.dmSans(
                         fontSize: 11,
                         color: tokens.textSecondary,
@@ -318,6 +318,7 @@ class _CategoryHadithCard extends StatelessWidget {
                           child: Text(
                             arabicReference,
                             textAlign: TextAlign.right,
+                            textDirection: TextDirection.rtl,
                             style: GoogleFonts.amiri(
                               fontSize: 11,
                               fontWeight: FontWeight.w700,
@@ -355,6 +356,7 @@ class _CategoryHadithCard extends StatelessWidget {
                         Text(
                           arabicGradeLabel,
                           textAlign: TextAlign.right,
+                          textDirection: TextDirection.rtl,
                           style: GoogleFonts.amiri(
                             fontSize: 10,
                             fontWeight: FontWeight.w700,
@@ -370,6 +372,7 @@ class _CategoryHadithCard extends StatelessWidget {
             Text(
               hadith.arabic,
               textAlign: TextAlign.right,
+              textDirection: TextDirection.rtl,
               style: GoogleFonts.amiri(
                 fontSize: 19,
                 height: 1.7,

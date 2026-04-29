@@ -502,6 +502,7 @@ class _HadithLibraryScreenState extends ConsumerState<HadithLibraryScreen> {
                                 child: Text(
                                   meta.arabicLabel,
                                   textAlign: TextAlign.right,
+                                  textDirection: TextDirection.rtl,
                                   style: GoogleFonts.amiri(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w700,
@@ -758,6 +759,7 @@ class _FeaturedHadithCard extends StatelessWidget {
                       Text(
                         arabicCollectionLabel,
                         textAlign: TextAlign.right,
+                        textDirection: TextDirection.rtl,
                         style: GoogleFonts.amiri(
                           fontSize: 11,
                           fontWeight: FontWeight.w700,
@@ -773,6 +775,7 @@ class _FeaturedHadithCard extends StatelessWidget {
           Text(
             hadith.arabic,
             textAlign: TextAlign.right,
+            textDirection: TextDirection.rtl,
             style: GoogleFonts.amiri(
               fontSize: 22,
               height: 1.7,
@@ -813,6 +816,7 @@ class _FeaturedHadithCard extends StatelessWidget {
                         child: Text(
                           arabicReference,
                           textAlign: TextAlign.right,
+                          textDirection: TextDirection.rtl,
                           style: GoogleFonts.amiri(
                             fontSize: 11,
                             fontWeight: FontWeight.w700,
@@ -847,6 +851,7 @@ class _FeaturedHadithCard extends StatelessWidget {
                       Text(
                         arabicGradeLabel,
                         textAlign: TextAlign.right,
+                        textDirection: TextDirection.rtl,
                         style: GoogleFonts.amiri(
                           fontSize: 10,
                           fontWeight: FontWeight.w700,
@@ -947,6 +952,7 @@ class _HadithCard extends StatelessWidget {
                           child: Text(
                             arabicReference,
                             textAlign: TextAlign.right,
+                            textDirection: TextDirection.rtl,
                             style: GoogleFonts.amiri(
                               fontSize: 11,
                               fontWeight: FontWeight.w700,
@@ -984,6 +990,7 @@ class _HadithCard extends StatelessWidget {
                         Text(
                           arabicGradeLabel,
                           textAlign: TextAlign.right,
+                          textDirection: TextDirection.rtl,
                           style: GoogleFonts.amiri(
                             fontSize: 10,
                             fontWeight: FontWeight.w700,
@@ -999,6 +1006,7 @@ class _HadithCard extends StatelessWidget {
             Text(
               hadith.arabic,
               textAlign: TextAlign.right,
+              textDirection: TextDirection.rtl,
               style: GoogleFonts.amiri(
                 fontSize: 19,
                 height: 1.7,
