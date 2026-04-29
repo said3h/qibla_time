@@ -165,12 +165,15 @@ class _QuranContinuousViewState extends State<QuranContinuousView> {
             _buildBismillah(),
             const SizedBox(height: 18),
           ],
-          Directionality(
-            textDirection: TextDirection.rtl,
-            child: RichText(
-              textAlign: TextAlign.right,
+          SizedBox(
+            width: double.infinity,
+            child: Directionality(
               textDirection: TextDirection.rtl,
-              text: TextSpan(children: _buildSpans()),
+              child: RichText(
+                textAlign: TextAlign.right,
+                textDirection: TextDirection.rtl,
+                text: TextSpan(children: _buildSpans()),
+              ),
             ),
           ),
         ],

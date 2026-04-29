@@ -772,14 +772,17 @@ class _FeaturedHadithCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 12),
-          Text(
-            hadith.arabic,
-            textAlign: TextAlign.right,
-            textDirection: TextDirection.rtl,
-            style: GoogleFonts.amiri(
-              fontSize: 22,
-              height: 1.7,
-              color: tokens.textPrimary,
+          SizedBox(
+            width: double.infinity,
+            child: Text(
+              hadith.arabic,
+              textAlign: TextAlign.right,
+              textDirection: TextDirection.rtl,
+              style: GoogleFonts.amiri(
+                fontSize: 22,
+                height: 1.7,
+                color: tokens.textPrimary,
+              ),
             ),
           ),
           if (!isArabicOnly && hasTranslation) ...[
@@ -802,11 +805,19 @@ class _FeaturedHadithCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     if (primaryReference.isNotEmpty)
-                      Text(
-                        primaryReference,
-                        style: GoogleFonts.dmSans(
-                          fontSize: 10,
-                          color: tokens.textSecondary,
+                      SizedBox(
+                        width: double.infinity,
+                        child: Text(
+                          primaryReference,
+                          textAlign:
+                              isArabicOnly ? TextAlign.right : TextAlign.left,
+                          textDirection: isArabicOnly
+                              ? TextDirection.rtl
+                              : TextDirection.ltr,
+                          style: GoogleFonts.dmSans(
+                            fontSize: 10,
+                            color: tokens.textSecondary,
+                          ),
                         ),
                       ),
                     if (!isArabicOnly && arabicReference != null) ...[
@@ -938,11 +949,19 @@ class _HadithCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       if (primaryReference.isNotEmpty)
-                        Text(
-                          primaryReference,
-                          style: GoogleFonts.dmSans(
-                            fontSize: 10,
-                            color: tokens.textSecondary,
+                        SizedBox(
+                          width: double.infinity,
+                          child: Text(
+                            primaryReference,
+                            textAlign:
+                                isArabicOnly ? TextAlign.right : TextAlign.left,
+                            textDirection: isArabicOnly
+                                ? TextDirection.rtl
+                                : TextDirection.ltr,
+                            style: GoogleFonts.dmSans(
+                              fontSize: 10,
+                              color: tokens.textSecondary,
+                            ),
                           ),
                         ),
                       if (!isArabicOnly && arabicReference != null) ...[
@@ -1003,14 +1022,17 @@ class _HadithCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 10),
-            Text(
-              hadith.arabic,
-              textAlign: TextAlign.right,
-              textDirection: TextDirection.rtl,
-              style: GoogleFonts.amiri(
-                fontSize: 19,
-                height: 1.7,
-                color: tokens.textPrimary,
+            SizedBox(
+              width: double.infinity,
+              child: Text(
+                hadith.arabic,
+                textAlign: TextAlign.right,
+                textDirection: TextDirection.rtl,
+                style: GoogleFonts.amiri(
+                  fontSize: 19,
+                  height: 1.7,
+                  color: tokens.textPrimary,
+                ),
               ),
             ),
             if (!isArabicOnly && hasTranslation) ...[

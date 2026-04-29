@@ -66,24 +66,30 @@ class QuranAyahCard extends StatelessWidget {
       return _buildPlainArabicText(style);
     }
 
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: RichText(
-        textAlign: TextAlign.right,
+    return SizedBox(
+      width: double.infinity,
+      child: Directionality(
         textDirection: TextDirection.rtl,
-        text: TextSpan(children: tajweedSpans),
+        child: RichText(
+          textAlign: TextAlign.right,
+          textDirection: TextDirection.rtl,
+          text: TextSpan(children: tajweedSpans),
+        ),
       ),
     );
   }
 
   Widget _buildPlainArabicText(TextStyle style) {
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: Text(
-        ayah.arabic,
-        textAlign: TextAlign.right,
+    return SizedBox(
+      width: double.infinity,
+      child: Directionality(
         textDirection: TextDirection.rtl,
-        style: style,
+        child: Text(
+          ayah.arabic,
+          textAlign: TextAlign.right,
+          textDirection: TextDirection.rtl,
+          style: style,
+        ),
       ),
     );
   }

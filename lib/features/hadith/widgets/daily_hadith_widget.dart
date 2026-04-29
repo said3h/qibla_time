@@ -203,14 +203,17 @@ class DailyHadithWidget extends ConsumerWidget {
                   const SizedBox(height: 14),
 
                   // Texto en árabe
-                  Text(
-                    snapshot.arabic,
-                    textAlign: TextAlign.right,
-                    textDirection: TextDirection.rtl,
-                    style: GoogleFonts.amiri(
-                      fontSize: 18,
-                      height: 1.8,
-                      color: tokens.textPrimary,
+                  SizedBox(
+                    width: double.infinity,
+                    child: Text(
+                      snapshot.arabic,
+                      textAlign: TextAlign.right,
+                      textDirection: TextDirection.rtl,
+                      style: GoogleFonts.amiri(
+                        fontSize: 18,
+                        height: 1.8,
+                        color: tokens.textPrimary,
+                      ),
                     ),
                   ),
 
@@ -240,11 +243,20 @@ class DailyHadithWidget extends ConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             if (primaryReference.isNotEmpty)
-                              Text(
-                                primaryReference,
-                                style: GoogleFonts.dmSans(
-                                  fontSize: 9,
-                                  color: tokens.textSecondary,
+                              SizedBox(
+                                width: double.infinity,
+                                child: Text(
+                                  primaryReference,
+                                  textAlign: isArabicOnly
+                                      ? TextAlign.right
+                                      : TextAlign.left,
+                                  textDirection: isArabicOnly
+                                      ? TextDirection.rtl
+                                      : TextDirection.ltr,
+                                  style: GoogleFonts.dmSans(
+                                    fontSize: 9,
+                                    color: tokens.textSecondary,
+                                  ),
                                 ),
                               ),
                             if (!isArabicOnly && arabicReference != null) ...[

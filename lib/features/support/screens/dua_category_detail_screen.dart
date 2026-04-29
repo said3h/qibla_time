@@ -316,9 +316,15 @@ class _DuaCard extends StatelessWidget {
                               ),
                           ],
                           if (showReference)
-                            Flexible(
+                            Expanded(
                               child: Text(
                                 primaryReference!,
+                                textAlign: isArabicOnly
+                                    ? TextAlign.right
+                                    : TextAlign.left,
+                                textDirection: isArabicOnly
+                                    ? TextDirection.rtl
+                                    : TextDirection.ltr,
                                 style: GoogleFonts.dmSans(
                                   fontSize: 9,
                                   color: tokens.textSecondary,
@@ -350,14 +356,17 @@ class _DuaCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 12),
-          Text(
-            dua.arabicText,
-            textAlign: TextAlign.right,
-            textDirection: TextDirection.rtl,
-            style: GoogleFonts.amiri(
-              fontSize: 19,
-              color: tokens.textPrimary,
-              height: 1.9,
+          SizedBox(
+            width: double.infinity,
+            child: Text(
+              dua.arabicText,
+              textAlign: TextAlign.right,
+              textDirection: TextDirection.rtl,
+              style: GoogleFonts.amiri(
+                fontSize: 19,
+                color: tokens.textPrimary,
+                height: 1.9,
+              ),
             ),
           ),
           if (hasTransliteration) ...[

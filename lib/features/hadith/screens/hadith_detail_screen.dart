@@ -314,14 +314,17 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
   }
 
   Widget _buildArabicText(QiblaTokens tokens, String arabic) {
-    return SelectableText(
-      arabic,
-      textAlign: TextAlign.right,
-      textDirection: TextDirection.rtl,
-      style: GoogleFonts.amiri(
-        fontSize: 24,
-        height: 2.0,
-        color: tokens.textPrimary,
+    return SizedBox(
+      width: double.infinity,
+      child: SelectableText(
+        arabic,
+        textAlign: TextAlign.right,
+        textDirection: TextDirection.rtl,
+        style: GoogleFonts.amiri(
+          fontSize: 24,
+          height: 2.0,
+          color: tokens.textPrimary,
+        ),
       ),
     );
   }
@@ -374,12 +377,18 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
           ),
           const SizedBox(height: 10),
           if (primaryReference.isNotEmpty)
-            Text(
-              primaryReference,
-              style: GoogleFonts.dmSans(
-                fontSize: 13,
-                height: 1.6,
-                color: tokens.textPrimary,
+            SizedBox(
+              width: double.infinity,
+              child: Text(
+                primaryReference,
+                textAlign: isArabicOnly ? TextAlign.right : TextAlign.left,
+                textDirection:
+                    isArabicOnly ? TextDirection.rtl : TextDirection.ltr,
+                style: GoogleFonts.dmSans(
+                  fontSize: 13,
+                  height: 1.6,
+                  color: tokens.textPrimary,
+                ),
               ),
             ),
           if (!isArabicOnly && arabicReference != null) ...[

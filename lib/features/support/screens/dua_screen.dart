@@ -489,11 +489,20 @@ class _DuaCard extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            primaryReference!,
-                            style: GoogleFonts.dmSans(
-                              fontSize: 10,
-                              color: tokens.textSecondary,
+                          SizedBox(
+                            width: double.infinity,
+                            child: Text(
+                              primaryReference!,
+                              textAlign: isArabicOnly
+                                  ? TextAlign.right
+                                  : TextAlign.left,
+                              textDirection: isArabicOnly
+                                  ? TextDirection.rtl
+                                  : TextDirection.ltr,
+                              style: GoogleFonts.dmSans(
+                                fontSize: 10,
+                                color: tokens.textSecondary,
+                              ),
                             ),
                           ),
                           if (!isArabicOnly && arabicReference != null) ...[
@@ -560,14 +569,17 @@ class _DuaCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 12),
-          Text(
-            dua.arabicText,
-            textAlign: TextAlign.right,
-            textDirection: TextDirection.rtl,
-            style: GoogleFonts.amiri(
-              fontSize: compact ? 17 : 19,
-              color: tokens.textPrimary,
-              height: 1.9,
+          SizedBox(
+            width: double.infinity,
+            child: Text(
+              dua.arabicText,
+              textAlign: TextAlign.right,
+              textDirection: TextDirection.rtl,
+              style: GoogleFonts.amiri(
+                fontSize: compact ? 17 : 19,
+                color: tokens.textPrimary,
+                height: 1.9,
+              ),
             ),
           ),
           if (hasTransliteration) ...[
