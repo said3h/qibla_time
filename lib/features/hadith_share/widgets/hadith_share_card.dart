@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../shared_share/widgets/share_branding_footer.dart';
 import '../../shared_share/widgets/share_content_badge.dart';
 import '../models/hadith_share_data.dart';
 import '../models/hadith_share_theme.dart';
@@ -136,20 +137,10 @@ class HadithShareCard extends StatelessWidget {
                 ),
               SizedBox(height: resolvedTheme.contentSpacing * 1.2),
             ],
-            SizedBox(
-              width: double.infinity,
-              child: Text(
-                data.branding.trim(),
-                textAlign: TextAlign.center,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: GoogleFonts.dmSans(
-                  fontSize: resolvedTheme.brandingFontSize,
-                  fontWeight: FontWeight.w700,
-                  letterSpacing: 1.4,
-                  color: resolvedTheme.brandingTextColor,
-                ),
-              ),
+            ShareBrandingFooter(
+              accentColor: resolvedTheme.accentColor,
+              mutedColor: resolvedTheme.brandingTextColor,
+              fontSize: resolvedTheme.brandingFontSize,
             ),
           ],
         ),
