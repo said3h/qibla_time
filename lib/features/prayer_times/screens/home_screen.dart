@@ -245,21 +245,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
+          SvgPicture.asset(
+            'assets/images/app/logo.svg',
             width: 40,
             height: 40,
-            decoration: BoxDecoration(
-              color: _blend(tokens.primary, tokens.bgSurface,
-                  _isLightTheme(tokens) ? 0.08 : 0.14),
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(
-                  color: _blend(tokens.primary, tokens.border, 0.18)),
-            ),
-            child: Icon(
-              Icons.auto_awesome_rounded,
-              size: 18,
-              color: tokens.primary,
-            ),
+            colorFilter: ColorFilter.mode(tokens.primary, BlendMode.srcIn),
           ),
           const SizedBox(width: 12),
           Expanded(

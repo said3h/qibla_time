@@ -63,6 +63,7 @@ flutter:
     - assets/hadiths/
     - assets/data/
     - assets/images/prayer_positions/
+    - assets/images/app/
 
   # Fuentes personalizadas Amiri
   fonts:

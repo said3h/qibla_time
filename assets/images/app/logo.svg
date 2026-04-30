@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Outer ring -->
+  <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="4"/>
+  <!-- North arrow -->
+  <polygon points="50,6 55,24 50,20 45,24" fill="currentColor"/>
+  <!-- South arrow -->
+  <polygon points="50,94 55,76 50,80 45,76" fill="currentColor"/>
+  <!-- East arrow -->
+  <polygon points="94,50 76,55 80,50 76,45" fill="currentColor"/>
+  <!-- West arrow -->
+  <polygon points="6,50 24,55 20,50 24,45" fill="currentColor"/>
+  <!-- Kaaba front face -->
+  <rect x="33" y="44" width="22" height="18" fill="currentColor"/>
+  <!-- Kaaba top face -->
+  <path d="M33 44 L41 36 L63 36 L55 44 Z" fill="currentColor" opacity="0.7"/>
+  <!-- Kaaba right face -->
+  <path d="M55 44 L63 36 L63 54 L55 62 Z" fill="currentColor" opacity="0.85"/>
+  <!-- Kiswa stripe -->
+  <line x1="33" y1="50" x2="55" y2="50" stroke="white" stroke-width="2.5" opacity="0.3"/>
+  <!-- Crescent -->
+  <path d="M54 68 C62 65,67 72,64 79 C60 87,48 87,42 82 C48 84,59 83,62 76 C64 70,60 66,54 68 Z" fill="currentColor"/>
+</svg>
