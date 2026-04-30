@@ -1,4 +1,4 @@
-{
+﻿{
   "@@locale": "ru",
   "appTitle": "Qibla Time",
   "commonSkip": "Пропускать",
@@ -309,7 +309,7 @@
   "commonText": "Текст",
   "commonVideo": "Видео",
   "commonRemove": "Удалять",
-  "shareBranding": "Приложение: Qibla Time",
+  "shareBranding": "Qibla Time",
   "shareReferenceLabel": "Ссылка: {reference}",
   "@shareReferenceLabel": {
     "placeholders": {

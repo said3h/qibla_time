@@ -1,4 +1,4 @@
-{
+﻿{
   "@@locale": "nl",
   "appTitle": "Qibla Time",
   "commonSkip": "Overslaan",
@@ -309,7 +309,7 @@
   "commonText": "Tekst",
   "commonVideo": "Video",
   "commonRemove": "Verwijderen",
-  "shareBranding": "App: Qibla Time",
+  "shareBranding": "Qibla Time",
   "shareReferenceLabel": "Referentie: {reference}",
   "@shareReferenceLabel": {
     "placeholders": {

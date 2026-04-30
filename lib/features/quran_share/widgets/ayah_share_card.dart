@@ -134,19 +134,44 @@ class AyahShareCard extends StatelessWidget {
                 ),
               SizedBox(height: resolvedTheme.contentSpacing * 1.2),
             ],
-            SizedBox(
-              width: double.infinity,
-              child: Text(
-                data.branding.trim(),
-                textAlign: TextAlign.center,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: GoogleFonts.dmSans(
-                  fontSize: resolvedTheme.brandingFontSize,
-                  fontWeight: FontWeight.w700,
-                  letterSpacing: 1.4,
-                  color: resolvedTheme.brandingTextColor,
+            // Branding premium con separador
+            Row(
+              children: [
+                Expanded(
+                  child: Divider(
+                    color: resolvedTheme.brandingTextColor.withOpacity(0.25),
+                    thickness: 0.5,
+                  ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 6),
+                  child: Text(
+                    '✦',
+                    style: TextStyle(
+                      fontSize: resolvedTheme.brandingFontSize * 0.65,
+                      color: resolvedTheme.brandingTextColor.withOpacity(0.45),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Divider(
+                    color: resolvedTheme.brandingTextColor.withOpacity(0.25),
+                    thickness: 0.5,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 5),
+            Text(
+              data.branding.trim(),
+              textAlign: TextAlign.center,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: GoogleFonts.dmSans(
+                fontSize: resolvedTheme.brandingFontSize,
+                fontWeight: FontWeight.w700,
+                letterSpacing: 2.8,
+                color: resolvedTheme.brandingTextColor,
               ),
             ),
           ],

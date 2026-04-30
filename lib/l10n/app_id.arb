@@ -1,4 +1,4 @@
-{
+﻿{
   "@@locale": "id",
   "appTitle": "Qibla Time",
   "commonSkip": "Lewati",
@@ -310,7 +310,7 @@
   "commonText": "Teks",
   "commonVideo": "Video",
   "commonRemove": "Hapus",
-  "shareBranding": "Aplikasi: Qibla Time",
+  "shareBranding": "Qibla Time",
   "shareReferenceLabel": "Referensi: {reference}",
   "@shareReferenceLabel": {
     "placeholders": {

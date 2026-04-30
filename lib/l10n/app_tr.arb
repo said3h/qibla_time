@@ -1,4 +1,4 @@
-{
+﻿{
   "@@locale": "tr",
   "appTitle": "Qibla Time",
   "commonSkip": "Atla",
@@ -309,7 +309,7 @@
   "commonText": "Metin",
   "commonVideo": "Video",
   "commonRemove": "Kaldırmak",
-  "shareBranding": "Uygulama: Kıble Saati",
+  "shareBranding": "Qibla Time",
   "shareReferenceLabel": "Referans: {reference}",
   "@shareReferenceLabel": {
     "placeholders": {

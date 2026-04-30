@@ -1,4 +1,4 @@
-{
+﻿{
   "@@locale": "es",
   "appTitle": "Qibla Time",
   "commonSkip": "Saltar",
@@ -309,7 +309,7 @@
   "commonText": "Texto",
   "commonVideo": "Video",
   "commonRemove": "Quitar",
-  "shareBranding": "App: Qibla Time",
+  "shareBranding": "Qibla Time",
   "shareReferenceLabel": "Referencia: {reference}",
   "@shareReferenceLabel": {
     "placeholders": {

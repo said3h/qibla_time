@@ -1,4 +1,4 @@
-{
+﻿{
   "@@locale": "ar",
   "appTitle": "قبلة تايم",
   "commonSkip": "تخطي",
@@ -309,7 +309,7 @@
   "commonText": "نص",
   "commonVideo": "فيديو",
   "commonRemove": "إزالة",
-  "shareBranding": "التطبيق: قبلة تايم",
+  "shareBranding": "Qibla Time",
   "shareReferenceLabel": "المرجع: {reference}",
   "@shareReferenceLabel": {
     "placeholders": {

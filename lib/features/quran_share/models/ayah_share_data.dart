@@ -8,7 +8,7 @@ class AyahShareData {
     required this.arabicText,
     this.translation,
     this.badgeLabel = 'QURAN',
-    this.branding = 'App: Qibla Time',
+    this.branding = 'QIBLA TIME',
   });
 
   final int surahNumber;
