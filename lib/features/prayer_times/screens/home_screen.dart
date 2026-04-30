@@ -249,7 +249,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             'assets/images/app/logo.svg',
             width: 40,
             height: 40,
-            colorFilter: ColorFilter.mode(tokens.primary, BlendMode.srcIn),
           ),
           const SizedBox(width: 12),
           Expanded(
