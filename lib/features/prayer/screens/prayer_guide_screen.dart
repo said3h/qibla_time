@@ -105,8 +105,8 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
                             isArabicOnly: isArabicOnly,
                             onOpenFatiha:
                                 page.step!.showsOpenFatiha && fatiha != null
-                                ? () => _openSurah(context, fatiha)
-                                : null,
+                                    ? () => _openSurah(context, fatiha)
+                                    : null,
                             onChooseSurah: page.step!.showsChooseSurah
                                 ? () => _showSurahPicker(
                                       context,
@@ -187,7 +187,8 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
     List<SurahSummary> surahs,
     bool isArabicOnly,
   ) async {
-    final selectableSurahs = surahs.where((surah) => surah.number >= 2).toList();
+    final selectableSurahs =
+        surahs.where((surah) => surah.number >= 2).toList();
     if (selectableSurahs.isEmpty) {
       return;
     }
@@ -416,6 +417,7 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
     void addQiyam(
       int rakaatNumber, {
       required bool includeAdditionalSurah,
+      bool showFatihaAction = true,
     }) {
       addStep(
         rakaatNumber: rakaatNumber,
@@ -427,7 +429,7 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
         positionTransliteration: 'Qiyam',
         assetPath: 'assets/images/prayer_positions/qiyam.webp',
         repetitionLabel: l10n.prayerGuideTimesOnce,
-        showsOpenFatiha: true,
+        showsOpenFatiha: showFatihaAction,
         showsChooseSurah: includeAdditionalSurah,
       );
     }
@@ -541,7 +543,7 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
         description: l10n.prayerGuideTashahhudShortDescription,
         positionArabicName: 'التشهد',
         positionTransliteration: 'Tashahhud',
-        assetPath: 'assets/images/prayer_positions/tashahhud.webp',
+        assetPath: 'assets/images/prayer_positions/tashahhud2.webp',
         repetitionLabel: l10n.prayerGuideTimesOnce,
         recitations: const [atTahiyyatRecitation],
       );
@@ -554,7 +556,7 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
         description: l10n.prayerGuideTashahhudCompleteDescription,
         positionArabicName: 'التشهد الأخير',
         positionTransliteration: 'Complete Tashahhud',
-        assetPath: 'assets/images/prayer_positions/tashahhud.webp',
+        assetPath: 'assets/images/prayer_positions/tashahhud2.webp',
         repetitionLabel: l10n.prayerGuideTimesOnce,
         note: l10n.prayerGuideTashahhudCompleteNote,
         recitations: const [
@@ -605,6 +607,7 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
       int rakaatNumber, {
       required bool includeExtraSurah,
       required bool isOpeningRakaat,
+      bool showFatihaAction = true,
     }) {
       if (isOpeningRakaat) {
         addNiyyah(rakaatNumber);
@@ -614,6 +617,7 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
       addQiyam(
         rakaatNumber,
         includeAdditionalSurah: includeExtraSurah,
+        showFatihaAction: showFatihaAction,
       );
       addRuku(rakaatNumber);
       addItidal(rakaatNumber);
@@ -631,6 +635,27 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
         addCompleteTashahhud(2);
         addTaslims(2);
       case PrayerName.dhuhr:
+        addSeparator(1);
+        addRakaatCore(1, includeExtraSurah: true, isOpeningRakaat: true);
+        addSeparator(2);
+        addRakaatCore(2, includeExtraSurah: true, isOpeningRakaat: false);
+        addShortTashahhud(2);
+        addSeparator(3);
+        addRakaatCore(
+          3,
+          includeExtraSurah: false,
+          isOpeningRakaat: false,
+          showFatihaAction: false,
+        );
+        addSeparator(4);
+        addRakaatCore(
+          4,
+          includeExtraSurah: false,
+          isOpeningRakaat: false,
+          showFatihaAction: false,
+        );
+        addCompleteTashahhud(4);
+        addTaslims(4);
       case PrayerName.asr:
       case PrayerName.isha:
         addSeparator(1);
@@ -1223,10 +1248,8 @@ class _PrayerRecitationCard extends StatelessWidget {
         l10n.prayerGuideItidalStandMeaning,
       _PrayerGuideTranslationKey.sujud => l10n.prayerGuideSujudMeaning,
       _PrayerGuideTranslationKey.jalsa => l10n.prayerGuideJalsaMeaning,
-      _PrayerGuideTranslationKey.atTahiyyat =>
-        l10n.prayerGuideTashahhudMeaning,
-      _PrayerGuideTranslationKey.salawat =>
-        l10n.prayerGuideSalawatMeaning,
+      _PrayerGuideTranslationKey.atTahiyyat => l10n.prayerGuideTashahhudMeaning,
+      _PrayerGuideTranslationKey.salawat => l10n.prayerGuideSalawatMeaning,
       _PrayerGuideTranslationKey.taslim => l10n.prayerGuideTaslimMeaning,
     };
   }

@@ -66,160 +66,163 @@ class _FocusModeScreenState extends ConsumerState<FocusModeScreen>
     final focus = ref.watch(focusProvider);
     final l10n = context.l10n;
 
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: SafeArea(
-        child: Column(
-          children: [
-            const Spacer(),
-            if (focus.dndActive)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.do_not_disturb_on,
-                    color: Colors.white.withOpacity(0.5),
-                    size: 16,
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    l10n.focusModeDndActive,
-                    style: TextStyle(
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        backgroundColor: Colors.black,
+        body: SafeArea(
+          child: Column(
+            children: [
+              const Spacer(),
+              if (focus.dndActive)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.do_not_disturb_on,
                       color: Colors.white.withOpacity(0.5),
-                      fontSize: 10,
-                      letterSpacing: 1.2,
+                      size: 16,
                     ),
-                  ),
-                ],
-              )
-            else
-              TextButton.icon(
-                onPressed: openAppSettings,
-                icon: const Icon(
-                  Icons.notifications_off,
-                  size: 14,
-                  color: Colors.amber,
-                ),
-                label: Text(
-                  l10n.focusModeOpenDndSettings,
-                  style: const TextStyle(color: Colors.amber, fontSize: 12),
-                ),
-              ),
-            const Spacer(),
-            Center(
-              child: Column(
-                children: [
-                  Text(
-                    l10n.focusModeTitle,
-                    style: TextStyle(
-                      color: Colors.white.withOpacity(0.3),
-                      fontSize: 24,
-                      letterSpacing: 4,
-                      fontWeight: FontWeight.w300,
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  Text(
-                    '${focus.rakahs}',
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 160,
-                      fontWeight: FontWeight.bold,
-                      height: 1.0,
-                    ),
-                  ),
-                  if (focus.sujudCount > 0)
+                    const SizedBox(width: 8),
                     Text(
-                      l10n.focusModeSujudCount,
+                      l10n.focusModeDndActive,
                       style: TextStyle(
-                        color: Colors.teal.withOpacity(0.7),
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  if (!focus.dndActive) ...[
-                    const SizedBox(height: 16),
-                    Text(
-                      l10n.focusModeDndHint,
-                      style: TextStyle(
-                        color: Colors.white.withOpacity(0.22),
+                        color: Colors.white.withOpacity(0.5),
                         fontSize: 10,
-                        letterSpacing: 1.4,
+                        letterSpacing: 1.2,
                       ),
-                      textAlign: TextAlign.center,
                     ),
                   ],
-                ],
-              ),
-            ),
-            const Spacer(),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 60),
-              child: GestureDetector(
-                onLongPressStart: (_) => _onExitHoldStart(),
-                onLongPressEnd: (_) => _onExitHoldEnd(),
-                onLongPressCancel: _onExitHoldEnd,
+                )
+              else
+                TextButton.icon(
+                  onPressed: openAppSettings,
+                  icon: const Icon(
+                    Icons.notifications_off,
+                    size: 14,
+                    color: Colors.amber,
+                  ),
+                  label: Text(
+                    l10n.focusModeOpenDndSettings,
+                    style: const TextStyle(color: Colors.amber, fontSize: 12),
+                  ),
+                ),
+              const Spacer(),
+              Center(
                 child: Column(
-                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    AnimatedBuilder(
-                      animation: _exitController,
-                      builder: (context, _) {
-                        return SizedBox(
-                          width: 92,
-                          height: 92,
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              CustomPaint(
-                                size: const Size.square(92),
-                                painter: _HoldRingPainter(
-                                  progress: _exitController.value,
-                                  isActive: _isExiting,
-                                ),
-                              ),
-                              Container(
-                                width: 68,
-                                height: 68,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.white.withOpacity(
-                                    _isExiting ? 0.08 : 0.05,
+                    Text(
+                      l10n.focusModeTitle,
+                      style: TextStyle(
+                        color: Colors.white.withOpacity(0.3),
+                        fontSize: 24,
+                        letterSpacing: 4,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    Text(
+                      '${focus.rakahs}',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 160,
+                        fontWeight: FontWeight.bold,
+                        height: 1.0,
+                      ),
+                    ),
+                    if (focus.sujudCount > 0)
+                      Text(
+                        l10n.focusModeSujudCount,
+                        style: TextStyle(
+                          color: Colors.teal.withOpacity(0.7),
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    if (!focus.dndActive) ...[
+                      const SizedBox(height: 16),
+                      Text(
+                        l10n.focusModeDndHint,
+                        style: TextStyle(
+                          color: Colors.white.withOpacity(0.22),
+                          fontSize: 10,
+                          letterSpacing: 1.4,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+              const Spacer(),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 60),
+                child: GestureDetector(
+                  onLongPressStart: (_) => _onExitHoldStart(),
+                  onLongPressEnd: (_) => _onExitHoldEnd(),
+                  onLongPressCancel: _onExitHoldEnd,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      AnimatedBuilder(
+                        animation: _exitController,
+                        builder: (context, _) {
+                          return SizedBox(
+                            width: 92,
+                            height: 92,
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                CustomPaint(
+                                  size: const Size.square(92),
+                                  painter: _HoldRingPainter(
+                                    progress: _exitController.value,
+                                    isActive: _isExiting,
                                   ),
-                                  border: Border.all(
+                                ),
+                                Container(
+                                  width: 68,
+                                  height: 68,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
                                     color: Colors.white.withOpacity(
-                                      _isExiting ? 0.22 : 0.12,
+                                      _isExiting ? 0.08 : 0.05,
+                                    ),
+                                    border: Border.all(
+                                      color: Colors.white.withOpacity(
+                                        _isExiting ? 0.22 : 0.12,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                child: Icon(
-                                  Icons.power_settings_new,
-                                  color: Colors.white.withOpacity(
-                                    _isExiting ? 0.96 : 0.52,
+                                  child: Icon(
+                                    Icons.power_settings_new,
+                                    color: Colors.white.withOpacity(
+                                      _isExiting ? 0.96 : 0.52,
+                                    ),
+                                    size: 30,
                                   ),
-                                  size: 30,
                                 ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      _isExiting
-                          ? l10n.focusModeReleaseToCancel
-                          : l10n.focusModeHoldToExit,
-                      style: TextStyle(
-                        color: Colors.white.withOpacity(0.4),
-                        fontSize: 14,
+                              ],
+                            ),
+                          );
+                        },
                       ),
-                    ),
-                  ],
+                      const SizedBox(height: 16),
+                      Text(
+                        _isExiting
+                            ? l10n.focusModeReleaseToCancel
+                            : l10n.focusModeHoldToExit,
+                        style: TextStyle(
+                          color: Colors.white.withOpacity(0.4),
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -272,7 +275,6 @@ class _HoldRingPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant _HoldRingPainter oldDelegate) {
-    return oldDelegate.progress != progress ||
-        oldDelegate.isActive != isActive;
+    return oldDelegate.progress != progress || oldDelegate.isActive != isActive;
   }
 }
