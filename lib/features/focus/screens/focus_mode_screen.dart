@@ -21,6 +21,7 @@ class _FocusModeScreenState extends ConsumerState<FocusModeScreen>
     with SingleTickerProviderStateMixin {
   late final AnimationController _exitController;
   bool _isExiting = false;
+  bool _allowExit = false;
 
   @override
   void initState() {
@@ -46,7 +47,13 @@ class _FocusModeScreenState extends ConsumerState<FocusModeScreen>
 
   void _closeRakaha() {
     ref.read(focusProvider.notifier).deactivate();
-    Navigator.of(context).pop();
+    setState(() => _allowExit = true);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted || !_allowExit) {
+        return;
+      }
+      Navigator.of(context).pop();
+    });
   }
 
   void _onExitHoldStart() {
@@ -67,7 +74,7 @@ class _FocusModeScreenState extends ConsumerState<FocusModeScreen>
     final l10n = context.l10n;
 
     return PopScope(
-      canPop: false,
+      canPop: _allowExit,
       child: Scaffold(
         backgroundColor: Colors.black,
         body: SafeArea(
