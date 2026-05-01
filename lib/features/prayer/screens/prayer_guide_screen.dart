@@ -417,7 +417,6 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
     void addQiyam(
       int rakaatNumber, {
       required bool includeAdditionalSurah,
-      bool showFatihaAction = true,
     }) {
       addStep(
         rakaatNumber: rakaatNumber,
@@ -429,7 +428,7 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
         positionTransliteration: 'Qiyam',
         assetPath: 'assets/images/prayer_positions/qiyam.webp',
         repetitionLabel: l10n.prayerGuideTimesOnce,
-        showsOpenFatiha: showFatihaAction,
+        showsOpenFatiha: true,
         showsChooseSurah: includeAdditionalSurah,
       );
     }
@@ -607,7 +606,6 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
       int rakaatNumber, {
       required bool includeExtraSurah,
       required bool isOpeningRakaat,
-      bool showFatihaAction = true,
     }) {
       if (isOpeningRakaat) {
         addNiyyah(rakaatNumber);
@@ -617,7 +615,6 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
       addQiyam(
         rakaatNumber,
         includeAdditionalSurah: includeExtraSurah,
-        showFatihaAction: showFatihaAction,
       );
       addRuku(rakaatNumber);
       addItidal(rakaatNumber);
@@ -645,14 +642,12 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
           3,
           includeExtraSurah: false,
           isOpeningRakaat: false,
-          showFatihaAction: false,
         );
         addSeparator(4);
         addRakaatCore(
           4,
           includeExtraSurah: false,
           isOpeningRakaat: false,
-          showFatihaAction: false,
         );
         addCompleteTashahhud(4);
         addTaslims(4);
