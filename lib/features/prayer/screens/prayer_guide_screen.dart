@@ -640,7 +640,7 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
         addSeparator(3);
         addRakaatCore(
           3,
-          includeExtraSurah: false,
+          includeExtraSurah: true,
           isOpeningRakaat: false,
         );
         addSeparator(4);
