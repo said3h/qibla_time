@@ -86,6 +86,25 @@ class QiblaTokens {
     }
   }
 
+  Color get transliterationText => primary.withValues(alpha: 0.78);
+
+  TextStyle transliterationTextStyle({
+    double fontSize = 13,
+    double height = 1.7,
+    FontStyle fontStyle = FontStyle.italic,
+    FontWeight fontWeight = FontWeight.w500,
+    double? letterSpacing,
+  }) {
+    return GoogleFonts.dmSans(
+      fontSize: fontSize,
+      height: height,
+      fontStyle: fontStyle,
+      fontWeight: fontWeight,
+      letterSpacing: letterSpacing,
+      color: transliterationText,
+    );
+  }
+
   QiblaTokens copyWith({
     Color? bgPage,
     Color? bgApp,
@@ -185,11 +204,26 @@ class QiblaThemes {
     borderMed: Color(0x21FFFFFF),
 
     // Hero dinámico
-    fajr: QiblaHero(bg: Color(0xFF0D1F35), tint: Color(0xFF1A3A5C), label: Color(0xFF6A9BB5)),
-    dhuhr: QiblaHero(bg: Color(0xFF1A2E1A), tint: Color(0xFF243824), label: Color(0xFF6A9B7A)),
-    asr: QiblaHero(bg: Color(0xFF1A2A3A), tint: Color(0xFF1E3248), label: Color(0xFF7A9AB5)),
-    maghrib: QiblaHero(bg: Color(0xFF2D1A0E), tint: Color(0xFF3D2510), label: Color(0xFFC4784A)),
-    isha: QiblaHero(bg: Color(0xFF14101E), tint: Color(0xFF1E1530), label: Color(0xFF7A6A9B)),
+    fajr: QiblaHero(
+        bg: Color(0xFF0D1F35),
+        tint: Color(0xFF1A3A5C),
+        label: Color(0xFF6A9BB5)),
+    dhuhr: QiblaHero(
+        bg: Color(0xFF1A2E1A),
+        tint: Color(0xFF243824),
+        label: Color(0xFF6A9B7A)),
+    asr: QiblaHero(
+        bg: Color(0xFF1A2A3A),
+        tint: Color(0xFF1E3248),
+        label: Color(0xFF7A9AB5)),
+    maghrib: QiblaHero(
+        bg: Color(0xFF2D1A0E),
+        tint: Color(0xFF3D2510),
+        label: Color(0xFFC4784A)),
+    isha: QiblaHero(
+        bg: Color(0xFF14101E),
+        tint: Color(0xFF1E1530),
+        label: Color(0xFF7A6A9B)),
   );
 
   // ═══════════════════════════════════════════════════════════
@@ -201,31 +235,40 @@ class QiblaThemes {
     bgApp: Color(0xFFF5F0E6),
     bgSurface: Color(0xFFFFFFFF),
     bgSurface2: Color(0xFFEDE8DC),
-
     primary: Color(0xFF8B6914),
     primaryLight: Color(0xFF6B4F0E),
     primaryBg: Color(0x1A8B6914),
     primaryBorder: Color(0x478B6914),
-
     activeBg: Color(0x298B6914),
     activeBorder: Color(0xFF8B6914),
-
     textPrimary: Color(0xFF2C2416),
     textSecondary: Color(0xFF7A6E5E),
     textMuted: Color(0xFFA89880),
-
     accent: Color(0xFF1E6B52),
     confirm: Color(0xFF8B6914),
     danger: Color(0xFF9B2222),
-
     border: Color(0x14000000),
     borderMed: Color(0x26000000),
-
-    fajr: QiblaHero(bg: Color(0xFFDDE8F0), tint: Color(0xFFC8DCE8), label: Color(0xFF4A7A9B)),
-    dhuhr: QiblaHero(bg: Color(0xFFE8F0DC), tint: Color(0xFFD4E8C8), label: Color(0xFF4A7A5A)),
-    asr: QiblaHero(bg: Color(0xFFE0E8F0), tint: Color(0xFFCCD8E8), label: Color(0xFF4A6A8B)),
-    maghrib: QiblaHero(bg: Color(0xFFF0E0C8), tint: Color(0xFFE8CCA8), label: Color(0xFF9B5A28)),
-    isha: QiblaHero(bg: Color(0xFFE0DCF0), tint: Color(0xFFCCC8E8), label: Color(0xFF5A4A8B)),
+    fajr: QiblaHero(
+        bg: Color(0xFFDDE8F0),
+        tint: Color(0xFFC8DCE8),
+        label: Color(0xFF4A7A9B)),
+    dhuhr: QiblaHero(
+        bg: Color(0xFFE8F0DC),
+        tint: Color(0xFFD4E8C8),
+        label: Color(0xFF4A7A5A)),
+    asr: QiblaHero(
+        bg: Color(0xFFE0E8F0),
+        tint: Color(0xFFCCD8E8),
+        label: Color(0xFF4A6A8B)),
+    maghrib: QiblaHero(
+        bg: Color(0xFFF0E0C8),
+        tint: Color(0xFFE8CCA8),
+        label: Color(0xFF9B5A28)),
+    isha: QiblaHero(
+        bg: Color(0xFFE0DCF0),
+        tint: Color(0xFFCCC8E8),
+        label: Color(0xFF5A4A8B)),
   );
 
   // ═══════════════════════════════════════════════════════════
@@ -237,31 +280,40 @@ class QiblaThemes {
     bgApp: Color(0xFF000000),
     bgSurface: Color(0xFF0D0D0D),
     bgSurface2: Color(0xFF1A1A1A),
-
     primary: Color(0xFFC9A84C),
     primaryLight: Color(0xFFE8C97A),
     primaryBg: Color(0x1AC9A84C),
     primaryBorder: Color(0x47C9A84C),
-
     activeBg: Color(0x33C9A84C),
     activeBorder: Color(0xFFE8C97A),
-
     textPrimary: Color(0xFFF5F2EA),
     textSecondary: Color(0xFF7A8A96),
     textMuted: Color(0xFF4A5A66),
-
     accent: Color(0xFF2A7A62),
     confirm: Color(0xFFC9A84C),
     danger: Color(0xFFB84444),
-
     border: Color(0x0FFFFFFF),
     borderMed: Color(0x1CFFFFFF),
-
-    fajr: QiblaHero(bg: Color(0xFF050D18), tint: Color(0xFF0A1A2E), label: Color(0xFF5A8AAA)),
-    dhuhr: QiblaHero(bg: Color(0xFF051005), tint: Color(0xFF0A1E0A), label: Color(0xFF5A8A6A)),
-    asr: QiblaHero(bg: Color(0xFF080D14), tint: Color(0xFF0D1828), label: Color(0xFF6A8AAA)),
-    maghrib: QiblaHero(bg: Color(0xFF150800), tint: Color(0xFF261200), label: Color(0xFFB06030)),
-    isha: QiblaHero(bg: Color(0xFF08050F), tint: Color(0xFF100A1E), label: Color(0xFF6A5A8A)),
+    fajr: QiblaHero(
+        bg: Color(0xFF050D18),
+        tint: Color(0xFF0A1A2E),
+        label: Color(0xFF5A8AAA)),
+    dhuhr: QiblaHero(
+        bg: Color(0xFF051005),
+        tint: Color(0xFF0A1E0A),
+        label: Color(0xFF5A8A6A)),
+    asr: QiblaHero(
+        bg: Color(0xFF080D14),
+        tint: Color(0xFF0D1828),
+        label: Color(0xFF6A8AAA)),
+    maghrib: QiblaHero(
+        bg: Color(0xFF150800),
+        tint: Color(0xFF261200),
+        label: Color(0xFFB06030)),
+    isha: QiblaHero(
+        bg: Color(0xFF08050F),
+        tint: Color(0xFF100A1E),
+        label: Color(0xFF6A5A8A)),
   );
 
   // ═══════════════════════════════════════════════════════════
@@ -273,31 +325,40 @@ class QiblaThemes {
     bgApp: Color(0xFF131924),
     bgSurface: Color(0xFF1B2230),
     bgSurface2: Color(0xFF222C3D),
-
     primary: Color(0xFFD4A827),
     primaryLight: Color(0xFFF0C84A),
     primaryBg: Color(0x21D4A827),
     primaryBorder: Color(0x59D4A827),
-
     activeBg: Color(0x33D4A827),
     activeBorder: Color(0xFFF0C84A),
-
     textPrimary: Color(0xFFE8E4D8),
     textSecondary: Color(0xFF8896AA),
     textMuted: Color(0xFF5A6678),
-
     accent: Color(0xFF4A8EC4),
     confirm: Color(0xFFD4A827),
     danger: Color(0xFFD4721A),
-
     border: Color(0x12FFFFFF),
     borderMed: Color(0x21FFFFFF),
-
-    fajr: QiblaHero(bg: Color(0xFF0E1A28), tint: Color(0xFF162436), label: Color(0xFF5A8AB0)),
-    dhuhr: QiblaHero(bg: Color(0xFF201A08), tint: Color(0xFF30280A), label: Color(0xFFA08828)),
-    asr: QiblaHero(bg: Color(0xFF0E1828), tint: Color(0xFF142030), label: Color(0xFF5A7AA0)),
-    maghrib: QiblaHero(bg: Color(0xFF241408), tint: Color(0xFF341E0C), label: Color(0xFFB07040)),
-    isha: QiblaHero(bg: Color(0xFF0E0E1E), tint: Color(0xFF14142E), label: Color(0xFF6A6A9A)),
+    fajr: QiblaHero(
+        bg: Color(0xFF0E1A28),
+        tint: Color(0xFF162436),
+        label: Color(0xFF5A8AB0)),
+    dhuhr: QiblaHero(
+        bg: Color(0xFF201A08),
+        tint: Color(0xFF30280A),
+        label: Color(0xFFA08828)),
+    asr: QiblaHero(
+        bg: Color(0xFF0E1828),
+        tint: Color(0xFF142030),
+        label: Color(0xFF5A7AA0)),
+    maghrib: QiblaHero(
+        bg: Color(0xFF241408),
+        tint: Color(0xFF341E0C),
+        label: Color(0xFFB07040)),
+    isha: QiblaHero(
+        bg: Color(0xFF0E0E1E),
+        tint: Color(0xFF14142E),
+        label: Color(0xFF6A6A9A)),
   );
 
   // ═══════════════════════════════════════════════════════════
@@ -309,31 +370,40 @@ class QiblaThemes {
     bgApp: Color(0xFF161616),
     bgSurface: Color(0xFF222222),
     bgSurface2: Color(0xFF2E2E2E),
-
     primary: Color(0xFFE8E8E8),
     primaryLight: Color(0xFFFFFFFF),
     primaryBg: Color(0x14FFFFFF),
     primaryBorder: Color(0x38FFFFFF),
-
     activeBg: Color(0x23FFFFFF),
     activeBorder: Color(0xFFFFFFFF),
-
     textPrimary: Color(0xFFF0EFEA),
     textSecondary: Color(0xFF909090),
     textMuted: Color(0xFF606060),
-
     accent: Color(0xFFD0D0D0),
     confirm: Color(0xFFE8E8E8),
     danger: Color(0xFFAAAAAA),
-
     border: Color(0x1AFFFFFF),
     borderMed: Color(0x33FFFFFF),
-
-    fajr: QiblaHero(bg: Color(0xFF111111), tint: Color(0xFF1A1A1A), label: Color(0xFF707070)),
-    dhuhr: QiblaHero(bg: Color(0xFF181818), tint: Color(0xFF202020), label: Color(0xFF808080)),
-    asr: QiblaHero(bg: Color(0xFF141414), tint: Color(0xFF1C1C1C), label: Color(0xFF757575)),
-    maghrib: QiblaHero(bg: Color(0xFF1C1C1C), tint: Color(0xFF242424), label: Color(0xFF888888)),
-    isha: QiblaHero(bg: Color(0xFF0E0E0E), tint: Color(0xFF161616), label: Color(0xFF686868)),
+    fajr: QiblaHero(
+        bg: Color(0xFF111111),
+        tint: Color(0xFF1A1A1A),
+        label: Color(0xFF707070)),
+    dhuhr: QiblaHero(
+        bg: Color(0xFF181818),
+        tint: Color(0xFF202020),
+        label: Color(0xFF808080)),
+    asr: QiblaHero(
+        bg: Color(0xFF141414),
+        tint: Color(0xFF1C1C1C),
+        label: Color(0xFF757575)),
+    maghrib: QiblaHero(
+        bg: Color(0xFF1C1C1C),
+        tint: Color(0xFF242424),
+        label: Color(0xFF888888)),
+    isha: QiblaHero(
+        bg: Color(0xFF0E0E0E),
+        tint: Color(0xFF161616),
+        label: Color(0xFF686868)),
   );
 
   static String currentName = 'dark';
@@ -364,14 +434,14 @@ class QiblaThemes {
 
 class AppTheme {
   final tokens = QiblaThemes.dark;
-  
+
   // Colores legacy (usando tema dark por defecto)
   static const Color primaryGreen = Color(0xFFC9A84C);
   static const Color accentGold = Color(0xFFE8C97A);
   static const Color backgroundWhite = Color(0xFF0A0E14);
   static const Color textDark = Color(0xFFF3EBD1);
   static const Color textLight = Color(0xFF9BA7B4);
-  
+
   // Nuevos colores del diseño v2
   static const Color gold = Color(0xFFC9A84C);
   static const Color goldLight = Color(0xFFE8C97A);

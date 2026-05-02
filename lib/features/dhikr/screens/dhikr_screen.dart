@@ -113,8 +113,7 @@ class _DhikrScreenState extends State<DhikrScreen> {
       _snapshot = optimistic;
       _count = completesSession ? 0 : nextCount;
       if (completesSession) {
-        _currentPhraseIndex =
-            (_currentPhraseIndex + 1) % _activePhrases.length;
+        _currentPhraseIndex = (_currentPhraseIndex + 1) % _activePhrases.length;
       }
     });
 
@@ -155,9 +154,8 @@ class _DhikrScreenState extends State<DhikrScreen> {
     final presets = daily ? _dailyGoalPresets : _sessionGoalPresets;
     final l10n = context.l10n;
     final title = daily ? l10n.dhikrDailyGoalTitle : l10n.dhikrSessionGoalTitle;
-    final helper = daily
-        ? l10n.dhikrDailyGoalHelper
-        : l10n.dhikrSessionGoalHelper;
+    final helper =
+        daily ? l10n.dhikrDailyGoalHelper : l10n.dhikrSessionGoalHelper;
 
     final selected = await showModalBottomSheet<int>(
       context: context,
@@ -432,9 +430,8 @@ class _DhikrScreenState extends State<DhikrScreen> {
               Text(
                 phrase.transliteration,
                 textAlign: TextAlign.center,
-                style: GoogleFonts.dmSans(
+                style: tokens.transliterationTextStyle(
                   fontSize: 13,
-                  color: tokens.textSecondary,
                 ),
               ),
               const SizedBox(height: 2),
@@ -818,7 +815,8 @@ class _HistoryCard extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: _HistoryStat(label: l10n.commonToday, value: '${snapshot.todayCount}'),
+                child: _HistoryStat(
+                    label: l10n.commonToday, value: '${snapshot.todayCount}'),
               ),
               Expanded(
                 child: _HistoryStat(

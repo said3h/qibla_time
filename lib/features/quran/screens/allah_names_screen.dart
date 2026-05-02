@@ -135,10 +135,8 @@ class _AllahNameCard extends StatelessWidget {
               const SizedBox(height: 4),
               Text(
                 name.transliteration,
-                style: GoogleFonts.dmSans(
+                style: tokens.transliterationTextStyle(
                   fontSize: 12,
-                  color: tokens.textSecondary,
-                  fontStyle: FontStyle.italic,
                 ),
               ),
             ],

@@ -586,10 +586,8 @@ class _DuaCard extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               dua.transliteration,
-              style: GoogleFonts.dmSans(
+              style: tokens.transliterationTextStyle(
                 fontSize: 11,
-                color: tokens.textSecondary,
-                fontStyle: FontStyle.italic,
                 height: 1.6,
               ),
             ),

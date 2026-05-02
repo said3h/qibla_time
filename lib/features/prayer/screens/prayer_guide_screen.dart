@@ -1086,10 +1086,8 @@ class _PrayerGuideStepPage extends StatelessWidget {
             Text(
               step.positionTransliteration,
               textAlign: isArabicOnly ? TextAlign.right : TextAlign.left,
-              style: GoogleFonts.dmSans(
+              style: tokens.transliterationTextStyle(
                 fontSize: 13,
-                fontStyle: FontStyle.italic,
-                color: tokens.textSecondary,
               ),
             ),
             const SizedBox(height: 12),
@@ -1201,11 +1199,9 @@ class _PrayerRecitationCard extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             recitation.transliteration,
-            style: GoogleFonts.dmSans(
+            style: tokens.transliterationTextStyle(
               fontSize: 13,
               height: 1.55,
-              fontStyle: FontStyle.italic,
-              color: tokens.textSecondary,
             ),
           ),
           const SizedBox(height: 10),
