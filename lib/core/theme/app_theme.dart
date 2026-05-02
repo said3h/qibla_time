@@ -86,7 +86,7 @@ class QiblaTokens {
     }
   }
 
-  Color get transliterationText => primary.withValues(alpha: 0.78);
+  Color get transliterationText => textSecondary;
 
   TextStyle transliterationTextStyle({
     double fontSize = 13,
