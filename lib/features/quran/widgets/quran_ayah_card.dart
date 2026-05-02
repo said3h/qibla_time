@@ -44,7 +44,7 @@ class QuranAyahCard extends StatelessWidget {
   final VoidCallback onToggleBookmark;
   final EdgeInsets margin;
 
-  Widget _buildArabicText() {
+  Widget _buildArabicText(BuildContext context) {
     final style = GoogleFonts.amiri(
       fontSize: 22,
       height: 1.8,
@@ -73,6 +73,7 @@ class QuranAyahCard extends StatelessWidget {
         child: RichText(
           textAlign: TextAlign.right,
           textDirection: TextDirection.rtl,
+          textScaler: MediaQuery.textScalerOf(context),
           text: TextSpan(children: tajweedSpans),
         ),
       ),
@@ -242,7 +243,7 @@ class QuranAyahCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 12),
-          _buildArabicText(),
+          _buildArabicText(context),
           if (ayah.transliteration.trim().isNotEmpty) ...[
             const SizedBox(height: 6),
             Text(

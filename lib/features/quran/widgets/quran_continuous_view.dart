@@ -172,6 +172,7 @@ class _QuranContinuousViewState extends State<QuranContinuousView> {
               child: RichText(
                 textAlign: TextAlign.right,
                 textDirection: TextDirection.rtl,
+                textScaler: MediaQuery.textScalerOf(context),
                 text: TextSpan(children: _buildSpans()),
               ),
             ),
