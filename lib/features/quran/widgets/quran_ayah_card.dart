@@ -252,7 +252,7 @@ class QuranAyahCard extends StatelessWidget {
                 fontSize: 13,
                 height: 1.7,
                 fontStyle: FontStyle.italic,
-                color: tokens.textSecondary,
+                color: tokens.primary.withValues(alpha: 0.82),
               ),
             ),
           ],
