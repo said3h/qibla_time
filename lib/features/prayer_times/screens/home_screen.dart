@@ -2571,7 +2571,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       (
         icon: null,
         svgAsset: _sujudIconAsset,
-        label: 'Rakaha',
+        label: l10n.focusModeTitle,
         destination: const FocusModeScreen(),
       ),
       (
