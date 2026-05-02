@@ -209,10 +209,9 @@ class DailyHadithWidget extends ConsumerWidget {
                       snapshot.arabic,
                       textAlign: TextAlign.right,
                       textDirection: TextDirection.rtl,
-                      style: GoogleFonts.amiri(
+                      style: tokens.arabicTextStyle(
                         fontSize: 18,
                         height: 1.8,
-                        color: tokens.textPrimary,
                       ),
                     ),
                   ),

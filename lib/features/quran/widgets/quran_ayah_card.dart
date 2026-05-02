@@ -45,10 +45,9 @@ class QuranAyahCard extends StatelessWidget {
   final EdgeInsets margin;
 
   Widget _buildArabicText(BuildContext context) {
-    final style = GoogleFonts.amiri(
+    final style = tokens.arabicTextStyle(
       fontSize: 22,
       height: 1.8,
-      color: tokens.textPrimary,
     );
 
     if (!showTajweed || ayah.tajweedHtml.trim().isEmpty) {

@@ -362,9 +362,8 @@ class _DuaCard extends StatelessWidget {
               dua.arabicText,
               textAlign: TextAlign.right,
               textDirection: TextDirection.rtl,
-              style: GoogleFonts.amiri(
+              style: tokens.arabicTextStyle(
                 fontSize: 19,
-                color: tokens.textPrimary,
                 height: 1.9,
               ),
             ),

@@ -207,10 +207,9 @@ class _QuranContinuousViewState extends State<QuranContinuousView> {
       final activeBackground =
           isActiveAyah ? widget.tokens.primary.withOpacity(0.13) : null;
 
-      final ayahStyle = GoogleFonts.amiri(
+      final ayahStyle = widget.tokens.arabicTextStyle(
         fontSize: 27,
         height: 2.15,
-        color: widget.tokens.textPrimary,
         backgroundColor: activeBackground,
         fontWeight: isActiveAyah ? FontWeight.w700 : FontWeight.w400,
       );

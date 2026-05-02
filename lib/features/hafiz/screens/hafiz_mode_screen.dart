@@ -316,10 +316,8 @@ class _HafizPracticeScreenState extends ConsumerState<HafizPracticeScreen> {
                         child: Text(
                           currentAyah.arabic,
                           textAlign: TextAlign.right,
-                          style: GoogleFonts.amiri(
-                              fontSize: 24,
-                              height: 1.8,
-                              color: tokens.textPrimary),
+                          style:
+                              tokens.arabicTextStyle(fontSize: 24, height: 1.8),
                         ),
                       ),
                       if (currentAyah.transliteration.trim().isNotEmpty) ...[

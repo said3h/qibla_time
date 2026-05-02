@@ -88,6 +88,23 @@ class QiblaTokens {
 
   Color get transliterationText => primary.withValues(alpha: 0.78);
 
+  Color get arabicText => primaryLight;
+
+  TextStyle arabicTextStyle({
+    double fontSize = 22,
+    double height = 1.8,
+    FontWeight fontWeight = FontWeight.w400,
+    Color? backgroundColor,
+  }) {
+    return GoogleFonts.amiri(
+      fontSize: fontSize,
+      height: height,
+      fontWeight: fontWeight,
+      color: arabicText,
+      backgroundColor: backgroundColor,
+    );
+  }
+
   TextStyle transliterationTextStyle({
     double fontSize = 13,
     double height = 1.7,

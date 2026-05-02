@@ -383,10 +383,9 @@ class _CategoryHadithCard extends StatelessWidget {
                 hadith.arabic,
                 textAlign: TextAlign.right,
                 textDirection: TextDirection.rtl,
-                style: GoogleFonts.amiri(
+                style: tokens.arabicTextStyle(
                   fontSize: 19,
                   height: 1.7,
-                  color: tokens.textPrimary,
                 ),
               ),
             ),

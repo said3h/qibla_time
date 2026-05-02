@@ -320,10 +320,9 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
         arabic,
         textAlign: TextAlign.right,
         textDirection: TextDirection.rtl,
-        style: GoogleFonts.amiri(
+        style: tokens.arabicTextStyle(
           fontSize: 24,
           height: 2.0,
-          color: tokens.textPrimary,
         ),
       ),
     );
