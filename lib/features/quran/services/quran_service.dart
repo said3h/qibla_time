@@ -66,11 +66,45 @@ class QuranService {
   // ── Obtener detalle de una sura ─────────────────────────────
 
   Future<SurahLoadResult> getSurahDetail(SurahSummary summary) async {
+    final languageCode = _currentLanguage;
+    if (_normalizeLanguageCode(languageCode) == 'es') {
+      try {
+        final localResult = await _fetchFromLocal(
+          summary.number,
+          languageCode: languageCode,
+        );
+        if (localResult.source == SurahLoadSource.offline) {
+          AppLogger.info(
+            'Spanish Quran translation loaded from local asset for surah ${summary.number}.',
+          );
+          return localResult;
+        }
+
+        AppLogger.warning(
+          'Spanish Quran local asset unavailable for surah ${summary.number}; using API fallback.',
+        );
+      } catch (error, stackTrace) {
+        AppLogger.warning(
+          'Spanish Quran local asset failed for surah ${summary.number}; using API fallback.',
+          error: error,
+          stackTrace: stackTrace,
+        );
+      }
+
+      return SurahLoadResult(
+        detail: await _fetchFromApi(
+          summary,
+          languageCode: languageCode,
+        ),
+        source: SurahLoadSource.online,
+      );
+    }
+
     try {
       return SurahLoadResult(
         detail: await _fetchFromApi(
           summary,
-          languageCode: _currentLanguage,
+          languageCode: languageCode,
         ),
         source: SurahLoadSource.online,
       );
@@ -83,7 +117,7 @@ class QuranService {
       // API falló → fallback al JSON local
       return _fetchFromLocal(
         summary.number,
-        languageCode: _currentLanguage,
+        languageCode: languageCode,
       );
     }
   }
