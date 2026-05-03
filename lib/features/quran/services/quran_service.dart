@@ -68,36 +68,7 @@ class QuranService {
   Future<SurahLoadResult> getSurahDetail(SurahSummary summary) async {
     final languageCode = _currentLanguage;
     if (_normalizeLanguageCode(languageCode) == 'es') {
-      try {
-        final localResult = await _fetchFromLocal(
-          summary.number,
-          languageCode: languageCode,
-        );
-        if (localResult.source == SurahLoadSource.offline) {
-          AppLogger.info(
-            'Spanish Quran translation loaded from local asset for surah ${summary.number}.',
-          );
-          return localResult;
-        }
-
-        AppLogger.warning(
-          'Spanish Quran local asset unavailable for surah ${summary.number}; using API fallback.',
-        );
-      } catch (error, stackTrace) {
-        AppLogger.warning(
-          'Spanish Quran local asset failed for surah ${summary.number}; using API fallback.',
-          error: error,
-          stackTrace: stackTrace,
-        );
-      }
-
-      return SurahLoadResult(
-        detail: await _fetchFromApi(
-          summary,
-          languageCode: languageCode,
-        ),
-        source: SurahLoadSource.online,
-      );
+      return _fetchSpanishDetail(summary);
     }
 
     try {
@@ -120,6 +91,118 @@ class QuranService {
         languageCode: languageCode,
       );
     }
+  }
+
+  Future<SurahLoadResult> _fetchSpanishDetail(SurahSummary summary) async {
+    try {
+      final localResult = await _fetchFromLocal(
+        summary.number,
+        languageCode: 'es',
+      );
+      if (localResult.source != SurahLoadSource.offline) {
+        AppLogger.warning(
+          'Spanish Quran local asset unavailable for surah ${summary.number}; using API fallback.',
+        );
+        return SurahLoadResult(
+          detail: await _fetchFromApi(
+            summary,
+            languageCode: 'es',
+          ),
+          source: SurahLoadSource.online,
+        );
+      }
+
+      AppLogger.info(
+        'Spanish Quran translation loaded from local asset for surah ${summary.number}.',
+      );
+
+      try {
+        final apiDetail = await _fetchFromApi(
+          summary,
+          languageCode: 'en',
+        );
+        AppLogger.info(
+          'Quran Arabic and tajweed loaded from API for Spanish surah ${summary.number}.',
+        );
+        return SurahLoadResult(
+          detail: _combineArabicWithSpanishTranslation(
+            apiDetail: apiDetail,
+            spanishDetail: localResult.detail,
+          ),
+          source: SurahLoadSource.online,
+        );
+      } catch (error, stackTrace) {
+        AppLogger.warning(
+          'Quran Arabic/tajweed API unavailable for Spanish surah ${summary.number}; using local Spanish fallback without tajweed.',
+          error: error,
+          stackTrace: stackTrace,
+        );
+        return localResult;
+      }
+    } catch (error, stackTrace) {
+      AppLogger.warning(
+        'Spanish Quran local asset failed for surah ${summary.number}; using API fallback.',
+        error: error,
+        stackTrace: stackTrace,
+      );
+      return SurahLoadResult(
+        detail: await _fetchFromApi(
+          summary,
+          languageCode: 'es',
+        ),
+        source: SurahLoadSource.online,
+      );
+    }
+  }
+
+  SurahDetail _combineArabicWithSpanishTranslation({
+    required SurahDetail apiDetail,
+    required SurahDetail spanishDetail,
+  }) {
+    if (apiDetail.ayahs.length != spanishDetail.ayahs.length) {
+      throw FormatException(
+        'Cannot combine Quran data: API has ${apiDetail.ayahs.length} ayahs and local Spanish has ${spanishDetail.ayahs.length}.',
+      );
+    }
+
+    final spanishByAyah = <int, SurahAyah>{
+      for (final ayah in spanishDetail.ayahs) ayah.numberInSurah: ayah,
+    };
+
+    final combinedAyahs = apiDetail.ayahs.map((apiAyah) {
+      final spanishAyah = spanishByAyah[apiAyah.numberInSurah];
+      if (spanishAyah == null || spanishAyah.translation.trim().isEmpty) {
+        throw FormatException(
+          'Cannot combine Quran data: missing local Spanish translation for ayah ${apiDetail.summary.number}:${apiAyah.numberInSurah}.',
+        );
+      }
+
+      return SurahAyah(
+        number: apiAyah.number,
+        numberInSurah: apiAyah.numberInSurah,
+        arabic: apiAyah.arabic,
+        transliteration: apiAyah.transliteration.isNotEmpty
+            ? apiAyah.transliteration
+            : spanishAyah.transliteration,
+        translation: spanishAyah.translation,
+        audioUrl: apiAyah.audioUrl.isNotEmpty
+            ? apiAyah.audioUrl
+            : spanishAyah.audioUrl,
+        tajweedHtml: apiAyah.tajweedHtml,
+      );
+    }).toList();
+
+    final detail = SurahDetail(
+      summary: apiDetail.summary,
+      ayahs: combinedAyahs,
+    );
+    _validateQuranDetail(
+      detail,
+      expectedAyahCount: apiDetail.summary.ayahCount,
+      languageCode: 'es',
+      source: 'API Arabic + local Spanish',
+    );
+    return detail;
   }
 
   // ── API online ──────────────────────────────────────────────
