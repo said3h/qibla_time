@@ -38,6 +38,24 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
     super.dispose();
   }
 
+  bool _shouldShowSurahChoiceInQiyam(int rakaatNumber) {
+    return rakaatNumber <= 2 ||
+        _isFinalQiyamRakaah(widget.prayerName, rakaatNumber);
+  }
+
+  bool _isFinalQiyamRakaah(PrayerName prayer, int rakaatNumber) {
+    switch (prayer) {
+      case PrayerName.fajr:
+        return false;
+      case PrayerName.dhuhr:
+      case PrayerName.asr:
+      case PrayerName.isha:
+        return rakaatNumber == 3 || rakaatNumber == 4;
+      case PrayerName.maghrib:
+        return rakaatNumber == 3;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
@@ -626,27 +644,43 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
     switch (widget.prayerName) {
       case PrayerName.fajr:
         addSeparator(1);
-        addRakaatCore(1, includeExtraSurah: true, isOpeningRakaat: true);
+        addRakaatCore(
+          1,
+          includeExtraSurah: _shouldShowSurahChoiceInQiyam(1),
+          isOpeningRakaat: true,
+        );
         addSeparator(2);
-        addRakaatCore(2, includeExtraSurah: true, isOpeningRakaat: false);
+        addRakaatCore(
+          2,
+          includeExtraSurah: _shouldShowSurahChoiceInQiyam(2),
+          isOpeningRakaat: false,
+        );
         addCompleteTashahhud(2);
         addTaslims(2);
       case PrayerName.dhuhr:
         addSeparator(1);
-        addRakaatCore(1, includeExtraSurah: true, isOpeningRakaat: true);
+        addRakaatCore(
+          1,
+          includeExtraSurah: _shouldShowSurahChoiceInQiyam(1),
+          isOpeningRakaat: true,
+        );
         addSeparator(2);
-        addRakaatCore(2, includeExtraSurah: true, isOpeningRakaat: false);
+        addRakaatCore(
+          2,
+          includeExtraSurah: _shouldShowSurahChoiceInQiyam(2),
+          isOpeningRakaat: false,
+        );
         addShortTashahhud(2);
         addSeparator(3);
         addRakaatCore(
           3,
-          includeExtraSurah: true,
+          includeExtraSurah: _shouldShowSurahChoiceInQiyam(3),
           isOpeningRakaat: false,
         );
         addSeparator(4);
         addRakaatCore(
           4,
-          includeExtraSurah: true,
+          includeExtraSurah: _shouldShowSurahChoiceInQiyam(4),
           isOpeningRakaat: false,
         );
         addCompleteTashahhud(4);
@@ -654,24 +688,52 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
       case PrayerName.asr:
       case PrayerName.isha:
         addSeparator(1);
-        addRakaatCore(1, includeExtraSurah: true, isOpeningRakaat: true);
+        addRakaatCore(
+          1,
+          includeExtraSurah: _shouldShowSurahChoiceInQiyam(1),
+          isOpeningRakaat: true,
+        );
         addSeparator(2);
-        addRakaatCore(2, includeExtraSurah: true, isOpeningRakaat: false);
+        addRakaatCore(
+          2,
+          includeExtraSurah: _shouldShowSurahChoiceInQiyam(2),
+          isOpeningRakaat: false,
+        );
         addShortTashahhud(2);
         addSeparator(3);
-        addRakaatCore(3, includeExtraSurah: false, isOpeningRakaat: false);
+        addRakaatCore(
+          3,
+          includeExtraSurah: _shouldShowSurahChoiceInQiyam(3),
+          isOpeningRakaat: false,
+        );
         addSeparator(4);
-        addRakaatCore(4, includeExtraSurah: false, isOpeningRakaat: false);
+        addRakaatCore(
+          4,
+          includeExtraSurah: _shouldShowSurahChoiceInQiyam(4),
+          isOpeningRakaat: false,
+        );
         addCompleteTashahhud(4);
         addTaslims(4);
       case PrayerName.maghrib:
         addSeparator(1);
-        addRakaatCore(1, includeExtraSurah: true, isOpeningRakaat: true);
+        addRakaatCore(
+          1,
+          includeExtraSurah: _shouldShowSurahChoiceInQiyam(1),
+          isOpeningRakaat: true,
+        );
         addSeparator(2);
-        addRakaatCore(2, includeExtraSurah: true, isOpeningRakaat: false);
+        addRakaatCore(
+          2,
+          includeExtraSurah: _shouldShowSurahChoiceInQiyam(2),
+          isOpeningRakaat: false,
+        );
         addShortTashahhud(2);
         addSeparator(3);
-        addRakaatCore(3, includeExtraSurah: false, isOpeningRakaat: false);
+        addRakaatCore(
+          3,
+          includeExtraSurah: _shouldShowSurahChoiceInQiyam(3),
+          isOpeningRakaat: false,
+        );
         addCompleteTashahhud(3);
         addTaslims(3);
     }
