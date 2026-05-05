@@ -403,6 +403,8 @@
   "quranDailyVerseFallbackReference": "Al-Baqarah [2:255]",
   "quranTitle": "Al-Quran",
   "quranSubtitle": "114 surah · membaca berkelanjutan",
+  "quranSearchHint": "Cari surah…",
+  "quranSearchEmpty": "Tidak ada surah yang ditemukan.",
   "quranHafizLabel": "Hafiz",
   "quranUtilityAyatAlKursi": "Ayat Kursi",
   "quranUtilityAllahNames": "99 nama",

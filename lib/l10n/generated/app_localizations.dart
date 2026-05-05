@@ -1857,6 +1857,18 @@ abstract class AppLocalizations {
   /// **'114 suras · lectura continua'**
   String get quranSubtitle;
 
+  /// No description provided for @quranSearchHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Buscar sura…'**
+  String get quranSearchHint;
+
+  /// No description provided for @quranSearchEmpty.
+  ///
+  /// In es, this message translates to:
+  /// **'No se encontraron suras.'**
+  String get quranSearchEmpty;
+
   /// No description provided for @quranHafizLabel.
   ///
   /// In es, this message translates to:

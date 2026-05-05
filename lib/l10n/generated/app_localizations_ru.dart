@@ -981,6 +981,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String get quranSubtitle => '114 сур · непрерывное чтение';
 
   @override
+  String get quranSearchHint => 'Поиск суры…';
+
+  @override
+  String get quranSearchEmpty => 'Сур не найдено.';
+
+  @override
   String get quranHafizLabel => 'Хафиз';
 
   @override

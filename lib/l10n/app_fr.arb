@@ -401,6 +401,8 @@
   "quranDailyVerseFallbackReference": "Al-Baqara [2:255]",
   "quranTitle": "Coran",
   "quranSubtitle": "114 sourates à lecture continue",
+  "quranSearchHint": "Rechercher une sourate…",
+  "quranSearchEmpty": "Aucune sourate trouvée.",
   "quranHafizLabel": "Hafiz",
   "quranUtilityAyatAlKursi": "Ayat al-Kursi",
   "quranUtilityAllahNames": "99 noms",

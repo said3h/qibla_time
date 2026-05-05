@@ -402,6 +402,8 @@
   "quranDailyVerseFallbackReference": "Al-Baqara [2:255]",
   "quranTitle": "Corano",
   "quranSubtitle": "114 sure · lettura continua",
+  "quranSearchHint": "Cerca una sura…",
+  "quranSearchEmpty": "Nessuna sura trovata.",
   "quranHafizLabel": "Hafiz",
   "quranUtilityAyatAlKursi": "Ayat al-Kursi",
   "quranUtilityAllahNames": "99 nomi",

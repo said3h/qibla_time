@@ -968,6 +968,12 @@ class AppLocalizationsTr extends AppLocalizations {
   String get quranSubtitle => '114 sure · sürekli okuma';
 
   @override
+  String get quranSearchHint => 'Sure ara…';
+
+  @override
+  String get quranSearchEmpty => 'Sure bulunamadı.';
+
+  @override
   String get quranHafizLabel => 'Hafız';
 
   @override

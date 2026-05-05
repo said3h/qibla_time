@@ -973,6 +973,12 @@ class AppLocalizationsPt extends AppLocalizations {
   String get quranSubtitle => '114 suratas · leitura contínua';
 
   @override
+  String get quranSearchHint => 'Pesquisar surata…';
+
+  @override
+  String get quranSearchEmpty => 'Nenhuma surata encontrada.';
+
+  @override
   String get quranHafizLabel => 'Hafiz';
 
   @override

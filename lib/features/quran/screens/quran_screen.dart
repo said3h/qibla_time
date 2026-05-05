@@ -28,11 +28,47 @@ import '../services/quran_reader_preferences.dart';
 import '../services/quran_service.dart';
 import 'downloaded_surahs_screen.dart';
 
-class QuranScreen extends ConsumerWidget {
+class QuranScreen extends ConsumerStatefulWidget {
   const QuranScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<QuranScreen> createState() => _QuranScreenState();
+}
+
+class _QuranScreenState extends ConsumerState<QuranScreen> {
+  final TextEditingController _searchController = TextEditingController();
+  String _searchQuery = '';
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  List<SurahSummary> _filterSurahs(List<SurahSummary> surahs) {
+    final query = _searchQuery.trim();
+    if (query.isEmpty) return surahs;
+
+    final queryLower = query.toLowerCase();
+    final queryNumber = int.tryParse(query);
+
+    return surahs.where((surah) {
+      if (queryNumber != null && surah.number == queryNumber) return true;
+      if (surah.nameLatin.toLowerCase().contains(queryLower)) return true;
+      if (surah.nameArabic.contains(query)) return true;
+      return false;
+    }).toList();
+  }
+
+  SurahSummary _summaryFor(List<SurahSummary> surahs, int surahNumber) {
+    return surahs.firstWhere(
+      (surah) => surah.number == surahNumber,
+      orElse: () => surahs.first,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final l10n = context.l10n;
     final tokens = QiblaThemes.current;
     final surahs = ref.watch(quranSurahsProvider);
@@ -43,6 +79,7 @@ class QuranScreen extends ConsumerWidget {
     final favoriteDownloadedSurahs =
         ref.watch(favoriteDownloadedSurahsProvider).valueOrNull ??
             const <int>{};
+    final filteredSurahs = _filterSurahs(surahs);
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
@@ -167,36 +204,129 @@ class QuranScreen extends ConsumerWidget {
                 );
               },
             ),
-            const SizedBox(height: 16),
-            ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: surahs.length,
-              itemBuilder: (context, index) {
-                final surah = surahs[index];
-                return _SurahTile(
-                  surah: surah,
-                  lastReading: lastReading,
-                  bookmarks: bookmarks,
-                  isDownloaded: downloadedSurahs.contains(surah.number),
-                  isDownloadedFavorite:
-                      favoriteDownloadedSurahs.contains(surah.number),
-                );
-              },
+            const SizedBox(height: 12),
+            _SurahSearchBar(
+              controller: _searchController,
+              query: _searchQuery,
+              onChanged: (value) => setState(() => _searchQuery = value),
             ),
+            const SizedBox(height: 8),
+            if (filteredSurahs.isEmpty)
+              _QuranSearchEmpty(tokens: tokens)
+            else
+              ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: filteredSurahs.length,
+                itemBuilder: (context, index) {
+                  final surah = filteredSurahs[index];
+                  return _SurahTile(
+                    surah: surah,
+                    lastReading: lastReading,
+                    bookmarks: bookmarks,
+                    isDownloaded: downloadedSurahs.contains(surah.number),
+                    isDownloadedFavorite:
+                        favoriteDownloadedSurahs.contains(surah.number),
+                  );
+                },
+              ),
           ],
         ),
       ),
     );
   }
+}
 
-  SurahSummary _summaryFor(List<SurahSummary> surahs, int surahNumber) {
-    return surahs.firstWhere(
-      (surah) => surah.number == surahNumber,
-      orElse: () => surahs.first,
+// ── Surah search bar ──────────────────────────────────────────
+
+class _SurahSearchBar extends StatelessWidget {
+  const _SurahSearchBar({
+    required this.controller,
+    required this.query,
+    required this.onChanged,
+  });
+
+  final TextEditingController controller;
+  final String query;
+  final ValueChanged<String> onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = QiblaThemes.current;
+    final l10n = context.l10n;
+    return Container(
+      decoration: BoxDecoration(
+        color: tokens.bgSurface,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: tokens.border),
+      ),
+      child: TextField(
+        controller: controller,
+        onChanged: onChanged,
+        style: GoogleFonts.dmSans(
+          fontSize: 14,
+          color: tokens.textPrimary,
+        ),
+        decoration: InputDecoration(
+          hintText: l10n.quranSearchHint,
+          hintStyle: GoogleFonts.dmSans(
+            fontSize: 14,
+            color: tokens.textMuted,
+          ),
+          prefixIcon: Icon(Icons.search_rounded, color: tokens.textMuted),
+          suffixIcon: query.isNotEmpty
+              ? IconButton(
+                  icon: Icon(Icons.clear_rounded, color: tokens.textMuted),
+                  onPressed: () {
+                    controller.clear();
+                    onChanged('');
+                  },
+                )
+              : null,
+          border: InputBorder.none,
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 14,
+          ),
+        ),
+      ),
     );
   }
 }
+
+class _QuranSearchEmpty extends StatelessWidget {
+  const _QuranSearchEmpty({required this.tokens});
+
+  final QiblaTokens tokens;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 48),
+      child: Column(
+        children: [
+          Icon(
+            Icons.search_off_rounded,
+            size: 52,
+            color: tokens.textMuted,
+          ),
+          const SizedBox(height: 14),
+          Text(
+            l10n.quranSearchEmpty,
+            style: GoogleFonts.dmSans(
+              fontSize: 14,
+              color: tokens.textSecondary,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ── Utility row ────────────────────────────────────────────────
 
 class _QuranUtilityRow extends StatelessWidget {
   const _QuranUtilityRow({

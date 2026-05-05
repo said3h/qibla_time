@@ -402,6 +402,8 @@
   "quranDailyVerseFallbackReference": "البقرة [2:255]",
   "quranTitle": "القرآن",
   "quranSubtitle": "114 سورة · قراءة متواصلة",
+  "quranSearchHint": "ابحث عن سورة…",
+  "quranSearchEmpty": "لم يتم العثور على سور.",
   "quranHafizLabel": "حافظ",
   "quranUtilityAyatAlKursi": "آية الكرسي",
   "quranUtilityAllahNames": "99 اسمًا",

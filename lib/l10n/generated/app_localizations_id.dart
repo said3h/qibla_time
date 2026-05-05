@@ -973,6 +973,12 @@ class AppLocalizationsId extends AppLocalizations {
   String get quranSubtitle => '114 surah · membaca berkelanjutan';
 
   @override
+  String get quranSearchHint => 'Cari surah…';
+
+  @override
+  String get quranSearchEmpty => 'Tidak ada surah yang ditemukan.';
+
+  @override
   String get quranHafizLabel => 'Hafiz';
 
   @override

@@ -975,6 +975,12 @@ class AppLocalizationsNl extends AppLocalizations {
   String get quranSubtitle => '114 soerahs · doorlopend lezen';
 
   @override
+  String get quranSearchHint => 'Zoek een soera…';
+
+  @override
+  String get quranSearchEmpty => 'Geen soera\'s gevonden.';
+
+  @override
   String get quranHafizLabel => 'Hafiz';
 
   @override

@@ -966,6 +966,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get quranSubtitle => '114 surahs · continuous reading';
 
   @override
+  String get quranSearchHint => 'Search surah…';
+
+  @override
+  String get quranSearchEmpty => 'No surahs found.';
+
+  @override
   String get quranHafizLabel => 'Hafiz';
 
   @override

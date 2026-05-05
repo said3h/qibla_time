@@ -402,6 +402,8 @@
   "quranDailyVerseFallbackReference": "El-Bakara [2:255]",
   "quranTitle": "Kur'an",
   "quranSubtitle": "114 sure · sürekli okuma",
+  "quranSearchHint": "Sure ara…",
+  "quranSearchEmpty": "Sure bulunamadı.",
   "quranHafizLabel": "Hafız",
   "quranUtilityAyatAlKursi": "Ayetel Kürsi",
   "quranUtilityAllahNames": "99 isim",

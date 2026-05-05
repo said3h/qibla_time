@@ -402,6 +402,8 @@
   "quranDailyVerseFallbackReference": "Аль-Бакара [2:255]",
   "quranTitle": "Коран",
   "quranSubtitle": "114 сур · непрерывное чтение",
+  "quranSearchHint": "Поиск суры…",
+  "quranSearchEmpty": "Сур не найдено.",
   "quranHafizLabel": "Хафиз",
   "quranUtilityAyatAlKursi": "Аят аль-Курси",
   "quranUtilityAllahNames": "99 имен",
