@@ -1359,5 +1359,8 @@
   "commonRetry": "Повторить",
   "onboardingSkipLocationTitle": "Пропустить геолокацию",
   "onboardingSkipLocationBody": "Без геолокации время молитв не может быть рассчитано. Продолжить всё равно?",
-  "onboardingNotificationsPermissionWarning": "Разрешение не предоставлено. Вернитесь к предыдущему шагу, чтобы включить его."
+  "onboardingNotificationsPermissionWarning": "Разрешение не предоставлено. Вернитесь к предыдущему шагу, чтобы включить его.",
+  "commonUndo": "Отменить",
+  "homePrayerToggledDone": "Намаз отмечен как совершённый",
+  "homePrayerToggledUndone": "Отметка намаза снята"
 }

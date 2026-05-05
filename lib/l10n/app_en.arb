@@ -1359,5 +1359,8 @@
   "commonRetry": "Retry",
   "onboardingSkipLocationTitle": "Skip location",
   "onboardingSkipLocationBody": "Without location, prayer times cannot be calculated. Continue anyway?",
-  "onboardingNotificationsPermissionWarning": "Permission not granted. Go back to the previous step to enable it."
+  "onboardingNotificationsPermissionWarning": "Permission not granted. Go back to the previous step to enable it.",
+  "commonUndo": "Undo",
+  "homePrayerToggledDone": "Prayer marked as prayed",
+  "homePrayerToggledUndone": "Prayer unmarked"
 }

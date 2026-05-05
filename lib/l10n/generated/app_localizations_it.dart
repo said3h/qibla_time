@@ -3500,4 +3500,13 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get onboardingNotificationsPermissionWarning =>
       'Autorizzazione non concessa. Torna al passaggio precedente per attivarla.';
+
+  @override
+  String get commonUndo => 'Annulla';
+
+  @override
+  String get homePrayerToggledDone => 'Preghiera segnata come eseguita';
+
+  @override
+  String get homePrayerToggledUndone => 'Preghiera non contrassegnata';
 }

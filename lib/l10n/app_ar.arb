@@ -1295,5 +1295,8 @@
   "commonRetry": "إعادة المحاولة",
   "onboardingSkipLocationTitle": "تخطي الموقع",
   "onboardingSkipLocationBody": "بدون الموقع لا يمكن حساب مواقيت الصلاة. هل تريد المتابعة؟",
-  "onboardingNotificationsPermissionWarning": "لم يتم منح الإذن. ارجع إلى الخطوة السابقة لتفعيله."
+  "onboardingNotificationsPermissionWarning": "لم يتم منح الإذن. ارجع إلى الخطوة السابقة لتفعيله.",
+  "commonUndo": "تراجع",
+  "homePrayerToggledDone": "تم تحديد الصلاة كمؤداة",
+  "homePrayerToggledUndone": "تم إلغاء تحديد الصلاة"
 }

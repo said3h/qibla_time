@@ -3455,4 +3455,13 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get onboardingNotificationsPermissionWarning =>
       'İzin verilmedi. Etkinleştirmek için bir önceki adıma geri dönün.';
+
+  @override
+  String get commonUndo => 'Geri al';
+
+  @override
+  String get homePrayerToggledDone => 'Namaz kılındı olarak işaretlendi';
+
+  @override
+  String get homePrayerToggledUndone => 'Namaz işareti kaldırıldı';
 }

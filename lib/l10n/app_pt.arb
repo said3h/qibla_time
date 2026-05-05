@@ -1359,5 +1359,8 @@
   "commonRetry": "Tentar novamente",
   "onboardingSkipLocationTitle": "Ignorar localização",
   "onboardingSkipLocationBody": "Sem localização, os horários de oração não podem ser calculados. Continuar mesmo assim?",
-  "onboardingNotificationsPermissionWarning": "Permissão não concedida. Volte ao passo anterior para ativá-la."
+  "onboardingNotificationsPermissionWarning": "Permissão não concedida. Volte ao passo anterior para ativá-la.",
+  "commonUndo": "Desfazer",
+  "homePrayerToggledDone": "Oração marcada como rezada",
+  "homePrayerToggledUndone": "Oração desmarcada"
 }

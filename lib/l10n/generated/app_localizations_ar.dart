@@ -3399,4 +3399,13 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get onboardingNotificationsPermissionWarning =>
       'لم يتم منح الإذن. ارجع إلى الخطوة السابقة لتفعيله.';
+
+  @override
+  String get commonUndo => 'تراجع';
+
+  @override
+  String get homePrayerToggledDone => 'تم تحديد الصلاة كمؤداة';
+
+  @override
+  String get homePrayerToggledUndone => 'تم إلغاء تحديد الصلاة';
 }

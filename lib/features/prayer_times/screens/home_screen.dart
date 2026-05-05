@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geolocator/geolocator.dart';
@@ -2125,23 +2126,63 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     ),
                     const SizedBox(width: 10),
                     GestureDetector(
-                      onTap: () => ref
-                          .read(prayerTrackingProvider.notifier)
-                          .togglePrayer(prayer.$2, date: date),
-                      child: Container(
-                        width: 22,
-                        height: 22,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: isDone ? tokens.accent : Colors.transparent,
-                          border: Border.all(
-                            color: isDone ? tokens.accent : tokens.textMuted,
-                            width: 1.5,
+                      behavior: HitTestBehavior.opaque,
+                      onTap: () {
+                        final wasMarked = isDone;
+                        HapticFeedback.lightImpact();
+                        ref
+                            .read(prayerTrackingProvider.notifier)
+                            .togglePrayer(prayer.$2, date: date);
+                        final l10n = AppLocalizations.of(context)!;
+                        ScaffoldMessenger.of(context)
+                          ..hideCurrentSnackBar()
+                          ..showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                wasMarked
+                                    ? l10n.homePrayerToggledUndone
+                                    : l10n.homePrayerToggledDone,
+                              ),
+                              duration: const Duration(seconds: 3),
+                              action: SnackBarAction(
+                                label: l10n.commonUndo,
+                                onPressed: () {
+                                  HapticFeedback.lightImpact();
+                                  ref
+                                      .read(prayerTrackingProvider.notifier)
+                                      .togglePrayer(prayer.$2, date: date);
+                                },
+                              ),
+                            ),
+                          );
+                      },
+                      child: SizedBox(
+                        width: 44,
+                        height: 44,
+                        child: Center(
+                          child: Container(
+                            width: 22,
+                            height: 22,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color:
+                                  isDone ? tokens.accent : Colors.transparent,
+                              border: Border.all(
+                                color: isDone
+                                    ? tokens.accent
+                                    : tokens.textMuted,
+                                width: 1.5,
+                              ),
+                            ),
+                            child: isDone
+                                ? Icon(
+                                    Icons.check,
+                                    size: 12,
+                                    color: tokens.bgPage,
+                                  )
+                                : null,
                           ),
                         ),
-                        child: isDone
-                            ? Icon(Icons.check, size: 12, color: tokens.bgPage)
-                            : null,
                       ),
                     ),
                   ],
@@ -2470,34 +2511,77 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         ),
                         const SizedBox(height: 12),
                         GestureDetector(
-                          onTap: () => ref
-                              .read(prayerTrackingProvider.notifier)
-                              .togglePrayer(prayer.$1.key, date: date),
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 180),
-                            width: 30,
-                            height: 30,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(999),
-                              color: isDone
-                                  ? tokens.accent
-                                  : _blend(tokens.bgSurface2, tokens.bgSurface,
-                                      0.82),
-                              border: Border.all(
-                                color: isDone
-                                    ? tokens.accent
-                                    : _blend(
-                                        tokens.textMuted, tokens.border, 0.22),
-                                width: 1.4,
+                          behavior: HitTestBehavior.opaque,
+                          onTap: () {
+                            final wasMarked = isDone;
+                            HapticFeedback.lightImpact();
+                            ref
+                                .read(prayerTrackingProvider.notifier)
+                                .togglePrayer(prayer.$1.key, date: date);
+                            final l10n = AppLocalizations.of(context)!;
+                            ScaffoldMessenger.of(context)
+                              ..hideCurrentSnackBar()
+                              ..showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    wasMarked
+                                        ? l10n.homePrayerToggledUndone
+                                        : l10n.homePrayerToggledDone,
+                                  ),
+                                  duration: const Duration(seconds: 3),
+                                  action: SnackBarAction(
+                                    label: l10n.commonUndo,
+                                    onPressed: () {
+                                      HapticFeedback.lightImpact();
+                                      ref
+                                          .read(prayerTrackingProvider.notifier)
+                                          .togglePrayer(
+                                            prayer.$1.key,
+                                            date: date,
+                                          );
+                                    },
+                                  ),
+                                ),
+                              );
+                          },
+                          child: SizedBox(
+                            width: 44,
+                            height: 44,
+                            child: Center(
+                              child: AnimatedContainer(
+                                duration: const Duration(milliseconds: 180),
+                                width: 30,
+                                height: 30,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(999),
+                                  color: isDone
+                                      ? tokens.accent
+                                      : _blend(
+                                          tokens.bgSurface2,
+                                          tokens.bgSurface,
+                                          0.82,
+                                        ),
+                                  border: Border.all(
+                                    color: isDone
+                                        ? tokens.accent
+                                        : _blend(
+                                            tokens.textMuted,
+                                            tokens.border,
+                                            0.22,
+                                          ),
+                                    width: 1.4,
+                                  ),
+                                ),
+                                child: Icon(
+                                  isDone
+                                      ? Icons.check_rounded
+                                      : Icons.add_task_rounded,
+                                  size: 16,
+                                  color: isDone
+                                      ? tokens.bgPage
+                                      : tokens.textSecondary,
+                                ),
                               ),
-                            ),
-                            child: Icon(
-                              isDone
-                                  ? Icons.check_rounded
-                                  : Icons.add_task_rounded,
-                              size: 16,
-                              color:
-                                  isDone ? tokens.bgPage : tokens.textSecondary,
                             ),
                           ),
                         ),

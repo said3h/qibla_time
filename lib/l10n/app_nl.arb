@@ -1359,5 +1359,8 @@
   "commonRetry": "Opnieuw proberen",
   "onboardingSkipLocationTitle": "Locatie overslaan",
   "onboardingSkipLocationBody": "Zonder locatie kunnen de gebedstijden niet worden berekend. Toch doorgaan?",
-  "onboardingNotificationsPermissionWarning": "Toestemming niet verleend. Ga terug naar de vorige stap om het in te schakelen."
+  "onboardingNotificationsPermissionWarning": "Toestemming niet verleend. Ga terug naar de vorige stap om het in te schakelen.",
+  "commonUndo": "Ongedaan maken",
+  "homePrayerToggledDone": "Gebed gemarkeerd als gebeden",
+  "homePrayerToggledUndone": "Gebed-markering verwijderd"
 }

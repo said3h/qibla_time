@@ -1359,5 +1359,8 @@
   "commonRetry": "Réessayer",
   "onboardingSkipLocationTitle": "Ignorer la localisation",
   "onboardingSkipLocationBody": "Sans localisation, les horaires de prière ne peuvent pas être calculés. Continuer quand même ?",
-  "onboardingNotificationsPermissionWarning": "Permission non accordée. Revenez à étape précédente pour activer."
+  "onboardingNotificationsPermissionWarning": "Permission non accordée. Revenez à étape précédente pour activer.",
+  "commonUndo": "Annuler",
+  "homePrayerToggledDone": "Prière marquée comme accomplie",
+  "homePrayerToggledUndone": "Prière décochée"
 }

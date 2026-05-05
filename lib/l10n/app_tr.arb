@@ -1359,5 +1359,8 @@
   "commonRetry": "Tekrar dene",
   "onboardingSkipLocationTitle": "Konumu atla",
   "onboardingSkipLocationBody": "Konum olmadan namaz vakitleri hesaplanamaz. Yine de devam edilsin mi?",
-  "onboardingNotificationsPermissionWarning": "İzin verilmedi. Etkinleştirmek için bir önceki adıma geri dönün."
+  "onboardingNotificationsPermissionWarning": "İzin verilmedi. Etkinleştirmek için bir önceki adıma geri dönün.",
+  "commonUndo": "Geri al",
+  "homePrayerToggledDone": "Namaz kılındı olarak işaretlendi",
+  "homePrayerToggledUndone": "Namaz işareti kaldırıldı"
 }

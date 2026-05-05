@@ -3491,4 +3491,13 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get onboardingNotificationsPermissionWarning =>
       'Berechtigung nicht erteilt. Gehe zum vorherigen Schritt zurück, um sie zu aktivieren.';
+
+  @override
+  String get commonUndo => 'Rückgängig';
+
+  @override
+  String get homePrayerToggledDone => 'Gebet als gebetet markiert';
+
+  @override
+  String get homePrayerToggledUndone => 'Gebet-Markierung aufgehoben';
 }

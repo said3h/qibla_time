@@ -3485,4 +3485,13 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get onboardingNotificationsPermissionWarning =>
       'Permiso no concedido. Vuelve al paso anterior para activarlo.';
+
+  @override
+  String get commonUndo => 'Deshacer';
+
+  @override
+  String get homePrayerToggledDone => 'Oración marcada como rezada';
+
+  @override
+  String get homePrayerToggledUndone => 'Oración desmarcada';
 }

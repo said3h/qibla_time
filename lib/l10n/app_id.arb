@@ -1359,5 +1359,8 @@
   "commonRetry": "Coba lagi",
   "onboardingSkipLocationTitle": "Lewati lokasi",
   "onboardingSkipLocationBody": "Tanpa lokasi, waktu shalat tidak dapat dihitung. Lanjutkan tetap?",
-  "onboardingNotificationsPermissionWarning": "Izin belum diberikan. Kembali ke langkah sebelumnya untuk mengaktifkannya."
+  "onboardingNotificationsPermissionWarning": "Izin belum diberikan. Kembali ke langkah sebelumnya untuk mengaktifkannya.",
+  "commonUndo": "Batalkan",
+  "homePrayerToggledDone": "Shalat ditandai sebagai dilaksanakan",
+  "homePrayerToggledUndone": "Tanda shalat dihapus"
 }

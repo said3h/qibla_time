@@ -3489,4 +3489,13 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get onboardingNotificationsPermissionWarning =>
       'Разрешение не предоставлено. Вернитесь к предыдущему шагу, чтобы включить его.';
+
+  @override
+  String get commonUndo => 'Отменить';
+
+  @override
+  String get homePrayerToggledDone => 'Намаз отмечен как совершённый';
+
+  @override
+  String get homePrayerToggledUndone => 'Отметка намаза снята';
 }

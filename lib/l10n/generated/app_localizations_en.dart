@@ -3465,4 +3465,13 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get onboardingNotificationsPermissionWarning =>
       'Permission not granted. Go back to the previous step to enable it.';
+
+  @override
+  String get commonUndo => 'Undo';
+
+  @override
+  String get homePrayerToggledDone => 'Prayer marked as prayed';
+
+  @override
+  String get homePrayerToggledUndone => 'Prayer unmarked';
 }

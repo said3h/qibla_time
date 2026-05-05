@@ -3484,4 +3484,13 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get onboardingNotificationsPermissionWarning =>
       'Permissão não concedida. Volte ao passo anterior para ativá-la.';
+
+  @override
+  String get commonUndo => 'Desfazer';
+
+  @override
+  String get homePrayerToggledDone => 'Oração marcada como rezada';
+
+  @override
+  String get homePrayerToggledUndone => 'Oração desmarcada';
 }

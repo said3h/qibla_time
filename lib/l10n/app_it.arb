@@ -1359,5 +1359,8 @@
   "commonRetry": "Riprova",
   "onboardingSkipLocationTitle": "Salta posizione",
   "onboardingSkipLocationBody": "Senza posizione non è possibile calcolare gli orari di preghiera. Continuare comunque?",
-  "onboardingNotificationsPermissionWarning": "Autorizzazione non concessa. Torna al passaggio precedente per attivarla."
+  "onboardingNotificationsPermissionWarning": "Autorizzazione non concessa. Torna al passaggio precedente per attivarla.",
+  "commonUndo": "Annulla",
+  "homePrayerToggledDone": "Preghiera segnata come eseguita",
+  "homePrayerToggledUndone": "Preghiera non contrassegnata"
 }

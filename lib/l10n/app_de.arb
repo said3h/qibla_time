@@ -1359,5 +1359,8 @@
   "commonRetry": "Erneut versuchen",
   "onboardingSkipLocationTitle": "Standort überspringen",
   "onboardingSkipLocationBody": "Ohne Standort können die Gebetszeiten nicht berechnet werden. Trotzdem fortfahren?",
-  "onboardingNotificationsPermissionWarning": "Berechtigung nicht erteilt. Gehe zum vorherigen Schritt zurück, um sie zu aktivieren."
+  "onboardingNotificationsPermissionWarning": "Berechtigung nicht erteilt. Gehe zum vorherigen Schritt zurück, um sie zu aktivieren.",
+  "commonUndo": "Rückgängig",
+  "homePrayerToggledDone": "Gebet als gebetet markiert",
+  "homePrayerToggledUndone": "Gebet-Markierung aufgehoben"
 }
