@@ -1,4 +1,4 @@
-﻿{
+{
   "@@locale": "ar",
   "appTitle": "قبلة تايم",
   "commonSkip": "تخطي",
@@ -1291,5 +1291,9 @@
   "prayerNotificationJumuahTitle": "الجمعة اليوم",
   "prayerNotificationJumuahBody": "استعد للجمعة قبل الظهر، وخصص لحظة هادئة للذهاب إلى المسجد.",
   "quranViewModeAyahs": "عرض الآيات",
-  "quranViewModePage": "القراءة المستمرة"
+  "quranViewModePage": "القراءة المستمرة",
+  "commonRetry": "إعادة المحاولة",
+  "onboardingSkipLocationTitle": "تخطي الموقع",
+  "onboardingSkipLocationBody": "بدون الموقع لا يمكن حساب مواقيت الصلاة. هل تريد المتابعة؟",
+  "onboardingNotificationsPermissionWarning": "لم يتم منح الإذن. ارجع إلى الخطوة السابقة لتفعيله."
 }

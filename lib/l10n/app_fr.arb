@@ -1,4 +1,4 @@
-﻿{
+{
   "@@locale": "fr",
   "appTitle": "Qibla Time",
   "commonSkip": "Passer",
@@ -1355,5 +1355,9 @@
   "bookDeleteConfirmBody": "Le fichier sera supprimé de l'appareil",
   "bookDownloadError": "Erreur lors du téléchargement",
   "quranViewModeAyahs": "Vue par verset",
-  "quranViewModePage": "Lecture continue"
+  "quranViewModePage": "Lecture continue",
+  "commonRetry": "Réessayer",
+  "onboardingSkipLocationTitle": "Ignorer la localisation",
+  "onboardingSkipLocationBody": "Sans localisation, les horaires de prière ne peuvent pas être calculés. Continuer quand même ?",
+  "onboardingNotificationsPermissionWarning": "Permission non accordée. Revenez à étape précédente pour activer."
 }

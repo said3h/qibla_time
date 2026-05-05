@@ -759,7 +759,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get commonRemove => 'Remove';
 
   @override
-  String get shareBranding => 'App: Qibla Time';
+  String get shareBranding => 'Qibla Time';
 
   @override
   String shareReferenceLabel(Object reference) {
@@ -1257,12 +1257,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get quranTopBannerPlaceholder =>
       'Partial content loaded offline. Audio is not available for now.';
-
-  @override
-  String get quranViewModeAyahs => 'Ayah view';
-
-  @override
-  String get quranViewModePage => 'Continuous reading';
 
   @override
   String get quranSurahAudioCardTitle => 'LISTEN TO SURAH';
@@ -2661,13 +2655,13 @@ class AppLocalizationsEn extends AppLocalizations {
       'We couldn\'t load your downloaded surahs.';
 
   @override
-  String get focusModeDndActive => 'RAKAHA ACTIVE · DO NOT DISTURB ON';
+  String get focusModeDndActive => 'RAK\'AH COUNTER ACTIVE · DO NOT DISTURB ON';
 
   @override
   String get focusModeOpenDndSettings => 'Enable Do Not Disturb in settings';
 
   @override
-  String get focusModeTitle => 'RAKAHA';
+  String get focusModeTitle => 'Rak\'ah counter';
 
   @override
   String get focusModeSujudCount => '+ sujud';
@@ -3451,4 +3445,24 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get bookDownloadError => 'Download failed';
+
+  @override
+  String get quranViewModeAyahs => 'Ayah view';
+
+  @override
+  String get quranViewModePage => 'Continuous reading';
+
+  @override
+  String get commonRetry => 'Retry';
+
+  @override
+  String get onboardingSkipLocationTitle => 'Skip location';
+
+  @override
+  String get onboardingSkipLocationBody =>
+      'Without location, prayer times cannot be calculated. Continue anyway?';
+
+  @override
+  String get onboardingNotificationsPermissionWarning =>
+      'Permission not granted. Go back to the previous step to enable it.';
 }

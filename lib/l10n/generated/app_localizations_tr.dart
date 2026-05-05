@@ -760,7 +760,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get commonRemove => 'Kaldırmak';
 
   @override
-  String get shareBranding => 'Uygulama: Kıble Saati';
+  String get shareBranding => 'Qibla Time';
 
   @override
   String shareReferenceLabel(Object reference) {
@@ -1251,12 +1251,6 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get quranTopBannerPlaceholder =>
       'Kısmi içerik çevrimdışı olarak yüklendi. Ses şimdilik kullanılamıyor.';
-
-  @override
-  String get quranViewModeAyahs => 'Ayet görünümü';
-
-  @override
-  String get quranViewModePage => 'Sürekli okuma';
 
   @override
   String get quranSurahAudioCardTitle => 'SURESİ DİNLE';
@@ -2650,14 +2644,14 @@ class AppLocalizationsTr extends AppLocalizations {
   String get downloadedSurahsLoadError => 'İndirdiğiniz sureleri yükleyemedik.';
 
   @override
-  String get focusModeDndActive => 'RAKAHA AKTİF · RAHATSIZ ETMEYİN';
+  String get focusModeDndActive => 'REKÂT SAYACI AKTİF · RAHATSIZ ETMEYİN';
 
   @override
   String get focusModeOpenDndSettings =>
       'Ayarlarda Rahatsız Etmeyin özelliğini etkinleştirin';
 
   @override
-  String get focusModeTitle => 'RAKAHA';
+  String get focusModeTitle => 'Rekât sayacı';
 
   @override
   String get focusModeSujudCount => '+ secde';
@@ -3441,4 +3435,24 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get bookDownloadError => 'İndirme hatası';
+
+  @override
+  String get quranViewModeAyahs => 'Ayet görünümü';
+
+  @override
+  String get quranViewModePage => 'Sürekli okuma';
+
+  @override
+  String get commonRetry => 'Reintentar';
+
+  @override
+  String get onboardingSkipLocationTitle => 'Saltar ubicacion';
+
+  @override
+  String get onboardingSkipLocationBody =>
+      'Sin ubicacion no se pueden calcular los horarios de oracion. Continuar de todas formas?';
+
+  @override
+  String get onboardingNotificationsPermissionWarning =>
+      'Permiso no concedido. Vuelve al paso anterior para activarlo.';
 }

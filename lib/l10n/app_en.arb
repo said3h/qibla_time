@@ -1,4 +1,4 @@
-﻿{
+{
   "@@locale": "en",
   "appTitle": "Qibla Time",
   "commonSkip": "Skip",
@@ -1355,5 +1355,9 @@
   "bookDeleteConfirmBody": "The file will be removed from the device",
   "bookDownloadError": "Download failed",
   "quranViewModeAyahs": "Ayah view",
-  "quranViewModePage": "Continuous reading"
+  "quranViewModePage": "Continuous reading",
+  "commonRetry": "Retry",
+  "onboardingSkipLocationTitle": "Skip location",
+  "onboardingSkipLocationBody": "Without location, prayer times cannot be calculated. Continue anyway?",
+  "onboardingNotificationsPermissionWarning": "Permission not granted. Go back to the previous step to enable it."
 }

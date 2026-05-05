@@ -154,7 +154,7 @@ class AppLocalizationsRu extends AppLocalizations {
       'Ваши данные никогда не покидают устройство';
 
   @override
-  String get onboardingIntroLanguages => '11 ??????';
+  String get onboardingIntroLanguages => '11 языков';
 
   @override
   String get onboardingIntroLanguagesBody => 'Доступно на вашем языке';
@@ -768,7 +768,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get commonRemove => 'Удалять';
 
   @override
-  String get shareBranding => 'Приложение: Qibla Time';
+  String get shareBranding => 'Qibla Time';
 
   @override
   String shareReferenceLabel(Object reference) {
@@ -1277,12 +1277,6 @@ class AppLocalizationsRu extends AppLocalizations {
       'Частичный контент загружен офлайн. Аудио пока недоступно.';
 
   @override
-  String get quranViewModeAyahs => 'Просмотр аятов';
-
-  @override
-  String get quranViewModePage => 'Непрерывное чтение';
-
-  @override
   String get quranSurahAudioCardTitle => 'СЛУШАЙТЕ СУРУ';
 
   @override
@@ -1432,7 +1426,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get videoSaveFailed => 'Не удалось сохранить видео';
 
   @override
-  String get videoSavePermissionDenied => 'Разрешение на сохранение видео отклонено';
+  String get videoSavePermissionDenied =>
+      'Разрешение на сохранение видео отклонено';
 
   @override
   String get videoSaveToGallerySubtitle => 'Сохранить видео в галерею';
@@ -2685,14 +2680,14 @@ class AppLocalizationsRu extends AppLocalizations {
       'Нам не удалось загрузить загруженные вами суры.';
 
   @override
-  String get focusModeDndActive => 'РАКАХА АКТИВНО · НЕ БЕСПОКОИТЬ';
+  String get focusModeDndActive => 'СЧЁТЧИК РАКААТОВ АКТИВЕН · НЕ БЕСПОКОИТЬ';
 
   @override
   String get focusModeOpenDndSettings =>
       'Включите режим «Не беспокоить» в настройках';
 
   @override
-  String get focusModeTitle => 'РАКАХА';
+  String get focusModeTitle => 'Счётчик ракаатов';
 
   @override
   String get focusModeSujudCount => '+ суджуд';
@@ -2729,32 +2724,31 @@ class AppLocalizationsRu extends AppLocalizations {
   String get settingsProfileTasbih => 'тасбих';
 
   @override
-  String get settingsProfileEditTitle => '????????????? ???????';
+  String get settingsProfileEditTitle => 'Редактировать профиль';
 
   @override
-  String get settingsProfileEditSubtitle =>
-      '???????? ??? ? ??? ??????? ???????? ??????????????';
+  String get settingsProfileEditSubtitle => 'Измените имя и гражданство';
 
   @override
-  String get settingsProfileNameLabel => '???';
+  String get settingsProfileNameLabel => 'Имя';
 
   @override
-  String get settingsProfileNameHint => '??? ??? ? ??? ???????????';
+  String get settingsProfileNameHint => 'Как нам вас называть?';
 
   @override
-  String get settingsProfileNationalityLabel => '??????????????';
+  String get settingsProfileNationalityLabel => 'Гражданство';
 
   @override
-  String get settingsProfileNationalityOptional => '?????????????';
+  String get settingsProfileNationalityOptional => 'Необязательно';
 
   @override
-  String get settingsProfileNationalityNone => '?????????????? ?? ???????';
+  String get settingsProfileNationalityNone => 'Гражданство не выбрано';
 
   @override
-  String get settingsProfileChooseCountry => '???????? ??????';
+  String get settingsProfileChooseCountry => 'Выберите страну';
 
   @override
-  String get settingsProfileCountrySearchHint => '????? ??????';
+  String get settingsProfileCountrySearchHint => 'Поиск страны';
 
   @override
   String get commonShafii => 'Шафииты';
@@ -3456,23 +3450,43 @@ class AppLocalizationsRu extends AppLocalizations {
       'О Аллах, ниспошли благословения Мухаммаду и семье Мухаммада, как Ты ниспослал благословения Ибрахиму и семье Ибрахима. Поистине, Ты Достохвальный, Славный.';
 
   @override
-  String get bookDownload => '???????';
+  String get bookDownload => 'Скачать';
 
   @override
-  String get bookDownloading => '????????...';
+  String get bookDownloading => 'Загрузка...';
 
   @override
-  String get bookReadOffline => '?????? ??????';
+  String get bookReadOffline => 'Читать офлайн';
 
   @override
-  String get bookDeleteDownload => '??????? ????????';
+  String get bookDeleteDownload => 'Удалить загрузку';
 
   @override
-  String get bookDeleteConfirm => '??????? ??????????? ??????';
+  String get bookDeleteConfirm => 'Удалить подтверждение книги';
 
   @override
-  String get bookDeleteConfirmBody => '???? ????? ?????? ? ??????????';
+  String get bookDeleteConfirmBody => 'Эта книга будет удалена';
 
   @override
-  String get bookDownloadError => '?????? ????????';
+  String get bookDownloadError => 'Ошибка загрузки';
+
+  @override
+  String get quranViewModeAyahs => 'Просмотр аятов';
+
+  @override
+  String get quranViewModePage => 'Непрерывное чтение';
+
+  @override
+  String get commonRetry => 'Reintentar';
+
+  @override
+  String get onboardingSkipLocationTitle => 'Saltar ubicacion';
+
+  @override
+  String get onboardingSkipLocationBody =>
+      'Sin ubicacion no se pueden calcular los horarios de oracion. Continuar de todas formas?';
+
+  @override
+  String get onboardingNotificationsPermissionWarning =>
+      'Permiso no concedido. Vuelve al paso anterior para activarlo.';
 }

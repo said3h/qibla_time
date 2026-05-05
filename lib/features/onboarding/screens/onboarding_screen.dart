@@ -69,6 +69,35 @@ class _OnboardingScreenState extends State<OnboardingScreen>
     _refreshPermissionState(clearBusy: true);
   }
 
+  /// Shows a confirmation dialog when skipping without location permission,
+  /// since prayer times require location to work.
+  Future<void> _onSkipPressed() async {
+    if (!mounted) return;
+    final locationGranted = _hasLocationPermission && _locationServiceEnabled;
+    if (!locationGranted) {
+      final l10n = context.l10n;
+      final confirmed = await showDialog<bool>(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: Text(l10n.onboardingSkipLocationTitle),
+          content: Text(l10n.onboardingSkipLocationBody),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(ctx).pop(false),
+              child: Text(l10n.commonCancel),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(ctx).pop(true),
+              child: Text(l10n.commonSkip),
+            ),
+          ],
+        ),
+      );
+      if (confirmed != true) return;
+    }
+    await widget.onSkipped();
+  }
+
   Future<void> _loadInitialState() async {
     final prefs = await SharedPreferences.getInstance();
     final methodIndex = prefs.getInt('calculation_method');
@@ -295,7 +324,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                   ),
                   const SizedBox(width: 12),
                   TextButton(
-                    onPressed: _busy ? null : () => widget.onSkipped(),
+                    onPressed: _busy ? null : _onSkipPressed,
                     child: Text(l10n.commonSkip),
                   ),
                 ],
@@ -583,8 +612,11 @@ class _OnboardingScreenState extends State<OnboardingScreen>
               borderRadius: BorderRadius.circular(18),
               border: Border.all(color: tokens.border),
             ),
-            child: Row(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                Row(
+                  children: [
                 Expanded(
                   child: Column(
                     crossAxisAlignment: isArabicOnly
@@ -615,11 +647,38 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                   ),
                 ),
                 Switch.adaptive(
-                  value: _notificationsEnabled,
-                  onChanged: _toggleNotifications,
+                  // Disable ON state when system permission not granted —
+                  // saving the setting would have no effect and mislead the user.
+                  value: _notificationsEnabled && _notificationsGranted,
+                  onChanged: _notificationsGranted ? _toggleNotifications : null,
                   activeColor: tokens.bgPage,
                   activeTrackColor: tokens.primary,
                 ),
+              ],
+                ),
+                // Warning shown when system notification permission is missing
+                if (!_notificationsGranted) ...[
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.info_outline_rounded,
+                        size: 14,
+                        color: tokens.primary,
+                      ),
+                      const SizedBox(width: 6),
+                      Expanded(
+                        child: Text(
+                          l10n.onboardingNotificationsPermissionWarning,
+                          style: GoogleFonts.dmSans(
+                            fontSize: 11,
+                            color: tokens.primary,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ],
             ),
           ),

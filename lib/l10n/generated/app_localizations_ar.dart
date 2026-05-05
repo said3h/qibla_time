@@ -153,7 +153,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get onboardingIntroPrivacyBody => 'بياناتك لا تغادر جهازك أبدًا';
 
   @override
-  String get onboardingIntroLanguages => '11 ???';
+  String get onboardingIntroLanguages => '11 لغة';
 
   @override
   String get onboardingIntroLanguagesBody => 'متاح بلغتك';
@@ -748,7 +748,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get commonRemove => 'إزالة';
 
   @override
-  String get shareBranding => 'التطبيق: قبلة تايم';
+  String get shareBranding => 'Qibla Time';
 
   @override
   String shareReferenceLabel(Object reference) {
@@ -1233,12 +1233,6 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get quranTopBannerPlaceholder =>
       'تم تحميل محتوى جزئي دون اتصال. الصوت غير متاح حاليًا.';
-
-  @override
-  String get quranViewModeAyahs => 'عرض الآيات';
-
-  @override
-  String get quranViewModePage => 'القراءة المستمرة';
 
   @override
   String get quranSurahAudioCardTitle => 'الاستماع إلى السورة';
@@ -2605,13 +2599,14 @@ class AppLocalizationsAr extends AppLocalizations {
   String get downloadedSurahsLoadError => 'تعذر علينا تحميل السور المنزلة.';
 
   @override
-  String get focusModeDndActive => 'راكها مفعّل · عدم الإزعاج قيد التشغيل';
+  String get focusModeDndActive =>
+      'عداد الركعات مفعّل · عدم الإزعاج قيد التشغيل';
 
   @override
   String get focusModeOpenDndSettings => 'فعّل عدم الإزعاج من الإعدادات';
 
   @override
-  String get focusModeTitle => 'راكها';
+  String get focusModeTitle => 'عداد الركعات';
 
   @override
   String get focusModeSujudCount => '+ سجدات';
@@ -3384,4 +3379,24 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get bookDownloadError => 'فشل التنزيل';
+
+  @override
+  String get quranViewModeAyahs => 'عرض الآيات';
+
+  @override
+  String get quranViewModePage => 'القراءة المستمرة';
+
+  @override
+  String get commonRetry => 'إعادة المحاولة';
+
+  @override
+  String get onboardingSkipLocationTitle => 'تخطي الموقع';
+
+  @override
+  String get onboardingSkipLocationBody =>
+      'بدون الموقع لا يمكن حساب مواقيت الصلاة. هل تريد المتابعة؟';
+
+  @override
+  String get onboardingNotificationsPermissionWarning =>
+      'لم يتم منح الإذن. ارجع إلى الخطوة السابقة لتفعيله.';
 }

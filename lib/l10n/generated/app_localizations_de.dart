@@ -766,7 +766,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get commonRemove => 'Entfernen';
 
   @override
-  String get shareBranding => 'App: Qibla Time';
+  String get shareBranding => 'Qibla Time';
 
   @override
   String shareReferenceLabel(Object reference) {
@@ -1272,12 +1272,6 @@ class AppLocalizationsDe extends AppLocalizations {
       'Teilweiser Inhalt offline geladen. Audio ist vorerst nicht verfügbar.';
 
   @override
-  String get quranViewModeAyahs => 'Einzelverse';
-
-  @override
-  String get quranViewModePage => 'Fortlaufende Lesung';
-
-  @override
   String get quranSurahAudioCardTitle => 'SURE ANHÖREN';
 
   @override
@@ -1427,7 +1421,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String get videoSaveFailed => 'Video konnte nicht gespeichert werden';
 
   @override
-  String get videoSavePermissionDenied => 'Berechtigung zum Speichern des Videos verweigert';
+  String get videoSavePermissionDenied =>
+      'Berechtigung zum Speichern des Videos verweigert';
 
   @override
   String get videoSaveToGallerySubtitle => 'Video in der Galerie speichern';
@@ -2680,14 +2675,15 @@ class AppLocalizationsDe extends AppLocalizations {
       'Wir konnten Ihre heruntergeladenen Suren nicht laden.';
 
   @override
-  String get focusModeDndActive => 'RAKAHA AKTIV · BITTE NICHT STÖREN AN';
+  String get focusModeDndActive =>
+      'RAK\'AH-ZÄHLER AKTIV · BITTE NICHT STÖREN AN';
 
   @override
   String get focusModeOpenDndSettings =>
       'Bitte nicht stören in den Einstellungen aktivieren';
 
   @override
-  String get focusModeTitle => 'RAKAHA';
+  String get focusModeTitle => 'Rak\'ah-Zähler';
 
   @override
   String get focusModeSujudCount => '+ Sujud';
@@ -2728,7 +2724,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get settingsProfileEditSubtitle =>
-      '?ndere deinen Namen und deine optionale Nationalit?t';
+      'Ändere deinen Namen und deine optionale Nationalität';
 
   @override
   String get settingsProfileNameLabel => 'Name';
@@ -2737,16 +2733,16 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsProfileNameHint => 'Wie sollen wir dich nennen?';
 
   @override
-  String get settingsProfileNationalityLabel => 'Nationalit?t';
+  String get settingsProfileNationalityLabel => 'Nationalität';
 
   @override
   String get settingsProfileNationalityOptional => 'Optional';
 
   @override
-  String get settingsProfileNationalityNone => 'Keine Nationalit?t ausgew?hlt';
+  String get settingsProfileNationalityNone => 'Keine Nationalität ausgewählt';
 
   @override
-  String get settingsProfileChooseCountry => 'Land ausw?hlen';
+  String get settingsProfileChooseCountry => 'Land auswählen';
 
   @override
   String get settingsProfileCountrySearchHint => 'Land suchen';
@@ -3465,14 +3461,34 @@ class AppLocalizationsDe extends AppLocalizations {
   String get bookReadOffline => 'Offline lesen';
 
   @override
-  String get bookDeleteDownload => 'Download l?schen';
+  String get bookDeleteDownload => 'Download löschen';
 
   @override
-  String get bookDeleteConfirm => 'Heruntergeladenes Buch l?schen?';
+  String get bookDeleteConfirm => 'Heruntergeladenes Buch löschen?';
 
   @override
-  String get bookDeleteConfirmBody => 'Die Datei wird vom Ger?t entfernt';
+  String get bookDeleteConfirmBody => 'Die Datei wird vom Gerät entfernt';
 
   @override
   String get bookDownloadError => 'Fehler beim Herunterladen';
+
+  @override
+  String get quranViewModeAyahs => 'Einzelverse';
+
+  @override
+  String get quranViewModePage => 'Fortlaufende Lesung';
+
+  @override
+  String get commonRetry => 'Reintentar';
+
+  @override
+  String get onboardingSkipLocationTitle => 'Saltar ubicacion';
+
+  @override
+  String get onboardingSkipLocationBody =>
+      'Sin ubicacion no se pueden calcular los horarios de oracion. Continuar de todas formas?';
+
+  @override
+  String get onboardingNotificationsPermissionWarning =>
+      'Permiso no concedido. Vuelve al paso anterior para activarlo.';
 }

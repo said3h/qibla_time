@@ -762,7 +762,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get commonRemove => 'Hapus';
 
   @override
-  String get shareBranding => 'Aplikasi: Qibla Time';
+  String get shareBranding => 'Qibla Time';
 
   @override
   String shareReferenceLabel(Object reference) {
@@ -1264,12 +1264,6 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get quranTopBannerPlaceholder =>
       'Konten parsial dimuat secara offline. Audio tidak tersedia untuk saat ini.';
-
-  @override
-  String get quranViewModeAyahs => 'Tampilan ayat';
-
-  @override
-  String get quranViewModePage => 'Bacaan berkelanjutan';
 
   @override
   String get quranSurahAudioCardTitle => 'DENGARKAN SURAH';
@@ -2670,13 +2664,14 @@ class AppLocalizationsId extends AppLocalizations {
       'Kami tidak dapat memuat surah yang Anda unduh.';
 
   @override
-  String get focusModeDndActive => 'RAKAHA AKTIF · JANGAN GANGGU AKTIF';
+  String get focusModeDndActive =>
+      'PENGHITUNG RAKAAT AKTIF · JANGAN GANGGU AKTIF';
 
   @override
   String get focusModeOpenDndSettings => 'Aktifkan Jangan Ganggu di pengaturan';
 
   @override
-  String get focusModeTitle => 'RAKAHA';
+  String get focusModeTitle => 'Penghitung rakaat';
 
   @override
   String get focusModeSujudCount => '+ sujud';
@@ -3461,4 +3456,24 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get bookDownloadError => 'Gagal mengunduh';
+
+  @override
+  String get quranViewModeAyahs => 'Tampilan ayat';
+
+  @override
+  String get quranViewModePage => 'Bacaan berkelanjutan';
+
+  @override
+  String get commonRetry => 'Reintentar';
+
+  @override
+  String get onboardingSkipLocationTitle => 'Saltar ubicacion';
+
+  @override
+  String get onboardingSkipLocationBody =>
+      'Sin ubicacion no se pueden calcular los horarios de oracion. Continuar de todas formas?';
+
+  @override
+  String get onboardingNotificationsPermissionWarning =>
+      'Permiso no concedido. Vuelve al paso anterior para activarlo.';
 }

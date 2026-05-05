@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hijri/hijri_calendar.dart';
 
@@ -918,6 +919,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               color: tokens.textSecondary,
             ),
           ),
+          const SizedBox(height: 12),
+          // Retry button — lets the user trigger a fresh location attempt
+          // instead of waiting indefinitely with no feedback.
+          OutlinedButton.icon(
+            onPressed: () => ref.invalidate(prayerLocationDiagnosticProvider),
+            icon: const Icon(Icons.refresh_rounded, size: 16),
+            label: Text(l10n.commonRetry),
+          ),
         ],
       ),
     );
@@ -927,6 +936,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     QiblaTokens tokens,
     PrayerLocationDiagnostic? diagnostic,
   ) {
+    final l10n = context.l10n;
+    // Determine the most useful action for the current diagnostic state.
+    final deniedForever = diagnostic?.permissionStatus ==
+        PrayerLocationPermissionStatus.deniedForever;
+    final gpsOff =
+        diagnostic != null && !diagnostic.serviceEnabled;
+
     return Container(
       margin: const EdgeInsets.fromLTRB(16, 0, 16, 0),
       padding: const EdgeInsets.all(20),
@@ -955,6 +971,27 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               color: tokens.textSecondary,
             ),
           ),
+          const SizedBox(height: 14),
+          // Actionable button so the user can fix the issue without guessing.
+          if (deniedForever)
+            OutlinedButton.icon(
+              onPressed: () => Geolocator.openAppSettings(),
+              icon: const Icon(Icons.settings_outlined, size: 16),
+              label: Text(l10n.commonOpenSettings),
+            )
+          else if (gpsOff)
+            OutlinedButton.icon(
+              onPressed: () => Geolocator.openLocationSettings(),
+              icon: const Icon(Icons.gps_fixed_rounded, size: 16),
+              label: Text(l10n.commonEnableGps),
+            )
+          else
+            OutlinedButton.icon(
+              onPressed: () =>
+                  ref.invalidate(prayerLocationDiagnosticProvider),
+              icon: const Icon(Icons.refresh_rounded, size: 16),
+              label: Text(l10n.commonRetry),
+            ),
         ],
       ),
     );

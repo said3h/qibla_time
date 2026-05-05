@@ -1499,7 +1499,7 @@ abstract class AppLocalizations {
   /// No description provided for @shareBranding.
   ///
   /// In es, this message translates to:
-  /// **'App: Qibla Time'**
+  /// **'Qibla Time'**
   String get shareBranding;
 
   /// No description provided for @shareReferenceLabel.
@@ -2289,18 +2289,6 @@ abstract class AppLocalizations {
   /// **'Contenido parcial sin conexión. El audio no está disponible por ahora.'**
   String get quranTopBannerPlaceholder;
 
-  /// No description provided for @quranViewModeAyahs.
-  ///
-  /// In es, this message translates to:
-  /// **'Vista por aleya'**
-  String get quranViewModeAyahs;
-
-  /// No description provided for @quranViewModePage.
-  ///
-  /// In es, this message translates to:
-  /// **'Lectura continua'**
-  String get quranViewModePage;
-
   /// No description provided for @quranSurahAudioCardTitle.
   ///
   /// In es, this message translates to:
@@ -2574,7 +2562,7 @@ abstract class AppLocalizations {
   /// No description provided for @videoSavePermissionDenied.
   ///
   /// In es, this message translates to:
-  /// **"Permiso denegado para guardar el video"**
+  /// **'Permiso denegado para guardar el video'**
   String get videoSavePermissionDenied;
 
   /// No description provided for @videoSaveToGallerySubtitle.
@@ -4692,7 +4680,7 @@ abstract class AppLocalizations {
   /// No description provided for @focusModeDndActive.
   ///
   /// In es, this message translates to:
-  /// **'RAKAHA ACTIVA · NO MOLESTAR ENCENDIDO'**
+  /// **'CONTADOR DE RAKAAT ACTIVO · NO MOLESTAR ENCENDIDO'**
   String get focusModeDndActive;
 
   /// No description provided for @focusModeOpenDndSettings.
@@ -4704,7 +4692,7 @@ abstract class AppLocalizations {
   /// No description provided for @focusModeTitle.
   ///
   /// In es, this message translates to:
-  /// **'RAKAHA'**
+  /// **'Contador de rakaat'**
   String get focusModeTitle;
 
   /// No description provided for @focusModeSujudCount.
@@ -4794,7 +4782,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsProfileNameHint.
   ///
   /// In es, this message translates to:
-  /// **'?C?mo quieres que te llamemos?'**
+  /// **'¿Cómo quieres que te llamemos?'**
   String get settingsProfileNameHint;
 
   /// No description provided for @settingsProfileNationalityLabel.
@@ -4818,13 +4806,13 @@ abstract class AppLocalizations {
   /// No description provided for @settingsProfileChooseCountry.
   ///
   /// In es, this message translates to:
-  /// **'Elige un pa?s'**
+  /// **'Elige un país'**
   String get settingsProfileChooseCountry;
 
   /// No description provided for @settingsProfileCountrySearchHint.
   ///
   /// In es, this message translates to:
-  /// **'Buscar pa?s'**
+  /// **'Buscar país'**
   String get settingsProfileCountrySearchHint;
 
   /// No description provided for @commonShafii.
@@ -6030,13 +6018,13 @@ abstract class AppLocalizations {
   /// No description provided for @bookDeleteConfirm.
   ///
   /// In es, this message translates to:
-  /// **'?Borrar el libro descargado?'**
+  /// **'¿Borrar el libro descargado?'**
   String get bookDeleteConfirm;
 
   /// No description provided for @bookDeleteConfirmBody.
   ///
   /// In es, this message translates to:
-  /// **'Se eliminar? el archivo del dispositivo'**
+  /// **'Se eliminará el archivo del dispositivo'**
   String get bookDeleteConfirmBody;
 
   /// No description provided for @bookDownloadError.
@@ -6044,6 +6032,42 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Error al descargar'**
   String get bookDownloadError;
+
+  /// No description provided for @quranViewModeAyahs.
+  ///
+  /// In es, this message translates to:
+  /// **'Vista por aleya'**
+  String get quranViewModeAyahs;
+
+  /// No description provided for @quranViewModePage.
+  ///
+  /// In es, this message translates to:
+  /// **'Lectura continua'**
+  String get quranViewModePage;
+
+  /// No description provided for @commonRetry.
+  ///
+  /// In es, this message translates to:
+  /// **'Reintentar'**
+  String get commonRetry;
+
+  /// No description provided for @onboardingSkipLocationTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Saltar ubicacion'**
+  String get onboardingSkipLocationTitle;
+
+  /// No description provided for @onboardingSkipLocationBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin ubicacion no se pueden calcular los horarios de oracion. Continuar de todas formas?'**
+  String get onboardingSkipLocationBody;
+
+  /// No description provided for @onboardingNotificationsPermissionWarning.
+  ///
+  /// In es, this message translates to:
+  /// **'Permiso no concedido. Vuelve al paso anterior para activarlo.'**
+  String get onboardingNotificationsPermissionWarning;
 }
 
 class _AppLocalizationsDelegate

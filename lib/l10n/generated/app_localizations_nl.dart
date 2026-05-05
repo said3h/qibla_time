@@ -764,7 +764,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get commonRemove => 'Verwijderen';
 
   @override
-  String get shareBranding => 'App: Qibla Time';
+  String get shareBranding => 'Qibla Time';
 
   @override
   String shareReferenceLabel(Object reference) {
@@ -1269,12 +1269,6 @@ class AppLocalizationsNl extends AppLocalizations {
       'Gedeeltelijke inhoud offline geladen. Audio is voorlopig niet beschikbaar.';
 
   @override
-  String get quranViewModeAyahs => 'Ayah-weergave';
-
-  @override
-  String get quranViewModePage => 'Doorlopend lezen';
-
-  @override
   String get quranSurahAudioCardTitle => 'LUISTEREN NAAR SOERAH';
 
   @override
@@ -1424,7 +1418,8 @@ class AppLocalizationsNl extends AppLocalizations {
   String get videoSaveFailed => 'Kon de video niet opslaan';
 
   @override
-  String get videoSavePermissionDenied => 'Toestemming geweigerd om de video op te slaan';
+  String get videoSavePermissionDenied =>
+      'Toestemming geweigerd om de video op te slaan';
 
   @override
   String get videoSaveToGallerySubtitle => 'Sla de video op in je galerij';
@@ -2674,14 +2669,15 @@ class AppLocalizationsNl extends AppLocalizations {
       'We konden je gedownloade soerahs niet laden.';
 
   @override
-  String get focusModeDndActive => 'RAKAHA ACTIEF · NIET STOREN INGESCHAKELD';
+  String get focusModeDndActive =>
+      'RAKAAT-TELLER ACTIEF · NIET STOREN INGESCHAKELD';
 
   @override
   String get focusModeOpenDndSettings =>
       'Schakel Niet Storen in via instellingen';
 
   @override
-  String get focusModeTitle => 'RAKAHA';
+  String get focusModeTitle => 'Rakaat-teller';
 
   @override
   String get focusModeSujudCount => '+ sujud';
@@ -3470,4 +3466,24 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get bookDownloadError => 'Fout bij downloaden';
+
+  @override
+  String get quranViewModeAyahs => 'Ayah-weergave';
+
+  @override
+  String get quranViewModePage => 'Doorlopend lezen';
+
+  @override
+  String get commonRetry => 'Reintentar';
+
+  @override
+  String get onboardingSkipLocationTitle => 'Saltar ubicacion';
+
+  @override
+  String get onboardingSkipLocationBody =>
+      'Sin ubicacion no se pueden calcular los horarios de oracion. Continuar de todas formas?';
+
+  @override
+  String get onboardingNotificationsPermissionWarning =>
+      'Permiso no concedido. Vuelve al paso anterior para activarlo.';
 }
