@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Logo Preview</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0f0f0; }
+
+  .phone {
+    width: 390px;
+    margin: 30px auto;
+    border-radius: 40px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+
+  /* Dark theme */
+  .dark .header { background: #1a1a2e; }
+  .dark .card { background: #16213e; }
+  .dark .app-title { color: #e8d5b7; }
+  .dark .app-subtitle { color: #8899aa; }
+  .dark .prayer-label { color: #8899aa; }
+  .dark .prayer-name { color: #e8d5b7; }
+  .dark .prayer-time { color: #c8a96e; }
+  .dark .body { background: #0f3460; }
+
+  /* Light theme */
+  .light .header { background: #ffffff; }
+  .light .card { background: #f7f1e8; }
+  .light .app-title { color: #2c1810; }
+  .light .app-subtitle { color: #7a6a5a; }
+  .light .prayer-label { color: #7a6a5a; }
+  .light .prayer-name { color: #2c1810; }
+  .light .prayer-time { color: #c8862a; }
+  .light .body { background: #f5ede0; }
+
+  .header {
+    padding: 18px 18px 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .logo {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+  }
+
+  .title-block { display: flex; flex-direction: column; gap: 2px; }
+  .app-title { font-size: 18px; font-weight: 700; letter-spacing: 0.3px; }
+  .app-subtitle { font-size: 12px; }
+
+  .body { padding: 16px; min-height: 300px; }
+
+  .card {
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+
+  .prayer-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(128,128,128,0.15); }
+  .prayer-row:last-child { border-bottom: none; }
+  .prayer-name { font-size: 15px; font-weight: 500; }
+  .prayer-time { font-size: 15px; font-weight: 600; }
+  .prayer-label { font-size: 11px; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  .toggle { text-align: center; margin: 20px; }
+  button { padding: 8px 20px; border-radius: 20px; border: none; background: #c8862a; color: white; font-size: 14px; cursor: pointer; }
+</style>
+</head>
+<body>
+
+<div class="toggle">
+  <button onclick="toggleTheme()">Toggle Dark / Light</button>
+</div>
+
+<div class="phone dark" id="phone">
+  <div class="header">
+    <img src="assets/images/app/logo.svg" class="logo" alt="Logo">
+    <div class="title-block">
+      <span class="app-title">Qibla Time</span>
+      <span class="app-subtitle">Mecca · 3 km · Wednesday</span>
+    </div>
+  </div>
+  <div class="body">
+    <div class="card">
+      <div class="prayer-label">Next Prayer</div>
+      <div class="prayer-row">
+        <span class="prayer-name">Fajr</span>
+        <span class="prayer-time">05:12</span>
+      </div>
+      <div class="prayer-row">
+        <span class="prayer-name">Dhuhr</span>
+        <span class="prayer-time">12:45</span>
+      </div>
+      <div class="prayer-row">
+        <span class="prayer-name">Asr</span>
+        <span class="prayer-time">16:20</span>
+      </div>
+      <div class="prayer-row">
+        <span class="prayer-name">Maghrib</span>
+        <span class="prayer-time">19:48</span>
+      </div>
+      <div class="prayer-row">
+        <span class="prayer-name">Isha</span>
+        <span class="prayer-time">21:15</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleTheme() {
+    const phone = document.getElementById('phone');
+    phone.classList.toggle('dark');
+    phone.classList.toggle('light');
+  }
+</script>
+</body>
+</html>
