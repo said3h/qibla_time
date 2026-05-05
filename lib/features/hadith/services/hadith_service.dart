@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
@@ -10,6 +11,17 @@ import '../../../core/localization/locale_controller.dart';
 import '../../../core/services/logger_service.dart';
 import '../../../core/services/storage_service.dart';
 import '../models/hadith.dart';
+
+/// Top-level function required by [compute] — must not be a closure or
+/// instance method. Decodes the raw JSON string and maps every entry to a
+/// [HadithMultilenguaje] object entirely on a background isolate, keeping
+/// the 22 MB parse off the main thread.
+List<HadithMultilenguaje> _decodeHadithsJson(String raw) {
+  final decoded = jsonDecode(raw) as List<dynamic>;
+  return decoded
+      .map((item) => HadithMultilenguaje.fromJson(item as Map<String, dynamic>))
+      .toList();
+}
 
 class HadithService {
   static const _primaryHadithAsset = 'assets/data/hadiths_multilang_v2.json';
@@ -363,13 +375,9 @@ class HadithService {
   }) async {
     try {
       final raw = await rootBundle.loadString(assetPath);
-      final decoded = jsonDecode(raw) as List<dynamic>;
-      final hadiths = decoded
-          .map(
-            (item) =>
-                HadithMultilenguaje.fromJson(item as Map<String, dynamic>),
-          )
-          .toList();
+      // Decode + object mapping runs on a background isolate via compute()
+      // to avoid freezing the UI thread when parsing the 22 MB hadith asset.
+      final hadiths = await compute(_decodeHadithsJson, raw);
 
       if (hadiths.length < minimumEntries) {
         AppLogger.warning(
