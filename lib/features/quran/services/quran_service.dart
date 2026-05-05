@@ -9,6 +9,7 @@
 
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
@@ -16,6 +17,43 @@ import 'package:http/http.dart' as http;
 import '../../../core/localization/locale_controller.dart';
 import '../../../core/services/logger_service.dart';
 import '../models/quran_models.dart';
+
+/// Top-level function required by [compute] — must not be a closure or
+/// instance method. Parses the raw JSON string of quran_offline.json and
+/// builds the full [Map<int, SurahDetail>] cache on a background isolate,
+/// keeping the 3.7 MB decode off the main thread.
+///
+/// Accesses [QuranService.allSurahs] (a pure static getter) and the static
+/// helper methods promoted below — all are safe to call from any isolate.
+Map<int, SurahDetail> _parseQuranOfflineJson(String jsonString) {
+  final decoded = json.decode(jsonString);
+  if (decoded is! Map) return {};
+
+  final data = Map<String, dynamic>.from(decoded as Map);
+  final rawSurahs = data['surahs'];
+  if (rawSurahs is! Map) return {};
+
+  final offlineCache = <int, SurahDetail>{};
+  for (final entry in (rawSurahs as Map).entries) {
+    final number = int.tryParse(entry.key.toString());
+    if (number == null || entry.value is! Map) continue;
+
+    final surahData = Map<String, dynamic>.from(entry.value as Map);
+    final summary = QuranService.allSurahs.firstWhere(
+      (s) => s.number == number,
+      orElse: () => QuranService.allSurahs.first,
+    );
+
+    final detail = QuranService._buildOfflineDetail(
+      summary: summary,
+      surahData: surahData,
+    );
+    if (detail != null) {
+      offlineCache[number] = detail;
+    }
+  }
+  return offlineCache;
+}
 
 // ── Providers ──────────────────────────────────────────────────
 
@@ -364,43 +402,11 @@ class QuranService {
 
   Future<void> _loadOfflineCache() async {
     try {
-      final jsonString = await rootBundle.loadString('assets/data/quran_offline.json');
-      final decoded = json.decode(jsonString);
-      if (decoded is! Map) {
-        _offlineCache = {};
-        return;
-      }
-
-      final data = Map<String, dynamic>.from(decoded);
-      final rawSurahs = data['surahs'];
-      if (rawSurahs is! Map) {
-        _offlineCache = {};
-        return;
-      }
-
-      final offlineCache = <int, SurahDetail>{};
-      for (final entry in rawSurahs.entries) {
-        final number = int.tryParse(entry.key.toString());
-        if (number == null || entry.value is! Map) {
-          continue;
-        }
-
-        final surahData = Map<String, dynamic>.from(entry.value as Map);
-
-        final summary = allSurahs.firstWhere(
-          (s) => s.number == number,
-          orElse: () => allSurahs.first,
-        );
-
-        final detail = _buildOfflineDetail(
-          summary: summary,
-          surahData: surahData,
-        );
-        if (detail != null) {
-          offlineCache[number] = detail;
-        }
-      }
-      _offlineCache = offlineCache;
+      final jsonString =
+          await rootBundle.loadString('assets/data/quran_offline.json');
+      // Decode + SurahDetail construction runs on a background isolate via
+      // compute() to avoid freezing the UI thread on the 3.7 MB JSON parse.
+      _offlineCache = await compute(_parseQuranOfflineJson, jsonString);
     } catch (error, stackTrace) {
       AppLogger.error(
         'Failed to load offline Quran cache.',
@@ -629,7 +635,7 @@ class QuranService {
     return value.toString();
   }
 
-  String _readOptionalString(
+  static String _readOptionalString(
     Map<String, dynamic>? data,
     String key,
   ) {
@@ -656,7 +662,7 @@ class QuranService {
     return '$_alafasyAudioBaseUrl/$surah$ayah.mp3';
   }
 
-  SurahDetail? _buildOfflineDetail({
+  static SurahDetail? _buildOfflineDetail({
     required SurahSummary summary,
     required Map<String, dynamic> surahData,
   }) {
@@ -700,7 +706,7 @@ class QuranService {
     return _isValidOfflineDetail(detail) ? detail : null;
   }
 
-  bool _isValidOfflineDetail(SurahDetail detail) {
+  static bool _isValidOfflineDetail(SurahDetail detail) {
     if (detail.ayahs.isEmpty) return false;
     if (detail.ayahs.length != detail.summary.ayahCount) return false;
     return detail.ayahs.every(
@@ -770,7 +776,7 @@ class QuranService {
     );
   }
 
-  int? _tryReadInt(
+  static int? _tryReadInt(
     Map<String, dynamic> data,
     String key,
   ) {
@@ -781,7 +787,7 @@ class QuranService {
     return null;
   }
 
-  String? _tryReadNonEmptyString(
+  static String? _tryReadNonEmptyString(
     Map<String, dynamic> data,
     String key,
   ) {
