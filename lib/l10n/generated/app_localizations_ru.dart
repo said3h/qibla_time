@@ -1088,6 +1088,17 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
+  String get quranMaxAyahsSelected => 'Максимум 5 аятов';
+
+  @override
+  String get quranConsecutiveAyahsOnly => 'Выбирайте последовательные аяты';
+
+  @override
+  String quranAyahsSelectedCount(int count) {
+    return '$count аятов выбрано';
+  }
+
+  @override
   String get quranDownloadedFavoriteOffline =>
       'Аудио загружено · избранное офлайн';
 

@@ -1084,6 +1084,17 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
+  String get quranMaxAyahsSelected => 'Maximum 5 versets';
+
+  @override
+  String get quranConsecutiveAyahsOnly => 'Sélectionne des versets consécutifs';
+
+  @override
+  String quranAyahsSelectedCount(int count) {
+    return '$count versets sélectionnés';
+  }
+
+  @override
   String get quranDownloadedFavoriteOffline =>
       'Audio téléchargé · favori hors ligne';
 

@@ -1042,7 +1042,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     if (!_selectedAyahs.contains(ayahNumber) &&
         _selectedAyahs.length >= _maxSelectedAyahs) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Máximo 5 aleyas')),
+        SnackBar(content: Text(context.l10n.quranMaxAyahsSelected)),
       );
       return;
     }
@@ -1087,7 +1087,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
 
     if (_selectedAyahs.length >= _maxSelectedAyahs) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('M\u00E1ximo 5 aleyas')),
+        SnackBar(content: Text(context.l10n.quranMaxAyahsSelected)),
       );
       return;
     }
@@ -1104,7 +1104,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
 
   void _showConsecutiveAyahWarning() {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Selecciona aleyas consecutivas')),
+      SnackBar(content: Text(context.l10n.quranConsecutiveAyahsOnly)),
     );
   }
 
@@ -2015,7 +2015,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
             const SizedBox(width: 10),
             Expanded(
               child: Text(
-                '$selectedCount aleyas seleccionadas',
+                context.l10n.quranAyahsSelectedCount(selectedCount),
                 style: GoogleFonts.dmSans(
                   fontSize: 13,
                   fontWeight: FontWeight.w700,

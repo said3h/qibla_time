@@ -464,6 +464,16 @@
       }
     }
   },
+  "quranMaxAyahsSelected": "Максимум 5 аятов",
+  "quranConsecutiveAyahsOnly": "Выбирайте последовательные аяты",
+  "quranAyahsSelectedCount": "{count} аятов выбрано",
+  "@quranAyahsSelectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "quranDownloadedFavoriteOffline": "Аудио загружено · избранное офлайн",
   "quranDownloadedAudio": "Аудио загружено",
   "quranReadingPointSaved": "Точка чтения сохранена в аяте {ayah}.",

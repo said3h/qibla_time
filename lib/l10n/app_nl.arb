@@ -464,6 +464,16 @@
       }
     }
   },
+  "quranMaxAyahsSelected": "Maximaal 5 ayahs",
+  "quranConsecutiveAyahsOnly": "Selecteer opeenvolgende ayahs",
+  "quranAyahsSelectedCount": "{count} ayahs geselecteerd",
+  "@quranAyahsSelectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "quranDownloadedFavoriteOffline": "Audio gedownload · offline favoriet",
   "quranDownloadedAudio": "Audio gedownload",
   "quranReadingPointSaved": "Leespunt opgeslagen bij ayah {ayah}",

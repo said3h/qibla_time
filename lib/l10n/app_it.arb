@@ -464,6 +464,16 @@
       }
     }
   },
+  "quranMaxAyahsSelected": "Massimo 5 versetti",
+  "quranConsecutiveAyahsOnly": "Seleziona versetti consecutivi",
+  "quranAyahsSelectedCount": "{count} versetti selezionati",
+  "@quranAyahsSelectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "quranDownloadedFavoriteOffline": "AuAllah scaricato · preferito offline",
   "quranDownloadedAudio": "AuAllah scaricato",
   "quranReadingPointSaved": "Punto di lettura salvato in ayah {ayah}",

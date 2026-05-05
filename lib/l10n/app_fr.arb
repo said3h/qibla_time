@@ -463,6 +463,16 @@
       }
     }
   },
+  "quranMaxAyahsSelected": "Maximum 5 versets",
+  "quranConsecutiveAyahsOnly": "Sélectionne des versets consécutifs",
+  "quranAyahsSelectedCount": "{count} versets sélectionnés",
+  "@quranAyahsSelectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "quranDownloadedFavoriteOffline": "Audio téléchargé · favori hors ligne",
   "quranDownloadedAudio": "Audio téléchargé",
   "quranReadingPointSaved": "Point de lecture enregistré au verset {ayah}",

@@ -2013,6 +2013,24 @@ abstract class AppLocalizations {
   /// **'{count, plural, =1{1 marcador guardado} other{{count} marcadores guardados}}'**
   String quranBookmarkCount(int count);
 
+  /// No description provided for @quranMaxAyahsSelected.
+  ///
+  /// In es, this message translates to:
+  /// **'Máximo 5 aleyas'**
+  String get quranMaxAyahsSelected;
+
+  /// No description provided for @quranConsecutiveAyahsOnly.
+  ///
+  /// In es, this message translates to:
+  /// **'Selecciona aleyas consecutivas'**
+  String get quranConsecutiveAyahsOnly;
+
+  /// No description provided for @quranAyahsSelectedCount.
+  ///
+  /// In es, this message translates to:
+  /// **'{count} aleyas seleccionadas'**
+  String quranAyahsSelectedCount(int count);
+
   /// No description provided for @quranDownloadedFavoriteOffline.
   ///
   /// In es, this message translates to:

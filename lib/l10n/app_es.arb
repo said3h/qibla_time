@@ -464,6 +464,16 @@
       }
     }
   },
+  "quranMaxAyahsSelected": "Máximo 5 aleyas",
+  "quranConsecutiveAyahsOnly": "Selecciona aleyas consecutivas",
+  "quranAyahsSelectedCount": "{count} aleyas seleccionadas",
+  "@quranAyahsSelectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "quranDownloadedFavoriteOffline": "Audio descargado · favorita sin conexión",
   "quranDownloadedAudio": "Audio descargado",
   "quranReadingPointSaved": "Punto de lectura guardado en la aleya {ayah}",

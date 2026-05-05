@@ -1071,6 +1071,17 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
+  String get quranMaxAyahsSelected => 'En fazla 5 ayet';
+
+  @override
+  String get quranConsecutiveAyahsOnly => 'Ardışık ayetler seçin';
+
+  @override
+  String quranAyahsSelectedCount(int count) {
+    return '$count ayet seçildi';
+  }
+
+  @override
   String get quranDownloadedFavoriteOffline =>
       'Ses indirildi · çevrimdışı favori';
 

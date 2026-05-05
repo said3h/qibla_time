@@ -465,6 +465,16 @@
       }
     }
   },
+  "quranMaxAyahsSelected": "Maksimal 5 ayat",
+  "quranConsecutiveAyahsOnly": "Pilih ayat yang berurutan",
+  "quranAyahsSelectedCount": "{count} ayat dipilih",
+  "@quranAyahsSelectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "quranDownloadedFavoriteOffline": "Audio diunduh · favorit offline",
   "quranDownloadedAudio": "Audio diunduh",
   "quranReadingPointSaved": "Titik bacaan disimpan di ayat {ayah}",

@@ -464,6 +464,16 @@
       }
     }
   },
+  "quranMaxAyahsSelected": "Maximum 5 ayahs",
+  "quranConsecutiveAyahsOnly": "Select consecutive ayahs",
+  "quranAyahsSelectedCount": "{count} ayahs selected",
+  "@quranAyahsSelectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "quranDownloadedFavoriteOffline": "Audio downloaded · offline favorite",
   "quranDownloadedAudio": "Audio downloaded",
   "quranReadingPointSaved": "Reading point saved at ayah {ayah}",

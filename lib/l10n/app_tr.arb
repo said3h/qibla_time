@@ -464,6 +464,16 @@
       }
     }
   },
+  "quranMaxAyahsSelected": "En fazla 5 ayet",
+  "quranConsecutiveAyahsOnly": "Ardışık ayetler seçin",
+  "quranAyahsSelectedCount": "{count} ayet seçildi",
+  "@quranAyahsSelectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "quranDownloadedFavoriteOffline": "Ses indirildi · çevrimdışı favori",
   "quranDownloadedAudio": "Ses indirildi",
   "quranReadingPointSaved": "{ayah} ayetinde okuma noktası kaydedildi",

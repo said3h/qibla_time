@@ -464,6 +464,16 @@
       }
     }
   },
+  "quranMaxAyahsSelected": "الحد الأقصى 5 آيات",
+  "quranConsecutiveAyahsOnly": "اختر آيات متتالية",
+  "quranAyahsSelectedCount": "{count} آيات مختارة",
+  "@quranAyahsSelectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "quranDownloadedFavoriteOffline": "الصوت مُنزّل · مفضلة دون اتصال",
   "quranDownloadedAudio": "الصوت مُنزّل",
   "quranReadingPointSaved": "تم حفظ موضع القراءة عند الآية {ayah}",
