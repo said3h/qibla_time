@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -93,28 +95,52 @@ class DailyInspirationNotificationService {
 
     final content = await _generateNotificationContent();
 
-    await _plugin.zonedSchedule(
-      id: 10001,
-      title: content.title,
-      body: content.body,
-      scheduledDate: scheduledDate,
-      notificationDetails: _notificationDetails(),
-      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-      matchDateTimeComponents: DateTimeComponents.time,
-    );
-    /*
-    await _plugin.zonedSchedule(
-      10001, // ID único para notificación diaria
-      title: content.title,
-      body: content.body,
-      scheduledDate: scheduledDate,
-      notificationDetails: _notificationDetails(),
-      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-      uiLocalNotificationDateInterpretation:
-          UILocalNotificationDateInterpretation.absoluteTime,
-      matchDateTimeComponents: DateTimeComponents.time,
-    );
-    */
+    // Same guard as NotificationService.scheduleAdhan: use
+    // canScheduleExactNotifications() which covers both SCHEDULE_EXACT_ALARM
+    // (user-granted, Android 12+) and USE_EXACT_ALARM (auto-granted, Android 13+).
+    // Falling back to inexactAllowWhileIdle avoids SecurityException on Android 12
+    // devices that have not granted exact-alarm permission.
+    final scheduleMode = await _resolveScheduleMode();
+
+    try {
+      await _plugin.zonedSchedule(
+        id: 10001,
+        title: content.title,
+        body: content.body,
+        scheduledDate: scheduledDate,
+        notificationDetails: _notificationDetails(),
+        androidScheduleMode: scheduleMode,
+        matchDateTimeComponents: DateTimeComponents.time,
+      );
+    } catch (e) {
+      // If scheduling fails (e.g. permission revoked between check and call),
+      // retry once with inexact mode before giving up.
+      await _plugin.zonedSchedule(
+        id: 10001,
+        title: content.title,
+        body: content.body,
+        scheduledDate: scheduledDate,
+        notificationDetails: _notificationDetails(),
+        androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+        matchDateTimeComponents: DateTimeComponents.time,
+      );
+    }
+  }
+
+  /// Returns the appropriate [AndroidScheduleMode] for the current device.
+  ///
+  /// Mirrors the logic in [NotificationService._canScheduleExactAlarm]:
+  /// uses [canScheduleExactNotifications] (→ AlarmManager.canScheduleExactAlarms)
+  /// instead of permission_handler, which only checks SCHEDULE_EXACT_ALARM and
+  /// misses the USE_EXACT_ALARM auto-grant path available on Android 13+.
+  Future<AndroidScheduleMode> _resolveScheduleMode() async {
+    if (!Platform.isAndroid) return AndroidScheduleMode.exactAllowWhileIdle;
+    final android = _plugin.resolvePlatformSpecificImplementation<
+        AndroidFlutterLocalNotificationsPlugin>();
+    final canExact = await android?.canScheduleExactNotifications() ?? false;
+    return canExact
+        ? AndroidScheduleMode.exactAllowWhileIdle
+        : AndroidScheduleMode.inexactAllowWhileIdle;
   }
 
   /// Cancela la notificación diaria
@@ -179,7 +205,7 @@ class DailyInspirationNotificationService {
         showWhen: true,
         icon: '@mipmap/ic_launcher',
       ),
-      iOS: DarwinNotificationDetails(
+      iOS: const DarwinNotificationDetails(
         presentAlert: true,
         presentBadge: true,
         presentSound: false,

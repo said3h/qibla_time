@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -88,18 +90,23 @@ class HadithHourlyReminderService {
     // Cancelar primero todos los existentes
     await cancelAllReminders();
 
+    // Resolve once for the whole batch to avoid repeated IPC calls.
+    final scheduleMode = await _resolveScheduleMode();
+
     // Programar para cada hora en el rango
     for (int hour = startHour; hour <= endHour; hour++) {
-      await _scheduleReminderForHour(hour);
+      await _scheduleReminderForHour(hour, scheduleMode);
     }
   }
 
   /// Programa un recordatorio para una hora específica
-  Future<void> _scheduleReminderForHour(int hour) async {
-    // Nota: programar notificaciones horarias exactas requiere configuración especial
-    // Esta es una implementación simplificada
+  Future<void> _scheduleReminderForHour(
+    int hour,
+    AndroidScheduleMode scheduleMode,
+  ) async {
     final now = tz.TZDateTime.now(tz.local);
-    var scheduledDate = tz.TZDateTime(tz.local, now.year, now.month, now.day, hour, 0);
+    var scheduledDate =
+        tz.TZDateTime(tz.local, now.year, now.month, now.day, hour, 0);
 
     // Si ya pasó hoy, programar para mañana
     if (scheduledDate.isBefore(now)) {
@@ -116,17 +123,52 @@ class HadithHourlyReminderService {
         ? hadith.first.translation
         : l10n.notificationHadithReminderFallbackBody;
 
-    await _plugin.zonedSchedule(
-      id: 20000 + hour,
-      title: l10n.notificationHadithReminderTitle,
-      body: hadithText.length > 150
-          ? '${hadithText.substring(0, 147)}...'
-          : hadithText,
-      scheduledDate: scheduledDate,
-      notificationDetails: _notificationDetails(),
-      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-      payload: hour.toString(),
-    );
+    // Same guard as NotificationService.scheduleAdhan: use
+    // canScheduleExactNotifications() which covers both SCHEDULE_EXACT_ALARM
+    // (user-granted, Android 12+) and USE_EXACT_ALARM (auto-granted, Android 13+).
+    try {
+      await _plugin.zonedSchedule(
+        id: 20000 + hour,
+        title: l10n.notificationHadithReminderTitle,
+        body: hadithText.length > 150
+            ? '${hadithText.substring(0, 147)}...'
+            : hadithText,
+        scheduledDate: scheduledDate,
+        notificationDetails: _notificationDetails(),
+        androidScheduleMode: scheduleMode,
+        payload: hour.toString(),
+      );
+    } catch (e) {
+      // If scheduling fails (e.g. permission revoked between check and call),
+      // retry once with inexact mode before giving up.
+      await _plugin.zonedSchedule(
+        id: 20000 + hour,
+        title: l10n.notificationHadithReminderTitle,
+        body: hadithText.length > 150
+            ? '${hadithText.substring(0, 147)}...'
+            : hadithText,
+        scheduledDate: scheduledDate,
+        notificationDetails: _notificationDetails(),
+        androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+        payload: hour.toString(),
+      );
+    }
+  }
+
+  /// Returns the appropriate [AndroidScheduleMode] for the current device.
+  ///
+  /// Mirrors the logic in [NotificationService._canScheduleExactAlarm]:
+  /// uses [canScheduleExactNotifications] (→ AlarmManager.canScheduleExactAlarms)
+  /// instead of permission_handler, which only checks SCHEDULE_EXACT_ALARM and
+  /// misses the USE_EXACT_ALARM auto-grant path available on Android 13+.
+  Future<AndroidScheduleMode> _resolveScheduleMode() async {
+    if (!Platform.isAndroid) return AndroidScheduleMode.exactAllowWhileIdle;
+    final android = _plugin.resolvePlatformSpecificImplementation<
+        AndroidFlutterLocalNotificationsPlugin>();
+    final canExact = await android?.canScheduleExactNotifications() ?? false;
+    return canExact
+        ? AndroidScheduleMode.exactAllowWhileIdle
+        : AndroidScheduleMode.inexactAllowWhileIdle;
   }
 
   /// Cancela todos los recordatorios
@@ -154,7 +196,7 @@ class HadithHourlyReminderService {
         showWhen: true,
         icon: '@mipmap/ic_launcher',
       ),
-      iOS: DarwinNotificationDetails(
+      iOS: const DarwinNotificationDetails(
         presentAlert: true,
         presentBadge: false,
         presentSound: false,
