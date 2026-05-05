@@ -1,4 +1,4 @@
-﻿{
+{
   "@@locale": "it",
   "appTitle": "Qibla Time",
   "commonSkip": "Saltare",
@@ -1355,5 +1355,9 @@
   "bookDeleteConfirmBody": "Il file verr? rimosso dal dispositivo",
   "bookDownloadError": "Errore durante il download",
   "quranViewModeAyahs": "Vista versetti",
-  "quranViewModePage": "Lettura continua"
+  "quranViewModePage": "Lettura continua",
+  "commonRetry": "Riprova",
+  "onboardingSkipLocationTitle": "Salta posizione",
+  "onboardingSkipLocationBody": "Senza posizione non è possibile calcolare gli orari di preghiera. Continuare comunque?",
+  "onboardingNotificationsPermissionWarning": "Autorizzazione non concessa. Torna al passaggio precedente per attivarla."
 }

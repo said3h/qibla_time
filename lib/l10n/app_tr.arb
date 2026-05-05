@@ -1,4 +1,4 @@
-﻿{
+{
   "@@locale": "tr",
   "appTitle": "Qibla Time",
   "commonSkip": "Atla",
@@ -1355,5 +1355,9 @@
   "bookDeleteConfirmBody": "Dosya cihazdan silinecek",
   "bookDownloadError": "İndirme hatası",
   "quranViewModeAyahs": "Ayet görünümü",
-  "quranViewModePage": "Sürekli okuma"
+  "quranViewModePage": "Sürekli okuma",
+  "commonRetry": "Tekrar dene",
+  "onboardingSkipLocationTitle": "Konumu atla",
+  "onboardingSkipLocationBody": "Konum olmadan namaz vakitleri hesaplanamaz. Yine de devam edilsin mi?",
+  "onboardingNotificationsPermissionWarning": "İzin verilmedi. Etkinleştirmek için bir önceki adıma geri dönün."
 }

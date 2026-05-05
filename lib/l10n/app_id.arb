@@ -1,4 +1,4 @@
-﻿{
+{
   "@@locale": "id",
   "appTitle": "Qibla Time",
   "commonSkip": "Lewati",
@@ -1355,5 +1355,9 @@
   "bookDeleteConfirmBody": "File akan dihapus dari perangkat",
   "bookDownloadError": "Gagal mengunduh",
   "quranViewModeAyahs": "Tampilan ayat",
-  "quranViewModePage": "Bacaan berkelanjutan"
+  "quranViewModePage": "Bacaan berkelanjutan",
+  "commonRetry": "Coba lagi",
+  "onboardingSkipLocationTitle": "Lewati lokasi",
+  "onboardingSkipLocationBody": "Tanpa lokasi, waktu shalat tidak dapat dihitung. Lanjutkan tetap?",
+  "onboardingNotificationsPermissionWarning": "Izin belum diberikan. Kembali ke langkah sebelumnya untuk mengaktifkannya."
 }

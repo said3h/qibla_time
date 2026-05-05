@@ -3474,16 +3474,16 @@ class AppLocalizationsNl extends AppLocalizations {
   String get quranViewModePage => 'Doorlopend lezen';
 
   @override
-  String get commonRetry => 'Reintentar';
+  String get commonRetry => 'Opnieuw proberen';
 
   @override
-  String get onboardingSkipLocationTitle => 'Saltar ubicacion';
+  String get onboardingSkipLocationTitle => 'Locatie overslaan';
 
   @override
   String get onboardingSkipLocationBody =>
-      'Sin ubicacion no se pueden calcular los horarios de oracion. Continuar de todas formas?';
+      'Zonder locatie kunnen de gebedstijden niet worden berekend. Toch doorgaan?';
 
   @override
   String get onboardingNotificationsPermissionWarning =>
-      'Permiso no concedido. Vuelve al paso anterior para activarlo.';
+      'Toestemming niet verleend. Ga terug naar de vorige stap om het in te schakelen.';
 }

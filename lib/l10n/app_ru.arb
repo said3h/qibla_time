@@ -1,4 +1,4 @@
-﻿{
+{
   "@@locale": "ru",
   "appTitle": "Qibla Time",
   "commonSkip": "Пропускать",
@@ -1355,5 +1355,9 @@
   "bookDeleteConfirmBody": "Эта книга будет удалена",
   "bookDownloadError": "Ошибка загрузки",
   "quranViewModeAyahs": "Просмотр аятов",
-  "quranViewModePage": "Непрерывное чтение"
+  "quranViewModePage": "Непрерывное чтение",
+  "commonRetry": "Повторить",
+  "onboardingSkipLocationTitle": "Пропустить геолокацию",
+  "onboardingSkipLocationBody": "Без геолокации время молитв не может быть рассчитано. Продолжить всё равно?",
+  "onboardingNotificationsPermissionWarning": "Разрешение не предоставлено. Вернитесь к предыдущему шагу, чтобы включить его."
 }

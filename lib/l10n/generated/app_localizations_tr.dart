@@ -3443,16 +3443,16 @@ class AppLocalizationsTr extends AppLocalizations {
   String get quranViewModePage => 'Sürekli okuma';
 
   @override
-  String get commonRetry => 'Reintentar';
+  String get commonRetry => 'Tekrar dene';
 
   @override
-  String get onboardingSkipLocationTitle => 'Saltar ubicacion';
+  String get onboardingSkipLocationTitle => 'Konumu atla';
 
   @override
   String get onboardingSkipLocationBody =>
-      'Sin ubicacion no se pueden calcular los horarios de oracion. Continuar de todas formas?';
+      'Konum olmadan namaz vakitleri hesaplanamaz. Yine de devam edilsin mi?';
 
   @override
   String get onboardingNotificationsPermissionWarning =>
-      'Permiso no concedido. Vuelve al paso anterior para activarlo.';
+      'İzin verilmedi. Etkinleştirmek için bir önceki adıma geri dönün.';
 }

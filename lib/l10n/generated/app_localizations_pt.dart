@@ -3472,16 +3472,16 @@ class AppLocalizationsPt extends AppLocalizations {
   String get quranViewModePage => 'Leitura contínua';
 
   @override
-  String get commonRetry => 'Reintentar';
+  String get commonRetry => 'Tentar novamente';
 
   @override
-  String get onboardingSkipLocationTitle => 'Saltar ubicacion';
+  String get onboardingSkipLocationTitle => 'Ignorar localização';
 
   @override
   String get onboardingSkipLocationBody =>
-      'Sin ubicacion no se pueden calcular los horarios de oracion. Continuar de todas formas?';
+      'Sem localização, os horários de oração não podem ser calculados. Continuar mesmo assim?';
 
   @override
   String get onboardingNotificationsPermissionWarning =>
-      'Permiso no concedido. Vuelve al paso anterior para activarlo.';
+      'Permissão não concedida. Volte ao passo anterior para ativá-la.';
 }

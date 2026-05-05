@@ -3477,16 +3477,16 @@ class AppLocalizationsRu extends AppLocalizations {
   String get quranViewModePage => 'Непрерывное чтение';
 
   @override
-  String get commonRetry => 'Reintentar';
+  String get commonRetry => 'Повторить';
 
   @override
-  String get onboardingSkipLocationTitle => 'Saltar ubicacion';
+  String get onboardingSkipLocationTitle => 'Пропустить геолокацию';
 
   @override
   String get onboardingSkipLocationBody =>
-      'Sin ubicacion no se pueden calcular los horarios de oracion. Continuar de todas formas?';
+      'Без геолокации время молитв не может быть рассчитано. Продолжить всё равно?';
 
   @override
   String get onboardingNotificationsPermissionWarning =>
-      'Permiso no concedido. Vuelve al paso anterior para activarlo.';
+      'Разрешение не предоставлено. Вернитесь к предыдущему шагу, чтобы включить его.';
 }

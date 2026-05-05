@@ -1,4 +1,4 @@
-﻿{
+{
   "@@locale": "nl",
   "appTitle": "Qibla Time",
   "commonSkip": "Overslaan",
@@ -1355,5 +1355,9 @@
   "bookDeleteConfirmBody": "Het bestand wordt van het apparaat verwijderd",
   "bookDownloadError": "Fout bij downloaden",
   "quranViewModeAyahs": "Ayah-weergave",
-  "quranViewModePage": "Doorlopend lezen"
+  "quranViewModePage": "Doorlopend lezen",
+  "commonRetry": "Opnieuw proberen",
+  "onboardingSkipLocationTitle": "Locatie overslaan",
+  "onboardingSkipLocationBody": "Zonder locatie kunnen de gebedstijden niet worden berekend. Toch doorgaan?",
+  "onboardingNotificationsPermissionWarning": "Toestemming niet verleend. Ga terug naar de vorige stap om het in te schakelen."
 }
