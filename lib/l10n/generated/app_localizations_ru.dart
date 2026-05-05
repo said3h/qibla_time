@@ -881,6 +881,14 @@ class AppLocalizationsRu extends AppLocalizations {
       'Нам не удалось создать видео для этого аята.';
 
   @override
+  String get shareAyahVideoExporting =>
+      'Подготовка вашего видео… Это может занять несколько секунд.';
+
+  @override
+  String get shareAyahVideoExportFailed =>
+      'Не удалось создать видео. Попробуйте ещё раз.';
+
+  @override
   String get notificationAdhanChannelName => 'Азан';
 
   @override

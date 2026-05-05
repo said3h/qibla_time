@@ -359,6 +359,8 @@
   "shareAyahVideoNoAudio": "Нет аудио для создания видео для этого аята.",
   "shareAyahVideoGenerating": "Создание видео аята...",
   "shareAyahVideoError": "Нам не удалось создать видео для этого аята.",
+  "shareAyahVideoExporting": "Подготовка вашего видео… Это может занять несколько секунд.",
+  "shareAyahVideoExportFailed": "Не удалось создать видео. Попробуйте ещё раз.",
   "notificationAdhanChannelName": "Азан",
   "notificationAdhanChannelDescription": "Уведомления о времени молитвы",
   "notificationAdhanTitle": "Qibla Time – {prayerName}",

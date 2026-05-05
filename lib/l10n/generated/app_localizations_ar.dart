@@ -856,6 +856,14 @@ class AppLocalizationsAr extends AppLocalizations {
   String get shareAyahVideoError => 'تعذر علينا إنشاء فيديو هذه الآية.';
 
   @override
+  String get shareAyahVideoExporting =>
+      'جارٍ تجهيز الفيديو… قد يستغرق ذلك بضع ثوانٍ.';
+
+  @override
+  String get shareAyahVideoExportFailed =>
+      'تعذر إنشاء الفيديو. يُرجى المحاولة مرة أخرى.';
+
+  @override
   String get notificationAdhanChannelName => 'الأذان';
 
   @override

@@ -360,6 +360,8 @@
   "shareAyahVideoNoAudio": "Tidak ada audio yang tersedia untuk menghasilkan video ayat ini.",
   "shareAyahVideoGenerating": "Menghasilkan video ayat...",
   "shareAyahVideoError": "Kami tidak dapat menghasilkan video untuk ayat ini.",
+  "shareAyahVideoExporting": "Mempersiapkan video Anda… Ini mungkin membutuhkan beberapa detik.",
+  "shareAyahVideoExportFailed": "Gagal membuat video. Silakan coba lagi.",
   "notificationAdhanChannelName": "Adzan",
   "notificationAdhanChannelDescription": "Notifikasi waktu shalat",
   "notificationAdhanTitle": "Qibla Time - {prayerName}",

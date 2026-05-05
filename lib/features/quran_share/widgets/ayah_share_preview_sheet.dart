@@ -263,7 +263,7 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
     }
 
     if (!_includeArabic && !_includeTranslation) {
-      await _showVideoExportError(context.l10n.shareAyahVideoError);
+      _showVideoExportError(context.l10n.shareAyahVideoError);
       return;
     }
 
@@ -280,7 +280,7 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
       if (!mounted) return;
 
       if (draft == null) {
-        await _showVideoExportError(context.l10n.shareAyahVideoNoAudio);
+        _showVideoExportError(context.l10n.shareAyahVideoNoAudio);
         return;
       }
 
@@ -303,9 +303,14 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
       if (!mounted) return;
       Navigator.of(context).pop();
     } catch (e, stackTrace) {
-      AppLogger.error('shareVideo: FAILED — ${e.runtimeType}: $e',
-          error: e, stackTrace: stackTrace);
-      await _showVideoExportError(e);
+      AppLogger.error(
+        'shareVideo: FAILED — ${e.runtimeType}: $e',
+        error: e,
+        stackTrace: stackTrace,
+      );
+      if (mounted) {
+        _showVideoExportError(context.l10n.shareAyahVideoExportFailed);
+      }
     } finally {
       if (mounted) setState(() => _activeAction = null);
     }
@@ -432,25 +437,11 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
     }
   }
 
-  Future<void> _showVideoExportError(Object error) async {
+  void _showVideoExportError(String friendlyMessage) {
     if (!mounted) return;
-
-    final l10n = context.l10n;
-    await showDialog<void>(
-      context: context,
-      builder: (dialogContext) => AlertDialog(
-        title: Text(l10n.shareAyahVideoError),
-        content: SingleChildScrollView(
-          child: SelectableText(error.toString()),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(dialogContext).pop(),
-            child: Text(l10n.commonClose),
-          ),
-        ],
-      ),
-    );
+    widget.rootMessenger
+      ..hideCurrentSnackBar()
+      ..showSnackBar(SnackBar(content: Text(friendlyMessage)));
   }
 
   @override
@@ -575,6 +566,35 @@ class _AyahShareFooter extends StatelessWidget {
 
     return Column(
       children: [
+        if (activeAction == _AyahShareAction.video) ...[
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: 14,
+                  height: 14,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 1.8,
+                    valueColor: AlwaysStoppedAnimation(tokens.primary),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Flexible(
+                  child: Text(
+                    l10n.shareAyahVideoExporting,
+                    style: GoogleFonts.dmSans(
+                      fontSize: 12,
+                      color: tokens.textSecondary,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
         SizedBox(
           width: double.infinity,
           child: ElevatedButton(

@@ -359,6 +359,8 @@
   "shareAyahVideoNoAudio": "لا يوجد صوت متاح لإنشاء فيديو لهذه الآية.",
   "shareAyahVideoGenerating": "جارٍ إنشاء فيديو الآية...",
   "shareAyahVideoError": "تعذر علينا إنشاء فيديو هذه الآية.",
+  "shareAyahVideoExporting": "جارٍ تجهيز الفيديو… قد يستغرق ذلك بضع ثوانٍ.",
+  "shareAyahVideoExportFailed": "تعذر إنشاء الفيديو. يُرجى المحاولة مرة أخرى.",
   "notificationAdhanChannelName": "الأذان",
   "notificationAdhanChannelDescription": "إشعارات مواقيت الصلاة",
   "notificationAdhanTitle": "قبلة تايم - {prayerName}",

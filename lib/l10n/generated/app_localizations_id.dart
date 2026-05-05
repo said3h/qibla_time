@@ -875,6 +875,14 @@ class AppLocalizationsId extends AppLocalizations {
       'Kami tidak dapat menghasilkan video untuk ayat ini.';
 
   @override
+  String get shareAyahVideoExporting =>
+      'Mempersiapkan video Anda… Ini mungkin membutuhkan beberapa detik.';
+
+  @override
+  String get shareAyahVideoExportFailed =>
+      'Gagal membuat video. Silakan coba lagi.';
+
+  @override
   String get notificationAdhanChannelName => 'Adzan';
 
   @override

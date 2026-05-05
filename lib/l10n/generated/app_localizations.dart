@@ -1694,6 +1694,18 @@ abstract class AppLocalizations {
   /// **'No hemos podido generar el video de esta aleya.'**
   String get shareAyahVideoError;
 
+  /// No description provided for @shareAyahVideoExporting.
+  ///
+  /// In es, this message translates to:
+  /// **'Preparando tu vídeo… Esto puede tardar unos segundos.'**
+  String get shareAyahVideoExporting;
+
+  /// No description provided for @shareAyahVideoExportFailed.
+  ///
+  /// In es, this message translates to:
+  /// **'No se pudo crear el vídeo. Inténtalo de nuevo.'**
+  String get shareAyahVideoExportFailed;
+
   /// No description provided for @notificationAdhanChannelName.
   ///
   /// In es, this message translates to:

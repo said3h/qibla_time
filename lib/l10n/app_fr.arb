@@ -358,6 +358,8 @@
   "shareAyahVideoNoAudio": "Aucun audio n'est disponible pour générer une vidéo de ce verset.",
   "shareAyahVideoGenerating": "Génération de la vidéo du verset...",
   "shareAyahVideoError": "Nous n'avons pas pu générer la vidéo de ce verset.",
+  "shareAyahVideoExporting": "Préparation de votre vidéo… Cela peut prendre quelques secondes.",
+  "shareAyahVideoExportFailed": "Impossible de créer la vidéo. Veuillez réessayer.",
   "notificationAdhanChannelName": "Adhan",
   "notificationAdhanChannelDescription": "Notifications des horaires de prière",
   "notificationAdhanTitle": "Qibla Time - {prayerName}",

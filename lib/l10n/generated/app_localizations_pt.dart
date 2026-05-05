@@ -874,6 +874,14 @@ class AppLocalizationsPt extends AppLocalizations {
       'Não foi possível gerar o vídeo para este versículo.';
 
   @override
+  String get shareAyahVideoExporting =>
+      'Preparando seu vídeo… Isso pode levar alguns segundos.';
+
+  @override
+  String get shareAyahVideoExportFailed =>
+      'Não foi possível criar o vídeo. Tente novamente.';
+
+  @override
   String get notificationAdhanChannelName => 'Adhan';
 
   @override

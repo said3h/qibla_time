@@ -877,6 +877,14 @@ class AppLocalizationsNl extends AppLocalizations {
       'We konden de video voor deze ayah niet genereren.';
 
   @override
+  String get shareAyahVideoExporting =>
+      'Je video wordt voorbereid… Dit kan enkele seconden duren.';
+
+  @override
+  String get shareAyahVideoExportFailed =>
+      'Video kon niet worden gemaakt. Probeer het opnieuw.';
+
+  @override
   String get notificationAdhanChannelName => 'Adhan';
 
   @override

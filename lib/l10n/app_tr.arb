@@ -359,6 +359,8 @@
   "shareAyahVideoNoAudio": "Bu ayet için video oluşturulacak ses mevcut değil.",
   "shareAyahVideoGenerating": "Ayet videosu oluşturuluyor...",
   "shareAyahVideoError": "Bu ayetin videosunu oluşturamadık.",
+  "shareAyahVideoExporting": "Videonuz hazırlanıyor… Bu birkaç saniye sürebilir.",
+  "shareAyahVideoExportFailed": "Video oluşturulamadı. Lütfen tekrar deneyin.",
   "notificationAdhanChannelName": "Ezan bildirimleri",
   "notificationAdhanChannelDescription": "Namaz vakitleri için ezan bildirimi",
   "notificationAdhanTitle": "Qibla Time - {prayerName}",

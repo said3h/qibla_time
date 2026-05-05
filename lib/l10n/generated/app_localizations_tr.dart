@@ -869,6 +869,14 @@ class AppLocalizationsTr extends AppLocalizations {
   String get shareAyahVideoError => 'Bu ayetin videosunu oluşturamadık.';
 
   @override
+  String get shareAyahVideoExporting =>
+      'Videonuz hazırlanıyor… Bu birkaç saniye sürebilir.';
+
+  @override
+  String get shareAyahVideoExportFailed =>
+      'Video oluşturulamadı. Lütfen tekrar deneyin.';
+
+  @override
   String get notificationAdhanChannelName => 'Ezan bildirimleri';
 
   @override

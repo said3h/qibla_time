@@ -359,6 +359,8 @@
   "shareAyahVideoNoAudio": "Non è disponibile auAllah per generare un video per questa ayah.",
   "shareAyahVideoGenerating": "Generazione del video ayah...",
   "shareAyahVideoError": "Non è stato possibile generare il video per questa ayah.",
+  "shareAyahVideoExporting": "Preparazione del video in corso… Potrebbe richiedere alcuni secondi.",
+  "shareAyahVideoExportFailed": "Impossibile creare il video. Riprova.",
   "notificationAdhanChannelName": "Adhan",
   "notificationAdhanChannelDescription": "Notifiche sul tempo di preghiera",
   "notificationAdhanTitle": "Qibla Time - {prayerName}",
