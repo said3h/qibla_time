@@ -927,8 +927,23 @@
   "homeSelectCityButton": "Pilih kota",
   "homeManualCityTitle": "Pilih kota Anda",
   "homeManualCityBody": "Kami akan memakai kota ini untuk menghitung waktu shalat tanpa mengaktifkan GPS.",
+  "homeManualCountryTitle": "Pilih negara",
+  "homeManualCountrySearchHint": "Cari kode negara",
+  "homeManualCountryCityCount": "{count} kota tersedia",
+  "@homeManualCountryCityCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "homeManualCityFieldCity": "Kota",
   "homeManualCityFieldCountry": "Negara",
+  "homeManualCitySearchHint": "Cari kota",
+  "homeManualCityBackToCountries": "Kembali ke negara",
+  "homeManualCityNoResults": "Kota tidak ditemukan. Coba ejaan lain atau gunakan pencarian online.",
+  "homeManualCityOnlineFallback": "Cari online",
+  "homeManualCityGeoNamesAttribution": "Kota offline: GeoNames CC BY 4.0 · geonames.org",
   "homeManualCitySave": "Gunakan kota ini",
   "homeManualCityNotFound": "Kota tidak ditemukan. Coba ejaan lain atau pilih dari daftar.",
   "homeManualCityAmbiguous": "Tambahkan negara atau pilih kota yang benar dari daftar.",

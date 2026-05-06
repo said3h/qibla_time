@@ -62,6 +62,7 @@ flutter:
     - assets/audio/
     - assets/hadiths/
     - assets/data/
+    - assets/data/prayer_cities/
     - assets/images/prayer_positions/
     - assets/images/app/
 

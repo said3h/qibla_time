@@ -926,8 +926,23 @@
   "homeSelectCityButton": "Stadt auswählen",
   "homeManualCityTitle": "Wähle deine Stadt",
   "homeManualCityBody": "Wir verwenden diese Stadt, um Gebetszeiten ohne GPS zu berechnen.",
+  "homeManualCountryTitle": "Land auswählen",
+  "homeManualCountrySearchHint": "Ländercode suchen",
+  "homeManualCountryCityCount": "{count} Städte verfügbar",
+  "@homeManualCountryCityCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "homeManualCityFieldCity": "Stadt",
   "homeManualCityFieldCountry": "Land",
+  "homeManualCitySearchHint": "Stadt suchen",
+  "homeManualCityBackToCountries": "Zurück zu Ländern",
+  "homeManualCityNoResults": "Stadt nicht gefunden. Probiere eine andere Schreibweise oder die Online-Suche.",
+  "homeManualCityOnlineFallback": "Online suchen",
+  "homeManualCityGeoNamesAttribution": "Offline-Städte: GeoNames CC BY 4.0 · geonames.org",
   "homeManualCitySave": "Diese Stadt verwenden",
   "homeManualCityNotFound": "Stadt nicht gefunden. Versuche eine andere Schreibweise oder wähle aus der Liste.",
   "homeManualCityAmbiguous": "Bitte gib das Land an oder wähle die richtige Stadt aus der Liste.",

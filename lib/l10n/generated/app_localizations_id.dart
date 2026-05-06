@@ -2243,10 +2243,38 @@ class AppLocalizationsId extends AppLocalizations {
       'Kami akan memakai kota ini untuk menghitung waktu shalat tanpa mengaktifkan GPS.';
 
   @override
+  String get homeManualCountryTitle => 'Pilih negara';
+
+  @override
+  String get homeManualCountrySearchHint => 'Cari kode negara';
+
+  @override
+  String homeManualCountryCityCount(int count) {
+    return '$count kota tersedia';
+  }
+
+  @override
   String get homeManualCityFieldCity => 'Kota';
 
   @override
   String get homeManualCityFieldCountry => 'Negara';
+
+  @override
+  String get homeManualCitySearchHint => 'Cari kota';
+
+  @override
+  String get homeManualCityBackToCountries => 'Kembali ke negara';
+
+  @override
+  String get homeManualCityNoResults =>
+      'Kota tidak ditemukan. Coba ejaan lain atau gunakan pencarian online.';
+
+  @override
+  String get homeManualCityOnlineFallback => 'Cari online';
+
+  @override
+  String get homeManualCityGeoNamesAttribution =>
+      'Kota offline: GeoNames CC BY 4.0 · geonames.org';
 
   @override
   String get homeManualCitySave => 'Gunakan kota ini';

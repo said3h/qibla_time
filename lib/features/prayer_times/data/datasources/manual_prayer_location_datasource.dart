@@ -2,8 +2,8 @@ import 'package:geocoding/geocoding.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/services/logger_service.dart';
-import '../../domain/entities/manual_prayer_city_option.dart';
 import '../../domain/entities/manual_prayer_location.dart';
+import '../../domain/entities/offline_prayer_city.dart';
 
 class ManualPrayerLocationDataSource {
   static const _countryKey = 'manual_prayer_country';
@@ -60,13 +60,13 @@ class ManualPrayerLocationDataSource {
     return manualLocation;
   }
 
-  Future<void> saveCityOption(ManualPrayerCityOption option) {
+  Future<void> saveOfflineCity(OfflinePrayerCity city) {
     return saveManualLocation(
       ManualPrayerLocation(
-        country: option.country,
-        city: option.city,
-        latitude: option.latitude,
-        longitude: option.longitude,
+        country: city.countryCode,
+        city: city.name,
+        latitude: city.latitude,
+        longitude: city.longitude,
       ),
     );
   }

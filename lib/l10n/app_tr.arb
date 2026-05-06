@@ -926,8 +926,23 @@
   "homeSelectCityButton": "Şehir seç",
   "homeManualCityTitle": "Şehrini seç",
   "homeManualCityBody": "GPS'i açmadan namaz vakitlerini hesaplamak için bu şehri kullanacağız.",
+  "homeManualCountryTitle": "Ülke seç",
+  "homeManualCountrySearchHint": "Ülke kodu ara",
+  "homeManualCountryCityCount": "{count} şehir mevcut",
+  "@homeManualCountryCityCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "homeManualCityFieldCity": "Şehir",
   "homeManualCityFieldCountry": "Ülke",
+  "homeManualCitySearchHint": "Şehir ara",
+  "homeManualCityBackToCountries": "Ülkelere dön",
+  "homeManualCityNoResults": "Şehir bulunamadı. Başka bir yazım deneyin veya çevrimiçi arayın.",
+  "homeManualCityOnlineFallback": "Çevrimiçi ara",
+  "homeManualCityGeoNamesAttribution": "Çevrimdışı şehirler: GeoNames CC BY 4.0 · geonames.org",
   "homeManualCitySave": "Bu şehri kullan",
   "homeManualCityNotFound": "Şehir bulunamadı. Başka bir yazım dene veya listeden seç.",
   "homeManualCityAmbiguous": "Ülkeyi ekle veya listeden doğru şehri seç.",

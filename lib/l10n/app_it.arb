@@ -926,8 +926,23 @@
   "homeSelectCityButton": "Seleziona città",
   "homeManualCityTitle": "Seleziona la tua città",
   "homeManualCityBody": "Useremo questa città per calcolare gli orari senza attivare il GPS.",
+  "homeManualCountryTitle": "Seleziona paese",
+  "homeManualCountrySearchHint": "Cerca codice paese",
+  "homeManualCountryCityCount": "{count} città disponibili",
+  "@homeManualCountryCityCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "homeManualCityFieldCity": "Città",
   "homeManualCityFieldCountry": "Paese",
+  "homeManualCitySearchHint": "Cerca città",
+  "homeManualCityBackToCountries": "Torna ai paesi",
+  "homeManualCityNoResults": "Città non trovata. Prova un'altra grafia o la ricerca online.",
+  "homeManualCityOnlineFallback": "Cerca online",
+  "homeManualCityGeoNamesAttribution": "Città offline: GeoNames CC BY 4.0 · geonames.org",
   "homeManualCitySave": "Usa questa città",
   "homeManualCityNotFound": "Città non trovata. Prova un’altra scrittura o scegli dalla lista.",
   "homeManualCityAmbiguous": "Aggiungi il paese o scegli la città corretta dalla lista.",

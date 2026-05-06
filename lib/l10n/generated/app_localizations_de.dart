@@ -2252,10 +2252,38 @@ class AppLocalizationsDe extends AppLocalizations {
       'Wir verwenden diese Stadt, um Gebetszeiten ohne GPS zu berechnen.';
 
   @override
+  String get homeManualCountryTitle => 'Land auswählen';
+
+  @override
+  String get homeManualCountrySearchHint => 'Ländercode suchen';
+
+  @override
+  String homeManualCountryCityCount(int count) {
+    return '$count Städte verfügbar';
+  }
+
+  @override
   String get homeManualCityFieldCity => 'Stadt';
 
   @override
   String get homeManualCityFieldCountry => 'Land';
+
+  @override
+  String get homeManualCitySearchHint => 'Stadt suchen';
+
+  @override
+  String get homeManualCityBackToCountries => 'Zurück zu Ländern';
+
+  @override
+  String get homeManualCityNoResults =>
+      'Stadt nicht gefunden. Probiere eine andere Schreibweise oder die Online-Suche.';
+
+  @override
+  String get homeManualCityOnlineFallback => 'Online suchen';
+
+  @override
+  String get homeManualCityGeoNamesAttribution =>
+      'Offline-Städte: GeoNames CC BY 4.0 · geonames.org';
 
   @override
   String get homeManualCitySave => 'Diese Stadt verwenden';

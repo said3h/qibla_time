@@ -2255,10 +2255,38 @@ class AppLocalizationsIt extends AppLocalizations {
       'Useremo questa città per calcolare gli orari senza attivare il GPS.';
 
   @override
+  String get homeManualCountryTitle => 'Seleziona paese';
+
+  @override
+  String get homeManualCountrySearchHint => 'Cerca codice paese';
+
+  @override
+  String homeManualCountryCityCount(int count) {
+    return '$count città disponibili';
+  }
+
+  @override
   String get homeManualCityFieldCity => 'Città';
 
   @override
   String get homeManualCityFieldCountry => 'Paese';
+
+  @override
+  String get homeManualCitySearchHint => 'Cerca città';
+
+  @override
+  String get homeManualCityBackToCountries => 'Torna ai paesi';
+
+  @override
+  String get homeManualCityNoResults =>
+      'Città non trovata. Prova un\'altra grafia o la ricerca online.';
+
+  @override
+  String get homeManualCityOnlineFallback => 'Cerca online';
+
+  @override
+  String get homeManualCityGeoNamesAttribution =>
+      'Città offline: GeoNames CC BY 4.0 · geonames.org';
 
   @override
   String get homeManualCitySave => 'Usa questa città';

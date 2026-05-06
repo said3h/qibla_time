@@ -2186,10 +2186,38 @@ class AppLocalizationsAr extends AppLocalizations {
       'سنستخدم هذه المدينة لحساب مواقيت الصلاة دون تفعيل GPS.';
 
   @override
+  String get homeManualCountryTitle => 'اختر البلد';
+
+  @override
+  String get homeManualCountrySearchHint => 'ابحث برمز البلد';
+
+  @override
+  String homeManualCountryCityCount(int count) {
+    return '$count مدينة متاحة';
+  }
+
+  @override
   String get homeManualCityFieldCity => 'المدينة';
 
   @override
   String get homeManualCityFieldCountry => 'البلد';
+
+  @override
+  String get homeManualCitySearchHint => 'ابحث عن مدينة';
+
+  @override
+  String get homeManualCityBackToCountries => 'العودة إلى البلدان';
+
+  @override
+  String get homeManualCityNoResults =>
+      'لم يتم العثور على المدينة. جرّب كتابة أخرى أو استخدم البحث عبر الإنترنت.';
+
+  @override
+  String get homeManualCityOnlineFallback => 'البحث عبر الإنترنت';
+
+  @override
+  String get homeManualCityGeoNamesAttribution =>
+      'مدن بلا إنترنت: GeoNames CC BY 4.0 · geonames.org';
 
   @override
   String get homeManualCitySave => 'استخدم هذه المدينة';

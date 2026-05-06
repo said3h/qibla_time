@@ -926,8 +926,23 @@
   "homeSelectCityButton": "Select city",
   "homeManualCityTitle": "Select your city",
   "homeManualCityBody": "We will use this city to calculate prayer times without turning on GPS.",
+  "homeManualCountryTitle": "Select country",
+  "homeManualCountrySearchHint": "Search country code",
+  "homeManualCountryCityCount": "{count} cities available",
+  "@homeManualCountryCityCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "homeManualCityFieldCity": "City",
   "homeManualCityFieldCountry": "Country",
+  "homeManualCitySearchHint": "Search city",
+  "homeManualCityBackToCountries": "Back to countries",
+  "homeManualCityNoResults": "City not found. Try another spelling or use online search.",
+  "homeManualCityOnlineFallback": "Search online",
+  "homeManualCityGeoNamesAttribution": "Offline cities: GeoNames CC BY 4.0 · geonames.org",
   "homeManualCitySave": "Use this city",
   "homeManualCityNotFound": "City not found. Try another spelling or choose from the list.",
   "homeManualCityAmbiguous": "Please add the country or choose the correct city from the list.",

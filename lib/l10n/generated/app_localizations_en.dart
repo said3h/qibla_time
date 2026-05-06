@@ -2233,10 +2233,38 @@ class AppLocalizationsEn extends AppLocalizations {
       'We will use this city to calculate prayer times without turning on GPS.';
 
   @override
+  String get homeManualCountryTitle => 'Select country';
+
+  @override
+  String get homeManualCountrySearchHint => 'Search country code';
+
+  @override
+  String homeManualCountryCityCount(int count) {
+    return '$count cities available';
+  }
+
+  @override
   String get homeManualCityFieldCity => 'City';
 
   @override
   String get homeManualCityFieldCountry => 'Country';
+
+  @override
+  String get homeManualCitySearchHint => 'Search city';
+
+  @override
+  String get homeManualCityBackToCountries => 'Back to countries';
+
+  @override
+  String get homeManualCityNoResults =>
+      'City not found. Try another spelling or use online search.';
+
+  @override
+  String get homeManualCityOnlineFallback => 'Search online';
+
+  @override
+  String get homeManualCityGeoNamesAttribution =>
+      'Offline cities: GeoNames CC BY 4.0 · geonames.org';
 
   @override
   String get homeManualCitySave => 'Use this city';

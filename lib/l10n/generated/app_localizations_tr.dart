@@ -2226,10 +2226,38 @@ class AppLocalizationsTr extends AppLocalizations {
       'GPS\'i açmadan namaz vakitlerini hesaplamak için bu şehri kullanacağız.';
 
   @override
+  String get homeManualCountryTitle => 'Ülke seç';
+
+  @override
+  String get homeManualCountrySearchHint => 'Ülke kodu ara';
+
+  @override
+  String homeManualCountryCityCount(int count) {
+    return '$count şehir mevcut';
+  }
+
+  @override
   String get homeManualCityFieldCity => 'Şehir';
 
   @override
   String get homeManualCityFieldCountry => 'Ülke';
+
+  @override
+  String get homeManualCitySearchHint => 'Şehir ara';
+
+  @override
+  String get homeManualCityBackToCountries => 'Ülkelere dön';
+
+  @override
+  String get homeManualCityNoResults =>
+      'Şehir bulunamadı. Başka bir yazım deneyin veya çevrimiçi arayın.';
+
+  @override
+  String get homeManualCityOnlineFallback => 'Çevrimiçi ara';
+
+  @override
+  String get homeManualCityGeoNamesAttribution =>
+      'Çevrimdışı şehirler: GeoNames CC BY 4.0 · geonames.org';
 
   @override
   String get homeManualCitySave => 'Bu şehri kullan';

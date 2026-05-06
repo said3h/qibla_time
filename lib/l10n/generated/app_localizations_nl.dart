@@ -2246,10 +2246,38 @@ class AppLocalizationsNl extends AppLocalizations {
       'We gebruiken deze stad om gebedstijden te berekenen zonder GPS in te schakelen.';
 
   @override
+  String get homeManualCountryTitle => 'Land kiezen';
+
+  @override
+  String get homeManualCountrySearchHint => 'Landcode zoeken';
+
+  @override
+  String homeManualCountryCityCount(int count) {
+    return '$count steden beschikbaar';
+  }
+
+  @override
   String get homeManualCityFieldCity => 'Stad';
 
   @override
   String get homeManualCityFieldCountry => 'Land';
+
+  @override
+  String get homeManualCitySearchHint => 'Stad zoeken';
+
+  @override
+  String get homeManualCityBackToCountries => 'Terug naar landen';
+
+  @override
+  String get homeManualCityNoResults =>
+      'Stad niet gevonden. Probeer een andere spelling of online zoeken.';
+
+  @override
+  String get homeManualCityOnlineFallback => 'Online zoeken';
+
+  @override
+  String get homeManualCityGeoNamesAttribution =>
+      'Offline steden: GeoNames CC BY 4.0 · geonames.org';
 
   @override
   String get homeManualCitySave => 'Deze stad gebruiken';

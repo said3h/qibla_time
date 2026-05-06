@@ -5,6 +5,7 @@ import '../../data/datasources/prayer_cache_datasource.dart';
 import '../../data/datasources/prayer_calculation_datasource.dart';
 import '../../data/datasources/prayer_location_datasource.dart';
 import '../../data/datasources/manual_prayer_location_datasource.dart';
+import '../../data/datasources/offline_prayer_cities_datasource.dart';
 import '../../data/datasources/prayer_notifications_datasource.dart';
 import '../../data/datasources/prayer_settings_datasource.dart';
 import '../../data/datasources/prayer_widget_datasource.dart';
@@ -28,6 +29,11 @@ final homeScrollToTopSignalProvider = StateProvider<int>((ref) => 0);
 final manualPrayerLocationDataSourceProvider =
     Provider<ManualPrayerLocationDataSource>((ref) {
   return ManualPrayerLocationDataSource();
+});
+
+final offlinePrayerCitiesDataSourceProvider =
+    Provider<OfflinePrayerCitiesDataSource>((ref) {
+  return OfflinePrayerCitiesDataSource();
 });
 
 final prayerLocationDataSourceProvider =

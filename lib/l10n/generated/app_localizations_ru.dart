@@ -2250,10 +2250,38 @@ class AppLocalizationsRu extends AppLocalizations {
       'Мы будем использовать этот город для расчета времени молитв без включения GPS.';
 
   @override
+  String get homeManualCountryTitle => 'Выберите страну';
+
+  @override
+  String get homeManualCountrySearchHint => 'Поиск кода страны';
+
+  @override
+  String homeManualCountryCityCount(int count) {
+    return '$count городов доступно';
+  }
+
+  @override
   String get homeManualCityFieldCity => 'Город';
 
   @override
   String get homeManualCityFieldCountry => 'Страна';
+
+  @override
+  String get homeManualCitySearchHint => 'Поиск города';
+
+  @override
+  String get homeManualCityBackToCountries => 'Назад к странам';
+
+  @override
+  String get homeManualCityNoResults =>
+      'Город не найден. Попробуйте другое написание или онлайн-поиск.';
+
+  @override
+  String get homeManualCityOnlineFallback => 'Искать онлайн';
+
+  @override
+  String get homeManualCityGeoNamesAttribution =>
+      'Офлайн-города: GeoNames CC BY 4.0 · geonames.org';
 
   @override
   String get homeManualCitySave => 'Использовать этот город';

@@ -926,8 +926,23 @@
   "homeSelectCityButton": "اختر المدينة",
   "homeManualCityTitle": "اختر مدينتك",
   "homeManualCityBody": "سنستخدم هذه المدينة لحساب مواقيت الصلاة دون تفعيل GPS.",
+  "homeManualCountryTitle": "اختر البلد",
+  "homeManualCountrySearchHint": "ابحث برمز البلد",
+  "homeManualCountryCityCount": "{count} مدينة متاحة",
+  "@homeManualCountryCityCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "homeManualCityFieldCity": "المدينة",
   "homeManualCityFieldCountry": "البلد",
+  "homeManualCitySearchHint": "ابحث عن مدينة",
+  "homeManualCityBackToCountries": "العودة إلى البلدان",
+  "homeManualCityNoResults": "لم يتم العثور على المدينة. جرّب كتابة أخرى أو استخدم البحث عبر الإنترنت.",
+  "homeManualCityOnlineFallback": "البحث عبر الإنترنت",
+  "homeManualCityGeoNamesAttribution": "مدن بلا إنترنت: GeoNames CC BY 4.0 · geonames.org",
   "homeManualCitySave": "استخدم هذه المدينة",
   "homeManualCityNotFound": "لم يتم العثور على المدينة. جرّب كتابة أخرى أو اختر من القائمة.",
   "homeManualCityAmbiguous": "أضف البلد أو اختر المدينة الصحيحة من القائمة.",

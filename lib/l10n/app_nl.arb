@@ -926,8 +926,23 @@
   "homeSelectCityButton": "Stad selecteren",
   "homeManualCityTitle": "Selecteer je stad",
   "homeManualCityBody": "We gebruiken deze stad om gebedstijden te berekenen zonder GPS in te schakelen.",
+  "homeManualCountryTitle": "Land kiezen",
+  "homeManualCountrySearchHint": "Landcode zoeken",
+  "homeManualCountryCityCount": "{count} steden beschikbaar",
+  "@homeManualCountryCityCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "homeManualCityFieldCity": "Stad",
   "homeManualCityFieldCountry": "Land",
+  "homeManualCitySearchHint": "Stad zoeken",
+  "homeManualCityBackToCountries": "Terug naar landen",
+  "homeManualCityNoResults": "Stad niet gevonden. Probeer een andere spelling of online zoeken.",
+  "homeManualCityOnlineFallback": "Online zoeken",
+  "homeManualCityGeoNamesAttribution": "Offline steden: GeoNames CC BY 4.0 · geonames.org",
   "homeManualCitySave": "Deze stad gebruiken",
   "homeManualCityNotFound": "Stad niet gevonden. Probeer een andere spelling of kies uit de lijst.",
   "homeManualCityAmbiguous": "Voeg het land toe of kies de juiste stad uit de lijst.",

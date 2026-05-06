@@ -926,8 +926,23 @@
   "homeSelectCityButton": "Выбрать город",
   "homeManualCityTitle": "Выберите ваш город",
   "homeManualCityBody": "Мы будем использовать этот город для расчета времени молитв без включения GPS.",
+  "homeManualCountryTitle": "Выберите страну",
+  "homeManualCountrySearchHint": "Поиск кода страны",
+  "homeManualCountryCityCount": "{count} городов доступно",
+  "@homeManualCountryCityCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "homeManualCityFieldCity": "Город",
   "homeManualCityFieldCountry": "Страна",
+  "homeManualCitySearchHint": "Поиск города",
+  "homeManualCityBackToCountries": "Назад к странам",
+  "homeManualCityNoResults": "Город не найден. Попробуйте другое написание или онлайн-поиск.",
+  "homeManualCityOnlineFallback": "Искать онлайн",
+  "homeManualCityGeoNamesAttribution": "Офлайн-города: GeoNames CC BY 4.0 · geonames.org",
   "homeManualCitySave": "Использовать этот город",
   "homeManualCityNotFound": "Город не найден. Попробуйте другое написание или выберите из списка.",
   "homeManualCityAmbiguous": "Добавьте страну или выберите правильный город из списка.",

@@ -3975,6 +3975,24 @@ abstract class AppLocalizations {
   /// **'Usaremos esta ciudad para calcular los horarios sin activar el GPS.'**
   String get homeManualCityBody;
 
+  /// No description provided for @homeManualCountryTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Selecciona país'**
+  String get homeManualCountryTitle;
+
+  /// No description provided for @homeManualCountrySearchHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Buscar país por código'**
+  String get homeManualCountrySearchHint;
+
+  /// No description provided for @homeManualCountryCityCount.
+  ///
+  /// In es, this message translates to:
+  /// **'{count} ciudades disponibles'**
+  String homeManualCountryCityCount(int count);
+
   /// No description provided for @homeManualCityFieldCity.
   ///
   /// In es, this message translates to:
@@ -3986,6 +4004,36 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'País'**
   String get homeManualCityFieldCountry;
+
+  /// No description provided for @homeManualCitySearchHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Buscar ciudad'**
+  String get homeManualCitySearchHint;
+
+  /// No description provided for @homeManualCityBackToCountries.
+  ///
+  /// In es, this message translates to:
+  /// **'Volver a países'**
+  String get homeManualCityBackToCountries;
+
+  /// No description provided for @homeManualCityNoResults.
+  ///
+  /// In es, this message translates to:
+  /// **'Ciudad no encontrada. Prueba otra escritura o usa la búsqueda online.'**
+  String get homeManualCityNoResults;
+
+  /// No description provided for @homeManualCityOnlineFallback.
+  ///
+  /// In es, this message translates to:
+  /// **'Buscar online'**
+  String get homeManualCityOnlineFallback;
+
+  /// No description provided for @homeManualCityGeoNamesAttribution.
+  ///
+  /// In es, this message translates to:
+  /// **'Ciudades offline: GeoNames CC BY 4.0 · geonames.org'**
+  String get homeManualCityGeoNamesAttribution;
 
   /// No description provided for @homeManualCitySave.
   ///
