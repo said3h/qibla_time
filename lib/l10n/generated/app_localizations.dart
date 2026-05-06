@@ -683,7 +683,7 @@ abstract class AppLocalizations {
   /// No description provided for @homeHeaderLocationUnavailable.
   ///
   /// In es, this message translates to:
-  /// **'Ubicación no disponible'**
+  /// **'Ubicación desactivada'**
   String get homeHeaderLocationUnavailable;
 
   /// No description provided for @homeHeaderStatusLine.
@@ -709,6 +709,12 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Usando tu última ubicación guardada'**
   String get homeHeroUsingSavedLocation;
+
+  /// No description provided for @homeUsingSelectedCity.
+  ///
+  /// In es, this message translates to:
+  /// **'Usando ciudad seleccionada: {city}'**
+  String homeUsingSelectedCity(Object city);
 
   /// No description provided for @homeSelectedDateToday.
   ///
@@ -3942,14 +3948,93 @@ abstract class AppLocalizations {
   /// No description provided for @homeLocationEnableDeviceLocation.
   ///
   /// In es, this message translates to:
-  /// **'Activa la ubicación del dispositivo'**
+  /// **'Elige cómo configurar tu ubicación'**
   String get homeLocationEnableDeviceLocation;
 
   /// No description provided for @homeLocationGpsDisabledBody.
   ///
   /// In es, this message translates to:
-  /// **'Sin GPS activo no podemos calcular horarios precisos ni orientar la Qibla.'**
+  /// **'La ubicación está desactivada. Puedes activar el GPS o seleccionar tu ciudad manualmente.'**
   String get homeLocationGpsDisabledBody;
+
+  /// No description provided for @homeSelectCityButton.
+  ///
+  /// In es, this message translates to:
+  /// **'Seleccionar ciudad'**
+  String get homeSelectCityButton;
+
+  /// No description provided for @homeManualCityTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Selecciona tu ciudad'**
+  String get homeManualCityTitle;
+
+  /// No description provided for @homeManualCityBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Usaremos esta ciudad para calcular los horarios sin activar el GPS.'**
+  String get homeManualCityBody;
+
+  /// No description provided for @homeManualCityFieldCity.
+  ///
+  /// In es, this message translates to:
+  /// **'Ciudad'**
+  String get homeManualCityFieldCity;
+
+  /// No description provided for @homeManualCityFieldCountry.
+  ///
+  /// In es, this message translates to:
+  /// **'País'**
+  String get homeManualCityFieldCountry;
+
+  /// No description provided for @homeManualCitySave.
+  ///
+  /// In es, this message translates to:
+  /// **'Usar esta ciudad'**
+  String get homeManualCitySave;
+
+  /// No description provided for @homeManualCityNotFound.
+  ///
+  /// In es, this message translates to:
+  /// **'Ciudad no encontrada. Prueba otra escritura o elige una de la lista.'**
+  String get homeManualCityNotFound;
+
+  /// No description provided for @homeManualCityAmbiguous.
+  ///
+  /// In es, this message translates to:
+  /// **'Añade el país o elige la ciudad correcta de la lista.'**
+  String get homeManualCityAmbiguous;
+
+  /// No description provided for @homeManualCityPopularList.
+  ///
+  /// In es, this message translates to:
+  /// **'Ciudades populares'**
+  String get homeManualCityPopularList;
+
+  /// No description provided for @homeManualCityConfirmTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Confirmar ciudad'**
+  String get homeManualCityConfirmTitle;
+
+  /// No description provided for @homeManualCityConfirmBody.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Usar {label} para los horarios?\nCoordenadas: {latitude}, {longitude}'**
+  String homeManualCityConfirmBody(
+      Object label, Object latitude, Object longitude);
+
+  /// No description provided for @homeManualCityConfirmUse.
+  ///
+  /// In es, this message translates to:
+  /// **'Confirmar'**
+  String get homeManualCityConfirmUse;
+
+  /// No description provided for @homeManualCityClear.
+  ///
+  /// In es, this message translates to:
+  /// **'Borrar ciudad seleccionada'**
+  String get homeManualCityClear;
 
   /// No description provided for @homeLocationPendingBody.
   ///

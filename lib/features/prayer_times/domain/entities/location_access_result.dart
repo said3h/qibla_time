@@ -3,6 +3,7 @@ import 'prayer_location.dart';
 enum LocationAccessSource {
   live,
   cache,
+  manual,
 }
 
 class LocationAccessResult {
@@ -15,4 +16,6 @@ class LocationAccessResult {
   final LocationAccessSource source;
 
   bool get isFromCache => source == LocationAccessSource.cache;
+
+  bool get isManual => source == LocationAccessSource.manual;
 }

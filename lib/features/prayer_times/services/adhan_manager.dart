@@ -20,25 +20,34 @@ class AdhanManager {
     final startedAt = DateTime.now();
     AppLogger.info('AdhanManager.scheduleTodayAdhans: start at $startedAt');
 
-    // On a clean install, scheduling before location permission is granted can
-    // block startup or trigger permission flows too early. Bail out quickly and
-    // rely on the next app open/resume after permissions are granted.
-    final locationPermission = await Geolocator.checkPermission();
-    final hasLocationPermission =
-        locationPermission == LocationPermission.always ||
-            locationPermission == LocationPermission.whileInUse;
-    if (!hasLocationPermission) {
+    final hasManualLocation =
+        await _ref.read(prayerLocationDataSourceProvider).hasManualLocation();
+    if (!hasManualLocation) {
+      // On a clean install, scheduling before location permission is granted can
+      // block startup or trigger permission flows too early. Bail out quickly and
+      // rely on the next app open/resume after permissions are granted.
+      final locationPermission = await Geolocator.checkPermission();
+      final hasLocationPermission =
+          locationPermission == LocationPermission.always ||
+              locationPermission == LocationPermission.whileInUse;
+      if (!hasLocationPermission) {
+        AppLogger.info(
+          'AdhanManager.scheduleTodayAdhans: locationPermission=$locationPermission; skipping schedule',
+        );
+        return;
+      }
+      final locationServiceEnabled =
+          await Geolocator.isLocationServiceEnabled();
+      if (!locationServiceEnabled) {
+        AppLogger.info(
+          'AdhanManager.scheduleTodayAdhans: locationServiceEnabled=false; skipping schedule',
+        );
+        return;
+      }
+    } else {
       AppLogger.info(
-        'AdhanManager.scheduleTodayAdhans: locationPermission=$locationPermission; skipping schedule',
+        'AdhanManager.scheduleTodayAdhans: using manual city location',
       );
-      return;
-    }
-    final locationServiceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!locationServiceEnabled) {
-      AppLogger.info(
-        'AdhanManager.scheduleTodayAdhans: locationServiceEnabled=false; skipping schedule',
-      );
-      return;
     }
 
     final periodModeEnabled =
@@ -78,7 +87,8 @@ class AdhanManager {
 
     // Programa todas las oraciones de mañana (IDs 5-9) para garantizar que el
     // adhan suene aunque el usuario no vuelva a abrir la app antes de Fajr.
-    AppLogger.info('AdhanManager.scheduleTodayAdhans: scheduling tomorrow adhans');
+    AppLogger.info(
+        'AdhanManager.scheduleTodayAdhans: scheduling tomorrow adhans');
     await _scheduleTomorrowAdhans();
 
     await _ref

@@ -94,7 +94,7 @@
   "methodEgyptian": "الهيئة المصرية",
   "homeHeaderOnline": "متصل",
   "homeHeaderOffline": "بدون شبكة",
-  "homeHeaderLocationUnavailable": "الموقع غير متاح",
+  "homeHeaderLocationUnavailable": "الموقع متوقف",
   "homeHeaderStatusLine": "{location} · {networkStatus}",
   "@homeHeaderStatusLine": {
     "placeholders": {
@@ -105,6 +105,12 @@
   "homeHeroNextPrayer": "الصلاة القادمة",
   "homeHeroTodayOverview": "النظرة الرئيسية لليوم",
   "homeHeroUsingSavedLocation": "يتم استخدام آخر موقع محفوظ",
+  "homeUsingSelectedCity": "يتم استخدام المدينة المحددة: {city}",
+  "@homeUsingSelectedCity": {
+    "placeholders": {
+      "city": {}
+    }
+  },
   "homeSelectedDateToday": "اليوم",
   "homeSelectedDateCustom": "التاريخ المحدد",
   "homeCountdownUnavailable": "العد التنازلي غير متاح",
@@ -915,8 +921,28 @@
   "homeLoadingScheduleBody": "جارٍ تجهيز صلاتك التالية",
   "homeLoadingScheduleTitle": "جارٍ تحميل المواقيت",
   "homeLocationCachedBody": "نجهز مواقيتك باستخدام آخر موقع محفوظ لديك.",
-  "homeLocationEnableDeviceLocation": "فعّل موقع الجهاز",
-  "homeLocationGpsDisabledBody": "من دون GPS لا يمكننا حساب المواقيت بدقة أو توجيه القبلة.",
+  "homeLocationEnableDeviceLocation": "اختر طريقة تحديد موقعك",
+  "homeLocationGpsDisabledBody": "الموقع متوقف. يمكنك تفعيل GPS أو اختيار مدينتك يدويًا.",
+  "homeSelectCityButton": "اختر المدينة",
+  "homeManualCityTitle": "اختر مدينتك",
+  "homeManualCityBody": "سنستخدم هذه المدينة لحساب مواقيت الصلاة دون تفعيل GPS.",
+  "homeManualCityFieldCity": "المدينة",
+  "homeManualCityFieldCountry": "البلد",
+  "homeManualCitySave": "استخدم هذه المدينة",
+  "homeManualCityNotFound": "لم يتم العثور على المدينة. جرّب كتابة أخرى أو اختر من القائمة.",
+  "homeManualCityAmbiguous": "أضف البلد أو اختر المدينة الصحيحة من القائمة.",
+  "homeManualCityPopularList": "مدن شائعة",
+  "homeManualCityConfirmTitle": "تأكيد المدينة",
+  "homeManualCityConfirmBody": "استخدام {label} لمواقيت الصلاة؟\nالإحداثيات: {latitude}, {longitude}",
+  "@homeManualCityConfirmBody": {
+    "placeholders": {
+      "label": {},
+      "latitude": {},
+      "longitude": {}
+    }
+  },
+  "homeManualCityConfirmUse": "تأكيد",
+  "homeManualCityClear": "مسح المدينة المحددة",
   "homeLocationPendingBody": "تبقى الشاشة الرئيسية ظاهرة حتى لو لم تصبح المواقيت جاهزة بعد.",
   "homeLocationPermissionBlocked": "تم حظر إذن الموقع",
   "homeLocationPermissionBlockedBody": "يمكنك تفعيل الموقع لـ Qibla Time من إعدادات النظام متى شئت.",

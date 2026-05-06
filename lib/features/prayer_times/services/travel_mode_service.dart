@@ -3,6 +3,7 @@ import 'package:geolocator/geolocator.dart';
 
 import '../../../core/localization/locale_controller.dart';
 import '../../../l10n/l10n.dart';
+import '../data/datasources/manual_prayer_location_datasource.dart';
 import '../data/datasources/travel_location_label_datasource.dart';
 import '../data/datasources/travel_mode_datasource.dart';
 import '../domain/entities/prayer_location.dart';
@@ -145,6 +146,12 @@ final recentLocationsProvider = FutureProvider<List<RecentLocation>>((
 
 final lastLocationLabelProvider = FutureProvider<String?>((ref) async {
   final languageCode = ref.watch(currentLanguageCodeProvider);
+  final manualLocation =
+      await ManualPrayerLocationDataSource().getManualLocation();
+  if (manualLocation != null) {
+    return manualLocation.label;
+  }
+
   final label =
       await ref.watch(travelModeServiceProvider).getLastLocationLabel();
   return _visibleLocationLabelForLanguage(label, languageCode);

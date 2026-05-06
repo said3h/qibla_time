@@ -311,7 +311,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get homeHeaderOffline => 'Offline';
 
   @override
-  String get homeHeaderLocationUnavailable => 'Lokasi tidak tersedia';
+  String get homeHeaderLocationUnavailable => 'Lokasi mati';
 
   @override
   String homeHeaderStatusLine(Object networkStatus, Object location) {
@@ -327,6 +327,11 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get homeHeroUsingSavedLocation =>
       'Menggunakan lokasi terakhir yang Anda simpan';
+
+  @override
+  String homeUsingSelectedCity(Object city) {
+    return 'Menggunakan kota pilihan: $city';
+  }
 
   @override
   String get homeSelectedDateToday => 'HARI INI';
@@ -2220,11 +2225,57 @@ class AppLocalizationsId extends AppLocalizations {
       'Kami sedang menyiapkan waktu Anda menggunakan lokasi terakhir yang Anda simpan.';
 
   @override
-  String get homeLocationEnableDeviceLocation => 'Aktifkan lokasi perangkat';
+  String get homeLocationEnableDeviceLocation =>
+      'Pilih cara mengatur lokasi Anda';
 
   @override
   String get homeLocationGpsDisabledBody =>
-      'Tanpa GPS kami tidak dapat menghitung waktu shalat yang akurat atau menyelaraskan kiblat.';
+      'Lokasi mati. Anda dapat mengaktifkan GPS atau memilih kota secara manual.';
+
+  @override
+  String get homeSelectCityButton => 'Pilih kota';
+
+  @override
+  String get homeManualCityTitle => 'Pilih kota Anda';
+
+  @override
+  String get homeManualCityBody =>
+      'Kami akan memakai kota ini untuk menghitung waktu shalat tanpa mengaktifkan GPS.';
+
+  @override
+  String get homeManualCityFieldCity => 'Kota';
+
+  @override
+  String get homeManualCityFieldCountry => 'Negara';
+
+  @override
+  String get homeManualCitySave => 'Gunakan kota ini';
+
+  @override
+  String get homeManualCityNotFound =>
+      'Kota tidak ditemukan. Coba ejaan lain atau pilih dari daftar.';
+
+  @override
+  String get homeManualCityAmbiguous =>
+      'Tambahkan negara atau pilih kota yang benar dari daftar.';
+
+  @override
+  String get homeManualCityPopularList => 'Kota populer';
+
+  @override
+  String get homeManualCityConfirmTitle => 'Konfirmasi kota';
+
+  @override
+  String homeManualCityConfirmBody(
+      Object label, Object latitude, Object longitude) {
+    return 'Gunakan $label untuk waktu shalat?\nKoordinat: $latitude, $longitude';
+  }
+
+  @override
+  String get homeManualCityConfirmUse => 'Konfirmasi';
+
+  @override
+  String get homeManualCityClear => 'Hapus kota pilihan';
 
   @override
   String get homeLocationPendingBody =>

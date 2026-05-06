@@ -307,7 +307,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get homeHeaderOffline => 'بدون شبكة';
 
   @override
-  String get homeHeaderLocationUnavailable => 'الموقع غير متاح';
+  String get homeHeaderLocationUnavailable => 'الموقع متوقف';
 
   @override
   String homeHeaderStatusLine(Object networkStatus, Object location) {
@@ -322,6 +322,11 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get homeHeroUsingSavedLocation => 'يتم استخدام آخر موقع محفوظ';
+
+  @override
+  String homeUsingSelectedCity(Object city) {
+    return 'يتم استخدام المدينة المحددة: $city';
+  }
 
   @override
   String get homeSelectedDateToday => 'اليوم';
@@ -2164,11 +2169,56 @@ class AppLocalizationsAr extends AppLocalizations {
       'نجهز مواقيتك باستخدام آخر موقع محفوظ لديك.';
 
   @override
-  String get homeLocationEnableDeviceLocation => 'فعّل موقع الجهاز';
+  String get homeLocationEnableDeviceLocation => 'اختر طريقة تحديد موقعك';
 
   @override
   String get homeLocationGpsDisabledBody =>
-      'من دون GPS لا يمكننا حساب المواقيت بدقة أو توجيه القبلة.';
+      'الموقع متوقف. يمكنك تفعيل GPS أو اختيار مدينتك يدويًا.';
+
+  @override
+  String get homeSelectCityButton => 'اختر المدينة';
+
+  @override
+  String get homeManualCityTitle => 'اختر مدينتك';
+
+  @override
+  String get homeManualCityBody =>
+      'سنستخدم هذه المدينة لحساب مواقيت الصلاة دون تفعيل GPS.';
+
+  @override
+  String get homeManualCityFieldCity => 'المدينة';
+
+  @override
+  String get homeManualCityFieldCountry => 'البلد';
+
+  @override
+  String get homeManualCitySave => 'استخدم هذه المدينة';
+
+  @override
+  String get homeManualCityNotFound =>
+      'لم يتم العثور على المدينة. جرّب كتابة أخرى أو اختر من القائمة.';
+
+  @override
+  String get homeManualCityAmbiguous =>
+      'أضف البلد أو اختر المدينة الصحيحة من القائمة.';
+
+  @override
+  String get homeManualCityPopularList => 'مدن شائعة';
+
+  @override
+  String get homeManualCityConfirmTitle => 'تأكيد المدينة';
+
+  @override
+  String homeManualCityConfirmBody(
+      Object label, Object latitude, Object longitude) {
+    return 'استخدام $label لمواقيت الصلاة؟\nالإحداثيات: $latitude, $longitude';
+  }
+
+  @override
+  String get homeManualCityConfirmUse => 'تأكيد';
+
+  @override
+  String get homeManualCityClear => 'مسح المدينة المحددة';
 
   @override
   String get homeLocationPendingBody =>

@@ -311,7 +311,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeHeaderOffline => 'Offline';
 
   @override
-  String get homeHeaderLocationUnavailable => 'Location unavailable';
+  String get homeHeaderLocationUnavailable => 'Location is off';
 
   @override
   String homeHeaderStatusLine(Object networkStatus, Object location) {
@@ -326,6 +326,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get homeHeroUsingSavedLocation => 'Using your last saved location';
+
+  @override
+  String homeUsingSelectedCity(Object city) {
+    return 'Using selected city: $city';
+  }
 
   @override
   String get homeSelectedDateToday => 'TODAY';
@@ -2210,11 +2215,57 @@ class AppLocalizationsEn extends AppLocalizations {
       'We are preparing your times using your last saved location.';
 
   @override
-  String get homeLocationEnableDeviceLocation => 'Enable device location';
+  String get homeLocationEnableDeviceLocation =>
+      'Choose how to set your location';
 
   @override
   String get homeLocationGpsDisabledBody =>
-      'Without GPS we cannot calculate accurate prayer times or align the Qibla.';
+      'Location is off. You can enable GPS or select your city manually.';
+
+  @override
+  String get homeSelectCityButton => 'Select city';
+
+  @override
+  String get homeManualCityTitle => 'Select your city';
+
+  @override
+  String get homeManualCityBody =>
+      'We will use this city to calculate prayer times without turning on GPS.';
+
+  @override
+  String get homeManualCityFieldCity => 'City';
+
+  @override
+  String get homeManualCityFieldCountry => 'Country';
+
+  @override
+  String get homeManualCitySave => 'Use this city';
+
+  @override
+  String get homeManualCityNotFound =>
+      'City not found. Try another spelling or choose from the list.';
+
+  @override
+  String get homeManualCityAmbiguous =>
+      'Please add the country or choose the correct city from the list.';
+
+  @override
+  String get homeManualCityPopularList => 'Popular cities';
+
+  @override
+  String get homeManualCityConfirmTitle => 'Confirm city';
+
+  @override
+  String homeManualCityConfirmBody(
+      Object label, Object latitude, Object longitude) {
+    return 'Use $label for prayer times?\nCoordinates: $latitude, $longitude';
+  }
+
+  @override
+  String get homeManualCityConfirmUse => 'Confirm';
+
+  @override
+  String get homeManualCityClear => 'Clear selected city';
 
   @override
   String get homeLocationPendingBody =>

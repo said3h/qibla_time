@@ -312,7 +312,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get homeHeaderOffline => 'Çevrimdışı';
 
   @override
-  String get homeHeaderLocationUnavailable => 'Konum kullanılamıyor';
+  String get homeHeaderLocationUnavailable => 'Konum kapalı';
 
   @override
   String homeHeaderStatusLine(Object networkStatus, Object location) {
@@ -327,6 +327,11 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get homeHeroUsingSavedLocation => 'Son kayıtlı konumunuzu kullanma';
+
+  @override
+  String homeUsingSelectedCity(Object city) {
+    return 'Seçilen şehir kullanılıyor: $city';
+  }
 
   @override
   String get homeSelectedDateToday => 'BUGÜN';
@@ -2203,11 +2208,57 @@ class AppLocalizationsTr extends AppLocalizations {
       'Sürelerinizi son kayıtlı konumunuzu kullanarak hazırlıyoruz.';
 
   @override
-  String get homeLocationEnableDeviceLocation => 'Cihaz konumunu etkinleştir';
+  String get homeLocationEnableDeviceLocation =>
+      'Konumun nasıl ayarlanacağını seç';
 
   @override
   String get homeLocationGpsDisabledBody =>
-      'GPS olmadan doğru namaz vakitlerini hesaplayamayız veya kıbleyi hizalayamayız.';
+      'Konum kapalı. GPS\'i açabilir veya şehrini manuel seçebilirsin.';
+
+  @override
+  String get homeSelectCityButton => 'Şehir seç';
+
+  @override
+  String get homeManualCityTitle => 'Şehrini seç';
+
+  @override
+  String get homeManualCityBody =>
+      'GPS\'i açmadan namaz vakitlerini hesaplamak için bu şehri kullanacağız.';
+
+  @override
+  String get homeManualCityFieldCity => 'Şehir';
+
+  @override
+  String get homeManualCityFieldCountry => 'Ülke';
+
+  @override
+  String get homeManualCitySave => 'Bu şehri kullan';
+
+  @override
+  String get homeManualCityNotFound =>
+      'Şehir bulunamadı. Başka bir yazım dene veya listeden seç.';
+
+  @override
+  String get homeManualCityAmbiguous =>
+      'Ülkeyi ekle veya listeden doğru şehri seç.';
+
+  @override
+  String get homeManualCityPopularList => 'Popüler şehirler';
+
+  @override
+  String get homeManualCityConfirmTitle => 'Şehri onayla';
+
+  @override
+  String homeManualCityConfirmBody(
+      Object label, Object latitude, Object longitude) {
+    return 'Namaz vakitleri için $label kullanılsın mı?\nKoordinatlar: $latitude, $longitude';
+  }
+
+  @override
+  String get homeManualCityConfirmUse => 'Onayla';
+
+  @override
+  String get homeManualCityClear => 'Seçilen şehri temizle';
 
   @override
   String get homeLocationPendingBody =>

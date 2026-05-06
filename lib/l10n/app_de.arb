@@ -94,7 +94,7 @@
   "methodEgyptian": "Ägyptische Behörde",
   "homeHeaderOnline": "Online",
   "homeHeaderOffline": "Offline",
-  "homeHeaderLocationUnavailable": "Standort nicht verfügbar",
+  "homeHeaderLocationUnavailable": "Standort ist aus",
   "homeHeaderStatusLine": "{networkStatus} · {location}",
   "@homeHeaderStatusLine": {
     "placeholders": {
@@ -105,6 +105,12 @@
   "homeHeroNextPrayer": "NÄCHSTES GEBET",
   "homeHeroTodayOverview": "Heutige Hauptansicht",
   "homeHeroUsingSavedLocation": "Ihr zuletzt gespeicherter Standort wird verwendet",
+  "homeUsingSelectedCity": "Ausgewählte Stadt wird verwendet: {city}",
+  "@homeUsingSelectedCity": {
+    "placeholders": {
+      "city": {}
+    }
+  },
   "homeSelectedDateToday": "HEUTE",
   "homeSelectedDateCustom": "AUSGEWÄHLTES DATUM",
   "homeCountdownUnavailable": "Countdown nicht verfügbar",
@@ -915,8 +921,28 @@
   "homeLoadingScheduleBody": "Ihr nächstes Gebet wird vorbereitet",
   "homeLoadingScheduleTitle": "Zeiten werden geladen",
   "homeLocationCachedBody": "Wir bereiten Ihre Zeiten anhand Ihres zuletzt gespeicherten Standorts vor.",
-  "homeLocationEnableDeviceLocation": "Gerätestandort aktivieren",
-  "homeLocationGpsDisabledBody": "Ohne GPS können wir keine genauen Gebetszeiten berechnen oder die Qibla ausrichten.",
+  "homeLocationEnableDeviceLocation": "Wähle, wie dein Standort festgelegt wird",
+  "homeLocationGpsDisabledBody": "Der Standort ist aus. Du kannst GPS aktivieren oder deine Stadt manuell auswählen.",
+  "homeSelectCityButton": "Stadt auswählen",
+  "homeManualCityTitle": "Wähle deine Stadt",
+  "homeManualCityBody": "Wir verwenden diese Stadt, um Gebetszeiten ohne GPS zu berechnen.",
+  "homeManualCityFieldCity": "Stadt",
+  "homeManualCityFieldCountry": "Land",
+  "homeManualCitySave": "Diese Stadt verwenden",
+  "homeManualCityNotFound": "Stadt nicht gefunden. Versuche eine andere Schreibweise oder wähle aus der Liste.",
+  "homeManualCityAmbiguous": "Bitte gib das Land an oder wähle die richtige Stadt aus der Liste.",
+  "homeManualCityPopularList": "Beliebte Städte",
+  "homeManualCityConfirmTitle": "Stadt bestätigen",
+  "homeManualCityConfirmBody": "{label} für Gebetszeiten verwenden?\nKoordinaten: {latitude}, {longitude}",
+  "@homeManualCityConfirmBody": {
+    "placeholders": {
+      "label": {},
+      "latitude": {},
+      "longitude": {}
+    }
+  },
+  "homeManualCityConfirmUse": "Bestätigen",
+  "homeManualCityClear": "Ausgewählte Stadt löschen",
   "homeLocationPendingBody": "Der Startbildschirm bleibt sichtbar, auch wenn die Gebetszeiten noch nicht bereit sind.",
   "homeLocationPermissionBlocked": "Standortberechtigung blockiert",
   "homeLocationPermissionBlockedBody": "Sie können die Standortberechtigung für Qibla Time später in Ihren Systemeinstellungen aktivieren.",

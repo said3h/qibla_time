@@ -94,7 +94,7 @@
   "methodEgyptian": "Mısır Otoritesi",
   "homeHeaderOnline": "Çevrimiçi",
   "homeHeaderOffline": "Çevrimdışı",
-  "homeHeaderLocationUnavailable": "Konum kullanılamıyor",
+  "homeHeaderLocationUnavailable": "Konum kapalı",
   "homeHeaderStatusLine": "{networkStatus} · {location}",
   "@homeHeaderStatusLine": {
     "placeholders": {
@@ -105,6 +105,12 @@
   "homeHeroNextPrayer": "SONRAKİ DUA",
   "homeHeroTodayOverview": "Bugünün ana görünümü",
   "homeHeroUsingSavedLocation": "Son kayıtlı konumunuzu kullanma",
+  "homeUsingSelectedCity": "Seçilen şehir kullanılıyor: {city}",
+  "@homeUsingSelectedCity": {
+    "placeholders": {
+      "city": {}
+    }
+  },
   "homeSelectedDateToday": "BUGÜN",
   "homeSelectedDateCustom": "SEÇİLEN TARİH",
   "homeCountdownUnavailable": "Geri sayım kullanılamıyor",
@@ -915,8 +921,28 @@
   "homeLoadingScheduleBody": "Bir sonraki namaznızı hazırlamak",
   "homeLoadingScheduleTitle": "Yükleme süreleri",
   "homeLocationCachedBody": "Sürelerinizi son kayıtlı konumunuzu kullanarak hazırlıyoruz.",
-  "homeLocationEnableDeviceLocation": "Cihaz konumunu etkinleştir",
-  "homeLocationGpsDisabledBody": "GPS olmadan doğru namaz vakitlerini hesaplayamayız veya kıbleyi hizalayamayız.",
+  "homeLocationEnableDeviceLocation": "Konumun nasıl ayarlanacağını seç",
+  "homeLocationGpsDisabledBody": "Konum kapalı. GPS'i açabilir veya şehrini manuel seçebilirsin.",
+  "homeSelectCityButton": "Şehir seç",
+  "homeManualCityTitle": "Şehrini seç",
+  "homeManualCityBody": "GPS'i açmadan namaz vakitlerini hesaplamak için bu şehri kullanacağız.",
+  "homeManualCityFieldCity": "Şehir",
+  "homeManualCityFieldCountry": "Ülke",
+  "homeManualCitySave": "Bu şehri kullan",
+  "homeManualCityNotFound": "Şehir bulunamadı. Başka bir yazım dene veya listeden seç.",
+  "homeManualCityAmbiguous": "Ülkeyi ekle veya listeden doğru şehri seç.",
+  "homeManualCityPopularList": "Popüler şehirler",
+  "homeManualCityConfirmTitle": "Şehri onayla",
+  "homeManualCityConfirmBody": "Namaz vakitleri için {label} kullanılsın mı?\nKoordinatlar: {latitude}, {longitude}",
+  "@homeManualCityConfirmBody": {
+    "placeholders": {
+      "label": {},
+      "latitude": {},
+      "longitude": {}
+    }
+  },
+  "homeManualCityConfirmUse": "Onayla",
+  "homeManualCityClear": "Seçilen şehri temizle",
   "homeLocationPendingBody": "Namaz vakitleri henüz hazır olmasa bile ana ekran görünür durumda kalır.",
   "homeLocationPermissionBlocked": "Konum izni engellendi",
   "homeLocationPermissionBlockedBody": "Kıble Saati için konumu daha sonra sistem ayarlarınızdan etkinleştirebilirsiniz.",

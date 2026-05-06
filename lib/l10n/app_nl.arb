@@ -94,7 +94,7 @@
   "methodEgyptian": "Egyptische Autoriteit",
   "homeHeaderOnline": "Online",
   "homeHeaderOffline": "Offline",
-  "homeHeaderLocationUnavailable": "Locatie niet beschikbaar",
+  "homeHeaderLocationUnavailable": "Locatie staat uit",
   "homeHeaderStatusLine": "{networkStatus} · {location}",
   "@homeHeaderStatusLine": {
     "placeholders": {
@@ -105,6 +105,12 @@
   "homeHeroNextPrayer": "VOLGEND GEBED",
   "homeHeroTodayOverview": "Hoofdweergave van vandaag",
   "homeHeroUsingSavedLocation": "Je laatst opgeslagen locatie wordt gebruikt",
+  "homeUsingSelectedCity": "Geselecteerde stad wordt gebruikt: {city}",
+  "@homeUsingSelectedCity": {
+    "placeholders": {
+      "city": {}
+    }
+  },
   "homeSelectedDateToday": "VANDAAG",
   "homeSelectedDateCustom": "GESELECTEERDE DATUM",
   "homeCountdownUnavailable": "Aftellen niet beschikbaar",
@@ -915,8 +921,28 @@
   "homeLoadingScheduleBody": "Je volgende gebed wordt voorbereid",
   "homeLoadingScheduleTitle": "Tijden laden",
   "homeLocationCachedBody": "We bereiden je tijden voor met je laatst opgeslagen locatie.",
-  "homeLocationEnableDeviceLocation": "Apparaatlocatie inschakelen",
-  "homeLocationGpsDisabledBody": "Zonder GPS kunnen we geen nauwkeurige gebedstijden berekenen of de Qibla uitlijnen.",
+  "homeLocationEnableDeviceLocation": "Kies hoe je locatie wordt ingesteld",
+  "homeLocationGpsDisabledBody": "Locatie staat uit. Je kunt GPS inschakelen of je stad handmatig selecteren.",
+  "homeSelectCityButton": "Stad selecteren",
+  "homeManualCityTitle": "Selecteer je stad",
+  "homeManualCityBody": "We gebruiken deze stad om gebedstijden te berekenen zonder GPS in te schakelen.",
+  "homeManualCityFieldCity": "Stad",
+  "homeManualCityFieldCountry": "Land",
+  "homeManualCitySave": "Deze stad gebruiken",
+  "homeManualCityNotFound": "Stad niet gevonden. Probeer een andere spelling of kies uit de lijst.",
+  "homeManualCityAmbiguous": "Voeg het land toe of kies de juiste stad uit de lijst.",
+  "homeManualCityPopularList": "Populaire steden",
+  "homeManualCityConfirmTitle": "Stad bevestigen",
+  "homeManualCityConfirmBody": "{label} gebruiken voor gebedstijden?\nCoördinaten: {latitude}, {longitude}",
+  "@homeManualCityConfirmBody": {
+    "placeholders": {
+      "label": {},
+      "latitude": {},
+      "longitude": {}
+    }
+  },
+  "homeManualCityConfirmUse": "Bevestigen",
+  "homeManualCityClear": "Geselecteerde stad wissen",
   "homeLocationPendingBody": "Het beginscherm blijft zichtbaar, zelfs als de gebedstijden nog niet gereed zijn.",
   "homeLocationPermissionBlocked": "Locatiemachtiging geblokkeerd",
   "homeLocationPermissionBlockedBody": "Je kunt locatie voor Qibla Time later inschakelen in je systeeminstellingen.",

@@ -94,7 +94,7 @@
   "methodEgyptian": "Египетские власти",
   "homeHeaderOnline": "Онлайн",
   "homeHeaderOffline": "Оффлайн",
-  "homeHeaderLocationUnavailable": "Местоположение недоступно",
+  "homeHeaderLocationUnavailable": "Геолокация отключена",
   "homeHeaderStatusLine": "{networkStatus} · {location}",
   "@homeHeaderStatusLine": {
     "placeholders": {
@@ -105,6 +105,12 @@
   "homeHeroNextPrayer": "СЛЕДУЮЩАЯ МОЛИТВА",
   "homeHeroTodayOverview": "Главный вид на сегодня",
   "homeHeroUsingSavedLocation": "Использование вашего последнего сохраненного местоположения",
+  "homeUsingSelectedCity": "Используется выбранный город: {city}",
+  "@homeUsingSelectedCity": {
+    "placeholders": {
+      "city": {}
+    }
+  },
   "homeSelectedDateToday": "СЕГОДНЯ",
   "homeSelectedDateCustom": "ВЫБРАННАЯ ДАТА",
   "homeCountdownUnavailable": "Обратный отсчет недоступен.",
@@ -915,8 +921,28 @@
   "homeLoadingScheduleBody": "Подготовка следующей молитвы",
   "homeLoadingScheduleTitle": "Время загрузки",
   "homeLocationCachedBody": "Мы подготавливаем ваше время, используя ваше последнее сохраненное местоположение.",
-  "homeLocationEnableDeviceLocation": "Включить местоположение устройства",
-  "homeLocationGpsDisabledBody": "Без GPS мы не можем рассчитать точное время молитвы или выровнять Киблу.",
+  "homeLocationEnableDeviceLocation": "Выберите способ указать местоположение",
+  "homeLocationGpsDisabledBody": "Геолокация отключена. Вы можете включить GPS или выбрать город вручную.",
+  "homeSelectCityButton": "Выбрать город",
+  "homeManualCityTitle": "Выберите ваш город",
+  "homeManualCityBody": "Мы будем использовать этот город для расчета времени молитв без включения GPS.",
+  "homeManualCityFieldCity": "Город",
+  "homeManualCityFieldCountry": "Страна",
+  "homeManualCitySave": "Использовать этот город",
+  "homeManualCityNotFound": "Город не найден. Попробуйте другое написание или выберите из списка.",
+  "homeManualCityAmbiguous": "Добавьте страну или выберите правильный город из списка.",
+  "homeManualCityPopularList": "Популярные города",
+  "homeManualCityConfirmTitle": "Подтвердить город",
+  "homeManualCityConfirmBody": "Использовать {label} для времени молитв?\nКоординаты: {latitude}, {longitude}",
+  "@homeManualCityConfirmBody": {
+    "placeholders": {
+      "label": {},
+      "latitude": {},
+      "longitude": {}
+    }
+  },
+  "homeManualCityConfirmUse": "Подтвердить",
+  "homeManualCityClear": "Удалить выбранный город",
   "homeLocationPendingBody": "Главный экран остается видимым, даже если время молитвы еще не готово.",
   "homeLocationPermissionBlocked": "Разрешение на определение местоположения заблокировано",
   "homeLocationPermissionBlockedBody": "Вы можете включить местоположение для Qibla Time позже в настройках вашей системы.",

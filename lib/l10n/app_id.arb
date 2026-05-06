@@ -94,7 +94,7 @@
   "methodEgyptian": "Otoritas Mesir",
   "homeHeaderOnline": "Online",
   "homeHeaderOffline": "Offline",
-  "homeHeaderLocationUnavailable": "Lokasi tidak tersedia",
+  "homeHeaderLocationUnavailable": "Lokasi mati",
   "homeHeaderStatusLine": "{networkStatus} · {location}",
   "@homeHeaderStatusLine": {
     "placeholders": {
@@ -105,6 +105,12 @@
   "homeHeroNextPrayer": "SHALAT BERIKUTNYA",
   "homeHeroTodayOverview": "Tampilan utama hari ini",
   "homeHeroUsingSavedLocation": "Menggunakan lokasi terakhir yang Anda simpan",
+  "homeUsingSelectedCity": "Menggunakan kota pilihan: {city}",
+  "@homeUsingSelectedCity": {
+    "placeholders": {
+      "city": {}
+    }
+  },
   "homeSelectedDateToday": "HARI INI",
   "homeSelectedDateCustom": "TANGGAL DIPILIH",
   "homeCountdownUnavailable": "Hitung mundur tidak tersedia",
@@ -916,8 +922,28 @@
   "homeLoadingScheduleBody": "Menyiapkan shalat berikutnya",
   "homeLoadingScheduleTitle": "Memuat waktu",
   "homeLocationCachedBody": "Kami sedang menyiapkan waktu Anda menggunakan lokasi terakhir yang Anda simpan.",
-  "homeLocationEnableDeviceLocation": "Aktifkan lokasi perangkat",
-  "homeLocationGpsDisabledBody": "Tanpa GPS kami tidak dapat menghitung waktu shalat yang akurat atau menyelaraskan kiblat.",
+  "homeLocationEnableDeviceLocation": "Pilih cara mengatur lokasi Anda",
+  "homeLocationGpsDisabledBody": "Lokasi mati. Anda dapat mengaktifkan GPS atau memilih kota secara manual.",
+  "homeSelectCityButton": "Pilih kota",
+  "homeManualCityTitle": "Pilih kota Anda",
+  "homeManualCityBody": "Kami akan memakai kota ini untuk menghitung waktu shalat tanpa mengaktifkan GPS.",
+  "homeManualCityFieldCity": "Kota",
+  "homeManualCityFieldCountry": "Negara",
+  "homeManualCitySave": "Gunakan kota ini",
+  "homeManualCityNotFound": "Kota tidak ditemukan. Coba ejaan lain atau pilih dari daftar.",
+  "homeManualCityAmbiguous": "Tambahkan negara atau pilih kota yang benar dari daftar.",
+  "homeManualCityPopularList": "Kota populer",
+  "homeManualCityConfirmTitle": "Konfirmasi kota",
+  "homeManualCityConfirmBody": "Gunakan {label} untuk waktu shalat?\nKoordinat: {latitude}, {longitude}",
+  "@homeManualCityConfirmBody": {
+    "placeholders": {
+      "label": {},
+      "latitude": {},
+      "longitude": {}
+    }
+  },
+  "homeManualCityConfirmUse": "Konfirmasi",
+  "homeManualCityClear": "Hapus kota pilihan",
   "homeLocationPendingBody": "Layar beranda tetap terlihat bahkan ketika waktu shalat belum siap.",
   "homeLocationPermissionBlocked": "Izin lokasi diblokir",
   "homeLocationPermissionBlockedBody": "Anda dapat mengaktifkan lokasi untuk Qibla Time nanti di pengaturan sistem Anda.",

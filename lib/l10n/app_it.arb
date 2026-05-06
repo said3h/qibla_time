@@ -94,7 +94,7 @@
   "methodEgyptian": "Autorità egiziana",
   "homeHeaderOnline": "In linea",
   "homeHeaderOffline": "Non in linea",
-  "homeHeaderLocationUnavailable": "Posizione non disponibile",
+  "homeHeaderLocationUnavailable": "Posizione disattivata",
   "homeHeaderStatusLine": "{networkStatus} · {location}",
   "@homeHeaderStatusLine": {
     "placeholders": {
@@ -105,6 +105,12 @@
   "homeHeroNextPrayer": "PROSSIMA PREGHIERA",
   "homeHeroTodayOverview": "La vista principale di oggi",
   "homeHeroUsingSavedLocation": "Utilizzando la tua ultima posizione salvata",
+  "homeUsingSelectedCity": "Città selezionata in uso: {city}",
+  "@homeUsingSelectedCity": {
+    "placeholders": {
+      "city": {}
+    }
+  },
   "homeSelectedDateToday": "OGGI",
   "homeSelectedDateCustom": "DATA SELEZIONATA",
   "homeCountdownUnavailable": "Conto alla rovescia non disponibile",
@@ -915,8 +921,28 @@
   "homeLoadingScheduleBody": "Preparare la tua prossima preghiera",
   "homeLoadingScheduleTitle": "Tempi di caricamento",
   "homeLocationCachedBody": "Stiamo preparando i tuoi orari utilizzando la tua ultima posizione salvata.",
-  "homeLocationEnableDeviceLocation": "Abilita la localizzazione del dispositivo",
-  "homeLocationGpsDisabledBody": "Senza GPS non possiamo calcolare tempi di preghiera accurati o allineare Qibla.",
+  "homeLocationEnableDeviceLocation": "Scegli come impostare la posizione",
+  "homeLocationGpsDisabledBody": "La posizione è disattivata. Puoi attivare il GPS o selezionare manualmente la tua città.",
+  "homeSelectCityButton": "Seleziona città",
+  "homeManualCityTitle": "Seleziona la tua città",
+  "homeManualCityBody": "Useremo questa città per calcolare gli orari senza attivare il GPS.",
+  "homeManualCityFieldCity": "Città",
+  "homeManualCityFieldCountry": "Paese",
+  "homeManualCitySave": "Usa questa città",
+  "homeManualCityNotFound": "Città non trovata. Prova un’altra scrittura o scegli dalla lista.",
+  "homeManualCityAmbiguous": "Aggiungi il paese o scegli la città corretta dalla lista.",
+  "homeManualCityPopularList": "Città popolari",
+  "homeManualCityConfirmTitle": "Conferma città",
+  "homeManualCityConfirmBody": "Usare {label} per gli orari di preghiera?\nCoordinate: {latitude}, {longitude}",
+  "@homeManualCityConfirmBody": {
+    "placeholders": {
+      "label": {},
+      "latitude": {},
+      "longitude": {}
+    }
+  },
+  "homeManualCityConfirmUse": "Conferma",
+  "homeManualCityClear": "Cancella città selezionata",
   "homeLocationPendingBody": "La schermata iniziale rimane visibile anche quando i tempi di preghiera non sono ancora pronti.",
   "homeLocationPermissionBlocked": "Autorizzazione alla posizione bloccata",
   "homeLocationPermissionBlockedBody": "Puoi abilitare la posizione per Qibla Time in un secondo momento nelle impostazioni del sistema.",

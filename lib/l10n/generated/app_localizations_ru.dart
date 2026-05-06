@@ -313,7 +313,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get homeHeaderOffline => 'Оффлайн';
 
   @override
-  String get homeHeaderLocationUnavailable => 'Местоположение недоступно';
+  String get homeHeaderLocationUnavailable => 'Геолокация отключена';
 
   @override
   String homeHeaderStatusLine(Object networkStatus, Object location) {
@@ -329,6 +329,11 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get homeHeroUsingSavedLocation =>
       'Использование вашего последнего сохраненного местоположения';
+
+  @override
+  String homeUsingSelectedCity(Object city) {
+    return 'Используется выбранный город: $city';
+  }
 
   @override
   String get homeSelectedDateToday => 'СЕГОДНЯ';
@@ -2228,11 +2233,56 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get homeLocationEnableDeviceLocation =>
-      'Включить местоположение устройства';
+      'Выберите способ указать местоположение';
 
   @override
   String get homeLocationGpsDisabledBody =>
-      'Без GPS мы не можем рассчитать точное время молитвы или выровнять Киблу.';
+      'Геолокация отключена. Вы можете включить GPS или выбрать город вручную.';
+
+  @override
+  String get homeSelectCityButton => 'Выбрать город';
+
+  @override
+  String get homeManualCityTitle => 'Выберите ваш город';
+
+  @override
+  String get homeManualCityBody =>
+      'Мы будем использовать этот город для расчета времени молитв без включения GPS.';
+
+  @override
+  String get homeManualCityFieldCity => 'Город';
+
+  @override
+  String get homeManualCityFieldCountry => 'Страна';
+
+  @override
+  String get homeManualCitySave => 'Использовать этот город';
+
+  @override
+  String get homeManualCityNotFound =>
+      'Город не найден. Попробуйте другое написание или выберите из списка.';
+
+  @override
+  String get homeManualCityAmbiguous =>
+      'Добавьте страну или выберите правильный город из списка.';
+
+  @override
+  String get homeManualCityPopularList => 'Популярные города';
+
+  @override
+  String get homeManualCityConfirmTitle => 'Подтвердить город';
+
+  @override
+  String homeManualCityConfirmBody(
+      Object label, Object latitude, Object longitude) {
+    return 'Использовать $label для времени молитв?\nКоординаты: $latitude, $longitude';
+  }
+
+  @override
+  String get homeManualCityConfirmUse => 'Подтвердить';
+
+  @override
+  String get homeManualCityClear => 'Удалить выбранный город';
 
   @override
   String get homeLocationPendingBody =>

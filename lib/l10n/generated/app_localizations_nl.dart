@@ -311,7 +311,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get homeHeaderOffline => 'Offline';
 
   @override
-  String get homeHeaderLocationUnavailable => 'Locatie niet beschikbaar';
+  String get homeHeaderLocationUnavailable => 'Locatie staat uit';
 
   @override
   String homeHeaderStatusLine(Object networkStatus, Object location) {
@@ -327,6 +327,11 @@ class AppLocalizationsNl extends AppLocalizations {
   @override
   String get homeHeroUsingSavedLocation =>
       'Je laatst opgeslagen locatie wordt gebruikt';
+
+  @override
+  String homeUsingSelectedCity(Object city) {
+    return 'Geselecteerde stad wordt gebruikt: $city';
+  }
 
   @override
   String get homeSelectedDateToday => 'VANDAAG';
@@ -2223,11 +2228,57 @@ class AppLocalizationsNl extends AppLocalizations {
       'We bereiden je tijden voor met je laatst opgeslagen locatie.';
 
   @override
-  String get homeLocationEnableDeviceLocation => 'Apparaatlocatie inschakelen';
+  String get homeLocationEnableDeviceLocation =>
+      'Kies hoe je locatie wordt ingesteld';
 
   @override
   String get homeLocationGpsDisabledBody =>
-      'Zonder GPS kunnen we geen nauwkeurige gebedstijden berekenen of de Qibla uitlijnen.';
+      'Locatie staat uit. Je kunt GPS inschakelen of je stad handmatig selecteren.';
+
+  @override
+  String get homeSelectCityButton => 'Stad selecteren';
+
+  @override
+  String get homeManualCityTitle => 'Selecteer je stad';
+
+  @override
+  String get homeManualCityBody =>
+      'We gebruiken deze stad om gebedstijden te berekenen zonder GPS in te schakelen.';
+
+  @override
+  String get homeManualCityFieldCity => 'Stad';
+
+  @override
+  String get homeManualCityFieldCountry => 'Land';
+
+  @override
+  String get homeManualCitySave => 'Deze stad gebruiken';
+
+  @override
+  String get homeManualCityNotFound =>
+      'Stad niet gevonden. Probeer een andere spelling of kies uit de lijst.';
+
+  @override
+  String get homeManualCityAmbiguous =>
+      'Voeg het land toe of kies de juiste stad uit de lijst.';
+
+  @override
+  String get homeManualCityPopularList => 'Populaire steden';
+
+  @override
+  String get homeManualCityConfirmTitle => 'Stad bevestigen';
+
+  @override
+  String homeManualCityConfirmBody(
+      Object label, Object latitude, Object longitude) {
+    return '$label gebruiken voor gebedstijden?\nCoördinaten: $latitude, $longitude';
+  }
+
+  @override
+  String get homeManualCityConfirmUse => 'Bevestigen';
+
+  @override
+  String get homeManualCityClear => 'Geselecteerde stad wissen';
 
   @override
   String get homeLocationPendingBody =>

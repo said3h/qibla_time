@@ -4,12 +4,14 @@ import 'package:adhan/adhan.dart';
 import '../../data/datasources/prayer_cache_datasource.dart';
 import '../../data/datasources/prayer_calculation_datasource.dart';
 import '../../data/datasources/prayer_location_datasource.dart';
+import '../../data/datasources/manual_prayer_location_datasource.dart';
 import '../../data/datasources/prayer_notifications_datasource.dart';
 import '../../data/datasources/prayer_settings_datasource.dart';
 import '../../data/datasources/prayer_widget_datasource.dart';
 import '../../data/repositories/prayer_notifications_repository_impl.dart';
 import '../../data/repositories/prayer_times_repository_impl.dart';
 import '../../domain/entities/next_prayer_info.dart';
+import '../../domain/entities/manual_prayer_location.dart';
 import '../../domain/entities/prayer_cache_status.dart';
 import '../../domain/entities/prayer_location.dart';
 import '../../domain/entities/prayer_location_diagnostic.dart';
@@ -23,8 +25,16 @@ import '../../services/travel_mode_service.dart';
 
 final homeScrollToTopSignalProvider = StateProvider<int>((ref) => 0);
 
-final prayerLocationDataSourceProvider = Provider<PrayerLocationDataSource>((ref) {
-  return PrayerLocationDataSource();
+final manualPrayerLocationDataSourceProvider =
+    Provider<ManualPrayerLocationDataSource>((ref) {
+  return ManualPrayerLocationDataSource();
+});
+
+final prayerLocationDataSourceProvider =
+    Provider<PrayerLocationDataSource>((ref) {
+  return PrayerLocationDataSource(
+    manualLocationDataSource: ref.watch(manualPrayerLocationDataSourceProvider),
+  );
 });
 
 final prayerSettingsDataSourceProvider =
@@ -51,8 +61,14 @@ final prayerNotificationsDataSourceProvider =
 });
 
 final prayerLocationProvider = FutureProvider<PrayerLocation?>((ref) async {
-  final accessResult = await ref.watch(prayerLocationDataSourceProvider).getLocation();
+  final accessResult =
+      await ref.watch(prayerLocationDataSourceProvider).getLocation();
   return accessResult?.location;
+});
+
+final manualPrayerLocationProvider =
+    FutureProvider<ManualPrayerLocation?>((ref) async {
+  return ref.watch(manualPrayerLocationDataSourceProvider).getManualLocation();
 });
 
 final prayerLocationDiagnosticProvider =
@@ -62,17 +78,20 @@ final prayerLocationDiagnosticProvider =
 
 final prayerCalculationMethodProvider =
     FutureProvider<CalculationMethod>((ref) async {
-  final settings = await ref.watch(prayerSettingsDataSourceProvider).getSettings();
+  final settings =
+      await ref.watch(prayerSettingsDataSourceProvider).getSettings();
   return settings.method;
 });
 
 final prayerMadhabProvider = FutureProvider<Madhab>((ref) async {
-  final settings = await ref.watch(prayerSettingsDataSourceProvider).getSettings();
+  final settings =
+      await ref.watch(prayerSettingsDataSourceProvider).getSettings();
   return settings.madhab;
 });
 
 final prayerTimeOffsetProvider = FutureProvider<int>((ref) async {
-  final settings = await ref.watch(prayerSettingsDataSourceProvider).getSettings();
+  final settings =
+      await ref.watch(prayerSettingsDataSourceProvider).getSettings();
   return settings.timeOffsetMinutes;
 });
 
@@ -93,7 +112,8 @@ final prayerNotificationsRepositoryProvider =
   );
 });
 
-final getPrayerScheduleUseCaseProvider = Provider<GetPrayerScheduleUseCase>((ref) {
+final getPrayerScheduleUseCaseProvider =
+    Provider<GetPrayerScheduleUseCase>((ref) {
   return GetPrayerScheduleUseCase(ref.watch(prayerTimesRepositoryProvider));
 });
 
@@ -114,15 +134,21 @@ final prayerCacheStatusProvider = Provider<PrayerCacheStatus>((ref) {
 });
 
 final prayerNotificationsEnabledProvider = FutureProvider<bool>((ref) async {
-  return ref.watch(prayerNotificationsDataSourceProvider).areNotificationsEnabled();
+  return ref
+      .watch(prayerNotificationsDataSourceProvider)
+      .areNotificationsEnabled();
 });
 
 final systemNotificationPermissionProvider = FutureProvider<bool>((ref) async {
-  return ref.watch(prayerNotificationsDataSourceProvider).isSystemPermissionGranted();
+  return ref
+      .watch(prayerNotificationsDataSourceProvider)
+      .isSystemPermissionGranted();
 });
 
-final prayerScheduleProvider = FutureProvider<ResolvedPrayerSchedule?>((ref) async {
-  final resolvedSchedule = await ref.watch(getPrayerScheduleUseCaseProvider).call();
+final prayerScheduleProvider =
+    FutureProvider<ResolvedPrayerSchedule?>((ref) async {
+  final resolvedSchedule =
+      await ref.watch(getPrayerScheduleUseCaseProvider).call();
   if (resolvedSchedule == null) {
     return null;
   }
@@ -143,11 +169,11 @@ final prayerScheduleProvider = FutureProvider<ResolvedPrayerSchedule?>((ref) asy
 
 final prayerScheduleForDateProvider =
     FutureProvider.family<ResolvedPrayerSchedule?, DateTime>((ref, date) async {
-      final normalizedDate = DateTime(date.year, date.month, date.day);
-      return ref
-          .watch(prayerTimesRepositoryProvider)
-          .getScheduleForDate(normalizedDate);
-    });
+  final normalizedDate = DateTime(date.year, date.month, date.day);
+  return ref
+      .watch(prayerTimesRepositoryProvider)
+      .getScheduleForDate(normalizedDate);
+});
 
 final nextPrayerInfoProvider = Provider<NextPrayerInfo?>((ref) {
   final resolvedSchedule = ref.watch(prayerScheduleProvider).valueOrNull;
@@ -162,7 +188,8 @@ final nextPrayerInfoProvider = Provider<NextPrayerInfo?>((ref) {
 
 final prayerCountdownProvider = StreamProvider<Duration?>((ref) async* {
   yield _readCountdown(ref);
-  yield* Stream.periodic(const Duration(seconds: 1), (_) => _readCountdown(ref));
+  yield* Stream.periodic(
+      const Duration(seconds: 1), (_) => _readCountdown(ref));
 });
 
 Duration? _readCountdown(Ref ref) {

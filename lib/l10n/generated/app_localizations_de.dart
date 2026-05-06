@@ -312,7 +312,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get homeHeaderOffline => 'Offline';
 
   @override
-  String get homeHeaderLocationUnavailable => 'Standort nicht verfügbar';
+  String get homeHeaderLocationUnavailable => 'Standort ist aus';
 
   @override
   String homeHeaderStatusLine(Object networkStatus, Object location) {
@@ -328,6 +328,11 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get homeHeroUsingSavedLocation =>
       'Ihr zuletzt gespeicherter Standort wird verwendet';
+
+  @override
+  String homeUsingSelectedCity(Object city) {
+    return 'Ausgewählte Stadt wird verwendet: $city';
+  }
 
   @override
   String get homeSelectedDateToday => 'HEUTE';
@@ -2229,11 +2234,57 @@ class AppLocalizationsDe extends AppLocalizations {
       'Wir bereiten Ihre Zeiten anhand Ihres zuletzt gespeicherten Standorts vor.';
 
   @override
-  String get homeLocationEnableDeviceLocation => 'Gerätestandort aktivieren';
+  String get homeLocationEnableDeviceLocation =>
+      'Wähle, wie dein Standort festgelegt wird';
 
   @override
   String get homeLocationGpsDisabledBody =>
-      'Ohne GPS können wir keine genauen Gebetszeiten berechnen oder die Qibla ausrichten.';
+      'Der Standort ist aus. Du kannst GPS aktivieren oder deine Stadt manuell auswählen.';
+
+  @override
+  String get homeSelectCityButton => 'Stadt auswählen';
+
+  @override
+  String get homeManualCityTitle => 'Wähle deine Stadt';
+
+  @override
+  String get homeManualCityBody =>
+      'Wir verwenden diese Stadt, um Gebetszeiten ohne GPS zu berechnen.';
+
+  @override
+  String get homeManualCityFieldCity => 'Stadt';
+
+  @override
+  String get homeManualCityFieldCountry => 'Land';
+
+  @override
+  String get homeManualCitySave => 'Diese Stadt verwenden';
+
+  @override
+  String get homeManualCityNotFound =>
+      'Stadt nicht gefunden. Versuche eine andere Schreibweise oder wähle aus der Liste.';
+
+  @override
+  String get homeManualCityAmbiguous =>
+      'Bitte gib das Land an oder wähle die richtige Stadt aus der Liste.';
+
+  @override
+  String get homeManualCityPopularList => 'Beliebte Städte';
+
+  @override
+  String get homeManualCityConfirmTitle => 'Stadt bestätigen';
+
+  @override
+  String homeManualCityConfirmBody(
+      Object label, Object latitude, Object longitude) {
+    return '$label für Gebetszeiten verwenden?\nKoordinaten: $latitude, $longitude';
+  }
+
+  @override
+  String get homeManualCityConfirmUse => 'Bestätigen';
+
+  @override
+  String get homeManualCityClear => 'Ausgewählte Stadt löschen';
 
   @override
   String get homeLocationPendingBody =>

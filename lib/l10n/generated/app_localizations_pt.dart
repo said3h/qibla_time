@@ -311,7 +311,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get homeHeaderOffline => 'Off-line';
 
   @override
-  String get homeHeaderLocationUnavailable => 'Local indisponível';
+  String get homeHeaderLocationUnavailable => 'Localização desativada';
 
   @override
   String homeHeaderStatusLine(Object networkStatus, Object location) {
@@ -326,6 +326,11 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get homeHeroUsingSavedLocation => 'Usando seu último local salvo';
+
+  @override
+  String homeUsingSelectedCity(Object city) {
+    return 'Usando cidade selecionada: $city';
+  }
 
   @override
   String get homeSelectedDateToday => 'HOJE';
@@ -2224,11 +2229,56 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get homeLocationEnableDeviceLocation =>
-      'Ativar localização do dispositivo';
+      'Escolha como definir sua localização';
 
   @override
   String get homeLocationGpsDisabledBody =>
-      'Sem GPS não podemos calcular tempos de oração precisos ou alinhar o Qibla.';
+      'A localização está desativada. Você pode ativar o GPS ou selecionar sua cidade manualmente.';
+
+  @override
+  String get homeSelectCityButton => 'Selecionar cidade';
+
+  @override
+  String get homeManualCityTitle => 'Selecione sua cidade';
+
+  @override
+  String get homeManualCityBody =>
+      'Usaremos esta cidade para calcular os horários sem ativar o GPS.';
+
+  @override
+  String get homeManualCityFieldCity => 'Cidade';
+
+  @override
+  String get homeManualCityFieldCountry => 'País';
+
+  @override
+  String get homeManualCitySave => 'Usar esta cidade';
+
+  @override
+  String get homeManualCityNotFound =>
+      'Cidade não encontrada. Tente outra grafia ou escolha na lista.';
+
+  @override
+  String get homeManualCityAmbiguous =>
+      'Adicione o país ou escolha a cidade correta na lista.';
+
+  @override
+  String get homeManualCityPopularList => 'Cidades populares';
+
+  @override
+  String get homeManualCityConfirmTitle => 'Confirmar cidade';
+
+  @override
+  String homeManualCityConfirmBody(
+      Object label, Object latitude, Object longitude) {
+    return 'Usar $label para os horários?\nCoordenadas: $latitude, $longitude';
+  }
+
+  @override
+  String get homeManualCityConfirmUse => 'Confirmar';
+
+  @override
+  String get homeManualCityClear => 'Limpar cidade selecionada';
 
   @override
   String get homeLocationPendingBody =>

@@ -94,7 +94,7 @@
   "methodEgyptian": "Autorité égyptienne",
   "homeHeaderOnline": "En ligne",
   "homeHeaderOffline": "Hors ligne",
-  "homeHeaderLocationUnavailable": "Localisation indisponible",
+  "homeHeaderLocationUnavailable": "Localisation désactivée",
   "homeHeaderStatusLine": "{networkStatus} · {location}",
   "@homeHeaderStatusLine": {
     "placeholders": {
@@ -105,6 +105,12 @@
   "homeHeroNextPrayer": "PROCHAINE PRIÈRE",
   "homeHeroTodayOverview": "Vue principale d'aujourd'hui",
   "homeHeroUsingSavedLocation": "Utilisation de votre dernière localisation enregistrée",
+  "homeUsingSelectedCity": "Ville sélectionnée utilisée : {city}",
+  "@homeUsingSelectedCity": {
+    "placeholders": {
+      "city": {}
+    }
+  },
   "homeSelectedDateToday": "AUJOURD'HUI",
   "homeSelectedDateCustom": "DATE SÉLECTIONNÉE",
   "homeCountdownUnavailable": "Compte à rebours indisponible",
@@ -914,8 +920,28 @@
   "homeLoadingScheduleBody": "Préparation de votre prochaine prière",
   "homeLoadingScheduleTitle": "Chargement des horaires",
   "homeLocationCachedBody": "Nous préparons vos horaires en utilisant votre dernière localisation enregistrée.",
-  "homeLocationEnableDeviceLocation": "Activer la localisation de l’appareil",
-  "homeLocationGpsDisabledBody": "Sans GPS actif, nous ne pouvons pas calculer des horaires précis ni orienter la Qibla.",
+  "homeLocationEnableDeviceLocation": "Choisissez comment définir votre localisation",
+  "homeLocationGpsDisabledBody": "La localisation est désactivée. Vous pouvez activer le GPS ou sélectionner votre ville manuellement.",
+  "homeSelectCityButton": "Sélectionner la ville",
+  "homeManualCityTitle": "Sélectionnez votre ville",
+  "homeManualCityBody": "Nous utiliserons cette ville pour calculer les horaires sans activer le GPS.",
+  "homeManualCityFieldCity": "Ville",
+  "homeManualCityFieldCountry": "Pays",
+  "homeManualCitySave": "Utiliser cette ville",
+  "homeManualCityNotFound": "Ville introuvable. Essayez une autre orthographe ou choisissez dans la liste.",
+  "homeManualCityAmbiguous": "Ajoutez le pays ou choisissez la bonne ville dans la liste.",
+  "homeManualCityPopularList": "Villes populaires",
+  "homeManualCityConfirmTitle": "Confirmer la ville",
+  "homeManualCityConfirmBody": "Utiliser {label} pour les horaires ?\nCoordonnées : {latitude}, {longitude}",
+  "@homeManualCityConfirmBody": {
+    "placeholders": {
+      "label": {},
+      "latitude": {},
+      "longitude": {}
+    }
+  },
+  "homeManualCityConfirmUse": "Confirmer",
+  "homeManualCityClear": "Effacer la ville sélectionnée",
   "homeLocationPendingBody": "L’écran principal reste visible même si les horaires ne sont pas encore prêts.",
   "homeLocationPermissionBlocked": "Autorisation de localisation bloquée",
   "homeLocationPermissionBlockedBody": "Vous pourrez activer la localisation pour Qibla Time plus tard dans les réglages du système.",

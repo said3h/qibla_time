@@ -6,24 +6,38 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../domain/entities/location_access_result.dart';
 import '../../domain/entities/prayer_location.dart';
 import '../../domain/entities/prayer_location_diagnostic.dart';
+import 'manual_prayer_location_datasource.dart';
 
 class PrayerLocationDataSource {
+  PrayerLocationDataSource({
+    ManualPrayerLocationDataSource? manualLocationDataSource,
+  }) : _manualLocationDataSource =
+            manualLocationDataSource ?? ManualPrayerLocationDataSource();
+
+  final ManualPrayerLocationDataSource _manualLocationDataSource;
   Future<void>? _backgroundRefreshTask;
 
   Future<LocationAccessResult?> getLocation({
     bool allowCachedFallbackWhenUnavailable = true,
     bool persistOnSuccess = true,
   }) async {
+    final manualLocation = await _manualLocationDataSource.getManualLocation();
+    if (manualLocation != null) {
+      return LocationAccessResult(
+        location: manualLocation.location,
+        source: LocationAccessSource.manual,
+      );
+    }
+
     final cachedResult = allowCachedFallbackWhenUnavailable
         ? await _getLastKnownLocationResult()
         : null;
 
     if (cachedResult != null) {
-      _backgroundRefreshTask ??=
-          _refreshLocationInBackground(
-            cachedLocation: cachedResult.location,
-            persistOnSuccess: persistOnSuccess,
-          ).whenComplete(() => _backgroundRefreshTask = null);
+      _backgroundRefreshTask ??= _refreshLocationInBackground(
+        cachedLocation: cachedResult.location,
+        persistOnSuccess: persistOnSuccess,
+      ).whenComplete(() => _backgroundRefreshTask = null);
       return cachedResult;
     }
 
@@ -124,6 +138,12 @@ class PrayerLocationDataSource {
 
   Future<PrayerLocation?> getCurrentLocation() async {
     return (await getLocation())?.location;
+  }
+
+  Future<bool> hasManualLocation() async {
+    return _manualLocationDataSource.getManualLocation().then(
+          (location) => location != null,
+        );
   }
 
   Future<PrayerLocationDiagnostic> getDiagnostic() async {
