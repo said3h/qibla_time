@@ -2074,99 +2074,91 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 );
               }
 
-              return Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  FutureBuilder<List<OfflinePrayerCitySuggestion>>(
-                    future: citiesDataSource.searchGlobalCities(
-                      query: cityQuery,
-                    ),
-                    builder: (context, snapshot) {
-                      final cities = snapshot.data ?? const [];
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const Padding(
-                          padding: EdgeInsets.all(24),
-                          child: Center(child: CircularProgressIndicator()),
-                        );
-                      }
-                      if (cities.isEmpty) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 12),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                l10n.homeManualCityNoResults,
-                                textAlign: TextAlign.center,
-                                style: GoogleFonts.dmSans(
-                                  fontSize: 12,
-                                  color: tokens.textSecondary,
-                                ),
-                              ),
-                              const SizedBox(height: 10),
-                              OutlinedButton.icon(
-                                onPressed:
-                                    isSaving ? null : () => saveTypedCity(),
-                                icon:
-                                    const Icon(Icons.public_rounded, size: 16),
-                                label: Text(
-                                  l10n.homeManualCityOnlineFallback,
-                                ),
-                              ),
-                            ],
+              return FutureBuilder<List<OfflinePrayerCitySuggestion>>(
+                future: citiesDataSource.searchGlobalCities(
+                  query: cityQuery,
+                ),
+                builder: (context, snapshot) {
+                  final cities = snapshot.data ?? const [];
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Padding(
+                      padding: EdgeInsets.all(24),
+                      child: Center(child: CircularProgressIndicator()),
+                    );
+                  }
+                  if (cities.isEmpty) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            l10n.homeManualCityNoResults,
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.dmSans(
+                              fontSize: 12,
+                              color: tokens.textSecondary,
+                            ),
                           ),
-                        );
-                      }
-                      return ListView.separated(
-                        padding: EdgeInsets.zero,
-                        itemCount: cities.length,
-                        separatorBuilder: (_, __) =>
-                            Divider(color: tokens.border, height: 1),
-                        itemBuilder: (_, index) {
-                          final city = cities[index];
-                          return ListTile(
-                            dense: true,
-                            contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 4,
-                              vertical: 2,
+                          const SizedBox(height: 10),
+                          OutlinedButton.icon(
+                            onPressed: isSaving ? null : () => saveTypedCity(),
+                            icon: const Icon(Icons.public_rounded, size: 16),
+                            label: Text(
+                              l10n.homeManualCityOnlineFallback,
                             ),
-                            leading: Container(
-                              width: 34,
-                              height: 34,
-                              decoration: BoxDecoration(
-                                color: tokens.primary.withOpacity(0.10),
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: Icon(
-                                Icons.location_city_rounded,
-                                size: 17,
-                                color: tokens.primary,
-                              ),
-                            ),
-                            title: Text(
-                              city.name,
-                              style: GoogleFonts.dmSans(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w800,
-                                color: tokens.textPrimary,
-                              ),
-                            ),
-                            subtitle: Text(
-                              city.countryName,
-                              style: GoogleFonts.dmSans(
-                                fontSize: 12,
-                                color: tokens.textSecondary,
-                              ),
-                            ),
-                            trailing: const Icon(Icons.chevron_right_rounded),
-                            onTap:
-                                isSaving ? null : () => saveOfflineCity(city),
-                          );
-                        },
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+                  return ListView.separated(
+                    padding: EdgeInsets.zero,
+                    itemCount: cities.length,
+                    separatorBuilder: (_, __) =>
+                        Divider(color: tokens.border, height: 1),
+                    itemBuilder: (_, index) {
+                      final city = cities[index];
+                      return ListTile(
+                        dense: true,
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 4,
+                          vertical: 2,
+                        ),
+                        leading: Container(
+                          width: 34,
+                          height: 34,
+                          decoration: BoxDecoration(
+                            color: tokens.primary.withOpacity(0.10),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Icon(
+                            Icons.location_city_rounded,
+                            size: 17,
+                            color: tokens.primary,
+                          ),
+                        ),
+                        title: Text(
+                          city.name,
+                          style: GoogleFonts.dmSans(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w800,
+                            color: tokens.textPrimary,
+                          ),
+                        ),
+                        subtitle: Text(
+                          city.countryName,
+                          style: GoogleFonts.dmSans(
+                            fontSize: 12,
+                            color: tokens.textSecondary,
+                          ),
+                        ),
+                        trailing: const Icon(Icons.chevron_right_rounded),
+                        onTap: isSaving ? null : () => saveOfflineCity(city),
                       );
                     },
-                  ),
-                ],
+                  );
+                },
               );
             }
 
@@ -2242,9 +2234,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                 controller: cityController,
                                 autofocus: true,
                                 textInputAction: TextInputAction.search,
-                                onChanged: (value) => setSheetState(
-                                  () => cityQuery = value,
-                                ),
+                                onChanged: (value) {
+                                  setSheetState(() => cityQuery = value);
+                                },
                                 onSubmitted: (_) {
                                   if (cityQuery.trim().isNotEmpty) {
                                     saveTypedCity();
@@ -2275,13 +2267,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               SizedBox(
                                 height: suggestionsHeight,
                                 child: ClipRect(
-                                  child: AnimatedSwitcher(
-                                    duration: const Duration(milliseconds: 180),
-                                    child: KeyedSubtree(
-                                      key: ValueKey(cityQuery.trim()),
-                                      child: buildCitySuggestions(),
-                                    ),
-                                  ),
+                                  child: buildCitySuggestions(),
                                 ),
                               ),
                               const SizedBox(height: 14),

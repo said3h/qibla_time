@@ -6,6 +6,11 @@ import '../../domain/entities/offline_prayer_city.dart';
 
 class OfflinePrayerCitiesDataSource {
   static const _basePath = 'assets/data/prayer_cities';
+  static const _priorityCityKeys = {
+    'alicante|ES',
+    'istanbul|TR',
+    'new delhi|IN',
+  };
 
   final Map<String, List<OfflinePrayerCity>> _citiesByCountry = {};
   List<OfflinePrayerCitySuggestion>? _searchIndex;
@@ -104,8 +109,7 @@ class OfflinePrayerCitiesDataSource {
     }
 
     final index = await loadSearchIndex();
-    final startsWithMatches = <OfflinePrayerCitySuggestion>[];
-    final containsMatches = <OfflinePrayerCitySuggestion>[];
+    final matches = <OfflinePrayerCitySuggestion>[];
 
     for (final city in index) {
       final normalizedName = normalizeSearch(city.name);
@@ -116,21 +120,45 @@ class OfflinePrayerCitiesDataSource {
           indexedName.startsWith(normalizedQuery);
       final contains = searchableLabel.contains(normalizedQuery);
 
-      if (startsWith) {
-        startsWithMatches.add(city);
-      } else if (contains) {
-        containsMatches.add(city);
-      }
-
-      if (startsWithMatches.length >= limit) {
-        break;
+      if (startsWith || contains) {
+        matches.add(city);
       }
     }
 
-    return [
-      ...startsWithMatches,
-      ...containsMatches,
-    ].take(limit).toList();
+    matches.sort(
+      (a, b) => _citySearchScore(a, normalizedQuery)
+          .compareTo(_citySearchScore(b, normalizedQuery)),
+    );
+    return matches.take(limit).toList();
+  }
+
+  int _citySearchScore(
+    OfflinePrayerCitySuggestion city,
+    String normalizedQuery,
+  ) {
+    final normalizedName = normalizeSearch(city.name);
+    final indexedName = normalizeSearch(city.normalizedName);
+    final priorityKey = '$indexedName|${city.countryCode}';
+    final exactWord =
+        normalizedName.split(RegExp(r'[\s\-]+')).contains(normalizedQuery) ||
+            indexedName.split(RegExp(r'[\s\-]+')).contains(normalizedQuery);
+    final startsWithWord = normalizedName.startsWith('$normalizedQuery ') ||
+        indexedName.startsWith('$normalizedQuery ');
+    final startsWith = normalizedName.startsWith(normalizedQuery) ||
+        indexedName.startsWith(normalizedQuery);
+
+    final priorityBoost = _priorityCityKeys.contains(priorityKey) ? -10000 : 0;
+    final relevance = normalizedName == normalizedQuery
+        ? 0
+        : startsWithWord
+            ? 100
+            : startsWith
+                ? 200
+                : exactWord
+                    ? 300
+                    : 500;
+
+    return priorityBoost + relevance + normalizedName.length;
   }
 
   Future<OfflinePrayerCity> resolveSuggestion(
