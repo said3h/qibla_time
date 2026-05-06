@@ -2272,7 +2272,11 @@ class AppLocalizationsIt extends AppLocalizations {
   String get homeManualCityFieldCountry => 'Paese';
 
   @override
-  String get homeManualCitySearchHint => 'Cerca città';
+  String get homeManualCitySearchHint => 'Cerca città...';
+
+  @override
+  String get homeManualCityEmptyHint =>
+      'Inizia a scrivere per cercare città offline in tutto il mondo.';
 
   @override
   String get homeManualCityBackToCountries => 'Torna ai paesi';

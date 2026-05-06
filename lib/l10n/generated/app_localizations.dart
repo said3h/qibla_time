@@ -4008,8 +4008,14 @@ abstract class AppLocalizations {
   /// No description provided for @homeManualCitySearchHint.
   ///
   /// In es, this message translates to:
-  /// **'Buscar ciudad'**
+  /// **'Buscar ciudad...'**
   String get homeManualCitySearchHint;
+
+  /// No description provided for @homeManualCityEmptyHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Empieza a escribir para buscar ciudades offline de todo el mundo.'**
+  String get homeManualCityEmptyHint;
 
   /// No description provided for @homeManualCityBackToCountries.
   ///

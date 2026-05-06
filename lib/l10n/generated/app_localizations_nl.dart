@@ -2263,7 +2263,11 @@ class AppLocalizationsNl extends AppLocalizations {
   String get homeManualCityFieldCountry => 'Land';
 
   @override
-  String get homeManualCitySearchHint => 'Stad zoeken';
+  String get homeManualCitySearchHint => 'Stad zoeken...';
+
+  @override
+  String get homeManualCityEmptyHint =>
+      'Begin te typen om offline steden wereldwijd te zoeken.';
 
   @override
   String get homeManualCityBackToCountries => 'Terug naar landen';

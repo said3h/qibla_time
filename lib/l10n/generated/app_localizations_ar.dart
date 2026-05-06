@@ -2203,7 +2203,11 @@ class AppLocalizationsAr extends AppLocalizations {
   String get homeManualCityFieldCountry => 'البلد';
 
   @override
-  String get homeManualCitySearchHint => 'ابحث عن مدينة';
+  String get homeManualCitySearchHint => 'ابحث عن مدينة...';
+
+  @override
+  String get homeManualCityEmptyHint =>
+      'ابدأ بالكتابة للبحث عن مدن العالم بلا إنترنت.';
 
   @override
   String get homeManualCityBackToCountries => 'العودة إلى البلدان';

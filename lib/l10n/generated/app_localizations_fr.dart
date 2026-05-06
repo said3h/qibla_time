@@ -2278,7 +2278,11 @@ class AppLocalizationsFr extends AppLocalizations {
   String get homeManualCityFieldCountry => 'Pays';
 
   @override
-  String get homeManualCitySearchHint => 'Rechercher une ville';
+  String get homeManualCitySearchHint => 'Rechercher une ville...';
+
+  @override
+  String get homeManualCityEmptyHint =>
+      'Commence à écrire pour rechercher des villes hors ligne dans le monde entier.';
 
   @override
   String get homeManualCityBackToCountries => 'Retour aux pays';

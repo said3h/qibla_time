@@ -2267,7 +2267,11 @@ class AppLocalizationsRu extends AppLocalizations {
   String get homeManualCityFieldCountry => 'Страна';
 
   @override
-  String get homeManualCitySearchHint => 'Поиск города';
+  String get homeManualCitySearchHint => 'Поиск города...';
+
+  @override
+  String get homeManualCityEmptyHint =>
+      'Начните вводить, чтобы искать офлайн-города по всему миру.';
 
   @override
   String get homeManualCityBackToCountries => 'Назад к странам';

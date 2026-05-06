@@ -2260,7 +2260,11 @@ class AppLocalizationsId extends AppLocalizations {
   String get homeManualCityFieldCountry => 'Negara';
 
   @override
-  String get homeManualCitySearchHint => 'Cari kota';
+  String get homeManualCitySearchHint => 'Cari kota...';
+
+  @override
+  String get homeManualCityEmptyHint =>
+      'Mulai mengetik untuk mencari kota offline di seluruh dunia.';
 
   @override
   String get homeManualCityBackToCountries => 'Kembali ke negara';

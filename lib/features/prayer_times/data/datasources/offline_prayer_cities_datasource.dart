@@ -8,6 +8,7 @@ class OfflinePrayerCitiesDataSource {
   static const _basePath = 'assets/data/prayer_cities';
 
   final Map<String, List<OfflinePrayerCity>> _citiesByCountry = {};
+  List<OfflinePrayerCitySuggestion>? _searchIndex;
   List<OfflinePrayerCountry>? _countries;
 
   Future<List<OfflinePrayerCountry>> loadCountries() async {
@@ -49,6 +50,7 @@ class OfflinePrayerCitiesDataSource {
         .map(
           (item) => OfflinePrayerCity(
             countryCode: normalizedCode.toUpperCase(),
+            countryName: normalizedCode.toUpperCase(),
             name: item['n'] as String? ?? '',
             normalizedName: item['nn'] as String? ?? '',
             latitude: (item['lat'] as num?)?.toDouble() ?? 0,
@@ -59,6 +61,107 @@ class OfflinePrayerCitiesDataSource {
         .toList();
     _citiesByCountry[normalizedCode] = cities;
     return cities;
+  }
+
+  Future<List<OfflinePrayerCitySuggestion>> loadSearchIndex() async {
+    final cached = _searchIndex;
+    if (cached != null) {
+      return cached;
+    }
+
+    final raw =
+        await rootBundle.loadString('$_basePath/city_search_index.json');
+    final decoded = jsonDecode(raw) as List<dynamic>;
+    final index = decoded
+        .whereType<Map<String, dynamic>>()
+        .map(
+          (item) => OfflinePrayerCitySuggestion(
+            countryCode: (item['cc'] as String? ?? '').toUpperCase(),
+            countryName: item['cn'] as String? ?? '',
+            name: item['n'] as String? ?? '',
+            normalizedName: item['nn'] as String? ?? '',
+            entryIndex: (item['i'] as num?)?.toInt() ?? -1,
+          ),
+        )
+        .where(
+          (city) =>
+              city.name.isNotEmpty &&
+              city.countryCode.isNotEmpty &&
+              city.entryIndex >= 0,
+        )
+        .toList();
+    _searchIndex = index;
+    return index;
+  }
+
+  Future<List<OfflinePrayerCitySuggestion>> searchGlobalCities({
+    required String query,
+    int limit = 12,
+  }) async {
+    final normalizedQuery = normalizeSearch(query);
+    if (normalizedQuery.length < 2) {
+      return const [];
+    }
+
+    final index = await loadSearchIndex();
+    final startsWithMatches = <OfflinePrayerCitySuggestion>[];
+    final containsMatches = <OfflinePrayerCitySuggestion>[];
+
+    for (final city in index) {
+      final normalizedName = normalizeSearch(city.name);
+      final indexedName = normalizeSearch(city.normalizedName);
+      final searchableLabel =
+          '$indexedName ${normalizeSearch(city.countryName)}';
+      final startsWith = normalizedName.startsWith(normalizedQuery) ||
+          indexedName.startsWith(normalizedQuery);
+      final contains = searchableLabel.contains(normalizedQuery);
+
+      if (startsWith) {
+        startsWithMatches.add(city);
+      } else if (contains) {
+        containsMatches.add(city);
+      }
+
+      if (startsWithMatches.length >= limit) {
+        break;
+      }
+    }
+
+    return [
+      ...startsWithMatches,
+      ...containsMatches,
+    ].take(limit).toList();
+  }
+
+  Future<OfflinePrayerCity> resolveSuggestion(
+    OfflinePrayerCitySuggestion suggestion,
+  ) async {
+    final cities = await loadCities(suggestion.countryCode);
+    if (suggestion.entryIndex >= 0 && suggestion.entryIndex < cities.length) {
+      final city = cities[suggestion.entryIndex];
+      return OfflinePrayerCity(
+        countryCode: suggestion.countryCode,
+        countryName: suggestion.countryName,
+        name: city.name,
+        normalizedName: city.normalizedName,
+        latitude: city.latitude,
+        longitude: city.longitude,
+      );
+    }
+
+    final normalizedName = normalizeSearch(suggestion.normalizedName);
+    final city = cities.firstWhere(
+      (city) => normalizeSearch(city.normalizedName) == normalizedName,
+      orElse: () => cities.first,
+    );
+    return OfflinePrayerCity(
+      countryCode: suggestion.countryCode,
+      countryName: suggestion.countryName,
+      name: city.name,
+      normalizedName: city.normalizedName,
+      latitude: city.latitude,
+      longitude: city.longitude,
+    );
   }
 
   Future<List<OfflinePrayerCity>> searchCities({

@@ -2265,7 +2265,11 @@ class AppLocalizationsEs extends AppLocalizations {
   String get homeManualCityFieldCountry => 'País';
 
   @override
-  String get homeManualCitySearchHint => 'Buscar ciudad';
+  String get homeManualCitySearchHint => 'Buscar ciudad...';
+
+  @override
+  String get homeManualCityEmptyHint =>
+      'Empieza a escribir para buscar ciudades offline de todo el mundo.';
 
   @override
   String get homeManualCityBackToCountries => 'Volver a países';

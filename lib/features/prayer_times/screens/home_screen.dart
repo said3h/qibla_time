@@ -1979,14 +1979,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   Future<void> _showManualCitySheet() async {
     final l10n = context.l10n;
-    final countryController = TextEditingController();
     final cityController = TextEditingController();
     final citiesDataSource = ref.read(offlinePrayerCitiesDataSourceProvider);
     final manualLocationDataSource =
         ref.read(manualPrayerLocationDataSourceProvider);
-    final countriesFuture = citiesDataSource.loadCountries();
-    OfflinePrayerCountry? selectedCountry;
-    var countryQuery = '';
     var cityQuery = '';
     var isSaving = false;
 
@@ -1999,13 +1995,17 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             final dialogNavigator = Navigator.of(dialogContext);
             final messenger = ScaffoldMessenger.of(context);
 
-            Future<void> saveOfflineCity(OfflinePrayerCity city) async {
+            Future<void> saveOfflineCity(
+              OfflinePrayerCitySuggestion suggestion,
+            ) async {
               if (isSaving) {
                 return;
               }
 
               setSheetState(() => isSaving = true);
               try {
+                final city =
+                    await citiesDataSource.resolveSuggestion(suggestion);
                 await manualLocationDataSource.saveOfflineCity(city);
                 if (!mounted) {
                   return;
@@ -2026,8 +2026,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
             Future<void> saveTypedCity() async {
               final city = cityController.text.trim();
-              final country =
-                  selectedCountry?.code ?? countryController.text.trim();
               if (city.isEmpty || isSaving) {
                 return;
               }
@@ -2035,7 +2033,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               setSheetState(() => isSaving = true);
               try {
                 final resolved = await manualLocationDataSource.resolveAndSave(
-                  country: country,
+                  country: '',
                   city: city,
                 );
                 if (!mounted) {
@@ -2060,112 +2058,27 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               }
             }
 
-            Widget buildCountryStep() {
-              return FutureBuilder<List<OfflinePrayerCountry>>(
-                future: countriesFuture,
-                builder: (context, snapshot) {
-                  final countries = snapshot.data ?? const [];
-                  final filteredCountries =
-                      citiesDataSource.searchCountries(countries, countryQuery);
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                  return Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      TextField(
-                        controller: countryController,
-                        textInputAction: TextInputAction.search,
-                        onChanged: (value) => setSheetState(
-                          () => countryQuery = value,
-                        ),
-                        decoration: InputDecoration(
-                          labelText: l10n.homeManualCountrySearchHint,
-                          border: const OutlineInputBorder(),
-                        ),
-                      ),
-                      const SizedBox(height: 12),
-                      ConstrainedBox(
-                        constraints: const BoxConstraints(maxHeight: 320),
-                        child: ListView.separated(
-                          shrinkWrap: true,
-                          itemCount: filteredCountries.length,
-                          separatorBuilder: (_, __) =>
-                              Divider(color: tokens.border, height: 1),
-                          itemBuilder: (_, index) {
-                            final country = filteredCountries[index];
-                            return ListTile(
-                              dense: true,
-                              contentPadding: EdgeInsets.zero,
-                              title: Text(country.code),
-                              subtitle: Text(
-                                l10n.homeManualCountryCityCount(
-                                  country.cityCount,
-                                ),
-                              ),
-                              trailing: const Icon(Icons.chevron_right_rounded),
-                              onTap: () => setSheetState(() {
-                                selectedCountry = country;
-                                countryController.text = country.code;
-                                cityController.clear();
-                                cityQuery = '';
-                              }),
-                            );
-                          },
-                        ),
-                      ),
-                    ],
-                  );
-                },
-              );
-            }
+            Widget buildCitySuggestions() {
+              if (cityQuery.trim().length < 2) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 18),
+                  child: Text(
+                    l10n.homeManualCityEmptyHint,
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.dmSans(
+                      fontSize: 12,
+                      height: 1.45,
+                      color: tokens.textSecondary,
+                    ),
+                  ),
+                );
+              }
 
-            Widget buildCityStep(OfflinePrayerCountry country) {
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Row(
-                    children: [
-                      IconButton(
-                        tooltip: l10n.homeManualCityBackToCountries,
-                        onPressed: isSaving
-                            ? null
-                            : () => setSheetState(() {
-                                  selectedCountry = null;
-                                  cityController.clear();
-                                  cityQuery = '';
-                                }),
-                        icon: const Icon(Icons.arrow_back_rounded),
-                      ),
-                      const SizedBox(width: 4),
-                      Expanded(
-                        child: Text(
-                          country.code,
-                          style: GoogleFonts.dmSans(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w800,
-                            color: tokens.textPrimary,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  TextField(
-                    controller: cityController,
-                    textInputAction: TextInputAction.search,
-                    onChanged: (value) => setSheetState(
-                      () => cityQuery = value,
-                    ),
-                    decoration: InputDecoration(
-                      labelText: l10n.homeManualCitySearchHint,
-                      border: const OutlineInputBorder(),
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  FutureBuilder<List<OfflinePrayerCity>>(
-                    future: citiesDataSource.searchCities(
-                      countryCode: country.code,
+                  FutureBuilder<List<OfflinePrayerCitySuggestion>>(
+                    future: citiesDataSource.searchGlobalCities(
                       query: cityQuery,
                     ),
                     builder: (context, snapshot) {
@@ -2204,7 +2117,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         );
                       }
                       return ConstrainedBox(
-                        constraints: const BoxConstraints(maxHeight: 320),
+                        constraints: const BoxConstraints(maxHeight: 360),
                         child: ListView.separated(
                           shrinkWrap: true,
                           itemCount: cities.length,
@@ -2214,17 +2127,39 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             final city = cities[index];
                             return ListTile(
                               dense: true,
-                              contentPadding: EdgeInsets.zero,
-                              title: Text(city.name),
-                              subtitle: Text(city.countryCode),
-                              trailing: Text(
-                                '${city.latitude.toStringAsFixed(2)}, '
-                                '${city.longitude.toStringAsFixed(2)}',
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 4,
+                                vertical: 2,
+                              ),
+                              leading: Container(
+                                width: 34,
+                                height: 34,
+                                decoration: BoxDecoration(
+                                  color: tokens.primary.withOpacity(0.10),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: Icon(
+                                  Icons.location_city_rounded,
+                                  size: 17,
+                                  color: tokens.primary,
+                                ),
+                              ),
+                              title: Text(
+                                city.name,
                                 style: GoogleFonts.dmSans(
-                                  fontSize: 10,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w800,
+                                  color: tokens.textPrimary,
+                                ),
+                              ),
+                              subtitle: Text(
+                                city.countryName,
+                                style: GoogleFonts.dmSans(
+                                  fontSize: 12,
                                   color: tokens.textSecondary,
                                 ),
                               ),
+                              trailing: const Icon(Icons.chevron_right_rounded),
                               onTap:
                                   isSaving ? null : () => saveOfflineCity(city),
                             );
@@ -2260,16 +2195,33 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            selectedCountry == null
-                                ? l10n.homeManualCountryTitle
-                                : l10n.homeManualCityTitle,
-                            style: GoogleFonts.dmSerifDisplay(
-                              fontSize: 24,
-                              color: tokens.primary,
-                            ),
+                          Row(
+                            children: [
+                              Container(
+                                width: 42,
+                                height: 42,
+                                decoration: BoxDecoration(
+                                  color: tokens.primary.withOpacity(0.12),
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                                child: Icon(
+                                  Icons.travel_explore_rounded,
+                                  color: tokens.primary,
+                                ),
+                              ),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: Text(
+                                  l10n.homeManualCityTitle,
+                                  style: GoogleFonts.dmSerifDisplay(
+                                    fontSize: 24,
+                                    color: tokens.primary,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                          const SizedBox(height: 6),
+                          const SizedBox(height: 8),
                           Text(
                             l10n.homeManualCityBody,
                             style: GoogleFonts.dmSans(
@@ -2279,9 +2231,45 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             ),
                           ),
                           const SizedBox(height: 16),
-                          selectedCountry == null
-                              ? buildCountryStep()
-                              : buildCityStep(selectedCountry!),
+                          TextField(
+                            controller: cityController,
+                            autofocus: true,
+                            textInputAction: TextInputAction.search,
+                            onChanged: (value) => setSheetState(
+                              () => cityQuery = value,
+                            ),
+                            onSubmitted: (_) {
+                              if (cityQuery.trim().isNotEmpty) {
+                                saveTypedCity();
+                              }
+                            },
+                            decoration: InputDecoration(
+                              hintText: l10n.homeManualCitySearchHint,
+                              prefixIcon:
+                                  const Icon(Icons.search_rounded, size: 20),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(18),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(18),
+                                borderSide: BorderSide(color: tokens.border),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(18),
+                                borderSide: BorderSide(
+                                  color: tokens.primary,
+                                  width: 1.4,
+                                ),
+                              ),
+                            ),
+                          ),
+                          AnimatedSwitcher(
+                            duration: const Duration(milliseconds: 180),
+                            child: KeyedSubtree(
+                              key: ValueKey(cityQuery.trim()),
+                              child: buildCitySuggestions(),
+                            ),
+                          ),
                           const SizedBox(height: 14),
                           Text(
                             l10n.homeManualCityGeoNamesAttribution,
@@ -2323,7 +2311,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       },
     );
 
-    countryController.dispose();
     cityController.dispose();
   }
 

@@ -2269,7 +2269,11 @@ class AppLocalizationsDe extends AppLocalizations {
   String get homeManualCityFieldCountry => 'Land';
 
   @override
-  String get homeManualCitySearchHint => 'Stadt suchen';
+  String get homeManualCitySearchHint => 'Stadt suchen...';
+
+  @override
+  String get homeManualCityEmptyHint =>
+      'Beginne zu tippen, um Offline-Städte weltweit zu suchen.';
 
   @override
   String get homeManualCityBackToCountries => 'Zurück zu Ländern';

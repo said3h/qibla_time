@@ -2243,7 +2243,11 @@ class AppLocalizationsTr extends AppLocalizations {
   String get homeManualCityFieldCountry => 'Ülke';
 
   @override
-  String get homeManualCitySearchHint => 'Şehir ara';
+  String get homeManualCitySearchHint => 'Şehir ara...';
+
+  @override
+  String get homeManualCityEmptyHint =>
+      'Dünyadaki çevrimdışı şehirleri aramak için yazmaya başlayın.';
 
   @override
   String get homeManualCityBackToCountries => 'Ülkelere dön';
