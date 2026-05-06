@@ -2296,6 +2296,31 @@ class AppLocalizationsFr extends AppLocalizations {
   String get homeManualCityClear => 'Effacer la ville sélectionnée';
 
   @override
+  String get homeManualCityChange => 'Changer de ville';
+
+  @override
+  String get homeUseDeviceGps => 'Utiliser le GPS de l’appareil';
+
+  @override
+  String get homeSelectCityManually => 'Sélectionner la ville manuellement';
+
+  @override
+  String get homeLocationModeManual => 'Ville manuelle';
+
+  @override
+  String get homeLocationModeGps => 'Mode de localisation';
+
+  @override
+  String get homeLocationModeDeviceGps => 'GPS de l’appareil';
+
+  @override
+  String get homeLocationModeGpsUnavailable => 'GPS pas encore configuré';
+
+  @override
+  String get homeLocationTapHint =>
+      'Touchez la localisation ci-dessus pour choisir GPS ou ville';
+
+  @override
   String get homeLocationPendingBody =>
       'L’écran principal reste visible même si les horaires ne sont pas encore prêts.';
 

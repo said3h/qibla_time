@@ -2221,6 +2221,31 @@ class AppLocalizationsAr extends AppLocalizations {
   String get homeManualCityClear => 'مسح المدينة المحددة';
 
   @override
+  String get homeManualCityChange => 'تغيير المدينة';
+
+  @override
+  String get homeUseDeviceGps => 'استخدام GPS الجهاز';
+
+  @override
+  String get homeSelectCityManually => 'اختيار المدينة يدويًا';
+
+  @override
+  String get homeLocationModeManual => 'مدينة يدوية';
+
+  @override
+  String get homeLocationModeGps => 'وضع الموقع';
+
+  @override
+  String get homeLocationModeDeviceGps => 'GPS الجهاز';
+
+  @override
+  String get homeLocationModeGpsUnavailable => 'لم يتم إعداد GPS بعد';
+
+  @override
+  String get homeLocationTapHint =>
+      'اضغط على الموقع أعلاه لاختيار GPS أو المدينة';
+
+  @override
   String get homeLocationPendingBody =>
       'تبقى الشاشة الرئيسية ظاهرة حتى لو لم تصبح المواقيت جاهزة بعد.';
 

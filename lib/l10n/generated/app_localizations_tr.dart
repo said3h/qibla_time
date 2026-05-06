@@ -2261,6 +2261,31 @@ class AppLocalizationsTr extends AppLocalizations {
   String get homeManualCityClear => 'Seçilen şehri temizle';
 
   @override
+  String get homeManualCityChange => 'Şehri değiştir';
+
+  @override
+  String get homeUseDeviceGps => 'Cihaz GPS\'ini kullan';
+
+  @override
+  String get homeSelectCityManually => 'Şehri manuel seç';
+
+  @override
+  String get homeLocationModeManual => 'Manuel şehir';
+
+  @override
+  String get homeLocationModeGps => 'Konum modu';
+
+  @override
+  String get homeLocationModeDeviceGps => 'Cihaz GPS\'i';
+
+  @override
+  String get homeLocationModeGpsUnavailable => 'GPS henüz ayarlanmadı';
+
+  @override
+  String get homeLocationTapHint =>
+      'GPS veya şehir seçmek için yukarıdaki konuma dokun';
+
+  @override
   String get homeLocationPendingBody =>
       'Namaz vakitleri henüz hazır olmasa bile ana ekran görünür durumda kalır.';
 

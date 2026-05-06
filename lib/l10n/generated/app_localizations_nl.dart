@@ -2281,6 +2281,31 @@ class AppLocalizationsNl extends AppLocalizations {
   String get homeManualCityClear => 'Geselecteerde stad wissen';
 
   @override
+  String get homeManualCityChange => 'Stad wijzigen';
+
+  @override
+  String get homeUseDeviceGps => 'Apparaat-GPS gebruiken';
+
+  @override
+  String get homeSelectCityManually => 'Stad handmatig selecteren';
+
+  @override
+  String get homeLocationModeManual => 'Handmatige stad';
+
+  @override
+  String get homeLocationModeGps => 'Locatiemodus';
+
+  @override
+  String get homeLocationModeDeviceGps => 'Apparaat-GPS';
+
+  @override
+  String get homeLocationModeGpsUnavailable => 'GPS is nog niet ingesteld';
+
+  @override
+  String get homeLocationTapHint =>
+      'Tik op de locatie hierboven om GPS of stad te kiezen';
+
+  @override
   String get homeLocationPendingBody =>
       'Het beginscherm blijft zichtbaar, zelfs als de gebedstijden nog niet gereed zijn.';
 

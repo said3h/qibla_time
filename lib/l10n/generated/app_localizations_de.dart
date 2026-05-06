@@ -2287,6 +2287,32 @@ class AppLocalizationsDe extends AppLocalizations {
   String get homeManualCityClear => 'Ausgewählte Stadt löschen';
 
   @override
+  String get homeManualCityChange => 'Stadt ändern';
+
+  @override
+  String get homeUseDeviceGps => 'Geräte-GPS verwenden';
+
+  @override
+  String get homeSelectCityManually => 'Stadt manuell auswählen';
+
+  @override
+  String get homeLocationModeManual => 'Manuelle Stadt';
+
+  @override
+  String get homeLocationModeGps => 'Standortmodus';
+
+  @override
+  String get homeLocationModeDeviceGps => 'Geräte-GPS';
+
+  @override
+  String get homeLocationModeGpsUnavailable =>
+      'GPS ist noch nicht eingerichtet';
+
+  @override
+  String get homeLocationTapHint =>
+      'Tippe oben auf den Standort, um GPS oder Stadt zu wählen';
+
+  @override
   String get homeLocationPendingBody =>
       'Der Startbildschirm bleibt sichtbar, auch wenn die Gebetszeiten noch nicht bereit sind.';
 

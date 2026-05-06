@@ -4036,6 +4036,54 @@ abstract class AppLocalizations {
   /// **'Borrar ciudad seleccionada'**
   String get homeManualCityClear;
 
+  /// No description provided for @homeManualCityChange.
+  ///
+  /// In es, this message translates to:
+  /// **'Cambiar ciudad'**
+  String get homeManualCityChange;
+
+  /// No description provided for @homeUseDeviceGps.
+  ///
+  /// In es, this message translates to:
+  /// **'Usar GPS del dispositivo'**
+  String get homeUseDeviceGps;
+
+  /// No description provided for @homeSelectCityManually.
+  ///
+  /// In es, this message translates to:
+  /// **'Seleccionar ciudad manualmente'**
+  String get homeSelectCityManually;
+
+  /// No description provided for @homeLocationModeManual.
+  ///
+  /// In es, this message translates to:
+  /// **'Ciudad manual'**
+  String get homeLocationModeManual;
+
+  /// No description provided for @homeLocationModeGps.
+  ///
+  /// In es, this message translates to:
+  /// **'Modo de ubicación'**
+  String get homeLocationModeGps;
+
+  /// No description provided for @homeLocationModeDeviceGps.
+  ///
+  /// In es, this message translates to:
+  /// **'GPS del dispositivo'**
+  String get homeLocationModeDeviceGps;
+
+  /// No description provided for @homeLocationModeGpsUnavailable.
+  ///
+  /// In es, this message translates to:
+  /// **'GPS aún no configurado'**
+  String get homeLocationModeGpsUnavailable;
+
+  /// No description provided for @homeLocationTapHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Toca la ubicación de arriba para elegir GPS o ciudad'**
+  String get homeLocationTapHint;
+
   /// No description provided for @homeLocationPendingBody.
   ///
   /// In es, this message translates to:

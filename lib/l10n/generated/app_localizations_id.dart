@@ -2278,6 +2278,31 @@ class AppLocalizationsId extends AppLocalizations {
   String get homeManualCityClear => 'Hapus kota pilihan';
 
   @override
+  String get homeManualCityChange => 'Ganti kota';
+
+  @override
+  String get homeUseDeviceGps => 'Gunakan GPS perangkat';
+
+  @override
+  String get homeSelectCityManually => 'Pilih kota secara manual';
+
+  @override
+  String get homeLocationModeManual => 'Kota manual';
+
+  @override
+  String get homeLocationModeGps => 'Mode lokasi';
+
+  @override
+  String get homeLocationModeDeviceGps => 'GPS perangkat';
+
+  @override
+  String get homeLocationModeGpsUnavailable => 'GPS belum diatur';
+
+  @override
+  String get homeLocationTapHint =>
+      'Ketuk lokasi di atas untuk memilih GPS atau kota';
+
+  @override
   String get homeLocationPendingBody =>
       'Layar beranda tetap terlihat bahkan ketika waktu shalat belum siap.';
 

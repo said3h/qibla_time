@@ -249,6 +249,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       manualLocation,
       isOnline,
     );
+    final isGpsLocation = manualLocation == null &&
+        locationLabel != null &&
+        locationLabel.trim().isNotEmpty;
     return Padding(
       padding: const EdgeInsets.fromLTRB(18, 14, 18, 10),
       child: Row(
@@ -274,12 +277,32 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                 ),
                 const SizedBox(height: 2),
-                Text(
-                  statusLine,
-                  style: GoogleFonts.dmSans(
-                    fontSize: 10,
-                    color: tokens.textSecondary,
-                    letterSpacing: 0.2,
+                GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () => _showLocationModeDialog(
+                    manualLocation: manualLocation,
+                    isGpsLocation: isGpsLocation,
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          statusLine,
+                          style: GoogleFonts.dmSans(
+                            fontSize: 10,
+                            color: tokens.textSecondary,
+                            letterSpacing: 0.2,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 4),
+                      Icon(
+                        Icons.expand_more_rounded,
+                        size: 13,
+                        color: tokens.textSecondary,
+                      ),
+                    ],
                   ),
                 ),
               ],
@@ -983,50 +1006,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               color: tokens.textSecondary,
             ),
           ),
-          const SizedBox(height: 14),
-          Wrap(
-            spacing: 10,
-            runSpacing: 8,
-            children: [
-              OutlinedButton.icon(
-                onPressed: deniedForever
-                    ? () => Geolocator.openAppSettings()
-                    : gpsOff
-                        ? () => Geolocator.openLocationSettings()
-                        : () async {
-                            await Geolocator.requestPermission();
-                            ref.invalidate(prayerLocationDiagnosticProvider);
-                            ref.invalidate(prayerScheduleProvider);
-                          },
-                icon: Icon(
-                  deniedForever
-                      ? Icons.settings_outlined
-                      : Icons.gps_fixed_rounded,
-                  size: 16,
-                ),
-                label: Text(
-                  deniedForever
-                      ? l10n.commonOpenSettings
-                      : l10n.commonEnableGps,
-                ),
-              ),
-              FilledButton.icon(
-                onPressed: _showManualCitySheet,
-                icon: const Icon(Icons.location_city_rounded, size: 16),
-                label: Text(l10n.homeSelectCityButton),
-              ),
-              if (ref.read(manualPrayerLocationProvider).valueOrNull != null)
-                TextButton.icon(
-                  onPressed: () async {
-                    await ref
-                        .read(manualPrayerLocationDataSourceProvider)
-                        .clearManualLocation();
-                    _refreshPrayerLocationState();
-                  },
-                  icon: const Icon(Icons.close_rounded, size: 16),
-                  label: Text(l10n.homeManualCityClear),
-                ),
-            ],
+          const SizedBox(height: 10),
+          Text(
+            l10n.homeLocationTapHint,
+            style: GoogleFonts.dmSans(
+              fontSize: 11,
+              color: tokens.primary,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ],
       ),
@@ -1844,6 +1831,151 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     ref.invalidate(nextPrayerInfoProvider);
     ref.invalidate(prayerCountdownProvider);
     ref.invalidate(prayerScheduleForDateProvider(_selectedDate));
+  }
+
+  Future<void> _showLocationModeDialog({
+    required ManualPrayerLocation? manualLocation,
+    required bool isGpsLocation,
+  }) async {
+    final l10n = context.l10n;
+    final tokens = QiblaThemes.current;
+    final modeTitle = manualLocation != null
+        ? l10n.homeLocationModeManual
+        : l10n.homeLocationModeGps;
+    final modeBody = manualLocation != null
+        ? manualLocation.label
+        : isGpsLocation
+            ? l10n.homeLocationModeDeviceGps
+            : l10n.homeLocationModeGpsUnavailable;
+
+    await showDialog<void>(
+      context: context,
+      builder: (dialogContext) {
+        return SafeArea(
+          minimum: const EdgeInsets.all(18),
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 360),
+              child: Material(
+                color: Colors.transparent,
+                child: Container(
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: tokens.bgSurface,
+                    borderRadius: BorderRadius.circular(28),
+                    border: Border.all(color: tokens.border),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.18),
+                        blurRadius: 28,
+                        offset: const Offset(0, 16),
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            width: 38,
+                            height: 38,
+                            decoration: BoxDecoration(
+                              color: _blend(
+                                  tokens.primary, tokens.bgSurface, 0.12),
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: Icon(
+                              manualLocation != null
+                                  ? Icons.location_city_rounded
+                                  : Icons.gps_fixed_rounded,
+                              color: tokens.primary,
+                              size: 19,
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  modeTitle,
+                                  style: GoogleFonts.dmSans(
+                                    fontSize: 13,
+                                    color: tokens.textSecondary,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                                const SizedBox(height: 2),
+                                Text(
+                                  modeBody,
+                                  style: GoogleFonts.dmSerifDisplay(
+                                    fontSize: 22,
+                                    color: tokens.primary,
+                                    height: 1.05,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 18),
+                      if (manualLocation != null) ...[
+                        SizedBox(
+                          width: double.infinity,
+                          child: FilledButton.icon(
+                            onPressed: () {
+                              Navigator.of(dialogContext).pop();
+                              _showManualCitySheet();
+                            },
+                            icon: const Icon(Icons.edit_location_alt_rounded,
+                                size: 16),
+                            label: Text(l10n.homeManualCityChange),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        SizedBox(
+                          width: double.infinity,
+                          child: OutlinedButton.icon(
+                            onPressed: () async {
+                              await ref
+                                  .read(manualPrayerLocationDataSourceProvider)
+                                  .clearManualLocation();
+                              if (!mounted) {
+                                return;
+                              }
+                              _refreshPrayerLocationState();
+                              Navigator.of(dialogContext).pop();
+                            },
+                            icon: const Icon(Icons.gps_fixed_rounded, size: 16),
+                            label: Text(l10n.homeUseDeviceGps),
+                          ),
+                        ),
+                      ] else ...[
+                        SizedBox(
+                          width: double.infinity,
+                          child: FilledButton.icon(
+                            onPressed: () {
+                              Navigator.of(dialogContext).pop();
+                              _showManualCitySheet();
+                            },
+                            icon: const Icon(Icons.location_city_rounded,
+                                size: 16),
+                            label: Text(l10n.homeSelectCityManually),
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 
   Future<void> _showManualCitySheet() async {

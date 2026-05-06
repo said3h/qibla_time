@@ -2290,6 +2290,31 @@ class AppLocalizationsIt extends AppLocalizations {
   String get homeManualCityClear => 'Cancella città selezionata';
 
   @override
+  String get homeManualCityChange => 'Cambia città';
+
+  @override
+  String get homeUseDeviceGps => 'Usa GPS del dispositivo';
+
+  @override
+  String get homeSelectCityManually => 'Seleziona città manualmente';
+
+  @override
+  String get homeLocationModeManual => 'Città manuale';
+
+  @override
+  String get homeLocationModeGps => 'Modalità posizione';
+
+  @override
+  String get homeLocationModeDeviceGps => 'GPS del dispositivo';
+
+  @override
+  String get homeLocationModeGpsUnavailable => 'GPS non ancora configurato';
+
+  @override
+  String get homeLocationTapHint =>
+      'Tocca la posizione sopra per scegliere GPS o città';
+
+  @override
   String get homeLocationPendingBody =>
       'La schermata iniziale rimane visibile anche quando i tempi di preghiera non sono ancora pronti.';
 

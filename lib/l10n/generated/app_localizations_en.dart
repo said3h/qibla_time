@@ -2268,6 +2268,31 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeManualCityClear => 'Clear selected city';
 
   @override
+  String get homeManualCityChange => 'Change city';
+
+  @override
+  String get homeUseDeviceGps => 'Use device GPS';
+
+  @override
+  String get homeSelectCityManually => 'Select city manually';
+
+  @override
+  String get homeLocationModeManual => 'Manual city';
+
+  @override
+  String get homeLocationModeGps => 'Location mode';
+
+  @override
+  String get homeLocationModeDeviceGps => 'Device GPS';
+
+  @override
+  String get homeLocationModeGpsUnavailable => 'GPS is not set yet';
+
+  @override
+  String get homeLocationTapHint =>
+      'Tap the location above to choose GPS or city';
+
+  @override
   String get homeLocationPendingBody =>
       'The home screen stays visible even while prayer times are not ready yet.';
 

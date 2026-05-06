@@ -2285,6 +2285,31 @@ class AppLocalizationsRu extends AppLocalizations {
   String get homeManualCityClear => 'Удалить выбранный город';
 
   @override
+  String get homeManualCityChange => 'Изменить город';
+
+  @override
+  String get homeUseDeviceGps => 'Использовать GPS устройства';
+
+  @override
+  String get homeSelectCityManually => 'Выбрать город вручную';
+
+  @override
+  String get homeLocationModeManual => 'Город вручную';
+
+  @override
+  String get homeLocationModeGps => 'Режим геолокации';
+
+  @override
+  String get homeLocationModeDeviceGps => 'GPS устройства';
+
+  @override
+  String get homeLocationModeGpsUnavailable => 'GPS еще не настроен';
+
+  @override
+  String get homeLocationTapHint =>
+      'Нажмите на местоположение выше, чтобы выбрать GPS или город';
+
+  @override
   String get homeLocationPendingBody =>
       'Главный экран остается видимым, даже если время молитвы еще не готово.';
 
