@@ -2060,17 +2060,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
             Widget buildCitySuggestions() {
               if (cityQuery.trim().length < 2) {
-                return SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 18),
-                    child: Text(
-                      l10n.homeManualCityEmptyHint,
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.dmSans(
-                        fontSize: 12,
-                        height: 1.45,
-                        color: tokens.textSecondary,
-                      ),
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 18),
+                  child: Text(
+                    l10n.homeManualCityEmptyHint,
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.dmSans(
+                      fontSize: 12,
+                      height: 1.45,
+                      color: tokens.textSecondary,
                     ),
                   ),
                 );
@@ -2092,31 +2090,30 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         );
                       }
                       if (cities.isEmpty) {
-                        return SingleChildScrollView(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 12),
-                            child: Column(
-                              children: [
-                                Text(
-                                  l10n.homeManualCityNoResults,
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.dmSans(
-                                    fontSize: 12,
-                                    color: tokens.textSecondary,
-                                  ),
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                l10n.homeManualCityNoResults,
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.dmSans(
+                                  fontSize: 12,
+                                  color: tokens.textSecondary,
                                 ),
-                                const SizedBox(height: 10),
-                                OutlinedButton.icon(
-                                  onPressed:
-                                      isSaving ? null : () => saveTypedCity(),
-                                  icon: const Icon(Icons.public_rounded,
-                                      size: 16),
-                                  label: Text(
-                                    l10n.homeManualCityOnlineFallback,
-                                  ),
+                              ),
+                              const SizedBox(height: 10),
+                              OutlinedButton.icon(
+                                onPressed:
+                                    isSaving ? null : () => saveTypedCity(),
+                                icon:
+                                    const Icon(Icons.public_rounded, size: 16),
+                                label: Text(
+                                  l10n.homeManualCityOnlineFallback,
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         );
                       }
@@ -2183,6 +2180,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               child: LayoutBuilder(
                 builder: (context, constraints) {
                   final maxDialogHeight = constraints.maxHeight;
+                  final suggestionsHeight =
+                      (maxDialogHeight * 0.42).clamp(160.0, 280.0);
                   return Center(
                     child: ConstrainedBox(
                       constraints: BoxConstraints(
@@ -2272,12 +2271,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                   ),
                                 ),
                               ),
-                              Flexible(
-                                child: AnimatedSwitcher(
-                                  duration: const Duration(milliseconds: 180),
-                                  child: KeyedSubtree(
-                                    key: ValueKey(cityQuery.trim()),
-                                    child: buildCitySuggestions(),
+                              const SizedBox(height: 12),
+                              SizedBox(
+                                height: suggestionsHeight,
+                                child: ClipRect(
+                                  child: AnimatedSwitcher(
+                                    duration: const Duration(milliseconds: 180),
+                                    child: KeyedSubtree(
+                                      key: ValueKey(cityQuery.trim()),
+                                      child: buildCitySuggestions(),
+                                    ),
                                   ),
                                 ),
                               ),
