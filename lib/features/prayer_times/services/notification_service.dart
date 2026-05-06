@@ -103,11 +103,7 @@ class NotificationService {
       if (Platform.isAndroid) {
         // Use canScheduleExactNotifications() (→ AlarmManager.canScheduleExactAlarms())
         // instead of permission_handler's scheduleExactAlarm.isGranted.
-        // Reason: permission_handler only checks SCHEDULE_EXACT_ALARM (user-granted),
-        // but on Android 13+ USE_EXACT_ALARM is auto-granted for qualifying apps and
-        // also makes canScheduleExactAlarms() return true. Without this fix the code
-        // falls back to inexactAllowWhileIdle, which Doze mode defers or kills entirely
-        // when the screen is off — that's why notifications only fire with app open.
+        // If exact alarms are unavailable, fall back to inexactAllowWhileIdle.
         final canUseExactAlarm = await _canScheduleExactAlarm();
         scheduleMode = canUseExactAlarm
             ? AndroidScheduleMode.exactAllowWhileIdle
@@ -167,8 +163,7 @@ class NotificationService {
         ),
       );
 
-      // Same guard as scheduleAdhan: use canScheduleExactNotifications() which
-      // covers both SCHEDULE_EXACT_ALARM and USE_EXACT_ALARM (Android 13+).
+      // Same guard as scheduleAdhan: use canScheduleExactNotifications().
       AndroidScheduleMode scheduleMode =
           AndroidScheduleMode.inexactAllowWhileIdle;
       if (Platform.isAndroid) {
@@ -358,12 +353,7 @@ class NotificationService {
   /// Returns true if the system can schedule exact alarms.
   ///
   /// Uses [AndroidFlutterLocalNotificationsPlugin.canScheduleExactNotifications]
-  /// which calls [AlarmManager.canScheduleExactAlarms()] natively. This correctly
-  /// handles both paths:
-  ///   • [SCHEDULE_EXACT_ALARM] — user-granted in Settings (Android 12+)
-  ///   • [USE_EXACT_ALARM] — auto-granted for qualifying apps when declared in
-  ///     the manifest (Android 13+). [permission_handler]'s scheduleExactAlarm
-  ///     only checks the first path and misses this one.
+  /// which calls [AlarmManager.canScheduleExactAlarms()] natively.
   Future<bool> _canScheduleExactAlarm() async {
     if (!Platform.isAndroid) return true;
     final android = _plugin.resolvePlatformSpecificImplementation<

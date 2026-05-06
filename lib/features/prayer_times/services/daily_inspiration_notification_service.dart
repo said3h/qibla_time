@@ -96,8 +96,7 @@ class DailyInspirationNotificationService {
     final content = await _generateNotificationContent();
 
     // Same guard as NotificationService.scheduleAdhan: use
-    // canScheduleExactNotifications() which covers both SCHEDULE_EXACT_ALARM
-    // (user-granted, Android 12+) and USE_EXACT_ALARM (auto-granted, Android 13+).
+    // canScheduleExactNotifications() and fall back safely if exact alarms are unavailable.
     // Falling back to inexactAllowWhileIdle avoids SecurityException on Android 12
     // devices that have not granted exact-alarm permission.
     final scheduleMode = await _resolveScheduleMode();
@@ -130,9 +129,7 @@ class DailyInspirationNotificationService {
   /// Returns the appropriate [AndroidScheduleMode] for the current device.
   ///
   /// Mirrors the logic in [NotificationService._canScheduleExactAlarm]:
-  /// uses [canScheduleExactNotifications] (→ AlarmManager.canScheduleExactAlarms)
-  /// instead of permission_handler, which only checks SCHEDULE_EXACT_ALARM and
-  /// misses the USE_EXACT_ALARM auto-grant path available on Android 13+.
+  /// uses [canScheduleExactNotifications] (→ AlarmManager.canScheduleExactAlarms).
   Future<AndroidScheduleMode> _resolveScheduleMode() async {
     if (!Platform.isAndroid) return AndroidScheduleMode.exactAllowWhileIdle;
     final android = _plugin.resolvePlatformSpecificImplementation<
