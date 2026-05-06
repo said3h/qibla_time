@@ -2060,15 +2060,17 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
             Widget buildCitySuggestions() {
               if (cityQuery.trim().length < 2) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 18),
-                  child: Text(
-                    l10n.homeManualCityEmptyHint,
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.dmSans(
-                      fontSize: 12,
-                      height: 1.45,
-                      color: tokens.textSecondary,
+                return SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 18),
+                    child: Text(
+                      l10n.homeManualCityEmptyHint,
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.dmSans(
+                        fontSize: 12,
+                        height: 1.45,
+                        color: tokens.textSecondary,
+                      ),
                     ),
                   ),
                 );
@@ -2090,81 +2092,80 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         );
                       }
                       if (cities.isEmpty) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 12),
-                          child: Column(
-                            children: [
-                              Text(
-                                l10n.homeManualCityNoResults,
-                                textAlign: TextAlign.center,
-                                style: GoogleFonts.dmSans(
-                                  fontSize: 12,
-                                  color: tokens.textSecondary,
+                        return SingleChildScrollView(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            child: Column(
+                              children: [
+                                Text(
+                                  l10n.homeManualCityNoResults,
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.dmSans(
+                                    fontSize: 12,
+                                    color: tokens.textSecondary,
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(height: 10),
-                              OutlinedButton.icon(
-                                onPressed:
-                                    isSaving ? null : () => saveTypedCity(),
-                                icon:
-                                    const Icon(Icons.public_rounded, size: 16),
-                                label: Text(
-                                  l10n.homeManualCityOnlineFallback,
+                                const SizedBox(height: 10),
+                                OutlinedButton.icon(
+                                  onPressed:
+                                      isSaving ? null : () => saveTypedCity(),
+                                  icon: const Icon(Icons.public_rounded,
+                                      size: 16),
+                                  label: Text(
+                                    l10n.homeManualCityOnlineFallback,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         );
                       }
-                      return ConstrainedBox(
-                        constraints: const BoxConstraints(maxHeight: 360),
-                        child: ListView.separated(
-                          shrinkWrap: true,
-                          itemCount: cities.length,
-                          separatorBuilder: (_, __) =>
-                              Divider(color: tokens.border, height: 1),
-                          itemBuilder: (_, index) {
-                            final city = cities[index];
-                            return ListTile(
-                              dense: true,
-                              contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 4,
-                                vertical: 2,
+                      return ListView.separated(
+                        padding: EdgeInsets.zero,
+                        itemCount: cities.length,
+                        separatorBuilder: (_, __) =>
+                            Divider(color: tokens.border, height: 1),
+                        itemBuilder: (_, index) {
+                          final city = cities[index];
+                          return ListTile(
+                            dense: true,
+                            contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 4,
+                              vertical: 2,
+                            ),
+                            leading: Container(
+                              width: 34,
+                              height: 34,
+                              decoration: BoxDecoration(
+                                color: tokens.primary.withOpacity(0.10),
+                                borderRadius: BorderRadius.circular(12),
                               ),
-                              leading: Container(
-                                width: 34,
-                                height: 34,
-                                decoration: BoxDecoration(
-                                  color: tokens.primary.withOpacity(0.10),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: Icon(
-                                  Icons.location_city_rounded,
-                                  size: 17,
-                                  color: tokens.primary,
-                                ),
+                              child: Icon(
+                                Icons.location_city_rounded,
+                                size: 17,
+                                color: tokens.primary,
                               ),
-                              title: Text(
-                                city.name,
-                                style: GoogleFonts.dmSans(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w800,
-                                  color: tokens.textPrimary,
-                                ),
+                            ),
+                            title: Text(
+                              city.name,
+                              style: GoogleFonts.dmSans(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w800,
+                                color: tokens.textPrimary,
                               ),
-                              subtitle: Text(
-                                city.countryName,
-                                style: GoogleFonts.dmSans(
-                                  fontSize: 12,
-                                  color: tokens.textSecondary,
-                                ),
+                            ),
+                            subtitle: Text(
+                              city.countryName,
+                              style: GoogleFonts.dmSans(
+                                fontSize: 12,
+                                color: tokens.textSecondary,
                               ),
-                              trailing: const Icon(Icons.chevron_right_rounded),
-                              onTap:
-                                  isSaving ? null : () => saveOfflineCity(city),
-                            );
-                          },
-                        ),
+                            ),
+                            trailing: const Icon(Icons.chevron_right_rounded),
+                            onTap:
+                                isSaving ? null : () => saveOfflineCity(city),
+                          );
+                        },
                       );
                     },
                   ),
@@ -2179,131 +2180,144 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 18,
                 MediaQuery.of(context).viewInsets.bottom + 18,
               ),
-              child: Center(
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 430),
-                  child: Material(
-                    color: Colors.transparent,
-                    child: Container(
-                      padding: const EdgeInsets.all(18),
-                      decoration: BoxDecoration(
-                        color: tokens.bgSurface,
-                        borderRadius: BorderRadius.circular(26),
-                        border: Border.all(color: tokens.border),
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  final maxDialogHeight = constraints.maxHeight;
+                  return Center(
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        maxWidth: 430,
+                        maxHeight: maxDialogHeight,
                       ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
+                      child: Material(
+                        color: Colors.transparent,
+                        child: Container(
+                          padding: const EdgeInsets.all(18),
+                          clipBehavior: Clip.antiAlias,
+                          decoration: BoxDecoration(
+                            color: tokens.bgSurface,
+                            borderRadius: BorderRadius.circular(26),
+                            border: Border.all(color: tokens.border),
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Container(
-                                width: 42,
-                                height: 42,
-                                decoration: BoxDecoration(
-                                  color: tokens.primary.withOpacity(0.12),
-                                  borderRadius: BorderRadius.circular(16),
-                                ),
-                                child: Icon(
-                                  Icons.travel_explore_rounded,
-                                  color: tokens.primary,
+                              Row(
+                                children: [
+                                  Container(
+                                    width: 42,
+                                    height: 42,
+                                    decoration: BoxDecoration(
+                                      color: tokens.primary.withOpacity(0.12),
+                                      borderRadius: BorderRadius.circular(16),
+                                    ),
+                                    child: Icon(
+                                      Icons.travel_explore_rounded,
+                                      color: tokens.primary,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 12),
+                                  Expanded(
+                                    child: Text(
+                                      l10n.homeManualCityTitle,
+                                      style: GoogleFonts.dmSerifDisplay(
+                                        fontSize: 24,
+                                        color: tokens.primary,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                l10n.homeManualCityBody,
+                                style: GoogleFonts.dmSans(
+                                  fontSize: 12,
+                                  height: 1.45,
+                                  color: tokens.textSecondary,
                                 ),
                               ),
-                              const SizedBox(width: 12),
-                              Expanded(
-                                child: Text(
-                                  l10n.homeManualCityTitle,
-                                  style: GoogleFonts.dmSerifDisplay(
-                                    fontSize: 24,
-                                    color: tokens.primary,
+                              const SizedBox(height: 16),
+                              TextField(
+                                controller: cityController,
+                                autofocus: true,
+                                textInputAction: TextInputAction.search,
+                                onChanged: (value) => setSheetState(
+                                  () => cityQuery = value,
+                                ),
+                                onSubmitted: (_) {
+                                  if (cityQuery.trim().isNotEmpty) {
+                                    saveTypedCity();
+                                  }
+                                },
+                                decoration: InputDecoration(
+                                  hintText: l10n.homeManualCitySearchHint,
+                                  prefixIcon: const Icon(Icons.search_rounded,
+                                      size: 20),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(18),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(18),
+                                    borderSide:
+                                        BorderSide(color: tokens.border),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(18),
+                                    borderSide: BorderSide(
+                                      color: tokens.primary,
+                                      width: 1.4,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ],
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            l10n.homeManualCityBody,
-                            style: GoogleFonts.dmSans(
-                              fontSize: 12,
-                              height: 1.45,
-                              color: tokens.textSecondary,
-                            ),
-                          ),
-                          const SizedBox(height: 16),
-                          TextField(
-                            controller: cityController,
-                            autofocus: true,
-                            textInputAction: TextInputAction.search,
-                            onChanged: (value) => setSheetState(
-                              () => cityQuery = value,
-                            ),
-                            onSubmitted: (_) {
-                              if (cityQuery.trim().isNotEmpty) {
-                                saveTypedCity();
-                              }
-                            },
-                            decoration: InputDecoration(
-                              hintText: l10n.homeManualCitySearchHint,
-                              prefixIcon:
-                                  const Icon(Icons.search_rounded, size: 20),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(18),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(18),
-                                borderSide: BorderSide(color: tokens.border),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(18),
-                                borderSide: BorderSide(
-                                  color: tokens.primary,
-                                  width: 1.4,
-                                ),
-                              ),
-                            ),
-                          ),
-                          AnimatedSwitcher(
-                            duration: const Duration(milliseconds: 180),
-                            child: KeyedSubtree(
-                              key: ValueKey(cityQuery.trim()),
-                              child: buildCitySuggestions(),
-                            ),
-                          ),
-                          const SizedBox(height: 14),
-                          Text(
-                            l10n.homeManualCityGeoNamesAttribution,
-                            style: GoogleFonts.dmSans(
-                              fontSize: 10,
-                              color: tokens.textSecondary,
-                            ),
-                          ),
-                          const SizedBox(height: 14),
-                          Row(
-                            children: [
-                              TextButton(
-                                onPressed: isSaving
-                                    ? null
-                                    : () => Navigator.of(dialogContext).pop(),
-                                child: Text(l10n.commonCancel),
-                              ),
-                              const Spacer(),
-                              if (isSaving)
-                                SizedBox(
-                                  width: 18,
-                                  height: 18,
-                                  child: CircularProgressIndicator(
-                                    strokeWidth: 2,
-                                    color: tokens.primary,
+                              Flexible(
+                                child: AnimatedSwitcher(
+                                  duration: const Duration(milliseconds: 180),
+                                  child: KeyedSubtree(
+                                    key: ValueKey(cityQuery.trim()),
+                                    child: buildCitySuggestions(),
                                   ),
                                 ),
+                              ),
+                              const SizedBox(height: 14),
+                              Text(
+                                l10n.homeManualCityGeoNamesAttribution,
+                                style: GoogleFonts.dmSans(
+                                  fontSize: 10,
+                                  color: tokens.textSecondary,
+                                ),
+                              ),
+                              const SizedBox(height: 14),
+                              Row(
+                                children: [
+                                  TextButton(
+                                    onPressed: isSaving
+                                        ? null
+                                        : () =>
+                                            Navigator.of(dialogContext).pop(),
+                                    child: Text(l10n.commonCancel),
+                                  ),
+                                  const Spacer(),
+                                  if (isSaving)
+                                    SizedBox(
+                                      width: 18,
+                                      height: 18,
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 2,
+                                        color: tokens.primary,
+                                      ),
+                                    ),
+                                ],
+                              ),
                             ],
                           ),
-                        ],
+                        ),
                       ),
                     ),
-                  ),
-                ),
+                  );
+                },
               ),
             );
           },
