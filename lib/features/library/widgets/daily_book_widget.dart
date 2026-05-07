@@ -31,7 +31,8 @@ class DailyBookWidget extends ConsumerWidget {
 
         final book = IslamHouseBook.getBookOfDay(books);
         final title = _displayTitle(book, isArabicOnly);
-        final showCategory = !isArabicOnly || _containsArabicText(book.category);
+        final showCategory =
+            !isArabicOnly || _containsArabicText(book.category);
         final showAuthor = !isArabicOnly || _containsArabicText(book.author);
         final description = _displayDescription(book, isArabicOnly);
 
@@ -42,6 +43,7 @@ class DailyBookWidget extends ConsumerWidget {
           );
         }
 
+        final hasReadUrl = book.readUrl.trim().isNotEmpty;
         final accentColor = _bookAccent(tokens, book.title);
         final accentForeground = _foregroundFor(accentColor);
         final cardTopColor = _blend(
@@ -89,7 +91,8 @@ class DailyBookWidget extends ConsumerWidget {
               Row(
                 children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                     decoration: BoxDecoration(
                       color: chipBackgroundColor,
                       borderRadius: BorderRadius.circular(10),
@@ -206,9 +209,13 @@ class DailyBookWidget extends ConsumerWidget {
                   // Botón leer
                   Expanded(
                     child: ElevatedButton.icon(
-                      onPressed: () => openBookUrl(context, book.readUrl),
+                      onPressed: hasReadUrl
+                          ? () => openBookUrl(context, book.readUrl)
+                          : null,
                       icon: const Icon(Icons.read_more, size: 16),
-                      label: Text(l10n.commonRead),
+                      label: Text(
+                        hasReadUrl ? l10n.commonRead : l10n.commonUnavailable,
+                      ),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: accentColor,
                         foregroundColor: accentForeground,
@@ -257,9 +264,8 @@ class DailyBookWidget extends ConsumerWidget {
       tokens.primaryLight,
       _blend(tokens.primary, tokens.accent, 0.55),
     ];
-    final index = title.trim().isEmpty
-        ? 0
-        : title.trim().hashCode.abs() % palette.length;
+    final index =
+        title.trim().isEmpty ? 0 : title.trim().hashCode.abs() % palette.length;
     return palette[index];
   }
 

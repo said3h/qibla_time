@@ -1225,6 +1225,7 @@
   "cloudSyncRestoreFailed": "Wir konnten das Backup nicht wiederherstellen.",
   "bookLinkUnavailable": "Dieser Link ist nicht verfügbar.",
   "bookLinkOpenError": "Wir konnten den Link nicht öffnen.",
+  "bookNoCompatibleApp": "Keine kompatible App zum Öffnen dieses Buches gefunden.",
   "ramadanStatusHeaderDay": "Ramadan-Tag {day}",
   "@ramadanStatusHeaderDay": {
     "placeholders": {

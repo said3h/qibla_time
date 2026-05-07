@@ -5218,6 +5218,12 @@ abstract class AppLocalizations {
   /// **'No hemos podido abrir el enlace.'**
   String get bookLinkOpenError;
 
+  /// No description provided for @bookNoCompatibleApp.
+  ///
+  /// In es, this message translates to:
+  /// **'No se encontró una app compatible para abrir este libro.'**
+  String get bookNoCompatibleApp;
+
   /// No description provided for @ramadanStatusHeaderDay.
   ///
   /// In es, this message translates to:

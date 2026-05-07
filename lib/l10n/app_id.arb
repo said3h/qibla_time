@@ -1226,6 +1226,7 @@
   "cloudSyncRestoreFailed": "Kami tidak dapat memulihkan cadangan",
   "bookLinkUnavailable": "Tautan ini tidak tersedia.",
   "bookLinkOpenError": "Kami tidak dapat membuka tautan.",
+  "bookNoCompatibleApp": "Tidak ada aplikasi kompatibel untuk membuka buku ini.",
   "ramadanStatusHeaderDay": "Hari Ramadan ke-{day}",
   "@ramadanStatusHeaderDay": {
     "placeholders": {

@@ -2995,6 +2995,10 @@ class AppLocalizationsIt extends AppLocalizations {
       'Non è stato possibile aprire il collegamento.';
 
   @override
+  String get bookNoCompatibleApp =>
+      'Nessuna app compatibile trovata per aprire questo libro.';
+
+  @override
   String ramadanStatusHeaderDay(int day) {
     return 'Giorno del Ramadan $day';
   }

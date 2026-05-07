@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../core/services/logger_service.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../l10n/l10n.dart';
 import '../models/book_model.dart';
@@ -690,10 +691,30 @@ class _BookDetailSheetState extends ConsumerState<_BookDetailSheet> {
     final service = ref.read(bookDownloadServiceProvider);
     final localPath = _localPath ?? await service.getLocalPath(widget.book);
     final file = Uri.file(localPath);
-    final launched = await launchUrl(file);
-    if (!mounted) return;
-    if (!launched) {
-      _showSnackBar(l10n.bookLinkOpenError);
+    try {
+      final canOpen = await canLaunchUrl(file);
+      AppLogger.info(
+        'Opening offline book: url="${file.toString()}", scheme="${file.scheme}", canLaunchUrl=$canOpen',
+      );
+      final launched = await launchUrl(
+        file,
+        mode: LaunchMode.externalApplication,
+      );
+      if (!mounted) return;
+      if (!launched) {
+        AppLogger.warning(
+          'Offline book launch returned false: url="${file.toString()}", scheme="${file.scheme}", canLaunchUrl=$canOpen',
+        );
+        _showSnackBar(l10n.bookNoCompatibleApp);
+      }
+    } catch (error, stackTrace) {
+      AppLogger.error(
+        'Offline book launch failed: url="${file.toString()}", scheme="${file.scheme}"',
+        error: error,
+        stackTrace: stackTrace,
+      );
+      if (!mounted) return;
+      _showSnackBar(l10n.bookNoCompatibleApp);
     }
   }
 
@@ -737,6 +758,7 @@ class _BookDetailSheetState extends ConsumerState<_BookDetailSheet> {
     final tokens = QiblaThemes.current;
     final l10n = context.l10n;
     final book = widget.book;
+    final hasReadUrl = book.readUrl.trim().isNotEmpty;
 
     return DraggableScrollableSheet(
       initialChildSize: 0.7,
@@ -852,9 +874,13 @@ class _BookDetailSheetState extends ConsumerState<_BookDetailSheet> {
             children: [
               Expanded(
                 child: ElevatedButton.icon(
-                  onPressed: () => openBookUrl(context, book.readUrl),
+                  onPressed: hasReadUrl
+                      ? () => openBookUrl(context, book.readUrl)
+                      : null,
                   icon: const Icon(Icons.read_more),
-                  label: Text(l10n.commonRead),
+                  label: Text(
+                    hasReadUrl ? l10n.commonRead : l10n.commonUnavailable,
+                  ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: tokens.primary,
                     foregroundColor: Colors.white,

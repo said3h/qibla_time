@@ -2953,6 +2953,10 @@ class AppLocalizationsTr extends AppLocalizations {
   String get bookLinkOpenError => 'Bağlantıyı açamadık.';
 
   @override
+  String get bookNoCompatibleApp =>
+      'Bu kitabı açacak uyumlu bir uygulama bulunamadı.';
+
+  @override
   String ramadanStatusHeaderDay(int day) {
     return 'Ramezan günü $day';
   }

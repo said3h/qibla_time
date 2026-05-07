@@ -2989,6 +2989,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get bookLinkOpenError => 'Мы не смогли открыть ссылку.';
 
   @override
+  String get bookNoCompatibleApp =>
+      'Не найдено совместимое приложение для открытия этой книги.';
+
+  @override
   String ramadanStatusHeaderDay(int day) {
     return 'Рамадан, день $day';
   }

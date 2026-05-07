@@ -1339,6 +1339,7 @@
   "cloudSyncRestoreFailed": "تعذر استعادة النسخة الاحتياطية",
   "bookLinkUnavailable": "هذا الرابط غير متاح.",
   "bookLinkOpenError": "تعذر فتح الرابط.",
+  "bookNoCompatibleApp": "لم يتم العثور على تطبيق متوافق لفتح هذا الكتاب.",
   "ramadanStatusHeaderDay": "اليوم {day} من رمضان",
   "ramadanStatusHeaderManual": "وضع رمضان اليدوي",
   "ramadanStatusBlessingDetected": "تقبل الله صيامك وأعمالك اليوم.",
