@@ -333,6 +333,7 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
       context: context,
       builder: (sheetContext) {
         return SafeArea(
+          top: false,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

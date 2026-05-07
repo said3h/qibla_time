@@ -165,6 +165,7 @@ class _DhikrScreenState extends State<DhikrScreen> {
       ),
       builder: (context) {
         return SafeArea(
+          top: false,
           child: Padding(
             padding: const EdgeInsets.fromLTRB(20, 20, 20, 24),
             child: Column(

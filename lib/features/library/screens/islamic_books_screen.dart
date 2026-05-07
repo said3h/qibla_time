@@ -193,7 +193,8 @@ class _IslamicBooksScreenState extends ConsumerState<IslamicBooksScreen>
     );
   }
 
-  Widget _buildCategoriesTab(AsyncValue<List<IslamHouseCategory>> categoriesAsync) {
+  Widget _buildCategoriesTab(
+      AsyncValue<List<IslamHouseCategory>> categoriesAsync) {
     final tokens = QiblaThemes.current;
 
     return categoriesAsync.when(
@@ -205,7 +206,10 @@ class _IslamicBooksScreenState extends ConsumerState<IslamicBooksScreen>
           );
         }
 
-        final allCategories = [_allCategoriesValue, ...categories.map((c) => c.name)];
+        final allCategories = [
+          _allCategoriesValue,
+          ...categories.map((c) => c.name)
+        ];
 
         return ListView.builder(
           padding: const EdgeInsets.all(16),
@@ -235,7 +239,8 @@ class _IslamicBooksScreenState extends ConsumerState<IslamicBooksScreen>
                     children: [
                       Icon(
                         isSelected ? Icons.folder_open : Icons.folder_outlined,
-                        color: isSelected ? tokens.primary : tokens.textSecondary,
+                        color:
+                            isSelected ? tokens.primary : tokens.textSecondary,
                       ),
                       const SizedBox(width: 12),
                       Expanded(
@@ -245,13 +250,18 @@ class _IslamicBooksScreenState extends ConsumerState<IslamicBooksScreen>
                               : category,
                           style: GoogleFonts.dmSans(
                             fontSize: 13,
-                            fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
-                            color: isSelected ? tokens.primary : tokens.textPrimary,
+                            fontWeight: isSelected
+                                ? FontWeight.w600
+                                : FontWeight.normal,
+                            color: isSelected
+                                ? tokens.primary
+                                : tokens.textPrimary,
                           ),
                         ),
                       ),
                       if (isSelected)
-                        Icon(Icons.check_circle, color: tokens.primary, size: 20),
+                        Icon(Icons.check_circle,
+                            color: tokens.primary, size: 20),
                     ],
                   ),
                 ),
@@ -377,8 +387,10 @@ class _BookCard extends StatelessWidget {
                     ? CachedNetworkImage(
                         imageUrl: book.coverUrl,
                         fit: BoxFit.cover,
-                        placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
-                        errorWidget: (context, url, error) => const Icon(Icons.book, size: 40),
+                        placeholder: (context, url) =>
+                            const Center(child: CircularProgressIndicator()),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.book, size: 40),
                       )
                     : const Icon(Icons.menu_book, size: 48),
               ),
@@ -479,7 +491,9 @@ class _BookListCard extends StatelessWidget {
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
-                    isFeatured ? Colors.amber.withOpacity(0.3) : tokens.primary.withOpacity(0.2),
+                    isFeatured
+                        ? Colors.amber.withOpacity(0.3)
+                        : tokens.primary.withOpacity(0.2),
                     tokens.primary.withOpacity(0.05),
                   ],
                 ),
@@ -491,8 +505,10 @@ class _BookListCard extends StatelessWidget {
                       child: CachedNetworkImage(
                         imageUrl: book.coverUrl,
                         fit: BoxFit.cover,
-                        placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
-                        errorWidget: (context, url, error) => const Icon(Icons.book, size: 40),
+                        placeholder: (context, url) =>
+                            const Center(child: CircularProgressIndicator()),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.book, size: 40),
                       ),
                     )
                   : const Icon(Icons.menu_book),
@@ -505,7 +521,8 @@ class _BookListCard extends StatelessWidget {
                 children: [
                   if (isFeatured)
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 4),
                       decoration: BoxDecoration(
                         color: Colors.amber.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(6),
@@ -548,7 +565,8 @@ class _BookListCard extends StatelessWidget {
                   const SizedBox(height: 6),
                   Row(
                     children: [
-                      Icon(Icons.description, size: 12, color: tokens.textSecondary),
+                      Icon(Icons.description,
+                          size: 12, color: tokens.textSecondary),
                       const SizedBox(width: 4),
                       Text(
                         l10n.booksPageCount(book.pages),
@@ -558,7 +576,8 @@ class _BookListCard extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 12),
-                      Icon(Icons.download, size: 12, color: tokens.textSecondary),
+                      Icon(Icons.download,
+                          size: 12, color: tokens.textSecondary),
                       const SizedBox(width: 4),
                       Text(
                         book.size,
@@ -642,14 +661,14 @@ class _BookDetailSheetState extends ConsumerState<_BookDetailSheet> {
 
     try {
       await ref.read(bookDownloadServiceProvider).downloadBook(
-            widget.book,
-            onProgress: (progress) {
-              if (!mounted) return;
-              setState(() {
-                _downloadProgress = progress;
-              });
-            },
-          );
+        widget.book,
+        onProgress: (progress) {
+          if (!mounted) return;
+          setState(() {
+            _downloadProgress = progress;
+          });
+        },
+      );
       if (!mounted) return;
       setState(() {
         _isDownloading = false;
@@ -725,7 +744,12 @@ class _BookDetailSheetState extends ConsumerState<_BookDetailSheet> {
       maxChildSize: 0.95,
       builder: (_, controller) => ListView(
         controller: controller,
-        padding: const EdgeInsets.all(20),
+        padding: EdgeInsets.fromLTRB(
+          20,
+          20,
+          20,
+          20 + MediaQuery.viewPaddingOf(context).bottom,
+        ),
         children: [
           Center(
             child: Container(
@@ -800,7 +824,8 @@ class _BookDetailSheetState extends ConsumerState<_BookDetailSheet> {
                 label: l10n.booksPageCount(book.pages),
               ),
               _InfoChip(icon: Icons.storage, label: book.size),
-              _InfoChip(icon: Icons.star, label: book.rating.toStringAsFixed(1)),
+              _InfoChip(
+                  icon: Icons.star, label: book.rating.toStringAsFixed(1)),
             ],
           ),
           const SizedBox(height: 20),

@@ -219,87 +219,90 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
       showDragHandle: true,
       backgroundColor: tokens.bgSurface,
       builder: (sheetContext) {
-        return SizedBox(
-          height: MediaQuery.sizeOf(sheetContext).height * 0.72,
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20, 8, 20, 12),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      l10n.prayerGuideChooseSurahTitle,
-                      style: GoogleFonts.dmSans(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
-                        color: tokens.textPrimary,
-                      ),
-                    ),
-                    const SizedBox(height: 6),
-                    Text(
-                      l10n.prayerGuideChooseSurahSubtitle,
-                      style: GoogleFonts.dmSans(
-                        fontSize: 13,
-                        height: 1.5,
-                        color: tokens.textSecondary,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: ListView.separated(
-                  itemCount: selectableSurahs.length,
-                  separatorBuilder: (_, __) => Divider(
-                    height: 1,
-                    color: tokens.border,
-                  ),
-                  itemBuilder: (context, index) {
-                    final surah = selectableSurahs[index];
-                    return ListTile(
-                      onTap: () => Navigator.of(sheetContext).pop(surah),
-                      title: Text(
-                        isArabicOnly ? surah.nameArabic : surah.nameLatin,
+        return SafeArea(
+          top: false,
+          child: SizedBox(
+            height: MediaQuery.sizeOf(sheetContext).height * 0.72,
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 8, 20, 12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        l10n.prayerGuideChooseSurahTitle,
                         style: GoogleFonts.dmSans(
+                          fontSize: 18,
                           fontWeight: FontWeight.w700,
                           color: tokens.textPrimary,
                         ),
                       ),
-                      subtitle: isArabicOnly
-                          ? Text(
-                              surah.nameLatin,
-                              style: GoogleFonts.dmSans(
-                                color: tokens.textSecondary,
-                              ),
-                            )
-                          : Directionality(
-                              textDirection: TextDirection.rtl,
-                              child: Text(
-                                surah.nameArabic,
-                                style: GoogleFonts.amiri(
-                                  fontSize: 18,
-                                  color: tokens.textSecondary,
-                                ),
-                              ),
-                            ),
-                      trailing: CircleAvatar(
-                        radius: 16,
-                        backgroundColor: tokens.primaryBg,
-                        foregroundColor: tokens.primaryLight,
-                        child: Text(
-                          '${surah.number}',
-                          style: GoogleFonts.dmSans(
-                            fontSize: 11,
-                            fontWeight: FontWeight.w700,
-                          ),
+                      const SizedBox(height: 6),
+                      Text(
+                        l10n.prayerGuideChooseSurahSubtitle,
+                        style: GoogleFonts.dmSans(
+                          fontSize: 13,
+                          height: 1.5,
+                          color: tokens.textSecondary,
                         ),
                       ),
-                    );
-                  },
+                    ],
+                  ),
                 ),
-              ),
-            ],
+                Expanded(
+                  child: ListView.separated(
+                    itemCount: selectableSurahs.length,
+                    separatorBuilder: (_, __) => Divider(
+                      height: 1,
+                      color: tokens.border,
+                    ),
+                    itemBuilder: (context, index) {
+                      final surah = selectableSurahs[index];
+                      return ListTile(
+                        onTap: () => Navigator.of(sheetContext).pop(surah),
+                        title: Text(
+                          isArabicOnly ? surah.nameArabic : surah.nameLatin,
+                          style: GoogleFonts.dmSans(
+                            fontWeight: FontWeight.w700,
+                            color: tokens.textPrimary,
+                          ),
+                        ),
+                        subtitle: isArabicOnly
+                            ? Text(
+                                surah.nameLatin,
+                                style: GoogleFonts.dmSans(
+                                  color: tokens.textSecondary,
+                                ),
+                              )
+                            : Directionality(
+                                textDirection: TextDirection.rtl,
+                                child: Text(
+                                  surah.nameArabic,
+                                  style: GoogleFonts.amiri(
+                                    fontSize: 18,
+                                    color: tokens.textSecondary,
+                                  ),
+                                ),
+                              ),
+                        trailing: CircleAvatar(
+                          radius: 16,
+                          backgroundColor: tokens.primaryBg,
+                          foregroundColor: tokens.primaryLight,
+                          child: Text(
+                            '${surah.number}',
+                            style: GoogleFonts.dmSans(
+                              fontSize: 11,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },

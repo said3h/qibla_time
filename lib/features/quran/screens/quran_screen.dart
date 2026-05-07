@@ -1115,6 +1115,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
         final l10n = sheetContext.l10n;
         final tokens = QiblaThemes.current;
         return SafeArea(
+          top: false,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -1224,6 +1225,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       context: context,
       builder: (sheetContext) {
         return SafeArea(
+          top: false,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -1573,6 +1575,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
         final l10n = sheetContext.l10n;
         final tokens = QiblaThemes.current;
         return SafeArea(
+          top: false,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

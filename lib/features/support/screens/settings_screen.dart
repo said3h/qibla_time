@@ -381,68 +381,72 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
             final selectedLocale = ref.watch(appLocaleControllerProvider);
             final effectiveLocale = currentAppLocale(selectedLocale);
 
-            return ListView(
-              padding: const EdgeInsets.all(16),
-              shrinkWrap: true,
-              children: [
-                Text(
-                  l10n.settingsLanguageDialogTitle,
-                  style: GoogleFonts.dmSans(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: tokens.textPrimary,
+            return SafeArea(
+              top: false,
+              child: ListView(
+                padding: const EdgeInsets.all(16),
+                shrinkWrap: true,
+                children: [
+                  Text(
+                    l10n.settingsLanguageDialogTitle,
+                    style: GoogleFonts.dmSans(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: tokens.textPrimary,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 14),
-                ..._languageOptions.map((locale) {
-                  final isSelected =
-                      (selectedLocale?.languageCode ?? 'system') ==
-                          (locale?.languageCode ?? 'system');
-                  final title = locale == null
-                      ? l10n.settingsLanguageOptionSystem
-                      : _languageOptionTitle(locale.languageCode);
-                  final subtitle = locale == null
-                      ? l10n.settingsLanguageSystemValue(
-                          _languageOptionTitle(effectiveLocale.languageCode),
-                        )
-                      : null;
+                  const SizedBox(height: 14),
+                  ..._languageOptions.map((locale) {
+                    final isSelected =
+                        (selectedLocale?.languageCode ?? 'system') ==
+                            (locale?.languageCode ?? 'system');
+                    final title = locale == null
+                        ? l10n.settingsLanguageOptionSystem
+                        : _languageOptionTitle(locale.languageCode);
+                    final subtitle = locale == null
+                        ? l10n.settingsLanguageSystemValue(
+                            _languageOptionTitle(effectiveLocale.languageCode),
+                          )
+                        : null;
 
-                  return ListTile(
-                    tileColor: isSelected ? tokens.activeBg : tokens.bgSurface2,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14),
-                    ),
-                    title: Text(
-                      title,
-                      style: GoogleFonts.dmSans(
-                        color: isSelected
-                            ? tokens.primaryLight
-                            : tokens.textPrimary,
-                        fontWeight:
-                            isSelected ? FontWeight.w600 : FontWeight.w500,
+                    return ListTile(
+                      tileColor:
+                          isSelected ? tokens.activeBg : tokens.bgSurface2,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14),
                       ),
-                    ),
-                    subtitle: subtitle == null
-                        ? null
-                        : Text(
-                            subtitle,
-                            style: GoogleFonts.dmSans(
-                              fontSize: 11,
-                              color: tokens.textSecondary,
+                      title: Text(
+                        title,
+                        style: GoogleFonts.dmSans(
+                          color: isSelected
+                              ? tokens.primaryLight
+                              : tokens.textPrimary,
+                          fontWeight:
+                              isSelected ? FontWeight.w600 : FontWeight.w500,
+                        ),
+                      ),
+                      subtitle: subtitle == null
+                          ? null
+                          : Text(
+                              subtitle,
+                              style: GoogleFonts.dmSans(
+                                fontSize: 11,
+                                color: tokens.textSecondary,
+                              ),
                             ),
-                          ),
-                    trailing: isSelected
-                        ? Icon(Icons.check, color: tokens.primary)
-                        : null,
-                    onTap: () async {
-                      await _setAppLocale(locale);
-                      if (context.mounted) {
-                        Navigator.pop(context);
-                      }
-                    },
-                  );
-                }),
-              ],
+                      trailing: isSelected
+                          ? Icon(Icons.check, color: tokens.primary)
+                          : null,
+                      onTap: () async {
+                        await _setAppLocale(locale);
+                        if (context.mounted) {
+                          Navigator.pop(context);
+                        }
+                      },
+                    );
+                  }),
+                ],
+              ),
             );
           },
         );
@@ -1253,125 +1257,131 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
           builder: (context, setModalState) {
             final selectedCountry = findCountryOption(selectedCountryCode);
             final flag = countryFlagEmoji(selectedCountryCode);
+            final keyboardInset = MediaQuery.viewInsetsOf(context).bottom;
+            final systemBottom = MediaQuery.viewPaddingOf(context).bottom;
+            final bottomPadding =
+                (keyboardInset > 0 ? keyboardInset : systemBottom) + 20;
 
             return Padding(
               padding: EdgeInsets.fromLTRB(
                 20,
                 20,
                 20,
-                MediaQuery.of(context).viewInsets.bottom + 20,
+                bottomPadding,
               ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    l10n.settingsProfileEditTitle,
-                    style: GoogleFonts.dmSans(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w700,
-                      color: tokens.textPrimary,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    l10n.settingsProfileEditSubtitle,
-                    style: GoogleFonts.dmSans(
-                      fontSize: 12,
-                      color: tokens.textSecondary,
-                    ),
-                  ),
-                  const SizedBox(height: 18),
-                  TextField(
-                    controller: nameController,
-                    textCapitalization: TextCapitalization.words,
-                    decoration: InputDecoration(
-                      labelText: l10n.settingsProfileNameLabel,
-                      hintText: l10n.settingsProfileNameHint,
-                    ),
-                  ),
-                  const SizedBox(height: 14),
-                  ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    tileColor: tokens.bgSurface2,
-                    leading: Container(
-                      width: 40,
-                      height: 40,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: tokens.bgSurface,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: flag.isEmpty
-                          ? Icon(
-                              Icons.public,
-                              color: tokens.textSecondary,
-                            )
-                          : Text(
-                              flag,
-                              style: const TextStyle(fontSize: 20),
-                            ),
-                    ),
-                    title: Text(
-                      l10n.settingsProfileNationalityLabel,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      l10n.settingsProfileEditTitle,
                       style: GoogleFonts.dmSans(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
                         color: tokens.textPrimary,
                       ),
                     ),
-                    subtitle: Text(
-                      selectedCountry?.name ??
-                          l10n.settingsProfileNationalityNone,
+                    const SizedBox(height: 4),
+                    Text(
+                      l10n.settingsProfileEditSubtitle,
                       style: GoogleFonts.dmSans(
-                        fontSize: 11,
+                        fontSize: 12,
                         color: tokens.textSecondary,
                       ),
                     ),
-                    trailing: const Icon(Icons.chevron_right),
-                    onTap: () async {
-                      final pickedCountryCode = await _showCountryPickerSheet(
-                        initialCountryCode: selectedCountryCode,
-                      );
-                      if (pickedCountryCode == null) {
-                        return;
-                      }
-                      setModalState(() {
-                        selectedCountryCode = pickedCountryCode.isEmpty
-                            ? null
-                            : pickedCountryCode;
-                      });
-                    },
-                  ),
-                  const SizedBox(height: 18),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: OutlinedButton(
-                          onPressed: () => Navigator.of(context).pop(),
-                          child: Text(l10n.commonCancel),
-                        ),
+                    const SizedBox(height: 18),
+                    TextField(
+                      controller: nameController,
+                      textCapitalization: TextCapitalization.words,
+                      decoration: InputDecoration(
+                        labelText: l10n.settingsProfileNameLabel,
+                        hintText: l10n.settingsProfileNameHint,
                       ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: FilledButton(
-                          onPressed: () {
-                            Navigator.of(context).pop(
-                              _ProfileDraft(
-                                displayName: nameController.text.trim(),
-                                nationalityCode: selectedCountryCode,
+                    ),
+                    const SizedBox(height: 14),
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      tileColor: tokens.bgSurface2,
+                      leading: Container(
+                        width: 40,
+                        height: 40,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: tokens.bgSurface,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: flag.isEmpty
+                            ? Icon(
+                                Icons.public,
+                                color: tokens.textSecondary,
+                              )
+                            : Text(
+                                flag,
+                                style: const TextStyle(fontSize: 20),
                               ),
-                            );
-                          },
-                          child: Text(l10n.commonSave),
+                      ),
+                      title: Text(
+                        l10n.settingsProfileNationalityLabel,
+                        style: GoogleFonts.dmSans(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: tokens.textPrimary,
                         ),
                       ),
-                    ],
-                  ),
-                ],
+                      subtitle: Text(
+                        selectedCountry?.name ??
+                            l10n.settingsProfileNationalityNone,
+                        style: GoogleFonts.dmSans(
+                          fontSize: 11,
+                          color: tokens.textSecondary,
+                        ),
+                      ),
+                      trailing: const Icon(Icons.chevron_right),
+                      onTap: () async {
+                        final pickedCountryCode = await _showCountryPickerSheet(
+                          initialCountryCode: selectedCountryCode,
+                        );
+                        if (pickedCountryCode == null) {
+                          return;
+                        }
+                        setModalState(() {
+                          selectedCountryCode = pickedCountryCode.isEmpty
+                              ? null
+                              : pickedCountryCode;
+                        });
+                      },
+                    ),
+                    const SizedBox(height: 18),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: OutlinedButton(
+                            onPressed: () => Navigator.of(context).pop(),
+                            child: Text(l10n.commonCancel),
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: FilledButton(
+                            onPressed: () {
+                              Navigator.of(context).pop(
+                                _ProfileDraft(
+                                  displayName: nameController.text.trim(),
+                                  nationalityCode: selectedCountryCode,
+                                ),
+                              );
+                            },
+                            child: Text(l10n.commonSave),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             );
           },
@@ -1427,16 +1437,23 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
               return country.name.toLowerCase().contains(normalizedQuery) ||
                   country.code.toLowerCase().contains(normalizedQuery);
             }).toList();
+            final keyboardInset = MediaQuery.viewInsetsOf(context).bottom;
+            final systemBottom = MediaQuery.viewPaddingOf(context).bottom;
+            final bottomPadding =
+                (keyboardInset > 0 ? keyboardInset : systemBottom) + 12;
+            final availableHeight =
+                MediaQuery.sizeOf(context).height - bottomPadding - 72;
+            final sheetHeight = availableHeight.clamp(320.0, 520.0);
 
             return Padding(
               padding: EdgeInsets.fromLTRB(
                 20,
                 20,
                 20,
-                MediaQuery.of(context).viewInsets.bottom + 12,
+                bottomPadding,
               ),
               child: SizedBox(
-                height: 520,
+                height: sheetHeight,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -1943,27 +1960,31 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
       builder: (context) {
-        return ListView(
-          padding: const EdgeInsets.all(16),
-          shrinkWrap: true,
-          children: CalculationMethod.values.map((method) {
-            final selected = method == calculationMethod;
-            return ListTile(
-              tileColor: selected ? tokens.activeBg : tokens.bgSurface2,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(14)),
-              title: Text(method.name.replaceAll('_', ' ').toUpperCase(),
-                  style: GoogleFonts.dmSans(
-                      color:
-                          selected ? tokens.primaryLight : tokens.textPrimary)),
-              trailing:
-                  selected ? Icon(Icons.check, color: tokens.primary) : null,
-              onTap: () async {
-                await _setCalculationMethod(method);
-                if (context.mounted) Navigator.pop(context);
-              },
-            );
-          }).toList(),
+        return SafeArea(
+          top: false,
+          child: ListView(
+            padding: const EdgeInsets.all(16),
+            shrinkWrap: true,
+            children: CalculationMethod.values.map((method) {
+              final selected = method == calculationMethod;
+              return ListTile(
+                tileColor: selected ? tokens.activeBg : tokens.bgSurface2,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14)),
+                title: Text(method.name.replaceAll('_', ' ').toUpperCase(),
+                    style: GoogleFonts.dmSans(
+                        color: selected
+                            ? tokens.primaryLight
+                            : tokens.textPrimary)),
+                trailing:
+                    selected ? Icon(Icons.check, color: tokens.primary) : null,
+                onTap: () async {
+                  await _setCalculationMethod(method);
+                  if (context.mounted) Navigator.pop(context);
+                },
+              );
+            }).toList(),
+          ),
         );
       },
     );
