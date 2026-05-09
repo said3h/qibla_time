@@ -1,0 +1,783 @@
+{
+  "generatedAt": "2026-05-09T21:18:08.289Z",
+  "source": "HadeethEnc",
+  "sourcePolicy": "verbatim-import-only",
+  "targetHadithCount": 23,
+  "targetLanguages": [
+    "es",
+    "fr",
+    "de",
+    "pt"
+  ],
+  "pendingBefore": 92,
+  "pendingAfter": 0,
+  "importedCount": 92,
+  "skippedCount": 0,
+  "imported": [
+    {
+      "appHadithId": 80202,
+      "nawawiRef": "40 Hadith Nawawi 2",
+      "language": "es",
+      "sourceId": 4563,
+      "sourceUrl": "https://hadeethenc.com/es/browse/hadith/4563",
+      "sourceVersion": "v1.21.0"
+    },
+    {
+      "appHadithId": 80202,
+      "nawawiRef": "40 Hadith Nawawi 2",
+      "language": "fr",
+      "sourceId": 4563,
+      "sourceUrl": "https://hadeethenc.com/fr/browse/hadith/4563",
+      "sourceVersion": "v1.16.0"
+    },
+    {
+      "appHadithId": 80202,
+      "nawawiRef": "40 Hadith Nawawi 2",
+      "language": "de",
+      "sourceId": 4563,
+      "sourceUrl": "https://hadeethenc.com/de/browse/hadith/4563",
+      "sourceVersion": "v1.47.0"
+    },
+    {
+      "appHadithId": 80202,
+      "nawawiRef": "40 Hadith Nawawi 2",
+      "language": "pt",
+      "sourceId": 4563,
+      "sourceUrl": "https://hadeethenc.com/pt/browse/hadith/4563",
+      "sourceVersion": "v1.28.0"
+    },
+    {
+      "appHadithId": 80204,
+      "nawawiRef": "40 Hadith Nawawi 4",
+      "language": "es",
+      "sourceId": 66513,
+      "sourceUrl": "https://hadeethenc.com/es/browse/hadith/66513",
+      "sourceVersion": "v1.21.0"
+    },
+    {
+      "appHadithId": 80204,
+      "nawawiRef": "40 Hadith Nawawi 4",
+      "language": "fr",
+      "sourceId": 66513,
+      "sourceUrl": "https://hadeethenc.com/fr/browse/hadith/66513",
+      "sourceVersion": "v1.16.0"
+    },
+    {
+      "appHadithId": 80204,
+      "nawawiRef": "40 Hadith Nawawi 4",
+      "language": "de",
+      "sourceId": 66513,
+      "sourceUrl": "https://hadeethenc.com/de/browse/hadith/66513",
+      "sourceVersion": "v1.47.0"
+    },
+    {
+      "appHadithId": 80204,
+      "nawawiRef": "40 Hadith Nawawi 4",
+      "language": "pt",
+      "sourceId": 66513,
+      "sourceUrl": "https://hadeethenc.com/pt/browse/hadith/66513",
+      "sourceVersion": "v1.28.0"
+    },
+    {
+      "appHadithId": 80206,
+      "nawawiRef": "40 Hadith Nawawi 6",
+      "language": "es",
+      "sourceId": 66515,
+      "sourceUrl": "https://hadeethenc.com/es/browse/hadith/66515",
+      "sourceVersion": "v1.21.0"
+    },
+    {
+      "appHadithId": 80206,
+      "nawawiRef": "40 Hadith Nawawi 6",
+      "language": "fr",
+      "sourceId": 66515,
+      "sourceUrl": "https://hadeethenc.com/fr/browse/hadith/66515",
+      "sourceVersion": "v1.16.0"
+    },
+    {
+      "appHadithId": 80206,
+      "nawawiRef": "40 Hadith Nawawi 6",
+      "language": "de",
+      "sourceId": 66515,
+      "sourceUrl": "https://hadeethenc.com/de/browse/hadith/66515",
+      "sourceVersion": "v1.47.0"
+    },
+    {
+      "appHadithId": 80206,
+      "nawawiRef": "40 Hadith Nawawi 6",
+      "language": "pt",
+      "sourceId": 66515,
+      "sourceUrl": "https://hadeethenc.com/pt/browse/hadith/66515",
+      "sourceVersion": "v1.28.0"
+    },
+    {
+      "appHadithId": 80208,
+      "nawawiRef": "40 Hadith Nawawi 8",
+      "language": "es",
+      "sourceId": 4211,
+      "sourceUrl": "https://hadeethenc.com/es/browse/hadith/4211",
+      "sourceVersion": "v1.21.0"
+    },
+    {
+      "appHadithId": 80208,
+      "nawawiRef": "40 Hadith Nawawi 8",
+      "language": "fr",
+      "sourceId": 4211,
+      "sourceUrl": "https://hadeethenc.com/fr/browse/hadith/4211",
+      "sourceVersion": "v1.16.0"
+    },
+    {
+      "appHadithId": 80208,
+      "nawawiRef": "40 Hadith Nawawi 8",
+      "language": "de",
+      "sourceId": 4211,
+      "sourceUrl": "https://hadeethenc.com/de/browse/hadith/4211",
+      "sourceVersion": "v1.47.0"
+    },
+    {
+      "appHadithId": 80208,
+      "nawawiRef": "40 Hadith Nawawi 8",
+      "language": "pt",
+      "sourceId": 4211,
+      "sourceUrl": "https://hadeethenc.com/pt/browse/hadith/4211",
+      "sourceVersion": "v1.28.0"
+    },
+    {
+      "appHadithId": 80210,
+      "nawawiRef": "40 Hadith Nawawi 10",
+      "language": "es",
+      "sourceId": 66518,
+      "sourceUrl": "https://hadeethenc.com/es/browse/hadith/66518",
+      "sourceVersion": "v1.21.0"
+    },
+    {
+      "appHadithId": 80210,
+      "nawawiRef": "40 Hadith Nawawi 10",
+      "language": "fr",
+      "sourceId": 66518,
+      "sourceUrl": "https://hadeethenc.com/fr/browse/hadith/66518",
+      "sourceVersion": "v1.16.0"
+    },
+    {
+      "appHadithId": 80210,
+      "nawawiRef": "40 Hadith Nawawi 10",
+      "language": "de",
+      "sourceId": 66518,
+      "sourceUrl": "https://hadeethenc.com/de/browse/hadith/66518",
+      "sourceVersion": "v1.47.0"
+    },
+    {
+      "appHadithId": 80210,
+      "nawawiRef": "40 Hadith Nawawi 10",
+      "language": "pt",
+      "sourceId": 66518,
+      "sourceUrl": "https://hadeethenc.com/pt/browse/hadith/66518",
+      "sourceVersion": "v1.28.0"
+    },
+    {
+      "appHadithId": 80219,
+      "nawawiRef": "40 Hadith Nawawi 19",
+      "language": "es",
+      "sourceId": 66522,
+      "sourceUrl": "https://hadeethenc.com/es/browse/hadith/66522",
+      "sourceVersion": "v1.21.0"
+    },
+    {
+      "appHadithId": 80219,
+      "nawawiRef": "40 Hadith Nawawi 19",
+      "language": "fr",
+      "sourceId": 66522,
+      "sourceUrl": "https://hadeethenc.com/fr/browse/hadith/66522",
+      "sourceVersion": "v1.16.0"
+    },
+    {
+      "appHadithId": 80219,
+      "nawawiRef": "40 Hadith Nawawi 19",
+      "language": "de",
+      "sourceId": 66522,
+      "sourceUrl": "https://hadeethenc.com/de/browse/hadith/66522",
+      "sourceVersion": "v1.47.0"
+    },
+    {
+      "appHadithId": 80219,
+      "nawawiRef": "40 Hadith Nawawi 19",
+      "language": "pt",
+      "sourceId": 66522,
+      "sourceUrl": "https://hadeethenc.com/pt/browse/hadith/66522",
+      "sourceVersion": "v1.28.0"
+    },
+    {
+      "appHadithId": 80222,
+      "nawawiRef": "40 Hadith Nawawi 22",
+      "language": "es",
+      "sourceId": 66525,
+      "sourceUrl": "https://hadeethenc.com/es/browse/hadith/66525",
+      "sourceVersion": "v1.21.0"
+    },
+    {
+      "appHadithId": 80222,
+      "nawawiRef": "40 Hadith Nawawi 22",
+      "language": "fr",
+      "sourceId": 66525,
+      "sourceUrl": "https://hadeethenc.com/fr/browse/hadith/66525",
+      "sourceVersion": "v1.16.0"
+    },
+    {
+      "appHadithId": 80222,
+      "nawawiRef": "40 Hadith Nawawi 22",
+      "language": "de",
+      "sourceId": 66525,
+      "sourceUrl": "https://hadeethenc.com/de/browse/hadith/66525",
+      "sourceVersion": "v1.47.0"
+    },
+    {
+      "appHadithId": 80222,
+      "nawawiRef": "40 Hadith Nawawi 22",
+      "language": "pt",
+      "sourceId": 66525,
+      "sourceUrl": "https://hadeethenc.com/pt/browse/hadith/66525",
+      "sourceVersion": "v1.28.0"
+    },
+    {
+      "appHadithId": 80223,
+      "nawawiRef": "40 Hadith Nawawi 23",
+      "language": "es",
+      "sourceId": 66526,
+      "sourceUrl": "https://hadeethenc.com/es/browse/hadith/66526",
+      "sourceVersion": "v1.21.0"
+    },
+    {
+      "appHadithId": 80223,
+      "nawawiRef": "40 Hadith Nawawi 23",
+      "language": "fr",
+      "sourceId": 66526,
+      "sourceUrl": "https://hadeethenc.com/fr/browse/hadith/66526",
+      "sourceVersion": "v1.16.0"
+    },
+    {
+      "appHadithId": 80223,
+      "nawawiRef": "40 Hadith Nawawi 23",
+      "language": "de",
+      "sourceId": 66526,
+      "sourceUrl": "https://hadeethenc.com/de/browse/hadith/66526",
+      "sourceVersion": "v1.47.0"
+    },
+    {
+      "appHadithId": 80223,
+      "nawawiRef": "40 Hadith Nawawi 23",
+      "language": "pt",
+      "sourceId": 66526,
+      "sourceUrl": "https://hadeethenc.com/pt/browse/hadith/66526",
+      "sourceVersion": "v1.28.0"
+    },
+    {
+      "appHadithId": 80224,
+      "nawawiRef": "40 Hadith Nawawi 24",
+      "language": "es",
+      "sourceId": 4810,
+      "sourceUrl": "https://hadeethenc.com/es/browse/hadith/4810",
+      "sourceVersion": "v1.21.0"
+    },
+    {
+      "appHadithId": 80224,
+      "nawawiRef": "40 Hadith Nawawi 24",
+      "language": "fr",
+      "sourceId": 4810,
+      "sourceUrl": "https://hadeethenc.com/fr/browse/hadith/4810",
+      "sourceVersion": "v1.16.0"
+    },
+    {
+      "appHadithId": 80224,
+      "nawawiRef": "40 Hadith Nawawi 24",
+      "language": "de",
+      "sourceId": 4810,
+      "sourceUrl": "https://hadeethenc.com/de/browse/hadith/4810",
+      "sourceVersion": "v1.47.0"
+    },
+    {
+      "appHadithId": 80224,
+      "nawawiRef": "40 Hadith Nawawi 24",
+      "language": "pt",
+      "sourceId": 4810,
+      "sourceUrl": "https://hadeethenc.com/pt/browse/hadith/4810",
+      "sourceVersion": "v1.28.0"
+    },
+    {
+      "appHadithId": 80225,
+      "nawawiRef": "40 Hadith Nawawi 25",
+      "language": "es",
+      "sourceId": 66527,
+      "sourceUrl": "https://hadeethenc.com/es/browse/hadith/66527",
+      "sourceVersion": "v1.21.0"
+    },
+    {
+      "appHadithId": 80225,
+      "nawawiRef": "40 Hadith Nawawi 25",
+      "language": "fr",
+      "sourceId": 66527,
+      "sourceUrl": "https://hadeethenc.com/fr/browse/hadith/66527",
+      "sourceVersion": "v1.16.0"
+    },
+    {
+      "appHadithId": 80225,
+      "nawawiRef": "40 Hadith Nawawi 25",
+      "language": "de",
+      "sourceId": 66527,
+      "sourceUrl": "https://hadeethenc.com/de/browse/hadith/66527",
+      "sourceVersion": "v1.47.0"
+    },
+    {
+      "appHadithId": 80225,
+      "nawawiRef": "40 Hadith Nawawi 25",
+      "language": "pt",
+      "sourceId": 66527,
+      "sourceUrl": "https://hadeethenc.com/pt/browse/hadith/66527",
+      "sourceVersion": "v1.28.0"
+    },
+    {
+      "appHadithId": 80226,
+      "nawawiRef": "40 Hadith Nawawi 26",
+      "language": "es",
+      "sourceId": 4568,
+      "sourceUrl": "https://hadeethenc.com/es/browse/hadith/4568",
+      "sourceVersion": "v1.21.0"
+    },
+    {
+      "appHadithId": 80226,
+      "nawawiRef": "40 Hadith Nawawi 26",
+      "language": "fr",
+      "sourceId": 4568,
+      "sourceUrl": "https://hadeethenc.com/fr/browse/hadith/4568",
+      "sourceVersion": "v1.16.0"
+    },
+    {
+      "appHadithId": 80226,
+      "nawawiRef": "40 Hadith Nawawi 26",
+      "language": "de",
+      "sourceId": 4568,
+      "sourceUrl": "https://hadeethenc.com/de/browse/hadith/4568",
+      "sourceVersion": "v1.47.0"
+    },
+    {
+      "appHadithId": 80226,
+      "nawawiRef": "40 Hadith Nawawi 26",
+      "language": "pt",
+      "sourceId": 4568,
+      "sourceUrl": "https://hadeethenc.com/pt/browse/hadith/4568",
+      "sourceVersion": "v1.28.0"
+    },
+    {
+      "appHadithId": 80227,
+      "nawawiRef": "40 Hadith Nawawi 27",
+      "language": "es",
+      "sourceId": 66540,
+      "sourceUrl": "https://hadeethenc.com/es/browse/hadith/66540",
+      "sourceVersion": "v1.21.0"
+    },
+    {
+      "appHadithId": 80227,
+      "nawawiRef": "40 Hadith Nawawi 27",
+      "language": "fr",
+      "sourceId": 66540,
+      "sourceUrl": "https://hadeethenc.com/fr/browse/hadith/66540",
+      "sourceVersion": "v1.16.0"
+    },
+    {
+      "appHadithId": 80227,
+      "nawawiRef": "40 Hadith Nawawi 27",
+      "language": "de",
+      "sourceId": 66540,
+      "sourceUrl": "https://hadeethenc.com/de/browse/hadith/66540",
+      "sourceVersion": "v1.47.0"
+    },
+    {
+      "appHadithId": 80227,
+      "nawawiRef": "40 Hadith Nawawi 27",
+      "language": "pt",
+      "sourceId": 66540,
+      "sourceUrl": "https://hadeethenc.com/pt/browse/hadith/66540",
+      "sourceVersion": "v1.28.0"
+    },
+    {
+      "appHadithId": 80228,
+      "nawawiRef": "40 Hadith Nawawi 28",
+      "language": "es",
+      "sourceId": 66529,
+      "sourceUrl": "https://hadeethenc.com/es/browse/hadith/66529",
+      "sourceVersion": "v1.21.0"
+    },
+    {
+      "appHadithId": 80228,
+      "nawawiRef": "40 Hadith Nawawi 28",
+      "language": "fr",
+      "sourceId": 66529,
+      "sourceUrl": "https://hadeethenc.com/fr/browse/hadith/66529",
+      "sourceVersion": "v1.16.0"
+    },
+    {
+      "appHadithId": 80228,
+      "nawawiRef": "40 Hadith Nawawi 28",
+      "language": "de",
+      "sourceId": 66529,
+      "sourceUrl": "https://hadeethenc.com/de/browse/hadith/66529",
+      "sourceVersion": "v1.47.0"
+    },
+    {
+      "appHadithId": 80228,
+      "nawawiRef": "40 Hadith Nawawi 28",
+      "language": "pt",
+      "sourceId": 66529,
+      "sourceUrl": "https://hadeethenc.com/pt/browse/hadith/66529",
+      "sourceVersion": "v1.28.0"
+    },
+    {
+      "appHadithId": 80229,
+      "nawawiRef": "40 Hadith Nawawi 29",
+      "language": "es",
+      "sourceId": 66530,
+      "sourceUrl": "https://hadeethenc.com/es/browse/hadith/66530",
+      "sourceVersion": "v1.21.0"
+    },
+    {
+      "appHadithId": 80229,
+      "nawawiRef": "40 Hadith Nawawi 29",
+      "language": "fr",
+      "sourceId": 66530,
+      "sourceUrl": "https://hadeethenc.com/fr/browse/hadith/66530",
+      "sourceVersion": "v1.16.0"
+    },
+    {
+      "appHadithId": 80229,
+      "nawawiRef": "40 Hadith Nawawi 29",
+      "language": "de",
+      "sourceId": 66530,
+      "sourceUrl": "https://hadeethenc.com/de/browse/hadith/66530",
+      "sourceVersion": "v1.47.0"
+    },
+    {
+      "appHadithId": 80229,
+      "nawawiRef": "40 Hadith Nawawi 29",
+      "language": "pt",
+      "sourceId": 66530,
+      "sourceUrl": "https://hadeethenc.com/pt/browse/hadith/66530",
+      "sourceVersion": "v1.28.0"
+    },
+    {
+      "appHadithId": 80230,
+      "nawawiRef": "40 Hadith Nawawi 30",
+      "language": "es",
+      "sourceId": 66510,
+      "sourceUrl": "https://hadeethenc.com/es/browse/hadith/66510",
+      "sourceVersion": "v1.21.0"
+    },
+    {
+      "appHadithId": 80230,
+      "nawawiRef": "40 Hadith Nawawi 30",
+      "language": "fr",
+      "sourceId": 66510,
+      "sourceUrl": "https://hadeethenc.com/fr/browse/hadith/66510",
+      "sourceVersion": "v1.16.0"
+    },
+    {
+      "appHadithId": 80230,
+      "nawawiRef": "40 Hadith Nawawi 30",
+      "language": "de",
+      "sourceId": 66510,
+      "sourceUrl": "https://hadeethenc.com/de/browse/hadith/66510",
+      "sourceVersion": "v1.47.0"
+    },
+    {
+      "appHadithId": 80230,
+      "nawawiRef": "40 Hadith Nawawi 30",
+      "language": "pt",
+      "sourceId": 66510,
+      "sourceUrl": "https://hadeethenc.com/pt/browse/hadith/66510",
+      "sourceVersion": "v1.28.0"
+    },
+    {
+      "appHadithId": 80231,
+      "nawawiRef": "40 Hadith Nawawi 31",
+      "language": "es",
+      "sourceId": 4307,
+      "sourceUrl": "https://hadeethenc.com/es/browse/hadith/4307",
+      "sourceVersion": "v1.21.0"
+    },
+    {
+      "appHadithId": 80231,
+      "nawawiRef": "40 Hadith Nawawi 31",
+      "language": "fr",
+      "sourceId": 4307,
+      "sourceUrl": "https://hadeethenc.com/fr/browse/hadith/4307",
+      "sourceVersion": "v1.16.0"
+    },
+    {
+      "appHadithId": 80231,
+      "nawawiRef": "40 Hadith Nawawi 31",
+      "language": "de",
+      "sourceId": 4307,
+      "sourceUrl": "https://hadeethenc.com/de/browse/hadith/4307",
+      "sourceVersion": "v1.47.0"
+    },
+    {
+      "appHadithId": 80231,
+      "nawawiRef": "40 Hadith Nawawi 31",
+      "language": "pt",
+      "sourceId": 4307,
+      "sourceUrl": "https://hadeethenc.com/pt/browse/hadith/4307",
+      "sourceVersion": "v1.28.0"
+    },
+    {
+      "appHadithId": 80232,
+      "nawawiRef": "40 Hadith Nawawi 32",
+      "language": "es",
+      "sourceId": 66531,
+      "sourceUrl": "https://hadeethenc.com/es/browse/hadith/66531",
+      "sourceVersion": "v1.21.0"
+    },
+    {
+      "appHadithId": 80232,
+      "nawawiRef": "40 Hadith Nawawi 32",
+      "language": "fr",
+      "sourceId": 66531,
+      "sourceUrl": "https://hadeethenc.com/fr/browse/hadith/66531",
+      "sourceVersion": "v1.16.0"
+    },
+    {
+      "appHadithId": 80232,
+      "nawawiRef": "40 Hadith Nawawi 32",
+      "language": "de",
+      "sourceId": 66531,
+      "sourceUrl": "https://hadeethenc.com/de/browse/hadith/66531",
+      "sourceVersion": "v1.47.0"
+    },
+    {
+      "appHadithId": 80232,
+      "nawawiRef": "40 Hadith Nawawi 32",
+      "language": "pt",
+      "sourceId": 66531,
+      "sourceUrl": "https://hadeethenc.com/pt/browse/hadith/66531",
+      "sourceVersion": "v1.28.0"
+    },
+    {
+      "appHadithId": 80235,
+      "nawawiRef": "40 Hadith Nawawi 35",
+      "language": "es",
+      "sourceId": 4706,
+      "sourceUrl": "https://hadeethenc.com/es/browse/hadith/4706",
+      "sourceVersion": "v1.21.0"
+    },
+    {
+      "appHadithId": 80235,
+      "nawawiRef": "40 Hadith Nawawi 35",
+      "language": "fr",
+      "sourceId": 4706,
+      "sourceUrl": "https://hadeethenc.com/fr/browse/hadith/4706",
+      "sourceVersion": "v1.16.0"
+    },
+    {
+      "appHadithId": 80235,
+      "nawawiRef": "40 Hadith Nawawi 35",
+      "language": "de",
+      "sourceId": 4706,
+      "sourceUrl": "https://hadeethenc.com/de/browse/hadith/4706",
+      "sourceVersion": "v1.47.0"
+    },
+    {
+      "appHadithId": 80235,
+      "nawawiRef": "40 Hadith Nawawi 35",
+      "language": "pt",
+      "sourceId": 4706,
+      "sourceUrl": "https://hadeethenc.com/pt/browse/hadith/4706",
+      "sourceVersion": "v1.28.0"
+    },
+    {
+      "appHadithId": 80236,
+      "nawawiRef": "40 Hadith Nawawi 36",
+      "language": "es",
+      "sourceId": 4801,
+      "sourceUrl": "https://hadeethenc.com/es/browse/hadith/4801",
+      "sourceVersion": "v1.21.0"
+    },
+    {
+      "appHadithId": 80236,
+      "nawawiRef": "40 Hadith Nawawi 36",
+      "language": "fr",
+      "sourceId": 4801,
+      "sourceUrl": "https://hadeethenc.com/fr/browse/hadith/4801",
+      "sourceVersion": "v1.16.0"
+    },
+    {
+      "appHadithId": 80236,
+      "nawawiRef": "40 Hadith Nawawi 36",
+      "language": "de",
+      "sourceId": 4801,
+      "sourceUrl": "https://hadeethenc.com/de/browse/hadith/4801",
+      "sourceVersion": "v1.47.0"
+    },
+    {
+      "appHadithId": 80236,
+      "nawawiRef": "40 Hadith Nawawi 36",
+      "language": "pt",
+      "sourceId": 4801,
+      "sourceUrl": "https://hadeethenc.com/pt/browse/hadith/4801",
+      "sourceVersion": "v1.28.0"
+    },
+    {
+      "appHadithId": 80237,
+      "nawawiRef": "40 Hadith Nawawi 37",
+      "language": "es",
+      "sourceId": 66533,
+      "sourceUrl": "https://hadeethenc.com/es/browse/hadith/66533",
+      "sourceVersion": "v1.21.0"
+    },
+    {
+      "appHadithId": 80237,
+      "nawawiRef": "40 Hadith Nawawi 37",
+      "language": "fr",
+      "sourceId": 66533,
+      "sourceUrl": "https://hadeethenc.com/fr/browse/hadith/66533",
+      "sourceVersion": "v1.16.0"
+    },
+    {
+      "appHadithId": 80237,
+      "nawawiRef": "40 Hadith Nawawi 37",
+      "language": "de",
+      "sourceId": 66533,
+      "sourceUrl": "https://hadeethenc.com/de/browse/hadith/66533",
+      "sourceVersion": "v1.47.0"
+    },
+    {
+      "appHadithId": 80237,
+      "nawawiRef": "40 Hadith Nawawi 37",
+      "language": "pt",
+      "sourceId": 66533,
+      "sourceUrl": "https://hadeethenc.com/pt/browse/hadith/66533",
+      "sourceVersion": "v1.28.0"
+    },
+    {
+      "appHadithId": 80238,
+      "nawawiRef": "40 Hadith Nawawi 38",
+      "language": "es",
+      "sourceId": 66534,
+      "sourceUrl": "https://hadeethenc.com/es/browse/hadith/66534",
+      "sourceVersion": "v1.21.0"
+    },
+    {
+      "appHadithId": 80238,
+      "nawawiRef": "40 Hadith Nawawi 38",
+      "language": "fr",
+      "sourceId": 66534,
+      "sourceUrl": "https://hadeethenc.com/fr/browse/hadith/66534",
+      "sourceVersion": "v1.16.0"
+    },
+    {
+      "appHadithId": 80238,
+      "nawawiRef": "40 Hadith Nawawi 38",
+      "language": "de",
+      "sourceId": 66534,
+      "sourceUrl": "https://hadeethenc.com/de/browse/hadith/66534",
+      "sourceVersion": "v1.47.0"
+    },
+    {
+      "appHadithId": 80238,
+      "nawawiRef": "40 Hadith Nawawi 38",
+      "language": "pt",
+      "sourceId": 66534,
+      "sourceUrl": "https://hadeethenc.com/pt/browse/hadith/66534",
+      "sourceVersion": "v1.28.0"
+    },
+    {
+      "appHadithId": 80240,
+      "nawawiRef": "40 Hadith Nawawi 40",
+      "language": "es",
+      "sourceId": 4704,
+      "sourceUrl": "https://hadeethenc.com/es/browse/hadith/4704",
+      "sourceVersion": "v1.21.0"
+    },
+    {
+      "appHadithId": 80240,
+      "nawawiRef": "40 Hadith Nawawi 40",
+      "language": "fr",
+      "sourceId": 4704,
+      "sourceUrl": "https://hadeethenc.com/fr/browse/hadith/4704",
+      "sourceVersion": "v1.16.0"
+    },
+    {
+      "appHadithId": 80240,
+      "nawawiRef": "40 Hadith Nawawi 40",
+      "language": "de",
+      "sourceId": 4704,
+      "sourceUrl": "https://hadeethenc.com/de/browse/hadith/4704",
+      "sourceVersion": "v1.47.0"
+    },
+    {
+      "appHadithId": 80240,
+      "nawawiRef": "40 Hadith Nawawi 40",
+      "language": "pt",
+      "sourceId": 4704,
+      "sourceUrl": "https://hadeethenc.com/pt/browse/hadith/4704",
+      "sourceVersion": "v1.28.0"
+    },
+    {
+      "appHadithId": 80242,
+      "nawawiRef": "40 Hadith Nawawi 42",
+      "language": "es",
+      "sourceId": 5456,
+      "sourceUrl": "https://hadeethenc.com/es/browse/hadith/5456",
+      "sourceVersion": "v1.21.0"
+    },
+    {
+      "appHadithId": 80242,
+      "nawawiRef": "40 Hadith Nawawi 42",
+      "language": "fr",
+      "sourceId": 5456,
+      "sourceUrl": "https://hadeethenc.com/fr/browse/hadith/5456",
+      "sourceVersion": "v1.16.0"
+    },
+    {
+      "appHadithId": 80242,
+      "nawawiRef": "40 Hadith Nawawi 42",
+      "language": "de",
+      "sourceId": 5456,
+      "sourceUrl": "https://hadeethenc.com/de/browse/hadith/5456",
+      "sourceVersion": "v1.47.0"
+    },
+    {
+      "appHadithId": 80242,
+      "nawawiRef": "40 Hadith Nawawi 42",
+      "language": "pt",
+      "sourceId": 5456,
+      "sourceUrl": "https://hadeethenc.com/pt/browse/hadith/5456",
+      "sourceVersion": "v1.28.0"
+    }
+  ],
+  "skipped": [],
+  "sourceVersions": {
+    "es": {
+      "version": "v1.21.0",
+      "last_update": "2026-01-06 21:59:46",
+      "download_url": "https://hadeethenc.com/browse/download/es"
+    },
+    "fr": {
+      "version": "v1.16.0",
+      "last_update": "2026-01-08 11:29:15",
+      "download_url": "https://hadeethenc.com/browse/download/fr"
+    },
+    "de": {
+      "version": "v1.47.0",
+      "last_update": "2026-04-22 18:38:45",
+      "download_url": "https://hadeethenc.com/browse/download/de"
+    },
+    "pt": {
+      "version": "v1.28.0",
+      "last_update": "2025-11-12 00:13:47",
+      "download_url": "https://hadeethenc.com/browse/download/pt"
+    }
+  },
+  "validations": {
+    "corruptTranslationsAfterImport": null,
+    "targetHadithsWithAllTranslationsAfterImport": 23,
+    "nonNawawiChanged": 0,
+    "arabicChanged": 0
+  }
+}

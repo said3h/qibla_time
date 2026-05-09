@@ -1,0 +1,42 @@
+{
+  "hadeethenc": {
+    "name": "HadeethEnc",
+    "url": "https://hadeethenc.com/",
+    "license_or_permission": "Republication permitted under HadeethEnc stated conditions.",
+    "attribution_required": true,
+    "modification_allowed": false,
+    "attribution": "Translated hadith content sourced from HadeethEnc.com. Texts are imported verbatim and should not be modified.",
+    "imported_for": "Offline translations for selected 40 Hadith Nawawi entries in Qibla Time.",
+    "languages": {
+      "es": {
+        "source_language": "Español",
+        "homepage": "https://hadeethenc.com/es",
+        "download_url": "https://hadeethenc.com/browse/download/es",
+        "version": "v1.21.0",
+        "last_update": "2026-01-06 21:59:46"
+      },
+      "fr": {
+        "source_language": "Français",
+        "homepage": "https://hadeethenc.com/fr",
+        "download_url": "https://hadeethenc.com/browse/download/fr",
+        "version": "v1.16.0",
+        "last_update": "2026-01-08 11:29:15"
+      },
+      "de": {
+        "source_language": "Deutsch",
+        "homepage": "https://hadeethenc.com/de",
+        "download_url": "https://hadeethenc.com/browse/download/de",
+        "version": "v1.47.0",
+        "last_update": "2026-04-22 18:38:45"
+      },
+      "pt": {
+        "source_language": "Português",
+        "homepage": "https://hadeethenc.com/pt",
+        "download_url": "https://hadeethenc.com/browse/download/pt",
+        "version": "v1.28.0",
+        "last_update": "2025-11-12 00:13:47"
+      }
+    },
+    "imported_at": "2026-05-09T21:18:08.289Z"
+  }
+}
