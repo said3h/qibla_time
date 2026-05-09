@@ -1,0 +1,12 @@
+{
+  "generatedAt": "2026-05-09T20:10:50.991Z",
+  "source": "assets/data/hadiths_multilang_v2.json",
+  "totalHadiths": 2196,
+  "corruptTranslations": 0,
+  "affectedHadithCount": 0,
+  "affectedHadithIds": [],
+  "byCollection": {},
+  "byLanguage": {},
+  "byReason": {},
+  "issues": []
+}

@@ -1,0 +1,978 @@
+{
+  "generatedAt": "2026-05-09T20:10:43.878Z",
+  "source": "assets/data/hadiths_multilang_v2.json",
+  "backup": "assets/data/hadiths_multilang_v2.backup_before_translation_cleanup.json",
+  "corruptTranslationFieldsBefore": 92,
+  "corruptTranslationFieldsAfter": 0,
+  "affectedHadithsBefore": 23,
+  "affectedHadithsAfter": 0,
+  "cleaned": [
+    {
+      "hadithId": 80202,
+      "language": "es",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 2",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80202,
+      "language": "fr",
+      "field": "translation",
+      "reference": "40 Hadith Nawawi 2",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80202,
+      "language": "de",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 2",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80202,
+      "language": "pt",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 2",
+      "reasons": [
+        "PORTUGUESE_QUERY_LIMIT"
+      ]
+    },
+    {
+      "hadithId": 80204,
+      "language": "es",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 4",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80204,
+      "language": "fr",
+      "field": "translation",
+      "reference": "40 Hadith Nawawi 4",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80204,
+      "language": "de",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 4",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80204,
+      "language": "pt",
+      "field": "text",
+      "reference": "40 Hadith Nawawi4",
+      "reasons": [
+        "PORTUGUESE_QUERY_LIMIT"
+      ]
+    },
+    {
+      "hadithId": 80206,
+      "language": "es",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 6",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80206,
+      "language": "fr",
+      "field": "translation",
+      "reference": "40 Hadith Nawawi 6",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80206,
+      "language": "de",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 6",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80206,
+      "language": "pt",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 6",
+      "reasons": [
+        "PORTUGUESE_QUERY_LIMIT"
+      ]
+    },
+    {
+      "hadithId": 80208,
+      "language": "es",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 8",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80208,
+      "language": "fr",
+      "field": "translation",
+      "reference": "40 Hadith Nawawi 8",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80208,
+      "language": "de",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 8",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80208,
+      "language": "pt",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 8",
+      "reasons": [
+        "PORTUGUESE_QUERY_LIMIT"
+      ]
+    },
+    {
+      "hadithId": 80210,
+      "language": "es",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 10",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80210,
+      "language": "fr",
+      "field": "translation",
+      "reference": "40 Hadith Nawawi 10",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80210,
+      "language": "de",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 10",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80210,
+      "language": "pt",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 10",
+      "reasons": [
+        "PORTUGUESE_QUERY_LIMIT"
+      ]
+    },
+    {
+      "hadithId": 80219,
+      "language": "es",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 19",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80219,
+      "language": "fr",
+      "field": "translation",
+      "reference": "40 Hadith Nawawi 19",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80219,
+      "language": "de",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 19",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80219,
+      "language": "pt",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 19",
+      "reasons": [
+        "PORTUGUESE_QUERY_LIMIT"
+      ]
+    },
+    {
+      "hadithId": 80222,
+      "language": "es",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 22",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80222,
+      "language": "fr",
+      "field": "translation",
+      "reference": "40 Hadith Nawawi 22",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80222,
+      "language": "de",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 22",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80222,
+      "language": "pt",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 22",
+      "reasons": [
+        "PORTUGUESE_QUERY_LIMIT"
+      ]
+    },
+    {
+      "hadithId": 80223,
+      "language": "es",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 23",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80223,
+      "language": "fr",
+      "field": "translation",
+      "reference": "40 Hadith Nawawi 23",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80223,
+      "language": "de",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 23",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80223,
+      "language": "pt",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 23",
+      "reasons": [
+        "PORTUGUESE_QUERY_LIMIT"
+      ]
+    },
+    {
+      "hadithId": 80224,
+      "language": "es",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 24",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80224,
+      "language": "fr",
+      "field": "translation",
+      "reference": "40 Hadith Nawawi 24",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80224,
+      "language": "de",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 24",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80224,
+      "language": "pt",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 24",
+      "reasons": [
+        "PORTUGUESE_QUERY_LIMIT"
+      ]
+    },
+    {
+      "hadithId": 80225,
+      "language": "es",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 25",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80225,
+      "language": "fr",
+      "field": "translation",
+      "reference": "40 Hadith Nawawi 25",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80225,
+      "language": "de",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 25",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80225,
+      "language": "pt",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 25",
+      "reasons": [
+        "PORTUGUESE_QUERY_LIMIT"
+      ]
+    },
+    {
+      "hadithId": 80226,
+      "language": "es",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 26",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80226,
+      "language": "fr",
+      "field": "translation",
+      "reference": "40 Hadith Nawawi 26",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80226,
+      "language": "de",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 26",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80226,
+      "language": "pt",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 26",
+      "reasons": [
+        "PORTUGUESE_QUERY_LIMIT"
+      ]
+    },
+    {
+      "hadithId": 80227,
+      "language": "es",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 27",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80227,
+      "language": "fr",
+      "field": "translation",
+      "reference": "40 Hadith Nawawi 27",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80227,
+      "language": "de",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 27",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80227,
+      "language": "pt",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 27",
+      "reasons": [
+        "PORTUGUESE_QUERY_LIMIT"
+      ]
+    },
+    {
+      "hadithId": 80228,
+      "language": "es",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 28",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80228,
+      "language": "fr",
+      "field": "translation",
+      "reference": "40 Hadith Nawawi 28",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80228,
+      "language": "de",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 28",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80228,
+      "language": "pt",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 28",
+      "reasons": [
+        "PORTUGUESE_QUERY_LIMIT"
+      ]
+    },
+    {
+      "hadithId": 80229,
+      "language": "es",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 29",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80229,
+      "language": "fr",
+      "field": "translation",
+      "reference": "40 Hadith Nawawi 29",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80229,
+      "language": "de",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 29",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80229,
+      "language": "pt",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 29",
+      "reasons": [
+        "PORTUGUESE_QUERY_LIMIT"
+      ]
+    },
+    {
+      "hadithId": 80230,
+      "language": "es",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 30",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80230,
+      "language": "fr",
+      "field": "translation",
+      "reference": "40 Hadith Nawawi 30",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80230,
+      "language": "de",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 30",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80230,
+      "language": "pt",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 30",
+      "reasons": [
+        "PORTUGUESE_QUERY_LIMIT"
+      ]
+    },
+    {
+      "hadithId": 80231,
+      "language": "es",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 31",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80231,
+      "language": "fr",
+      "field": "translation",
+      "reference": "40 Hadith Nawawi 31",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80231,
+      "language": "de",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 31",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80231,
+      "language": "pt",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 31",
+      "reasons": [
+        "PORTUGUESE_QUERY_LIMIT"
+      ]
+    },
+    {
+      "hadithId": 80232,
+      "language": "es",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 32",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80232,
+      "language": "fr",
+      "field": "translation",
+      "reference": "40 Hadith Nawawi 32",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80232,
+      "language": "de",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 32",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80232,
+      "language": "pt",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 32",
+      "reasons": [
+        "PORTUGUESE_QUERY_LIMIT"
+      ]
+    },
+    {
+      "hadithId": 80235,
+      "language": "es",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 35",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80235,
+      "language": "fr",
+      "field": "translation",
+      "reference": "40 Hadith Nawawi 35",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80235,
+      "language": "de",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 35",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80235,
+      "language": "pt",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 35",
+      "reasons": [
+        "PORTUGUESE_QUERY_LIMIT"
+      ]
+    },
+    {
+      "hadithId": 80236,
+      "language": "es",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 36",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80236,
+      "language": "fr",
+      "field": "translation",
+      "reference": "40 Hadith Nawawi 36",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80236,
+      "language": "de",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 36",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80236,
+      "language": "pt",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 36",
+      "reasons": [
+        "PORTUGUESE_QUERY_LIMIT"
+      ]
+    },
+    {
+      "hadithId": 80237,
+      "language": "es",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 37",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80237,
+      "language": "fr",
+      "field": "translation",
+      "reference": "40 Hadith Nawawi 37",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80237,
+      "language": "de",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 37",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80237,
+      "language": "pt",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 37",
+      "reasons": [
+        "PORTUGUESE_QUERY_LIMIT"
+      ]
+    },
+    {
+      "hadithId": 80238,
+      "language": "es",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 38",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80238,
+      "language": "fr",
+      "field": "translation",
+      "reference": "40 Hadith Nawawi 38",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80238,
+      "language": "de",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 38",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80238,
+      "language": "pt",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 38",
+      "reasons": [
+        "PORTUGUESE_QUERY_LIMIT"
+      ]
+    },
+    {
+      "hadithId": 80240,
+      "language": "es",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 40",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80240,
+      "language": "fr",
+      "field": "translation",
+      "reference": "40 Hadith Nawawi 40",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80240,
+      "language": "de",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 40",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80240,
+      "language": "pt",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 40",
+      "reasons": [
+        "PORTUGUESE_QUERY_LIMIT"
+      ]
+    },
+    {
+      "hadithId": 80242,
+      "language": "es",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 42",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80242,
+      "language": "fr",
+      "field": "translation",
+      "reference": "40 Hadith Nawawi 42",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80242,
+      "language": "de",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 42",
+      "reasons": [
+        "QUERY_LENGTH_LIMIT",
+        "MAX_ALLOWED_QUERY",
+        "REQUEST_TOO_LARGE"
+      ]
+    },
+    {
+      "hadithId": 80242,
+      "language": "pt",
+      "field": "text",
+      "reference": "40 Hadith Nawawi 42",
+      "reasons": [
+        "PORTUGUESE_QUERY_LIMIT"
+      ]
+    }
+  ],
+  "remaining": []
+}
