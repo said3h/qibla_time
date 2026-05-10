@@ -1,0 +1,100 @@
+{
+  "generatedAt": "2026-05-10T15:47:51.357Z",
+  "importedSpanishCount": 6,
+  "clearedItalianCount": 4,
+  "skippedCount": 0,
+  "source": {
+    "name": "HadeethEnc",
+    "language": "es",
+    "downloadUrl": "https://hadeethenc.com/browse/download/es",
+    "version": "v1.21.0",
+    "lastUpdate": "2026-01-06 21:59:46"
+  },
+  "validations": {
+    "arabicChanged": 0,
+    "nonTargetHadithChanged": 0
+  },
+  "importedSpanish": [
+    {
+      "appHadithId": 80220,
+      "nawawiRef": "40 Hadith Nawawi 20",
+      "sourceId": 66523,
+      "sourceUrl": "https://hadeethenc.com/es/browse/hadith/66523",
+      "sourceVersion": "v1.21.0",
+      "beforeExcerpt": "On the authority of Abu Masood Uqbah bin ’Amr al-Ansaree al-Badree (may Allah be pleased with him) who said: The Messenger of Allah (peace and blessings of Allah be upon him) said,",
+      "afterExcerpt": "Abu Mas'ud 'Uqbah ibn ‘Amr Al-Ansari Al-Badri —que Al-lah esté complacido con él— narró que el Mensajero de Al-lah —la paz y las bendiciones de Al-lah sean con él— dijo: «Entre las"
+    },
+    {
+      "appHadithId": 80221,
+      "nawawiRef": "40 Hadith Nawawi 21",
+      "sourceId": 66524,
+      "sourceUrl": "https://hadeethenc.com/es/browse/hadith/66524",
+      "sourceVersion": "v1.21.0",
+      "beforeExcerpt": "On the authority of Abu `Amr — and he is also called Abu `Amrah — Sufyan bin Abdullah ath- Thaqafee (may Allah be pleased with him) who said: I said, \"O Messenger of Allah, tell me",
+      "afterExcerpt": "Abu ‘Amr —o Abu ‘Amrah— Sufian ibn ‘Abdul-lah —que Al-lah esté complacido con él— narró: «Dije: \"Mensajero de Al-lah, dime algo sobre el islam que no tenga que preguntar a nadie má"
+    },
+    {
+      "appHadithId": 80233,
+      "nawawiRef": "40 Hadith Nawawi 33",
+      "sourceId": 66532,
+      "sourceUrl": "https://hadeethenc.com/es/browse/hadith/66532",
+      "sourceVersion": "v1.21.0",
+      "beforeExcerpt": "On the authority of Ibn Abbas (may Allah be pleased with him), that the Messenger of Allah (peace and blessings of Allah be upon him) said: Were people to be given everything that ",
+      "afterExcerpt": "Ibn 'Abbás —que Al-lah esté complacido con ambos— narró que el Mensajero de Al-lah —la paz y las bendiciones de Al-lah sean con él— dijo: «Si a la gente se le concediera lo que rec"
+    },
+    {
+      "appHadithId": 80234,
+      "nawawiRef": "40 Hadith Nawawi 34",
+      "sourceId": 65001,
+      "sourceUrl": "https://hadeethenc.com/es/browse/hadith/65001",
+      "sourceVersion": "v1.21.0",
+      "beforeExcerpt": "On the authority of Abu Sa`eed al-Khudree (may Allah be pleased with him) who said: I heard the Messenger of Allah (ﷺ) say, “Whosoever of you sees an evil, let him change it with h",
+      "afterExcerpt": "De Abu Said Al Judri —que Al-lah esté complacido con él— quien dijo que escuchó al Mensajero de Al-lah —que la paz y las bendiciones de Al-lah sean con él— decir: \"Quien vea de ust"
+    },
+    {
+      "appHadithId": 80239,
+      "nawawiRef": "40 Hadith Nawawi 39",
+      "sourceId": 4216,
+      "sourceUrl": "https://hadeethenc.com/es/browse/hadith/4216",
+      "sourceVersion": "v1.21.0",
+      "beforeExcerpt": "On the authority of Ibn Abbas (may Allah be pleased with him), that the Messenger of Allah (peace and blessings of Allah be upon him) said: Verily Allah has pardoned [or been lenie",
+      "afterExcerpt": "Ibn 'Abbás —que Al-lah esté complacido con ambos— narró que el Mensajero de Al-lah —la paz y las bendiciones de Al-lah sean con él— dijo: «Al-lah ha perdonado para mí lo que mi nac"
+    },
+    {
+      "appHadithId": 80241,
+      "nawawiRef": "40 Hadith Nawawi 41",
+      "sourceId": 66535,
+      "sourceUrl": "https://hadeethenc.com/es/browse/hadith/66535",
+      "sourceVersion": "v1.21.0",
+      "beforeExcerpt": "On the authority of Abu Muhammad Abdullah bin ’Amr bin al-’Aas (may Allah be pleased with him) who said: The Messenger of Allah (peace and blessings of Allah be upon him) said, “No",
+      "afterExcerpt": "Abu Muhammad 'Abdul-lah ibn ‘Amr ibn Al-'As —que Al-lah esté complacido con ambos— narró que el Mensajero de Al-lah —la paz y las bendiciones de Al-lah sean con él— dijo: «Nadie en"
+    }
+  ],
+  "clearedItalian": [
+    {
+      "appHadithId": 4820,
+      "collection": "Sahih al-Bukhari",
+      "beforeExcerpt": "‘Abdur-Rahmān ibn ‘Abdullāh ibn Ka‘b ibn Mālik reported that (his father) ‘Abdullāh ibn Ka‘b ibn Mālik, who was Ka‘b's guide from among his sons when Ka‘b turned blind, said: I hea",
+      "action": "cleared_it_translation"
+    },
+    {
+      "appHadithId": 6380,
+      "collection": "Sahih Muslim",
+      "beforeExcerpt": "An-Nawwās ibn Sam‘ān (may Allah be pleased with him) reported: The Messenger of Allah (may Allah's peace and blessing be upon him) mentioned the Anti-Christ one morning, (sometimes",
+      "action": "cleared_it_translation"
+    },
+    {
+      "appHadithId": 6604,
+      "collection": "Sahih al-Bukhari",
+      "beforeExcerpt": "Samurah ibn Jundub (may Allah be pleased with him) reported: The Messenger of Allah (may Allah’s peace and blessings be upon him) often used to ask his Companions: \"Did anyone of y",
+      "action": "cleared_it_translation"
+    },
+    {
+      "appHadithId": 8301,
+      "collection": "Sahih al-Bukhari",
+      "beforeExcerpt": "Abu Sa‘īd al-Khudri (may Allah be pleased with him) reported: We said: \"O Messenger of Allah, shall we see our Lord on the Day of Judgment?\" He said: \"Do you have any difficulty in",
+      "action": "cleared_it_translation"
+    }
+  ],
+  "skipped": []
+}

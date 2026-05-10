@@ -1,0 +1,861 @@
+{
+  "generatedAt": "2026-05-10T15:48:50.310Z",
+  "source": "assets/data/hadiths_multilang_v2.json",
+  "status": "PASS",
+  "totalHadiths": 2196,
+  "totalIssues": 0,
+  "severityCounts": {
+    "critical": 0,
+    "medium": 0,
+    "warning": 0
+  },
+  "byReason": {},
+  "byLanguage": {
+    "ar": {
+      "totalDeclared": 2196,
+      "translated": 2196,
+      "empty": 0,
+      "issues": 0,
+      "critical": 0,
+      "medium": 0,
+      "warning": 0
+    },
+    "de": {
+      "totalDeclared": 2196,
+      "translated": 2196,
+      "empty": 0,
+      "issues": 0,
+      "critical": 0,
+      "medium": 0,
+      "warning": 0
+    },
+    "en": {
+      "totalDeclared": 2196,
+      "translated": 2196,
+      "empty": 0,
+      "issues": 0,
+      "critical": 0,
+      "medium": 0,
+      "warning": 0
+    },
+    "es": {
+      "totalDeclared": 2196,
+      "translated": 2196,
+      "empty": 0,
+      "issues": 0,
+      "critical": 0,
+      "medium": 0,
+      "warning": 0
+    },
+    "fr": {
+      "totalDeclared": 2196,
+      "translated": 2196,
+      "empty": 0,
+      "issues": 0,
+      "critical": 0,
+      "medium": 0,
+      "warning": 0
+    },
+    "id": {
+      "totalDeclared": 2196,
+      "translated": 2196,
+      "empty": 0,
+      "issues": 0,
+      "critical": 0,
+      "medium": 0,
+      "warning": 0
+    },
+    "it": {
+      "totalDeclared": 2196,
+      "translated": 2192,
+      "empty": 4,
+      "issues": 0,
+      "critical": 0,
+      "medium": 0,
+      "warning": 0
+    },
+    "nl": {
+      "totalDeclared": 2196,
+      "translated": 2196,
+      "empty": 0,
+      "issues": 0,
+      "critical": 0,
+      "medium": 0,
+      "warning": 0
+    },
+    "pt": {
+      "totalDeclared": 2196,
+      "translated": 2196,
+      "empty": 0,
+      "issues": 0,
+      "critical": 0,
+      "medium": 0,
+      "warning": 0
+    },
+    "ru": {
+      "totalDeclared": 2196,
+      "translated": 2196,
+      "empty": 0,
+      "issues": 0,
+      "critical": 0,
+      "medium": 0,
+      "warning": 0
+    },
+    "tr": {
+      "totalDeclared": 2196,
+      "translated": 2196,
+      "empty": 0,
+      "issues": 0,
+      "critical": 0,
+      "medium": 0,
+      "warning": 0
+    }
+  },
+  "byCollection": {
+    "40 Hadith Nawawi": {
+      "totalHadiths": 42,
+      "languages": {
+        "ar": {
+          "translated": 42,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "es": {
+          "translated": 42,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "en": {
+          "translated": 42,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "fr": {
+          "translated": 42,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "de": {
+          "translated": 42,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "nl": {
+          "translated": 42,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "id": {
+          "translated": 42,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "ru": {
+          "translated": 42,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "it": {
+          "translated": 42,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "pt": {
+          "translated": 42,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "tr": {
+          "translated": 42,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        }
+      }
+    },
+    "Jami' at-Tirmidhi": {
+      "totalHadiths": 201,
+      "languages": {
+        "ar": {
+          "translated": 201,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "es": {
+          "translated": 201,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "en": {
+          "translated": 201,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "fr": {
+          "translated": 201,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "de": {
+          "translated": 201,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "nl": {
+          "translated": 201,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "id": {
+          "translated": 201,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "ru": {
+          "translated": 201,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "it": {
+          "translated": 201,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "pt": {
+          "translated": 201,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "tr": {
+          "translated": 201,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        }
+      }
+    },
+    "Muwatta Malik": {
+      "totalHadiths": 7,
+      "languages": {
+        "ar": {
+          "translated": 7,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "es": {
+          "translated": 7,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "en": {
+          "translated": 7,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "fr": {
+          "translated": 7,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "de": {
+          "translated": 7,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "nl": {
+          "translated": 7,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "id": {
+          "translated": 7,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "ru": {
+          "translated": 7,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "it": {
+          "translated": 7,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "pt": {
+          "translated": 7,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "tr": {
+          "translated": 7,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        }
+      }
+    },
+    "Other / Unclassified": {
+      "totalHadiths": 251,
+      "languages": {
+        "ar": {
+          "translated": 251,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "es": {
+          "translated": 251,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "en": {
+          "translated": 251,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "fr": {
+          "translated": 251,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "de": {
+          "translated": 251,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "nl": {
+          "translated": 251,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "id": {
+          "translated": 251,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "ru": {
+          "translated": 251,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "it": {
+          "translated": 251,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "pt": {
+          "translated": 251,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "tr": {
+          "translated": 251,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        }
+      }
+    },
+    "Riyad as-Salihin": {
+      "totalHadiths": 200,
+      "languages": {
+        "ar": {
+          "translated": 200,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "es": {
+          "translated": 200,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "en": {
+          "translated": 200,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "fr": {
+          "translated": 200,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "de": {
+          "translated": 200,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "nl": {
+          "translated": 200,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "id": {
+          "translated": 200,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "ru": {
+          "translated": 200,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "it": {
+          "translated": 200,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "pt": {
+          "translated": 200,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "tr": {
+          "translated": 200,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        }
+      }
+    },
+    "Sahih al-Bukhari": {
+      "totalHadiths": 1055,
+      "languages": {
+        "ar": {
+          "translated": 1055,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "es": {
+          "translated": 1055,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "en": {
+          "translated": 1055,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "fr": {
+          "translated": 1055,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "de": {
+          "translated": 1055,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "nl": {
+          "translated": 1055,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "id": {
+          "translated": 1055,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "ru": {
+          "translated": 1055,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "it": {
+          "translated": 1052,
+          "empty": 3,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "pt": {
+          "translated": 1055,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "tr": {
+          "translated": 1055,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        }
+      }
+    },
+    "Sahih Muslim": {
+      "totalHadiths": 400,
+      "languages": {
+        "ar": {
+          "translated": 400,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "es": {
+          "translated": 400,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "en": {
+          "translated": 400,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "fr": {
+          "translated": 400,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "de": {
+          "translated": 400,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "nl": {
+          "translated": 400,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "id": {
+          "translated": 400,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "ru": {
+          "translated": 400,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "it": {
+          "translated": 399,
+          "empty": 1,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "pt": {
+          "translated": 400,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "tr": {
+          "translated": 400,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        }
+      }
+    },
+    "Sunan Ibn Majah": {
+      "totalHadiths": 40,
+      "languages": {
+        "ar": {
+          "translated": 40,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "es": {
+          "translated": 40,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "en": {
+          "translated": 40,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "fr": {
+          "translated": 40,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "de": {
+          "translated": 40,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "nl": {
+          "translated": 40,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "id": {
+          "translated": 40,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "ru": {
+          "translated": 40,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "it": {
+          "translated": 40,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "pt": {
+          "translated": 40,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        },
+        "tr": {
+          "translated": 40,
+          "empty": 0,
+          "issues": 0,
+          "critical": 0,
+          "medium": 0,
+          "warning": 0
+        }
+      }
+    }
+  },
+  "issues": []
+}
