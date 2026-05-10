@@ -3201,23 +3201,11 @@ abstract class AppLocalizations {
   /// **'Hoy · {date}'**
   String calendarTodayLabel(Object date);
 
-  /// No description provided for @dhikrChooseCustomValue.
-  ///
-  /// In es, this message translates to:
-  /// **'Elegir valor personalizado'**
-  String get dhikrChooseCustomValue;
-
   /// No description provided for @dhikrDailyGoalCompletedMessage.
   ///
   /// In es, this message translates to:
   /// **'Has completado tu meta diaria de dhikr.'**
   String get dhikrDailyGoalCompletedMessage;
-
-  /// No description provided for @dhikrDailyGoalHelper.
-  ///
-  /// In es, this message translates to:
-  /// **'Elige cuántas repeticiones quieres alcanzar hoy.'**
-  String get dhikrDailyGoalHelper;
 
   /// No description provided for @dhikrDailyGoalShort.
   ///
@@ -3230,12 +3218,6 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Meta diaria'**
   String get dhikrDailyGoalTitle;
-
-  /// No description provided for @dhikrDailyGoalUpdated.
-  ///
-  /// In es, this message translates to:
-  /// **'Meta diaria actualizada a {value}'**
-  String dhikrDailyGoalUpdated(Object value);
 
   /// No description provided for @dhikrFeedbackAlmostThere.
   ///
@@ -3315,18 +3297,6 @@ abstract class AppLocalizations {
   /// **'Gloria a Allah'**
   String get dhikrMeaningSubhanAllah;
 
-  /// No description provided for @dhikrRepetitionsFieldHint.
-  ///
-  /// In es, this message translates to:
-  /// **'Ejemplo: 100'**
-  String get dhikrRepetitionsFieldHint;
-
-  /// No description provided for @dhikrRepetitionsFieldLabel.
-  ///
-  /// In es, this message translates to:
-  /// **'Repeticiones'**
-  String get dhikrRepetitionsFieldLabel;
-
   /// No description provided for @dhikrResetSession.
   ///
   /// In es, this message translates to:
@@ -3345,12 +3315,6 @@ abstract class AppLocalizations {
   /// **'Has completado este ciclo de dhikr.'**
   String get dhikrSessionCycleCompleted;
 
-  /// No description provided for @dhikrSessionGoalHelper.
-  ///
-  /// In es, this message translates to:
-  /// **'Define cuántas repeticiones quieres hacer por ciclo.'**
-  String get dhikrSessionGoalHelper;
-
   /// No description provided for @dhikrSessionGoalShort.
   ///
   /// In es, this message translates to:
@@ -3362,12 +3326,6 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Meta de sesión'**
   String get dhikrSessionGoalTitle;
-
-  /// No description provided for @dhikrSessionGoalUpdated.
-  ///
-  /// In es, this message translates to:
-  /// **'Meta de sesión actualizada a {value}'**
-  String dhikrSessionGoalUpdated(Object value);
 
   /// No description provided for @dhikrSessionResetMessage.
   ///

@@ -27,11 +27,10 @@ void main() {
       expect(snapshot.recentDays.last.count, 1);
     });
 
-    test('loadSnapshot calcula hoy, ayer y semana desde el historial', () async {
+    test('loadSnapshot calcula hoy, ayer y semana desde el historial',
+        () async {
       SharedPreferences.setMockInitialValues({
         AppConstants.keyDhikrTotalCount: 42,
-        AppConstants.keyDhikrSessionGoal: 50,
-        AppConstants.keyDhikrDailyGoal: 120,
         AppConstants.keyDhikrDailyHistory: jsonEncode({
           '2026-03-20': 7,
           '2026-03-24': 11,
@@ -45,8 +44,8 @@ void main() {
       );
 
       expect(snapshot.lifetimeTotal, 42);
-      expect(snapshot.sessionGoal, 50);
-      expect(snapshot.dailyGoal, 120);
+      expect(snapshot.sessionGoal, 33);
+      expect(snapshot.dailyGoal, 99);
       expect(snapshot.todayCount, 9);
       expect(snapshot.yesterdayCount, 11);
       expect(snapshot.rollingWeekCount, 27);

@@ -34,9 +34,6 @@ class DhikrScreen extends StatefulWidget {
 }
 
 class _DhikrScreenState extends State<DhikrScreen> {
-  static const _sessionGoalPresets = [33, 66, 99, 100];
-  static const _dailyGoalPresets = [99, 100, 200, 500];
-
   final DhikrService _service = DhikrService();
   final List<({String arabic, String transliteration, String meaning})>
       _phrases = const [
@@ -106,12 +103,12 @@ class _DhikrScreenState extends State<DhikrScreen> {
 
     final sessionGoal = snapshot.sessionGoal;
     final nextCount = _count + 1;
-    final completesSession = nextCount >= sessionGoal;
+    final completesSession = nextCount % sessionGoal == 0;
     final optimistic = _optimisticIncrement(snapshot);
 
     setState(() {
       _snapshot = optimistic;
-      _count = completesSession ? 0 : nextCount;
+      _count = nextCount;
       if (completesSession) {
         _currentPhraseIndex = (_currentPhraseIndex + 1) % _activePhrases.length;
       }
@@ -143,149 +140,6 @@ class _DhikrScreenState extends State<DhikrScreen> {
       _currentPhraseIndex = 0;
     });
     _showMessage(context.l10n.dhikrSessionResetMessage);
-  }
-
-  Future<void> _pickGoal({required bool daily}) async {
-    final snapshot = _snapshot;
-    if (snapshot == null) return;
-
-    final tokens = QiblaThemes.current;
-    final currentValue = daily ? snapshot.dailyGoal : snapshot.sessionGoal;
-    final presets = daily ? _dailyGoalPresets : _sessionGoalPresets;
-    final l10n = context.l10n;
-    final title = daily ? l10n.dhikrDailyGoalTitle : l10n.dhikrSessionGoalTitle;
-    final helper =
-        daily ? l10n.dhikrDailyGoalHelper : l10n.dhikrSessionGoalHelper;
-
-    final selected = await showModalBottomSheet<int>(
-      context: context,
-      backgroundColor: tokens.bgSurface,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-      ),
-      builder: (context) {
-        return SafeArea(
-          top: false,
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(20, 20, 20, 24),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: GoogleFonts.dmSans(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w700,
-                    color: tokens.textPrimary,
-                  ),
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  helper,
-                  style: GoogleFonts.dmSans(
-                    fontSize: 12,
-                    color: tokens.textSecondary,
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Wrap(
-                  spacing: 10,
-                  runSpacing: 10,
-                  children: [
-                    for (final value in presets)
-                      _GoalPresetChip(
-                        label: '$value',
-                        selected: value == currentValue,
-                        onTap: () => Navigator.of(context).pop(value),
-                      ),
-                  ],
-                ),
-                const SizedBox(height: 14),
-                TextButton.icon(
-                  onPressed: () async {
-                    final custom = await _showCustomGoalDialog(
-                      title: title,
-                      initialValue: currentValue,
-                    );
-                    if (!context.mounted || custom == null) return;
-                    Navigator.of(context).pop(custom);
-                  },
-                  icon: const Icon(Icons.edit_outlined),
-                  label: Text(l10n.dhikrChooseCustomValue),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-
-    if (selected == null) return;
-
-    final updated = await _service.updateGoals(
-      sessionGoal: daily ? null : selected,
-      dailyGoal: daily ? selected : null,
-    );
-    if (!mounted) return;
-
-    setState(() {
-      _snapshot = updated;
-      if (!daily) {
-        _count = updated.sessionGoal <= 0 ? 0 : _count % updated.sessionGoal;
-      }
-    });
-
-    _showMessage(
-      daily
-          ? context.l10n.dhikrDailyGoalUpdated(selected)
-          : context.l10n.dhikrSessionGoalUpdated(selected),
-    );
-  }
-
-  Future<int?> _showCustomGoalDialog({
-    required String title,
-    required int initialValue,
-  }) async {
-    final controller = TextEditingController(text: '$initialValue');
-
-    final value = await showDialog<int>(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text(title),
-          content: TextField(
-            controller: controller,
-            keyboardType: TextInputType.number,
-            autofocus: true,
-            decoration: InputDecoration(
-              labelText: context.l10n.dhikrRepetitionsFieldLabel,
-              hintText: context.l10n.dhikrRepetitionsFieldHint,
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: Text(context.l10n.commonCancel),
-            ),
-            FilledButton(
-              onPressed: () {
-                final parsed = int.tryParse(controller.text.trim());
-                if (parsed == null || parsed <= 0) {
-                  Navigator.of(context).pop();
-                  return;
-                }
-                Navigator.of(context).pop(parsed);
-              },
-              child: Text(context.l10n.commonSave),
-            ),
-          ],
-        );
-      },
-    );
-
-    controller.dispose();
-    return value;
   }
 
   DhikrSnapshot _optimisticIncrement(DhikrSnapshot snapshot) {
@@ -334,7 +188,7 @@ class _DhikrScreenState extends State<DhikrScreen> {
     if (progress >= 0.4) {
       return l10n.dhikrFeedbackGoodPace;
     }
-    if (_count == 0) {
+    if (_count > 0 && _count % snapshot.sessionGoal == 0) {
       return l10n.dhikrFeedbackCycleCompleted;
     }
     return l10n.dhikrFeedbackTakeYourTime;
@@ -373,9 +227,10 @@ class _DhikrScreenState extends State<DhikrScreen> {
 
     final snapshot = _snapshot!;
     final phrase = _activePhrases[_currentPhraseIndex];
-    final sessionProgress = snapshot.sessionGoal <= 0
-        ? 0.0
-        : (_count / snapshot.sessionGoal).clamp(0.0, 1.0);
+    final sessionCycleCount = _count % snapshot.sessionGoal;
+    final sessionProgress = _count > 0 && sessionCycleCount == 0
+        ? 1.0
+        : (sessionCycleCount / snapshot.sessionGoal).clamp(0.0, 1.0);
     final dailyProgress = snapshot.dailyGoal <= 0
         ? 0.0
         : (snapshot.todayCount / snapshot.dailyGoal).clamp(0.0, 1.0);
@@ -485,7 +340,7 @@ class _DhikrScreenState extends State<DhikrScreen> {
                             ),
                           ),
                           Text(
-                            l10n.dhikrSessionCountOf(snapshot.sessionGoal),
+                            '${l10n.dhikrSessionGoalShort}: ${snapshot.sessionGoal}',
                             style: GoogleFonts.dmSans(
                               fontSize: 11,
                               color: tokens.textSecondary,
@@ -543,8 +398,6 @@ class _DhikrScreenState extends State<DhikrScreen> {
             _GoalCard(
               sessionGoal: snapshot.sessionGoal,
               dailyGoal: snapshot.dailyGoal,
-              onSessionTap: () => _pickGoal(daily: false),
-              onDailyTap: () => _pickGoal(daily: true),
             ),
             const SizedBox(height: 14),
             Container(
@@ -619,14 +472,10 @@ class _GoalCard extends StatelessWidget {
   const _GoalCard({
     required this.sessionGoal,
     required this.dailyGoal,
-    required this.onSessionTap,
-    required this.onDailyTap,
   });
 
   final int sessionGoal;
   final int dailyGoal;
-  final VoidCallback onSessionTap;
-  final VoidCallback onDailyTap;
 
   @override
   Widget build(BuildContext context) {
@@ -657,7 +506,6 @@ class _GoalCard extends StatelessWidget {
                 child: _GoalTile(
                   label: l10n.dhikrSessionGoalShort,
                   value: '$sessionGoal',
-                  onTap: onSessionTap,
                 ),
               ),
               const SizedBox(width: 10),
@@ -665,7 +513,6 @@ class _GoalCard extends StatelessWidget {
                 child: _GoalTile(
                   label: l10n.dhikrDailyGoalShort,
                   value: '$dailyGoal',
-                  onTap: onDailyTap,
                 ),
               ),
             ],
@@ -680,97 +527,42 @@ class _GoalTile extends StatelessWidget {
   const _GoalTile({
     required this.label,
     required this.value,
-    required this.onTap,
   });
 
   final String label;
   final String value;
-  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(12),
-      child: Container(
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          color: tokens.primaryBg,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: tokens.primaryBorder),
-        ),
-        child: Row(
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    label.toUpperCase(),
-                    style: GoogleFonts.dmSans(
-                      fontSize: 9,
-                      letterSpacing: 1.0,
-                      color: tokens.textSecondary,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    value,
-                    style: GoogleFonts.dmSans(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w700,
-                      color: tokens.textPrimary,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Icon(Icons.tune, size: 18, color: tokens.primary),
-          ],
-        ),
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: tokens.primaryBg,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: tokens.primaryBorder),
       ),
-    );
-  }
-}
-
-class _GoalPresetChip extends StatelessWidget {
-  const _GoalPresetChip({
-    required this.label,
-    required this.selected,
-    required this.onTap,
-  });
-
-  final String label;
-  final bool selected;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    final tokens = QiblaThemes.current;
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(999),
-        child: Ink(
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-          decoration: BoxDecoration(
-            color: selected ? tokens.primaryBg : tokens.bgSurface2,
-            borderRadius: BorderRadius.circular(999),
-            border: Border.all(
-              color: selected ? tokens.primaryBorder : tokens.border,
-            ),
-          ),
-          child: Text(
-            label,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label.toUpperCase(),
             style: GoogleFonts.dmSans(
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-              color: selected ? tokens.primary : tokens.textPrimary,
+              fontSize: 9,
+              letterSpacing: 1.0,
+              color: tokens.textSecondary,
             ),
           ),
-        ),
+          const SizedBox(height: 4),
+          Text(
+            value,
+            style: GoogleFonts.dmSans(
+              fontSize: 18,
+              fontWeight: FontWeight.w700,
+              color: tokens.textPrimary,
+            ),
+          ),
+        ],
       ),
     );
   }

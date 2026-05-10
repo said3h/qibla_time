@@ -1736,25 +1736,13 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get dhikrChooseCustomValue => 'اختيار قيمة مخصصة';
-
-  @override
   String get dhikrDailyGoalCompletedMessage => 'أكملت هدف الذكر اليومي.';
-
-  @override
-  String get dhikrDailyGoalHelper =>
-      'اختر عدد التكرارات التي تريد الوصول إليها اليوم.';
 
   @override
   String get dhikrDailyGoalShort => 'هدف يومي';
 
   @override
   String get dhikrDailyGoalTitle => 'الهدف اليومي';
-
-  @override
-  String dhikrDailyGoalUpdated(Object value) {
-    return 'تم تحديث الهدف اليومي إلى $value';
-  }
 
   @override
   String get dhikrFeedbackAlmostThere => 'أنت قريب جدًا من هدفك اليومي.';
@@ -1797,12 +1785,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get dhikrMeaningSubhanAllah => 'سبحان الله';
 
   @override
-  String get dhikrRepetitionsFieldHint => 'مثال: 100';
-
-  @override
-  String get dhikrRepetitionsFieldLabel => 'التكرارات';
-
-  @override
   String get dhikrResetSession => 'إعادة ضبط الجلسة';
 
   @override
@@ -1814,19 +1796,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get dhikrSessionCycleCompleted => 'أكملت دورة الذكر هذه.';
 
   @override
-  String get dhikrSessionGoalHelper =>
-      'حدد عدد التكرارات التي تريدها في كل دورة.';
-
-  @override
   String get dhikrSessionGoalShort => 'هدف الجلسة';
 
   @override
   String get dhikrSessionGoalTitle => 'هدف الجلسة';
-
-  @override
-  String dhikrSessionGoalUpdated(Object value) {
-    return 'تم تحديث هدف الجلسة إلى $value';
-  }
 
   @override
   String get dhikrSessionResetMessage => 'تمت إعادة ضبط الجلسة.';

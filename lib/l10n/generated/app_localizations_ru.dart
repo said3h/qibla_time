@@ -1785,26 +1785,14 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String get dhikrChooseCustomValue => 'Выберите пользовательское значение';
-
-  @override
   String get dhikrDailyGoalCompletedMessage =>
       'Вы выполнили цель ежедневного зикра.';
-
-  @override
-  String get dhikrDailyGoalHelper =>
-      'Выберите, сколько повторений вы хотите достичь сегодня.';
 
   @override
   String get dhikrDailyGoalShort => 'Ежедневная цель';
 
   @override
   String get dhikrDailyGoalTitle => 'Ежедневная цель';
-
-  @override
-  String dhikrDailyGoalUpdated(Object value) {
-    return 'Ежедневная цель обновлена ​​до $value.';
-  }
 
   @override
   String get dhikrFeedbackAlmostThere =>
@@ -1854,12 +1842,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get dhikrMeaningSubhanAllah => 'Слава Аллаху';
 
   @override
-  String get dhikrRepetitionsFieldHint => 'Пример: 100';
-
-  @override
-  String get dhikrRepetitionsFieldLabel => 'Повторения';
-
-  @override
   String get dhikrResetSession => 'Сбросить сеанс';
 
   @override
@@ -1871,19 +1853,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get dhikrSessionCycleCompleted => 'Вы завершили этот цикл зикра.';
 
   @override
-  String get dhikrSessionGoalHelper =>
-      'Установите, сколько повторений вы хотите за цикл.';
-
-  @override
   String get dhikrSessionGoalShort => 'Цель сеанса';
 
   @override
   String get dhikrSessionGoalTitle => 'Цель сеанса';
-
-  @override
-  String dhikrSessionGoalUpdated(Object value) {
-    return 'Цель сеанса изменена на $value.';
-  }
 
   @override
   String get dhikrSessionResetMessage => 'Сеанс сброшен.';

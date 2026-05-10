@@ -38,8 +38,8 @@ class DhikrSnapshot {
 }
 
 class DhikrService {
-  static const int _defaultSessionGoal = 33;
-  static const int _defaultDailyGoal = 99;
+  static const int sessionGoal = 33;
+  static const int dailyGoal = 99;
   static const int _historyWindowDays = 30;
 
   Future<DhikrSnapshot> loadSnapshot({DateTime? now}) async {
@@ -70,32 +70,6 @@ class DhikrService {
     return _buildSnapshot(prefs, pruned, effectiveNow);
   }
 
-  Future<DhikrSnapshot> updateGoals({
-    int? sessionGoal,
-    int? dailyGoal,
-    DateTime? now,
-  }) async {
-    final prefs = await SharedPreferences.getInstance();
-    if (sessionGoal != null) {
-      await prefs.setInt(
-        AppConstants.keyDhikrSessionGoal,
-        _normalizeGoal(sessionGoal, _defaultSessionGoal),
-      );
-    }
-    if (dailyGoal != null) {
-      await prefs.setInt(
-        AppConstants.keyDhikrDailyGoal,
-        _normalizeGoal(dailyGoal, _defaultDailyGoal),
-      );
-    }
-
-    return _buildSnapshot(
-      prefs,
-      _loadHistory(prefs),
-      _normalizeNow(now),
-    );
-  }
-
   DhikrSnapshot _buildSnapshot(
     SharedPreferences prefs,
     Map<String, int> history,
@@ -103,14 +77,6 @@ class DhikrService {
   ) {
     final todayKey = _dateKey(now);
     final yesterdayKey = _dateKey(now.subtract(const Duration(days: 1)));
-    final sessionGoal = _normalizeGoal(
-      prefs.getInt(AppConstants.keyDhikrSessionGoal),
-      _defaultSessionGoal,
-    );
-    final dailyGoal = _normalizeGoal(
-      prefs.getInt(AppConstants.keyDhikrDailyGoal),
-      _defaultDailyGoal,
-    );
 
     final recentDays = List.generate(7, (index) {
       final day = now.subtract(Duration(days: 6 - index));
@@ -128,8 +94,8 @@ class DhikrService {
         0,
         (sum, day) => sum + day.count,
       ),
-      sessionGoal: sessionGoal,
-      dailyGoal: dailyGoal,
+      sessionGoal: DhikrService.sessionGoal,
+      dailyGoal: DhikrService.dailyGoal,
       recentDays: recentDays,
     );
   }
@@ -158,11 +124,6 @@ class DhikrService {
         return date != null && !date.isBefore(cutoff);
       }),
     );
-  }
-
-  int _normalizeGoal(int? value, int fallback) {
-    if (value == null || value <= 0) return fallback;
-    return value;
   }
 
   DateTime _normalizeNow(DateTime? now) {

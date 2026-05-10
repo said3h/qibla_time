@@ -1782,26 +1782,14 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
-  String get dhikrChooseCustomValue => 'Elegir valor personalizado';
-
-  @override
   String get dhikrDailyGoalCompletedMessage =>
       'Has completado tu meta diaria de dhikr.';
-
-  @override
-  String get dhikrDailyGoalHelper =>
-      'Elige cuántas repeticiones quieres alcanzar hoy.';
 
   @override
   String get dhikrDailyGoalShort => 'Meta diaria';
 
   @override
   String get dhikrDailyGoalTitle => 'Meta diaria';
-
-  @override
-  String dhikrDailyGoalUpdated(Object value) {
-    return 'Meta diaria actualizada a $value';
-  }
 
   @override
   String get dhikrFeedbackAlmostThere =>
@@ -1851,12 +1839,6 @@ class AppLocalizationsEs extends AppLocalizations {
   String get dhikrMeaningSubhanAllah => 'Gloria a Allah';
 
   @override
-  String get dhikrRepetitionsFieldHint => 'Ejemplo: 100';
-
-  @override
-  String get dhikrRepetitionsFieldLabel => 'Repeticiones';
-
-  @override
   String get dhikrResetSession => 'Reiniciar sesión';
 
   @override
@@ -1869,19 +1851,10 @@ class AppLocalizationsEs extends AppLocalizations {
       'Has completado este ciclo de dhikr.';
 
   @override
-  String get dhikrSessionGoalHelper =>
-      'Define cuántas repeticiones quieres hacer por ciclo.';
-
-  @override
   String get dhikrSessionGoalShort => 'Meta de sesión';
 
   @override
   String get dhikrSessionGoalTitle => 'Meta de sesión';
-
-  @override
-  String dhikrSessionGoalUpdated(Object value) {
-    return 'Meta de sesión actualizada a $value';
-  }
 
   @override
   String get dhikrSessionResetMessage => 'La sesión se ha reiniciado.';

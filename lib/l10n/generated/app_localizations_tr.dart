@@ -1761,26 +1761,14 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
-  String get dhikrChooseCustomValue => 'Özel değer seçin';
-
-  @override
   String get dhikrDailyGoalCompletedMessage =>
       'Günlük zikir hedefinizi tamamladınız.';
-
-  @override
-  String get dhikrDailyGoalHelper =>
-      'Bugün kaç tekrara ulaşmak istediğinizi seçin.';
 
   @override
   String get dhikrDailyGoalShort => 'Günlük hedef';
 
   @override
   String get dhikrDailyGoalTitle => 'Günlük hedef';
-
-  @override
-  String dhikrDailyGoalUpdated(Object value) {
-    return 'Günlük hedef $value olarak güncellendi';
-  }
 
   @override
   String get dhikrFeedbackAlmostThere =>
@@ -1829,12 +1817,6 @@ class AppLocalizationsTr extends AppLocalizations {
   String get dhikrMeaningSubhanAllah => 'Allah\'a hamd olsun';
 
   @override
-  String get dhikrRepetitionsFieldHint => 'Örnek: 100';
-
-  @override
-  String get dhikrRepetitionsFieldLabel => 'Tekrarlar';
-
-  @override
   String get dhikrResetSession => 'Oturumu sıfırla';
 
   @override
@@ -1846,19 +1828,10 @@ class AppLocalizationsTr extends AppLocalizations {
   String get dhikrSessionCycleCompleted => 'Bu zikir döngüsünü tamamladınız.';
 
   @override
-  String get dhikrSessionGoalHelper =>
-      'Döngü başına kaç tekrar istediğinizi ayarlayın.';
-
-  @override
   String get dhikrSessionGoalShort => 'Oturum hedefi';
 
   @override
   String get dhikrSessionGoalTitle => 'Oturum hedefi';
-
-  @override
-  String dhikrSessionGoalUpdated(Object value) {
-    return 'Oturum hedefi $value olarak güncellendi';
-  }
 
   @override
   String get dhikrSessionResetMessage => 'Oturum sıfırlandı.';
