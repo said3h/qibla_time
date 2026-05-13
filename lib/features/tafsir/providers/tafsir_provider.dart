@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/tafsir_entry.dart';
 import '../services/tafsir_api_client.dart';
+import '../services/tafsir_cache_service.dart';
 import '../services/tafsir_config.dart';
 import '../services/tafsir_service.dart';
 
@@ -23,9 +24,14 @@ final tafsirApiClientProvider = Provider<TafsirApiClient?>((ref) {
   );
 });
 
+final tafsirCacheServiceProvider = Provider<TafsirCacheService>((ref) {
+  return const TafsirCacheService();
+});
+
 final tafsirServiceProvider = Provider<TafsirService>((ref) {
   return TafsirService(
     apiClient: ref.watch(tafsirApiClientProvider),
+    cacheService: ref.watch(tafsirCacheServiceProvider),
     defaultTafsirId:
         ref.watch(tafsirConfigProvider).normalizedDefaultResourceId,
   );

@@ -32,6 +32,81 @@ class TafsirEntry {
   String get verseKey => '$surahNumber:$ayahNumber';
 
   bool get hasUsableText => text.trim().isNotEmpty;
+
+  TafsirEntry copyWith({
+    String? tafsirId,
+    String? resourceName,
+    String? languageCode,
+    int? surahNumber,
+    int? ayahNumber,
+    String? text,
+    String? source,
+    String? sourceUrl,
+    String? author,
+    String? translator,
+    String? publisher,
+    String? license,
+    DateTime? cachedAt,
+  }) {
+    return TafsirEntry(
+      tafsirId: tafsirId ?? this.tafsirId,
+      resourceName: resourceName ?? this.resourceName,
+      languageCode: languageCode ?? this.languageCode,
+      surahNumber: surahNumber ?? this.surahNumber,
+      ayahNumber: ayahNumber ?? this.ayahNumber,
+      text: text ?? this.text,
+      source: source ?? this.source,
+      sourceUrl: sourceUrl ?? this.sourceUrl,
+      author: author ?? this.author,
+      translator: translator ?? this.translator,
+      publisher: publisher ?? this.publisher,
+      license: license ?? this.license,
+      cachedAt: cachedAt ?? this.cachedAt,
+    );
+  }
+
+  factory TafsirEntry.fromJson(Map<String, dynamic> json) {
+    return TafsirEntry(
+      tafsirId: json['tafsirId']?.toString() ?? '',
+      resourceName: json['resourceName']?.toString() ?? '',
+      languageCode: json['languageCode']?.toString() ?? '',
+      surahNumber: _readInt(json['surahNumber']),
+      ayahNumber: _readInt(json['ayahNumber']),
+      text: json['text']?.toString() ?? '',
+      source: json['source']?.toString() ?? '',
+      sourceUrl: json['sourceUrl']?.toString(),
+      author: json['author']?.toString(),
+      translator: json['translator']?.toString(),
+      publisher: json['publisher']?.toString(),
+      license: json['license']?.toString(),
+      cachedAt: DateTime.tryParse(json['cachedAt']?.toString() ?? ''),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'tafsirId': tafsirId,
+      'resourceName': resourceName,
+      'languageCode': languageCode,
+      'surahNumber': surahNumber,
+      'ayahNumber': ayahNumber,
+      'text': text,
+      'source': source,
+      if (sourceUrl != null) 'sourceUrl': sourceUrl,
+      if (author != null) 'author': author,
+      if (translator != null) 'translator': translator,
+      if (publisher != null) 'publisher': publisher,
+      if (license != null) 'license': license,
+      if (cachedAt != null) 'cachedAt': cachedAt!.toIso8601String(),
+    };
+  }
+
+  static int _readInt(Object? value) {
+    if (value is int) return value;
+    if (value is num) return value.toInt();
+    if (value is String) return int.tryParse(value) ?? 0;
+    return 0;
+  }
 }
 
 enum TafsirLoadSource {

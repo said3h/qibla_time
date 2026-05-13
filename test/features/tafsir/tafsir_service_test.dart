@@ -5,11 +5,19 @@ import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
 import 'package:qibla_time/features/tafsir/models/tafsir_entry.dart';
 import 'package:qibla_time/features/tafsir/services/tafsir_api_client.dart';
+import 'package:qibla_time/features/tafsir/services/tafsir_cache_service.dart';
 import 'package:qibla_time/features/tafsir/services/tafsir_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
   group('TafsirService', () {
     const service = TafsirService();
+
+    setUp(() {
+      SharedPreferences.setMockInitialValues({});
+    });
 
     test('returns unavailable while no tafsir source is configured', () async {
       final result = await service.getTafsir(
@@ -67,6 +75,127 @@ void main() {
       expect(result.entry, isNotNull);
       expect(result.entry!.languageCode, 'en');
       expect(result.entry!.verseKey, '2:255');
+    });
+
+    test('returns cache before calling API', () async {
+      var didCallApi = false;
+      const cacheService = TafsirCacheService();
+      await cacheService.write(
+        const TafsirEntry(
+          tafsirId: '169',
+          resourceName: 'Cached Tafsir',
+          languageCode: 'en',
+          surahNumber: 2,
+          ayahNumber: 255,
+          text: '<p>Cached tafsir body.</p>',
+          source: 'Quran Foundation API',
+        ),
+      );
+      final apiClient = TafsirApiClient(
+        httpClient: MockClient((request) async {
+          didCallApi = true;
+          return http.Response('{}', 200);
+        }),
+      );
+      final apiBackedService = TafsirService(
+        apiClient: apiClient,
+        cacheService: cacheService,
+      );
+
+      final result = await apiBackedService.getTafsir(
+        surahNumber: 2,
+        ayahNumber: 255,
+        languageCode: 'en',
+        tafsirId: '169',
+      );
+
+      expect(result.source, TafsirLoadSource.cache);
+      expect(result.entry!.resourceName, 'Cached Tafsir');
+      expect(didCallApi, isFalse);
+    });
+
+    test('writes valid API responses to cache', () async {
+      const cacheService = TafsirCacheService();
+      final apiClient = TafsirApiClient(
+        httpClient: MockClient((request) async {
+          return http.Response(
+            jsonEncode({
+              'tafsir': {
+                'verses': {
+                  '2:255': {'id': 255},
+                },
+                'resource_id': 169,
+                'resource_name': 'Fake Tafsir',
+                'text': '<p>Fresh tafsir body.</p>',
+              },
+            }),
+            200,
+          );
+        }),
+      );
+      final apiBackedService = TafsirService(
+        apiClient: apiClient,
+        cacheService: cacheService,
+      );
+
+      final result = await apiBackedService.getTafsir(
+        surahNumber: 2,
+        ayahNumber: 255,
+        languageCode: 'en',
+        tafsirId: '169',
+      );
+      final cached = await cacheService.read(
+        languageCode: 'en',
+        tafsirId: '169',
+        surahNumber: 2,
+        ayahNumber: 255,
+      );
+
+      expect(result.source, TafsirLoadSource.api);
+      expect(cached, isNotNull);
+      expect(cached!.text, '<p>Fresh tafsir body.</p>');
+    });
+
+    test('does not cache invalid API responses', () async {
+      const cacheService = TafsirCacheService();
+      final apiClient = TafsirApiClient(
+        httpClient: MockClient((request) async {
+          return http.Response(
+            jsonEncode({
+              'tafsir': {
+                'verses': {
+                  '2:255': {'id': 255},
+                },
+                'resource_id': 169,
+                'resource_name': 'Fake Tafsir',
+                'text': 'Too many requests, please try again later',
+              },
+            }),
+            200,
+          );
+        }),
+      );
+      final apiBackedService = TafsirService(
+        apiClient: apiClient,
+        cacheService: cacheService,
+      );
+
+      final result = await apiBackedService.getTafsir(
+        surahNumber: 2,
+        ayahNumber: 255,
+        languageCode: 'en',
+        tafsirId: '169',
+      );
+      final cached = await cacheService.read(
+        languageCode: 'en',
+        tafsirId: '169',
+        surahNumber: 2,
+        ayahNumber: 255,
+      );
+
+      expect(result.source, TafsirLoadSource.unavailable);
+      expect(result.errorCode, 'invalid_tafsir_text');
+      expect(cached, isNull);
     });
 
     test('uses default tafsir id when request does not include one', () async {

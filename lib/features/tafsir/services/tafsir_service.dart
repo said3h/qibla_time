@@ -1,15 +1,19 @@
 import '../../../core/services/logger_service.dart';
 import '../models/tafsir_entry.dart';
 import 'tafsir_api_client.dart';
+import 'tafsir_cache_service.dart';
 
 class TafsirService {
   const TafsirService({
     TafsirApiClient? apiClient,
+    TafsirCacheService? cacheService,
     String? defaultTafsirId,
   })  : _apiClient = apiClient,
+        _cacheService = cacheService,
         _defaultTafsirId = defaultTafsirId;
 
   final TafsirApiClient? _apiClient;
+  final TafsirCacheService? _cacheService;
   final String? _defaultTafsirId;
 
   Future<TafsirLoadResult> getTafsir({
@@ -34,7 +38,19 @@ class TafsirService {
 
     // TODO: Check verified offline tafsir assets once a legally usable dataset
     // is approved for bundling.
-    // TODO: Check local tafsir cache if API caching is legally allowed.
+    final cachedEntry = await _readCache(
+      languageCode: normalizedLanguage,
+      tafsirId: normalizedTafsirId,
+      surahNumber: surahNumber,
+      ayahNumber: ayahNumber,
+    );
+    if (cachedEntry != null) {
+      return TafsirLoadResult(
+        source: TafsirLoadSource.cache,
+        entry: cachedEntry,
+      );
+    }
+
     if (_apiClient != null) {
       if (normalizedTafsirId == null) {
         return const TafsirLoadResult(
@@ -50,13 +66,29 @@ class TafsirService {
         languageCode: normalizedLanguage,
       );
       if (apiResult.hasEntry && apiResult.source == TafsirLoadSource.api) {
-        return validateEntry(apiResult.entry!).source ==
-                TafsirLoadSource.offline
-            ? apiResult
-            : const TafsirLoadResult(
-                source: TafsirLoadSource.unavailable,
-                errorCode: 'invalid_tafsir_text',
-              );
+        final validation = validateEntry(apiResult.entry!);
+        if (validation.source != TafsirLoadSource.offline) {
+          return const TafsirLoadResult(
+            source: TafsirLoadSource.unavailable,
+            errorCode: 'invalid_tafsir_text',
+          );
+        }
+
+        await _cacheService?.write(apiResult.entry!);
+        return apiResult;
+      }
+
+      final fallbackEntry = await _readCache(
+        languageCode: normalizedLanguage,
+        tafsirId: normalizedTafsirId,
+        surahNumber: surahNumber,
+        ayahNumber: ayahNumber,
+      );
+      if (fallbackEntry != null) {
+        return TafsirLoadResult(
+          source: TafsirLoadSource.cache,
+          entry: fallbackEntry,
+        );
       }
 
       return apiResult;
@@ -101,6 +133,25 @@ class TafsirService {
       source: TafsirLoadSource.offline,
       entry: entry,
     );
+  }
+
+  Future<TafsirEntry?> _readCache({
+    required String languageCode,
+    required String? tafsirId,
+    required int surahNumber,
+    required int ayahNumber,
+  }) async {
+    if (_cacheService == null || tafsirId == null) return null;
+    final entry = await _cacheService.read(
+      languageCode: languageCode,
+      tafsirId: tafsirId,
+      surahNumber: surahNumber,
+      ayahNumber: ayahNumber,
+    );
+    if (entry == null) return null;
+    final validation = validateEntry(entry);
+    if (validation.source != TafsirLoadSource.offline) return null;
+    return entry;
   }
 
   bool _isValidAyahReference(int surahNumber, int ayahNumber) {
