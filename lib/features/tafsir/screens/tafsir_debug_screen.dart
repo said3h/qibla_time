@@ -9,6 +9,8 @@ import '../providers/tafsir_provider.dart';
 class TafsirDebugScreen extends ConsumerStatefulWidget {
   const TafsirDebugScreen({super.key});
 
+  static const routeName = '/debug/tafsir';
+
   @override
   ConsumerState<TafsirDebugScreen> createState() => _TafsirDebugScreenState();
 }

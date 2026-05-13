@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'core/localization/locale_controller.dart';
 import 'core/services/logger_service.dart';
@@ -12,6 +13,7 @@ import 'features/onboarding/screens/onboarding_gate.dart';
 import 'features/prayer_times/services/adhan_manager.dart';
 import 'features/prayer_times/services/notification_service.dart';
 import 'features/prayer_times/services/widget_sync_service.dart';
+import 'features/tafsir/screens/tafsir_debug_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,7 +38,8 @@ void main() async {
       await container.read(adhanManagerProvider).scheduleTodayAdhans();
     } catch (e, st) {
       // Keep startup resilient; diagnosis goes to logs.
-      AppLogger.error('AdhanManager.scheduleTodayAdhans failed at startup', error: e, stackTrace: st);
+      AppLogger.error('AdhanManager.scheduleTodayAdhans failed at startup',
+          error: e, stackTrace: st);
     }
   });
 }
@@ -53,8 +56,10 @@ class QiblaTimeApp extends ConsumerWidget {
     if (accessibility.highContrast) {
       tokens = tokens.copyWith(
         bgSurface: Color.alphaBlend(
-            tokens.primary.withOpacity(0.06), tokens.bgSurface),
-        border: tokens.primary.withOpacity(0.42),
+          tokens.primary.withValues(alpha: 0.06),
+          tokens.bgSurface,
+        ),
+        border: tokens.primary.withValues(alpha: 0.42),
         textSecondary: tokens.textPrimary,
         textMuted: tokens.textSecondary,
       );
@@ -83,6 +88,10 @@ class QiblaTimeApp extends ConsumerWidget {
         );
       },
       home: const OnboardingGate(),
+      routes: {
+        if (kDebugMode)
+          TafsirDebugScreen.routeName: (_) => const TafsirDebugScreen(),
+      },
     );
   }
 }
