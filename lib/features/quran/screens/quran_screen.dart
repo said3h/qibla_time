@@ -17,6 +17,7 @@ import '../../hafiz/screens/hafiz_mode_screen.dart';
 import '../../quran_share/services/ayah_share_service.dart';
 import '../../quran_share/services/ayah_share_video_service.dart';
 import '../../quran_share/widgets/ayah_share_preview_sheet.dart';
+import '../../tafsir/widgets/tafsir_panel.dart';
 import '../models/quran_models.dart';
 import '../widgets/quran_ayah_card.dart';
 import '../widgets/quran_continuous_view.dart';
@@ -27,6 +28,9 @@ import '../services/quran_reading_service.dart';
 import '../services/quran_reader_preferences.dart';
 import '../services/quran_service.dart';
 import 'downloaded_surahs_screen.dart';
+
+const _enableQuranTafsirPanels =
+    kDebugMode && bool.fromEnvironment('QURAN_TAFSIR_PANEL_ENABLED');
 
 class QuranScreen extends ConsumerStatefulWidget {
   const QuranScreen({super.key});
@@ -1927,35 +1931,57 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                             bookmark.ayahNumber == ayah.numberInSurah,
                       );
 
-                      return InkWell(
-                        onTap: () => _isSelectionMode
-                            ? _toggleContiguousAyahSelection(ayah.numberInSurah)
-                            : _saveReading(ayah.numberInSurah),
-                        onLongPress: () =>
-                            _toggleContiguousAyahSelection(ayah.numberInSurah),
-                        borderRadius: BorderRadius.circular(16),
-                        child: QuranAyahCard(
-                          tokens: tokens,
-                          l10n: l10n,
-                          ayah: ayah,
-                          surahNumber: widget.summary.number,
-                          canPlayAudio: canPlayAudio,
-                          isLastRead: isLastRead,
-                          isActiveAudio: isActiveAudio,
-                          isPlayingAudio: isPlayingAudio,
-                          isBookmarked: isBookmarked,
-                          isSelected: isSelected,
-                          isSelectionMode: _isSelectionMode,
-                          showTajweed: showTajweed,
-                          audioStatusLabel: _audioStatusLabel(
-                            ayah,
-                            result.source,
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          InkWell(
+                            onTap: () => _isSelectionMode
+                                ? _toggleContiguousAyahSelection(
+                                    ayah.numberInSurah,
+                                  )
+                                : _saveReading(ayah.numberInSurah),
+                            onLongPress: () => _toggleContiguousAyahSelection(
+                              ayah.numberInSurah,
+                            ),
+                            borderRadius: BorderRadius.circular(16),
+                            child: QuranAyahCard(
+                              tokens: tokens,
+                              l10n: l10n,
+                              ayah: ayah,
+                              surahNumber: widget.summary.number,
+                              canPlayAudio: canPlayAudio,
+                              isLastRead: isLastRead,
+                              isActiveAudio: isActiveAudio,
+                              isPlayingAudio: isPlayingAudio,
+                              isBookmarked: isBookmarked,
+                              isSelected: isSelected,
+                              isSelectionMode: _isSelectionMode,
+                              showTajweed: showTajweed,
+                              audioStatusLabel: _audioStatusLabel(
+                                ayah,
+                                result.source,
+                              ),
+                              onToggleAudio: () =>
+                                  _toggleAyahAudio(ayah, result.source),
+                              onToggleBookmark: () =>
+                                  _toggleBookmark(ayah.numberInSurah),
+                            ),
                           ),
-                          onToggleAudio: () =>
-                              _toggleAyahAudio(ayah, result.source),
-                          onToggleBookmark: () =>
-                              _toggleBookmark(ayah.numberInSurah),
-                        ),
+                          if (_enableQuranTafsirPanels && !_isSelectionMode)
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                left: 2,
+                                right: 2,
+                                bottom: 12,
+                              ),
+                              child: TafsirPanel(
+                                surahNumber: widget.summary.number,
+                                ayahNumber: ayah.numberInSurah,
+                                languageCode: Localizations.localeOf(context)
+                                    .languageCode,
+                              ),
+                            ),
+                        ],
                       );
                     },
                   ),
