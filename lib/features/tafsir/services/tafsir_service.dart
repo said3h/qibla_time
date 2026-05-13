@@ -5,9 +5,12 @@ import 'tafsir_api_client.dart';
 class TafsirService {
   const TafsirService({
     TafsirApiClient? apiClient,
-  }) : _apiClient = apiClient;
+    String? defaultTafsirId,
+  })  : _apiClient = apiClient,
+        _defaultTafsirId = defaultTafsirId;
 
   final TafsirApiClient? _apiClient;
+  final String? _defaultTafsirId;
 
   Future<TafsirLoadResult> getTafsir({
     required int surahNumber,
@@ -16,7 +19,8 @@ class TafsirService {
     String? tafsirId,
   }) async {
     final normalizedLanguage = _normalizeLanguageCode(languageCode);
-    final normalizedTafsirId = _normalizeOptionalId(tafsirId);
+    final normalizedTafsirId = _normalizeOptionalId(tafsirId) ??
+        _normalizeOptionalId(_defaultTafsirId);
 
     if (!_isValidAyahReference(surahNumber, ayahNumber)) {
       AppLogger.warning(

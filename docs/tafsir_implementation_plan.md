@@ -237,6 +237,50 @@ Never show:
 - HTML error pages
 - empty text as a tafsir card
 
+## Safe API Configuration
+
+Tafsir API access must be opt-in and configured with `--dart-define`. Do not
+commit real tokens, client IDs, or `.env` files.
+
+Supported defines:
+
+```text
+TAFSIR_API_ENABLED=true
+TAFSIR_API_BASE_URL=https://api.quran.com/api/v4
+TAFSIR_API_AUTH_TOKEN=<content-api-token>
+TAFSIR_API_CLIENT_ID=<client-id>
+TAFSIR_DEFAULT_RESOURCE_ID=<numeric-resource-id>
+```
+
+Safety rules:
+- If `TAFSIR_API_ENABLED` is not `true`, no `TafsirApiClient` is created.
+- If token or client id is missing, no `TafsirApiClient` is created.
+- If `TAFSIR_DEFAULT_RESOURCE_ID` is missing, the debug screen can still accept
+  a numeric tafsir ID manually.
+- Resource IDs must be numeric; slugs or names are rejected before making a
+  request.
+- Release builds should not pass these defines until Quran Foundation API terms,
+  caching policy, and source selection are approved.
+
+Manual debug run example:
+
+```bash
+flutter run \
+  --dart-define=TAFSIR_API_ENABLED=true \
+  --dart-define=TAFSIR_API_BASE_URL=https://api.quran.com/api/v4 \
+  --dart-define=TAFSIR_API_AUTH_TOKEN=REDACTED \
+  --dart-define=TAFSIR_API_CLIENT_ID=REDACTED \
+  --dart-define=TAFSIR_DEFAULT_RESOURCE_ID=169
+```
+
+The temporary debug screen is registered only in debug mode at:
+
+```text
+/debug/tafsir
+```
+
+It is not exposed in main navigation and is not available in production builds.
+
 ## Asset Loading Pattern
 
 Reuse the existing Quran pattern:

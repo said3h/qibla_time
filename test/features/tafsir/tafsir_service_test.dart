@@ -69,6 +69,42 @@ void main() {
       expect(result.entry!.verseKey, '2:255');
     });
 
+    test('uses default tafsir id when request does not include one', () async {
+      late http.Request capturedRequest;
+      final apiClient = TafsirApiClient(
+        httpClient: MockClient((request) async {
+          capturedRequest = request;
+          return http.Response(
+            jsonEncode({
+              'tafsir': {
+                'verses': {
+                  '1:1': {'id': 1},
+                },
+                'resource_id': 169,
+                'resource_name': 'Fake Tafsir',
+                'text': '<p>Fake tafsir body.</p>',
+              },
+            }),
+            200,
+          );
+        }),
+        baseUri: Uri.parse('https://api.example.test/api/v4'),
+      );
+      final apiBackedService = TafsirService(
+        apiClient: apiClient,
+        defaultTafsirId: '169',
+      );
+
+      final result = await apiBackedService.getTafsir(
+        surahNumber: 1,
+        ayahNumber: 1,
+        languageCode: 'en',
+      );
+
+      expect(result.source, TafsirLoadSource.api);
+      expect(capturedRequest.url.path, '/api/v4/tafsirs/169/by_ayah/1:1');
+    });
+
     test('does not call API when tafsir id is missing', () async {
       var didCallApi = false;
       final apiClient = TafsirApiClient(

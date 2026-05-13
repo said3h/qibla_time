@@ -59,6 +59,11 @@ class _TafsirDebugScreenState extends ConsumerState<TafsirDebugScreen> {
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
     final request = _request;
+    final config = ref.watch(tafsirConfigProvider);
+    final defaultResourceId = config.normalizedDefaultResourceId;
+    if (_tafsirIdController.text.trim().isEmpty && defaultResourceId != null) {
+      _tafsirIdController.text = defaultResourceId;
+    }
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
