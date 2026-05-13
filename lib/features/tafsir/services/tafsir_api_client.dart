@@ -138,7 +138,7 @@ class TafsirApiClient {
 
     final translatedName = _readMap(tafsir, 'translated_name');
     return TafsirLoadResult(
-      source: TafsirLoadSource.online,
+      source: TafsirLoadSource.api,
       entry: TafsirEntry(
         tafsirId: tafsir['resource_id']?.toString() ?? tafsirId,
         resourceName:

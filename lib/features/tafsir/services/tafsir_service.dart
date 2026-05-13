@@ -1,8 +1,13 @@
 import '../../../core/services/logger_service.dart';
 import '../models/tafsir_entry.dart';
+import 'tafsir_api_client.dart';
 
 class TafsirService {
-  const TafsirService();
+  const TafsirService({
+    TafsirApiClient? apiClient,
+  }) : _apiClient = apiClient;
+
+  final TafsirApiClient? _apiClient;
 
   Future<TafsirLoadResult> getTafsir({
     required int surahNumber,
@@ -26,8 +31,35 @@ class TafsirService {
     // TODO: Check verified offline tafsir assets once a legally usable dataset
     // is approved for bundling.
     // TODO: Check local tafsir cache if API caching is legally allowed.
-    // TODO: Fetch online tafsir by resource when API credentials and terms are
-    // confirmed safe for mobile usage.
+    if (_apiClient != null) {
+      if (normalizedTafsirId == null) {
+        return const TafsirLoadResult(
+          source: TafsirLoadSource.unavailable,
+          errorCode: 'missing_tafsir_id',
+        );
+      }
+
+      final apiResult = await _apiClient.fetchAyahTafsir(
+        tafsirId: normalizedTafsirId,
+        surahNumber: surahNumber,
+        ayahNumber: ayahNumber,
+        languageCode: normalizedLanguage,
+      );
+      if (apiResult.hasEntry && apiResult.source == TafsirLoadSource.api) {
+        return validateEntry(apiResult.entry!).source ==
+                TafsirLoadSource.offline
+            ? apiResult
+            : const TafsirLoadResult(
+                source: TafsirLoadSource.unavailable,
+                errorCode: 'invalid_tafsir_text',
+              );
+      }
+
+      return apiResult;
+    }
+
+    // TODO: Enable online tafsir by resource when API credentials, selected
+    // resource IDs, and cache terms are confirmed safe for mobile usage.
     AppLogger.info(
       'Tafsir unavailable: ${normalizedTafsirId ?? 'default'} '
       '$normalizedLanguage $surahNumber:$ayahNumber.',
@@ -83,7 +115,9 @@ class TafsirService {
   String? _normalizeOptionalId(String? tafsirId) {
     final normalized = tafsirId?.trim();
     if (normalized == null || normalized.isEmpty) return null;
-    return normalized;
+    final parsed = int.tryParse(normalized);
+    if (parsed == null || parsed <= 0) return null;
+    return parsed.toString();
   }
 
   bool _containsTechnicalError(String text) {

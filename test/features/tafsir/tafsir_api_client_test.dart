@@ -57,7 +57,7 @@ void main() {
         languageCode: 'en',
       );
 
-      expect(result.source, TafsirLoadSource.online);
+      expect(result.source, TafsirLoadSource.api);
       expect(result.entry, isNotNull);
       expect(result.entry!.tafsirId, '169');
       expect(result.entry!.resourceName, 'Fake Tafsir');
@@ -151,7 +151,7 @@ void main() {
         languageCode: 'en',
       );
 
-      expect(result.source, TafsirLoadSource.online);
+      expect(result.source, TafsirLoadSource.api);
       expect(capturedRequest.headers['x-auth-token'], 'token');
       expect(capturedRequest.headers['x-client-id'], 'client');
       expect(capturedRequest.headers['Accept'], 'application/json');

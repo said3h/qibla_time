@@ -36,6 +36,7 @@ class TafsirEntry {
 
 enum TafsirLoadSource {
   offline,
+  api,
   online,
   cache,
   unavailable,
