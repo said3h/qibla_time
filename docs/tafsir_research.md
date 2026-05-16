@@ -34,6 +34,31 @@ Add reliable tafsir/context to Quran verses in Qibla Time to reduce misunderstan
   - Online API usage is not the same as offline bundling rights.
   - Cached content limits and attribution requirements must be verified before storing large offline caches.
 
+### Debug Spanish Resource Candidate
+- Resource: Spanish Abridged Explanation of the Quran
+- QUL resource ID: `268`
+- QUL URL: https://qul.tarteel.ai/resources/tafsir/268
+- Source listed by QUL: https://quranenc.com/en/browse/spanish_mokhtasar
+- Language: Spanish
+- Publisher/source note from QUL: Spanish translation of "Abridged Explanation of the Quran" by Tafsir Center of Quranic Studies.
+- Quran Foundation `/resources/tafsirs` status:
+  - The public Quran.com/Quran Foundation tafsir resource list currently does not include a Spanish tafsir entry.
+  - Resource `268` returns `404` from the Quran Foundation tafsir-by-ayah endpoint, so it is treated as a QUL resource ID, not a Quran Foundation API resource ID.
+- QUL availability:
+  - The public QUL resource page exposes a per-ayah preview, e.g. `https://qul.tarteel.ai/resources/tafsir/268?ayah=2%3A255`.
+  - Full JSON/SQLite exports are shown by QUL, but download currently requires sign-in.
+- Response/format observed:
+  - QUL preview is HTML, not JSON.
+  - The preview includes an HTML heading, Arabic ayah text, and a `<div class="tafsir spanish">...</div>` containing Spanish tafsir text.
+  - QUL documentation says JSON exports may contain grouped tafsir entries where an ayah key points to another group key; this must be supported before offline bundling.
+- Approximate length:
+  - Short ayahs can be one sentence.
+  - Longer ayahs such as 2:255 return a paragraph of several hundred Spanish characters.
+- Current implementation decision:
+  - Use QUL preview only for internal debug testing behind explicit `--dart-define` flags.
+  - Do not bundle or redistribute the dataset yet.
+  - TODO: verify QuranEnc/Tafsir Center redistribution, caching, modification, and attribution terms before any production feature or offline import.
+
 ## MVP Recommendation
 Start with:
 - Spanish Abridged Explanation of the Quran

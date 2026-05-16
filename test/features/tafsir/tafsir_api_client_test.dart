@@ -26,6 +26,24 @@ void main() {
       );
     });
 
+    test('builds QUL preview URL for debug Spanish tafsir', () {
+      final client = TafsirApiClient(
+        baseUri: Uri.parse('https://qul.tarteel.ai'),
+        source: TafsirApiSource.qulPreview,
+      );
+
+      final uri = client.buildAyahTafsirUri(
+        tafsirId: '268',
+        surahNumber: 2,
+        ayahNumber: 255,
+      );
+
+      expect(
+        uri.toString(),
+        'https://qul.tarteel.ai/resources/tafsir/268?ayah=2%3A255',
+      );
+    });
+
     test('parses a successful Quran Foundation tafsir response', () {
       final client = TafsirApiClient(
         baseUri: Uri.parse('https://api.example.test/api/v4'),
@@ -63,6 +81,39 @@ void main() {
       expect(result.entry!.resourceName, 'Fake Tafsir');
       expect(result.entry!.verseKey, '2:255');
       expect(result.entry!.text, '<p>Fake tafsir body for tests.</p>');
+    });
+
+    test('parses a successful QUL preview response safely', () {
+      final client = TafsirApiClient(
+        baseUri: Uri.parse('https://qul.tarteel.ai'),
+        source: TafsirApiSource.qulPreview,
+      );
+      final body = utf8.encode('''
+        <h1>Spanish Abridged Explanation of the Quran</h1>
+        <h2>Spanish Abridged Explanation of the Quran tafsir for Surah Al-Baqarah — Ayah 255</h2>
+        <div class="tafsir spanish">
+          Al-lah, no existe ninguna otra divinidad fuera de Él.
+        </div>
+      ''');
+
+      final result = client.parseQulPreviewResponse(
+        body,
+        tafsirId: '268',
+        surahNumber: 2,
+        ayahNumber: 255,
+        languageCode: 'es',
+        sourceUrl: 'https://qul.tarteel.ai/resources/tafsir/268?ayah=2:255',
+      );
+
+      expect(result.source, TafsirLoadSource.api);
+      expect(result.entry, isNotNull);
+      expect(result.entry!.tafsirId, '268');
+      expect(result.entry!.resourceName,
+          'Spanish Abridged Explanation of the Quran');
+      expect(result.entry!.languageCode, 'es');
+      expect(result.entry!.text,
+          'Al-lah, no existe ninguna otra divinidad fuera de Él.');
+      expect(result.entry!.source, 'QUL preview');
     });
 
     test('rejects shifted verse alignment in fake response', () {

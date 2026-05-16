@@ -81,6 +81,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
   String? _profileDisplayName;
   String? _profileNationalityCode;
 
+  // Quran settings
+  bool _tafsirEnabled = false;
+
   static const _languageOptions = <Locale?>[
     null,
     Locale('es'),
@@ -159,6 +162,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
     dailyInspirationHour = await inspirationService.getNotificationHour();
     hadithFavoritesCount =
         (await ref.read(hadithServiceProvider).getFavorites()).length;
+
+    _tafsirEnabled = await _settingsService.getTafsirEnabled();
 
     if (Platform.isAndroid) {
       final androidInfo = await DeviceInfoPlugin().androidInfo;
@@ -795,6 +800,21 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
                 l10n.commonCurrentStatus,
                 _ramadanStatusLabel(ramadanStatus),
               ),
+            const SizedBox(height: 14),
+
+            // ── SECCIÓN QURAN ───────────────────────────────────────────
+            _buildSectionTitle(tokens, l10n.settingsSectionQuran),
+            _buildSimpleToggleTile(
+              tokens,
+              l10n.settingsShowTafsir,
+              l10n.settingsShowTafsirSubtitle,
+              _tafsirEnabled,
+              (value) async {
+                await _settingsService.saveTafsirEnabled(value);
+                if (!mounted) return;
+                setState(() => _tafsirEnabled = value);
+              },
+            ),
             const SizedBox(height: 14),
 
             // ── SECCIÓN HADICES ────────────────────────────────────────

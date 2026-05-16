@@ -2,6 +2,7 @@ class TafsirConfig {
   const TafsirConfig({
     required this.enabled,
     required this.baseUrl,
+    this.provider = 'quran_foundation',
     this.authToken,
     this.clientId,
     this.defaultResourceId,
@@ -13,6 +14,7 @@ class TafsirConfig {
       'TAFSIR_API_BASE_URL',
       defaultValue: 'https://api.quran.com/api/v4',
     ),
+    provider: String.fromEnvironment('TAFSIR_API_PROVIDER'),
     authToken: String.fromEnvironment('TAFSIR_API_AUTH_TOKEN'),
     clientId: String.fromEnvironment('TAFSIR_API_CLIENT_ID'),
     defaultResourceId: String.fromEnvironment('TAFSIR_DEFAULT_RESOURCE_ID'),
@@ -20,6 +22,7 @@ class TafsirConfig {
 
   final bool enabled;
   final String baseUrl;
+  final String provider;
   final String? authToken;
   final String? clientId;
   final String? defaultResourceId;
@@ -37,18 +40,25 @@ class TafsirConfig {
   String? get normalizedClientId => _nonEmpty(clientId);
 
   String? get normalizedDefaultResourceId {
-    final value = _nonEmpty(defaultResourceId);
+    final value = _nonEmpty(defaultResourceId) ?? (isQulPreview ? '268' : null);
     if (value == null) return null;
     final parsed = int.tryParse(value);
     if (parsed == null || parsed <= 0) return null;
     return parsed.toString();
   }
 
+  String get normalizedProvider {
+    final value = provider.trim().toLowerCase();
+    if (value.isEmpty) return 'quran_foundation';
+    return value;
+  }
+
+  bool get isQulPreview => normalizedProvider == 'qul_preview';
+
   bool get canCreateApiClient {
-    return enabled &&
-        baseUri != null &&
-        normalizedAuthToken != null &&
-        normalizedClientId != null;
+    if (!enabled || baseUri == null) return false;
+    if (isQulPreview) return true;
+    return normalizedAuthToken != null && normalizedClientId != null;
   }
 
   static String? _nonEmpty(String? value) {

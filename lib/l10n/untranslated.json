@@ -1,1 +1,49 @@
-{}
+{
+  "de": [
+    "settingsSectionQuran",
+    "settingsShowTafsir",
+    "settingsShowTafsirSubtitle"
+  ],
+
+  "fr": [
+    "settingsSectionQuran",
+    "settingsShowTafsir",
+    "settingsShowTafsirSubtitle"
+  ],
+
+  "id": [
+    "settingsSectionQuran",
+    "settingsShowTafsir",
+    "settingsShowTafsirSubtitle"
+  ],
+
+  "it": [
+    "settingsSectionQuran",
+    "settingsShowTafsir",
+    "settingsShowTafsirSubtitle"
+  ],
+
+  "nl": [
+    "settingsSectionQuran",
+    "settingsShowTafsir",
+    "settingsShowTafsirSubtitle"
+  ],
+
+  "pt": [
+    "settingsSectionQuran",
+    "settingsShowTafsir",
+    "settingsShowTafsirSubtitle"
+  ],
+
+  "ru": [
+    "settingsSectionQuran",
+    "settingsShowTafsir",
+    "settingsShowTafsirSubtitle"
+  ],
+
+  "tr": [
+    "settingsSectionQuran",
+    "settingsShowTafsir",
+    "settingsShowTafsirSubtitle"
+  ]
+}

@@ -4,10 +4,16 @@ import 'package:http/http.dart' as http;
 
 import '../models/tafsir_entry.dart';
 
+enum TafsirApiSource {
+  quranFoundation,
+  qulPreview,
+}
+
 class TafsirApiClient {
   TafsirApiClient({
     http.Client? httpClient,
     Uri? baseUri,
+    this.source = TafsirApiSource.quranFoundation,
     this.authToken,
     this.clientId,
     this.timeout = const Duration(seconds: 8),
@@ -16,6 +22,7 @@ class TafsirApiClient {
 
   final http.Client _httpClient;
   final Uri _baseUri;
+  final TafsirApiSource source;
   final String? authToken;
   final String? clientId;
   final Duration timeout;
@@ -54,13 +61,23 @@ class TafsirApiClient {
         );
       }
 
-      return parseAyahTafsirResponse(
-        response.bodyBytes,
-        tafsirId: tafsirId,
-        surahNumber: surahNumber,
-        ayahNumber: ayahNumber,
-        languageCode: languageCode,
-      );
+      return switch (source) {
+        TafsirApiSource.quranFoundation => parseAyahTafsirResponse(
+            response.bodyBytes,
+            tafsirId: tafsirId,
+            surahNumber: surahNumber,
+            ayahNumber: ayahNumber,
+            languageCode: languageCode,
+          ),
+        TafsirApiSource.qulPreview => parseQulPreviewResponse(
+            response.bodyBytes,
+            tafsirId: tafsirId,
+            surahNumber: surahNumber,
+            ayahNumber: ayahNumber,
+            languageCode: languageCode,
+            sourceUrl: uri.toString(),
+          ),
+      };
     } catch (_) {
       return const TafsirLoadResult(
         source: TafsirLoadSource.unavailable,
@@ -74,6 +91,20 @@ class TafsirApiClient {
     required int surahNumber,
     required int ayahNumber,
   }) {
+    if (source == TafsirApiSource.qulPreview) {
+      return _baseUri.replace(
+        pathSegments: [
+          ..._baseUri.pathSegments.where((segment) => segment.isNotEmpty),
+          'resources',
+          'tafsir',
+          tafsirId,
+        ],
+        queryParameters: {
+          'ayah': '$surahNumber:$ayahNumber',
+        },
+      );
+    }
+
     final verseKey = '$surahNumber:$ayahNumber';
     return _baseUri.replace(
       pathSegments: [
@@ -157,6 +188,80 @@ class TafsirApiClient {
     );
   }
 
+  TafsirLoadResult parseQulPreviewResponse(
+    List<int> bodyBytes, {
+    required String tafsirId,
+    required int surahNumber,
+    required int ayahNumber,
+    required String languageCode,
+    required String sourceUrl,
+  }) {
+    final html = _decodeUtf8(bodyBytes);
+    if (html == null) {
+      return const TafsirLoadResult(
+        source: TafsirLoadSource.unavailable,
+        errorCode: 'invalid_tafsir_response',
+      );
+    }
+
+    final title = _firstMatch(
+      html,
+      RegExp(r'<h1[^>]*>([\s\S]*?)</h1>', caseSensitive: false),
+    );
+    final previewHeading = _firstMatch(
+      html,
+      RegExp(r'<h2[^>]*>([\s\S]*?)</h2>', caseSensitive: false),
+    );
+    if (previewHeading != null &&
+        !previewHeading.toLowerCase().contains('ayah $ayahNumber')) {
+      return const TafsirLoadResult(
+        source: TafsirLoadSource.unavailable,
+        errorCode: 'invalid_verse_alignment',
+      );
+    }
+
+    final textHtml = _firstMatch(
+      html,
+      RegExp(
+        r'<div[^>]*class="[^"]*\btafsir\b[^"]*"[^>]*>([\s\S]*?)</div>',
+        caseSensitive: false,
+      ),
+    );
+    final text = _cleanHtmlText(textHtml);
+    if (text.isEmpty) {
+      return const TafsirLoadResult(
+        source: TafsirLoadSource.unavailable,
+        errorCode: 'empty_tafsir_text',
+      );
+    }
+
+    if (_containsTechnicalError(text)) {
+      return const TafsirLoadResult(
+        source: TafsirLoadSource.unavailable,
+        errorCode: 'invalid_tafsir_text',
+      );
+    }
+
+    final resourceName = _cleanHtmlText(title);
+    return TafsirLoadResult(
+      source: TafsirLoadSource.api,
+      entry: TafsirEntry(
+        tafsirId: tafsirId,
+        resourceName: resourceName.isNotEmpty
+            ? resourceName
+            : 'Spanish Abridged Explanation of the Quran',
+        languageCode: languageCode.trim().toLowerCase(),
+        surahNumber: surahNumber,
+        ayahNumber: ayahNumber,
+        text: text,
+        source: 'QUL preview',
+        sourceUrl: sourceUrl,
+        publisher: 'Tafsir Center of Quranic Studies',
+        license: 'TODO: Verify redistribution and caching terms before release',
+      ),
+    );
+  }
+
   Map<String, String> get _headers {
     final headers = <String, String>{
       'Accept': 'application/json',
@@ -174,9 +279,19 @@ class TafsirApiClient {
 
   Map<String, dynamic>? _decodeJsonMap(List<int> bodyBytes) {
     try {
-      final decoded = json.decode(utf8.decode(bodyBytes));
+      final decodedText = _decodeUtf8(bodyBytes);
+      if (decodedText == null) return null;
+      final decoded = json.decode(decodedText);
       if (decoded is! Map) return null;
       return Map<String, dynamic>.from(decoded);
+    } catch (_) {
+      return null;
+    }
+  }
+
+  String? _decodeUtf8(List<int> bodyBytes) {
+    try {
+      return utf8.decode(bodyBytes);
     } catch (_) {
       return null;
     }
@@ -227,5 +342,26 @@ class TafsirApiClient {
     ];
 
     return blockedMarkers.any(normalized.contains);
+  }
+
+  String? _firstMatch(String text, RegExp pattern) {
+    return pattern.firstMatch(text)?.group(1);
+  }
+
+  String _cleanHtmlText(String? html) {
+    if (html == null) return '';
+    return html
+        .replaceAll(RegExp(r'<br\s*/?>', caseSensitive: false), '\n')
+        .replaceAll(RegExp(r'</p\s*>', caseSensitive: false), '\n')
+        .replaceAll(RegExp(r'<[^>]+>'), ' ')
+        .replaceAll('&nbsp;', ' ')
+        .replaceAll('&amp;', '&')
+        .replaceAll('&quot;', '"')
+        .replaceAll('&#39;', "'")
+        .replaceAll('&apos;', "'")
+        .replaceAll('&lt;', '<')
+        .replaceAll('&gt;', '>')
+        .replaceAll(RegExp(r'\s+'), ' ')
+        .trim();
   }
 }

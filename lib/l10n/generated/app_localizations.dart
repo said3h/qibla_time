@@ -848,6 +848,24 @@ abstract class AppLocalizations {
   /// **'Modo Ramadán'**
   String get settingsSectionRamadanMode;
 
+  /// No description provided for @settingsSectionQuran.
+  ///
+  /// In es, this message translates to:
+  /// **'Corán'**
+  String get settingsSectionQuran;
+
+  /// No description provided for @settingsShowTafsir.
+  ///
+  /// In es, this message translates to:
+  /// **'Mostrar Tafsir'**
+  String get settingsShowTafsir;
+
+  /// No description provided for @settingsShowTafsirSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Muestra la interpretación del Corán debajo de cada aleya'**
+  String get settingsShowTafsirSubtitle;
+
   /// No description provided for @settingsSectionHadith.
   ///
   /// In es, this message translates to:

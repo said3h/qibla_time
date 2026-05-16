@@ -18,7 +18,7 @@ class TafsirDebugScreen extends ConsumerStatefulWidget {
 class _TafsirDebugScreenState extends ConsumerState<TafsirDebugScreen> {
   final _surahController = TextEditingController(text: '2');
   final _ayahController = TextEditingController(text: '255');
-  final _tafsirIdController = TextEditingController(text: '169');
+  final _tafsirIdController = TextEditingController();
   final _languageController = TextEditingController(text: 'es');
 
   TafsirRequest? _request;
@@ -61,9 +61,6 @@ class _TafsirDebugScreenState extends ConsumerState<TafsirDebugScreen> {
     final request = _request;
     final config = ref.watch(tafsirConfigProvider);
     final defaultResourceId = config.normalizedDefaultResourceId;
-    if (_tafsirIdController.text.trim().isEmpty && defaultResourceId != null) {
-      _tafsirIdController.text = defaultResourceId;
-    }
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
@@ -84,6 +81,16 @@ class _TafsirDebugScreenState extends ConsumerState<TafsirDebugScreen> {
           padding: const EdgeInsets.all(20),
           children: [
             _DebugNotice(tokens: tokens),
+            if (defaultResourceId != null) ...[
+              const SizedBox(height: 12),
+              _StateCard(
+                tokens: tokens,
+                icon: Icons.tune_rounded,
+                title: 'Default resource',
+                message: 'Using tafsir resource $defaultResourceId when the '
+                    'Tafsir ID field is empty.',
+              ),
+            ],
             const SizedBox(height: 18),
             _InputCard(
               tokens: tokens,

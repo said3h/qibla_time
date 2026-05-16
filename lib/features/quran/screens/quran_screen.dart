@@ -17,6 +17,7 @@ import '../../hafiz/screens/hafiz_mode_screen.dart';
 import '../../quran_share/services/ayah_share_service.dart';
 import '../../quran_share/services/ayah_share_video_service.dart';
 import '../../quran_share/widgets/ayah_share_preview_sheet.dart';
+import '../../tafsir/providers/tafsir_provider.dart';
 import '../../tafsir/widgets/tafsir_panel.dart';
 import '../models/quran_models.dart';
 import '../widgets/quran_ayah_card.dart';
@@ -1968,18 +1969,11 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                             ),
                           ),
                           if (_enableQuranTafsirPanels && !_isSelectionMode)
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                left: 2,
-                                right: 2,
-                                bottom: 12,
-                              ),
-                              child: TafsirPanel(
-                                surahNumber: widget.summary.number,
-                                ayahNumber: ayah.numberInSurah,
-                                languageCode: Localizations.localeOf(context)
-                                    .languageCode,
-                              ),
+                            _TafsirPanelLoader(
+                              surahNumber: widget.summary.number,
+                              ayahNumber: ayah.numberInSurah,
+                              languageCode: Localizations.localeOf(context)
+                                  .languageCode,
                             ),
                         ],
                       );
@@ -2344,6 +2338,39 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _TafsirPanelLoader extends ConsumerWidget {
+  const _TafsirPanelLoader({
+    required this.surahNumber,
+    required this.ayahNumber,
+    required this.languageCode,
+  });
+
+  final int surahNumber;
+  final int ayahNumber;
+  final String languageCode;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final userEnabled = ref.watch(tafsirUserEnabledProvider);
+
+    return userEnabled.when(
+      data: (enabled) {
+        if (!enabled) return const SizedBox.shrink();
+        return Padding(
+          padding: const EdgeInsets.only(left: 2, right: 2, bottom: 12),
+          child: TafsirPanel(
+            surahNumber: surahNumber,
+            ayahNumber: ayahNumber,
+            languageCode: languageCode,
+          ),
+        );
+      },
+      loading: () => const SizedBox.shrink(),
+      error: (_, __) => const SizedBox.shrink(),
     );
   }
 }

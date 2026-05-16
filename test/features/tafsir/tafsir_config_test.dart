@@ -28,6 +28,18 @@ void main() {
       expect(config.normalizedClientId, isNull);
     });
 
+    test('allows QUL preview client without Quran Foundation auth headers', () {
+      const config = TafsirConfig(
+        enabled: true,
+        provider: 'qul_preview',
+        baseUrl: 'https://qul.tarteel.ai',
+      );
+
+      expect(config.canCreateApiClient, isTrue);
+      expect(config.isQulPreview, isTrue);
+      expect(config.normalizedDefaultResourceId, '268');
+    });
+
     test('accepts complete explicit configuration', () {
       const config = TafsirConfig(
         enabled: true,

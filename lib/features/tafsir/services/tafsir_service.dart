@@ -68,6 +68,10 @@ class TafsirService {
       if (apiResult.hasEntry && apiResult.source == TafsirLoadSource.api) {
         final validation = validateEntry(apiResult.entry!);
         if (validation.source != TafsirLoadSource.offline) {
+          AppLogger.warning(
+            'Rejected unsafe tafsir response for $normalizedLanguage '
+            '$surahNumber:$ayahNumber using resource $normalizedTafsirId.',
+          );
           return const TafsirLoadResult(
             source: TafsirLoadSource.unavailable,
             errorCode: 'invalid_tafsir_text',
@@ -77,6 +81,12 @@ class TafsirService {
         await _cacheService?.write(apiResult.entry!);
         return apiResult;
       }
+
+      AppLogger.info(
+        'Tafsir API returned ${apiResult.errorCode ?? 'no_entry'} for '
+        '$normalizedLanguage $surahNumber:$ayahNumber using resource '
+        '$normalizedTafsirId.',
+      );
 
       final fallbackEntry = await _readCache(
         languageCode: normalizedLanguage,

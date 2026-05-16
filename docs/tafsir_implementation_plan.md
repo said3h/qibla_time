@@ -246,15 +246,35 @@ Supported defines:
 
 ```text
 TAFSIR_API_ENABLED=true
+TAFSIR_API_PROVIDER=quran_foundation
 TAFSIR_API_BASE_URL=https://api.quran.com/api/v4
 TAFSIR_API_AUTH_TOKEN=<content-api-token>
 TAFSIR_API_CLIENT_ID=<client-id>
 TAFSIR_DEFAULT_RESOURCE_ID=<numeric-resource-id>
 ```
 
+Temporary QUL preview debug defines:
+
+```text
+TAFSIR_API_ENABLED=true
+TAFSIR_API_PROVIDER=qul_preview
+TAFSIR_DEFAULT_RESOURCE_ID=268
+```
+
+Notes:
+- `qul_preview` is for internal debug only and is disabled in release builds by
+  the provider layer.
+- `268` is QUL's Spanish Abridged Explanation of the Quran resource ID.
+- The QUL preview page is HTML, not JSON, so the debug client extracts only the
+  visible `<div class="tafsir spanish">...</div>` text for one ayah.
+- TODO: verify QUL/QuranEnc/Tafsir Center licensing, caching, attribution, and
+  redistribution terms before any production or offline use.
+
 Safety rules:
 - If `TAFSIR_API_ENABLED` is not `true`, no `TafsirApiClient` is created.
 - If token or client id is missing, no `TafsirApiClient` is created.
+- Exception: `TAFSIR_API_PROVIDER=qul_preview` does not require Quran
+  Foundation auth headers, but it only creates a client in debug builds.
 - If `TAFSIR_DEFAULT_RESOURCE_ID` is missing, the debug screen can still accept
   a numeric tafsir ID manually.
 - Resource IDs must be numeric; slugs or names are rejected before making a
@@ -267,10 +287,20 @@ Manual debug run example:
 ```bash
 flutter run \
   --dart-define=TAFSIR_API_ENABLED=true \
+  --dart-define=TAFSIR_API_PROVIDER=quran_foundation \
   --dart-define=TAFSIR_API_BASE_URL=https://api.quran.com/api/v4 \
   --dart-define=TAFSIR_API_AUTH_TOKEN=REDACTED \
   --dart-define=TAFSIR_API_CLIENT_ID=REDACTED \
   --dart-define=TAFSIR_DEFAULT_RESOURCE_ID=169
+```
+
+QUL Spanish preview debug run example:
+
+```bash
+flutter run \
+  --dart-define=TAFSIR_API_ENABLED=true \
+  --dart-define=TAFSIR_API_PROVIDER=qul_preview \
+  --dart-define=TAFSIR_DEFAULT_RESOURCE_ID=268
 ```
 
 The temporary debug screen is registered only in debug mode at:
