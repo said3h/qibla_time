@@ -289,16 +289,19 @@ class TafsirApiClient {
       html,
       RegExp(r'<h1[^>]*>([\s\S]*?)</h1>', caseSensitive: false),
     );
-    final previewHeading = _firstMatch(
-      html,
-      RegExp(r'<h2[^>]*>([\s\S]*?)</h2>', caseSensitive: false),
+    final previewHeading = _findQulPreviewHeading(html);
+    final detectedAyahNumber = _readQulHeadingAyahNumber(previewHeading);
+    _debugLog(
+      'QuranTafsirParse',
+      'qul requestedAyah=$surahNumber:$ayahNumber '
+          'detectedAyah=${detectedAyahNumber ?? 'unknown'} '
+          'heading=${_cleanHtmlText(previewHeading)}',
     );
-    if (previewHeading != null &&
-        !previewHeading.toLowerCase().contains('ayah $ayahNumber')) {
+    if (detectedAyahNumber != null && detectedAyahNumber != ayahNumber) {
       _debugLog(
         'QuranTafsirParse',
-        'fallback reason=qul_heading_mismatch ayah=$surahNumber:$ayahNumber '
-            'heading=${_cleanHtmlText(previewHeading)}',
+        'fallback reason=qul_heading_mismatch '
+            'requested=$surahNumber:$ayahNumber detected=$detectedAyahNumber',
       );
       return TafsirLoadResult(
         source: TafsirLoadSource.unavailable,
@@ -324,7 +327,8 @@ class TafsirApiClient {
       'QuranTafsirParse',
       'qul headingFound=${previewHeading != null} '
           'tafsirDivFound=${textHtml != null} textLength=${text.length} '
-          'ayah=$surahNumber:$ayahNumber',
+          'requestedAyah=$surahNumber:$ayahNumber '
+          'detectedAyah=${detectedAyahNumber ?? 'unknown'}',
     );
     if (text.isEmpty) {
       _debugLog(
@@ -473,6 +477,30 @@ class TafsirApiClient {
 
   String? _firstMatch(String text, RegExp pattern) {
     return pattern.firstMatch(text)?.group(1);
+  }
+
+  String? _findQulPreviewHeading(String html) {
+    final headings = RegExp(
+      r'<h2[^>]*>([\s\S]*?)</h2>',
+      caseSensitive: false,
+    ).allMatches(html);
+    for (final match in headings) {
+      final heading = match.group(1);
+      final normalized = _cleanHtmlText(heading).toLowerCase();
+      if (normalized.contains('tafsir for surah') &&
+          normalized.contains('ayah')) {
+        return heading;
+      }
+    }
+    return null;
+  }
+
+  int? _readQulHeadingAyahNumber(String? headingHtml) {
+    final heading = _cleanHtmlText(headingHtml);
+    if (heading.isEmpty) return null;
+    final match =
+        RegExp(r'\bAyah\s+(\d+)\b', caseSensitive: false).firstMatch(heading);
+    return int.tryParse(match?.group(1) ?? '');
   }
 
   String _cleanHtmlText(String? html) {

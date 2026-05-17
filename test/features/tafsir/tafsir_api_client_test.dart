@@ -116,6 +116,58 @@ void main() {
       expect(result.entry!.source, 'QUL preview');
     });
 
+    test('parses real QUL preview shape with earlier non-preview h2 tags', () {
+      final client = TafsirApiClient(
+        baseUri: Uri.parse('https://qul.tarteel.ai'),
+        source: TafsirApiSource.qulPreview,
+      );
+      final body = utf8.encode('''
+        <h1>Spanish Abridged Explanation of the Quran</h1>
+        <h2>Tags</h2>
+        <h2>Download Links</h2>
+        <h2>Spanish Abridged Explanation of the Quran tafsir for Surah Al-Fatihah - Ayah 1</h2>
+        <div class="tafsir spanish">Texto correcto de la aleya.</div>
+      ''');
+
+      final result = client.parseQulPreviewResponse(
+        body,
+        tafsirId: '268',
+        surahNumber: 1,
+        ayahNumber: 1,
+        languageCode: 'es',
+        sourceUrl: 'https://qul.tarteel.ai/resources/tafsir/268?ayah=1:1',
+      );
+
+      expect(result.source, TafsirLoadSource.api);
+      expect(result.entry!.text, 'Texto correcto de la aleya.');
+    });
+
+    test('rejects QUL preview when detected ayah does not match request', () {
+      final client = TafsirApiClient(
+        baseUri: Uri.parse('https://qul.tarteel.ai'),
+        source: TafsirApiSource.qulPreview,
+      );
+      final body = utf8.encode('''
+        <h1>Spanish Abridged Explanation of the Quran</h1>
+        <h2>Tags</h2>
+        <h2>Spanish Abridged Explanation of the Quran tafsir for Surah Al-Fatihah - Ayah 2</h2>
+        <div class="tafsir spanish">Texto de otra aleya.</div>
+      ''');
+
+      final result = client.parseQulPreviewResponse(
+        body,
+        tafsirId: '268',
+        surahNumber: 1,
+        ayahNumber: 1,
+        languageCode: 'es',
+        sourceUrl: 'https://qul.tarteel.ai/resources/tafsir/268?ayah=1:1',
+      );
+
+      expect(result.source, TafsirLoadSource.unavailable);
+      expect(result.errorCode, 'invalid_verse_alignment');
+      expect(result.debugInfo?.fallbackReason, 'validation_rejected');
+    });
+
     test('rejects shifted verse alignment in fake response', () {
       final client = TafsirApiClient();
       final body = utf8.encode(
