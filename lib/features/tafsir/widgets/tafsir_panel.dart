@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -145,6 +146,7 @@ class _TafsirPanelBody extends ConsumerWidget {
               title: 'No tafsir available',
               message: _safeMessageFor(result.errorCode),
               source: _sourceLabel(result.source),
+              debugInfo: result.debugInfo,
               isError: result.errorCode != null,
             );
           }
@@ -223,6 +225,7 @@ class _PanelStateMessage extends StatelessWidget {
     required this.title,
     required this.message,
     this.source,
+    this.debugInfo,
     this.isError = false,
   });
 
@@ -231,6 +234,7 @@ class _PanelStateMessage extends StatelessWidget {
   final String title;
   final String message;
   final String? source;
+  final TafsirDebugInfo? debugInfo;
   final bool isError;
 
   @override
@@ -278,9 +282,72 @@ class _PanelStateMessage extends StatelessWidget {
                       label: 'Source: $source',
                     ),
                   ],
+                  if (kDebugMode && debugInfo != null) ...[
+                    const SizedBox(height: 10),
+                    _DebugInfoBox(
+                      tokens: tokens,
+                      debugInfo: debugInfo!,
+                    ),
+                  ],
                 ],
               ),
             ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _DebugInfoBox extends StatelessWidget {
+  const _DebugInfoBox({
+    required this.tokens,
+    required this.debugInfo,
+  });
+
+  final QiblaTokens tokens;
+  final TafsirDebugInfo debugInfo;
+
+  @override
+  Widget build(BuildContext context) {
+    final rows = [
+      'provider: ${debugInfo.provider ?? 'unknown'}',
+      'resourceId: ${debugInfo.resourceId ?? 'unknown'}',
+      'url: ${debugInfo.url ?? 'none'}',
+      'statusCode: ${debugInfo.statusCode?.toString() ?? 'none'}',
+      'fallback: ${debugInfo.fallbackReason}',
+      'html: ${debugInfo.receivedHtml ? '${debugInfo.htmlLength} chars' : 'none'}',
+    ];
+
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: tokens.bgSurface,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: tokens.border),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Debug info',
+              style: GoogleFonts.dmSans(
+                color: tokens.textPrimary,
+                fontWeight: FontWeight.w800,
+                fontSize: 11,
+              ),
+            ),
+            const SizedBox(height: 6),
+            for (final row in rows)
+              Text(
+                row,
+                style: GoogleFonts.dmSans(
+                  color: tokens.textSecondary,
+                  height: 1.35,
+                  fontSize: 10,
+                ),
+              ),
           ],
         ),
       ),

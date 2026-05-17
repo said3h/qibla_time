@@ -74,11 +74,13 @@ final tafsirCacheServiceProvider = Provider<TafsirCacheService>((ref) {
 });
 
 final tafsirServiceProvider = Provider<TafsirService>((ref) {
+  final config = ref.watch(tafsirConfigProvider);
   return TafsirService(
     apiClient: ref.watch(tafsirApiClientProvider),
     cacheService: ref.watch(tafsirCacheServiceProvider),
-    defaultTafsirId:
-        ref.watch(tafsirConfigProvider).normalizedDefaultResourceId,
+    defaultTafsirId: config.normalizedDefaultResourceId,
+    apiEnabled: config.enabled,
+    providerName: config.normalizedProvider,
   );
 });
 

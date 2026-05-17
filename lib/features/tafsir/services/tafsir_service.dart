@@ -10,13 +10,19 @@ class TafsirService {
     TafsirApiClient? apiClient,
     TafsirCacheService? cacheService,
     String? defaultTafsirId,
+    bool apiEnabled = false,
+    String? providerName,
   })  : _apiClient = apiClient,
         _cacheService = cacheService,
-        _defaultTafsirId = defaultTafsirId;
+        _defaultTafsirId = defaultTafsirId,
+        _apiEnabled = apiEnabled,
+        _providerName = providerName;
 
   final TafsirApiClient? _apiClient;
   final TafsirCacheService? _cacheService;
   final String? _defaultTafsirId;
+  final bool _apiEnabled;
+  final String? _providerName;
 
   Future<TafsirLoadResult> getTafsir({
     required int surahNumber,
@@ -39,9 +45,13 @@ class TafsirService {
       AppLogger.warning(
         'Invalid tafsir request for $surahNumber:$ayahNumber.',
       );
-      return const TafsirLoadResult(
+      return TafsirLoadResult(
         source: TafsirLoadSource.unavailable,
         errorCode: 'invalid_ayah_reference',
+        debugInfo: _debugInfo(
+          resourceId: normalizedTafsirId,
+          fallbackReason: 'validation_rejected',
+        ),
       );
     }
 
@@ -68,9 +78,10 @@ class TafsirService {
         _debugLog(
           'fallback reason=missing_tafsir_id ayah=$surahNumber:$ayahNumber',
         );
-        return const TafsirLoadResult(
+        return TafsirLoadResult(
           source: TafsirLoadSource.unavailable,
           errorCode: 'missing_tafsir_id',
+          debugInfo: _debugInfo(fallbackReason: 'missing_provider'),
         );
       }
 
@@ -92,9 +103,12 @@ class TafsirService {
             'Rejected unsafe tafsir response for $normalizedLanguage '
             '$surahNumber:$ayahNumber using resource $normalizedTafsirId.',
           );
-          return const TafsirLoadResult(
+          return TafsirLoadResult(
             source: TafsirLoadSource.unavailable,
             errorCode: 'invalid_tafsir_text',
+            debugInfo: (apiResult.debugInfo ??
+                    _debugInfo(resourceId: normalizedTafsirId))
+                .copyWith(fallbackReason: 'validation_rejected'),
           );
         }
 
@@ -149,9 +163,13 @@ class TafsirService {
       '$normalizedLanguage $surahNumber:$ayahNumber.',
     );
 
-    return const TafsirLoadResult(
+    return TafsirLoadResult(
       source: TafsirLoadSource.unavailable,
       errorCode: 'tafsir_not_configured',
+      debugInfo: _debugInfo(
+        resourceId: normalizedTafsirId,
+        fallbackReason: _apiEnabled ? 'client_not_created' : 'api_disabled',
+      ),
     );
   }
 
@@ -160,6 +178,7 @@ class TafsirService {
       return const TafsirLoadResult(
         source: TafsirLoadSource.unavailable,
         errorCode: 'invalid_ayah_reference',
+        debugInfo: TafsirDebugInfo(fallbackReason: 'validation_rejected'),
       );
     }
 
@@ -167,6 +186,7 @@ class TafsirService {
       return const TafsirLoadResult(
         source: TafsirLoadSource.unavailable,
         errorCode: 'empty_tafsir_text',
+        debugInfo: TafsirDebugInfo(fallbackReason: 'parse_empty'),
       );
     }
 
@@ -174,6 +194,7 @@ class TafsirService {
       return const TafsirLoadResult(
         source: TafsirLoadSource.unavailable,
         errorCode: 'invalid_tafsir_text',
+        debugInfo: TafsirDebugInfo(fallbackReason: 'validation_rejected'),
       );
     }
 
@@ -246,5 +267,16 @@ class TafsirService {
   void _debugLog(String message) {
     if (!kDebugMode) return;
     debugPrint('[QuranTafsirApi] $message');
+  }
+
+  TafsirDebugInfo _debugInfo({
+    String? resourceId,
+    String fallbackReason = 'unknown',
+  }) {
+    return TafsirDebugInfo(
+      provider: _providerName,
+      resourceId: resourceId,
+      fallbackReason: fallbackReason,
+    );
   }
 }

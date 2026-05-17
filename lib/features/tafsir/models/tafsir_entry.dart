@@ -122,13 +122,53 @@ class TafsirLoadResult {
     required this.source,
     this.entry,
     this.errorCode,
+    this.debugInfo,
   });
 
   final TafsirLoadSource source;
   final TafsirEntry? entry;
   final String? errorCode;
+  final TafsirDebugInfo? debugInfo;
 
   bool get hasEntry => entry != null && entry!.hasUsableText;
+}
+
+class TafsirDebugInfo {
+  const TafsirDebugInfo({
+    this.provider,
+    this.resourceId,
+    this.url,
+    this.statusCode,
+    this.fallbackReason = 'unknown',
+    this.htmlLength,
+  });
+
+  final String? provider;
+  final String? resourceId;
+  final String? url;
+  final int? statusCode;
+  final String fallbackReason;
+  final int? htmlLength;
+
+  bool get receivedHtml => htmlLength != null && htmlLength! > 0;
+
+  TafsirDebugInfo copyWith({
+    String? provider,
+    String? resourceId,
+    String? url,
+    int? statusCode,
+    String? fallbackReason,
+    int? htmlLength,
+  }) {
+    return TafsirDebugInfo(
+      provider: provider ?? this.provider,
+      resourceId: resourceId ?? this.resourceId,
+      url: url ?? this.url,
+      statusCode: statusCode ?? this.statusCode,
+      fallbackReason: fallbackReason ?? this.fallbackReason,
+      htmlLength: htmlLength ?? this.htmlLength,
+    );
+  }
 }
 
 class TafsirRequest {

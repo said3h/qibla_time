@@ -38,6 +38,7 @@ class TafsirApiClient {
       return const TafsirLoadResult(
         source: TafsirLoadSource.unavailable,
         errorCode: 'invalid_ayah_reference',
+        debugInfo: TafsirDebugInfo(fallbackReason: 'validation_rejected'),
       );
     }
 
@@ -74,6 +75,13 @@ class TafsirApiClient {
         return TafsirLoadResult(
           source: TafsirLoadSource.unavailable,
           errorCode: _httpErrorCode(response.statusCode, response.bodyBytes),
+          debugInfo: _debugInfo(
+            tafsirId: tafsirId,
+            url: uri.toString(),
+            statusCode: response.statusCode,
+            fallbackReason: 'http_error',
+            htmlLength: _htmlLength(response),
+          ),
         );
       }
 
@@ -99,9 +107,14 @@ class TafsirApiClient {
         'QuranTafsirApi',
         'fallback reason=request_exception url=$uri error=$error',
       );
-      return const TafsirLoadResult(
+      return TafsirLoadResult(
         source: TafsirLoadSource.unavailable,
         errorCode: 'tafsir_api_unavailable',
+        debugInfo: _debugInfo(
+          tafsirId: tafsirId,
+          url: uri.toString(),
+          fallbackReason: 'unknown',
+        ),
       );
     }
   }
@@ -158,6 +171,7 @@ class TafsirApiClient {
       return const TafsirLoadResult(
         source: TafsirLoadSource.unavailable,
         errorCode: 'invalid_tafsir_response',
+        debugInfo: TafsirDebugInfo(fallbackReason: 'parse_empty'),
       );
     }
 
@@ -171,6 +185,10 @@ class TafsirApiClient {
       return TafsirLoadResult(
         source: TafsirLoadSource.unavailable,
         errorCode: _readApiErrorType(decoded) ?? 'missing_tafsir_payload',
+        debugInfo: _debugInfo(
+          tafsirId: tafsirId,
+          fallbackReason: 'parse_empty',
+        ),
       );
     }
 
@@ -184,6 +202,7 @@ class TafsirApiClient {
       return const TafsirLoadResult(
         source: TafsirLoadSource.unavailable,
         errorCode: 'invalid_verse_alignment',
+        debugInfo: TafsirDebugInfo(fallbackReason: 'validation_rejected'),
       );
     }
 
@@ -197,6 +216,7 @@ class TafsirApiClient {
       return const TafsirLoadResult(
         source: TafsirLoadSource.unavailable,
         errorCode: 'empty_tafsir_text',
+        debugInfo: TafsirDebugInfo(fallbackReason: 'parse_empty'),
       );
     }
 
@@ -209,6 +229,7 @@ class TafsirApiClient {
       return const TafsirLoadResult(
         source: TafsirLoadSource.unavailable,
         errorCode: 'invalid_tafsir_text',
+        debugInfo: TafsirDebugInfo(fallbackReason: 'validation_rejected'),
       );
     }
 
@@ -248,9 +269,14 @@ class TafsirApiClient {
         'fallback reason=invalid_utf8_qul tafsirId=$tafsirId '
             'ayah=$surahNumber:$ayahNumber bytes=${bodyBytes.length}',
       );
-      return const TafsirLoadResult(
+      return TafsirLoadResult(
         source: TafsirLoadSource.unavailable,
         errorCode: 'invalid_tafsir_response',
+        debugInfo: _debugInfo(
+          tafsirId: tafsirId,
+          url: sourceUrl,
+          fallbackReason: 'parse_empty',
+        ),
       );
     }
     _debugLog(
@@ -274,9 +300,15 @@ class TafsirApiClient {
         'fallback reason=qul_heading_mismatch ayah=$surahNumber:$ayahNumber '
             'heading=${_cleanHtmlText(previewHeading)}',
       );
-      return const TafsirLoadResult(
+      return TafsirLoadResult(
         source: TafsirLoadSource.unavailable,
         errorCode: 'invalid_verse_alignment',
+        debugInfo: _debugInfo(
+          tafsirId: tafsirId,
+          url: sourceUrl,
+          fallbackReason: 'validation_rejected',
+          htmlLength: html.length,
+        ),
       );
     }
 
@@ -300,9 +332,15 @@ class TafsirApiClient {
         'fallback reason=empty_qul_tafsir_text tafsirId=$tafsirId '
             'ayah=$surahNumber:$ayahNumber',
       );
-      return const TafsirLoadResult(
+      return TafsirLoadResult(
         source: TafsirLoadSource.unavailable,
         errorCode: 'empty_tafsir_text',
+        debugInfo: _debugInfo(
+          tafsirId: tafsirId,
+          url: sourceUrl,
+          fallbackReason: 'parse_empty',
+          htmlLength: html.length,
+        ),
       );
     }
 
@@ -312,9 +350,15 @@ class TafsirApiClient {
         'fallback reason=invalid_qul_tafsir_text tafsirId=$tafsirId '
             'ayah=$surahNumber:$ayahNumber',
       );
-      return const TafsirLoadResult(
+      return TafsirLoadResult(
         source: TafsirLoadSource.unavailable,
         errorCode: 'invalid_tafsir_text',
+        debugInfo: _debugInfo(
+          tafsirId: tafsirId,
+          url: sourceUrl,
+          fallbackReason: 'validation_rejected',
+          htmlLength: html.length,
+        ),
       );
     }
 
@@ -446,6 +490,31 @@ class TafsirApiClient {
         .replaceAll('&gt;', '>')
         .replaceAll(RegExp(r'\s+'), ' ')
         .trim();
+  }
+
+  TafsirDebugInfo _debugInfo({
+    required String tafsirId,
+    String? url,
+    int? statusCode,
+    String fallbackReason = 'unknown',
+    int? htmlLength,
+  }) {
+    return TafsirDebugInfo(
+      provider: source == TafsirApiSource.qulPreview
+          ? 'qul_preview'
+          : 'quran_foundation',
+      resourceId: tafsirId,
+      url: url,
+      statusCode: statusCode,
+      fallbackReason: fallbackReason,
+      htmlLength: htmlLength,
+    );
+  }
+
+  int? _htmlLength(http.Response response) {
+    final contentType = response.headers['content-type']?.toLowerCase() ?? '';
+    if (!contentType.contains('html')) return null;
+    return _decodeUtf8(response.bodyBytes)?.length;
   }
 
   void _debugLog(String tag, String message) {

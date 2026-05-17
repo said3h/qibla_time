@@ -31,6 +31,38 @@ void main() {
     expect(find.textContaining('tafsir_not_configured'), findsNothing);
   });
 
+  testWidgets('TafsirPanel shows debug info for unavailable debug results',
+      (tester) async {
+    await tester.pumpWidget(
+      _wrapPanel(
+        overrides: [
+          tafsirEntryProvider.overrideWith(
+            (ref, request) async => const TafsirLoadResult(
+              source: TafsirLoadSource.unavailable,
+              errorCode: 'empty_tafsir_text',
+              debugInfo: TafsirDebugInfo(
+                provider: 'qul_preview',
+                resourceId: '268',
+                url: 'https://qul.tarteel.ai/resources/tafsir/268?ayah=1%3A1',
+                statusCode: 200,
+                fallbackReason: 'parse_empty',
+                htmlLength: 1200,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+    await tester.pump();
+
+    expect(find.text('Debug info'), findsOneWidget);
+    expect(find.text('provider: qul_preview'), findsOneWidget);
+    expect(find.text('resourceId: 268'), findsOneWidget);
+    expect(find.text('statusCode: 200'), findsOneWidget);
+    expect(find.text('fallback: parse_empty'), findsOneWidget);
+    expect(find.text('html: 1200 chars'), findsOneWidget);
+  });
+
   testWidgets('TafsirPanel shows success state and source', (tester) async {
     await tester.pumpWidget(
       _wrapPanel(
