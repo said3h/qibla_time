@@ -234,7 +234,12 @@ jobs:
 
       - name: Prepare iOS build config
         if: matrix.platform == 'ios'
-        run: flutter build ios --release --no-codesign --config-only
+        run: >
+          flutter build ios --release --no-codesign --config-only
+          --dart-define=QURAN_TAFSIR_PANEL_ENABLED=true
+          --dart-define=TAFSIR_API_ENABLED=true
+          --dart-define=TAFSIR_API_PROVIDER=qul_preview
+          --dart-define=TAFSIR_DEFAULT_RESOURCE_ID=268
 
       - name: Build unsigned Runner archive
         if: matrix.platform == 'ios'

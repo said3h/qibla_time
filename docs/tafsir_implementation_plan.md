@@ -307,6 +307,9 @@ GitHub Actions build behavior:
 - The `qiblatime-android-debug` artifact enables the temporary Tafsir test
   flags automatically so internal APK testing can use the QuranScreen Tafsir
   button without running `flutter run` locally.
+- The `qiblatime-ios-ipa` artifact also enables the same temporary Tafsir test
+  flags for internal Sideloadly testing. This IPA is experimental and should be
+  used only for QA while Tafsir source/legal review is still pending.
 - Release artifacts (`qiblatime-android-release` and
   `qiblatime-android-release-aab`) do not pass these Tafsir flags, so Tafsir
   remains hidden from public release builds while legal/source review is still
