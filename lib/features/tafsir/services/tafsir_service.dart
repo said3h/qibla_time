@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import '../../../core/services/logger_service.dart';
 import '../models/tafsir_entry.dart';
 import 'tafsir_api_client.dart';
@@ -25,8 +27,15 @@ class TafsirService {
     final normalizedLanguage = _normalizeLanguageCode(languageCode);
     final normalizedTafsirId = _normalizeOptionalId(tafsirId) ??
         _normalizeOptionalId(_defaultTafsirId);
+    _debugLog(
+      'request language=$normalizedLanguage tafsirId=$normalizedTafsirId '
+      'ayah=$surahNumber:$ayahNumber apiClient=${_apiClient != null}',
+    );
 
     if (!_isValidAyahReference(surahNumber, ayahNumber)) {
+      _debugLog(
+        'fallback reason=invalid_ayah_reference ayah=$surahNumber:$ayahNumber',
+      );
       AppLogger.warning(
         'Invalid tafsir request for $surahNumber:$ayahNumber.',
       );
@@ -45,6 +54,9 @@ class TafsirService {
       ayahNumber: ayahNumber,
     );
     if (cachedEntry != null) {
+      _debugLog(
+        'cache hit tafsirId=$normalizedTafsirId ayah=$surahNumber:$ayahNumber',
+      );
       return TafsirLoadResult(
         source: TafsirLoadSource.cache,
         entry: cachedEntry,
@@ -53,6 +65,9 @@ class TafsirService {
 
     if (_apiClient != null) {
       if (normalizedTafsirId == null) {
+        _debugLog(
+          'fallback reason=missing_tafsir_id ayah=$surahNumber:$ayahNumber',
+        );
         return const TafsirLoadResult(
           source: TafsirLoadSource.unavailable,
           errorCode: 'missing_tafsir_id',
@@ -68,6 +83,11 @@ class TafsirService {
       if (apiResult.hasEntry && apiResult.source == TafsirLoadSource.api) {
         final validation = validateEntry(apiResult.entry!);
         if (validation.source != TafsirLoadSource.offline) {
+          _debugLog(
+            'fallback reason=invalid_api_entry tafsirId=$normalizedTafsirId '
+            'ayah=$surahNumber:$ayahNumber '
+            'validation=${validation.errorCode}',
+          );
           AppLogger.warning(
             'Rejected unsafe tafsir response for $normalizedLanguage '
             '$surahNumber:$ayahNumber using resource $normalizedTafsirId.',
@@ -79,9 +99,18 @@ class TafsirService {
         }
 
         await _cacheService?.write(apiResult.entry!);
+        _debugLog(
+          'success source=api tafsirId=$normalizedTafsirId '
+          'ayah=$surahNumber:$ayahNumber '
+          'textLength=${apiResult.entry!.text.length}',
+        );
         return apiResult;
       }
 
+      _debugLog(
+        'fallback reason=${apiResult.errorCode ?? 'no_entry'} '
+        'tafsirId=$normalizedTafsirId ayah=$surahNumber:$ayahNumber',
+      );
       AppLogger.info(
         'Tafsir API returned ${apiResult.errorCode ?? 'no_entry'} for '
         '$normalizedLanguage $surahNumber:$ayahNumber using resource '
@@ -95,6 +124,10 @@ class TafsirService {
         ayahNumber: ayahNumber,
       );
       if (fallbackEntry != null) {
+        _debugLog(
+          'cache fallback tafsirId=$normalizedTafsirId '
+          'ayah=$surahNumber:$ayahNumber',
+        );
         return TafsirLoadResult(
           source: TafsirLoadSource.cache,
           entry: fallbackEntry,
@@ -106,6 +139,11 @@ class TafsirService {
 
     // TODO: Enable online tafsir by resource when API credentials, selected
     // resource IDs, and cache terms are confirmed safe for mobile usage.
+    _debugLog(
+      'fallback reason=tafsir_not_configured '
+      'tafsirId=${normalizedTafsirId ?? 'default'} '
+      'ayah=$surahNumber:$ayahNumber',
+    );
     AppLogger.info(
       'Tafsir unavailable: ${normalizedTafsirId ?? 'default'} '
       '$normalizedLanguage $surahNumber:$ayahNumber.',
@@ -203,5 +241,10 @@ class TafsirService {
     ];
 
     return blockedMarkers.any(normalized.contains);
+  }
+
+  void _debugLog(String message) {
+    if (!kDebugMode) return;
+    debugPrint('[QuranTafsirApi] $message');
   }
 }

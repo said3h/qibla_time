@@ -18,20 +18,31 @@ final tafsirConfigProvider = Provider<TafsirConfig>((ref) {
 
 final tafsirApiClientProvider = Provider<TafsirApiClient?>((ref) {
   final config = ref.watch(tafsirConfigProvider);
+  _debugLogConfig(config, 'provider_build');
   if (!config.canCreateApiClient) {
+    _debugLogConfig(config, 'client_disabled');
     return null;
   }
 
   if (config.isQulPreview) {
-    if (!kDebugMode) return null;
+    if (!kDebugMode) {
+      _debugLogConfig(config, 'qul_preview_release_blocked');
+      return null;
+    }
+    final baseUri = _qulPreviewBaseUri(config);
+    _debugLogConfig(config, 'client_created_qul_preview baseUri=$baseUri');
     return TafsirApiClient(
-      baseUri: _qulPreviewBaseUri(config),
+      baseUri: baseUri,
       source: TafsirApiSource.qulPreview,
     );
   }
 
   final baseUri = config.baseUri;
-  if (baseUri == null) return null;
+  if (baseUri == null) {
+    _debugLogConfig(config, 'client_disabled_invalid_base_uri');
+    return null;
+  }
+  _debugLogConfig(config, 'client_created_quran_foundation baseUri=$baseUri');
   return TafsirApiClient(
     baseUri: baseUri,
     authToken: config.normalizedAuthToken,
@@ -45,6 +56,17 @@ Uri _qulPreviewBaseUri(TafsirConfig config) {
     return configured;
   }
   return Uri.parse('https://qul.tarteel.ai');
+}
+
+void _debugLogConfig(TafsirConfig config, String event) {
+  if (!kDebugMode) return;
+  debugPrint(
+    '[QuranTafsirApi] $event enabled=${config.enabled} '
+    'provider=${config.normalizedProvider} isQul=${config.isQulPreview} '
+    'baseUri=${config.baseUri} defaultResourceId='
+    '${config.normalizedDefaultResourceId} '
+    'canCreateClient=${config.canCreateApiClient}',
+  );
 }
 
 final tafsirCacheServiceProvider = Provider<TafsirCacheService>((ref) {

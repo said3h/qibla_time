@@ -207,5 +207,39 @@ void main() {
       expect(capturedRequest.headers['x-client-id'], 'client');
       expect(capturedRequest.headers['Accept'], 'application/json');
     });
+
+    test('uses HTML headers for QUL preview requests', () async {
+      late http.Request capturedRequest;
+      final client = TafsirApiClient(
+        httpClient: MockClient((request) async {
+          capturedRequest = request;
+          return http.Response(
+            '''
+              <h1>Spanish Abridged Explanation of the Quran</h1>
+              <h2>Spanish Abridged Explanation of the Quran tafsir for Surah Al-Fatihah — Ayah 1</h2>
+              <div class="tafsir spanish">En el nombre de Al-lah.</div>
+            ''',
+            200,
+            headers: const {'content-type': 'text/html; charset=utf-8'},
+          );
+        }),
+        baseUri: Uri.parse('https://qul.tarteel.ai'),
+        source: TafsirApiSource.qulPreview,
+      );
+
+      final result = await client.fetchAyahTafsir(
+        tafsirId: '268',
+        surahNumber: 1,
+        ayahNumber: 1,
+        languageCode: 'es',
+      );
+
+      expect(result.source, TafsirLoadSource.api);
+      expect(
+          capturedRequest.headers['Accept'], 'text/html,application/xhtml+xml');
+      expect(capturedRequest.headers['User-Agent'], 'QiblaTimeDebug/1.0');
+      expect(capturedRequest.url.toString(),
+          'https://qul.tarteel.ai/resources/tafsir/268?ayah=1%3A1');
+    });
   });
 }

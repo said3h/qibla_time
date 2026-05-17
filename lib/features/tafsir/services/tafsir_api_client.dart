@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/tafsir_entry.dart';
@@ -45,6 +46,11 @@ class TafsirApiClient {
       surahNumber: surahNumber,
       ayahNumber: ayahNumber,
     );
+    _debugLog(
+      'QuranTafsirRequest',
+      'url=$uri source=$source tafsirId=$tafsirId '
+          'ayah=$surahNumber:$ayahNumber language=$languageCode',
+    );
 
     try {
       final response = await _httpClient
@@ -53,8 +59,18 @@ class TafsirApiClient {
             headers: _headers,
           )
           .timeout(timeout);
+      _debugLog(
+        'QuranTafsirResponse',
+        'url=$uri statusCode=${response.statusCode} '
+            'bytes=${response.bodyBytes.length} '
+            'contentType=${response.headers['content-type'] ?? 'unknown'}',
+      );
 
       if (response.statusCode != 200) {
+        _debugLog(
+          'QuranTafsirApi',
+          'fallback reason=http_${response.statusCode} url=$uri',
+        );
         return TafsirLoadResult(
           source: TafsirLoadSource.unavailable,
           errorCode: _httpErrorCode(response.statusCode, response.bodyBytes),
@@ -78,7 +94,11 @@ class TafsirApiClient {
             sourceUrl: uri.toString(),
           ),
       };
-    } catch (_) {
+    } catch (error) {
+      _debugLog(
+        'QuranTafsirApi',
+        'fallback reason=request_exception url=$uri error=$error',
+      );
       return const TafsirLoadResult(
         source: TafsirLoadSource.unavailable,
         errorCode: 'tafsir_api_unavailable',
@@ -130,6 +150,11 @@ class TafsirApiClient {
     final verseKey = '$surahNumber:$ayahNumber';
     final decoded = _decodeJsonMap(bodyBytes);
     if (decoded == null) {
+      _debugLog(
+        'QuranTafsirParse',
+        'fallback reason=invalid_json tafsirId=$tafsirId '
+            'ayah=$surahNumber:$ayahNumber bytes=${bodyBytes.length}',
+      );
       return const TafsirLoadResult(
         source: TafsirLoadSource.unavailable,
         errorCode: 'invalid_tafsir_response',
@@ -138,6 +163,11 @@ class TafsirApiClient {
 
     final tafsir = _readMap(decoded, 'tafsir');
     if (tafsir == null) {
+      _debugLog(
+        'QuranTafsirParse',
+        'fallback reason=missing_tafsir_payload tafsirId=$tafsirId '
+            'ayah=$surahNumber:$ayahNumber keys=${decoded.keys.join(',')}',
+      );
       return TafsirLoadResult(
         source: TafsirLoadSource.unavailable,
         errorCode: _readApiErrorType(decoded) ?? 'missing_tafsir_payload',
@@ -146,6 +176,11 @@ class TafsirApiClient {
 
     final verses = _readMap(tafsir, 'verses');
     if (verses != null && verses.isNotEmpty && !verses.containsKey(verseKey)) {
+      _debugLog(
+        'QuranTafsirParse',
+        'fallback reason=invalid_verse_alignment expected=$verseKey '
+            'found=${verses.keys.join(',')}',
+      );
       return const TafsirLoadResult(
         source: TafsirLoadSource.unavailable,
         errorCode: 'invalid_verse_alignment',
@@ -154,6 +189,11 @@ class TafsirApiClient {
 
     final text = tafsir['text']?.toString().trim() ?? '';
     if (text.isEmpty) {
+      _debugLog(
+        'QuranTafsirParse',
+        'fallback reason=empty_tafsir_text tafsirId=$tafsirId '
+            'ayah=$surahNumber:$ayahNumber',
+      );
       return const TafsirLoadResult(
         source: TafsirLoadSource.unavailable,
         errorCode: 'empty_tafsir_text',
@@ -161,6 +201,11 @@ class TafsirApiClient {
     }
 
     if (_containsTechnicalError(text)) {
+      _debugLog(
+        'QuranTafsirParse',
+        'fallback reason=invalid_tafsir_text tafsirId=$tafsirId '
+            'ayah=$surahNumber:$ayahNumber',
+      );
       return const TafsirLoadResult(
         source: TafsirLoadSource.unavailable,
         errorCode: 'invalid_tafsir_text',
@@ -198,11 +243,21 @@ class TafsirApiClient {
   }) {
     final html = _decodeUtf8(bodyBytes);
     if (html == null) {
+      _debugLog(
+        'QuranTafsirParse',
+        'fallback reason=invalid_utf8_qul tafsirId=$tafsirId '
+            'ayah=$surahNumber:$ayahNumber bytes=${bodyBytes.length}',
+      );
       return const TafsirLoadResult(
         source: TafsirLoadSource.unavailable,
         errorCode: 'invalid_tafsir_response',
       );
     }
+    _debugLog(
+      'QuranTafsirParse',
+      'qul htmlLength=${html.length} tafsirId=$tafsirId '
+          'ayah=$surahNumber:$ayahNumber',
+    );
 
     final title = _firstMatch(
       html,
@@ -214,6 +269,11 @@ class TafsirApiClient {
     );
     if (previewHeading != null &&
         !previewHeading.toLowerCase().contains('ayah $ayahNumber')) {
+      _debugLog(
+        'QuranTafsirParse',
+        'fallback reason=qul_heading_mismatch ayah=$surahNumber:$ayahNumber '
+            'heading=${_cleanHtmlText(previewHeading)}',
+      );
       return const TafsirLoadResult(
         source: TafsirLoadSource.unavailable,
         errorCode: 'invalid_verse_alignment',
@@ -228,7 +288,18 @@ class TafsirApiClient {
       ),
     );
     final text = _cleanHtmlText(textHtml);
+    _debugLog(
+      'QuranTafsirParse',
+      'qul headingFound=${previewHeading != null} '
+          'tafsirDivFound=${textHtml != null} textLength=${text.length} '
+          'ayah=$surahNumber:$ayahNumber',
+    );
     if (text.isEmpty) {
+      _debugLog(
+        'QuranTafsirParse',
+        'fallback reason=empty_qul_tafsir_text tafsirId=$tafsirId '
+            'ayah=$surahNumber:$ayahNumber',
+      );
       return const TafsirLoadResult(
         source: TafsirLoadSource.unavailable,
         errorCode: 'empty_tafsir_text',
@@ -236,6 +307,11 @@ class TafsirApiClient {
     }
 
     if (_containsTechnicalError(text)) {
+      _debugLog(
+        'QuranTafsirParse',
+        'fallback reason=invalid_qul_tafsir_text tafsirId=$tafsirId '
+            'ayah=$surahNumber:$ayahNumber',
+      );
       return const TafsirLoadResult(
         source: TafsirLoadSource.unavailable,
         errorCode: 'invalid_tafsir_text',
@@ -263,6 +339,13 @@ class TafsirApiClient {
   }
 
   Map<String, String> get _headers {
+    if (source == TafsirApiSource.qulPreview) {
+      return const {
+        'Accept': 'text/html,application/xhtml+xml',
+        'User-Agent': 'QiblaTimeDebug/1.0',
+      };
+    }
+
     final headers = <String, String>{
       'Accept': 'application/json',
     };
@@ -363,5 +446,10 @@ class TafsirApiClient {
         .replaceAll('&gt;', '>')
         .replaceAll(RegExp(r'\s+'), ' ')
         .trim();
+  }
+
+  void _debugLog(String tag, String message) {
+    if (!kDebugMode) return;
+    debugPrint('[$tag] $message');
   }
 }
