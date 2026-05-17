@@ -69,7 +69,7 @@ class _TafsirPanelState extends ConsumerState<TafsirPanel> {
               onTap: () => setState(() => _expanded = !_expanded),
               child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 child: Row(
                   children: [
                     Icon(
@@ -136,7 +136,7 @@ class _TafsirPanelBody extends ConsumerWidget {
     final resultAsync = ref.watch(tafsirEntryProvider(request));
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+      padding: const EdgeInsets.fromLTRB(16, 0, 16, 14),
       child: resultAsync.when(
         loading: () => _PanelStateMessage(
           tokens: tokens,
@@ -219,34 +219,24 @@ class _PanelSuccessState extends State<_PanelSuccess> {
     return DecoratedBox(
       decoration: BoxDecoration(
         color: tokens.bgSurface,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(18),
         border: Border.all(color: tokens.border),
       ),
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 16, 16, 14),
+        padding: const EdgeInsets.fromLTRB(14, 13, 14, 12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              entry.resourceName,
-              style: GoogleFonts.dmSans(
-                color: tokens.textPrimary,
-                fontWeight: FontWeight.w800,
-                fontSize: 14,
-                height: 1.25,
-              ),
-            ),
-            const SizedBox(height: 10),
-            Text(
               visibleText,
               style: GoogleFonts.dmSans(
                 color: tokens.textSecondary,
-                height: 1.62,
+                height: 1.56,
                 fontSize: 14,
               ),
             ),
             if (isLong) ...[
-              const SizedBox(height: 10),
+              const SizedBox(height: 8),
               Align(
                 alignment: Alignment.centerLeft,
                 child: TextButton.icon(
@@ -273,7 +263,7 @@ class _PanelSuccessState extends State<_PanelSuccess> {
               ),
             ],
             if (_shouldShowInternalDetails) ...[
-              const SizedBox(height: 12),
+              const SizedBox(height: 10),
               _SourcePill(
                 tokens: tokens,
                 label: 'Source: ${_sourceLabel(result.source)}',
@@ -311,59 +301,52 @@ class _PanelStateMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     final accent = isError ? tokens.danger : tokens.primary;
 
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: tokens.bgSurface2,
-        borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: tokens.border),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(14),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Icon(icon, color: accent, size: 20),
-            const SizedBox(width: 10),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: GoogleFonts.dmSans(
-                      color: tokens.textPrimary,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 13,
-                    ),
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(2, 6, 2, 2),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(icon, color: accent, size: 19),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: GoogleFonts.dmSans(
+                    color: tokens.textPrimary,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 13,
                   ),
-                  const SizedBox(height: 4),
-                  Text(
-                    message,
-                    style: GoogleFonts.dmSans(
-                      color: tokens.textSecondary,
-                      height: 1.4,
-                      fontSize: 13,
-                    ),
+                ),
+                const SizedBox(height: 3),
+                Text(
+                  message,
+                  style: GoogleFonts.dmSans(
+                    color: tokens.textSecondary,
+                    height: 1.35,
+                    fontSize: 13,
                   ),
-                  if (source != null) ...[
-                    const SizedBox(height: 10),
-                    _SourcePill(
-                      tokens: tokens,
-                      label: 'Source: $source',
-                    ),
-                  ],
-                  if (_shouldShowInternalDetails && debugInfo != null) ...[
-                    const SizedBox(height: 10),
-                    _DebugInfoBox(
-                      tokens: tokens,
-                      debugInfo: debugInfo!,
-                    ),
-                  ],
+                ),
+                if (source != null) ...[
+                  const SizedBox(height: 8),
+                  _SourcePill(
+                    tokens: tokens,
+                    label: 'Source: $source',
+                  ),
                 ],
-              ),
+                if (_shouldShowInternalDetails && debugInfo != null) ...[
+                  const SizedBox(height: 8),
+                  _DebugInfoBox(
+                    tokens: tokens,
+                    debugInfo: debugInfo!,
+                  ),
+                ],
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

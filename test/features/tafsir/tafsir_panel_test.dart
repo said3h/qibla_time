@@ -88,7 +88,7 @@ void main() {
     );
     await tester.pump();
 
-    expect(find.text('Fake Tafsir'), findsOneWidget);
+    expect(find.text('Fake Tafsir'), findsNothing);
     expect(find.text('Cached tafsir body.'), findsOneWidget);
     expect(find.text('Source: cache'), findsOneWidget);
   });
