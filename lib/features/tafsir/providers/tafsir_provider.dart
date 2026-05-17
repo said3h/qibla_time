@@ -25,8 +25,8 @@ final tafsirApiClientProvider = Provider<TafsirApiClient?>((ref) {
   }
 
   if (config.isQulPreview) {
-    if (!kDebugMode) {
-      _debugLogConfig(config, 'qul_preview_release_blocked');
+    if (!config.internalBuild) {
+      _debugLogConfig(config, 'qul_preview_internal_flag_missing');
       return null;
     }
     final baseUri = _qulPreviewBaseUri(config);
@@ -63,6 +63,7 @@ void _debugLogConfig(TafsirConfig config, String event) {
   debugPrint(
     '[QuranTafsirApi] $event enabled=${config.enabled} '
     'provider=${config.normalizedProvider} isQul=${config.isQulPreview} '
+    'internalBuild=${config.internalBuild} '
     'baseUri=${config.baseUri} defaultResourceId='
     '${config.normalizedDefaultResourceId} '
     'canCreateClient=${config.canCreateApiClient}',

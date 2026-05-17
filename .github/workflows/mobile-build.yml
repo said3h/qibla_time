@@ -103,6 +103,7 @@ jobs:
         if: matrix.platform == 'android'
         run: >
           flutter build apk --debug
+          --dart-define=QIBLA_INTERNAL_TAFSIR_BUILD=true
           --dart-define=QURAN_TAFSIR_PANEL_ENABLED=true
           --dart-define=TAFSIR_API_ENABLED=true
           --dart-define=TAFSIR_API_PROVIDER=qul_preview
@@ -236,6 +237,7 @@ jobs:
         if: matrix.platform == 'ios'
         run: >
           flutter build ios --release --no-codesign --config-only
+          --dart-define=QIBLA_INTERNAL_TAFSIR_BUILD=true
           --dart-define=QURAN_TAFSIR_PANEL_ENABLED=true
           --dart-define=TAFSIR_API_ENABLED=true
           --dart-define=TAFSIR_API_PROVIDER=qul_preview

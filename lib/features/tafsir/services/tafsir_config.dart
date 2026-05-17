@@ -2,6 +2,7 @@ class TafsirConfig {
   const TafsirConfig({
     required this.enabled,
     required this.baseUrl,
+    this.internalBuild = false,
     this.provider = 'quran_foundation',
     this.authToken,
     this.clientId,
@@ -10,6 +11,7 @@ class TafsirConfig {
 
   static const fromEnvironment = TafsirConfig(
     enabled: bool.fromEnvironment('TAFSIR_API_ENABLED'),
+    internalBuild: bool.fromEnvironment('QIBLA_INTERNAL_TAFSIR_BUILD'),
     baseUrl: String.fromEnvironment(
       'TAFSIR_API_BASE_URL',
       defaultValue: 'https://api.quran.com/api/v4',
@@ -22,6 +24,7 @@ class TafsirConfig {
 
   final bool enabled;
   final String baseUrl;
+  final bool internalBuild;
   final String provider;
   final String? authToken;
   final String? clientId;

@@ -256,6 +256,8 @@ TAFSIR_DEFAULT_RESOURCE_ID=<numeric-resource-id>
 Temporary QUL preview debug defines:
 
 ```text
+QIBLA_INTERNAL_TAFSIR_BUILD=true
+QURAN_TAFSIR_PANEL_ENABLED=true
 TAFSIR_API_ENABLED=true
 TAFSIR_API_PROVIDER=qul_preview
 TAFSIR_DEFAULT_RESOURCE_ID=268
@@ -263,7 +265,7 @@ TAFSIR_DEFAULT_RESOURCE_ID=268
 
 Notes:
 - `qul_preview` is for internal debug only and is disabled in release builds by
-  the provider layer.
+  the provider layer unless `QIBLA_INTERNAL_TAFSIR_BUILD=true` is present.
 - `268` is QUL's Spanish Abridged Explanation of the Quran resource ID.
 - The QUL preview page is HTML, not JSON, so the debug client extracts only the
   visible `<div class="tafsir spanish">...</div>` text for one ayah.
@@ -274,7 +276,7 @@ Safety rules:
 - If `TAFSIR_API_ENABLED` is not `true`, no `TafsirApiClient` is created.
 - If token or client id is missing, no `TafsirApiClient` is created.
 - Exception: `TAFSIR_API_PROVIDER=qul_preview` does not require Quran
-  Foundation auth headers, but it only creates a client in debug builds.
+  Foundation auth headers, but it only creates a client in internal builds.
 - If `TAFSIR_DEFAULT_RESOURCE_ID` is missing, the debug screen can still accept
   a numeric tafsir ID manually.
 - Resource IDs must be numeric; slugs or names are rejected before making a
@@ -298,6 +300,8 @@ QUL Spanish preview debug run example:
 
 ```bash
 flutter run \
+  --dart-define=QIBLA_INTERNAL_TAFSIR_BUILD=true \
+  --dart-define=QURAN_TAFSIR_PANEL_ENABLED=true \
   --dart-define=TAFSIR_API_ENABLED=true \
   --dart-define=TAFSIR_API_PROVIDER=qul_preview \
   --dart-define=TAFSIR_DEFAULT_RESOURCE_ID=268

@@ -30,8 +30,10 @@ import '../services/quran_reader_preferences.dart';
 import '../services/quran_service.dart';
 import 'downloaded_surahs_screen.dart';
 
-const _enableQuranTafsirPanels =
-    kDebugMode && bool.fromEnvironment('QURAN_TAFSIR_PANEL_ENABLED');
+const _isTafsirInternalBuild =
+    bool.fromEnvironment('QIBLA_INTERNAL_TAFSIR_BUILD');
+const _enableQuranTafsirPanels = _isTafsirInternalBuild &&
+    bool.fromEnvironment('QURAN_TAFSIR_PANEL_ENABLED');
 
 class QuranScreen extends ConsumerStatefulWidget {
   const QuranScreen({super.key});
