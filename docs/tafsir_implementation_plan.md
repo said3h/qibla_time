@@ -303,6 +303,18 @@ flutter run \
   --dart-define=TAFSIR_DEFAULT_RESOURCE_ID=268
 ```
 
+GitHub Actions build behavior:
+- The `qiblatime-android-debug` artifact enables the temporary Tafsir test
+  flags automatically so internal APK testing can use the QuranScreen Tafsir
+  button without running `flutter run` locally.
+- Release artifacts (`qiblatime-android-release` and
+  `qiblatime-android-release-aab`) do not pass these Tafsir flags, so Tafsir
+  remains hidden from public release builds while legal/source review is still
+  pending.
+- The Settings toggle remains an optional user preference in debug/internal
+  builds. The QuranScreen button can still appear when the internal flag allows
+  it, and tapping the button opens/enables Tafsir for that ayah.
+
 The temporary debug screen is registered only in debug mode at:
 
 ```text
