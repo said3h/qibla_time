@@ -991,6 +991,9 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
 
   bool get _isSelectionMode => _selectedAyahs.isNotEmpty;
 
+  bool get _canShowTafsirButton =>
+      _enableQuranTafsirPanels && !_isPageView && !_isSelectionMode;
+
   int get _selectedRangeStart => _selectedAyahs.reduce(
         (value, element) => value < element ? value : element,
       );
@@ -1506,6 +1509,22 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     );
   }
 
+  void _logTafsirState({
+    required bool showButton,
+    required bool showPanel,
+  }) {
+    if (!kDebugMode) return;
+    final readingMode = _isPageView ? 'continuous' : 'list';
+    final key = 'state:$readingMode:$_isSelectionMode:'
+        '$_enableQuranTafsirPanels:$showButton:$showPanel';
+    if (!_loggedTafsirVisibilityReasons.add(key)) return;
+    debugPrint('[QuranTafsir] flag=$_enableQuranTafsirPanels');
+    debugPrint('[QuranTafsir] readingMode=$readingMode');
+    debugPrint('[QuranTafsir] selectionMode=$_isSelectionMode');
+    debugPrint('[QuranTafsir] showButton=$showButton');
+    debugPrint('[QuranTafsir] showPanel=$showPanel');
+  }
+
   void _ensureDownloadStateLoaded(SurahDetail detail) {
     if (_hasRequestedDownloadState) return;
     _hasRequestedDownloadState = true;
@@ -1898,6 +1917,14 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
 
           final currentAyahIndex =
               _activeAyahNumber == null ? null : _activeAyahNumber! - 1;
+          final showTafsirButton = _canShowTafsirButton;
+          final showTafsirPanel =
+              showTafsirButton && _openTafsirAyahNumber != null;
+          _logTafsirState(
+            showButton: showTafsirButton,
+            showPanel: showTafsirPanel,
+          );
+
           if (_activeAyahNumber == null) {
             _lastAutoScrolledListAyahNumber = null;
             _lastObservedPlayingAyahNumber = null;
@@ -2006,16 +2033,14 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                                   _toggleAyahAudio(ayah, result.source),
                               onToggleBookmark: () =>
                                   _toggleBookmark(ayah.numberInSurah),
-                              showTafsirAction:
-                                  _enableQuranTafsirPanels && !_isSelectionMode,
+                              showTafsirAction: showTafsirButton,
                               isTafsirOpen:
                                   _openTafsirAyahNumber == ayah.numberInSurah,
                               onToggleTafsir: () =>
                                   _toggleTafsirForAyah(ayah.numberInSurah),
                             ),
                           ),
-                          if (_enableQuranTafsirPanels &&
-                              !_isSelectionMode &&
+                          if (showTafsirButton &&
                               _openTafsirAyahNumber == ayah.numberInSurah)
                             _TafsirPanelLoader(
                               surahNumber: widget.summary.number,
