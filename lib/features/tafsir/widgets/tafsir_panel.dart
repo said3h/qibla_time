@@ -7,6 +7,10 @@ import '../../../core/theme/app_theme.dart';
 import '../models/tafsir_entry.dart';
 import '../providers/tafsir_provider.dart';
 
+const _isTafsirInternalBuild =
+    bool.fromEnvironment('QIBLA_INTERNAL_TAFSIR_BUILD');
+const _tafsirPreviewLimit = 520;
+
 class TafsirPanel extends ConsumerStatefulWidget {
   const TafsirPanel({
     super.key,
@@ -45,12 +49,19 @@ class _TafsirPanelState extends ConsumerState<TafsirPanel> {
 
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: tokens.bgSurface,
-        borderRadius: BorderRadius.circular(22),
+        color: tokens.bgSurface2,
+        borderRadius: BorderRadius.circular(24),
         border: Border.all(color: tokens.border),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.04),
+            blurRadius: 18,
+            offset: const Offset(0, 8),
+          ),
+        ],
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(22),
+        borderRadius: BorderRadius.circular(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -69,7 +80,7 @@ class _TafsirPanelState extends ConsumerState<TafsirPanel> {
                     const SizedBox(width: 10),
                     Expanded(
                       child: Text(
-                        'Tafsir',
+                        'Tafsir de la aleya',
                         style: GoogleFonts.dmSans(
                           color: tokens.textPrimary,
                           fontWeight: FontWeight.w800,
@@ -90,7 +101,9 @@ class _TafsirPanelState extends ConsumerState<TafsirPanel> {
               ),
             ),
             AnimatedSwitcher(
-              duration: const Duration(milliseconds: 180),
+              duration: const Duration(milliseconds: 220),
+              switchInCurve: Curves.easeOutCubic,
+              switchOutCurve: Curves.easeInCubic,
               child: _expanded
                   ? _TafsirPanelBody(
                       key: const ValueKey('tafsir-panel-body'),
@@ -128,14 +141,14 @@ class _TafsirPanelBody extends ConsumerWidget {
         loading: () => _PanelStateMessage(
           tokens: tokens,
           icon: Icons.hourglass_top_rounded,
-          title: 'Loading tafsir',
-          message: 'Checking the tafsir source.',
+          title: 'Cargando tafsir',
+          message: 'Buscando la explicacion de esta aleya.',
         ),
         error: (_, __) => _PanelStateMessage(
           tokens: tokens,
           icon: Icons.info_outline_rounded,
-          title: 'Tafsir unavailable',
-          message: 'The tafsir could not be loaded safely.',
+          title: 'Tafsir no disponible',
+          message: 'No se pudo cargar la explicacion ahora.',
           isError: true,
         ),
         data: (result) {
@@ -143,9 +156,11 @@ class _TafsirPanelBody extends ConsumerWidget {
             return _PanelStateMessage(
               tokens: tokens,
               icon: Icons.info_outline_rounded,
-              title: 'No tafsir available',
+              title: 'Tafsir no disponible',
               message: _safeMessageFor(result.errorCode),
-              source: _sourceLabel(result.source),
+              source: _shouldShowInternalDetails
+                  ? _sourceLabel(result.source)
+                  : null,
               debugInfo: result.debugInfo,
               isError: result.errorCode != null,
             );
@@ -163,19 +178,18 @@ class _TafsirPanelBody extends ConsumerWidget {
   String _safeMessageFor(String? errorCode) {
     return switch (errorCode) {
       'tafsir_not_configured' =>
-        'No tafsir source is configured for this ayah yet.',
-      'missing_tafsir_id' => 'No tafsir resource is selected yet.',
-      'invalid_ayah_reference' => 'The ayah reference is not valid.',
-      'empty_tafsir_text' => 'No usable tafsir text was found.',
-      'invalid_tafsir_text' => 'The tafsir response was rejected for safety.',
-      'invalid_verse_alignment' =>
-        'The tafsir response did not match this ayah.',
-      _ => 'Tafsir is not available for this ayah yet.',
+        'Todavia no hay una fuente de tafsir disponible para esta aleya.',
+      'missing_tafsir_id' => 'No hay tafsir disponible para este idioma.',
+      'invalid_ayah_reference' => 'No hay tafsir disponible para esta aleya.',
+      'empty_tafsir_text' => 'No hay tafsir disponible para esta aleya.',
+      'invalid_tafsir_text' => 'No hay tafsir disponible para esta aleya.',
+      'invalid_verse_alignment' => 'No hay tafsir disponible para esta aleya.',
+      _ => 'No hay tafsir disponible para esta aleya.',
     };
   }
 }
 
-class _PanelSuccess extends StatelessWidget {
+class _PanelSuccess extends StatefulWidget {
   const _PanelSuccess({
     required this.tokens,
     required this.result,
@@ -185,38 +199,94 @@ class _PanelSuccess extends StatelessWidget {
   final TafsirLoadResult result;
 
   @override
-  Widget build(BuildContext context) {
-    final entry = result.entry!;
+  State<_PanelSuccess> createState() => _PanelSuccessState();
+}
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        _SourcePill(
-          tokens: tokens,
-          label: 'Source: ${_sourceLabel(result.source)}',
+class _PanelSuccessState extends State<_PanelSuccess> {
+  bool _showFullText = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = widget.tokens;
+    final result = widget.result;
+    final entry = result.entry!;
+    final text = entry.text.trim();
+    final isLong = text.length > _tafsirPreviewLimit;
+    final visibleText = isLong && !_showFullText
+        ? '${text.substring(0, _tafsirPreviewLimit).trimRight()}...'
+        : text;
+
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: tokens.bgSurface,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: tokens.border),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 14),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              entry.resourceName,
+              style: GoogleFonts.dmSans(
+                color: tokens.textPrimary,
+                fontWeight: FontWeight.w800,
+                fontSize: 14,
+                height: 1.25,
+              ),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              visibleText,
+              style: GoogleFonts.dmSans(
+                color: tokens.textSecondary,
+                height: 1.62,
+                fontSize: 14,
+              ),
+            ),
+            if (isLong) ...[
+              const SizedBox(height: 10),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: TextButton.icon(
+                  onPressed: () =>
+                      setState(() => _showFullText = !_showFullText),
+                  icon: Icon(
+                    _showFullText
+                        ? Icons.keyboard_arrow_up_rounded
+                        : Icons.keyboard_arrow_down_rounded,
+                    size: 18,
+                  ),
+                  label: Text(_showFullText ? 'Mostrar menos' : 'Leer mas'),
+                  style: TextButton.styleFrom(
+                    foregroundColor: tokens.primary,
+                    padding: EdgeInsets.zero,
+                    minimumSize: const Size(0, 34),
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    textStyle: GoogleFonts.dmSans(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+            if (_shouldShowInternalDetails) ...[
+              const SizedBox(height: 12),
+              _SourcePill(
+                tokens: tokens,
+                label: 'Source: ${_sourceLabel(result.source)}',
+              ),
+            ],
+          ],
         ),
-        const SizedBox(height: 12),
-        Text(
-          entry.resourceName,
-          style: GoogleFonts.dmSans(
-            color: tokens.textPrimary,
-            fontWeight: FontWeight.w800,
-            fontSize: 14,
-          ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          entry.text,
-          style: GoogleFonts.dmSans(
-            color: tokens.textSecondary,
-            height: 1.55,
-            fontSize: 14,
-          ),
-        ),
-      ],
+      ),
     );
   }
 }
+
+bool get _shouldShowInternalDetails => kDebugMode || _isTafsirInternalBuild;
 
 class _PanelStateMessage extends StatelessWidget {
   const _PanelStateMessage({
@@ -282,7 +352,7 @@ class _PanelStateMessage extends StatelessWidget {
                       label: 'Source: $source',
                     ),
                   ],
-                  if (kDebugMode && debugInfo != null) ...[
+                  if (_shouldShowInternalDetails && debugInfo != null) ...[
                     const SizedBox(height: 10),
                     _DebugInfoBox(
                       tokens: tokens,

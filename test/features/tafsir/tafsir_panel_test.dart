@@ -22,10 +22,11 @@ void main() {
     );
     await tester.pump();
 
-    expect(find.text('Tafsir'), findsOneWidget);
-    expect(find.text('No tafsir available'), findsOneWidget);
+    expect(find.text('Tafsir de la aleya'), findsOneWidget);
+    expect(find.text('Tafsir no disponible'), findsOneWidget);
     expect(
-      find.text('No tafsir source is configured for this ayah yet.'),
+      find.text(
+          'Todavia no hay una fuente de tafsir disponible para esta aleya.'),
       findsOneWidget,
     );
     expect(find.textContaining('tafsir_not_configured'), findsNothing);
@@ -63,7 +64,8 @@ void main() {
     expect(find.text('html: 1200 chars'), findsOneWidget);
   });
 
-  testWidgets('TafsirPanel shows success state and source', (tester) async {
+  testWidgets('TafsirPanel shows success state and internal source in debug',
+      (tester) async {
     await tester.pumpWidget(
       _wrapPanel(
         overrides: [
@@ -91,6 +93,42 @@ void main() {
     expect(find.text('Source: cache'), findsOneWidget);
   });
 
+  testWidgets('TafsirPanel truncates long tafsir until read more is tapped',
+      (tester) async {
+    final longText = List.filled(70, 'Texto largo de tafsir').join(' ');
+    await tester.pumpWidget(
+      _wrapPanel(
+        overrides: [
+          tafsirEntryProvider.overrideWith(
+            (ref, request) async => TafsirLoadResult(
+              source: TafsirLoadSource.api,
+              entry: TafsirEntry(
+                tafsirId: '268',
+                resourceName: 'Spanish Tafsir',
+                languageCode: 'es',
+                surahNumber: 2,
+                ayahNumber: 255,
+                text: longText,
+                source: 'test',
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+    await tester.pump();
+
+    expect(find.text('Leer mas'), findsOneWidget);
+    expect(find.text(longText), findsNothing);
+
+    await tester.ensureVisible(find.text('Leer mas'));
+    await tester.tap(find.text('Leer mas'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Mostrar menos'), findsOneWidget);
+    expect(find.text(longText), findsOneWidget);
+  });
+
   testWidgets('TafsirPanel can stay collapsed until tapped', (tester) async {
     await tester.pumpWidget(
       _wrapPanel(
@@ -107,12 +145,12 @@ void main() {
     );
     await tester.pump();
 
-    expect(find.text('No tafsir available'), findsNothing);
+    expect(find.text('Tafsir no disponible'), findsNothing);
 
-    await tester.tap(find.text('Tafsir'));
+    await tester.tap(find.text('Tafsir de la aleya'));
     await tester.pumpAndSettle();
 
-    expect(find.text('No tafsir available'), findsOneWidget);
+    expect(find.text('Tafsir no disponible'), findsOneWidget);
   });
 }
 
@@ -126,14 +164,16 @@ Widget _wrapPanel({
       theme: AppTheme.darkTheme,
       home: Scaffold(
         body: Center(
-          child: SizedBox(
-            width: 360,
-            child: TafsirPanel(
-              surahNumber: 2,
-              ayahNumber: 255,
-              languageCode: 'en',
-              tafsirId: '169',
-              initiallyExpanded: initiallyExpanded,
+          child: SingleChildScrollView(
+            child: SizedBox(
+              width: 360,
+              child: TafsirPanel(
+                surahNumber: 2,
+                ayahNumber: 255,
+                languageCode: 'en',
+                tafsirId: '169',
+                initiallyExpanded: initiallyExpanded,
+              ),
             ),
           ),
         ),

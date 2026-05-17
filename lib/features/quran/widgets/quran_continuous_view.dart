@@ -152,7 +152,7 @@ class _QuranContinuousViewState extends State<QuranContinuousView> {
         border: Border.all(color: widget.tokens.border),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.035),
+            color: Colors.black.withValues(alpha: 0.035),
             blurRadius: 18,
             offset: const Offset(0, 8),
           ),
@@ -205,7 +205,7 @@ class _QuranContinuousViewState extends State<QuranContinuousView> {
       final ayah = widget.ayahs[index];
       final isActiveAyah = widget.currentAyahIndex == index;
       final activeBackground =
-          isActiveAyah ? widget.tokens.primary.withOpacity(0.13) : null;
+          isActiveAyah ? widget.tokens.primary.withValues(alpha: 0.13) : null;
 
       final ayahStyle = widget.tokens.arabicTextStyle(
         fontSize: 27,
@@ -256,7 +256,8 @@ class _QuranContinuousViewState extends State<QuranContinuousView> {
           style: GoogleFonts.amiri(
             fontSize: 17,
             height: 2.15,
-            color: widget.tokens.primary.withOpacity(isActiveAyah ? 1 : 0.92),
+            color: widget.tokens.primary
+                .withValues(alpha: isActiveAyah ? 1 : 0.92),
             backgroundColor: activeBackground,
             fontWeight: isActiveAyah ? FontWeight.w800 : FontWeight.w600,
           ),
