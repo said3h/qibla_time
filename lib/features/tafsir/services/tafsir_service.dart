@@ -4,6 +4,7 @@ import '../../../core/services/logger_service.dart';
 import '../models/tafsir_entry.dart';
 import 'tafsir_api_client.dart';
 import 'tafsir_cache_service.dart';
+import 'tafsir_config.dart';
 
 class TafsirService {
   const TafsirService({
@@ -31,8 +32,10 @@ class TafsirService {
     String? tafsirId,
   }) async {
     final normalizedLanguage = _normalizeLanguageCode(languageCode);
-    final normalizedTafsirId = _normalizeOptionalId(tafsirId) ??
-        _normalizeOptionalId(_defaultTafsirId);
+    final languageResource = _resourceForLanguage(normalizedLanguage);
+    final normalizedTafsirId =
+        _normalizeOptionalId(tafsirId) ?? languageResource?.resourceId;
+    _debugLanguage(normalizedLanguage, normalizedTafsirId);
     _debugLog(
       'request language=$normalizedLanguage tafsirId=$normalizedTafsirId '
       'ayah=$surahNumber:$ayahNumber apiClient=${_apiClient != null}',
@@ -244,6 +247,20 @@ class TafsirService {
     return parsed.toString();
   }
 
+  QulTafsirResource? _resourceForLanguage(String languageCode) {
+    if (_providerName == 'qul_preview') {
+      return qulTafsirResourceForLanguage(languageCode);
+    }
+    final defaultId = _normalizeOptionalId(_defaultTafsirId);
+    if (defaultId == null) return null;
+    return QulTafsirResource(
+      languageCode: languageCode,
+      resourceId: defaultId,
+      name: 'Configured tafsir resource',
+      notes: 'Configured by dart-define.',
+    );
+  }
+
   bool _containsTechnicalError(String text) {
     final normalized = text.toLowerCase();
     const blockedMarkers = [
@@ -267,6 +284,14 @@ class TafsirService {
   void _debugLog(String message) {
     if (!kDebugMode) return;
     debugPrint('[QuranTafsirApi] $message');
+  }
+
+  void _debugLanguage(String languageCode, String? resourceId) {
+    if (!kDebugMode) return;
+    debugPrint(
+      '[QuranTafsirLanguage] language=$languageCode '
+      'resourceId=${resourceId ?? 'none'}',
+    );
   }
 
   TafsirDebugInfo _debugInfo({

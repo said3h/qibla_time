@@ -59,6 +59,37 @@ Add reliable tafsir/context to Quran verses in Qibla Time to reduce misunderstan
   - Do not bundle or redistribute the dataset yet.
   - TODO: verify QuranEnc/Tafsir Center redistribution, caching, modification, and attribution terms before any production feature or offline import.
 
+### QUL Multi-language Resource Candidates
+
+Discovery source:
+- QUL tafsir list: https://qul.tarteel.ai/resources/tafsir?view=list
+- Per-ayah preview checked with `?ayah=1%3A1`.
+- These resources are for internal online preview only until legal/source terms
+  are verified. They must not be bundled offline yet.
+
+Confirmed initial mapping:
+
+| App language | QUL resource ID | Name | Type | Preview status | Notes |
+| --- | ---: | --- | --- | --- | --- |
+| `es` | `268` | Spanish Abridged Explanation of the Quran | Al-Mukhtasar / abridged explanation | `1:1` returns HTML tafsir text | Current reference resource. |
+| `en` | `266` | English Al-Mukhtasar | Al-Mukhtasar | `1:1` returns HTML tafsir text | Good first English candidate. |
+| `ar` | `251` | Arabic Al-Mukhtasar in interpreting the Noble Quran | Al-Mukhtasar | `1:1` returns HTML tafsir text | Preferred Arabic candidate because it matches the Mukhtasar family. |
+| `tr` | `258` | Turkish Al-Mukhtasar in Interpreting the Noble Quran | Al-Mukhtasar | `1:1` returns HTML tafsir text | Good first Turkish candidate. |
+| `fr` | `259` | French Abridged Explanation of the Quran | Al-Mukhtasar / abridged explanation | `1:1` returns HTML tafsir text | Good first French candidate. |
+| `ru` | `262` | Russian Al-Mukhtasar | Al-Mukhtasar | `1:1` returns HTML tafsir text | Good first Russian candidate. |
+| `it` | `253` | Italian Al-Mukhtasar in interpreting the Noble Quran | Al-Mukhtasar | `1:1` returns HTML tafsir text | Good first Italian candidate. |
+
+Not mapped yet:
+- `de`: no clear German tafsir resource found in the QUL tafsir list.
+- `pt`: no clear Portuguese tafsir resource found in the QUL tafsir list.
+
+Implementation decision:
+- Use a central `languageCode -> QUL resourceId` map for confirmed resources.
+- If the active language is not mapped, return the safe unavailable/fallback
+  state.
+- Do not use Spanish or English as automatic fallback for another language.
+- Do not use machine translation.
+
 ## MVP Recommendation
 Start with:
 - Spanish Abridged Explanation of the Quran

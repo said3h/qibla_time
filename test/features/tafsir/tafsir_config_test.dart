@@ -31,6 +31,7 @@ void main() {
     test('allows QUL preview client without Quran Foundation auth headers', () {
       const config = TafsirConfig(
         enabled: true,
+        internalBuild: true,
         provider: 'qul_preview',
         baseUrl: 'https://qul.tarteel.ai',
       );
@@ -38,6 +39,7 @@ void main() {
       expect(config.canCreateApiClient, isTrue);
       expect(config.isQulPreview, isTrue);
       expect(config.normalizedDefaultResourceId, '268');
+      expect(config.internalBuild, isTrue);
     });
 
     test('accepts complete explicit configuration', () {
@@ -67,6 +69,18 @@ void main() {
 
       expect(config.canCreateApiClient, isTrue);
       expect(config.normalizedDefaultResourceId, isNull);
+    });
+
+    test('maps confirmed QUL tafsir resources by language', () {
+      expect(qulTafsirResourceForLanguage('es')?.resourceId, '268');
+      expect(qulTafsirResourceForLanguage('en')?.resourceId, '266');
+      expect(qulTafsirResourceForLanguage('ar')?.resourceId, '251');
+      expect(qulTafsirResourceForLanguage('tr')?.resourceId, '258');
+      expect(qulTafsirResourceForLanguage('fr')?.resourceId, '259');
+      expect(qulTafsirResourceForLanguage('ru')?.resourceId, '262');
+      expect(qulTafsirResourceForLanguage('it')?.resourceId, '253');
+      expect(qulTafsirResourceForLanguage('de'), isNull);
+      expect(qulTafsirResourceForLanguage('pt'), isNull);
     });
   });
 }

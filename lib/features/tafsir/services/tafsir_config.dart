@@ -70,3 +70,68 @@ class TafsirConfig {
     return trimmed;
   }
 }
+
+class QulTafsirResource {
+  const QulTafsirResource({
+    required this.languageCode,
+    required this.resourceId,
+    required this.name,
+    required this.notes,
+  });
+
+  final String languageCode;
+  final String resourceId;
+  final String name;
+  final String notes;
+}
+
+const qulTafsirResourcesByLanguage = <String, QulTafsirResource>{
+  'es': QulTafsirResource(
+    languageCode: 'es',
+    resourceId: '268',
+    name: 'Spanish Abridged Explanation of the Quran',
+    notes: 'QUL preview, Al-Mukhtasar/Abridged Explanation.',
+  ),
+  'en': QulTafsirResource(
+    languageCode: 'en',
+    resourceId: '266',
+    name: 'English Al-Mukhtasar',
+    notes: 'QUL preview, Al-Mukhtasar.',
+  ),
+  'ar': QulTafsirResource(
+    languageCode: 'ar',
+    resourceId: '251',
+    name: 'Arabic Al-Mukhtasar in interpreting the Noble Quran',
+    notes: 'QUL preview, Arabic Al-Mukhtasar.',
+  ),
+  'tr': QulTafsirResource(
+    languageCode: 'tr',
+    resourceId: '258',
+    name: 'Turkish Al-Mukhtasar in Interpreting the Noble Quran',
+    notes: 'QUL preview, Turkish Al-Mukhtasar.',
+  ),
+  'fr': QulTafsirResource(
+    languageCode: 'fr',
+    resourceId: '259',
+    name: 'French Abridged Explanation of the Quran',
+    notes: 'QUL preview, Al-Mukhtasar/Abridged Explanation.',
+  ),
+  'ru': QulTafsirResource(
+    languageCode: 'ru',
+    resourceId: '262',
+    name: 'Russian Al-Mukhtasar',
+    notes: 'QUL preview, Russian Al-Mukhtasar.',
+  ),
+  'it': QulTafsirResource(
+    languageCode: 'it',
+    resourceId: '253',
+    name: 'Italian Al-Mukhtasar in interpreting the Noble Quran',
+    notes: 'QUL preview, Italian Al-Mukhtasar.',
+  ),
+};
+
+QulTafsirResource? qulTafsirResourceForLanguage(String languageCode) {
+  final normalized = languageCode.trim().toLowerCase().replaceAll('-', '_');
+  final shortCode = normalized.split('_').first;
+  return qulTafsirResourcesByLanguage[shortCode];
+}

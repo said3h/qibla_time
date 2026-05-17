@@ -234,6 +234,69 @@ void main() {
       expect(capturedRequest.url.path, '/api/v4/tafsirs/169/by_ayah/1:1');
     });
 
+    test('uses QUL resource mapped to the requested language', () async {
+      late http.Request capturedRequest;
+      final apiClient = TafsirApiClient(
+        httpClient: MockClient((request) async {
+          capturedRequest = request;
+          return http.Response(
+            '''
+              <h1>French Abridged Explanation of the Quran</h1>
+              <h2>French Abridged Explanation of the Quran tafsir for Surah Al-Fatihah - Ayah 1</h2>
+              <div class="tafsir french">Texte de tafsir.</div>
+            ''',
+            200,
+            headers: const {'content-type': 'text/html; charset=utf-8'},
+          );
+        }),
+        baseUri: Uri.parse('https://qul.tarteel.ai'),
+        source: TafsirApiSource.qulPreview,
+      );
+      final apiBackedService = TafsirService(
+        apiClient: apiClient,
+        providerName: 'qul_preview',
+      );
+
+      final result = await apiBackedService.getTafsir(
+        surahNumber: 1,
+        ayahNumber: 1,
+        languageCode: 'fr',
+      );
+
+      expect(result.source, TafsirLoadSource.api);
+      expect(capturedRequest.url.path, '/resources/tafsir/259');
+      expect(result.entry!.tafsirId, '259');
+      expect(result.entry!.languageCode, 'fr');
+    });
+
+    test('does not fallback to Spanish when QUL language has no resource',
+        () async {
+      var didCallApi = false;
+      final apiClient = TafsirApiClient(
+        httpClient: MockClient((request) async {
+          didCallApi = true;
+          return http.Response('', 200);
+        }),
+        baseUri: Uri.parse('https://qul.tarteel.ai'),
+        source: TafsirApiSource.qulPreview,
+      );
+      final apiBackedService = TafsirService(
+        apiClient: apiClient,
+        defaultTafsirId: '268',
+        providerName: 'qul_preview',
+      );
+
+      final result = await apiBackedService.getTafsir(
+        surahNumber: 1,
+        ayahNumber: 1,
+        languageCode: 'de',
+      );
+
+      expect(result.source, TafsirLoadSource.unavailable);
+      expect(result.errorCode, 'missing_tafsir_id');
+      expect(didCallApi, isFalse);
+    });
+
     test('does not call API when tafsir id is missing', () async {
       var didCallApi = false;
       final apiClient = TafsirApiClient(
