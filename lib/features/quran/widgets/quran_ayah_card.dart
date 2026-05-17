@@ -24,6 +24,9 @@ class QuranAyahCard extends StatelessWidget {
     required this.audioStatusLabel,
     required this.onToggleAudio,
     required this.onToggleBookmark,
+    this.showTafsirAction = false,
+    this.isTafsirOpen = false,
+    this.onToggleTafsir,
     this.margin = const EdgeInsets.only(bottom: 10),
   });
 
@@ -42,6 +45,9 @@ class QuranAyahCard extends StatelessWidget {
   final String audioStatusLabel;
   final VoidCallback onToggleAudio;
   final VoidCallback onToggleBookmark;
+  final bool showTafsirAction;
+  final bool isTafsirOpen;
+  final VoidCallback? onToggleTafsir;
   final EdgeInsets margin;
 
   Widget _buildArabicText(BuildContext context) {
@@ -123,7 +129,7 @@ class QuranAyahCard extends StatelessWidget {
         boxShadow: isActiveAudio
             ? [
                 BoxShadow(
-                  color: tokens.primary.withOpacity(0.08),
+                  color: tokens.primary.withValues(alpha: 0.08),
                   blurRadius: 16,
                   offset: const Offset(0, 8),
                 ),
@@ -265,12 +271,41 @@ class QuranAyahCard extends StatelessWidget {
             ),
           ],
           const SizedBox(height: 10),
-          Text(
-            l10n.quranAyahFooterHint(audioStatusLabel),
-            style: GoogleFonts.dmSans(
-              fontSize: 10,
-              color: tokens.textMuted,
-            ),
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  l10n.quranAyahFooterHint(audioStatusLabel),
+                  style: GoogleFonts.dmSans(
+                    fontSize: 10,
+                    color: tokens.textMuted,
+                  ),
+                ),
+              ),
+              if (showTafsirAction && onToggleTafsir != null) ...[
+                const SizedBox(width: 8),
+                TextButton.icon(
+                  onPressed: onToggleTafsir,
+                  icon: Icon(
+                    isTafsirOpen
+                        ? Icons.keyboard_arrow_up_rounded
+                        : Icons.menu_book_rounded,
+                    size: 16,
+                  ),
+                  label: const Text('Tafsir'),
+                  style: TextButton.styleFrom(
+                    foregroundColor: tokens.primary,
+                    textStyle: GoogleFonts.dmSans(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w800,
+                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    minimumSize: const Size(0, 32),
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  ),
+                ),
+              ],
+            ],
           ),
         ],
       ),

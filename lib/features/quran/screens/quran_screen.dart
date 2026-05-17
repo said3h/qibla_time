@@ -908,7 +908,9 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   int? _lastAutoScrolledListAyahNumber;
   int? _lastObservedPlayingAyahNumber;
   int _listAutoScrollGeneration = 0;
+  int? _openTafsirAyahNumber;
   final Set<int> _selectedAyahs = <int>{};
+  final Set<String> _loggedTafsirVisibilityReasons = <String>{};
 
   static const int _maxSelectedAyahs = 5;
 
@@ -938,6 +940,30 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   Future<void> _toggleTajweed(bool value) async {
     await SettingsService.instance.saveQuranTajweedEnabled(value);
     ref.invalidate(quranTajweedEnabledProvider);
+  }
+
+  Future<void> _toggleTafsirForAyah(int ayahNumber) async {
+    if (!_enableQuranTafsirPanels) {
+      _logTafsirVisibility('button ignored: internal flag off');
+      return;
+    }
+    if (_isPageView) {
+      _logTafsirVisibility('button ignored: page mode incompatible');
+      return;
+    }
+    if (_isSelectionMode) {
+      _logTafsirVisibility('button ignored: selection mode active');
+      return;
+    }
+
+    await SettingsService.instance.saveTafsirEnabled(true);
+    ref.invalidate(tafsirUserEnabledProvider);
+
+    if (!mounted) return;
+    setState(() {
+      _openTafsirAyahNumber =
+          _openTafsirAyahNumber == ayahNumber ? null : ayahNumber;
+    });
   }
 
   QuranMiniPlayerState get _miniPlayerState =>
@@ -1067,7 +1093,10 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     _cancelPendingListAutoScroll();
     if (wasEmpty) {
       _logSelectionMode('ENTERING selection mode with ayah $ayahNumber');
-      setState(() => _selectedAyahs.add(ayahNumber));
+      setState(() {
+        _openTafsirAyahNumber = null;
+        _selectedAyahs.add(ayahNumber);
+      });
       return;
     }
 
@@ -1113,6 +1142,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     );
   }
 
+  // ignore: unused_element
   Future<void> _showAyahShareOptions(SurahAyah ayah) async {
     final action = await showModalBottomSheet<_AyahShareAction>(
       context: context,
@@ -1463,6 +1493,16 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     debugPrint(
       '[QuranSelection] $reason | mode=$_isSelectionMode | '
       'selectedCount=${_selectedAyahs.length}',
+    );
+  }
+
+  void _logTafsirVisibility(String reason) {
+    if (!kDebugMode) return;
+    if (!_loggedTafsirVisibilityReasons.add(reason)) return;
+    debugPrint(
+      '[QuranTafsir] $reason | flag=$_enableQuranTafsirPanels | '
+      'selectionMode=$_isSelectionMode | pageView=$_isPageView | '
+      'openAyah=$_openTafsirAyahNumber',
     );
   }
 
@@ -1966,20 +2006,36 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                                   _toggleAyahAudio(ayah, result.source),
                               onToggleBookmark: () =>
                                   _toggleBookmark(ayah.numberInSurah),
+                              showTafsirAction:
+                                  _enableQuranTafsirPanels && !_isSelectionMode,
+                              isTafsirOpen:
+                                  _openTafsirAyahNumber == ayah.numberInSurah,
+                              onToggleTafsir: () =>
+                                  _toggleTafsirForAyah(ayah.numberInSurah),
                             ),
                           ),
-                          if (_enableQuranTafsirPanels && !_isSelectionMode)
+                          if (_enableQuranTafsirPanels &&
+                              !_isSelectionMode &&
+                              _openTafsirAyahNumber == ayah.numberInSurah)
                             _TafsirPanelLoader(
                               surahNumber: widget.summary.number,
                               ayahNumber: ayah.numberInSurah,
-                              languageCode: Localizations.localeOf(context)
-                                  .languageCode,
+                              languageCode:
+                                  Localizations.localeOf(context).languageCode,
                             ),
                         ],
                       );
                     },
                   ),
                 );
+
+          if (!_enableQuranTafsirPanels) {
+            _logTafsirVisibility('hidden: internal flag off');
+          } else if (_isPageView) {
+            _logTafsirVisibility('hidden: page mode incompatible');
+          } else if (_isSelectionMode) {
+            _logTafsirVisibility('hidden: selection mode active');
+          }
 
           return Stack(
             fit: StackFit.expand,
@@ -2359,7 +2415,15 @@ class _TafsirPanelLoader extends ConsumerWidget {
 
     return userEnabled.when(
       data: (enabled) {
-        if (!enabled) return const SizedBox.shrink();
+        if (!enabled) {
+          if (kDebugMode) {
+            debugPrint(
+              '[QuranTafsir] panel hidden: user preference off | '
+              'ayah=$surahNumber:$ayahNumber',
+            );
+          }
+          return const SizedBox.shrink();
+        }
         return Padding(
           padding: const EdgeInsets.only(left: 2, right: 2, bottom: 12),
           child: TafsirPanel(
