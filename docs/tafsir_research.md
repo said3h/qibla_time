@@ -80,8 +80,21 @@ Confirmed initial mapping:
 | `it` | `253` | Italian Al-Mukhtasar in interpreting the Noble Quran | Al-Mukhtasar | `1:1` returns HTML tafsir text | Good first Italian candidate. |
 
 Not mapped yet:
-- `de`: no clear German tafsir resource found in the QUL tafsir list.
-- `pt`: no clear Portuguese tafsir resource found in the QUL tafsir list.
+- `de`: unsupported for now. A focused QUL tafsir search found no German or
+  Deutsch tafsir resource by tag, title, or search text.
+- `pt`: unsupported for now. A focused QUL tafsir search found no Portuguese,
+  Portugues, Português, Brazil, or Brasil tafsir resource by tag, title, or
+  search text.
+
+Focused German/Portuguese check:
+- Checked QUL tafsir list page: `https://qul.tarteel.ai/resources/tafsir?view=list`
+- Checked QUL search pages:
+  - `https://qul.tarteel.ai/resources/tafsir?q=german`
+  - `https://qul.tarteel.ai/resources/tafsir?q=portuguese`
+- Search terms checked in parsed resource cards:
+  - German: `german`, `deutsch`, `alem`
+  - Portuguese: `portuguese`, `portugues`, `português`, `brazil`, `brasil`
+- Result: no reliable original tafsir resource found for `de` or `pt`.
 
 Implementation decision:
 - Use a central `languageCode -> QUL resourceId` map for confirmed resources.
