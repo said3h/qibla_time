@@ -2891,6 +2891,15 @@ class AppLocalizationsAr extends AppLocalizations {
       'لم يتم العثور على تطبيق متوافق لفتح هذا الكتاب.';
 
   @override
+  String get bookReaderLoading => 'جارٍ تحميل الكتاب...';
+
+  @override
+  String get bookReaderLoadError => 'تعذر تحميل هذا الكتاب داخل التطبيق.';
+
+  @override
+  String get bookOpenExternally => 'فتح خارجيًا';
+
+  @override
   String ramadanStatusHeaderDay(int day) {
     return 'اليوم $day من رمضان';
   }

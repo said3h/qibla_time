@@ -2,15 +2,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-import '../../../core/services/logger_service.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../l10n/l10n.dart';
 import '../models/book_model.dart';
 import '../services/book_download_service.dart';
 import '../services/islamhouse_book_service.dart';
 import '../utils/book_link_launcher.dart';
+import 'book_reader_screen.dart';
 
 /// Pantalla de Biblioteca de Libros de IslamHouse
 class IslamicBooksScreen extends ConsumerStatefulWidget {
@@ -229,7 +228,7 @@ class _IslamicBooksScreenState extends ConsumerState<IslamicBooksScreen>
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: isSelected
-                        ? tokens.primary.withOpacity(0.1)
+                        ? tokens.primary.withValues(alpha: 0.1)
                         : tokens.bgSurface,
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
@@ -374,8 +373,8 @@ class _BookCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      tokens.primary.withOpacity(0.2),
-                      tokens.primary.withOpacity(0.05),
+                      tokens.primary.withValues(alpha: 0.2),
+                      tokens.primary.withValues(alpha: 0.05),
                     ],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
@@ -425,7 +424,7 @@ class _BookCard extends StatelessWidget {
                   const SizedBox(height: 6),
                   Row(
                     children: [
-                      Icon(Icons.star, size: 12, color: Colors.amber),
+                      const Icon(Icons.star, size: 12, color: Colors.amber),
                       const SizedBox(width: 4),
                       Text(
                         book.rating.toStringAsFixed(1),
@@ -493,9 +492,9 @@ class _BookListCard extends StatelessWidget {
                 gradient: LinearGradient(
                   colors: [
                     isFeatured
-                        ? Colors.amber.withOpacity(0.3)
-                        : tokens.primary.withOpacity(0.2),
-                    tokens.primary.withOpacity(0.05),
+                        ? Colors.amber.withValues(alpha: 0.3)
+                        : tokens.primary.withValues(alpha: 0.2),
+                    tokens.primary.withValues(alpha: 0.05),
                   ],
                 ),
                 borderRadius: BorderRadius.circular(8),
@@ -525,7 +524,7 @@ class _BookListCard extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 8, vertical: 4),
                       decoration: BoxDecoration(
-                        color: Colors.amber.withOpacity(0.1),
+                        color: Colors.amber.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: Row(
@@ -687,35 +686,22 @@ class _BookDetailSheetState extends ConsumerState<_BookDetailSheet> {
   }
 
   Future<void> _handleOpenOffline() async {
-    final l10n = context.l10n;
     final service = ref.read(bookDownloadServiceProvider);
     final localPath = _localPath ?? await service.getLocalPath(widget.book);
-    final file = Uri.file(localPath);
-    try {
-      final canOpen = await canLaunchUrl(file);
-      AppLogger.info(
-        'Opening offline book: url="${file.toString()}", scheme="${file.scheme}", canLaunchUrl=$canOpen',
-      );
-      final launched = await launchUrl(
-        file,
-        mode: LaunchMode.externalApplication,
-      );
-      if (!mounted) return;
-      if (!launched) {
-        AppLogger.warning(
-          'Offline book launch returned false: url="${file.toString()}", scheme="${file.scheme}", canLaunchUrl=$canOpen',
-        );
-        _showSnackBar(l10n.bookNoCompatibleApp);
-      }
-    } catch (error, stackTrace) {
-      AppLogger.error(
-        'Offline book launch failed: url="${file.toString()}", scheme="${file.scheme}"',
-        error: error,
-        stackTrace: stackTrace,
-      );
-      if (!mounted) return;
-      _showSnackBar(l10n.bookNoCompatibleApp);
-    }
+    if (!mounted) return;
+    _openReader(localPath, isLocalFile: true);
+  }
+
+  void _openReader(String source, {bool isLocalFile = false}) {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (_) => BookReaderScreen(
+          title: widget.book.title,
+          source: source,
+          isLocalFile: isLocalFile,
+        ),
+      ),
+    );
   }
 
   Future<void> _handleDeleteDownload() async {
@@ -874,9 +860,8 @@ class _BookDetailSheetState extends ConsumerState<_BookDetailSheet> {
             children: [
               Expanded(
                 child: ElevatedButton.icon(
-                  onPressed: hasReadUrl
-                      ? () => openBookUrl(context, book.readUrl)
-                      : null,
+                  onPressed:
+                      hasReadUrl ? () => _openReader(book.readUrl) : null,
                   icon: const Icon(Icons.read_more),
                   label: Text(
                     hasReadUrl ? l10n.commonRead : l10n.commonUnavailable,
@@ -1074,7 +1059,7 @@ class _ErrorState extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.error_outline, size: 48, color: Colors.red),
+            const Icon(Icons.error_outline, size: 48, color: Colors.red),
             const SizedBox(height: 16),
             Text(
               l10n.booksLoadErrorTitle,

@@ -1,4 +1,6 @@
 /// Modelo para libros de IslamHouse
+library;
+
 import '../../../l10n/l10n.dart';
 
 class IslamHouseBook {

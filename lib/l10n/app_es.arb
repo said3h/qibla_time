@@ -1222,6 +1222,9 @@
   "bookLinkUnavailable": "Este enlace no está disponible.",
   "bookLinkOpenError": "No hemos podido abrir el enlace.",
   "bookNoCompatibleApp": "No se encontró una app compatible para abrir este libro.",
+  "bookReaderLoading": "Cargando libro...",
+  "bookReaderLoadError": "No se pudo cargar este libro dentro de la app.",
+  "bookOpenExternally": "Abrir externamente",
   "ramadanStatusHeaderDay": "Ramadán día {day}",
   "@ramadanStatusHeaderDay": {
     "placeholders": {

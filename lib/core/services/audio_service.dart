@@ -8,7 +8,7 @@ import 'package:audioplayers/audioplayers.dart';
 class AudioService {
   AudioService._();
   static final AudioService instance = AudioService._();
-  static final AudioContext _defaultAudioContext = AudioContext(
+  static const AudioContext _defaultAudioContext = AudioContext(
     iOS: AudioContextIOS(
       category: AVAudioSessionCategory.playback,
     ),
@@ -55,8 +55,7 @@ class AudioService {
       _ensurePlayer().onPlayerStateChanged;
   Stream<void> get onPlayerComplete => _ensurePlayer().onPlayerComplete;
   Stream<Duration> get onPositionChanged => _ensurePlayer().onPositionChanged;
-  Stream<Duration?> get onDurationChanged =>
-      _ensurePlayer().onDurationChanged;
+  Stream<Duration?> get onDurationChanged => _ensurePlayer().onDurationChanged;
 
   Future<void> playAdhan(String fileName) async {
     await stop();

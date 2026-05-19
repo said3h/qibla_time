@@ -11,7 +11,8 @@ class HadithOfflineScreen extends ConsumerStatefulWidget {
   const HadithOfflineScreen({super.key});
 
   @override
-  ConsumerState<HadithOfflineScreen> createState() => _HadithOfflineScreenState();
+  ConsumerState<HadithOfflineScreen> createState() =>
+      _HadithOfflineScreenState();
 }
 
 class _HadithOfflineScreenState extends ConsumerState<HadithOfflineScreen> {
@@ -110,7 +111,9 @@ class _HadithOfflineScreenState extends ConsumerState<HadithOfflineScreen> {
           Row(
             children: [
               Icon(
-                _status!.isFullyOffline ? Icons.cloud_done : Icons.cloud_download,
+                _status!.isFullyOffline
+                    ? Icons.cloud_done
+                    : Icons.cloud_download,
                 color: tokens.primary,
                 size: 24,
               ),
@@ -219,7 +222,7 @@ class _HadithOfflineScreenState extends ConsumerState<HadithOfflineScreen> {
               color: Colors.green.withOpacity(0.1),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Icon(
+            child: const Icon(
               Icons.check_circle,
               color: Colors.green,
               size: 20,

@@ -1220,6 +1220,9 @@
   "bookLinkUnavailable": "Tautan ini tidak tersedia.",
   "bookLinkOpenError": "Kami tidak dapat membuka tautan.",
   "bookNoCompatibleApp": "Tidak ada aplikasi kompatibel untuk membuka buku ini.",
+  "bookReaderLoading": "Memuat buku...",
+  "bookReaderLoadError": "Kami tidak dapat memuat buku ini di dalam aplikasi.",
+  "bookOpenExternally": "Buka secara eksternal",
   "ramadanStatusHeaderDay": "Hari Ramadan ke-{day}",
   "@ramadanStatusHeaderDay": {
     "placeholders": {

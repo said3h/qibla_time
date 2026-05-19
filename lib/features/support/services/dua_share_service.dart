@@ -1,4 +1,3 @@
-import 'package:cross_file/cross_file.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../core/theme/app_theme.dart';
@@ -48,7 +47,8 @@ class DuaShareService {
         includeArabic: includeArabic,
         includeTranslation: includeTranslation,
       ),
-      subject: dua.title.trim().isEmpty ? l10n.shareSubjectDua : dua.title.trim(),
+      subject:
+          dua.title.trim().isEmpty ? l10n.shareSubjectDua : dua.title.trim(),
     );
   }
 
@@ -89,7 +89,8 @@ class DuaShareService {
         includeArabic: includeArabic,
         includeTranslation: includeTranslation,
       ),
-      subject: dua.title.trim().isEmpty ? l10n.shareSubjectDua : dua.title.trim(),
+      subject:
+          dua.title.trim().isEmpty ? l10n.shareSubjectDua : dua.title.trim(),
     );
   }
 

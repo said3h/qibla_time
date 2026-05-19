@@ -58,10 +58,10 @@ class HadithWidgetService {
   static HadithSnapshot snapshotFromHadith(Hadith hadith) {
     return HadithSnapshot(
       arabic: hadith.arabic.length > 150
-          ? hadith.arabic.substring(0, 147) + '...'
+          ? '${hadith.arabic.substring(0, 147)}...'
           : hadith.arabic,
       translation: hadith.translation.length > 200
-          ? hadith.translation.substring(0, 197) + '...'
+          ? '${hadith.translation.substring(0, 197)}...'
           : hadith.translation,
       reference: _shortenReference(hadith.reference),
       grade: hadith.grade,
@@ -71,24 +71,28 @@ class HadithWidgetService {
 
   static String _shortenReference(String reference) {
     if (reference.length > 40) {
-      return reference.substring(0, 37) + '...';
+      return '${reference.substring(0, 37)}...';
     }
     return reference;
   }
 
   static String _extractCollection(String reference) {
     final refLower = reference.toLowerCase();
-    if (refLower.contains('bujari') || refLower.contains('bukhari'))
+    if (refLower.contains('bujari') || refLower.contains('bukhari')) {
       return 'Bukhari';
+    }
     if (refLower.contains('muslim')) return 'Muslim';
     if (refLower.contains('tirmidhi')) return 'Tirmidhi';
-    if (refLower.contains('abu dawud') || refLower.contains('abudawud'))
+    if (refLower.contains('abu dawud') || refLower.contains('abudawud')) {
       return 'Abu Dawud';
+    }
     if (refLower.contains('nasai')) return 'Nasai';
-    if (refLower.contains('ibn majah') || refLower.contains('ibnmajah'))
+    if (refLower.contains('ibn majah') || refLower.contains('ibnmajah')) {
       return 'Ibn Majah';
-    if (refLower.contains('malik') || refLower.contains('muwatta'))
+    }
+    if (refLower.contains('malik') || refLower.contains('muwatta')) {
       return 'Malik';
+    }
     if (refLower.contains('ahmad')) return 'Ahmad';
     return 'Hadiz';
   }

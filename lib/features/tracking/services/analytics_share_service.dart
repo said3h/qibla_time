@@ -60,7 +60,7 @@ class AnalyticsShareService {
 
     final recorder = ui.PictureRecorder();
     final canvas = Canvas(recorder);
-    final bounds = const Rect.fromLTWH(0, 0, width, height);
+    const bounds = Rect.fromLTWH(0, 0, width, height);
 
     final background = Paint()
       ..shader = ui.Gradient.linear(
@@ -121,7 +121,7 @@ class AnalyticsShareService {
       maxWidth: 300,
     );
 
-    final statsTop = 470.0;
+    const statsTop = 470.0;
     _drawStatCard(
       canvas,
       tokens: tokens,

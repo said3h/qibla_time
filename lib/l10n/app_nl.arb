@@ -1219,6 +1219,9 @@
   "bookLinkUnavailable": "Deze link is niet beschikbaar.",
   "bookLinkOpenError": "We konden de link niet openen.",
   "bookNoCompatibleApp": "Geen compatibele app gevonden om dit boek te openen.",
+  "bookReaderLoading": "Boek laden...",
+  "bookReaderLoadError": "We konden dit boek niet in de app laden.",
+  "bookOpenExternally": "Extern openen",
   "ramadanStatusHeaderDay": "Ramadan-dag {day}",
   "@ramadanStatusHeaderDay": {
     "placeholders": {

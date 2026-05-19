@@ -2962,6 +2962,16 @@ class AppLocalizationsId extends AppLocalizations {
       'Tidak ada aplikasi kompatibel untuk membuka buku ini.';
 
   @override
+  String get bookReaderLoading => 'Memuat buku...';
+
+  @override
+  String get bookReaderLoadError =>
+      'Kami tidak dapat memuat buku ini di dalam aplikasi.';
+
+  @override
+  String get bookOpenExternally => 'Buka secara eksternal';
+
+  @override
   String ramadanStatusHeaderDay(int day) {
     return 'Hari Ramadan ke-$day';
   }

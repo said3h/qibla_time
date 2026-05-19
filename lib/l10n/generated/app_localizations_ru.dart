@@ -2976,6 +2976,16 @@ class AppLocalizationsRu extends AppLocalizations {
       'Не найдено совместимое приложение для открытия этой книги.';
 
   @override
+  String get bookReaderLoading => 'Загрузка книги...';
+
+  @override
+  String get bookReaderLoadError =>
+      'Не удалось загрузить эту книгу внутри приложения.';
+
+  @override
+  String get bookOpenExternally => 'Открыть внешне';
+
+  @override
   String ramadanStatusHeaderDay(int day) {
     return 'Рамадан, день $day';
   }

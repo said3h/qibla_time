@@ -749,10 +749,12 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
     if (refLower.contains('nasai') || refLower.contains('nasa\'i')) {
       return Colors.teal;
     }
-    if (refLower.contains('ibn majah') || refLower.contains('ibnmajah'))
+    if (refLower.contains('ibn majah') || refLower.contains('ibnmajah')) {
       return Colors.indigo;
-    if (refLower.contains('malik') || refLower.contains('muwatta'))
+    }
+    if (refLower.contains('malik') || refLower.contains('muwatta')) {
       return Colors.amber;
+    }
     if (refLower.contains('ahmad')) return Colors.brown;
     return Colors.grey;
   }

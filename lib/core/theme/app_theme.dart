@@ -550,8 +550,8 @@ class AppTheme {
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: tokens.bgApp,
         indicatorColor: tokens.primaryBg,
-        labelTextStyle: MaterialStateProperty.resolveWith((states) {
-          final color = states.contains(MaterialState.selected)
+        labelTextStyle: WidgetStateProperty.resolveWith((states) {
+          final color = states.contains(WidgetState.selected)
               ? tokens.primary
               : tokens.textSecondary;
           return GoogleFonts.dmSans(
@@ -560,8 +560,8 @@ class AppTheme {
             color: color,
           );
         }),
-        iconTheme: MaterialStateProperty.resolveWith((states) {
-          final color = states.contains(MaterialState.selected)
+        iconTheme: WidgetStateProperty.resolveWith((states) {
+          final color = states.contains(WidgetState.selected)
               ? tokens.primary
               : tokens.textSecondary;
           return IconThemeData(color: color, size: 22);

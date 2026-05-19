@@ -2950,6 +2950,16 @@ class AppLocalizationsEn extends AppLocalizations {
       'No compatible app found to open this book.';
 
   @override
+  String get bookReaderLoading => 'Loading book...';
+
+  @override
+  String get bookReaderLoadError =>
+      'We couldn\'t load this book inside the app.';
+
+  @override
+  String get bookOpenExternally => 'Open externally';
+
+  @override
   String ramadanStatusHeaderDay(int day) {
     return 'Ramadan day $day';
   }

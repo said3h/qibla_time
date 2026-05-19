@@ -2940,6 +2940,15 @@ class AppLocalizationsTr extends AppLocalizations {
       'Bu kitabı açacak uyumlu bir uygulama bulunamadı.';
 
   @override
+  String get bookReaderLoading => 'Kitap yükleniyor...';
+
+  @override
+  String get bookReaderLoadError => 'Bu kitap uygulama içinde yüklenemedi.';
+
+  @override
+  String get bookOpenExternally => 'Harici olarak aç';
+
+  @override
   String ramadanStatusHeaderDay(int day) {
     return 'Ramezan günü $day';
   }

@@ -1219,6 +1219,9 @@
   "bookLinkUnavailable": "Bu bağlantı mevcut değil.",
   "bookLinkOpenError": "Bağlantıyı açamadık.",
   "bookNoCompatibleApp": "Bu kitabı açacak uyumlu bir uygulama bulunamadı.",
+  "bookReaderLoading": "Kitap yükleniyor...",
+  "bookReaderLoadError": "Bu kitap uygulama içinde yüklenemedi.",
+  "bookOpenExternally": "Harici olarak aç",
   "ramadanStatusHeaderDay": "Ramezan günü {day}",
   "@ramadanStatusHeaderDay": {
     "placeholders": {

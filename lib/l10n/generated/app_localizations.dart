@@ -5200,6 +5200,24 @@ abstract class AppLocalizations {
   /// **'No se encontró una app compatible para abrir este libro.'**
   String get bookNoCompatibleApp;
 
+  /// No description provided for @bookReaderLoading.
+  ///
+  /// In es, this message translates to:
+  /// **'Cargando libro...'**
+  String get bookReaderLoading;
+
+  /// No description provided for @bookReaderLoadError.
+  ///
+  /// In es, this message translates to:
+  /// **'No se pudo cargar este libro dentro de la app.'**
+  String get bookReaderLoadError;
+
+  /// No description provided for @bookOpenExternally.
+  ///
+  /// In es, this message translates to:
+  /// **'Abrir externamente'**
+  String get bookOpenExternally;
+
   /// No description provided for @ramadanStatusHeaderDay.
   ///
   /// In es, this message translates to:

@@ -338,7 +338,7 @@ class NotificationService {
       final created = channels?.where((c) => c.id == channelId).firstOrNull;
       AppLogger.info(
         '_ensureAndroidAdhanChannel: channel=$channelId created OK '
-        'readback_sound=${created?.sound} readback_importance=${created?.importance?.name}',
+        'readback_sound=${created?.sound} readback_importance=${created?.importance.name}',
       );
     } catch (e, stackTrace) {
       AppLogger.error(

@@ -370,7 +370,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     if (!isEnabled) return const SizedBox.shrink();
 
     final l10n = context.l10n;
-    final color = const Color(0xFFD17B8A);
+    const color = Color(0xFFD17B8A);
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
       child: GestureDetector(
@@ -2686,7 +2686,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         ref
                             .read(prayerTrackingProvider.notifier)
                             .togglePrayer(prayer.$2, date: date);
-                        final l10n = AppLocalizations.of(context)!;
+                        final l10n = AppLocalizations.of(context);
                         ScaffoldMessenger.of(context)
                           ..hideCurrentSnackBar()
                           ..showSnackBar(
@@ -3070,7 +3070,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             ref
                                 .read(prayerTrackingProvider.notifier)
                                 .togglePrayer(prayer.$1.key, date: date);
-                            final l10n = AppLocalizations.of(context)!;
+                            final l10n = AppLocalizations.of(context);
                             ScaffoldMessenger.of(context)
                               ..hideCurrentSnackBar()
                               ..showSnackBar(
@@ -3742,7 +3742,7 @@ class _CountdownRingPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final stroke = 4.0;
+    const stroke = 4.0;
     final rect = Offset.zero & size;
     final circleRect = rect.deflate(stroke / 2);
 

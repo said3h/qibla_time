@@ -2967,6 +2967,16 @@ class AppLocalizationsPt extends AppLocalizations {
       'Nenhum app compatível encontrado para abrir este livro.';
 
   @override
+  String get bookReaderLoading => 'A carregar livro...';
+
+  @override
+  String get bookReaderLoadError =>
+      'Não foi possível carregar este livro dentro da app.';
+
+  @override
+  String get bookOpenExternally => 'Abrir externamente';
+
+  @override
   String ramadanStatusHeaderDay(int day) {
     return 'Dia do Ramadã $day';
   }
