@@ -158,9 +158,6 @@ class _TafsirPanelBody extends ConsumerWidget {
               icon: Icons.info_outline_rounded,
               title: 'Tafsir no disponible',
               message: _safeMessageFor(result.errorCode),
-              source: _shouldShowInternalDetails
-                  ? _sourceLabel(result.source)
-                  : null,
               debugInfo: result.debugInfo,
               isError: result.errorCode != null,
             );
@@ -262,13 +259,6 @@ class _PanelSuccessState extends State<_PanelSuccess> {
                 ),
               ),
             ],
-            if (_shouldShowInternalDetails) ...[
-              const SizedBox(height: 10),
-              _SourcePill(
-                tokens: tokens,
-                label: 'Source: ${_sourceLabel(result.source)}',
-              ),
-            ],
           ],
         ),
       ),
@@ -284,7 +274,6 @@ class _PanelStateMessage extends StatelessWidget {
     required this.icon,
     required this.title,
     required this.message,
-    this.source,
     this.debugInfo,
     this.isError = false,
   });
@@ -293,7 +282,6 @@ class _PanelStateMessage extends StatelessWidget {
   final IconData icon;
   final String title;
   final String message;
-  final String? source;
   final TafsirDebugInfo? debugInfo;
   final bool isError;
 
@@ -329,13 +317,6 @@ class _PanelStateMessage extends StatelessWidget {
                     fontSize: 13,
                   ),
                 ),
-                if (source != null) ...[
-                  const SizedBox(height: 8),
-                  _SourcePill(
-                    tokens: tokens,
-                    label: 'Source: $source',
-                  ),
-                ],
                 if (_shouldShowInternalDetails && debugInfo != null) ...[
                   const SizedBox(height: 8),
                   _DebugInfoBox(
@@ -406,49 +387,4 @@ class _DebugInfoBox extends StatelessWidget {
       ),
     );
   }
-}
-
-class _SourcePill extends StatelessWidget {
-  const _SourcePill({
-    required this.tokens,
-    required this.label,
-  });
-
-  final QiblaTokens tokens;
-  final String label;
-
-  @override
-  Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: tokens.primaryBg,
-          borderRadius: BorderRadius.circular(999),
-          border: Border.all(color: tokens.primaryBorder),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-          child: Text(
-            label,
-            style: GoogleFonts.dmSans(
-              color: tokens.primary,
-              fontWeight: FontWeight.w800,
-              fontSize: 11,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-String _sourceLabel(TafsirLoadSource source) {
-  return switch (source) {
-    TafsirLoadSource.api => 'api',
-    TafsirLoadSource.cache => 'cache',
-    TafsirLoadSource.offline => 'offline',
-    TafsirLoadSource.online => 'online',
-    TafsirLoadSource.unavailable => 'fallback',
-  };
 }

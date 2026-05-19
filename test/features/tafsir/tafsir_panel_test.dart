@@ -64,7 +64,7 @@ void main() {
     expect(find.text('html: 1200 chars'), findsOneWidget);
   });
 
-  testWidgets('TafsirPanel shows success state and internal source in debug',
+  testWidgets('TafsirPanel shows success state without visible source chip',
       (tester) async {
     await tester.pumpWidget(
       _wrapPanel(
@@ -90,7 +90,7 @@ void main() {
 
     expect(find.text('Fake Tafsir'), findsNothing);
     expect(find.text('Cached tafsir body.'), findsOneWidget);
-    expect(find.text('Source: cache'), findsOneWidget);
+    expect(find.text('Source: cache'), findsNothing);
   });
 
   testWidgets('TafsirPanel truncates long tafsir until read more is tapped',
