@@ -375,10 +375,25 @@ class NotificationService {
     return await android.canScheduleExactNotifications() ?? false;
   }
 
-  Future<void> _configureLocalTimeZone() async {
+  @visibleForTesting
+  Future<void> debugConfigureLocalTimeZone({
+    bool forceAndroidForTesting = false,
+  }) {
+    return _configureLocalTimeZone(
+      forceAndroidForTesting: forceAndroidForTesting,
+    );
+  }
+
+  Future<void> _configureLocalTimeZone({
+    bool forceAndroidForTesting = false,
+  }) async {
+    final previousLocal = tz.local;
     tz.initializeTimeZones();
 
-    if (!Platform.isAndroid) {
+    if (!Platform.isAndroid && !forceAndroidForTesting) {
+      if (previousLocal.name != tz.local.name) {
+        tz.setLocalLocation(previousLocal);
+      }
       return;
     }
 
@@ -386,6 +401,9 @@ class NotificationService {
       final timeZoneId =
           await _androidSettingsChannel.invokeMethod<String>('getTimeZoneId');
       if (timeZoneId == null || timeZoneId.trim().isEmpty) {
+        if (previousLocal.name != tz.local.name) {
+          tz.setLocalLocation(previousLocal);
+        }
         AppLogger.warning(
           'NotificationService: Android timezone id unavailable; using ${tz.local.name}',
         );
@@ -398,10 +416,16 @@ class NotificationService {
         'NotificationService: local timezone configured as ${location.name}',
       );
     } on MissingPluginException catch (e) {
+      if (previousLocal.name != tz.local.name) {
+        tz.setLocalLocation(previousLocal);
+      }
       AppLogger.warning(
         'NotificationService: timezone channel unavailable; using ${tz.local.name}. $e',
       );
     } catch (e, stackTrace) {
+      if (previousLocal.name != tz.local.name) {
+        tz.setLocalLocation(previousLocal);
+      }
       AppLogger.error(
         'NotificationService: failed to configure local timezone',
         error: e,

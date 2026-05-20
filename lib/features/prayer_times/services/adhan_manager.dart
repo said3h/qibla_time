@@ -1,5 +1,6 @@
 // lib/features/prayer_times/services/adhan_manager.dart
 
+import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -12,29 +13,14 @@ import 'notification_service.dart';
 final adhanManagerProvider = Provider<AdhanManager>((ref) => AdhanManager(ref));
 
 class AdhanManager {
-  AdhanManager(this._ref);
+  AdhanManager(this._ref, {ScheduleRunGate? scheduleGate})
+      : _scheduleGate = scheduleGate ?? ScheduleRunGate();
 
   final Ref _ref;
-  Future<void>? _activeScheduleTask;
+  final ScheduleRunGate _scheduleGate;
 
   Future<void> scheduleTodayAdhans() async {
-    final activeScheduleTask = _activeScheduleTask;
-    if (activeScheduleTask != null) {
-      AppLogger.info(
-        'AdhanManager.scheduleTodayAdhans: schedule already running; joining existing task',
-      );
-      return activeScheduleTask;
-    }
-
-    final task = _scheduleTodayAdhans();
-    _activeScheduleTask = task;
-    try {
-      await task;
-    } finally {
-      if (identical(_activeScheduleTask, task)) {
-        _activeScheduleTask = null;
-      }
-    }
+    await _scheduleGate.run(_scheduleTodayAdhans);
   }
 
   Future<void> _scheduleTodayAdhans() async {
@@ -156,6 +142,31 @@ class AdhanManager {
     final id = prayerIds[prayerName];
     if (id != null) {
       await NotificationService.instance.cancel(id);
+    }
+  }
+}
+
+@visibleForTesting
+class ScheduleRunGate {
+  Future<void>? _activeTask;
+
+  Future<void> run(Future<void> Function() action) async {
+    final activeTask = _activeTask;
+    if (activeTask != null) {
+      AppLogger.info(
+        'AdhanManager.scheduleTodayAdhans: schedule already running; joining existing task',
+      );
+      return activeTask;
+    }
+
+    final task = Future<void>.sync(action);
+    _activeTask = task;
+    try {
+      await task;
+    } finally {
+      if (identical(_activeTask, task)) {
+        _activeTask = null;
+      }
     }
   }
 }
