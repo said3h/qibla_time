@@ -1423,5 +1423,15 @@
   "onboardingNotificationsPermissionWarning": "Toestemming niet verleend. Ga terug naar de vorige stap om het in te schakelen.",
   "commonUndo": "Ongedaan maken",
   "homePrayerToggledDone": "Gebed gemarkeerd als gebeden",
-  "homePrayerToggledUndone": "Gebed-markering verwijderd"
+  "homePrayerToggledUndone": "Gebed-markering verwijderd",
+  "tafsirPanelTitle": "Tafsir",
+  "tafsirLoadingTitle": "Tafsir laden",
+  "tafsirLoadingMessage": "De uitleg van deze ayah wordt gezocht.",
+  "tafsirUnavailableTitle": "Tafsir niet beschikbaar",
+  "tafsirLoadErrorMessage": "De uitleg kan nu niet worden geladen.",
+  "tafsirNotConfiguredMessage": "Er is nog geen tafsirbron beschikbaar voor deze ayah.",
+  "tafsirMissingLanguageMessage": "Tafsir is niet beschikbaar voor deze taal.",
+  "tafsirUnavailableAyahMessage": "Tafsir is niet beschikbaar voor deze ayah.",
+  "tafsirReadMore": "Meer lezen",
+  "tafsirShowLess": "Minder tonen"
 }

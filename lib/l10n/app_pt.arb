@@ -1423,5 +1423,15 @@
   "onboardingNotificationsPermissionWarning": "Permissão não concedida. Volte ao passo anterior para ativá-la.",
   "commonUndo": "Desfazer",
   "homePrayerToggledDone": "Oração marcada como rezada",
-  "homePrayerToggledUndone": "Oração desmarcada"
+  "homePrayerToggledUndone": "Oração desmarcada",
+  "tafsirPanelTitle": "Tafsir",
+  "tafsirLoadingTitle": "Carregando tafsir",
+  "tafsirLoadingMessage": "Procurando a explicacao desta ayah.",
+  "tafsirUnavailableTitle": "Tafsir indisponivel",
+  "tafsirLoadErrorMessage": "A explicacao nao pode ser carregada agora.",
+  "tafsirNotConfiguredMessage": "Ainda nao ha uma fonte de tafsir disponivel para esta ayah.",
+  "tafsirMissingLanguageMessage": "Tafsir nao esta disponivel para este idioma.",
+  "tafsirUnavailableAyahMessage": "Tafsir nao esta disponivel para esta ayah.",
+  "tafsirReadMore": "Ler mais",
+  "tafsirShowLess": "Mostrar menos"
 }

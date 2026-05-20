@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../localization/locale_controller.dart';
 import '../../features/dhikr/screens/dhikr_screen.dart';
 import '../../features/prayer_times/presentation/providers/prayer_times_providers.dart';
 import '../../features/prayer_times/screens/home_screen.dart';
@@ -77,12 +76,10 @@ class _MainNavigationState extends ConsumerState<MainNavigation>
     final themeName = ref.watch(themeControllerProvider);
     final theme = Theme.of(context);
     final miniPlayerState = ref.watch(quranMiniPlayerControllerProvider);
-    final currentLanguageCode = ref.watch(currentLanguageCodeProvider);
     final navigationBarTheme = theme.navigationBarTheme;
     final navigationBackground =
         navigationBarTheme.backgroundColor ?? theme.colorScheme.surface;
-    final navigationIndicator =
-        navigationBarTheme.indicatorColor ??
+    final navigationIndicator = navigationBarTheme.indicatorColor ??
         theme.colorScheme.primary.withOpacity(0.12);
 
     return Scaffold(
@@ -208,12 +205,10 @@ class _QuranMiniPlayerBar extends StatelessWidget {
         children: [
           Expanded(
             child: Text(
-              currentLanguageCode == 'ar'
-                  ? '${state.surahName} · الآية ${state.ayahNumber}'
-                  : l10n.navigationMiniPlayerAyah(
-                      state.surahName,
-                      state.ayahNumber,
-                    ),
+              l10n.navigationMiniPlayerAyah(
+                state.surahName,
+                state.ayahNumber,
+              ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: theme.textTheme.bodyMedium?.copyWith(
@@ -228,9 +223,8 @@ class _QuranMiniPlayerBar extends StatelessWidget {
                   ? Icons.pause_circle_filled
                   : Icons.play_circle_fill,
             ),
-            tooltip: state.isPlaying
-                ? l10n.quranPauseAudio
-                : l10n.quranResumeAudio,
+            tooltip:
+                state.isPlaying ? l10n.quranPauseAudio : l10n.quranResumeAudio,
           ),
         ],
       ),

@@ -3644,4 +3644,38 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get homePrayerToggledUndone => 'Prière décochée';
+
+  @override
+  String get tafsirPanelTitle => 'Tafsir';
+
+  @override
+  String get tafsirLoadingTitle => 'Chargement du tafsir';
+
+  @override
+  String get tafsirLoadingMessage => 'Recherche de l’explication de ce verset.';
+
+  @override
+  String get tafsirUnavailableTitle => 'Tafsir indisponible';
+
+  @override
+  String get tafsirLoadErrorMessage =>
+      'L’explication ne peut pas etre chargee pour le moment.';
+
+  @override
+  String get tafsirNotConfiguredMessage =>
+      'Aucune source de tafsir n’est encore disponible pour ce verset.';
+
+  @override
+  String get tafsirMissingLanguageMessage =>
+      'Le tafsir n’est pas disponible dans cette langue.';
+
+  @override
+  String get tafsirUnavailableAyahMessage =>
+      'Le tafsir n’est pas disponible pour ce verset.';
+
+  @override
+  String get tafsirReadMore => 'Lire plus';
+
+  @override
+  String get tafsirShowLess => 'Afficher moins';
 }

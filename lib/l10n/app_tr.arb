@@ -1423,5 +1423,15 @@
   "onboardingNotificationsPermissionWarning": "İzin verilmedi. Etkinleştirmek için bir önceki adıma geri dönün.",
   "commonUndo": "Geri al",
   "homePrayerToggledDone": "Namaz kılındı olarak işaretlendi",
-  "homePrayerToggledUndone": "Namaz işareti kaldırıldı"
+  "homePrayerToggledUndone": "Namaz işareti kaldırıldı",
+  "tafsirPanelTitle": "Tefsir",
+  "tafsirLoadingTitle": "Tefsir yukleniyor",
+  "tafsirLoadingMessage": "Bu ayetin aciklamasi araniyor.",
+  "tafsirUnavailableTitle": "Tefsir kullanilamiyor",
+  "tafsirLoadErrorMessage": "Aciklama su anda yuklenemedi.",
+  "tafsirNotConfiguredMessage": "Bu ayet icin henuz tefsir kaynagi yok.",
+  "tafsirMissingLanguageMessage": "Bu dil icin tefsir mevcut degil.",
+  "tafsirUnavailableAyahMessage": "Bu ayet icin tefsir mevcut degil.",
+  "tafsirReadMore": "Daha fazla oku",
+  "tafsirShowLess": "Daha az goster"
 }

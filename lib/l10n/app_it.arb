@@ -1423,5 +1423,15 @@
   "onboardingNotificationsPermissionWarning": "Autorizzazione non concessa. Torna al passaggio precedente per attivarla.",
   "commonUndo": "Annulla",
   "homePrayerToggledDone": "Preghiera segnata come eseguita",
-  "homePrayerToggledUndone": "Preghiera non contrassegnata"
+  "homePrayerToggledUndone": "Preghiera non contrassegnata",
+  "tafsirPanelTitle": "Tafsir",
+  "tafsirLoadingTitle": "Caricamento tafsir",
+  "tafsirLoadingMessage": "Ricerca della spiegazione di questa ayah.",
+  "tafsirUnavailableTitle": "Tafsir non disponibile",
+  "tafsirLoadErrorMessage": "La spiegazione non puo essere caricata ora.",
+  "tafsirNotConfiguredMessage": "Una fonte di tafsir non e ancora disponibile per questa ayah.",
+  "tafsirMissingLanguageMessage": "Il tafsir non e disponibile per questa lingua.",
+  "tafsirUnavailableAyahMessage": "Il tafsir non e disponibile per questa ayah.",
+  "tafsirReadMore": "Leggi di piu",
+  "tafsirShowLess": "Mostra meno"
 }

@@ -3624,4 +3624,37 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get homePrayerToggledUndone => 'Gebed-markering verwijderd';
+
+  @override
+  String get tafsirPanelTitle => 'Tafsir';
+
+  @override
+  String get tafsirLoadingTitle => 'Tafsir laden';
+
+  @override
+  String get tafsirLoadingMessage => 'De uitleg van deze ayah wordt gezocht.';
+
+  @override
+  String get tafsirUnavailableTitle => 'Tafsir niet beschikbaar';
+
+  @override
+  String get tafsirLoadErrorMessage => 'De uitleg kan nu niet worden geladen.';
+
+  @override
+  String get tafsirNotConfiguredMessage =>
+      'Er is nog geen tafsirbron beschikbaar voor deze ayah.';
+
+  @override
+  String get tafsirMissingLanguageMessage =>
+      'Tafsir is niet beschikbaar voor deze taal.';
+
+  @override
+  String get tafsirUnavailableAyahMessage =>
+      'Tafsir is niet beschikbaar voor deze ayah.';
+
+  @override
+  String get tafsirReadMore => 'Meer lezen';
+
+  @override
+  String get tafsirShowLess => 'Minder tonen';
 }

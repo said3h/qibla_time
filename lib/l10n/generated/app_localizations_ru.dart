@@ -3627,4 +3627,38 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get homePrayerToggledUndone => 'Отметка намаза снята';
+
+  @override
+  String get tafsirPanelTitle => 'Тафсир';
+
+  @override
+  String get tafsirLoadingTitle => 'Загрузка тафсира';
+
+  @override
+  String get tafsirLoadingMessage => 'Ищем объяснение этого аята.';
+
+  @override
+  String get tafsirUnavailableTitle => 'Тафсир недоступен';
+
+  @override
+  String get tafsirLoadErrorMessage =>
+      'Сейчас не удалось загрузить объяснение.';
+
+  @override
+  String get tafsirNotConfiguredMessage =>
+      'Источник тафсира для этого аята пока недоступен.';
+
+  @override
+  String get tafsirMissingLanguageMessage =>
+      'Тафсир недоступен для этого языка.';
+
+  @override
+  String get tafsirUnavailableAyahMessage =>
+      'Тафсир недоступен для этого аята.';
+
+  @override
+  String get tafsirReadMore => 'Читать дальше';
+
+  @override
+  String get tafsirShowLess => 'Показать меньше';
 }

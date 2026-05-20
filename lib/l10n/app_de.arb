@@ -1423,5 +1423,15 @@
   "onboardingNotificationsPermissionWarning": "Berechtigung nicht erteilt. Gehe zum vorherigen Schritt zurück, um sie zu aktivieren.",
   "commonUndo": "Rückgängig",
   "homePrayerToggledDone": "Gebet als gebetet markiert",
-  "homePrayerToggledUndone": "Gebet-Markierung aufgehoben"
+  "homePrayerToggledUndone": "Gebet-Markierung aufgehoben",
+  "tafsirPanelTitle": "Tafsir",
+  "tafsirLoadingTitle": "Tafsir wird geladen",
+  "tafsirLoadingMessage": "Die Erklaerung dieser Ayah wird gesucht.",
+  "tafsirUnavailableTitle": "Tafsir nicht verfuegbar",
+  "tafsirLoadErrorMessage": "Die Erklaerung konnte gerade nicht geladen werden.",
+  "tafsirNotConfiguredMessage": "Fuer diese Ayah ist noch keine Tafsir-Quelle verfuegbar.",
+  "tafsirMissingLanguageMessage": "Fuer diese Sprache ist kein Tafsir verfuegbar.",
+  "tafsirUnavailableAyahMessage": "Fuer diese Ayah ist kein Tafsir verfuegbar.",
+  "tafsirReadMore": "Mehr lesen",
+  "tafsirShowLess": "Weniger anzeigen"
 }

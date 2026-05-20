@@ -1426,5 +1426,15 @@
   "onboardingNotificationsPermissionWarning": "Permission not granted. Go back to the previous step to enable it.",
   "commonUndo": "Undo",
   "homePrayerToggledDone": "Prayer marked as prayed",
-  "homePrayerToggledUndone": "Prayer unmarked"
+  "homePrayerToggledUndone": "Prayer unmarked",
+  "tafsirPanelTitle": "Tafsir",
+  "tafsirLoadingTitle": "Loading tafsir",
+  "tafsirLoadingMessage": "Looking for the explanation of this ayah.",
+  "tafsirUnavailableTitle": "Tafsir unavailable",
+  "tafsirLoadErrorMessage": "The explanation could not be loaded right now.",
+  "tafsirNotConfiguredMessage": "A tafsir source is not available for this ayah yet.",
+  "tafsirMissingLanguageMessage": "Tafsir is not available for this language.",
+  "tafsirUnavailableAyahMessage": "Tafsir is not available for this ayah.",
+  "tafsirReadMore": "Read more",
+  "tafsirShowLess": "Show less"
 }

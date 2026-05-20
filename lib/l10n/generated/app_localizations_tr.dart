@@ -3593,4 +3593,36 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get homePrayerToggledUndone => 'Namaz işareti kaldırıldı';
+
+  @override
+  String get tafsirPanelTitle => 'Tefsir';
+
+  @override
+  String get tafsirLoadingTitle => 'Tefsir yukleniyor';
+
+  @override
+  String get tafsirLoadingMessage => 'Bu ayetin aciklamasi araniyor.';
+
+  @override
+  String get tafsirUnavailableTitle => 'Tefsir kullanilamiyor';
+
+  @override
+  String get tafsirLoadErrorMessage => 'Aciklama su anda yuklenemedi.';
+
+  @override
+  String get tafsirNotConfiguredMessage =>
+      'Bu ayet icin henuz tefsir kaynagi yok.';
+
+  @override
+  String get tafsirMissingLanguageMessage => 'Bu dil icin tefsir mevcut degil.';
+
+  @override
+  String get tafsirUnavailableAyahMessage =>
+      'Bu ayet icin tefsir mevcut degil.';
+
+  @override
+  String get tafsirReadMore => 'Daha fazla oku';
+
+  @override
+  String get tafsirShowLess => 'Daha az goster';
 }

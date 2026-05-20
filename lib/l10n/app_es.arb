@@ -1426,5 +1426,15 @@
   "onboardingNotificationsPermissionWarning": "Permiso no concedido. Vuelve al paso anterior para activarlo.",
   "commonUndo": "Deshacer",
   "homePrayerToggledDone": "Oración marcada como rezada",
-  "homePrayerToggledUndone": "Oración desmarcada"
+  "homePrayerToggledUndone": "Oración desmarcada",
+  "tafsirPanelTitle": "Tafsir",
+  "tafsirLoadingTitle": "Cargando tafsir",
+  "tafsirLoadingMessage": "Buscando la explicación de esta aleya.",
+  "tafsirUnavailableTitle": "Tafsir no disponible",
+  "tafsirLoadErrorMessage": "No se pudo cargar la explicación ahora.",
+  "tafsirNotConfiguredMessage": "Todavía no hay una fuente de tafsir disponible para esta aleya.",
+  "tafsirMissingLanguageMessage": "No hay tafsir disponible para este idioma.",
+  "tafsirUnavailableAyahMessage": "No hay tafsir disponible para esta aleya.",
+  "tafsirReadMore": "Leer más",
+  "tafsirShowLess": "Mostrar menos"
 }

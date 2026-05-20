@@ -1423,5 +1423,15 @@
   "onboardingNotificationsPermissionWarning": "Разрешение не предоставлено. Вернитесь к предыдущему шагу, чтобы включить его.",
   "commonUndo": "Отменить",
   "homePrayerToggledDone": "Намаз отмечен как совершённый",
-  "homePrayerToggledUndone": "Отметка намаза снята"
+  "homePrayerToggledUndone": "Отметка намаза снята",
+  "tafsirPanelTitle": "Тафсир",
+  "tafsirLoadingTitle": "Загрузка тафсира",
+  "tafsirLoadingMessage": "Ищем объяснение этого аята.",
+  "tafsirUnavailableTitle": "Тафсир недоступен",
+  "tafsirLoadErrorMessage": "Сейчас не удалось загрузить объяснение.",
+  "tafsirNotConfiguredMessage": "Источник тафсира для этого аята пока недоступен.",
+  "tafsirMissingLanguageMessage": "Тафсир недоступен для этого языка.",
+  "tafsirUnavailableAyahMessage": "Тафсир недоступен для этого аята.",
+  "tafsirReadMore": "Читать дальше",
+  "tafsirShowLess": "Показать меньше"
 }

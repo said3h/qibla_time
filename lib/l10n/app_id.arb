@@ -1423,5 +1423,15 @@
   "onboardingNotificationsPermissionWarning": "Izin belum diberikan. Kembali ke langkah sebelumnya untuk mengaktifkannya.",
   "commonUndo": "Batalkan",
   "homePrayerToggledDone": "Shalat ditandai sebagai dilaksanakan",
-  "homePrayerToggledUndone": "Tanda shalat dihapus"
+  "homePrayerToggledUndone": "Tanda shalat dihapus",
+  "tafsirPanelTitle": "Tafsir",
+  "tafsirLoadingTitle": "Memuat tafsir",
+  "tafsirLoadingMessage": "Mencari penjelasan ayat ini.",
+  "tafsirUnavailableTitle": "Tafsir tidak tersedia",
+  "tafsirLoadErrorMessage": "Penjelasan belum dapat dimuat saat ini.",
+  "tafsirNotConfiguredMessage": "Sumber tafsir untuk ayat ini belum tersedia.",
+  "tafsirMissingLanguageMessage": "Tafsir tidak tersedia untuk bahasa ini.",
+  "tafsirUnavailableAyahMessage": "Tafsir tidak tersedia untuk ayat ini.",
+  "tafsirReadMore": "Baca selengkapnya",
+  "tafsirShowLess": "Tampilkan lebih sedikit"
 }

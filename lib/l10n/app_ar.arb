@@ -1362,5 +1362,15 @@
   "onboardingNotificationsPermissionWarning": "لم يتم منح الإذن. ارجع إلى الخطوة السابقة لتفعيله.",
   "commonUndo": "تراجع",
   "homePrayerToggledDone": "تم تحديد الصلاة كمؤداة",
-  "homePrayerToggledUndone": "تم إلغاء تحديد الصلاة"
+  "homePrayerToggledUndone": "تم إلغاء تحديد الصلاة",
+  "tafsirPanelTitle": "التفسير",
+  "tafsirLoadingTitle": "جارٍ تحميل التفسير",
+  "tafsirLoadingMessage": "يتم البحث عن تفسير هذه الآية.",
+  "tafsirUnavailableTitle": "التفسير غير متاح",
+  "tafsirLoadErrorMessage": "تعذر تحميل التفسير الآن.",
+  "tafsirNotConfiguredMessage": "لا يتوفر مصدر تفسير لهذه الآية بعد.",
+  "tafsirMissingLanguageMessage": "لا يتوفر تفسير لهذه اللغة.",
+  "tafsirUnavailableAyahMessage": "لا يتوفر تفسير لهذه الآية.",
+  "tafsirReadMore": "اقرأ المزيد",
+  "tafsirShowLess": "عرض أقل"
 }

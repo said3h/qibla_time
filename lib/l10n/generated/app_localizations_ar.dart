@@ -3535,4 +3535,35 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get homePrayerToggledUndone => 'تم إلغاء تحديد الصلاة';
+
+  @override
+  String get tafsirPanelTitle => 'التفسير';
+
+  @override
+  String get tafsirLoadingTitle => 'جارٍ تحميل التفسير';
+
+  @override
+  String get tafsirLoadingMessage => 'يتم البحث عن تفسير هذه الآية.';
+
+  @override
+  String get tafsirUnavailableTitle => 'التفسير غير متاح';
+
+  @override
+  String get tafsirLoadErrorMessage => 'تعذر تحميل التفسير الآن.';
+
+  @override
+  String get tafsirNotConfiguredMessage =>
+      'لا يتوفر مصدر تفسير لهذه الآية بعد.';
+
+  @override
+  String get tafsirMissingLanguageMessage => 'لا يتوفر تفسير لهذه اللغة.';
+
+  @override
+  String get tafsirUnavailableAyahMessage => 'لا يتوفر تفسير لهذه الآية.';
+
+  @override
+  String get tafsirReadMore => 'اقرأ المزيد';
+
+  @override
+  String get tafsirShowLess => 'عرض أقل';
 }

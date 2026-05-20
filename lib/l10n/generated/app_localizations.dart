@@ -6315,6 +6315,66 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Oración desmarcada'**
   String get homePrayerToggledUndone;
+
+  /// No description provided for @tafsirPanelTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Tafsir'**
+  String get tafsirPanelTitle;
+
+  /// No description provided for @tafsirLoadingTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Cargando tafsir'**
+  String get tafsirLoadingTitle;
+
+  /// No description provided for @tafsirLoadingMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'Buscando la explicación de esta aleya.'**
+  String get tafsirLoadingMessage;
+
+  /// No description provided for @tafsirUnavailableTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Tafsir no disponible'**
+  String get tafsirUnavailableTitle;
+
+  /// No description provided for @tafsirLoadErrorMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'No se pudo cargar la explicación ahora.'**
+  String get tafsirLoadErrorMessage;
+
+  /// No description provided for @tafsirNotConfiguredMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'Todavía no hay una fuente de tafsir disponible para esta aleya.'**
+  String get tafsirNotConfiguredMessage;
+
+  /// No description provided for @tafsirMissingLanguageMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'No hay tafsir disponible para este idioma.'**
+  String get tafsirMissingLanguageMessage;
+
+  /// No description provided for @tafsirUnavailableAyahMessage.
+  ///
+  /// In es, this message translates to:
+  /// **'No hay tafsir disponible para esta aleya.'**
+  String get tafsirUnavailableAyahMessage;
+
+  /// No description provided for @tafsirReadMore.
+  ///
+  /// In es, this message translates to:
+  /// **'Leer más'**
+  String get tafsirReadMore;
+
+  /// No description provided for @tafsirShowLess.
+  ///
+  /// In es, this message translates to:
+  /// **'Mostrar menos'**
+  String get tafsirShowLess;
 }
 
 class _AppLocalizationsDelegate

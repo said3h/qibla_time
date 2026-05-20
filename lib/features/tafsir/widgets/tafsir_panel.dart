@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theme/app_theme.dart';
+import '../../../l10n/l10n.dart';
 import '../models/tafsir_entry.dart';
 import '../providers/tafsir_provider.dart';
 
@@ -46,6 +47,7 @@ class _TafsirPanelState extends ConsumerState<TafsirPanel> {
   @override
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
+    final l10n = context.l10n;
 
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -80,7 +82,7 @@ class _TafsirPanelState extends ConsumerState<TafsirPanel> {
                     const SizedBox(width: 10),
                     Expanded(
                       child: Text(
-                        'Tafsir de la aleya',
+                        l10n.tafsirPanelTitle,
                         style: GoogleFonts.dmSans(
                           color: tokens.textPrimary,
                           fontWeight: FontWeight.w800,
@@ -134,6 +136,7 @@ class _TafsirPanelBody extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final resultAsync = ref.watch(tafsirEntryProvider(request));
+    final l10n = context.l10n;
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 14),
@@ -141,14 +144,14 @@ class _TafsirPanelBody extends ConsumerWidget {
         loading: () => _PanelStateMessage(
           tokens: tokens,
           icon: Icons.hourglass_top_rounded,
-          title: 'Cargando tafsir',
-          message: 'Buscando la explicacion de esta aleya.',
+          title: l10n.tafsirLoadingTitle,
+          message: l10n.tafsirLoadingMessage,
         ),
         error: (_, __) => _PanelStateMessage(
           tokens: tokens,
           icon: Icons.info_outline_rounded,
-          title: 'Tafsir no disponible',
-          message: 'No se pudo cargar la explicacion ahora.',
+          title: l10n.tafsirUnavailableTitle,
+          message: l10n.tafsirLoadErrorMessage,
           isError: true,
         ),
         data: (result) {
@@ -156,8 +159,8 @@ class _TafsirPanelBody extends ConsumerWidget {
             return _PanelStateMessage(
               tokens: tokens,
               icon: Icons.info_outline_rounded,
-              title: 'Tafsir no disponible',
-              message: _safeMessageFor(result.errorCode),
+              title: l10n.tafsirUnavailableTitle,
+              message: _safeMessageFor(l10n, result.errorCode),
               debugInfo: result.debugInfo,
               isError: result.errorCode != null,
             );
@@ -172,16 +175,15 @@ class _TafsirPanelBody extends ConsumerWidget {
     );
   }
 
-  String _safeMessageFor(String? errorCode) {
+  String _safeMessageFor(AppLocalizations l10n, String? errorCode) {
     return switch (errorCode) {
-      'tafsir_not_configured' =>
-        'Todavia no hay una fuente de tafsir disponible para esta aleya.',
-      'missing_tafsir_id' => 'No hay tafsir disponible para este idioma.',
-      'invalid_ayah_reference' => 'No hay tafsir disponible para esta aleya.',
-      'empty_tafsir_text' => 'No hay tafsir disponible para esta aleya.',
-      'invalid_tafsir_text' => 'No hay tafsir disponible para esta aleya.',
-      'invalid_verse_alignment' => 'No hay tafsir disponible para esta aleya.',
-      _ => 'No hay tafsir disponible para esta aleya.',
+      'tafsir_not_configured' => l10n.tafsirNotConfiguredMessage,
+      'missing_tafsir_id' => l10n.tafsirMissingLanguageMessage,
+      'invalid_ayah_reference' => l10n.tafsirUnavailableAyahMessage,
+      'empty_tafsir_text' => l10n.tafsirUnavailableAyahMessage,
+      'invalid_tafsir_text' => l10n.tafsirUnavailableAyahMessage,
+      'invalid_verse_alignment' => l10n.tafsirUnavailableAyahMessage,
+      _ => l10n.tafsirUnavailableAyahMessage,
     };
   }
 }
@@ -205,6 +207,7 @@ class _PanelSuccessState extends State<_PanelSuccess> {
   @override
   Widget build(BuildContext context) {
     final tokens = widget.tokens;
+    final l10n = context.l10n;
     final result = widget.result;
     final entry = result.entry!;
     final text = entry.text.trim();
@@ -245,7 +248,9 @@ class _PanelSuccessState extends State<_PanelSuccess> {
                         : Icons.keyboard_arrow_down_rounded,
                     size: 18,
                   ),
-                  label: Text(_showFullText ? 'Mostrar menos' : 'Leer mas'),
+                  label: Text(
+                    _showFullText ? l10n.tafsirShowLess : l10n.tafsirReadMore,
+                  ),
                   style: TextButton.styleFrom(
                     foregroundColor: tokens.primary,
                     padding: EdgeInsets.zero,

@@ -3615,4 +3615,38 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get homePrayerToggledUndone => 'Tanda shalat dihapus';
+
+  @override
+  String get tafsirPanelTitle => 'Tafsir';
+
+  @override
+  String get tafsirLoadingTitle => 'Memuat tafsir';
+
+  @override
+  String get tafsirLoadingMessage => 'Mencari penjelasan ayat ini.';
+
+  @override
+  String get tafsirUnavailableTitle => 'Tafsir tidak tersedia';
+
+  @override
+  String get tafsirLoadErrorMessage =>
+      'Penjelasan belum dapat dimuat saat ini.';
+
+  @override
+  String get tafsirNotConfiguredMessage =>
+      'Sumber tafsir untuk ayat ini belum tersedia.';
+
+  @override
+  String get tafsirMissingLanguageMessage =>
+      'Tafsir tidak tersedia untuk bahasa ini.';
+
+  @override
+  String get tafsirUnavailableAyahMessage =>
+      'Tafsir tidak tersedia untuk ayat ini.';
+
+  @override
+  String get tafsirReadMore => 'Baca selengkapnya';
+
+  @override
+  String get tafsirShowLess => 'Tampilkan lebih sedikit';
 }

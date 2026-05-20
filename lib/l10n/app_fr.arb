@@ -1423,5 +1423,15 @@
   "onboardingNotificationsPermissionWarning": "Permission non accordée. Revenez à étape précédente pour activer.",
   "commonUndo": "Annuler",
   "homePrayerToggledDone": "Prière marquée comme accomplie",
-  "homePrayerToggledUndone": "Prière décochée"
+  "homePrayerToggledUndone": "Prière décochée",
+  "tafsirPanelTitle": "Tafsir",
+  "tafsirLoadingTitle": "Chargement du tafsir",
+  "tafsirLoadingMessage": "Recherche de l’explication de ce verset.",
+  "tafsirUnavailableTitle": "Tafsir indisponible",
+  "tafsirLoadErrorMessage": "L’explication ne peut pas etre chargee pour le moment.",
+  "tafsirNotConfiguredMessage": "Aucune source de tafsir n’est encore disponible pour ce verset.",
+  "tafsirMissingLanguageMessage": "Le tafsir n’est pas disponible dans cette langue.",
+  "tafsirUnavailableAyahMessage": "Le tafsir n’est pas disponible pour ce verset.",
+  "tafsirReadMore": "Lire plus",
+  "tafsirShowLess": "Afficher moins"
 }

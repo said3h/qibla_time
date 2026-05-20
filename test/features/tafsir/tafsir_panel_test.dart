@@ -5,6 +5,7 @@ import 'package:qibla_time/core/theme/app_theme.dart';
 import 'package:qibla_time/features/tafsir/models/tafsir_entry.dart';
 import 'package:qibla_time/features/tafsir/providers/tafsir_provider.dart';
 import 'package:qibla_time/features/tafsir/widgets/tafsir_panel.dart';
+import 'package:qibla_time/l10n/l10n.dart';
 
 void main() {
   testWidgets('TafsirPanel shows safe unavailable state', (tester) async {
@@ -22,11 +23,12 @@ void main() {
     );
     await tester.pump();
 
-    expect(find.text('Tafsir de la aleya'), findsOneWidget);
-    expect(find.text('Tafsir no disponible'), findsOneWidget);
+    expect(find.text('Tafsir'), findsOneWidget);
+    expect(find.text('Tafsir unavailable'), findsOneWidget);
     expect(
       find.text(
-          'Todavia no hay una fuente de tafsir disponible para esta aleya.'),
+        'A tafsir source is not available for this ayah yet.',
+      ),
       findsOneWidget,
     );
     expect(find.textContaining('tafsir_not_configured'), findsNothing);
@@ -118,14 +120,14 @@ void main() {
     );
     await tester.pump();
 
-    expect(find.text('Leer mas'), findsOneWidget);
+    expect(find.text('Read more'), findsOneWidget);
     expect(find.text(longText), findsNothing);
 
-    await tester.ensureVisible(find.text('Leer mas'));
-    await tester.tap(find.text('Leer mas'));
+    await tester.ensureVisible(find.text('Read more'));
+    await tester.tap(find.text('Read more'));
     await tester.pumpAndSettle();
 
-    expect(find.text('Mostrar menos'), findsOneWidget);
+    expect(find.text('Show less'), findsOneWidget);
     expect(find.text(longText), findsOneWidget);
   });
 
@@ -145,12 +147,12 @@ void main() {
     );
     await tester.pump();
 
-    expect(find.text('Tafsir no disponible'), findsNothing);
+    expect(find.text('Tafsir unavailable'), findsNothing);
 
-    await tester.tap(find.text('Tafsir de la aleya'));
+    await tester.tap(find.text('Tafsir'));
     await tester.pumpAndSettle();
 
-    expect(find.text('Tafsir no disponible'), findsOneWidget);
+    expect(find.text('Tafsir unavailable'), findsOneWidget);
   });
 }
 
@@ -162,6 +164,8 @@ Widget _wrapPanel({
     overrides: overrides,
     child: MaterialApp(
       theme: AppTheme.darkTheme,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       home: Scaffold(
         body: Center(
           child: SingleChildScrollView(

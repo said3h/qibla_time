@@ -40,7 +40,8 @@ class _QuranContinuousViewState extends State<QuranContinuousView> {
 
   // The Bismillah text used as a visual separator before surah content.
   // Surah 1 already has it as ayah 1; surah 9 has none by tradition.
-  static const _bismillah = 'بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ';
+  static const _bismillah =
+      '\u0628\u0650\u0633\u0652\u0645\u0650 \u0627\u0644\u0644\u0651\u064e\u0647\u0650 \u0627\u0644\u0631\u0651\u064e\u062d\u0652\u0645\u064e\u0670\u0646\u0650 \u0627\u0644\u0631\u0651\u064e\u062d\u0650\u064a\u0645\u0650';
 
   bool get _shouldShowBismillah =>
       widget.surahNumber != 1 && widget.surahNumber != 9;
