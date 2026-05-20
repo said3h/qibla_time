@@ -102,9 +102,11 @@ class QuranAyahCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mutedTextColor = tokens.textMuted.withValues(alpha: 0.78);
+
     return Container(
       margin: margin,
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.fromLTRB(16, 14, 16, 12),
       decoration: BoxDecoration(
         color: isSelected
             ? tokens.primaryBg
@@ -142,7 +144,7 @@ class QuranAyahCard extends StatelessWidget {
           Row(
             children: [
               CircleAvatar(
-                radius: 14,
+                radius: 13,
                 backgroundColor: tokens.primaryBg,
                 foregroundColor: tokens.primary,
                 child: Text(
@@ -161,9 +163,11 @@ class QuranAyahCard extends StatelessWidget {
                     vertical: 4,
                   ),
                   decoration: BoxDecoration(
-                    color: tokens.primaryBg,
+                    color: tokens.primaryBg.withValues(alpha: 0.72),
                     borderRadius: BorderRadius.circular(999),
-                    border: Border.all(color: tokens.primaryBorder),
+                    border: Border.all(
+                      color: tokens.primaryBorder.withValues(alpha: 0.72),
+                    ),
                   ),
                   child: Text(
                     l10n.quranLastReadingBadge,
@@ -217,12 +221,19 @@ class QuranAyahCard extends StatelessWidget {
                                         : l10n.quranPlayAudio)
                                 : l10n.quranAudioUnavailable,
                             onPressed: canPlayAudio ? onToggleAudio : null,
+                            visualDensity: VisualDensity.compact,
+                            padding: EdgeInsets.zero,
+                            constraints: const BoxConstraints(
+                              minWidth: 38,
+                              minHeight: 38,
+                            ),
                             icon: Icon(
                               !canPlayAudio
                                   ? Icons.volume_off_outlined
                                   : isPlayingAudio
                                       ? Icons.pause_circle_outline
                                       : Icons.play_circle_outline,
+                              size: 22,
                               color: !canPlayAudio
                                   ? tokens.textMuted
                                   : tokens.primary,
@@ -233,10 +244,17 @@ class QuranAyahCard extends StatelessWidget {
                                 ? l10n.quranRemoveBookmark
                                 : l10n.quranSaveBookmark,
                             onPressed: onToggleBookmark,
+                            visualDensity: VisualDensity.compact,
+                            padding: EdgeInsets.zero,
+                            constraints: const BoxConstraints(
+                              minWidth: 38,
+                              minHeight: 38,
+                            ),
                             icon: Icon(
                               isBookmarked
                                   ? Icons.bookmark
                                   : Icons.bookmark_border,
+                              size: 21,
                               color: isBookmarked
                                   ? tokens.primary
                                   : tokens.textMuted,
@@ -255,30 +273,34 @@ class QuranAyahCard extends StatelessWidget {
               ayah.transliteration,
               style: tokens.transliterationTextStyle(
                 fontSize: 13,
-                height: 1.7,
+                height: 1.65,
               ),
             ),
           ],
           if (ayah.translation.trim().isNotEmpty) ...[
-            const SizedBox(height: 10),
+            const SizedBox(height: 9),
             Text(
               ayah.translation,
               style: GoogleFonts.dmSans(
                 fontSize: 13,
-                height: 1.7,
+                height: 1.65,
                 color: tokens.textPrimary,
               ),
             ),
           ],
-          const SizedBox(height: 10),
+          const SizedBox(height: 8),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Expanded(
                 child: Text(
                   l10n.quranAyahFooterHint(audioStatusLabel),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: GoogleFonts.dmSans(
-                    fontSize: 10,
-                    color: tokens.textMuted,
+                    fontSize: 9.5,
+                    letterSpacing: 0.1,
+                    color: mutedTextColor,
                   ),
                 ),
               ),
@@ -290,17 +312,17 @@ class QuranAyahCard extends StatelessWidget {
                     isTafsirOpen
                         ? Icons.keyboard_arrow_up_rounded
                         : Icons.menu_book_rounded,
-                    size: 16,
+                    size: 15,
                   ),
-                  label: const Text('Tafsir'),
+                  label: Text(l10n.tafsirPanelTitle),
                   style: TextButton.styleFrom(
                     foregroundColor: tokens.primary,
                     textStyle: GoogleFonts.dmSans(
-                      fontSize: 11,
+                      fontSize: 10.5,
                       fontWeight: FontWeight.w800,
                     ),
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    minimumSize: const Size(0, 32),
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
+                    minimumSize: const Size(0, 30),
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),
                 ),
