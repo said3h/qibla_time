@@ -19,6 +19,7 @@ import '../../quran_share/services/ayah_share_video_service.dart';
 import '../../quran_share/widgets/ayah_share_preview_sheet.dart';
 import '../../tafsir/providers/tafsir_provider.dart';
 import '../../tafsir/widgets/tafsir_panel.dart';
+import '../domain/quran_ayah_selection.dart';
 import '../models/quran_models.dart';
 import '../widgets/quran_ayah_card.dart';
 import '../widgets/quran_continuous_view.dart';
@@ -996,14 +997,6 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   bool get _canShowTafsirButton =>
       _enableQuranTafsirPanels && !_isPageView && !_isSelectionMode;
 
-  int get _selectedRangeStart => _selectedAyahs.reduce(
-        (value, element) => value < element ? value : element,
-      );
-
-  int get _selectedRangeEnd => _selectedAyahs.reduce(
-        (value, element) => value > element ? value : element,
-      );
-
   _QuranPlaybackMode get _playbackMode {
     if (!_hasCurrentSurahPlayback) {
       return _QuranPlaybackMode.none;
@@ -1096,42 +1089,39 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   void _toggleContiguousAyahSelection(int ayahNumber) {
     final wasEmpty = _selectedAyahs.isEmpty;
     _cancelPendingListAutoScroll();
-    if (wasEmpty) {
-      _logSelectionMode('ENTERING selection mode with ayah $ayahNumber');
-      setState(() {
-        _openTafsirAyahNumber = null;
-        _selectedAyahs.add(ayahNumber);
-      });
-      return;
-    }
 
-    if (_selectedAyahs.contains(ayahNumber)) {
-      final isRangeEdge =
-          ayahNumber == _selectedRangeStart || ayahNumber == _selectedRangeEnd;
-      if (!isRangeEdge && _selectedAyahs.length > 1) {
+    final decision = toggleContiguousAyahSelection(
+      selectedAyahs: _selectedAyahs,
+      ayahNumber: ayahNumber,
+      maxSelectedAyahs: _maxSelectedAyahs,
+    );
+
+    switch (decision.type) {
+      case QuranAyahSelectionDecisionType.rejectNonConsecutive:
         _showConsecutiveAyahWarning();
         return;
+      case QuranAyahSelectionDecisionType.rejectMaxReached:
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(context.l10n.quranMaxAyahsSelected)),
+        );
+        return;
+      case QuranAyahSelectionDecisionType.add:
+      case QuranAyahSelectionDecisionType.remove:
+        break;
+    }
+
+    if (wasEmpty && decision.accepted) {
+      _logSelectionMode('ENTERING selection mode with ayah $ayahNumber');
+    }
+
+    setState(() {
+      if (wasEmpty && decision.accepted) {
+        _openTafsirAyahNumber = null;
       }
-
-      setState(() => _selectedAyahs.remove(ayahNumber));
-      return;
-    }
-
-    final canExtendRange = ayahNumber == _selectedRangeStart - 1 ||
-        ayahNumber == _selectedRangeEnd + 1;
-    if (!canExtendRange) {
-      _showConsecutiveAyahWarning();
-      return;
-    }
-
-    if (_selectedAyahs.length >= _maxSelectedAyahs) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(context.l10n.quranMaxAyahsSelected)),
-      );
-      return;
-    }
-
-    setState(() => _selectedAyahs.add(ayahNumber));
+      _selectedAyahs
+        ..clear()
+        ..addAll(decision.selectedAyahs);
+    });
   }
 
   void _cancelPendingListAutoScroll() {

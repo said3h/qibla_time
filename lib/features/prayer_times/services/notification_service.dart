@@ -300,6 +300,16 @@ class NotificationService {
     return '$_androidAdhanChannelPrefix${_androidSoundNameFor(adhanFile)}';
   }
 
+  @visibleForTesting
+  String debugAndroidSoundNameFor(String adhanFile) {
+    return _androidSoundNameFor(adhanFile);
+  }
+
+  @visibleForTesting
+  String debugAndroidChannelIdFor(String adhanFile) {
+    return _androidChannelIdFor(adhanFile);
+  }
+
   Future<void> _ensureAndroidAdhanChannel({
     required String channelId,
     required String soundName,

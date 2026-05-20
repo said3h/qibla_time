@@ -7,6 +7,10 @@ workflows:
     scripts:
       - name: Get dependencies
         script: flutter pub get
+      - name: Analyze
+        script: flutter analyze --no-fatal-infos --no-fatal-warnings
+      - name: Run tests
+        script: flutter test
       - name: Build Android
         script: flutter build appbundle --release
     artifacts:
@@ -22,6 +26,10 @@ workflows:
     scripts:
       - name: Get dependencies
         script: flutter pub get
+      - name: Analyze
+        script: flutter analyze --no-fatal-infos --no-fatal-warnings
+      - name: Run tests
+        script: flutter test
       - name: Build iOS
         script: |
           flutter build ios --release --no-codesign

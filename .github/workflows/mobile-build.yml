@@ -48,11 +48,14 @@ jobs:
       - name: Verify Flutter version
         run: flutter --version
 
+      - name: Clean build artifacts
+        run: flutter clean
+
       - name: Get dependencies
         run: flutter pub get
 
-      - name: Clean build artifacts
-        run: flutter clean
+      - name: Analyze
+        run: flutter analyze --no-fatal-infos --no-fatal-warnings
 
       - name: Run tests
         run: flutter test
