@@ -15,8 +15,29 @@ class AdhanManager {
   AdhanManager(this._ref);
 
   final Ref _ref;
+  Future<void>? _activeScheduleTask;
 
   Future<void> scheduleTodayAdhans() async {
+    final activeScheduleTask = _activeScheduleTask;
+    if (activeScheduleTask != null) {
+      AppLogger.info(
+        'AdhanManager.scheduleTodayAdhans: schedule already running; joining existing task',
+      );
+      return activeScheduleTask;
+    }
+
+    final task = _scheduleTodayAdhans();
+    _activeScheduleTask = task;
+    try {
+      await task;
+    } finally {
+      if (identical(_activeScheduleTask, task)) {
+        _activeScheduleTask = null;
+      }
+    }
+  }
+
+  Future<void> _scheduleTodayAdhans() async {
     final startedAt = DateTime.now();
     AppLogger.info('AdhanManager.scheduleTodayAdhans: start at $startedAt');
 

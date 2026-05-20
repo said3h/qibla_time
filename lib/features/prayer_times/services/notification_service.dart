@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:timezone/data/latest.dart' as tz;
@@ -19,6 +20,8 @@ class NotificationService {
   // que un canal v6 creado sin sonido nunca se puede reparar in-situ;
   // eliminarlo y recrear con el soundName correcto es la única solución.
   static const _androidAdhanChannelPrefix = 'adhan_channel_v7_';
+  static const _androidSettingsChannel =
+      MethodChannel('com.qiblatime/android_settings');
 
   final FlutterLocalNotificationsPlugin _plugin =
       FlutterLocalNotificationsPlugin();
@@ -27,7 +30,7 @@ class NotificationService {
 
   Future<void> initialize() async {
     try {
-      tz.initializeTimeZones();
+      await _configureLocalTimeZone();
 
       AppLogger.info('NotificationService: initializing...');
 
@@ -370,6 +373,41 @@ class NotificationService {
         AndroidFlutterLocalNotificationsPlugin>();
     if (android == null) return false;
     return await android.canScheduleExactNotifications() ?? false;
+  }
+
+  Future<void> _configureLocalTimeZone() async {
+    tz.initializeTimeZones();
+
+    if (!Platform.isAndroid) {
+      return;
+    }
+
+    try {
+      final timeZoneId =
+          await _androidSettingsChannel.invokeMethod<String>('getTimeZoneId');
+      if (timeZoneId == null || timeZoneId.trim().isEmpty) {
+        AppLogger.warning(
+          'NotificationService: Android timezone id unavailable; using ${tz.local.name}',
+        );
+        return;
+      }
+
+      final location = tz.getLocation(timeZoneId);
+      tz.setLocalLocation(location);
+      AppLogger.info(
+        'NotificationService: local timezone configured as ${location.name}',
+      );
+    } on MissingPluginException catch (e) {
+      AppLogger.warning(
+        'NotificationService: timezone channel unavailable; using ${tz.local.name}. $e',
+      );
+    } catch (e, stackTrace) {
+      AppLogger.error(
+        'NotificationService: failed to configure local timezone',
+        error: e,
+        stackTrace: stackTrace,
+      );
+    }
   }
 
   Future<bool> requestPermission() async {

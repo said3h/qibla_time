@@ -33,6 +33,7 @@ import java.io.PrintWriter
 import java.io.StringWriter
 import java.util.concurrent.Executors
 import java.util.Locale
+import java.util.TimeZone
 import java.util.concurrent.atomic.AtomicBoolean
 
 import com.qiblatime.mobile.video.StillVideoExporter
@@ -103,6 +104,10 @@ class MainActivity : FlutterActivity(), EventChannel.StreamHandler, SensorEventL
                     val manufacturer =
                         call.argument<String>("manufacturer").orEmpty()
                     result.success(openBatterySettings(manufacturer))
+                }
+
+                "getTimeZoneId" -> {
+                    result.success(TimeZone.getDefault().id)
                 }
 
                 else -> result.notImplemented()
