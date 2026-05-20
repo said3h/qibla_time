@@ -155,28 +155,17 @@ class _PrayerGuideScreenState extends ConsumerState<PrayerGuideScreen> {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  SizedBox(
-                    height: 8,
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: List.generate(
-                          pages.length,
-                          (index) => Padding(
-                            padding: EdgeInsets.only(
-                              right: index == pages.length - 1 ? 0 : 8,
-                            ),
-                            child: AnimatedContainer(
-                              duration: const Duration(milliseconds: 220),
-                              width: index == _currentPage ? 22 : 8,
-                              height: 8,
-                              decoration: BoxDecoration(
-                                color: index == _currentPage
-                                    ? tokens.primaryLight
-                                    : tokens.border,
-                                borderRadius: BorderRadius.circular(999),
-                              ),
-                            ),
+                  Center(
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(maxWidth: 220),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(999),
+                        child: LinearProgressIndicator(
+                          value: (_currentPage + 1) / pages.length,
+                          minHeight: 6,
+                          backgroundColor: tokens.border,
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            tokens.primaryLight,
                           ),
                         ),
                       ),
