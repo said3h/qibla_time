@@ -1,6 +1,5 @@
-import 'package:shared_preferences/shared_preferences.dart';
-
 import '../constants/app_constants.dart';
+import 'storage_service.dart';
 
 class SettingsService {
   SettingsService._();
@@ -14,22 +13,22 @@ class SettingsService {
   static const _keyTafsirEnabled = 'tafsir_enabled';
 
   Future<void> saveAdhan(String fileName) async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await StorageService.prefs;
     await prefs.setString(_keyAdhan, fileName);
   }
 
   Future<String> getAdhan() async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await StorageService.prefs;
     return prefs.getString(_keyAdhan) ?? 'azan1.mp3';
   }
 
   Future<void> saveNotificationsEnabled(bool value) async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await StorageService.prefs;
     await prefs.setBool(_keyNotifications, value);
   }
 
   Future<bool> getNotificationsEnabled() async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await StorageService.prefs;
     return prefs.getBool(_keyNotifications) ?? true;
   }
 
@@ -40,13 +39,13 @@ class SettingsService {
     String prayerKey,
     bool value,
   ) async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await StorageService.prefs;
     await prefs.setBool(_prayerNotificationKey(prayerKey), value);
     await prefs.remove(_legacyPrayerNotificationKey(prayerKey));
   }
 
   Future<bool> getPrayerNotificationEnabled(String prayerKey) async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await StorageService.prefs;
     final key = _prayerNotificationKey(prayerKey);
     final legacyKey = _legacyPrayerNotificationKey(prayerKey);
 
@@ -66,67 +65,67 @@ class SettingsService {
   }
 
   Future<void> saveCalculationMethod(int value) async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await StorageService.prefs;
     await prefs.setInt(_keyCalcMethod, value);
   }
 
   Future<int> getCalculationMethod() async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await StorageService.prefs;
     return prefs.getInt(_keyCalcMethod) ?? 1;
   }
 
   Future<void> saveMadhab(int value) async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await StorageService.prefs;
     await prefs.setInt(_keyMadhab, value);
   }
 
   Future<int> getMadhab() async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await StorageService.prefs;
     return prefs.getInt(_keyMadhab) ?? 0;
   }
 
   Future<void> saveQuranTajweedEnabled(bool value) async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await StorageService.prefs;
     await prefs.setBool(_keyQuranTajweedEnabled, value);
   }
 
   Future<bool> getQuranTajweedEnabled() async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await StorageService.prefs;
     return prefs.getBool(_keyQuranTajweedEnabled) ?? false;
   }
 
   Future<void> saveTafsirEnabled(bool value) async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await StorageService.prefs;
     await prefs.setBool(_keyTafsirEnabled, value);
   }
 
   Future<bool> getTafsirEnabled() async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await StorageService.prefs;
     return prefs.getBool(_keyTafsirEnabled) ?? false;
   }
 
   Future<void> saveRamadanModeAutomatic(bool value) async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await StorageService.prefs;
     await prefs.setBool(AppConstants.keyRamadanModeAutomatic, value);
   }
 
   Future<bool> getRamadanModeAutomatic() async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await StorageService.prefs;
     return prefs.getBool(AppConstants.keyRamadanModeAutomatic) ?? true;
   }
 
   Future<void> saveRamadanModeForced(bool value) async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await StorageService.prefs;
     await prefs.setBool(AppConstants.keyRamadanModeForced, value);
   }
 
   Future<bool> getRamadanModeForced() async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await StorageService.prefs;
     return prefs.getBool(AppConstants.keyRamadanModeForced) ?? false;
   }
 
   Future<void> saveProfileDisplayName(String? value) async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await StorageService.prefs;
     final normalized = value?.trim();
     if (normalized == null || normalized.isEmpty) {
       await prefs.remove(AppConstants.keyProfileDisplayName);
@@ -136,7 +135,7 @@ class SettingsService {
   }
 
   Future<String?> getProfileDisplayName() async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await StorageService.prefs;
     final value = prefs.getString(AppConstants.keyProfileDisplayName)?.trim();
     if (value == null || value.isEmpty) {
       return null;
@@ -145,7 +144,7 @@ class SettingsService {
   }
 
   Future<void> saveProfileNationalityCode(String? value) async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await StorageService.prefs;
     final normalized = value?.trim().toUpperCase();
     if (normalized == null || normalized.isEmpty) {
       await prefs.remove(AppConstants.keyProfileNationalityCode);
@@ -155,7 +154,7 @@ class SettingsService {
   }
 
   Future<String?> getProfileNationalityCode() async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await StorageService.prefs;
     final value =
         prefs.getString(AppConstants.keyProfileNationalityCode)?.trim();
     if (value == null || value.isEmpty) {
@@ -165,7 +164,7 @@ class SettingsService {
   }
 
   Future<void> resetAll() async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await StorageService.prefs;
     await prefs.clear();
   }
 }
