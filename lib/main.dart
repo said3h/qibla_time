@@ -17,10 +17,7 @@ import 'features/tafsir/screens/tafsir_debug_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await StorageService.init();
-  await AppLocaleController.prime();
-  await NotificationService.instance.initialize();
-  await WidgetSyncService().configure();
+  await _prepareCriticalStartup();
 
   // Ensure prayer notifications get scheduled even if the user stays in
   // onboarding (clean install) and never reaches HomeScreen yet.
@@ -32,16 +29,38 @@ void main() async {
     ),
   );
 
-  // Don't block app startup on location/permissions. Schedule in background.
+  // Don't block app startup on plugin initialization, location or permissions.
+  // This keeps iOS resilient if a native plugin throws before the first frame.
   Future<void>(() async {
-    try {
-      await container.read(adhanManagerProvider).scheduleTodayAdhans();
-    } catch (e, st) {
-      // Keep startup resilient; diagnosis goes to logs.
-      AppLogger.error('AdhanManager.scheduleTodayAdhans failed at startup',
-          error: e, stackTrace: st);
-    }
+    await _runStartupTask(
+      'NotificationService.initialize',
+      NotificationService.instance.initialize,
+    );
+    await _runStartupTask(
+      'WidgetSyncService.configure',
+      WidgetSyncService().configure,
+    );
+    await _runStartupTask(
+      'AdhanManager.scheduleTodayAdhans',
+      () => container.read(adhanManagerProvider).scheduleTodayAdhans(),
+    );
   });
+}
+
+Future<void> _prepareCriticalStartup() async {
+  await _runStartupTask('StorageService.init', StorageService.init);
+  await _runStartupTask('AppLocaleController.prime', AppLocaleController.prime);
+}
+
+Future<void> _runStartupTask(
+  String name,
+  Future<void> Function() task,
+) async {
+  try {
+    await task();
+  } catch (e, st) {
+    AppLogger.error('$name failed during startup', error: e, stackTrace: st);
+  }
 }
 
 class QiblaTimeApp extends ConsumerWidget {

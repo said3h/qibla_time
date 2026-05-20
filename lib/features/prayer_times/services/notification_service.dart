@@ -28,7 +28,17 @@ class NotificationService {
 
   FlutterLocalNotificationsPlugin get plugin => _plugin;
 
-  Future<void> initialize() async {
+  Future<void>? _initializeFuture;
+  bool _initialized = false;
+
+  Future<void> initialize() {
+    if (_initialized) {
+      return Future<void>.value();
+    }
+    return _initializeFuture ??= _initialize();
+  }
+
+  Future<void> _initialize() async {
     try {
       await _configureLocalTimeZone();
 
@@ -48,8 +58,10 @@ class NotificationService {
 
       await _deleteOldAdhanChannels();
 
+      _initialized = true;
       AppLogger.info('NotificationService: initialized OK');
     } catch (e, stackTrace) {
+      _initializeFuture = null;
       AppLogger.error(
         'NotificationService: FAILED to initialize',
         error: e,
@@ -66,6 +78,8 @@ class NotificationService {
     required String adhanFile,
   }) async {
     try {
+      await initialize();
+
       final l10n = appLocalizationsForDevice();
       final androidSound = _androidSoundNameFor(adhanFile);
       final androidChannelId = _androidChannelIdFor(adhanFile);
@@ -146,6 +160,8 @@ class NotificationService {
     required DateTime scheduledAt,
   }) async {
     try {
+      await initialize();
+
       final l10n = appLocalizationsForDevice();
 
       AppLogger.info('scheduleReminder: id=$id title="$title" at=$scheduledAt');
@@ -206,6 +222,8 @@ class NotificationService {
     String adhanFile = 'azan1.mp3',
   }) async {
     try {
+      await initialize();
+
       final l10n = appLocalizationsForDevice();
       final androidSound = _androidSoundNameFor(adhanFile);
       final androidChannelId = _androidChannelIdFor(adhanFile);
@@ -246,14 +264,21 @@ class NotificationService {
     }
   }
 
-  Future<void> cancel(int id) async => _plugin.cancel(id: id);
+  Future<void> cancel(int id) async {
+    await initialize();
+    await _plugin.cancel(id: id);
+  }
 
-  Future<void> cancelAll() async => _plugin.cancelAll();
+  Future<void> cancelAll() async {
+    await initialize();
+    await _plugin.cancelAll();
+  }
 
   /// Cancela únicamente las notificaciones relacionadas con oraciones:
   /// hoy (0-4), mañana (5-9), Ramadán imsak/iftar (100-101), Jumu'ah (102).
   /// No cancela la inspiración diaria (10001) ni los hadiths horarios (20000+).
   Future<void> cancelPrayerNotifications() async {
+    await initialize();
     for (final id in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 100, 101, 102]) {
       await _plugin.cancel(id: id);
     }
@@ -387,8 +412,9 @@ class NotificationService {
   Future<void> _configureLocalTimeZone({
     bool forceAndroidForTesting = false,
   }) async {
-    final previousLocal = tz.local;
+    final previousLocalName = _safeCurrentTimeZoneName();
     tz.initializeTimeZones();
+    final previousLocal = _timeZoneLocationFor(previousLocalName);
 
     if (!Platform.isAndroid && !forceAndroidForTesting) {
       if (previousLocal.name != tz.local.name) {
@@ -431,6 +457,28 @@ class NotificationService {
         error: e,
         stackTrace: stackTrace,
       );
+    }
+  }
+
+  String? _safeCurrentTimeZoneName() {
+    try {
+      return tz.local.name;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  tz.Location _timeZoneLocationFor(String? timeZoneName) {
+    if (timeZoneName == null || timeZoneName.trim().isEmpty) {
+      tz.setLocalLocation(tz.UTC);
+      return tz.UTC;
+    }
+
+    try {
+      return tz.getLocation(timeZoneName);
+    } catch (_) {
+      tz.setLocalLocation(tz.UTC);
+      return tz.UTC;
     }
   }
 
