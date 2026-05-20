@@ -2093,12 +2093,25 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   ) {
     final l10n = context.l10n;
     final selectedCount = _selectedAyahs.length;
+    final isCompactWidth = MediaQuery.sizeOf(context).width < 380;
+    final textScale = MediaQuery.textScalerOf(context).scale(1);
+    final useCompactActions = isCompactWidth || textScale > 1.15;
+    final shareAction = _selectedAyahs.isEmpty
+        ? null
+        : () => _openSelectedAyahsSharePreview(ayahs);
+
+    void cancelSelection() {
+      setState(() {
+        _logSelectionMode('EXITING selection mode via cancel button');
+        _selectedAyahs.clear();
+      });
+    }
 
     return Material(
       elevation: 5,
       color: tokens.bgSurface,
       child: Container(
-        padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
+        padding: const EdgeInsets.fromLTRB(14, 9, 10, 9),
         decoration: BoxDecoration(
           color: tokens.bgSurface,
           border: Border(
@@ -2108,10 +2121,12 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
         child: Row(
           children: [
             Icon(Icons.check_circle_outline, color: tokens.primary, size: 20),
-            const SizedBox(width: 10),
+            const SizedBox(width: 8),
             Expanded(
               child: Text(
                 context.l10n.quranAyahsSelectedCount(selectedCount),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
                 style: GoogleFonts.dmSans(
                   fontSize: 13,
                   fontWeight: FontWeight.w700,
@@ -2119,20 +2134,48 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                 ),
               ),
             ),
-            FilledButton.icon(
-              onPressed: _selectedAyahs.isEmpty
-                  ? null
-                  : () => _openSelectedAyahsSharePreview(ayahs),
-              icon: const Icon(Icons.ios_share_outlined, size: 18),
-              label: Text(l10n.commonShare),
+            const SizedBox(width: 8),
+            Tooltip(
+              message: l10n.commonShare,
+              child: useCompactActions
+                  ? FilledButton(
+                      onPressed: shareAction,
+                      style: FilledButton.styleFrom(
+                        minimumSize: const Size(40, 38),
+                        padding: EdgeInsets.zero,
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        visualDensity: VisualDensity.compact,
+                      ),
+                      child: const Icon(Icons.ios_share_outlined, size: 18),
+                    )
+                  : FilledButton.icon(
+                      onPressed: shareAction,
+                      icon: const Icon(Icons.ios_share_outlined, size: 17),
+                      label: Text(
+                        l10n.commonShare,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      style: FilledButton.styleFrom(
+                        minimumSize: const Size(0, 38),
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        visualDensity: VisualDensity.compact,
+                      ),
+                    ),
             ),
-            const SizedBox(width: 6),
-            TextButton(
-              onPressed: () => setState(() {
-                _logSelectionMode('EXITING selection mode via cancel button');
-                _selectedAyahs.clear();
-              }),
-              child: Text(l10n.commonCancel),
+            const SizedBox(width: 4),
+            IconButton(
+              tooltip: l10n.commonCancel,
+              onPressed: cancelSelection,
+              icon: const Icon(Icons.close_rounded, size: 20),
+              color: tokens.textSecondary,
+              visualDensity: VisualDensity.compact,
+              padding: EdgeInsets.zero,
+              constraints: const BoxConstraints(
+                minWidth: 38,
+                minHeight: 38,
+              ),
             ),
           ],
         ),
