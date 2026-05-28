@@ -2,6 +2,7 @@ import 'package:share_plus/share_plus.dart';
 
 import '../../../core/theme/app_theme.dart';
 import '../../../core/utils/religious_reference_formatter.dart';
+import '../../../core/utils/share_sheet_origin.dart';
 import '../../../l10n/l10n.dart';
 import '../../hadith_share/models/hadith_share_data.dart';
 import '../../hadith_share/models/hadith_share_theme.dart';
@@ -49,6 +50,7 @@ class DuaShareService {
       ),
       subject:
           dua.title.trim().isEmpty ? l10n.shareSubjectDua : dua.title.trim(),
+      sharePositionOrigin: qiblaShareSheetOrigin,
     );
   }
 
@@ -91,6 +93,7 @@ class DuaShareService {
       ),
       subject:
           dua.title.trim().isEmpty ? l10n.shareSubjectDua : dua.title.trim(),
+      sharePositionOrigin: qiblaShareSheetOrigin,
     );
   }
 

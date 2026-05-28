@@ -12,6 +12,8 @@ import '../../../core/services/audio_service.dart';
 import '../../../core/services/logger_service.dart';
 import '../../../core/services/settings_service.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../../core/utils/share_sheet_origin.dart';
+import '../../../core/localization/locale_controller.dart';
 import '../../../l10n/l10n.dart';
 import '../../hafiz/screens/hafiz_mode_screen.dart';
 import '../../quran_share/services/ayah_share_service.dart';
@@ -31,10 +33,8 @@ import '../services/quran_reader_preferences.dart';
 import '../services/quran_service.dart';
 import 'downloaded_surahs_screen.dart';
 
-const _isTafsirInternalBuild =
-    bool.fromEnvironment('QIBLA_INTERNAL_TAFSIR_BUILD');
-const _enableQuranTafsirPanels = _isTafsirInternalBuild &&
-    bool.fromEnvironment('QURAN_TAFSIR_PANEL_ENABLED');
+const _enableQuranTafsirPanels =
+    bool.fromEnvironment('QURAN_TAFSIR_PANEL_ENABLED', defaultValue: true);
 
 class QuranScreen extends ConsumerStatefulWidget {
   const QuranScreen({super.key});
@@ -947,7 +947,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
 
   Future<void> _toggleTafsirForAyah(int ayahNumber) async {
     if (!_enableQuranTafsirPanels) {
-      _logTafsirVisibility('button ignored: internal flag off');
+      _logTafsirVisibility('button ignored: feature flag off');
       return;
     }
     if (_isPageView) {
@@ -1314,6 +1314,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
           ayah.numberInSurah,
           widget.summary.nameLatin,
         ),
+        sharePositionOrigin: qiblaShareSheetOrigin,
       );
     } catch (e, stackTrace) {
       AppLogger.error(
@@ -1858,6 +1859,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     final detailAsync = ref.watch(surahLoadResultProvider(widget.summary));
     final bookmarks = ref.watch(quranBookmarksProvider).valueOrNull ?? const [];
     final lastReading = ref.watch(lastReadingProvider).valueOrNull;
+    final tafsirLanguageCode = ref.watch(currentLanguageCodeProvider);
     final showTajweed =
         ref.watch(quranTajweedEnabledProvider).valueOrNull ?? false;
 
@@ -2037,8 +2039,9 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                             _TafsirPanelLoader(
                               surahNumber: widget.summary.number,
                               ayahNumber: ayah.numberInSurah,
-                              languageCode:
-                                  Localizations.localeOf(context).languageCode,
+                              languageCode: tafsirLanguageCode,
+                              localeCode:
+                                  Localizations.localeOf(context).toString(),
                             ),
                         ],
                       );
@@ -2047,7 +2050,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                 );
 
           if (!_enableQuranTafsirPanels) {
-            _logTafsirVisibility('hidden: internal flag off');
+            _logTafsirVisibility('hidden: feature flag off');
           } else if (_isPageView) {
             _logTafsirVisibility('hidden: page mode incompatible');
           } else if (_isSelectionMode) {
@@ -2463,11 +2466,13 @@ class _TafsirPanelLoader extends ConsumerWidget {
     required this.surahNumber,
     required this.ayahNumber,
     required this.languageCode,
+    required this.localeCode,
   });
 
   final int surahNumber;
   final int ayahNumber;
   final String languageCode;
+  final String localeCode;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -2484,6 +2489,10 @@ class _TafsirPanelLoader extends ConsumerWidget {
           }
           return const SizedBox.shrink();
         }
+        AppLogger.info(
+          '[QuranTafsirPanel] open locale=$localeCode '
+          'tafsirLanguage=$languageCode ayah=$surahNumber:$ayahNumber',
+        );
         return Padding(
           padding: const EdgeInsets.only(left: 2, right: 2, bottom: 12),
           child: TafsirPanel(

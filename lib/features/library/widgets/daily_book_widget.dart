@@ -275,7 +275,7 @@ class DailyBookWidget extends ConsumerWidget {
   }
 
   Color _blend(Color foreground, Color background, double opacity) {
-    return Color.alphaBlend(foreground.withOpacity(opacity), background);
+    return Color.alphaBlend(foreground.withValues(alpha: opacity), background);
   }
 
   Color _foregroundFor(Color background) {
@@ -285,8 +285,8 @@ class DailyBookWidget extends ConsumerWidget {
 
   Color _accentForeground(QiblaTokens tokens, Color accent) {
     return _isLightTheme(tokens)
-        ? Color.alphaBlend(Colors.black.withOpacity(0.28), accent)
-        : Color.alphaBlend(Colors.white.withOpacity(0.14), accent);
+        ? Color.alphaBlend(Colors.black.withValues(alpha: 0.28), accent)
+        : Color.alphaBlend(Colors.white.withValues(alpha: 0.14), accent);
   }
 
   String _displayTitle(IslamHouseBook book, bool isArabicOnly) {
@@ -340,8 +340,8 @@ class _InfoChip extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
         color: Color.alphaBlend(
-          accent.withOpacity(
-            ThemeData.estimateBrightnessForColor(tokens.bgPage) ==
+          accent.withValues(
+            alpha: ThemeData.estimateBrightnessForColor(tokens.bgPage) ==
                     Brightness.light
                 ? 0.1
                 : 0.18,
@@ -362,8 +362,8 @@ class _InfoChip extends StatelessWidget {
               fontWeight: FontWeight.w600,
               color: ThemeData.estimateBrightnessForColor(tokens.bgPage) ==
                       Brightness.light
-                  ? Color.alphaBlend(Colors.black.withOpacity(0.28), accent)
-                  : Color.alphaBlend(Colors.white.withOpacity(0.14), accent),
+                  ? Color.alphaBlend(Colors.black.withValues(alpha: 0.28), accent)
+                  : Color.alphaBlend(Colors.white.withValues(alpha: 0.14), accent),
             ),
           ),
         ],

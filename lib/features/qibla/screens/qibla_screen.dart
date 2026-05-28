@@ -272,7 +272,7 @@ class QiblaScreen extends ConsumerWidget {
                           width: isMajor ? 2 : 1,
                           height: isMajor ? 14 : 9,
                           margin: const EdgeInsets.only(top: 10),
-                          color: tokens.primary.withOpacity(isMajor ? 0.55 : 0.22),
+                          color: tokens.primary.withValues(alpha: isMajor ? 0.55 : 0.22),
                         ),
                       ),
                     );
@@ -298,7 +298,7 @@ class QiblaScreen extends ConsumerWidget {
                     color: tokens.primary,
                     boxShadow: [
                       BoxShadow(
-                        color: tokens.primary.withOpacity(0.35),
+                        color: tokens.primary.withValues(alpha: 0.35),
                         blurRadius: 16,
                         spreadRadius: 2,
                       ),

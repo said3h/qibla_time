@@ -32,10 +32,17 @@ class TafsirService {
     String? tafsirId,
   }) async {
     final normalizedLanguage = _normalizeLanguageCode(languageCode);
-    final languageResource = _resourceForLanguage(normalizedLanguage);
-    final normalizedTafsirId =
-        _normalizeOptionalId(tafsirId) ?? languageResource?.resourceId;
-    _debugLanguage(normalizedLanguage, normalizedTafsirId);
+    final resolvedResource = _resolveResource(
+      normalizedLanguage,
+      requestedTafsirId: tafsirId,
+    );
+    final normalizedTafsirId = resolvedResource.resourceId;
+    _debugLanguage(
+      requestedLanguageCode: languageCode,
+      normalizedLanguageCode: normalizedLanguage,
+      resourceId: normalizedTafsirId,
+      resourceSource: resolvedResource.source,
+    );
     _debugLog(
       'request language=$normalizedLanguage tafsirId=$normalizedTafsirId '
       'ayah=$surahNumber:$ayahNumber apiClient=${_apiClient != null}',
@@ -247,17 +254,31 @@ class TafsirService {
     return parsed.toString();
   }
 
-  QulTafsirResource? _resourceForLanguage(String languageCode) {
-    if (_providerName == 'qul_preview') {
-      return qulTafsirResourceForLanguage(languageCode);
+  _ResolvedTafsirResource _resolveResource(
+    String languageCode, {
+    String? requestedTafsirId,
+  }) {
+    final explicitTafsirId = _normalizeOptionalId(requestedTafsirId);
+    if (explicitTafsirId != null) {
+      return _ResolvedTafsirResource(
+        resourceId: explicitTafsirId,
+        source: 'request',
+      );
     }
+
+    if (_providerName == 'qul_preview') {
+      final languageResource = qulTafsirResourceForLanguage(languageCode);
+      return _ResolvedTafsirResource(
+        resourceId: languageResource?.resourceId,
+        source:
+            languageResource == null ? 'missing_language_map' : 'locale_map',
+      );
+    }
+
     final defaultId = _normalizeOptionalId(_defaultTafsirId);
-    if (defaultId == null) return null;
-    return QulTafsirResource(
-      languageCode: languageCode,
+    return _ResolvedTafsirResource(
       resourceId: defaultId,
-      name: 'Configured tafsir resource',
-      notes: 'Configured by dart-define.',
+      source: defaultId == null ? 'missing_default' : 'default_define',
     );
   }
 
@@ -282,16 +303,33 @@ class TafsirService {
   }
 
   void _debugLog(String message) {
-    if (!kDebugMode) return;
-    debugPrint('[QuranTafsirApi] $message');
+    final logMessage = '[QuranTafsirApi] $message';
+    if (kDebugMode) {
+      debugPrint(logMessage);
+      return;
+    }
+    if (_apiEnabled || _providerName == 'qul_preview') {
+      AppLogger.info(logMessage);
+    }
   }
 
-  void _debugLanguage(String languageCode, String? resourceId) {
-    if (!kDebugMode) return;
-    debugPrint(
-      '[QuranTafsirLanguage] language=$languageCode '
-      'resourceId=${resourceId ?? 'none'}',
-    );
+  void _debugLanguage({
+    required String requestedLanguageCode,
+    required String normalizedLanguageCode,
+    required String? resourceId,
+    required String resourceSource,
+  }) {
+    final message = '[QuranTafsirLanguage] requestedLocale='
+        '$requestedLanguageCode tafsirLanguage=$normalizedLanguageCode '
+        'resourceId=${resourceId ?? 'none'} resourceSource=$resourceSource '
+        'provider=${_providerName ?? 'default'}';
+    if (kDebugMode) {
+      debugPrint(message);
+      return;
+    }
+    if (_apiEnabled || _providerName == 'qul_preview') {
+      AppLogger.info(message);
+    }
   }
 
   TafsirDebugInfo _debugInfo({
@@ -304,4 +342,14 @@ class TafsirService {
       fallbackReason: fallbackReason,
     );
   }
+}
+
+class _ResolvedTafsirResource {
+  const _ResolvedTafsirResource({
+    required this.resourceId,
+    required this.source,
+  });
+
+  final String? resourceId;
+  final String source;
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hijri/hijri_calendar.dart';
 
@@ -317,7 +316,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               boxShadow: [
                 BoxShadow(
                   color: Colors.black
-                      .withOpacity(_isLightTheme(tokens) ? 0.04 : 0.16),
+                      .withValues(alpha: _isLightTheme(tokens) ? 0.04 : 0.16),
                   blurRadius: 18,
                   offset: const Offset(0, 8),
                 ),
@@ -381,14 +380,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
           decoration: BoxDecoration(
-            color: color.withOpacity(0.10),
+            color: color.withValues(alpha: 0.10),
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: color.withOpacity(0.30)),
+            border: Border.all(color: color.withValues(alpha: 0.30)),
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(Icons.pause_circle_outline, size: 14, color: color),
+              const Icon(Icons.pause_circle_outline, size: 14, color: color),
               const SizedBox(width: 6),
               Text(
                 l10n.periodModeActive,
@@ -522,7 +521,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       borderRadius: BorderRadius.circular(22),
                       border: Border.all(
                         color: isSelected
-                            ? tokens.primary.withOpacity(0.35)
+                            ? tokens.primary.withValues(alpha: 0.35)
                             : isToday
                                 ? tokens.primaryBorder
                                 : tokens.border,
@@ -531,8 +530,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       boxShadow: [
                         BoxShadow(
                           color: isSelected
-                              ? tokens.primary.withOpacity(0.16)
-                              : Colors.black.withOpacity(0.08),
+                              ? tokens.primary.withValues(alpha: 0.16)
+                              : Colors.black.withValues(alpha: 0.08),
                           blurRadius: isSelected ? 18 : 10,
                           offset: const Offset(0, 8),
                         ),
@@ -668,7 +667,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.18),
+            color: Colors.black.withValues(alpha: 0.18),
             blurRadius: 24,
             offset: const Offset(0, 14),
           ),
@@ -687,7 +686,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 child: Icon(
                   Icons.mosque_rounded,
                   size: 118,
-                  color: tokens.primary.withOpacity(0.045),
+                  color: tokens.primary.withValues(alpha: 0.045),
                 ),
               ),
             ),
@@ -702,7 +701,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     shape: BoxShape.circle,
                     gradient: RadialGradient(
                       colors: [
-                        tokens.primary.withOpacity(0.08),
+                        tokens.primary.withValues(alpha: 0.08),
                         Colors.transparent,
                       ],
                     ),
@@ -720,7 +719,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     l10n.homeHeroNextPrayer,
                     style: GoogleFonts.dmSans(
                       fontSize: 9,
-                      color: tokens.primary.withOpacity(0.65),
+                      color: tokens.primary.withValues(alpha: 0.65),
                       letterSpacing: 1.8,
                       fontWeight: FontWeight.w600,
                     ),
@@ -833,7 +832,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.12),
+            color: Colors.black.withValues(alpha: 0.12),
             blurRadius: 20,
             offset: const Offset(0, 12),
           ),
@@ -876,7 +875,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             width: 40,
             height: 3,
             decoration: BoxDecoration(
-              color: tokens.primary.withOpacity(0.45),
+              color: tokens.primary.withValues(alpha: 0.45),
               borderRadius: BorderRadius.circular(999),
             ),
           ),
@@ -1865,7 +1864,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     border: Border.all(color: tokens.border),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.18),
+                        color: Colors.black.withValues(alpha: 0.18),
                         blurRadius: 28,
                         offset: const Offset(0, 16),
                       ),
@@ -2129,7 +2128,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           width: 34,
                           height: 34,
                           decoration: BoxDecoration(
-                            color: tokens.primary.withOpacity(0.10),
+                            color: tokens.primary.withValues(alpha: 0.10),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Icon(
@@ -2200,7 +2199,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                     width: 42,
                                     height: 42,
                                     decoration: BoxDecoration(
-                                      color: tokens.primary.withOpacity(0.12),
+                                      color: tokens.primary.withValues(alpha: 0.12),
                                       borderRadius: BorderRadius.circular(16),
                                     ),
                                     child: Icon(
@@ -2363,7 +2362,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         width: 188,
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 18),
         decoration: BoxDecoration(
-          color: Colors.black.withOpacity(0.18),
+          color: Colors.black.withValues(alpha: 0.18),
           borderRadius: BorderRadius.circular(24),
         ),
         child: Text(
@@ -2616,8 +2615,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   boxShadow: [
                     BoxShadow(
                       color: isCurrent
-                          ? tokens.primary.withOpacity(0.12)
-                          : Colors.black.withOpacity(0.06),
+                          ? tokens.primary.withValues(alpha: 0.12)
+                          : Colors.black.withValues(alpha: 0.06),
                       blurRadius: isCurrent ? 18 : 10,
                       offset: const Offset(0, 8),
                     ),
@@ -2630,7 +2629,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       height: 40,
                       decoration: BoxDecoration(
                         color: isCurrent
-                            ? tokens.primary.withOpacity(0.14)
+                            ? tokens.primary.withValues(alpha: 0.14)
                             : tokens.bgSurface2,
                         shape: BoxShape.circle,
                       ),
@@ -3306,7 +3305,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         color: _blend(tokens.primary, tokens.border, 0.08)),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.08),
+                        color: Colors.black.withValues(alpha: 0.08),
                         blurRadius: 12,
                         offset: const Offset(0, 8),
                       ),
@@ -3424,7 +3423,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           label: l10n.homePrayerStatusNow,
           surfaceColor: _blend(tokens.accent, tokens.bgSurface, 0.16),
           borderColor: _blend(tokens.accent, tokens.borderMed, 0.22),
-          shadowColor: tokens.accent.withOpacity(0.12),
+          shadowColor: tokens.accent.withValues(alpha: 0.12),
           iconBackground: _blend(tokens.accent, tokens.bgSurface2, 0.2),
           iconColor: tokens.accent,
           timeBackground: _blend(tokens.accent, tokens.bgSurface, 0.14),
@@ -3438,7 +3437,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           label: l10n.homePrayerStatusNext,
           surfaceColor: _blend(tokens.primary, tokens.bgSurface, 0.14),
           borderColor: _blend(tokens.primary, tokens.primaryBorder, 0.2),
-          shadowColor: tokens.primary.withOpacity(0.12),
+          shadowColor: tokens.primary.withValues(alpha: 0.12),
           iconBackground: _blend(tokens.primary, tokens.bgSurface2, 0.18),
           iconColor: tokens.primary,
           timeBackground: _blend(tokens.primary, tokens.bgSurface, 0.12),
@@ -3452,7 +3451,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           label: l10n.homePrayerStatusCompleted,
           surfaceColor: _blend(tokens.bgSurface, tokens.bgPage, 0.9),
           borderColor: tokens.border,
-          shadowColor: Colors.black.withOpacity(0.06),
+          shadowColor: Colors.black.withValues(alpha: 0.06),
           iconBackground: _blend(tokens.accent, tokens.bgSurface, 0.1),
           iconColor: tokens.accent,
           timeBackground: _blend(tokens.bgSurface2, tokens.bgSurface, 0.88),
@@ -3466,7 +3465,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           label: l10n.homePrayerStatusUpcoming,
           surfaceColor: _blend(tokens.bgSurface2, tokens.bgSurface, 0.84),
           borderColor: _blend(tokens.primary, tokens.border, 0.08),
-          shadowColor: Colors.black.withOpacity(0.07),
+          shadowColor: Colors.black.withValues(alpha: 0.07),
           iconBackground: _blend(tokens.primary, tokens.bgSurface, 0.08),
           iconColor: tokens.textSecondary,
           timeBackground: _blend(tokens.bgSurface, tokens.bgPage, 0.82),
@@ -3480,7 +3479,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           label: l10n.commonPending,
           surfaceColor: tokens.bgSurface,
           borderColor: tokens.border,
-          shadowColor: Colors.black.withOpacity(0.06),
+          shadowColor: Colors.black.withValues(alpha: 0.06),
           iconBackground: tokens.bgSurface2,
           iconColor: tokens.textSecondary,
           timeBackground: _blend(tokens.bgSurface2, tokens.bgSurface, 0.88),

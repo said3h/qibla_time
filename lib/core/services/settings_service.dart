@@ -101,7 +101,7 @@ class SettingsService {
 
   Future<bool> getTafsirEnabled() async {
     final prefs = await StorageService.prefs;
-    return prefs.getBool(_keyTafsirEnabled) ?? false;
+    return prefs.getBool(_keyTafsirEnabled) ?? true;
   }
 
   Future<void> saveRamadanModeAutomatic(bool value) async {

@@ -166,14 +166,14 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            tokens.primary.withOpacity(0.15),
-            tokens.primary.withOpacity(0.05),
+            tokens.primary.withValues(alpha: 0.15),
+            tokens.primary.withValues(alpha: 0.05),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: tokens.primary.withOpacity(0.3)),
+        border: Border.all(color: tokens.primary.withValues(alpha: 0.3)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -185,7 +185,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                 decoration: BoxDecoration(
                   color:
-                      _getCollectionColor(hadith.reference).withOpacity(0.15),
+                      _getCollectionColor(hadith.reference).withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Column(
@@ -232,7 +232,7 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
                 decoration: BoxDecoration(
-                  color: _getGradeColor(hadith.grade).withOpacity(0.15),
+                  color: _getGradeColor(hadith.grade).withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Column(
@@ -539,9 +539,9 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: tokens.primary.withOpacity(0.05),
+        color: tokens.primary.withValues(alpha: 0.05),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: tokens.primary.withOpacity(0.2)),
+        border: Border.all(color: tokens.primary.withValues(alpha: 0.2)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -971,9 +971,9 @@ class _QuickActionButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: color.withOpacity(0.1),
+          color: color.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: color.withOpacity(0.3)),
+          border: Border.all(color: color.withValues(alpha: 0.3)),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

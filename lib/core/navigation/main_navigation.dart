@@ -80,7 +80,7 @@ class _MainNavigationState extends ConsumerState<MainNavigation>
     final navigationBackground =
         navigationBarTheme.backgroundColor ?? theme.colorScheme.surface;
     final navigationIndicator = navigationBarTheme.indicatorColor ??
-        theme.colorScheme.primary.withOpacity(0.12);
+        theme.colorScheme.primary.withValues(alpha: 0.12);
 
     return Scaffold(
       body: KeyedSubtree(
@@ -197,7 +197,7 @@ class _QuranMiniPlayerBar extends StatelessWidget {
         color: theme.colorScheme.surface,
         border: Border(
           top: BorderSide(
-            color: theme.dividerColor.withOpacity(0.6),
+            color: theme.dividerColor.withValues(alpha: 0.6),
           ),
         ),
       ),

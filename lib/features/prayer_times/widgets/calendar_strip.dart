@@ -54,12 +54,12 @@ class CalendarStrip extends StatelessWidget {
         width: 70,
         decoration: BoxDecoration(
           color: isSelected 
-              ? AppTheme.gold.withOpacity(0.15) 
+              ? AppTheme.gold.withValues(alpha: 0.15) 
               : AppTheme.surface,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
             color: isToday || isSelected
-                ? AppTheme.gold.withOpacity(0.4)
+                ? AppTheme.gold.withValues(alpha: 0.4)
                 : const Color(0x0FFFFFFF),
             width: isToday || isSelected ? 1.5 : 1,
           ),

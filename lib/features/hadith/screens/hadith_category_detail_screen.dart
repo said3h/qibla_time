@@ -184,7 +184,7 @@ class _HadithCategoryDetailScreenState
                       width: 40,
                       height: 3,
                       decoration: BoxDecoration(
-                        color: tokens.primary.withOpacity(0.6),
+                        color: tokens.primary.withValues(alpha: 0.6),
                         borderRadius: BorderRadius.circular(2),
                       ),
                     ),
@@ -345,7 +345,7 @@ class _CategoryHadithCard extends StatelessWidget {
                     vertical: 4,
                   ),
                   decoration: BoxDecoration(
-                    color: _getGradeColor(hadith.grade).withOpacity(0.1),
+                    color: _getGradeColor(hadith.grade).withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: Column(

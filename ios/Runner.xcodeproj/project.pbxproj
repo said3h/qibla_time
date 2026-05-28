@@ -8,22 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
+		313538E26FE40F4EED8BB50F /* azan2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 51A02C8EDBD81D6A7F81B39D /* azan2.caf */; };
 		331C808B294A63AB00263BE5 /* RunnerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331C807B294A618700263BE5 /* RunnerTests.swift */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
-		313538E26FE40F4EED8BB50F /* azan2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 51A02C8EDBD81D6A7F81B39D /* azan2.caf */; };
-		A1B2C3D4E5F60718293A4B5C /* azan_madinah.caf in Resources */ = {isa = PBXBuildFile; fileRef = C1D2E3F40516273849A5B6C7 /* azan_madinah.caf */; };
-		A2B3C4D5E6F708192A3B4C5D /* azan_madinah.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E2F30415263748596A7B8C9D /* azan_madinah.mp3 */; };
-		B1C2D3E4F5061728394A5B6C /* azan_makkah.caf in Resources */ = {isa = PBXBuildFile; fileRef = D1E2F3041526374859A6B7C8 /* azan_makkah.caf */; };
-		B2C3D4E5F60718293A4B5C6D /* azan_makkah.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F2031425364758697A8B9C0D /* azan_makkah.mp3 */; };
 		613AE3898F7193A80F3783AD /* azan3.caf in Resources */ = {isa = PBXBuildFile; fileRef = 194E7782EE28AD0B2B14E4B1 /* azan3.caf */; };
 		6A0B423D69EF9F4FAF6F435B /* azan4.caf in Resources */ = {isa = PBXBuildFile; fileRef = DA2A47E4947F5D88D1CFF3CA /* azan4.caf */; };
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
-		C3D4E5F6A7B8C9D0E1F2A3B5 /* StillVideoExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D4E5F6A7B8C9D0E1F2A3B4 /* StillVideoExporter.swift */; };
-		D4E5F6A7B8C9D0E1F2A3B4C6 /* VideoExportChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E5F6A7B8C9D0E1F2A3B4C5 /* VideoExportChannel.swift */; };
 		75F3BB44A638FA569BF64F8B /* azan6.caf in Resources */ = {isa = PBXBuildFile; fileRef = B6C7F1CE6BDE7A1A5B65585F /* azan6.caf */; };
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
+		9D42441AFC13DBD109389A8C /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71B463C3F178DE71C5950680 /* Pods_Runner.framework */; };
+		A1B2C3D4E5F60718293A4B5C /* azan_madinah.caf in Resources */ = {isa = PBXBuildFile; fileRef = C1D2E3F40516273849A5B6C7 /* azan_madinah.caf */; };
+		A2B3C4D5E6F708192A3B4C5D /* azan_madinah.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E2F30415263748596A7B8C9D /* azan_madinah.mp3 */; };
+		B1C2D3E4F5061728394A5B6C /* azan_makkah.caf in Resources */ = {isa = PBXBuildFile; fileRef = D1E2F3041526374859A6B7C8 /* azan_makkah.caf */; };
+		B2C3D4E5F60718293A4B5C6D /* azan_makkah.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F2031425364758697A8B9C0D /* azan_makkah.mp3 */; };
+		C3D4E5F6A7B8C9D0E1F2A3B5 /* StillVideoExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D4E5F6A7B8C9D0E1F2A3B4 /* StillVideoExporter.swift */; };
+		D4E5F6A7B8C9D0E1F2A3B4C6 /* VideoExportChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E5F6A7B8C9D0E1F2A3B4C5 /* VideoExportChannel.swift */; };
 		E5BF76CBDE230A2FFFD977BC /* azan1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 52E02B34FCD415E1EE6A6F00 /* azan1.caf */; };
 		EE6F70D1828E81416E113ADC /* azan5.caf in Resources */ = {isa = PBXBuildFile; fileRef = 36B4715CD21C2F5CAEDCFBCA /* azan5.caf */; };
 /* End PBXBuildFile section */
@@ -54,24 +55,18 @@
 /* Begin PBXFileReference section */
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
-		194E7782EE28AD0B2B14E4B1 /* azan3.caf */ = {isa = PBXFileReference; lastKnownFileType = audio.x-caf; path = azan3.caf; sourceTree = "<group>"; };
+		194E7782EE28AD0B2B14E4B1 /* azan3.caf */ = {isa = PBXFileReference; lastKnownFileType = "audio.x-caf"; path = azan3.caf; sourceTree = "<group>"; };
 		331C807B294A618700263BE5 /* RunnerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerTests.swift; sourceTree = "<group>"; };
 		331C8081294A63A400263BE5 /* RunnerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RunnerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		36B4715CD21C2F5CAEDCFBCA /* azan5.caf */ = {isa = PBXFileReference; lastKnownFileType = "audio.x-caf"; path = azan5.caf; sourceTree = "<group>"; };
 		3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AppFrameworkInfo.plist; path = Flutter/AppFrameworkInfo.plist; sourceTree = "<group>"; };
-		36B4715CD21C2F5CAEDCFBCA /* azan5.caf */ = {isa = PBXFileReference; lastKnownFileType = audio.x-caf; path = azan5.caf; sourceTree = "<group>"; };
-		51A02C8EDBD81D6A7F81B39D /* azan2.caf */ = {isa = PBXFileReference; lastKnownFileType = audio.x-caf; path = azan2.caf; sourceTree = "<group>"; };
-		52E02B34FCD415E1EE6A6F00 /* azan1.caf */ = {isa = PBXFileReference; lastKnownFileType = audio.x-caf; path = azan1.caf; sourceTree = "<group>"; };
-		C1D2E3F40516273849A5B6C7 /* azan_madinah.caf */ = {isa = PBXFileReference; lastKnownFileType = audio.x-caf; path = azan_madinah.caf; sourceTree = "<group>"; };
-		E2F30415263748596A7B8C9D /* azan_madinah.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = azan_madinah.mp3; sourceTree = "<group>"; };
-		D1E2F3041526374859A6B7C8 /* azan_makkah.caf */ = {isa = PBXFileReference; lastKnownFileType = audio.x-caf; path = azan_makkah.caf; sourceTree = "<group>"; };
-		F2031425364758697A8B9C0D /* azan_makkah.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = azan_makkah.mp3; sourceTree = "<group>"; };
+		48EBE7709420F47F961BF1DB /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
+		51A02C8EDBD81D6A7F81B39D /* azan2.caf */ = {isa = PBXFileReference; lastKnownFileType = "audio.x-caf"; path = azan2.caf; sourceTree = "<group>"; };
+		52E02B34FCD415E1EE6A6F00 /* azan1.caf */ = {isa = PBXFileReference; lastKnownFileType = "audio.x-caf"; path = azan1.caf; sourceTree = "<group>"; };
+		71B463C3F178DE71C5950680 /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Runner-Bridging-Header.h"; sourceTree = "<group>"; };
 		74858FAE1ED2DC5600515810 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C3D4E5F6A7B8C9D0E1F2A3B4 /* StillVideoExporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StillVideoExporter.swift; sourceTree = "<group>"; };
-		D4E5F6A7B8C9D0E1F2A3B4C5 /* VideoExportChannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoExportChannel.swift; sourceTree = "<group>"; };
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = Flutter/Release.xcconfig; sourceTree = "<group>"; };
-		B6C7F1CE6BDE7A1A5B65585F /* azan6.caf */ = {isa = PBXFileReference; lastKnownFileType = audio.x-caf; path = azan6.caf; sourceTree = "<group>"; };
-		DA2A47E4947F5D88D1CFF3CA /* azan4.caf */ = {isa = PBXFileReference; lastKnownFileType = audio.x-caf; path = azan4.caf; sourceTree = "<group>"; };
 		9740EEB21CF90195004384FC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = Flutter/Debug.xcconfig; sourceTree = "<group>"; };
 		9740EEB31CF90195004384FC /* Generated.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Generated.xcconfig; path = Flutter/Generated.xcconfig; sourceTree = "<group>"; };
 		97C146EE1CF9000F007C117D /* Runner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Runner.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -79,6 +74,16 @@
 		97C146FD1CF9000F007C117D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		97C147001CF9000F007C117D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B45039829E26942A5CC0B2BB /* Pods-Runner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"; sourceTree = "<group>"; };
+		B6C7F1CE6BDE7A1A5B65585F /* azan6.caf */ = {isa = PBXFileReference; lastKnownFileType = "audio.x-caf"; path = azan6.caf; sourceTree = "<group>"; };
+		BA0A0D4447624B82F7B6226B /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
+		C1D2E3F40516273849A5B6C7 /* azan_madinah.caf */ = {isa = PBXFileReference; lastKnownFileType = "audio.x-caf"; path = azan_madinah.caf; sourceTree = "<group>"; };
+		C3D4E5F6A7B8C9D0E1F2A3B4 /* StillVideoExporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StillVideoExporter.swift; sourceTree = "<group>"; };
+		D1E2F3041526374859A6B7C8 /* azan_makkah.caf */ = {isa = PBXFileReference; lastKnownFileType = "audio.x-caf"; path = azan_makkah.caf; sourceTree = "<group>"; };
+		D4E5F6A7B8C9D0E1F2A3B4C5 /* VideoExportChannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoExportChannel.swift; sourceTree = "<group>"; };
+		DA2A47E4947F5D88D1CFF3CA /* azan4.caf */ = {isa = PBXFileReference; lastKnownFileType = "audio.x-caf"; path = azan4.caf; sourceTree = "<group>"; };
+		E2F30415263748596A7B8C9D /* azan_madinah.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = azan_madinah.mp3; sourceTree = "<group>"; };
+		F2031425364758697A8B9C0D /* azan_makkah.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = azan_makkah.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,18 +91,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D42441AFC13DBD109389A8C /* Pods_Runner.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2E216E733DF3AA08FA5E93C7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B45039829E26942A5CC0B2BB /* Pods-Runner.debug.xcconfig */,
+				BA0A0D4447624B82F7B6226B /* Pods-Runner.release.xcconfig */,
+				48EBE7709420F47F961BF1DB /* Pods-Runner.profile.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		331C8082294A63A400263BE5 /* RunnerTests */ = {
 			isa = PBXGroup;
 			children = (
 				331C807B294A618700263BE5 /* RunnerTests.swift */,
 			);
 			path = RunnerTests;
+			sourceTree = "<group>";
+		};
+		6900A68F0F8ADA4DF9DDE2AB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				71B463C3F178DE71C5950680 /* Pods_Runner.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		9740EEB11CF90186004384FC /* Flutter */ = {
@@ -118,6 +142,8 @@
 				97C146F01CF9000F007C117D /* Runner */,
 				97C146EF1CF9000F007C117D /* Products */,
 				331C8082294A63A400263BE5 /* RunnerTests */,
+				2E216E733DF3AA08FA5E93C7 /* Pods */,
+				6900A68F0F8ADA4DF9DDE2AB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -181,12 +207,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 97C147051CF9000F007C117D /* Build configuration list for PBXNativeTarget "Runner" */;
 			buildPhases = (
+				2597F19D42D792B25D3B8B1E /* [CP] Check Pods Manifest.lock */,
 				9740EEB61CF901F6004384FC /* Run Script */,
 				97C146EA1CF9000F007C117D /* Sources */,
 				97C146EB1CF9000F007C117D /* Frameworks */,
 				97C146EC1CF9000F007C117D /* Resources */,
 				9705A1C41CF9048500538489 /* Embed Frameworks */,
 				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
+				DFDA4A7569574C319A9C2E9D /* [CP] Embed Pods Frameworks */,
+				9E46A26263460D2DDD2093FD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -268,6 +297,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		2597F19D42D792B25D3B8B1E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Runner-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		3B06AD1E1E4923F5004D2608 /* Thin Binary */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -298,6 +349,40 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build";
+		};
+		9E46A26263460D2DDD2093FD /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DFDA4A7569574C319A9C2E9D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -408,20 +493,19 @@
 			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+					CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
+					CODE_SIGN_STYLE = Automatic;
+					CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+					DEVELOPMENT_TEAM = 4XJTFN47FF;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.qiblatime.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qiblatime.mobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				CODE_SIGNING_ALLOWED = NO;
-				CODE_SIGNING_REQUIRED = NO;
-				CODE_SIGNING_IDENTITY = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -434,9 +518,10 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4XJTFN47FF;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.qiblatime.app.RunnerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qiblatime.mobile.RunnerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -451,9 +536,10 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4XJTFN47FF;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.qiblatime.app.RunnerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qiblatime.mobile.RunnerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Runner.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Runner";
@@ -466,9 +552,10 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4XJTFN47FF;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.qiblatime.app.RunnerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qiblatime.mobile.RunnerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Runner.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Runner";
@@ -504,6 +591,9 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_IDENTITY = "";
+				CODE_SIGNING_REQUIRED = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -527,9 +617,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				CODE_SIGNING_ALLOWED = NO;
-				CODE_SIGNING_REQUIRED = NO;
-				CODE_SIGNING_IDENTITY = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -564,6 +651,9 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_IDENTITY = "";
+				CODE_SIGNING_REQUIRED = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -580,9 +670,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				CODE_SIGNING_ALLOWED = NO;
-				CODE_SIGNING_REQUIRED = NO;
-				CODE_SIGNING_IDENTITY = "";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -596,17 +683,19 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9740EEB21CF90195004384FC /* Debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
-				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+					ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+					CLANG_ENABLE_MODULES = YES;
+					CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
+					CODE_SIGN_STYLE = Automatic;
+					CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+					DEVELOPMENT_TEAM = 4XJTFN47FF;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.qiblatime.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qiblatime.mobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -620,20 +709,19 @@
 			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+					CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
+					CODE_SIGN_STYLE = Automatic;
+					CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+					DEVELOPMENT_TEAM = 4XJTFN47FF;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.qiblatime.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qiblatime.mobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				CODE_SIGNING_ALLOWED = NO;
-				CODE_SIGNING_REQUIRED = NO;
-				CODE_SIGNING_IDENTITY = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -674,6 +762,7 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-	};
+
+		};
 	rootObject = 97C146E61CF9000F007C117D /* Project object */;
 }

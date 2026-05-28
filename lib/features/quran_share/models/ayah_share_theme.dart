@@ -71,7 +71,7 @@ class AyahShareThemeData {
       canvasBackgroundColor: transparentBackground
           ? Colors.transparent
           : tokens.bgPage,
-      shadowColor: Colors.black.withOpacity(0.18),
+      shadowColor: Colors.black.withValues(alpha: 0.18),
       accentColor: tokens.primary,
       primaryTextColor: tokens.textPrimary,
       secondaryTextColor: tokens.textSecondary,

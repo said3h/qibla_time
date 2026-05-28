@@ -31,7 +31,6 @@ void main() {
     test('allows QUL preview client without Quran Foundation auth headers', () {
       const config = TafsirConfig(
         enabled: true,
-        internalBuild: true,
         provider: 'qul_preview',
         baseUrl: 'https://qul.tarteel.ai',
       );
@@ -39,7 +38,7 @@ void main() {
       expect(config.canCreateApiClient, isTrue);
       expect(config.isQulPreview, isTrue);
       expect(config.normalizedDefaultResourceId, '268');
-      expect(config.internalBuild, isTrue);
+      expect(config.internalBuild, isFalse);
     });
 
     test('accepts complete explicit configuration', () {
@@ -79,6 +78,7 @@ void main() {
       expect(qulTafsirResourceForLanguage('fr')?.resourceId, '259');
       expect(qulTafsirResourceForLanguage('ru')?.resourceId, '262');
       expect(qulTafsirResourceForLanguage('it')?.resourceId, '253');
+      expect(qulTafsirResourceForLanguage('id')?.resourceId, '260');
       expect(qulTafsirResourceForLanguage('de'), isNull);
       expect(qulTafsirResourceForLanguage('pt'), isNull);
     });

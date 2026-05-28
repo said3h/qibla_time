@@ -5,6 +5,7 @@ import 'package:share_plus/share_plus.dart';
 
 import '../../../core/services/logger_service.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../../core/utils/share_sheet_origin.dart';
 import '../../../l10n/l10n.dart';
 import '../../quran/models/quran_models.dart';
 import '../../shared_share/widgets/content_share_preview_sheet.dart';
@@ -299,6 +300,7 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
           includeArabic: _includeArabic,
           includeTranslation: _includeTranslation,
         ),
+        sharePositionOrigin: qiblaShareSheetOrigin,
       );
       if (!mounted) return;
       Navigator.of(context).pop();

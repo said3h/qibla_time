@@ -677,11 +677,11 @@ class _HeatmapCard extends StatelessWidget {
       case 0:
         return tokens.bgSurface2;
       case 1:
-        return tokens.primary.withOpacity(0.20);
+        return tokens.primary.withValues(alpha: 0.20);
       case 2:
-        return tokens.primary.withOpacity(0.40);
+        return tokens.primary.withValues(alpha: 0.40);
       case 3:
-        return tokens.primary.withOpacity(0.65);
+        return tokens.primary.withValues(alpha: 0.65);
       default:
         return tokens.primary;
     }
@@ -715,9 +715,9 @@ class _HeatCell extends StatelessWidget {
 
   Color _color() {
     if (day.completed == 0) return tokens.bgSurface2;
-    if (day.completed <= 1) return tokens.primary.withOpacity(0.20);
-    if (day.completed <= 2) return tokens.primary.withOpacity(0.40);
-    if (day.completed <= 4) return tokens.primary.withOpacity(0.65);
+    if (day.completed <= 1) return tokens.primary.withValues(alpha: 0.20);
+    if (day.completed <= 2) return tokens.primary.withValues(alpha: 0.40);
+    if (day.completed <= 4) return tokens.primary.withValues(alpha: 0.65);
     return tokens.primary;
   }
 }
@@ -835,8 +835,8 @@ class _PrayerBar extends StatelessWidget {
 
   Color _barColor() {
     if (ratio >= 0.8) return tokens.primary;
-    if (ratio >= 0.5) return tokens.primary.withOpacity(0.7);
-    return tokens.primary.withOpacity(0.4);
+    if (ratio >= 0.5) return tokens.primary.withValues(alpha: 0.7);
+    return tokens.primary.withValues(alpha: 0.4);
   }
 }
 
@@ -1236,9 +1236,9 @@ class _StatItem extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: color.withOpacity(0.3)),
+        border: Border.all(color: color.withValues(alpha: 0.3)),
       ),
       child: Column(
         children: [

@@ -152,7 +152,7 @@ class _DuaCategoryDetailScreenState
                       width: 40,
                       height: 3,
                       decoration: BoxDecoration(
-                        color: tokens.primary.withOpacity(0.6),
+                        color: tokens.primary.withValues(alpha: 0.6),
                         borderRadius: BorderRadius.circular(2),
                       ),
                     ),
@@ -301,7 +301,7 @@ class _DuaCard extends StatelessWidget {
                                 dua.source!,
                                 style: GoogleFonts.dmSans(
                                   fontSize: 9,
-                                  color: tokens.primary.withOpacity(0.8),
+                                  color: tokens.primary.withValues(alpha: 0.8),
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),

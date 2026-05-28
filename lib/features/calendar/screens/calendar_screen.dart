@@ -142,7 +142,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
         boxShadow: [
           BoxShadow(
             color:
-                tokens.primary.withOpacity(_isLightTheme(tokens) ? 0.08 : 0.16),
+                tokens.primary.withValues(alpha: _isLightTheme(tokens) ? 0.08 : 0.16),
             blurRadius: 18,
             offset: const Offset(0, 8),
           ),
@@ -301,7 +301,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
     final foreground =
         isSelected ? _foregroundFor(tokens.primary) : tokens.textPrimary;
     final secondary = isSelected
-        ? _foregroundFor(tokens.primary).withOpacity(0.78)
+        ? _foregroundFor(tokens.primary).withValues(alpha: 0.78)
         : isCurrentMonth
             ? tokens.textSecondary
             : tokens.textMuted;
@@ -326,7 +326,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
     }
 
     return Material(
-      color: background.withOpacity(isCurrentMonth || isSelected ? 1 : 0.55),
+      color: background.withValues(alpha: isCurrentMonth || isSelected ? 1 : 0.55),
       borderRadius: BorderRadius.circular(14),
       child: InkWell(
         onTap: () => _selectDate(date),
@@ -346,7 +346,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 '${date.day}',
                 style: TextStyle(
                   color: foreground
-                      .withOpacity(isCurrentMonth || isSelected ? 1 : 0.45),
+                      .withValues(alpha: isCurrentMonth || isSelected ? 1 : 0.45),
                   fontSize: 16,
                   fontWeight: FontWeight.w800,
                   height: 1,
@@ -357,7 +357,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 '${hijri.hDay}',
                 style: TextStyle(
                   color: secondary
-                      .withOpacity(isCurrentMonth || isSelected ? 1 : 0.5),
+                      .withValues(alpha: isCurrentMonth || isSelected ? 1 : 0.5),
                   fontSize: 10,
                   fontWeight: FontWeight.w700,
                   height: 1,
@@ -687,7 +687,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
   }
 
   Color _blend(Color foreground, Color background, double opacity) {
-    return Color.alphaBlend(foreground.withOpacity(opacity), background);
+    return Color.alphaBlend(foreground.withValues(alpha: opacity), background);
   }
 
   Color _surfaceCardColor(QiblaTokens tokens) {

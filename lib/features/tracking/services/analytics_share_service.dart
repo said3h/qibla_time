@@ -2,13 +2,13 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
-import 'package:cross_file/cross_file.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../core/theme/app_theme.dart';
+import '../../../core/utils/share_sheet_origin.dart';
 import '../../../l10n/l10n.dart';
 import '../models/tracking_models.dart';
 
@@ -31,12 +31,16 @@ class AnalyticsShareService {
     await Share.shareXFiles(
       [XFile(file.path)],
       text: _shareText(summary, tracking),
+      sharePositionOrigin: qiblaShareSheetOrigin,
     );
   }
 
   Future<void> shareWeeklyProgressAsText(TrackingState tracking) {
     final summary = tracking.currentWeekSummary;
-    return Share.share(_shareText(summary, tracking));
+    return Share.share(
+      _shareText(summary, tracking),
+      sharePositionOrigin: qiblaShareSheetOrigin,
+    );
   }
 
   String _shareText(WeeklySummary summary, TrackingState tracking) {
@@ -125,21 +129,21 @@ class AnalyticsShareService {
     _drawStatCard(
       canvas,
       tokens: tokens,
-      rect: Rect.fromLTWH(92, statsTop, 280, 172),
+      rect: const Rect.fromLTWH(92, statsTop, 280, 172),
       value: '${summary.prayersCompleted}/${summary.maxPossible}',
       label: l10n.analyticsShareWeeklyPrayersLabel,
     );
     _drawStatCard(
       canvas,
       tokens: tokens,
-      rect: Rect.fromLTWH(400, statsTop, 280, 172),
+      rect: const Rect.fromLTWH(400, statsTop, 280, 172),
       value: summary.strongestDay.shortLabel,
       label: l10n.analyticsShareBestDayLabel(summary.strongestDay.completed),
     );
     _drawStatCard(
       canvas,
       tokens: tokens,
-      rect: Rect.fromLTWH(708, statsTop, 280, 172),
+      rect: const Rect.fromLTWH(708, statsTop, 280, 172),
       value: '${summary.fullDays}',
       label: l10n.analyticsShareFullDaysLabel,
     );

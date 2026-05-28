@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/services/logger_service.dart';
 import '../../../core/services/settings_service.dart';
 import '../models/tafsir_entry.dart';
 import '../services/tafsir_api_client.dart';
@@ -25,10 +26,6 @@ final tafsirApiClientProvider = Provider<TafsirApiClient?>((ref) {
   }
 
   if (config.isQulPreview) {
-    if (!config.internalBuild) {
-      _debugLogConfig(config, 'qul_preview_internal_flag_missing');
-      return null;
-    }
     final baseUri = _qulPreviewBaseUri(config);
     _debugLogConfig(config, 'client_created_qul_preview baseUri=$baseUri');
     return TafsirApiClient(
@@ -59,15 +56,19 @@ Uri _qulPreviewBaseUri(TafsirConfig config) {
 }
 
 void _debugLogConfig(TafsirConfig config, String event) {
-  if (!kDebugMode) return;
-  debugPrint(
-    '[QuranTafsirApi] $event enabled=${config.enabled} '
-    'provider=${config.normalizedProvider} isQul=${config.isQulPreview} '
-    'internalBuild=${config.internalBuild} '
-    'baseUri=${config.baseUri} defaultResourceId='
-    '${config.normalizedDefaultResourceId} '
-    'canCreateClient=${config.canCreateApiClient}',
-  );
+  final message = '[QuranTafsirApi] $event enabled=${config.enabled} '
+      'provider=${config.normalizedProvider} isQul=${config.isQulPreview} '
+      'internalBuild=${config.internalBuild} '
+      'baseUri=${config.baseUri} defaultResourceId='
+      '${config.normalizedDefaultResourceId} '
+      'canCreateClient=${config.canCreateApiClient}';
+  if (kDebugMode) {
+    debugPrint(message);
+    return;
+  }
+  if (config.internalBuild || config.isQulPreview) {
+    AppLogger.info(message);
+  }
 }
 
 final tafsirCacheServiceProvider = Provider<TafsirCacheService>((ref) {

@@ -534,10 +534,10 @@ class _DuaCard extends StatelessWidget {
                   vertical: 6,
                 ),
                 decoration: BoxDecoration(
-                  color: tokens.primary.withOpacity(0.08),
+                  color: tokens.primary.withValues(alpha: 0.08),
                   borderRadius: BorderRadius.circular(999),
                   border: Border.all(
-                    color: tokens.primary.withOpacity(0.16),
+                    color: tokens.primary.withValues(alpha: 0.16),
                   ),
                 ),
                 child: Column(

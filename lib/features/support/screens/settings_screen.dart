@@ -20,6 +20,7 @@ import '../../../core/models/adhan_model.dart';
 import '../../../core/theme/accessibility_provider.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/theme/theme_provider.dart';
+import '../../../core/utils/share_sheet_origin.dart';
 import '../../../l10n/l10n.dart';
 import '../../dhikr/services/dhikr_service.dart';
 import '../../hafiz/services/hafiz_service.dart';
@@ -1084,7 +1085,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
                     .read(cloudSyncServiceProvider)
                     .createBackupSnapshot(ref.read(hafizServiceProvider));
                 if (!mounted) return;
-                await Share.share(snapshot.toJsonString());
+                await Share.share(
+                  snapshot.toJsonString(),
+                  sharePositionOrigin: qiblaShareSheetOrigin,
+                );
                 ref.invalidate(_lastBackupProvider);
               },
             ),

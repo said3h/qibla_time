@@ -96,14 +96,14 @@ class _HadithOfflineScreenState extends ConsumerState<HadithOfflineScreen> {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            tokens.primary.withOpacity(0.15),
-            tokens.primary.withOpacity(0.05),
+            tokens.primary.withValues(alpha: 0.15),
+            tokens.primary.withValues(alpha: 0.05),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: tokens.primary.withOpacity(0.3)),
+        border: Border.all(color: tokens.primary.withValues(alpha: 0.3)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -212,14 +212,14 @@ class _HadithOfflineScreenState extends ConsumerState<HadithOfflineScreen> {
       decoration: BoxDecoration(
         color: tokens.bgSurface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: tokens.primary.withOpacity(0.3)),
+        border: Border.all(color: tokens.primary.withValues(alpha: 0.3)),
       ),
       child: Row(
         children: [
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: Colors.green.withOpacity(0.1),
+              color: Colors.green.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(8),
             ),
             child: const Icon(

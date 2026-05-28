@@ -446,7 +446,7 @@ class DailyHadithWidget extends ConsumerWidget {
   }
 
   Color _blend(Color foreground, Color background, double opacity) {
-    return Color.alphaBlend(foreground.withOpacity(opacity), background);
+    return Color.alphaBlend(foreground.withValues(alpha: opacity), background);
   }
 
   Color _accentBackground(QiblaTokens tokens, Color accent) {
@@ -456,8 +456,8 @@ class DailyHadithWidget extends ConsumerWidget {
 
   Color _accentForeground(QiblaTokens tokens, Color accent) {
     return _isLightTheme(tokens)
-        ? Color.alphaBlend(Colors.black.withOpacity(0.26), accent)
-        : Color.alphaBlend(Colors.white.withOpacity(0.14), accent);
+        ? Color.alphaBlend(Colors.black.withValues(alpha: 0.26), accent)
+        : Color.alphaBlend(Colors.white.withValues(alpha: 0.14), accent);
   }
 
   Color _getCollectionColor(String collection) {

@@ -128,6 +128,12 @@ const qulTafsirResourcesByLanguage = <String, QulTafsirResource>{
     name: 'Italian Al-Mukhtasar in interpreting the Noble Quran',
     notes: 'QUL preview, Italian Al-Mukhtasar.',
   ),
+  'id': QulTafsirResource(
+    languageCode: 'id',
+    resourceId: '260',
+    name: 'Indonesian Al-Mukhtasar in Interpreting the Noble Quran',
+    notes: 'QUL preview, Indonesian Al-Mukhtasar.',
+  ),
 };
 
 QulTafsirResource? qulTafsirResourceForLanguage(String languageCode) {

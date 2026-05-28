@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../core/theme/app_theme.dart';
+import '../../../core/utils/share_sheet_origin.dart';
 import '../../../l10n/l10n.dart';
 import '../../quran/models/quran_models.dart';
 import '../models/ayah_share_data.dart';
@@ -148,6 +149,7 @@ class AyahShareService {
         includeArabic: includeArabic,
         includeTranslation: includeTranslation,
       ),
+      sharePositionOrigin: qiblaShareSheetOrigin,
     );
   }
 
@@ -164,6 +166,7 @@ class AyahShareService {
         includeArabic: includeArabic,
         includeTranslation: includeTranslation,
       ),
+      sharePositionOrigin: qiblaShareSheetOrigin,
     );
   }
 
@@ -192,6 +195,7 @@ class AyahShareService {
         includeArabic: includeArabic,
         includeTranslation: includeTranslation,
       ),
+      sharePositionOrigin: qiblaShareSheetOrigin,
     );
   }
 
@@ -220,6 +224,7 @@ class AyahShareService {
         includeArabic: includeArabic,
         includeTranslation: includeTranslation,
       ),
+      sharePositionOrigin: qiblaShareSheetOrigin,
     );
   }
 

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
+import '../../../core/services/logger_service.dart';
 import '../models/tafsir_entry.dart';
 
 enum TafsirApiSource {
@@ -64,7 +65,8 @@ class TafsirApiClient {
         'QuranTafsirResponse',
         'url=$uri statusCode=${response.statusCode} '
             'bytes=${response.bodyBytes.length} '
-            'contentType=${response.headers['content-type'] ?? 'unknown'}',
+            'contentType=${response.headers['content-type'] ?? 'unknown'} '
+            'hasBody=${response.bodyBytes.isNotEmpty}',
       );
 
       if (response.statusCode != 200) {
@@ -327,6 +329,7 @@ class TafsirApiClient {
       'QuranTafsirParse',
       'qul headingFound=${previewHeading != null} '
           'tafsirDivFound=${textHtml != null} textLength=${text.length} '
+          'hasContent=${text.isNotEmpty} '
           'requestedAyah=$surahNumber:$ayahNumber '
           'detectedAyah=${detectedAyahNumber ?? 'unknown'}',
     );
@@ -546,7 +549,13 @@ class TafsirApiClient {
   }
 
   void _debugLog(String tag, String message) {
-    if (!kDebugMode) return;
-    debugPrint('[$tag] $message');
+    final logMessage = '[$tag] $message';
+    if (kDebugMode) {
+      debugPrint(logMessage);
+      return;
+    }
+    if (source == TafsirApiSource.qulPreview) {
+      AppLogger.info(logMessage);
+    }
   }
 }

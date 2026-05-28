@@ -87,14 +87,14 @@ class _FocusModeScreenState extends ConsumerState<FocusModeScreen>
                   children: [
                     Icon(
                       Icons.do_not_disturb_on,
-                      color: Colors.white.withOpacity(0.5),
+                      color: Colors.white.withValues(alpha: 0.5),
                       size: 16,
                     ),
                     const SizedBox(width: 8),
                     Text(
                       l10n.focusModeDndActive,
                       style: TextStyle(
-                        color: Colors.white.withOpacity(0.5),
+                        color: Colors.white.withValues(alpha: 0.5),
                         fontSize: 10,
                         letterSpacing: 1.2,
                       ),
@@ -121,7 +121,7 @@ class _FocusModeScreenState extends ConsumerState<FocusModeScreen>
                     Text(
                       l10n.focusModeTitle,
                       style: TextStyle(
-                        color: Colors.white.withOpacity(0.3),
+                        color: Colors.white.withValues(alpha: 0.3),
                         fontSize: 24,
                         letterSpacing: 4,
                         fontWeight: FontWeight.w300,
@@ -141,7 +141,7 @@ class _FocusModeScreenState extends ConsumerState<FocusModeScreen>
                       Text(
                         l10n.focusModeSujudCount,
                         style: TextStyle(
-                          color: Colors.teal.withOpacity(0.7),
+                          color: Colors.teal.withValues(alpha: 0.7),
                           fontSize: 20,
                           fontWeight: FontWeight.w500,
                         ),
@@ -151,7 +151,7 @@ class _FocusModeScreenState extends ConsumerState<FocusModeScreen>
                       Text(
                         l10n.focusModeDndHint,
                         style: TextStyle(
-                          color: Colors.white.withOpacity(0.22),
+                          color: Colors.white.withValues(alpha: 0.22),
                           fontSize: 10,
                           letterSpacing: 1.4,
                         ),
@@ -192,19 +192,19 @@ class _FocusModeScreenState extends ConsumerState<FocusModeScreen>
                                   height: 68,
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
-                                    color: Colors.white.withOpacity(
-                                      _isExiting ? 0.08 : 0.05,
+                                    color: Colors.white.withValues(
+                                      alpha: _isExiting ? 0.08 : 0.05,
                                     ),
                                     border: Border.all(
-                                      color: Colors.white.withOpacity(
-                                        _isExiting ? 0.22 : 0.12,
+                                      color: Colors.white.withValues(
+                                        alpha: _isExiting ? 0.22 : 0.12,
                                       ),
                                     ),
                                   ),
                                   child: Icon(
                                     Icons.power_settings_new,
-                                    color: Colors.white.withOpacity(
-                                      _isExiting ? 0.96 : 0.52,
+                                    color: Colors.white.withValues(
+                                      alpha: _isExiting ? 0.96 : 0.52,
                                     ),
                                     size: 30,
                                   ),
@@ -220,7 +220,7 @@ class _FocusModeScreenState extends ConsumerState<FocusModeScreen>
                             ? l10n.focusModeReleaseToCancel
                             : l10n.focusModeHoldToExit,
                         style: TextStyle(
-                          color: Colors.white.withOpacity(0.4),
+                          color: Colors.white.withValues(alpha: 0.4),
                           fontSize: 14,
                         ),
                       ),
@@ -253,14 +253,14 @@ class _HoldRingPainter extends CustomPainter {
     final rect = Rect.fromCircle(center: center, radius: radius);
 
     final trackPaint = Paint()
-      ..color = Colors.white.withOpacity(0.10)
+      ..color = Colors.white.withValues(alpha: 0.10)
       ..style = PaintingStyle.stroke
       ..strokeWidth = strokeWidth
       ..strokeCap = StrokeCap.round;
 
     final progressPaint = Paint()
       ..color = Color.lerp(
-        Colors.white.withOpacity(0.45),
+        Colors.white.withValues(alpha: 0.45),
         Colors.white,
         progress,
       )!

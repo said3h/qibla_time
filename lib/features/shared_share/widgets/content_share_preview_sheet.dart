@@ -231,8 +231,8 @@ class ShareSelectionChip extends StatelessWidget {
       selected: selected,
       onSelected: enabled ? (_) => onSelected() : null,
       backgroundColor: tokens.bgSurface,
-      disabledColor: tokens.bgSurface.withOpacity(0.65),
-      selectedColor: tokens.primary.withOpacity(0.14),
+      disabledColor: tokens.bgSurface.withValues(alpha: 0.65),
+      selectedColor: tokens.primary.withValues(alpha: 0.14),
       side: BorderSide(
         color: selected ? tokens.primary : tokens.border,
       ),
