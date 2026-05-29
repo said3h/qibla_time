@@ -20,7 +20,7 @@ void main() {
       expect(await service.getCalculationMethod(), 1);
       expect(await service.getMadhab(), 0);
       expect(await service.getQuranTajweedEnabled(), isFalse);
-      expect(await service.getTafsirEnabled(), isFalse);
+      expect(await service.getTafsirEnabled(), isTrue);
     });
 
     test('persists settings through the cached StorageService preferences',
