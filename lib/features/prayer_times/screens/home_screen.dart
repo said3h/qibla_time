@@ -2199,7 +2199,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                     width: 42,
                                     height: 42,
                                     decoration: BoxDecoration(
-                                      color: tokens.primary.withValues(alpha: 0.12),
+                                      color: tokens.primary
+                                          .withValues(alpha: 0.12),
                                       borderRadius: BorderRadius.circular(16),
                                     ),
                                     child: Icon(
@@ -2680,33 +2681,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     GestureDetector(
                       behavior: HitTestBehavior.opaque,
                       onTap: () {
-                        final wasMarked = isDone;
                         HapticFeedback.lightImpact();
                         ref
                             .read(prayerTrackingProvider.notifier)
                             .togglePrayer(prayer.$2, date: date);
-                        final l10n = AppLocalizations.of(context);
-                        ScaffoldMessenger.of(context)
-                          ..hideCurrentSnackBar()
-                          ..showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                wasMarked
-                                    ? l10n.homePrayerToggledUndone
-                                    : l10n.homePrayerToggledDone,
-                              ),
-                              duration: const Duration(seconds: 3),
-                              action: SnackBarAction(
-                                label: l10n.commonUndo,
-                                onPressed: () {
-                                  HapticFeedback.lightImpact();
-                                  ref
-                                      .read(prayerTrackingProvider.notifier)
-                                      .togglePrayer(prayer.$2, date: date);
-                                },
-                              ),
-                            ),
-                          );
                       },
                       child: SizedBox(
                         width: 44,
@@ -3064,36 +3042,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         GestureDetector(
                           behavior: HitTestBehavior.opaque,
                           onTap: () {
-                            final wasMarked = isDone;
                             HapticFeedback.lightImpact();
                             ref
                                 .read(prayerTrackingProvider.notifier)
                                 .togglePrayer(prayer.$1.key, date: date);
-                            final l10n = AppLocalizations.of(context);
-                            ScaffoldMessenger.of(context)
-                              ..hideCurrentSnackBar()
-                              ..showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    wasMarked
-                                        ? l10n.homePrayerToggledUndone
-                                        : l10n.homePrayerToggledDone,
-                                  ),
-                                  duration: const Duration(seconds: 3),
-                                  action: SnackBarAction(
-                                    label: l10n.commonUndo,
-                                    onPressed: () {
-                                      HapticFeedback.lightImpact();
-                                      ref
-                                          .read(prayerTrackingProvider.notifier)
-                                          .togglePrayer(
-                                            prayer.$1.key,
-                                            date: date,
-                                          );
-                                    },
-                                  ),
-                                ),
-                              );
                           },
                           child: SizedBox(
                             width: 44,
