@@ -6298,24 +6298,6 @@ abstract class AppLocalizations {
   /// **'Permiso no concedido. Vuelve al paso anterior para activarlo.'**
   String get onboardingNotificationsPermissionWarning;
 
-  /// No description provided for @commonUndo.
-  ///
-  /// In es, this message translates to:
-  /// **'Deshacer'**
-  String get commonUndo;
-
-  /// No description provided for @homePrayerToggledDone.
-  ///
-  /// In es, this message translates to:
-  /// **'Oración marcada como rezada'**
-  String get homePrayerToggledDone;
-
-  /// No description provided for @homePrayerToggledUndone.
-  ///
-  /// In es, this message translates to:
-  /// **'Oración desmarcada'**
-  String get homePrayerToggledUndone;
-
   /// No description provided for @tafsirPanelTitle.
   ///
   /// In es, this message translates to:

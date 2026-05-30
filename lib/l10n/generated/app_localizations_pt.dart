@@ -3615,15 +3615,6 @@ class AppLocalizationsPt extends AppLocalizations {
       'Permissão não concedida. Volte ao passo anterior para ativá-la.';
 
   @override
-  String get commonUndo => 'Desfazer';
-
-  @override
-  String get homePrayerToggledDone => 'Oração marcada como rezada';
-
-  @override
-  String get homePrayerToggledUndone => 'Oração desmarcada';
-
-  @override
   String get tafsirPanelTitle => 'Tafsir';
 
   @override

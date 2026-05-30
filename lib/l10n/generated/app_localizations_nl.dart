@@ -3617,15 +3617,6 @@ class AppLocalizationsNl extends AppLocalizations {
       'Toestemming niet verleend. Ga terug naar de vorige stap om het in te schakelen.';
 
   @override
-  String get commonUndo => 'Ongedaan maken';
-
-  @override
-  String get homePrayerToggledDone => 'Gebed gemarkeerd als gebeden';
-
-  @override
-  String get homePrayerToggledUndone => 'Gebed-markering verwijderd';
-
-  @override
   String get tafsirPanelTitle => 'Tafsir';
 
   @override

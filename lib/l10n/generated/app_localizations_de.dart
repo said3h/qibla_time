@@ -3624,15 +3624,6 @@ class AppLocalizationsDe extends AppLocalizations {
       'Berechtigung nicht erteilt. Gehe zum vorherigen Schritt zurück, um sie zu aktivieren.';
 
   @override
-  String get commonUndo => 'Rückgängig';
-
-  @override
-  String get homePrayerToggledDone => 'Gebet als gebetet markiert';
-
-  @override
-  String get homePrayerToggledUndone => 'Gebet-Markierung aufgehoben';
-
-  @override
   String get tafsirPanelTitle => 'Tafsir';
 
   @override

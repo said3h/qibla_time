@@ -3631,15 +3631,6 @@ class AppLocalizationsIt extends AppLocalizations {
       'Autorizzazione non concessa. Torna al passaggio precedente per attivarla.';
 
   @override
-  String get commonUndo => 'Annulla';
-
-  @override
-  String get homePrayerToggledDone => 'Preghiera segnata come eseguita';
-
-  @override
-  String get homePrayerToggledUndone => 'Preghiera non contrassegnata';
-
-  @override
   String get tafsirPanelTitle => 'Tafsir';
 
   @override

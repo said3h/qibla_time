@@ -3608,15 +3608,6 @@ class AppLocalizationsId extends AppLocalizations {
       'Izin belum diberikan. Kembali ke langkah sebelumnya untuk mengaktifkannya.';
 
   @override
-  String get commonUndo => 'Batalkan';
-
-  @override
-  String get homePrayerToggledDone => 'Shalat ditandai sebagai dilaksanakan';
-
-  @override
-  String get homePrayerToggledUndone => 'Tanda shalat dihapus';
-
-  @override
   String get tafsirPanelTitle => 'Tafsir';
 
   @override

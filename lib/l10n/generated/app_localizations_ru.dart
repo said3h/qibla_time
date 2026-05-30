@@ -3620,15 +3620,6 @@ class AppLocalizationsRu extends AppLocalizations {
       'Разрешение не предоставлено. Вернитесь к предыдущему шагу, чтобы включить его.';
 
   @override
-  String get commonUndo => 'Отменить';
-
-  @override
-  String get homePrayerToggledDone => 'Намаз отмечен как совершённый';
-
-  @override
-  String get homePrayerToggledUndone => 'Отметка намаза снята';
-
-  @override
   String get tafsirPanelTitle => 'Тафсир';
 
   @override

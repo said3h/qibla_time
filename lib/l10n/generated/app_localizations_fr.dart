@@ -3637,15 +3637,6 @@ class AppLocalizationsFr extends AppLocalizations {
       'Permission non accordée. Revenez à étape précédente pour activer.';
 
   @override
-  String get commonUndo => 'Annuler';
-
-  @override
-  String get homePrayerToggledDone => 'Prière marquée comme accomplie';
-
-  @override
-  String get homePrayerToggledUndone => 'Prière décochée';
-
-  @override
   String get tafsirPanelTitle => 'Tafsir';
 
   @override

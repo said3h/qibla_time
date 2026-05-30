@@ -3586,15 +3586,6 @@ class AppLocalizationsTr extends AppLocalizations {
       'İzin verilmedi. Etkinleştirmek için bir önceki adıma geri dönün.';
 
   @override
-  String get commonUndo => 'Geri al';
-
-  @override
-  String get homePrayerToggledDone => 'Namaz kılındı olarak işaretlendi';
-
-  @override
-  String get homePrayerToggledUndone => 'Namaz işareti kaldırıldı';
-
-  @override
   String get tafsirPanelTitle => 'Tefsir';
 
   @override

@@ -3597,15 +3597,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Permission not granted. Go back to the previous step to enable it.';
 
   @override
-  String get commonUndo => 'Undo';
-
-  @override
-  String get homePrayerToggledDone => 'Prayer marked as prayed';
-
-  @override
-  String get homePrayerToggledUndone => 'Prayer unmarked';
-
-  @override
   String get tafsirPanelTitle => 'Tafsir';
 
   @override
