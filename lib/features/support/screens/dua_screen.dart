@@ -40,6 +40,16 @@ class _DuasScreenState extends ConsumerState<DuasScreen> {
     'gratitude',
     'parents',
     'hajj',
+    'waking_up',
+    'clothing',
+    'home',
+    'witr',
+    'funeral_grief',
+    'weather_nature',
+    'fasting',
+    'social_manners',
+    'marriage_family',
+    'gatherings',
   ];
 
   @override

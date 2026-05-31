@@ -19091,5 +19091,4193 @@
         "isFeatured": false
       }
     }
+  },
+  {
+    "id": "hisn_waking_up_3",
+    "arabicText": "الحمدُ للهِ الذي عافاني في جَسَدي وَرَدّ عَليّ روحي وَأَذِنَ لي بِذِكْرِه",
+    "transliteration": "Al-ḥamdu lillāhil-ladhī `āfānī fī jasadī, wa radda `alayya rūḥī, wa 'adhina lī bidhikrihi.",
+    "reference": "Hisn al-Muslim 3; At-Tirmidhi 5/473. See Al-Albani's Sahih Tirmidhi 3/144.",
+    "count": 1,
+    "tags": [
+      "waking",
+      "health",
+      "remembrance"
+    ],
+    "translations": {
+      "es": {
+        "title": "Al despertar con salud y recuerdo",
+        "translation": "Alabado sea Allah, que me dio bienestar en mi cuerpo, me devolvió el alma y me permitió recordarlo.",
+        "category": "waking_up",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 3; At-Tirmidhi 5/473. See Al-Albani's Sahih Tirmidhi 3/144.",
+        "count": 1,
+        "tags": [
+          "waking",
+          "health",
+          "remembrance"
+        ],
+        "isFeatured": false
+      },
+      "en": {
+        "title": "Waking with health and remembrance",
+        "translation": "Praise is to Allah Who gave strength to my body and returned my soul to me and permitted me to remember Him.",
+        "category": "waking_up",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 3; At-Tirmidhi 5/473. See Al-Albani's Sahih Tirmidhi 3/144.",
+        "count": 1,
+        "tags": [
+          "waking",
+          "health",
+          "remembrance"
+        ],
+        "isFeatured": false
+      },
+      "ar": {
+        "title": "الاستيقاظ مع العافية والذكر",
+        "translation": "الحمدُ للهِ الذي عافاني في جَسَدي وَرَدّ عَليّ روحي وَأَذِنَ لي بِذِكْرِه",
+        "category": "waking_up",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 3; At-Tirmidhi 5/473. See Al-Albani's Sahih Tirmidhi 3/144.",
+        "count": 1,
+        "tags": [
+          "waking",
+          "health",
+          "remembrance"
+        ],
+        "isFeatured": false
+      },
+      "fr": {
+        "title": "Au réveil avec santé et rappel",
+        "translation": "Louange à Allah qui m’a accordé la santé dans mon corps, m’a rendu mon âme et m’a permis de L’évoquer.",
+        "category": "waking_up",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 3; At-Tirmidhi 5/473. See Al-Albani's Sahih Tirmidhi 3/144.",
+        "count": 1,
+        "tags": [
+          "waking",
+          "health",
+          "remembrance"
+        ],
+        "isFeatured": false
+      },
+      "de": {
+        "title": "Aufwachen mit Gesundheit und Gedenken",
+        "translation": "Alles Lob gebührt Allah, der meinem Körper Wohlbefinden gab, mir meine Seele zurückgab und mir erlaubte, Seiner zu gedenken.",
+        "category": "waking_up",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 3; At-Tirmidhi 5/473. See Al-Albani's Sahih Tirmidhi 3/144.",
+        "count": 1,
+        "tags": [
+          "waking",
+          "health",
+          "remembrance"
+        ],
+        "isFeatured": false
+      },
+      "id": {
+        "title": "Bangun dengan kesehatan dan zikir",
+        "translation": "Segala puji bagi Allah yang menyehatkan tubuhku, mengembalikan ruhku, dan mengizinkanku mengingat-Nya.",
+        "category": "waking_up",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 3; At-Tirmidhi 5/473. See Al-Albani's Sahih Tirmidhi 3/144.",
+        "count": 1,
+        "tags": [
+          "waking",
+          "health",
+          "remembrance"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Пробуждение со здоровьем и поминанием",
+        "translation": "Хвала Аллаху, Который даровал здоровье моему телу, вернул мне душу и позволил мне поминать Его.",
+        "category": "waking_up",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 3; At-Tirmidhi 5/473. See Al-Albani's Sahih Tirmidhi 3/144.",
+        "count": 1,
+        "tags": [
+          "waking",
+          "health",
+          "remembrance"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Al risveglio con salute e ricordo",
+        "translation": "Lode ad Allah, che mi ha dato salute nel corpo, mi ha restituito l’anima e mi ha permesso di ricordarLo.",
+        "category": "waking_up",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 3; At-Tirmidhi 5/473. See Al-Albani's Sahih Tirmidhi 3/144.",
+        "count": 1,
+        "tags": [
+          "waking",
+          "health",
+          "remembrance"
+        ],
+        "isFeatured": false
+      },
+      "pt": {
+        "title": "Ao acordar com saúde e recordação",
+        "translation": "Louvado seja Allah, que deu saúde ao meu corpo, devolveu-me a alma e me permitiu recordá-Lo.",
+        "category": "waking_up",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 3; At-Tirmidhi 5/473. See Al-Albani's Sahih Tirmidhi 3/144.",
+        "count": 1,
+        "tags": [
+          "waking",
+          "health",
+          "remembrance"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Sağlık ve zikirle uyanınca",
+        "translation": "Bedenime afiyet veren, ruhumu bana geri döndüren ve kendisini zikretmeme izin veren Allah’a hamdolsun.",
+        "category": "waking_up",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 3; At-Tirmidhi 5/473. See Al-Albani's Sahih Tirmidhi 3/144.",
+        "count": 1,
+        "tags": [
+          "waking",
+          "health",
+          "remembrance"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Wakker worden met gezondheid en gedenken",
+        "translation": "Alle lof behoort aan Allah, die mijn lichaam welzijn gaf, mijn ziel aan mij teruggaf en mij toestond Hem te gedenken.",
+        "category": "waking_up",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 3; At-Tirmidhi 5/473. See Al-Albani's Sahih Tirmidhi 3/144.",
+        "count": 1,
+        "tags": [
+          "waking",
+          "health",
+          "remembrance"
+        ],
+        "isFeatured": false
+      }
+    }
+  },
+  {
+    "id": "hisn_clothing_7",
+    "arabicText": "تُبْـلي وَيُـخْلِفُ اللهُ تَعَالى",
+    "transliteration": "Tublī wa yukhliful-lāhu ta`ālā.",
+    "reference": "Hisn al-Muslim 7; Abu Dawud 4/41. See also Al-Albani Sahih Abu Dawud 2/760.",
+    "count": 1,
+    "tags": [
+      "clothing",
+      "blessing"
+    ],
+    "translations": {
+      "es": {
+        "title": "Para quien viste ropa nueva",
+        "translation": "Que la uses hasta desgastarla y que Allah te la reemplace.",
+        "category": "clothing",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 7; Abu Dawud 4/41. See also Al-Albani Sahih Abu Dawud 2/760.",
+        "count": 1,
+        "tags": [
+          "clothing",
+          "blessing"
+        ],
+        "isFeatured": false
+      },
+      "en": {
+        "title": "To someone wearing new clothes",
+        "translation": "May Allah replace it when it is worn out.",
+        "category": "clothing",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 7; Abu Dawud 4/41. See also Al-Albani Sahih Abu Dawud 2/760.",
+        "count": 1,
+        "tags": [
+          "clothing",
+          "blessing"
+        ],
+        "isFeatured": false
+      },
+      "ar": {
+        "title": "لمن لبس ثوبا جديدا",
+        "translation": "تُبْـلي وَيُـخْلِفُ اللهُ تَعَالى",
+        "category": "clothing",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 7; Abu Dawud 4/41. See also Al-Albani Sahih Abu Dawud 2/760.",
+        "count": 1,
+        "tags": [
+          "clothing",
+          "blessing"
+        ],
+        "isFeatured": false
+      },
+      "fr": {
+        "title": "Pour quelqu’un qui porte un vêtement neuf",
+        "translation": "Puisses-tu l’user, et qu’Allah te la remplace.",
+        "category": "clothing",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 7; Abu Dawud 4/41. See also Al-Albani Sahih Abu Dawud 2/760.",
+        "count": 1,
+        "tags": [
+          "clothing",
+          "blessing"
+        ],
+        "isFeatured": false
+      },
+      "de": {
+        "title": "Für jemanden mit neuer Kleidung",
+        "translation": "Mögest du es tragen, bis es abgenutzt ist, und möge Allah es ersetzen.",
+        "category": "clothing",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 7; Abu Dawud 4/41. See also Al-Albani Sahih Abu Dawud 2/760.",
+        "count": 1,
+        "tags": [
+          "clothing",
+          "blessing"
+        ],
+        "isFeatured": false
+      },
+      "id": {
+        "title": "Untuk orang yang memakai pakaian baru",
+        "translation": "Semoga engkau memakainya hingga usang, dan semoga Allah menggantinya.",
+        "category": "clothing",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 7; Abu Dawud 4/41. See also Al-Albani Sahih Abu Dawud 2/760.",
+        "count": 1,
+        "tags": [
+          "clothing",
+          "blessing"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Тому, кто надел новую одежду",
+        "translation": "Пусть ты носишь её, пока она не износится, и пусть Аллах заменит её.",
+        "category": "clothing",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 7; Abu Dawud 4/41. See also Al-Albani Sahih Abu Dawud 2/760.",
+        "count": 1,
+        "tags": [
+          "clothing",
+          "blessing"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Per chi indossa abiti nuovi",
+        "translation": "Che tu possa consumarlo, e che Allah te lo sostituisca.",
+        "category": "clothing",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 7; Abu Dawud 4/41. See also Al-Albani Sahih Abu Dawud 2/760.",
+        "count": 1,
+        "tags": [
+          "clothing",
+          "blessing"
+        ],
+        "isFeatured": false
+      },
+      "pt": {
+        "title": "Para quem veste roupa nova",
+        "translation": "Que a uses até gastar, e que Allah a substitua.",
+        "category": "clothing",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 7; Abu Dawud 4/41. See also Al-Albani Sahih Abu Dawud 2/760.",
+        "count": 1,
+        "tags": [
+          "clothing",
+          "blessing"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Yeni elbise giyene",
+        "translation": "Onu eskitinceye kadar giyesin ve Allah sana yenisini versin.",
+        "category": "clothing",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 7; Abu Dawud 4/41. See also Al-Albani Sahih Abu Dawud 2/760.",
+        "count": 1,
+        "tags": [
+          "clothing",
+          "blessing"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Voor iemand met nieuwe kleding",
+        "translation": "Moge je het dragen tot het versleten is, en moge Allah het vervangen.",
+        "category": "clothing",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 7; Abu Dawud 4/41. See also Al-Albani Sahih Abu Dawud 2/760.",
+        "count": 1,
+        "tags": [
+          "clothing",
+          "blessing"
+        ],
+        "isFeatured": false
+      }
+    }
+  },
+  {
+    "id": "hisn_home_18",
+    "arabicText": "بِسْـمِ اللهِ وَلَجْنـا، وَبِسْـمِ اللهِ خَـرَجْنـا، وَعَلـى رَبِّنـا تَوَكّلْـن (ثم ليسلم على أهله.)",
+    "transliteration": "Bismillāhi walajnā, wa bismillāhi kharajnā, wa `ala Rabbinā tawakkalnā",
+    "reference": "Hisn al-Muslim 18; Abu Dawud 4/325. Muslim {Hadith no. 2018) says that one should mention the Name of Allah when entering the home and when beginning to eat; and that the devil, hearing this, says: \"There is no shelter for us here tonight and no food.\"",
+    "count": 1,
+    "tags": [
+      "home",
+      "entering",
+      "tawakkul"
+    ],
+    "translations": {
+      "es": {
+        "title": "Al entrar en casa",
+        "translation": "En el nombre de Allah entramos, en el nombre de Allah salimos, y en nuestro Señor confiamos. Luego se saluda a la familia.",
+        "category": "home",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 18; Abu Dawud 4/325. Muslim {Hadith no. 2018) says that one should mention the Name of Allah when entering the home and when beginning to eat; and that the devil, hearing this, says: \"There is no shelter for us here tonight and no food.\"",
+        "count": 1,
+        "tags": [
+          "home",
+          "entering",
+          "tawakkul"
+        ],
+        "isFeatured": false
+      },
+      "en": {
+        "title": "Upon entering the home",
+        "translation": "In the Name of Allah we enter , in the Name of Allah we leave , and upon our Lord we depend [then say As-Salāmu `Alaykum to those present].",
+        "category": "home",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 18; Abu Dawud 4/325. Muslim {Hadith no. 2018) says that one should mention the Name of Allah when entering the home and when beginning to eat; and that the devil, hearing this, says: \"There is no shelter for us here tonight and no food.\"",
+        "count": 1,
+        "tags": [
+          "home",
+          "entering",
+          "tawakkul"
+        ],
+        "isFeatured": false
+      },
+      "ar": {
+        "title": "عند دخول المنزل",
+        "translation": "بِسْـمِ اللهِ وَلَجْنـا، وَبِسْـمِ اللهِ خَـرَجْنـا، وَعَلـى رَبِّنـا تَوَكّلْـن (ثم ليسلم على أهله.)",
+        "category": "home",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 18; Abu Dawud 4/325. Muslim {Hadith no. 2018) says that one should mention the Name of Allah when entering the home and when beginning to eat; and that the devil, hearing this, says: \"There is no shelter for us here tonight and no food.\"",
+        "count": 1,
+        "tags": [
+          "home",
+          "entering",
+          "tawakkul"
+        ],
+        "isFeatured": false
+      },
+      "fr": {
+        "title": "En entrant chez soi",
+        "translation": "Au nom d’Allah nous entrons, au nom d’Allah nous sortons, et en notre Seigneur nous plaçons notre confiance. Ensuite on salue les gens de la maison.",
+        "category": "home",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 18; Abu Dawud 4/325. Muslim {Hadith no. 2018) says that one should mention the Name of Allah when entering the home and when beginning to eat; and that the devil, hearing this, says: \"There is no shelter for us here tonight and no food.\"",
+        "count": 1,
+        "tags": [
+          "home",
+          "entering",
+          "tawakkul"
+        ],
+        "isFeatured": false
+      },
+      "de": {
+        "title": "Beim Betreten des Hauses",
+        "translation": "Im Namen Allahs treten wir ein, im Namen Allahs gehen wir hinaus, und auf unseren Herrn vertrauen wir. Danach grüßt man die Angehörigen im Haus.",
+        "category": "home",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 18; Abu Dawud 4/325. Muslim {Hadith no. 2018) says that one should mention the Name of Allah when entering the home and when beginning to eat; and that the devil, hearing this, says: \"There is no shelter for us here tonight and no food.\"",
+        "count": 1,
+        "tags": [
+          "home",
+          "entering",
+          "tawakkul"
+        ],
+        "isFeatured": false
+      },
+      "id": {
+        "title": "Saat masuk rumah",
+        "translation": "Dengan nama Allah kami masuk, dengan nama Allah kami keluar, dan kepada Rabb kami bertawakal. Lalu ucapkan salam kepada keluarga di rumah.",
+        "category": "home",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 18; Abu Dawud 4/325. Muslim {Hadith no. 2018) says that one should mention the Name of Allah when entering the home and when beginning to eat; and that the devil, hearing this, says: \"There is no shelter for us here tonight and no food.\"",
+        "count": 1,
+        "tags": [
+          "home",
+          "entering",
+          "tawakkul"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "При входе в дом",
+        "translation": "С именем Аллаха мы входим, с именем Аллаха мы выходим, и на нашего Господа мы уповаем. Затем приветствуют домашних.",
+        "category": "home",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 18; Abu Dawud 4/325. Muslim {Hadith no. 2018) says that one should mention the Name of Allah when entering the home and when beginning to eat; and that the devil, hearing this, says: \"There is no shelter for us here tonight and no food.\"",
+        "count": 1,
+        "tags": [
+          "home",
+          "entering",
+          "tawakkul"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Entrando in casa",
+        "translation": "Nel nome di Allah entriamo, nel nome di Allah usciamo, e nel nostro Signore riponiamo fiducia. Poi si saluta la famiglia.",
+        "category": "home",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 18; Abu Dawud 4/325. Muslim {Hadith no. 2018) says that one should mention the Name of Allah when entering the home and when beginning to eat; and that the devil, hearing this, says: \"There is no shelter for us here tonight and no food.\"",
+        "count": 1,
+        "tags": [
+          "home",
+          "entering",
+          "tawakkul"
+        ],
+        "isFeatured": false
+      },
+      "pt": {
+        "title": "Ao entrar em casa",
+        "translation": "Em nome de Allah entramos, em nome de Allah saímos, e em nosso Senhor confiamos. Depois saúda-se a família.",
+        "category": "home",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 18; Abu Dawud 4/325. Muslim {Hadith no. 2018) says that one should mention the Name of Allah when entering the home and when beginning to eat; and that the devil, hearing this, says: \"There is no shelter for us here tonight and no food.\"",
+        "count": 1,
+        "tags": [
+          "home",
+          "entering",
+          "tawakkul"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Eve girerken",
+        "translation": "Allah’ın adıyla gireriz, Allah’ın adıyla çıkarız ve Rabbimize tevekkül ederiz. Sonra ev halkına selam verilir.",
+        "category": "home",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 18; Abu Dawud 4/325. Muslim {Hadith no. 2018) says that one should mention the Name of Allah when entering the home and when beginning to eat; and that the devil, hearing this, says: \"There is no shelter for us here tonight and no food.\"",
+        "count": 1,
+        "tags": [
+          "home",
+          "entering",
+          "tawakkul"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Bij het binnengaan van het huis",
+        "translation": "In de naam van Allah gaan wij binnen, in de naam van Allah gaan wij naar buiten, en op onze Heer vertrouwen wij. Daarna groet men de familie.",
+        "category": "home",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 18; Abu Dawud 4/325. Muslim {Hadith no. 2018) says that one should mention the Name of Allah when entering the home and when beginning to eat; and that the devil, hearing this, says: \"There is no shelter for us here tonight and no food.\"",
+        "count": 1,
+        "tags": [
+          "home",
+          "entering",
+          "tawakkul"
+        ],
+        "isFeatured": false
+      }
+    }
+  },
+  {
+    "id": "hisn_witr_119",
+    "arabicText": "\"سبحان الملك القدوس\" ثلاث مرات والثالثة يجهر بها ويمد بها صوته \"ربِّ الملائكةِ والرّوح\"",
+    "transliteration": "Subḥāna ‘l-Maliki ‘l-Quddūs. [Recite three times, and raise and extend the voice on the third time and say...] Rabbi ‘l-Malā'ikati war-rūh.",
+    "reference": "Hisn al-Muslim 119; An-Nasa'i 3/244, Ad-Daraqutni and others. The final addition is from Ad-Daraqutni's version 2/ 31 and its chain of narration is authentic. See the checking of Zadul-Ma'ad by Shu'aib Al-Arna'ut and 'Abdul-Qadir Al-Arna'ut 1/337.",
+    "count": 1,
+    "tags": [
+      "witr",
+      "night prayer",
+      "dhikr"
+    ],
+    "translations": {
+      "es": {
+        "title": "Después del Witr",
+        "translation": "Gloria al Rey, el Santísimo. Se recita tres veces; en la tercera se eleva y alarga la voz diciendo: Señor de los ángeles y del Espíritu.",
+        "category": "witr",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 119; An-Nasa'i 3/244, Ad-Daraqutni and others. The final addition is from Ad-Daraqutni's version 2/ 31 and its chain of narration is authentic. See the checking of Zadul-Ma'ad by Shu'aib Al-Arna'ut and 'Abdul-Qadir Al-Arna'ut 1/337.",
+        "count": 1,
+        "tags": [
+          "witr",
+          "night prayer",
+          "dhikr"
+        ],
+        "isFeatured": false
+      },
+      "en": {
+        "title": "After Witr prayer",
+        "translation": "Glory is to the King, the Holy. [Recite three times in Arabic, and raise and extend the voice on the third time and say...] Lord of the angels and the Spirit.",
+        "category": "witr",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 119; An-Nasa'i 3/244, Ad-Daraqutni and others. The final addition is from Ad-Daraqutni's version 2/ 31 and its chain of narration is authentic. See the checking of Zadul-Ma'ad by Shu'aib Al-Arna'ut and 'Abdul-Qadir Al-Arna'ut 1/337.",
+        "count": 1,
+        "tags": [
+          "witr",
+          "night prayer",
+          "dhikr"
+        ],
+        "isFeatured": false
+      },
+      "ar": {
+        "title": "بعد صلاة الوتر",
+        "translation": "\"سبحان الملك القدوس\" ثلاث مرات والثالثة يجهر بها ويمد بها صوته \"ربِّ الملائكةِ والرّوح\"",
+        "category": "witr",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 119; An-Nasa'i 3/244, Ad-Daraqutni and others. The final addition is from Ad-Daraqutni's version 2/ 31 and its chain of narration is authentic. See the checking of Zadul-Ma'ad by Shu'aib Al-Arna'ut and 'Abdul-Qadir Al-Arna'ut 1/337.",
+        "count": 1,
+        "tags": [
+          "witr",
+          "night prayer",
+          "dhikr"
+        ],
+        "isFeatured": false
+      },
+      "fr": {
+        "title": "Après la prière du Witr",
+        "translation": "Gloire au Roi, le Très-Saint. À réciter trois fois; la troisième fois, on élève et prolonge la voix en disant : Seigneur des anges et de l’Esprit.",
+        "category": "witr",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 119; An-Nasa'i 3/244, Ad-Daraqutni and others. The final addition is from Ad-Daraqutni's version 2/ 31 and its chain of narration is authentic. See the checking of Zadul-Ma'ad by Shu'aib Al-Arna'ut and 'Abdul-Qadir Al-Arna'ut 1/337.",
+        "count": 1,
+        "tags": [
+          "witr",
+          "night prayer",
+          "dhikr"
+        ],
+        "isFeatured": false
+      },
+      "de": {
+        "title": "Nach dem Witr-Gebet",
+        "translation": "Gepriesen sei der König, der Heilige. Dreimal zu sprechen; beim dritten Mal hebt und verlängert man die Stimme und sagt: Herr der Engel und des Geistes.",
+        "category": "witr",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 119; An-Nasa'i 3/244, Ad-Daraqutni and others. The final addition is from Ad-Daraqutni's version 2/ 31 and its chain of narration is authentic. See the checking of Zadul-Ma'ad by Shu'aib Al-Arna'ut and 'Abdul-Qadir Al-Arna'ut 1/337.",
+        "count": 1,
+        "tags": [
+          "witr",
+          "night prayer",
+          "dhikr"
+        ],
+        "isFeatured": false
+      },
+      "id": {
+        "title": "Setelah salat witir",
+        "translation": "Mahasuci Raja Yang Mahasuci. Dibaca tiga kali; pada kali ketiga suara ditinggikan dan dipanjangkan dengan mengatakan: Rabb para malaikat dan Ruh.",
+        "category": "witr",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 119; An-Nasa'i 3/244, Ad-Daraqutni and others. The final addition is from Ad-Daraqutni's version 2/ 31 and its chain of narration is authentic. See the checking of Zadul-Ma'ad by Shu'aib Al-Arna'ut and 'Abdul-Qadir Al-Arna'ut 1/337.",
+        "count": 1,
+        "tags": [
+          "witr",
+          "night prayer",
+          "dhikr"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "После молитвы витр",
+        "translation": "Пречист Царь, Святой. Произносится трижды; на третий раз голос повышают и протягивают, говоря: Господь ангелов и Духа.",
+        "category": "witr",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 119; An-Nasa'i 3/244, Ad-Daraqutni and others. The final addition is from Ad-Daraqutni's version 2/ 31 and its chain of narration is authentic. See the checking of Zadul-Ma'ad by Shu'aib Al-Arna'ut and 'Abdul-Qadir Al-Arna'ut 1/337.",
+        "count": 1,
+        "tags": [
+          "witr",
+          "night prayer",
+          "dhikr"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Dopo la preghiera Witr",
+        "translation": "Gloria al Re, il Santissimo. Si recita tre volte; alla terza si alza e prolunga la voce dicendo: Signore degli angeli e dello Spirito.",
+        "category": "witr",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 119; An-Nasa'i 3/244, Ad-Daraqutni and others. The final addition is from Ad-Daraqutni's version 2/ 31 and its chain of narration is authentic. See the checking of Zadul-Ma'ad by Shu'aib Al-Arna'ut and 'Abdul-Qadir Al-Arna'ut 1/337.",
+        "count": 1,
+        "tags": [
+          "witr",
+          "night prayer",
+          "dhikr"
+        ],
+        "isFeatured": false
+      },
+      "pt": {
+        "title": "Após a oração Witr",
+        "translation": "Glória ao Rei, o Santíssimo. Recita-se três vezes; na terceira, eleva-se e prolonga-se a voz dizendo: Senhor dos anjos e do Espírito.",
+        "category": "witr",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 119; An-Nasa'i 3/244, Ad-Daraqutni and others. The final addition is from Ad-Daraqutni's version 2/ 31 and its chain of narration is authentic. See the checking of Zadul-Ma'ad by Shu'aib Al-Arna'ut and 'Abdul-Qadir Al-Arna'ut 1/337.",
+        "count": 1,
+        "tags": [
+          "witr",
+          "night prayer",
+          "dhikr"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Vitir namazından sonra",
+        "translation": "Melik ve Kuddûs olan Allah’ı tesbih ederim. Üç kez söylenir; üçüncüde ses yükseltilip uzatılarak: Meleklerin ve Ruh’un Rabbi denir.",
+        "category": "witr",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 119; An-Nasa'i 3/244, Ad-Daraqutni and others. The final addition is from Ad-Daraqutni's version 2/ 31 and its chain of narration is authentic. See the checking of Zadul-Ma'ad by Shu'aib Al-Arna'ut and 'Abdul-Qadir Al-Arna'ut 1/337.",
+        "count": 1,
+        "tags": [
+          "witr",
+          "night prayer",
+          "dhikr"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Na het Witr-gebed",
+        "translation": "Glorie aan de Koning, de Heilige. Dit wordt driemaal gereciteerd; bij de derde keer verheft en verlengt men de stem en zegt: Heer van de engelen en de Geest.",
+        "category": "witr",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 119; An-Nasa'i 3/244, Ad-Daraqutni and others. The final addition is from Ad-Daraqutni's version 2/ 31 and its chain of narration is authentic. See the checking of Zadul-Ma'ad by Shu'aib Al-Arna'ut and 'Abdul-Qadir Al-Arna'ut 1/337.",
+        "count": 1,
+        "tags": [
+          "witr",
+          "night prayer",
+          "dhikr"
+        ],
+        "isFeatured": false
+      }
+    }
+  },
+  {
+    "id": "hisn_hardship_121",
+    "arabicText": "اللّهُـمَّ إِنِّي أَعْوذُ بِكَ مِنَ الهَـمِّ وَ الْحُـزْنِ، والعًجْـزِ والكَسَلِ والبُخْـلِ والجُـبْنِ، وضَلْـعِ الـدَّيْنِ وغَلَبَـةِ الرِّجال",
+    "transliteration": "Allāhumma 'innī 'a`ūdhu bika mina ‘l-ḥammi wa ‘l-ḥuzn, wa ‘l-`ajzi wa ‘l-kasal, wa ‘l-bukhli wa ‘l-jubn, wa ḍala`id-dayn, wa ghalabatir-rijāl.",
+    "reference": "Hisn al-Muslim 121; Al-Bukhari 7/158. See also Al-Asqalani, Fathul-Bari 11/173.",
+    "count": 1,
+    "tags": [
+      "worry",
+      "debt",
+      "sadness"
+    ],
+    "translations": {
+      "es": {
+        "title": "Contra preocupación, deuda y debilidad",
+        "translation": "Oh Allah, busco refugio en Ti de la preocupación y la tristeza, de la incapacidad y la pereza, de la avaricia y la cobardía, de la carga de la deuda y del dominio de la gente.",
+        "category": "stress",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 121; Al-Bukhari 7/158. See also Al-Asqalani, Fathul-Bari 11/173.",
+        "count": 1,
+        "tags": [
+          "worry",
+          "debt",
+          "sadness"
+        ],
+        "isFeatured": false
+      },
+      "en": {
+        "title": "From worry, debt and weakness",
+        "translation": "O Allah, I seek refuge in you from grief and sadness, from weakness and from laziness, from miserliness and from cowardice, from being overcome by debt and overpowered by men (i.e. others).",
+        "category": "stress",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 121; Al-Bukhari 7/158. See also Al-Asqalani, Fathul-Bari 11/173.",
+        "count": 1,
+        "tags": [
+          "worry",
+          "debt",
+          "sadness"
+        ],
+        "isFeatured": false
+      },
+      "ar": {
+        "title": "من الهم والدين والعجز",
+        "translation": "اللّهُـمَّ إِنِّي أَعْوذُ بِكَ مِنَ الهَـمِّ وَ الْحُـزْنِ، والعًجْـزِ والكَسَلِ والبُخْـلِ والجُـبْنِ، وضَلْـعِ الـدَّيْنِ وغَلَبَـةِ الرِّجال",
+        "category": "stress",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 121; Al-Bukhari 7/158. See also Al-Asqalani, Fathul-Bari 11/173.",
+        "count": 1,
+        "tags": [
+          "worry",
+          "debt",
+          "sadness"
+        ],
+        "isFeatured": false
+      },
+      "fr": {
+        "title": "Contre souci, dette et faiblesse",
+        "translation": "Ô Allah, je cherche refuge auprès de Toi contre le souci et la tristesse, l’incapacité et la paresse, l’avarice et la lâcheté, le poids de la dette et la domination des gens.",
+        "category": "stress",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 121; Al-Bukhari 7/158. See also Al-Asqalani, Fathul-Bari 11/173.",
+        "count": 1,
+        "tags": [
+          "worry",
+          "debt",
+          "sadness"
+        ],
+        "isFeatured": false
+      },
+      "de": {
+        "title": "Vor Sorge, Schulden und Schwäche",
+        "translation": "O Allah, ich suche Zuflucht bei Dir vor Sorge und Traurigkeit, vor Unfähigkeit und Trägheit, vor Geiz und Feigheit, vor der Last der Schulden und davor, von Menschen überwältigt zu werden.",
+        "category": "stress",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 121; Al-Bukhari 7/158. See also Al-Asqalani, Fathul-Bari 11/173.",
+        "count": 1,
+        "tags": [
+          "worry",
+          "debt",
+          "sadness"
+        ],
+        "isFeatured": false
+      },
+      "id": {
+        "title": "Dari gelisah, utang, dan kelemahan",
+        "translation": "Ya Allah, aku berlindung kepada-Mu dari gelisah dan sedih, dari lemah dan malas, dari kikir dan pengecut, dari beratnya utang dan tekanan manusia.",
+        "category": "stress",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 121; Al-Bukhari 7/158. See also Al-Asqalani, Fathul-Bari 11/173.",
+        "count": 1,
+        "tags": [
+          "worry",
+          "debt",
+          "sadness"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "От тревоги, долга и слабости",
+        "translation": "О Аллах, прибегаю к Тебе от тревоги и печали, от немощи и лени, от скупости и трусости, от бремени долга и превосходства людей.",
+        "category": "stress",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 121; Al-Bukhari 7/158. See also Al-Asqalani, Fathul-Bari 11/173.",
+        "count": 1,
+        "tags": [
+          "worry",
+          "debt",
+          "sadness"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Da preoccupazione, debito e debolezza",
+        "translation": "O Allah, cerco rifugio in Te dalla preoccupazione e dalla tristezza, dall’incapacità e dalla pigrizia, dall’avarizia e dalla codardia, dal peso del debito e dal dominio degli uomini.",
+        "category": "stress",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 121; Al-Bukhari 7/158. See also Al-Asqalani, Fathul-Bari 11/173.",
+        "count": 1,
+        "tags": [
+          "worry",
+          "debt",
+          "sadness"
+        ],
+        "isFeatured": false
+      },
+      "pt": {
+        "title": "Contra preocupação, dívida e fraqueza",
+        "translation": "Ó Allah, busco refúgio em Ti contra a preocupação e a tristeza, a incapacidade e a preguiça, a avareza e a covardia, o peso da dívida e o domínio das pessoas.",
+        "category": "stress",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 121; Al-Bukhari 7/158. See also Al-Asqalani, Fathul-Bari 11/173.",
+        "count": 1,
+        "tags": [
+          "worry",
+          "debt",
+          "sadness"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Sıkıntı, borç ve zayıflıktan",
+        "translation": "Allah’ım, keder ve hüzünden, acizlik ve tembellikten, cimrilik ve korkaklıktan, borcun ağırlığından ve insanların baskısından Sana sığınırım.",
+        "category": "stress",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 121; Al-Bukhari 7/158. See also Al-Asqalani, Fathul-Bari 11/173.",
+        "count": 1,
+        "tags": [
+          "worry",
+          "debt",
+          "sadness"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Tegen zorgen, schuld en zwakte",
+        "translation": "O Allah, ik zoek toevlucht bij U tegen zorgen en verdriet, onvermogen en luiheid, gierigheid en lafheid, de last van schulden en overheersing door mensen.",
+        "category": "stress",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 121; Al-Bukhari 7/158. See also Al-Asqalani, Fathul-Bari 11/173.",
+        "count": 1,
+        "tags": [
+          "worry",
+          "debt",
+          "sadness"
+        ],
+        "isFeatured": false
+      }
+    }
+  },
+  {
+    "id": "hisn_hardship_123",
+    "arabicText": "اللّهُـمَّ رَحْمَتَـكَ أَرْجـو فَلا تَكِلـني إِلى نَفْـسي طَـرْفَةَ عَـيْن، وَأَصْلِـحْ لي شَأْنـي كُلَّـه لَا إِلَهَ إِلَّا أنْـت",
+    "transliteration": "Allāhumma raḥmataka arjū falā takilnī ilā nafsī ṭarfata `ayn, wa aṣliḥ lī sha'nī kullah, lā ilāha illā ant.",
+    "reference": "Hisn al-Muslim 123; Abu Dawud 4/324, Ahmad 5/42. Al-Albani graded it as good in Sahih Abu Dawud 3/959.",
+    "count": 1,
+    "tags": [
+      "mercy",
+      "hardship",
+      "reliance"
+    ],
+    "translations": {
+      "es": {
+        "title": "No me dejes a mí mismo",
+        "translation": "Oh Allah, espero Tu misericordia. No me dejes a mí mismo ni por un parpadeo, y rectifica todos mis asuntos. No hay divinidad digna de adoración salvo Tú.",
+        "category": "stress",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 123; Abu Dawud 4/324, Ahmad 5/42. Al-Albani graded it as good in Sahih Abu Dawud 3/959.",
+        "count": 1,
+        "tags": [
+          "mercy",
+          "hardship",
+          "reliance"
+        ],
+        "isFeatured": false
+      },
+      "en": {
+        "title": "Do not leave me to myself",
+        "translation": "O Allah, I hope for Your mercy. Do not leave me to myself even for the blinking of an eye (i.e. a moment). Correct all of my affairs for me. There is none worthy of worship but You.",
+        "category": "stress",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 123; Abu Dawud 4/324, Ahmad 5/42. Al-Albani graded it as good in Sahih Abu Dawud 3/959.",
+        "count": 1,
+        "tags": [
+          "mercy",
+          "hardship",
+          "reliance"
+        ],
+        "isFeatured": false
+      },
+      "ar": {
+        "title": "لا تكلني إلى نفسي",
+        "translation": "اللّهُـمَّ رَحْمَتَـكَ أَرْجـو فَلا تَكِلـني إِلى نَفْـسي طَـرْفَةَ عَـيْن، وَأَصْلِـحْ لي شَأْنـي كُلَّـه لَا إِلَهَ إِلَّا أنْـت",
+        "category": "stress",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 123; Abu Dawud 4/324, Ahmad 5/42. Al-Albani graded it as good in Sahih Abu Dawud 3/959.",
+        "count": 1,
+        "tags": [
+          "mercy",
+          "hardship",
+          "reliance"
+        ],
+        "isFeatured": false
+      },
+      "fr": {
+        "title": "Ne me laisse pas à moi-même",
+        "translation": "Ô Allah, j’espère Ta miséricorde. Ne me laisse pas à moi-même, même le temps d’un clignement d’œil, et rectifie toutes mes affaires. Nul n’est digne d’adoration sauf Toi.",
+        "category": "stress",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 123; Abu Dawud 4/324, Ahmad 5/42. Al-Albani graded it as good in Sahih Abu Dawud 3/959.",
+        "count": 1,
+        "tags": [
+          "mercy",
+          "hardship",
+          "reliance"
+        ],
+        "isFeatured": false
+      },
+      "de": {
+        "title": "Überlasse mich nicht mir selbst",
+        "translation": "O Allah, ich hoffe auf Deine Barmherzigkeit. Überlasse mich nicht mir selbst, nicht einmal für einen Augenblick, und richte alle meine Angelegenheiten. Es gibt keinen anbetungswürdigen Gott außer Dir.",
+        "category": "stress",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 123; Abu Dawud 4/324, Ahmad 5/42. Al-Albani graded it as good in Sahih Abu Dawud 3/959.",
+        "count": 1,
+        "tags": [
+          "mercy",
+          "hardship",
+          "reliance"
+        ],
+        "isFeatured": false
+      },
+      "id": {
+        "title": "Jangan biarkan aku pada diriku",
+        "translation": "Ya Allah, aku mengharap rahmat-Mu. Jangan Engkau serahkan aku kepada diriku walau sekejap mata, dan perbaikilah seluruh urusanku. Tiada sesembahan yang berhak disembah selain Engkau.",
+        "category": "stress",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 123; Abu Dawud 4/324, Ahmad 5/42. Al-Albani graded it as good in Sahih Abu Dawud 3/959.",
+        "count": 1,
+        "tags": [
+          "mercy",
+          "hardship",
+          "reliance"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Не оставляй меня самому себе",
+        "translation": "О Аллах, я надеюсь на Твою милость. Не оставляй меня самому себе даже на мгновение и исправь все мои дела. Нет божества, достойного поклонения, кроме Тебя.",
+        "category": "stress",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 123; Abu Dawud 4/324, Ahmad 5/42. Al-Albani graded it as good in Sahih Abu Dawud 3/959.",
+        "count": 1,
+        "tags": [
+          "mercy",
+          "hardship",
+          "reliance"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Non lasciarmi a me stesso",
+        "translation": "O Allah, spero nella Tua misericordia. Non lasciarmi a me stesso neppure per un battito di ciglia, e riforma ogni mio affare. Non vi è divinità degna di adorazione tranne Te.",
+        "category": "stress",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 123; Abu Dawud 4/324, Ahmad 5/42. Al-Albani graded it as good in Sahih Abu Dawud 3/959.",
+        "count": 1,
+        "tags": [
+          "mercy",
+          "hardship",
+          "reliance"
+        ],
+        "isFeatured": false
+      },
+      "pt": {
+        "title": "Não me deixes entregue a mim mesmo",
+        "translation": "Ó Allah, espero a Tua misericórdia. Não me deixes entregue a mim mesmo nem por um piscar de olhos, e corrige todos os meus assuntos. Não há divindade digna de adoração exceto Tu.",
+        "category": "stress",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 123; Abu Dawud 4/324, Ahmad 5/42. Al-Albani graded it as good in Sahih Abu Dawud 3/959.",
+        "count": 1,
+        "tags": [
+          "mercy",
+          "hardship",
+          "reliance"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Beni nefsime bırakma",
+        "translation": "Allah’ım, rahmetini umuyorum. Beni göz açıp kapayıncaya kadar bile nefsime bırakma; bütün işlerimi düzelt. Senden başka ibadete layık ilah yoktur.",
+        "category": "stress",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 123; Abu Dawud 4/324, Ahmad 5/42. Al-Albani graded it as good in Sahih Abu Dawud 3/959.",
+        "count": 1,
+        "tags": [
+          "mercy",
+          "hardship",
+          "reliance"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Laat mij niet aan mijzelf over",
+        "translation": "O Allah, ik hoop op Uw barmhartigheid. Laat mij niet aan mijzelf over, zelfs niet voor een oogwenk, en verbeter al mijn zaken. Er is geen god die het waard is aanbeden te worden behalve U.",
+        "category": "stress",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 123; Abu Dawud 4/324, Ahmad 5/42. Al-Albani graded it as good in Sahih Abu Dawud 3/959.",
+        "count": 1,
+        "tags": [
+          "mercy",
+          "hardship",
+          "reliance"
+        ],
+        "isFeatured": false
+      }
+    }
+  },
+  {
+    "id": "hisn_hardship_136",
+    "arabicText": "اللّهُـمَّ اكْفِـني بِحَلالِـكَ عَنْ حَـرامِـك، وَأَغْنِـني بِفَضْـلِكَ عَمَّـنْ سِـواك",
+    "transliteration": "Allāhummak-finī biḥalālika `an ḥarāmik, wa 'aghninī bi faḍlika `amman siwāk.",
+    "reference": "Hisn al-Muslim 136; At-Tirmidhi 5/560. See also Al-Albani, Sahih At-Tirmidhi 3/180.",
+    "count": 1,
+    "tags": [
+      "debt",
+      "halal",
+      "provision"
+    ],
+    "translations": {
+      "es": {
+        "title": "Para saldar deudas",
+        "translation": "Oh Allah, haz que me baste lo lícito que has permitido frente a lo ilícito, y enriquéceme con Tu favor para no necesitar a nadie fuera de Ti.",
+        "category": "stress",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 136; At-Tirmidhi 5/560. See also Al-Albani, Sahih At-Tirmidhi 3/180.",
+        "count": 1,
+        "tags": [
+          "debt",
+          "halal",
+          "provision"
+        ],
+        "isFeatured": false
+      },
+      "en": {
+        "title": "For settling debt",
+        "translation": "O Allah, suffice me with what You have allowed instead of what You have forbidden, and make me independent of all others besides You.",
+        "category": "stress",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 136; At-Tirmidhi 5/560. See also Al-Albani, Sahih At-Tirmidhi 3/180.",
+        "count": 1,
+        "tags": [
+          "debt",
+          "halal",
+          "provision"
+        ],
+        "isFeatured": false
+      },
+      "ar": {
+        "title": "دعاء قضاء الدين",
+        "translation": "اللّهُـمَّ اكْفِـني بِحَلالِـكَ عَنْ حَـرامِـك، وَأَغْنِـني بِفَضْـلِكَ عَمَّـنْ سِـواك",
+        "category": "stress",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 136; At-Tirmidhi 5/560. See also Al-Albani, Sahih At-Tirmidhi 3/180.",
+        "count": 1,
+        "tags": [
+          "debt",
+          "halal",
+          "provision"
+        ],
+        "isFeatured": false
+      },
+      "fr": {
+        "title": "Pour régler une dette",
+        "translation": "Ô Allah, fais que ce que Tu as rendu licite me suffise contre ce que Tu as interdit, et enrichis-moi par Ta grâce afin que je n’aie besoin de nul autre que Toi.",
+        "category": "stress",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 136; At-Tirmidhi 5/560. See also Al-Albani, Sahih At-Tirmidhi 3/180.",
+        "count": 1,
+        "tags": [
+          "debt",
+          "halal",
+          "provision"
+        ],
+        "isFeatured": false
+      },
+      "de": {
+        "title": "Zum Begleichen von Schulden",
+        "translation": "O Allah, lasse mir Dein Erlaubtes genügen statt des Verbotenen, und mache mich durch Deine Gunst unabhängig von allen außer Dir.",
+        "category": "stress",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 136; At-Tirmidhi 5/560. See also Al-Albani, Sahih At-Tirmidhi 3/180.",
+        "count": 1,
+        "tags": [
+          "debt",
+          "halal",
+          "provision"
+        ],
+        "isFeatured": false
+      },
+      "id": {
+        "title": "Untuk melunasi utang",
+        "translation": "Ya Allah, cukupkanlah aku dengan yang halal dari-Mu sehingga aku tidak membutuhkan yang haram, dan kayakanlah aku dengan karunia-Mu sehingga tidak membutuhkan selain-Mu.",
+        "category": "stress",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 136; At-Tirmidhi 5/560. See also Al-Albani, Sahih At-Tirmidhi 3/180.",
+        "count": 1,
+        "tags": [
+          "debt",
+          "halal",
+          "provision"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Для избавления от долга",
+        "translation": "О Аллах, сделай дозволенное Тобой достаточным для меня вместо запретного и обогати меня Своей милостью, чтобы я не нуждался ни в ком, кроме Тебя.",
+        "category": "stress",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 136; At-Tirmidhi 5/560. See also Al-Albani, Sahih At-Tirmidhi 3/180.",
+        "count": 1,
+        "tags": [
+          "debt",
+          "halal",
+          "provision"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Per saldare un debito",
+        "translation": "O Allah, rendimi sufficiente ciò che hai reso lecito rispetto a ciò che hai proibito, e arricchiscimi con il Tuo favore affinché non abbia bisogno di altri oltre a Te.",
+        "category": "stress",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 136; At-Tirmidhi 5/560. See also Al-Albani, Sahih At-Tirmidhi 3/180.",
+        "count": 1,
+        "tags": [
+          "debt",
+          "halal",
+          "provision"
+        ],
+        "isFeatured": false
+      },
+      "pt": {
+        "title": "Para quitar dívidas",
+        "translation": "Ó Allah, faze com que o lícito que permitiste me baste contra o ilícito, e enriquece-me com o Teu favor para que eu não precise de ninguém além de Ti.",
+        "category": "stress",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 136; At-Tirmidhi 5/560. See also Al-Albani, Sahih At-Tirmidhi 3/180.",
+        "count": 1,
+        "tags": [
+          "debt",
+          "halal",
+          "provision"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Borcu ödemek için",
+        "translation": "Allah’ım, helalinle beni haramından uzak ve yeterli kıl; lütfunla beni Senden başkasına muhtaç etme.",
+        "category": "stress",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 136; At-Tirmidhi 5/560. See also Al-Albani, Sahih At-Tirmidhi 3/180.",
+        "count": 1,
+        "tags": [
+          "debt",
+          "halal",
+          "provision"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Voor het aflossen van schulden",
+        "translation": "O Allah, laat Uw toegestane mij genoeg zijn tegen wat U verboden hebt, en maak mij door Uw gunst onafhankelijk van iedereen behalve U.",
+        "category": "stress",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 136; At-Tirmidhi 5/560. See also Al-Albani, Sahih At-Tirmidhi 3/180.",
+        "count": 1,
+        "tags": [
+          "debt",
+          "halal",
+          "provision"
+        ],
+        "isFeatured": false
+      }
+    }
+  },
+  {
+    "id": "hisn_sickness_148",
+    "arabicText": "أَسْـأَلُ اللهَ العَـظيـم، رَبَّ العَـرْشِ العَـظيـم أَنْ يَشْفـيك . (سبع مرات)",
+    "transliteration": "As'alullāha ‘l-`Aẓīma Rabba ‘l-`Arshil-`Aẓīmi an yashfiyak.",
+    "reference": "Hisn al-Muslim 148; At-Tirmidhi, Abu Dawud. See also Al-Albani, Sahih At-Tirmidhi 2/210 and Sahihul-Jami' As-Saghir 5/180.",
+    "count": 1,
+    "tags": [
+      "illness",
+      "healing",
+      "visit"
+    ],
+    "translations": {
+      "es": {
+        "title": "Por una persona enferma",
+        "translation": "Pido a Allah, el Magnífico, Señor del Trono Magnífico, que te cure. Se recita siete veces.",
+        "category": "sickness",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 148; At-Tirmidhi, Abu Dawud. See also Al-Albani, Sahih At-Tirmidhi 2/210 and Sahihul-Jami' As-Saghir 5/180.",
+        "count": 1,
+        "tags": [
+          "illness",
+          "healing",
+          "visit"
+        ],
+        "isFeatured": false
+      },
+      "en": {
+        "title": "For a sick person",
+        "translation": "I ask Almighty Allah, Lord of the Magnificent Throne, to make you well. (Recite seven times in Arabic .)",
+        "category": "sickness",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 148; At-Tirmidhi, Abu Dawud. See also Al-Albani, Sahih At-Tirmidhi 2/210 and Sahihul-Jami' As-Saghir 5/180.",
+        "count": 1,
+        "tags": [
+          "illness",
+          "healing",
+          "visit"
+        ],
+        "isFeatured": false
+      },
+      "ar": {
+        "title": "للمريض",
+        "translation": "أَسْـأَلُ اللهَ العَـظيـم، رَبَّ العَـرْشِ العَـظيـم أَنْ يَشْفـيك . (سبع مرات)",
+        "category": "sickness",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 148; At-Tirmidhi, Abu Dawud. See also Al-Albani, Sahih At-Tirmidhi 2/210 and Sahihul-Jami' As-Saghir 5/180.",
+        "count": 1,
+        "tags": [
+          "illness",
+          "healing",
+          "visit"
+        ],
+        "isFeatured": false
+      },
+      "fr": {
+        "title": "Pour une personne malade",
+        "translation": "Je demande à Allah, l’Immense, Seigneur du Trône immense, de te guérir. À réciter sept fois.",
+        "category": "sickness",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 148; At-Tirmidhi, Abu Dawud. See also Al-Albani, Sahih At-Tirmidhi 2/210 and Sahihul-Jami' As-Saghir 5/180.",
+        "count": 1,
+        "tags": [
+          "illness",
+          "healing",
+          "visit"
+        ],
+        "isFeatured": false
+      },
+      "de": {
+        "title": "Für eine kranke Person",
+        "translation": "Ich bitte Allah, den Gewaltigen, den Herrn des gewaltigen Thrones, dich zu heilen. Siebenmal zu sprechen.",
+        "category": "sickness",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 148; At-Tirmidhi, Abu Dawud. See also Al-Albani, Sahih At-Tirmidhi 2/210 and Sahihul-Jami' As-Saghir 5/180.",
+        "count": 1,
+        "tags": [
+          "illness",
+          "healing",
+          "visit"
+        ],
+        "isFeatured": false
+      },
+      "id": {
+        "title": "Untuk orang sakit",
+        "translation": "Aku memohon kepada Allah Yang Mahaagung, Rabb Arasy yang agung, agar menyembuhkanmu. Dibaca tujuh kali.",
+        "category": "sickness",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 148; At-Tirmidhi, Abu Dawud. See also Al-Albani, Sahih At-Tirmidhi 2/210 and Sahihul-Jami' As-Saghir 5/180.",
+        "count": 1,
+        "tags": [
+          "illness",
+          "healing",
+          "visit"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "За больного человека",
+        "translation": "Прошу Аллаха Великого, Господа Великого Трона, исцелить тебя. Произносится семь раз.",
+        "category": "sickness",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 148; At-Tirmidhi, Abu Dawud. See also Al-Albani, Sahih At-Tirmidhi 2/210 and Sahihul-Jami' As-Saghir 5/180.",
+        "count": 1,
+        "tags": [
+          "illness",
+          "healing",
+          "visit"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Per una persona malata",
+        "translation": "Chiedo ad Allah, l’Immenso, Signore del Trono immenso, di guarirti. Si recita sette volte.",
+        "category": "sickness",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 148; At-Tirmidhi, Abu Dawud. See also Al-Albani, Sahih At-Tirmidhi 2/210 and Sahihul-Jami' As-Saghir 5/180.",
+        "count": 1,
+        "tags": [
+          "illness",
+          "healing",
+          "visit"
+        ],
+        "isFeatured": false
+      },
+      "pt": {
+        "title": "Por uma pessoa doente",
+        "translation": "Peço a Allah, o Magnífico, Senhor do Trono magnífico, que te cure. Recita-se sete vezes.",
+        "category": "sickness",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 148; At-Tirmidhi, Abu Dawud. See also Al-Albani, Sahih At-Tirmidhi 2/210 and Sahihul-Jami' As-Saghir 5/180.",
+        "count": 1,
+        "tags": [
+          "illness",
+          "healing",
+          "visit"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Hasta kişi için",
+        "translation": "Yüce Arş’ın Rabbi olan Azîm Allah’tan sana şifa vermesini dilerim. Yedi kez okunur.",
+        "category": "sickness",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 148; At-Tirmidhi, Abu Dawud. See also Al-Albani, Sahih At-Tirmidhi 2/210 and Sahihul-Jami' As-Saghir 5/180.",
+        "count": 1,
+        "tags": [
+          "illness",
+          "healing",
+          "visit"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Voor een zieke persoon",
+        "translation": "Ik vraag Allah, de Geweldige, Heer van de geweldige Troon, om jou te genezen. Zeven keer te reciteren.",
+        "category": "sickness",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 148; At-Tirmidhi, Abu Dawud. See also Al-Albani, Sahih At-Tirmidhi 2/210 and Sahihul-Jami' As-Saghir 5/180.",
+        "count": 1,
+        "tags": [
+          "illness",
+          "healing",
+          "visit"
+        ],
+        "isFeatured": false
+      }
+    }
+  },
+  {
+    "id": "hisn_grief_154",
+    "arabicText": "إِنّا للهِ وَإِنَا إِلَـيْهِ راجِعـون ، اللهُـمِّ اْجُـرْني في مُصـيبَتي، وَاخْلُـفْ لي خَيْـراً مِنْـها",
+    "transliteration": "Innā lillāhi wa innā ilayhi rāji`ūn, Allāhumma-jurni fī muṣībatī wa 'khluf lī khayran minhā.",
+    "reference": "Hisn al-Muslim 154; Muslim 2/632.",
+    "count": 1,
+    "tags": [
+      "calamity",
+      "grief",
+      "patience"
+    ],
+    "translations": {
+      "es": {
+        "title": "Cuando llega una calamidad",
+        "translation": "Ciertamente pertenecemos a Allah y a Él volveremos. Oh Allah, recompénsame en mi calamidad y sustitúyela por algo mejor.",
+        "category": "funeral_grief",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 154; Muslim 2/632.",
+        "count": 1,
+        "tags": [
+          "calamity",
+          "grief",
+          "patience"
+        ],
+        "isFeatured": false
+      },
+      "en": {
+        "title": "When afflicted by calamity",
+        "translation": "We are from Allah and unto Him we return. O Allah take me out of my plight and bring to me after it something better.",
+        "category": "funeral_grief",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 154; Muslim 2/632.",
+        "count": 1,
+        "tags": [
+          "calamity",
+          "grief",
+          "patience"
+        ],
+        "isFeatured": false
+      },
+      "ar": {
+        "title": "عند المصيبة",
+        "translation": "إِنّا للهِ وَإِنَا إِلَـيْهِ راجِعـون ، اللهُـمِّ اْجُـرْني في مُصـيبَتي، وَاخْلُـفْ لي خَيْـراً مِنْـها",
+        "category": "funeral_grief",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 154; Muslim 2/632.",
+        "count": 1,
+        "tags": [
+          "calamity",
+          "grief",
+          "patience"
+        ],
+        "isFeatured": false
+      },
+      "fr": {
+        "title": "Lors d’une calamité",
+        "translation": "Nous appartenons certes à Allah et c’est vers Lui que nous retournerons. Ô Allah, récompense-moi dans mon épreuve et remplace-la pour moi par quelque chose de meilleur.",
+        "category": "funeral_grief",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 154; Muslim 2/632.",
+        "count": 1,
+        "tags": [
+          "calamity",
+          "grief",
+          "patience"
+        ],
+        "isFeatured": false
+      },
+      "de": {
+        "title": "Bei einem Unglück",
+        "translation": "Wahrlich, wir gehören Allah, und zu Ihm kehren wir zurück. O Allah, belohne mich in meinem Unglück und ersetze es mir durch Besseres.",
+        "category": "funeral_grief",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 154; Muslim 2/632.",
+        "count": 1,
+        "tags": [
+          "calamity",
+          "grief",
+          "patience"
+        ],
+        "isFeatured": false
+      },
+      "id": {
+        "title": "Saat tertimpa musibah",
+        "translation": "Sesungguhnya kami milik Allah dan kepada-Nya kami kembali. Ya Allah, berilah aku pahala dalam musibahku dan gantikanlah untukku dengan yang lebih baik.",
+        "category": "funeral_grief",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 154; Muslim 2/632.",
+        "count": 1,
+        "tags": [
+          "calamity",
+          "grief",
+          "patience"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Когда постигла беда",
+        "translation": "Поистине, мы принадлежим Аллаху и к Нему возвращаемся. О Аллах, вознагради меня в моей беде и замени её для меня лучшим.",
+        "category": "funeral_grief",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 154; Muslim 2/632.",
+        "count": 1,
+        "tags": [
+          "calamity",
+          "grief",
+          "patience"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Quando si subisce una calamità",
+        "translation": "In verità apparteniamo ad Allah e a Lui faremo ritorno. O Allah, ricompensami nella mia prova e sostituiscila per me con qualcosa di migliore.",
+        "category": "funeral_grief",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 154; Muslim 2/632.",
+        "count": 1,
+        "tags": [
+          "calamity",
+          "grief",
+          "patience"
+        ],
+        "isFeatured": false
+      },
+      "pt": {
+        "title": "Quando ocorre uma calamidade",
+        "translation": "Certamente pertencemos a Allah e a Ele retornaremos. Ó Allah, recompensa-me na minha calamidade e substitui-a para mim por algo melhor.",
+        "category": "funeral_grief",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 154; Muslim 2/632.",
+        "count": 1,
+        "tags": [
+          "calamity",
+          "grief",
+          "patience"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Musibet gelince",
+        "translation": "Şüphesiz biz Allah’a aitiz ve O’na döneceğiz. Allah’ım, musibetimde bana ecir ver ve onun yerine bana daha hayırlısını ver.",
+        "category": "funeral_grief",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 154; Muslim 2/632.",
+        "count": 1,
+        "tags": [
+          "calamity",
+          "grief",
+          "patience"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Wanneer een ramp treft",
+        "translation": "Wij behoren aan Allah toe en tot Hem keren wij terug. O Allah, beloon mij in mijn beproeving en vervang haar voor mij door iets beters.",
+        "category": "funeral_grief",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 154; Muslim 2/632.",
+        "count": 1,
+        "tags": [
+          "calamity",
+          "grief",
+          "patience"
+        ],
+        "isFeatured": false
+      }
+    }
+  },
+  {
+    "id": "hisn_grief_165",
+    "arabicText": "السَّلامُ عَلَـيْكُمْ أَهْلَ الدِّيارِ مِنَ المؤْمِنيـنَ وَالْمُسْلِمين، وَإِنّا إِنْ شاءَ اللهُ بِكُـمْ لاحِقـون، نَسْـاَلُ اللهَ لنـا وَلَكُـمْ العـافِيَة",
+    "transliteration": "Assalāmu `alaykum ahlad-diyāri minal-mu'minīna wa ‘l-muslimīn, wa innā in shā' Allāhu bikum lāḥiqūn nas'alullāha lanā wa lakumul-`āfiyah.",
+    "reference": "Hisn al-Muslim 165; Muslim 2/671, Ibn Majah 1/494, the portion brackets is from Muslim 2/671.",
+    "count": 1,
+    "tags": [
+      "graves",
+      "afterlife",
+      "wellbeing"
+    ],
+    "translations": {
+      "es": {
+        "title": "Al visitar las tumbas",
+        "translation": "La paz sea con vosotros, moradores de estas moradas, creyentes y musulmanes. Si Allah quiere, nos uniremos a vosotros. Pedimos a Allah bienestar para nosotros y para vosotros.",
+        "category": "funeral_grief",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 165; Muslim 2/671, Ibn Majah 1/494, the portion brackets is from Muslim 2/671.",
+        "count": 1,
+        "tags": [
+          "graves",
+          "afterlife",
+          "wellbeing"
+        ],
+        "isFeatured": false
+      },
+      "en": {
+        "title": "When visiting graves",
+        "translation": "Peace be upon you, people of this abode, from among the believers and those who are Muslims, and we, by the Will of Allah, shall be joining you. [May Allah have mercy on the first of us and the last of us] I ask Allah to grant us and you well-being.",
+        "category": "funeral_grief",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 165; Muslim 2/671, Ibn Majah 1/494, the portion brackets is from Muslim 2/671.",
+        "count": 1,
+        "tags": [
+          "graves",
+          "afterlife",
+          "wellbeing"
+        ],
+        "isFeatured": false
+      },
+      "ar": {
+        "title": "زيارة القبور",
+        "translation": "السَّلامُ عَلَـيْكُمْ أَهْلَ الدِّيارِ مِنَ المؤْمِنيـنَ وَالْمُسْلِمين، وَإِنّا إِنْ شاءَ اللهُ بِكُـمْ لاحِقـون، نَسْـاَلُ اللهَ لنـا وَلَكُـمْ العـافِيَة",
+        "category": "funeral_grief",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 165; Muslim 2/671, Ibn Majah 1/494, the portion brackets is from Muslim 2/671.",
+        "count": 1,
+        "tags": [
+          "graves",
+          "afterlife",
+          "wellbeing"
+        ],
+        "isFeatured": false
+      },
+      "fr": {
+        "title": "En visitant les tombes",
+        "translation": "Que la paix soit sur vous, habitants de ces demeures, croyants et musulmans. Si Allah le veut, nous vous rejoindrons. Nous demandons à Allah le bien-être pour nous et pour vous.",
+        "category": "funeral_grief",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 165; Muslim 2/671, Ibn Majah 1/494, the portion brackets is from Muslim 2/671.",
+        "count": 1,
+        "tags": [
+          "graves",
+          "afterlife",
+          "wellbeing"
+        ],
+        "isFeatured": false
+      },
+      "de": {
+        "title": "Beim Besuch von Gräbern",
+        "translation": "Friede sei mit euch, Bewohner dieser Stätten unter den Gläubigen und Muslimen. Wenn Allah will, werden wir euch folgen. Wir bitten Allah um Wohlergehen für uns und für euch.",
+        "category": "funeral_grief",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 165; Muslim 2/671, Ibn Majah 1/494, the portion brackets is from Muslim 2/671.",
+        "count": 1,
+        "tags": [
+          "graves",
+          "afterlife",
+          "wellbeing"
+        ],
+        "isFeatured": false
+      },
+      "id": {
+        "title": "Saat ziarah kubur",
+        "translation": "Semoga keselamatan atas kalian, penghuni negeri ini dari kalangan mukmin dan muslim. Insya Allah kami akan menyusul kalian. Kami memohon kepada Allah keselamatan bagi kami dan kalian.",
+        "category": "funeral_grief",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 165; Muslim 2/671, Ibn Majah 1/494, the portion brackets is from Muslim 2/671.",
+        "count": 1,
+        "tags": [
+          "graves",
+          "afterlife",
+          "wellbeing"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "При посещении могил",
+        "translation": "Мир вам, обитатели этих жилищ из числа верующих и мусульман. Если пожелает Аллах, мы присоединимся к вам. Просим Аллаха благополучия для нас и для вас.",
+        "category": "funeral_grief",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 165; Muslim 2/671, Ibn Majah 1/494, the portion brackets is from Muslim 2/671.",
+        "count": 1,
+        "tags": [
+          "graves",
+          "afterlife",
+          "wellbeing"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Visitando le tombe",
+        "translation": "La pace sia su di voi, abitanti di queste dimore, credenti e musulmani. Se Allah vuole, vi raggiungeremo. Chiediamo ad Allah benessere per noi e per voi.",
+        "category": "funeral_grief",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 165; Muslim 2/671, Ibn Majah 1/494, the portion brackets is from Muslim 2/671.",
+        "count": 1,
+        "tags": [
+          "graves",
+          "afterlife",
+          "wellbeing"
+        ],
+        "isFeatured": false
+      },
+      "pt": {
+        "title": "Ao visitar túmulos",
+        "translation": "Que a paz esteja convosco, habitantes destas moradas, crentes e muçulmanos. Se Allah quiser, juntar-nos-emos a vós. Pedimos a Allah bem-estar para nós e para vós.",
+        "category": "funeral_grief",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 165; Muslim 2/671, Ibn Majah 1/494, the portion brackets is from Muslim 2/671.",
+        "count": 1,
+        "tags": [
+          "graves",
+          "afterlife",
+          "wellbeing"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Kabirleri ziyaret ederken",
+        "translation": "Ey bu diyarın mümin ve Müslüman sakinleri, selam üzerinize olsun. Allah dilerse biz de size katılacağız. Allah’tan bize ve size afiyet dileriz.",
+        "category": "funeral_grief",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 165; Muslim 2/671, Ibn Majah 1/494, the portion brackets is from Muslim 2/671.",
+        "count": 1,
+        "tags": [
+          "graves",
+          "afterlife",
+          "wellbeing"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Bij het bezoeken van graven",
+        "translation": "Vrede zij met jullie, bewoners van deze verblijfplaatsen onder de gelovigen en moslims. Als Allah wil, zullen wij jullie volgen. Wij vragen Allah welzijn voor ons en voor jullie.",
+        "category": "funeral_grief",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 165; Muslim 2/671, Ibn Majah 1/494, the portion brackets is from Muslim 2/671.",
+        "count": 1,
+        "tags": [
+          "graves",
+          "afterlife",
+          "wellbeing"
+        ],
+        "isFeatured": false
+      }
+    }
+  },
+  {
+    "id": "hisn_weather_166",
+    "arabicText": "اللّهُـمَّ إِنَّـي أَسْـأَلُـكَ خَيْـرَها، وَأَعـوذُ بِكَ مِنْ شَـرِّها",
+    "transliteration": "Allāhumma innī as'aluka khayrahā, wa a`ūdhu bika min sharrihā.",
+    "reference": "Hisn al-Muslim 166; Abu Dawud 4/326, Ibn Majah 2/1228. See also Al-Albani, Sahih Ibn Majah 2/305.",
+    "count": 1,
+    "tags": [
+      "wind",
+      "weather",
+      "protection"
+    ],
+    "translations": {
+      "es": {
+        "title": "Durante el viento",
+        "translation": "Oh Allah, Te pido su bien y busco refugio en Ti de su mal.",
+        "category": "weather_nature",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 166; Abu Dawud 4/326, Ibn Majah 2/1228. See also Al-Albani, Sahih Ibn Majah 2/305.",
+        "count": 1,
+        "tags": [
+          "wind",
+          "weather",
+          "protection"
+        ],
+        "isFeatured": false
+      },
+      "en": {
+        "title": "During wind",
+        "translation": "O Allah, I ask You for the good of it, and seek refuge in You against its evil.",
+        "category": "weather_nature",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 166; Abu Dawud 4/326, Ibn Majah 2/1228. See also Al-Albani, Sahih Ibn Majah 2/305.",
+        "count": 1,
+        "tags": [
+          "wind",
+          "weather",
+          "protection"
+        ],
+        "isFeatured": false
+      },
+      "ar": {
+        "title": "دعاء الريح",
+        "translation": "اللّهُـمَّ إِنَّـي أَسْـأَلُـكَ خَيْـرَها، وَأَعـوذُ بِكَ مِنْ شَـرِّها",
+        "category": "weather_nature",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 166; Abu Dawud 4/326, Ibn Majah 2/1228. See also Al-Albani, Sahih Ibn Majah 2/305.",
+        "count": 1,
+        "tags": [
+          "wind",
+          "weather",
+          "protection"
+        ],
+        "isFeatured": false
+      },
+      "fr": {
+        "title": "Pendant le vent",
+        "translation": "Ô Allah, je Te demande son bien et je cherche refuge auprès de Toi contre son mal.",
+        "category": "weather_nature",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 166; Abu Dawud 4/326, Ibn Majah 2/1228. See also Al-Albani, Sahih Ibn Majah 2/305.",
+        "count": 1,
+        "tags": [
+          "wind",
+          "weather",
+          "protection"
+        ],
+        "isFeatured": false
+      },
+      "de": {
+        "title": "Bei Wind",
+        "translation": "O Allah, ich bitte Dich um sein Gutes und suche Zuflucht bei Dir vor seinem Übel.",
+        "category": "weather_nature",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 166; Abu Dawud 4/326, Ibn Majah 2/1228. See also Al-Albani, Sahih Ibn Majah 2/305.",
+        "count": 1,
+        "tags": [
+          "wind",
+          "weather",
+          "protection"
+        ],
+        "isFeatured": false
+      },
+      "id": {
+        "title": "Saat angin bertiup",
+        "translation": "Ya Allah, aku memohon kepada-Mu kebaikannya dan berlindung kepada-Mu dari keburukannya.",
+        "category": "weather_nature",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 166; Abu Dawud 4/326, Ibn Majah 2/1228. See also Al-Albani, Sahih Ibn Majah 2/305.",
+        "count": 1,
+        "tags": [
+          "wind",
+          "weather",
+          "protection"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Во время ветра",
+        "translation": "О Аллах, прошу у Тебя его блага и прибегаю к Тебе от его зла.",
+        "category": "weather_nature",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 166; Abu Dawud 4/326, Ibn Majah 2/1228. See also Al-Albani, Sahih Ibn Majah 2/305.",
+        "count": 1,
+        "tags": [
+          "wind",
+          "weather",
+          "protection"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Durante il vento",
+        "translation": "O Allah, Ti chiedo il suo bene e cerco rifugio in Te dal suo male.",
+        "category": "weather_nature",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 166; Abu Dawud 4/326, Ibn Majah 2/1228. See also Al-Albani, Sahih Ibn Majah 2/305.",
+        "count": 1,
+        "tags": [
+          "wind",
+          "weather",
+          "protection"
+        ],
+        "isFeatured": false
+      },
+      "pt": {
+        "title": "Durante o vento",
+        "translation": "Ó Allah, peço-Te o seu bem e busco refúgio em Ti contra o seu mal.",
+        "category": "weather_nature",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 166; Abu Dawud 4/326, Ibn Majah 2/1228. See also Al-Albani, Sahih Ibn Majah 2/305.",
+        "count": 1,
+        "tags": [
+          "wind",
+          "weather",
+          "protection"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Rüzgar esince",
+        "translation": "Allah’ım, onun hayrını Senden isterim ve onun şerrinden Sana sığınırım.",
+        "category": "weather_nature",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 166; Abu Dawud 4/326, Ibn Majah 2/1228. See also Al-Albani, Sahih Ibn Majah 2/305.",
+        "count": 1,
+        "tags": [
+          "wind",
+          "weather",
+          "protection"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Bij wind",
+        "translation": "O Allah, ik vraag U om het goede ervan en zoek toevlucht bij U tegen het kwade ervan.",
+        "category": "weather_nature",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 166; Abu Dawud 4/326, Ibn Majah 2/1228. See also Al-Albani, Sahih Ibn Majah 2/305.",
+        "count": 1,
+        "tags": [
+          "wind",
+          "weather",
+          "protection"
+        ],
+        "isFeatured": false
+      }
+    }
+  },
+  {
+    "id": "hisn_weather_168",
+    "arabicText": "سُبْـحانَ الّذي يُسَبِّـحُ الـرَّعْدُ بِحَمْـدِهِ، وَالملائِكـةُ مِنْ خيـفَته",
+    "transliteration": "Subḥāna ‘l-ladhī yusabbiḥur-ra`du bi ḥamdihi wa ‘l-malā'ikatu min khīfatih.",
+    "reference": "Hisn al-Muslim 168; Whenever Abdullah bin Zubair (RA) would hear thunder, he would abandon all conversation and say this supplication. See Al-Muwatta' 2/992. It was graded authentic by Al-Albani as a statement of Abdullah bin Zubayr only.",
+    "count": 1,
+    "tags": [
+      "thunder",
+      "weather",
+      "glorification"
+    ],
+    "translations": {
+      "es": {
+        "title": "Al oír el trueno",
+        "translation": "Gloria a Aquel a quien el trueno glorifica con Su alabanza, y los ángeles por temor a Él.",
+        "category": "weather_nature",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 168; Whenever Abdullah bin Zubair (RA) would hear thunder, he would abandon all conversation and say this supplication. See Al-Muwatta' 2/992. It was graded authentic by Al-Albani as a statement of Abdullah bin Zubayr only.",
+        "count": 1,
+        "tags": [
+          "thunder",
+          "weather",
+          "glorification"
+        ],
+        "isFeatured": false
+      },
+      "en": {
+        "title": "Upon hearing thunder",
+        "translation": "Glory is to Him Whom thunder and angels glorify due to fear of Him.",
+        "category": "weather_nature",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 168; Whenever Abdullah bin Zubair (RA) would hear thunder, he would abandon all conversation and say this supplication. See Al-Muwatta' 2/992. It was graded authentic by Al-Albani as a statement of Abdullah bin Zubayr only.",
+        "count": 1,
+        "tags": [
+          "thunder",
+          "weather",
+          "glorification"
+        ],
+        "isFeatured": false
+      },
+      "ar": {
+        "title": "عند سماع الرعد",
+        "translation": "سُبْـحانَ الّذي يُسَبِّـحُ الـرَّعْدُ بِحَمْـدِهِ، وَالملائِكـةُ مِنْ خيـفَته",
+        "category": "weather_nature",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 168; Whenever Abdullah bin Zubair (RA) would hear thunder, he would abandon all conversation and say this supplication. See Al-Muwatta' 2/992. It was graded authentic by Al-Albani as a statement of Abdullah bin Zubayr only.",
+        "count": 1,
+        "tags": [
+          "thunder",
+          "weather",
+          "glorification"
+        ],
+        "isFeatured": false
+      },
+      "fr": {
+        "title": "En entendant le tonnerre",
+        "translation": "Gloire à Celui que le tonnerre glorifie par Sa louange, ainsi que les anges par crainte de Lui.",
+        "category": "weather_nature",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 168; Whenever Abdullah bin Zubair (RA) would hear thunder, he would abandon all conversation and say this supplication. See Al-Muwatta' 2/992. It was graded authentic by Al-Albani as a statement of Abdullah bin Zubayr only.",
+        "count": 1,
+        "tags": [
+          "thunder",
+          "weather",
+          "glorification"
+        ],
+        "isFeatured": false
+      },
+      "de": {
+        "title": "Beim Hören von Donner",
+        "translation": "Gepriesen sei Derjenige, den der Donner mit Seinem Lobpreis verherrlicht, und die Engel aus Furcht vor Ihm.",
+        "category": "weather_nature",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 168; Whenever Abdullah bin Zubair (RA) would hear thunder, he would abandon all conversation and say this supplication. See Al-Muwatta' 2/992. It was graded authentic by Al-Albani as a statement of Abdullah bin Zubayr only.",
+        "count": 1,
+        "tags": [
+          "thunder",
+          "weather",
+          "glorification"
+        ],
+        "isFeatured": false
+      },
+      "id": {
+        "title": "Saat mendengar petir",
+        "translation": "Mahasuci Dzat yang petir bertasbih memuji-Nya, dan para malaikat karena takut kepada-Nya.",
+        "category": "weather_nature",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 168; Whenever Abdullah bin Zubair (RA) would hear thunder, he would abandon all conversation and say this supplication. See Al-Muwatta' 2/992. It was graded authentic by Al-Albani as a statement of Abdullah bin Zubayr only.",
+        "count": 1,
+        "tags": [
+          "thunder",
+          "weather",
+          "glorification"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Услышав гром",
+        "translation": "Пречист Тот, Кого гром прославляет хвалой Ему, и ангелы из страха перед Ним.",
+        "category": "weather_nature",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 168; Whenever Abdullah bin Zubair (RA) would hear thunder, he would abandon all conversation and say this supplication. See Al-Muwatta' 2/992. It was graded authentic by Al-Albani as a statement of Abdullah bin Zubayr only.",
+        "count": 1,
+        "tags": [
+          "thunder",
+          "weather",
+          "glorification"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Sentendo il tuono",
+        "translation": "Gloria a Colui che il tuono glorifica con la Sua lode, e gli angeli per timore di Lui.",
+        "category": "weather_nature",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 168; Whenever Abdullah bin Zubair (RA) would hear thunder, he would abandon all conversation and say this supplication. See Al-Muwatta' 2/992. It was graded authentic by Al-Albani as a statement of Abdullah bin Zubayr only.",
+        "count": 1,
+        "tags": [
+          "thunder",
+          "weather",
+          "glorification"
+        ],
+        "isFeatured": false
+      },
+      "pt": {
+        "title": "Ao ouvir o trovão",
+        "translation": "Glória Àquele a quem o trovão glorifica com o Seu louvor, e os anjos por temor a Ele.",
+        "category": "weather_nature",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 168; Whenever Abdullah bin Zubair (RA) would hear thunder, he would abandon all conversation and say this supplication. See Al-Muwatta' 2/992. It was graded authentic by Al-Albani as a statement of Abdullah bin Zubayr only.",
+        "count": 1,
+        "tags": [
+          "thunder",
+          "weather",
+          "glorification"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Gök gürültüsünü duyunca",
+        "translation": "Gök gürültüsünün hamd ile, meleklerin de korkusundan tesbih ettiği Allah’ı tenzih ederim.",
+        "category": "weather_nature",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 168; Whenever Abdullah bin Zubair (RA) would hear thunder, he would abandon all conversation and say this supplication. See Al-Muwatta' 2/992. It was graded authentic by Al-Albani as a statement of Abdullah bin Zubayr only.",
+        "count": 1,
+        "tags": [
+          "thunder",
+          "weather",
+          "glorification"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Bij het horen van donder",
+        "translation": "Glorie aan Degene die door de donder met Zijn lof wordt verheerlijkt, en door de engelen uit vrees voor Hem.",
+        "category": "weather_nature",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 168; Whenever Abdullah bin Zubair (RA) would hear thunder, he would abandon all conversation and say this supplication. See Al-Muwatta' 2/992. It was graded authentic by Al-Albani as a statement of Abdullah bin Zubayr only.",
+        "count": 1,
+        "tags": [
+          "thunder",
+          "weather",
+          "glorification"
+        ],
+        "isFeatured": false
+      }
+    }
+  },
+  {
+    "id": "hisn_weather_175",
+    "arabicText": "اللهُ أَكْـبَر، اللّهُمَّ أَهِلَّـهُ عَلَيْـنا بِالأمْـنِ وَالإيمـان، والسَّلامَـةِ والإسْلام، وَالتَّـوْفيـقِ لِما تُحِـبُّ رَبَّنـا وَتَـرْضـى، رَبُّنـا وَرَبُّكَ الله",
+    "transliteration": "Allāhu Akbar, Allāhumma ahillahu `alayna bi ‘l-amni wa ‘l-īmān, was-salāmati wa ‘l-'Islām, wat-tawfīqi limā tuḥibbu Rabbanā wa tarḍā, Rabbunā wa Rabbukallāh.",
+    "reference": "Hisn al-Muslim 175; At-Tirmidhi 5/504, Ad-Darimi 1/336. See also Al-Albani, Sahih At-Tirmidhi 3/157.",
+    "count": 1,
+    "tags": [
+      "crescent",
+      "moon",
+      "islam"
+    ],
+    "translations": {
+      "es": {
+        "title": "Al ver la luna nueva",
+        "translation": "Allah es el Más Grande. Oh Allah, haz que esta luna nueva llegue con seguridad, fe, paz, Islam y éxito en lo que Tú amas y Te complace. Nuestro Señor y tu Señor es Allah.",
+        "category": "weather_nature",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 175; At-Tirmidhi 5/504, Ad-Darimi 1/336. See also Al-Albani, Sahih At-Tirmidhi 3/157.",
+        "count": 1,
+        "tags": [
+          "crescent",
+          "moon",
+          "islam"
+        ],
+        "isFeatured": false
+      },
+      "en": {
+        "title": "Upon sighting the crescent moon",
+        "translation": "Allah is the Most Great. O Allah, bring us the new moon with security and Faith, with peace and in Islam, and in harmony with what our Lord loves and what pleases Him. Our Lord and your Lord is Allah.",
+        "category": "weather_nature",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 175; At-Tirmidhi 5/504, Ad-Darimi 1/336. See also Al-Albani, Sahih At-Tirmidhi 3/157.",
+        "count": 1,
+        "tags": [
+          "crescent",
+          "moon",
+          "islam"
+        ],
+        "isFeatured": false
+      },
+      "ar": {
+        "title": "عند رؤية الهلال",
+        "translation": "اللهُ أَكْـبَر، اللّهُمَّ أَهِلَّـهُ عَلَيْـنا بِالأمْـنِ وَالإيمـان، والسَّلامَـةِ والإسْلام، وَالتَّـوْفيـقِ لِما تُحِـبُّ رَبَّنـا وَتَـرْضـى، رَبُّنـا وَرَبُّكَ الله",
+        "category": "weather_nature",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 175; At-Tirmidhi 5/504, Ad-Darimi 1/336. See also Al-Albani, Sahih At-Tirmidhi 3/157.",
+        "count": 1,
+        "tags": [
+          "crescent",
+          "moon",
+          "islam"
+        ],
+        "isFeatured": false
+      },
+      "fr": {
+        "title": "En voyant le croissant lunaire",
+        "translation": "Allah est le Plus Grand. Ô Allah, fais paraître ce croissant avec sécurité, foi, paix, Islam et réussite dans ce que Tu aimes et agrées. Notre Seigneur et ton Seigneur est Allah.",
+        "category": "weather_nature",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 175; At-Tirmidhi 5/504, Ad-Darimi 1/336. See also Al-Albani, Sahih At-Tirmidhi 3/157.",
+        "count": 1,
+        "tags": [
+          "crescent",
+          "moon",
+          "islam"
+        ],
+        "isFeatured": false
+      },
+      "de": {
+        "title": "Beim Sehen der Mondsichel",
+        "translation": "Allah ist der Größte. O Allah, bringe uns diese Mondsichel mit Sicherheit, Glauben, Frieden, Islam und Erfolg in dem, was Du liebst und womit Du zufrieden bist. Unser Herr und dein Herr ist Allah.",
+        "category": "weather_nature",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 175; At-Tirmidhi 5/504, Ad-Darimi 1/336. See also Al-Albani, Sahih At-Tirmidhi 3/157.",
+        "count": 1,
+        "tags": [
+          "crescent",
+          "moon",
+          "islam"
+        ],
+        "isFeatured": false
+      },
+      "id": {
+        "title": "Saat melihat hilal",
+        "translation": "Allah Mahabesar. Ya Allah, datangkanlah hilal ini kepada kami dengan keamanan, iman, keselamatan, Islam, dan taufik kepada apa yang Engkau cintai dan ridhai. Rabb kami dan Rabbmu adalah Allah.",
+        "category": "weather_nature",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 175; At-Tirmidhi 5/504, Ad-Darimi 1/336. See also Al-Albani, Sahih At-Tirmidhi 3/157.",
+        "count": 1,
+        "tags": [
+          "crescent",
+          "moon",
+          "islam"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "При виде нового месяца",
+        "translation": "Аллах Велик. О Аллах, приведи этот новый месяц к нам с безопасностью, верой, миром, Исламом и успехом в том, что Ты любишь и чем доволен. Наш Господь и твой Господь — Аллах.",
+        "category": "weather_nature",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 175; At-Tirmidhi 5/504, Ad-Darimi 1/336. See also Al-Albani, Sahih At-Tirmidhi 3/157.",
+        "count": 1,
+        "tags": [
+          "crescent",
+          "moon",
+          "islam"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Vedendo la luna nuova",
+        "translation": "Allah è il Più Grande. O Allah, fa’ che questa luna nuova giunga con sicurezza, fede, pace, Islam e successo in ciò che Tu ami e approvi. Il nostro Signore e il tuo Signore è Allah.",
+        "category": "weather_nature",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 175; At-Tirmidhi 5/504, Ad-Darimi 1/336. See also Al-Albani, Sahih At-Tirmidhi 3/157.",
+        "count": 1,
+        "tags": [
+          "crescent",
+          "moon",
+          "islam"
+        ],
+        "isFeatured": false
+      },
+      "pt": {
+        "title": "Ao ver a lua nova",
+        "translation": "Allah é o Maior. Ó Allah, faze esta lua nova chegar com segurança, fé, paz, Islam e sucesso no que Tu amas e Te agradas. Nosso Senhor e o teu Senhor é Allah.",
+        "category": "weather_nature",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 175; At-Tirmidhi 5/504, Ad-Darimi 1/336. See also Al-Albani, Sahih At-Tirmidhi 3/157.",
+        "count": 1,
+        "tags": [
+          "crescent",
+          "moon",
+          "islam"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Hilali görünce",
+        "translation": "Allah en büyüktür. Allah’ım, bu hilali bize güven, iman, esenlik, İslam ve Rabbimizin sevdiği ve razı olduğu şeylerde başarı ile getir. Bizim Rabbimiz de senin Rabbin de Allah’tır.",
+        "category": "weather_nature",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 175; At-Tirmidhi 5/504, Ad-Darimi 1/336. See also Al-Albani, Sahih At-Tirmidhi 3/157.",
+        "count": 1,
+        "tags": [
+          "crescent",
+          "moon",
+          "islam"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Bij het zien van de maansikkel",
+        "translation": "Allah is de Grootste. O Allah, laat deze nieuwe maan tot ons komen met veiligheid, geloof, vrede, Islam en succes in wat U liefhebt en waarmee U tevreden bent. Onze Heer en jouw Heer is Allah.",
+        "category": "weather_nature",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 175; At-Tirmidhi 5/504, Ad-Darimi 1/336. See also Al-Albani, Sahih At-Tirmidhi 3/157.",
+        "count": 1,
+        "tags": [
+          "crescent",
+          "moon",
+          "islam"
+        ],
+        "isFeatured": false
+      }
+    }
+  },
+  {
+    "id": "hisn_fasting_176",
+    "arabicText": "ذَهَـبَ الظَّمَـأُ، وَابْتَلَّـتِ العُـروق، وَثَبَـتَ الأجْـرُ إِنْ شـاءَ الله",
+    "transliteration": "Dhahabaẓ-ẓama', wabtallati ‘l-`urūq, wa thabata ‘l-'ajru in shā Allāh.",
+    "reference": "Hisn al-Muslim 176; Abu Dawud 2/306 and others. See also Al- Albani, Sahihul-Jami' As-Saghir 4/209.",
+    "count": 1,
+    "tags": [
+      "iftar",
+      "fasting",
+      "reward"
+    ],
+    "translations": {
+      "es": {
+        "title": "Al romper el ayuno",
+        "translation": "La sed se ha ido, las venas se han humedecido y la recompensa ha quedado confirmada, si Allah quiere.",
+        "category": "fasting",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 176; Abu Dawud 2/306 and others. See also Al- Albani, Sahihul-Jami' As-Saghir 4/209.",
+        "count": 1,
+        "tags": [
+          "iftar",
+          "fasting",
+          "reward"
+        ],
+        "isFeatured": false
+      },
+      "en": {
+        "title": "When breaking the fast",
+        "translation": "The thirst is gone, the veins are moistened, and the reward is confirmed, if Allah wills.",
+        "category": "fasting",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 176; Abu Dawud 2/306 and others. See also Al- Albani, Sahihul-Jami' As-Saghir 4/209.",
+        "count": 1,
+        "tags": [
+          "iftar",
+          "fasting",
+          "reward"
+        ],
+        "isFeatured": false
+      },
+      "ar": {
+        "title": "عند الإفطار",
+        "translation": "ذَهَـبَ الظَّمَـأُ، وَابْتَلَّـتِ العُـروق، وَثَبَـتَ الأجْـرُ إِنْ شـاءَ الله",
+        "category": "fasting",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 176; Abu Dawud 2/306 and others. See also Al- Albani, Sahihul-Jami' As-Saghir 4/209.",
+        "count": 1,
+        "tags": [
+          "iftar",
+          "fasting",
+          "reward"
+        ],
+        "isFeatured": false
+      },
+      "fr": {
+        "title": "À la rupture du jeûne",
+        "translation": "La soif est partie, les veines sont humidifiées et la récompense est confirmée, si Allah le veut.",
+        "category": "fasting",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 176; Abu Dawud 2/306 and others. See also Al- Albani, Sahihul-Jami' As-Saghir 4/209.",
+        "count": 1,
+        "tags": [
+          "iftar",
+          "fasting",
+          "reward"
+        ],
+        "isFeatured": false
+      },
+      "de": {
+        "title": "Beim Fastenbrechen",
+        "translation": "Der Durst ist vergangen, die Adern sind befeuchtet, und die Belohnung ist bestätigt, wenn Allah will.",
+        "category": "fasting",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 176; Abu Dawud 2/306 and others. See also Al- Albani, Sahihul-Jami' As-Saghir 4/209.",
+        "count": 1,
+        "tags": [
+          "iftar",
+          "fasting",
+          "reward"
+        ],
+        "isFeatured": false
+      },
+      "id": {
+        "title": "Saat berbuka puasa",
+        "translation": "Dahaga telah hilang, urat-urat telah basah, dan pahala telah tetap, insya Allah.",
+        "category": "fasting",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 176; Abu Dawud 2/306 and others. See also Al- Albani, Sahihul-Jami' As-Saghir 4/209.",
+        "count": 1,
+        "tags": [
+          "iftar",
+          "fasting",
+          "reward"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "При разговении",
+        "translation": "Жажда ушла, жилы увлажнились, и награда утвердилась, если пожелает Аллах.",
+        "category": "fasting",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 176; Abu Dawud 2/306 and others. See also Al- Albani, Sahihul-Jami' As-Saghir 4/209.",
+        "count": 1,
+        "tags": [
+          "iftar",
+          "fasting",
+          "reward"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Rompendo il digiuno",
+        "translation": "La sete è passata, le vene si sono inumidite e la ricompensa è confermata, se Allah vuole.",
+        "category": "fasting",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 176; Abu Dawud 2/306 and others. See also Al- Albani, Sahihul-Jami' As-Saghir 4/209.",
+        "count": 1,
+        "tags": [
+          "iftar",
+          "fasting",
+          "reward"
+        ],
+        "isFeatured": false
+      },
+      "pt": {
+        "title": "Ao quebrar o jejum",
+        "translation": "A sede foi embora, as veias foram umedecidas e a recompensa foi confirmada, se Allah quiser.",
+        "category": "fasting",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 176; Abu Dawud 2/306 and others. See also Al- Albani, Sahihul-Jami' As-Saghir 4/209.",
+        "count": 1,
+        "tags": [
+          "iftar",
+          "fasting",
+          "reward"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Orucu açarken",
+        "translation": "Susuzluk gitti, damarlar ıslandı ve ecir sabit oldu, Allah dilerse.",
+        "category": "fasting",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 176; Abu Dawud 2/306 and others. See also Al- Albani, Sahihul-Jami' As-Saghir 4/209.",
+        "count": 1,
+        "tags": [
+          "iftar",
+          "fasting",
+          "reward"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Bij het verbreken van het vasten",
+        "translation": "De dorst is verdwenen, de aderen zijn bevochtigd en de beloning is bevestigd, als Allah wil.",
+        "category": "fasting",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 176; Abu Dawud 2/306 and others. See also Al- Albani, Sahihul-Jami' As-Saghir 4/209.",
+        "count": 1,
+        "tags": [
+          "iftar",
+          "fasting",
+          "reward"
+        ],
+        "isFeatured": false
+      }
+    }
+  },
+  {
+    "id": "hisn_fasting_184",
+    "arabicText": "أَفْطَـرَ عِنْدَكُم الصّـائِمونَ وَأَكَلَ طَعامَـكُمُ الأبْـرار، وَصَلَّـتْ عَلَـيْكُمُ الملائِكَـة",
+    "transliteration": "Afṭara `indakumuṣ-ṣā'imūn, wa akala ṭa`āmakumu ‘l-'abrār, wa ṣallat `alaykumu ‘l-malā'ikah.",
+    "reference": "Hisn al-Muslim 184; Abu Dawud 3/367, Ibn Majah 1/556, An-Nasa'i, 'Amalul-Yawm wal-Laylah 296-8. Al-Albani graded it authentic in Sahih Abu Dawud 2/730.",
+    "count": 1,
+    "tags": [
+      "iftar",
+      "host",
+      "blessing"
+    ],
+    "translations": {
+      "es": {
+        "title": "Al romper el ayuno en casa de alguien",
+        "translation": "Que los ayunantes rompan su ayuno con vosotros, que los piadosos coman de vuestra comida y que los ángeles pidan bendiciones por vosotros.",
+        "category": "fasting",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 184; Abu Dawud 3/367, Ibn Majah 1/556, An-Nasa'i, 'Amalul-Yawm wal-Laylah 296-8. Al-Albani graded it authentic in Sahih Abu Dawud 2/730.",
+        "count": 1,
+        "tags": [
+          "iftar",
+          "host",
+          "blessing"
+        ],
+        "isFeatured": false
+      },
+      "en": {
+        "title": "When breaking fast with a host",
+        "translation": "With you, those who are fasting have broken their fast, you have fed those who are righteous, and the angels recite their prayers upon you.",
+        "category": "fasting",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 184; Abu Dawud 3/367, Ibn Majah 1/556, An-Nasa'i, 'Amalul-Yawm wal-Laylah 296-8. Al-Albani graded it authentic in Sahih Abu Dawud 2/730.",
+        "count": 1,
+        "tags": [
+          "iftar",
+          "host",
+          "blessing"
+        ],
+        "isFeatured": false
+      },
+      "ar": {
+        "title": "إذا أفطر عند أهل بيت",
+        "translation": "أَفْطَـرَ عِنْدَكُم الصّـائِمونَ وَأَكَلَ طَعامَـكُمُ الأبْـرار، وَصَلَّـتْ عَلَـيْكُمُ الملائِكَـة",
+        "category": "fasting",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 184; Abu Dawud 3/367, Ibn Majah 1/556, An-Nasa'i, 'Amalul-Yawm wal-Laylah 296-8. Al-Albani graded it authentic in Sahih Abu Dawud 2/730.",
+        "count": 1,
+        "tags": [
+          "iftar",
+          "host",
+          "blessing"
+        ],
+        "isFeatured": false
+      },
+      "fr": {
+        "title": "En rompant le jeûne chez quelqu’un",
+        "translation": "Que les jeûneurs rompent leur jeûne chez vous, que les pieux mangent de votre nourriture et que les anges prient pour vous.",
+        "category": "fasting",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 184; Abu Dawud 3/367, Ibn Majah 1/556, An-Nasa'i, 'Amalul-Yawm wal-Laylah 296-8. Al-Albani graded it authentic in Sahih Abu Dawud 2/730.",
+        "count": 1,
+        "tags": [
+          "iftar",
+          "host",
+          "blessing"
+        ],
+        "isFeatured": false
+      },
+      "de": {
+        "title": "Beim Fastenbrechen bei Gastgebern",
+        "translation": "Mögen die Fastenden bei euch ihr Fasten brechen, mögen die Rechtschaffenen von eurem Essen essen, und mögen die Engel für euch bitten.",
+        "category": "fasting",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 184; Abu Dawud 3/367, Ibn Majah 1/556, An-Nasa'i, 'Amalul-Yawm wal-Laylah 296-8. Al-Albani graded it authentic in Sahih Abu Dawud 2/730.",
+        "count": 1,
+        "tags": [
+          "iftar",
+          "host",
+          "blessing"
+        ],
+        "isFeatured": false
+      },
+      "id": {
+        "title": "Saat berbuka di rumah seseorang",
+        "translation": "Semoga orang-orang yang berpuasa berbuka di tempat kalian, orang-orang saleh memakan makanan kalian, dan para malaikat mendoakan kalian.",
+        "category": "fasting",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 184; Abu Dawud 3/367, Ibn Majah 1/556, An-Nasa'i, 'Amalul-Yawm wal-Laylah 296-8. Al-Albani graded it authentic in Sahih Abu Dawud 2/730.",
+        "count": 1,
+        "tags": [
+          "iftar",
+          "host",
+          "blessing"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "При разговении у хозяев",
+        "translation": "Пусть постящиеся разговляются у вас, праведные едят вашу пищу, и ангелы молятся за вас.",
+        "category": "fasting",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 184; Abu Dawud 3/367, Ibn Majah 1/556, An-Nasa'i, 'Amalul-Yawm wal-Laylah 296-8. Al-Albani graded it authentic in Sahih Abu Dawud 2/730.",
+        "count": 1,
+        "tags": [
+          "iftar",
+          "host",
+          "blessing"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Rompendo il digiuno da qualcuno",
+        "translation": "Che i digiunanti rompano il digiuno presso di voi, che i pii mangino del vostro cibo e che gli angeli preghino per voi.",
+        "category": "fasting",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 184; Abu Dawud 3/367, Ibn Majah 1/556, An-Nasa'i, 'Amalul-Yawm wal-Laylah 296-8. Al-Albani graded it authentic in Sahih Abu Dawud 2/730.",
+        "count": 1,
+        "tags": [
+          "iftar",
+          "host",
+          "blessing"
+        ],
+        "isFeatured": false
+      },
+      "pt": {
+        "title": "Ao quebrar o jejum na casa de alguém",
+        "translation": "Que os jejuadores quebrem o jejum convosco, que os piedosos comam da vossa comida e que os anjos orem por vós.",
+        "category": "fasting",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 184; Abu Dawud 3/367, Ibn Majah 1/556, An-Nasa'i, 'Amalul-Yawm wal-Laylah 296-8. Al-Albani graded it authentic in Sahih Abu Dawud 2/730.",
+        "count": 1,
+        "tags": [
+          "iftar",
+          "host",
+          "blessing"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Bir evde iftar edince",
+        "translation": "Oruçlular sizin yanınızda iftar etsin, iyiler yemeğinizden yesin ve melekler size dua etsin.",
+        "category": "fasting",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 184; Abu Dawud 3/367, Ibn Majah 1/556, An-Nasa'i, 'Amalul-Yawm wal-Laylah 296-8. Al-Albani graded it authentic in Sahih Abu Dawud 2/730.",
+        "count": 1,
+        "tags": [
+          "iftar",
+          "host",
+          "blessing"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Bij iftar bij een gastheer",
+        "translation": "Mogen de vastenden bij jullie hun vasten verbreken, mogen de rechtschapenen van jullie voedsel eten en mogen de engelen voor jullie bidden.",
+        "category": "fasting",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 184; Abu Dawud 3/367, Ibn Majah 1/556, An-Nasa'i, 'Amalul-Yawm wal-Laylah 296-8. Al-Albani graded it authentic in Sahih Abu Dawud 2/730.",
+        "count": 1,
+        "tags": [
+          "iftar",
+          "host",
+          "blessing"
+        ],
+        "isFeatured": false
+      }
+    }
+  },
+  {
+    "id": "hisn_social_188",
+    "arabicText": "إِذَا عَطَسَ أَحَدُكُم فَلْيَقُلِ (الْحَمْدُ لِلَّهِ)، وَلْيَقُلْ لَهُ أَخُوهُ أَوْ صَاحِبُهُ: (يَرْحَمُكَ اللَّهُ)، فَإِذَا قَالَ لَهُ: (يَرحَمُكَ اللَّهُ)، فَلْيَقُلْ: (يَهْدِيكُمُ اللَّهُ وَيُصْلِحُ بَالَكُمْ)",
+    "transliteration": "When you sneeze , then say : Alḥamdulillāh Your companion should say : Yarḥamukallāh When someone says Yarḥamukallāh to you then you should say: Yahdīkumu ‘llāhu wa yuṣliḥu bālakum.",
+    "reference": "Hisn al-Muslim 188; Al-Bukhari 7/125.",
+    "count": 1,
+    "tags": [
+      "sneezing",
+      "manners",
+      "mercy"
+    ],
+    "translations": {
+      "es": {
+        "title": "Al estornudar",
+        "translation": "Cuando alguien estornuda dice: Alabado sea Allah. Su compañero responde: Que Allah tenga misericordia de ti. Entonces responde: Que Allah os guíe y rectifique vuestros asuntos.",
+        "category": "social_manners",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 188; Al-Bukhari 7/125.",
+        "count": 1,
+        "tags": [
+          "sneezing",
+          "manners",
+          "mercy"
+        ],
+        "isFeatured": false
+      },
+      "en": {
+        "title": "Upon sneezing",
+        "translation": "When you sneeze, then say: All praises and thanks are to Allah. Your companion should say: May Allah have mercy upon you. When someone says Yarḥamukallāh to you then you should say: May Allah guide you and set your affairs in order.",
+        "category": "social_manners",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 188; Al-Bukhari 7/125.",
+        "count": 1,
+        "tags": [
+          "sneezing",
+          "manners",
+          "mercy"
+        ],
+        "isFeatured": false
+      },
+      "ar": {
+        "title": "دعاء العطاس",
+        "translation": "إِذَا عَطَسَ أَحَدُكُم فَلْيَقُلِ (الْحَمْدُ لِلَّهِ)، وَلْيَقُلْ لَهُ أَخُوهُ أَوْ صَاحِبُهُ: (يَرْحَمُكَ اللَّهُ)، فَإِذَا قَالَ لَهُ: (يَرحَمُكَ اللَّهُ)، فَلْيَقُلْ: (يَهْدِيكُمُ اللَّهُ وَيُصْلِحُ بَالَكُمْ)",
+        "category": "social_manners",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 188; Al-Bukhari 7/125.",
+        "count": 1,
+        "tags": [
+          "sneezing",
+          "manners",
+          "mercy"
+        ],
+        "isFeatured": false
+      },
+      "fr": {
+        "title": "Lors de l’éternuement",
+        "translation": "Quand quelqu’un éternue, il dit : Louange à Allah. Son compagnon répond : Qu’Allah te fasse miséricorde. Il répond alors : Qu’Allah vous guide et améliore vos affaires.",
+        "category": "social_manners",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 188; Al-Bukhari 7/125.",
+        "count": 1,
+        "tags": [
+          "sneezing",
+          "manners",
+          "mercy"
+        ],
+        "isFeatured": false
+      },
+      "de": {
+        "title": "Beim Niesen",
+        "translation": "Wenn jemand niest, sagt er: Alles Lob gebührt Allah. Sein Begleiter antwortet: Möge Allah sich deiner erbarmen. Dann antwortet er: Möge Allah euch rechtleiten und eure Angelegenheiten verbessern.",
+        "category": "social_manners",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 188; Al-Bukhari 7/125.",
+        "count": 1,
+        "tags": [
+          "sneezing",
+          "manners",
+          "mercy"
+        ],
+        "isFeatured": false
+      },
+      "id": {
+        "title": "Saat bersin",
+        "translation": "Ketika seseorang bersin, ia mengucapkan: segala puji bagi Allah. Temannya menjawab: semoga Allah merahmatimu. Lalu ia menjawab: semoga Allah memberi kalian petunjuk dan memperbaiki urusan kalian.",
+        "category": "social_manners",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 188; Al-Bukhari 7/125.",
+        "count": 1,
+        "tags": [
+          "sneezing",
+          "manners",
+          "mercy"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "При чихании",
+        "translation": "Когда человек чихает, он говорит: хвала Аллаху. Его товарищ отвечает: да помилует тебя Аллах. Тогда он отвечает: да наставит вас Аллах и исправит ваши дела.",
+        "category": "social_manners",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 188; Al-Bukhari 7/125.",
+        "count": 1,
+        "tags": [
+          "sneezing",
+          "manners",
+          "mercy"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Quando si starnutisce",
+        "translation": "Quando qualcuno starnutisce dice: Lode ad Allah. Il compagno risponde: Che Allah abbia misericordia di te. Poi risponde: Che Allah vi guidi e migliori i vostri affari.",
+        "category": "social_manners",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 188; Al-Bukhari 7/125.",
+        "count": 1,
+        "tags": [
+          "sneezing",
+          "manners",
+          "mercy"
+        ],
+        "isFeatured": false
+      },
+      "pt": {
+        "title": "Ao espirrar",
+        "translation": "Quando alguém espirra, diz: Louvado seja Allah. O companheiro responde: Que Allah tenha misericórdia de ti. Então responde: Que Allah vos guie e corrija os vossos assuntos.",
+        "category": "social_manners",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 188; Al-Bukhari 7/125.",
+        "count": 1,
+        "tags": [
+          "sneezing",
+          "manners",
+          "mercy"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Hapşırınca",
+        "translation": "Bir kimse hapşırınca: Hamd Allah’adır der. Arkadaşı: Allah sana merhamet etsin der. O da: Allah sizi hidayete erdirsin ve işlerinizi düzeltsin diye cevap verir.",
+        "category": "social_manners",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 188; Al-Bukhari 7/125.",
+        "count": 1,
+        "tags": [
+          "sneezing",
+          "manners",
+          "mercy"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Bij niezen",
+        "translation": "Wanneer iemand niest, zegt hij: alle lof behoort aan Allah. Zijn metgezel antwoordt: moge Allah zich over jou ontfermen. Daarna antwoordt hij: moge Allah jullie leiden en jullie zaken verbeteren.",
+        "category": "social_manners",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 188; Al-Bukhari 7/125.",
+        "count": 1,
+        "tags": [
+          "sneezing",
+          "manners",
+          "mercy"
+        ],
+        "isFeatured": false
+      }
+    }
+  },
+  {
+    "id": "hisn_marriage_190",
+    "arabicText": "بارَكَ اللّهُ لَك، وَبارَكَ عَلَـيْك، وَجَمَعَ بَيْـنَكُما في خَـيْر",
+    "transliteration": "Bārakallāhu lak, wa bāraka `alayk, wa jama`a baynakumā fī khayr.",
+    "reference": "Hisn al-Muslim 190; Abu Dawud, Ibn Majah and At-Tirmidhi. See also Al-Albani, Sahih At-Tirmidhi 1/316.",
+    "count": 1,
+    "tags": [
+      "marriage",
+      "blessing",
+      "family"
+    ],
+    "translations": {
+      "es": {
+        "title": "Por los recién casados",
+        "translation": "Que Allah te bendiga, derrame bendiciones sobre ti y os una a ambos en el bien.",
+        "category": "marriage_family",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 190; Abu Dawud, Ibn Majah and At-Tirmidhi. See also Al-Albani, Sahih At-Tirmidhi 1/316.",
+        "count": 1,
+        "tags": [
+          "marriage",
+          "blessing",
+          "family"
+        ],
+        "isFeatured": false
+      },
+      "en": {
+        "title": "For the newly married",
+        "translation": "May Allah bless you, and shower His blessings upon you, and join you together in goodness.",
+        "category": "marriage_family",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 190; Abu Dawud, Ibn Majah and At-Tirmidhi. See also Al-Albani, Sahih At-Tirmidhi 1/316.",
+        "count": 1,
+        "tags": [
+          "marriage",
+          "blessing",
+          "family"
+        ],
+        "isFeatured": false
+      },
+      "ar": {
+        "title": "للمتزوج",
+        "translation": "بارَكَ اللّهُ لَك، وَبارَكَ عَلَـيْك، وَجَمَعَ بَيْـنَكُما في خَـيْر",
+        "category": "marriage_family",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 190; Abu Dawud, Ibn Majah and At-Tirmidhi. See also Al-Albani, Sahih At-Tirmidhi 1/316.",
+        "count": 1,
+        "tags": [
+          "marriage",
+          "blessing",
+          "family"
+        ],
+        "isFeatured": false
+      },
+      "fr": {
+        "title": "Pour les nouveaux mariés",
+        "translation": "Qu’Allah te bénisse, répande Sa bénédiction sur toi et vous unisse tous deux dans le bien.",
+        "category": "marriage_family",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 190; Abu Dawud, Ibn Majah and At-Tirmidhi. See also Al-Albani, Sahih At-Tirmidhi 1/316.",
+        "count": 1,
+        "tags": [
+          "marriage",
+          "blessing",
+          "family"
+        ],
+        "isFeatured": false
+      },
+      "de": {
+        "title": "Für frisch Verheiratete",
+        "translation": "Möge Allah dich segnen, Seinen Segen über dich ausgießen und euch beide im Guten vereinen.",
+        "category": "marriage_family",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 190; Abu Dawud, Ibn Majah and At-Tirmidhi. See also Al-Albani, Sahih At-Tirmidhi 1/316.",
+        "count": 1,
+        "tags": [
+          "marriage",
+          "blessing",
+          "family"
+        ],
+        "isFeatured": false
+      },
+      "id": {
+        "title": "Untuk pengantin baru",
+        "translation": "Semoga Allah memberkahimu, mencurahkan berkah kepadamu, dan menyatukan kalian berdua dalam kebaikan.",
+        "category": "marriage_family",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 190; Abu Dawud, Ibn Majah and At-Tirmidhi. See also Al-Albani, Sahih At-Tirmidhi 1/316.",
+        "count": 1,
+        "tags": [
+          "marriage",
+          "blessing",
+          "family"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "За молодожёнов",
+        "translation": "Пусть Аллах благословит тебя, ниспошлёт на тебя благодать и соединит вас обоих во благе.",
+        "category": "marriage_family",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 190; Abu Dawud, Ibn Majah and At-Tirmidhi. See also Al-Albani, Sahih At-Tirmidhi 1/316.",
+        "count": 1,
+        "tags": [
+          "marriage",
+          "blessing",
+          "family"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Per gli sposi novelli",
+        "translation": "Che Allah ti benedica, riversi benedizioni su di te e vi unisca entrambi nel bene.",
+        "category": "marriage_family",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 190; Abu Dawud, Ibn Majah and At-Tirmidhi. See also Al-Albani, Sahih At-Tirmidhi 1/316.",
+        "count": 1,
+        "tags": [
+          "marriage",
+          "blessing",
+          "family"
+        ],
+        "isFeatured": false
+      },
+      "pt": {
+        "title": "Pelos recém-casados",
+        "translation": "Que Allah te abençoe, derrame bênçãos sobre ti e vos una no bem.",
+        "category": "marriage_family",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 190; Abu Dawud, Ibn Majah and At-Tirmidhi. See also Al-Albani, Sahih At-Tirmidhi 1/316.",
+        "count": 1,
+        "tags": [
+          "marriage",
+          "blessing",
+          "family"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Yeni evlenenler için",
+        "translation": "Allah seni mübarek kılsın, üzerine bereket indirsin ve ikinizi hayırda birleştirsin.",
+        "category": "marriage_family",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 190; Abu Dawud, Ibn Majah and At-Tirmidhi. See also Al-Albani, Sahih At-Tirmidhi 1/316.",
+        "count": 1,
+        "tags": [
+          "marriage",
+          "blessing",
+          "family"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Voor pasgetrouwden",
+        "translation": "Moge Allah je zegenen, Zijn zegen over je uitstorten en jullie beiden in goedheid verenigen.",
+        "category": "marriage_family",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 190; Abu Dawud, Ibn Majah and At-Tirmidhi. See also Al-Albani, Sahih At-Tirmidhi 1/316.",
+        "count": 1,
+        "tags": [
+          "marriage",
+          "blessing",
+          "family"
+        ],
+        "isFeatured": false
+      }
+    }
+  },
+  {
+    "id": "hisn_marriage_192",
+    "arabicText": "بِسْمِ الله اللّهُـمَّ جَنِّبْنا الشَّيْـطانَ، وَجَنِّبِ الشَّـيْطانَ ما رَزَقْـتَنا",
+    "transliteration": "Bismillāh. Allāhumma jannibnash-Shayṭān, wa jannibish-Shayṭāna mā razaqtanā.",
+    "reference": "Hisn al-Muslim 192; Al-Bukhari 6/141, Muslim 2/1028.",
+    "count": 1,
+    "tags": [
+      "marriage",
+      "family",
+      "protection"
+    ],
+    "translations": {
+      "es": {
+        "title": "Antes de las relaciones conyugales",
+        "translation": "En el nombre de Allah. Oh Allah, aleja al Shaytán de nosotros y aleja al Shaytán de lo que nos concedas.",
+        "category": "marriage_family",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 192; Al-Bukhari 6/141, Muslim 2/1028.",
+        "count": 1,
+        "tags": [
+          "marriage",
+          "family",
+          "protection"
+        ],
+        "isFeatured": false
+      },
+      "en": {
+        "title": "Before marital relations",
+        "translation": "With the Name of Allah. O Allah, keep the Devil away from us, and keep the Devil away from that which You provide for us.",
+        "category": "marriage_family",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 192; Al-Bukhari 6/141, Muslim 2/1028.",
+        "count": 1,
+        "tags": [
+          "marriage",
+          "family",
+          "protection"
+        ],
+        "isFeatured": false
+      },
+      "ar": {
+        "title": "قبل إتيان الزوجة",
+        "translation": "بِسْمِ الله اللّهُـمَّ جَنِّبْنا الشَّيْـطانَ، وَجَنِّبِ الشَّـيْطانَ ما رَزَقْـتَنا",
+        "category": "marriage_family",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 192; Al-Bukhari 6/141, Muslim 2/1028.",
+        "count": 1,
+        "tags": [
+          "marriage",
+          "family",
+          "protection"
+        ],
+        "isFeatured": false
+      },
+      "fr": {
+        "title": "Avant les relations conjugales",
+        "translation": "Au nom d’Allah. Ô Allah, éloigne Satan de nous et éloigne Satan de ce que Tu nous accordes.",
+        "category": "marriage_family",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 192; Al-Bukhari 6/141, Muslim 2/1028.",
+        "count": 1,
+        "tags": [
+          "marriage",
+          "family",
+          "protection"
+        ],
+        "isFeatured": false
+      },
+      "de": {
+        "title": "Vor ehelicher Beziehung",
+        "translation": "Im Namen Allahs. O Allah, halte den Satan von uns fern und halte den Satan fern von dem, was Du uns gewährst.",
+        "category": "marriage_family",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 192; Al-Bukhari 6/141, Muslim 2/1028.",
+        "count": 1,
+        "tags": [
+          "marriage",
+          "family",
+          "protection"
+        ],
+        "isFeatured": false
+      },
+      "id": {
+        "title": "Sebelum hubungan suami istri",
+        "translation": "Dengan nama Allah. Ya Allah, jauhkan setan dari kami dan jauhkan setan dari apa yang Engkau karuniakan kepada kami.",
+        "category": "marriage_family",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 192; Al-Bukhari 6/141, Muslim 2/1028.",
+        "count": 1,
+        "tags": [
+          "marriage",
+          "family",
+          "protection"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Перед супружеской близостью",
+        "translation": "С именем Аллаха. О Аллах, отдали шайтана от нас и отдали шайтана от того, чем Ты нас наделишь.",
+        "category": "marriage_family",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 192; Al-Bukhari 6/141, Muslim 2/1028.",
+        "count": 1,
+        "tags": [
+          "marriage",
+          "family",
+          "protection"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Prima dei rapporti coniugali",
+        "translation": "Nel nome di Allah. O Allah, allontana Satana da noi e allontana Satana da ciò che ci concederai.",
+        "category": "marriage_family",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 192; Al-Bukhari 6/141, Muslim 2/1028.",
+        "count": 1,
+        "tags": [
+          "marriage",
+          "family",
+          "protection"
+        ],
+        "isFeatured": false
+      },
+      "pt": {
+        "title": "Antes das relações conjugais",
+        "translation": "Em nome de Allah. Ó Allah, afasta Satanás de nós e afasta Satanás do que nos concederes.",
+        "category": "marriage_family",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 192; Al-Bukhari 6/141, Muslim 2/1028.",
+        "count": 1,
+        "tags": [
+          "marriage",
+          "family",
+          "protection"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Eşler arası ilişkiden önce",
+        "translation": "Allah’ın adıyla. Allah’ım, şeytanı bizden uzak tut ve bize vereceğin şeyden de şeytanı uzak tut.",
+        "category": "marriage_family",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 192; Al-Bukhari 6/141, Muslim 2/1028.",
+        "count": 1,
+        "tags": [
+          "marriage",
+          "family",
+          "protection"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Voor echtelijke omgang",
+        "translation": "In de naam van Allah. O Allah, houd de satan bij ons vandaan en houd de satan weg van wat U ons schenkt.",
+        "category": "marriage_family",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 192; Al-Bukhari 6/141, Muslim 2/1028.",
+        "count": 1,
+        "tags": [
+          "marriage",
+          "family",
+          "protection"
+        ],
+        "isFeatured": false
+      }
+    }
+  },
+  {
+    "id": "hisn_gathering_196",
+    "arabicText": "سُبْحـانَكَ اللّهُـمَّ وَبِحَمدِك، أَشْهَـدُ أَنْ لا إِلهَ إِلاّ أَنْتَ أَسْتَغْفِرُكَ وَأَتوبُ إِلَـيْك",
+    "transliteration": "Subhānaka Allāhumma wa biḥamdik, ash-hadu an lā ilāha illā ant, astaghfiruka wa atību ilayk.",
+    "reference": "Hisn al-Muslim 196; Abu Dawud, Ibn Majah, At-Tirmidhi and An-Nasa'i. See also Al-Albani, Sahih At-Tirmidhi 3/ 153. Aishah (RA) said: \"Allah's Messenger (ﷺ) did not sit in a gathering, and did not recite the Qur'an, and did not perform any prayer without concluding by saying ... (then she quoted the above).\" This was reported by An-Nasa'i in 'Amalul-Yawm wal-Laylah (no.308), and Dr. Farooq Hamadah graded it authentic in his checking of the same book, p. 273. See also Ahmad 6/77",
+    "count": 1,
+    "tags": [
+      "gathering",
+      "forgiveness",
+      "repentance"
+    ],
+    "translations": {
+      "es": {
+        "title": "Expiación de una reunión",
+        "translation": "Gloria a Ti, oh Allah, y alabado seas. Atestiguo que no hay divinidad digna de adoración salvo Tú. Te pido perdón y me arrepiento ante Ti.",
+        "category": "gatherings",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 196; Abu Dawud, Ibn Majah, At-Tirmidhi and An-Nasa'i. See also Al-Albani, Sahih At-Tirmidhi 3/ 153. Aishah (RA) said: \"Allah's Messenger (ﷺ) did not sit in a gathering, and did not recite the Qur'an, and did not perform any prayer without concluding by saying ... (then she quoted the above).\" This was reported by An-Nasa'i in 'Amalul-Yawm wal-Laylah (no.308), and Dr. Farooq Hamadah graded it authentic in his checking of the same book, p. 273. See also Ahmad 6/77",
+        "count": 1,
+        "tags": [
+          "gathering",
+          "forgiveness",
+          "repentance"
+        ],
+        "isFeatured": false
+      },
+      "en": {
+        "title": "Expiation of a gathering",
+        "translation": "Glory is to You, O Allah, and praise is to You. I bear witness that there is none worthy of worship but You. I seek Your forgiveness and repent to You.",
+        "category": "gatherings",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 196; Abu Dawud, Ibn Majah, At-Tirmidhi and An-Nasa'i. See also Al-Albani, Sahih At-Tirmidhi 3/ 153. Aishah (RA) said: \"Allah's Messenger (ﷺ) did not sit in a gathering, and did not recite the Qur'an, and did not perform any prayer without concluding by saying ... (then she quoted the above).\" This was reported by An-Nasa'i in 'Amalul-Yawm wal-Laylah (no.308), and Dr. Farooq Hamadah graded it authentic in his checking of the same book, p. 273. See also Ahmad 6/77",
+        "count": 1,
+        "tags": [
+          "gathering",
+          "forgiveness",
+          "repentance"
+        ],
+        "isFeatured": false
+      },
+      "ar": {
+        "title": "كفارة المجلس",
+        "translation": "سُبْحـانَكَ اللّهُـمَّ وَبِحَمدِك، أَشْهَـدُ أَنْ لا إِلهَ إِلاّ أَنْتَ أَسْتَغْفِرُكَ وَأَتوبُ إِلَـيْك",
+        "category": "gatherings",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 196; Abu Dawud, Ibn Majah, At-Tirmidhi and An-Nasa'i. See also Al-Albani, Sahih At-Tirmidhi 3/ 153. Aishah (RA) said: \"Allah's Messenger (ﷺ) did not sit in a gathering, and did not recite the Qur'an, and did not perform any prayer without concluding by saying ... (then she quoted the above).\" This was reported by An-Nasa'i in 'Amalul-Yawm wal-Laylah (no.308), and Dr. Farooq Hamadah graded it authentic in his checking of the same book, p. 273. See also Ahmad 6/77",
+        "count": 1,
+        "tags": [
+          "gathering",
+          "forgiveness",
+          "repentance"
+        ],
+        "isFeatured": false
+      },
+      "fr": {
+        "title": "Expiation d’une assemblée",
+        "translation": "Gloire à Toi, ô Allah, et louange à Toi. J’atteste que nul n’est digne d’adoration sauf Toi. Je Te demande pardon et je me repens auprès de Toi.",
+        "category": "gatherings",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 196; Abu Dawud, Ibn Majah, At-Tirmidhi and An-Nasa'i. See also Al-Albani, Sahih At-Tirmidhi 3/ 153. Aishah (RA) said: \"Allah's Messenger (ﷺ) did not sit in a gathering, and did not recite the Qur'an, and did not perform any prayer without concluding by saying ... (then she quoted the above).\" This was reported by An-Nasa'i in 'Amalul-Yawm wal-Laylah (no.308), and Dr. Farooq Hamadah graded it authentic in his checking of the same book, p. 273. See also Ahmad 6/77",
+        "count": 1,
+        "tags": [
+          "gathering",
+          "forgiveness",
+          "repentance"
+        ],
+        "isFeatured": false
+      },
+      "de": {
+        "title": "Sühne für eine Versammlung",
+        "translation": "Gepriesen seist Du, o Allah, und Dir gebührt der Lobpreis. Ich bezeuge, dass es keinen anbetungswürdigen Gott außer Dir gibt. Ich bitte Dich um Vergebung und bereue vor Dir.",
+        "category": "gatherings",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 196; Abu Dawud, Ibn Majah, At-Tirmidhi and An-Nasa'i. See also Al-Albani, Sahih At-Tirmidhi 3/ 153. Aishah (RA) said: \"Allah's Messenger (ﷺ) did not sit in a gathering, and did not recite the Qur'an, and did not perform any prayer without concluding by saying ... (then she quoted the above).\" This was reported by An-Nasa'i in 'Amalul-Yawm wal-Laylah (no.308), and Dr. Farooq Hamadah graded it authentic in his checking of the same book, p. 273. See also Ahmad 6/77",
+        "count": 1,
+        "tags": [
+          "gathering",
+          "forgiveness",
+          "repentance"
+        ],
+        "isFeatured": false
+      },
+      "id": {
+        "title": "Kafarat majelis",
+        "translation": "Mahasuci Engkau, ya Allah, dan segala puji bagi-Mu. Aku bersaksi bahwa tiada sesembahan yang berhak disembah selain Engkau. Aku memohon ampun kepada-Mu dan bertaubat kepada-Mu.",
+        "category": "gatherings",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 196; Abu Dawud, Ibn Majah, At-Tirmidhi and An-Nasa'i. See also Al-Albani, Sahih At-Tirmidhi 3/ 153. Aishah (RA) said: \"Allah's Messenger (ﷺ) did not sit in a gathering, and did not recite the Qur'an, and did not perform any prayer without concluding by saying ... (then she quoted the above).\" This was reported by An-Nasa'i in 'Amalul-Yawm wal-Laylah (no.308), and Dr. Farooq Hamadah graded it authentic in his checking of the same book, p. 273. See also Ahmad 6/77",
+        "count": 1,
+        "tags": [
+          "gathering",
+          "forgiveness",
+          "repentance"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Искупление собрания",
+        "translation": "Пречист Ты, о Аллах, и хвала Тебе. Свидетельствую, что нет божества, достойного поклонения, кроме Тебя. Прошу у Тебя прощения и каюсь перед Тобой.",
+        "category": "gatherings",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 196; Abu Dawud, Ibn Majah, At-Tirmidhi and An-Nasa'i. See also Al-Albani, Sahih At-Tirmidhi 3/ 153. Aishah (RA) said: \"Allah's Messenger (ﷺ) did not sit in a gathering, and did not recite the Qur'an, and did not perform any prayer without concluding by saying ... (then she quoted the above).\" This was reported by An-Nasa'i in 'Amalul-Yawm wal-Laylah (no.308), and Dr. Farooq Hamadah graded it authentic in his checking of the same book, p. 273. See also Ahmad 6/77",
+        "count": 1,
+        "tags": [
+          "gathering",
+          "forgiveness",
+          "repentance"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Espiazione di una riunione",
+        "translation": "Gloria a Te, o Allah, e lode a Te. Testimonio che non vi è divinità degna di adorazione tranne Te. Ti chiedo perdono e mi pento davanti a Te.",
+        "category": "gatherings",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 196; Abu Dawud, Ibn Majah, At-Tirmidhi and An-Nasa'i. See also Al-Albani, Sahih At-Tirmidhi 3/ 153. Aishah (RA) said: \"Allah's Messenger (ﷺ) did not sit in a gathering, and did not recite the Qur'an, and did not perform any prayer without concluding by saying ... (then she quoted the above).\" This was reported by An-Nasa'i in 'Amalul-Yawm wal-Laylah (no.308), and Dr. Farooq Hamadah graded it authentic in his checking of the same book, p. 273. See also Ahmad 6/77",
+        "count": 1,
+        "tags": [
+          "gathering",
+          "forgiveness",
+          "repentance"
+        ],
+        "isFeatured": false
+      },
+      "pt": {
+        "title": "Expiação de uma reunião",
+        "translation": "Glória a Ti, ó Allah, e louvado sejas. Testemunho que não há divindade digna de adoração exceto Tu. Peço-Te perdão e arrependo-me perante Ti.",
+        "category": "gatherings",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 196; Abu Dawud, Ibn Majah, At-Tirmidhi and An-Nasa'i. See also Al-Albani, Sahih At-Tirmidhi 3/ 153. Aishah (RA) said: \"Allah's Messenger (ﷺ) did not sit in a gathering, and did not recite the Qur'an, and did not perform any prayer without concluding by saying ... (then she quoted the above).\" This was reported by An-Nasa'i in 'Amalul-Yawm wal-Laylah (no.308), and Dr. Farooq Hamadah graded it authentic in his checking of the same book, p. 273. See also Ahmad 6/77",
+        "count": 1,
+        "tags": [
+          "gathering",
+          "forgiveness",
+          "repentance"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Meclis kefareti",
+        "translation": "Allah’ım, Seni tesbih eder ve Sana hamd ederim. Senden başka ibadete layık ilah olmadığına şahitlik ederim. Senden bağışlanma diler ve Sana tövbe ederim.",
+        "category": "gatherings",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 196; Abu Dawud, Ibn Majah, At-Tirmidhi and An-Nasa'i. See also Al-Albani, Sahih At-Tirmidhi 3/ 153. Aishah (RA) said: \"Allah's Messenger (ﷺ) did not sit in a gathering, and did not recite the Qur'an, and did not perform any prayer without concluding by saying ... (then she quoted the above).\" This was reported by An-Nasa'i in 'Amalul-Yawm wal-Laylah (no.308), and Dr. Farooq Hamadah graded it authentic in his checking of the same book, p. 273. See also Ahmad 6/77",
+        "count": 1,
+        "tags": [
+          "gathering",
+          "forgiveness",
+          "repentance"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Verzoening van een bijeenkomst",
+        "translation": "Glorie zij U, O Allah, en alle lof zij U. Ik getuig dat er geen god is die het waard is aanbeden te worden behalve U. Ik vraag U om vergeving en keer berouwvol tot U terug.",
+        "category": "gatherings",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 196; Abu Dawud, Ibn Majah, At-Tirmidhi and An-Nasa'i. See also Al-Albani, Sahih At-Tirmidhi 3/ 153. Aishah (RA) said: \"Allah's Messenger (ﷺ) did not sit in a gathering, and did not recite the Qur'an, and did not perform any prayer without concluding by saying ... (then she quoted the above).\" This was reported by An-Nasa'i in 'Amalul-Yawm wal-Laylah (no.308), and Dr. Farooq Hamadah graded it authentic in his checking of the same book, p. 273. See also Ahmad 6/77",
+        "count": 1,
+        "tags": [
+          "gathering",
+          "forgiveness",
+          "repentance"
+        ],
+        "isFeatured": false
+      }
+    }
+  },
+  {
+    "id": "hisn_social_198",
+    "arabicText": "جَزاكَ اللهُ خَـيْراً",
+    "transliteration": "Jazākallāhu khayra.",
+    "reference": "Hisn al-Muslim 198; At-Tirmidhi (no. 2035). See also Al-Albani, Sahih At-Tirmidhi 2/200 and Sahihul-Jami' (no. 6244).",
+    "count": 1,
+    "tags": [
+      "thanks",
+      "kindness",
+      "manners"
+    ],
+    "translations": {
+      "es": {
+        "title": "Para quien te hace un favor",
+        "translation": "Que Allah te recompense con bien.",
+        "category": "social_manners",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 198; At-Tirmidhi (no. 2035). See also Al-Albani, Sahih At-Tirmidhi 2/200 and Sahihul-Jami' (no. 6244).",
+        "count": 1,
+        "tags": [
+          "thanks",
+          "kindness",
+          "manners"
+        ],
+        "isFeatured": false
+      },
+      "en": {
+        "title": "For one who does you a favor",
+        "translation": "May Allah reward you with good.",
+        "category": "social_manners",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 198; At-Tirmidhi (no. 2035). See also Al-Albani, Sahih At-Tirmidhi 2/200 and Sahihul-Jami' (no. 6244).",
+        "count": 1,
+        "tags": [
+          "thanks",
+          "kindness",
+          "manners"
+        ],
+        "isFeatured": false
+      },
+      "ar": {
+        "title": "لمن صنع إليك معروفا",
+        "translation": "جَزاكَ اللهُ خَـيْراً",
+        "category": "social_manners",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 198; At-Tirmidhi (no. 2035). See also Al-Albani, Sahih At-Tirmidhi 2/200 and Sahihul-Jami' (no. 6244).",
+        "count": 1,
+        "tags": [
+          "thanks",
+          "kindness",
+          "manners"
+        ],
+        "isFeatured": false
+      },
+      "fr": {
+        "title": "Pour celui qui te rend service",
+        "translation": "Qu’Allah te récompense par le bien.",
+        "category": "social_manners",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 198; At-Tirmidhi (no. 2035). See also Al-Albani, Sahih At-Tirmidhi 2/200 and Sahihul-Jami' (no. 6244).",
+        "count": 1,
+        "tags": [
+          "thanks",
+          "kindness",
+          "manners"
+        ],
+        "isFeatured": false
+      },
+      "de": {
+        "title": "Für jemanden, der dir Gutes tut",
+        "translation": "Möge Allah dich mit Gutem belohnen.",
+        "category": "social_manners",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 198; At-Tirmidhi (no. 2035). See also Al-Albani, Sahih At-Tirmidhi 2/200 and Sahihul-Jami' (no. 6244).",
+        "count": 1,
+        "tags": [
+          "thanks",
+          "kindness",
+          "manners"
+        ],
+        "isFeatured": false
+      },
+      "id": {
+        "title": "Untuk orang yang berbuat baik kepadamu",
+        "translation": "Semoga Allah membalasmu dengan kebaikan.",
+        "category": "social_manners",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 198; At-Tirmidhi (no. 2035). See also Al-Albani, Sahih At-Tirmidhi 2/200 and Sahihul-Jami' (no. 6244).",
+        "count": 1,
+        "tags": [
+          "thanks",
+          "kindness",
+          "manners"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Тому, кто сделал тебе добро",
+        "translation": "Да воздаст тебе Аллах благом.",
+        "category": "social_manners",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 198; At-Tirmidhi (no. 2035). See also Al-Albani, Sahih At-Tirmidhi 2/200 and Sahihul-Jami' (no. 6244).",
+        "count": 1,
+        "tags": [
+          "thanks",
+          "kindness",
+          "manners"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Per chi ti fa un favore",
+        "translation": "Che Allah ti ricompensi con il bene.",
+        "category": "social_manners",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 198; At-Tirmidhi (no. 2035). See also Al-Albani, Sahih At-Tirmidhi 2/200 and Sahihul-Jami' (no. 6244).",
+        "count": 1,
+        "tags": [
+          "thanks",
+          "kindness",
+          "manners"
+        ],
+        "isFeatured": false
+      },
+      "pt": {
+        "title": "Para quem te faz um favor",
+        "translation": "Que Allah te recompense com o bem.",
+        "category": "social_manners",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 198; At-Tirmidhi (no. 2035). See also Al-Albani, Sahih At-Tirmidhi 2/200 and Sahihul-Jami' (no. 6244).",
+        "count": 1,
+        "tags": [
+          "thanks",
+          "kindness",
+          "manners"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Sana iyilik yapana",
+        "translation": "Allah seni hayırla mükâfatlandırsın.",
+        "category": "social_manners",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 198; At-Tirmidhi (no. 2035). See also Al-Albani, Sahih At-Tirmidhi 2/200 and Sahihul-Jami' (no. 6244).",
+        "count": 1,
+        "tags": [
+          "thanks",
+          "kindness",
+          "manners"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Voor iemand die jou een gunst doet",
+        "translation": "Moge Allah jou met het goede belonen.",
+        "category": "social_manners",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 198; At-Tirmidhi (no. 2035). See also Al-Albani, Sahih At-Tirmidhi 2/200 and Sahihul-Jami' (no. 6244).",
+        "count": 1,
+        "tags": [
+          "thanks",
+          "kindness",
+          "manners"
+        ],
+        "isFeatured": false
+      }
+    }
+  },
+  {
+    "id": "hisn_protection_203",
+    "arabicText": "اللّهُـمَّ إِنّـي أَعـوذُبِكَ أَنْ أُشْـرِكَ بِكَ وَأَنا أَعْـلَمْ، وَأَسْتَـغْفِرُكَ لِما لا أَعْـلَم",
+    "transliteration": "Allāhumma innī a`ūdhu bika an ushrika bika wa anā a`lam, wa astaghfiruka limā lā a`lam.",
+    "reference": "Hisn al-Muslim 203; Ahmad 4/403. See also Al-Albani, Sahihul-Jami' As-Saghir 3/233 and Sahihut-Targhib wat- Tarhib 1/19.",
+    "count": 1,
+    "tags": [
+      "shirk",
+      "forgiveness",
+      "protection"
+    ],
+    "translations": {
+      "es": {
+        "title": "Protección contra el shirk oculto",
+        "translation": "Oh Allah, busco refugio en Ti de asociarte algo sabiendo, y Te pido perdón por aquello que no sé.",
+        "category": "protection",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 203; Ahmad 4/403. See also Al-Albani, Sahihul-Jami' As-Saghir 3/233 and Sahihut-Targhib wat- Tarhib 1/19.",
+        "count": 1,
+        "tags": [
+          "shirk",
+          "forgiveness",
+          "protection"
+        ],
+        "isFeatured": false
+      },
+      "en": {
+        "title": "Protection from hidden shirk",
+        "translation": "O Allah, I seek refuge in You lest I associate anything with You knowingly, and I seek Your forgiveness for what I know not.",
+        "category": "protection",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 203; Ahmad 4/403. See also Al-Albani, Sahihul-Jami' As-Saghir 3/233 and Sahihut-Targhib wat- Tarhib 1/19.",
+        "count": 1,
+        "tags": [
+          "shirk",
+          "forgiveness",
+          "protection"
+        ],
+        "isFeatured": false
+      },
+      "ar": {
+        "title": "الخوف من الشرك",
+        "translation": "اللّهُـمَّ إِنّـي أَعـوذُبِكَ أَنْ أُشْـرِكَ بِكَ وَأَنا أَعْـلَمْ، وَأَسْتَـغْفِرُكَ لِما لا أَعْـلَم",
+        "category": "protection",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 203; Ahmad 4/403. See also Al-Albani, Sahihul-Jami' As-Saghir 3/233 and Sahihut-Targhib wat- Tarhib 1/19.",
+        "count": 1,
+        "tags": [
+          "shirk",
+          "forgiveness",
+          "protection"
+        ],
+        "isFeatured": false
+      },
+      "fr": {
+        "title": "Protection contre le shirk caché",
+        "translation": "Ô Allah, je cherche refuge auprès de Toi contre le fait de T’associer quoi que ce soit sciemment, et je Te demande pardon pour ce que j’ignore.",
+        "category": "protection",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 203; Ahmad 4/403. See also Al-Albani, Sahihul-Jami' As-Saghir 3/233 and Sahihut-Targhib wat- Tarhib 1/19.",
+        "count": 1,
+        "tags": [
+          "shirk",
+          "forgiveness",
+          "protection"
+        ],
+        "isFeatured": false
+      },
+      "de": {
+        "title": "Schutz vor verborgenem Schirk",
+        "translation": "O Allah, ich suche Zuflucht bei Dir davor, Dir wissentlich etwas beizugesellen, und bitte Dich um Vergebung für das, was ich nicht weiß.",
+        "category": "protection",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 203; Ahmad 4/403. See also Al-Albani, Sahihul-Jami' As-Saghir 3/233 and Sahihut-Targhib wat- Tarhib 1/19.",
+        "count": 1,
+        "tags": [
+          "shirk",
+          "forgiveness",
+          "protection"
+        ],
+        "isFeatured": false
+      },
+      "id": {
+        "title": "Perlindungan dari syirik tersembunyi",
+        "translation": "Ya Allah, aku berlindung kepada-Mu dari menyekutukan-Mu dengan sesuatu sementara aku mengetahuinya, dan aku memohon ampun kepada-Mu atas apa yang tidak aku ketahui.",
+        "category": "protection",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 203; Ahmad 4/403. See also Al-Albani, Sahihul-Jami' As-Saghir 3/233 and Sahihut-Targhib wat- Tarhib 1/19.",
+        "count": 1,
+        "tags": [
+          "shirk",
+          "forgiveness",
+          "protection"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Защита от скрытого ширка",
+        "translation": "О Аллах, прибегаю к Тебе от того, чтобы сознательно приобщать Тебе сотоварищей, и прошу у Тебя прощения за то, чего не знаю.",
+        "category": "protection",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 203; Ahmad 4/403. See also Al-Albani, Sahihul-Jami' As-Saghir 3/233 and Sahihut-Targhib wat- Tarhib 1/19.",
+        "count": 1,
+        "tags": [
+          "shirk",
+          "forgiveness",
+          "protection"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Protezione dallo shirk nascosto",
+        "translation": "O Allah, cerco rifugio in Te dall’associarTi qualcosa consapevolmente, e Ti chiedo perdono per ciò che non so.",
+        "category": "protection",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 203; Ahmad 4/403. See also Al-Albani, Sahihul-Jami' As-Saghir 3/233 and Sahihut-Targhib wat- Tarhib 1/19.",
+        "count": 1,
+        "tags": [
+          "shirk",
+          "forgiveness",
+          "protection"
+        ],
+        "isFeatured": false
+      },
+      "pt": {
+        "title": "Proteção contra shirk oculto",
+        "translation": "Ó Allah, busco refúgio em Ti contra associar algo a Ti conscientemente, e peço-Te perdão por aquilo que não sei.",
+        "category": "protection",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 203; Ahmad 4/403. See also Al-Albani, Sahihul-Jami' As-Saghir 3/233 and Sahihut-Targhib wat- Tarhib 1/19.",
+        "count": 1,
+        "tags": [
+          "shirk",
+          "forgiveness",
+          "protection"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Gizli şirkten korunma",
+        "translation": "Allah’ım, bilerek Sana ortak koşmaktan Sana sığınırım; bilmediğim şeyler için de Senden bağışlanma dilerim.",
+        "category": "protection",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 203; Ahmad 4/403. See also Al-Albani, Sahihul-Jami' As-Saghir 3/233 and Sahihut-Targhib wat- Tarhib 1/19.",
+        "count": 1,
+        "tags": [
+          "shirk",
+          "forgiveness",
+          "protection"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Bescherming tegen verborgen shirk",
+        "translation": "O Allah, ik zoek toevlucht bij U dat ik U bewust iets deelgenoot maak, en ik vraag U om vergeving voor wat ik niet weet.",
+        "category": "protection",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 203; Ahmad 4/403. See also Al-Albani, Sahihul-Jami' As-Saghir 3/233 and Sahihut-Targhib wat- Tarhib 1/19.",
+        "count": 1,
+        "tags": [
+          "shirk",
+          "forgiveness",
+          "protection"
+        ],
+        "isFeatured": false
+      }
+    }
+  },
+  {
+    "id": "hisn_travel_211",
+    "arabicText": "أَسْتَـوْدِعُكُـمُ اللَّهَ الَّذي لا تَضـيعُ وَدائِعُـه",
+    "transliteration": "Astawdi`ukumu ‘llāha ‘l-ladhi lā taḍī`u wadā'i`uh.",
+    "reference": "Hisn al-Muslim 211; Ahmad 2/403, Ibn Majah 2/943. See also Al-Albani, Sahih Ibn Majah 2/133.",
+    "count": 1,
+    "tags": [
+      "travel",
+      "farewell",
+      "trust"
+    ],
+    "translations": {
+      "es": {
+        "title": "El viajero por quienes se quedan",
+        "translation": "Os confío a Allah, Aquel cuyos depósitos nunca se pierden.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 211; Ahmad 2/403, Ibn Majah 2/943. See also Al-Albani, Sahih Ibn Majah 2/133.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "farewell",
+          "trust"
+        ],
+        "isFeatured": false
+      },
+      "en": {
+        "title": "Traveler for those staying behind",
+        "translation": "I place you in the trust of Allah, whose trust is never misplaced.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 211; Ahmad 2/403, Ibn Majah 2/943. See also Al-Albani, Sahih Ibn Majah 2/133.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "farewell",
+          "trust"
+        ],
+        "isFeatured": false
+      },
+      "ar": {
+        "title": "دعاء المسافر للمقيم",
+        "translation": "أَسْتَـوْدِعُكُـمُ اللَّهَ الَّذي لا تَضـيعُ وَدائِعُـه",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 211; Ahmad 2/403, Ibn Majah 2/943. See also Al-Albani, Sahih Ibn Majah 2/133.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "farewell",
+          "trust"
+        ],
+        "isFeatured": false
+      },
+      "fr": {
+        "title": "Le voyageur pour ceux qui restent",
+        "translation": "Je vous confie à Allah, Celui auprès de qui les dépôts ne se perdent jamais.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 211; Ahmad 2/403, Ibn Majah 2/943. See also Al-Albani, Sahih Ibn Majah 2/133.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "farewell",
+          "trust"
+        ],
+        "isFeatured": false
+      },
+      "de": {
+        "title": "Der Reisende für Zurückbleibende",
+        "translation": "Ich vertraue euch Allah an, bei dem Anvertrautes niemals verloren geht.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 211; Ahmad 2/403, Ibn Majah 2/943. See also Al-Albani, Sahih Ibn Majah 2/133.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "farewell",
+          "trust"
+        ],
+        "isFeatured": false
+      },
+      "id": {
+        "title": "Doa musafir untuk yang ditinggalkan",
+        "translation": "Aku menitipkan kalian kepada Allah, Dzat yang titipan-Nya tidak akan hilang.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 211; Ahmad 2/403, Ibn Majah 2/943. See also Al-Albani, Sahih Ibn Majah 2/133.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "farewell",
+          "trust"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Мольба путника за остающихся",
+        "translation": "Вверяю вас Аллаху, у Которого не пропадают доверенные Ему вещи.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 211; Ahmad 2/403, Ibn Majah 2/943. See also Al-Albani, Sahih Ibn Majah 2/133.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "farewell",
+          "trust"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Il viaggiatore per chi resta",
+        "translation": "Vi affido ad Allah, Colui presso il quale ciò che è affidato non va mai perduto.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 211; Ahmad 2/403, Ibn Majah 2/943. See also Al-Albani, Sahih Ibn Majah 2/133.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "farewell",
+          "trust"
+        ],
+        "isFeatured": false
+      },
+      "pt": {
+        "title": "O viajante por quem fica",
+        "translation": "Confio-vos a Allah, Aquele junto de Quem os depósitos nunca se perdem.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 211; Ahmad 2/403, Ibn Majah 2/943. See also Al-Albani, Sahih Ibn Majah 2/133.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "farewell",
+          "trust"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Yolcunun geride kalanlara duası",
+        "translation": "Sizi, emanetleri asla kaybolmayan Allah’a emanet ediyorum.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 211; Ahmad 2/403, Ibn Majah 2/943. See also Al-Albani, Sahih Ibn Majah 2/133.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "farewell",
+          "trust"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "De reiziger voor wie achterblijven",
+        "translation": "Ik vertrouw jullie toe aan Allah, bij Wie toevertrouwde zaken nooit verloren gaan.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 211; Ahmad 2/403, Ibn Majah 2/943. See also Al-Albani, Sahih Ibn Majah 2/133.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "farewell",
+          "trust"
+        ],
+        "isFeatured": false
+      }
+    }
+  },
+  {
+    "id": "hisn_travel_212",
+    "arabicText": "أَسْتَـوْدِعُ اللَّهَ ديـنَكَ وَأَمانَتَـكَ، وَخَـواتيـمَ عَمَـلِك",
+    "transliteration": "Astawdi`ullāha dīnak, wa amānatak, wa khawātīma `amalik.",
+    "reference": "Hisn al-Muslim 212; Ahmad 2/7, At-Tirmidhi 5/499. See also Al-Albani, Sahih At-Tirmidhi 2/155.",
+    "count": 1,
+    "tags": [
+      "travel",
+      "farewell",
+      "trust"
+    ],
+    "translations": {
+      "es": {
+        "title": "Quien se queda por el viajero",
+        "translation": "Confío a Allah tu religión, tu seguridad y el final de tus obras.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 212; Ahmad 2/7, At-Tirmidhi 5/499. See also Al-Albani, Sahih At-Tirmidhi 2/155.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "farewell",
+          "trust"
+        ],
+        "isFeatured": false
+      },
+      "en": {
+        "title": "Resident for the traveler",
+        "translation": "I leave your religion in the care of Allah, as well as your safety, and the last of your deeds.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 212; Ahmad 2/7, At-Tirmidhi 5/499. See also Al-Albani, Sahih At-Tirmidhi 2/155.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "farewell",
+          "trust"
+        ],
+        "isFeatured": false
+      },
+      "ar": {
+        "title": "دعاء المقيم للمسافر",
+        "translation": "أَسْتَـوْدِعُ اللَّهَ ديـنَكَ وَأَمانَتَـكَ، وَخَـواتيـمَ عَمَـلِك",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 212; Ahmad 2/7, At-Tirmidhi 5/499. See also Al-Albani, Sahih At-Tirmidhi 2/155.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "farewell",
+          "trust"
+        ],
+        "isFeatured": false
+      },
+      "fr": {
+        "title": "Celui qui reste pour le voyageur",
+        "translation": "Je confie à Allah ta religion, ta sécurité et la fin de tes œuvres.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 212; Ahmad 2/7, At-Tirmidhi 5/499. See also Al-Albani, Sahih At-Tirmidhi 2/155.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "farewell",
+          "trust"
+        ],
+        "isFeatured": false
+      },
+      "de": {
+        "title": "Der Zurückbleibende für den Reisenden",
+        "translation": "Ich vertraue Allah deine Religion, deine Sicherheit und den Abschluss deiner Taten an.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 212; Ahmad 2/7, At-Tirmidhi 5/499. See also Al-Albani, Sahih At-Tirmidhi 2/155.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "farewell",
+          "trust"
+        ],
+        "isFeatured": false
+      },
+      "id": {
+        "title": "Doa orang mukim untuk musafir",
+        "translation": "Aku menitipkan agamamu, amanahmu, dan penutup amalmu kepada Allah.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 212; Ahmad 2/7, At-Tirmidhi 5/499. See also Al-Albani, Sahih At-Tirmidhi 2/155.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "farewell",
+          "trust"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Мольба остающегося за путника",
+        "translation": "Вверяю Аллаху твою религию, твою сохранность и завершение твоих дел.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 212; Ahmad 2/7, At-Tirmidhi 5/499. See also Al-Albani, Sahih At-Tirmidhi 2/155.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "farewell",
+          "trust"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Chi resta per il viaggiatore",
+        "translation": "Affido ad Allah la tua religione, la tua sicurezza e la conclusione delle tue opere.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 212; Ahmad 2/7, At-Tirmidhi 5/499. See also Al-Albani, Sahih At-Tirmidhi 2/155.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "farewell",
+          "trust"
+        ],
+        "isFeatured": false
+      },
+      "pt": {
+        "title": "Quem fica pelo viajante",
+        "translation": "Confio a Allah a tua religião, a tua segurança e o fim das tuas obras.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 212; Ahmad 2/7, At-Tirmidhi 5/499. See also Al-Albani, Sahih At-Tirmidhi 2/155.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "farewell",
+          "trust"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Mukimin yolcuya duası",
+        "translation": "Dinini, emanetini ve amellerinin sonunu Allah’a emanet ediyorum.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 212; Ahmad 2/7, At-Tirmidhi 5/499. See also Al-Albani, Sahih At-Tirmidhi 2/155.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "farewell",
+          "trust"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Wie achterblijft voor de reiziger",
+        "translation": "Ik vertrouw jouw religie, jouw veiligheid en het einde van jouw daden toe aan Allah.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 212; Ahmad 2/7, At-Tirmidhi 5/499. See also Al-Albani, Sahih At-Tirmidhi 2/155.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "farewell",
+          "trust"
+        ],
+        "isFeatured": false
+      }
+    }
+  },
+  {
+    "id": "hisn_travel_213",
+    "arabicText": "زَوَّدَكَ اللَّهُ التقْوى، وَغَفَـرَذَنْـبَكَ، وَيَسَّـرَ لَكَ الخَـيْرَ حَيْـثُما كُنْـت",
+    "transliteration": "Zawwadaka ‘llāhut-taqwā, wa ghafara dhanbak, wa yassara laka ‘l-khayra ḥaythu mā kunt.",
+    "reference": "Hisn al-Muslim 213; At-Tirmidhi. See Al-Albani, Sahih At-Tirmidhi, 3/155.",
+    "count": 1,
+    "tags": [
+      "travel",
+      "provision",
+      "forgiveness"
+    ],
+    "translations": {
+      "es": {
+        "title": "Bendición para un viajero",
+        "translation": "Que Allah haga de la piedad tu provisión, perdone tus pecados y te facilite el bien dondequiera que estés.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 213; At-Tirmidhi. See Al-Albani, Sahih At-Tirmidhi, 3/155.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "provision",
+          "forgiveness"
+        ],
+        "isFeatured": false
+      },
+      "en": {
+        "title": "Blessing for a traveler",
+        "translation": "May Allah give you piety as your provision, forgive your sins, and make goodness easy for you wherever you are.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 213; At-Tirmidhi. See Al-Albani, Sahih At-Tirmidhi, 3/155.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "provision",
+          "forgiveness"
+        ],
+        "isFeatured": false
+      },
+      "ar": {
+        "title": "الدعاء للمسافر",
+        "translation": "زَوَّدَكَ اللَّهُ التقْوى، وَغَفَـرَذَنْـبَكَ، وَيَسَّـرَ لَكَ الخَـيْرَ حَيْـثُما كُنْـت",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 213; At-Tirmidhi. See Al-Albani, Sahih At-Tirmidhi, 3/155.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "provision",
+          "forgiveness"
+        ],
+        "isFeatured": false
+      },
+      "fr": {
+        "title": "Bénédiction pour un voyageur",
+        "translation": "Qu’Allah fasse de la piété ta provision, pardonne tes péchés et te facilite le bien où que tu sois.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 213; At-Tirmidhi. See Al-Albani, Sahih At-Tirmidhi, 3/155.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "provision",
+          "forgiveness"
+        ],
+        "isFeatured": false
+      },
+      "de": {
+        "title": "Segen für einen Reisenden",
+        "translation": "Möge Allah Gottesfurcht zu deinem Reisevorrat machen, deine Sünden vergeben und dir das Gute erleichtern, wo immer du bist.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 213; At-Tirmidhi. See Al-Albani, Sahih At-Tirmidhi, 3/155.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "provision",
+          "forgiveness"
+        ],
+        "isFeatured": false
+      },
+      "id": {
+        "title": "Berkah untuk musafir",
+        "translation": "Semoga Allah menjadikan takwa sebagai bekalmu, mengampuni dosamu, dan memudahkan kebaikan bagimu di mana pun engkau berada.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 213; At-Tirmidhi. See Al-Albani, Sahih At-Tirmidhi, 3/155.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "provision",
+          "forgiveness"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "Благословение для путника",
+        "translation": "Пусть Аллах сделает богобоязненность твоим запасом, простит твои грехи и облегчит тебе благо, где бы ты ни был.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 213; At-Tirmidhi. See Al-Albani, Sahih At-Tirmidhi, 3/155.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "provision",
+          "forgiveness"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Benedizione per un viaggiatore",
+        "translation": "Che Allah faccia della pietà la tua provvista, perdoni i tuoi peccati e ti renda facile il bene ovunque tu sia.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 213; At-Tirmidhi. See Al-Albani, Sahih At-Tirmidhi, 3/155.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "provision",
+          "forgiveness"
+        ],
+        "isFeatured": false
+      },
+      "pt": {
+        "title": "Bênção para um viajante",
+        "translation": "Que Allah faça da piedade a tua provisão, perdoe os teus pecados e facilite o bem para ti onde quer que estejas.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 213; At-Tirmidhi. See Al-Albani, Sahih At-Tirmidhi, 3/155.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "provision",
+          "forgiveness"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Yolcu için bereket duası",
+        "translation": "Allah takvayı azığın kılsın, günahını bağışlasın ve nerede olursan ol hayrı sana kolaylaştırsın.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 213; At-Tirmidhi. See Al-Albani, Sahih At-Tirmidhi, 3/155.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "provision",
+          "forgiveness"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Zegen voor een reiziger",
+        "translation": "Moge Allah godsvrees tot jouw provisie maken, jouw zonden vergeven en het goede gemakkelijk voor jou maken waar je ook bent.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 213; At-Tirmidhi. See Al-Albani, Sahih At-Tirmidhi, 3/155.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "provision",
+          "forgiveness"
+        ],
+        "isFeatured": false
+      }
+    }
+  },
+  {
+    "id": "hisn_travel_217",
+    "arabicText": "يُكَبِّرُ عَلَى كُلِّ شَرَفٍ ثَلاَثَ تَكْبِيرَاتٍ ثُمَّ يَقُولُ: لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ، لَهُ الْمُلْكُ، وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، آيِبُونَ، تَائِبُونَ، عَابِدُونَ، لِرَبِّنا حَامِدُونَ، صَدَقَ اللَّهُ وَعْدَهُ، وَنَصَرَ عَبْدَهُ، وَهَزَمَ الْأَحْزابَ وَحْدَهُ",
+    "transliteration": "From every elevated point say Allāhu Akbar (three times), and then recite: Lā ilāha illallāh waḥdahu lā sharīka lah, lahu ‘l-mulku, walahu ‘l-ḥamd, wa Huwa `alā kulli shay'in Qadīr, ā'ibūna, tā'ibūna,`ābidūn, li Rabbinā ḥāmidūn, sadaqallāhu wa`dah, wa nasara `abdah, wa hazama ‘l-'aḥzāba waḥdah.",
+    "reference": "Hisn al-Muslim 217; Bukhari 7/163, Muslim 2/980. The Prophet (ﷺ) used to say this when returning from a campaign or from Hajj.",
+    "count": 1,
+    "tags": [
+      "travel",
+      "return",
+      "gratitude"
+    ],
+    "translations": {
+      "es": {
+        "title": "Al regresar de viaje",
+        "translation": "Desde cada elevación se dice Allah es el Más Grande tres veces, y luego: No hay divinidad digna de adoración salvo Allah, Único y sin asociado. Suyo es el dominio y Suya la alabanza, y Él tiene poder sobre todas las cosas. Volvemos arrepentidos, adorando y alabando a nuestro Señor. Allah cumplió Su promesa, ayudó a Su siervo y derrotó solo a los confederados.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 217; Bukhari 7/163, Muslim 2/980. The Prophet (ﷺ) used to say this when returning from a campaign or from Hajj.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "return",
+          "gratitude"
+        ],
+        "isFeatured": false
+      },
+      "en": {
+        "title": "Returning from travel",
+        "translation": "From every elevated point say Allāhu Akbar (Allah is the Most Great) three times and then recite: None has the right to be worshipped but Allah alone, Who has no partner. His is the dominion and His is the praise, and He is Able to do all things. We return repentant to our Lord, worshipping our Lord, and praising our Lord. He fulfilled His Promise, He aided His slave, and He alone defeated the Confederates.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 217; Bukhari 7/163, Muslim 2/980. The Prophet (ﷺ) used to say this when returning from a campaign or from Hajj.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "return",
+          "gratitude"
+        ],
+        "isFeatured": false
+      },
+      "ar": {
+        "title": "الرجوع من السفر",
+        "translation": "يُكَبِّرُ عَلَى كُلِّ شَرَفٍ ثَلاَثَ تَكْبِيرَاتٍ ثُمَّ يَقُولُ: لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ، لَهُ الْمُلْكُ، وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، آيِبُونَ، تَائِبُونَ، عَابِدُونَ، لِرَبِّنا حَامِدُونَ، صَدَقَ اللَّهُ وَعْدَهُ، وَنَصَرَ عَبْدَهُ، وَهَزَمَ الْأَحْزابَ وَحْدَهُ",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 217; Bukhari 7/163, Muslim 2/980. The Prophet (ﷺ) used to say this when returning from a campaign or from Hajj.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "return",
+          "gratitude"
+        ],
+        "isFeatured": false
+      },
+      "fr": {
+        "title": "Au retour de voyage",
+        "translation": "Sur chaque hauteur, on dit Allah est le Plus Grand trois fois, puis : Nul n’est digne d’adoration sauf Allah, Seul et sans associé. À Lui la royauté et la louange, et Il est capable de toute chose. Nous revenons repentants, adorant et louant notre Seigneur. Allah a tenu Sa promesse, secouru Son serviteur et vaincu seul les coalisés.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 217; Bukhari 7/163, Muslim 2/980. The Prophet (ﷺ) used to say this when returning from a campaign or from Hajj.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "return",
+          "gratitude"
+        ],
+        "isFeatured": false
+      },
+      "de": {
+        "title": "Bei der Rückkehr von einer Reise",
+        "translation": "Auf jeder Anhöhe sagt man dreimal Allah ist der Größte, dann: Es gibt keinen anbetungswürdigen Gott außer Allah allein, ohne Teilhaber. Ihm gehört die Herrschaft und Ihm gebührt der Lobpreis, und Er hat Macht über alle Dinge. Wir kehren zurück, bereuen, dienen und lobpreisen unseren Herrn. Allah erfüllte Sein Versprechen, half Seinem Diener und besiegte allein die Verbündeten.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 217; Bukhari 7/163, Muslim 2/980. The Prophet (ﷺ) used to say this when returning from a campaign or from Hajj.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "return",
+          "gratitude"
+        ],
+        "isFeatured": false
+      },
+      "id": {
+        "title": "Saat pulang dari perjalanan",
+        "translation": "Di setiap tempat tinggi dibaca Allah Mahabesar tiga kali, lalu: Tiada sesembahan yang berhak disembah selain Allah semata, tiada sekutu bagi-Nya. Milik-Nya kerajaan dan pujian, dan Dia Mahakuasa atas segala sesuatu. Kami kembali, bertaubat, beribadah, dan memuji Rabb kami. Allah menepati janji-Nya, menolong hamba-Nya, dan mengalahkan pasukan sekutu sendirian.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 217; Bukhari 7/163, Muslim 2/980. The Prophet (ﷺ) used to say this when returning from a campaign or from Hajj.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "return",
+          "gratitude"
+        ],
+        "isFeatured": false
+      },
+      "ru": {
+        "title": "При возвращении из путешествия",
+        "translation": "На каждом возвышении произносят Аллах Велик трижды, затем: Нет божества, достойного поклонения, кроме одного Аллаха, у Которого нет сотоварища. Ему принадлежит власть и хвала, и Он способен на всякую вещь. Мы возвращаемся кающимися, поклоняющимися и восхваляющими нашего Господа. Аллах исполнил Своё обещание, помог Своему рабу и Один разгромил союзников.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 217; Bukhari 7/163, Muslim 2/980. The Prophet (ﷺ) used to say this when returning from a campaign or from Hajj.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "return",
+          "gratitude"
+        ],
+        "isFeatured": false
+      },
+      "it": {
+        "title": "Al ritorno dal viaggio",
+        "translation": "Su ogni altura si dice Allah è il Più Grande tre volte, poi: Non vi è divinità degna di adorazione tranne Allah, Unico e senza associati. A Lui il regno e la lode, ed Egli ha potere su ogni cosa. Torniamo pentiti, adorando e lodando il nostro Signore. Allah ha mantenuto la Sua promessa, aiutato il Suo servo e sconfitto da solo i confederati.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 217; Bukhari 7/163, Muslim 2/980. The Prophet (ﷺ) used to say this when returning from a campaign or from Hajj.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "return",
+          "gratitude"
+        ],
+        "isFeatured": false
+      },
+      "pt": {
+        "title": "Ao regressar de viagem",
+        "translation": "Em cada elevação diz-se Allah é o Maior três vezes, depois: Não há divindade digna de adoração exceto Allah, Único, sem parceiro. A Ele pertence o domínio e a Ele pertence o louvor, e Ele tem poder sobre todas as coisas. Regressamos arrependidos, adorando e louvando nosso Senhor. Allah cumpriu a Sua promessa, ajudou o Seu servo e derrotou sozinho os aliados.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 217; Bukhari 7/163, Muslim 2/980. The Prophet (ﷺ) used to say this when returning from a campaign or from Hajj.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "return",
+          "gratitude"
+        ],
+        "isFeatured": false
+      },
+      "tr": {
+        "title": "Yolculuktan dönerken",
+        "translation": "Her yüksek yerde üç kez Allah en büyüktür denir, sonra: Allah’tan başka ibadete layık ilah yoktur; O tektir, ortağı yoktur. Mülk O’nundur, hamd O’nadır ve O her şeye kadirdir. Rabbimize dönüyor, tövbe ediyor, ibadet ediyor ve hamd ediyoruz. Allah vaadini gerçekleştirdi, kuluna yardım etti ve hizipleri tek başına bozguna uğrattı.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 217; Bukhari 7/163, Muslim 2/980. The Prophet (ﷺ) used to say this when returning from a campaign or from Hajj.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "return",
+          "gratitude"
+        ],
+        "isFeatured": false
+      },
+      "nl": {
+        "title": "Bij terugkeer van reis",
+        "translation": "Op elke hoogte zegt men drie keer Allah is de Grootste, daarna: Er is geen god die het waard is aanbeden te worden behalve Allah alleen, zonder deelgenoot. Aan Hem behoort de heerschappij en aan Hem behoort de lof, en Hij heeft macht over alle dingen. Wij keren berouwvol terug, aanbidden en prijzen onze Heer. Allah vervulde Zijn belofte, hielp Zijn dienaar en versloeg alleen de bondgenoten.",
+        "category": "travel",
+        "source": "Hisn al-Muslim / Sunnah.com",
+        "reference": "Hisn al-Muslim 217; Bukhari 7/163, Muslim 2/980. The Prophet (ﷺ) used to say this when returning from a campaign or from Hajj.",
+        "count": 1,
+        "tags": [
+          "travel",
+          "return",
+          "gratitude"
+        ],
+        "isFeatured": false
+      }
+    }
   }
 ]

@@ -33,6 +33,16 @@ class DuaLocalePresentation {
     'gratitude': Icons.favorite_border_outlined,
     'parents': Icons.family_restroom_outlined,
     'hajj': Icons.route_outlined,
+    'waking_up': Icons.wb_twilight_outlined,
+    'clothing': Icons.checkroom_outlined,
+    'home': Icons.home_outlined,
+    'witr': Icons.nights_stay_outlined,
+    'funeral_grief': Icons.volunteer_activism_outlined,
+    'weather_nature': Icons.air_outlined,
+    'fasting': Icons.no_food_outlined,
+    'social_manners': Icons.handshake_outlined,
+    'marriage_family': Icons.diversity_1_outlined,
+    'gatherings': Icons.groups_outlined,
   };
 
   static const _categoryArabicLabels = <String, String>{
@@ -53,6 +63,16 @@ class DuaLocalePresentation {
     'gratitude': 'الشكر',
     'parents': 'العائلة',
     'hajj': 'الحج',
+    'waking_up': 'الاستيقاظ',
+    'clothing': 'اللباس',
+    'home': 'المنزل',
+    'witr': 'الوتر',
+    'funeral_grief': 'الجنائز والمواساة',
+    'weather_nature': 'الطقس والطبيعة',
+    'fasting': 'الصيام',
+    'social_manners': 'آداب التعامل',
+    'marriage_family': 'الزواج والأسرة',
+    'gatherings': 'المجالس',
   };
 
   static const _categorySpanishLabels = <String, String>{
@@ -73,6 +93,16 @@ class DuaLocalePresentation {
     'gratitude': 'Gratitud',
     'parents': 'Familia',
     'hajj': 'Hajj y Umrah',
+    'waking_up': 'Al despertar',
+    'clothing': 'Ropa',
+    'home': 'Hogar',
+    'witr': 'Witr',
+    'funeral_grief': 'Duelo y funeral',
+    'weather_nature': 'Clima y naturaleza',
+    'fasting': 'Ayuno',
+    'social_manners': 'Buenos modales',
+    'marriage_family': 'Matrimonio y familia',
+    'gatherings': 'Reuniones',
   };
 
   static const _categorySpanishHints = <String, String>{
@@ -93,6 +123,16 @@ class DuaLocalePresentation {
     'gratitude': 'Agradecimiento',
     'parents': 'Padres e hijos',
     'hajj': 'Peregrinación',
+    'waking_up': 'Al despertar',
+    'clothing': 'Vestirse y ropa',
+    'home': 'Entrada y hogar',
+    'witr': 'Oración nocturna',
+    'funeral_grief': 'Consuelo y duelo',
+    'weather_nature': 'Viento, trueno y luna',
+    'fasting': 'Iftar y ayuno',
+    'social_manners': 'Cortesía diaria',
+    'marriage_family': 'Bendiciones familiares',
+    'gatherings': 'Cierre de reuniones',
   };
 
   static const _categoryEnglishLabels = <String, String>{
@@ -113,6 +153,16 @@ class DuaLocalePresentation {
     'gratitude': 'Gratitude',
     'parents': 'Family',
     'hajj': 'Hajj and Umrah',
+    'waking_up': 'Waking up',
+    'clothing': 'Clothing',
+    'home': 'Home',
+    'witr': 'Witr',
+    'funeral_grief': 'Funeral and grief',
+    'weather_nature': 'Weather and nature',
+    'fasting': 'Fasting',
+    'social_manners': 'Social manners',
+    'marriage_family': 'Marriage and family',
+    'gatherings': 'Gatherings',
   };
 
   static const _categoryEnglishHints = <String, String>{
@@ -133,6 +183,16 @@ class DuaLocalePresentation {
     'gratitude': 'Thankfulness',
     'parents': 'Parents and children',
     'hajj': 'Pilgrimage',
+    'waking_up': 'After waking',
+    'clothing': 'Dressing and garments',
+    'home': 'Entering the home',
+    'witr': 'Night prayer',
+    'funeral_grief': 'Condolence and grief',
+    'weather_nature': 'Wind, thunder and moon',
+    'fasting': 'Iftar and fasting',
+    'social_manners': 'Everyday courtesy',
+    'marriage_family': 'Family blessings',
+    'gatherings': 'Closing gatherings',
   };
 
   static const _categoryTurkishLabels = <String, String>{
@@ -153,6 +213,16 @@ class DuaLocalePresentation {
     'gratitude': 'Şükür',
     'parents': 'Aile',
     'hajj': 'Hac ve Umre',
+    'waking_up': 'Uyanınca',
+    'clothing': 'Giyim',
+    'home': 'Ev',
+    'witr': 'Vitir',
+    'funeral_grief': 'Cenaze ve taziye',
+    'weather_nature': 'Hava ve tabiat',
+    'fasting': 'Oruç',
+    'social_manners': 'Güzel ahlak',
+    'marriage_family': 'Evlilik ve aile',
+    'gatherings': 'Meclisler',
   };
 
   static const _categoryTurkishHints = <String, String>{
@@ -173,6 +243,16 @@ class DuaLocalePresentation {
     'gratitude': 'Şükretmek',
     'parents': 'Anne baba ve çocuklar',
     'hajj': 'Hac ve umre',
+    'waking_up': 'Uyanma vakti',
+    'clothing': 'Giyinme ve elbise',
+    'home': 'Eve giriş',
+    'witr': 'Gece namazı',
+    'funeral_grief': 'Taziye ve hüzün',
+    'weather_nature': 'Rüzgar, gök gürültüsü ve ay',
+    'fasting': 'İftar ve oruç',
+    'social_manners': 'Günlük nezaket',
+    'marriage_family': 'Aile bereketi',
+    'gatherings': 'Meclis kapanışı',
   };
 
   static const _categoryFrenchLabels = <String, String>{
@@ -193,6 +273,16 @@ class DuaLocalePresentation {
     'gratitude': 'Gratitude',
     'parents': 'Famille',
     'hajj': 'Hajj et Omra',
+    'waking_up': 'Réveil',
+    'clothing': 'Vêtements',
+    'home': 'Foyer',
+    'witr': 'Witr',
+    'funeral_grief': 'Funérailles et deuil',
+    'weather_nature': 'Temps et nature',
+    'fasting': 'Jeûne',
+    'social_manners': 'Bonnes manières',
+    'marriage_family': 'Mariage et famille',
+    'gatherings': 'Assemblées',
   };
 
   static const _categoryFrenchHints = <String, String>{
@@ -213,6 +303,16 @@ class DuaLocalePresentation {
     'gratitude': 'Reconnaissance',
     'parents': 'Parents et enfants',
     'hajj': 'Pèlerinage',
+    'waking_up': 'Après le réveil',
+    'clothing': 'S’habiller',
+    'home': 'Entrer chez soi',
+    'witr': 'Prière nocturne',
+    'funeral_grief': 'Condoléances et deuil',
+    'weather_nature': 'Vent, tonnerre et lune',
+    'fasting': 'Iftar et jeûne',
+    'social_manners': 'Courtoisie quotidienne',
+    'marriage_family': 'Bénédictions familiales',
+    'gatherings': 'Fin des assemblées',
   };
 
   static const _categoryGermanLabels = <String, String>{
@@ -233,6 +333,16 @@ class DuaLocalePresentation {
     'gratitude': 'Dankbarkeit',
     'parents': 'Familie',
     'hajj': 'Hadsch und Umra',
+    'waking_up': 'Aufwachen',
+    'clothing': 'Kleidung',
+    'home': 'Zuhause',
+    'witr': 'Witr',
+    'funeral_grief': 'Trauer und Bestattung',
+    'weather_nature': 'Wetter und Natur',
+    'fasting': 'Fasten',
+    'social_manners': 'Gutes Benehmen',
+    'marriage_family': 'Ehe und Familie',
+    'gatherings': 'Versammlungen',
   };
 
   static const _categoryGermanHints = <String, String>{
@@ -253,6 +363,16 @@ class DuaLocalePresentation {
     'gratitude': 'Dank und Lob',
     'parents': 'Eltern und Kinder',
     'hajj': 'Pilgerfahrt',
+    'waking_up': 'Nach dem Aufwachen',
+    'clothing': 'Kleiden und Gewand',
+    'home': 'Betreten des Hauses',
+    'witr': 'Nachtgebet',
+    'funeral_grief': 'Beileid und Trauer',
+    'weather_nature': 'Wind, Donner und Mond',
+    'fasting': 'Iftar und Fasten',
+    'social_manners': 'Alltägliche Höflichkeit',
+    'marriage_family': 'Familiärer Segen',
+    'gatherings': 'Abschluss von Versammlungen',
   };
 
   static const _categoryItalianLabels = <String, String>{
@@ -273,6 +393,16 @@ class DuaLocalePresentation {
     'gratitude': 'Gratitudine',
     'parents': 'Famiglia',
     'hajj': 'Hajj e Umrah',
+    'waking_up': 'Risveglio',
+    'clothing': 'Abbigliamento',
+    'home': 'Casa',
+    'witr': 'Witr',
+    'funeral_grief': 'Funerale e lutto',
+    'weather_nature': 'Meteo e natura',
+    'fasting': 'Digiuno',
+    'social_manners': 'Buone maniere',
+    'marriage_family': 'Matrimonio e famiglia',
+    'gatherings': 'Riunioni',
   };
 
   static const _categoryItalianHints = <String, String>{
@@ -293,6 +423,16 @@ class DuaLocalePresentation {
     'gratitude': 'Ringraziamento',
     'parents': 'Genitori e figli',
     'hajj': 'Pellegrinaggio',
+    'waking_up': 'Dopo il risveglio',
+    'clothing': 'Vestirsi e abiti',
+    'home': 'Entrare in casa',
+    'witr': 'Preghiera notturna',
+    'funeral_grief': 'Condoglianze e lutto',
+    'weather_nature': 'Vento, tuono e luna',
+    'fasting': 'Iftar e digiuno',
+    'social_manners': 'Cortesia quotidiana',
+    'marriage_family': 'Benedizioni familiari',
+    'gatherings': 'Chiusura delle riunioni',
   };
 
   static const _categoryPortugueseLabels = <String, String>{
@@ -313,6 +453,16 @@ class DuaLocalePresentation {
     'gratitude': 'Gratidão',
     'parents': 'Família',
     'hajj': 'Hajj e Umrah',
+    'waking_up': 'Ao acordar',
+    'clothing': 'Roupa',
+    'home': 'Casa',
+    'witr': 'Witr',
+    'funeral_grief': 'Funeral e luto',
+    'weather_nature': 'Clima e natureza',
+    'fasting': 'Jejum',
+    'social_manners': 'Boas maneiras',
+    'marriage_family': 'Casamento e família',
+    'gatherings': 'Reuniões',
   };
 
   static const _categoryPortugueseHints = <String, String>{
@@ -333,6 +483,16 @@ class DuaLocalePresentation {
     'gratitude': 'Agradecimento',
     'parents': 'Pais e filhos',
     'hajj': 'Peregrinação',
+    'waking_up': 'Depois de acordar',
+    'clothing': 'Vestir e roupa',
+    'home': 'Entrar em casa',
+    'witr': 'Oração noturna',
+    'funeral_grief': 'Consolo e luto',
+    'weather_nature': 'Vento, trovão e lua',
+    'fasting': 'Iftar e jejum',
+    'social_manners': 'Cortesia diária',
+    'marriage_family': 'Bênçãos familiares',
+    'gatherings': 'Encerrar reuniões',
   };
 
   static const _categoryDutchLabels = <String, String>{
@@ -353,6 +513,16 @@ class DuaLocalePresentation {
     'gratitude': 'Dankbaarheid',
     'parents': 'Familie',
     'hajj': 'Hadj en Omra',
+    'waking_up': 'Wakker worden',
+    'clothing': 'Kleding',
+    'home': 'Thuis',
+    'witr': 'Witr',
+    'funeral_grief': 'Begrafenis en rouw',
+    'weather_nature': 'Weer en natuur',
+    'fasting': 'Vasten',
+    'social_manners': 'Goede manieren',
+    'marriage_family': 'Huwelijk en familie',
+    'gatherings': 'Bijeenkomsten',
   };
 
   static const _categoryDutchHints = <String, String>{
@@ -373,6 +543,16 @@ class DuaLocalePresentation {
     'gratitude': 'Dank en lof',
     'parents': 'Ouders en kinderen',
     'hajj': 'Bedevaart',
+    'waking_up': 'Na het wakker worden',
+    'clothing': 'Aankleden en kleding',
+    'home': 'Het huis binnengaan',
+    'witr': 'Nachtgebed',
+    'funeral_grief': 'Troost en rouw',
+    'weather_nature': 'Wind, donder en maan',
+    'fasting': 'Iftar en vasten',
+    'social_manners': 'Dagelijkse hoffelijkheid',
+    'marriage_family': 'Familiezegeningen',
+    'gatherings': 'Bijeenkomsten afsluiten',
   };
 
   static const _categoryRussianLabels = <String, String>{
@@ -393,6 +573,16 @@ class DuaLocalePresentation {
     'gratitude': 'Благодарность',
     'parents': 'Родители',
     'hajj': 'Хадж и умра',
+    'waking_up': 'Пробуждение',
+    'clothing': 'Одежда',
+    'home': 'Дом',
+    'witr': 'Витр',
+    'funeral_grief': 'Похороны и утешение',
+    'weather_nature': 'Погода и природа',
+    'fasting': 'Пост',
+    'social_manners': 'Адаб общения',
+    'marriage_family': 'Брак и семья',
+    'gatherings': 'Собрания',
   };
 
   static const _categoryRussianHints = <String, String>{
@@ -413,6 +603,16 @@ class DuaLocalePresentation {
     'gratitude': 'Благодарность и хвала',
     'parents': 'Родители и дети',
     'hajj': 'Паломничество',
+    'waking_up': 'После пробуждения',
+    'clothing': 'Одежда и одевание',
+    'home': 'Вход в дом',
+    'witr': 'Ночная молитва',
+    'funeral_grief': 'Соболезнование и скорбь',
+    'weather_nature': 'Ветер, гром и луна',
+    'fasting': 'Ифтар и пост',
+    'social_manners': 'Повседневная вежливость',
+    'marriage_family': 'Семейные благословения',
+    'gatherings': 'Завершение собраний',
   };
 
   static const _categoryIndonesianLabels = <String, String>{
@@ -433,6 +633,16 @@ class DuaLocalePresentation {
     'gratitude': 'Syukur',
     'parents': 'Orang Tua',
     'hajj': 'Haji',
+    'waking_up': 'Bangun tidur',
+    'clothing': 'Pakaian',
+    'home': 'Rumah',
+    'witr': 'Witir',
+    'funeral_grief': 'Jenazah dan duka',
+    'weather_nature': 'Cuaca dan alam',
+    'fasting': 'Puasa',
+    'social_manners': 'Adab sosial',
+    'marriage_family': 'Pernikahan dan keluarga',
+    'gatherings': 'Majelis',
   };
 
   static const _categoryIndonesianHints = <String, String>{
@@ -453,6 +663,16 @@ class DuaLocalePresentation {
     'gratitude': 'Rasa syukur',
     'parents': 'Orang tua dan anak',
     'hajj': 'Ibadah haji',
+    'waking_up': 'Setelah bangun',
+    'clothing': 'Berpakaian dan pakaian',
+    'home': 'Masuk rumah',
+    'witr': 'Salat malam',
+    'funeral_grief': 'Takziah dan duka',
+    'weather_nature': 'Angin, petir, dan bulan',
+    'fasting': 'Iftar dan puasa',
+    'social_manners': 'Kesopanan sehari-hari',
+    'marriage_family': 'Berkah keluarga',
+    'gatherings': 'Penutup majelis',
   };
 
   static const _categoryArabicHints = <String, String>{
@@ -473,6 +693,16 @@ class DuaLocalePresentation {
     'gratitude': 'الحمد والشكر',
     'parents': 'الوالدان والأبناء',
     'hajj': 'النسك والمناسك',
+    'waking_up': 'بعد الاستيقاظ',
+    'clothing': 'اللباس والثوب',
+    'home': 'دخول المنزل',
+    'witr': 'قيام الليل',
+    'funeral_grief': 'العزاء والحزن',
+    'weather_nature': 'الريح والرعد والهلال',
+    'fasting': 'الإفطار والصيام',
+    'social_manners': 'آداب يومية',
+    'marriage_family': 'بركات الأسرة',
+    'gatherings': 'ختام المجالس',
   };
 
   static String normalizeLanguageCode(String languageCode) {
@@ -514,8 +744,7 @@ class DuaLocalePresentation {
         ),
       'pt' => DuaCategoryMeta(
           icon: icon,
-          label:
-              _categoryPortugueseLabels[key] ??
+          label: _categoryPortugueseLabels[key] ??
               _categoryEnglishLabels[key] ??
               key,
           hint: _categoryPortugueseHints[key] ?? 'Categoria',
@@ -537,8 +766,9 @@ class DuaLocalePresentation {
         ),
       'id' => DuaCategoryMeta(
           icon: icon,
-          label:
-              _categoryIndonesianLabels[key] ?? _categoryEnglishLabels[key] ?? key,
+          label: _categoryIndonesianLabels[key] ??
+              _categoryEnglishLabels[key] ??
+              key,
           hint: _categoryIndonesianHints[key] ?? 'Kategori',
           arabicLabel: arabicLabel,
         ),
@@ -557,7 +787,8 @@ class DuaLocalePresentation {
         ),
       'tr' => DuaCategoryMeta(
           icon: icon,
-          label: _categoryTurkishLabels[key] ?? _categoryEnglishLabels[key] ?? key,
+          label:
+              _categoryTurkishLabels[key] ?? _categoryEnglishLabels[key] ?? key,
           hint: _categoryTurkishHints[key] ?? 'Kategori',
           arabicLabel: arabicLabel,
         ),
@@ -728,8 +959,7 @@ class DuaLocalePresentation {
 
   static String noResultsBody(String languageCode) {
     return switch (normalizeLanguageCode(languageCode)) {
-      'en' =>
-        'Try words like rain, travel, protection, sleep or gratitude.',
+      'en' => 'Try words like rain, travel, protection, sleep or gratitude.',
       'it' =>
         'Prova parole come pioggia, viaggio, protezione, sonno o gratitudine.',
       'pt' =>
@@ -740,14 +970,12 @@ class DuaLocalePresentation {
         'Versuche Begriffe wie Regen, Reise, Schutz, Schlaf oder Dankbarkeit.',
       'fr' =>
         'Essayez des mots comme pluie, voyage, protection, sommeil ou gratitude.',
-      'ar' =>
-        'جرّب كلمات مثل المطر أو السفر أو التحصين أو النوم أو الشكر.',
+      'ar' => 'جرّب كلمات مثل المطر أو السفر أو التحصين أو النوم أو الشكر.',
       'id' =>
         'Coba kata-kata seperti hujan, perjalanan, perlindungan, tidur atau rasa syukur.',
       'nl' =>
         'Probeer woorden als regen, reizen, bescherming, slaap of dankbaarheid.',
-      'tr' =>
-        'Yağmur, yolculuk, korunma, uyku veya şükür gibi kelimeler dene.',
+      'tr' => 'Yağmur, yolculuk, korunma, uyku veya şükür gibi kelimeler dene.',
       _ =>
         'Prueba con palabras como lluvia, viaje, protección, sueño o gratitud.',
     };

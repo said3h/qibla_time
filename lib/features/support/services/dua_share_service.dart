@@ -147,6 +147,16 @@ class DuaShareService {
       'zikr' => 'الذكر',
       'parents' => 'العائلة',
       'hajj' => 'الحج',
+      'waking_up' => 'الاستيقاظ',
+      'clothing' => 'اللباس',
+      'home' => 'المنزل',
+      'witr' => 'الوتر',
+      'funeral_grief' => 'الجنائز والمواساة',
+      'weather_nature' => 'الطقس والطبيعة',
+      'fasting' => 'الصيام',
+      'social_manners' => 'آداب التعامل',
+      'marriage_family' => 'الزواج والأسرة',
+      'gatherings' => 'المجالس',
       _ => null,
     };
   }

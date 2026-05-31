@@ -73,7 +73,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
   String selectedAdhanName = '';
 
   bool _exactAlarmPermissionGranted = true;
-  String? _manufacturerName;
 
   // Hadices settings
   bool dailyInspirationEnabled = false;
@@ -168,7 +167,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
 
     if (Platform.isAndroid) {
       final androidInfo = await DeviceInfoPlugin().androidInfo;
-      _manufacturerName = androidInfo.manufacturer;
       if (androidInfo.version.sdkInt >= 31) {
         final status = await Permission.scheduleExactAlarm.status;
         if (mounted) {
@@ -2113,12 +2111,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
         l10n.settingsLocationBlocked,
       _ => l10n.commonUnavailable,
     };
-  }
-
-  String _manufacturerLabel(String? manufacturer) {
-    final trimmed = manufacturer?.trim() ?? '';
-    if (trimmed.isEmpty) return 'Android';
-    return trimmed[0].toUpperCase() + trimmed.substring(1);
   }
 
   Widget _buildSettingRow({

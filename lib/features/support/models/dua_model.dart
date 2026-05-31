@@ -75,7 +75,8 @@ class DuaMultilenguaje {
 
   factory DuaMultilenguaje.fromJson(Map<String, dynamic> json) {
     final translations = <String, DuaTranslation>{};
-    final translationsJson = json['translations'] as Map<String, dynamic>? ?? {};
+    final translationsJson =
+        json['translations'] as Map<String, dynamic>? ?? {};
     final sharedArabicText = json['arabicText'] as String? ?? '';
     final sharedTransliteration = json['transliteration'] as String? ?? '';
     final sharedReference = json['reference'] as String?;
@@ -130,7 +131,8 @@ class DuaMultilenguaje {
   }
 
   Dua toDua(String languageCode, {String fallbackLanguage = 'es'}) {
-    final translation = translations[languageCode] ?? translations[fallbackLanguage];
+    final translation =
+        translations[languageCode] ?? translations[fallbackLanguage];
 
     if (translation == null) {
       throw Exception(
@@ -155,7 +157,8 @@ class DuaMultilenguaje {
   }
 
   Dua getDua(String languageCode, {String fallbackLanguage = 'es'}) {
-    final translation = translations[languageCode] ?? translations[fallbackLanguage];
+    final translation =
+        translations[languageCode] ?? translations[fallbackLanguage];
 
     if (translation == null) {
       final firstEntry = translations.values.firstOrNull;
@@ -195,7 +198,8 @@ class DuaMultilenguaje {
     );
   }
 
-  bool hasLanguage(String languageCode) => translations.containsKey(languageCode);
+  bool hasLanguage(String languageCode) =>
+      translations.containsKey(languageCode);
 
   static String _resolveCanonicalCategory(
     Map<String, DuaTranslation> translations,
@@ -231,6 +235,21 @@ class DuaMultilenguaje {
       'family' => 'parents',
       'hajj' => 'hajj',
       'hajj & umrah' => 'hajj',
+      'waking_up' => 'waking_up',
+      'waking up' => 'waking_up',
+      'clothing' => 'clothing',
+      'home' => 'home',
+      'witr' => 'witr',
+      'funeral_grief' => 'funeral_grief',
+      'funeral & grief' => 'funeral_grief',
+      'weather_nature' => 'weather_nature',
+      'weather & nature' => 'weather_nature',
+      'fasting' => 'fasting',
+      'social_manners' => 'social_manners',
+      'social manners' => 'social_manners',
+      'marriage_family' => 'marriage_family',
+      'marriage & family' => 'marriage_family',
+      'gatherings' => 'gatherings',
       _ => normalized,
     };
   }
