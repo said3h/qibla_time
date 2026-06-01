@@ -11,6 +11,11 @@ import 'package:timezone/timezone.dart' as tz;
 import '../../../core/services/logger_service.dart';
 import '../../../l10n/l10n.dart';
 
+enum AdhanScheduleResult {
+  scheduled,
+  exactAlarmPermissionRequired,
+}
+
 class NotificationService {
   NotificationService._();
   static final NotificationService instance = NotificationService._();
@@ -71,7 +76,7 @@ class NotificationService {
     }
   }
 
-  Future<void> scheduleAdhan({
+  Future<AdhanScheduleResult> scheduleAdhan({
     required int id,
     required String prayerName,
     required DateTime scheduledAt,
@@ -86,7 +91,8 @@ class NotificationService {
 
       AppLogger.info(
         'scheduleAdhan: id=$id prayer=$prayerName at=$scheduledAt '
-        'sound=$androidSound channel=$androidChannelId',
+        'sound=$androidSound channel=$androidChannelId '
+        'now=${DateTime.now()} tzLocal=${tz.local.name}',
       );
 
       await _ensureAndroidAdhanChannel(
@@ -116,19 +122,26 @@ class NotificationService {
 
       final tzDate = tz.TZDateTime.from(scheduledAt, tz.local);
 
-      AndroidScheduleMode scheduleMode;
+      final AndroidScheduleMode scheduleMode;
       if (Platform.isAndroid) {
-        // Use canScheduleExactNotifications() (→ AlarmManager.canScheduleExactAlarms())
-        // instead of permission_handler's scheduleExactAlarm.isGranted.
-        // If exact alarms are unavailable, fall back to inexactAllowWhileIdle.
         final canUseExactAlarm = await _canScheduleExactAlarm();
-        scheduleMode = canUseExactAlarm
-            ? AndroidScheduleMode.exactAllowWhileIdle
-            : AndroidScheduleMode.inexactAllowWhileIdle;
+        final resolvedMode = _adhanScheduleModeFor(canUseExactAlarm);
         AppLogger.info(
           'scheduleAdhan: canScheduleExact=$canUseExactAlarm '
-          'mode=${canUseExactAlarm ? "exactAllowWhileIdle" : "inexactAllowWhileIdle"}',
+          'mode=${resolvedMode?.name ?? "permission_required"} '
+          'id=$id prayer=$prayerName scheduledAt=$scheduledAt '
+          'tzDate=$tzDate diffMinutes=${scheduledAt.difference(DateTime.now()).inMinutes} '
+          'channel=$androidChannelId sound=$androidSound',
         );
+        if (resolvedMode == null) {
+          AppLogger.warning(
+            'scheduleAdhan: NOT_SCHEDULED exact alarm permission missing. '
+            'Adhan requires exactAllowWhileIdle; no inexact fallback will be used. '
+            'id=$id prayer=$prayerName scheduledAt=$scheduledAt',
+          );
+          return AdhanScheduleResult.exactAlarmPermissionRequired;
+        }
+        scheduleMode = resolvedMode;
       } else {
         scheduleMode = AndroidScheduleMode.exactAllowWhileIdle;
       }
@@ -142,7 +155,11 @@ class NotificationService {
         androidScheduleMode: scheduleMode,
       );
 
-      AppLogger.info('scheduleAdhan: SCHEDULED id=$id OK');
+      AppLogger.info(
+        'scheduleAdhan: SCHEDULED id=$id OK mode=${scheduleMode.name} '
+        'scheduledAt=$scheduledAt tzDate=$tzDate channel=$androidChannelId',
+      );
+      return AdhanScheduleResult.scheduled;
     } catch (e, stackTrace) {
       AppLogger.error(
         'scheduleAdhan: FAILED id=$id prayer=$prayerName',
@@ -400,6 +417,19 @@ class NotificationService {
     return await android.canScheduleExactNotifications() ?? false;
   }
 
+  Future<bool> canScheduleExactAdhanAlarms() {
+    return _canScheduleExactAlarm();
+  }
+
+  AndroidScheduleMode? _adhanScheduleModeFor(bool canUseExactAlarm) {
+    return canUseExactAlarm ? AndroidScheduleMode.exactAllowWhileIdle : null;
+  }
+
+  @visibleForTesting
+  AndroidScheduleMode? debugAdhanScheduleModeFor(bool canUseExactAlarm) {
+    return _adhanScheduleModeFor(canUseExactAlarm);
+  }
+
   @visibleForTesting
   Future<void> debugConfigureLocalTimeZone({
     bool forceAndroidForTesting = false,
@@ -527,9 +557,7 @@ class NotificationService {
   }
 
   Future<bool> isExactAlarmPermissionGranted() async {
-    if (!Platform.isAndroid) return true;
-    final status = await Permission.scheduleExactAlarm.status;
-    return status.isGranted;
+    return canScheduleExactAdhanAlarms();
   }
 
   Future<bool> requestExactAlarmPermission() async {
@@ -544,6 +572,34 @@ class NotificationService {
 
     final result = await Permission.scheduleExactAlarm.request();
     return result.isGranted;
+  }
+
+  Future<bool> isBatteryOptimizationActive() async {
+    if (!Platform.isAndroid) return false;
+    try {
+      final ignoring = await _androidSettingsChannel.invokeMethod<bool>(
+        'isIgnoringBatteryOptimizations',
+      );
+      return ignoring == false;
+    } on PlatformException {
+      return false;
+    } on MissingPluginException {
+      return false;
+    }
+  }
+
+  Future<AdhanScheduleResult> scheduleTestAdhanInOneMinute() async {
+    final scheduledAt = DateTime.now().add(const Duration(minutes: 1));
+    final result = await scheduleAdhan(
+      id: 9998,
+      prayerName: 'Test',
+      scheduledAt: scheduledAt,
+      adhanFile: 'azan1.mp3',
+    );
+    AppLogger.info(
+      'scheduleTestAdhanInOneMinute: result=$result scheduledAt=$scheduledAt',
+    );
+    return result;
   }
 
   /// Dispara una notificación inmediata para verificar que el sistema funciona.

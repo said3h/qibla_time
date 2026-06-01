@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:adhan/adhan.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -73,6 +74,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
   String selectedAdhanName = '';
 
   bool _exactAlarmPermissionGranted = true;
+  bool _batteryOptimizationActive = false;
+  String? _manufacturerName;
 
   // Hadices settings
   bool dailyInspirationEnabled = false;
@@ -167,10 +170,26 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
 
     if (Platform.isAndroid) {
       final androidInfo = await DeviceInfoPlugin().androidInfo;
+      _manufacturerName = androidInfo.manufacturer;
       if (androidInfo.version.sdkInt >= 31) {
-        final status = await Permission.scheduleExactAlarm.status;
+        final exactAlarmGranted =
+            await NotificationService.instance.canScheduleExactAdhanAlarms();
+        final batteryOptimizationActive =
+            await NotificationService.instance.isBatteryOptimizationActive();
         if (mounted) {
-          setState(() => _exactAlarmPermissionGranted = status.isGranted);
+          setState(() {
+            _exactAlarmPermissionGranted = exactAlarmGranted;
+            _batteryOptimizationActive = batteryOptimizationActive;
+          });
+        }
+      } else {
+        final batteryOptimizationActive =
+            await NotificationService.instance.isBatteryOptimizationActive();
+        if (mounted) {
+          setState(() {
+            _exactAlarmPermissionGranted = true;
+            _batteryOptimizationActive = batteryOptimizationActive;
+          });
         }
       }
     }
@@ -231,6 +250,27 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
   Future<void> _openExactAlarmSettings() async {
     await AndroidSettingsLauncher.openExactAlarmSettings();
     await _refreshAndroidAdhanStatus();
+  }
+
+  Future<void> _openBatterySettings() async {
+    await AndroidSettingsLauncher.openBatterySettings(
+      manufacturer: _manufacturerName,
+    );
+    await _refreshAndroidAdhanStatus();
+  }
+
+  Future<void> _scheduleTestAdhanInOneMinute() async {
+    final result =
+        await NotificationService.instance.scheduleTestAdhanInOneMinute();
+    if (!mounted) return;
+    final message = result == AdhanScheduleResult.scheduled
+        ? 'Adhan de prueba programado para dentro de 1 minuto.'
+        : 'No se programó: activa las alarmas exactas de Android primero.';
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
+    );
   }
 
   Future<void> _refreshAndroidAdhanStatus() async {
@@ -675,10 +715,34 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
                 icon: Icons.alarm_on_outlined,
                 title: 'Paso 2: permitir alarmas exactas',
                 subtitle:
-                    'Toca aqui. Se abrira la pantalla exacta para permitir alarmas y recordatorios.',
+                    'Para que el adhan suene a la hora exacta, activa las alarmas exactas en ajustes.',
                 actionLabel: 'Permitir',
                 onTap: () {
                   _openExactAlarmSettings();
+                },
+              ),
+            if (_batteryOptimizationActive && Platform.isAndroid)
+              _buildAndroidAdhanActionCard(
+                tokens,
+                icon: Icons.battery_alert_outlined,
+                title: 'Optimización de batería activa',
+                subtitle:
+                    'Android puede retrasar alarmas en segundo plano. Permite que QiblaTime funcione sin restricciones de batería.',
+                actionLabel: 'Abrir ajustes',
+                onTap: () {
+                  _openBatterySettings();
+                },
+              ),
+            if (kDebugMode && Platform.isAndroid)
+              _buildAndroidAdhanActionCard(
+                tokens,
+                icon: Icons.science_outlined,
+                title: 'QA: probar adhan en 1 minuto',
+                subtitle:
+                    'Programa una notificación de adhan con el mismo canal y sonido.',
+                actionLabel: 'Programar',
+                onTap: () {
+                  _scheduleTestAdhanInOneMinute();
                 },
               ),
             _buildToggleTile(

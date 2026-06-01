@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:qibla_time/features/prayer_times/services/adhan_manager.dart';
@@ -37,6 +38,22 @@ void main() {
         service.debugAndroidChannelIdFor('azan1.mp3'),
         'adhan_channel_v7_adhan_azan1',
       );
+    });
+
+    test('uses exactAllowWhileIdle for adhan when exact alarms are allowed',
+        () {
+      final service = NotificationService.instance;
+
+      expect(
+        service.debugAdhanScheduleModeFor(true),
+        AndroidScheduleMode.exactAllowWhileIdle,
+      );
+    });
+
+    test('does not fallback to inexactAllowWhileIdle for adhan', () {
+      final service = NotificationService.instance;
+
+      expect(service.debugAdhanScheduleModeFor(false), isNull);
     });
 
     test('configures local timezone from the Android channel before scheduling',

@@ -21,6 +21,7 @@ import android.os.Build
 import android.os.Environment
 import android.os.Handler
 import android.os.Looper
+import android.os.PowerManager
 import android.provider.MediaStore
 import android.provider.Settings
 import android.util.Log
@@ -108,6 +109,10 @@ class MainActivity : FlutterActivity(), EventChannel.StreamHandler, SensorEventL
 
                 "getTimeZoneId" -> {
                     result.success(TimeZone.getDefault().id)
+                }
+
+                "isIgnoringBatteryOptimizations" -> {
+                    result.success(isIgnoringBatteryOptimizations())
                 }
 
                 else -> result.notImplemented()
@@ -468,6 +473,12 @@ class MainActivity : FlutterActivity(), EventChannel.StreamHandler, SensorEventL
         }
 
         return openAppDetails()
+    }
+
+    private fun isIgnoringBatteryOptimizations(): Boolean {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return true
+        val powerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
+        return powerManager.isIgnoringBatteryOptimizations(packageName)
     }
 
     private fun openAppDetails(): Boolean {

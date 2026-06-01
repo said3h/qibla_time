@@ -27,7 +27,6 @@ import '../../support/screens/purification_guide_screen.dart';
 import '../../tracking/models/tracking_models.dart';
 import '../../tracking/screens/analytics_screen.dart';
 import '../../tracking/services/tracking_service.dart';
-import '../domain/entities/home_insight.dart';
 import '../domain/entities/manual_prayer_location.dart';
 import '../domain/entities/next_prayer_info.dart';
 import '../domain/entities/offline_prayer_city.dart';
@@ -36,7 +35,6 @@ import '../domain/entities/prayer_location_diagnostic.dart';
 import '../domain/entities/prayer_schedule.dart';
 import '../domain/entities/ramadan_status.dart';
 import '../domain/entities/resolved_prayer_schedule.dart';
-import '../domain/usecases/generate_home_insights.dart';
 import '../presentation/providers/ramadan_providers.dart';
 import '../presentation/providers/prayer_times_providers.dart';
 import '../../period/services/period_mode_service.dart';
@@ -63,8 +61,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     'السبت',
     'الأحد',
   ];
-  static const _generateHomeInsights = GenerateHomeInsightsUseCase();
-
   late DateTime _selectedDate;
   late final ScrollController _scrollController;
   late final ScrollController _calendarController;
@@ -971,11 +967,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     PrayerLocationDiagnostic? diagnostic,
   ) {
     final l10n = context.l10n;
-    // Determine the most useful action for the current diagnostic state.
-    final deniedForever = diagnostic?.permissionStatus ==
-        PrayerLocationPermissionStatus.deniedForever;
-    final gpsOff = diagnostic != null && !diagnostic.serviceEnabled;
-
     return Container(
       margin: const EdgeInsets.fromLTRB(16, 0, 16, 0),
       padding: const EdgeInsets.all(20),
@@ -1014,54 +1005,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildNotificationStatusCard(
-    QiblaTokens tokens,
-    bool? systemPermissionGranted,
-    bool? prayerNotificationsEnabled,
-  ) {
-    final l10n = context.l10n;
-    if (systemPermissionGranted == null || prayerNotificationsEnabled == null) {
-      return const SizedBox.shrink();
-    }
-    if (systemPermissionGranted && prayerNotificationsEnabled) {
-      return const SizedBox.shrink();
-    }
-
-    final text = !systemPermissionGranted
-        ? l10n.homeNotificationPermissionPending
-        : l10n.homeNotificationPaused;
-
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
-      child: Container(
-        padding: const EdgeInsets.all(14),
-        decoration: BoxDecoration(
-          color: tokens.primaryBg,
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: tokens.primaryBorder),
-        ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Icon(Icons.notifications_off_outlined,
-                color: tokens.primary, size: 18),
-            const SizedBox(width: 10),
-            Expanded(
-              child: Text(
-                text,
-                style: GoogleFonts.dmSans(
-                  fontSize: 11,
-                  height: 1.5,
-                  color: tokens.textPrimary,
-                ),
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }
@@ -1198,198 +1141,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             const SizedBox(height: 10),
             Text(
               ramadanStatus.dailySuggestion,
-              style: GoogleFonts.dmSans(
-                fontSize: 11,
-                height: 1.5,
-                color: tokens.textSecondary,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildHomeInsightCard(
-    QiblaTokens tokens,
-    HomeInsightBundle bundle,
-  ) {
-    final l10n = context.l10n;
-    final primary = bundle.primary;
-    final secondary = bundle.secondary;
-
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: tokens.bgSurface,
-          borderRadius: BorderRadius.circular(18),
-          border: Border.all(color: tokens.border),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Container(
-                  width: 34,
-                  height: 34,
-                  decoration: BoxDecoration(
-                    color: tokens.primaryBg,
-                    shape: BoxShape.circle,
-                    border: Border.all(color: tokens.primaryBorder),
-                  ),
-                  child: Icon(
-                    _insightIcon(primary.kind),
-                    size: 18,
-                    color: tokens.primaryLight,
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        l10n.homeInsightTodayLabel,
-                        style: GoogleFonts.dmSans(
-                          fontSize: 9,
-                          color: tokens.textSecondary,
-                          letterSpacing: 1.4,
-                        ),
-                      ),
-                      const SizedBox(height: 2),
-                      Text(
-                        primary.title,
-                        style: GoogleFonts.dmSans(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: tokens.textPrimary,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            Text(
-              primary.message,
-              style: GoogleFonts.dmSans(
-                fontSize: 12,
-                height: 1.5,
-                color: tokens.textPrimary,
-              ),
-            ),
-            if (secondary != null) ...[
-              const SizedBox(height: 12),
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 10,
-                ),
-                decoration: BoxDecoration(
-                  color: tokens.bgSurface2,
-                  borderRadius: BorderRadius.circular(14),
-                  border: Border.all(color: tokens.border),
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Icon(
-                      _insightIcon(secondary.kind),
-                      size: 16,
-                      color: tokens.textMuted,
-                    ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Text(
-                        secondary.message,
-                        style: GoogleFonts.dmSans(
-                          fontSize: 10,
-                          height: 1.45,
-                          color: tokens.textSecondary,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildWeeklySummaryCard(QiblaTokens tokens, WeeklySummary summary) {
-    final l10n = context.l10n;
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: tokens.bgSurface,
-          borderRadius: BorderRadius.circular(18),
-          border: Border.all(color: tokens.border),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    l10n.analyticsWeeklySummaryTitle,
-                    style: GoogleFonts.dmSans(
-                      fontSize: 9,
-                      color: tokens.textSecondary,
-                      letterSpacing: 1.4,
-                    ),
-                  ),
-                ),
-                Text(
-                  '${summary.prayersCompleted}/${summary.maxPossible}',
-                  style: GoogleFonts.dmSans(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                    color: tokens.primaryLight,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            Row(
-              children: [
-                Expanded(
-                  child: _summaryMetric(
-                    tokens,
-                    '${summary.fullDays}',
-                    l10n.analyticsFullDaysLabel,
-                  ),
-                ),
-                Expanded(
-                  child: _summaryMetric(
-                    tokens,
-                    '${summary.currentStreak}',
-                    l10n.analyticsCurrentStreakLabel,
-                  ),
-                ),
-                Expanded(
-                  child: _summaryMetric(
-                    tokens,
-                    summary.strongestDay.shortLabel,
-                    l10n.homeWeeklyBestDayHelper(
-                      summary.strongestDay.completed,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 12),
-            Text(
-              summary.interpretation,
               style: GoogleFonts.dmSans(
                 fontSize: 11,
                 height: 1.5,
@@ -1945,6 +1696,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                 return;
                               }
                               _refreshPrayerLocationState();
+                              if (!dialogContext.mounted) {
+                                return;
+                              }
                               Navigator.of(dialogContext).pop();
                             },
                             icon: const Icon(Icons.gps_fixed_rounded, size: 16),
@@ -2500,267 +2254,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildPrayerSection(
-    PrayerSchedule? prayerSchedule,
-    NextPrayerInfo? nextPrayerInfo,
-    List<String> completed,
-    DateTime date,
-    QiblaTokens tokens,
-  ) {
-    final l10n = context.l10n;
-    if (prayerSchedule == null) {
-      return _buildPrayerFallback(tokens, null);
-    }
-
-    final languageCode = AppLocaleController.effectiveLanguageCode();
-    final isArabicOnly = languageCode == 'ar';
-    final prayers = [
-      (
-        PrayerName.fajr,
-        _localizedPrayerPrimaryName(PrayerName.fajr, languageCode),
-        isArabicOnly ? '' : PrayerName.fajr.displayNameArabic,
-        prayerSchedule.fajr,
-      ),
-      (
-        PrayerName.dhuhr,
-        _localizedPrayerPrimaryName(PrayerName.dhuhr, languageCode),
-        isArabicOnly ? '' : PrayerName.dhuhr.displayNameArabic,
-        prayerSchedule.dhuhr,
-      ),
-      (
-        PrayerName.asr,
-        _localizedPrayerPrimaryName(PrayerName.asr, languageCode),
-        isArabicOnly ? '' : PrayerName.asr.displayNameArabic,
-        prayerSchedule.asr,
-      ),
-      (
-        PrayerName.maghrib,
-        _localizedPrayerPrimaryName(PrayerName.maghrib, languageCode),
-        isArabicOnly ? '' : PrayerName.maghrib.displayNameArabic,
-        prayerSchedule.maghrib,
-      ),
-      (
-        PrayerName.isha,
-        _localizedPrayerPrimaryName(PrayerName.isha, languageCode),
-        isArabicOnly ? '' : PrayerName.isha.displayNameArabic,
-        prayerSchedule.isha,
-      ),
-    ];
-    final nextPrayerName = nextPrayerInfo?.prayer.key;
-    final isToday = _isSameDay(date, _dateOnly(DateTime.now()));
-
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child: Text(
-                  (isToday
-                          ? l10n.homePrayerSectionToday
-                          : l10n.homePrayerSectionForDate(
-                              _formatCompactDate(date)))
-                      .toUpperCase(),
-                  style: GoogleFonts.dmSans(
-                    fontSize: 9,
-                    color: tokens.textSecondary,
-                    letterSpacing: 1.5,
-                  ),
-                ),
-              ),
-              Text(
-                isToday
-                    ? l10n.homePrayerSectionWorshipDay(
-                        SpanishDateLabels.longWeekday(date),
-                      )
-                    : l10n.homePrayerSectionMarkedCount(completed.length),
-                style: GoogleFonts.dmSans(
-                    fontSize: 10, color: tokens.primaryLight),
-              ),
-            ],
-          ),
-          const SizedBox(height: 10),
-          ...prayers.map((prayer) {
-            final isCurrent = prayer.$1.key == nextPrayerName;
-            final isDone = _isPrayerDone(completed, prayer.$1.key);
-            return GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => PrayerGuideScreen(prayerName: prayer.$1),
-                  ),
-                );
-              },
-              child: Container(
-                margin: const EdgeInsets.only(bottom: 10),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                decoration: BoxDecoration(
-                  color: isCurrent
-                      ? _blend(tokens.primary, tokens.bgSurface, 0.12)
-                      : isDone
-                          ? _blend(tokens.bgSurface, tokens.bgPage, 0.9)
-                          : tokens.bgSurface,
-                  borderRadius: BorderRadius.circular(22),
-                  border: Border.all(
-                    color: isCurrent
-                        ? _blend(tokens.primary, tokens.primaryBorder, 0.18)
-                        : tokens.border,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: isCurrent
-                          ? tokens.primary.withValues(alpha: 0.12)
-                          : Colors.black.withValues(alpha: 0.06),
-                      blurRadius: isCurrent ? 18 : 10,
-                      offset: const Offset(0, 8),
-                    ),
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: isCurrent
-                            ? tokens.primary.withValues(alpha: 0.14)
-                            : tokens.bgSurface2,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Icon(
-                        _prayerIcon(prayer.$1),
-                        size: 18,
-                        color:
-                            isCurrent ? tokens.primary : tokens.textSecondary,
-                      ),
-                    ),
-                    const SizedBox(width: 14),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            prayer.$2,
-                            style: GoogleFonts.dmSans(
-                              fontSize: 14,
-                              fontWeight:
-                                  isCurrent ? FontWeight.w700 : FontWeight.w600,
-                              color: isCurrent
-                                  ? tokens.primary
-                                  : tokens.textPrimary,
-                            ),
-                          ),
-                          if (prayer.$3.isNotEmpty)
-                            Text(
-                              prayer.$3,
-                              style: GoogleFonts.amiri(
-                                fontSize: 13,
-                                color: tokens.textSecondary,
-                              ),
-                            ),
-                        ],
-                      ),
-                    ),
-                    Text(
-                      _formatTime(prayer.$4),
-                      style: GoogleFonts.dmSans(
-                        fontSize: 14,
-                        fontWeight:
-                            isCurrent ? FontWeight.w700 : FontWeight.w500,
-                        color: isCurrent ? tokens.primary : tokens.textPrimary,
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    GestureDetector(
-                      behavior: HitTestBehavior.opaque,
-                      onTap: () {
-                        HapticFeedback.lightImpact();
-                        ref
-                            .read(prayerTrackingProvider.notifier)
-                            .togglePrayer(prayer.$2, date: date);
-                      },
-                      child: SizedBox(
-                        width: 44,
-                        height: 44,
-                        child: Center(
-                          child: Container(
-                            width: 22,
-                            height: 22,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color:
-                                  isDone ? tokens.accent : Colors.transparent,
-                              border: Border.all(
-                                color:
-                                    isDone ? tokens.accent : tokens.textMuted,
-                                width: 1.5,
-                              ),
-                            ),
-                            child: isDone
-                                ? Icon(
-                                    Icons.check,
-                                    size: 12,
-                                    color: tokens.bgPage,
-                                  )
-                                : null,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          }),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildPrayerSkeleton(QiblaTokens tokens) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Column(
-        children: List.generate(
-          3,
-          (_) => Container(
-            height: 58,
-            margin: const EdgeInsets.only(bottom: 6),
-            decoration: BoxDecoration(
-              color: tokens.bgSurface,
-              borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: tokens.border),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildPrayerFallback(
-    QiblaTokens tokens,
-    PrayerLocationDiagnostic? diagnostic,
-  ) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: tokens.bgSurface,
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: tokens.border),
-        ),
-        child: Text(
-          _locationDiagnosticBody(diagnostic),
-          style: GoogleFonts.dmSans(fontSize: 12, color: tokens.textSecondary),
-        ),
       ),
     );
   }
@@ -3549,17 +3042,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     return SpanishDateLabels.fullDate(date);
   }
 
-  String _formatRemaining(Duration? remaining) {
-    final l10n = context.l10n;
-    if (remaining == null) {
-      return l10n.homeCountdownUnavailable.toLowerCase();
-    }
-    return l10n.homeDurationUntil(
-      remaining.inHours,
-      remaining.inMinutes.remainder(60),
-    );
-  }
-
   String _formatRamadanCountdown(Duration remaining) {
     final l10n = context.l10n;
     final safe = remaining.isNegative ? Duration.zero : remaining;
@@ -3598,25 +3080,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     }
 
     return (l10n.homeDurationSeconds(seconds.toString()), null, false);
-  }
-
-  IconData _insightIcon(HomeInsightKind kind) {
-    switch (kind) {
-      case HomeInsightKind.progress:
-        return Icons.check_circle_outline;
-      case HomeInsightKind.streak:
-        return Icons.local_fire_department_outlined;
-      case HomeInsightKind.improvement:
-        return Icons.trending_up;
-      case HomeInsightKind.prayerPattern:
-        return Icons.insights_outlined;
-      case HomeInsightKind.dhikr:
-        return Icons.auto_awesome_outlined;
-      case HomeInsightKind.ramadan:
-        return Icons.nightlight_round;
-      case HomeInsightKind.guidance:
-        return Icons.lightbulb_outline;
-    }
   }
 }
 

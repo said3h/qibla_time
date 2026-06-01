@@ -75,6 +75,7 @@ class PrayerNotificationsDataSource {
     AppLogger.info('rescheduleToday: adhanFile=$adhanFile');
     final now = DateTime.now();
     int scheduled = 0;
+    int exactPermissionRequired = 0;
 
     for (final prayer in schedule.times.entries) {
       final scheduledAt = _adhanScheduledAt(prayer.value);
@@ -102,12 +103,17 @@ class PrayerNotificationsDataSource {
       // Try-catch por iteración: si una oración falla (p. ej. permiso de alarma
       // exacta revocado), las demás se siguen programando.
       try {
+        final canScheduleExact =
+            await _notificationService.canScheduleExactAdhanAlarms();
         AppLogger.info(
           'rescheduleToday: scheduling ${prayer.key.key} raw=${prayer.value} '
           'scheduled=$scheduledAt '
-          'diffSeconds=${scheduledAt.difference(prayer.value).inSeconds}',
+          'diffSeconds=${scheduledAt.difference(prayer.value).inSeconds} '
+          'diffMinutesFromNow=${scheduledAt.difference(now).inMinutes} '
+          'notificationId=${_prayerIds[prayer.key]} '
+          'canScheduleExact=$canScheduleExact',
         );
-        await _notificationService.scheduleAdhan(
+        final result = await _notificationService.scheduleAdhan(
           id: _prayerIds[prayer.key]!,
           prayerName: prayer.key.localizedDisplayName(
             AppLocaleController.effectiveLanguageCode(),
@@ -115,7 +121,11 @@ class PrayerNotificationsDataSource {
           scheduledAt: scheduledAt,
           adhanFile: adhanFile,
         );
-        scheduled++;
+        if (result == AdhanScheduleResult.scheduled) {
+          scheduled++;
+        } else if (result == AdhanScheduleResult.exactAlarmPermissionRequired) {
+          exactPermissionRequired++;
+        }
       } catch (e, stackTrace) {
         AppLogger.error(
           'rescheduleToday: FAILED ${prayer.key.key}',
@@ -126,7 +136,8 @@ class PrayerNotificationsDataSource {
     }
 
     AppLogger.info(
-      'rescheduleToday: done. $scheduled prayers scheduled.',
+      'rescheduleToday: done. $scheduled prayers scheduled. '
+      'exactPermissionRequired=$exactPermissionRequired',
     );
 
     await _scheduleRamadanReminders(schedule, now: now);
@@ -143,6 +154,8 @@ class PrayerNotificationsDataSource {
 
     final adhanFile = await _settingsService.getAdhan();
     final now = DateTime.now();
+    int scheduled = 0;
+    int exactPermissionRequired = 0;
 
     for (final prayer in tomorrowSchedule.times.entries) {
       final scheduledAt = _adhanScheduledAt(prayer.value);
@@ -160,12 +173,17 @@ class PrayerNotificationsDataSource {
       }
 
       try {
+        final canScheduleExact =
+            await _notificationService.canScheduleExactAdhanAlarms();
         AppLogger.info(
           'scheduleTomorrow: scheduling ${prayer.key.key} raw=${prayer.value} '
           'scheduled=$scheduledAt '
-          'diffSeconds=${scheduledAt.difference(prayer.value).inSeconds}',
+          'diffSeconds=${scheduledAt.difference(prayer.value).inSeconds} '
+          'diffMinutesFromNow=${scheduledAt.difference(now).inMinutes} '
+          'notificationId=${_tomorrowPrayerIds[prayer.key]} '
+          'canScheduleExact=$canScheduleExact',
         );
-        await _notificationService.scheduleAdhan(
+        final result = await _notificationService.scheduleAdhan(
           id: _tomorrowPrayerIds[prayer.key]!,
           prayerName: prayer.key.localizedDisplayName(
             AppLocaleController.effectiveLanguageCode(),
@@ -173,6 +191,11 @@ class PrayerNotificationsDataSource {
           scheduledAt: scheduledAt,
           adhanFile: adhanFile,
         );
+        if (result == AdhanScheduleResult.scheduled) {
+          scheduled++;
+        } else if (result == AdhanScheduleResult.exactAlarmPermissionRequired) {
+          exactPermissionRequired++;
+        }
       } catch (e, stackTrace) {
         AppLogger.error(
           'Failed to schedule tomorrow adhan for ${prayer.key.key}',
@@ -181,6 +204,11 @@ class PrayerNotificationsDataSource {
         );
       }
     }
+
+    AppLogger.info(
+      'scheduleTomorrow: done. $scheduled prayers scheduled. '
+      'exactPermissionRequired=$exactPermissionRequired',
+    );
   }
 
   DateTime _adhanScheduledAt(DateTime prayerTime) {
