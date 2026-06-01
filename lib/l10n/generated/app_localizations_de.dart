@@ -188,11 +188,11 @@ class AppLocalizationsDe extends AppLocalizations {
       'Adhan-Benachrichtigungen und wichtige Einstellungen von Anfang an bereit.';
 
   @override
-  String get onboardingPermissionsTitle => 'Wichtige Berechtigungen';
+  String get onboardingPermissionsTitle => 'Optionale Berechtigungen';
 
   @override
   String get onboardingPermissionsSubtitle =>
-      'Wir fragen nur nach dem, was benötigt wird, um Gebetszeiten zu berechnen, die Qibla zu nutzen und Sie rechtzeitig zu benachrichtigen.';
+      'Standort und Benachrichtigungen sind optional. Sie helfen bei Gebetszeiten, Qibla-Richtung und Erinnerungen; die App kann auch ohne sie genutzt werden.';
 
   @override
   String get onboardingLocationReadyBody =>
@@ -200,15 +200,15 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get onboardingLocationBlockedBody =>
-      'Standortzugriff ist blockiert. Sie können ihn später in den Systemeinstellungen aktivieren.';
+      'Der Standort ist derzeit nicht verfügbar. Du kannst fortfahren und später manuell eine Stadt auswählen.';
 
   @override
   String get onboardingLocationGpsOffBody =>
-      'Das GPS Ihres Geräts ist ausgeschaltet. Sie können fortfahren und es später einschalten.';
+      'Das GPS des Geräts scheint ausgeschaltet zu sein. Du kannst fortfahren und später manuell eine Stadt auswählen.';
 
   @override
   String get onboardingLocationPendingBody =>
-      'Erforderlich für genaue Gebetszeiten und die Richtung nach Mekka.';
+      'Der Standort hilft, Gebetszeiten und Qibla-Richtung für deine aktuelle Umgebung zu berechnen.';
 
   @override
   String get onboardingNotificationsReadyBody =>
@@ -216,7 +216,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get onboardingNotificationsPendingBody =>
-      'Dies ermöglicht Ihnen, Adhan-Benachrichtigungen und Erinnerungen zu erhalten.';
+      'Benachrichtigungen können für Adhan-Hinweise und Erinnerungen genutzt werden. Du kannst ohne sie fortfahren.';
 
   @override
   String get onboardingMethodTitle => 'Berechnungsmethode';
@@ -265,7 +265,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get onboardingPrayerNotificationsSubtitle =>
-      'Sie können sie jetzt aktivieren oder vorerst ohne sie fortfahren.';
+      'Du kannst die Benachrichtigungen jetzt ansehen oder vorerst ohne sie fortfahren.';
 
   @override
   String get onboardingAdhanPreviewTitle => 'Schnelle Adhan-Vorschau';
@@ -3617,11 +3617,11 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get onboardingSkipLocationBody =>
-      'Ohne Standort können die Gebetszeiten nicht berechnet werden. Trotzdem fortfahren?';
+      'Ohne Standort musst du für Gebetszeiten möglicherweise manuell eine Stadt auswählen. Trotzdem fortfahren?';
 
   @override
   String get onboardingNotificationsPermissionWarning =>
-      'Berechtigung nicht erteilt. Gehe zum vorherigen Schritt zurück, um sie zu aktivieren.';
+      'Benachrichtigungen sind derzeit nicht verfügbar. Du kannst fortfahren und dies später anpassen.';
 
   @override
   String get tafsirPanelTitle => 'Tafsir';

@@ -189,11 +189,11 @@ class AppLocalizationsTr extends AppLocalizations {
       'Ezan bildirimleri ve temel ayarlar ilk günden itibaren hazır.';
 
   @override
-  String get onboardingPermissionsTitle => 'Önemli izinler';
+  String get onboardingPermissionsTitle => 'İsteğe bağlı izinler';
 
   @override
   String get onboardingPermissionsSubtitle =>
-      'Sadece namaz vakitlerini hesaplamak, kıbleyi kullanmak ve zamanında bildirimde bulunmak için gerekenleri istiyoruz.';
+      'Konum ve bildirimler isteğe bağlıdır. Namaz vakitleri, kıble yönü ve hatırlatmalar için yardımcı olur; uygulama bunlar olmadan da kullanılabilir.';
 
   @override
   String get onboardingLocationReadyBody =>
@@ -201,15 +201,15 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get onboardingLocationBlockedBody =>
-      'Konum erişimi engellendi. Daha sonra sistem ayarlarından etkinleştirebilirsiniz.';
+      'Konum şu anda kullanılamıyor. Devam edip daha sonra şehri elle seçebilirsiniz.';
 
   @override
   String get onboardingLocationGpsOffBody =>
-      'Cihazınızın GPS\'i kapalı. Daha sonra devam edip açabilirsiniz.';
+      'Cihaz GPS’i kapalı görünüyor. Devam edip daha sonra şehri elle seçebilirsiniz.';
 
   @override
   String get onboardingLocationPendingBody =>
-      'Doğru namaz vakitleri ve Mekke\'ye yön bilgisi için gereklidir.';
+      'Konum, mevcut bölgeniz için namaz vakitlerini ve kıble yönünü hesaplamaya yardımcı olur.';
 
   @override
   String get onboardingNotificationsReadyBody =>
@@ -217,7 +217,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get onboardingNotificationsPendingBody =>
-      'Bu, daha sonra ezan uyarıları ve hatırlatıcıları almanızı sağlar.';
+      'Bildirimler ezan uyarıları ve hatırlatmalar için kullanılabilir. Bildirimler olmadan devam edebilirsiniz.';
 
   @override
   String get onboardingMethodTitle => 'Hesaplama yöntemi';
@@ -265,7 +265,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get onboardingPrayerNotificationsSubtitle =>
-      'Bunları şimdi etkinleştirebilir veya şimdilik onlarsız devam edebilirsiniz.';
+      'Bildirimleri şimdi gözden geçirebilir veya şimdilik onlarsız devam edebilirsiniz.';
 
   @override
   String get onboardingAdhanPreviewTitle => 'Hızlı ezan önizlemesi';
@@ -3579,11 +3579,11 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get onboardingSkipLocationBody =>
-      'Konum olmadan namaz vakitleri hesaplanamaz. Yine de devam edilsin mi?';
+      'Konum olmadan namaz vakitleri için şehri elle seçmeniz gerekebilir. Yine de devam edilsin mi?';
 
   @override
   String get onboardingNotificationsPermissionWarning =>
-      'İzin verilmedi. Etkinleştirmek için bir önceki adıma geri dönün.';
+      'Bildirimler şu anda kullanılamıyor. Devam edip bunu daha sonra ayarlayabilirsiniz.';
 
   @override
   String get tafsirPanelTitle => 'Tefsir';

@@ -189,11 +189,11 @@ class AppLocalizationsEs extends AppLocalizations {
       'Notificaciones de adhan y ajustes listos desde el primer día.';
 
   @override
-  String get onboardingPermissionsTitle => 'Permisos importantes';
+  String get onboardingPermissionsTitle => 'Permisos opcionales';
 
   @override
   String get onboardingPermissionsSubtitle =>
-      'Te pedimos solo lo necesario para calcular horarios, usar Qibla y avisarte a tiempo.';
+      'La ubicación y las notificaciones son opcionales. Ayudan con los horarios, la Qibla y los recordatorios, y la app puede usarse sin ellas.';
 
   @override
   String get onboardingLocationReadyBody =>
@@ -201,15 +201,15 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get onboardingLocationBlockedBody =>
-      'El permiso está bloqueado. Puedes activarlo después desde los ajustes del sistema.';
+      'La ubicación no está disponible ahora. Puedes continuar y elegir una ciudad manualmente después.';
 
   @override
   String get onboardingLocationGpsOffBody =>
-      'El GPS del dispositivo está desactivado. Puedes seguir y activarlo después.';
+      'El GPS del dispositivo parece estar desactivado. Puedes continuar y elegir una ciudad manualmente después.';
 
   @override
   String get onboardingLocationPendingBody =>
-      'Necesaria para horarios precisos y dirección a La Meca.';
+      'La ubicación ayuda a calcular horarios y dirección de Qibla para tu zona actual.';
 
   @override
   String get onboardingNotificationsReadyBody =>
@@ -217,7 +217,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get onboardingNotificationsPendingBody =>
-      'Así podrás recibir avisos de adhan y recordatorios más adelante.';
+      'Las notificaciones pueden usarse para avisos de adhan y recordatorios. Puedes continuar sin ellas.';
 
   @override
   String get onboardingMethodTitle => 'Método de cálculo';
@@ -264,7 +264,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get onboardingPrayerNotificationsSubtitle =>
-      'Puedes activarlas o seguir sin ellas por ahora.';
+      'Puedes revisar los avisos ahora o seguir sin ellos por ahora.';
 
   @override
   String get onboardingAdhanPreviewTitle => 'Prueba rápida del adhan';
@@ -3609,11 +3609,11 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get onboardingSkipLocationBody =>
-      'Sin ubicacion no se pueden calcular los horarios de oracion. Continuar de todas formas?';
+      'Sin ubicación, puede que tengas que elegir una ciudad manualmente para los horarios. ¿Continuar de todas formas?';
 
   @override
   String get onboardingNotificationsPermissionWarning =>
-      'Permiso no concedido. Vuelve al paso anterior para activarlo.';
+      'Las notificaciones no están disponibles ahora. Puedes continuar y ajustarlo después.';
 
   @override
   String get tafsirPanelTitle => 'Tafsir';

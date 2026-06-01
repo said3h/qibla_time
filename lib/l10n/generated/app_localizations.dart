@@ -467,13 +467,13 @@ abstract class AppLocalizations {
   /// No description provided for @onboardingPermissionsTitle.
   ///
   /// In es, this message translates to:
-  /// **'Permisos importantes'**
+  /// **'Permisos opcionales'**
   String get onboardingPermissionsTitle;
 
   /// No description provided for @onboardingPermissionsSubtitle.
   ///
   /// In es, this message translates to:
-  /// **'Te pedimos solo lo necesario para calcular horarios, usar Qibla y avisarte a tiempo.'**
+  /// **'La ubicación y las notificaciones son opcionales. Ayudan con los horarios, la Qibla y los recordatorios, y la app puede usarse sin ellas.'**
   String get onboardingPermissionsSubtitle;
 
   /// No description provided for @onboardingLocationReadyBody.
@@ -485,19 +485,19 @@ abstract class AppLocalizations {
   /// No description provided for @onboardingLocationBlockedBody.
   ///
   /// In es, this message translates to:
-  /// **'El permiso está bloqueado. Puedes activarlo después desde los ajustes del sistema.'**
+  /// **'La ubicación no está disponible ahora. Puedes continuar y elegir una ciudad manualmente después.'**
   String get onboardingLocationBlockedBody;
 
   /// No description provided for @onboardingLocationGpsOffBody.
   ///
   /// In es, this message translates to:
-  /// **'El GPS del dispositivo está desactivado. Puedes seguir y activarlo después.'**
+  /// **'El GPS del dispositivo parece estar desactivado. Puedes continuar y elegir una ciudad manualmente después.'**
   String get onboardingLocationGpsOffBody;
 
   /// No description provided for @onboardingLocationPendingBody.
   ///
   /// In es, this message translates to:
-  /// **'Necesaria para horarios precisos y dirección a La Meca.'**
+  /// **'La ubicación ayuda a calcular horarios y dirección de Qibla para tu zona actual.'**
   String get onboardingLocationPendingBody;
 
   /// No description provided for @onboardingNotificationsReadyBody.
@@ -509,7 +509,7 @@ abstract class AppLocalizations {
   /// No description provided for @onboardingNotificationsPendingBody.
   ///
   /// In es, this message translates to:
-  /// **'Así podrás recibir avisos de adhan y recordatorios más adelante.'**
+  /// **'Las notificaciones pueden usarse para avisos de adhan y recordatorios. Puedes continuar sin ellas.'**
   String get onboardingNotificationsPendingBody;
 
   /// No description provided for @onboardingMethodTitle.
@@ -593,7 +593,7 @@ abstract class AppLocalizations {
   /// No description provided for @onboardingPrayerNotificationsSubtitle.
   ///
   /// In es, this message translates to:
-  /// **'Puedes activarlas o seguir sin ellas por ahora.'**
+  /// **'Puedes revisar los avisos ahora o seguir sin ellos por ahora.'**
   String get onboardingPrayerNotificationsSubtitle;
 
   /// No description provided for @onboardingAdhanPreviewTitle.
@@ -6289,13 +6289,13 @@ abstract class AppLocalizations {
   /// No description provided for @onboardingSkipLocationBody.
   ///
   /// In es, this message translates to:
-  /// **'Sin ubicacion no se pueden calcular los horarios de oracion. Continuar de todas formas?'**
+  /// **'Sin ubicación, puede que tengas que elegir una ciudad manualmente para los horarios. ¿Continuar de todas formas?'**
   String get onboardingSkipLocationBody;
 
   /// No description provided for @onboardingNotificationsPermissionWarning.
   ///
   /// In es, this message translates to:
-  /// **'Permiso no concedido. Vuelve al paso anterior para activarlo.'**
+  /// **'Las notificaciones no están disponibles ahora. Puedes continuar y ajustarlo después.'**
   String get onboardingNotificationsPermissionWarning;
 
   /// No description provided for @tafsirPanelTitle.

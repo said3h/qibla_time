@@ -45,6 +45,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
   bool _locationServiceEnabled = false;
   bool _notificationsGranted = false;
   bool _didTriggerInitialSchedule = false;
+  bool _locationRequestAttempted = false;
 
   static const _recommendedMethods = [
     CalculationMethod.muslim_world_league,
@@ -104,6 +105,8 @@ class _OnboardingScreenState extends State<OnboardingScreen>
     final hanafi = prefs.getBool('madhab_hanafi') ?? false;
     final notifEnabled = await _settingsService.getNotificationsEnabled();
     final permissionState = await _readPermissionState();
+    final locationRequestAttempted =
+        prefs.getBool('onboarding_location_permission_requested') ?? false;
 
     if (!mounted) return;
     setState(() {
@@ -115,6 +118,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
       _locationPermission = permissionState.locationPermission;
       _locationServiceEnabled = permissionState.locationServiceEnabled;
       _notificationsGranted = permissionState.notificationsGranted;
+      _locationRequestAttempted = locationRequestAttempted;
     });
   }
 
@@ -168,13 +172,15 @@ class _OnboardingScreenState extends State<OnboardingScreen>
     // grants location and services are enabled, trigger a single background
     // re-attempt so release users actually get notifications scheduled.
     _didTriggerInitialSchedule = true;
-    AppLogger.info('Onboarding._maybeTriggerAdhanScheduling: triggering scheduleTodayAdhans reason=$reason');
+    final container = ProviderScope.containerOf(context, listen: false);
+    AppLogger.info(
+        'Onboarding._maybeTriggerAdhanScheduling: triggering scheduleTodayAdhans reason=$reason');
 
     Future<void>(() async {
       try {
-        final container = ProviderScope.containerOf(context, listen: false);
         await container.read(adhanManagerProvider).scheduleTodayAdhans();
-        AppLogger.info('Onboarding._maybeTriggerAdhanScheduling: scheduleTodayAdhans OK reason=$reason');
+        AppLogger.info(
+            'Onboarding._maybeTriggerAdhanScheduling: scheduleTodayAdhans OK reason=$reason');
       } catch (e, st) {
         AppLogger.error(
           'Onboarding._maybeTriggerAdhanScheduling: scheduleTodayAdhans FAILED reason=$reason',
@@ -210,25 +216,30 @@ class _OnboardingScreenState extends State<OnboardingScreen>
 
   Future<void> _requestLocation() async {
     if (_busy) return;
+
+    if (_locationRequestAttempted ||
+        _locationPermission == LocationPermission.deniedForever ||
+        _hasLocationPermission) {
+      await _next();
+      return;
+    }
+
     setState(() => _busy = true);
     try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('onboarding_location_permission_requested', true);
+      if (mounted) {
+        setState(() => _locationRequestAttempted = true);
+      }
+
       var permission = await Geolocator.checkPermission();
       if (permission == LocationPermission.denied) {
         permission = await Geolocator.requestPermission();
       }
 
-      if (permission == LocationPermission.deniedForever) {
-        await Geolocator.openAppSettings();
-        return;
-      }
-
-      if (permission == LocationPermission.denied) {
-        return;
-      }
-
-      final enabled = await Geolocator.isLocationServiceEnabled();
-      if (!enabled) {
-        await Geolocator.openLocationSettings();
+      if (permission == LocationPermission.denied ||
+          permission == LocationPermission.deniedForever) {
+        await _next();
       }
     } finally {
       await _refreshPermissionState(clearBusy: true);
@@ -298,8 +309,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
     final l10n = context.l10n;
     final isArabicOnly = Localizations.localeOf(context).languageCode == 'ar';
     final isLastStep = _step == _pageCount - 1;
-    final primaryActionLabel =
-        isLastStep ? l10n.commonEnter : l10n.commonNext;
+    final primaryActionLabel = isLastStep ? l10n.commonEnter : l10n.commonNext;
     final primaryAction = isLastStep ? widget.onCompleted : _next;
 
     return Scaffold(
@@ -483,12 +493,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
   Widget _buildPermissions(QiblaTokens tokens, bool isArabicOnly) {
     final l10n = context.l10n;
     final locationReady = _locationServiceEnabled && _hasLocationPermission;
-    final locationActionLabel = _locationPermission ==
-            LocationPermission.deniedForever
-        ? l10n.commonOpenSettings
-        : _hasLocationPermission && !_locationServiceEnabled
-            ? l10n.commonEnableGps
-            : l10n.commonAllow;
+    final locationActionLabel = l10n.commonContinue;
     final locationStatus = locationReady
         ? l10n.commonGranted
         : _locationPermission == LocationPermission.deniedForever
@@ -528,10 +533,9 @@ class _OnboardingScreenState extends State<OnboardingScreen>
             body: _notificationsGranted
                 ? l10n.onboardingNotificationsReadyBody
                 : l10n.onboardingNotificationsPendingBody,
-            status: _notificationsGranted
-                ? l10n.commonGranted
-                : l10n.commonPending,
-            actionLabel: l10n.commonActivate,
+            status:
+                _notificationsGranted ? l10n.commonGranted : l10n.commonPending,
+            actionLabel: l10n.commonContinue,
             action: _requestNotifications,
             tokens: tokens,
             completed: _notificationsGranted,
@@ -617,44 +621,45 @@ class _OnboardingScreenState extends State<OnboardingScreen>
               children: [
                 Row(
                   children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: isArabicOnly
-                        ? CrossAxisAlignment.end
-                        : CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        l10n.onboardingPrayerNotificationsTitle,
-                        textAlign:
-                            isArabicOnly ? TextAlign.right : TextAlign.left,
-                        style: GoogleFonts.dmSans(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: tokens.textPrimary,
-                        ),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: isArabicOnly
+                            ? CrossAxisAlignment.end
+                            : CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            l10n.onboardingPrayerNotificationsTitle,
+                            textAlign:
+                                isArabicOnly ? TextAlign.right : TextAlign.left,
+                            style: GoogleFonts.dmSans(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                              color: tokens.textPrimary,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            l10n.onboardingPrayerNotificationsSubtitle,
+                            textAlign:
+                                isArabicOnly ? TextAlign.right : TextAlign.left,
+                            style: GoogleFonts.dmSans(
+                              fontSize: 11,
+                              color: tokens.textSecondary,
+                            ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(height: 4),
-                      Text(
-                        l10n.onboardingPrayerNotificationsSubtitle,
-                        textAlign:
-                            isArabicOnly ? TextAlign.right : TextAlign.left,
-                        style: GoogleFonts.dmSans(
-                          fontSize: 11,
-                          color: tokens.textSecondary,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Switch.adaptive(
-                  // Disable ON state when system permission not granted —
-                  // saving the setting would have no effect and mislead the user.
-                  value: _notificationsEnabled && _notificationsGranted,
-                  onChanged: _notificationsGranted ? _toggleNotifications : null,
-                  activeColor: tokens.bgPage,
-                  activeTrackColor: tokens.primary,
-                ),
-              ],
+                    ),
+                    Switch.adaptive(
+                      // Disable ON state when system permission not granted —
+                      // saving the setting would have no effect and mislead the user.
+                      value: _notificationsEnabled && _notificationsGranted,
+                      onChanged:
+                          _notificationsGranted ? _toggleNotifications : null,
+                      activeThumbColor: tokens.bgPage,
+                      activeTrackColor: tokens.primary,
+                    ),
+                  ],
                 ),
                 // Warning shown when system notification permission is missing
                 if (!_notificationsGranted) ...[
@@ -698,8 +703,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
               children: [
                 Text(
                   l10n.onboardingAdhanPreviewTitle,
-                  textAlign:
-                      isArabicOnly ? TextAlign.right : TextAlign.left,
+                  textAlign: isArabicOnly ? TextAlign.right : TextAlign.left,
                   style: GoogleFonts.dmSans(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
@@ -709,8 +713,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                 const SizedBox(height: 4),
                 Text(
                   l10n.onboardingAdhanPreviewSubtitle,
-                  textAlign:
-                      isArabicOnly ? TextAlign.right : TextAlign.left,
+                  textAlign: isArabicOnly ? TextAlign.right : TextAlign.left,
                   style: GoogleFonts.dmSans(
                     fontSize: 11,
                     color: tokens.textSecondary,
@@ -719,7 +722,9 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                 const SizedBox(height: 12),
                 ElevatedButton.icon(
                   onPressed: _togglePreview,
-                  icon: Icon(_playingPreview ? Icons.stop_circle_outlined : Icons.play_circle_outline),
+                  icon: Icon(_playingPreview
+                      ? Icons.stop_circle_outlined
+                      : Icons.play_circle_outline),
                   label: Text(
                     _playingPreview
                         ? l10n.onboardingAdhanStopPreview
@@ -749,9 +754,8 @@ class _OnboardingScreenState extends State<OnboardingScreen>
           border: Border.all(color: tokens.border),
         ),
         child: Column(
-          crossAxisAlignment: isArabicOnly
-              ? CrossAxisAlignment.end
-              : CrossAxisAlignment.start,
+          crossAxisAlignment:
+              isArabicOnly ? CrossAxisAlignment.end : CrossAxisAlignment.start,
           children: [
             _summaryRow(
               tokens,
@@ -786,7 +790,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
               isArabicOnly,
             ),
           ],
-      ),
+        ),
       ),
     );
   }
@@ -995,7 +999,8 @@ class _PermissionCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: tokens.bgSurface,
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: completed ? tokens.primaryBorder : tokens.border),
+        border:
+            Border.all(color: completed ? tokens.primaryBorder : tokens.border),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

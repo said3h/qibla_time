@@ -188,11 +188,11 @@ class AppLocalizationsRu extends AppLocalizations {
       'Уведомления о молитвах и ключевые настройки готовы с первого дня.';
 
   @override
-  String get onboardingPermissionsTitle => 'Важные разрешения';
+  String get onboardingPermissionsTitle => 'Необязательные разрешения';
 
   @override
   String get onboardingPermissionsSubtitle =>
-      'Мы просим только то, что необходимо для расчёта времени молитвы, использования Киблы и своевременного уведомления вас.';
+      'Геолокация и уведомления необязательны. Они помогают с временем молитв, направлением киблы и напоминаниями, но приложением можно пользоваться и без них.';
 
   @override
   String get onboardingLocationReadyBody =>
@@ -200,15 +200,15 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get onboardingLocationBlockedBody =>
-      'Доступ к местоположению заблокирован. Вы можете включить его позже в настройках системы.';
+      'Геолокация сейчас недоступна. Вы можете продолжить и позже выбрать город вручную.';
 
   @override
   String get onboardingLocationGpsOffBody =>
-      'GPS вашего устройства отключен. Вы можете продолжить и включить его позже.';
+      'GPS устройства, похоже, отключен. Вы можете продолжить и позже выбрать город вручную.';
 
   @override
   String get onboardingLocationPendingBody =>
-      'Требуется для точного времени молитвы и направления в Мекку.';
+      'Геолокация помогает рассчитывать время молитв и направление киблы для вашей текущей местности.';
 
   @override
   String get onboardingNotificationsReadyBody =>
@@ -216,7 +216,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get onboardingNotificationsPendingBody =>
-      'Это позволит вам получать оповещения и напоминания об азанах позже.';
+      'Уведомления можно использовать для азана и напоминаний. Вы можете продолжить без них.';
 
   @override
   String get onboardingMethodTitle => 'Метод расчета';
@@ -264,7 +264,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get onboardingPrayerNotificationsSubtitle =>
-      'Вы можете включить их сейчас или пока продолжить без них.';
+      'Вы можете просмотреть уведомления сейчас или пока продолжить без них.';
 
   @override
   String get onboardingAdhanPreviewTitle => 'Быстрый просмотр азана';
@@ -3613,11 +3613,11 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get onboardingSkipLocationBody =>
-      'Без геолокации время молитв не может быть рассчитано. Продолжить всё равно?';
+      'Без геолокации может понадобиться выбрать город вручную для времени молитв. Всё равно продолжить?';
 
   @override
   String get onboardingNotificationsPermissionWarning =>
-      'Разрешение не предоставлено. Вернитесь к предыдущему шагу, чтобы включить его.';
+      'Уведомления сейчас недоступны. Вы можете продолжить и настроить это позже.';
 
   @override
   String get tafsirPanelTitle => 'Тафсир';

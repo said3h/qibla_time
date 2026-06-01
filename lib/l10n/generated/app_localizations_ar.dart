@@ -187,33 +187,33 @@ class AppLocalizationsAr extends AppLocalizations {
       'إشعارات الأذان والإعدادات الأساسية جاهزة من اليوم الأول.';
 
   @override
-  String get onboardingPermissionsTitle => 'أذونات مهمة';
+  String get onboardingPermissionsTitle => 'أذونات اختيارية';
 
   @override
   String get onboardingPermissionsSubtitle =>
-      'نطلب فقط ما نحتاجه لحساب المواقيت واستخدام القبلة وتنبيهك في الوقت المناسب.';
+      'الموقع والإشعارات اختياريان. يساعدان في مواقيت الصلاة واتجاه القبلة والتذكيرات، ويمكن استخدام التطبيق بدونهما.';
 
   @override
   String get onboardingLocationReadyBody => 'جاهزة لحساب المواقيت والقبلة.';
 
   @override
   String get onboardingLocationBlockedBody =>
-      'تم حظر إذن الموقع. يمكنك تفعيله لاحقًا من إعدادات النظام.';
+      'الموقع غير متاح الآن. يمكنك المتابعة واختيار مدينة يدويًا لاحقًا.';
 
   @override
   String get onboardingLocationGpsOffBody =>
-      'خدمة GPS في جهازك متوقفة. يمكنك المتابعة وتفعيلها لاحقًا.';
+      'يبدو أن GPS في الجهاز متوقف. يمكنك المتابعة واختيار مدينة يدويًا لاحقًا.';
 
   @override
   String get onboardingLocationPendingBody =>
-      'مطلوب لمواقيت دقيقة وتحديد اتجاه مكة.';
+      'يساعد الموقع في حساب مواقيت الصلاة واتجاه القبلة لمنطقتك الحالية.';
 
   @override
   String get onboardingNotificationsReadyBody => 'جاهزة لتذكيرك بالصلوات.';
 
   @override
   String get onboardingNotificationsPendingBody =>
-      'بهذا يمكنك تلقي تنبيهات الأذان والتذكيرات لاحقًا.';
+      'يمكن استخدام الإشعارات لتنبيهات الأذان والتذكيرات. يمكنك المتابعة بدونها.';
 
   @override
   String get onboardingMethodTitle => 'طريقة الحساب';
@@ -260,7 +260,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get onboardingPrayerNotificationsSubtitle =>
-      'يمكنك تفعيلها الآن أو المتابعة بدونها في الوقت الحالي.';
+      'يمكنك مراجعة التنبيهات الآن أو المتابعة بدونها في الوقت الحالي.';
 
   @override
   String get onboardingAdhanPreviewTitle => 'معاينة سريعة للأذان';
@@ -3521,11 +3521,11 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get onboardingSkipLocationBody =>
-      'بدون الموقع لا يمكن حساب مواقيت الصلاة. هل تريد المتابعة؟';
+      'بدون الموقع، قد تحتاج إلى اختيار مدينة يدويًا لحساب المواقيت. هل تريد المتابعة؟';
 
   @override
   String get onboardingNotificationsPermissionWarning =>
-      'لم يتم منح الإذن. ارجع إلى الخطوة السابقة لتفعيله.';
+      'الإشعارات غير متاحة الآن. يمكنك المتابعة وتعديل ذلك لاحقًا.';
 
   @override
   String get tafsirPanelTitle => 'التفسير';

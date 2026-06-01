@@ -108,7 +108,7 @@ class AyahShareImageService {
         ..flushPaint();
 
       image = await repaintBoundary.toImage(pixelRatio: pixelRatio);
-      return _pngBytes(image);
+      return await _pngBytes(image);
     } finally {
       image?.dispose();
       renderView.child = null;

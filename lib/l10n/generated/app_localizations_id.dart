@@ -188,11 +188,11 @@ class AppLocalizationsId extends AppLocalizations {
       'Notifikasi adzan dan pengaturan utama siap sejak hari pertama.';
 
   @override
-  String get onboardingPermissionsTitle => 'Izin yang penting';
+  String get onboardingPermissionsTitle => 'Izin opsional';
 
   @override
   String get onboardingPermissionsSubtitle =>
-      'Kami hanya meminta apa yang diperlukan untuk menghitung waktu shalat, menggunakan kiblat, dan memberi notifikasi tepat waktu.';
+      'Lokasi dan notifikasi bersifat opsional. Keduanya membantu waktu shalat, arah kiblat, dan pengingat, dan aplikasi tetap dapat digunakan tanpa keduanya.';
 
   @override
   String get onboardingLocationReadyBody =>
@@ -200,15 +200,15 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get onboardingLocationBlockedBody =>
-      'Akses lokasi diblokir. Anda dapat mengaktifkannya nanti dari pengaturan sistem.';
+      'Lokasi belum tersedia saat ini. Anda dapat melanjutkan dan memilih kota secara manual nanti.';
 
   @override
   String get onboardingLocationGpsOffBody =>
-      'GPS perangkat Anda mati. Anda dapat melanjutkan dan menyalakannya nanti.';
+      'GPS perangkat tampaknya mati. Anda dapat melanjutkan dan memilih kota secara manual nanti.';
 
   @override
   String get onboardingLocationPendingBody =>
-      'Diperlukan untuk waktu shalat yang akurat dan arah ke Makkah.';
+      'Lokasi membantu menghitung waktu shalat dan arah kiblat untuk area Anda saat ini.';
 
   @override
   String get onboardingNotificationsReadyBody =>
@@ -216,7 +216,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get onboardingNotificationsPendingBody =>
-      'Ini memungkinkan Anda menerima peringatan adzan dan pengingat lainnya nanti.';
+      'Notifikasi dapat digunakan untuk peringatan adzan dan pengingat. Anda dapat melanjutkan tanpanya.';
 
   @override
   String get onboardingMethodTitle => 'Metode perhitungan';
@@ -264,7 +264,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get onboardingPrayerNotificationsSubtitle =>
-      'Anda dapat mengaktifkannya sekarang atau melanjutkan tanpa mereka untuk saat ini.';
+      'Anda dapat meninjau peringatan sekarang atau melanjutkan tanpanya untuk saat ini.';
 
   @override
   String get onboardingAdhanPreviewTitle => 'Pratinjau adzan singkat';
@@ -3601,11 +3601,11 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get onboardingSkipLocationBody =>
-      'Tanpa lokasi, waktu shalat tidak dapat dihitung. Lanjutkan tetap?';
+      'Tanpa lokasi, waktu shalat mungkin memerlukan pilihan kota manual. Tetap lanjutkan?';
 
   @override
   String get onboardingNotificationsPermissionWarning =>
-      'Izin belum diberikan. Kembali ke langkah sebelumnya untuk mengaktifkannya.';
+      'Notifikasi belum tersedia saat ini. Anda dapat melanjutkan dan menyesuaikannya nanti.';
 
   @override
   String get tafsirPanelTitle => 'Tafsir';

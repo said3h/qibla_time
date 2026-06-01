@@ -188,11 +188,11 @@ class AppLocalizationsNl extends AppLocalizations {
       'Adhan-meldingen en belangrijke instellingen vanaf dag één gereed.';
 
   @override
-  String get onboardingPermissionsTitle => 'Belangrijke machtigingen';
+  String get onboardingPermissionsTitle => 'Optionele machtigingen';
 
   @override
   String get onboardingPermissionsSubtitle =>
-      'We vragen alleen om wat nodig is om gebedstijden te berekenen, de Qibla te gebruiken en je op tijd te melden.';
+      'Locatie en meldingen zijn optioneel. Ze helpen met gebedstijden, Qibla-richting en herinneringen, maar de app kan ook zonder worden gebruikt.';
 
   @override
   String get onboardingLocationReadyBody =>
@@ -200,15 +200,15 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get onboardingLocationBlockedBody =>
-      'Locatietoegang is geblokkeerd. Je kunt dit later inschakelen in de systeeminstellingen.';
+      'Locatie is nu niet beschikbaar. Je kunt doorgaan en later handmatig een stad kiezen.';
 
   @override
   String get onboardingLocationGpsOffBody =>
-      'De GPS van je apparaat is uitgeschakeld. Je kunt doorgaan en het later inschakelen.';
+      'De GPS van het apparaat lijkt uit te staan. Je kunt doorgaan en later handmatig een stad kiezen.';
 
   @override
   String get onboardingLocationPendingBody =>
-      'Nodig voor nauwkeurige gebedstijden en de richting naar Mekka.';
+      'Locatie helpt gebedstijden en Qibla-richting voor je huidige omgeving te berekenen.';
 
   @override
   String get onboardingNotificationsReadyBody =>
@@ -216,7 +216,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get onboardingNotificationsPendingBody =>
-      'Hiermee kun je Adhan-meldingen en herinneringen ontvangen.';
+      'Meldingen kunnen worden gebruikt voor adhan-waarschuwingen en herinneringen. Je kunt zonder doorgaan.';
 
   @override
   String get onboardingMethodTitle => 'Berekeningsmethode';
@@ -264,7 +264,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get onboardingPrayerNotificationsSubtitle =>
-      'Je kunt ze nu inschakelen of voorlopig zonder ze doorgaan.';
+      'Je kunt meldingen nu bekijken of voorlopig zonder doorgaan.';
 
   @override
   String get onboardingAdhanPreviewTitle => 'Snelle Adhan-voorbeeld';
@@ -3610,11 +3610,11 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get onboardingSkipLocationBody =>
-      'Zonder locatie kunnen de gebedstijden niet worden berekend. Toch doorgaan?';
+      'Zonder locatie moet je mogelijk handmatig een stad kiezen voor gebedstijden. Toch doorgaan?';
 
   @override
   String get onboardingNotificationsPermissionWarning =>
-      'Toestemming niet verleend. Ga terug naar de vorige stap om het in te schakelen.';
+      'Meldingen zijn nu niet beschikbaar. Je kunt doorgaan en dit later aanpassen.';
 
   @override
   String get tafsirPanelTitle => 'Tafsir';
