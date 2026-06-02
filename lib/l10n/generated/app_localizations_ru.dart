@@ -3609,13 +3609,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get commonRetry => 'Повторить';
 
   @override
-  String get onboardingSkipLocationTitle => 'Пропустить геолокацию';
-
-  @override
-  String get onboardingSkipLocationBody =>
-      'Без геолокации может понадобиться выбрать город вручную для времени молитв. Всё равно продолжить?';
-
-  @override
   String get onboardingNotificationsPermissionWarning =>
       'Уведомления сейчас недоступны. Вы можете продолжить и настроить это позже.';
 

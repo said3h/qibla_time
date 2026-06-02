@@ -3620,13 +3620,6 @@ class AppLocalizationsIt extends AppLocalizations {
   String get commonRetry => 'Riprova';
 
   @override
-  String get onboardingSkipLocationTitle => 'Salta posizione';
-
-  @override
-  String get onboardingSkipLocationBody =>
-      'Senza posizione, gli orari di preghiera potrebbero richiedere una città manuale. Continuare comunque?';
-
-  @override
   String get onboardingNotificationsPermissionWarning =>
       'Le notifiche non sono disponibili al momento. Puoi continuare e modificarle più tardi.';
 

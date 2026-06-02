@@ -1418,8 +1418,6 @@
   "quranViewModeAyahs": "Просмотр аятов",
   "quranViewModePage": "Непрерывное чтение",
   "commonRetry": "Повторить",
-  "onboardingSkipLocationTitle": "Пропустить геолокацию",
-  "onboardingSkipLocationBody": "Без геолокации может понадобиться выбрать город вручную для времени молитв. Всё равно продолжить?",
   "onboardingNotificationsPermissionWarning": "Уведомления сейчас недоступны. Вы можете продолжить и настроить это позже.",
   "tafsirPanelTitle": "Тафсир",
   "tafsirLoadingTitle": "Загрузка тафсира",

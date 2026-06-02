@@ -3575,13 +3575,6 @@ class AppLocalizationsTr extends AppLocalizations {
   String get commonRetry => 'Tekrar dene';
 
   @override
-  String get onboardingSkipLocationTitle => 'Konumu atla';
-
-  @override
-  String get onboardingSkipLocationBody =>
-      'Konum olmadan namaz vakitleri için şehri elle seçmeniz gerekebilir. Yine de devam edilsin mi?';
-
-  @override
   String get onboardingNotificationsPermissionWarning =>
       'Bildirimler şu anda kullanılamıyor. Devam edip bunu daha sonra ayarlayabilirsiniz.';
 

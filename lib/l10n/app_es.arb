@@ -1421,8 +1421,6 @@
   "quranViewModeAyahs": "Vista por aleya",
   "quranViewModePage": "Lectura continua",
   "commonRetry": "Reintentar",
-  "onboardingSkipLocationTitle": "Saltar ubicacion",
-  "onboardingSkipLocationBody": "Sin ubicación, puede que tengas que elegir una ciudad manualmente para los horarios. ¿Continuar de todas formas?",
   "onboardingNotificationsPermissionWarning": "Las notificaciones no están disponibles ahora. Puedes continuar y ajustarlo después.",
   "tafsirPanelTitle": "Tafsir",
   "tafsirLoadingTitle": "Cargando tafsir",

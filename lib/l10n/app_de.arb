@@ -1418,8 +1418,6 @@
   "quranViewModeAyahs": "Einzelverse",
   "quranViewModePage": "Fortlaufende Lesung",
   "commonRetry": "Erneut versuchen",
-  "onboardingSkipLocationTitle": "Standort überspringen",
-  "onboardingSkipLocationBody": "Ohne Standort musst du für Gebetszeiten möglicherweise manuell eine Stadt auswählen. Trotzdem fortfahren?",
   "onboardingNotificationsPermissionWarning": "Benachrichtigungen sind derzeit nicht verfügbar. Du kannst fortfahren und dies später anpassen.",
   "tafsirPanelTitle": "Tafsir",
   "tafsirLoadingTitle": "Tafsir wird geladen",

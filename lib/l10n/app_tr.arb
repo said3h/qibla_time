@@ -1418,8 +1418,6 @@
   "quranViewModeAyahs": "Ayet görünümü",
   "quranViewModePage": "Sürekli okuma",
   "commonRetry": "Tekrar dene",
-  "onboardingSkipLocationTitle": "Konumu atla",
-  "onboardingSkipLocationBody": "Konum olmadan namaz vakitleri için şehri elle seçmeniz gerekebilir. Yine de devam edilsin mi?",
   "onboardingNotificationsPermissionWarning": "Bildirimler şu anda kullanılamıyor. Devam edip bunu daha sonra ayarlayabilirsiniz.",
   "tafsirPanelTitle": "Tefsir",
   "tafsirLoadingTitle": "Tefsir yukleniyor",

@@ -6280,18 +6280,6 @@ abstract class AppLocalizations {
   /// **'Reintentar'**
   String get commonRetry;
 
-  /// No description provided for @onboardingSkipLocationTitle.
-  ///
-  /// In es, this message translates to:
-  /// **'Saltar ubicacion'**
-  String get onboardingSkipLocationTitle;
-
-  /// No description provided for @onboardingSkipLocationBody.
-  ///
-  /// In es, this message translates to:
-  /// **'Sin ubicación, puede que tengas que elegir una ciudad manualmente para los horarios. ¿Continuar de todas formas?'**
-  String get onboardingSkipLocationBody;
-
   /// No description provided for @onboardingNotificationsPermissionWarning.
   ///
   /// In es, this message translates to:

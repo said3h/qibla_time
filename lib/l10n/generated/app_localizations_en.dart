@@ -3586,13 +3586,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get commonRetry => 'Retry';
 
   @override
-  String get onboardingSkipLocationTitle => 'Skip location';
-
-  @override
-  String get onboardingSkipLocationBody =>
-      'Without location, prayer times may need a manual city. Continue anyway?';
-
-  @override
   String get onboardingNotificationsPermissionWarning =>
       'Notifications are not available right now. You can continue and adjust this later.';
 

@@ -3613,13 +3613,6 @@ class AppLocalizationsDe extends AppLocalizations {
   String get commonRetry => 'Erneut versuchen';
 
   @override
-  String get onboardingSkipLocationTitle => 'Standort überspringen';
-
-  @override
-  String get onboardingSkipLocationBody =>
-      'Ohne Standort musst du für Gebetszeiten möglicherweise manuell eine Stadt auswählen. Trotzdem fortfahren?';
-
-  @override
   String get onboardingNotificationsPermissionWarning =>
       'Benachrichtigungen sind derzeit nicht verfügbar. Du kannst fortfahren und dies später anpassen.';
 

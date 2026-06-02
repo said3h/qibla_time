@@ -3517,13 +3517,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get commonRetry => 'إعادة المحاولة';
 
   @override
-  String get onboardingSkipLocationTitle => 'تخطي الموقع';
-
-  @override
-  String get onboardingSkipLocationBody =>
-      'بدون الموقع، قد تحتاج إلى اختيار مدينة يدويًا لحساب المواقيت. هل تريد المتابعة؟';
-
-  @override
   String get onboardingNotificationsPermissionWarning =>
       'الإشعارات غير متاحة الآن. يمكنك المتابعة وتعديل ذلك لاحقًا.';
 

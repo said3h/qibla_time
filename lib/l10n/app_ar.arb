@@ -1357,8 +1357,6 @@
   "quranViewModeAyahs": "عرض الآيات",
   "quranViewModePage": "القراءة المستمرة",
   "commonRetry": "إعادة المحاولة",
-  "onboardingSkipLocationTitle": "تخطي الموقع",
-  "onboardingSkipLocationBody": "بدون الموقع، قد تحتاج إلى اختيار مدينة يدويًا لحساب المواقيت. هل تريد المتابعة؟",
   "onboardingNotificationsPermissionWarning": "الإشعارات غير متاحة الآن. يمكنك المتابعة وتعديل ذلك لاحقًا.",
   "tafsirPanelTitle": "التفسير",
   "tafsirLoadingTitle": "جارٍ تحميل التفسير",

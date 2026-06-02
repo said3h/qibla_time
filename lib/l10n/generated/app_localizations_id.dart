@@ -3597,13 +3597,6 @@ class AppLocalizationsId extends AppLocalizations {
   String get commonRetry => 'Coba lagi';
 
   @override
-  String get onboardingSkipLocationTitle => 'Lewati lokasi';
-
-  @override
-  String get onboardingSkipLocationBody =>
-      'Tanpa lokasi, waktu shalat mungkin memerlukan pilihan kota manual. Tetap lanjutkan?';
-
-  @override
   String get onboardingNotificationsPermissionWarning =>
       'Notifikasi belum tersedia saat ini. Anda dapat melanjutkan dan menyesuaikannya nanti.';
 

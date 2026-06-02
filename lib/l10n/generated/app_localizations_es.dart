@@ -3605,13 +3605,6 @@ class AppLocalizationsEs extends AppLocalizations {
   String get commonRetry => 'Reintentar';
 
   @override
-  String get onboardingSkipLocationTitle => 'Saltar ubicacion';
-
-  @override
-  String get onboardingSkipLocationBody =>
-      'Sin ubicación, puede que tengas que elegir una ciudad manualmente para los horarios. ¿Continuar de todas formas?';
-
-  @override
   String get onboardingNotificationsPermissionWarning =>
       'Las notificaciones no están disponibles ahora. Puedes continuar y ajustarlo después.';
 

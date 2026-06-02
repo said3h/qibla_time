@@ -3626,13 +3626,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get commonRetry => 'Réessayer';
 
   @override
-  String get onboardingSkipLocationTitle => 'Ignorer la localisation';
-
-  @override
-  String get onboardingSkipLocationBody =>
-      'Sans localisation, il faudra peut-être choisir une ville manuellement pour les horaires. Continuer quand même ?';
-
-  @override
   String get onboardingNotificationsPermissionWarning =>
       'Les notifications ne sont pas disponibles pour le moment. Vous pouvez continuer et ajuster cela plus tard.';
 

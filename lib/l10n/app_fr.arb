@@ -1418,8 +1418,6 @@
   "quranViewModeAyahs": "Vue par verset",
   "quranViewModePage": "Lecture continue",
   "commonRetry": "Réessayer",
-  "onboardingSkipLocationTitle": "Ignorer la localisation",
-  "onboardingSkipLocationBody": "Sans localisation, il faudra peut-être choisir une ville manuellement pour les horaires. Continuer quand même ?",
   "onboardingNotificationsPermissionWarning": "Les notifications ne sont pas disponibles pour le moment. Vous pouvez continuer et ajuster cela plus tard.",
   "tafsirPanelTitle": "Tafsir",
   "tafsirLoadingTitle": "Chargement du tafsir",

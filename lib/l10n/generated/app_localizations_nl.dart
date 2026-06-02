@@ -3606,13 +3606,6 @@ class AppLocalizationsNl extends AppLocalizations {
   String get commonRetry => 'Opnieuw proberen';
 
   @override
-  String get onboardingSkipLocationTitle => 'Locatie overslaan';
-
-  @override
-  String get onboardingSkipLocationBody =>
-      'Zonder locatie moet je mogelijk handmatig een stad kiezen voor gebedstijden. Toch doorgaan?';
-
-  @override
   String get onboardingNotificationsPermissionWarning =>
       'Meldingen zijn nu niet beschikbaar. Je kunt doorgaan en dit later aanpassen.';
 

@@ -70,32 +70,9 @@ class _OnboardingScreenState extends State<OnboardingScreen>
     _refreshPermissionState(clearBusy: true);
   }
 
-  /// Shows a confirmation dialog when skipping without location permission,
-  /// since prayer times require location to work.
+  /// Lets users leave onboarding without requesting location or adding friction.
   Future<void> _onSkipPressed() async {
     if (!mounted) return;
-    final locationGranted = _hasLocationPermission && _locationServiceEnabled;
-    if (!locationGranted) {
-      final l10n = context.l10n;
-      final confirmed = await showDialog<bool>(
-        context: context,
-        builder: (ctx) => AlertDialog(
-          title: Text(l10n.onboardingSkipLocationTitle),
-          content: Text(l10n.onboardingSkipLocationBody),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(ctx).pop(false),
-              child: Text(l10n.commonCancel),
-            ),
-            TextButton(
-              onPressed: () => Navigator.of(ctx).pop(true),
-              child: Text(l10n.commonSkip),
-            ),
-          ],
-        ),
-      );
-      if (confirmed != true) return;
-    }
     await widget.onSkipped();
   }
 

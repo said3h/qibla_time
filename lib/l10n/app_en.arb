@@ -1421,8 +1421,6 @@
   "quranViewModeAyahs": "Ayah view",
   "quranViewModePage": "Continuous reading",
   "commonRetry": "Retry",
-  "onboardingSkipLocationTitle": "Skip location",
-  "onboardingSkipLocationBody": "Without location, prayer times may need a manual city. Continue anyway?",
   "onboardingNotificationsPermissionWarning": "Notifications are not available right now. You can continue and adjust this later.",
   "tafsirPanelTitle": "Tafsir",
   "tafsirLoadingTitle": "Loading tafsir",
