@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DuaCategoryMeta {
   const DuaCategoryMeta({
@@ -30,7 +32,7 @@ class DuaLocalePresentation {
     'mosque': Icons.mosque_outlined,
     'rain': Icons.water_drop_outlined,
     'stress': Icons.self_improvement_outlined,
-    'gratitude': Icons.favorite_border_outlined,
+    'gratitude': Icons.thumb_up_outlined,
     'parents': Icons.family_restroom_outlined,
     'hajj': Icons.route_outlined,
     'waking_up': Icons.wb_twilight_outlined,
@@ -44,6 +46,19 @@ class DuaLocalePresentation {
     'marriage_family': Icons.diversity_1_outlined,
     'gatherings': Icons.groups_outlined,
   };
+
+  static const _savedDuaIdsKey = 'saved_dua_ids';
+
+  static Future<Set<String>> loadSavedDuaIds(Set<String> defaultIds) async {
+    final prefs = await SharedPreferences.getInstance();
+    final saved = prefs.getStringList(_savedDuaIdsKey);
+    return saved == null ? Set<String>.from(defaultIds) : saved.toSet();
+  }
+
+  static Future<void> saveDuaIds(Set<String> ids) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList(_savedDuaIdsKey, ids.toList()..sort());
+  }
 
   static const _categoryArabicLabels = <String, String>{
     'morning': 'الصباح',
@@ -1112,5 +1127,73 @@ class DuaLocalePresentation {
       'tr' => 'Paylaş',
       _ => 'Share', // neutral English fallback for any unhandled locale
     };
+  }
+
+  static String saveTooltip(String languageCode) {
+    return switch (normalizeLanguageCode(languageCode)) {
+      'es' => 'Guardar',
+      'it' => 'Salva',
+      'pt' => 'Guardar',
+      'ru' => 'Сохранить',
+      'de' => 'Speichern',
+      'en' => 'Save',
+      'fr' => 'Enregistrer',
+      'ar' => 'حفظ',
+      'id' => 'Simpan',
+      'nl' => 'Opslaan',
+      'tr' => 'Kaydet',
+      _ => 'Save',
+    };
+  }
+
+  static String unsaveTooltip(String languageCode) {
+    return switch (normalizeLanguageCode(languageCode)) {
+      'es' => 'Quitar guardado',
+      'it' => 'Rimuovi dai salvati',
+      'pt' => 'Remover dos guardados',
+      'ru' => 'Удалить из сохранённых',
+      'de' => 'Nicht mehr speichern',
+      'en' => 'Remove saved',
+      'fr' => 'Retirer des enregistrements',
+      'ar' => 'إزالة من المحفوظات',
+      'id' => 'Hapus dari tersimpan',
+      'nl' => 'Verwijderen uit opgeslagen',
+      'tr' => 'Kayıttan çıkar',
+      _ => 'Remove saved',
+    };
+  }
+}
+
+final savedDuaIdsProvider =
+    StateNotifierProvider<SavedDuaIdsController, Set<String>?>(
+  (ref) => SavedDuaIdsController(),
+);
+
+class SavedDuaIdsController extends StateNotifier<Set<String>?> {
+  SavedDuaIdsController() : super(null);
+
+  bool _isLoading = false;
+
+  Future<void> loadIfNeeded(Set<String> defaultIds) async {
+    if (state != null || _isLoading) return;
+    _isLoading = true;
+    try {
+      state = await DuaLocalePresentation.loadSavedDuaIds(defaultIds);
+    } finally {
+      _isLoading = false;
+    }
+  }
+
+  Set<String> effectiveIds(Set<String> defaultIds) {
+    return state ?? defaultIds;
+  }
+
+  Future<void> toggle(String duaId, Set<String> defaultIds) async {
+    final nextIds = Set<String>.from(effectiveIds(defaultIds));
+    if (!nextIds.add(duaId)) {
+      nextIds.remove(duaId);
+    }
+    state = nextIds;
+    await DuaLocalePresentation.saveDuaIds(nextIds);
   }
 }

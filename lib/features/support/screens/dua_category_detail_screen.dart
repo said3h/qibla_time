@@ -168,6 +168,19 @@ class _DuaCategoryDetailScreenState
                   position: _contentOffset,
                   child: duasAsync.when(
                     data: (duas) {
+                      final defaultSavedDuaIds = _defaultSavedDuaIds(duas);
+                      final savedDuaIdsState = ref.watch(savedDuaIdsProvider);
+                      final savedDuaIds =
+                          savedDuaIdsState ?? defaultSavedDuaIds;
+                      if (savedDuaIdsState == null) {
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          if (!mounted) return;
+                          ref
+                              .read(savedDuaIdsProvider.notifier)
+                              .loadIfNeeded(defaultSavedDuaIds);
+                        });
+                      }
+
                       final categoryDuas = duas
                           .where((d) => d.category == widget.categoryKey)
                           .toList();
@@ -208,6 +221,10 @@ class _DuaCategoryDetailScreenState
                           return _DuaCard(
                             dua: dua,
                             languageCode: languageCode,
+                            isSaved: savedDuaIds.contains(dua.id),
+                            onToggleSaved: () => ref
+                                .read(savedDuaIdsProvider.notifier)
+                                .toggle(dua.id, defaultSavedDuaIds),
                           );
                         },
                       );
@@ -236,16 +253,24 @@ class _DuaCategoryDetailScreenState
       ),
     );
   }
+
+  Set<String> _defaultSavedDuaIds(List<Dua> duas) {
+    return duas.where((dua) => dua.isFeatured).map((dua) => dua.id).toSet();
+  }
 }
 
 class _DuaCard extends StatelessWidget {
   const _DuaCard({
     required this.dua,
     required this.languageCode,
+    required this.isSaved,
+    required this.onToggleSaved,
   });
 
   final Dua dua;
   final String languageCode;
+  final bool isSaved;
+  final VoidCallback onToggleSaved;
 
   @override
   Widget build(BuildContext context) {
@@ -414,15 +439,27 @@ class _DuaCard extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                )
-              else
-                Icon(
-                  dua.isFeatured
-                      ? Icons.favorite_rounded
+                ),
+              if (dua.count != null && dua.count! > 1) const SizedBox(width: 8),
+              IconButton(
+                tooltip: isSaved
+                    ? DuaLocalePresentation.unsaveTooltip(languageCode)
+                    : DuaLocalePresentation.saveTooltip(languageCode),
+                onPressed: onToggleSaved,
+                visualDensity: VisualDensity.compact,
+                padding: EdgeInsets.zero,
+                constraints: const BoxConstraints(
+                  minWidth: 28,
+                  minHeight: 28,
+                ),
+                icon: Icon(
+                  isSaved
+                      ? Icons.bookmark_rounded
                       : Icons.bookmark_border_rounded,
                   size: 18,
-                  color: dua.isFeatured ? tokens.primary : tokens.textMuted,
+                  color: isSaved ? tokens.primary : tokens.textMuted,
                 ),
+              ),
               const Spacer(),
               IconButton(
                 tooltip: DuaLocalePresentation.shareTooltip(languageCode),
