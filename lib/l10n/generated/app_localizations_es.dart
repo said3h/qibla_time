@@ -565,11 +565,11 @@ class AppLocalizationsEs extends AppLocalizations {
       'Se activa solo cuando el calendario islámico entra en Ramadán';
 
   @override
-  String get settingsRamadanForced => 'Forzar modo Ramadán';
+  String get settingsRamadanForced => 'Activar modo ayuno';
 
   @override
   String get settingsRamadanForcedSubtitle =>
-      'Activar vista de Ramadán manualmente';
+      'Activar la vista de ayuno manualmente cuando sea necesario';
 
   @override
   String get settingsDailyNotification => 'Notificación diaria';

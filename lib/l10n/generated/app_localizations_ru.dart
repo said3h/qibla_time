@@ -570,11 +570,11 @@ class AppLocalizationsRu extends AppLocalizations {
       'Включается автоматически, когда по исламскому календарю наступает Рамадан.';
 
   @override
-  String get settingsRamadanForced => 'Принудительный режим Рамадана';
+  String get settingsRamadanForced => 'Включить режим поста';
 
   @override
   String get settingsRamadanForcedSubtitle =>
-      'Включите оформление Рамадана вручную';
+      'Включите отображение поста вручную при необходимости';
 
   @override
   String get settingsDailyNotification => 'Ежедневное уведомление';

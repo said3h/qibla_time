@@ -565,11 +565,11 @@ class AppLocalizationsEn extends AppLocalizations {
       'Turns on automatically when the Islamic calendar enters Ramadan';
 
   @override
-  String get settingsRamadanForced => 'Force Ramadan mode';
+  String get settingsRamadanForced => 'Activate fasting mode';
 
   @override
   String get settingsRamadanForcedSubtitle =>
-      'Enable the Ramadan view manually';
+      'Enable the fasting view manually when needed';
 
   @override
   String get settingsDailyNotification => 'Daily notification';

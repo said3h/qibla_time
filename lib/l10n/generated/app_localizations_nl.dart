@@ -566,11 +566,11 @@ class AppLocalizationsNl extends AppLocalizations {
       'Wordt automatisch ingeschakeld wanneer de Islamitische kalender Ramadan binnenkomt';
 
   @override
-  String get settingsRamadanForced => 'Ramadan-modus forceren';
+  String get settingsRamadanForced => 'Vastmodus activeren';
 
   @override
   String get settingsRamadanForcedSubtitle =>
-      'De Ramadan-weergave handmatig inschakelen';
+      'Schakel de vastenweergave handmatig in wanneer nodig';
 
   @override
   String get settingsDailyNotification => 'Dagelijkse melding';

@@ -181,6 +181,17 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                 ),
                 selectedPrayerScheduleAsync.when(
+                  data: (resolvedSchedule) => _buildPrayerTimeline(
+                    resolvedSchedule?.schedule,
+                    selectedNextPrayerInfo,
+                    _selectedDate,
+                    ramadanStatusAsync.valueOrNull,
+                    tokens,
+                  ),
+                  loading: () => const SizedBox.shrink(),
+                  error: (_, __) => const SizedBox.shrink(),
+                ),
+                selectedPrayerScheduleAsync.when(
                   data: (resolvedSchedule) => _buildPremiumPrayerSection(
                     resolvedSchedule?.schedule,
                     selectedNextPrayerInfo,
@@ -2258,6 +2269,189 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 
+  Widget _buildPrayerTimeline(
+    PrayerSchedule? prayerSchedule,
+    NextPrayerInfo? nextPrayerInfo,
+    DateTime date,
+    RamadanStatus? ramadanStatus,
+    QiblaTokens tokens,
+  ) {
+    if (prayerSchedule == null) {
+      return const SizedBox.shrink();
+    }
+
+    final languageCode = AppLocaleController.effectiveLanguageCode();
+    final fastingActive = ramadanStatus?.isEnabled == true;
+    final items = <_PrayerTimelineItem>[
+      if (fastingActive)
+        _PrayerTimelineItem(
+          label: 'Imsak',
+          time: prayerSchedule.fajr,
+          icon: Icons.schedule_rounded,
+        ),
+      _PrayerTimelineItem(
+        label: _localizedPrayerPrimaryName(PrayerName.fajr, languageCode),
+        time: prayerSchedule.fajr,
+        icon: _prayerIcon(PrayerName.fajr),
+        prayer: PrayerName.fajr,
+      ),
+      _PrayerTimelineItem(
+        label: _localizedPrayerPrimaryName(PrayerName.dhuhr, languageCode),
+        time: prayerSchedule.dhuhr,
+        icon: _prayerIcon(PrayerName.dhuhr),
+        prayer: PrayerName.dhuhr,
+      ),
+      _PrayerTimelineItem(
+        label: _localizedPrayerPrimaryName(PrayerName.asr, languageCode),
+        time: prayerSchedule.asr,
+        icon: _prayerIcon(PrayerName.asr),
+        prayer: PrayerName.asr,
+      ),
+      _PrayerTimelineItem(
+        label: fastingActive
+            ? 'Iftar'
+            : _localizedPrayerPrimaryName(PrayerName.maghrib, languageCode),
+        time: prayerSchedule.maghrib,
+        icon: _prayerIcon(PrayerName.maghrib),
+        prayer: PrayerName.maghrib,
+      ),
+      _PrayerTimelineItem(
+        label: _localizedPrayerPrimaryName(PrayerName.isha, languageCode),
+        time: prayerSchedule.isha,
+        icon: _prayerIcon(PrayerName.isha),
+        prayer: PrayerName.isha,
+      ),
+    ];
+
+    final now = DateTime.now();
+    final isToday = _isSameDay(date, _dateOnly(now));
+    final currentIndex = isToday ? _currentTimelineIndex(items, now) : -1;
+    final nextPrayerKey = isToday ? nextPrayerInfo?.prayer.key : null;
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+      child: Container(
+        padding: const EdgeInsets.fromLTRB(12, 10, 12, 11),
+        decoration: BoxDecoration(
+          color: _blend(tokens.bgSurface2, tokens.bgSurface, 0.76),
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(color: _blend(tokens.primary, tokens.border, 0.1)),
+        ),
+        child: SizedBox(
+          height: 76,
+          child: Stack(
+            children: [
+              Positioned.fill(
+                top: 2,
+                bottom: 38,
+                child: CustomPaint(
+                  painter: _PrayerTimelineCurvePainter(
+                    color: _blend(tokens.primary, tokens.border, 0.2),
+                  ),
+                ),
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: List.generate(items.length, (index) {
+                  final item = items[index];
+                  final isNext = item.prayer?.key == nextPrayerKey;
+                  final isCurrent = index == currentIndex;
+                  final isActive = isNext || isCurrent;
+                  final itemColor = isActive
+                      ? tokens.primary
+                      : _blend(tokens.textSecondary, tokens.primary, 0.12);
+                  final dotBg = isActive
+                      ? _blend(tokens.primary, tokens.bgSurface, 0.2)
+                      : _blend(tokens.bgSurface, tokens.bgSurface2, 0.6);
+
+                  return Expanded(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        AnimatedContainer(
+                          duration: const Duration(milliseconds: 180),
+                          width: isActive ? 31 : 27,
+                          height: isActive ? 31 : 27,
+                          decoration: BoxDecoration(
+                            color: dotBg,
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: isActive
+                                  ? tokens.primary
+                                  : _blend(
+                                      tokens.textMuted,
+                                      tokens.border,
+                                      0.2,
+                                    ),
+                              width: isActive ? 1.4 : 1,
+                            ),
+                            boxShadow: isActive
+                                ? [
+                                    BoxShadow(
+                                      color: tokens.primary
+                                          .withValues(alpha: 0.16),
+                                      blurRadius: 12,
+                                      offset: const Offset(0, 4),
+                                    ),
+                                  ]
+                                : null,
+                          ),
+                          child: Icon(
+                            item.icon,
+                            size: isActive ? 15 : 13,
+                            color: itemColor,
+                          ),
+                        ),
+                        const SizedBox(height: 7),
+                        Text(
+                          item.label,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.dmSans(
+                            fontSize: 9,
+                            fontWeight:
+                                isActive ? FontWeight.w700 : FontWeight.w600,
+                            color: isActive
+                                ? tokens.primary
+                                : tokens.textSecondary,
+                          ),
+                        ),
+                        const SizedBox(height: 2),
+                        Text(
+                          _formatTime(item.time),
+                          maxLines: 1,
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.dmSans(
+                            fontSize: 10,
+                            fontWeight:
+                                isActive ? FontWeight.w700 : FontWeight.w500,
+                            color: isActive
+                                ? tokens.primaryLight
+                                : tokens.textPrimary,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  int _currentTimelineIndex(List<_PrayerTimelineItem> items, DateTime now) {
+    for (var i = items.length - 1; i >= 0; i--) {
+      if (!now.isBefore(items[i].time)) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
   Widget _buildPremiumPrayerSection(
     PrayerSchedule? prayerSchedule,
     NextPrayerInfo? nextPrayerInfo,
@@ -3141,6 +3335,52 @@ class _PremiumPrayerCardStyle {
   final Color badgeBackground;
   final Color badgeBorder;
   final Color badgeForeground;
+}
+
+class _PrayerTimelineItem {
+  const _PrayerTimelineItem({
+    required this.label,
+    required this.time,
+    required this.icon,
+    this.prayer,
+  });
+
+  final String label;
+  final DateTime time;
+  final IconData icon;
+  final PrayerName? prayer;
+}
+
+class _PrayerTimelineCurvePainter extends CustomPainter {
+  const _PrayerTimelineCurvePainter({
+    required this.color,
+  });
+
+  final Color color;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = color
+      ..strokeWidth = 1.2
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round;
+    final centerY = size.height * 0.52;
+    final path = Path()
+      ..moveTo(4, centerY)
+      ..quadraticBezierTo(
+        size.width * 0.5,
+        centerY - 8,
+        size.width - 4,
+        centerY,
+      );
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant _PrayerTimelineCurvePainter oldDelegate) {
+    return oldDelegate.color != color;
+  }
 }
 
 class _CountdownRingPainter extends CustomPainter {

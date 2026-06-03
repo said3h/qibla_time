@@ -558,10 +558,11 @@ class AppLocalizationsAr extends AppLocalizations {
       'يعمل تلقائيًا عند دخول رمضان في التقويم الإسلامي';
 
   @override
-  String get settingsRamadanForced => 'فرض وضع رمضان';
+  String get settingsRamadanForced => 'تفعيل وضع الصيام';
 
   @override
-  String get settingsRamadanForcedSubtitle => 'تفعيل عرض رمضان يدويًا';
+  String get settingsRamadanForcedSubtitle =>
+      'فعّل عرض الصيام يدويًا عند الحاجة';
 
   @override
   String get settingsDailyNotification => 'إشعار يومي';

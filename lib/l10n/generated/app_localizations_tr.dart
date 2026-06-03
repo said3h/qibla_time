@@ -565,11 +565,11 @@ class AppLocalizationsTr extends AppLocalizations {
       'İslami takvim Ramezan ayına girdiğinde otomatik olarak açılır';
 
   @override
-  String get settingsRamadanForced => 'Ramezan modunu zorla';
+  String get settingsRamadanForced => 'Oruç modunu etkinleştir';
 
   @override
   String get settingsRamadanForcedSubtitle =>
-      'Ramezan görünümünü manuel olarak etkinleştirme';
+      'Gerektiğinde oruç görünümünü manuel olarak etkinleştir';
 
   @override
   String get settingsDailyNotification => 'Günlük bildirim';

@@ -567,11 +567,11 @@ class AppLocalizationsIt extends AppLocalizations {
       'Si accende automaticamente quando il calendario islamico entra nel Ramadan';
 
   @override
-  String get settingsRamadanForced => 'Forza la modalità Ramadan';
+  String get settingsRamadanForced => 'Attiva modalità digiuno';
 
   @override
   String get settingsRamadanForcedSubtitle =>
-      'Abilita manualmente la vista Ramadan';
+      'Abilita manualmente la vista digiuno quando serve';
 
   @override
   String get settingsDailyNotification => 'Notifica quotidiana';

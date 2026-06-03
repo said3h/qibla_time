@@ -566,11 +566,11 @@ class AppLocalizationsId extends AppLocalizations {
       'Aktif secara otomatis ketika kalender Islam memasuki Ramadan';
 
   @override
-  String get settingsRamadanForced => 'Paksa mode Ramadan';
+  String get settingsRamadanForced => 'Aktifkan mode puasa';
 
   @override
   String get settingsRamadanForcedSubtitle =>
-      'Aktifkan tampilan Ramadan secara manual';
+      'Aktifkan tampilan puasa secara manual saat diperlukan';
 
   @override
   String get settingsDailyNotification => 'Notifikasi harian';

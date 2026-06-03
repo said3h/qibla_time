@@ -1127,13 +1127,13 @@ abstract class AppLocalizations {
   /// No description provided for @settingsRamadanForced.
   ///
   /// In es, this message translates to:
-  /// **'Forzar modo Ramadán'**
+  /// **'Activar modo ayuno'**
   String get settingsRamadanForced;
 
   /// No description provided for @settingsRamadanForcedSubtitle.
   ///
   /// In es, this message translates to:
-  /// **'Activar vista de Ramadán manualmente'**
+  /// **'Activar la vista de ayuno manualmente cuando sea necesario'**
   String get settingsRamadanForcedSubtitle;
 
   /// No description provided for @settingsDailyNotification.

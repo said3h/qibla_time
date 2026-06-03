@@ -565,11 +565,11 @@ class AppLocalizationsPt extends AppLocalizations {
       'Liga automaticamente quando o calendário islâmico entra no Ramadã';
 
   @override
-  String get settingsRamadanForced => 'Forçar modo Ramadã';
+  String get settingsRamadanForced => 'Ativar modo de jejum';
 
   @override
   String get settingsRamadanForcedSubtitle =>
-      'Habilite a visualização do Ramadã manualmente';
+      'Ative manualmente a visualização de jejum quando necessário';
 
   @override
   String get settingsDailyNotification => 'Notificação diária';
