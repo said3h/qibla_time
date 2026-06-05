@@ -29,6 +29,9 @@ class PrayerCacheEntryModel {
       schedule: PrayerSchedule(
         date: DateTime.parse(decoded['date'] as String),
         fajr: DateTime.parse(times['fajr'] as String),
+        sunrise: times['sunrise'] == null
+            ? null
+            : DateTime.parse(times['sunrise'] as String),
         dhuhr: DateTime.parse(times['dhuhr'] as String),
         asr: DateTime.parse(times['asr'] as String),
         maghrib: DateTime.parse(times['maghrib'] as String),
@@ -55,6 +58,8 @@ class PrayerCacheEntryModel {
       'validUntil': validUntil.toIso8601String(),
       'times': {
         'fajr': schedule.fajr.toIso8601String(),
+        if (schedule.sunrise != null)
+          'sunrise': schedule.sunrise!.toIso8601String(),
         'dhuhr': schedule.dhuhr.toIso8601String(),
         'asr': schedule.asr.toIso8601String(),
         'maghrib': schedule.maghrib.toIso8601String(),

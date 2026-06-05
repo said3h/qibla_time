@@ -2280,43 +2280,40 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       return const SizedBox.shrink();
     }
 
-    final languageCode = AppLocaleController.effectiveLanguageCode();
     final fastingActive = ramadanStatus?.isEnabled == true;
     final items = <_PrayerTimelineItem>[
-      if (fastingActive)
-        _PrayerTimelineItem(
-          label: 'Imsak',
-          time: prayerSchedule.fajr,
-          icon: Icons.schedule_rounded,
-        ),
       _PrayerTimelineItem(
-        label: _localizedPrayerPrimaryName(PrayerName.fajr, languageCode),
+        label: fastingActive ? 'فجر / إمساك' : 'فجر',
         time: prayerSchedule.fajr,
         icon: _prayerIcon(PrayerName.fajr),
         prayer: PrayerName.fajr,
       ),
+      if (prayerSchedule.sunrise != null)
+        _PrayerTimelineItem(
+          label: 'شروق',
+          time: prayerSchedule.sunrise!,
+          icon: Icons.wb_twilight_rounded,
+        ),
       _PrayerTimelineItem(
-        label: _localizedPrayerPrimaryName(PrayerName.dhuhr, languageCode),
+        label: 'ظهر',
         time: prayerSchedule.dhuhr,
         icon: _prayerIcon(PrayerName.dhuhr),
         prayer: PrayerName.dhuhr,
       ),
       _PrayerTimelineItem(
-        label: _localizedPrayerPrimaryName(PrayerName.asr, languageCode),
+        label: 'عصر',
         time: prayerSchedule.asr,
         icon: _prayerIcon(PrayerName.asr),
         prayer: PrayerName.asr,
       ),
       _PrayerTimelineItem(
-        label: fastingActive
-            ? 'Iftar'
-            : _localizedPrayerPrimaryName(PrayerName.maghrib, languageCode),
+        label: fastingActive ? 'إفطار' : 'مغرب',
         time: prayerSchedule.maghrib,
         icon: _prayerIcon(PrayerName.maghrib),
         prayer: PrayerName.maghrib,
       ),
       _PrayerTimelineItem(
-        label: _localizedPrayerPrimaryName(PrayerName.isha, languageCode),
+        label: 'عشاء',
         time: prayerSchedule.isha,
         icon: _prayerIcon(PrayerName.isha),
         prayer: PrayerName.isha,
@@ -2356,7 +2353,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   final item = items[index];
                   final isNext = item.prayer?.key == nextPrayerKey;
                   final isCurrent = index == currentIndex;
-                  final isActive = isNext || isCurrent;
+                  final isActive =
+                      isNext || (nextPrayerKey == null && isCurrent);
                   final itemColor = isActive
                       ? tokens.primary
                       : _blend(tokens.textSecondary, tokens.primary, 0.12);
@@ -2405,11 +2403,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         const SizedBox(height: 7),
                         Text(
                           item.label,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          softWrap: true,
                           textAlign: TextAlign.center,
                           style: GoogleFonts.dmSans(
-                            fontSize: 9,
+                            fontSize: 8.5,
                             fontWeight:
                                 isActive ? FontWeight.w700 : FontWeight.w600,
                             color: isActive

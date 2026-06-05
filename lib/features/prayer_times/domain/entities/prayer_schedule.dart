@@ -4,6 +4,7 @@ class PrayerSchedule {
   const PrayerSchedule({
     required this.date,
     required this.fajr,
+    this.sunrise,
     required this.dhuhr,
     required this.asr,
     required this.maghrib,
@@ -12,6 +13,7 @@ class PrayerSchedule {
 
   final DateTime date;
   final DateTime fajr;
+  final DateTime? sunrise;
   final DateTime dhuhr;
   final DateTime asr;
   final DateTime maghrib;

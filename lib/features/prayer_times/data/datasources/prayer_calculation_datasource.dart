@@ -29,6 +29,7 @@ class PrayerCalculationDataSource {
     return PrayerSchedule(
       date: DateTime(reference.year, reference.month, reference.day),
       fajr: prayerTimes.fajr,
+      sunrise: prayerTimes.sunrise,
       dhuhr: prayerTimes.dhuhr,
       asr: prayerTimes.asr,
       maghrib: prayerTimes.maghrib,
