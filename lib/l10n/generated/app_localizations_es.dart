@@ -2404,6 +2404,30 @@ class AppLocalizationsEs extends AppLocalizations {
   String get homePrayerStatusUpcoming => 'Próxima';
 
   @override
+  String get homePrayerTimelineFajr => 'Fajr';
+
+  @override
+  String get homePrayerTimelineFajrImsak => 'Fajr / Imsak';
+
+  @override
+  String get homePrayerTimelineShuruq => 'Shuruq';
+
+  @override
+  String get homePrayerTimelineDhuhr => 'Dhuhr';
+
+  @override
+  String get homePrayerTimelineAsr => 'Asr';
+
+  @override
+  String get homePrayerTimelineMaghrib => 'Maghrib';
+
+  @override
+  String get homePrayerTimelineIftar => 'Iftar';
+
+  @override
+  String get homePrayerTimelineIsha => 'Isha';
+
+  @override
   String get homeQuickActionsTitle => 'ACCESOS SAGRADOS';
 
   @override

@@ -2399,6 +2399,30 @@ class AppLocalizationsId extends AppLocalizations {
   String get homePrayerStatusUpcoming => 'Akan datang';
 
   @override
+  String get homePrayerTimelineFajr => 'Subuh';
+
+  @override
+  String get homePrayerTimelineFajrImsak => 'Subuh / Imsak';
+
+  @override
+  String get homePrayerTimelineShuruq => 'Syuruq';
+
+  @override
+  String get homePrayerTimelineDhuhr => 'Dzuhur';
+
+  @override
+  String get homePrayerTimelineAsr => 'Ashar';
+
+  @override
+  String get homePrayerTimelineMaghrib => 'Maghrib';
+
+  @override
+  String get homePrayerTimelineIftar => 'Iftar';
+
+  @override
+  String get homePrayerTimelineIsha => 'Isya';
+
+  @override
   String get homeQuickActionsTitle => 'PINTASAN SUCI';
 
   @override

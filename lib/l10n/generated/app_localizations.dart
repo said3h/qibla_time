@@ -4246,6 +4246,54 @@ abstract class AppLocalizations {
   /// **'Próxima'**
   String get homePrayerStatusUpcoming;
 
+  /// No description provided for @homePrayerTimelineFajr.
+  ///
+  /// In es, this message translates to:
+  /// **'Fajr'**
+  String get homePrayerTimelineFajr;
+
+  /// No description provided for @homePrayerTimelineFajrImsak.
+  ///
+  /// In es, this message translates to:
+  /// **'Fajr / Imsak'**
+  String get homePrayerTimelineFajrImsak;
+
+  /// No description provided for @homePrayerTimelineShuruq.
+  ///
+  /// In es, this message translates to:
+  /// **'Shuruq'**
+  String get homePrayerTimelineShuruq;
+
+  /// No description provided for @homePrayerTimelineDhuhr.
+  ///
+  /// In es, this message translates to:
+  /// **'Dhuhr'**
+  String get homePrayerTimelineDhuhr;
+
+  /// No description provided for @homePrayerTimelineAsr.
+  ///
+  /// In es, this message translates to:
+  /// **'Asr'**
+  String get homePrayerTimelineAsr;
+
+  /// No description provided for @homePrayerTimelineMaghrib.
+  ///
+  /// In es, this message translates to:
+  /// **'Maghrib'**
+  String get homePrayerTimelineMaghrib;
+
+  /// No description provided for @homePrayerTimelineIftar.
+  ///
+  /// In es, this message translates to:
+  /// **'Iftar'**
+  String get homePrayerTimelineIftar;
+
+  /// No description provided for @homePrayerTimelineIsha.
+  ///
+  /// In es, this message translates to:
+  /// **'Isha'**
+  String get homePrayerTimelineIsha;
+
   /// No description provided for @homeQuickActionsTitle.
   ///
   /// In es, this message translates to:

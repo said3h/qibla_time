@@ -2403,6 +2403,30 @@ class AppLocalizationsNl extends AppLocalizations {
   String get homePrayerStatusUpcoming => 'Aankomend';
 
   @override
+  String get homePrayerTimelineFajr => 'Fajr';
+
+  @override
+  String get homePrayerTimelineFajrImsak => 'Fajr / Imsak';
+
+  @override
+  String get homePrayerTimelineShuruq => 'Shuruq';
+
+  @override
+  String get homePrayerTimelineDhuhr => 'Dhoehr';
+
+  @override
+  String get homePrayerTimelineAsr => 'Asr';
+
+  @override
+  String get homePrayerTimelineMaghrib => 'Maghrib';
+
+  @override
+  String get homePrayerTimelineIftar => 'Iftar';
+
+  @override
+  String get homePrayerTimelineIsha => 'Isja';
+
+  @override
   String get homeQuickActionsTitle => 'HEILIGE SNELKOPPELINGEN';
 
   @override

@@ -2408,6 +2408,30 @@ class AppLocalizationsRu extends AppLocalizations {
   String get homePrayerStatusUpcoming => 'Предстоящие';
 
   @override
+  String get homePrayerTimelineFajr => 'Фаджр';
+
+  @override
+  String get homePrayerTimelineFajrImsak => 'Фаджр / Имсак';
+
+  @override
+  String get homePrayerTimelineShuruq => 'Шурук';
+
+  @override
+  String get homePrayerTimelineDhuhr => 'Зухр';
+
+  @override
+  String get homePrayerTimelineAsr => 'Аср';
+
+  @override
+  String get homePrayerTimelineMaghrib => 'Магриб';
+
+  @override
+  String get homePrayerTimelineIftar => 'Ифтар';
+
+  @override
+  String get homePrayerTimelineIsha => 'Иша';
+
+  @override
   String get homeQuickActionsTitle => 'СВЯЩЕННЫЕ ПУТИ';
 
   @override

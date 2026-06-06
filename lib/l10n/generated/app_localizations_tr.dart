@@ -2382,6 +2382,30 @@ class AppLocalizationsTr extends AppLocalizations {
   String get homePrayerStatusUpcoming => 'Yaklaşan';
 
   @override
+  String get homePrayerTimelineFajr => 'Sabah';
+
+  @override
+  String get homePrayerTimelineFajrImsak => 'Sabah / İmsak';
+
+  @override
+  String get homePrayerTimelineShuruq => 'Şuruk';
+
+  @override
+  String get homePrayerTimelineDhuhr => 'Öğle';
+
+  @override
+  String get homePrayerTimelineAsr => 'İkindi';
+
+  @override
+  String get homePrayerTimelineMaghrib => 'Akşam';
+
+  @override
+  String get homePrayerTimelineIftar => 'İftar';
+
+  @override
+  String get homePrayerTimelineIsha => 'Yatsı';
+
+  @override
   String get homeQuickActionsTitle => 'KUTSAL KISAYOLLAR';
 
   @override

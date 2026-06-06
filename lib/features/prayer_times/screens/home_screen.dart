@@ -2280,40 +2280,45 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       return const SizedBox.shrink();
     }
 
+    final l10n = context.l10n;
     final fastingActive = ramadanStatus?.isEnabled == true;
     final items = <_PrayerTimelineItem>[
       _PrayerTimelineItem(
-        label: fastingActive ? 'فجر / إمساك' : 'فجر',
+        label: fastingActive
+            ? l10n.homePrayerTimelineFajrImsak
+            : l10n.homePrayerTimelineFajr,
         time: prayerSchedule.fajr,
         icon: _prayerIcon(PrayerName.fajr),
         prayer: PrayerName.fajr,
       ),
       if (prayerSchedule.sunrise != null)
         _PrayerTimelineItem(
-          label: 'شروق',
+          label: l10n.homePrayerTimelineShuruq,
           time: prayerSchedule.sunrise!,
           icon: Icons.wb_twilight_rounded,
         ),
       _PrayerTimelineItem(
-        label: 'ظهر',
+        label: l10n.homePrayerTimelineDhuhr,
         time: prayerSchedule.dhuhr,
         icon: _prayerIcon(PrayerName.dhuhr),
         prayer: PrayerName.dhuhr,
       ),
       _PrayerTimelineItem(
-        label: 'عصر',
+        label: l10n.homePrayerTimelineAsr,
         time: prayerSchedule.asr,
         icon: _prayerIcon(PrayerName.asr),
         prayer: PrayerName.asr,
       ),
       _PrayerTimelineItem(
-        label: fastingActive ? 'إفطار' : 'مغرب',
+        label: fastingActive
+            ? l10n.homePrayerTimelineIftar
+            : l10n.homePrayerTimelineMaghrib,
         time: prayerSchedule.maghrib,
         icon: _prayerIcon(PrayerName.maghrib),
         prayer: PrayerName.maghrib,
       ),
       _PrayerTimelineItem(
-        label: 'عشاء',
+        label: l10n.homePrayerTimelineIsha,
         time: prayerSchedule.isha,
         icon: _prayerIcon(PrayerName.isha),
         prayer: PrayerName.isha,
