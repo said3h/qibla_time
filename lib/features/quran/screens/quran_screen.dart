@@ -36,6 +36,20 @@ import 'downloaded_surahs_screen.dart';
 const _enableQuranTafsirPanels =
     bool.fromEnvironment('QURAN_TAFSIR_PANEL_ENABLED', defaultValue: true);
 
+@visibleForTesting
+bool shouldReplaceQuranDetailForPlaybackSurah({
+  required int currentScreenSurahNumber,
+  required QuranMiniPlayerState? previous,
+  required QuranMiniPlayerState next,
+}) {
+  return previous != null &&
+      previous.playbackMode == QuranMiniPlaybackMode.surah &&
+      previous.surahNumber == currentScreenSurahNumber &&
+      next.playbackMode == QuranMiniPlaybackMode.surah &&
+      next.isVisible &&
+      next.surahNumber != currentScreenSurahNumber;
+}
+
 class QuranScreen extends ConsumerStatefulWidget {
   const QuranScreen({super.key});
 
@@ -972,6 +986,41 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   QuranMiniPlayerState get _miniPlayerState =>
       ref.read(quranMiniPlayerControllerProvider);
 
+  SurahSummary? _summaryForSurahNumber(int surahNumber) {
+    for (final summary in QuranService.allSurahs) {
+      if (summary.number == surahNumber) return summary;
+    }
+    return null;
+  }
+
+  void _syncScreenWithContinuousPlayback(
+    QuranMiniPlayerState? previous,
+    QuranMiniPlayerState next,
+  ) {
+    if (!shouldReplaceQuranDetailForPlaybackSurah(
+      currentScreenSurahNumber: widget.summary.number,
+      previous: previous,
+      next: next,
+    )) {
+      return;
+    }
+
+    final nextSummary = _summaryForSurahNumber(next.surahNumber);
+    if (nextSummary == null) return;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (_) => QuranDetailScreen(
+            summary: nextSummary,
+            initialAyah: next.ayahNumber,
+          ),
+        ),
+      );
+    });
+  }
+
   bool get _hasCurrentSurahPlayback =>
       _miniPlayerState.isVisible &&
       _miniPlayerState.surahNumber == widget.summary.number;
@@ -1862,6 +1911,10 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ref.listen<QuranMiniPlayerState>(
+      quranMiniPlayerControllerProvider,
+      _syncScreenWithContinuousPlayback,
+    );
     ref.watch(quranMiniPlayerControllerProvider);
     final l10n = context.l10n;
     final tokens = QiblaThemes.current;
