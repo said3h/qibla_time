@@ -124,6 +124,7 @@ class _QuranContinuousViewState extends State<QuranContinuousView> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      key: PageStorageKey<String>('quran_continuous_${widget.surahNumber}'),
       controller: _scrollController,
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 44),
       child: Center(

@@ -47,6 +47,7 @@ bool shouldReplaceQuranDetailForPlaybackSurah({
       previous.surahNumber == currentScreenSurahNumber &&
       next.playbackMode == QuranMiniPlaybackMode.surah &&
       next.isVisible &&
+      previous.surahNumber != next.surahNumber &&
       next.surahNumber != currentScreenSurahNumber;
 }
 
@@ -2018,6 +2019,9 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                     return false;
                   },
                   child: ScrollablePositionedList.builder(
+                    key: PageStorageKey<String>(
+                      'quran_ayah_list_${widget.summary.number}',
+                    ),
                     itemScrollController: _itemScrollController,
                     itemPositionsListener: _itemPositionsListener,
                     padding: const EdgeInsets.all(16),

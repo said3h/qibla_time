@@ -140,5 +140,31 @@ void main() {
         isFalse,
       );
     });
+
+    test('does not sync when only the ayah changes within the same surah', () {
+      const previous = QuranMiniPlayerState(
+        surahName: 'Al-Fatiha',
+        surahNumber: 1,
+        ayahNumber: 8,
+        isPlaying: true,
+        playbackMode: QuranMiniPlaybackMode.surah,
+      );
+      const next = QuranMiniPlayerState(
+        surahName: 'Al-Fatiha',
+        surahNumber: 1,
+        ayahNumber: 9,
+        isPlaying: true,
+        playbackMode: QuranMiniPlaybackMode.surah,
+      );
+
+      expect(
+        shouldReplaceQuranDetailForPlaybackSurah(
+          currentScreenSurahNumber: 1,
+          previous: previous,
+          next: next,
+        ),
+        isFalse,
+      );
+    });
   });
 }
