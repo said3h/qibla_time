@@ -10,6 +10,7 @@ import '../../../core/localization/locale_controller.dart';
 import '../../../core/services/audio_service.dart';
 import '../models/quran_models.dart';
 import 'quran_audio_download_service.dart';
+import 'quran_service.dart';
 
 enum QuranMiniPlaybackMode {
   none,
@@ -71,6 +72,19 @@ class _QueuedAyahAudio {
   final bool isLocalFile;
 }
 
+List<SurahAyah> quranAudioQueueFromAyah({
+  required List<SurahAyah> ayahs,
+  required int startAyahNumber,
+}) {
+  return ayahs
+      .where(
+        (ayah) =>
+            ayah.numberInSurah >= startAyahNumber &&
+            ayah.audioUrl.trim().isNotEmpty,
+      )
+      .toList();
+}
+
 final quranMiniPlayerControllerProvider =
     StateNotifierProvider<QuranMiniPlayerController, QuranMiniPlayerState>(
         (ref) {
@@ -103,9 +117,12 @@ class QuranMiniPlayerController extends StateNotifier<QuranMiniPlayerState> {
 
   SurahSummary? _surahQueueSummary;
   List<SurahAyah> _surahQueue = const [];
+  List<SurahSummary> _continuousSurahs = const [];
   final Map<int, _QueuedAyahAudio> _resolvedSurahQueue = {};
   final Map<int, Future<void>> _prefetchingAyahTasks = {};
   int _surahQueueIndex = -1;
+  bool _continueAcrossSurahs = false;
+  bool _continuousPreferDownloadedAudio = false;
   Duration? _currentDuration;
   bool _isAdvancingEarly = false;
   DateTime? _lastEarlyAdvanceAt;
@@ -149,6 +166,34 @@ class QuranMiniPlayerController extends StateNotifier<QuranMiniPlayerState> {
     _surahQueue = queue;
     _surahQueueSummary = summary;
     _surahQueueIndex = -1;
+
+    try {
+      await _primeSurahQueueForPlayback(
+        summary.number,
+        preferDownloadedAudio: preferDownloadedAudio,
+      );
+      await _playSurahQueueIndex(summary, 0);
+    } catch (_) {
+      _clearQueueState();
+      rethrow;
+    }
+  }
+
+  Future<void> startQuranPlaybackFromAyah({
+    required SurahSummary summary,
+    required List<SurahSummary> allSurahs,
+    required List<SurahAyah> queue,
+    required bool preferDownloadedAudio,
+  }) async {
+    if (queue.isEmpty) return;
+
+    _clearQueueState();
+    _surahQueue = queue;
+    _surahQueueSummary = summary;
+    _surahQueueIndex = -1;
+    _continuousSurahs = allSurahs;
+    _continueAcrossSurahs = true;
+    _continuousPreferDownloadedAudio = preferDownloadedAudio;
 
     try {
       await _primeSurahQueueForPlayback(
@@ -214,7 +259,67 @@ class QuranMiniPlayerController extends StateNotifier<QuranMiniPlayerState> {
       }
     }
 
+    if (state.playbackMode == QuranMiniPlaybackMode.surah &&
+        _continueAcrossSurahs) {
+      final didStartNextSurah = await _playNextContinuousSurah();
+      if (didStartNextSurah) {
+        return;
+      }
+    }
+
     clear();
+  }
+
+  Future<bool> _playNextContinuousSurah() async {
+    final currentSummary = _surahQueueSummary;
+    if (currentSummary == null || _continuousSurahs.isEmpty) {
+      return false;
+    }
+
+    final nextSurahs = _continuousSurahs
+        .where((summary) => summary.number > currentSummary.number)
+        .toList()
+      ..sort((a, b) => a.number.compareTo(b.number));
+
+    for (final nextSummary in nextSurahs) {
+      try {
+        final result =
+            await _ref.read(quranServiceProvider).getSurahDetail(nextSummary);
+        final nextQueue = quranAudioQueueFromAyah(
+          ayahs: result.detail.ayahs,
+          startAyahNumber: 1,
+        );
+        if (nextQueue.isEmpty) {
+          continue;
+        }
+
+        _setQueueForContinuousSurah(nextSummary, nextQueue);
+        await _primeSurahQueueForPlayback(
+          nextSummary.number,
+          preferDownloadedAudio: _continuousPreferDownloadedAudio,
+        );
+        await _playSurahQueueIndex(nextSummary, 0);
+        return true;
+      } catch (_) {
+        continue;
+      }
+    }
+
+    return false;
+  }
+
+  void _setQueueForContinuousSurah(
+    SurahSummary summary,
+    List<SurahAyah> queue,
+  ) {
+    _surahQueueSummary = summary;
+    _surahQueue = queue;
+    _surahQueueIndex = -1;
+    _currentDuration = null;
+    _isAdvancingEarly = false;
+    _lastEarlyAdvanceAt = null;
+    _resolvedSurahQueue.clear();
+    _prefetchingAyahTasks.clear();
   }
 
   Future<_QueuedAyahAudio?> _resolveAyahAudioSource(
@@ -488,7 +593,10 @@ class QuranMiniPlayerController extends StateNotifier<QuranMiniPlayerState> {
   void _clearQueueState() {
     _surahQueueSummary = null;
     _surahQueue = const [];
+    _continuousSurahs = const [];
     _surahQueueIndex = -1;
+    _continueAcrossSurahs = false;
+    _continuousPreferDownloadedAudio = false;
     _currentDuration = null;
     _isAdvancingEarly = false;
     _lastEarlyAdvanceAt = null;

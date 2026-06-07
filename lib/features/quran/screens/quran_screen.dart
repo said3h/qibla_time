@@ -1779,10 +1779,13 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   Future<void> _toggleAyahAudio(
     SurahAyah ayah,
     SurahLoadSource source,
+    List<SurahAyah> ayahs,
   ) async {
     if (!_canPlayAyahAudio(ayah, source)) return;
 
-    final sourceKey = 'quran:${widget.summary.number}:${ayah.numberInSurah}';
+    final sourceKey = _playbackMode == _QuranPlaybackMode.surah
+        ? 'quran:surah:${widget.summary.number}:${ayah.numberInSurah}'
+        : 'quran:${widget.summary.number}:${ayah.numberInSurah}';
     final controller = ref.read(quranMiniPlayerControllerProvider.notifier);
     try {
       if (_activeAyahNumber == ayah.numberInSurah &&
@@ -1791,9 +1794,15 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
         return;
       }
 
-      await controller.playAyah(
+      final queue = quranAudioQueueFromAyah(
+        ayahs: ayahs,
+        startAyahNumber: ayah.numberInSurah,
+      );
+      await controller.startQuranPlaybackFromAyah(
         summary: widget.summary,
-        ayah: ayah,
+        allSurahs: QuranService.allSurahs,
+        queue: queue,
+        preferDownloadedAudio: _downloadState?.isDownloaded == true,
       );
     } catch (_) {
       if (!mounted) return;
@@ -2023,8 +2032,11 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                                 ayah,
                                 result.source,
                               ),
-                              onToggleAudio: () =>
-                                  _toggleAyahAudio(ayah, result.source),
+                              onToggleAudio: () => _toggleAyahAudio(
+                                ayah,
+                                result.source,
+                                detail.ayahs,
+                              ),
                               onToggleBookmark: () =>
                                   _toggleBookmark(ayah.numberInSurah),
                               showTafsirAction: showTafsirButton,
