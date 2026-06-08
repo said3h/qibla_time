@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:qibla_time/features/quran/models/quran_models.dart';
 import 'package:qibla_time/features/quran/screens/quran_screen.dart';
 import 'package:qibla_time/features/quran/services/quran_mini_player_service.dart';
+import 'package:qibla_time/features/quran/widgets/quran_continuous_view.dart';
 
 void main() {
   group('QuranMiniPlayerState', () {
@@ -164,6 +165,36 @@ void main() {
           next: next,
         ),
         isFalse,
+      );
+    });
+  });
+
+  group('shouldScheduleQuranContinuousAutoScroll', () {
+    test('does not auto-scroll when only active ayah changes', () {
+      expect(
+        shouldScheduleQuranContinuousAutoScroll(
+          oldEnableAutoScroll: true,
+          newEnableAutoScroll: true,
+          oldSurahNumber: 2,
+          newSurahNumber: 2,
+          oldAyahCount: 286,
+          newAyahCount: 286,
+        ),
+        isFalse,
+      );
+    });
+
+    test('allows auto-scroll when the surah changes', () {
+      expect(
+        shouldScheduleQuranContinuousAutoScroll(
+          oldEnableAutoScroll: true,
+          newEnableAutoScroll: true,
+          oldSurahNumber: 1,
+          newSurahNumber: 2,
+          oldAyahCount: 7,
+          newAyahCount: 286,
+        ),
+        isTrue,
       );
     });
   });

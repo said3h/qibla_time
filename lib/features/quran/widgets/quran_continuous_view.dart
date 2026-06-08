@@ -5,6 +5,20 @@ import '../../../core/theme/app_theme.dart';
 import '../models/quran_models.dart';
 import 'tajweed_text.dart';
 
+@visibleForTesting
+bool shouldScheduleQuranContinuousAutoScroll({
+  required bool oldEnableAutoScroll,
+  required bool newEnableAutoScroll,
+  required int oldSurahNumber,
+  required int newSurahNumber,
+  required int oldAyahCount,
+  required int newAyahCount,
+}) {
+  return (!oldEnableAutoScroll && newEnableAutoScroll) ||
+      oldSurahNumber != newSurahNumber ||
+      oldAyahCount != newAyahCount;
+}
+
 /// Renders a surah as a single flowing Arabic text block, similar to Mushaf
 /// page layout. Each ayah ends with an inline number marker ﴿N﴾.
 class QuranContinuousView extends StatefulWidget {
@@ -55,9 +69,15 @@ class _QuranContinuousViewState extends State<QuranContinuousView> {
   @override
   void didUpdateWidget(covariant QuranContinuousView oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.enableAutoScroll != widget.enableAutoScroll ||
-        oldWidget.currentAyahIndex != widget.currentAyahIndex ||
-        oldWidget.ayahs.length != widget.ayahs.length) {
+    if (shouldScheduleQuranContinuousAutoScroll(
+      oldEnableAutoScroll: oldWidget.enableAutoScroll,
+      newEnableAutoScroll: widget.enableAutoScroll,
+      oldSurahNumber: oldWidget.surahNumber,
+      newSurahNumber: widget.surahNumber,
+      oldAyahCount: oldWidget.ayahs.length,
+      newAyahCount: widget.ayahs.length,
+    )) {
+      _lastAutoScrolledAyahIndex = null;
       _scheduleAutoScroll();
     }
   }
