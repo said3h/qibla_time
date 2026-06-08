@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -2329,118 +2331,227 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final isToday = _isSameDay(date, _dateOnly(now));
     final currentIndex = isToday ? _currentTimelineIndex(items, now) : -1;
     final nextPrayerKey = isToday ? nextPrayerInfo?.prayer.key : null;
+    final nextIndex = nextPrayerKey == null
+        ? -1
+        : items.indexWhere((item) => item.prayer?.key == nextPrayerKey);
+    final activeIndex = currentIndex >= 0 ? currentIndex : nextIndex;
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
       child: Container(
-        padding: const EdgeInsets.fromLTRB(12, 10, 12, 11),
+        padding: const EdgeInsets.fromLTRB(10, 12, 10, 10),
         decoration: BoxDecoration(
           color: _blend(tokens.bgSurface2, tokens.bgSurface, 0.76),
-          borderRadius: BorderRadius.circular(18),
-          border: Border.all(color: _blend(tokens.primary, tokens.border, 0.1)),
-        ),
-        child: SizedBox(
-          height: 76,
-          child: Stack(
-            children: [
-              Positioned.fill(
-                top: 2,
-                bottom: 38,
-                child: CustomPaint(
-                  painter: _PrayerTimelineCurvePainter(
-                    color: _blend(tokens.primary, tokens.border, 0.2),
-                  ),
-                ),
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: List.generate(items.length, (index) {
-                  final item = items[index];
-                  final isNext = item.prayer?.key == nextPrayerKey;
-                  final isCurrent = index == currentIndex;
-                  final isActive =
-                      isNext || (nextPrayerKey == null && isCurrent);
-                  final itemColor = isActive
-                      ? tokens.primary
-                      : _blend(tokens.textSecondary, tokens.primary, 0.12);
-                  final dotBg = isActive
-                      ? _blend(tokens.primary, tokens.bgSurface, 0.2)
-                      : _blend(tokens.bgSurface, tokens.bgSurface2, 0.6);
-
-                  return Expanded(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        AnimatedContainer(
-                          duration: const Duration(milliseconds: 180),
-                          width: isActive ? 31 : 27,
-                          height: isActive ? 31 : 27,
-                          decoration: BoxDecoration(
-                            color: dotBg,
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: isActive
-                                  ? tokens.primary
-                                  : _blend(
-                                      tokens.textMuted,
-                                      tokens.border,
-                                      0.2,
-                                    ),
-                              width: isActive ? 1.4 : 1,
-                            ),
-                            boxShadow: isActive
-                                ? [
-                                    BoxShadow(
-                                      color: tokens.primary
-                                          .withValues(alpha: 0.16),
-                                      blurRadius: 12,
-                                      offset: const Offset(0, 4),
-                                    ),
-                                  ]
-                                : null,
-                          ),
-                          child: Icon(
-                            item.icon,
-                            size: isActive ? 15 : 13,
-                            color: itemColor,
-                          ),
-                        ),
-                        const SizedBox(height: 7),
-                        Text(
-                          item.label,
-                          maxLines: 2,
-                          softWrap: true,
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.dmSans(
-                            fontSize: 8.5,
-                            fontWeight:
-                                isActive ? FontWeight.w700 : FontWeight.w600,
-                            color: isActive
-                                ? tokens.primary
-                                : tokens.textSecondary,
-                          ),
-                        ),
-                        const SizedBox(height: 2),
-                        Text(
-                          _formatTime(item.time),
-                          maxLines: 1,
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.dmSans(
-                            fontSize: 10,
-                            fontWeight:
-                                isActive ? FontWeight.w700 : FontWeight.w500,
-                            color: isActive
-                                ? tokens.primaryLight
-                                : tokens.textPrimary,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                }),
-              ),
-            ],
+          borderRadius: BorderRadius.circular(22),
+          border: Border.all(
+            color: _blend(tokens.primary, tokens.border, 0.18),
           ),
+          boxShadow: [
+            BoxShadow(
+              color: tokens.primary.withValues(alpha: 0.05),
+              blurRadius: 22,
+              offset: const Offset(0, -3),
+            ),
+          ],
+        ),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final compact = constraints.maxWidth < 360;
+            final timelineHeight = compact ? 132.0 : 146.0;
+            final nodeBaseSize = compact ? 29.0 : 33.0;
+            final activeNodeSize = compact ? 43.0 : 48.0;
+
+            return SizedBox(
+              height: timelineHeight,
+              child: TweenAnimationBuilder<double>(
+                tween: Tween<double>(
+                  begin: activeIndex.toDouble(),
+                  end: activeIndex.toDouble(),
+                ),
+                duration: const Duration(milliseconds: 360),
+                curve: Curves.easeOutCubic,
+                builder: (context, animatedActiveIndex, _) {
+                  return Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      Positioned.fill(
+                        child: CustomPaint(
+                          painter: _PrayerTimelineCurvePainter(
+                            itemCount: items.length,
+                            activeIndex: animatedActiveIndex,
+                            trackColor: _blend(
+                              tokens.primary,
+                              tokens.border,
+                              0.16,
+                            ),
+                            completedColor: _blend(
+                              tokens.primary,
+                              tokens.textMuted,
+                              0.3,
+                            ),
+                            glowColor: tokens.primary,
+                          ),
+                        ),
+                      ),
+                      ...List.generate(items.length, (index) {
+                        final item = items[index];
+                        final point = _PrayerTimelineCurvePainter.pointFor(
+                          Size(constraints.maxWidth, timelineHeight),
+                          index,
+                          items.length,
+                        );
+                        final isActive = index == activeIndex;
+                        final isCompleted =
+                            activeIndex >= 0 && index < activeIndex;
+                        final nodeSize =
+                            isActive ? activeNodeSize : nodeBaseSize;
+                        final labelWidth = compact ? 58.0 : 68.0;
+                        final labelTop = math.min(
+                          point.dy + nodeSize * 0.55 + 12,
+                          timelineHeight - 45,
+                        );
+                        final emphasis = isActive
+                            ? 1.0
+                            : isCompleted
+                                ? 0.42
+                                : 0.72;
+                        final labelColor = isActive
+                            ? tokens.primary
+                            : isCompleted
+                                ? tokens.textMuted
+                                : tokens.textSecondary;
+                        final timeColor = isActive
+                            ? tokens.primaryLight
+                            : isCompleted
+                                ? tokens.textMuted
+                                : tokens.textPrimary;
+
+                        return Positioned(
+                          left: point.dx - labelWidth / 2,
+                          top: math.max(0, point.dy - nodeSize / 2),
+                          width: labelWidth,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              AnimatedContainer(
+                                duration: const Duration(milliseconds: 260),
+                                curve: Curves.easeOutCubic,
+                                width: nodeSize,
+                                height: nodeSize,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: isActive
+                                      ? _blend(
+                                          tokens.primary,
+                                          tokens.bgSurface,
+                                          0.2,
+                                        )
+                                      : _blend(
+                                          tokens.bgSurface,
+                                          tokens.bgSurface2,
+                                          0.64,
+                                        ).withValues(alpha: emphasis),
+                                  border: Border.all(
+                                    color: isActive
+                                        ? tokens.primary
+                                        : _blend(
+                                            tokens.textMuted,
+                                            tokens.border,
+                                            0.28,
+                                          ).withValues(alpha: emphasis),
+                                    width: isActive ? 2.1 : 1.2,
+                                  ),
+                                  boxShadow: isActive
+                                      ? [
+                                          BoxShadow(
+                                            color: tokens.primary
+                                                .withValues(alpha: 0.34),
+                                            blurRadius: 18,
+                                            spreadRadius: 1,
+                                          ),
+                                          BoxShadow(
+                                            color: tokens.primary
+                                                .withValues(alpha: 0.16),
+                                            blurRadius: 34,
+                                            spreadRadius: 5,
+                                          ),
+                                        ]
+                                      : null,
+                                ),
+                                child: Icon(
+                                  item.icon,
+                                  size: isActive
+                                      ? (compact ? 22 : 24)
+                                      : (compact ? 15 : 17),
+                                  color: isActive
+                                      ? tokens.primaryLight
+                                      : labelColor.withValues(alpha: emphasis),
+                                ),
+                              ),
+                              SizedBox(
+                                height: labelTop - point.dy - nodeSize / 2,
+                              ),
+                              AnimatedDefaultTextStyle(
+                                duration: const Duration(milliseconds: 240),
+                                curve: Curves.easeOutCubic,
+                                style: GoogleFonts.dmSans(
+                                  fontSize: compact ? 8.2 : 9.2,
+                                  height: 1.08,
+                                  letterSpacing: 0.6,
+                                  fontWeight: isActive
+                                      ? FontWeight.w800
+                                      : FontWeight.w600,
+                                  color: labelColor,
+                                ),
+                                child: Text(
+                                  item.label,
+                                  maxLines: 2,
+                                  softWrap: true,
+                                  overflow: TextOverflow.visible,
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              AnimatedDefaultTextStyle(
+                                duration: const Duration(milliseconds: 240),
+                                curve: Curves.easeOutCubic,
+                                style: GoogleFonts.dmSans(
+                                  fontSize: isActive
+                                      ? (compact ? 14 : 16)
+                                      : (compact ? 10.5 : 11.5),
+                                  height: 1,
+                                  fontWeight: isActive
+                                      ? FontWeight.w800
+                                      : FontWeight.w600,
+                                  color: timeColor,
+                                ),
+                                child: Text(
+                                  _formatTime(item.time),
+                                  maxLines: 1,
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                              if (isActive) ...[
+                                const SizedBox(height: 5),
+                                Container(
+                                  width: 18,
+                                  height: 2,
+                                  decoration: BoxDecoration(
+                                    color: tokens.primaryLight,
+                                    borderRadius: BorderRadius.circular(999),
+                                  ),
+                                ),
+                              ],
+                            ],
+                          ),
+                        );
+                      }),
+                    ],
+                  );
+                },
+              ),
+            );
+          },
         ),
       ),
     );
@@ -3356,33 +3467,114 @@ class _PrayerTimelineItem {
 
 class _PrayerTimelineCurvePainter extends CustomPainter {
   const _PrayerTimelineCurvePainter({
-    required this.color,
+    required this.itemCount,
+    required this.activeIndex,
+    required this.trackColor,
+    required this.completedColor,
+    required this.glowColor,
   });
 
-  final Color color;
+  final int itemCount;
+  final double activeIndex;
+  final Color trackColor;
+  final Color completedColor;
+  final Color glowColor;
+
+  static Offset pointFor(Size size, int index, int itemCount) {
+    if (itemCount <= 1) {
+      return Offset(size.width / 2, size.height * 0.34);
+    }
+
+    final safeWidth = math.max(1.0, size.width);
+    final t = index / (itemCount - 1);
+    final horizontalPadding = math.min(36.0, safeWidth * 0.1);
+    final x = horizontalPadding + (safeWidth - horizontalPadding * 2) * t;
+    final baseY = size.height * 0.42;
+    final arcHeight = size.height * 0.22;
+    final y = baseY - math.sin(math.pi * t) * arcHeight;
+    return Offset(x, y);
+  }
+
+  Path _arcPath(Size size) {
+    final path = Path();
+    if (itemCount <= 0) return path;
+
+    final first = pointFor(size, 0, itemCount);
+    path.moveTo(first.dx, first.dy);
+    for (var i = 1; i < itemCount; i++) {
+      final previous = pointFor(size, i - 1, itemCount);
+      final current = pointFor(size, i, itemCount);
+      final control = Offset(
+        (previous.dx + current.dx) / 2,
+        math.min(previous.dy, current.dy) - size.height * 0.035,
+      );
+      path.quadraticBezierTo(control.dx, control.dy, current.dx, current.dy);
+    }
+    return path;
+  }
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..strokeWidth = 1.2
+    if (itemCount <= 1) return;
+
+    final path = _arcPath(size);
+    final trackPaint = Paint()
+      ..color = trackColor
+      ..strokeWidth = 1.5
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
-    final centerY = size.height * 0.52;
-    final path = Path()
-      ..moveTo(4, centerY)
-      ..quadraticBezierTo(
-        size.width * 0.5,
-        centerY - 8,
-        size.width - 4,
-        centerY,
-      );
-    canvas.drawPath(path, paint);
+
+    final shadowPaint = Paint()
+      ..color = glowColor.withValues(alpha: 0.06)
+      ..strokeWidth = 9
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round
+      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 10);
+
+    canvas
+      ..drawPath(path, shadowPaint)
+      ..drawPath(path, trackPaint);
+
+    if (activeIndex < 0) return;
+
+    final clampedActiveIndex = activeIndex.clamp(0.0, itemCount - 1.0);
+    final progress =
+        itemCount <= 1 ? 0.0 : clampedActiveIndex / (itemCount - 1);
+    final pathMetrics = path.computeMetrics().toList(growable: false);
+    if (pathMetrics.isEmpty) return;
+
+    final metric = pathMetrics.first;
+    final completedPath = metric.extractPath(0, metric.length * progress);
+    final completedPaint = Paint()
+      ..shader = LinearGradient(
+        colors: [
+          completedColor.withValues(alpha: 0.55),
+          glowColor.withValues(alpha: 0.95),
+        ],
+      ).createShader(Offset.zero & size)
+      ..strokeWidth = 2.1
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round;
+    canvas.drawPath(completedPath, completedPaint);
+
+    final activePoint = pointFor(
+      size,
+      clampedActiveIndex.round().clamp(0, itemCount - 1),
+      itemCount,
+    );
+    final glowPaint = Paint()
+      ..color = glowColor.withValues(alpha: 0.16)
+      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 14);
+    canvas.drawCircle(activePoint, 24, glowPaint);
   }
 
   @override
   bool shouldRepaint(covariant _PrayerTimelineCurvePainter oldDelegate) {
-    return oldDelegate.color != color;
+    return oldDelegate.itemCount != itemCount ||
+        oldDelegate.activeIndex != activeIndex ||
+        oldDelegate.trackColor != trackColor ||
+        oldDelegate.completedColor != completedColor ||
+        oldDelegate.glowColor != glowColor;
   }
 }
 
