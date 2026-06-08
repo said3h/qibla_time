@@ -2395,7 +2395,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       ),
                       ...List.generate(items.length, (index) {
                         final item = items[index];
-                        final point = _PrayerTimelineCurvePainter.pointFor(
+                        final point = _PrayerTimelineCurvePainter.pointForIndex(
                           Size(constraints.maxWidth, timelineHeight),
                           index,
                           items.length,
@@ -3480,18 +3480,24 @@ class _PrayerTimelineCurvePainter extends CustomPainter {
   final Color completedColor;
   final Color glowColor;
 
-  static Offset pointFor(Size size, int index, int itemCount) {
+  static Offset pointForIndex(Size size, int index, int itemCount) {
     if (itemCount <= 1) {
       return Offset(size.width / 2, size.height * 0.34);
     }
 
-    final safeWidth = math.max(1.0, size.width);
     final t = index / (itemCount - 1);
+    return pointOnArc(size, t);
+  }
+
+  static Offset pointOnArc(Size size, double t) {
+    final safeWidth = math.max(1.0, size.width);
+    final clampedT = t.clamp(0.0, 1.0).toDouble();
     final horizontalPadding = math.min(36.0, safeWidth * 0.1);
-    final x = horizontalPadding + (safeWidth - horizontalPadding * 2) * t;
+    final x =
+        horizontalPadding + (safeWidth - horizontalPadding * 2) * clampedT;
     final baseY = size.height * 0.42;
     final arcHeight = size.height * 0.22;
-    final y = baseY - math.sin(math.pi * t) * arcHeight;
+    final y = baseY - math.sin(math.pi * clampedT) * arcHeight;
     return Offset(x, y);
   }
 
@@ -3499,16 +3505,12 @@ class _PrayerTimelineCurvePainter extends CustomPainter {
     final path = Path();
     if (itemCount <= 0) return path;
 
-    final first = pointFor(size, 0, itemCount);
+    final first = pointOnArc(size, 0);
     path.moveTo(first.dx, first.dy);
-    for (var i = 1; i < itemCount; i++) {
-      final previous = pointFor(size, i - 1, itemCount);
-      final current = pointFor(size, i, itemCount);
-      final control = Offset(
-        (previous.dx + current.dx) / 2,
-        math.min(previous.dy, current.dy) - size.height * 0.035,
-      );
-      path.quadraticBezierTo(control.dx, control.dy, current.dx, current.dy);
+    const segmentCount = 80;
+    for (var i = 1; i <= segmentCount; i++) {
+      final point = pointOnArc(size, i / segmentCount);
+      path.lineTo(point.dx, point.dy);
     }
     return path;
   }
@@ -3557,7 +3559,7 @@ class _PrayerTimelineCurvePainter extends CustomPainter {
       ..strokeCap = StrokeCap.round;
     canvas.drawPath(completedPath, completedPaint);
 
-    final activePoint = pointFor(
+    final activePoint = pointForIndex(
       size,
       clampedActiveIndex.round().clamp(0, itemCount - 1),
       itemCount,
