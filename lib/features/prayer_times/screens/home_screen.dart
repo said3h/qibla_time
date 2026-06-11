@@ -50,8 +50,7 @@ class HomeScreen extends ConsumerStatefulWidget {
   ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends ConsumerState<HomeScreen>
-    with SingleTickerProviderStateMixin {
+class _HomeScreenState extends ConsumerState<HomeScreen> {
   static const _sujudIconAsset =
       'assets/images/prayer_positions/sujud_icon.svg';
 
@@ -67,7 +66,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
   late DateTime _selectedDate;
   late final ScrollController _scrollController;
   late final ScrollController _calendarController;
-  late final AnimationController _timelinePulseController;
 
   @override
   void initState() {
@@ -75,10 +73,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
     _selectedDate = _dateOnly(DateTime.now());
     _scrollController = ScrollController();
     _calendarController = ScrollController(initialScrollOffset: 6 * 62.0);
-    _timelinePulseController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 1600),
-    )..repeat(reverse: true);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(adhanManagerProvider).scheduleTodayAdhans();
     });
@@ -88,7 +82,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
   void dispose() {
     _scrollController.dispose();
     _calendarController.dispose();
-    _timelinePulseController.dispose();
     super.dispose();
   }
 
@@ -2335,6 +2328,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
     final now = DateTime.now();
     final isToday = _isSameDay(date, _dateOnly(now));
     final completedIndex = isToday ? _lastPassedTimelineIndex(items, now) : -1;
+    final highlightedInterval =
+        isToday ? _currentTimelineInterval(items, now) : null;
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
@@ -2362,135 +2357,165 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
 
             return SizedBox(
               height: timelineHeight,
-              child: AnimatedBuilder(
-                animation: _timelinePulseController,
-                builder: (context, _) {
-                  final liveNow = DateTime.now();
-                  final liveIndicatorProgress = isToday
-                      ? _timelineIndicatorProgress(items, liveNow)
-                      : null;
-
-                  return Stack(
-                    clipBehavior: Clip.none,
-                    children: [
-                      Positioned.fill(
-                        child: CustomPaint(
-                          painter: _PrayerTimelineCurvePainter(
-                            itemCount: items.length,
-                            indicatorProgress: liveIndicatorProgress,
-                            pulseValue: _timelinePulseController.value,
-                            trackColor: _blend(
-                              tokens.primary,
-                              tokens.border,
-                              0.16,
-                            ),
-                            glowColor: tokens.primary,
-                            indicatorColor: const Color(0xFFD8A53A),
-                          ),
+              child: Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  Positioned.fill(
+                    child: CustomPaint(
+                      painter: _PrayerTimelineCurvePainter(
+                        itemCount: items.length,
+                        highlightedStartIndex: highlightedInterval?.$1,
+                        highlightedEndIndex: highlightedInterval?.$2,
+                        trackColor: _blend(
+                          tokens.primary,
+                          tokens.border,
+                          0.16,
                         ),
+                        glowColor: tokens.primary,
+                        highlightColor: const Color(0xFFD8A53A),
                       ),
-                      ...List.generate(items.length, (index) {
-                        final item = items[index];
-                        final point = _PrayerTimelineCurvePainter.pointForIndex(
-                          Size(constraints.maxWidth, timelineHeight),
-                          index,
-                          items.length,
-                        );
-                        final isCompleted =
-                            completedIndex >= 0 && index <= completedIndex;
-                        final nodeSize = nodeBaseSize;
-                        final labelWidth = compact ? 58.0 : 68.0;
-                        final labelTop = math.min(
-                          point.dy + nodeSize * 0.55 + 12,
-                          timelineHeight - 45,
-                        );
-                        final emphasis = isCompleted ? 0.42 : 0.72;
-                        final labelColor = isCompleted
+                    ),
+                  ),
+                  ...List.generate(items.length, (index) {
+                    final item = items[index];
+                    final point = _PrayerTimelineCurvePainter.pointForIndex(
+                      Size(constraints.maxWidth, timelineHeight),
+                      index,
+                      items.length,
+                    );
+                    final isHighlighted = highlightedInterval != null &&
+                        (index == highlightedInterval.$1 ||
+                            index == highlightedInterval.$2);
+                    final isCompleted = !isHighlighted &&
+                        completedIndex >= 0 &&
+                        index <= completedIndex;
+                    final nodeSize =
+                        isHighlighted ? (compact ? 36.0 : 40.0) : nodeBaseSize;
+                    final labelWidth = compact ? 58.0 : 68.0;
+                    final labelTop = math.min(
+                      point.dy + nodeSize * 0.55 + 12,
+                      timelineHeight - 45,
+                    );
+                    final emphasis = isHighlighted
+                        ? 1.0
+                        : isCompleted
+                            ? 0.42
+                            : 0.72;
+                    final labelColor = isHighlighted
+                        ? const Color(0xFFD8A53A)
+                        : isCompleted
                             ? tokens.textMuted
                             : tokens.textSecondary;
-                        final timeColor =
-                            isCompleted ? tokens.textMuted : tokens.textPrimary;
+                    final timeColor = isHighlighted
+                        ? const Color(0xFFE9C46A)
+                        : isCompleted
+                            ? tokens.textMuted
+                            : tokens.textPrimary;
 
-                        return Positioned(
-                          left: point.dx - labelWidth / 2,
-                          top: math.max(0, point.dy - nodeSize / 2),
-                          width: labelWidth,
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              AnimatedContainer(
-                                duration: const Duration(milliseconds: 260),
-                                curve: Curves.easeOutCubic,
-                                width: nodeSize,
-                                height: nodeSize,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: _blend(
-                                    tokens.bgSurface,
-                                    tokens.bgSurface2,
-                                    0.64,
-                                  ).withValues(alpha: emphasis),
-                                  border: Border.all(
-                                    color: _blend(
-                                      tokens.textMuted,
-                                      tokens.border,
-                                      0.28,
+                    return Positioned(
+                      left: point.dx - labelWidth / 2,
+                      top: math.max(0, point.dy - nodeSize / 2),
+                      width: labelWidth,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          AnimatedContainer(
+                            duration: const Duration(milliseconds: 260),
+                            curve: Curves.easeOutCubic,
+                            width: nodeSize,
+                            height: nodeSize,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: isHighlighted
+                                  ? _blend(
+                                      const Color(0xFFD8A53A),
+                                      tokens.bgSurface,
+                                      0.18,
+                                    )
+                                  : _blend(
+                                      tokens.bgSurface,
+                                      tokens.bgSurface2,
+                                      0.64,
                                     ).withValues(alpha: emphasis),
-                                    width: 1.2,
-                                  ),
-                                ),
-                                child: Icon(
-                                  item.icon,
-                                  size: compact ? 15 : 17,
-                                  color: labelColor.withValues(
-                                    alpha: emphasis,
-                                  ),
-                                ),
+                              border: Border.all(
+                                color: isHighlighted
+                                    ? const Color(0xFFD8A53A)
+                                    : _blend(
+                                        tokens.textMuted,
+                                        tokens.border,
+                                        0.28,
+                                      ).withValues(alpha: emphasis),
+                                width: isHighlighted ? 1.8 : 1.2,
                               ),
-                              SizedBox(
-                                height: labelTop - point.dy - nodeSize / 2,
+                              boxShadow: isHighlighted
+                                  ? [
+                                      BoxShadow(
+                                        color: const Color(0xFFD8A53A)
+                                            .withValues(alpha: 0.18),
+                                        blurRadius: 18,
+                                        spreadRadius: 1,
+                                      ),
+                                    ]
+                                  : null,
+                            ),
+                            child: Icon(
+                              item.icon,
+                              size: isHighlighted
+                                  ? (compact ? 18 : 20)
+                                  : (compact ? 15 : 17),
+                              color: labelColor.withValues(
+                                alpha: emphasis,
                               ),
-                              AnimatedDefaultTextStyle(
-                                duration: const Duration(milliseconds: 240),
-                                curve: Curves.easeOutCubic,
-                                style: GoogleFonts.dmSans(
-                                  fontSize: compact ? 8.2 : 9.2,
-                                  height: 1.08,
-                                  letterSpacing: 0.6,
-                                  fontWeight: FontWeight.w600,
-                                  color: labelColor,
-                                ),
-                                child: Text(
-                                  item.label,
-                                  maxLines: 2,
-                                  softWrap: true,
-                                  overflow: TextOverflow.visible,
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                              const SizedBox(height: 4),
-                              AnimatedDefaultTextStyle(
-                                duration: const Duration(milliseconds: 240),
-                                curve: Curves.easeOutCubic,
-                                style: GoogleFonts.dmSans(
-                                  fontSize: compact ? 10.5 : 11.5,
-                                  height: 1,
-                                  fontWeight: FontWeight.w600,
-                                  color: timeColor,
-                                ),
-                                child: Text(
-                                  _formatTime(item.time),
-                                  maxLines: 1,
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
-                        );
-                      }),
-                    ],
-                  );
-                },
+                          SizedBox(
+                            height: labelTop - point.dy - nodeSize / 2,
+                          ),
+                          AnimatedDefaultTextStyle(
+                            duration: const Duration(milliseconds: 240),
+                            curve: Curves.easeOutCubic,
+                            style: GoogleFonts.dmSans(
+                              fontSize: compact ? 8.2 : 9.2,
+                              height: 1.08,
+                              letterSpacing: 0.6,
+                              fontWeight: isHighlighted
+                                  ? FontWeight.w800
+                                  : FontWeight.w600,
+                              color: labelColor,
+                            ),
+                            child: Text(
+                              item.label,
+                              maxLines: 2,
+                              softWrap: true,
+                              overflow: TextOverflow.visible,
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          AnimatedDefaultTextStyle(
+                            duration: const Duration(milliseconds: 240),
+                            curve: Curves.easeOutCubic,
+                            style: GoogleFonts.dmSans(
+                              fontSize: isHighlighted
+                                  ? (compact ? 12.5 : 13.5)
+                                  : (compact ? 10.5 : 11.5),
+                              height: 1,
+                              fontWeight: isHighlighted
+                                  ? FontWeight.w800
+                                  : FontWeight.w600,
+                              color: timeColor,
+                            ),
+                            child: Text(
+                              _formatTime(item.time),
+                              maxLines: 1,
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }),
+                ],
               ),
             );
           },
@@ -2508,33 +2533,22 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
     return -1;
   }
 
-  double _timelineIndicatorProgress(
+  (int, int)? _currentTimelineInterval(
     List<_PrayerTimelineItem> items,
     DateTime now,
   ) {
-    if (items.length <= 1) {
-      return 0;
+    if (items.length <= 1 || now.isBefore(items.first.time)) {
+      return null;
     }
 
-    if (now.isBefore(items.first.time)) {
-      return 0;
-    }
-
-    for (var i = 0; i < items.length - 1; i++) {
-      final current = items[i].time;
-      final next = items[i + 1].time;
-      if (now.isBefore(next)) {
-        final interval = next.difference(current).inMilliseconds;
-        if (interval <= 0) {
-          return i / (items.length - 1);
-        }
-        final elapsed = now.difference(current).inMilliseconds;
-        final segmentProgress = (elapsed / interval).clamp(0.0, 1.0);
-        return (i + segmentProgress) / (items.length - 1);
+    for (var index = 0; index < items.length - 1; index++) {
+      if (!now.isBefore(items[index].time) &&
+          now.isBefore(items[index + 1].time)) {
+        return (index, index + 1);
       }
     }
 
-    return 1;
+    return null;
   }
 
   Widget _buildPremiumPrayerSection(
@@ -3388,19 +3402,19 @@ class _PrayerTimelineItem {
 class _PrayerTimelineCurvePainter extends CustomPainter {
   const _PrayerTimelineCurvePainter({
     required this.itemCount,
-    required this.indicatorProgress,
-    required this.pulseValue,
+    required this.highlightedStartIndex,
+    required this.highlightedEndIndex,
     required this.trackColor,
     required this.glowColor,
-    required this.indicatorColor,
+    required this.highlightColor,
   });
 
   final int itemCount;
-  final double? indicatorProgress;
-  final double pulseValue;
+  final int? highlightedStartIndex;
+  final int? highlightedEndIndex;
   final Color trackColor;
   final Color glowColor;
-  final Color indicatorColor;
+  final Color highlightColor;
 
   static Offset pointForIndex(Size size, int index, int itemCount) {
     if (itemCount <= 1) {
@@ -3459,43 +3473,49 @@ class _PrayerTimelineCurvePainter extends CustomPainter {
       ..drawPath(path, shadowPaint)
       ..drawPath(path, trackPaint);
 
-    final progress = indicatorProgress;
-    if (progress == null) return;
+    final startIndex = highlightedStartIndex;
+    final endIndex = highlightedEndIndex;
+    if (startIndex == null || endIndex == null) return;
 
-    final clampedProgress = progress.clamp(0.0, 1.0).toDouble();
     final pathMetrics = path.computeMetrics().toList(growable: false);
     if (pathMetrics.isEmpty) return;
 
     final metric = pathMetrics.first;
-    final activePoint =
-        metric.getTangentForOffset(metric.length * clampedProgress)?.position ??
-            pointOnArc(size, clampedProgress);
-    final pulseRadius = 12 + pulseValue * 9;
-    final glowPaint = Paint()
-      ..color = indicatorColor.withValues(alpha: 0.16 - pulseValue * 0.06)
-      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 10);
-    final haloPaint = Paint()
-      ..color = indicatorColor.withValues(alpha: 0.18 - pulseValue * 0.08)
+    final clampedStart = startIndex.clamp(0, itemCount - 1);
+    final clampedEnd = endIndex.clamp(0, itemCount - 1);
+    if (clampedStart == clampedEnd) return;
+
+    final startProgress = clampedStart / (itemCount - 1);
+    final endProgress = clampedEnd / (itemCount - 1);
+    final highlightedPath = metric.extractPath(
+      metric.length * math.min(startProgress, endProgress),
+      metric.length * math.max(startProgress, endProgress),
+    );
+    final highlightGlowPaint = Paint()
+      ..color = highlightColor.withValues(alpha: 0.16)
+      ..strokeWidth = 9
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 1.4;
-    final dotPaint = Paint()..color = indicatorColor;
-    final corePaint = Paint()..color = Colors.white.withValues(alpha: 0.78);
+      ..strokeCap = StrokeCap.round
+      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 10);
+    final highlightPaint = Paint()
+      ..color = highlightColor
+      ..strokeWidth = 3
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round;
 
     canvas
-      ..drawCircle(activePoint, pulseRadius, glowPaint)
-      ..drawCircle(activePoint, 8 + pulseValue * 3, haloPaint)
-      ..drawCircle(activePoint, 5.2, dotPaint)
-      ..drawCircle(activePoint, 2.0, corePaint);
+      ..drawPath(highlightedPath, highlightGlowPaint)
+      ..drawPath(highlightedPath, highlightPaint);
   }
 
   @override
   bool shouldRepaint(covariant _PrayerTimelineCurvePainter oldDelegate) {
     return oldDelegate.itemCount != itemCount ||
-        oldDelegate.indicatorProgress != indicatorProgress ||
-        oldDelegate.pulseValue != pulseValue ||
+        oldDelegate.highlightedStartIndex != highlightedStartIndex ||
+        oldDelegate.highlightedEndIndex != highlightedEndIndex ||
         oldDelegate.trackColor != trackColor ||
         oldDelegate.glowColor != glowColor ||
-        oldDelegate.indicatorColor != indicatorColor;
+        oldDelegate.highlightColor != highlightColor;
   }
 }
 
