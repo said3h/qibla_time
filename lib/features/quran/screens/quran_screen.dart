@@ -55,7 +55,19 @@ bool shouldReplaceQuranDetailForPlaybackSurah({
 bool looksLikeQuranReferenceQuery(String query) {
   final trimmed = query.trim();
   return RegExp(r'^\d{1,3}\s*[:/]\s*\d{1,3}$').hasMatch(trimmed) ||
+      RegExp(r'^\d{1,3}\s*[:/]\s*$').hasMatch(trimmed) ||
       RegExp(r'^\d{1,3}\s+\d{1,3}$').hasMatch(trimmed);
+}
+
+@visibleForTesting
+int? partialQuranReferenceSurahNumber(String query) {
+  final match = RegExp(r'^\s*(\d{1,3})\s*[:/]\s*$').firstMatch(query);
+  if (match == null) return null;
+  final surahNumber = int.tryParse(match.group(1) ?? '');
+  if (surahNumber == null || surahNumber < 1 || surahNumber > 114) {
+    return null;
+  }
+  return surahNumber;
 }
 
 @visibleForTesting
@@ -114,6 +126,17 @@ class _QuranScreenState extends ConsumerState<QuranScreen> {
   List<SurahSummary> _filterSurahs(List<SurahSummary> surahs) {
     final query = _searchQuery.trim();
     if (query.isEmpty) return surahs;
+
+    final partialReferenceSurah = partialQuranReferenceSurahNumber(query);
+    if (partialReferenceSurah != null) {
+      return surahs
+          .where((surah) => surah.number == partialReferenceSurah)
+          .toList();
+    }
+
+    if (looksLikeQuranReferenceQuery(query)) {
+      return const <SurahSummary>[];
+    }
 
     final queryLower = query.toLowerCase();
     final queryNumber = int.tryParse(query);
@@ -177,6 +200,7 @@ class _QuranScreenState extends ConsumerState<QuranScreen> {
             const <int>{};
     final filteredSurahs = _filterSurahs(surahs);
     final quranReference = parseQuranReferenceQuery(_searchQuery, surahs);
+    final isReferenceSearch = looksLikeQuranReferenceQuery(_searchQuery);
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
@@ -315,6 +339,8 @@ class _QuranScreenState extends ConsumerState<QuranScreen> {
                 summary: _summaryFor(surahs, quranReference.surahNumber),
                 onTap: () => _openQuranReference(quranReference, surahs),
               )
+            else if (isReferenceSearch && filteredSurahs.isEmpty)
+              _QuranReferenceInvalidResult(tokens: tokens)
             else if (filteredSurahs.isEmpty)
               _QuranSearchEmpty(tokens: tokens)
             else
@@ -474,6 +500,40 @@ class _QuranSearchEmpty extends StatelessWidget {
               color: tokens.textSecondary,
             ),
             textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _QuranReferenceInvalidResult extends StatelessWidget {
+  const _QuranReferenceInvalidResult({required this.tokens});
+
+  final QiblaTokens tokens;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 8),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: tokens.bgSurface,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: tokens.border),
+      ),
+      child: Row(
+        children: [
+          Icon(Icons.info_outline_rounded, color: tokens.textMuted),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Text(
+              'Enter a valid reference like 2:255.',
+              style: GoogleFonts.dmSans(
+                fontSize: 13,
+                color: tokens.textSecondary,
+              ),
+            ),
           ),
         ],
       ),

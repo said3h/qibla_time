@@ -255,12 +255,14 @@ class QuranService {
     final normalizedLanguage = _normalizeLanguageCode(languageCode);
     final translationEdition = _translationEditionFor(normalizedLanguage);
 
-    // Petición paralela: árabe Uthmani Quran.com + traducción según idioma + transliteración
+    // Petición paralela: árabe Uthmani simple para display + traducción
+    // según idioma + transliteración. El texto Uthmani completo puede incluir
+    // marcas que algunas fuentes iOS renderizan como bloques vacíos.
     final responses = await Future.wait([
       http
           .get(
             Uri.parse(
-              '$_quranComBaseUrl/quran/verses/uthmani?chapter_number=${summary.number}',
+              '$_quranComBaseUrl/quran/verses/uthmani_simple?chapter_number=${summary.number}',
             ),
           )
           .timeout(const Duration(seconds: _timeoutSeconds)),
@@ -283,6 +285,7 @@ class QuranService {
     final arabicAyahs = _decodeQuranComUthmaniAyahs(
       responses[0].bodyBytes,
       context: 'árabe',
+      textKey: 'text_uthmani_simple',
     );
     final tajweedAyahs = await _fetchTajweedAyahs(summary);
 

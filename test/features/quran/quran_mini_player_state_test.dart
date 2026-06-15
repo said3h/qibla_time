@@ -258,6 +258,20 @@ void main() {
     });
   });
 
+  group('partialQuranReferenceSurahNumber', () {
+    test('recognizes an unfinished surah reference', () {
+      expect(partialQuranReferenceSurahNumber('2:'), 2);
+      expect(partialQuranReferenceSurahNumber('2: '), 2);
+      expect(partialQuranReferenceSurahNumber('112/'), 112);
+    });
+
+    test('rejects invalid unfinished references', () {
+      expect(partialQuranReferenceSurahNumber('115:'), isNull);
+      expect(partialQuranReferenceSurahNumber('baqarah:'), isNull);
+      expect(partialQuranReferenceSurahNumber('2:255'), isNull);
+    });
+  });
+
   group('shouldApplySavedQuranViewMode', () {
     test('does not apply the saved mode after a manual toggle', () {
       expect(
