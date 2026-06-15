@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -18,16 +19,22 @@ final quranWordsForSurahProvider =
 class QuranWordService {
   QuranWordService({
     AssetBundle? assetBundle,
-    this.assetPath = 'assets/data/quran_words_sample.json',
+    this.surahAssetDirectory = 'assets/data/quran_words',
+    this.fallbackAssetPath = 'assets/data/quran_words_sample.json',
   }) : _assetBundle = assetBundle ?? rootBundle;
 
   final AssetBundle _assetBundle;
-  final String assetPath;
-  Map<int, Map<int, List<QuranWord>>>? _cache;
+  final String surahAssetDirectory;
+  final String fallbackAssetPath;
+  final Map<int, Map<int, List<QuranWord>>> _surahCache = {};
 
   Future<Map<int, List<QuranWord>>> wordsForSurah(int surahNumber) async {
-    final cache = await _loadCache();
-    return cache[surahNumber] ?? const {};
+    final cached = _surahCache[surahNumber];
+    if (cached != null) return cached;
+
+    final words = await _loadSurahWords(surahNumber);
+    _surahCache[surahNumber] = words;
+    return words;
   }
 
   Future<List<QuranWord>> wordsForAyah({
@@ -38,36 +45,39 @@ class QuranWordService {
     return surahWords[ayahNumber] ?? const [];
   }
 
-  Future<Map<int, Map<int, List<QuranWord>>>> _loadCache() async {
-    final existing = _cache;
-    if (existing != null) return existing;
-
-    final raw = await _assetBundle.loadString(assetPath);
+  Future<Map<int, List<QuranWord>>> _loadSurahWords(int surahNumber) async {
+    final raw = await _loadSurahAsset(surahNumber);
     final decoded = jsonDecode(raw);
     final entries = decoded is Map ? decoded['words'] : null;
     if (entries is! List) {
-      _cache = const {};
-      return _cache!;
+      return const {};
     }
 
-    final cache = <int, Map<int, List<QuranWord>>>{};
+    final ayahWords = <int, List<QuranWord>>{};
     for (final entry in entries) {
       if (entry is! Map) continue;
-      final word = QuranWord.fromJson(Map<String, dynamic>.from(entry));
-      cache
-          .putIfAbsent(word.surahNumber, () => <int, List<QuranWord>>{})
-          .putIfAbsent(word.ayahNumber, () => <QuranWord>[])
-          .add(word);
+      final wordJson = Map<String, dynamic>.from(entry);
+      wordJson['surahNumber'] ??= surahNumber;
+      final word = QuranWord.fromJson(wordJson);
+      if (word.surahNumber != surahNumber) continue;
+      ayahWords.putIfAbsent(word.ayahNumber, () => <QuranWord>[]).add(word);
     }
 
-    for (final ayahs in cache.values) {
-      for (final words in ayahs.values) {
-        words.sort((a, b) => a.position.compareTo(b.position));
-      }
+    for (final words in ayahWords.values) {
+      words.sort((a, b) => a.position.compareTo(b.position));
     }
 
-    _cache = cache;
-    return cache;
+    return ayahWords;
+  }
+
+  Future<String> _loadSurahAsset(int surahNumber) async {
+    final path =
+        '$surahAssetDirectory/surah_${surahNumber.toString().padLeft(3, '0')}.json';
+    try {
+      return await _assetBundle.loadString(path);
+    } on FlutterError {
+      return _assetBundle.loadString(fallbackAssetPath);
+    }
   }
 }
 

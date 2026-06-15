@@ -1,0 +1,24 @@
+{
+  "metadata": {
+    "sampleDev": true,
+    "note": "Pilot word segmentation only. Translations are intentionally empty until reviewed source data is imported."
+  },
+  "surahNumber": 112,
+  "words": [
+    { "ayahNumber": 1, "position": 1, "arabic": "قُلْ", "transliteration": "", "translations": {} },
+    { "ayahNumber": 1, "position": 2, "arabic": "هُوَ", "transliteration": "", "translations": {} },
+    { "ayahNumber": 1, "position": 3, "arabic": "اللَّهُ", "transliteration": "", "translations": {} },
+    { "ayahNumber": 1, "position": 4, "arabic": "أَحَدٌ", "transliteration": "", "translations": {} },
+    { "ayahNumber": 2, "position": 1, "arabic": "اللَّهُ", "transliteration": "", "translations": {} },
+    { "ayahNumber": 2, "position": 2, "arabic": "الصَّمَدُ", "transliteration": "", "translations": {} },
+    { "ayahNumber": 3, "position": 1, "arabic": "لَمْ", "transliteration": "", "translations": {} },
+    { "ayahNumber": 3, "position": 2, "arabic": "يَلِدْ", "transliteration": "", "translations": {} },
+    { "ayahNumber": 3, "position": 3, "arabic": "وَلَمْ", "transliteration": "", "translations": {} },
+    { "ayahNumber": 3, "position": 4, "arabic": "يُولَدْ", "transliteration": "", "translations": {} },
+    { "ayahNumber": 4, "position": 1, "arabic": "وَلَمْ", "transliteration": "", "translations": {} },
+    { "ayahNumber": 4, "position": 2, "arabic": "يَكُن", "transliteration": "", "translations": {} },
+    { "ayahNumber": 4, "position": 3, "arabic": "لَّهُ", "transliteration": "", "translations": {} },
+    { "ayahNumber": 4, "position": 4, "arabic": "كُفُوًا", "transliteration": "", "translations": {} },
+    { "ayahNumber": 4, "position": 5, "arabic": "أَحَدٌ", "transliteration": "", "translations": {} }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "metadata": {
+    "sampleDev": true,
+    "note": "Pilot word segmentation only. Translations are intentionally empty until reviewed source data is imported."
+  },
+  "surahNumber": 114,
+  "words": [
+    { "ayahNumber": 1, "position": 1, "arabic": "قُلْ", "transliteration": "", "translations": {} },
+    { "ayahNumber": 1, "position": 2, "arabic": "أَعُوذُ", "transliteration": "", "translations": {} },
+    { "ayahNumber": 1, "position": 3, "arabic": "بِرَبِّ", "transliteration": "", "translations": {} },
+    { "ayahNumber": 1, "position": 4, "arabic": "النَّاسِ", "transliteration": "", "translations": {} },
+    { "ayahNumber": 2, "position": 1, "arabic": "مَلِكِ", "transliteration": "", "translations": {} },
+    { "ayahNumber": 2, "position": 2, "arabic": "النَّاسِ", "transliteration": "", "translations": {} },
+    { "ayahNumber": 3, "position": 1, "arabic": "إِلَٰهِ", "transliteration": "", "translations": {} },
+    { "ayahNumber": 3, "position": 2, "arabic": "النَّاسِ", "transliteration": "", "translations": {} },
+    { "ayahNumber": 4, "position": 1, "arabic": "مِن", "transliteration": "", "translations": {} },
+    { "ayahNumber": 4, "position": 2, "arabic": "شَرِّ", "transliteration": "", "translations": {} },
+    { "ayahNumber": 4, "position": 3, "arabic": "الْوَسْوَاسِ", "transliteration": "", "translations": {} },
+    { "ayahNumber": 4, "position": 4, "arabic": "الْخَنَّاسِ", "transliteration": "", "translations": {} },
+    { "ayahNumber": 5, "position": 1, "arabic": "الَّذِي", "transliteration": "", "translations": {} },
+    { "ayahNumber": 5, "position": 2, "arabic": "يُوَسْوِسُ", "transliteration": "", "translations": {} },
+    { "ayahNumber": 5, "position": 3, "arabic": "فِي", "transliteration": "", "translations": {} },
+    { "ayahNumber": 5, "position": 4, "arabic": "صُدُورِ", "transliteration": "", "translations": {} },
+    { "ayahNumber": 5, "position": 5, "arabic": "النَّاسِ", "transliteration": "", "translations": {} },
+    { "ayahNumber": 6, "position": 1, "arabic": "مِنَ", "transliteration": "", "translations": {} },
+    { "ayahNumber": 6, "position": 2, "arabic": "الْجِنَّةِ", "transliteration": "", "translations": {} },
+    { "ayahNumber": 6, "position": 3, "arabic": "وَالنَّاسِ", "transliteration": "", "translations": {} }
+  ]
+}
