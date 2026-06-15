@@ -258,6 +258,35 @@ void main() {
     });
   });
 
+  group('shouldApplySavedQuranViewMode', () {
+    test('does not apply the saved mode after a manual toggle', () {
+      expect(
+        shouldApplySavedQuranViewMode(
+          userChangedViewMode: true,
+          mounted: true,
+        ),
+        isFalse,
+      );
+    });
+
+    test('applies the saved mode only while mounted and untouched', () {
+      expect(
+        shouldApplySavedQuranViewMode(
+          userChangedViewMode: false,
+          mounted: true,
+        ),
+        isTrue,
+      );
+      expect(
+        shouldApplySavedQuranViewMode(
+          userChangedViewMode: false,
+          mounted: false,
+        ),
+        isFalse,
+      );
+    });
+  });
+
   group('QuranWord', () {
     test('returns requested translation with English fallback', () {
       const word = QuranWord(

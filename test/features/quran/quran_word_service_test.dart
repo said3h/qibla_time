@@ -78,6 +78,17 @@ void main() {
       ]);
     });
 
+    test('returns empty words when surah and fallback assets are missing',
+        () async {
+      final service = QuranWordService(
+        assetBundle: _FakeQuranWordAssetBundle(const {}),
+      );
+
+      final wordsByAyah = await service.wordsForSurah(2);
+
+      expect(wordsByAyah, isEmpty);
+    });
+
     test('caches each requested surah without loading unrelated surahs',
         () async {
       final bundle = _FakeQuranWordAssetBundle({

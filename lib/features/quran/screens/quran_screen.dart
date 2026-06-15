@@ -58,6 +58,14 @@ bool looksLikeQuranReferenceQuery(String query) {
       RegExp(r'^\d{1,3}\s+\d{1,3}$').hasMatch(trimmed);
 }
 
+@visibleForTesting
+bool shouldApplySavedQuranViewMode({
+  required bool userChangedViewMode,
+  required bool mounted,
+}) {
+  return mounted && !userChangedViewMode;
+}
+
 QuranReference? parseQuranReferenceQuery(
   String query,
   List<SurahSummary> surahs,
@@ -1041,6 +1049,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   final TextEditingController _ayahJumpController = TextEditingController();
   final AudioService _audioService = AudioService.instance;
   bool _isPageView = false;
+  bool _userChangedViewMode = false;
   bool _initialJumpDone = false;
   bool _initialReadingSaved = false;
   SurahAudioDownloadState? _downloadState;
@@ -1074,16 +1083,23 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   Future<void> _loadViewMode() async {
     final prefs = await SharedPreferences.getInstance();
     final saved = prefs.getBool(_kQuranViewModeKey);
-    if (mounted) {
-      setState(() {
-        _isPageView = saved ?? false;
-      });
+    if (!shouldApplySavedQuranViewMode(
+      userChangedViewMode: _userChangedViewMode,
+      mounted: mounted,
+    )) {
+      return;
     }
+    setState(() {
+      _isPageView = saved ?? false;
+    });
   }
 
   Future<void> _toggleViewMode() async {
     final newValue = !_isPageView;
-    setState(() => _isPageView = newValue);
+    setState(() {
+      _userChangedViewMode = true;
+      _isPageView = newValue;
+    });
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(_kQuranViewModeKey, newValue);
   }

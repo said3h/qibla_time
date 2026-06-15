@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -47,7 +46,14 @@ class QuranWordService {
 
   Future<Map<int, List<QuranWord>>> _loadSurahWords(int surahNumber) async {
     final raw = await _loadSurahAsset(surahNumber);
-    final decoded = jsonDecode(raw);
+    if (raw == null) return const {};
+
+    final dynamic decoded;
+    try {
+      decoded = jsonDecode(raw);
+    } catch (_) {
+      return const {};
+    }
     final entries = decoded is Map ? decoded['words'] : null;
     if (entries is! List) {
       return const {};
@@ -70,13 +76,17 @@ class QuranWordService {
     return ayahWords;
   }
 
-  Future<String> _loadSurahAsset(int surahNumber) async {
+  Future<String?> _loadSurahAsset(int surahNumber) async {
     final path =
         '$surahAssetDirectory/surah_${surahNumber.toString().padLeft(3, '0')}.json';
     try {
       return await _assetBundle.loadString(path);
-    } on FlutterError {
-      return _assetBundle.loadString(fallbackAssetPath);
+    } catch (_) {
+      try {
+        return await _assetBundle.loadString(fallbackAssetPath);
+      } catch (_) {
+        return null;
+      }
     }
   }
 }
