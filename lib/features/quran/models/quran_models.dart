@@ -36,6 +36,57 @@ class SurahAyah {
   });
 }
 
+class QuranReference {
+  const QuranReference({
+    required this.surahNumber,
+    required this.ayahNumber,
+  });
+
+  final int surahNumber;
+  final int ayahNumber;
+}
+
+class QuranWord {
+  const QuranWord({
+    required this.surahNumber,
+    required this.ayahNumber,
+    required this.position,
+    required this.arabic,
+    required this.transliteration,
+    required this.translations,
+  });
+
+  final int surahNumber;
+  final int ayahNumber;
+  final int position;
+  final String arabic;
+  final String transliteration;
+  final Map<String, String> translations;
+
+  String translationFor(String languageCode) {
+    final normalized = languageCode.trim().toLowerCase().split('_').first;
+    return translations[normalized] ??
+        translations['en'] ??
+        (translations.isEmpty ? '' : translations.values.first);
+  }
+
+  factory QuranWord.fromJson(Map<String, dynamic> json) {
+    final rawTranslations = json['translations'];
+    return QuranWord(
+      surahNumber: json['surahNumber'] as int,
+      ayahNumber: json['ayahNumber'] as int,
+      position: json['position'] as int,
+      arabic: json['arabic'] as String? ?? '',
+      transliteration: json['transliteration'] as String? ?? '',
+      translations: rawTranslations is Map
+          ? rawTranslations.map(
+              (key, value) => MapEntry(key.toString(), value.toString()),
+            )
+          : const {},
+    );
+  }
+}
+
 class SurahDetail {
   final SurahSummary summary;
   final List<SurahAyah> ayahs;

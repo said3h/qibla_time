@@ -28,6 +28,8 @@ class QuranContinuousView extends StatefulWidget {
     required this.ayahs,
     required this.surahNumber,
     this.currentAyahIndex,
+    this.manualScrollAyahIndex,
+    this.manualScrollRequestId = 0,
     this.showTajweed = false,
     this.enableAutoScroll = true,
     this.header,
@@ -37,6 +39,8 @@ class QuranContinuousView extends StatefulWidget {
   final List<SurahAyah> ayahs;
   final int surahNumber;
   final int? currentAyahIndex;
+  final int? manualScrollAyahIndex;
+  final int manualScrollRequestId;
   final bool showTajweed;
   final bool enableAutoScroll;
 
@@ -80,6 +84,12 @@ class _QuranContinuousViewState extends State<QuranContinuousView> {
       _lastAutoScrolledAyahIndex = null;
       _scheduleAutoScroll();
     }
+    if (oldWidget.manualScrollRequestId != widget.manualScrollRequestId) {
+      _scheduleAutoScroll(
+        targetAyahIndex: widget.manualScrollAyahIndex,
+        force: true,
+      );
+    }
   }
 
   @override
@@ -88,16 +98,19 @@ class _QuranContinuousViewState extends State<QuranContinuousView> {
     super.dispose();
   }
 
-  void _scheduleAutoScroll() {
-    if (!widget.enableAutoScroll) {
+  void _scheduleAutoScroll({
+    int? targetAyahIndex,
+    bool force = false,
+  }) {
+    if (!force && !widget.enableAutoScroll) {
       return;
     }
 
-    final currentAyahIndex = widget.currentAyahIndex;
+    final currentAyahIndex = targetAyahIndex ?? widget.currentAyahIndex;
     if (currentAyahIndex == null ||
         currentAyahIndex < 0 ||
         currentAyahIndex >= widget.ayahs.length ||
-        currentAyahIndex == _lastAutoScrolledAyahIndex) {
+        (!force && currentAyahIndex == _lastAutoScrolledAyahIndex)) {
       return;
     }
 

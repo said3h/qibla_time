@@ -27,6 +27,8 @@ class QuranAyahCard extends StatelessWidget {
     this.showTafsirAction = false,
     this.isTafsirOpen = false,
     this.onToggleTafsir,
+    this.words = const [],
+    this.onWordTap,
     this.margin = const EdgeInsets.only(bottom: 10),
   });
 
@@ -48,6 +50,8 @@ class QuranAyahCard extends StatelessWidget {
   final bool showTafsirAction;
   final bool isTafsirOpen;
   final VoidCallback? onToggleTafsir;
+  final List<QuranWord> words;
+  final ValueChanged<QuranWord>? onWordTap;
   final EdgeInsets margin;
 
   Widget _buildArabicText(BuildContext context) {
@@ -55,6 +59,10 @@ class QuranAyahCard extends StatelessWidget {
       fontSize: 22,
       height: 1.8,
     );
+
+    if (words.isNotEmpty && onWordTap != null) {
+      return _buildWordByWordArabicText(style);
+    }
 
     if (!showTajweed || ayah.tajweedHtml.trim().isEmpty) {
       return _buildPlainArabicText(style);
@@ -95,6 +103,40 @@ class QuranAyahCard extends StatelessWidget {
           textAlign: TextAlign.right,
           textDirection: TextDirection.rtl,
           style: style,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildWordByWordArabicText(TextStyle style) {
+    return SizedBox(
+      width: double.infinity,
+      child: Directionality(
+        textDirection: TextDirection.rtl,
+        child: Wrap(
+          alignment: WrapAlignment.end,
+          textDirection: TextDirection.rtl,
+          spacing: 4,
+          runSpacing: 6,
+          children: words.map((word) {
+            return InkWell(
+              borderRadius: BorderRadius.circular(8),
+              onTap: () => onWordTap?.call(word),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 2),
+                child: Text(
+                  word.arabic,
+                  textDirection: TextDirection.rtl,
+                  style: style.copyWith(
+                    color: tokens.primaryLight,
+                    decoration: TextDecoration.underline,
+                    decorationColor: tokens.primary.withValues(alpha: 0.45),
+                    decorationThickness: 0.8,
+                  ),
+                ),
+              ),
+            );
+          }).toList(),
         ),
       ),
     );

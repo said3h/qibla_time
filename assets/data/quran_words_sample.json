@@ -1,0 +1,84 @@
+{
+  "words": [
+    {
+      "surahNumber": 1,
+      "ayahNumber": 1,
+      "position": 1,
+      "arabic": "بِسْمِ",
+      "transliteration": "Bismi",
+      "translations": {
+        "ar": "باسم",
+        "en": "In the name",
+        "es": "En el nombre",
+        "fr": "Au nom",
+        "de": "Im Namen",
+        "id": "Dengan nama",
+        "it": "Nel nome",
+        "nl": "In de naam",
+        "pt": "Em nome",
+        "ru": "Во имя",
+        "tr": "Adıyla"
+      }
+    },
+    {
+      "surahNumber": 1,
+      "ayahNumber": 1,
+      "position": 2,
+      "arabic": "اللَّهِ",
+      "transliteration": "Allahi",
+      "translations": {
+        "ar": "الله",
+        "en": "of Allah",
+        "es": "de Allah",
+        "fr": "d'Allah",
+        "de": "Allahs",
+        "id": "Allah",
+        "it": "di Allah",
+        "nl": "van Allah",
+        "pt": "de Allah",
+        "ru": "Аллаха",
+        "tr": "Allah'ın"
+      }
+    },
+    {
+      "surahNumber": 1,
+      "ayahNumber": 1,
+      "position": 3,
+      "arabic": "الرَّحْمَٰنِ",
+      "transliteration": "Ar-Rahmani",
+      "translations": {
+        "ar": "الرحمن",
+        "en": "the Most Compassionate",
+        "es": "el Compasivo",
+        "fr": "le Tout Miséricordieux",
+        "de": "des Allerbarmers",
+        "id": "Yang Maha Pengasih",
+        "it": "il Compassionevole",
+        "nl": "de Meest Barmhartige",
+        "pt": "o Misericordioso",
+        "ru": "Милостивого",
+        "tr": "Rahman"
+      }
+    },
+    {
+      "surahNumber": 1,
+      "ayahNumber": 1,
+      "position": 4,
+      "arabic": "الرَّحِيمِ",
+      "transliteration": "Ar-Rahim",
+      "translations": {
+        "ar": "الرحيم",
+        "en": "the Most Merciful",
+        "es": "el Misericordioso",
+        "fr": "le Très Miséricordieux",
+        "de": "des Barmherzigen",
+        "id": "Yang Maha Penyayang",
+        "it": "il Misericordioso",
+        "nl": "de Meest Genadevolle",
+        "pt": "o Misericordioso",
+        "ru": "Милующего",
+        "tr": "Rahim"
+      }
+    }
+  ]
+}

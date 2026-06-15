@@ -5,6 +5,44 @@ import 'package:qibla_time/features/quran/services/quran_mini_player_service.dar
 import 'package:qibla_time/features/quran/widgets/quran_continuous_view.dart';
 
 void main() {
+  const testSurahs = [
+    SurahSummary(
+      number: 1,
+      nameArabic: 'الفاتحة',
+      nameLatin: 'Al-Fatiha',
+      revelationType: 'Meccan',
+      ayahCount: 7,
+    ),
+    SurahSummary(
+      number: 2,
+      nameArabic: 'البقرة',
+      nameLatin: 'Al-Baqarah',
+      revelationType: 'Medinan',
+      ayahCount: 286,
+    ),
+    SurahSummary(
+      number: 18,
+      nameArabic: 'الكهف',
+      nameLatin: 'Al-Kahf',
+      revelationType: 'Meccan',
+      ayahCount: 110,
+    ),
+    SurahSummary(
+      number: 36,
+      nameArabic: 'يس',
+      nameLatin: 'Ya-Sin',
+      revelationType: 'Meccan',
+      ayahCount: 83,
+    ),
+    SurahSummary(
+      number: 112,
+      nameArabic: 'الإخلاص',
+      nameLatin: 'Al-Ikhlas',
+      revelationType: 'Meccan',
+      ayahCount: 4,
+    ),
+  ];
+
   group('QuranMiniPlayerState', () {
     test('idle state is not visible', () {
       const state = QuranMiniPlayerState.idle();
@@ -196,6 +234,46 @@ void main() {
         ),
         isTrue,
       );
+    });
+  });
+
+  group('parseQuranReferenceQuery', () {
+    test('accepts common surah ayah reference formats', () {
+      final references = ['2:255', '2: 255', '2/255', '2 255'];
+
+      for (final value in references) {
+        final reference = parseQuranReferenceQuery(value, testSurahs);
+        expect(reference?.surahNumber, 2);
+        expect(reference?.ayahNumber, 255);
+      }
+    });
+
+    test('validates that the ayah exists in the surah', () {
+      expect(parseQuranReferenceQuery('1:1', testSurahs)?.ayahNumber, 1);
+      expect(parseQuranReferenceQuery('18:10', testSurahs)?.ayahNumber, 10);
+      expect(parseQuranReferenceQuery('36:1', testSurahs)?.ayahNumber, 1);
+      expect(parseQuranReferenceQuery('112:4', testSurahs)?.ayahNumber, 4);
+      expect(parseQuranReferenceQuery('112:5', testSurahs), isNull);
+      expect(parseQuranReferenceQuery('115:1', testSurahs), isNull);
+    });
+  });
+
+  group('QuranWord', () {
+    test('returns requested translation with English fallback', () {
+      const word = QuranWord(
+        surahNumber: 1,
+        ayahNumber: 1,
+        position: 1,
+        arabic: 'بِسْمِ',
+        transliteration: 'Bismi',
+        translations: {
+          'en': 'In the name',
+          'es': 'En el nombre',
+        },
+      );
+
+      expect(word.translationFor('es'), 'En el nombre');
+      expect(word.translationFor('fr'), 'In the name');
     });
   });
 }
