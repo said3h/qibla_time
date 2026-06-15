@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -204,6 +205,17 @@ class _PanelSuccess extends StatefulWidget {
 class _PanelSuccessState extends State<_PanelSuccess> {
   bool _showFullText = false;
 
+  Future<void> _copyTafsirText(String text) async {
+    await Clipboard.setData(ClipboardData(text: text));
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Tafsir copied'),
+        duration: Duration(seconds: 2),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final tokens = widget.tokens;
@@ -227,12 +239,16 @@ class _PanelSuccessState extends State<_PanelSuccess> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(
-              visibleText,
-              style: GoogleFonts.dmSans(
-                color: tokens.textSecondary,
-                height: 1.56,
-                fontSize: 14,
+            GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onLongPress: () => _copyTafsirText(text),
+              child: Text(
+                visibleText,
+                style: GoogleFonts.dmSans(
+                  color: tokens.textSecondary,
+                  height: 1.56,
+                  fontSize: 14,
+                ),
               ),
             ),
             if (isLong) ...[

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:qibla_time/core/theme/app_theme.dart';
@@ -93,6 +94,58 @@ void main() {
     expect(find.text('Fake Tafsir'), findsNothing);
     expect(find.text('Cached tafsir body.'), findsOneWidget);
     expect(find.text('Source: cache'), findsNothing);
+  });
+
+  testWidgets('TafsirPanel copies full tafsir text on long press',
+      (tester) async {
+    const tafsirText = 'The real tafsir body only.';
+    String? copiedText;
+    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+      SystemChannels.platform,
+      (call) async {
+        if (call.method == 'Clipboard.setData') {
+          final arguments = call.arguments as Map<dynamic, dynamic>;
+          copiedText = arguments['text'] as String?;
+        }
+        return null;
+      },
+    );
+    addTearDown(() {
+      tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+        SystemChannels.platform,
+        null,
+      );
+    });
+
+    await tester.pumpWidget(
+      _wrapPanel(
+        overrides: [
+          tafsirEntryProvider.overrideWith(
+            (ref, request) async => const TafsirLoadResult(
+              source: TafsirLoadSource.api,
+              entry: TafsirEntry(
+                tafsirId: '169',
+                resourceName: 'Fake Tafsir',
+                languageCode: 'en',
+                surahNumber: 2,
+                ayahNumber: 255,
+                text: tafsirText,
+                source: 'test-source',
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+    await tester.pump();
+
+    await tester.longPress(find.text(tafsirText));
+    await tester.pump();
+
+    expect(copiedText, tafsirText);
+    expect(find.text('Tafsir copied'), findsOneWidget);
+    expect(copiedText, isNot(contains('test-source')));
+    expect(copiedText, isNot(contains('Fake Tafsir')));
   });
 
   testWidgets('TafsirPanel truncates long tafsir until read more is tapped',
