@@ -269,13 +269,20 @@ void main() {
       expect(result.entry!.languageCode, 'fr');
     });
 
-    test('does not fallback to Spanish when QUL language has no resource',
-        () async {
-      var didCallApi = false;
+    test('falls back to Spanish when QUL language has no resource', () async {
+      late http.Request capturedRequest;
       final apiClient = TafsirApiClient(
         httpClient: MockClient((request) async {
-          didCallApi = true;
-          return http.Response('', 200);
+          capturedRequest = request;
+          return http.Response(
+            '''
+              <h1>Spanish Abridged Explanation of the Quran</h1>
+              <h2>Spanish Abridged Explanation of the Quran tafsir for Surah Al-Fatihah - Ayah 1</h2>
+              <div class="tafsir spanish">Texto de tafsir.</div>
+            ''',
+            200,
+            headers: const {'content-type': 'text/html; charset=utf-8'},
+          );
         }),
         baseUri: Uri.parse('https://qul.tarteel.ai'),
         source: TafsirApiSource.qulPreview,
@@ -292,9 +299,52 @@ void main() {
         languageCode: 'de',
       );
 
-      expect(result.source, TafsirLoadSource.unavailable);
-      expect(result.errorCode, 'missing_tafsir_id');
-      expect(didCallApi, isFalse);
+      expect(result.source, TafsirLoadSource.api);
+      expect(capturedRequest.url.path, '/resources/tafsir/268');
+      expect(result.entry!.tafsirId, '268');
+      expect(result.entry!.languageCode, 'es');
+    });
+
+    test('falls back from Spanish to English when QUL response is empty',
+        () async {
+      final capturedPaths = <String>[];
+      final apiClient = TafsirApiClient(
+        httpClient: MockClient((request) async {
+          capturedPaths.add(request.url.path);
+          if (request.url.path.endsWith('/268')) {
+            return http.Response('', 200);
+          }
+          return http.Response(
+            '''
+              <h1>English Abridged Explanation of the Quran</h1>
+              <h2>English Abridged Explanation of the Quran tafsir for Surah Al-Ikhlas - Ayah 1</h2>
+              <div class="tafsir english">Tafsir text.</div>
+            ''',
+            200,
+            headers: const {'content-type': 'text/html; charset=utf-8'},
+          );
+        }),
+        baseUri: Uri.parse('https://qul.tarteel.ai'),
+        source: TafsirApiSource.qulPreview,
+      );
+      final apiBackedService = TafsirService(
+        apiClient: apiClient,
+        providerName: 'qul_preview',
+      );
+
+      final result = await apiBackedService.getTafsir(
+        surahNumber: 112,
+        ayahNumber: 1,
+        languageCode: 'es',
+      );
+
+      expect(result.source, TafsirLoadSource.api);
+      expect(capturedPaths, [
+        '/resources/tafsir/268',
+        '/resources/tafsir/266',
+      ]);
+      expect(result.entry!.tafsirId, '266');
+      expect(result.entry!.languageCode, 'en');
     });
 
     test('does not call API when tafsir id is missing', () async {

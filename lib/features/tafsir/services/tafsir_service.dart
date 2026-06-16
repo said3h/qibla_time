@@ -32,20 +32,23 @@ class TafsirService {
     String? tafsirId,
   }) async {
     final normalizedLanguage = _normalizeLanguageCode(languageCode);
-    final resolvedResource = _resolveResource(
+    final attempts = _resolveResourceAttempts(
       normalizedLanguage,
       requestedTafsirId: tafsirId,
     );
-    final normalizedTafsirId = resolvedResource.resourceId;
+    final primaryAttempt = attempts.first;
+    final normalizedTafsirId = primaryAttempt.resource.resourceId;
     _debugLanguage(
       requestedLanguageCode: languageCode,
       normalizedLanguageCode: normalizedLanguage,
       resourceId: normalizedTafsirId,
-      resourceSource: resolvedResource.source,
+      resourceSource: primaryAttempt.resource.source,
     );
     _debugLog(
       'request language=$normalizedLanguage tafsirId=$normalizedTafsirId '
-      'ayah=$surahNumber:$ayahNumber apiClient=${_apiClient != null}',
+      'ayah=$surahNumber:$ayahNumber apiClient=${_apiClient != null} '
+      'attempts=${attempts.map((attempt) => '${attempt.languageCode}:'
+          '${attempt.resource.resourceId ?? 'none'}').join(',')}',
     );
 
     if (!_isValidAyahReference(surahNumber, ayahNumber)) {
@@ -65,66 +68,94 @@ class TafsirService {
       );
     }
 
-    // TODO: Check verified offline tafsir assets once a legally usable dataset
-    // is approved for bundling.
-    final cachedEntry = await _readCache(
-      languageCode: normalizedLanguage,
-      tafsirId: normalizedTafsirId,
-      surahNumber: surahNumber,
-      ayahNumber: ayahNumber,
-    );
-    if (cachedEntry != null) {
-      _debugLog(
-        'cache hit tafsirId=$normalizedTafsirId ayah=$surahNumber:$ayahNumber',
+    TafsirLoadResult? lastUnavailableResult;
+    for (final attempt in attempts) {
+      final attemptLanguage = attempt.languageCode;
+      final attemptTafsirId = attempt.resource.resourceId;
+      _debugLanguage(
+        requestedLanguageCode: languageCode,
+        normalizedLanguageCode: attemptLanguage,
+        resourceId: attemptTafsirId,
+        resourceSource: attempt.resource.source,
       );
-      return TafsirLoadResult(
-        source: TafsirLoadSource.cache,
-        entry: cachedEntry,
-      );
-    }
 
-    if (_apiClient != null) {
-      if (normalizedTafsirId == null) {
+      // TODO: Check verified offline tafsir assets once a legally usable
+      // dataset is approved for bundling.
+      final cachedEntry = await _readCache(
+        languageCode: attemptLanguage,
+        tafsirId: attemptTafsirId,
+        surahNumber: surahNumber,
+        ayahNumber: ayahNumber,
+      );
+      if (cachedEntry != null) {
         _debugLog(
-          'fallback reason=missing_tafsir_id ayah=$surahNumber:$ayahNumber',
+          'cache hit language=$attemptLanguage tafsirId=$attemptTafsirId '
+          'ayah=$surahNumber:$ayahNumber',
         );
         return TafsirLoadResult(
+          source: TafsirLoadSource.cache,
+          entry: cachedEntry,
+        );
+      }
+
+      if (_apiClient == null) {
+        lastUnavailableResult = TafsirLoadResult(
+          source: TafsirLoadSource.unavailable,
+          errorCode: 'tafsir_not_configured',
+          debugInfo: _debugInfo(
+            resourceId: attemptTafsirId,
+            fallbackReason: _apiEnabled ? 'client_not_created' : 'api_disabled',
+          ),
+        );
+        break;
+      }
+
+      if (attemptTafsirId == null) {
+        _debugLog(
+          'fallback reason=missing_tafsir_id language=$attemptLanguage '
+          'ayah=$surahNumber:$ayahNumber',
+        );
+        lastUnavailableResult = TafsirLoadResult(
           source: TafsirLoadSource.unavailable,
           errorCode: 'missing_tafsir_id',
           debugInfo: _debugInfo(fallbackReason: 'missing_provider'),
         );
+        continue;
       }
 
       final apiResult = await _apiClient.fetchAyahTafsir(
-        tafsirId: normalizedTafsirId,
+        tafsirId: attemptTafsirId,
         surahNumber: surahNumber,
         ayahNumber: ayahNumber,
-        languageCode: normalizedLanguage,
+        languageCode: attemptLanguage,
       );
       if (apiResult.hasEntry && apiResult.source == TafsirLoadSource.api) {
         final validation = validateEntry(apiResult.entry!);
         if (validation.source != TafsirLoadSource.offline) {
           _debugLog(
-            'fallback reason=invalid_api_entry tafsirId=$normalizedTafsirId '
+            'fallback reason=invalid_api_entry language=$attemptLanguage '
+            'tafsirId=$attemptTafsirId '
             'ayah=$surahNumber:$ayahNumber '
             'validation=${validation.errorCode}',
           );
           AppLogger.warning(
-            'Rejected unsafe tafsir response for $normalizedLanguage '
-            '$surahNumber:$ayahNumber using resource $normalizedTafsirId.',
+            'Rejected unsafe tafsir response for $attemptLanguage '
+            '$surahNumber:$ayahNumber using resource $attemptTafsirId.',
           );
-          return TafsirLoadResult(
+          lastUnavailableResult = TafsirLoadResult(
             source: TafsirLoadSource.unavailable,
             errorCode: 'invalid_tafsir_text',
-            debugInfo: (apiResult.debugInfo ??
-                    _debugInfo(resourceId: normalizedTafsirId))
-                .copyWith(fallbackReason: 'validation_rejected'),
+            debugInfo:
+                (apiResult.debugInfo ?? _debugInfo(resourceId: attemptTafsirId))
+                    .copyWith(fallbackReason: 'validation_rejected'),
           );
+          continue;
         }
 
         await _cacheService?.write(apiResult.entry!);
         _debugLog(
-          'success source=api tafsirId=$normalizedTafsirId '
+          'success source=api language=$attemptLanguage '
+          'tafsirId=$attemptTafsirId '
           'ayah=$surahNumber:$ayahNumber '
           'textLength=${apiResult.entry!.text.length}',
         );
@@ -133,23 +164,25 @@ class TafsirService {
 
       _debugLog(
         'fallback reason=${apiResult.errorCode ?? 'no_entry'} '
-        'tafsirId=$normalizedTafsirId ayah=$surahNumber:$ayahNumber',
+        'language=$attemptLanguage tafsirId=$attemptTafsirId '
+        'ayah=$surahNumber:$ayahNumber',
       );
       AppLogger.info(
         'Tafsir API returned ${apiResult.errorCode ?? 'no_entry'} for '
-        '$normalizedLanguage $surahNumber:$ayahNumber using resource '
-        '$normalizedTafsirId.',
+        '$attemptLanguage $surahNumber:$ayahNumber using resource '
+        '$attemptTafsirId.',
       );
 
       final fallbackEntry = await _readCache(
-        languageCode: normalizedLanguage,
-        tafsirId: normalizedTafsirId,
+        languageCode: attemptLanguage,
+        tafsirId: attemptTafsirId,
         surahNumber: surahNumber,
         ayahNumber: ayahNumber,
       );
       if (fallbackEntry != null) {
         _debugLog(
-          'cache fallback tafsirId=$normalizedTafsirId '
+          'cache fallback language=$attemptLanguage '
+          'tafsirId=$attemptTafsirId '
           'ayah=$surahNumber:$ayahNumber',
         );
         return TafsirLoadResult(
@@ -158,8 +191,10 @@ class TafsirService {
         );
       }
 
-      return apiResult;
+      lastUnavailableResult = apiResult;
     }
+
+    if (lastUnavailableResult != null) return lastUnavailableResult;
 
     // TODO: Enable online tafsir by resource when API credentials, selected
     // resource IDs, and cache terms are confirmed safe for mobile usage.
@@ -173,14 +208,15 @@ class TafsirService {
       '$normalizedLanguage $surahNumber:$ayahNumber.',
     );
 
-    return TafsirLoadResult(
-      source: TafsirLoadSource.unavailable,
-      errorCode: 'tafsir_not_configured',
-      debugInfo: _debugInfo(
-        resourceId: normalizedTafsirId,
-        fallbackReason: _apiEnabled ? 'client_not_created' : 'api_disabled',
-      ),
-    );
+    return lastUnavailableResult ??
+        TafsirLoadResult(
+          source: TafsirLoadSource.unavailable,
+          errorCode: 'tafsir_not_configured',
+          debugInfo: _debugInfo(
+            resourceId: normalizedTafsirId,
+            fallbackReason: _apiEnabled ? 'client_not_created' : 'api_disabled',
+          ),
+        );
   }
 
   TafsirLoadResult validateEntry(TafsirEntry entry) {
@@ -282,6 +318,49 @@ class TafsirService {
     );
   }
 
+  List<_TafsirResourceAttempt> _resolveResourceAttempts(
+    String languageCode, {
+    String? requestedTafsirId,
+  }) {
+    final explicitTafsirId = _normalizeOptionalId(requestedTafsirId);
+    if (explicitTafsirId != null) {
+      return [
+        _TafsirResourceAttempt(
+          languageCode: languageCode,
+          resource: _ResolvedTafsirResource(
+            resourceId: explicitTafsirId,
+            source: 'request',
+          ),
+        ),
+      ];
+    }
+
+    if (_providerName != 'qul_preview') {
+      return [
+        _TafsirResourceAttempt(
+          languageCode: languageCode,
+          resource: _resolveResource(languageCode),
+        ),
+      ];
+    }
+
+    return _fallbackLanguageCodes(languageCode).map((fallbackLanguage) {
+      return _TafsirResourceAttempt(
+        languageCode: fallbackLanguage,
+        resource: _resolveResource(fallbackLanguage),
+      );
+    }).toList(growable: false);
+  }
+
+  List<String> _fallbackLanguageCodes(String languageCode) {
+    final languages = <String>[
+      languageCode,
+      'es',
+      'en',
+    ];
+    return languages.toSet().toList(growable: false);
+  }
+
   bool _containsTechnicalError(String text) {
     final normalized = text.toLowerCase();
     const blockedMarkers = [
@@ -352,4 +431,14 @@ class _ResolvedTafsirResource {
 
   final String? resourceId;
   final String source;
+}
+
+class _TafsirResourceAttempt {
+  const _TafsirResourceAttempt({
+    required this.languageCode,
+    required this.resource,
+  });
+
+  final String languageCode;
+  final _ResolvedTafsirResource resource;
 }
