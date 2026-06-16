@@ -3,6 +3,15 @@ import 'package:qibla_time/features/tafsir/services/tafsir_config.dart';
 
 void main() {
   group('TafsirConfig', () {
+    test('uses QUL preview by default for app builds', () {
+      const config = TafsirConfig.fromEnvironment;
+
+      expect(config.enabled, isTrue);
+      expect(config.isQulPreview, isTrue);
+      expect(config.canCreateApiClient, isTrue);
+      expect(config.normalizedDefaultResourceId, '268');
+    });
+
     test('does not create API client unless explicitly enabled', () {
       const config = TafsirConfig(
         enabled: false,

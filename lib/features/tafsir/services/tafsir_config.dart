@@ -10,13 +10,16 @@ class TafsirConfig {
   });
 
   static const fromEnvironment = TafsirConfig(
-    enabled: bool.fromEnvironment('TAFSIR_API_ENABLED'),
+    enabled: bool.fromEnvironment('TAFSIR_API_ENABLED', defaultValue: true),
     internalBuild: bool.fromEnvironment('QIBLA_INTERNAL_TAFSIR_BUILD'),
     baseUrl: String.fromEnvironment(
       'TAFSIR_API_BASE_URL',
       defaultValue: 'https://api.quran.com/api/v4',
     ),
-    provider: String.fromEnvironment('TAFSIR_API_PROVIDER'),
+    provider: String.fromEnvironment(
+      'TAFSIR_API_PROVIDER',
+      defaultValue: 'qul_preview',
+    ),
     authToken: String.fromEnvironment('TAFSIR_API_AUTH_TOKEN'),
     clientId: String.fromEnvironment('TAFSIR_API_CLIENT_ID'),
     defaultResourceId: String.fromEnvironment('TAFSIR_DEFAULT_RESOURCE_ID'),
