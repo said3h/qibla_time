@@ -144,6 +144,13 @@ void main() {
 
     expect(copiedText, tafsirText);
     expect(find.text('Tafsir copied'), findsOneWidget);
+    expect(find.byIcon(Icons.check_circle_rounded), findsOneWidget);
+    final snackBar = tester.widget<SnackBar>(find.byType(SnackBar));
+    expect(snackBar.behavior, SnackBarBehavior.floating);
+    expect(snackBar.width, isNotNull);
+    expect(snackBar.backgroundColor, QiblaThemes.current.bgSurface2);
+    expect(snackBar.duration, const Duration(milliseconds: 1800));
+    expect(snackBar.shape, isA<RoundedRectangleBorder>());
     expect(copiedText, isNot(contains('test-source')));
     expect(copiedText, isNot(contains('Fake Tafsir')));
   });
