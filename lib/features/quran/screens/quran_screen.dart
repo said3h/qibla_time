@@ -12,6 +12,7 @@ import '../../../core/services/audio_service.dart';
 import '../../../core/services/logger_service.dart';
 import '../../../core/services/settings_service.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../../core/utils/qibla_snackbar.dart';
 import '../../../core/utils/share_sheet_origin.dart';
 import '../../../core/localization/locale_controller.dart';
 import '../../../l10n/l10n.dart';
@@ -182,10 +183,10 @@ class _QuranScreenState extends ConsumerState<QuranScreen> {
     }
 
     if (!looksLikeQuranReferenceQuery(value)) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Reference not found. Try a valid format like 2:255.'),
-      ),
+    showQiblaSnackBar(
+      context,
+      message: 'Reference not found. Try a valid format like 2:255.',
+      icon: Icons.info_outline_rounded,
     );
   }
 
@@ -1289,10 +1290,10 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     ref.invalidate(lastReadingProvider);
     if (!mounted || !showFeedback) return;
     final l10n = context.l10n;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(l10n.quranReadingPointSaved(ayahNumber)),
-      ),
+    showQiblaSnackBar(
+      context,
+      message: l10n.quranReadingPointSaved(ayahNumber),
+      icon: Icons.bookmark_added_rounded,
     );
   }
 
@@ -1303,14 +1304,13 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     ref.invalidate(quranBookmarksProvider);
     if (!mounted) return;
     final l10n = context.l10n;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          saved
-              ? l10n.quranBookmarkSaved(ayahNumber)
-              : l10n.quranBookmarkRemoved(ayahNumber),
-        ),
-      ),
+    showQiblaSnackBar(
+      context,
+      message: saved
+          ? l10n.quranBookmarkSaved(ayahNumber)
+          : l10n.quranBookmarkRemoved(ayahNumber),
+      icon:
+          saved ? Icons.bookmark_added_rounded : Icons.bookmark_remove_rounded,
     );
   }
 
@@ -1340,8 +1340,10 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   void _toggleAyahSelection(int ayahNumber) {
     if (!_selectedAyahs.contains(ayahNumber) &&
         _selectedAyahs.length >= _maxSelectedAyahs) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(context.l10n.quranMaxAyahsSelected)),
+      showQiblaSnackBar(
+        context,
+        message: context.l10n.quranMaxAyahsSelected,
+        icon: Icons.info_outline_rounded,
       );
       return;
     }
@@ -1371,8 +1373,10 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
         _showConsecutiveAyahWarning();
         return;
       case QuranAyahSelectionDecisionType.rejectMaxReached:
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(context.l10n.quranMaxAyahsSelected)),
+        showQiblaSnackBar(
+          context,
+          message: context.l10n.quranMaxAyahsSelected,
+          icon: Icons.info_outline_rounded,
         );
         return;
       case QuranAyahSelectionDecisionType.add:
@@ -1402,8 +1406,10 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   }
 
   void _showConsecutiveAyahWarning() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(context.l10n.quranConsecutiveAyahsOnly)),
+    showQiblaSnackBar(
+      context,
+      message: context.l10n.quranConsecutiveAyahsOnly,
+      icon: Icons.info_outline_rounded,
     );
   }
 
@@ -1495,12 +1501,10 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
               );
         } catch (_) {
           if (!mounted) return;
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                context.l10n.quranAyahImageError,
-              ),
-            ),
+          showQiblaSnackBar(
+            context,
+            message: context.l10n.quranAyahImageError,
+            icon: Icons.info_outline_rounded,
           );
         }
         return;
@@ -1610,10 +1614,10 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       if (!mounted) return;
 
       if (draft == null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(l10n.videoSaveFailed),
-          ),
+        showQiblaSnackBar(
+          context,
+          message: l10n.videoSaveFailed,
+          icon: Icons.info_outline_rounded,
         );
         return;
       }
@@ -1624,17 +1628,17 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       await videoService.saveVideoToGallery(file);
       if (!mounted) return;
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(l10n.videoSavedToGallery),
-        ),
+      showQiblaSnackBar(
+        context,
+        message: l10n.videoSavedToGallery,
+        icon: Icons.check_circle_rounded,
       );
     } catch (_) {
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(l10n.videoSaveFailed),
-        ),
+      showQiblaSnackBar(
+        context,
+        message: l10n.videoSaveFailed,
+        icon: Icons.info_outline_rounded,
       );
     }
   }
@@ -1689,10 +1693,10 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     );
     if (targetIndex < 0) {
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Ayah $ayahNumber is not available in this surah.'),
-        ),
+      showQiblaSnackBar(
+        context,
+        message: 'Ayah $ayahNumber is not available in this surah.',
+        icon: Icons.info_outline_rounded,
       );
       return;
     }
@@ -1738,8 +1742,10 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   Future<void> _submitAyahJump(SurahDetail detail) async {
     final value = int.tryParse(_ayahJumpController.text.trim());
     if (value == null || value < 1) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Enter a valid ayah number.')),
+      showQiblaSnackBar(
+        context,
+        message: 'Enter a valid ayah number.',
+        icon: Icons.info_outline_rounded,
       );
       return;
     }
@@ -1917,10 +1923,10 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       ref.invalidate(downloadedSurahNumbersProvider);
       ref.invalidate(favoriteDownloadedSurahsProvider);
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(context.l10n.quranDownloadSuccess),
-        ),
+      showQiblaSnackBar(
+        context,
+        message: context.l10n.quranDownloadSuccess,
+        icon: Icons.download_done_rounded,
       );
     } catch (_) {
       if (!mounted) return;
@@ -1937,12 +1943,10 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
           errorMessage: l10n.quranDownloadDetailedError,
         );
       });
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            l10n.quranDownloadShortError,
-          ),
-        ),
+      showQiblaSnackBar(
+        context,
+        message: l10n.quranDownloadShortError,
+        icon: Icons.info_outline_rounded,
       );
     }
   }
@@ -1994,10 +1998,10 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     ref.invalidate(downloadedSurahNumbersProvider);
     ref.invalidate(favoriteDownloadedSurahsProvider);
     if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(context.l10n.quranDownloadedAudioRemoved),
-      ),
+    showQiblaSnackBar(
+      context,
+      message: context.l10n.quranDownloadedAudioRemoved,
+      icon: Icons.delete_outline_rounded,
     );
   }
 
@@ -2010,14 +2014,14 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     if (!mounted) return;
     final l10n = context.l10n;
     setState(() => _isDownloadedFavorite = isFavorite);
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          isFavorite
-              ? l10n.quranDownloadedFavoriteAdded
-              : l10n.quranDownloadedFavoriteRemoved,
-        ),
-      ),
+    showQiblaSnackBar(
+      context,
+      message: isFavorite
+          ? l10n.quranDownloadedFavoriteAdded
+          : l10n.quranDownloadedFavoriteRemoved,
+      icon: isFavorite
+          ? Icons.bookmark_added_rounded
+          : Icons.bookmark_remove_rounded,
     );
   }
 
@@ -2132,12 +2136,10 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     } catch (_) {
       if (!mounted) return;
       controller.clear();
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            context.l10n.quranAyahPlaybackError,
-          ),
-        ),
+      showQiblaSnackBar(
+        context,
+        message: context.l10n.quranAyahPlaybackError,
+        icon: Icons.info_outline_rounded,
       );
     }
   }
@@ -2164,12 +2166,10 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     } catch (_) {
       if (!mounted) return;
       controller.clear();
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            context.l10n.quranSurahPlaybackError,
-          ),
-        ),
+      showQiblaSnackBar(
+        context,
+        message: context.l10n.quranSurahPlaybackError,
+        icon: Icons.info_outline_rounded,
       );
     }
   }

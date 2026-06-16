@@ -5,6 +5,7 @@ import 'package:share_plus/share_plus.dart';
 
 import '../../../core/services/logger_service.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../../core/utils/qibla_snackbar.dart';
 import '../../../core/utils/share_sheet_origin.dart';
 import '../../../l10n/l10n.dart';
 import '../../quran/models/quran_models.dart';
@@ -125,6 +126,15 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
 
   bool get _isBusy => _activeAction != null;
 
+  void _showSnackBar(String message, {IconData? icon}) {
+    showQiblaSnackBarWithMessenger(
+      context,
+      messenger: widget.rootMessenger,
+      message: message,
+      icon: icon,
+    );
+  }
+
   bool get _supportsVideoExport =>
       !_isMultiAyah &&
       !kIsWeb &&
@@ -203,10 +213,9 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
       Navigator.of(context).pop();
     } catch (_) {
       if (!mounted) return;
-      widget.rootMessenger.showSnackBar(
-        SnackBar(
-          content: Text(context.l10n.shareAyahTextError),
-        ),
+      _showSnackBar(
+        context.l10n.shareAyahTextError,
+        icon: Icons.info_outline_rounded,
       );
     } finally {
       if (mounted) {
@@ -246,10 +255,9 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
       Navigator.of(context).pop();
     } catch (_) {
       if (!mounted) return;
-      widget.rootMessenger.showSnackBar(
-        SnackBar(
-          content: Text(context.l10n.shareAyahImageError),
-        ),
+      _showSnackBar(
+        context.l10n.shareAyahImageError,
+        icon: Icons.info_outline_rounded,
       );
     } finally {
       if (mounted) {
@@ -372,10 +380,9 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
     }
 
     if (!_includeArabic && !_includeTranslation) {
-      widget.rootMessenger.showSnackBar(
-        SnackBar(
-          content: Text(context.l10n.videoSaveFailed),
-        ),
+      _showSnackBar(
+        context.l10n.videoSaveFailed,
+        icon: Icons.info_outline_rounded,
       );
       return;
     }
@@ -393,10 +400,9 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
       if (!mounted) return;
 
       if (draft == null) {
-        widget.rootMessenger.showSnackBar(
-          SnackBar(
-            content: Text(context.l10n.videoSaveFailed),
-          ),
+        _showSnackBar(
+          context.l10n.videoSaveFailed,
+          icon: Icons.info_outline_rounded,
         );
         return;
       }
@@ -410,10 +416,9 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
       await widget.videoService.saveVideoToGallery(file);
       if (!mounted) return;
 
-      widget.rootMessenger.showSnackBar(
-        SnackBar(
-          content: Text(context.l10n.videoSavedToGallery),
-        ),
+      _showSnackBar(
+        context.l10n.videoSavedToGallery,
+        icon: Icons.check_circle_rounded,
       );
       Navigator.of(context).pop();
     } catch (e, st) {
@@ -430,10 +435,9 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
               ? context.l10n.videoSavePermissionDenied
               : context.l10n.videoSaveFailed;
 
-      widget.rootMessenger.showSnackBar(
-        SnackBar(
-          content: Text(message),
-        ),
+      _showSnackBar(
+        message,
+        icon: Icons.info_outline_rounded,
       );
     } finally {
       if (mounted) setState(() => _activeAction = null);
@@ -442,9 +446,10 @@ class _AyahSharePreviewSheetState extends State<_AyahSharePreviewSheet> {
 
   void _showVideoExportError(String friendlyMessage) {
     if (!mounted) return;
-    widget.rootMessenger
-      ..hideCurrentSnackBar()
-      ..showSnackBar(SnackBar(content: Text(friendlyMessage)));
+    _showSnackBar(
+      friendlyMessage,
+      icon: Icons.info_outline_rounded,
+    );
   }
 
   @override

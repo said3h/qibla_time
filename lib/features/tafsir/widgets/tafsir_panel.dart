@@ -1,5 +1,3 @@
-import 'dart:math' as math;
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theme/app_theme.dart';
+import '../../../core/utils/qibla_snackbar.dart';
 import '../../../l10n/l10n.dart';
 import '../models/tafsir_entry.dart';
 import '../providers/tafsir_provider.dart';
@@ -210,47 +209,7 @@ class _PanelSuccessState extends State<_PanelSuccess> {
   Future<void> _copyTafsirText(String text) async {
     await Clipboard.setData(ClipboardData(text: text));
     if (!mounted) return;
-    final tokens = widget.tokens;
-    final availableWidth = MediaQuery.sizeOf(context).width - 40;
-    final snackBarWidth = math.max(220.0, math.min(340.0, availableWidth));
-    final messenger = ScaffoldMessenger.of(context)..hideCurrentSnackBar();
-    messenger.showSnackBar(
-      SnackBar(
-        behavior: SnackBarBehavior.floating,
-        width: snackBarWidth,
-        elevation: 14,
-        duration: const Duration(milliseconds: 1800),
-        backgroundColor: tokens.bgSurface2,
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(18),
-          side: BorderSide(color: tokens.primaryBorder, width: 1),
-        ),
-        content: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              Icons.check_circle_rounded,
-              color: tokens.primary,
-              size: 19,
-            ),
-            const SizedBox(width: 10),
-            Flexible(
-              child: Text(
-                'Tafsir copied',
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: GoogleFonts.dmSans(
-                  color: tokens.textPrimary,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 14,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+    showQiblaSnackBar(context, message: 'Tafsir copied');
   }
 
   @override
