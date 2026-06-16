@@ -78,6 +78,9 @@ bool shouldApplySavedQuranViewMode({
   return mounted && !userChangedViewMode;
 }
 
+@visibleForTesting
+int nextQuranViewModeGeneration(int current) => current + 1;
+
 QuranReference? parseQuranReferenceQuery(
   String query,
   List<SurahSummary> surahs,
@@ -1103,9 +1106,8 @@ class QuranDetailScreen extends ConsumerStatefulWidget {
 const _kQuranViewModeKey = 'quran_view_mode_page';
 
 class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
-  final ItemScrollController _itemScrollController = ItemScrollController();
-  final ItemPositionsListener _itemPositionsListener =
-      ItemPositionsListener.create();
+  ItemScrollController _itemScrollController = ItemScrollController();
+  ItemPositionsListener _itemPositionsListener = ItemPositionsListener.create();
   final TextEditingController _ayahJumpController = TextEditingController();
   final AudioService _audioService = AudioService.instance;
   bool _isPageView = false;
@@ -1120,6 +1122,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   int? _lastAutoScrolledListAyahNumber;
   int? _lastObservedPlayingAyahNumber;
   int _listAutoScrollGeneration = 0;
+  int _viewModeGeneration = 0;
   int? _continuousManualScrollAyahIndex;
   int _continuousManualScrollRequestId = 0;
   int? _openTafsirAyahNumber;
@@ -1159,6 +1162,14 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     setState(() {
       _userChangedViewMode = true;
       _isPageView = newValue;
+      _viewModeGeneration = nextQuranViewModeGeneration(_viewModeGeneration);
+      if (!newValue) {
+        _itemScrollController = ItemScrollController();
+        _itemPositionsListener = ItemPositionsListener.create();
+        _lastAutoScrolledListAyahNumber = null;
+        _lastObservedPlayingAyahNumber = null;
+        _listAutoScrollGeneration++;
+      }
     });
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(_kQuranViewModeKey, newValue);
@@ -2261,141 +2272,153 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
             _scheduleActiveAyahListScroll(_activeAyahNumber!);
           }
 
-          final content = _isPageView
-              ? QuranContinuousView(
-                  tokens: tokens,
-                  ayahs: detail.ayahs,
-                  surahNumber: widget.summary.number,
-                  currentAyahIndex: currentAyahIndex,
-                  manualScrollAyahIndex: _continuousManualScrollAyahIndex,
-                  manualScrollRequestId: _continuousManualScrollRequestId,
-                  showTajweed: showTajweed,
-                  enableAutoScroll: !_isSelectionMode,
-                  header: Column(
-                    children: [
-                      _buildTopBanner(
-                        tokens,
-                        result.source,
-                        widget.initialAyah,
-                      ),
-                      _buildSurahAudioCard(tokens, detail, result.source),
-                      _buildAyahJumpCard(tokens, detail),
-                      if (_activeAyahNumber != null)
-                        _buildActiveAudioIndicator(tokens),
-                    ],
-                  ),
-                )
-              : NotificationListener<UserScrollNotification>(
-                  onNotification: (notification) {
-                    _lastUserListScrollAt = DateTime.now();
-                    return false;
-                  },
-                  child: ScrollablePositionedList.builder(
-                    key: PageStorageKey<String>(
-                      'quran_ayah_list_${widget.summary.number}',
+          final content = KeyedSubtree(
+            key: ValueKey<String>(
+              'quran_detail_mode_${widget.summary.number}_${_isPageView ? 'continuous' : 'cards'}_$_viewModeGeneration',
+            ),
+            child: _isPageView
+                ? QuranContinuousView(
+                    key: ValueKey<String>(
+                      'quran_continuous_${widget.summary.number}_$_viewModeGeneration',
                     ),
-                    itemScrollController: _itemScrollController,
-                    itemPositionsListener: _itemPositionsListener,
-                    padding: const EdgeInsets.all(16),
-                    itemCount: detail.ayahs.length + 1,
-                    itemBuilder: (_, index) {
-                      if (index == 0) {
+                    tokens: tokens,
+                    ayahs: detail.ayahs,
+                    surahNumber: widget.summary.number,
+                    currentAyahIndex: currentAyahIndex,
+                    manualScrollAyahIndex: _continuousManualScrollAyahIndex,
+                    manualScrollRequestId: _continuousManualScrollRequestId,
+                    showTajweed: showTajweed,
+                    enableAutoScroll: !_isSelectionMode,
+                    header: Column(
+                      children: [
+                        _buildTopBanner(
+                          tokens,
+                          result.source,
+                          widget.initialAyah,
+                        ),
+                        _buildSurahAudioCard(tokens, detail, result.source),
+                        _buildAyahJumpCard(tokens, detail),
+                        if (_activeAyahNumber != null)
+                          _buildActiveAudioIndicator(tokens),
+                      ],
+                    ),
+                  )
+                : NotificationListener<UserScrollNotification>(
+                    key: ValueKey<String>(
+                      'quran_cards_${widget.summary.number}_$_viewModeGeneration',
+                    ),
+                    onNotification: (notification) {
+                      _lastUserListScrollAt = DateTime.now();
+                      return false;
+                    },
+                    child: ScrollablePositionedList.builder(
+                      key: PageStorageKey<String>(
+                        'quran_ayah_list_${widget.summary.number}_$_viewModeGeneration',
+                      ),
+                      itemScrollController: _itemScrollController,
+                      itemPositionsListener: _itemPositionsListener,
+                      padding: const EdgeInsets.all(16),
+                      itemCount: detail.ayahs.length + 1,
+                      itemBuilder: (_, index) {
+                        if (index == 0) {
+                          return Column(
+                            children: [
+                              _buildTopBanner(
+                                tokens,
+                                result.source,
+                                widget.initialAyah,
+                              ),
+                              _buildSurahAudioCard(
+                                  tokens, detail, result.source),
+                              _buildAyahJumpCard(tokens, detail),
+                              if (_activeAyahNumber != null)
+                                _buildActiveAudioIndicator(tokens),
+                            ],
+                          );
+                        }
+
+                        final ayah = detail.ayahs[index - 1];
+                        final canPlayAudio =
+                            _canPlayAyahAudio(ayah, result.source);
+                        final isLastRead =
+                            lastReading?.surahNumber == widget.summary.number &&
+                                lastReading?.ayahNumber == ayah.numberInSurah;
+                        final isActiveAudio =
+                            _activeAyahNumber == ayah.numberInSurah;
+                        final isPlayingAudio = isActiveAudio && _isAudioPlaying;
+                        final isSelected =
+                            _selectedAyahs.contains(ayah.numberInSurah);
+                        final isBookmarked = bookmarks.any(
+                          (bookmark) =>
+                              bookmark.surahNumber == widget.summary.number &&
+                              bookmark.ayahNumber == ayah.numberInSurah,
+                        );
+
                         return Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            _buildTopBanner(
-                              tokens,
-                              result.source,
-                              widget.initialAyah,
+                            InkWell(
+                              onTap: () => _isSelectionMode
+                                  ? _toggleContiguousAyahSelection(
+                                      ayah.numberInSurah,
+                                    )
+                                  : _saveReading(ayah.numberInSurah),
+                              onLongPress: () => _toggleContiguousAyahSelection(
+                                ayah.numberInSurah,
+                              ),
+                              borderRadius: BorderRadius.circular(16),
+                              child: QuranAyahCard(
+                                tokens: tokens,
+                                l10n: l10n,
+                                ayah: ayah,
+                                surahNumber: widget.summary.number,
+                                canPlayAudio: canPlayAudio,
+                                isLastRead: isLastRead,
+                                isActiveAudio: isActiveAudio,
+                                isPlayingAudio: isPlayingAudio,
+                                isBookmarked: isBookmarked,
+                                isSelected: isSelected,
+                                isSelectionMode: _isSelectionMode,
+                                showTajweed: showTajweed,
+                                audioStatusLabel: _audioStatusLabel(
+                                  ayah,
+                                  result.source,
+                                ),
+                                onToggleAudio: () => _toggleAyahAudio(
+                                  ayah,
+                                  result.source,
+                                  detail.ayahs,
+                                ),
+                                onToggleBookmark: () =>
+                                    _toggleBookmark(ayah.numberInSurah),
+                                showTafsirAction: showTafsirButton,
+                                isTafsirOpen:
+                                    _openTafsirAyahNumber == ayah.numberInSurah,
+                                onToggleTafsir: () =>
+                                    _toggleTafsirForAyah(ayah.numberInSurah),
+                                words:
+                                    wordsByAyah[ayah.numberInSurah] ?? const [],
+                                onWordTap: (word) => _showQuranWordSheet(
+                                  word,
+                                  languageCode: wordLanguageCode,
+                                ),
+                              ),
                             ),
-                            _buildSurahAudioCard(tokens, detail, result.source),
-                            _buildAyahJumpCard(tokens, detail),
-                            if (_activeAyahNumber != null)
-                              _buildActiveAudioIndicator(tokens),
+                            if (showTafsirButton &&
+                                _openTafsirAyahNumber == ayah.numberInSurah)
+                              _TafsirPanelLoader(
+                                surahNumber: widget.summary.number,
+                                ayahNumber: ayah.numberInSurah,
+                                languageCode: tafsirLanguageCode,
+                                localeCode:
+                                    Localizations.localeOf(context).toString(),
+                              ),
                           ],
                         );
-                      }
-
-                      final ayah = detail.ayahs[index - 1];
-                      final canPlayAudio =
-                          _canPlayAyahAudio(ayah, result.source);
-                      final isLastRead =
-                          lastReading?.surahNumber == widget.summary.number &&
-                              lastReading?.ayahNumber == ayah.numberInSurah;
-                      final isActiveAudio =
-                          _activeAyahNumber == ayah.numberInSurah;
-                      final isPlayingAudio = isActiveAudio && _isAudioPlaying;
-                      final isSelected =
-                          _selectedAyahs.contains(ayah.numberInSurah);
-                      final isBookmarked = bookmarks.any(
-                        (bookmark) =>
-                            bookmark.surahNumber == widget.summary.number &&
-                            bookmark.ayahNumber == ayah.numberInSurah,
-                      );
-
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          InkWell(
-                            onTap: () => _isSelectionMode
-                                ? _toggleContiguousAyahSelection(
-                                    ayah.numberInSurah,
-                                  )
-                                : _saveReading(ayah.numberInSurah),
-                            onLongPress: () => _toggleContiguousAyahSelection(
-                              ayah.numberInSurah,
-                            ),
-                            borderRadius: BorderRadius.circular(16),
-                            child: QuranAyahCard(
-                              tokens: tokens,
-                              l10n: l10n,
-                              ayah: ayah,
-                              surahNumber: widget.summary.number,
-                              canPlayAudio: canPlayAudio,
-                              isLastRead: isLastRead,
-                              isActiveAudio: isActiveAudio,
-                              isPlayingAudio: isPlayingAudio,
-                              isBookmarked: isBookmarked,
-                              isSelected: isSelected,
-                              isSelectionMode: _isSelectionMode,
-                              showTajweed: showTajweed,
-                              audioStatusLabel: _audioStatusLabel(
-                                ayah,
-                                result.source,
-                              ),
-                              onToggleAudio: () => _toggleAyahAudio(
-                                ayah,
-                                result.source,
-                                detail.ayahs,
-                              ),
-                              onToggleBookmark: () =>
-                                  _toggleBookmark(ayah.numberInSurah),
-                              showTafsirAction: showTafsirButton,
-                              isTafsirOpen:
-                                  _openTafsirAyahNumber == ayah.numberInSurah,
-                              onToggleTafsir: () =>
-                                  _toggleTafsirForAyah(ayah.numberInSurah),
-                              words:
-                                  wordsByAyah[ayah.numberInSurah] ?? const [],
-                              onWordTap: (word) => _showQuranWordSheet(
-                                word,
-                                languageCode: wordLanguageCode,
-                              ),
-                            ),
-                          ),
-                          if (showTafsirButton &&
-                              _openTafsirAyahNumber == ayah.numberInSurah)
-                            _TafsirPanelLoader(
-                              surahNumber: widget.summary.number,
-                              ayahNumber: ayah.numberInSurah,
-                              languageCode: tafsirLanguageCode,
-                              localeCode:
-                                  Localizations.localeOf(context).toString(),
-                            ),
-                        ],
-                      );
-                    },
+                      },
+                    ),
                   ),
-                );
+          );
 
           if (!_enableQuranTafsirPanels) {
             _logTafsirVisibility('hidden: feature flag off');

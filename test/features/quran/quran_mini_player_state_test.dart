@@ -302,6 +302,13 @@ void main() {
     });
   });
 
+  group('nextQuranViewModeGeneration', () {
+    test('increments the render generation on every view mode toggle', () {
+      expect(nextQuranViewModeGeneration(0), 1);
+      expect(nextQuranViewModeGeneration(4), 5);
+    });
+  });
+
   group('QuranWord', () {
     test('returns requested translation with English fallback', () {
       const word = QuranWord(
