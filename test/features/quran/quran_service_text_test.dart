@@ -15,7 +15,7 @@ void main() {
       expect(normalized, contains('\u0650')); // kasra
       expect(normalized, contains('\u0652')); // sukun
       expect(normalized, contains('\u0670')); // dagger alif
-      expect(normalized, contains('\u06DB')); // pause sign
+      expect(normalized, isNot(contains('\u06DB'))); // iOS missing glyph
     });
   });
 }

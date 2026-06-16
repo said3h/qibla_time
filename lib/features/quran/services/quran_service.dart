@@ -59,10 +59,11 @@ Map<int, SurahDetail> _parseQuranOfflineJson(String jsonString) {
 String normalizeQuranArabicForDisplay(String text) {
   return text
       // Quran.com Uthmani uses alef wasla and tatweel in places where the iOS
-      // font fallback can render a large missing-glyph block. Keep harakat and
-      // pause marks, but normalize those display-only trouble spots.
+      // font fallback can render a large missing-glyph block. Keep harakat, but
+      // normalize those display-only trouble spots.
       .replaceAll('\u0671', '\u0627')
       .replaceAll('\u0640', '')
+      .replaceAll('\u06DB', '')
       .trim();
 }
 
