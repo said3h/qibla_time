@@ -55,6 +55,17 @@ Map<int, SurahDetail> _parseQuranOfflineJson(String jsonString) {
   return offlineCache;
 }
 
+@visibleForTesting
+String normalizeQuranArabicForDisplay(String text) {
+  return text
+      // Quran.com Uthmani uses alef wasla and tatweel in places where the iOS
+      // font fallback can render a large missing-glyph block. Keep harakat and
+      // pause marks, but normalize those display-only trouble spots.
+      .replaceAll('\u0671', '\u0627')
+      .replaceAll('\u0640', '')
+      .trim();
+}
+
 // ── Providers ──────────────────────────────────────────────────
 
 final quranServiceProvider = Provider<QuranService>((ref) {
@@ -255,14 +266,14 @@ class QuranService {
     final normalizedLanguage = _normalizeLanguageCode(languageCode);
     final translationEdition = _translationEditionFor(normalizedLanguage);
 
-    // Petición paralela: árabe Uthmani simple para display + traducción
-    // según idioma + transliteración. El texto Uthmani completo puede incluir
-    // marcas que algunas fuentes iOS renderizan como bloques vacíos.
+    // Petición paralela: árabe Uthmani con harakat + traducción según idioma
+    // + transliteración. Se normaliza después para evitar glifos problemáticos
+    // de iOS sin caer a uthmani_simple.
     final responses = await Future.wait([
       http
           .get(
             Uri.parse(
-              '$_quranComBaseUrl/quran/verses/uthmani_simple?chapter_number=${summary.number}',
+              '$_quranComBaseUrl/quran/verses/uthmani?chapter_number=${summary.number}',
             ),
           )
           .timeout(const Duration(seconds: _timeoutSeconds)),
@@ -285,7 +296,6 @@ class QuranService {
     final arabicAyahs = _decodeQuranComUthmaniAyahs(
       responses[0].bodyBytes,
       context: 'árabe',
-      textKey: 'text_uthmani_simple',
     );
     final tajweedAyahs = await _fetchTajweedAyahs(summary);
 
@@ -336,10 +346,12 @@ class QuranService {
       return SurahAyah(
         number: ayahNumber,
         numberInSurah: numberInSurah,
-        arabic: _readRequiredString(
-          arabicAyah,
-          'text',
-          context: 'aleya árabe ${i + 1}',
+        arabic: normalizeQuranArabicForDisplay(
+          _readRequiredString(
+            arabicAyah,
+            'text',
+            context: 'aleya árabe ${i + 1}',
+          ),
         ),
         transliteration: i < translitAyahs.length
             ? _readOptionalString(translitAyahs[i], 'text')
