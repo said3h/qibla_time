@@ -5,3 +5,7 @@ import '../../../core/services/settings_service.dart';
 final quranTajweedEnabledProvider = FutureProvider<bool>((ref) {
   return SettingsService.instance.getQuranTajweedEnabled();
 });
+
+final quranWordByWordEnabledProvider = FutureProvider<bool>((ref) {
+  return SettingsService.instance.getQuranWordByWordEnabled();
+});

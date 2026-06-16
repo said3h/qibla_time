@@ -38,6 +38,13 @@ import 'downloaded_surahs_screen.dart';
 const _enableQuranTafsirPanels =
     bool.fromEnvironment('QURAN_TAFSIR_PANEL_ENABLED', defaultValue: true);
 
+const _quranWordByWordPilotSurahs = <int>{1, 112, 113, 114};
+
+@visibleForTesting
+bool supportsQuranWordByWordPilot(int surahNumber) {
+  return _quranWordByWordPilotSurahs.contains(surahNumber);
+}
+
 @visibleForTesting
 bool shouldReplaceQuranDetailForPlaybackSurah({
   required int currentScreenSurahNumber,
@@ -1181,6 +1188,11 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     ref.invalidate(quranTajweedEnabledProvider);
   }
 
+  Future<void> _toggleWordByWord(bool value) async {
+    await SettingsService.instance.saveQuranWordByWordEnabled(value);
+    ref.invalidate(quranWordByWordEnabledProvider);
+  }
+
   Future<void> _toggleTafsirForAyah(int ayahNumber) async {
     if (!_enableQuranTafsirPanels) {
       _logTafsirVisibility('button ignored: feature flag off');
@@ -2205,20 +2217,34 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
         const <int, List<QuranWord>>{};
     final showTajweed =
         ref.watch(quranTajweedEnabledProvider).valueOrNull ?? false;
+    final wordByWordSupported =
+        supportsQuranWordByWordPilot(widget.summary.number);
+    final showWordByWord = wordByWordSupported &&
+        (ref.watch(quranWordByWordEnabledProvider).valueOrNull ?? false);
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
       appBar: AppBar(
         title: Text(_surahPrimaryName(context, widget.summary)),
         actions: [
-          IconButton(
-            tooltip: 'Tajweed',
-            icon: Icon(
-              Icons.color_lens_outlined,
-              color: showTajweed ? tokens.primary : null,
-            ),
-            onPressed: () => _toggleTajweed(!showTajweed),
+          _QuranReaderToggleChip(
+            label: 'Tajweed',
+            icon: Icons.color_lens_outlined,
+            selected: showTajweed,
+            tokens: tokens,
+            onTap: () => _toggleTajweed(!showTajweed),
           ),
+          if (wordByWordSupported) ...[
+            const SizedBox(width: 6),
+            _QuranReaderToggleChip(
+              label: 'Word by Word',
+              icon: Icons.touch_app_outlined,
+              selected: showWordByWord,
+              tokens: tokens,
+              onTap: () => _toggleWordByWord(!showWordByWord),
+            ),
+          ],
+          const SizedBox(width: 4),
           IconButton(
             tooltip:
                 _isPageView ? l10n.quranViewModeAyahs : l10n.quranViewModePage,
@@ -2288,6 +2314,14 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                     manualScrollAyahIndex: _continuousManualScrollAyahIndex,
                     manualScrollRequestId: _continuousManualScrollRequestId,
                     showTajweed: showTajweed,
+                    showWordByWord: showWordByWord,
+                    wordsByAyah: showWordByWord ? wordsByAyah : const {},
+                    onWordTap: showWordByWord
+                        ? (word) => _showQuranWordSheet(
+                              word,
+                              languageCode: wordLanguageCode,
+                            )
+                        : null,
                     enableAutoScroll: !_isSelectionMode,
                     header: Column(
                       children: [
@@ -2380,6 +2414,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                                 isSelected: isSelected,
                                 isSelectionMode: _isSelectionMode,
                                 showTajweed: showTajweed,
+                                showWordByWord: showWordByWord,
                                 audioStatusLabel: _audioStatusLabel(
                                   ayah,
                                   result.source,
@@ -2396,12 +2431,16 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                                     _openTafsirAyahNumber == ayah.numberInSurah,
                                 onToggleTafsir: () =>
                                     _toggleTafsirForAyah(ayah.numberInSurah),
-                                words:
-                                    wordsByAyah[ayah.numberInSurah] ?? const [],
-                                onWordTap: (word) => _showQuranWordSheet(
-                                  word,
-                                  languageCode: wordLanguageCode,
-                                ),
+                                words: showWordByWord
+                                    ? wordsByAyah[ayah.numberInSurah] ??
+                                        const []
+                                    : const [],
+                                onWordTap: showWordByWord
+                                    ? (word) => _showQuranWordSheet(
+                                          word,
+                                          languageCode: wordLanguageCode,
+                                        )
+                                    : null,
                               ),
                             ),
                             if (showTafsirButton &&
@@ -3051,6 +3090,64 @@ class _TafsirPanelLoader extends ConsumerWidget {
       },
       loading: () => const SizedBox.shrink(),
       error: (_, __) => const SizedBox.shrink(),
+    );
+  }
+}
+
+class _QuranReaderToggleChip extends StatelessWidget {
+  const _QuranReaderToggleChip({
+    required this.label,
+    required this.icon,
+    required this.selected,
+    required this.tokens,
+    required this.onTap,
+  });
+
+  final String label;
+  final IconData icon;
+  final bool selected;
+  final QiblaTokens tokens;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final foreground = selected ? tokens.primaryLight : tokens.textSecondary;
+    return Tooltip(
+      message: label,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(999),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 180),
+          curve: Curves.easeOutCubic,
+          margin: const EdgeInsets.symmetric(vertical: 9),
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+          decoration: BoxDecoration(
+            color: selected ? tokens.primaryBg : tokens.bgSurface,
+            borderRadius: BorderRadius.circular(999),
+            border: Border.all(
+              color: selected ? tokens.primaryBorder : tokens.borderMed,
+            ),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(icon, size: 14, color: foreground),
+              const SizedBox(width: 4),
+              Text(
+                label,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: GoogleFonts.dmSans(
+                  color: foreground,
+                  fontSize: 11,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

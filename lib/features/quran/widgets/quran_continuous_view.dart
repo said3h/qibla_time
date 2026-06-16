@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theme/app_theme.dart';
 import '../models/quran_models.dart';
+import 'quran_ayah_card.dart';
 import 'tajweed_text.dart';
 
 @visibleForTesting
@@ -31,6 +32,9 @@ class QuranContinuousView extends StatefulWidget {
     this.manualScrollAyahIndex,
     this.manualScrollRequestId = 0,
     this.showTajweed = false,
+    this.showWordByWord = false,
+    this.wordsByAyah = const {},
+    this.onWordTap,
     this.enableAutoScroll = true,
     this.header,
   });
@@ -42,6 +46,9 @@ class QuranContinuousView extends StatefulWidget {
   final int? manualScrollAyahIndex;
   final int manualScrollRequestId;
   final bool showTajweed;
+  final bool showWordByWord;
+  final Map<int, List<QuranWord>> wordsByAyah;
+  final ValueChanged<QuranWord>? onWordTap;
   final bool enableAutoScroll;
 
   /// Optional header widget rendered above the Arabic text (e.g. the top
@@ -263,7 +270,19 @@ class _QuranContinuousViewState extends State<QuranContinuousView> {
           ),
         );
       }
-      if (widget.showTajweed && ayah.tajweedHtml.trim().isNotEmpty) {
+      if (shouldUseQuranWordByWordArabic(
+        showWordByWord: widget.showWordByWord,
+        hasWordTapHandler: widget.onWordTap != null,
+        ayahArabic: ayah.arabic,
+        words: widget.wordsByAyah[ayah.numberInSurah] ?? const [],
+      )) {
+        spans.addAll(
+          _wordByWordSpans(
+            widget.wordsByAyah[ayah.numberInSurah]!,
+            ayahStyle,
+          ),
+        );
+      } else if (widget.showTajweed && ayah.tajweedHtml.trim().isNotEmpty) {
         final tajweedSpans = TajweedText.buildSpans(
           html: ayah.tajweedHtml,
           baseStyle: ayahStyle,
@@ -301,5 +320,31 @@ class _QuranContinuousViewState extends State<QuranContinuousView> {
     }
 
     return spans;
+  }
+
+  List<InlineSpan> _wordByWordSpans(List<QuranWord> words, TextStyle style) {
+    return words.map((word) {
+      return WidgetSpan(
+        alignment: PlaceholderAlignment.baseline,
+        baseline: TextBaseline.alphabetic,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(8),
+          onTap: () => widget.onWordTap?.call(word),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 2),
+            child: Text(
+              word.arabic,
+              textDirection: TextDirection.rtl,
+              style: style.copyWith(
+                color: widget.tokens.primaryLight,
+                decoration: TextDecoration.underline,
+                decorationColor: widget.tokens.primary.withValues(alpha: 0.45),
+                decorationThickness: 0.8,
+              ),
+            ),
+          ),
+        ),
+      );
+    }).toList(growable: false);
   }
 }

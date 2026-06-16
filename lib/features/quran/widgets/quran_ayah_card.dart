@@ -18,6 +18,20 @@ bool shouldRenderQuranWordByWordArabic({
   return _hasArabicHarakat(wordText);
 }
 
+bool shouldUseQuranWordByWordArabic({
+  required bool showWordByWord,
+  required bool hasWordTapHandler,
+  required String ayahArabic,
+  required List<QuranWord> words,
+}) {
+  return showWordByWord &&
+      hasWordTapHandler &&
+      shouldRenderQuranWordByWordArabic(
+        ayahArabic: ayahArabic,
+        words: words,
+      );
+}
+
 bool _hasArabicHarakat(String text) {
   return RegExp(r'[\u0610-\u061A\u064B-\u065F\u0670\u06D6-\u06ED]')
       .hasMatch(text);
@@ -38,6 +52,7 @@ class QuranAyahCard extends StatelessWidget {
     this.isSelected = false,
     this.isSelectionMode = false,
     this.showTajweed = false,
+    this.showWordByWord = false,
     required this.audioStatusLabel,
     required this.onToggleAudio,
     required this.onToggleBookmark,
@@ -61,6 +76,7 @@ class QuranAyahCard extends StatelessWidget {
   final bool isSelected;
   final bool isSelectionMode;
   final bool showTajweed;
+  final bool showWordByWord;
   final String audioStatusLabel;
   final VoidCallback onToggleAudio;
   final VoidCallback onToggleBookmark;
@@ -77,11 +93,12 @@ class QuranAyahCard extends StatelessWidget {
       height: 1.8,
     );
 
-    if (onWordTap != null &&
-        shouldRenderQuranWordByWordArabic(
-          ayahArabic: ayah.arabic,
-          words: words,
-        )) {
+    if (shouldUseQuranWordByWordArabic(
+      showWordByWord: showWordByWord,
+      hasWordTapHandler: onWordTap != null,
+      ayahArabic: ayah.arabic,
+      words: words,
+    )) {
       return _buildWordByWordArabicText(style);
     }
 

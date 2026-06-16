@@ -328,6 +328,17 @@ void main() {
     });
   });
 
+  group('supportsQuranWordByWordPilot', () {
+    test('allows only pilot surahs while data is incomplete', () {
+      expect(supportsQuranWordByWordPilot(1), isTrue);
+      expect(supportsQuranWordByWordPilot(112), isTrue);
+      expect(supportsQuranWordByWordPilot(113), isTrue);
+      expect(supportsQuranWordByWordPilot(114), isTrue);
+      expect(supportsQuranWordByWordPilot(2), isFalse);
+      expect(supportsQuranWordByWordPilot(18), isFalse);
+    });
+  });
+
   group('shouldRenderQuranWordByWordArabic', () {
     test('does not replace vocalized ayah text with unvocalized word data', () {
       const words = [
@@ -368,6 +379,43 @@ void main() {
           words: words,
         ),
         isTrue,
+      );
+    });
+  });
+
+  group('shouldUseQuranWordByWordArabic', () {
+    const words = [
+      QuranWord(
+        surahNumber: 1,
+        ayahNumber: 1,
+        position: 1,
+        arabic: 'بِسْمِ',
+        transliteration: '',
+        translations: {},
+      ),
+    ];
+
+    test('requires the production toggle to be on', () {
+      expect(
+        shouldUseQuranWordByWordArabic(
+          showWordByWord: false,
+          hasWordTapHandler: true,
+          ayahArabic: 'بِسْمِ اللَّهِ',
+          words: words,
+        ),
+        isFalse,
+      );
+    });
+
+    test('requires a tap handler before rendering tappable words', () {
+      expect(
+        shouldUseQuranWordByWordArabic(
+          showWordByWord: true,
+          hasWordTapHandler: false,
+          ayahArabic: 'بِسْمِ اللَّهِ',
+          words: words,
+        ),
+        isFalse,
       );
     });
   });

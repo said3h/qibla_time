@@ -10,6 +10,7 @@ class SettingsService {
   static const _keyCalcMethod = 'calculation_method';
   static const _keyMadhab = 'prayer_madhab';
   static const _keyQuranTajweedEnabled = 'quran_tajweed_enabled';
+  static const _keyQuranWordByWordEnabled = 'quran_word_by_word_enabled';
   static const _keyTafsirEnabled = 'tafsir_enabled';
 
   Future<void> saveAdhan(String fileName) async {
@@ -92,6 +93,16 @@ class SettingsService {
   Future<bool> getQuranTajweedEnabled() async {
     final prefs = await StorageService.prefs;
     return prefs.getBool(_keyQuranTajweedEnabled) ?? false;
+  }
+
+  Future<void> saveQuranWordByWordEnabled(bool value) async {
+    final prefs = await StorageService.prefs;
+    await prefs.setBool(_keyQuranWordByWordEnabled, value);
+  }
+
+  Future<bool> getQuranWordByWordEnabled() async {
+    final prefs = await StorageService.prefs;
+    return prefs.getBool(_keyQuranWordByWordEnabled) ?? false;
   }
 
   Future<void> saveTafsirEnabled(bool value) async {
