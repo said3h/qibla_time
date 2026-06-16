@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:qibla_time/features/quran/models/quran_models.dart';
 import 'package:qibla_time/features/quran/screens/quran_screen.dart';
 import 'package:qibla_time/features/quran/services/quran_mini_player_service.dart';
+import 'package:qibla_time/features/quran/widgets/quran_ayah_card.dart';
 import 'package:qibla_time/features/quran/widgets/quran_continuous_view.dart';
 
 void main() {
@@ -317,6 +318,50 @@ void main() {
 
       expect(word.translationFor('es'), 'En el nombre');
       expect(word.translationFor('fr'), 'In the name');
+    });
+  });
+
+  group('shouldRenderQuranWordByWordArabic', () {
+    test('does not replace vocalized ayah text with unvocalized word data', () {
+      const words = [
+        QuranWord(
+          surahNumber: 112,
+          ayahNumber: 1,
+          position: 1,
+          arabic: 'قل',
+          transliteration: '',
+          translations: {},
+        ),
+      ];
+
+      expect(
+        shouldRenderQuranWordByWordArabic(
+          ayahArabic: 'قُلْ',
+          words: words,
+        ),
+        isFalse,
+      );
+    });
+
+    test('allows word-by-word rendering when word data keeps harakat', () {
+      const words = [
+        QuranWord(
+          surahNumber: 1,
+          ayahNumber: 1,
+          position: 1,
+          arabic: 'بِسْمِ',
+          transliteration: '',
+          translations: {},
+        ),
+      ];
+
+      expect(
+        shouldRenderQuranWordByWordArabic(
+          ayahArabic: 'بِسْمِ اللَّهِ',
+          words: words,
+        ),
+        isTrue,
+      );
     });
   });
 }

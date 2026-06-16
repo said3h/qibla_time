@@ -6,6 +6,23 @@ import '../../../l10n/generated/app_localizations.dart';
 import '../models/quran_models.dart';
 import 'tajweed_text.dart';
 
+@visibleForTesting
+bool shouldRenderQuranWordByWordArabic({
+  required String ayahArabic,
+  required List<QuranWord> words,
+}) {
+  if (words.isEmpty) return false;
+  if (!_hasArabicHarakat(ayahArabic)) return true;
+
+  final wordText = words.map((word) => word.arabic).join('');
+  return _hasArabicHarakat(wordText);
+}
+
+bool _hasArabicHarakat(String text) {
+  return RegExp(r'[\u0610-\u061A\u064B-\u065F\u0670\u06D6-\u06ED]')
+      .hasMatch(text);
+}
+
 class QuranAyahCard extends StatelessWidget {
   const QuranAyahCard({
     super.key,
@@ -60,7 +77,11 @@ class QuranAyahCard extends StatelessWidget {
       height: 1.8,
     );
 
-    if (words.isNotEmpty && onWordTap != null) {
+    if (onWordTap != null &&
+        shouldRenderQuranWordByWordArabic(
+          ayahArabic: ayah.arabic,
+          words: words,
+        )) {
       return _buildWordByWordArabicText(style);
     }
 

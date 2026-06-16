@@ -713,7 +713,7 @@ class QuranService {
         SurahAyah(
           number: number,
           numberInSurah: numberInSurah,
-          arabic: arabic.trim(),
+          arabic: normalizeQuranArabicForDisplay(arabic),
           transliteration: _readOptionalString(ayahData, 'transliteration'),
           translation: _readOptionalString(ayahData, 'translation'),
           audioUrl: _safeAlafasyAudioUrl(
