@@ -65,6 +65,7 @@ nul
 
 # Scratch / CI repos and build artifacts
 _codex_build_*/
+_quran_words_generated/
 
 # Design prototypes
 _design_stitch3/
