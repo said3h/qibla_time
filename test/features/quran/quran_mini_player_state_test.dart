@@ -325,6 +325,25 @@ void main() {
 
       expect(word.translationFor('es'), 'En el nombre');
       expect(word.translationFor('fr'), 'In the name');
+      expect(word.translationLanguageFor('es'), 'es');
+      expect(word.translationLanguageFor('fr'), 'en');
+    });
+
+    test('reports English as the active language when Spanish is unavailable',
+        () {
+      const word = QuranWord(
+        surahNumber: 1,
+        ayahNumber: 1,
+        position: 1,
+        arabic: 'بِسْمِ',
+        transliteration: 'Bismi',
+        translations: {
+          'en': 'In the name',
+        },
+      );
+
+      expect(word.translationFor('es'), 'In the name');
+      expect(word.translationLanguageFor('es'), 'en');
     });
   });
 

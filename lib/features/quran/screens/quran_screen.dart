@@ -3007,6 +3007,13 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       ),
       builder: (sheetContext) {
         final translation = word.translationFor(languageCode);
+        final translationLanguageCode = word.translationLanguageFor(
+          languageCode,
+        );
+        final translationLanguageLabel = _quranWordTranslationLanguageLabel(
+          translationLanguageCode,
+          appLanguageCode: languageCode,
+        );
         return SafeArea(
           child: Padding(
             padding: const EdgeInsets.fromLTRB(20, 18, 20, 24),
@@ -3044,6 +3051,19 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
                     ),
                   ),
                 ],
+                if (translationLanguageLabel != null) ...[
+                  const SizedBox(height: 8),
+                  Text(
+                    translationLanguageLabel,
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.dmSans(
+                      fontSize: 11,
+                      height: 1.35,
+                      color: tokens.textMuted,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ],
                 const SizedBox(height: 14),
                 Text(
                   '${word.surahNumber}:${word.ayahNumber} · word ${word.position}',
@@ -3060,6 +3080,49 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       },
     );
   }
+}
+
+String? _quranWordTranslationLanguageLabel(
+  String? translationLanguageCode, {
+  required String appLanguageCode,
+}) {
+  if (translationLanguageCode == null || translationLanguageCode.isEmpty) {
+    return null;
+  }
+  final appLanguage = appLanguageCode.trim().toLowerCase().split('_').first;
+  final languageName = _quranWordLanguageName(
+    translationLanguageCode,
+    appLanguageCode: appLanguage,
+  );
+  if (appLanguage == 'es') {
+    return 'Traducción palabra por palabra: $languageName';
+  }
+  return 'Word-by-Word translation: $languageName';
+}
+
+String _quranWordLanguageName(
+  String languageCode, {
+  required String appLanguageCode,
+}) {
+  final code = languageCode.trim().toLowerCase().split('_').first;
+  if (appLanguageCode == 'es') {
+    return switch (code) {
+      'en' => 'inglés',
+      'tr' => 'turco',
+      'id' => 'indonesio',
+      'ur' => 'urdu',
+      'es' => 'español',
+      _ => code.toUpperCase(),
+    };
+  }
+  return switch (code) {
+    'en' => 'English',
+    'tr' => 'Turkish',
+    'id' => 'Indonesian',
+    'ur' => 'Urdu',
+    'es' => 'Spanish',
+    _ => code.toUpperCase(),
+  };
 }
 
 class _TafsirPanelLoader extends ConsumerWidget {

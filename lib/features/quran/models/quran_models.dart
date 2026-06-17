@@ -64,10 +64,26 @@ class QuranWord {
   final Map<String, String> translations;
 
   String translationFor(String languageCode) {
+    final translationLanguageCode = translationLanguageFor(languageCode);
+    return translationLanguageCode == null
+        ? ''
+        : translations[translationLanguageCode] ?? '';
+  }
+
+  String? translationLanguageFor(String languageCode) {
     final normalized = languageCode.trim().toLowerCase().split('_').first;
-    return translations[normalized] ??
-        translations['en'] ??
-        (translations.isEmpty ? '' : translations.values.first);
+    if ((translations[normalized] ?? '').trim().isNotEmpty) {
+      return normalized;
+    }
+    if ((translations['en'] ?? '').trim().isNotEmpty) {
+      return 'en';
+    }
+    for (final entry in translations.entries) {
+      if (entry.value.trim().isNotEmpty) {
+        return entry.key;
+      }
+    }
+    return null;
   }
 
   factory QuranWord.fromJson(Map<String, dynamic> json) {
