@@ -2236,9 +2236,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
           ),
           if (wordByWordSupported) ...[
             const SizedBox(width: 6),
-            _QuranReaderToggleChip(
-              label: 'Word by Word',
-              icon: Icons.touch_app_outlined,
+            _QuranWordByWordToggleButton(
               selected: showWordByWord,
               tokens: tokens,
               onTap: () => _toggleWordByWord(!showWordByWord),
@@ -3145,6 +3143,63 @@ class _QuranReaderToggleChip extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _QuranWordByWordToggleButton extends StatelessWidget {
+  const _QuranWordByWordToggleButton({
+    required this.selected,
+    required this.tokens,
+    required this.onTap,
+  });
+
+  final bool selected;
+  final QiblaTokens tokens;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final foreground = selected ? tokens.primaryLight : tokens.textSecondary;
+    return Tooltip(
+      message: 'Word by Word',
+      child: Semantics(
+        button: true,
+        toggled: selected,
+        label: 'Word by Word',
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(999),
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 180),
+            curve: Curves.easeOutCubic,
+            width: 40,
+            height: 40,
+            margin: const EdgeInsets.symmetric(vertical: 7),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: selected ? tokens.primaryBg : tokens.bgSurface,
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: selected ? tokens.primaryBorder : tokens.borderMed,
+              ),
+            ),
+            child: Directionality(
+              textDirection: TextDirection.ltr,
+              child: Text(
+                'A|أ',
+                maxLines: 1,
+                style: GoogleFonts.dmSans(
+                  color: foreground,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: 0,
+                ),
+              ),
+            ),
           ),
         ),
       ),
