@@ -51,7 +51,35 @@ class HomeScreen extends ConsumerStatefulWidget {
   ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends ConsumerState<HomeScreen> {
+@visibleForTesting
+bool shouldRefreshPrayerTimesIfStale({
+  required ResolvedPrayerSchedule? resolvedSchedule,
+  required DateTime now,
+  required DateTime? lastRefreshAt,
+  Duration staleAfter = const Duration(hours: 4),
+}) {
+  if (resolvedSchedule == null) {
+    return true;
+  }
+
+  final scheduleDate = resolvedSchedule.schedule.date;
+  if (scheduleDate.year != now.year ||
+      scheduleDate.month != now.month ||
+      scheduleDate.day != now.day) {
+    return true;
+  }
+
+  if (lastRefreshAt == null) {
+    return false;
+  }
+
+  return now.difference(lastRefreshAt) >= staleAfter;
+}
+
+class _HomeScreenState extends ConsumerState<HomeScreen>
+    with WidgetsBindingObserver {
+  static const _prayerRefreshStaleAfter = Duration(hours: 4);
+  static const _prayerRefreshDebounce = Duration(minutes: 2);
   static const _sujudIconAsset =
       'assets/images/prayer_positions/sujud_icon.svg';
 
@@ -67,23 +95,86 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   late DateTime _selectedDate;
   late final ScrollController _scrollController;
   late final ScrollController _calendarController;
+  DateTime? _lastPrayerRefreshAt;
+  DateTime? _lastPrayerRefreshAttemptAt;
+  bool _isRefreshingPrayerTimes = false;
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _selectedDate = _dateOnly(DateTime.now());
     _scrollController = ScrollController();
     _calendarController = ScrollController(initialScrollOffset: 6 * 62.0);
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      _refreshPrayerTimesIfStale(reason: 'initial');
       ref.read(adhanManagerProvider).scheduleTodayAdhans();
     });
   }
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _scrollController.dispose();
     _calendarController.dispose();
     super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      _refreshPrayerTimesIfStale(reason: 'resume');
+    }
+  }
+
+  Future<void> _refreshPrayerTimesIfStale({required String reason}) async {
+    if (!mounted || _isRefreshingPrayerTimes) {
+      return;
+    }
+
+    final now = DateTime.now();
+    final lastAttempt = _lastPrayerRefreshAttemptAt;
+    if (lastAttempt != null &&
+        now.difference(lastAttempt) < _prayerRefreshDebounce) {
+      return;
+    }
+    _lastPrayerRefreshAttemptAt = now;
+
+    final resolvedSchedule = ref.read(prayerScheduleProvider).valueOrNull;
+    if (!shouldRefreshPrayerTimesIfStale(
+      resolvedSchedule: resolvedSchedule,
+      now: now,
+      lastRefreshAt: _lastPrayerRefreshAt,
+      staleAfter: _prayerRefreshStaleAfter,
+    )) {
+      return;
+    }
+
+    _isRefreshingPrayerTimes = true;
+    _lastPrayerRefreshAt = now;
+    try {
+      final today = _dateOnly(now);
+      if (_selectedDate.isBefore(today) && mounted) {
+        setState(() => _selectedDate = today);
+      }
+
+      ref.invalidate(manualPrayerLocationProvider);
+      ref.invalidate(prayerLocationProvider);
+      ref.invalidate(prayerLocationDiagnosticProvider);
+      ref.invalidate(lastLocationLabelProvider);
+      ref.invalidate(recentLocationsProvider);
+      ref.invalidate(travelBannerProvider);
+      ref.invalidate(prayerScheduleProvider);
+      ref.invalidate(nextPrayerInfoProvider);
+      ref.invalidate(prayerCountdownProvider);
+      ref.invalidate(prayerScheduleForDateProvider(_selectedDate));
+
+      if (reason == 'resume') {
+        await ref.read(adhanManagerProvider).scheduleTodayAdhans();
+      }
+    } finally {
+      _isRefreshingPrayerTimes = false;
+    }
   }
 
   @override
