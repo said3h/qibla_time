@@ -348,11 +348,11 @@ void main() {
   });
 
   group('supportsQuranWordByWordOnline', () {
-    test('allows every Quran surah for runtime word-by-word loading', () {
-      expect(supportsQuranWordByWordOnline(1), isTrue);
-      expect(supportsQuranWordByWordOnline(2), isTrue);
-      expect(supportsQuranWordByWordOnline(18), isTrue);
-      expect(supportsQuranWordByWordOnline(114), isTrue);
+    test('is hidden by default behind the production feature flag', () {
+      expect(supportsQuranWordByWordOnline(1), isFalse);
+      expect(supportsQuranWordByWordOnline(2), isFalse);
+      expect(supportsQuranWordByWordOnline(18), isFalse);
+      expect(supportsQuranWordByWordOnline(114), isFalse);
       expect(supportsQuranWordByWordOnline(0), isFalse);
       expect(supportsQuranWordByWordOnline(115), isFalse);
     });

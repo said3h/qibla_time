@@ -39,9 +39,12 @@ import 'downloaded_surahs_screen.dart';
 const _enableQuranTafsirPanels =
     bool.fromEnvironment('QURAN_TAFSIR_PANEL_ENABLED', defaultValue: true);
 
+const _enableQuranWordByWord =
+    bool.fromEnvironment('QURAN_WORD_BY_WORD_ENABLED', defaultValue: false);
+
 @visibleForTesting
 bool supportsQuranWordByWordOnline(int surahNumber) {
-  return surahNumber >= 1 && surahNumber <= 114;
+  return _enableQuranWordByWord && surahNumber >= 1 && surahNumber <= 114;
 }
 
 @visibleForTesting
@@ -1188,6 +1191,10 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   }
 
   Future<void> _toggleWordByWord(bool value) async {
+    if (!_enableQuranWordByWord) {
+      return;
+    }
+
     if (value) {
       final hasConnection = ref.read(connectivityStatusProvider).valueOrNull;
       if (hasConnection == false) {
@@ -2225,7 +2232,8 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     final bookmarks = ref.watch(quranBookmarksProvider).valueOrNull ?? const [];
     final lastReading = ref.watch(lastReadingProvider).valueOrNull;
     final tafsirLanguageCode = ref.watch(currentLanguageCodeProvider);
-    final wordLanguageCode = ref.watch(currentLanguageCodeProvider);
+    final wordLanguageCode =
+        _enableQuranWordByWord ? ref.watch(currentLanguageCodeProvider) : 'en';
     final showTajweed =
         ref.watch(quranTajweedEnabledProvider).valueOrNull ?? false;
     final wordByWordSupported =
