@@ -328,14 +328,14 @@ void main() {
     });
   });
 
-  group('supportsQuranWordByWordPilot', () {
-    test('allows only pilot surahs while data is incomplete', () {
-      expect(supportsQuranWordByWordPilot(1), isTrue);
-      expect(supportsQuranWordByWordPilot(112), isTrue);
-      expect(supportsQuranWordByWordPilot(113), isTrue);
-      expect(supportsQuranWordByWordPilot(114), isTrue);
-      expect(supportsQuranWordByWordPilot(2), isFalse);
-      expect(supportsQuranWordByWordPilot(18), isFalse);
+  group('supportsQuranWordByWordOnline', () {
+    test('allows every Quran surah for runtime word-by-word loading', () {
+      expect(supportsQuranWordByWordOnline(1), isTrue);
+      expect(supportsQuranWordByWordOnline(2), isTrue);
+      expect(supportsQuranWordByWordOnline(18), isTrue);
+      expect(supportsQuranWordByWordOnline(114), isTrue);
+      expect(supportsQuranWordByWordOnline(0), isFalse);
+      expect(supportsQuranWordByWordOnline(115), isFalse);
     });
   });
 

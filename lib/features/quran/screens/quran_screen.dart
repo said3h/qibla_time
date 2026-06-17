@@ -9,6 +9,7 @@ import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/services/audio_service.dart';
+import '../../../core/services/connectivity_service.dart';
 import '../../../core/services/logger_service.dart';
 import '../../../core/services/settings_service.dart';
 import '../../../core/theme/app_theme.dart';
@@ -38,11 +39,9 @@ import 'downloaded_surahs_screen.dart';
 const _enableQuranTafsirPanels =
     bool.fromEnvironment('QURAN_TAFSIR_PANEL_ENABLED', defaultValue: true);
 
-const _quranWordByWordPilotSurahs = <int>{1, 112, 113, 114};
-
 @visibleForTesting
-bool supportsQuranWordByWordPilot(int surahNumber) {
-  return _quranWordByWordPilotSurahs.contains(surahNumber);
+bool supportsQuranWordByWordOnline(int surahNumber) {
+  return surahNumber >= 1 && surahNumber <= 114;
 }
 
 @visibleForTesting
@@ -1189,8 +1188,24 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   }
 
   Future<void> _toggleWordByWord(bool value) async {
+    if (value) {
+      final hasConnection = ref.read(connectivityStatusProvider).valueOrNull;
+      if (hasConnection == false) {
+        if (!mounted) return;
+        showQiblaSnackBar(
+          context,
+          message: 'Word-by-Word requiere conexión',
+          icon: Icons.wifi_off_rounded,
+        );
+        return;
+      }
+    }
+
     await SettingsService.instance.saveQuranWordByWordEnabled(value);
     ref.invalidate(quranWordByWordEnabledProvider);
+    if (value) {
+      ref.invalidate(quranWordsForSurahProvider(widget.summary.number));
+    }
   }
 
   Future<void> _toggleTafsirForAyah(int ayahNumber) async {
@@ -2211,16 +2226,18 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
     final lastReading = ref.watch(lastReadingProvider).valueOrNull;
     final tafsirLanguageCode = ref.watch(currentLanguageCodeProvider);
     final wordLanguageCode = ref.watch(currentLanguageCodeProvider);
-    final wordsByAyah = ref
-            .watch(quranWordsForSurahProvider(widget.summary.number))
-            .valueOrNull ??
-        const <int, List<QuranWord>>{};
     final showTajweed =
         ref.watch(quranTajweedEnabledProvider).valueOrNull ?? false;
     final wordByWordSupported =
-        supportsQuranWordByWordPilot(widget.summary.number);
+        supportsQuranWordByWordOnline(widget.summary.number);
     final showWordByWord = wordByWordSupported &&
         (ref.watch(quranWordByWordEnabledProvider).valueOrNull ?? false);
+    final wordsByAyah = showWordByWord
+        ? ref
+                .watch(quranWordsForSurahProvider(widget.summary.number))
+                .valueOrNull ??
+            const <int, List<QuranWord>>{}
+        : const <int, List<QuranWord>>{};
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
