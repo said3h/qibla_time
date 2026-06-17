@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theme/app_theme.dart';
+import '../../../core/utils/qibla_snackbar.dart';
 import '../../../core/utils/religious_reference_formatter.dart';
 import '../../../l10n/l10n.dart';
 import '../../hadith/models/hadith.dart';
@@ -184,8 +185,8 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                 decoration: BoxDecoration(
-                  color:
-                      _getCollectionColor(hadith.reference).withValues(alpha: 0.15),
+                  color: _getCollectionColor(hadith.reference)
+                      .withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Column(
@@ -674,15 +675,12 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
       _isFavorite = !_isFavorite;
     });
     if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          _isFavorite
-              ? context.l10n.hadithDetailSavedToFavorites
-              : context.l10n.hadithDetailRemovedFromFavorites,
-        ),
-        duration: const Duration(seconds: 2),
-      ),
+    showQiblaSnackBar(
+      context,
+      message: _isFavorite
+          ? context.l10n.hadithDetailSavedToFavorites
+          : context.l10n.hadithDetailRemovedFromFavorites,
+      duration: const Duration(seconds: 2),
     );
   }
 
@@ -691,11 +689,10 @@ class _HadithDetailScreenState extends ConsumerState<HadithDetailScreen> {
         '${hadith.arabic}\n\n${hadith.translation}\n\n— ${hadith.reference}';
     await Clipboard.setData(ClipboardData(text: text));
     if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(context.l10n.hadithDetailCopied),
-        duration: const Duration(seconds: 2),
-      ),
+    showQiblaSnackBar(
+      context,
+      message: context.l10n.hadithDetailCopied,
+      duration: const Duration(seconds: 2),
     );
   }
 

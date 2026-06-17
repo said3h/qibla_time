@@ -21,6 +21,7 @@ import '../../../core/models/adhan_model.dart';
 import '../../../core/theme/accessibility_provider.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/theme/theme_provider.dart';
+import '../../../core/utils/qibla_snackbar.dart';
 import '../../../core/utils/share_sheet_origin.dart';
 import '../../../l10n/l10n.dart';
 import '../../dhikr/services/dhikr_service.dart';
@@ -266,11 +267,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
     final message = result == AdhanScheduleResult.scheduled
         ? 'Adhan de prueba programado para dentro de 1 minuto.'
         : 'No se programó: activa las alarmas exactas de Android primero.';
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-      ),
-    );
+    showQiblaSnackBar(context, message: message);
   }
 
   Future<void> _refreshAndroidAdhanStatus() async {
@@ -323,15 +320,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
     if (!mounted) return;
     setState(() => dailyInspirationEnabled = value);
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          value
-              ? context.l10n.settingsDailyNotificationEnabled
-              : context.l10n.settingsDailyNotificationDisabled,
-        ),
-        duration: const Duration(seconds: 2),
-      ),
+    showQiblaSnackBar(
+      context,
+      message: value
+          ? context.l10n.settingsDailyNotificationEnabled
+          : context.l10n.settingsDailyNotificationDisabled,
+      duration: const Duration(seconds: 2),
     );
   }
 
@@ -2116,18 +2110,21 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
                   ref.invalidate(accessibilityControllerProvider);
                   if (!mounted) return;
                   _loadSettings();
-                  ScaffoldMessenger.of(this.context).showSnackBar(
-                    SnackBar(content: Text(l10n.settingsRestoreBackupSuccess)),
+                  showQiblaSnackBar(
+                    this.context,
+                    message: l10n.settingsRestoreBackupSuccess,
                   );
                 } on CloudSyncRestoreException catch (e) {
                   if (!context.mounted) return;
-                  ScaffoldMessenger.of(this.context).showSnackBar(
-                    SnackBar(content: Text(e.message)),
+                  showQiblaSnackBar(
+                    this.context,
+                    message: e.message,
                   );
                 } catch (_) {
                   if (!context.mounted) return;
-                  ScaffoldMessenger.of(this.context).showSnackBar(
-                    SnackBar(content: Text(l10n.settingsRestoreBackupError)),
+                  showQiblaSnackBar(
+                    this.context,
+                    message: l10n.settingsRestoreBackupError,
                   );
                 }
               },

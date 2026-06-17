@@ -10,6 +10,7 @@ import 'package:hijri/hijri_calendar.dart';
 import '../../../core/localization/locale_controller.dart';
 import '../../../core/services/connectivity_service.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../../core/utils/qibla_snackbar.dart';
 import '../../../core/utils/spanish_date_labels.dart';
 import '../../../l10n/l10n.dart';
 import '../../calendar/screens/calendar_screen.dart';
@@ -1779,12 +1780,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 dialogNavigator.pop();
                 await ref.read(adhanManagerProvider).scheduleTodayAdhans();
               } catch (_) {
-                if (!mounted) {
+                if (!mounted || !context.mounted) {
                   return;
                 }
                 setSheetState(() => isSaving = false);
-                messenger.showSnackBar(
-                  SnackBar(content: Text(l10n.homeManualCityNotFound)),
+                showQiblaSnackBarWithMessenger(
+                  context,
+                  messenger: messenger,
+                  message: l10n.homeManualCityNotFound,
                 );
               }
             }
@@ -1813,12 +1816,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 dialogNavigator.pop();
                 await ref.read(adhanManagerProvider).scheduleTodayAdhans();
               } catch (_) {
-                if (!mounted) {
+                if (!mounted || !context.mounted) {
                   return;
                 }
                 setSheetState(() => isSaving = false);
-                messenger.showSnackBar(
-                  SnackBar(content: Text(l10n.homeManualCityNotFound)),
+                showQiblaSnackBarWithMessenger(
+                  context,
+                  messenger: messenger,
+                  message: l10n.homeManualCityNotFound,
                 );
               }
             }

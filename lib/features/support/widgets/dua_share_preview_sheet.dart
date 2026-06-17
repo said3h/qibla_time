@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theme/app_theme.dart';
+import '../../../core/utils/qibla_snackbar.dart';
 import '../../../l10n/l10n.dart';
 import '../../hadith_share/models/hadith_share_theme.dart';
 import '../../hadith_share/services/hadith_share_image_service.dart';
@@ -108,10 +109,9 @@ class _DuaSharePreviewSheetState extends State<_DuaSharePreviewSheet> {
       Navigator.of(context).pop();
     } catch (_) {
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(context.l10n.shareDuaTextError),
-        ),
+      showQiblaSnackBar(
+        context,
+        message: context.l10n.shareDuaTextError,
       );
     } finally {
       if (mounted) {
@@ -139,10 +139,9 @@ class _DuaSharePreviewSheetState extends State<_DuaSharePreviewSheet> {
       Navigator.of(context).pop();
     } catch (_) {
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(context.l10n.shareDuaImageError),
-        ),
+      showQiblaSnackBar(
+        context,
+        message: context.l10n.shareDuaImageError,
       );
     } finally {
       if (mounted) {
@@ -201,8 +200,7 @@ class _DuaSharePreviewSheetState extends State<_DuaSharePreviewSheet> {
           children: [
             ShareSelectionChip(
               label: l10n.shareContentBilingual,
-              selected:
-                  _selectedContent == SharePreviewContentOption.bilingual,
+              selected: _selectedContent == SharePreviewContentOption.bilingual,
               enabled: SharePreviewContentOption.bilingual.isAvailable(
                 hasArabic: _hasArabicText,
                 hasTranslation: _hasTranslation,

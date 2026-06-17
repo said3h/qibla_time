@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theme/app_theme.dart';
+import '../../../core/utils/qibla_snackbar.dart';
 import '../../../l10n/l10n.dart';
 import '../../quran/models/quran_models.dart';
 import '../../quran/services/quran_service.dart';
@@ -394,8 +395,10 @@ class _HafizPracticeScreenState extends ConsumerState<HafizPracticeScreen> {
                         ref.read(hafizProgressProvider.notifier).state =
                             ref.read(hafizServiceProvider).getProgress();
                         if (!mounted) return;
-                        ScaffoldMessenger.of(this.context).showSnackBar(
-                            SnackBar(content: Text(l10n.hafizPlanSaved)));
+                        showQiblaSnackBar(
+                          this.context,
+                          message: l10n.hafizPlanSaved,
+                        );
                       },
                       child: Text(l10n.hafizSavePlan),
                     ),
@@ -410,10 +413,10 @@ class _HafizPracticeScreenState extends ConsumerState<HafizPracticeScreen> {
                               ref.read(hafizProgressProvider.notifier).state =
                                   ref.read(hafizServiceProvider).getProgress();
                               if (!mounted) return;
-                              ScaffoldMessenger.of(this.context).showSnackBar(
-                                  SnackBar(
-                                      content:
-                                          Text(l10n.hafizRepetitionLogged)));
+                              showQiblaSnackBar(
+                                this.context,
+                                message: l10n.hafizRepetitionLogged,
+                              );
                             },
                       child: Text(l10n.hafizLogRepetition),
                     ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/services/logger_service.dart';
+import '../../../core/utils/qibla_snackbar.dart';
 import '../../../l10n/l10n.dart';
 
 Future<void> openBookUrl(BuildContext context, String url) async {
@@ -69,12 +70,9 @@ Future<void> openBookUrl(BuildContext context, String url) async {
 }
 
 void _showBookLinkFeedback(BuildContext context, String message) {
-  final messenger = ScaffoldMessenger.of(context);
-  messenger.hideCurrentSnackBar();
-  messenger.showSnackBar(
-    SnackBar(
-      content: Text(message),
-      duration: const Duration(seconds: 2),
-    ),
+  showQiblaSnackBar(
+    context,
+    message: message,
+    duration: const Duration(seconds: 2),
   );
 }

@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theme/app_theme.dart';
 import '../../../core/theme/theme_provider.dart';
+import '../../../core/utils/qibla_snackbar.dart';
 import '../../../l10n/l10n.dart';
 import '../../hadith/services/hadith_service.dart';
 import '../models/achievement.dart';
@@ -138,13 +139,9 @@ class AnalyticsScreen extends ConsumerWidget {
       }
     } catch (_) {
       if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              context.l10n.analyticsShareError,
-              style: GoogleFonts.dmSans(),
-            ),
-          ),
+        showQiblaSnackBar(
+          context,
+          message: context.l10n.analyticsShareError,
         );
       }
     }
@@ -235,7 +232,8 @@ class _WeeklySummaryCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _SectionTitle(title: context.l10n.analyticsWeeklySummaryTitle, tokens: tokens),
+          _SectionTitle(
+              title: context.l10n.analyticsWeeklySummaryTitle, tokens: tokens),
           const SizedBox(height: 16),
           Row(
             children: [
@@ -448,7 +446,8 @@ class _AchievementsCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _SectionTitle(title: context.l10n.analyticsAchievementsTitle, tokens: tokens),
+          _SectionTitle(
+              title: context.l10n.analyticsAchievementsTitle, tokens: tokens),
           const SizedBox(height: 14),
           achievements.when(
             data: (items) {
@@ -560,9 +559,8 @@ class _AchievementTile extends StatelessWidget {
                       style: GoogleFonts.dmSans(
                         fontSize: 11,
                         fontWeight: FontWeight.w600,
-                        color: isUnlocked
-                            ? tokens.primary
-                            : tokens.textSecondary,
+                        color:
+                            isUnlocked ? tokens.primary : tokens.textSecondary,
                       ),
                     ),
                   ],
@@ -615,7 +613,8 @@ class _HeatmapCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _SectionTitle(title: context.l10n.analyticsLast30DaysTitle, tokens: tokens),
+          _SectionTitle(
+              title: context.l10n.analyticsLast30DaysTitle, tokens: tokens),
           const SizedBox(height: 14),
           GridView.builder(
             shrinkWrap: true,
@@ -626,7 +625,8 @@ class _HeatmapCard extends StatelessWidget {
               mainAxisSpacing: 5,
             ),
             itemCount: days.length,
-            itemBuilder: (_, index) => _HeatCell(day: days[index], tokens: tokens),
+            itemBuilder: (_, index) =>
+                _HeatCell(day: days[index], tokens: tokens),
           ),
           const SizedBox(height: 12),
           Row(
@@ -748,7 +748,8 @@ class _PrayerProgressCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _SectionTitle(title: context.l10n.analyticsByPrayerTitle, tokens: tokens),
+          _SectionTitle(
+              title: context.l10n.analyticsByPrayerTitle, tokens: tokens),
           const SizedBox(height: 14),
           ..._prayers.map(
             (prayer) => Padding(
@@ -1069,9 +1070,8 @@ class _HadithStatsCard extends ConsumerWidget {
               .where((grade) => grade.isNotEmpty)
               .toSet()
               .length;
-          final favoritesRatio = totalHadiths == 0
-              ? 0.0
-              : favoritesCount / totalHadiths;
+          final favoritesRatio =
+              totalHadiths == 0 ? 0.0 : favoritesCount / totalHadiths;
 
           return _Card(
             tokens: tokens,

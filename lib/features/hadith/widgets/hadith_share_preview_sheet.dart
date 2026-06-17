@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theme/app_theme.dart';
+import '../../../core/utils/qibla_snackbar.dart';
 import '../../../l10n/l10n.dart';
 import '../../hadith/models/hadith.dart';
 import '../../hadith/services/hadith_share_service.dart';
@@ -116,10 +117,9 @@ class _HadithSharePreviewSheetState extends State<_HadithSharePreviewSheet> {
       Navigator.of(context).pop();
     } catch (_) {
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(context.l10n.shareHadithTextError),
-        ),
+      showQiblaSnackBar(
+        context,
+        message: context.l10n.shareHadithTextError,
       );
     } finally {
       if (mounted) {
@@ -147,10 +147,9 @@ class _HadithSharePreviewSheetState extends State<_HadithSharePreviewSheet> {
       Navigator.of(context).pop();
     } catch (_) {
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(context.l10n.shareHadithImageError),
-        ),
+      showQiblaSnackBar(
+        context,
+        message: context.l10n.shareHadithImageError,
       );
     } finally {
       if (mounted) {
@@ -202,8 +201,7 @@ class _HadithSharePreviewSheetState extends State<_HadithSharePreviewSheet> {
           children: [
             ShareSelectionChip(
               label: l10n.shareContentBilingual,
-              selected:
-                  _selectedContent == SharePreviewContentOption.bilingual,
+              selected: _selectedContent == SharePreviewContentOption.bilingual,
               enabled: SharePreviewContentOption.bilingual.isAvailable(
                 hasArabic: _hasArabicText,
                 hasTranslation: _hasTranslation,

@@ -8,6 +8,7 @@ import '../../../core/models/adhan_model.dart';
 import '../../../core/services/audio_service.dart';
 import '../../../core/services/settings_service.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../../core/utils/qibla_snackbar.dart';
 import '../../../l10n/l10n.dart';
 
 class AdhanSelectorScreen extends StatefulWidget {
@@ -53,7 +54,8 @@ class _AdhanSelectorScreenState extends State<AdhanSelectorScreen> {
       });
     });
 
-    _playerStateSubscription = _audioService.onPlayerStateChanged.listen((state) {
+    _playerStateSubscription =
+        _audioService.onPlayerStateChanged.listen((state) {
       if (!mounted) return;
       setState(() {
         _isPreviewPlaying = state == PlayerState.playing;
@@ -85,11 +87,9 @@ class _AdhanSelectorScreenState extends State<AdhanSelectorScreen> {
       _selectedAdhan = file;
     });
     final l10n = context.l10n;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(l10n.adhanSelectorSelected(_getAdhanName(file))),
-        behavior: SnackBarBehavior.floating,
-      ),
+    showQiblaSnackBar(
+      context,
+      message: l10n.adhanSelectorSelected(_getAdhanName(file)),
     );
   }
 
@@ -157,11 +157,9 @@ class _AdhanSelectorScreenState extends State<AdhanSelectorScreen> {
         _activeAdhan = null;
         _isPreviewPlaying = false;
       });
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(context.l10n.adhanSelectorPreviewError),
-          behavior: SnackBarBehavior.floating,
-        ),
+      showQiblaSnackBar(
+        context,
+        message: context.l10n.adhanSelectorPreviewError,
       );
     }
   }
@@ -383,8 +381,11 @@ class _AdhanSelectorScreenState extends State<AdhanSelectorScreen> {
               ),
               const Spacer(),
               FilledButton.icon(
-                onPressed: _activeAdhan == null ? null : () => _togglePreview(_activeAdhan!),
-                icon: Icon(_isPreviewPlaying ? Icons.pause : Icons.record_voice_over),
+                onPressed: _activeAdhan == null
+                    ? null
+                    : () => _togglePreview(_activeAdhan!),
+                icon: Icon(
+                    _isPreviewPlaying ? Icons.pause : Icons.record_voice_over),
                 label: Text(
                   _isPreviewPlaying ? l10n.commonPause : l10n.commonResume,
                 ),
@@ -435,7 +436,8 @@ class _AdhanSelectorScreenState extends State<AdhanSelectorScreen> {
         ),
       ),
       child: ListTile(
-        contentPadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
         leading: Container(
           width: 48,
           height: 48,

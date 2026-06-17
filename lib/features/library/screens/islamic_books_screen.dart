@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theme/app_theme.dart';
+import '../../../core/utils/qibla_snackbar.dart';
 import '../../../l10n/l10n.dart';
 import '../models/book_model.dart';
 import '../services/book_download_service.dart';
@@ -734,9 +735,7 @@ class _BookDetailSheetState extends ConsumerState<_BookDetailSheet> {
   }
 
   void _showSnackBar(String message) {
-    final messenger = ScaffoldMessenger.of(context);
-    messenger.hideCurrentSnackBar();
-    messenger.showSnackBar(SnackBar(content: Text(message)));
+    showQiblaSnackBar(context, message: message);
   }
 
   @override

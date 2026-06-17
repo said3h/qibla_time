@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theme/app_theme.dart';
+import '../../../core/utils/qibla_snackbar.dart';
 import '../../../core/utils/spanish_date_labels.dart';
 import '../../../l10n/l10n.dart';
 import '../services/dhikr_service.dart';
@@ -165,12 +166,7 @@ class _DhikrScreenState extends State<DhikrScreen> {
 
   void _showMessage(String message) {
     if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        behavior: SnackBarBehavior.floating,
-      ),
-    );
+    showQiblaSnackBar(context, message: message);
   }
 
   String _feedbackText(DhikrSnapshot snapshot) {
