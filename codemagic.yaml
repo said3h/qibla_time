@@ -8,7 +8,7 @@ workflows:
       - name: Get dependencies
         script: flutter pub get
       - name: Analyze
-        script: flutter analyze --no-fatal-infos --no-fatal-warnings
+        script: flutter analyze --no-fatal-infos
       - name: Run tests
         script: flutter test
       - name: Build Android
@@ -27,7 +27,7 @@ workflows:
       - name: Get dependencies
         script: flutter pub get
       - name: Analyze
-        script: flutter analyze --no-fatal-infos --no-fatal-warnings
+        script: flutter analyze --no-fatal-infos
       - name: Run tests
         script: flutter test
       - name: Build iOS
