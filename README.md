@@ -106,7 +106,7 @@ assets/
 
 ### Prerequisites
 
-- Flutter **3.19+** (project developed with Flutter 3.41.x)
+- Flutter **3.41.6**
 - Android SDK with `compileSdkVersion 36`, `minSdkVersion 21`
 - Java 17+
 
