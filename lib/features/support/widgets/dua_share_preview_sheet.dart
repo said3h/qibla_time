@@ -87,10 +87,15 @@ class _DuaSharePreviewSheetState extends State<_DuaSharePreviewSheet> {
           ? HadithShareExportMode.cardOnly
           : HadithShareExportMode.storyCanvas;
 
-  HadithShareThemeData get _previewTheme => HadithShareThemeData.fromTokens(
-        widget.tokens,
-        transparentBackground: _selectedLayout == SharePreviewLayoutOption.card,
-      );
+  HadithShareThemeData get _previewTheme {
+    final baseTheme = HadithShareThemeData.fromTokens(
+      widget.tokens,
+      transparentBackground: _selectedLayout == SharePreviewLayoutOption.card,
+    );
+    return baseTheme.copyWith(
+      brandingFontSize: baseTheme.brandingFontSize * 1.45,
+    );
+  }
 
   Future<void> _shareText() async {
     if (_isBusy || (!_includeArabic && !_includeTranslation)) {
@@ -154,7 +159,7 @@ class _DuaSharePreviewSheetState extends State<_DuaSharePreviewSheet> {
   Widget build(BuildContext context) {
     final tokens = widget.tokens;
     final l10n = context.l10n;
-    final previewData = widget.shareService.buildShareData(
+    final previewData = widget.shareService.buildImageShareData(
       widget.dua,
       includeArabic: _includeArabic,
       includeTranslation: _includeTranslation,

@@ -69,15 +69,18 @@ class DuaShareService {
 
     final l10n = appLocalizationsForDevice();
     final transparentBackground = mode == HadithShareExportMode.cardOnly;
+    final baseTheme = HadithShareThemeData.fromTokens(
+      tokens,
+      transparentBackground: transparentBackground,
+    );
     final file = await HadithShareImageService.savePng(
-      data: buildShareData(
+      data: buildImageShareData(
         dua,
         includeArabic: includeArabic,
         includeTranslation: includeTranslation,
       ),
-      theme: HadithShareThemeData.fromTokens(
-        tokens,
-        transparentBackground: transparentBackground,
+      theme: baseTheme.copyWith(
+        brandingFontSize: baseTheme.brandingFontSize * 1.45,
       ),
       transparentBackground: transparentBackground,
       mode: mode,
@@ -94,6 +97,25 @@ class DuaShareService {
       subject:
           dua.title.trim().isEmpty ? l10n.shareSubjectDua : dua.title.trim(),
       sharePositionOrigin: qiblaShareSheetOrigin,
+    );
+  }
+
+  HadithShareData buildImageShareData(
+    Dua dua, {
+    bool includeArabic = true,
+    bool includeTranslation = true,
+  }) {
+    final l10n = appLocalizationsForDevice();
+
+    return HadithShareData(
+      arabicText: includeArabic && dua.arabicText.trim().isNotEmpty
+          ? dua.arabicText
+          : null,
+      translation: includeTranslation ? dua.translation : '',
+      reference: '',
+      arabicReference: null,
+      badgeLabel: '',
+      branding: l10n.shareBranding,
     );
   }
 

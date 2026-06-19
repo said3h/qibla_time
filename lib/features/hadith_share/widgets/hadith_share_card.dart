@@ -23,6 +23,7 @@ class HadithShareCard extends StatelessWidget {
     final showTranslationMetadata =
         data.hasTranslation && data.reference.trim().isNotEmpty;
     final showMetadata = showArabicMetadata || showTranslationMetadata;
+    final showBadge = data.badgeLabel.trim().isNotEmpty;
 
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -43,12 +44,13 @@ class HadithShareCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ShareContentBadge(
-              label: data.badgeLabel,
-              accentColor: resolvedTheme.accentColor,
-            ),
+            if (showBadge)
+              ShareContentBadge(
+                label: data.badgeLabel,
+                accentColor: resolvedTheme.accentColor,
+              ),
             if (data.hasArabicText) ...[
-              SizedBox(height: resolvedTheme.sectionSpacing),
+              if (showBadge) SizedBox(height: resolvedTheme.sectionSpacing),
               SizedBox(
                 width: double.infinity,
                 child: Directionality(
