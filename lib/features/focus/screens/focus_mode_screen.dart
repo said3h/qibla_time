@@ -3,7 +3,6 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -13,7 +12,7 @@ import '../services/focus_service.dart';
 const _kHoldToExitDuration = Duration(seconds: 2);
 const _kRakahPlacementGuideSeenKey = 'focus_rakah_placement_guide_seen';
 const _kRakahPlacementGuideAsset =
-    'assets/images/prayer_positions/rakah_phone_placement.svg';
+    'assets/images/prayer_positions/rakah_phone_placement.png';
 
 class FocusModeScreen extends ConsumerStatefulWidget {
   const FocusModeScreen({super.key});
@@ -141,7 +140,7 @@ class _FocusModeScreenState extends ConsumerState<FocusModeScreen>
                           decoration: BoxDecoration(
                             color: Colors.black.withValues(alpha: 0.18),
                           ),
-                          child: SvgPicture.asset(
+                          child: Image.asset(
                             _kRakahPlacementGuideAsset,
                             fit: BoxFit.contain,
                           ),
