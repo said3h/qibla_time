@@ -2834,6 +2834,19 @@ class AppLocalizationsEs extends AppLocalizations {
   String get focusModeHoldToExit => 'Mantén pulsado para salir';
 
   @override
+  String get focusModePlacementGuideLink => 'Ver guía de colocación';
+
+  @override
+  String get focusModePlacementGuideTitle => 'Guía de colocación';
+
+  @override
+  String get focusModePlacementGuideBody =>
+      'Coloca el móvil en el suelo, justo debajo del brazo, a la altura donde apoyas la mano durante el sujud. Así la app podrá detectar mejor cada rak‘ah sin molestarte mientras rezas.';
+
+  @override
+  String get focusModePlacementGuideUnderstood => 'Entendido';
+
+  @override
   String get settingsMadhabAsr => 'Madhab (Asr)';
 
   @override

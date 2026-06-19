@@ -3,12 +3,17 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../l10n/l10n.dart';
 import '../services/focus_service.dart';
 
 const _kHoldToExitDuration = Duration(seconds: 2);
+const _kRakahPlacementGuideSeenKey = 'focus_rakah_placement_guide_seen';
+const _kRakahPlacementGuideAsset =
+    'assets/images/prayer_positions/rakah_phone_placement.svg';
 
 class FocusModeScreen extends ConsumerStatefulWidget {
   const FocusModeScreen({super.key});
@@ -36,6 +41,10 @@ class _FocusModeScreenState extends ConsumerState<FocusModeScreen>
           _closeRakaha();
         }
       });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      unawaited(_showPlacementGuideOnFirstOpen());
+    });
   }
 
   @override
@@ -66,6 +75,128 @@ class _FocusModeScreenState extends ConsumerState<FocusModeScreen>
       _exitController.reverse();
       setState(() => _isExiting = false);
     }
+  }
+
+  Future<void> _showPlacementGuideOnFirstOpen() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (!mounted || (prefs.getBool(_kRakahPlacementGuideSeenKey) ?? false)) {
+      return;
+    }
+    await _showPlacementGuide(markSeenOnUnderstood: true);
+  }
+
+  Future<void> _showPlacementGuide({
+    required bool markSeenOnUnderstood,
+  }) async {
+    if (!mounted) return;
+    final l10n = context.l10n;
+
+    await showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (sheetContext) {
+        final maxHeight = MediaQuery.sizeOf(sheetContext).height * 0.82;
+        return SafeArea(
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: ConstrainedBox(
+              constraints: BoxConstraints(maxHeight: maxHeight),
+              child: Container(
+                margin: const EdgeInsets.all(16),
+                padding: const EdgeInsets.fromLTRB(18, 18, 18, 20),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF0D1726),
+                  borderRadius: BorderRadius.circular(24),
+                  border: Border.all(
+                    color: Colors.amber.withValues(alpha: 0.42),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.42),
+                      blurRadius: 28,
+                      offset: const Offset(0, 14),
+                    ),
+                  ],
+                ),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text(
+                        l10n.focusModePlacementGuideTitle,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          color: Colors.amber,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w800,
+                          letterSpacing: 0.2,
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(18),
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(
+                            color: Colors.black.withValues(alpha: 0.18),
+                          ),
+                          child: SvgPicture.asset(
+                            _kRakahPlacementGuideAsset,
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 18),
+                      Text(
+                        l10n.focusModePlacementGuideBody,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white.withValues(alpha: 0.84),
+                          fontSize: 15,
+                          height: 1.45,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      FilledButton(
+                        style: FilledButton.styleFrom(
+                          backgroundColor: Colors.amber,
+                          foregroundColor: Colors.black,
+                          padding: const EdgeInsets.symmetric(vertical: 14),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(999),
+                          ),
+                        ),
+                        onPressed: () async {
+                          if (markSeenOnUnderstood) {
+                            final prefs = await SharedPreferences.getInstance();
+                            await prefs.setBool(
+                              _kRakahPlacementGuideSeenKey,
+                              true,
+                            );
+                          }
+                          if (sheetContext.mounted) {
+                            Navigator.of(sheetContext).pop();
+                          }
+                        },
+                        child: Text(
+                          l10n.focusModePlacementGuideUnderstood,
+                          style: const TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -127,7 +258,26 @@ class _FocusModeScreenState extends ConsumerState<FocusModeScreen>
                         fontWeight: FontWeight.w300,
                       ),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 14),
+                    TextButton.icon(
+                      onPressed: () => unawaited(
+                        _showPlacementGuide(markSeenOnUnderstood: false),
+                      ),
+                      icon: Icon(
+                        Icons.phone_android_rounded,
+                        color: Colors.amber.withValues(alpha: 0.88),
+                        size: 16,
+                      ),
+                      label: Text(
+                        l10n.focusModePlacementGuideLink,
+                        style: TextStyle(
+                          color: Colors.amber.withValues(alpha: 0.88),
+                          fontSize: 12,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
                     Text(
                       '${focus.rakahs}',
                       style: const TextStyle(

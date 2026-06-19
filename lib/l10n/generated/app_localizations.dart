@@ -4972,6 +4972,30 @@ abstract class AppLocalizations {
   /// **'Mantén pulsado para salir'**
   String get focusModeHoldToExit;
 
+  /// No description provided for @focusModePlacementGuideLink.
+  ///
+  /// In es, this message translates to:
+  /// **'Ver guía de colocación'**
+  String get focusModePlacementGuideLink;
+
+  /// No description provided for @focusModePlacementGuideTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Guía de colocación'**
+  String get focusModePlacementGuideTitle;
+
+  /// No description provided for @focusModePlacementGuideBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Coloca el móvil en el suelo, justo debajo del brazo, a la altura donde apoyas la mano durante el sujud. Así la app podrá detectar mejor cada rak‘ah sin molestarte mientras rezas.'**
+  String get focusModePlacementGuideBody;
+
+  /// No description provided for @focusModePlacementGuideUnderstood.
+  ///
+  /// In es, this message translates to:
+  /// **'Entendido'**
+  String get focusModePlacementGuideUnderstood;
+
   /// No description provided for @settingsMadhabAsr.
   ///
   /// In es, this message translates to:
