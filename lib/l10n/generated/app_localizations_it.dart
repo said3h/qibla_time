@@ -2845,17 +2845,17 @@ class AppLocalizationsIt extends AppLocalizations {
   String get focusModeHoldToExit => 'Tieni premuto per uscire';
 
   @override
-  String get focusModePlacementGuideLink => 'View placement guide';
+  String get focusModePlacementGuideLink => 'Vedi guida al posizionamento';
 
   @override
-  String get focusModePlacementGuideTitle => 'Placement guide';
+  String get focusModePlacementGuideTitle => 'Come posizionare il telefono';
 
   @override
   String get focusModePlacementGuideBody =>
-      'Place the phone on the floor, just under your arm, at the height where your hand rests during sujud. This helps the app detect each rak‘ah more accurately without disturbing you while you pray.';
+      'Posiziona il telefono sul pavimento, appena sotto il braccio, all’altezza in cui appoggi la mano durante il sujud. Così l’app può rilevare meglio ogni rak‘ah senza disturbarti mentre preghi.';
 
   @override
-  String get focusModePlacementGuideUnderstood => 'Understood';
+  String get focusModePlacementGuideUnderstood => 'Capito';
 
   @override
   String get settingsMadhabAsr => 'Madhab (Asr)';

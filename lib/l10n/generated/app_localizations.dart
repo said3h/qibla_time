@@ -4981,7 +4981,7 @@ abstract class AppLocalizations {
   /// No description provided for @focusModePlacementGuideTitle.
   ///
   /// In es, this message translates to:
-  /// **'Guía de colocación'**
+  /// **'Cómo colocar el móvil'**
   String get focusModePlacementGuideTitle;
 
   /// No description provided for @focusModePlacementGuideBody.

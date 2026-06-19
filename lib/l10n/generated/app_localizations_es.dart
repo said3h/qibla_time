@@ -2837,7 +2837,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get focusModePlacementGuideLink => 'Ver guía de colocación';
 
   @override
-  String get focusModePlacementGuideTitle => 'Guía de colocación';
+  String get focusModePlacementGuideTitle => 'Cómo colocar el móvil';
 
   @override
   String get focusModePlacementGuideBody =>

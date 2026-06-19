@@ -2842,17 +2842,17 @@ class AppLocalizationsRu extends AppLocalizations {
   String get focusModeHoldToExit => 'Удерживайте, чтобы выйти';
 
   @override
-  String get focusModePlacementGuideLink => 'View placement guide';
+  String get focusModePlacementGuideLink => 'Показать, как разместить телефон';
 
   @override
-  String get focusModePlacementGuideTitle => 'Placement guide';
+  String get focusModePlacementGuideTitle => 'Как разместить телефон';
 
   @override
   String get focusModePlacementGuideBody =>
-      'Place the phone on the floor, just under your arm, at the height where your hand rests during sujud. This helps the app detect each rak‘ah more accurately without disturbing you while you pray.';
+      'Положите телефон на пол прямо под рукой, на уровне места, куда вы опираете ладонь во время суджуда. Так приложение сможет точнее распознавать каждую рак‘а, не мешая вам во время молитвы.';
 
   @override
-  String get focusModePlacementGuideUnderstood => 'Understood';
+  String get focusModePlacementGuideUnderstood => 'Понятно';
 
   @override
   String get settingsMadhabAsr => 'Мазхаб (Аср)';

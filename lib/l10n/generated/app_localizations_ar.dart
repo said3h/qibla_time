@@ -2761,17 +2761,17 @@ class AppLocalizationsAr extends AppLocalizations {
   String get focusModeHoldToExit => 'اضغط مطولًا للخروج';
 
   @override
-  String get focusModePlacementGuideLink => 'View placement guide';
+  String get focusModePlacementGuideLink => 'عرض دليل وضع الهاتف';
 
   @override
-  String get focusModePlacementGuideTitle => 'Placement guide';
+  String get focusModePlacementGuideTitle => 'كيفية وضع الهاتف';
 
   @override
   String get focusModePlacementGuideBody =>
-      'Place the phone on the floor, just under your arm, at the height where your hand rests during sujud. This helps the app detect each rak‘ah more accurately without disturbing you while you pray.';
+      'ضع الهاتف على الأرض، تحت ذراعك مباشرة، عند الموضع الذي تستند فيه يدك أثناء السجود. يساعد ذلك التطبيق على اكتشاف كل ركعة بدقة أكبر دون أن يزعجك أثناء الصلاة.';
 
   @override
-  String get focusModePlacementGuideUnderstood => 'Understood';
+  String get focusModePlacementGuideUnderstood => 'فهمت';
 
   @override
   String get settingsMadhabAsr => 'المذهب (العصر)';

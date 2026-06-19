@@ -2807,17 +2807,17 @@ class AppLocalizationsTr extends AppLocalizations {
   String get focusModeHoldToExit => 'Çıkmak için basılı tutun';
 
   @override
-  String get focusModePlacementGuideLink => 'View placement guide';
+  String get focusModePlacementGuideLink => 'Yerleştirme rehberini gör';
 
   @override
-  String get focusModePlacementGuideTitle => 'Placement guide';
+  String get focusModePlacementGuideTitle => 'Telefonu nasıl yerleştirmeli';
 
   @override
   String get focusModePlacementGuideBody =>
-      'Place the phone on the floor, just under your arm, at the height where your hand rests during sujud. This helps the app detect each rak‘ah more accurately without disturbing you while you pray.';
+      'Telefonu yere, kolunuzun hemen altına, secdede elinizi koyduğunuz hizaya yerleştirin. Böylece uygulama namaz sırasında sizi rahatsız etmeden her rek‘atı daha doğru algılayabilir.';
 
   @override
-  String get focusModePlacementGuideUnderstood => 'Understood';
+  String get focusModePlacementGuideUnderstood => 'Anladım';
 
   @override
   String get settingsMadhabAsr => 'Mezhep (İkindi)';

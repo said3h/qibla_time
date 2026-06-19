@@ -2852,17 +2852,17 @@ class AppLocalizationsFr extends AppLocalizations {
   String get focusModeHoldToExit => 'Maintenez pour quitter';
 
   @override
-  String get focusModePlacementGuideLink => 'View placement guide';
+  String get focusModePlacementGuideLink => 'Voir le guide de placement';
 
   @override
-  String get focusModePlacementGuideTitle => 'Placement guide';
+  String get focusModePlacementGuideTitle => 'Comment placer le téléphone';
 
   @override
   String get focusModePlacementGuideBody =>
-      'Place the phone on the floor, just under your arm, at the height where your hand rests during sujud. This helps the app detect each rak‘ah more accurately without disturbing you while you pray.';
+      'Placez le téléphone au sol, juste sous votre bras, à la hauteur où votre main repose pendant le sujud. Cela aide l’app à détecter chaque rak‘ah plus précisément sans vous gêner pendant la prière.';
 
   @override
-  String get focusModePlacementGuideUnderstood => 'Understood';
+  String get focusModePlacementGuideUnderstood => 'Compris';
 
   @override
   String get settingsMadhabAsr => 'Madhab (Asr)';
