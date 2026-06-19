@@ -35,6 +35,8 @@ Future<void> showDuaSharePreviewSheet({
 
 enum _DuaShareAction { text, image }
 
+const _duaImageBrandingScale = 2.25;
+
 class _DuaSharePreviewSheet extends StatefulWidget {
   const _DuaSharePreviewSheet({
     required this.dua,
@@ -93,7 +95,7 @@ class _DuaSharePreviewSheetState extends State<_DuaSharePreviewSheet> {
       transparentBackground: _selectedLayout == SharePreviewLayoutOption.card,
     );
     return baseTheme.copyWith(
-      brandingFontSize: baseTheme.brandingFontSize * 1.45,
+      brandingFontSize: baseTheme.brandingFontSize * _duaImageBrandingScale,
     );
   }
 
