@@ -6,10 +6,10 @@ import '../../../core/utils/qibla_snackbar.dart';
 import '../../../l10n/l10n.dart';
 import '../../hadith_share/models/hadith_share_theme.dart';
 import '../../hadith_share/services/hadith_share_image_service.dart';
-import '../../hadith_share/widgets/hadith_share_preview.dart';
 import '../../shared_share/widgets/content_share_preview_sheet.dart';
 import '../models/dua_model.dart';
 import '../services/dua_share_service.dart';
+import 'dua_share_image_preview.dart';
 
 Future<void> showDuaSharePreviewSheet({
   required BuildContext context,
@@ -168,7 +168,7 @@ class _DuaSharePreviewSheetState extends State<_DuaSharePreviewSheet> {
           ? l10n.shareDuaTitle
           : l10n.shareDuaTitleNamed(widget.dua.title.trim()),
       subtitle: l10n.shareDuaSubtitle,
-      preview: HadithSharePreview(
+      preview: DuaShareImagePreview(
         data: previewData,
         theme: _previewTheme,
         cardOnly: _selectedLayout == SharePreviewLayoutOption.card,

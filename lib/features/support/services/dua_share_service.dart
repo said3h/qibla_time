@@ -8,6 +8,7 @@ import '../../hadith_share/models/hadith_share_data.dart';
 import '../../hadith_share/models/hadith_share_theme.dart';
 import '../../hadith_share/services/hadith_share_image_service.dart';
 import '../models/dua_model.dart';
+import 'dua_share_image_service.dart';
 
 class DuaShareService {
   const DuaShareService();
@@ -73,7 +74,7 @@ class DuaShareService {
       tokens,
       transparentBackground: transparentBackground,
     );
-    final file = await HadithShareImageService.savePng(
+    final file = await DuaShareImageService.savePng(
       data: buildImageShareData(
         dua,
         includeArabic: includeArabic,
