@@ -41,6 +41,34 @@ void main() {
       );
     });
 
+    test('refreshes same-day cached schedules on cold start', () {
+      expect(
+        shouldRefreshPrayerTimesIfStale(
+          resolvedSchedule: _resolvedSchedule(
+            DateTime(2026, 6, 18),
+            fromCache: true,
+          ),
+          now: DateTime(2026, 6, 18, 11),
+          lastRefreshAt: null,
+        ),
+        isTrue,
+      );
+    });
+
+    test('keeps a same-day calculated schedule on cold start', () {
+      expect(
+        shouldRefreshPrayerTimesIfStale(
+          resolvedSchedule: _resolvedSchedule(
+            DateTime(2026, 6, 18),
+            fromCache: false,
+          ),
+          now: DateTime(2026, 6, 18, 11),
+          lastRefreshAt: null,
+        ),
+        isFalse,
+      );
+    });
+
     test('keeps a same-day recent schedule', () {
       expect(
         shouldRefreshPrayerTimesIfStale(
@@ -54,7 +82,10 @@ void main() {
   });
 }
 
-ResolvedPrayerSchedule _resolvedSchedule(DateTime date) {
+ResolvedPrayerSchedule _resolvedSchedule(
+  DateTime date, {
+  bool fromCache = true,
+}) {
   final day = DateTime(date.year, date.month, date.day);
   return ResolvedPrayerSchedule(
     location: const PrayerLocation(latitude: 40.4168, longitude: -3.7038),
@@ -75,6 +106,6 @@ ResolvedPrayerSchedule _resolvedSchedule(DateTime date) {
       maghrib: day.add(const Duration(hours: 21)),
       isha: day.add(const Duration(hours: 22, minutes: 30)),
     ),
-    fromCache: true,
+    fromCache: fromCache,
   );
 }

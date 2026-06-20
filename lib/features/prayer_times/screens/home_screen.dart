@@ -70,7 +70,7 @@ bool shouldRefreshPrayerTimesIfStale({
   }
 
   if (lastRefreshAt == null) {
-    return false;
+    return resolvedSchedule.fromCache;
   }
 
   return now.difference(lastRefreshAt) >= staleAfter;
@@ -106,9 +106,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
     _selectedDate = _dateOnly(DateTime.now());
     _scrollController = ScrollController();
     _calendarController = ScrollController(initialScrollOffset: 6 * 62.0);
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _refreshPrayerTimesIfStale(reason: 'initial');
-      ref.read(adhanManagerProvider).scheduleTodayAdhans();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await _refreshPrayerTimesIfStale();
+      await ref.read(adhanManagerProvider).scheduleTodayAdhans();
     });
   }
 
@@ -123,11 +123,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
-      _refreshPrayerTimesIfStale(reason: 'resume');
+      _refreshPrayerTimesIfStale();
     }
   }
 
-  Future<void> _refreshPrayerTimesIfStale({required String reason}) async {
+  Future<void> _refreshPrayerTimesIfStale() async {
     if (!mounted || _isRefreshingPrayerTimes) {
       return;
     }
@@ -151,30 +151,73 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
     }
 
     _isRefreshingPrayerTimes = true;
-    _lastPrayerRefreshAt = now;
     try {
       final today = _dateOnly(now);
       if (_selectedDate.isBefore(today) && mounted) {
         setState(() => _selectedDate = today);
       }
 
-      ref.invalidate(manualPrayerLocationProvider);
-      ref.invalidate(prayerLocationProvider);
-      ref.invalidate(prayerLocationDiagnosticProvider);
-      ref.invalidate(lastLocationLabelProvider);
-      ref.invalidate(recentLocationsProvider);
-      ref.invalidate(travelBannerProvider);
-      ref.invalidate(prayerScheduleProvider);
-      ref.invalidate(nextPrayerInfoProvider);
-      ref.invalidate(prayerCountdownProvider);
-      ref.invalidate(prayerScheduleForDateProvider(_selectedDate));
-
-      if (reason == 'resume') {
+      await _primePrayerLocationForRefresh();
+      final refreshedSchedule = await _reloadPrayerTimes();
+      if (refreshedSchedule != null) {
+        _lastPrayerRefreshAt = DateTime.now();
         await ref.read(adhanManagerProvider).scheduleTodayAdhans();
       }
     } finally {
       _isRefreshingPrayerTimes = false;
     }
+  }
+
+  Future<void> _forceRefreshPrayerTimes() async {
+    if (!mounted || _isRefreshingPrayerTimes) {
+      return;
+    }
+    _isRefreshingPrayerTimes = true;
+    try {
+      await _primePrayerLocationForRefresh();
+      final refreshedSchedule = await _reloadPrayerTimes();
+      if (refreshedSchedule != null) {
+        _lastPrayerRefreshAt = DateTime.now();
+        await ref.read(adhanManagerProvider).scheduleTodayAdhans();
+      }
+    } finally {
+      _isRefreshingPrayerTimes = false;
+    }
+  }
+
+  Future<void> _primePrayerLocationForRefresh() async {
+    try {
+      final hasManualLocation =
+          await ref.read(prayerLocationDataSourceProvider).hasManualLocation();
+      if (hasManualLocation) {
+        return;
+      }
+      await ref.read(prayerLocationDataSourceProvider).getLocation(
+            allowCachedFallbackWhenUnavailable: false,
+          );
+    } catch (_) {
+      // Keep the home screen usable; the schedule provider can still fall back
+      // to the last cached location when live GPS is not immediately available.
+    }
+  }
+
+  Future<ResolvedPrayerSchedule?> _reloadPrayerTimes() async {
+    ref.invalidate(manualPrayerLocationProvider);
+    ref.invalidate(prayerLocationProvider);
+    ref.invalidate(prayerLocationDiagnosticProvider);
+    ref.invalidate(lastLocationLabelProvider);
+    ref.invalidate(recentLocationsProvider);
+    ref.invalidate(travelBannerProvider);
+    ref.invalidate(prayerScheduleProvider);
+    ref.invalidate(nextPrayerInfoProvider);
+    ref.invalidate(prayerCountdownProvider);
+    ref.invalidate(prayerScheduleForDateProvider(_selectedDate));
+
+    final resolvedSchedule = await ref.read(prayerScheduleProvider.future);
+    ref.invalidate(nextPrayerInfoProvider);
+    ref.invalidate(prayerCountdownProvider);
+    ref.invalidate(prayerScheduleForDateProvider(_selectedDate));
+    return resolvedSchedule;
   }
 
   @override
@@ -232,12 +275,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
         ),
         child: SafeArea(
           child: RefreshIndicator(
-            onRefresh: () async {
-              ref.invalidate(prayerScheduleProvider);
-              ref.invalidate(nextPrayerInfoProvider);
-              ref.invalidate(prayerCountdownProvider);
-              ref.invalidate(prayerScheduleForDateProvider(_selectedDate));
-            },
+            onRefresh: _forceRefreshPrayerTimes,
             color: tokens.primary,
             backgroundColor: tokens.bgSurface,
             child: ListView(
