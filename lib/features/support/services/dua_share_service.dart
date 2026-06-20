@@ -12,8 +12,6 @@ import '../models/dua_model.dart';
 class DuaShareService {
   const DuaShareService();
 
-  static const _imageBrandingScale = 2.25;
-
   String buildShareText(
     Dua dua, {
     bool includeArabic = true,
@@ -81,9 +79,7 @@ class DuaShareService {
         includeArabic: includeArabic,
         includeTranslation: includeTranslation,
       ),
-      theme: baseTheme.copyWith(
-        brandingFontSize: baseTheme.brandingFontSize * _imageBrandingScale,
-      ),
+      theme: baseTheme,
       transparentBackground: transparentBackground,
       mode: mode,
       fileName: 'dua_${dua.id}_${DateTime.now().millisecondsSinceEpoch}',

@@ -35,8 +35,6 @@ Future<void> showDuaSharePreviewSheet({
 
 enum _DuaShareAction { text, image }
 
-const _duaImageBrandingScale = 2.25;
-
 class _DuaSharePreviewSheet extends StatefulWidget {
   const _DuaSharePreviewSheet({
     required this.dua,
@@ -90,12 +88,9 @@ class _DuaSharePreviewSheetState extends State<_DuaSharePreviewSheet> {
           : HadithShareExportMode.storyCanvas;
 
   HadithShareThemeData get _previewTheme {
-    final baseTheme = HadithShareThemeData.fromTokens(
+    return HadithShareThemeData.fromTokens(
       widget.tokens,
       transparentBackground: _selectedLayout == SharePreviewLayoutOption.card,
-    );
-    return baseTheme.copyWith(
-      brandingFontSize: baseTheme.brandingFontSize * _duaImageBrandingScale,
     );
   }
 

@@ -68,9 +68,8 @@ class HadithShareThemeData {
       cardPadding: const EdgeInsets.symmetric(horizontal: 64, vertical: 72),
       cardRadius: 42,
       cardBackgroundColor: tokens.bgSurface,
-      canvasBackgroundColor: transparentBackground
-          ? Colors.transparent
-          : tokens.bgPage,
+      canvasBackgroundColor:
+          transparentBackground ? Colors.transparent : tokens.bgPage,
       shadowColor: Colors.black.withValues(alpha: 0.18),
       accentColor: tokens.primary,
       primaryTextColor: tokens.textPrimary,
@@ -82,7 +81,7 @@ class HadithShareThemeData {
       arabicFontSize: 58,
       translationFontSize: 34,
       referenceFontSize: 24,
-      brandingFontSize: 22,
+      brandingFontSize: 49.5,
       sectionSpacing: 28,
       contentSpacing: 18,
       translationLineHeight: 1.55,
@@ -96,8 +95,7 @@ class HadithShareThemeData {
     final translationLength = data.translation.trim().length;
     final referenceLength = data.reference.trim().length;
     final arabicReferenceLength = (data.arabicReference ?? '').trim().length;
-    final densityScore =
-        (arabicLength / 320) +
+    final densityScore = (arabicLength / 320) +
         (translationLength / 540) +
         (referenceLength / 120) +
         (arabicReferenceLength / 110);
@@ -119,7 +117,6 @@ class HadithShareThemeData {
       arabicFontSize: arabicFontSize * compactScale,
       translationFontSize: translationFontSize * compactScale,
       referenceFontSize: referenceFontSize * compactScale,
-      brandingFontSize: brandingFontSize * compactScale,
       cardPadding: EdgeInsets.fromLTRB(
         scaledPadding(cardPadding.left, 28.0),
         scaledPadding(cardPadding.top, 32.0),
@@ -168,7 +165,8 @@ class HadithShareThemeData {
       cardPadding: cardPadding ?? this.cardPadding,
       cardRadius: cardRadius ?? this.cardRadius,
       cardBackgroundColor: cardBackgroundColor ?? this.cardBackgroundColor,
-      canvasBackgroundColor: canvasBackgroundColor ?? this.canvasBackgroundColor,
+      canvasBackgroundColor:
+          canvasBackgroundColor ?? this.canvasBackgroundColor,
       shadowColor: shadowColor ?? this.shadowColor,
       accentColor: accentColor ?? this.accentColor,
       primaryTextColor: primaryTextColor ?? this.primaryTextColor,
@@ -183,7 +181,8 @@ class HadithShareThemeData {
       brandingFontSize: brandingFontSize ?? this.brandingFontSize,
       sectionSpacing: sectionSpacing ?? this.sectionSpacing,
       contentSpacing: contentSpacing ?? this.contentSpacing,
-      translationLineHeight: translationLineHeight ?? this.translationLineHeight,
+      translationLineHeight:
+          translationLineHeight ?? this.translationLineHeight,
       arabicLineHeight: arabicLineHeight ?? this.arabicLineHeight,
       referenceLineHeight: referenceLineHeight ?? this.referenceLineHeight,
     );

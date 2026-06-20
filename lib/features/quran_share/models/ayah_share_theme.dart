@@ -68,9 +68,8 @@ class AyahShareThemeData {
       cardPadding: const EdgeInsets.symmetric(horizontal: 60, vertical: 64),
       cardRadius: 40,
       cardBackgroundColor: tokens.bgSurface,
-      canvasBackgroundColor: transparentBackground
-          ? Colors.transparent
-          : tokens.bgPage,
+      canvasBackgroundColor:
+          transparentBackground ? Colors.transparent : tokens.bgPage,
       shadowColor: Colors.black.withValues(alpha: 0.18),
       accentColor: tokens.primary,
       primaryTextColor: tokens.textPrimary,
@@ -82,7 +81,7 @@ class AyahShareThemeData {
       arabicFontSize: 56,
       translationFontSize: 30,
       referenceFontSize: 24,
-      brandingFontSize: 22,
+      brandingFontSize: 49.5,
       sectionSpacing: 24,
       contentSpacing: 16,
       translationLineHeight: 1.55,
@@ -95,8 +94,7 @@ class AyahShareThemeData {
     final arabicLength = data.arabicText.trim().length;
     final translationLength = (data.translation ?? '').trim().length;
     final referenceLength = data.referenceLabel.length;
-    final densityScore =
-        (arabicLength / 280) +
+    final densityScore = (arabicLength / 280) +
         (translationLength / 420) +
         (referenceLength / 80);
 
@@ -118,7 +116,6 @@ class AyahShareThemeData {
       arabicFontSize: arabicFontSize * compactScale,
       translationFontSize: translationFontSize * compactScale,
       referenceFontSize: referenceFontSize * compactScale,
-      brandingFontSize: brandingFontSize * compactScale,
       cardPadding: EdgeInsets.fromLTRB(
         scaledPadding(cardPadding.left, 26.0),
         scaledPadding(cardPadding.top, 28.0),
