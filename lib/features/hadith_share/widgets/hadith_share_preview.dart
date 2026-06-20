@@ -18,15 +18,20 @@ class HadithSharePreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final maxCardWidth = theme.canvasSize.width - theme.canvasPadding.horizontal;
-    final maxCardHeight = theme.canvasSize.height - theme.canvasPadding.vertical;
+    final maxCardWidth =
+        theme.canvasSize.width - theme.canvasPadding.horizontal;
+    final maxCardHeight =
+        theme.canvasSize.height - theme.canvasPadding.vertical;
     final targetCardWidth = theme.canvasSize.width * theme.cardWidthFactor;
     final cardWidth =
         targetCardWidth < maxCardWidth ? targetCardWidth : maxCardWidth;
     final card = SizedBox(
       width: cardWidth,
       child: ConstrainedBox(
-        constraints: BoxConstraints(maxHeight: maxCardHeight),
+        constraints: BoxConstraints(
+          minHeight: cardWidth / 1.19,
+          maxHeight: maxCardHeight,
+        ),
         child: HadithShareCard(
           data: data,
           theme: theme,

@@ -104,7 +104,11 @@ class HadithShareThemeData {
       return this;
     }
 
-    final compactScale = densityScore > 1.8 ? 0.78 : 0.88;
+    final compactScale = densityScore > 2.4
+        ? 0.64
+        : densityScore > 1.8
+            ? 0.74
+            : 0.86;
     double scaledPadding(double original, double minimum) {
       final scaled = original * compactScale;
       if (original <= minimum) {

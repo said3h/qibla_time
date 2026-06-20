@@ -15,6 +15,7 @@ class HadithShareCard extends StatelessWidget {
 
   final HadithShareData data;
   final HadithShareThemeData theme;
+  static const _frameAsset = 'assets/images/app/share_dua_frame.png';
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +25,12 @@ class HadithShareCard extends StatelessWidget {
         data.hasTranslation && data.reference.trim().isNotEmpty;
     final showMetadata = showArabicMetadata || showTranslationMetadata;
     final showBadge = data.badgeLabel.trim().isNotEmpty;
+    final contentPadding = EdgeInsets.fromLTRB(
+      resolvedTheme.cardPadding.left * 1.25,
+      resolvedTheme.cardPadding.top * 1.55,
+      resolvedTheme.cardPadding.right * 1.25,
+      resolvedTheme.cardPadding.bottom * 0.82,
+    );
 
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -38,111 +45,117 @@ class HadithShareCard extends StatelessWidget {
           ),
         ],
       ),
-      child: Padding(
-        padding: resolvedTheme.cardPadding,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(resolvedTheme.cardRadius),
+        child: Stack(
+          alignment: Alignment.center,
           children: [
-            if (showBadge)
-              ShareContentBadge(
-                label: data.badgeLabel,
-                accentColor: resolvedTheme.accentColor,
+            Positioned.fill(
+              child: Image.asset(
+                _frameAsset,
+                fit: BoxFit.fill,
               ),
-            if (data.hasArabicText) ...[
-              if (showBadge) SizedBox(height: resolvedTheme.sectionSpacing),
-              SizedBox(
-                width: double.infinity,
-                child: Directionality(
-                  textDirection: TextDirection.rtl,
-                  child: Text(
-                    data.arabicText!.trim(),
-                    textAlign: TextAlign.right,
-                    maxLines: 8,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontFamily: resolvedTheme.arabicFontFamily,
-                      fontSize: resolvedTheme.arabicFontSize,
-                      height: resolvedTheme.arabicLineHeight,
-                      fontWeight: FontWeight.w500,
-                      color: resolvedTheme.primaryTextColor,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: resolvedTheme.sectionSpacing),
-            ] else
-              SizedBox(height: resolvedTheme.sectionSpacing * 0.7),
-            if (data.hasTranslation) ...[
-              SizedBox(
-                width: double.infinity,
-                child: Text(
-                  data.translation.trim(),
-                  textAlign: TextAlign.left,
-                  maxLines: data.hasArabicText ? 13 : 16,
-                  overflow: TextOverflow.ellipsis,
-                  style: GoogleFonts.dmSans(
-                    fontSize: resolvedTheme.translationFontSize,
-                    height: resolvedTheme.translationLineHeight,
-                    fontWeight: FontWeight.w500,
-                    color: resolvedTheme.primaryTextColor,
-                  ),
-                ),
-              ),
-              SizedBox(height: resolvedTheme.sectionSpacing),
-            ],
-            if (showMetadata) ...[
-              Container(
-                width: double.infinity,
-                height: 1,
-                color: resolvedTheme.dividerColor,
-              ),
-              SizedBox(height: resolvedTheme.contentSpacing),
-              if (showArabicMetadata) ...[
-                SizedBox(
-                  width: double.infinity,
-                  child: Directionality(
-                    textDirection: TextDirection.rtl,
-                    child: Text(
-                      data.arabicReference!.trim(),
-                      textAlign: TextAlign.right,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontFamily: resolvedTheme.arabicFontFamily,
-                        fontSize: resolvedTheme.referenceFontSize * 1.02,
-                        height: resolvedTheme.referenceLineHeight,
-                        fontWeight: FontWeight.w600,
-                        color: resolvedTheme.secondaryTextColor,
+            ),
+            Padding(
+              padding: contentPadding,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  if (showBadge) ...[
+                    Align(
+                      alignment: Alignment.center,
+                      child: ShareContentBadge(
+                        label: data.badgeLabel,
+                        accentColor: resolvedTheme.accentColor,
                       ),
                     ),
-                  ),
-                ),
-                if (showTranslationMetadata)
-                  SizedBox(height: resolvedTheme.contentSpacing * 0.55),
-              ],
-              if (showTranslationMetadata)
-                SizedBox(
-                  width: double.infinity,
-                  child: Text(
-                    data.reference.trim(),
-                    textAlign: TextAlign.left,
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
-                    style: GoogleFonts.dmSans(
-                      fontSize: resolvedTheme.referenceFontSize,
-                      height: resolvedTheme.referenceLineHeight,
-                      fontWeight: FontWeight.w600,
-                      color: resolvedTheme.referenceTextColor,
+                    SizedBox(height: resolvedTheme.sectionSpacing * 0.8),
+                  ],
+                  if (data.hasArabicText) ...[
+                    Directionality(
+                      textDirection: TextDirection.rtl,
+                      child: Text(
+                        data.arabicText!.trim(),
+                        textAlign: TextAlign.center,
+                        maxLines: 12,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontFamily: resolvedTheme.arabicFontFamily,
+                          fontSize: resolvedTheme.arabicFontSize,
+                          height: resolvedTheme.arabicLineHeight,
+                          fontWeight: FontWeight.w500,
+                          color: resolvedTheme.primaryTextColor,
+                        ),
+                      ),
                     ),
+                    SizedBox(height: resolvedTheme.sectionSpacing * 0.78),
+                  ],
+                  if (data.hasTranslation) ...[
+                    Text(
+                      data.translation.trim(),
+                      textAlign: TextAlign.center,
+                      maxLines: data.hasArabicText ? 14 : 18,
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.dmSans(
+                        fontSize: resolvedTheme.translationFontSize,
+                        height: resolvedTheme.translationLineHeight,
+                        fontWeight: FontWeight.w500,
+                        color: resolvedTheme.primaryTextColor,
+                      ),
+                    ),
+                    SizedBox(height: resolvedTheme.sectionSpacing * 0.65),
+                  ],
+                  if (showMetadata) ...[
+                    Container(
+                      width: double.infinity,
+                      height: 1,
+                      color: resolvedTheme.dividerColor,
+                    ),
+                    SizedBox(height: resolvedTheme.contentSpacing * 0.78),
+                    if (showArabicMetadata) ...[
+                      Directionality(
+                        textDirection: TextDirection.rtl,
+                        child: Text(
+                          data.arabicReference!.trim(),
+                          textAlign: TextAlign.center,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontFamily: resolvedTheme.arabicFontFamily,
+                            fontSize: resolvedTheme.referenceFontSize * 1.02,
+                            height: resolvedTheme.referenceLineHeight,
+                            fontWeight: FontWeight.w600,
+                            color: resolvedTheme.secondaryTextColor,
+                          ),
+                        ),
+                      ),
+                      if (showTranslationMetadata)
+                        SizedBox(height: resolvedTheme.contentSpacing * 0.35),
+                    ],
+                    if (showTranslationMetadata)
+                      Text(
+                        data.reference.trim(),
+                        textAlign: TextAlign.center,
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.dmSans(
+                          fontSize: resolvedTheme.referenceFontSize,
+                          height: resolvedTheme.referenceLineHeight,
+                          fontWeight: FontWeight.w600,
+                          color: resolvedTheme.referenceTextColor,
+                        ),
+                      ),
+                    SizedBox(height: resolvedTheme.sectionSpacing * 0.8),
+                  ],
+                  ShareBrandingFooter(
+                    accentColor: resolvedTheme.accentColor,
+                    mutedColor: resolvedTheme.brandingTextColor,
+                    fontSize: resolvedTheme.brandingFontSize,
                   ),
-                ),
-              SizedBox(height: resolvedTheme.contentSpacing * 1.2),
-            ],
-            ShareBrandingFooter(
-              accentColor: resolvedTheme.accentColor,
-              mutedColor: resolvedTheme.brandingTextColor,
-              fontSize: resolvedTheme.brandingFontSize,
+                  const SizedBox(height: 18),
+                ],
+              ),
             ),
           ],
         ),

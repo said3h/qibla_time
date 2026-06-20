@@ -18,7 +18,8 @@ class AyahSharePreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final maxCardWidth = theme.canvasSize.width - theme.canvasPadding.horizontal;
+    final maxCardWidth =
+        theme.canvasSize.width - theme.canvasPadding.horizontal;
     final maxCardHeight =
         theme.canvasSize.height - theme.canvasPadding.vertical;
     final targetCardWidth = theme.canvasSize.width * theme.cardWidthFactor;
@@ -27,7 +28,10 @@ class AyahSharePreview extends StatelessWidget {
     final card = SizedBox(
       width: cardWidth,
       child: ConstrainedBox(
-        constraints: BoxConstraints(maxHeight: maxCardHeight),
+        constraints: BoxConstraints(
+          minHeight: cardWidth / 1.19,
+          maxHeight: maxCardHeight,
+        ),
         child: AyahShareCard(
           data: data,
           theme: theme,
