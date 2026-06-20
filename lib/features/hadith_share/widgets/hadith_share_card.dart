@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../shared_share/widgets/adaptive_share_frame.dart';
 import '../../shared_share/widgets/share_branding_footer.dart';
 import '../../shared_share/widgets/share_content_badge.dart';
 import '../models/hadith_share_data.dart';
@@ -51,9 +52,10 @@ class HadithShareCard extends StatelessWidget {
           alignment: Alignment.center,
           children: [
             Positioned.fill(
-              child: Image.asset(
-                _frameAsset,
-                fit: BoxFit.fill,
+              child: AdaptiveShareFrame(
+                assetPath: _frameAsset,
+                accentColor: resolvedTheme.accentColor,
+                borderRadius: resolvedTheme.cardRadius,
               ),
             ),
             Padding(
