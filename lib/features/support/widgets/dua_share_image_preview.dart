@@ -30,7 +30,6 @@ class DuaShareImagePreview extends StatelessWidget {
       width: cardWidth,
       child: ConstrainedBox(
         constraints: BoxConstraints(
-          minHeight: cardWidth / 1.19,
           maxHeight: maxCardHeight,
         ),
         child: DuaShareImageCard(
@@ -80,10 +79,6 @@ class DuaShareImageCard extends StatelessWidget {
       resolvedTheme.cardPadding.right * 1.25,
       resolvedTheme.cardPadding.bottom * 1.08,
     );
-    final footerBottom = resolvedTheme.cardPadding.bottom * 0.58;
-    final footerHeight = resolvedTheme.brandingFontSize * 2.75;
-    final contentBottom =
-        footerBottom + footerHeight + resolvedTheme.sectionSpacing * 0.55;
 
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -113,78 +108,50 @@ class DuaShareImageCard extends StatelessWidget {
                 fit: BoxFit.fill,
               ),
             ),
-            Positioned(
-              left: contentPadding.left,
-              top: contentPadding.top,
-              right: contentPadding.right,
-              bottom: contentBottom,
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  return Align(
-                    alignment: Alignment.center,
-                    child: FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: SizedBox(
-                        width: constraints.maxWidth,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            if (data.hasArabicText) ...[
-                              Directionality(
-                                textDirection: TextDirection.rtl,
-                                child: Text(
-                                  data.arabicText!.trim(),
-                                  textAlign: TextAlign.center,
-                                  maxLines: 24,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                    fontFamily: resolvedTheme.arabicFontFamily,
-                                    fontSize: resolvedTheme.arabicFontSize,
-                                    height: resolvedTheme.arabicLineHeight,
-                                    fontWeight: FontWeight.w600,
-                                    color: resolvedTheme.accentColor,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: resolvedTheme.sectionSpacing * 1.05,
-                              ),
-                            ],
-                            if (data.hasTranslation) ...[
-                              Text(
-                                data.translation.trim(),
-                                textAlign: TextAlign.center,
-                                maxLines: data.hasArabicText ? 30 : 34,
-                                overflow: TextOverflow.ellipsis,
-                                style: GoogleFonts.dmSans(
-                                  fontSize: resolvedTheme.translationFontSize,
-                                  height: resolvedTheme.translationLineHeight,
-                                  fontWeight: FontWeight.w600,
-                                  color: resolvedTheme.referenceTextColor,
-                                ),
-                              ),
-                            ],
-                          ],
+            Padding(
+              padding: contentPadding,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  if (data.hasArabicText) ...[
+                    Directionality(
+                      textDirection: TextDirection.rtl,
+                      child: Text(
+                        data.arabicText!.trim(),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontFamily: resolvedTheme.arabicFontFamily,
+                          fontSize: resolvedTheme.arabicFontSize,
+                          height: resolvedTheme.arabicLineHeight,
+                          fontWeight: FontWeight.w600,
+                          color: resolvedTheme.accentColor,
                         ),
                       ),
                     ),
-                  );
-                },
-              ),
-            ),
-            Positioned(
-              left: contentPadding.left,
-              right: contentPadding.right,
-              bottom: footerBottom,
-              height: footerHeight,
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: ShareBrandingFooter(
-                  accentColor: resolvedTheme.accentColor,
-                  mutedColor: resolvedTheme.brandingTextColor,
-                  fontSize: resolvedTheme.brandingFontSize,
-                ),
+                    SizedBox(
+                      height: resolvedTheme.sectionSpacing * 1.05,
+                    ),
+                  ],
+                  if (data.hasTranslation) ...[
+                    Text(
+                      data.translation.trim(),
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.dmSans(
+                        fontSize: resolvedTheme.translationFontSize,
+                        height: resolvedTheme.translationLineHeight,
+                        fontWeight: FontWeight.w600,
+                        color: resolvedTheme.referenceTextColor,
+                      ),
+                    ),
+                  ],
+                  SizedBox(height: resolvedTheme.sectionSpacing * 1.35),
+                  ShareBrandingFooter(
+                    accentColor: resolvedTheme.accentColor,
+                    mutedColor: resolvedTheme.brandingTextColor,
+                    fontSize: resolvedTheme.brandingFontSize,
+                  ),
+                ],
               ),
             ),
           ],

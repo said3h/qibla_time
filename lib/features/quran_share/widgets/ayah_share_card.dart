@@ -23,10 +23,6 @@ class AyahShareCard extends StatelessWidget {
     final showArabicMetadata = data.hasArabicText;
     final showTranslationMetadata = data.hasTranslation;
     final showMetadata = showArabicMetadata || showTranslationMetadata;
-    final footerBottom = resolvedTheme.cardPadding.bottom * 0.58;
-    final footerHeight = resolvedTheme.brandingFontSize * 2.75;
-    final contentBottom =
-        footerBottom + footerHeight + resolvedTheme.sectionSpacing * 0.55;
     final contentPadding = EdgeInsets.fromLTRB(
       resolvedTheme.cardPadding.left * 1.25,
       resolvedTheme.cardPadding.top * 1.55,
@@ -58,139 +54,104 @@ class AyahShareCard extends StatelessWidget {
                 fit: BoxFit.fill,
               ),
             ),
-            Positioned(
-              left: contentPadding.left,
-              top: contentPadding.top,
-              right: contentPadding.right,
-              bottom: contentBottom,
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  return Align(
+            Padding(
+              padding: contentPadding,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Align(
                     alignment: Alignment.center,
-                    child: FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: SizedBox(
-                        width: constraints.maxWidth,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Align(
-                              alignment: Alignment.center,
-                              child: ShareContentBadge(
-                                label: data.badgeLabel,
-                                accentColor: resolvedTheme.accentColor,
-                              ),
-                            ),
-                            SizedBox(
-                              height: resolvedTheme.sectionSpacing * 0.8,
-                            ),
-                            if (data.hasArabicText) ...[
-                              Directionality(
-                                textDirection: TextDirection.rtl,
-                                child: Text(
-                                  data.arabicText.trim(),
-                                  textAlign: TextAlign.center,
-                                  maxLines: 20,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                    fontFamily: resolvedTheme.arabicFontFamily,
-                                    fontSize: resolvedTheme.arabicFontSize,
-                                    height: resolvedTheme.arabicLineHeight,
-                                    fontWeight: FontWeight.w500,
-                                    color: resolvedTheme.primaryTextColor,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: resolvedTheme.sectionSpacing * 0.78,
-                              ),
-                            ],
-                            if (data.hasTranslation) ...[
-                              Text(
-                                data.translation!.trim(),
-                                textAlign: TextAlign.center,
-                                maxLines: data.hasArabicText ? 28 : 34,
-                                overflow: TextOverflow.ellipsis,
-                                style: GoogleFonts.dmSans(
-                                  fontSize: resolvedTheme.translationFontSize,
-                                  height: resolvedTheme.translationLineHeight,
-                                  fontWeight: FontWeight.w500,
-                                  color: resolvedTheme.primaryTextColor,
-                                ),
-                              ),
-                              SizedBox(
-                                height: resolvedTheme.sectionSpacing * 0.65,
-                              ),
-                            ],
-                            if (showMetadata) ...[
-                              Container(
-                                width: double.infinity,
-                                height: 1,
-                                color: resolvedTheme.dividerColor,
-                              ),
-                              SizedBox(
-                                height: resolvedTheme.contentSpacing * 0.78,
-                              ),
-                              if (showArabicMetadata) ...[
-                                Directionality(
-                                  textDirection: TextDirection.rtl,
-                                  child: Text(
-                                    data.arabicReferenceLabel,
-                                    textAlign: TextAlign.center,
-                                    maxLines: 3,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                      fontFamily:
-                                          resolvedTheme.arabicFontFamily,
-                                      fontSize:
-                                          resolvedTheme.referenceFontSize *
-                                              1.02,
-                                      height: resolvedTheme.referenceLineHeight,
-                                      fontWeight: FontWeight.w600,
-                                      color: resolvedTheme.secondaryTextColor,
-                                    ),
-                                  ),
-                                ),
-                                if (showTranslationMetadata)
-                                  SizedBox(
-                                    height: resolvedTheme.contentSpacing * 0.35,
-                                  ),
-                              ],
-                              if (showTranslationMetadata)
-                                Text(
-                                  data.referenceLabel,
-                                  textAlign: TextAlign.center,
-                                  maxLines: 4,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: GoogleFonts.dmSans(
-                                    fontSize: resolvedTheme.referenceFontSize,
-                                    height: resolvedTheme.referenceLineHeight,
-                                    fontWeight: FontWeight.w600,
-                                    color: resolvedTheme.referenceTextColor,
-                                  ),
-                                ),
-                            ],
-                          ],
+                    child: ShareContentBadge(
+                      label: data.badgeLabel,
+                      accentColor: resolvedTheme.accentColor,
+                    ),
+                  ),
+                  SizedBox(
+                    height: resolvedTheme.sectionSpacing * 0.8,
+                  ),
+                  if (data.hasArabicText) ...[
+                    Directionality(
+                      textDirection: TextDirection.rtl,
+                      child: Text(
+                        data.arabicText.trim(),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontFamily: resolvedTheme.arabicFontFamily,
+                          fontSize: resolvedTheme.arabicFontSize,
+                          height: resolvedTheme.arabicLineHeight,
+                          fontWeight: FontWeight.w500,
+                          color: resolvedTheme.primaryTextColor,
                         ),
                       ),
                     ),
-                  );
-                },
-              ),
-            ),
-            Positioned(
-              left: contentPadding.left,
-              right: contentPadding.right,
-              bottom: footerBottom,
-              height: footerHeight,
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: ShareBrandingFooter(
-                  accentColor: resolvedTheme.accentColor,
-                  mutedColor: resolvedTheme.brandingTextColor,
-                  fontSize: resolvedTheme.brandingFontSize,
-                ),
+                    SizedBox(
+                      height: resolvedTheme.sectionSpacing * 0.78,
+                    ),
+                  ],
+                  if (data.hasTranslation) ...[
+                    Text(
+                      data.translation!.trim(),
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.dmSans(
+                        fontSize: resolvedTheme.translationFontSize,
+                        height: resolvedTheme.translationLineHeight,
+                        fontWeight: FontWeight.w500,
+                        color: resolvedTheme.primaryTextColor,
+                      ),
+                    ),
+                    SizedBox(
+                      height: resolvedTheme.sectionSpacing * 0.65,
+                    ),
+                  ],
+                  if (showMetadata) ...[
+                    Container(
+                      width: double.infinity,
+                      height: 1,
+                      color: resolvedTheme.dividerColor,
+                    ),
+                    SizedBox(
+                      height: resolvedTheme.contentSpacing * 0.78,
+                    ),
+                    if (showArabicMetadata) ...[
+                      Directionality(
+                        textDirection: TextDirection.rtl,
+                        child: Text(
+                          data.arabicReferenceLabel,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: resolvedTheme.arabicFontFamily,
+                            fontSize: resolvedTheme.referenceFontSize * 1.02,
+                            height: resolvedTheme.referenceLineHeight,
+                            fontWeight: FontWeight.w600,
+                            color: resolvedTheme.secondaryTextColor,
+                          ),
+                        ),
+                      ),
+                      if (showTranslationMetadata)
+                        SizedBox(
+                          height: resolvedTheme.contentSpacing * 0.35,
+                        ),
+                    ],
+                    if (showTranslationMetadata)
+                      Text(
+                        data.referenceLabel,
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.dmSans(
+                          fontSize: resolvedTheme.referenceFontSize,
+                          height: resolvedTheme.referenceLineHeight,
+                          fontWeight: FontWeight.w600,
+                          color: resolvedTheme.referenceTextColor,
+                        ),
+                      ),
+                  ],
+                  SizedBox(height: resolvedTheme.sectionSpacing * 1.15),
+                  ShareBrandingFooter(
+                    accentColor: resolvedTheme.accentColor,
+                    mutedColor: resolvedTheme.brandingTextColor,
+                    fontSize: resolvedTheme.brandingFontSize,
+                  ),
+                ],
               ),
             ),
           ],

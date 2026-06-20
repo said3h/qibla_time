@@ -29,7 +29,6 @@ class AyahSharePreview extends StatelessWidget {
       width: cardWidth,
       child: ConstrainedBox(
         constraints: BoxConstraints(
-          minHeight: cardWidth / 1.19,
           maxHeight: maxCardHeight,
         ),
         child: AyahShareCard(
