@@ -1,5 +1,3 @@
-import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -32,9 +30,12 @@ class DuaShareImagePreview extends StatelessWidget {
       width: cardWidth,
       child: ConstrainedBox(
         constraints: BoxConstraints(maxHeight: maxCardHeight),
-        child: DuaShareImageCard(
-          data: data,
-          theme: theme,
+        child: AspectRatio(
+          aspectRatio: 1.19,
+          child: DuaShareImageCard(
+            data: data,
+            theme: theme,
+          ),
         ),
       ),
     );
@@ -68,8 +69,7 @@ class DuaShareImageCard extends StatelessWidget {
 
   final HadithShareData data;
   final HadithShareThemeData theme;
-  static const _cornerOrnamentAsset =
-      'assets/images/app/share_corner_ornament.png';
+  static const _frameAsset = 'assets/images/app/share_dua_frame.png';
 
   @override
   Widget build(BuildContext context) {
@@ -97,125 +97,69 @@ class DuaShareImageCard extends StatelessWidget {
         child: Stack(
           children: [
             Positioned.fill(
+              child: Image.asset(
+                _frameAsset,
+                fit: BoxFit.fill,
+              ),
+            ),
+            Positioned.fill(
               child: Padding(
-                padding: const EdgeInsets.all(22),
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(
-                      resolvedTheme.cardRadius - 14,
+                padding: EdgeInsets.fromLTRB(
+                  resolvedTheme.cardPadding.left * 1.25,
+                  resolvedTheme.cardPadding.top * 1.75,
+                  resolvedTheme.cardPadding.right * 1.25,
+                  resolvedTheme.cardPadding.bottom * 0.82,
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const Spacer(flex: 2),
+                    if (data.hasArabicText) ...[
+                      Directionality(
+                        textDirection: TextDirection.rtl,
+                        child: Text(
+                          data.arabicText!.trim(),
+                          textAlign: TextAlign.center,
+                          maxLines: 9,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontFamily: resolvedTheme.arabicFontFamily,
+                            fontSize: resolvedTheme.arabicFontSize,
+                            height: resolvedTheme.arabicLineHeight,
+                            fontWeight: FontWeight.w600,
+                            color: resolvedTheme.accentColor,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: resolvedTheme.sectionSpacing * 1.35),
+                    ],
+                    if (data.hasTranslation) ...[
+                      Text(
+                        data.translation.trim(),
+                        textAlign: TextAlign.center,
+                        maxLines: data.hasArabicText ? 13 : 16,
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.dmSans(
+                          fontSize: resolvedTheme.translationFontSize,
+                          height: resolvedTheme.translationLineHeight,
+                          fontWeight: FontWeight.w600,
+                          color: resolvedTheme.referenceTextColor,
+                        ),
+                      ),
+                    ],
+                    const Spacer(),
+                    ShareBrandingFooter(
+                      accentColor: resolvedTheme.accentColor,
+                      mutedColor: resolvedTheme.brandingTextColor,
+                      fontSize: resolvedTheme.brandingFontSize,
                     ),
-                    border: Border.all(
-                      color: resolvedTheme.accentColor.withValues(alpha: 0.28),
-                      width: 0.9,
-                    ),
-                  ),
+                    const SizedBox(height: 10),
+                  ],
                 ),
               ),
             ),
-            const _CornerOrnament(
-              asset: _cornerOrnamentAsset,
-              alignment: Alignment.topLeft,
-              angle: 0,
-            ),
-            const _CornerOrnament(
-              asset: _cornerOrnamentAsset,
-              alignment: Alignment.topRight,
-              angle: math.pi / 2,
-            ),
-            const _CornerOrnament(
-              asset: _cornerOrnamentAsset,
-              alignment: Alignment.bottomRight,
-              angle: math.pi,
-            ),
-            const _CornerOrnament(
-              asset: _cornerOrnamentAsset,
-              alignment: Alignment.bottomLeft,
-              angle: -math.pi / 2,
-            ),
-            Padding(
-              padding: resolvedTheme.cardPadding,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  if (data.hasArabicText) ...[
-                    Directionality(
-                      textDirection: TextDirection.rtl,
-                      child: Text(
-                        data.arabicText!.trim(),
-                        textAlign: TextAlign.center,
-                        maxLines: 9,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontFamily: resolvedTheme.arabicFontFamily,
-                          fontSize: resolvedTheme.arabicFontSize,
-                          height: resolvedTheme.arabicLineHeight,
-                          fontWeight: FontWeight.w600,
-                          color: resolvedTheme.accentColor,
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: resolvedTheme.sectionSpacing),
-                  ],
-                  if (data.hasTranslation) ...[
-                    Text(
-                      data.translation.trim(),
-                      textAlign: TextAlign.center,
-                      maxLines: data.hasArabicText ? 13 : 16,
-                      overflow: TextOverflow.ellipsis,
-                      style: GoogleFonts.dmSans(
-                        fontSize: resolvedTheme.translationFontSize,
-                        height: resolvedTheme.translationLineHeight,
-                        fontWeight: FontWeight.w600,
-                        color: resolvedTheme.referenceTextColor,
-                      ),
-                    ),
-                    SizedBox(height: resolvedTheme.sectionSpacing),
-                  ],
-                  ShareBrandingFooter(
-                    accentColor: resolvedTheme.accentColor,
-                    mutedColor: resolvedTheme.brandingTextColor,
-                    fontSize: resolvedTheme.brandingFontSize,
-                  ),
-                ],
-              ),
-            ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class _CornerOrnament extends StatelessWidget {
-  const _CornerOrnament({
-    required this.asset,
-    required this.alignment,
-    required this.angle,
-  });
-
-  final String asset;
-  final Alignment alignment;
-  final double angle;
-
-  @override
-  Widget build(BuildContext context) {
-    return Positioned.fill(
-      child: IgnorePointer(
-        child: Align(
-          alignment: alignment,
-          child: Padding(
-            padding: const EdgeInsets.all(17),
-            child: Transform.rotate(
-              angle: angle,
-              child: Image.asset(
-                asset,
-                width: 172,
-                height: 172,
-                fit: BoxFit.contain,
-              ),
-            ),
-          ),
         ),
       ),
     );
