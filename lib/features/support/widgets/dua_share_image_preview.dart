@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -66,6 +68,8 @@ class DuaShareImageCard extends StatelessWidget {
 
   final HadithShareData data;
   final HadithShareThemeData theme;
+  static const _cornerOrnamentAsset =
+      'assets/images/app/share_corner_ornament.png';
 
   @override
   Widget build(BuildContext context) {
@@ -90,129 +94,130 @@ class DuaShareImageCard extends StatelessWidget {
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(resolvedTheme.cardRadius),
-        child: CustomPaint(
-          foregroundPainter: _DuaShareCornerPainter(
-            color: resolvedTheme.accentColor.withValues(alpha: 0.84),
-            radius: resolvedTheme.cardRadius,
-          ),
-          child: Padding(
-            padding: resolvedTheme.cardPadding,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                if (data.hasArabicText) ...[
-                  Directionality(
-                    textDirection: TextDirection.rtl,
-                    child: Text(
-                      data.arabicText!.trim(),
-                      textAlign: TextAlign.center,
-                      maxLines: 9,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontFamily: resolvedTheme.arabicFontFamily,
-                        fontSize: resolvedTheme.arabicFontSize,
-                        height: resolvedTheme.arabicLineHeight,
-                        fontWeight: FontWeight.w600,
-                        color: resolvedTheme.accentColor,
+        child: Stack(
+          children: [
+            Positioned.fill(
+              child: Padding(
+                padding: const EdgeInsets.all(22),
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(
+                      resolvedTheme.cardRadius - 14,
+                    ),
+                    border: Border.all(
+                      color: resolvedTheme.accentColor.withValues(alpha: 0.28),
+                      width: 0.9,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            const _CornerOrnament(
+              asset: _cornerOrnamentAsset,
+              alignment: Alignment.topLeft,
+              angle: 0,
+            ),
+            const _CornerOrnament(
+              asset: _cornerOrnamentAsset,
+              alignment: Alignment.topRight,
+              angle: math.pi / 2,
+            ),
+            const _CornerOrnament(
+              asset: _cornerOrnamentAsset,
+              alignment: Alignment.bottomRight,
+              angle: math.pi,
+            ),
+            const _CornerOrnament(
+              asset: _cornerOrnamentAsset,
+              alignment: Alignment.bottomLeft,
+              angle: -math.pi / 2,
+            ),
+            Padding(
+              padding: resolvedTheme.cardPadding,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  if (data.hasArabicText) ...[
+                    Directionality(
+                      textDirection: TextDirection.rtl,
+                      child: Text(
+                        data.arabicText!.trim(),
+                        textAlign: TextAlign.center,
+                        maxLines: 9,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontFamily: resolvedTheme.arabicFontFamily,
+                          fontSize: resolvedTheme.arabicFontSize,
+                          height: resolvedTheme.arabicLineHeight,
+                          fontWeight: FontWeight.w600,
+                          color: resolvedTheme.accentColor,
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: resolvedTheme.sectionSpacing),
-                ],
-                if (data.hasTranslation) ...[
-                  Text(
-                    data.translation.trim(),
-                    textAlign: TextAlign.center,
-                    maxLines: data.hasArabicText ? 13 : 16,
-                    overflow: TextOverflow.ellipsis,
-                    style: GoogleFonts.dmSans(
-                      fontSize: resolvedTheme.translationFontSize,
-                      height: resolvedTheme.translationLineHeight,
-                      fontWeight: FontWeight.w600,
-                      color: resolvedTheme.referenceTextColor,
+                    SizedBox(height: resolvedTheme.sectionSpacing),
+                  ],
+                  if (data.hasTranslation) ...[
+                    Text(
+                      data.translation.trim(),
+                      textAlign: TextAlign.center,
+                      maxLines: data.hasArabicText ? 13 : 16,
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.dmSans(
+                        fontSize: resolvedTheme.translationFontSize,
+                        height: resolvedTheme.translationLineHeight,
+                        fontWeight: FontWeight.w600,
+                        color: resolvedTheme.referenceTextColor,
+                      ),
                     ),
+                    SizedBox(height: resolvedTheme.sectionSpacing),
+                  ],
+                  ShareBrandingFooter(
+                    accentColor: resolvedTheme.accentColor,
+                    mutedColor: resolvedTheme.brandingTextColor,
+                    fontSize: resolvedTheme.brandingFontSize,
                   ),
-                  SizedBox(height: resolvedTheme.sectionSpacing),
                 ],
-                ShareBrandingFooter(
-                  accentColor: resolvedTheme.accentColor,
-                  mutedColor: resolvedTheme.brandingTextColor,
-                  fontSize: resolvedTheme.brandingFontSize,
-                ),
-              ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );
   }
 }
 
-class _DuaShareCornerPainter extends CustomPainter {
-  const _DuaShareCornerPainter({
-    required this.color,
-    required this.radius,
+class _CornerOrnament extends StatelessWidget {
+  const _CornerOrnament({
+    required this.asset,
+    required this.alignment,
+    required this.angle,
   });
 
-  final Color color;
-  final double radius;
+  final String asset;
+  final Alignment alignment;
+  final double angle;
 
   @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..strokeWidth = 2.2
-      ..style = PaintingStyle.stroke
-      ..strokeCap = StrokeCap.round;
-    const inset = 22.0;
-    const length = 68.0;
-    const curl = 18.0;
-
-    void drawCorner({required bool right, required bool bottom}) {
-      final x = right ? size.width - inset : inset;
-      final y = bottom ? size.height - inset : inset;
-      final horizontalEnd = Offset(x + (right ? -length : length), y);
-      final verticalEnd = Offset(x, y + (bottom ? -length : length));
-
-      final path = Path()
-        ..moveTo(x, y)
-        ..lineTo(horizontalEnd.dx, horizontalEnd.dy)
-        ..moveTo(x, y)
-        ..lineTo(verticalEnd.dx, verticalEnd.dy);
-      canvas.drawPath(path, paint);
-
-      final curlRect = Rect.fromCircle(
-        center: Offset(
-          x + (right ? -length : length),
-          y + (bottom ? -curl : curl),
+  Widget build(BuildContext context) {
+    return Positioned.fill(
+      child: IgnorePointer(
+        child: Align(
+          alignment: alignment,
+          child: Padding(
+            padding: const EdgeInsets.all(17),
+            child: Transform.rotate(
+              angle: angle,
+              child: Image.asset(
+                asset,
+                width: 172,
+                height: 172,
+                fit: BoxFit.contain,
+              ),
+            ),
+          ),
         ),
-        radius: curl,
-      );
-      canvas.drawArc(
-        curlRect,
-        right ? (bottom ? 0.2 : -1.8) : (bottom ? 1.4 : -0.2),
-        right ? -1.15 : 1.15,
-        false,
-        paint,
-      );
-
-      final dotOffset = Offset(
-        x + (right ? -length - 18 : length + 18),
-        y,
-      );
-      canvas.drawCircle(dotOffset, 2.4, paint..style = PaintingStyle.fill);
-      paint.style = PaintingStyle.stroke;
-    }
-
-    drawCorner(right: false, bottom: false);
-    drawCorner(right: true, bottom: false);
-    drawCorner(right: false, bottom: true);
-    drawCorner(right: true, bottom: true);
-  }
-
-  @override
-  bool shouldRepaint(covariant _DuaShareCornerPainter oldDelegate) {
-    return oldDelegate.color != color || oldDelegate.radius != radius;
+      ),
+    );
   }
 }
