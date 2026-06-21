@@ -1428,6 +1428,7 @@
   "bookDeleteConfirmBody": "Het bestand wordt van het apparaat verwijderd",
   "bookDownloadError": "Fout bij downloaden",
   "quranViewModeAyahs": "Ayah-weergave",
+  "quranGoToAyah": "Ga naar aya",
   "quranViewModePage": "Doorlopend lezen",
   "commonRetry": "Opnieuw proberen",
   "onboardingNotificationsPermissionWarning": "Meldingen zijn nu niet beschikbaar. Je kunt doorgaan en dit later aanpassen.",

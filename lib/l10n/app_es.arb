@@ -1431,6 +1431,7 @@
   "bookDeleteConfirmBody": "Se eliminará el archivo del dispositivo",
   "bookDownloadError": "Error al descargar",
   "quranViewModeAyahs": "Vista por aleya",
+  "quranGoToAyah": "Ir a aleya",
   "quranViewModePage": "Lectura continua",
   "commonRetry": "Reintentar",
   "onboardingNotificationsPermissionWarning": "Las notificaciones no están disponibles ahora. Puedes continuar y ajustarlo después.",

@@ -3606,6 +3606,9 @@ class AppLocalizationsTr extends AppLocalizations {
   String get quranViewModeAyahs => 'Ayet görünümü';
 
   @override
+  String get quranGoToAyah => 'Ayete git';
+
+  @override
   String get quranViewModePage => 'Sürekli okuma';
 
   @override

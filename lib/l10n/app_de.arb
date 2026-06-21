@@ -1428,6 +1428,7 @@
   "bookDeleteConfirmBody": "Die Datei wird vom Gerät entfernt",
   "bookDownloadError": "Fehler beim Herunterladen",
   "quranViewModeAyahs": "Einzelverse",
+  "quranGoToAyah": "Zur Aya gehen",
   "quranViewModePage": "Fortlaufende Lesung",
   "commonRetry": "Erneut versuchen",
   "onboardingNotificationsPermissionWarning": "Benachrichtigungen sind derzeit nicht verfügbar. Du kannst fortfahren und dies später anpassen.",

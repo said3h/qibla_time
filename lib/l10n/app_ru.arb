@@ -1428,6 +1428,7 @@
   "bookDeleteConfirmBody": "Эта книга будет удалена",
   "bookDownloadError": "Ошибка загрузки",
   "quranViewModeAyahs": "Просмотр аятов",
+  "quranGoToAyah": "Перейти к аяту",
   "quranViewModePage": "Непрерывное чтение",
   "commonRetry": "Повторить",
   "onboardingNotificationsPermissionWarning": "Уведомления сейчас недоступны. Вы можете продолжить и настроить это позже.",

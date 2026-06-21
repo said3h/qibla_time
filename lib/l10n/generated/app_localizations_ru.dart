@@ -3640,6 +3640,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get quranViewModeAyahs => 'Просмотр аятов';
 
   @override
+  String get quranGoToAyah => 'Перейти к аяту';
+
+  @override
   String get quranViewModePage => 'Непрерывное чтение';
 
   @override

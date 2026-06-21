@@ -6340,6 +6340,12 @@ abstract class AppLocalizations {
   /// **'Vista por aleya'**
   String get quranViewModeAyahs;
 
+  /// No description provided for @quranGoToAyah.
+  ///
+  /// In es, this message translates to:
+  /// **'Ir a aleya'**
+  String get quranGoToAyah;
+
   /// No description provided for @quranViewModePage.
   ///
   /// In es, this message translates to:

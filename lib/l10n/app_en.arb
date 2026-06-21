@@ -1431,6 +1431,7 @@
   "bookDeleteConfirmBody": "The file will be removed from the device",
   "bookDownloadError": "Download failed",
   "quranViewModeAyahs": "Ayah view",
+  "quranGoToAyah": "Go to ayah",
   "quranViewModePage": "Continuous reading",
   "commonRetry": "Retry",
   "onboardingNotificationsPermissionWarning": "Notifications are not available right now. You can continue and adjust this later.",

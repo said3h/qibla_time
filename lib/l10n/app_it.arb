@@ -1428,6 +1428,7 @@
   "bookDeleteConfirmBody": "Il file verr? rimosso dal dispositivo",
   "bookDownloadError": "Errore durante il download",
   "quranViewModeAyahs": "Vista versetti",
+  "quranGoToAyah": "Vai all'ayah",
   "quranViewModePage": "Lettura continua",
   "commonRetry": "Riprova",
   "onboardingNotificationsPermissionWarning": "Le notifiche non sono disponibili al momento. Puoi continuare e modificarle più tardi.",

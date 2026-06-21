@@ -3636,6 +3636,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get quranViewModeAyahs => 'Vista por aleya';
 
   @override
+  String get quranGoToAyah => 'Ir a aleya';
+
+  @override
   String get quranViewModePage => 'Lectura continua';
 
   @override

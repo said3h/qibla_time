@@ -1428,6 +1428,7 @@
   "bookDeleteConfirmBody": "File akan dihapus dari perangkat",
   "bookDownloadError": "Gagal mengunduh",
   "quranViewModeAyahs": "Tampilan ayat",
+  "quranGoToAyah": "Buka ayat",
   "quranViewModePage": "Bacaan berkelanjutan",
   "commonRetry": "Coba lagi",
   "onboardingNotificationsPermissionWarning": "Notifikasi belum tersedia saat ini. Anda dapat melanjutkan dan menyesuaikannya nanti.",

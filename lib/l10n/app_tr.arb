@@ -1428,6 +1428,7 @@
   "bookDeleteConfirmBody": "Dosya cihazdan silinecek",
   "bookDownloadError": "İndirme hatası",
   "quranViewModeAyahs": "Ayet görünümü",
+  "quranGoToAyah": "Ayete git",
   "quranViewModePage": "Sürekli okuma",
   "commonRetry": "Tekrar dene",
   "onboardingNotificationsPermissionWarning": "Bildirimler şu anda kullanılamıyor. Devam edip bunu daha sonra ayarlayabilirsiniz.",

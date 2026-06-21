@@ -3628,6 +3628,9 @@ class AppLocalizationsId extends AppLocalizations {
   String get quranViewModeAyahs => 'Tampilan ayat';
 
   @override
+  String get quranGoToAyah => 'Buka ayat';
+
+  @override
   String get quranViewModePage => 'Bacaan berkelanjutan';
 
   @override

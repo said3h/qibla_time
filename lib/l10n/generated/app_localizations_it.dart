@@ -3651,6 +3651,9 @@ class AppLocalizationsIt extends AppLocalizations {
   String get quranViewModeAyahs => 'Vista versetti';
 
   @override
+  String get quranGoToAyah => 'Vai all\'ayah';
+
+  @override
   String get quranViewModePage => 'Lettura continua';
 
   @override

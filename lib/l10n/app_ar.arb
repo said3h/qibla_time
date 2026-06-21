@@ -1367,6 +1367,7 @@
   "prayerNotificationJumuahTitle": "الجمعة اليوم",
   "prayerNotificationJumuahBody": "استعد للجمعة قبل الظهر، وخصص لحظة هادئة للذهاب إلى المسجد.",
   "quranViewModeAyahs": "عرض الآيات",
+  "quranGoToAyah": "الانتقال إلى الآية",
   "quranViewModePage": "القراءة المستمرة",
   "commonRetry": "إعادة المحاولة",
   "onboardingNotificationsPermissionWarning": "الإشعارات غير متاحة الآن. يمكنك المتابعة وتعديل ذلك لاحقًا.",

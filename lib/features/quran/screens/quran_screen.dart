@@ -2956,6 +2956,8 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
   }
 
   Widget _buildAyahJumpCard(QiblaTokens tokens, SurahDetail detail) {
+    final l10n = context.l10n;
+
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.fromLTRB(12, 10, 8, 10),
@@ -2980,7 +2982,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
               ),
               decoration: InputDecoration(
                 isDense: true,
-                hintText: 'Go to ayah',
+                hintText: l10n.quranGoToAyah,
                 hintStyle: GoogleFonts.dmSans(
                   fontSize: 13,
                   color: tokens.textMuted,
@@ -2991,7 +2993,7 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
           ),
           TextButton(
             onPressed: () => _submitAyahJump(detail),
-            child: const Text('Go'),
+            child: Text(l10n.quranGoToAyah),
           ),
         ],
       ),

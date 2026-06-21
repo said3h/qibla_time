@@ -3637,6 +3637,9 @@ class AppLocalizationsNl extends AppLocalizations {
   String get quranViewModeAyahs => 'Ayah-weergave';
 
   @override
+  String get quranGoToAyah => 'Ga naar aya';
+
+  @override
   String get quranViewModePage => 'Doorlopend lezen';
 
   @override
