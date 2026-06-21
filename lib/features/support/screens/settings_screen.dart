@@ -45,7 +45,6 @@ import '../../tracking/services/tracking_service.dart';
 import '../../tracking/services/weekly_summary_notification_service.dart';
 import '../services/dua_service.dart';
 import '../services/android_settings_launcher.dart';
-import '../services/app_store_links.dart';
 import 'adhan_selector_screen.dart';
 import 'support_screen.dart';
 
@@ -974,7 +973,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
             ),
             _buildValueTile(
               tokens,
-              l10n.settingsSupportInfo,
+              l10n.settingsSupportCardTitle,
               l10n.commonOpen,
               onTap: () {
                 Navigator.of(context).push(
@@ -982,16 +981,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
                     builder: (_) => const SupportScreen(),
                   ),
                 );
-              },
-            ),
-            _buildValueTile(
-              tokens,
-              l10n.rateApp,
-              l10n.commonOpen,
-              trailing:
-                  Icon(Icons.star_rounded, size: 16, color: tokens.primary),
-              onTap: () async {
-                await AppStoreLinks.openStoreListing();
               },
             ),
             const SizedBox(height: 14),
