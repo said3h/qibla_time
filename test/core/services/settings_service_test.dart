@@ -20,7 +20,6 @@ void main() {
       expect(await service.getCalculationMethod(), 1);
       expect(await service.getMadhab(), 0);
       expect(await service.getQuranTajweedEnabled(), isFalse);
-      expect(await service.getTafsirEnabled(), isTrue);
     });
 
     test('persists settings through the cached StorageService preferences',
@@ -32,14 +31,12 @@ void main() {
       await service.saveCalculationMethod(4);
       await service.saveMadhab(1);
       await service.saveQuranTajweedEnabled(true);
-      await service.saveTafsirEnabled(true);
 
       expect(await service.getAdhan(), 'azan_madinah.mp3');
       expect(await service.getNotificationsEnabled(), isFalse);
       expect(await service.getCalculationMethod(), 4);
       expect(await service.getMadhab(), 1);
       expect(await service.getQuranTajweedEnabled(), isTrue);
-      expect(await service.getTafsirEnabled(), isTrue);
     });
 
     test('migrates legacy prayer notification keys once', () async {

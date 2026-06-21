@@ -85,9 +85,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
   String? _profileDisplayName;
   String? _profileNationalityCode;
 
-  // Quran settings
-  bool _tafsirEnabled = false;
-
   static const _languageOptions = <Locale?>[
     null,
     Locale('es'),
@@ -166,8 +163,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
     dailyInspirationHour = await inspirationService.getNotificationHour();
     hadithFavoritesCount =
         (await ref.read(hadithServiceProvider).getFavorites()).length;
-
-    _tafsirEnabled = await _settingsService.getTafsirEnabled();
 
     if (Platform.isAndroid) {
       final androidInfo = await DeviceInfoPlugin().androidInfo;
@@ -859,21 +854,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
               ),
             const SizedBox(height: 14),
 
-            // ── SECCIÓN QURAN ───────────────────────────────────────────
-            _buildSectionTitle(tokens, l10n.settingsSectionQuran),
-            _buildSimpleToggleTile(
-              tokens,
-              l10n.settingsShowTafsir,
-              l10n.settingsShowTafsirSubtitle,
-              _tafsirEnabled,
-              (value) async {
-                await _settingsService.saveTafsirEnabled(value);
-                if (!mounted) return;
-                setState(() => _tafsirEnabled = value);
-              },
-            ),
-            const SizedBox(height: 14),
-
             // ── SECCIÓN HADICES ────────────────────────────────────────
             _buildSectionTitle(tokens, l10n.settingsSectionHadith),
             _buildSimpleToggleTile(
@@ -932,87 +912,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
             ),
 
             const SizedBox(height: 6),
-
-            // Lugares recientes
-            Consumer(
-              builder: (context, ref, _) {
-                final locationsAsync = ref.watch(recentLocationsProvider);
-                return locationsAsync.when(
-                  data: (locations) {
-                    if (locations.isEmpty) {
-                      return _buildSettingRow(
-                        label: l10n.settingsRecentPlaces,
-                        subtitle: l10n.settingsNoRecentTrips,
-                        trailing: Icon(Icons.history,
-                            color: tokens.textMuted, size: 18),
-                        tokens: tokens,
-                      );
-                    }
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding:
-                              const EdgeInsets.only(left: 4, bottom: 8, top: 4),
-                          child: Text(
-                            l10n.settingsSectionRecentPlaces,
-                            style: TextStyle(
-                              fontSize: 9,
-                              color: tokens.textSecondary,
-                              letterSpacing: 1.4,
-                            ),
-                          ),
-                        ),
-                        ...locations.map((loc) => Container(
-                              margin: const EdgeInsets.only(bottom: 5),
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 14, vertical: 11),
-                              decoration: BoxDecoration(
-                                color: tokens.bgSurface,
-                                borderRadius: BorderRadius.circular(12),
-                                border: Border.all(color: tokens.border),
-                              ),
-                              child: Row(
-                                children: [
-                                  Icon(Icons.location_on_outlined,
-                                      color: tokens.primary, size: 16),
-                                  const SizedBox(width: 10),
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          loc.label,
-                                          style: TextStyle(
-                                              fontSize: 13,
-                                              color: tokens.textPrimary),
-                                        ),
-                                        Text(
-                                          _formatDate(loc.timestamp),
-                                          style: TextStyle(
-                                              fontSize: 10,
-                                              color: tokens.textSecondary),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            )),
-                      ],
-                    );
-                  },
-                  loading: () => const SizedBox(height: 40),
-                  error: (_, __) => _buildSettingRow(
-                    label: l10n.settingsRecentPlaces,
-                    subtitle: l10n.settingsLoadError,
-                    trailing: Icon(Icons.error, color: tokens.danger, size: 18),
-                    tokens: tokens,
-                  ),
-                );
-              },
-            ),
 
             _buildSectionTitle(tokens, l10n.settingsSectionSmartCache),
             _buildValueTile(
@@ -1174,7 +1073,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
               l10n.commonVersion,
               packageInfo == null ? l10n.commonGenerating : packageInfo.version,
             ),
-            _buildValueTile(tokens, l10n.settingsOpenSourceLicenses, '→'),
           ],
         ),
       ),
@@ -2134,18 +2032,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
         );
       },
     );
-  }
-
-  // ── HELPERS PARA TRAVEL MODE ────────────────────────────────────
-
-  String _formatDate(DateTime date) {
-    final l10n = context.l10n;
-    final now = DateTime.now();
-    final diff = now.difference(date);
-    if (diff.inDays == 0) return l10n.settingsToday;
-    if (diff.inDays == 1) return l10n.settingsYesterday;
-    if (diff.inDays < 7) return l10n.settingsDaysAgo(diff.inDays);
-    return '${date.day}/${date.month}/${date.year}';
   }
 
   String _ramadanStatusLabel(RamadanStatus status) {

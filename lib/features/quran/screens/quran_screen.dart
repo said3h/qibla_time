@@ -21,7 +21,6 @@ import '../../hafiz/screens/hafiz_mode_screen.dart';
 import '../../quran_share/services/ayah_share_service.dart';
 import '../../quran_share/services/ayah_share_video_service.dart';
 import '../../quran_share/widgets/ayah_share_preview_sheet.dart';
-import '../../tafsir/providers/tafsir_provider.dart';
 import '../../tafsir/widgets/tafsir_panel.dart';
 import '../domain/quran_ayah_selection.dart';
 import '../models/quran_models.dart';
@@ -1228,9 +1227,6 @@ class _QuranDetailScreenState extends ConsumerState<QuranDetailScreen> {
       _logTafsirVisibility('button ignored: selection mode active');
       return;
     }
-
-    await SettingsService.instance.saveTafsirEnabled(true);
-    ref.invalidate(tafsirUserEnabledProvider);
 
     if (!mounted) return;
     setState(() {
@@ -3148,34 +3144,17 @@ class _TafsirPanelLoader extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userEnabled = ref.watch(tafsirUserEnabledProvider);
-
-    return userEnabled.when(
-      data: (enabled) {
-        if (!enabled) {
-          if (kDebugMode) {
-            debugPrint(
-              '[QuranTafsir] panel hidden: user preference off | '
-              'ayah=$surahNumber:$ayahNumber',
-            );
-          }
-          return const SizedBox.shrink();
-        }
-        AppLogger.info(
-          '[QuranTafsirPanel] open locale=$localeCode '
-          'tafsirLanguage=$languageCode ayah=$surahNumber:$ayahNumber',
-        );
-        return Padding(
-          padding: const EdgeInsets.only(left: 2, right: 2, bottom: 12),
-          child: TafsirPanel(
-            surahNumber: surahNumber,
-            ayahNumber: ayahNumber,
-            languageCode: languageCode,
-          ),
-        );
-      },
-      loading: () => const SizedBox.shrink(),
-      error: (_, __) => const SizedBox.shrink(),
+    AppLogger.info(
+      '[QuranTafsirPanel] open locale=$localeCode '
+      'tafsirLanguage=$languageCode ayah=$surahNumber:$ayahNumber',
+    );
+    return Padding(
+      padding: const EdgeInsets.only(left: 2, right: 2, bottom: 12),
+      child: TafsirPanel(
+        surahNumber: surahNumber,
+        ayahNumber: ayahNumber,
+        languageCode: languageCode,
+      ),
     );
   }
 }

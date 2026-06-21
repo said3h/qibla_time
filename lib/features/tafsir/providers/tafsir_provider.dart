@@ -2,16 +2,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/services/logger_service.dart';
-import '../../../core/services/settings_service.dart';
 import '../models/tafsir_entry.dart';
 import '../services/tafsir_api_client.dart';
 import '../services/tafsir_cache_service.dart';
 import '../services/tafsir_config.dart';
 import '../services/tafsir_service.dart';
-
-final tafsirUserEnabledProvider = FutureProvider<bool>((ref) async {
-  return SettingsService.instance.getTafsirEnabled();
-});
 
 final tafsirConfigProvider = Provider<TafsirConfig>((ref) {
   return TafsirConfig.fromEnvironment;
