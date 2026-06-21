@@ -111,6 +111,9 @@ merge_*.json
 # Backup data files inside assets
 assets/data/*.backup
 
+# Backups directory (offline snapshots, pre-cleanup dumps, etc.)
+backups/
+
 # Temporary implementation notes
 IMPLEMENTACION_*.md
 INTEGRACION_*.md
