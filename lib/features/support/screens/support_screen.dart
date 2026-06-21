@@ -102,12 +102,8 @@ class SupportScreen extends StatelessWidget {
   }
 
   static Future<void> _openSupportEmail() async {
-    final uri = Uri(
-      scheme: 'mailto',
-      path: 'support.qiblatime@gmail.com',
-      queryParameters: {
-        'subject': 'Qibla Time Support',
-        'body': '''
+    const subject = 'Qibla Time Support';
+    const body = '''
 Hello,
 
 I need help with Qibla Time.
@@ -116,8 +112,12 @@ Device:
 OS Version:
 
 Description:
-''',
-      },
+''';
+    final uri = Uri(
+      scheme: 'mailto',
+      path: 'support.qiblatime@gmail.com',
+      query:
+          'subject=${Uri.encodeComponent(subject)}&body=${Uri.encodeComponent(body)}',
     );
     await launchUrl(uri, mode: LaunchMode.externalApplication);
   }
