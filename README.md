@@ -66,7 +66,7 @@ The app is fully localized in **11 languages**:
 | Audio Playback | [audioplayers](https://pub.dev/packages/audioplayers) |
 | Location | [geolocator](https://pub.dev/packages/geolocator) |
 | Local Storage | [shared_preferences](https://pub.dev/packages/shared_preferences) |
-| Fonts | [google_fonts](https://pub.dev/packages/google_fonts) (DM Serif Display, DM Sans, Amiri) |
+| Fonts | Local bundled fonts (DM Serif Display, DM Sans, Amiri) |
 | Navigation | [go_router](https://pub.dev/packages/go_router) |
 | Deep Links | [url_launcher](https://pub.dev/packages/url_launcher) |
 | Localization | Flutter `gen-l10n` with ARB files |
@@ -148,7 +148,7 @@ storeFile=<path-to-your.jks>
 
 ## Privacy
 
-Qibla Time collects **no personal data**. Location is used only for on-device prayer time and Qibla calculation and is never transmitted anywhere.
+Qibla Time has no ads, no analytics, and no tracking SDKs. Location is used for prayer time and Qibla calculation; optional online features may contact external services as described in the privacy policy.
 
 Full details: [PRIVACY_POLICY.md](PRIVACY_POLICY.md)
 

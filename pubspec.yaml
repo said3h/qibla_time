@@ -40,7 +40,6 @@ dependencies:
   cached_network_image: ^3.3.1
   device_info_plus: 10.1.0
   package_info_plus: 8.3.1
-  google_fonts: ^6.3.2
   flutter_svg: 2.0.10+1
   flutter_pdfview: ^1.4.4
 
@@ -67,8 +66,34 @@ flutter:
     - assets/images/prayer_positions/
     - assets/images/app/
 
-  # Fuentes personalizadas Amiri
+  # Fuentes locales para evitar runtime fetching de fuentes remotas.
   fonts:
+    - family: DMSans
+      fonts:
+        - asset: assets/fonts/DMSans.ttf
+          weight: 300
+        - asset: assets/fonts/DMSans.ttf
+          weight: 400
+        - asset: assets/fonts/DMSans.ttf
+          weight: 500
+        - asset: assets/fonts/DMSans.ttf
+          weight: 600
+        - asset: assets/fonts/DMSans.ttf
+          weight: 700
+        - asset: assets/fonts/DMSans.ttf
+          weight: 800
+        - asset: assets/fonts/DMSans.ttf
+          weight: 900
+        - asset: assets/fonts/DMSans-Italic.ttf
+          weight: 400
+          style: italic
+        - asset: assets/fonts/DMSans-Italic.ttf
+          weight: 500
+          style: italic
+    - family: DMSerifDisplay
+      fonts:
+        - asset: assets/fonts/DMSerifDisplay-Regular.ttf
+          weight: 400
     - family: Amiri
       fonts:
         - asset: assets/fonts/Amiri-Regular.ttf

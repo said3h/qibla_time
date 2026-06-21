@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:qibla_time/core/theme/local_fonts.dart';
 
 /// QiblaTime Design Tokens v2.0
 /// Basado en qiblatime-palettes-v2.js

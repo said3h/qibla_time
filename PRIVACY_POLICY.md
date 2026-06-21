@@ -1,50 +1,54 @@
-# Privacy Policy — QiblaTime
+# Privacy Policy — Qibla Time
 
-**Last updated:** April 12, 2026
-**Effective date:** April 12, 2026
+**Last updated:** June 22, 2026
+**Effective date:** June 22, 2026
 
 ---
 
 ## 1. Overview
 
-QiblaTime ("the App", "we", "our") is developed and maintained by an individual developer based in Spain and is therefore subject to the **General Data Protection Regulation (GDPR)** (EU) 2016/679.
+Qibla Time ("the App", "we", "our") is developed and maintained by an individual developer based in Spain and is therefore subject to the **General Data Protection Regulation (GDPR)** (EU) 2016/679.
 
-This Privacy Policy explains what information the App accesses, how it is used, and your rights as a user. The short version: **we collect nothing. All data stays on your device.**
+This Privacy Policy explains what information the App accesses, how it is used, when online features may contact external services, and your rights as a user. The short version: **Qibla Time has no ads, no analytics, no tracking SDKs, and we do not sell personal information.**
 
 ---
 
 ## 2. Data We Do Not Collect
 
-QiblaTime does **not**:
+Qibla Time does **not**:
 
-- Collect, store, or transmit any personally identifiable information (PII)
 - Use advertising networks or display advertisements of any kind
 - Use analytics SDKs (no Firebase, no Google Analytics, no Mixpanel, etc.)
 - Require account registration or login
 - Track your behavior across apps or websites
+- Sell personal information
 - Share any data with third parties for marketing or profiling purposes
+
+Some optional or content-related features use external services to load religious content, audio, book metadata, store links, or system geocoding results. These are described below.
 
 ---
 
 ## 3. Location Data
 
-The App requests access to your device's **GPS / network location** for the sole purpose of:
+The App requests access to your device's **GPS / network location** for the purpose of:
 
 - Calculating the five daily Islamic prayer times (Fajr, Dhuhr, Asr, Maghrib, Isha) based on your geographic coordinates
 - Determining the Qibla direction (the bearing toward Mecca) from your current position
 
 **Your location coordinates are:**
-- Processed entirely **on-device** using the open-source [Adhan](https://github.com/batoulapps/adhan-dart) library
-- **Never transmitted** to any server, API, or third-party service
-- **Never stored** beyond the current app session (unless you choose to save a manual location in the App's settings, in which case it is stored locally on your device only)
+- Used by the App to calculate prayer times and Qibla direction
+- Stored locally when needed so the App can keep working without asking for GPS every time
+- Not sold, used for advertising, or used for analytics
 
-You can revoke location permission at any time through your device's system settings. The App will fall back to a manually entered or last-saved location.
+Most prayer time and Qibla calculations are performed on-device using the open-source [Adhan](https://github.com/batoulapps/adhan-dart) library. If you search for or save a manual city, the device's geocoding service may be used to convert the city name into coordinates. If the App displays a readable place name for coordinates, the device's reverse geocoding service may be used. These geocoding services are provided by the operating system or platform provider.
+
+You can revoke location permission at any time through your device's system settings. The App can fall back to a manually entered or last-saved location where available.
 
 ---
 
 ## 4. Locally Stored Data
 
-All user preferences and content saved by the App are stored exclusively in your device's **local storage** (using Android SharedPreferences / iOS UserDefaults). This includes:
+User preferences and saved content are stored in your device's **local storage** (using Android SharedPreferences / iOS UserDefaults and local app storage). This includes:
 
 | Data | Purpose |
 |---|---|
@@ -57,23 +61,43 @@ All user preferences and content saved by the App are stored exclusively in your
 | Period mode setting | Menstruation tracking toggle (salah reminder behavior) |
 | Onboarding completion flag | Skip intro on subsequent launches |
 
-None of this data leaves your device.
+This local data is not uploaded by us to our own servers. Some online features may separately contact external services as described below.
 
 ---
 
 ## 5. Third-Party Services
 
-### 5.1 IslamHouse API
+### 5.1 Quran Text APIs
 
-The App fetches **Islamic books and educational content** (Hadith collections, Dua booklets) from the [IslamHouse.com](https://islamhouse.com) public API. This is a read-only request to retrieve content; no user data is sent as part of this request. The only information transmitted is a standard HTTP request (your IP address is visible to IslamHouse's servers as is the case with any HTTP connection). IslamHouse's own privacy policy applies to their servers.
+The Quran reader may contact Quran content APIs, including Quran.com and AlQuran Cloud, to load Quran text, translations, transliteration, and Tajweed data. These requests generally include the surah, ayah, language, or resource being requested. As with any internet request, the external service may receive technical information such as your IP address, device network metadata, and request time.
 
 ### 5.2 Quran Audio Files
 
-Quran recitation audio files are downloaded from publicly available CDN URLs (e.g., EveryAyah.com mirrors) upon first playback and then cached locally on your device. No user-identifying data is sent alongside these requests.
+Quran recitation audio files may be streamed or downloaded from publicly available audio hosts/CDNs such as EveryAyah.com mirrors. Audio may be cached locally on your device for playback or offline use.
 
-### 5.3 Google Play
+### 5.3 IslamHouse API
 
-The App is distributed through the Google Play Store. Google collects installation and crash data according to [Google's Privacy Policy](https://policies.google.com/privacy). This data is collected by Google, not by us, and we receive only aggregated, anonymised crash reports through the Play Console.
+The App fetches **Islamic books and educational content** from the [IslamHouse.com](https://islamhouse.com) public API. This is used to retrieve book lists, metadata, covers, and downloadable or readable book files. IslamHouse's own privacy policy applies to their servers.
+
+### 5.4 Tafsir
+
+Tafsir is designed as an optional online feature. In production releases, Tafsir API access is only active if it is explicitly enabled for the build. When enabled, the App may contact Quran.com or QUL/Tarteel services to request Tafsir for a specific surah and ayah, resource, and language.
+
+### 5.5 Word-by-Word Quran
+
+Word-by-Word Quran support is currently feature-flagged and may use Quran.com APIs when enabled. Results may be cached temporarily on the device.
+
+### 5.6 Geocoding Services
+
+When you search for a manual city or when the App converts coordinates into a readable city/country label, the App may use the geocoding service provided by your device platform. This may send the typed place name or coordinates to the platform provider.
+
+### 5.7 App Stores and Contact Links
+
+When you choose to rate, share, or open the store listing, the App opens Google Play or the Apple App Store. When you choose to contact support, the App opens your email client with a support email draft. These actions are initiated by you.
+
+### 5.8 Google Play and App Store
+
+The App may be distributed through Google Play and the Apple App Store. Google and Apple may collect installation, purchase, crash, or store analytics data according to their own privacy policies. This data is collected by the store provider, not directly by us.
 
 ---
 
@@ -82,11 +106,10 @@ The App is distributed through the Google Play Store. Google collects installati
 | Permission | Why it is needed |
 |---|---|
 | `ACCESS_FINE_LOCATION` / `ACCESS_COARSE_LOCATION` | Calculate prayer times and Qibla direction |
-| `INTERNET` | Download Quran audio files and IslamHouse content |
+| `INTERNET` | Load online Quran content, Quran audio, IslamHouse content, optional Tafsir, store links, and other online features |
 | `RECEIVE_BOOT_COMPLETED` | Reschedule local prayer time notifications after device reboot |
 | `SCHEDULE_EXACT_ALARM` / `USE_EXACT_ALARM` | Deliver prayer time notifications at precise times |
 | `VIBRATE` | Optional notification vibration |
-| `READ_EXTERNAL_STORAGE` (optional) | Access cached audio files on older Android versions |
 
 No permission is used for any purpose other than what is stated above.
 
@@ -94,7 +117,7 @@ No permission is used for any purpose other than what is stated above.
 
 ## 7. Children's Privacy
 
-The App does not knowingly collect any data from users of any age. Because no personal data is collected at all, the App is safe for use by children.
+The App does not knowingly collect personal information from children. Some online content features may contact the external services described above.
 
 ---
 
@@ -102,23 +125,23 @@ The App does not knowingly collect any data from users of any age. Because no pe
 
 Because the developer is based in Spain (EU), the following GDPR rights apply to you regardless of your country of residence:
 
-- **Right of access** — You have the right to know what personal data we hold about you. In our case: none.
+- **Right of access** — You have the right to know what personal data we hold about you. We do not maintain user accounts or personal data databases.
 - **Right to erasure ("right to be forgotten")** — You may delete all locally stored app data at any time by clearing the App's storage in your device settings or by uninstalling the App.
-- **Right to data portability** — Not applicable; no data is collected.
-- **Right to object** — Not applicable; no data is processed.
+- **Right to data portability** — Not applicable to us because we do not maintain a server-side user profile.
+- **Right to object** — You can avoid optional online features or revoke permissions through your device settings.
 - **Right to lodge a complaint** — If you believe your privacy rights have been violated, you may lodge a complaint with the Spanish data protection authority, the **Agencia Española de Protección de Datos (AEPD)** at [aepd.es](https://www.aepd.es), or the supervisory authority of your country of residence.
 
 ---
 
 ## 9. Data Retention
 
-We retain **no data** on any server. Locally stored preferences and cached files remain on your device until you clear them or uninstall the App.
+We do not operate a server that stores Qibla Time user profiles or personal data. Locally stored preferences, cached content, and downloaded files remain on your device until you clear them or uninstall the App. External services contacted by online features may have their own retention practices.
 
 ---
 
 ## 10. Changes to This Policy
 
-We may update this Privacy Policy from time to time. Changes will be reflected by updating the "Last updated" date at the top of this document. The current version is always available in the App's settings screen and in the App's Google Play listing.
+We may update this Privacy Policy from time to time. Changes will be reflected by updating the "Last updated" date at the top of this document. The current version is available in the App's settings screen and/or store listing.
 
 ---
 
@@ -127,9 +150,10 @@ We may update this Privacy Policy from time to time. Changes will be reflected b
 If you have any questions or concerns about this Privacy Policy, please contact:
 
 **Developer:** Said (individual developer, Spain)
-**Email:** contact@qiblatime.app
-**Google Play:** [QiblaTime on Google Play](https://play.google.com/store/apps/details?id=com.qiblatime.mobile)
+**Email:** support.qiblatime@gmail.com
+**Google Play:** [Qibla Time on Google Play](https://play.google.com/store/apps/details?id=com.qiblatime.mobile)
+**App Store:** [Qibla Time on the App Store](https://apps.apple.com/es/app/qibla-time/id6771987364)
 
 ---
 
-*This privacy policy was written in plain language with the intent of being fully transparent. QiblaTime is built for the community, not for data collection.*
+*This privacy policy was written in plain language with the intent of being fully transparent. Qibla Time is built for the community, not for advertising, tracking, or data sales.*

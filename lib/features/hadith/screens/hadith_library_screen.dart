@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:qibla_time/core/theme/local_fonts.dart';
 
 import '../../../core/localization/locale_controller.dart';
 import '../../../core/theme/app_theme.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:qibla_time/core/theme/local_fonts.dart';
 
 class ShareBrandingFooter extends StatelessWidget {
   const ShareBrandingFooter({

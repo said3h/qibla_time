@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:qibla_time/core/theme/local_fonts.dart';
 
 import '../../shared_share/widgets/adaptive_share_frame.dart';
 import '../../shared_share/widgets/share_branding_footer.dart';

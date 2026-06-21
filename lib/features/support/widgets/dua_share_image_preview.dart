@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:qibla_time/core/theme/local_fonts.dart';
 
 import '../../hadith_share/models/hadith_share_data.dart';
 import '../../hadith_share/models/hadith_share_theme.dart';
