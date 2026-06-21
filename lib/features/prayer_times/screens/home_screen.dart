@@ -25,6 +25,7 @@ import '../../prayer/screens/prayer_guide_screen.dart';
 import '../../quran/models/quran_models.dart';
 import '../../quran/screens/quran_screen.dart';
 import '../../quran/services/quran_reading_service.dart';
+import '../../support/screens/support_screen.dart';
 import '../../support/screens/settings_screen.dart';
 import '../../support/screens/purification_guide_screen.dart';
 import '../../tracking/models/tracking_models.dart';
@@ -393,10 +394,19 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SvgPicture.asset(
-            'assets/images/app/logo.svg',
-            width: 40,
-            height: 40,
+          InkResponse(
+            onTap: () {
+              HapticFeedback.selectionClick();
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => const SupportScreen()),
+              );
+            },
+            radius: 26,
+            child: SvgPicture.asset(
+              'assets/images/app/logo.svg',
+              width: 40,
+              height: 40,
+            ),
           ),
           const SizedBox(width: 12),
           Expanded(
