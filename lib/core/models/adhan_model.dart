@@ -3,13 +3,11 @@ class AdhanModel {
   final String name;
   final String file;
   final String? description;
-  final bool isIosShort;
 
   const AdhanModel({
     required this.name,
     required this.file,
     this.description,
-    this.isIosShort = false,
   });
 
   static const defaultAdhanFile = 'azan1.mp3';
@@ -48,16 +46,14 @@ class AdhanModel {
           description: 'Llamada a la oracion 6',
         ),
         const AdhanModel(
-          name: 'Adhan Madinah',
+          name: 'Adhan Madinah (iOS short)',
           file: 'azan_madinah.mp3',
           description: 'Short Madinah adhan',
-          isIosShort: true,
         ),
         const AdhanModel(
-          name: 'Adhan Makkah',
+          name: 'Adhan Makkah (iOS short)',
           file: 'azan_makkah.mp3',
           description: 'Short Makkah adhan',
-          isIosShort: true,
         ),
       ];
 

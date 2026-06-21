@@ -465,10 +465,6 @@ class _AdhanSelectorScreenState extends State<AdhanSelectorScreen> {
                 ),
               ),
             ),
-            if (adhan.isIosShort) ...[
-              const SizedBox(width: 8),
-              _buildIosShortBadge(tokens),
-            ],
             if (isSelected)
               Icon(
                 Icons.check_circle,
@@ -518,29 +514,6 @@ class _AdhanSelectorScreenState extends State<AdhanSelectorScreen> {
           onPressed: () => _togglePreview(adhan.file),
         ),
         onTap: () => _selectAdhan(adhan.file),
-      ),
-    );
-  }
-
-  Widget _buildIosShortBadge(QiblaTokens tokens) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-      decoration: BoxDecoration(
-        color: tokens.primaryBg,
-        borderRadius: BorderRadius.circular(999),
-        border: Border.all(color: tokens.primaryBorder),
-      ),
-      child: Text(
-        'iOS short',
-        maxLines: 1,
-        overflow: TextOverflow.fade,
-        softWrap: false,
-        style: GoogleFonts.dmSans(
-          color: tokens.primary,
-          fontSize: 10,
-          fontWeight: FontWeight.w700,
-          letterSpacing: .2,
-        ),
       ),
     );
   }
