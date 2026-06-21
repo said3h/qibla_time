@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../core/theme/app_theme.dart';
+import '../../../core/utils/share_sheet_origin.dart';
 import '../../../l10n/l10n.dart';
+import '../services/app_store_links.dart';
 
 class SupportScreen extends StatelessWidget {
   const SupportScreen({super.key});
@@ -53,11 +56,20 @@ class SupportScreen extends StatelessWidget {
             icon: Icons.star_rate_rounded,
             title: l10n.supportScreenRateTitle,
             description: l10n.supportScreenRateBody,
+            onTap: () {
+              AppStoreLinks.openStoreListing();
+            },
           ),
           _SupportInfoCard(
             icon: Icons.share_rounded,
             title: l10n.supportScreenShareTitle,
             description: l10n.supportScreenShareBody,
+            onTap: () {
+              Share.share(
+                AppStoreLinks.shareUrl,
+                sharePositionOrigin: qiblaShareSheetOrigin,
+              );
+            },
           ),
           _SupportInfoCard(
             icon: Icons.volunteer_activism_outlined,
@@ -93,63 +105,74 @@ class _SupportInfoCard extends StatelessWidget {
     required this.icon,
     required this.title,
     required this.description,
+    this.onTap,
   });
 
   final IconData icon;
   final String title;
   final String description;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
 
-    return Container(
-      margin: const EdgeInsets.only(bottom: 14),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 14),
+      child: Material(
         color: tokens.bgSurface,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: tokens.border),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: 44,
-            height: 44,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(16),
+          child: Container(
+            padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: tokens.primaryBg,
-              shape: BoxShape.circle,
-              border: Border.all(color: tokens.primaryBorder),
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: tokens.border),
             ),
-            child: Icon(icon, color: tokens.primary, size: 22),
-          ),
-          const SizedBox(width: 14),
-          Expanded(
-            child: Column(
+            child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  title,
-                  style: GoogleFonts.dmSans(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w700,
-                    color: tokens.textPrimary,
+                Container(
+                  width: 44,
+                  height: 44,
+                  decoration: BoxDecoration(
+                    color: tokens.primaryBg,
+                    shape: BoxShape.circle,
+                    border: Border.all(color: tokens.primaryBorder),
                   ),
+                  child: Icon(icon, color: tokens.primary, size: 22),
                 ),
-                const SizedBox(height: 4),
-                Text(
-                  description,
-                  style: GoogleFonts.dmSans(
-                    fontSize: 12,
-                    height: 1.5,
-                    color: tokens.textSecondary,
+                const SizedBox(width: 14),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
+                        style: GoogleFonts.dmSans(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700,
+                          color: tokens.textPrimary,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        description,
+                        style: GoogleFonts.dmSans(
+                          fontSize: 12,
+                          height: 1.5,
+                          color: tokens.textSecondary,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }

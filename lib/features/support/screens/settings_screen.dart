@@ -10,7 +10,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/data/country_catalog.dart';
 import '../../../core/services/cloud_sync_service.dart';
@@ -46,6 +45,7 @@ import '../../tracking/services/tracking_service.dart';
 import '../../tracking/services/weekly_summary_notification_service.dart';
 import '../services/dua_service.dart';
 import '../services/android_settings_launcher.dart';
+import '../services/app_store_links.dart';
 import 'adhan_selector_screen.dart';
 import 'support_screen.dart';
 
@@ -991,16 +991,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
               trailing:
                   Icon(Icons.star_rounded, size: 16, color: tokens.primary),
               onTap: () async {
-                final uri =
-                    Uri.parse('market://details?id=com.qiblatime.mobile');
-                if (await canLaunchUrl(uri)) {
-                  await launchUrl(uri, mode: LaunchMode.externalApplication);
-                } else {
-                  final fallback = Uri.parse(
-                      'https://play.google.com/store/apps/details?id=com.qiblatime.mobile');
-                  await launchUrl(fallback,
-                      mode: LaunchMode.externalApplication);
-                }
+                await AppStoreLinks.openStoreListing();
               },
             ),
             const SizedBox(height: 14),
