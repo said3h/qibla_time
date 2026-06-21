@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/theme/app_theme.dart';
 import '../../../core/utils/share_sheet_origin.dart';
@@ -71,10 +72,11 @@ class SupportScreen extends StatelessWidget {
               );
             },
           ),
-          _SupportInfoCard(
-            icon: Icons.volunteer_activism_outlined,
-            title: l10n.supportScreenSadaqahTitle,
-            description: l10n.supportScreenSadaqahBody,
+          const _SupportInfoCard(
+            icon: Icons.mail_outline_rounded,
+            title: 'Contact Support',
+            description: 'support.qiblatime@gmail.com',
+            onTap: _openSupportEmail,
           ),
           const SizedBox(height: 24),
           Container(
@@ -97,6 +99,27 @@ class SupportScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  static Future<void> _openSupportEmail() async {
+    final uri = Uri(
+      scheme: 'mailto',
+      path: 'support.qiblatime@gmail.com',
+      queryParameters: {
+        'subject': 'Qibla Time Support',
+        'body': '''
+Hello,
+
+I need help with Qibla Time.
+
+Device:
+OS Version:
+
+Description:
+''',
+      },
+    );
+    await launchUrl(uri, mode: LaunchMode.externalApplication);
   }
 }
 
