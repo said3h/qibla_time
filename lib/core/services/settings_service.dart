@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import '../constants/app_constants.dart';
+import '../models/adhan_model.dart';
 import 'storage_service.dart';
 
 class SettingsService {
@@ -19,7 +22,11 @@ class SettingsService {
 
   Future<String> getAdhan() async {
     final prefs = await StorageService.prefs;
-    return prefs.getString(_keyAdhan) ?? 'azan1.mp3';
+    final savedAdhan = prefs.getString(_keyAdhan);
+    if (savedAdhan != null) return savedAdhan;
+    return Platform.isIOS
+        ? AdhanModel.defaultIosAdhanFile
+        : AdhanModel.defaultAdhanFile;
   }
 
   Future<void> saveNotificationsEnabled(bool value) async {

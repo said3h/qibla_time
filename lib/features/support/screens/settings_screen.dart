@@ -981,13 +981,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
-                              Text(
-                                l10n.settingsSupportCardSubtitle,
-                                style: GoogleFonts.dmSans(
-                                  fontSize: 10,
-                                  color: tokens.textSecondary,
-                                ),
-                              ),
                             ],
                           ),
                         ),
