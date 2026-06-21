@@ -1893,6 +1893,24 @@ abstract class AppLocalizations {
   /// **'No se encontraron suras.'**
   String get quranSearchEmpty;
 
+  /// No description provided for @quranOpenReference.
+  ///
+  /// In es, this message translates to:
+  /// **'Abrir {reference}'**
+  String quranOpenReference(String reference);
+
+  /// No description provided for @quranInvalidReferenceHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Introduce una referencia válida como 2:255.'**
+  String get quranInvalidReferenceHint;
+
+  /// No description provided for @quranReferenceNotFound.
+  ///
+  /// In es, this message translates to:
+  /// **'Referencia no encontrada. Prueba un formato válido como 2:255.'**
+  String get quranReferenceNotFound;
+
   /// No description provided for @quranHafizLabel.
   ///
   /// In es, this message translates to:

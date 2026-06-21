@@ -193,7 +193,7 @@ class _QuranScreenState extends ConsumerState<QuranScreen> {
     if (!looksLikeQuranReferenceQuery(value)) return;
     showQiblaSnackBar(
       context,
-      message: 'Reference not found. Try a valid format like 2:255.',
+      message: context.l10n.quranReferenceNotFound,
       icon: Icons.info_outline_rounded,
     );
   }
@@ -453,6 +453,8 @@ class _QuranReferenceResultCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
+    final l10n = context.l10n;
+    final referenceLabel = '${summary.number}:${reference.ayahNumber}';
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
       decoration: BoxDecoration(
@@ -475,7 +477,7 @@ class _QuranReferenceResultCard extends StatelessWidget {
           ),
         ),
         subtitle: Text(
-          'Open ${summary.number}:${reference.ayahNumber}',
+          l10n.quranOpenReference(referenceLabel),
           style: GoogleFonts.dmSans(
             fontSize: 12,
             color: tokens.textSecondary,
@@ -526,6 +528,7 @@ class _QuranReferenceInvalidResult extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.all(16),
@@ -540,7 +543,7 @@ class _QuranReferenceInvalidResult extends StatelessWidget {
           const SizedBox(width: 12),
           Expanded(
             child: Text(
-              'Enter a valid reference like 2:255.',
+              l10n.quranInvalidReferenceHint,
               style: GoogleFonts.dmSans(
                 fontSize: 13,
                 color: tokens.textSecondary,

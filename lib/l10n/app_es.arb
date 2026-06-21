@@ -413,6 +413,16 @@
   "quranSubtitle": "114 suras · lectura continua",
   "quranSearchHint": "Buscar sura…",
   "quranSearchEmpty": "No se encontraron suras.",
+  "quranOpenReference": "Abrir {reference}",
+  "@quranOpenReference": {
+    "placeholders": {
+      "reference": {
+        "type": "String"
+      }
+    }
+  },
+  "quranInvalidReferenceHint": "Introduce una referencia válida como 2:255.",
+  "quranReferenceNotFound": "Referencia no encontrada. Prueba un formato válido como 2:255.",
   "quranHafizLabel": "Hafiz",
   "quranUtilityAyatAlKursi": "Ayat al-Kursi",
   "quranUtilityAllahNames": "99 nombres",

@@ -1002,6 +1002,19 @@ class AppLocalizationsRu extends AppLocalizations {
   String get quranSearchEmpty => 'Сур не найдено.';
 
   @override
+  String quranOpenReference(String reference) {
+    return 'Открыть $reference';
+  }
+
+  @override
+  String get quranInvalidReferenceHint =>
+      'Введите корректную ссылку, например 2:255.';
+
+  @override
+  String get quranReferenceNotFound =>
+      'Ссылка не найдена. Попробуйте корректный формат, например 2:255.';
+
+  @override
   String get quranHafizLabel => 'Хафиз';
 
   @override

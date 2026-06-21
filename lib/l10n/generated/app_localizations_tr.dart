@@ -989,6 +989,19 @@ class AppLocalizationsTr extends AppLocalizations {
   String get quranSearchEmpty => 'Sure bulunamadı.';
 
   @override
+  String quranOpenReference(String reference) {
+    return '$reference aç';
+  }
+
+  @override
+  String get quranInvalidReferenceHint =>
+      '2:255 gibi geçerli bir referans girin.';
+
+  @override
+  String get quranReferenceNotFound =>
+      'Referans bulunamadı. 2:255 gibi geçerli bir format deneyin.';
+
+  @override
   String get quranHafizLabel => 'Hafız';
 
   @override

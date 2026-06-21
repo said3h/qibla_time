@@ -972,6 +972,18 @@ class AppLocalizationsAr extends AppLocalizations {
   String get quranSearchEmpty => 'لم يتم العثور على سور.';
 
   @override
+  String quranOpenReference(String reference) {
+    return 'افتح $reference';
+  }
+
+  @override
+  String get quranInvalidReferenceHint => 'أدخل مرجعًا صالحًا مثل 2:255.';
+
+  @override
+  String get quranReferenceNotFound =>
+      'لم يتم العثور على المرجع. جرّب صيغة صالحة مثل 2:255.';
+
+  @override
   String get quranHafizLabel => 'حافظ';
 
   @override
