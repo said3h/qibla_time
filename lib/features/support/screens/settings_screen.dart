@@ -941,47 +941,66 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
             ),
             const SizedBox(height: 14),
             _buildSectionTitle(tokens, l10n.settingsSectionSupport),
-            Container(
-              margin: const EdgeInsets.only(bottom: 5),
-              padding: const EdgeInsets.all(14),
-              decoration: BoxDecoration(
+            Padding(
+              padding: const EdgeInsets.only(bottom: 5),
+              child: Material(
                 color: tokens.primaryBg,
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: tokens.primaryBorder),
-              ),
-              child: Row(
-                children: [
-                  Icon(Icons.favorite_rounded, color: tokens.primary, size: 28),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                child: InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => const SupportScreen(),
+                      ),
+                    );
+                  },
+                  borderRadius: BorderRadius.circular(16),
+                  child: Container(
+                    padding: const EdgeInsets.all(14),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(color: tokens.primaryBorder),
+                    ),
+                    child: Row(
                       children: [
-                        Text(l10n.settingsSupportCardTitle,
-                            style: GoogleFonts.dmSans(
-                                fontSize: 13,
-                                color: tokens.primaryLight,
-                                fontWeight: FontWeight.w500)),
-                        Text(l10n.settingsSupportCardSubtitle,
-                            style: GoogleFonts.dmSans(
-                                fontSize: 10, color: tokens.textSecondary)),
+                        Icon(
+                          Icons.favorite_rounded,
+                          color: tokens.primary,
+                          size: 28,
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                l10n.settingsSupportCardTitle,
+                                style: GoogleFonts.dmSans(
+                                  fontSize: 13,
+                                  color: tokens.primaryLight,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              Text(
+                                l10n.settingsSupportCardSubtitle,
+                                style: GoogleFonts.dmSans(
+                                  fontSize: 10,
+                                  color: tokens.textSecondary,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Icon(
+                          Icons.arrow_forward_ios_rounded,
+                          color: tokens.primary,
+                          size: 14,
+                        ),
                       ],
                     ),
                   ),
-                ],
+                ),
               ),
-            ),
-            _buildValueTile(
-              tokens,
-              l10n.settingsSupportCardTitle,
-              l10n.commonOpen,
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => const SupportScreen(),
-                  ),
-                );
-              },
             ),
             const SizedBox(height: 14),
             _buildSectionTitle(tokens, l10n.settingsSectionCloudBackup),
