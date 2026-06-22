@@ -81,7 +81,7 @@ The App fetches **Islamic books and educational content** from the [IslamHouse.c
 
 ### 5.4 Tafsir
 
-Tafsir is designed as an optional online feature. In production releases, Tafsir API access is only active if it is explicitly enabled for the build. When enabled, the App may contact Quran.com or QUL/Tarteel services to request Tafsir for a specific surah and ayah, resource, and language.
+Tafsir is an online feature when available. The App may contact Quran.com or QUL/Tarteel services to request Tafsir for a specific surah and ayah, resource, and language.
 
 ### 5.5 Word-by-Word Quran
 

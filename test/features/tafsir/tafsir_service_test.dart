@@ -269,6 +269,46 @@ void main() {
       expect(result.entry!.languageCode, 'fr');
     });
 
+    test('loads Spanish QUL preview tafsir for Al-Fatiha 1:1', () async {
+      late http.Request capturedRequest;
+      final apiClient = TafsirApiClient(
+        httpClient: MockClient((request) async {
+          capturedRequest = request;
+          return http.Response(
+            '''
+              <h1>Spanish Abridged Explanation of the Quran</h1>
+              <h2>Spanish Abridged Explanation of the Quran tafsir for Surah Al-Fatihah - Ayah 1</h2>
+              <div class="tafsir spanish">Texto español de tafsir.</div>
+            ''',
+            200,
+            headers: const {'content-type': 'text/html; charset=utf-8'},
+          );
+        }),
+        baseUri: Uri.parse('https://qul.tarteel.ai'),
+        source: TafsirApiSource.qulPreview,
+      );
+      final apiBackedService = TafsirService(
+        apiClient: apiClient,
+        defaultTafsirId: '268',
+        apiEnabled: true,
+        providerName: 'qul_preview',
+      );
+
+      final result = await apiBackedService.getTafsir(
+        surahNumber: 1,
+        ayahNumber: 1,
+        languageCode: 'es',
+      );
+
+      expect(result.source, TafsirLoadSource.api);
+      expect(result.entry, isNotNull);
+      expect(result.entry!.tafsirId, '268');
+      expect(result.entry!.languageCode, 'es');
+      expect(result.entry!.verseKey, '1:1');
+      expect(capturedRequest.url.path, '/resources/tafsir/268');
+      expect(capturedRequest.url.queryParameters['ayah'], '1:1');
+    });
+
     test('falls back to Spanish when QUL language has no resource', () async {
       late http.Request capturedRequest;
       final apiClient = TafsirApiClient(
