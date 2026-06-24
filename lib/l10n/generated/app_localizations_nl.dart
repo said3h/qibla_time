@@ -2849,6 +2849,9 @@ class AppLocalizationsNl extends AppLocalizations {
   String get focusModePlacementGuideLink => 'Plaatsingsgids bekijken';
 
   @override
+  String get focusModePlacementGuideHoldHint => 'Houd ingedrukt om te openen';
+
+  @override
   String get focusModePlacementGuideTitle => 'Zo plaats je je telefoon';
 
   @override

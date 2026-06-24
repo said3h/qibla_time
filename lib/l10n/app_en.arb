@@ -1131,6 +1131,7 @@
   "focusModeReleaseToCancel": "Release to cancel",
   "focusModeHoldToExit": "Hold to exit",
   "focusModePlacementGuideLink": "View phone placement guide",
+  "focusModePlacementGuideHoldHint": "Hold to open",
   "focusModePlacementGuideTitle": "How to place your phone",
   "focusModePlacementGuideBody": "Place your phone on the floor, just under your arm, level with where your hand rests during sujud. This helps the app detect each rak‘ah more accurately without disturbing you while you pray.",
   "focusModePlacementGuideUnderstood": "Understood",

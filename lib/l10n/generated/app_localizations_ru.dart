@@ -2858,6 +2858,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get focusModePlacementGuideLink => 'Показать, как разместить телефон';
 
   @override
+  String get focusModePlacementGuideHoldHint => 'Удерживайте, чтобы открыть';
+
+  @override
   String get focusModePlacementGuideTitle => 'Как разместить телефон';
 
   @override

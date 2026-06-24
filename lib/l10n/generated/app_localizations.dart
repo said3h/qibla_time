@@ -4996,6 +4996,12 @@ abstract class AppLocalizations {
   /// **'Ver guía de colocación'**
   String get focusModePlacementGuideLink;
 
+  /// No description provided for @focusModePlacementGuideHoldHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Mantén pulsado para abrir'**
+  String get focusModePlacementGuideHoldHint;
+
   /// No description provided for @focusModePlacementGuideTitle.
   ///
   /// In es, this message translates to:

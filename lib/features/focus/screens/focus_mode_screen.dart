@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -74,6 +75,11 @@ class _FocusModeScreenState extends ConsumerState<FocusModeScreen>
       _exitController.reverse();
       setState(() => _isExiting = false);
     }
+  }
+
+  void _openPlacementGuideFromLongPress() {
+    unawaited(HapticFeedback.mediumImpact());
+    unawaited(_showPlacementGuide(markSeenOnUnderstood: false));
   }
 
   Future<void> _showPlacementGuideOnFirstOpen() async {
@@ -258,22 +264,39 @@ class _FocusModeScreenState extends ConsumerState<FocusModeScreen>
                       ),
                     ),
                     const SizedBox(height: 14),
-                    TextButton.icon(
-                      onPressed: () => unawaited(
-                        _showPlacementGuide(markSeenOnUnderstood: false),
-                      ),
-                      icon: Icon(
-                        Icons.phone_android_rounded,
-                        color: Colors.amber.withValues(alpha: 0.88),
-                        size: 16,
-                      ),
-                      label: Text(
-                        l10n.focusModePlacementGuideLink,
-                        style: TextStyle(
-                          color: Colors.amber.withValues(alpha: 0.88),
-                          fontSize: 12,
-                          fontWeight: FontWeight.w700,
-                        ),
+                    Semantics(
+                      button: true,
+                      hint: l10n.focusModePlacementGuideHoldHint,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          TextButton.icon(
+                            onPressed: null,
+                            onLongPress: _openPlacementGuideFromLongPress,
+                            icon: Icon(
+                              Icons.phone_android_rounded,
+                              color: Colors.amber.withValues(alpha: 0.88),
+                              size: 16,
+                            ),
+                            label: Text(
+                              l10n.focusModePlacementGuideLink,
+                              style: TextStyle(
+                                color: Colors.amber.withValues(alpha: 0.88),
+                                fontSize: 12,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ),
+                          Text(
+                            l10n.focusModePlacementGuideHoldHint,
+                            style: TextStyle(
+                              color: Colors.white.withValues(alpha: 0.32),
+                              fontSize: 10,
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: 0.4,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     const SizedBox(height: 10),

@@ -2856,6 +2856,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get focusModePlacementGuideLink => 'Platzierungshilfe anzeigen';
 
   @override
+  String get focusModePlacementGuideHoldHint => 'Zum Öffnen gedrückt halten';
+
+  @override
   String get focusModePlacementGuideTitle => 'So platzierst du dein Handy';
 
   @override

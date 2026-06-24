@@ -2868,6 +2868,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get focusModePlacementGuideLink => 'Voir le guide de placement';
 
   @override
+  String get focusModePlacementGuideHoldHint => 'Maintenir pour ouvrir';
+
+  @override
   String get focusModePlacementGuideTitle => 'Comment placer le téléphone';
 
   @override

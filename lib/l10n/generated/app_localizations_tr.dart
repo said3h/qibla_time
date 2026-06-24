@@ -2823,6 +2823,9 @@ class AppLocalizationsTr extends AppLocalizations {
   String get focusModePlacementGuideLink => 'Yerleştirme rehberini gör';
 
   @override
+  String get focusModePlacementGuideHoldHint => 'Açmak için basılı tut';
+
+  @override
   String get focusModePlacementGuideTitle => 'Telefonu nasıl yerleştirmeli';
 
   @override

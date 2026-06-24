@@ -1138,6 +1138,7 @@
   "focusModeReleaseToCancel": "Suelta para cancelar",
   "focusModeHoldToExit": "Mantén pulsado para salir",
   "focusModePlacementGuideLink": "Ver guía de colocación",
+  "focusModePlacementGuideHoldHint": "Mantén pulsado para abrir",
   "focusModePlacementGuideTitle": "Cómo colocar el móvil",
   "focusModePlacementGuideBody": "Coloca el móvil en el suelo, justo debajo del brazo, a la altura donde apoyas la mano durante el sujud. Así la app podrá detectar mejor cada rak‘ah sin molestarte mientras rezas.",
   "focusModePlacementGuideUnderstood": "Entendido",

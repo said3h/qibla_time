@@ -2848,6 +2848,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get focusModePlacementGuideLink => 'Ver guia de posicionamento';
 
   @override
+  String get focusModePlacementGuideHoldHint => 'Manter premido para abrir';
+
+  @override
   String get focusModePlacementGuideTitle => 'Como posicionar o telemóvel';
 
   @override

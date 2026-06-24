@@ -2776,6 +2776,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get focusModePlacementGuideLink => 'عرض دليل وضع الهاتف';
 
   @override
+  String get focusModePlacementGuideHoldHint => 'اضغط مطولاً للفتح';
+
+  @override
   String get focusModePlacementGuideTitle => 'كيفية وضع الهاتف';
 
   @override

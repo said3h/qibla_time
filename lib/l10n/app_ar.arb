@@ -1315,6 +1315,7 @@
   "focusModeReleaseToCancel": "اترك للإلغاء",
   "focusModeHoldToExit": "اضغط مطولًا للخروج",
   "focusModePlacementGuideLink": "عرض دليل وضع الهاتف",
+  "focusModePlacementGuideHoldHint": "اضغط مطولاً للفتح",
   "focusModePlacementGuideTitle": "كيفية وضع الهاتف",
   "focusModePlacementGuideBody": "ضع الهاتف على الأرض، تحت ذراعك مباشرة، عند الموضع الذي تستند فيه يدك أثناء السجود. يساعد ذلك التطبيق على اكتشاف كل ركعة بدقة أكبر دون أن يزعجك أثناء الصلاة.",
   "focusModePlacementGuideUnderstood": "فهمت",

@@ -2843,6 +2843,9 @@ class AppLocalizationsId extends AppLocalizations {
   String get focusModePlacementGuideLink => 'Lihat panduan posisi';
 
   @override
+  String get focusModePlacementGuideHoldHint => 'Tahan untuk membuka';
+
+  @override
   String get focusModePlacementGuideTitle => 'Cara meletakkan ponsel';
 
   @override

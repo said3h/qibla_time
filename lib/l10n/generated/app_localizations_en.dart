@@ -2832,6 +2832,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get focusModePlacementGuideLink => 'View phone placement guide';
 
   @override
+  String get focusModePlacementGuideHoldHint => 'Hold to open';
+
+  @override
   String get focusModePlacementGuideTitle => 'How to place your phone';
 
   @override

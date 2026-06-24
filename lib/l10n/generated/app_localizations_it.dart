@@ -2861,6 +2861,9 @@ class AppLocalizationsIt extends AppLocalizations {
   String get focusModePlacementGuideLink => 'Vedi guida al posizionamento';
 
   @override
+  String get focusModePlacementGuideHoldHint => 'Tieni premuto per aprire';
+
+  @override
   String get focusModePlacementGuideTitle => 'Come posizionare il telefono';
 
   @override
