@@ -3,15 +3,14 @@ import 'package:qibla_time/features/tafsir/services/tafsir_config.dart';
 
 void main() {
   group('TafsirConfig', () {
-    test('enables public QUL preview by default without auth headers', () {
+    test('keeps public QUL preview disabled by default', () {
       const config = TafsirConfig.fromEnvironment;
 
-      // QUL preview is a public, keyless source. It must be available when the
-      // Tafsir panel is visible without requiring Android release builds to
-      // pass extra dart-defines.
-      expect(config.enabled, isTrue);
+      // QUL preview is a public, keyless source, but it must be explicitly
+      // enabled for release builds until source/cache terms are approved.
+      expect(config.enabled, isFalse);
       expect(config.isQulPreview, isTrue);
-      expect(config.canCreateApiClient, isTrue);
+      expect(config.canCreateApiClient, isFalse);
       expect(config.normalizedDefaultResourceId, '268');
     });
 

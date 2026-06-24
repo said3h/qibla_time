@@ -36,7 +36,7 @@ import '../services/quran_word_service.dart';
 import 'downloaded_surahs_screen.dart';
 
 const _enableQuranTafsirPanels =
-    bool.fromEnvironment('QURAN_TAFSIR_PANEL_ENABLED', defaultValue: true);
+    bool.fromEnvironment('QURAN_TAFSIR_PANEL_ENABLED');
 
 const _enableQuranWordByWord =
     bool.fromEnvironment('QURAN_WORD_BY_WORD_ENABLED', defaultValue: false);

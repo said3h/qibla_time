@@ -79,7 +79,7 @@ class TafsirService {
         resourceSource: attempt.resource.source,
       );
 
-      // TODO: Check verified offline tafsir assets once a legally usable
+      // Offline tafsir assets are intentionally unused until a legally usable
       // dataset is approved for bundling.
       final cachedEntry = await _readCache(
         languageCode: attemptLanguage,
@@ -203,8 +203,8 @@ class TafsirService {
 
     if (lastUnavailableResult != null) return lastUnavailableResult;
 
-    // TODO: Enable online tafsir by resource when API credentials, selected
-    // resource IDs, and cache terms are confirmed safe for mobile usage.
+    // Online tafsir remains disabled unless explicitly configured with
+    // verified resource IDs and cache terms.
     _debugLog(
       'fallback reason=tafsir_not_configured '
       'tafsirId=${normalizedTafsirId ?? 'default'} '

@@ -10,7 +10,7 @@ class TafsirConfig {
   });
 
   static const fromEnvironment = TafsirConfig(
-    enabled: bool.fromEnvironment('TAFSIR_API_ENABLED', defaultValue: true),
+    enabled: bool.fromEnvironment('TAFSIR_API_ENABLED'),
     internalBuild: bool.fromEnvironment('QIBLA_INTERNAL_TAFSIR_BUILD'),
     baseUrl: String.fromEnvironment(
       'TAFSIR_API_BASE_URL',

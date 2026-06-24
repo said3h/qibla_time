@@ -415,16 +415,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsSectionRamadanMode => 'Ramadan mode';
 
   @override
-  String get settingsSectionQuran => 'Quran';
-
-  @override
-  String get settingsShowTafsir => 'Show Tafsir';
-
-  @override
-  String get settingsShowTafsirSubtitle =>
-      'Display Quran interpretation below each ayah';
-
-  @override
   String get settingsSectionHadith => 'Hadith';
 
   @override

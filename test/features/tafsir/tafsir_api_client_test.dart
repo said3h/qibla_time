@@ -289,7 +289,7 @@ void main() {
       expect(result.source, TafsirLoadSource.api);
       expect(
           capturedRequest.headers['Accept'], 'text/html,application/xhtml+xml');
-      expect(capturedRequest.headers['User-Agent'], 'QiblaTimeDebug/1.0');
+      expect(capturedRequest.headers['User-Agent'], 'QiblaTime/1.6.0');
       expect(capturedRequest.url.toString(),
           'https://qul.tarteel.ai/resources/tafsir/268?ayah=1%3A1');
     });

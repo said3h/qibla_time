@@ -384,7 +384,6 @@ class TafsirApiClient {
         source: 'QUL preview',
         sourceUrl: sourceUrl,
         publisher: 'Tafsir Center of Quranic Studies',
-        license: 'TODO: Verify redistribution and caching terms before release',
       ),
     );
   }
@@ -393,7 +392,7 @@ class TafsirApiClient {
     if (source == TafsirApiSource.qulPreview) {
       return const {
         'Accept': 'text/html,application/xhtml+xml',
-        'User-Agent': 'QiblaTimeDebug/1.0',
+        'User-Agent': 'QiblaTime/1.6.0',
       };
     }
 
