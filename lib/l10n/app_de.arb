@@ -1443,6 +1443,8 @@
   "tafsirNotConfiguredMessage": "Fuer diese Ayah ist noch keine Tafsir-Quelle verfuegbar.",
   "tafsirMissingLanguageMessage": "Fuer diese Sprache ist kein Tafsir verfuegbar.",
   "tafsirUnavailableAyahMessage": "Fuer diese Ayah ist kein Tafsir verfuegbar.",
+  "tafsirFallbackLanguageNotice": "Tafsir wird auf {language} angezeigt, weil er in deiner ausgewählten Sprache nicht verfügbar ist.",
+  "tafsirUnsupportedLanguageNotice": "Tafsir ist in deiner Sprache noch nicht verfuegbar. Die naechste Ausgabe wird in einer anderen Sprache angezeigt.",
   "tafsirReadMore": "Mehr lesen",
   "tafsirShowLess": "Weniger anzeigen"
 }

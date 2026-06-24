@@ -3698,6 +3698,15 @@ class AppLocalizationsDe extends AppLocalizations {
       'Fuer diese Ayah ist kein Tafsir verfuegbar.';
 
   @override
+  String tafsirFallbackLanguageNotice(Object language) {
+    return 'Tafsir wird auf $language angezeigt, weil er in deiner ausgewählten Sprache nicht verfügbar ist.';
+  }
+
+  @override
+  String get tafsirUnsupportedLanguageNotice =>
+      'Tafsir ist in deiner Sprache noch nicht verfuegbar. Die naechste Ausgabe wird in einer anderen Sprache angezeigt.';
+
+  @override
   String get tafsirReadMore => 'Mehr lesen';
 
   @override

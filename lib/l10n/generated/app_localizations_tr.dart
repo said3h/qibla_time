@@ -3658,6 +3658,15 @@ class AppLocalizationsTr extends AppLocalizations {
       'Bu ayet icin tefsir mevcut degil.';
 
   @override
+  String tafsirFallbackLanguageNotice(Object language) {
+    return 'Tefsir, seçtiğin dilde bulunmadığı için $language olarak gösteriliyor.';
+  }
+
+  @override
+  String get tafsirUnsupportedLanguageNotice =>
+      'Tefsir henuz dilinizde mevcut degil. En yakin baska bir dilde gosteriliyor.';
+
+  @override
   String get tafsirReadMore => 'Daha fazla oku';
 
   @override

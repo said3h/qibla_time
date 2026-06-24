@@ -345,6 +345,54 @@ void main() {
       expect(result.entry!.languageCode, 'es');
     });
 
+    test('keeps German Dutch and Portuguese from showing empty tafsir',
+        () async {
+      final requestedLanguages = ['de', 'nl', 'pt'];
+      final requestedPaths = <String>[];
+      final apiClient = TafsirApiClient(
+        httpClient: MockClient((request) async {
+          requestedPaths.add(request.url.path);
+          return http.Response(
+            '''
+              <h1>Spanish Abridged Explanation of the Quran</h1>
+              <h2>Spanish Abridged Explanation of the Quran tafsir for Surah Al-Fatihah - Ayah 1</h2>
+              <div class="tafsir spanish">Texto de tafsir en español.</div>
+            ''',
+            200,
+            headers: const {'content-type': 'text/html; charset=utf-8'},
+          );
+        }),
+        baseUri: Uri.parse('https://qul.tarteel.ai'),
+        source: TafsirApiSource.qulPreview,
+      );
+      final apiBackedService = TafsirService(
+        apiClient: apiClient,
+        defaultTafsirId: '268',
+        apiEnabled: true,
+        providerName: 'qul_preview',
+      );
+
+      for (final languageCode in requestedLanguages) {
+        final result = await apiBackedService.getTafsir(
+          surahNumber: 1,
+          ayahNumber: 1,
+          languageCode: languageCode,
+        );
+
+        expect(result.source, TafsirLoadSource.api);
+        expect(result.entry, isNotNull);
+        expect(result.entry!.text, isNotEmpty);
+        expect(result.entry!.tafsirId, '268');
+        expect(result.entry!.languageCode, 'es');
+      }
+
+      expect(requestedPaths, [
+        '/resources/tafsir/268',
+        '/resources/tafsir/268',
+        '/resources/tafsir/268',
+      ]);
+    });
+
     test('falls back from Spanish to English when QUL response is empty',
         () async {
       final capturedPaths = <String>[];

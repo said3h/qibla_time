@@ -153,6 +153,13 @@ class TafsirService {
         }
 
         await _cacheService?.write(apiResult.entry!);
+        if (attemptLanguage != normalizedLanguage) {
+          _debugLog(
+            'fallback success requestedLanguage=$normalizedLanguage '
+            'selectedLanguage=$attemptLanguage tafsirId=$attemptTafsirId '
+            'ayah=$surahNumber:$ayahNumber',
+          );
+        }
         _debugLog(
           'success source=api language=$attemptLanguage '
           'tafsirId=$attemptTafsirId '

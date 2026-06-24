@@ -6430,6 +6430,18 @@ abstract class AppLocalizations {
   /// **'No hay tafsir disponible para esta aleya.'**
   String get tafsirUnavailableAyahMessage;
 
+  /// No description provided for @tafsirFallbackLanguageNotice.
+  ///
+  /// In es, this message translates to:
+  /// **'El Tafsir se muestra en {language} porque no está disponible en tu idioma seleccionado.'**
+  String tafsirFallbackLanguageNotice(Object language);
+
+  /// No description provided for @tafsirUnsupportedLanguageNotice.
+  ///
+  /// In es, this message translates to:
+  /// **'El Tafsir aún no está disponible en tu idioma. Se muestra la edición más cercana en otro idioma.'**
+  String get tafsirUnsupportedLanguageNotice;
+
   /// No description provided for @tafsirReadMore.
   ///
   /// In es, this message translates to:

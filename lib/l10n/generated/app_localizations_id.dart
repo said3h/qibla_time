@@ -3682,6 +3682,15 @@ class AppLocalizationsId extends AppLocalizations {
       'Tafsir tidak tersedia untuk ayat ini.';
 
   @override
+  String tafsirFallbackLanguageNotice(Object language) {
+    return 'Tafsir ditampilkan dalam bahasa $language karena belum tersedia dalam bahasa pilihanmu.';
+  }
+
+  @override
+  String get tafsirUnsupportedLanguageNotice =>
+      'Tafsir belum tersedia dalam bahasamu. Edisi terdekat ditampilkan dalam bahasa lain.';
+
+  @override
   String get tafsirReadMore => 'Baca selengkapnya';
 
   @override

@@ -1443,6 +1443,8 @@
   "tafsirNotConfiguredMessage": "Bu ayet icin henuz tefsir kaynagi yok.",
   "tafsirMissingLanguageMessage": "Bu dil icin tefsir mevcut degil.",
   "tafsirUnavailableAyahMessage": "Bu ayet icin tefsir mevcut degil.",
+  "tafsirFallbackLanguageNotice": "Tefsir, seçtiğin dilde bulunmadığı için {language} olarak gösteriliyor.",
+  "tafsirUnsupportedLanguageNotice": "Tefsir henuz dilinizde mevcut degil. En yakin baska bir dilde gosteriliyor.",
   "tafsirReadMore": "Daha fazla oku",
   "tafsirShowLess": "Daha az goster"
 }

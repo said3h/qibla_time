@@ -96,6 +96,169 @@ void main() {
     expect(find.text('Source: cache'), findsNothing);
   });
 
+  testWidgets('TafsirPanel explains when tafsir uses fallback language',
+      (tester) async {
+    await tester.pumpWidget(
+      _wrapPanel(
+        languageCode: 'fr',
+        overrides: [
+          tafsirEntryProvider.overrideWith(
+            (ref, request) async => const TafsirLoadResult(
+              source: TafsirLoadSource.api,
+              entry: TafsirEntry(
+                tafsirId: '266',
+                resourceName: 'English Tafsir',
+                languageCode: 'en',
+                surahNumber: 1,
+                ayahNumber: 1,
+                text: 'English tafsir body.',
+                source: 'QUL preview',
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+    await tester.pump();
+
+    expect(find.text('English tafsir body.'), findsOneWidget);
+    expect(
+      find.text(
+        'Tafsir is shown in English because it is not available in your selected language.',
+      ),
+      findsOneWidget,
+    );
+    expect(
+      find.text(
+        'Tafsir is not yet available in your language. The closest edition is shown in another language.',
+      ),
+      findsNothing,
+    );
+  });
+
+  testWidgets(
+      'TafsirPanel shows unsupported language notice for German fallback',
+      (tester) async {
+    await tester.pumpWidget(
+      _wrapPanel(
+        languageCode: 'de',
+        overrides: [
+          tafsirEntryProvider.overrideWith(
+            (ref, request) async => const TafsirLoadResult(
+              source: TafsirLoadSource.api,
+              entry: TafsirEntry(
+                tafsirId: '268',
+                resourceName: 'Spanish Tafsir',
+                languageCode: 'es',
+                surahNumber: 1,
+                ayahNumber: 1,
+                text: 'Texto de tafsir en español.',
+                source: 'QUL preview',
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+    await tester.pump();
+
+    expect(find.text('Texto de tafsir en español.'), findsOneWidget);
+    expect(
+      find.text(
+        'Tafsir is not yet available in your language. The closest edition is shown in another language.',
+      ),
+      findsOneWidget,
+    );
+    expect(
+      find.text(
+        'Tafsir is shown in Spanish because it is not available in your selected language.',
+      ),
+      findsNothing,
+    );
+  });
+
+  testWidgets(
+      'TafsirPanel shows unsupported language notice for Dutch fallback',
+      (tester) async {
+    await tester.pumpWidget(
+      _wrapPanel(
+        languageCode: 'nl',
+        overrides: [
+          tafsirEntryProvider.overrideWith(
+            (ref, request) async => const TafsirLoadResult(
+              source: TafsirLoadSource.api,
+              entry: TafsirEntry(
+                tafsirId: '268',
+                resourceName: 'Spanish Tafsir',
+                languageCode: 'es',
+                surahNumber: 1,
+                ayahNumber: 1,
+                text: 'Texto de tafsir en español.',
+                source: 'QUL preview',
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+    await tester.pump();
+
+    expect(find.text('Texto de tafsir en español.'), findsOneWidget);
+    expect(
+      find.text(
+        'Tafsir is not yet available in your language. The closest edition is shown in another language.',
+      ),
+      findsOneWidget,
+    );
+    expect(
+      find.text(
+        'Tafsir is shown in Spanish because it is not available in your selected language.',
+      ),
+      findsNothing,
+    );
+  });
+
+  testWidgets(
+      'TafsirPanel shows unsupported language notice for Portuguese fallback',
+      (tester) async {
+    await tester.pumpWidget(
+      _wrapPanel(
+        languageCode: 'pt',
+        overrides: [
+          tafsirEntryProvider.overrideWith(
+            (ref, request) async => const TafsirLoadResult(
+              source: TafsirLoadSource.api,
+              entry: TafsirEntry(
+                tafsirId: '268',
+                resourceName: 'Spanish Tafsir',
+                languageCode: 'es',
+                surahNumber: 1,
+                ayahNumber: 1,
+                text: 'Texto de tafsir en español.',
+                source: 'QUL preview',
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+    await tester.pump();
+
+    expect(find.text('Texto de tafsir en español.'), findsOneWidget);
+    expect(
+      find.text(
+        'Tafsir is not yet available in your language. The closest edition is shown in another language.',
+      ),
+      findsOneWidget,
+    );
+    expect(
+      find.text(
+        'Tafsir is shown in Spanish because it is not available in your selected language.',
+      ),
+      findsNothing,
+    );
+  });
+
   testWidgets('TafsirPanel copies full tafsir text on long press',
       (tester) async {
     const tafsirText = 'The real tafsir body only.';
@@ -219,6 +382,7 @@ void main() {
 Widget _wrapPanel({
   required List<Override> overrides,
   bool initiallyExpanded = true,
+  String languageCode = 'en',
 }) {
   return ProviderScope(
     overrides: overrides,
@@ -234,7 +398,7 @@ Widget _wrapPanel({
               child: TafsirPanel(
                 surahNumber: 2,
                 ayahNumber: 255,
-                languageCode: 'en',
+                languageCode: languageCode,
                 tafsirId: '169',
                 initiallyExpanded: initiallyExpanded,
               ),

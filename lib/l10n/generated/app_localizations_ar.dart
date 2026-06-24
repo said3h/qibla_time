@@ -3599,6 +3599,15 @@ class AppLocalizationsAr extends AppLocalizations {
   String get tafsirUnavailableAyahMessage => 'لا يتوفر تفسير لهذه الآية.';
 
   @override
+  String tafsirFallbackLanguageNotice(Object language) {
+    return 'يُعرض التفسير باللغة $language لأنه غير متوفر باللغة التي اخترتها.';
+  }
+
+  @override
+  String get tafsirUnsupportedLanguageNotice =>
+      'لم يتوفر التفسير بعد بلغتك. يتم عرض أقرب إصدار بلغة أخرى.';
+
+  @override
   String get tafsirReadMore => 'اقرأ المزيد';
 
   @override

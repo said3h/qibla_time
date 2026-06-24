@@ -1382,6 +1382,8 @@
   "tafsirNotConfiguredMessage": "لا يتوفر مصدر تفسير لهذه الآية بعد.",
   "tafsirMissingLanguageMessage": "لا يتوفر تفسير لهذه اللغة.",
   "tafsirUnavailableAyahMessage": "لا يتوفر تفسير لهذه الآية.",
+  "tafsirFallbackLanguageNotice": "يُعرض التفسير باللغة {language} لأنه غير متوفر باللغة التي اخترتها.",
+  "tafsirUnsupportedLanguageNotice": "لم يتوفر التفسير بعد بلغتك. يتم عرض أقرب إصدار بلغة أخرى.",
   "tafsirReadMore": "اقرأ المزيد",
   "tafsirShowLess": "عرض أقل"
 }

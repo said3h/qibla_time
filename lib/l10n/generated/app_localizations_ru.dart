@@ -3694,6 +3694,15 @@ class AppLocalizationsRu extends AppLocalizations {
       'Тафсир недоступен для этого аята.';
 
   @override
+  String tafsirFallbackLanguageNotice(Object language) {
+    return 'Тафсир показан на $language, потому что он недоступен на выбранном языке.';
+  }
+
+  @override
+  String get tafsirUnsupportedLanguageNotice =>
+      'Tafsir eshe nedostupen na vasheyazyike. Ближайшее izdanie pokazyvaetsya na drugom yazyke.';
+
+  @override
   String get tafsirReadMore => 'Читать дальше';
 
   @override

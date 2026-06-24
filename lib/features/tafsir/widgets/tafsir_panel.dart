@@ -171,6 +171,7 @@ class _TafsirPanelBody extends ConsumerWidget {
           return _PanelSuccess(
             tokens: tokens,
             result: result,
+            request: request,
           );
         },
       ),
@@ -194,10 +195,12 @@ class _PanelSuccess extends StatefulWidget {
   const _PanelSuccess({
     required this.tokens,
     required this.result,
+    required this.request,
   });
 
   final QiblaTokens tokens;
   final TafsirLoadResult result;
+  final TafsirRequest request;
 
   @override
   State<_PanelSuccess> createState() => _PanelSuccessState();
@@ -217,8 +220,15 @@ class _PanelSuccessState extends State<_PanelSuccess> {
     final tokens = widget.tokens;
     final l10n = context.l10n;
     final result = widget.result;
+    final request = widget.request;
     final entry = result.entry!;
     final text = entry.text.trim();
+    final isLanguageFallback = _normalizeLanguageCode(entry.languageCode) !=
+        _normalizeLanguageCode(request.languageCode);
+    final fallbackLanguageName = _tafsirLanguageName(
+      l10n,
+      entry.languageCode,
+    );
     final isLong = text.length > _tafsirPreviewLimit;
     final visibleText = isLong && !_showFullText
         ? '${text.substring(0, _tafsirPreviewLimit).trimRight()}...'
@@ -235,6 +245,17 @@ class _PanelSuccessState extends State<_PanelSuccess> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            if (isLanguageFallback) ...[
+              _TafsirFallbackNotice(
+                tokens: tokens,
+                message: _isUnsupportedLanguage(request.languageCode)
+                    ? l10n.tafsirUnsupportedLanguageNotice
+                    : l10n.tafsirFallbackLanguageNotice(
+                        fallbackLanguageName,
+                      ),
+              ),
+              const SizedBox(height: 10),
+            ],
             GestureDetector(
               behavior: HitTestBehavior.opaque,
               onLongPress: () => _copyTafsirText(text),
@@ -281,6 +302,135 @@ class _PanelSuccessState extends State<_PanelSuccess> {
       ),
     );
   }
+}
+
+class _TafsirFallbackNotice extends StatelessWidget {
+  const _TafsirFallbackNotice({
+    required this.tokens,
+    required this.message,
+  });
+
+  final QiblaTokens tokens;
+  final String message;
+
+  @override
+  Widget build(BuildContext context) {
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: tokens.primary.withValues(alpha: 0.08),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: tokens.primary.withValues(alpha: 0.22)),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(
+              Icons.translate_rounded,
+              color: tokens.primary,
+              size: 16,
+            ),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Text(
+                message,
+                style: GoogleFonts.dmSans(
+                  color: tokens.textSecondary,
+                  height: 1.3,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+String _normalizeLanguageCode(String languageCode) {
+  final normalized = languageCode.trim().toLowerCase();
+  if (normalized.isEmpty) return 'es';
+  return normalized.replaceAll('-', '_').split('_').first;
+}
+
+/// Languages currently without a verified, legally usable tafsir dataset
+/// (see `lib/features/tafsir/services/tafsir_config.dart` for the rationale).
+/// The panel surfaces a dedicated notice for these instead of the generic
+/// "shown in another language" message so users get a clearer explanation.
+bool _isUnsupportedLanguage(String languageCode) {
+  switch (_normalizeLanguageCode(languageCode)) {
+    case 'de':
+    case 'nl':
+    case 'pt':
+      return true;
+    default:
+      return false;
+  }
+}
+
+String _tafsirLanguageName(AppLocalizations l10n, String languageCode) {
+  final code = _normalizeLanguageCode(languageCode);
+  final locale = _normalizeLanguageCode(l10n.localeName);
+  return switch (locale) {
+    'ar' => switch (code) {
+        'es' => 'الإسبانية',
+        'en' => 'الإنجليزية',
+        _ => code.toUpperCase(),
+      },
+    'de' => switch (code) {
+        'es' => 'Spanisch',
+        'en' => 'Englisch',
+        _ => code.toUpperCase(),
+      },
+    'es' => switch (code) {
+        'es' => 'español',
+        'en' => 'inglés',
+        _ => code.toUpperCase(),
+      },
+    'fr' => switch (code) {
+        'es' => 'espagnol',
+        'en' => 'anglais',
+        _ => code.toUpperCase(),
+      },
+    'id' => switch (code) {
+        'es' => 'Spanyol',
+        'en' => 'Inggris',
+        _ => code.toUpperCase(),
+      },
+    'it' => switch (code) {
+        'es' => 'spagnolo',
+        'en' => 'inglese',
+        _ => code.toUpperCase(),
+      },
+    'nl' => switch (code) {
+        'es' => 'Spaans',
+        'en' => 'Engels',
+        _ => code.toUpperCase(),
+      },
+    'pt' => switch (code) {
+        'es' => 'espanhol',
+        'en' => 'inglês',
+        _ => code.toUpperCase(),
+      },
+    'ru' => switch (code) {
+        'es' => 'испанском',
+        'en' => 'английском',
+        _ => code.toUpperCase(),
+      },
+    'tr' => switch (code) {
+        'es' => 'İspanyolca',
+        'en' => 'İngilizce',
+        _ => code.toUpperCase(),
+      },
+    _ => switch (code) {
+        'es' => 'Spanish',
+        'en' => 'English',
+        _ => code.toUpperCase(),
+      },
+  };
 }
 
 bool get _shouldShowInternalDetails => kDebugMode || _isTafsirInternalBuild;

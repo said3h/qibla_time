@@ -1443,6 +1443,8 @@
   "tafsirNotConfiguredMessage": "Sumber tafsir untuk ayat ini belum tersedia.",
   "tafsirMissingLanguageMessage": "Tafsir tidak tersedia untuk bahasa ini.",
   "tafsirUnavailableAyahMessage": "Tafsir tidak tersedia untuk ayat ini.",
+  "tafsirFallbackLanguageNotice": "Tafsir ditampilkan dalam bahasa {language} karena belum tersedia dalam bahasa pilihanmu.",
+  "tafsirUnsupportedLanguageNotice": "Tafsir belum tersedia dalam bahasamu. Edisi terdekat ditampilkan dalam bahasa lain.",
   "tafsirReadMore": "Baca selengkapnya",
   "tafsirShowLess": "Tampilkan lebih sedikit"
 }

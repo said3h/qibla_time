@@ -89,6 +89,19 @@ class QulTafsirResource {
 }
 
 const qulTafsirResourcesByLanguage = <String, QulTafsirResource>{
+  // Languages intentionally NOT mapped (currently):
+  //   - 'de' (German): no complete Quran tafsir resource is currently
+  //     available from the QUL preview sources for this app. Adding an entry
+  //     here would either point to a non-existent resource id or require a
+  //     dataset whose redistribution license has not been verified.
+  //   - 'nl' (Dutch): same situation — no verified tafsir dataset.
+  //   - 'pt' (Portuguese): same situation — no verified tafsir dataset.
+  // For these languages the service falls back to Spanish, then English, and
+  // the panel surfaces `tafsirUnsupportedLanguageNotice` so the user is told
+  // their language is not yet supported (instead of silently swapping content).
+  // Do NOT add placeholder or auto-generated entries here. If a legitimate,
+  // licensed source becomes available, add it via the same QulTafsirResource
+  // shape with verified `resourceId` and license notes.
   'es': QulTafsirResource(
     languageCode: 'es',
     resourceId: '268',

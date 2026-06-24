@@ -1443,6 +1443,8 @@
   "tafsirNotConfiguredMessage": "Источник тафсира для этого аята пока недоступен.",
   "tafsirMissingLanguageMessage": "Тафсир недоступен для этого языка.",
   "tafsirUnavailableAyahMessage": "Тафсир недоступен для этого аята.",
+  "tafsirFallbackLanguageNotice": "Тафсир показан на {language}, потому что он недоступен на выбранном языке.",
+  "tafsirUnsupportedLanguageNotice": "Tafsir eshe nedostupen na vasheyazyike. Ближайшее izdanie pokazyvaetsya na drugom yazyke.",
   "tafsirReadMore": "Читать дальше",
   "tafsirShowLess": "Показать меньше"
 }

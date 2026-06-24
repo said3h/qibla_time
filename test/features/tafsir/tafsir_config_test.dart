@@ -92,6 +92,7 @@ void main() {
       expect(qulTafsirResourceForLanguage('it')?.resourceId, '253');
       expect(qulTafsirResourceForLanguage('id')?.resourceId, '260');
       expect(qulTafsirResourceForLanguage('de'), isNull);
+      expect(qulTafsirResourceForLanguage('nl'), isNull);
       expect(qulTafsirResourceForLanguage('pt'), isNull);
     });
   });

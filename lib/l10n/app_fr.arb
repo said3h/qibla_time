@@ -1443,6 +1443,8 @@
   "tafsirNotConfiguredMessage": "Aucune source de tafsir n’est encore disponible pour ce verset.",
   "tafsirMissingLanguageMessage": "Le tafsir n’est pas disponible dans cette langue.",
   "tafsirUnavailableAyahMessage": "Le tafsir n’est pas disponible pour ce verset.",
+  "tafsirFallbackLanguageNotice": "Le tafsir est affiché en {language}, car il n’est pas disponible dans la langue sélectionnée.",
+  "tafsirUnsupportedLanguageNotice": "Le tafsir n’est pas encore disponible dans votre langue. L’édition la plus proche est affichée dans une autre langue.",
   "tafsirReadMore": "Lire plus",
   "tafsirShowLess": "Afficher moins"
 }
