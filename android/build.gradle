@@ -34,24 +34,34 @@ subprojects { project ->
 }
 
 subprojects { project ->
-    project.afterEvaluate {
-        project.tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
-            kotlinOptions {
-                jvmTarget = '17'
+    def configureAndroidJvmTarget = {
+        def androidComponents = project.extensions.findByName('androidComponents')
+        if (androidComponents != null) {
+            androidComponents.finalizeDsl { androidExtension ->
+                androidExtension.compileOptions {
+                    sourceCompatibility JavaVersion.VERSION_17
+                    targetCompatibility JavaVersion.VERSION_17
+                }
             }
         }
+    }
 
-        project.tasks.withType(JavaCompile).configureEach {
-            sourceCompatibility = JavaVersion.VERSION_17.toString()
-            targetCompatibility = JavaVersion.VERSION_17.toString()
-        }
+    project.plugins.withId('com.android.application') {
+        configureAndroidJvmTarget()
+    }
 
-        def androidExtension = project.extensions.findByName('android')
-        if (androidExtension != null && project.name != 'app') {
-            androidExtension.compileOptions {
-                sourceCompatibility JavaVersion.VERSION_17
-                targetCompatibility JavaVersion.VERSION_17
-            }
+    project.plugins.withId('com.android.library') {
+        configureAndroidJvmTarget()
+    }
+
+    project.tasks.withType(JavaCompile).configureEach {
+        sourceCompatibility = JavaVersion.VERSION_17.toString()
+        targetCompatibility = JavaVersion.VERSION_17.toString()
+    }
+
+    project.tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+        kotlinOptions {
+            jvmTarget = '17'
         }
     }
 }
