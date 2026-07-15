@@ -1,0 +1,179 @@
+import 'package:flutter/foundation.dart';
+
+import '../../../core/services/logger_service.dart';
+import '../../prayer_times/data/datasources/prayer_location_datasource.dart';
+import '../../prayer_times/domain/entities/location_access_result.dart';
+import '../../prayer_times/domain/entities/prayer_location.dart';
+import '../models/nearby_place.dart';
+import '../models/nearby_place_search.dart';
+import 'nearby_cache_service.dart';
+import 'nearby_distance_service.dart';
+import 'overpass_mosque_service.dart';
+
+class NearbyPlacesRepository {
+  NearbyPlacesRepository({
+    required PrayerLocationDataSource locationDataSource,
+    required OverpassMosqueService overpassService,
+    required NearbyCacheService cacheService,
+    NearbyDistanceService distanceService = const NearbyDistanceService(),
+  })  : _locationDataSource = locationDataSource,
+        _overpassService = overpassService,
+        _cacheService = cacheService,
+        _distanceService = distanceService;
+
+  final PrayerLocationDataSource _locationDataSource;
+  final OverpassMosqueService _overpassService;
+  final NearbyCacheService _cacheService;
+  final NearbyDistanceService _distanceService;
+
+  Future<NearbyPlacesResult> loadMosques({
+    required int radiusMeters,
+    bool forceRefresh = false,
+  }) async {
+    final accessResult = await _locationDataSource.getLocation();
+    if (accessResult == null) {
+      _debugLog('location unavailable before nearby mosque search');
+      final diagnostic = await _locationDataSource.getDiagnostic();
+      return NearbyPlacesResult.locationUnavailable(diagnostic);
+    }
+    if (!_hasUsableCoordinates(accessResult.location)) {
+      _debugLog('invalid nearby mosque origin ignored');
+      final diagnostic = await _locationDataSource.getDiagnostic();
+      return NearbyPlacesResult.locationUnavailable(diagnostic);
+    }
+    _debugLog(
+      'nearby mosque search source=${accessResult.source.name} '
+      'radius=$radiusMeters',
+    );
+
+    final search = NearbyPlaceSearch(
+      category: NearbyPlaceCategory.mosque,
+      origin: accessResult.location,
+      radiusMeters: radiusMeters,
+    );
+
+    final cached = forceRefresh ? null : await _cacheService.read(search);
+    if (cached != null) {
+      _debugLog(
+        'nearby mosque result source=cache radius=$radiusMeters '
+        'count=${cached.places.length}',
+      );
+      return NearbyPlacesResult.success(
+        places: _withDistanceAndSort(cached.places, search),
+        originSource: accessResult.source,
+        originLocation: accessResult.location,
+        fromCache: true,
+      );
+    }
+
+    final List<NearbyPlace> places;
+    try {
+      places = await _overpassService.fetchMosques(
+        latitude: search.origin.latitude,
+        longitude: search.origin.longitude,
+        radiusMeters: radiusMeters,
+      );
+    } catch (error) {
+      _debugLog(
+        'nearby mosque network error type=${error.runtimeType} '
+        'radius=$radiusMeters',
+      );
+      rethrow;
+    }
+    final sorted = _withDistanceAndSort(places, search);
+    await _cacheService.write(search: search, places: sorted);
+    _debugLog(
+      'nearby mosque result source=network radius=$radiusMeters '
+      'count=${sorted.length}',
+    );
+    return NearbyPlacesResult.success(
+      places: sorted,
+      originSource: accessResult.source,
+      originLocation: accessResult.location,
+      fromCache: false,
+    );
+  }
+
+  void _debugLog(String message) {
+    if (kDebugMode) {
+      AppLogger.info(message);
+    }
+  }
+
+  bool _hasUsableCoordinates(PrayerLocation location) {
+    final latitude = location.latitude;
+    final longitude = location.longitude;
+    final inRange = latitude >= -90 &&
+        latitude <= 90 &&
+        longitude >= -180 &&
+        longitude <= 180;
+    final nullIsland = latitude == 0 && longitude == 0;
+    return inRange && !nullIsland;
+  }
+
+  List<NearbyPlace> _withDistanceAndSort(
+    List<NearbyPlace> places,
+    NearbyPlaceSearch search,
+  ) {
+    final withDistance = places.map((place) {
+      return place.copyWith(
+        distanceMeters: _distanceService.distanceMeters(
+          fromLatitude: search.origin.latitude,
+          fromLongitude: search.origin.longitude,
+          toLatitude: place.latitude,
+          toLongitude: place.longitude,
+        ),
+      );
+    }).toList();
+    withDistance.sort(
+      (a, b) => (a.distanceMeters ?? double.infinity)
+          .compareTo(b.distanceMeters ?? double.infinity),
+    );
+    return withDistance;
+  }
+}
+
+enum NearbyPlacesResultStatus {
+  success,
+  locationUnavailable,
+}
+
+class NearbyPlacesResult {
+  const NearbyPlacesResult._({
+    required this.status,
+    this.places = const <NearbyPlace>[],
+    this.originSource,
+    this.originLocation,
+    this.fromCache = false,
+    this.locationDiagnostic,
+  });
+
+  factory NearbyPlacesResult.success({
+    required List<NearbyPlace> places,
+    required LocationAccessSource originSource,
+    required PrayerLocation originLocation,
+    required bool fromCache,
+  }) {
+    return NearbyPlacesResult._(
+      status: NearbyPlacesResultStatus.success,
+      places: places,
+      originSource: originSource,
+      originLocation: originLocation,
+      fromCache: fromCache,
+    );
+  }
+
+  factory NearbyPlacesResult.locationUnavailable(Object diagnostic) {
+    return NearbyPlacesResult._(
+      status: NearbyPlacesResultStatus.locationUnavailable,
+      locationDiagnostic: diagnostic,
+    );
+  }
+
+  final NearbyPlacesResultStatus status;
+  final List<NearbyPlace> places;
+  final LocationAccessSource? originSource;
+  final PrayerLocation? originLocation;
+  final bool fromCache;
+  final Object? locationDiagnostic;
+}

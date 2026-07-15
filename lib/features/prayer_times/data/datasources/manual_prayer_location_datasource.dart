@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -77,10 +78,12 @@ class ManualPrayerLocationDataSource {
     await prefs.setString(_cityKey, location.city);
     await prefs.setDouble(_latitudeKey, location.latitude);
     await prefs.setDouble(_longitudeKey, location.longitude);
-    AppLogger.info(
-      'Manual prayer location saved: ${location.label} '
-      '(${location.latitude}, ${location.longitude})',
-    );
+    if (kDebugMode) {
+      AppLogger.info(
+        'Manual prayer location saved: ${location.label} '
+        '(${location.latitude}, ${location.longitude})',
+      );
+    }
   }
 
   Future<void> clearManualLocation() async {

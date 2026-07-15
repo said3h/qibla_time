@@ -1447,5 +1447,75 @@
   "tafsirFallbackLanguageNotice": "Le tafsir est affiché en {language}, car il n’est pas disponible dans la langue sélectionnée.",
   "tafsirUnsupportedLanguageNotice": "Le tafsir n’est pas encore disponible dans votre langue. L’édition la plus proche est affichée dans une autre langue.",
   "tafsirReadMore": "Lire plus",
-  "tafsirShowLess": "Afficher moins"
+  "tafsirShowLess": "Afficher moins",
+  "navNearby": "Lieux",
+  "nearbyPlacesTitle": "Lieux à proximité",
+  "nearbyPlacesSubtitle": "Find useful places near you using your current location or selected city.",
+  "nearbyMosques": "Mosquées",
+  "nearbyMosquesSubtitle": "Search nearby mosques with OpenStreetMap data.",
+  "nearbyHalalRestaurants": "Restaurants halal",
+  "nearbyHalalRestaurantsSubtitle": "Prepared for a future phase with verified data.",
+  "nearbyHalalButchers": "Boucheries halal",
+  "nearbyHalalButchersSubtitle": "Prepared for a future phase with verified data.",
+  "nearbyComingSoon": "Bientôt",
+  "nearbyMosquesScreenSubtitle": "Mosques sorted by distance. Islamic denomination is not shown unless the source clearly provides it.",
+  "nearbyList": "Liste",
+  "nearbyMap": "Carte",
+  "nearbyMapUnavailable": "La carte intégrée n’est pas encore disponible. Utilise Itinéraire pour ouvrir ton application de cartes.",
+  "nearbyDirections": "Itinéraire",
+  "nearbyDirectionsError": "Impossible d’ouvrir une application de cartes compatible.",
+  "nearbyNoResults": "Aucun résultat",
+  "nearbyNoResultsBody": "Aucune mosquée trouvée dans ce rayon. Essaie un rayon plus large.",
+  "nearbyRetry": "Réessayer",
+  "nearbyAllowLocation": "Autoriser la position",
+  "nearbyLocationDenied": "Position refusée",
+  "nearbyLocationDeniedBody": "Active la position ou sélectionne une ville manuellement pour rechercher des mosquées proches.",
+  "nearbyUseManualCity": "Utiliser la ville manuelle",
+  "nearbyUnnamedMosque": "Mosquée sans nom",
+  "nearbyDistance": "Distance : {distance}",
+  "nearbySearchRadius": "Rayon de recherche",
+  "nearbyPlacesLoadError": "Erreur lors du chargement",
+  "nearbyPlacesLoadErrorBody": "Impossible d’interroger OpenStreetMap pour le moment. Réessaie dans quelques secondes.",
+  "nearbyPrayerStartsInMinutes": "{prayerName} starts in {minutes} min",
+  "nearbyPrayerStartsInHours": "{prayerName} starts in {hours} h {minutes} min",
+  "nearbyPrayerTimeDisclaimer": "Prayer time start calculated by Qibla Time: {label}. This is not the mosque congregation time.",
+  "nearbyOsmAttribution": "Données issues d’OpenStreetMap",
+  "nearbyCachedResults": "Showing saved results",
+  "nearbyUsingManualCity": "Using manual city",
+  "nearbyUsingDeviceLocation": "Using device location",
+  "nearbyWheelchair": "Accessibilité : {value}",
+  "@nearbyDistance": {
+    "placeholders": {
+      "distance": {}
+    }
+  },
+  "@nearbyPrayerStartsInMinutes": {
+    "placeholders": {
+      "prayerName": {},
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "@nearbyPrayerStartsInHours": {
+    "placeholders": {
+      "prayerName": {},
+      "hours": {
+        "type": "int"
+      },
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "@nearbyPrayerTimeDisclaimer": {
+    "placeholders": {
+      "label": {}
+    }
+  },
+  "@nearbyWheelchair": {
+    "placeholders": {
+      "value": {}
+    }
+  }
 }

@@ -3704,4 +3704,132 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get tafsirShowLess => 'Weniger anzeigen';
+
+  @override
+  String get navNearby => 'Orte';
+
+  @override
+  String get nearbyPlacesTitle => 'Orte in der Nähe';
+
+  @override
+  String get nearbyPlacesSubtitle =>
+      'Find useful places near you using your current location or selected city.';
+
+  @override
+  String get nearbyMosques => 'Moscheen';
+
+  @override
+  String get nearbyMosquesSubtitle =>
+      'Search nearby mosques with OpenStreetMap data.';
+
+  @override
+  String get nearbyHalalRestaurants => 'Halal-Restaurants';
+
+  @override
+  String get nearbyHalalRestaurantsSubtitle =>
+      'Prepared for a future phase with verified data.';
+
+  @override
+  String get nearbyHalalButchers => 'Halal-Metzgereien';
+
+  @override
+  String get nearbyHalalButchersSubtitle =>
+      'Prepared for a future phase with verified data.';
+
+  @override
+  String get nearbyComingSoon => 'Demnächst';
+
+  @override
+  String get nearbyMosquesScreenSubtitle =>
+      'Mosques sorted by distance. Islamic denomination is not shown unless the source clearly provides it.';
+
+  @override
+  String get nearbyList => 'Liste';
+
+  @override
+  String get nearbyMap => 'Karte';
+
+  @override
+  String get nearbyMapUnavailable =>
+      'Die interne Kartenansicht ist noch nicht verfügbar. Nutze Wegbeschreibung, um deine Karten-App zu öffnen.';
+
+  @override
+  String get nearbyDirections => 'Route';
+
+  @override
+  String get nearbyDirectionsError =>
+      'Es konnte keine kompatible Karten-App geöffnet werden.';
+
+  @override
+  String get nearbyNoResults => 'No results';
+
+  @override
+  String get nearbyNoResultsBody =>
+      'In diesem Umkreis wurden keine Moscheen gefunden. Versuche einen größeren Radius.';
+
+  @override
+  String get nearbyRetry => 'Erneut versuchen';
+
+  @override
+  String get nearbyAllowLocation => 'Standort erlauben';
+
+  @override
+  String get nearbyLocationDenied => 'Location denied';
+
+  @override
+  String get nearbyLocationDeniedBody =>
+      'Aktiviere den Standort oder wähle eine Stadt manuell aus, um Moscheen in der Nähe zu suchen.';
+
+  @override
+  String get nearbyUseManualCity => 'Manuelle Stadt verwenden';
+
+  @override
+  String get nearbyUnnamedMosque => 'Moschee ohne Namen';
+
+  @override
+  String nearbyDistance(Object distance) {
+    return 'Entfernung: $distance';
+  }
+
+  @override
+  String get nearbySearchRadius => 'Suchradius';
+
+  @override
+  String get nearbyPlacesLoadError => 'Error loading places';
+
+  @override
+  String get nearbyPlacesLoadErrorBody =>
+      'OpenStreetMap konnte gerade nicht abgefragt werden. Versuche es in ein paar Sekunden erneut.';
+
+  @override
+  String nearbyPrayerStartsInMinutes(Object prayerName, int minutes) {
+    return '$prayerName starts in $minutes min';
+  }
+
+  @override
+  String nearbyPrayerStartsInHours(Object prayerName, int hours, int minutes) {
+    return '$prayerName starts in $hours h $minutes min';
+  }
+
+  @override
+  String nearbyPrayerTimeDisclaimer(Object label) {
+    return 'Prayer time start calculated by Qibla Time: $label. This is not the mosque congregation time.';
+  }
+
+  @override
+  String get nearbyOsmAttribution => 'Daten von OpenStreetMap';
+
+  @override
+  String get nearbyCachedResults => 'Showing saved results';
+
+  @override
+  String get nearbyUsingManualCity => 'Using manual city';
+
+  @override
+  String get nearbyUsingDeviceLocation => 'Using device location';
+
+  @override
+  String nearbyWheelchair(Object value) {
+    return 'Barrierefreiheit: $value';
+  }
 }

@@ -1447,5 +1447,75 @@
   "tafsirFallbackLanguageNotice": "Тафсир показан на {language}, потому что он недоступен на выбранном языке.",
   "tafsirUnsupportedLanguageNotice": "Tafsir eshe nedostupen na vasheyazyike. Ближайшее izdanie pokazyvaetsya na drugom yazyke.",
   "tafsirReadMore": "Читать дальше",
-  "tafsirShowLess": "Показать меньше"
+  "tafsirShowLess": "Показать меньше",
+  "navNearby": "Места",
+  "nearbyPlacesTitle": "Места рядом",
+  "nearbyPlacesSubtitle": "Find useful places near you using your current location or selected city.",
+  "nearbyMosques": "Мечети",
+  "nearbyMosquesSubtitle": "Search nearby mosques with OpenStreetMap data.",
+  "nearbyHalalRestaurants": "Халяль-рестораны",
+  "nearbyHalalRestaurantsSubtitle": "Prepared for a future phase with verified data.",
+  "nearbyHalalButchers": "Халяль-мясные",
+  "nearbyHalalButchersSubtitle": "Prepared for a future phase with verified data.",
+  "nearbyComingSoon": "Скоро",
+  "nearbyMosquesScreenSubtitle": "Mosques sorted by distance. Islamic denomination is not shown unless the source clearly provides it.",
+  "nearbyList": "Список",
+  "nearbyMap": "Карта",
+  "nearbyMapUnavailable": "Встроенная карта пока недоступна. Используйте маршрут, чтобы открыть приложение карт.",
+  "nearbyDirections": "Маршрут",
+  "nearbyDirectionsError": "Не удалось открыть совместимое приложение карт.",
+  "nearbyNoResults": "No results",
+  "nearbyNoResultsBody": "В этом радиусе мечети не найдены. Попробуйте увеличить радиус.",
+  "nearbyRetry": "Повторить",
+  "nearbyAllowLocation": "Разрешить геолокацию",
+  "nearbyLocationDenied": "Location denied",
+  "nearbyLocationDeniedBody": "Включите геолокацию или выберите город вручную, чтобы найти ближайшие мечети.",
+  "nearbyUseManualCity": "Использовать выбранный город",
+  "nearbyUnnamedMosque": "Мечеть без названия",
+  "nearbyDistance": "Расстояние: {distance}",
+  "nearbySearchRadius": "Радиус поиска",
+  "nearbyPlacesLoadError": "Error loading places",
+  "nearbyPlacesLoadErrorBody": "Сейчас не удалось запросить OpenStreetMap. Повторите попытку через несколько секунд.",
+  "nearbyPrayerStartsInMinutes": "{prayerName} starts in {minutes} min",
+  "nearbyPrayerStartsInHours": "{prayerName} starts in {hours} h {minutes} min",
+  "nearbyPrayerTimeDisclaimer": "Prayer time start calculated by Qibla Time: {label}. This is not the mosque congregation time.",
+  "nearbyOsmAttribution": "Данные OpenStreetMap",
+  "nearbyCachedResults": "Showing saved results",
+  "nearbyUsingManualCity": "Using manual city",
+  "nearbyUsingDeviceLocation": "Using device location",
+  "nearbyWheelchair": "Доступность: {value}",
+  "@nearbyDistance": {
+    "placeholders": {
+      "distance": {}
+    }
+  },
+  "@nearbyPrayerStartsInMinutes": {
+    "placeholders": {
+      "prayerName": {},
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "@nearbyPrayerStartsInHours": {
+    "placeholders": {
+      "prayerName": {},
+      "hours": {
+        "type": "int"
+      },
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "@nearbyPrayerTimeDisclaimer": {
+    "placeholders": {
+      "label": {}
+    }
+  },
+  "@nearbyWheelchair": {
+    "placeholders": {
+      "value": {}
+    }
+  }
 }

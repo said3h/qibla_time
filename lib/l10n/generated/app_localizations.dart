@@ -6441,6 +6441,222 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Mostrar menos'**
   String get tafsirShowLess;
+
+  /// No description provided for @navNearby.
+  ///
+  /// In es, this message translates to:
+  /// **'Lugares'**
+  String get navNearby;
+
+  /// No description provided for @nearbyPlacesTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Lugares cercanos'**
+  String get nearbyPlacesTitle;
+
+  /// No description provided for @nearbyPlacesSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Encuentra lugares útiles cerca de ti usando tu ubicación actual o la ciudad seleccionada.'**
+  String get nearbyPlacesSubtitle;
+
+  /// No description provided for @nearbyMosques.
+  ///
+  /// In es, this message translates to:
+  /// **'Mezquitas'**
+  String get nearbyMosques;
+
+  /// No description provided for @nearbyMosquesSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Busca mezquitas cercanas con datos de OpenStreetMap.'**
+  String get nearbyMosquesSubtitle;
+
+  /// No description provided for @nearbyHalalRestaurants.
+  ///
+  /// In es, this message translates to:
+  /// **'Restaurantes halal'**
+  String get nearbyHalalRestaurants;
+
+  /// No description provided for @nearbyHalalRestaurantsSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Prepared for a future phase with verified data.'**
+  String get nearbyHalalRestaurantsSubtitle;
+
+  /// No description provided for @nearbyHalalButchers.
+  ///
+  /// In es, this message translates to:
+  /// **'Carnicerías halal'**
+  String get nearbyHalalButchers;
+
+  /// No description provided for @nearbyHalalButchersSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Prepared for a future phase with verified data.'**
+  String get nearbyHalalButchersSubtitle;
+
+  /// No description provided for @nearbyComingSoon.
+  ///
+  /// In es, this message translates to:
+  /// **'Próximamente'**
+  String get nearbyComingSoon;
+
+  /// No description provided for @nearbyMosquesScreenSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Mosques sorted by distance. Islamic denomination is not shown unless the source clearly provides it.'**
+  String get nearbyMosquesScreenSubtitle;
+
+  /// No description provided for @nearbyList.
+  ///
+  /// In es, this message translates to:
+  /// **'Lista'**
+  String get nearbyList;
+
+  /// No description provided for @nearbyMap.
+  ///
+  /// In es, this message translates to:
+  /// **'Mapa'**
+  String get nearbyMap;
+
+  /// No description provided for @nearbyMapUnavailable.
+  ///
+  /// In es, this message translates to:
+  /// **'La vista de mapa interna aún no está disponible. Usa Cómo llegar para abrir tu app de mapas.'**
+  String get nearbyMapUnavailable;
+
+  /// No description provided for @nearbyDirections.
+  ///
+  /// In es, this message translates to:
+  /// **'Cómo llegar'**
+  String get nearbyDirections;
+
+  /// No description provided for @nearbyDirectionsError.
+  ///
+  /// In es, this message translates to:
+  /// **'No pudimos abrir una app de mapas compatible.'**
+  String get nearbyDirectionsError;
+
+  /// No description provided for @nearbyNoResults.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin resultados'**
+  String get nearbyNoResults;
+
+  /// No description provided for @nearbyNoResultsBody.
+  ///
+  /// In es, this message translates to:
+  /// **'No encontramos mezquitas en este radio. Prueba con un radio más amplio.'**
+  String get nearbyNoResultsBody;
+
+  /// No description provided for @nearbyRetry.
+  ///
+  /// In es, this message translates to:
+  /// **'Reintentar'**
+  String get nearbyRetry;
+
+  /// No description provided for @nearbyAllowLocation.
+  ///
+  /// In es, this message translates to:
+  /// **'Permitir ubicación'**
+  String get nearbyAllowLocation;
+
+  /// No description provided for @nearbyLocationDenied.
+  ///
+  /// In es, this message translates to:
+  /// **'Ubicación denegada'**
+  String get nearbyLocationDenied;
+
+  /// No description provided for @nearbyLocationDeniedBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Activa la ubicación o selecciona una ciudad manual para buscar mezquitas cercanas.'**
+  String get nearbyLocationDeniedBody;
+
+  /// No description provided for @nearbyUseManualCity.
+  ///
+  /// In es, this message translates to:
+  /// **'Usar ciudad manual'**
+  String get nearbyUseManualCity;
+
+  /// No description provided for @nearbyUnnamedMosque.
+  ///
+  /// In es, this message translates to:
+  /// **'Mezquita sin nombre'**
+  String get nearbyUnnamedMosque;
+
+  /// No description provided for @nearbyDistance.
+  ///
+  /// In es, this message translates to:
+  /// **'Distancia: {distance}'**
+  String nearbyDistance(Object distance);
+
+  /// No description provided for @nearbySearchRadius.
+  ///
+  /// In es, this message translates to:
+  /// **'Radio de búsqueda'**
+  String get nearbySearchRadius;
+
+  /// No description provided for @nearbyPlacesLoadError.
+  ///
+  /// In es, this message translates to:
+  /// **'Error al cargar lugares'**
+  String get nearbyPlacesLoadError;
+
+  /// No description provided for @nearbyPlacesLoadErrorBody.
+  ///
+  /// In es, this message translates to:
+  /// **'No pudimos consultar OpenStreetMap ahora mismo. Inténtalo de nuevo en unos segundos.'**
+  String get nearbyPlacesLoadErrorBody;
+
+  /// No description provided for @nearbyPrayerStartsInMinutes.
+  ///
+  /// In es, this message translates to:
+  /// **'{prayerName} comienza en {minutes} min'**
+  String nearbyPrayerStartsInMinutes(Object prayerName, int minutes);
+
+  /// No description provided for @nearbyPrayerStartsInHours.
+  ///
+  /// In es, this message translates to:
+  /// **'{prayerName} comienza en {hours} h {minutes} min'**
+  String nearbyPrayerStartsInHours(Object prayerName, int hours, int minutes);
+
+  /// No description provided for @nearbyPrayerTimeDisclaimer.
+  ///
+  /// In es, this message translates to:
+  /// **'Inicio del tiempo de oración calculado por Qibla Time: {label}. No es horario de congregación de la mezquita.'**
+  String nearbyPrayerTimeDisclaimer(Object label);
+
+  /// No description provided for @nearbyOsmAttribution.
+  ///
+  /// In es, this message translates to:
+  /// **'Datos obtenidos de OpenStreetMap'**
+  String get nearbyOsmAttribution;
+
+  /// No description provided for @nearbyCachedResults.
+  ///
+  /// In es, this message translates to:
+  /// **'Mostrando resultados guardados'**
+  String get nearbyCachedResults;
+
+  /// No description provided for @nearbyUsingManualCity.
+  ///
+  /// In es, this message translates to:
+  /// **'Usando ciudad manual'**
+  String get nearbyUsingManualCity;
+
+  /// No description provided for @nearbyUsingDeviceLocation.
+  ///
+  /// In es, this message translates to:
+  /// **'Usando ubicación del dispositivo'**
+  String get nearbyUsingDeviceLocation;
+
+  /// No description provided for @nearbyWheelchair.
+  ///
+  /// In es, this message translates to:
+  /// **'Accesibilidad: {value}'**
+  String nearbyWheelchair(Object value);
 }
 
 class _AppLocalizationsDelegate

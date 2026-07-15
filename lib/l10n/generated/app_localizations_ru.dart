@@ -3700,4 +3700,132 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get tafsirShowLess => 'Показать меньше';
+
+  @override
+  String get navNearby => 'Места';
+
+  @override
+  String get nearbyPlacesTitle => 'Места рядом';
+
+  @override
+  String get nearbyPlacesSubtitle =>
+      'Find useful places near you using your current location or selected city.';
+
+  @override
+  String get nearbyMosques => 'Мечети';
+
+  @override
+  String get nearbyMosquesSubtitle =>
+      'Search nearby mosques with OpenStreetMap data.';
+
+  @override
+  String get nearbyHalalRestaurants => 'Халяль-рестораны';
+
+  @override
+  String get nearbyHalalRestaurantsSubtitle =>
+      'Prepared for a future phase with verified data.';
+
+  @override
+  String get nearbyHalalButchers => 'Халяль-мясные';
+
+  @override
+  String get nearbyHalalButchersSubtitle =>
+      'Prepared for a future phase with verified data.';
+
+  @override
+  String get nearbyComingSoon => 'Скоро';
+
+  @override
+  String get nearbyMosquesScreenSubtitle =>
+      'Mosques sorted by distance. Islamic denomination is not shown unless the source clearly provides it.';
+
+  @override
+  String get nearbyList => 'Список';
+
+  @override
+  String get nearbyMap => 'Карта';
+
+  @override
+  String get nearbyMapUnavailable =>
+      'Встроенная карта пока недоступна. Используйте маршрут, чтобы открыть приложение карт.';
+
+  @override
+  String get nearbyDirections => 'Маршрут';
+
+  @override
+  String get nearbyDirectionsError =>
+      'Не удалось открыть совместимое приложение карт.';
+
+  @override
+  String get nearbyNoResults => 'No results';
+
+  @override
+  String get nearbyNoResultsBody =>
+      'В этом радиусе мечети не найдены. Попробуйте увеличить радиус.';
+
+  @override
+  String get nearbyRetry => 'Повторить';
+
+  @override
+  String get nearbyAllowLocation => 'Разрешить геолокацию';
+
+  @override
+  String get nearbyLocationDenied => 'Location denied';
+
+  @override
+  String get nearbyLocationDeniedBody =>
+      'Включите геолокацию или выберите город вручную, чтобы найти ближайшие мечети.';
+
+  @override
+  String get nearbyUseManualCity => 'Использовать выбранный город';
+
+  @override
+  String get nearbyUnnamedMosque => 'Мечеть без названия';
+
+  @override
+  String nearbyDistance(Object distance) {
+    return 'Расстояние: $distance';
+  }
+
+  @override
+  String get nearbySearchRadius => 'Радиус поиска';
+
+  @override
+  String get nearbyPlacesLoadError => 'Error loading places';
+
+  @override
+  String get nearbyPlacesLoadErrorBody =>
+      'Сейчас не удалось запросить OpenStreetMap. Повторите попытку через несколько секунд.';
+
+  @override
+  String nearbyPrayerStartsInMinutes(Object prayerName, int minutes) {
+    return '$prayerName starts in $minutes min';
+  }
+
+  @override
+  String nearbyPrayerStartsInHours(Object prayerName, int hours, int minutes) {
+    return '$prayerName starts in $hours h $minutes min';
+  }
+
+  @override
+  String nearbyPrayerTimeDisclaimer(Object label) {
+    return 'Prayer time start calculated by Qibla Time: $label. This is not the mosque congregation time.';
+  }
+
+  @override
+  String get nearbyOsmAttribution => 'Данные OpenStreetMap';
+
+  @override
+  String get nearbyCachedResults => 'Showing saved results';
+
+  @override
+  String get nearbyUsingManualCity => 'Using manual city';
+
+  @override
+  String get nearbyUsingDeviceLocation => 'Using device location';
+
+  @override
+  String nearbyWheelchair(Object value) {
+    return 'Доступность: $value';
+  }
 }

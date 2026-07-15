@@ -1447,5 +1447,75 @@
   "tafsirFallbackLanguageNotice": "Tafsir ditampilkan dalam bahasa {language} karena belum tersedia dalam bahasa pilihanmu.",
   "tafsirUnsupportedLanguageNotice": "Tafsir belum tersedia dalam bahasamu. Edisi terdekat ditampilkan dalam bahasa lain.",
   "tafsirReadMore": "Baca selengkapnya",
-  "tafsirShowLess": "Tampilkan lebih sedikit"
+  "tafsirShowLess": "Tampilkan lebih sedikit",
+  "navNearby": "Tempat",
+  "nearbyPlacesTitle": "Tempat terdekat",
+  "nearbyPlacesSubtitle": "Find useful places near you using your current location or selected city.",
+  "nearbyMosques": "Masjid",
+  "nearbyMosquesSubtitle": "Search nearby mosques with OpenStreetMap data.",
+  "nearbyHalalRestaurants": "Restoran halal",
+  "nearbyHalalRestaurantsSubtitle": "Prepared for a future phase with verified data.",
+  "nearbyHalalButchers": "Toko daging halal",
+  "nearbyHalalButchersSubtitle": "Prepared for a future phase with verified data.",
+  "nearbyComingSoon": "Segera hadir",
+  "nearbyMosquesScreenSubtitle": "Mosques sorted by distance. Islamic denomination is not shown unless the source clearly provides it.",
+  "nearbyList": "Daftar",
+  "nearbyMap": "Peta",
+  "nearbyMapUnavailable": "Tampilan peta internal belum tersedia. Gunakan Petunjuk arah untuk membuka aplikasi peta.",
+  "nearbyDirections": "Petunjuk arah",
+  "nearbyDirectionsError": "Kami tidak dapat membuka aplikasi peta yang kompatibel.",
+  "nearbyNoResults": "No results",
+  "nearbyNoResultsBody": "Kami tidak menemukan masjid dalam radius ini. Coba radius yang lebih besar.",
+  "nearbyRetry": "Coba lagi",
+  "nearbyAllowLocation": "Izinkan lokasi",
+  "nearbyLocationDenied": "Location denied",
+  "nearbyLocationDeniedBody": "Aktifkan lokasi atau pilih kota secara manual untuk mencari masjid terdekat.",
+  "nearbyUseManualCity": "Gunakan kota manual",
+  "nearbyUnnamedMosque": "Masjid tanpa nama",
+  "nearbyDistance": "Jarak: {distance}",
+  "nearbySearchRadius": "Radius pencarian",
+  "nearbyPlacesLoadError": "Error loading places",
+  "nearbyPlacesLoadErrorBody": "Kami belum dapat menghubungi OpenStreetMap saat ini. Coba lagi dalam beberapa detik.",
+  "nearbyPrayerStartsInMinutes": "{prayerName} starts in {minutes} min",
+  "nearbyPrayerStartsInHours": "{prayerName} starts in {hours} h {minutes} min",
+  "nearbyPrayerTimeDisclaimer": "Prayer time start calculated by Qibla Time: {label}. This is not the mosque congregation time.",
+  "nearbyOsmAttribution": "Data dari OpenStreetMap",
+  "nearbyCachedResults": "Showing saved results",
+  "nearbyUsingManualCity": "Using manual city",
+  "nearbyUsingDeviceLocation": "Using device location",
+  "nearbyWheelchair": "Aksesibilitas: {value}",
+  "@nearbyDistance": {
+    "placeholders": {
+      "distance": {}
+    }
+  },
+  "@nearbyPrayerStartsInMinutes": {
+    "placeholders": {
+      "prayerName": {},
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "@nearbyPrayerStartsInHours": {
+    "placeholders": {
+      "prayerName": {},
+      "hours": {
+        "type": "int"
+      },
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "@nearbyPrayerTimeDisclaimer": {
+    "placeholders": {
+      "label": {}
+    }
+  },
+  "@nearbyWheelchair": {
+    "placeholders": {
+      "value": {}
+    }
+  }
 }

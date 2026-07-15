@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../features/dhikr/screens/dhikr_screen.dart';
+import '../../features/nearby/screens/nearby_places_screen.dart';
 import '../../features/prayer_times/presentation/providers/prayer_times_providers.dart';
 import '../../features/prayer_times/screens/home_screen.dart';
 import '../../features/prayer_times/services/adhan_manager.dart';
@@ -145,6 +146,11 @@ class _MainNavigationState extends ConsumerState<MainNavigation>
                     label: l10n.navDua,
                   ),
                   NavigationDestination(
+                    icon: const Icon(Icons.place_outlined),
+                    selectedIcon: const Icon(Icons.place),
+                    label: l10n.navNearby,
+                  ),
+                  NavigationDestination(
                     icon: const Icon(Icons.menu_book_outlined),
                     selectedIcon: const Icon(Icons.menu_book),
                     label: l10n.navQuran,
@@ -169,6 +175,8 @@ class _MainNavigationState extends ConsumerState<MainNavigation>
       case 3:
         return const DuasScreen();
       case 4:
+        return const NearbyPlacesScreen();
+      case 5:
         return const QuranScreen();
       default:
         return const HomeScreen();

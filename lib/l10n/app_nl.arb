@@ -1447,5 +1447,75 @@
   "tafsirFallbackLanguageNotice": "Tafsir wordt weergegeven in het {language}, omdat het niet beschikbaar is in je geselecteerde taal.",
   "tafsirUnsupportedLanguageNotice": "Tafsir is nog niet beschikbaar in je taal. De dichtstbijzijnde editie wordt in een andere taal weergegeven.",
   "tafsirReadMore": "Meer lezen",
-  "tafsirShowLess": "Minder tonen"
+  "tafsirShowLess": "Minder tonen",
+  "navNearby": "Plaatsen",
+  "nearbyPlacesTitle": "Plaatsen in de buurt",
+  "nearbyPlacesSubtitle": "Find useful places near you using your current location or selected city.",
+  "nearbyMosques": "Moskeeën",
+  "nearbyMosquesSubtitle": "Search nearby mosques with OpenStreetMap data.",
+  "nearbyHalalRestaurants": "Halal restaurants",
+  "nearbyHalalRestaurantsSubtitle": "Prepared for a future phase with verified data.",
+  "nearbyHalalButchers": "Halal slagers",
+  "nearbyHalalButchersSubtitle": "Prepared for a future phase with verified data.",
+  "nearbyComingSoon": "Binnenkort",
+  "nearbyMosquesScreenSubtitle": "Mosques sorted by distance. Islamic denomination is not shown unless the source clearly provides it.",
+  "nearbyList": "Lijst",
+  "nearbyMap": "Kaart",
+  "nearbyMapUnavailable": "De interne kaartweergave is nog niet beschikbaar. Gebruik Route om je kaarten-app te openen.",
+  "nearbyDirections": "Route",
+  "nearbyDirectionsError": "Er kon geen compatibele kaarten-app worden geopend.",
+  "nearbyNoResults": "No results",
+  "nearbyNoResultsBody": "We konden geen moskeeën vinden binnen deze straal. Probeer een grotere straal.",
+  "nearbyRetry": "Opnieuw",
+  "nearbyAllowLocation": "Locatie toestaan",
+  "nearbyLocationDenied": "Location denied",
+  "nearbyLocationDeniedBody": "Schakel locatie in of kies handmatig een stad om moskeeën in de buurt te zoeken.",
+  "nearbyUseManualCity": "Handmatige stad gebruiken",
+  "nearbyUnnamedMosque": "Moskee zonder naam",
+  "nearbyDistance": "Afstand: {distance}",
+  "nearbySearchRadius": "Zoekstraal",
+  "nearbyPlacesLoadError": "Error loading places",
+  "nearbyPlacesLoadErrorBody": "OpenStreetMap kan nu niet worden geraadpleegd. Probeer het over een paar seconden opnieuw.",
+  "nearbyPrayerStartsInMinutes": "{prayerName} starts in {minutes} min",
+  "nearbyPrayerStartsInHours": "{prayerName} starts in {hours} h {minutes} min",
+  "nearbyPrayerTimeDisclaimer": "Prayer time start calculated by Qibla Time: {label}. This is not the mosque congregation time.",
+  "nearbyOsmAttribution": "Gegevens van OpenStreetMap",
+  "nearbyCachedResults": "Showing saved results",
+  "nearbyUsingManualCity": "Using manual city",
+  "nearbyUsingDeviceLocation": "Using device location",
+  "nearbyWheelchair": "Toegankelijkheid: {value}",
+  "@nearbyDistance": {
+    "placeholders": {
+      "distance": {}
+    }
+  },
+  "@nearbyPrayerStartsInMinutes": {
+    "placeholders": {
+      "prayerName": {},
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "@nearbyPrayerStartsInHours": {
+    "placeholders": {
+      "prayerName": {},
+      "hours": {
+        "type": "int"
+      },
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "@nearbyPrayerTimeDisclaimer": {
+    "placeholders": {
+      "label": {}
+    }
+  },
+  "@nearbyWheelchair": {
+    "placeholders": {
+      "value": {}
+    }
+  }
 }

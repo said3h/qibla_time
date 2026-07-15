@@ -1383,5 +1383,75 @@
   "tafsirFallbackLanguageNotice": "يُعرض التفسير باللغة {language} لأنه غير متوفر باللغة التي اخترتها.",
   "tafsirUnsupportedLanguageNotice": "لم يتوفر التفسير بعد بلغتك. يتم عرض أقرب إصدار بلغة أخرى.",
   "tafsirReadMore": "اقرأ المزيد",
-  "tafsirShowLess": "عرض أقل"
+  "tafsirShowLess": "عرض أقل",
+  "navNearby": "الأماكن",
+  "nearbyPlacesTitle": "الأماكن القريبة",
+  "nearbyPlacesSubtitle": "Find useful places near you using your current location or selected city.",
+  "nearbyMosques": "المساجد",
+  "nearbyMosquesSubtitle": "Search nearby mosques with OpenStreetMap data.",
+  "nearbyHalalRestaurants": "مطاعم حلال",
+  "nearbyHalalRestaurantsSubtitle": "Prepared for a future phase with verified data.",
+  "nearbyHalalButchers": "جزارات حلال",
+  "nearbyHalalButchersSubtitle": "Prepared for a future phase with verified data.",
+  "nearbyComingSoon": "قريبًا",
+  "nearbyMosquesScreenSubtitle": "Mosques sorted by distance. Islamic denomination is not shown unless the source clearly provides it.",
+  "nearbyList": "قائمة",
+  "nearbyMap": "خريطة",
+  "nearbyMapUnavailable": "عرض الخريطة الداخلي غير متاح بعد. استخدم الاتجاهات لفتح تطبيق الخرائط.",
+  "nearbyDirections": "الاتجاهات",
+  "nearbyDirectionsError": "تعذّر فتح تطبيق خرائط متوافق.",
+  "nearbyNoResults": "لا توجد نتائج",
+  "nearbyNoResultsBody": "لم نعثر على مساجد ضمن هذا النطاق. جرّب نطاقًا أكبر.",
+  "nearbyRetry": "إعادة المحاولة",
+  "nearbyAllowLocation": "السماح بالموقع",
+  "nearbyLocationDenied": "تم رفض الموقع",
+  "nearbyLocationDeniedBody": "فعّل الموقع أو اختر مدينة يدويًا للبحث عن المساجد القريبة.",
+  "nearbyUseManualCity": "استخدام مدينة يدوية",
+  "nearbyUnnamedMosque": "مسجد بلا اسم",
+  "nearbyDistance": "المسافة: {distance}",
+  "nearbySearchRadius": "نطاق البحث",
+  "nearbyPlacesLoadError": "خطأ في تحميل الأماكن",
+  "nearbyPlacesLoadErrorBody": "تعذّر الاتصال بـ OpenStreetMap الآن. حاول مرة أخرى بعد بضع ثوانٍ.",
+  "nearbyPrayerStartsInMinutes": "يبدأ {prayerName} بعد {minutes} دقيقة",
+  "nearbyPrayerStartsInHours": "يبدأ {prayerName} بعد {hours} س {minutes} د",
+  "nearbyPrayerTimeDisclaimer": "Prayer time start calculated by Qibla Time: {label}. This is not the mosque congregation time.",
+  "nearbyOsmAttribution": "البيانات من OpenStreetMap",
+  "nearbyCachedResults": "عرض نتائج محفوظة",
+  "nearbyUsingManualCity": "استخدام المدينة اليدوية",
+  "nearbyUsingDeviceLocation": "استخدام موقع الجهاز",
+  "nearbyWheelchair": "إمكانية الوصول: {value}",
+  "@nearbyDistance": {
+    "placeholders": {
+      "distance": {}
+    }
+  },
+  "@nearbyPrayerStartsInMinutes": {
+    "placeholders": {
+      "prayerName": {},
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "@nearbyPrayerStartsInHours": {
+    "placeholders": {
+      "prayerName": {},
+      "hours": {
+        "type": "int"
+      },
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "@nearbyPrayerTimeDisclaimer": {
+    "placeholders": {
+      "label": {}
+    }
+  },
+  "@nearbyWheelchair": {
+    "placeholders": {
+      "value": {}
+    }
+  }
 }

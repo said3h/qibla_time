@@ -3664,4 +3664,131 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get tafsirShowLess => 'Daha az goster';
+
+  @override
+  String get navNearby => 'Yerler';
+
+  @override
+  String get nearbyPlacesTitle => 'Yakındaki yerler';
+
+  @override
+  String get nearbyPlacesSubtitle =>
+      'Find useful places near you using your current location or selected city.';
+
+  @override
+  String get nearbyMosques => 'Camiler';
+
+  @override
+  String get nearbyMosquesSubtitle =>
+      'Search nearby mosques with OpenStreetMap data.';
+
+  @override
+  String get nearbyHalalRestaurants => 'Helal restoranlar';
+
+  @override
+  String get nearbyHalalRestaurantsSubtitle =>
+      'Prepared for a future phase with verified data.';
+
+  @override
+  String get nearbyHalalButchers => 'Helal kasaplar';
+
+  @override
+  String get nearbyHalalButchersSubtitle =>
+      'Prepared for a future phase with verified data.';
+
+  @override
+  String get nearbyComingSoon => 'Yakında';
+
+  @override
+  String get nearbyMosquesScreenSubtitle =>
+      'Mosques sorted by distance. Islamic denomination is not shown unless the source clearly provides it.';
+
+  @override
+  String get nearbyList => 'Liste';
+
+  @override
+  String get nearbyMap => 'Harita';
+
+  @override
+  String get nearbyMapUnavailable =>
+      'Dahili harita görünümü henüz kullanılamıyor. Harita uygulamanı açmak için Yol tarifi kullan.';
+
+  @override
+  String get nearbyDirections => 'Yol tarifi';
+
+  @override
+  String get nearbyDirectionsError => 'Uyumlu bir harita uygulaması açılamadı.';
+
+  @override
+  String get nearbyNoResults => 'No results';
+
+  @override
+  String get nearbyNoResultsBody =>
+      'Bu yarıçapta cami bulamadık. Daha geniş bir yarıçap dene.';
+
+  @override
+  String get nearbyRetry => 'Tekrar dene';
+
+  @override
+  String get nearbyAllowLocation => 'Konuma izin ver';
+
+  @override
+  String get nearbyLocationDenied => 'Location denied';
+
+  @override
+  String get nearbyLocationDeniedBody =>
+      'Yakındaki camileri aramak için konumu aç veya manuel bir şehir seç.';
+
+  @override
+  String get nearbyUseManualCity => 'Manuel şehir kullan';
+
+  @override
+  String get nearbyUnnamedMosque => 'İsimsiz cami';
+
+  @override
+  String nearbyDistance(Object distance) {
+    return 'Mesafe: $distance';
+  }
+
+  @override
+  String get nearbySearchRadius => 'Arama yarıçapı';
+
+  @override
+  String get nearbyPlacesLoadError => 'Error loading places';
+
+  @override
+  String get nearbyPlacesLoadErrorBody =>
+      'OpenStreetMap şu anda sorgulanamadı. Birkaç saniye sonra tekrar dene.';
+
+  @override
+  String nearbyPrayerStartsInMinutes(Object prayerName, int minutes) {
+    return '$prayerName starts in $minutes min';
+  }
+
+  @override
+  String nearbyPrayerStartsInHours(Object prayerName, int hours, int minutes) {
+    return '$prayerName starts in $hours h $minutes min';
+  }
+
+  @override
+  String nearbyPrayerTimeDisclaimer(Object label) {
+    return 'Prayer time start calculated by Qibla Time: $label. This is not the mosque congregation time.';
+  }
+
+  @override
+  String get nearbyOsmAttribution => 'Veriler OpenStreetMap’ten';
+
+  @override
+  String get nearbyCachedResults => 'Showing saved results';
+
+  @override
+  String get nearbyUsingManualCity => 'Using manual city';
+
+  @override
+  String get nearbyUsingDeviceLocation => 'Using device location';
+
+  @override
+  String nearbyWheelchair(Object value) {
+    return 'Erişilebilirlik: $value';
+  }
 }

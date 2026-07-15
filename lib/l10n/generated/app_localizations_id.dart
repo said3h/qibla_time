@@ -3688,4 +3688,132 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get tafsirShowLess => 'Tampilkan lebih sedikit';
+
+  @override
+  String get navNearby => 'Tempat';
+
+  @override
+  String get nearbyPlacesTitle => 'Tempat terdekat';
+
+  @override
+  String get nearbyPlacesSubtitle =>
+      'Find useful places near you using your current location or selected city.';
+
+  @override
+  String get nearbyMosques => 'Masjid';
+
+  @override
+  String get nearbyMosquesSubtitle =>
+      'Search nearby mosques with OpenStreetMap data.';
+
+  @override
+  String get nearbyHalalRestaurants => 'Restoran halal';
+
+  @override
+  String get nearbyHalalRestaurantsSubtitle =>
+      'Prepared for a future phase with verified data.';
+
+  @override
+  String get nearbyHalalButchers => 'Toko daging halal';
+
+  @override
+  String get nearbyHalalButchersSubtitle =>
+      'Prepared for a future phase with verified data.';
+
+  @override
+  String get nearbyComingSoon => 'Segera hadir';
+
+  @override
+  String get nearbyMosquesScreenSubtitle =>
+      'Mosques sorted by distance. Islamic denomination is not shown unless the source clearly provides it.';
+
+  @override
+  String get nearbyList => 'Daftar';
+
+  @override
+  String get nearbyMap => 'Peta';
+
+  @override
+  String get nearbyMapUnavailable =>
+      'Tampilan peta internal belum tersedia. Gunakan Petunjuk arah untuk membuka aplikasi peta.';
+
+  @override
+  String get nearbyDirections => 'Petunjuk arah';
+
+  @override
+  String get nearbyDirectionsError =>
+      'Kami tidak dapat membuka aplikasi peta yang kompatibel.';
+
+  @override
+  String get nearbyNoResults => 'No results';
+
+  @override
+  String get nearbyNoResultsBody =>
+      'Kami tidak menemukan masjid dalam radius ini. Coba radius yang lebih besar.';
+
+  @override
+  String get nearbyRetry => 'Coba lagi';
+
+  @override
+  String get nearbyAllowLocation => 'Izinkan lokasi';
+
+  @override
+  String get nearbyLocationDenied => 'Location denied';
+
+  @override
+  String get nearbyLocationDeniedBody =>
+      'Aktifkan lokasi atau pilih kota secara manual untuk mencari masjid terdekat.';
+
+  @override
+  String get nearbyUseManualCity => 'Gunakan kota manual';
+
+  @override
+  String get nearbyUnnamedMosque => 'Masjid tanpa nama';
+
+  @override
+  String nearbyDistance(Object distance) {
+    return 'Jarak: $distance';
+  }
+
+  @override
+  String get nearbySearchRadius => 'Radius pencarian';
+
+  @override
+  String get nearbyPlacesLoadError => 'Error loading places';
+
+  @override
+  String get nearbyPlacesLoadErrorBody =>
+      'Kami belum dapat menghubungi OpenStreetMap saat ini. Coba lagi dalam beberapa detik.';
+
+  @override
+  String nearbyPrayerStartsInMinutes(Object prayerName, int minutes) {
+    return '$prayerName starts in $minutes min';
+  }
+
+  @override
+  String nearbyPrayerStartsInHours(Object prayerName, int hours, int minutes) {
+    return '$prayerName starts in $hours h $minutes min';
+  }
+
+  @override
+  String nearbyPrayerTimeDisclaimer(Object label) {
+    return 'Prayer time start calculated by Qibla Time: $label. This is not the mosque congregation time.';
+  }
+
+  @override
+  String get nearbyOsmAttribution => 'Data dari OpenStreetMap';
+
+  @override
+  String get nearbyCachedResults => 'Showing saved results';
+
+  @override
+  String get nearbyUsingManualCity => 'Using manual city';
+
+  @override
+  String get nearbyUsingDeviceLocation => 'Using device location';
+
+  @override
+  String nearbyWheelchair(Object value) {
+    return 'Aksesibilitas: $value';
+  }
 }

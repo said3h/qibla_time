@@ -1,7 +1,7 @@
 # Privacy Policy — Qibla Time
 
-**Last updated:** June 22, 2026
-**Effective date:** June 22, 2026
+**Last updated:** July 15, 2026
+**Effective date:** July 15, 2026
 
 ---
 
@@ -34,6 +34,7 @@ The App requests access to your device's **GPS / network location** for the purp
 
 - Calculating the five daily Islamic prayer times (Fajr, Dhuhr, Asr, Maghrib, Isha) based on your geographic coordinates
 - Determining the Qibla direction (the bearing toward Mecca) from your current position
+- Finding nearby mosques when you choose to use the nearby places feature
 
 **Your location coordinates are:**
 - Used by the App to calculate prayer times and Qibla direction
@@ -41,6 +42,8 @@ The App requests access to your device's **GPS / network location** for the purp
 - Not sold, used for advertising, or used for analytics
 
 Most prayer time and Qibla calculations are performed on-device using the open-source [Adhan](https://github.com/batoulapps/adhan-dart) library. If you search for or save a manual city, the device's geocoding service may be used to convert the city name into coordinates. If the App displays a readable place name for coordinates, the device's reverse geocoding service may be used. These geocoding services are provided by the operating system or platform provider.
+
+When you use the nearby mosques feature, the App may send the coordinates of your current location or manually selected city to the public Overpass/OpenStreetMap service in order to search for nearby mosque data. Qibla Time does not operate its own server for these searches and does not store those searches on a Qibla Time server. Nearby mosque results may be cached locally on your device for approximately 12 hours to reduce repeated requests. Data availability and accuracy depend on OpenStreetMap contributors.
 
 You can revoke location permission at any time through your device's system settings. The App can fall back to a manually entered or last-saved location where available.
 
@@ -95,7 +98,11 @@ When you search for a manual city or when the App converts coordinates into a re
 
 When you choose to rate, share, or open the store listing, the App opens Google Play or the Apple App Store. When you choose to contact support, the App opens your email client with a support email draft. These actions are initiated by you.
 
-### 5.8 Google Play and App Store
+### 5.8 OpenStreetMap / Overpass
+
+The nearby mosques feature uses OpenStreetMap data through public Overpass API endpoints. Requests include the coordinates and search radius needed to find nearby places. OpenStreetMap data is provided by OpenStreetMap contributors and is subject to OpenStreetMap's own terms and privacy practices.
+
+### 5.9 Google Play and App Store
 
 The App may be distributed through Google Play and the Apple App Store. Google and Apple may collect installation, purchase, crash, or store analytics data according to their own privacy policies. This data is collected by the store provider, not directly by us.
 
@@ -106,9 +113,9 @@ The App may be distributed through Google Play and the Apple App Store. Google a
 | Permission | Why it is needed |
 |---|---|
 | `ACCESS_FINE_LOCATION` / `ACCESS_COARSE_LOCATION` | Calculate prayer times and Qibla direction |
-| `INTERNET` | Load online Quran content, Quran audio, IslamHouse content, optional Tafsir, store links, and other online features |
+| `INTERNET` | Load online Quran content, Quran audio, IslamHouse content, optional Tafsir, nearby mosque data, store links, and other online features |
 | `RECEIVE_BOOT_COMPLETED` | Reschedule local prayer time notifications after device reboot |
-| `SCHEDULE_EXACT_ALARM` / `USE_EXACT_ALARM` | Deliver prayer time notifications at precise times |
+| `SCHEDULE_EXACT_ALARM` | Deliver prayer time notifications at precise times |
 | `VIBRATE` | Optional notification vibration |
 
 No permission is used for any purpose other than what is stated above.
