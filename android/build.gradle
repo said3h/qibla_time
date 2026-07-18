@@ -64,6 +64,19 @@ subprojects { project ->
             jvmTarget = '17'
         }
     }
+
+    // Some Flutter plugins apply their own Kotlin Gradle plugin classpath.
+    // Configure by task shape too, so clean CI runners do not leave plugin
+    // compileDebugKotlin tasks on their declared 1.8 target.
+    project.tasks.configureEach { task ->
+        if (task.name.toLowerCase(java.util.Locale.ROOT).contains('kotlin')) {
+            try {
+                task.kotlinOptions.jvmTarget = '17'
+            } catch (ignored) {
+                // Non-compiler Kotlin tasks do not expose kotlinOptions.
+            }
+        }
+    }
 }
 
 rootProject.buildDir = '../build'
