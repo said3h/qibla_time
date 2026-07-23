@@ -34,6 +34,24 @@ subprojects { project ->
 }
 
 subprojects { project ->
+    def forceKotlinJvmTarget = { task ->
+        try {
+            task.kotlinOptions {
+                jvmTarget = '17'
+            }
+        } catch (ignored) {
+            // Kotlin 2.x compiler tasks expose compilerOptions instead.
+        }
+
+        try {
+            task.compilerOptions {
+                jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+            }
+        } catch (ignored) {
+            // Older Kotlin compiler tasks do not expose compilerOptions.
+        }
+    }
+
     def configureAndroidJvmTarget = {
         def androidComponents = project.extensions.findByName('androidComponents')
         if (androidComponents != null) {
@@ -60,9 +78,7 @@ subprojects { project ->
     }
 
     project.tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
-        kotlinOptions {
-            jvmTarget = '17'
-        }
+        forceKotlinJvmTarget(delegate)
     }
 
     // Some Flutter plugins apply their own Kotlin Gradle plugin classpath.
@@ -70,11 +86,15 @@ subprojects { project ->
     // compileDebugKotlin tasks on their declared 1.8 target.
     project.tasks.configureEach { task ->
         if (task.name.toLowerCase(java.util.Locale.ROOT).contains('kotlin')) {
-            try {
-                task.kotlinOptions.jvmTarget = '17'
-            } catch (ignored) {
-                // Non-compiler Kotlin tasks do not expose kotlinOptions.
-            }
+            forceKotlinJvmTarget(task)
+        }
+    }
+
+    project.afterEvaluate {
+        project.tasks.matching { task ->
+            task.name.toLowerCase(java.util.Locale.ROOT).contains('kotlin')
+        }.configureEach { task ->
+            forceKotlinJvmTarget(task)
         }
     }
 }
