@@ -78,6 +78,8 @@ class OverpassMosqueService {
           endpoint,
           headers: const {
             'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+            'Accept': 'application/json',
+            'User-Agent': 'QiblaTime/1.6.0 (support.qiblatime@gmail.com)',
           },
           body: {'data': query},
         ).timeout(timeout);

@@ -286,9 +286,11 @@ void main() {
   test('posts a bounded meter radius query with nodes ways and relations',
       () async {
     late String postedQuery;
+    late Map<String, String> headers;
     final service = OverpassMosqueService(
       client: MockClient((request) async {
         postedQuery = request.bodyFields['data'] ?? '';
+        headers = request.headers;
         return http.Response(jsonEncode({'elements': []}), 200);
       }),
     );
@@ -307,6 +309,8 @@ void main() {
       postedQuery,
       contains('["amenity"="place_of_worship"]["religion"="muslim"]'),
     );
+    expect(headers['Accept'], 'application/json');
+    expect(headers['User-Agent'], contains('QiblaTime/1.6.0'));
   });
 }
 
