@@ -88,17 +88,11 @@ echo ""
 read -p "¿Subir cambios a GitHub? (y/n): " PUSH_GIT
 
 if [ "$PUSH_GIT" = "y" ]; then
-  CURRENT_BRANCH="$(git branch --show-current)"
-  if [ -z "$CURRENT_BRANCH" ]; then
-    echo "No se pudo detectar la rama actual de Git."
-    exit 1
-  fi
-
   git status
   read -p "Mensaje del commit: " COMMIT_MSG
   git add .
   git commit -m "$COMMIT_MSG"
-  git push origin "$CURRENT_BRANCH"
+  git push origin HEAD:main
 fi
 
 read -p "¿Subir IPA a App Store Connect? (y/n): " UPLOAD_CONNECT
