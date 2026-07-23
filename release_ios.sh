@@ -7,6 +7,16 @@ if [ "$#" -ne 0 ]; then
   exit 1
 fi
 
+if command -v flutter >/dev/null 2>&1; then
+  FLUTTER_BIN="$(command -v flutter)"
+elif [ -x "/Users/said3h/development/flutter/bin/flutter" ]; then
+  FLUTTER_BIN="/Users/said3h/development/flutter/bin/flutter"
+else
+  echo "No se encontró Flutter."
+  echo "Añade Flutter al PATH o instala Flutter en /Users/said3h/development/flutter."
+  exit 1
+fi
+
 VERSION_LINE="$(grep -E '^version:[[:space:]]*[0-9]+\.[0-9]+\.[0-9]+\+[0-9]+[[:space:]]*$' pubspec.yaml | head -n 1 || true)"
 
 if [ -z "$VERSION_LINE" ]; then
@@ -25,10 +35,26 @@ echo "Preparando Qibla Time $VERSION_NAME+$NEW_BUILD"
 
 perl -0pi -e "s/^version:\s*\Q$VERSION_NAME\E\+\Q$CURRENT_BUILD\E\s*$/version: $VERSION_NAME+$NEW_BUILD/m" pubspec.yaml
 
-flutter clean
-flutter pub get
-flutter analyze --no-fatal-infos
-flutter build ipa --release || true
+"$FLUTTER_BIN" clean
+"$FLUTTER_BIN" pub get
+"$FLUTTER_BIN" analyze --no-fatal-infos
+
+if ! security find-identity -v -p codesigning | grep -qE '[0-9]+\) [A-F0-9]{40}'; then
+  echo ""
+  echo "ERROR: No hay certificados de firma iOS válidos en este Mac."
+  echo "Abre Xcode, inicia sesión con tu Apple ID y crea/descarga un certificado válido para el Team ID 4XJTFN47FF."
+  echo "Después vuelve a ejecutar ./release_ios.sh"
+  exit 1
+fi
+
+"$FLUTTER_BIN" build ipa --release
+
+if [ ! -d "build/ios/archive/Runner.xcarchive" ]; then
+  echo ""
+  echo "ERROR: No se creó el archive iOS en build/ios/archive/Runner.xcarchive."
+  echo "Revisa el error de firma/build anterior antes de exportar el IPA."
+  exit 1
+fi
 
 cat > /tmp/qibla_export_options.plist <<'PLIST'
 <?xml version="1.0" encoding="UTF-8"?>
