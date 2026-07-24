@@ -22,7 +22,7 @@ allprojects {
 class FlutterSdkStub {
     int compileSdkVersion = 36
     int minSdkVersion    = 21
-    int targetSdkVersion = 34
+    int targetSdkVersion = 36
 }
 
 // Apply only to plugin sub-projects; :app uses the real FlutterExtension from
