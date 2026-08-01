@@ -20,7 +20,12 @@ class NearbyNavigationService {
   }
 
   List<Uri> buildDirectionUris(NearbyPlace place) {
-    final label = Uri.encodeComponent(place.name ?? 'Mosque');
+    final fallbackLabel = switch (place.category) {
+      NearbyPlaceCategory.mosque => 'Mosque',
+      NearbyPlaceCategory.halalRestaurant => 'Halal restaurant',
+      NearbyPlaceCategory.halalButcher => 'Halal butcher',
+    };
+    final label = Uri.encodeComponent(place.name ?? fallbackLabel);
     final lat = place.latitude.toStringAsFixed(6);
     final lng = place.longitude.toStringAsFixed(6);
     return <Uri>[

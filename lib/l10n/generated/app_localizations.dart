@@ -6481,7 +6481,7 @@ abstract class AppLocalizations {
   /// No description provided for @nearbyHalalRestaurantsSubtitle.
   ///
   /// In es, this message translates to:
-  /// **'Prepared for a future phase with verified data.'**
+  /// **'Busca restaurantes marcados explícitamente como halal en OpenStreetMap.'**
   String get nearbyHalalRestaurantsSubtitle;
 
   /// No description provided for @nearbyHalalButchers.
@@ -6493,20 +6493,26 @@ abstract class AppLocalizations {
   /// No description provided for @nearbyHalalButchersSubtitle.
   ///
   /// In es, this message translates to:
-  /// **'Prepared for a future phase with verified data.'**
+  /// **'Busca carnicerías marcadas explícitamente como halal en OpenStreetMap.'**
   String get nearbyHalalButchersSubtitle;
-
-  /// No description provided for @nearbyComingSoon.
-  ///
-  /// In es, this message translates to:
-  /// **'Próximamente'**
-  String get nearbyComingSoon;
 
   /// No description provided for @nearbyMosquesScreenSubtitle.
   ///
   /// In es, this message translates to:
-  /// **'Mosques sorted by distance. Islamic denomination is not shown unless the source clearly provides it.'**
+  /// **'Mezquitas ordenadas por distancia. Solo se muestra la corriente islámica cuando la fuente la indica claramente.'**
   String get nearbyMosquesScreenSubtitle;
+
+  /// No description provided for @nearbyHalalRestaurantsScreenSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Restaurantes marcados explícitamente como halal, ordenados por distancia.'**
+  String get nearbyHalalRestaurantsScreenSubtitle;
+
+  /// No description provided for @nearbyHalalButchersScreenSubtitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Carnicerías marcadas explícitamente como halal, ordenadas por distancia.'**
+  String get nearbyHalalButchersScreenSubtitle;
 
   /// No description provided for @nearbyList.
   ///
@@ -6550,6 +6556,18 @@ abstract class AppLocalizations {
   /// **'No encontramos mezquitas en este radio. Prueba con un radio más amplio.'**
   String get nearbyNoResultsBody;
 
+  /// No description provided for @nearbyNoRestaurantsBody.
+  ///
+  /// In es, this message translates to:
+  /// **'No encontramos restaurantes marcados como halal en este radio. Prueba con un radio más amplio.'**
+  String get nearbyNoRestaurantsBody;
+
+  /// No description provided for @nearbyNoButchersBody.
+  ///
+  /// In es, this message translates to:
+  /// **'No encontramos carnicerías marcadas como halal en este radio. Prueba con un radio más amplio.'**
+  String get nearbyNoButchersBody;
+
   /// No description provided for @nearbyRetry.
   ///
   /// In es, this message translates to:
@@ -6571,7 +6589,7 @@ abstract class AppLocalizations {
   /// No description provided for @nearbyLocationDeniedBody.
   ///
   /// In es, this message translates to:
-  /// **'Activa la ubicación o selecciona una ciudad manual para buscar mezquitas cercanas.'**
+  /// **'Activa la ubicación o selecciona una ciudad manual para buscar lugares cercanos.'**
   String get nearbyLocationDeniedBody;
 
   /// No description provided for @nearbyUseManualCity.
@@ -6585,6 +6603,18 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Mezquita sin nombre'**
   String get nearbyUnnamedMosque;
+
+  /// No description provided for @nearbyUnnamedRestaurant.
+  ///
+  /// In es, this message translates to:
+  /// **'Restaurante halal sin nombre'**
+  String get nearbyUnnamedRestaurant;
+
+  /// No description provided for @nearbyUnnamedButcher.
+  ///
+  /// In es, this message translates to:
+  /// **'Carnicería halal sin nombre'**
+  String get nearbyUnnamedButcher;
 
   /// No description provided for @nearbyDistance.
   ///

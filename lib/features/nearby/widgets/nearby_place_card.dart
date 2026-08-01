@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qibla_time/core/theme/local_fonts.dart';
 
+import '../../../core/utils/qibla_snackbar.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../l10n/l10n.dart';
 import '../models/nearby_place.dart';
@@ -23,7 +24,7 @@ class NearbyPlaceCard extends StatelessWidget {
     final l10n = context.l10n;
     final title = place.name?.trim().isNotEmpty == true
         ? place.name!.trim()
-        : l10n.nearbyUnnamedMosque;
+        : _unnamedTitle(context);
 
     return Semantics(
       container: true,
@@ -49,7 +50,7 @@ class NearbyPlaceCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Icon(
-                    Icons.mosque_outlined,
+                    _categoryIcon(),
                     color: tokens.primary,
                   ),
                 ),
@@ -122,8 +123,11 @@ class NearbyPlaceCard extends StatelessWidget {
                     final messenger = ScaffoldMessenger.of(context);
                     final opened = await onDirections();
                     if (!opened && context.mounted) {
-                      messenger.showSnackBar(
-                        SnackBar(content: Text(l10n.nearbyDirectionsError)),
+                      showQiblaSnackBarWithMessenger(
+                        context,
+                        messenger: messenger,
+                        message: l10n.nearbyDirectionsError,
+                        icon: Icons.error_outline_rounded,
                       );
                     }
                   },
@@ -143,6 +147,23 @@ class NearbyPlaceCard extends StatelessWidget {
       return '${meters.round()} m';
     }
     return '${(meters / 1000).toStringAsFixed(1)} km';
+  }
+
+  IconData _categoryIcon() {
+    return switch (place.category) {
+      NearbyPlaceCategory.mosque => Icons.mosque_outlined,
+      NearbyPlaceCategory.halalRestaurant => Icons.restaurant_menu_outlined,
+      NearbyPlaceCategory.halalButcher => Icons.storefront_outlined,
+    };
+  }
+
+  String _unnamedTitle(BuildContext context) {
+    return switch (place.category) {
+      NearbyPlaceCategory.mosque => context.l10n.nearbyUnnamedMosque,
+      NearbyPlaceCategory.halalRestaurant =>
+        context.l10n.nearbyUnnamedRestaurant,
+      NearbyPlaceCategory.halalButcher => context.l10n.nearbyUnnamedButcher,
+    };
   }
 }
 

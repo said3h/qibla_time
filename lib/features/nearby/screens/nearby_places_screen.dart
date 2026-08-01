@@ -42,7 +42,6 @@ class NearbyPlacesScreen extends ConsumerWidget {
               icon: Icons.mosque_outlined,
               title: l10n.nearbyMosques,
               subtitle: l10n.nearbyMosquesSubtitle,
-              isAvailable: true,
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute<void>(
@@ -56,14 +55,26 @@ class NearbyPlacesScreen extends ConsumerWidget {
               icon: Icons.restaurant_menu_outlined,
               title: l10n.nearbyHalalRestaurants,
               subtitle: l10n.nearbyHalalRestaurantsSubtitle,
-              isAvailable: false,
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                    builder: (_) => const NearbyHalalRestaurantsScreen(),
+                  ),
+                );
+              },
             ),
             const SizedBox(height: 12),
             _NearbyCategoryCard(
               icon: Icons.storefront_outlined,
               title: l10n.nearbyHalalButchers,
               subtitle: l10n.nearbyHalalButchersSubtitle,
-              isAvailable: false,
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                    builder: (_) => const NearbyHalalButchersScreen(),
+                  ),
+                );
+              },
             ),
             const SizedBox(height: 18),
             _OsmAttribution(tokens: tokens),
@@ -79,27 +90,24 @@ class _NearbyCategoryCard extends StatelessWidget {
     required this.icon,
     required this.title,
     required this.subtitle,
-    required this.isAvailable,
-    this.onTap,
+    required this.onTap,
   });
 
   final IconData icon;
   final String title;
   final String subtitle;
-  final bool isAvailable;
-  final VoidCallback? onTap;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     final tokens = QiblaThemes.current;
-    final l10n = context.l10n;
 
     return Semantics(
-      button: isAvailable,
-      enabled: isAvailable,
+      button: true,
+      enabled: true,
       label: title,
       child: InkWell(
-        onTap: isAvailable ? onTap : null,
+        onTap: onTap,
         borderRadius: BorderRadius.circular(22),
         child: Container(
           padding: const EdgeInsets.all(18),
@@ -107,7 +115,7 @@ class _NearbyCategoryCard extends StatelessWidget {
             color: tokens.bgSurface,
             borderRadius: BorderRadius.circular(22),
             border: Border.all(
-              color: isAvailable ? tokens.primaryBorder : tokens.border,
+              color: tokens.primaryBorder,
             ),
           ),
           child: Row(
@@ -116,12 +124,12 @@ class _NearbyCategoryCard extends StatelessWidget {
                 width: 48,
                 height: 48,
                 decoration: BoxDecoration(
-                  color: isAvailable ? tokens.primaryBg : tokens.bgSurface2,
+                  color: tokens.primaryBg,
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Icon(
                   icon,
-                  color: isAvailable ? tokens.primary : tokens.textSecondary,
+                  color: tokens.primary,
                 ),
               ),
               const SizedBox(width: 14),
@@ -129,21 +137,13 @@ class _NearbyCategoryCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            title,
-                            style: GoogleFonts.dmSans(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
-                              color: tokens.textPrimary,
-                            ),
-                          ),
-                        ),
-                        if (!isAvailable)
-                          _ComingSoonBadge(label: l10n.nearbyComingSoon),
-                      ],
+                    Text(
+                      title,
+                      style: GoogleFonts.dmSans(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        color: tokens.textPrimary,
+                      ),
                     ),
                     const SizedBox(height: 6),
                     Text(
@@ -157,43 +157,14 @@ class _NearbyCategoryCard extends StatelessWidget {
                   ],
                 ),
               ),
-              if (isAvailable) ...[
-                const SizedBox(width: 10),
-                Icon(
-                  Icons.arrow_forward_ios_rounded,
-                  size: 16,
-                  color: tokens.textSecondary,
-                ),
-              ],
+              const SizedBox(width: 10),
+              Icon(
+                Icons.arrow_forward_ios_rounded,
+                size: 16,
+                color: tokens.textSecondary,
+              ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class _ComingSoonBadge extends StatelessWidget {
-  const _ComingSoonBadge({required this.label});
-
-  final String label;
-
-  @override
-  Widget build(BuildContext context) {
-    final tokens = QiblaThemes.current;
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 5),
-      decoration: BoxDecoration(
-        color: tokens.bgSurface2,
-        borderRadius: BorderRadius.circular(999),
-        border: Border.all(color: tokens.border),
-      ),
-      child: Text(
-        label,
-        style: GoogleFonts.dmSans(
-          fontSize: 10,
-          fontWeight: FontWeight.w700,
-          color: tokens.textSecondary,
         ),
       ),
     );

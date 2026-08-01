@@ -47,6 +47,5 @@ Use this checklist to test the first Nearby Places release on real Android and i
 - Test Arabic UI and RTL layout.
 - Increase system text size. Expected: no clipped key actions.
 - Test a small phone screen. Expected: radius selector, cards, and retry buttons remain usable.
-- Confirm Restaurants halal and Halal butchers show Coming soon and do not open empty screens.
+- Open Restaurants halal and Halal butchers. Confirm results are sorted by distance, refresh works, and only places explicitly tagged halal in OpenStreetMap appear.
 - Confirm OpenStreetMap attribution is visible and opens the OSM copyright page.
-

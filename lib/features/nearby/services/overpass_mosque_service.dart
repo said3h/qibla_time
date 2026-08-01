@@ -28,7 +28,48 @@ class OverpassMosqueService {
     required double longitude,
     required int radiusMeters,
   }) async {
-    final query = _buildMosqueQuery(
+    return fetchPlaces(
+      category: NearbyPlaceCategory.mosque,
+      latitude: latitude,
+      longitude: longitude,
+      radiusMeters: radiusMeters,
+    );
+  }
+
+  Future<List<NearbyPlace>> fetchHalalRestaurants({
+    required double latitude,
+    required double longitude,
+    required int radiusMeters,
+  }) {
+    return fetchPlaces(
+      category: NearbyPlaceCategory.halalRestaurant,
+      latitude: latitude,
+      longitude: longitude,
+      radiusMeters: radiusMeters,
+    );
+  }
+
+  Future<List<NearbyPlace>> fetchHalalButchers({
+    required double latitude,
+    required double longitude,
+    required int radiusMeters,
+  }) {
+    return fetchPlaces(
+      category: NearbyPlaceCategory.halalButcher,
+      latitude: latitude,
+      longitude: longitude,
+      radiusMeters: radiusMeters,
+    );
+  }
+
+  Future<List<NearbyPlace>> fetchPlaces({
+    required NearbyPlaceCategory category,
+    required double latitude,
+    required double longitude,
+    required int radiusMeters,
+  }) async {
+    final query = _buildQuery(
+      category: category,
       latitude: latitude,
       longitude: longitude,
       radiusMeters: radiusMeters,
@@ -51,7 +92,7 @@ class OverpassMosqueService {
     var acceptedBeforeDedupe = 0;
     for (final element in elements) {
       if (element is! Map<String, dynamic>) continue;
-      final place = parseElement(element);
+      final place = parseElement(element, category: category);
       if (place == null) continue;
       acceptedBeforeDedupe++;
       if (!seenOsmIds.add(place.id)) continue;
@@ -62,7 +103,7 @@ class OverpassMosqueService {
     }
     if (kDebugMode) {
       AppLogger.info(
-        'Nearby Overpass mosques: raw=${elements.length}, '
+        'Nearby Overpass ${category.name}: raw=${elements.length}, '
         'accepted=$acceptedBeforeDedupe, deduped=${places.length}',
       );
     }
@@ -110,11 +151,14 @@ class OverpassMosqueService {
     return error is TimeoutException || error is http.ClientException;
   }
 
-  NearbyPlace? parseElement(Map<String, dynamic> element) {
+  NearbyPlace? parseElement(
+    Map<String, dynamic> element, {
+    NearbyPlaceCategory category = NearbyPlaceCategory.mosque,
+  }) {
     final tags = (element['tags'] as Map<String, dynamic>?)
             ?.map((key, value) => MapEntry(key, value.toString())) ??
         const <String, String>{};
-    if (!_isMuslimPlaceOfWorship(tags)) return null;
+    if (!_matchesCategory(tags, category)) return null;
 
     final coordinates = _coordinatesFor(element);
     if (coordinates == null) return null;
@@ -123,11 +167,14 @@ class OverpassMosqueService {
     final id = element['id']?.toString() ?? _dedupeKeyFromTags(tags);
     return NearbyPlace(
       id: '$type/$id',
-      category: NearbyPlaceCategory.mosque,
+      category: category,
       latitude: coordinates.latitude,
       longitude: coordinates.longitude,
       source: 'OpenStreetMap',
-      name: _readFirst(tags, const ['name', 'name:en', 'name:ar']),
+      name: _readFirst(
+        tags,
+        const ['name', 'brand', 'operator', 'name:en', 'name:ar'],
+      ),
       address: _addressFromTags(tags),
       phone: _readFirst(tags, const ['phone', 'contact:phone']),
       website: _readFirst(tags, const ['website', 'contact:website']),
@@ -137,7 +184,8 @@ class OverpassMosqueService {
     );
   }
 
-  static String _buildMosqueQuery({
+  static String _buildQuery({
+    required NearbyPlaceCategory category,
     required double latitude,
     required double longitude,
     required int radiusMeters,
@@ -145,18 +193,72 @@ class OverpassMosqueService {
     final lat = latitude.toStringAsFixed(6);
     final lng = longitude.toStringAsFixed(6);
     final radius = radiusMeters.clamp(1000, 50000);
-    return '''
-[out:json][timeout:12];
-(
+    final selectors = switch (category) {
+      NearbyPlaceCategory.mosque => '''
   node(around:$radius,$lat,$lng)["amenity"="place_of_worship"]["religion"="muslim"];
   way(around:$radius,$lat,$lng)["amenity"="place_of_worship"]["religion"="muslim"];
   relation(around:$radius,$lat,$lng)["amenity"="place_of_worship"]["religion"="muslim"];
   node(around:$radius,$lat,$lng)["building"="mosque"];
   way(around:$radius,$lat,$lng)["building"="mosque"];
-  relation(around:$radius,$lat,$lng)["building"="mosque"];
+  relation(around:$radius,$lat,$lng)["building"="mosque"];''',
+      NearbyPlaceCategory.halalRestaurant => '''
+  node(around:$radius,$lat,$lng)["amenity"~"^(restaurant|fast_food|cafe)\$"]["diet:halal"~"^(yes|only)\$",i];
+  way(around:$radius,$lat,$lng)["amenity"~"^(restaurant|fast_food|cafe)\$"]["diet:halal"~"^(yes|only)\$",i];
+  relation(around:$radius,$lat,$lng)["amenity"~"^(restaurant|fast_food|cafe)\$"]["diet:halal"~"^(yes|only)\$",i];''',
+      NearbyPlaceCategory.halalButcher => '''
+  node(around:$radius,$lat,$lng)["shop"="butcher"]["diet:halal"~"^(yes|only)\$",i];
+  way(around:$radius,$lat,$lng)["shop"="butcher"]["diet:halal"~"^(yes|only)\$",i];
+  relation(around:$radius,$lat,$lng)["shop"="butcher"]["diet:halal"~"^(yes|only)\$",i];
+  node(around:$radius,$lat,$lng)["shop"="butcher"]["butcher"~"^halal\$",i];
+  way(around:$radius,$lat,$lng)["shop"="butcher"]["butcher"~"^halal\$",i];
+  relation(around:$radius,$lat,$lng)["shop"="butcher"]["butcher"~"^halal\$",i];''',
+    };
+    return '''
+[out:json][timeout:12];
+(
+$selectors
 );
 out center tags;
 ''';
+  }
+
+  bool _matchesCategory(
+    Map<String, String> tags,
+    NearbyPlaceCategory category,
+  ) {
+    if (_isInactive(tags)) return false;
+    return switch (category) {
+      NearbyPlaceCategory.mosque => _isMuslimPlaceOfWorship(tags),
+      NearbyPlaceCategory.halalRestaurant => _isHalalRestaurant(tags),
+      NearbyPlaceCategory.halalButcher => _isHalalButcher(tags),
+    };
+  }
+
+  bool _isHalalRestaurant(Map<String, String> tags) {
+    const supportedAmenities = {'restaurant', 'fast_food', 'cafe'};
+    return supportedAmenities.contains(tags['amenity']?.toLowerCase()) &&
+        _isExplicitlyHalal(tags);
+  }
+
+  bool _isHalalButcher(Map<String, String> tags) {
+    if (tags['shop']?.toLowerCase() != 'butcher') return false;
+    return _isExplicitlyHalal(tags) ||
+        tags['butcher']?.toLowerCase() == 'halal';
+  }
+
+  bool _isExplicitlyHalal(Map<String, String> tags) {
+    final value = tags['diet:halal']?.toLowerCase();
+    return value == 'yes' || value == 'only';
+  }
+
+  bool _isInactive(Map<String, String> tags) {
+    return tags['disused']?.toLowerCase() == 'yes' ||
+        tags['abandoned']?.toLowerCase() == 'yes' ||
+        tags['historic']?.toLowerCase() == 'yes' ||
+        tags['disused:amenity'] != null ||
+        tags['abandoned:amenity'] != null ||
+        tags['disused:shop'] != null ||
+        tags['abandoned:shop'] != null;
   }
 
   bool _isMuslimPlaceOfWorship(Map<String, String> tags) {
@@ -171,12 +273,7 @@ out center tags;
     if (building == 'mosque') {
       final incompatibleReligion = religion != null && religion != 'muslim';
       if (incompatibleReligion) return false;
-      final disused = tags['disused']?.toLowerCase() == 'yes' ||
-          tags['abandoned']?.toLowerCase() == 'yes' ||
-          tags['historic']?.toLowerCase() == 'yes' ||
-          tags['disused:amenity'] != null ||
-          tags['abandoned:amenity'] != null;
-      return !disused;
+      return !_isInactive(tags);
     }
 
     return false;
@@ -240,6 +337,11 @@ out center tags;
       'building',
       'denomination',
       'operator',
+      'shop',
+      'diet:halal',
+      'butcher',
+      'cuisine',
+      'brand',
     };
     return Map<String, String>.fromEntries(
       tags.entries.where((entry) => allowed.contains(entry.key)),

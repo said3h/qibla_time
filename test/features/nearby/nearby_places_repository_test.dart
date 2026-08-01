@@ -58,6 +58,58 @@ void main() {
     expect(result.originSource, LocationAccessSource.manual);
   });
 
+  test('loads halal restaurants with their own category and cache', () async {
+    SharedPreferences.setMockInitialValues({});
+    final prefs = await SharedPreferences.getInstance();
+    var requests = 0;
+    final repository = NearbyPlacesRepository(
+      locationDataSource: _FakeLocationDataSource(
+        result: const LocationAccessResult(
+          location: PrayerLocation(latitude: 38.34, longitude: -0.48),
+          source: LocationAccessSource.manual,
+        ),
+      ),
+      overpassService: OverpassMosqueService(
+        client: MockClient((_) async {
+          requests++;
+          return http.Response(_halalRestaurantJson, 200);
+        }),
+      ),
+      cacheService: NearbyCacheService(prefs: prefs),
+    );
+
+    final first = await repository.loadHalalRestaurants(radiusMeters: 5000);
+    final cached = await repository.loadHalalRestaurants(radiusMeters: 5000);
+
+    expect(first.places.single.name, 'Halal Restaurant');
+    expect(first.places.single.category.name, 'halalRestaurant');
+    expect(first.fromCache, isFalse);
+    expect(cached.fromCache, isTrue);
+    expect(requests, 1);
+  });
+
+  test('loads halal butchers and rejects untagged businesses', () async {
+    SharedPreferences.setMockInitialValues({});
+    final repository = NearbyPlacesRepository(
+      locationDataSource: _FakeLocationDataSource(
+        result: const LocationAccessResult(
+          location: PrayerLocation(latitude: 38.34, longitude: -0.48),
+          source: LocationAccessSource.live,
+        ),
+      ),
+      overpassService: OverpassMosqueService(
+        client: MockClient((_) async => http.Response(_halalButcherJson, 200)),
+      ),
+      cacheService: NearbyCacheService(),
+    );
+
+    final result = await repository.loadHalalButchers(radiusMeters: 5000);
+
+    expect(result.places, hasLength(1));
+    expect(result.places.single.name, 'Halal Butcher');
+    expect(result.places.single.category.name, 'halalButcher');
+  });
+
   test('returns locationUnavailable state when no location can be resolved',
       () async {
     final repository = NearbyPlacesRepository(
@@ -145,6 +197,52 @@ const _twoMosquesJson = '''
         "amenity": "place_of_worship",
         "religion": "muslim",
         "name": "Near Mosque"
+      }
+    }
+  ]
+}
+''';
+
+const _halalRestaurantJson = '''
+{
+  "elements": [
+    {
+      "type": "node",
+      "id": 11,
+      "lat": 38.3410,
+      "lon": -0.4800,
+      "tags": {
+        "amenity": "restaurant",
+        "diet:halal": "yes",
+        "name": "Halal Restaurant"
+      }
+    }
+  ]
+}
+''';
+
+const _halalButcherJson = '''
+{
+  "elements": [
+    {
+      "type": "node",
+      "id": 21,
+      "lat": 38.3410,
+      "lon": -0.4800,
+      "tags": {
+        "shop": "butcher",
+        "diet:halal": "only",
+        "name": "Halal Butcher"
+      }
+    },
+    {
+      "type": "node",
+      "id": 22,
+      "lat": 38.3420,
+      "lon": -0.4800,
+      "tags": {
+        "shop": "butcher",
+        "name": "Unverified Butcher"
       }
     }
   ]

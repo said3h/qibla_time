@@ -34,3 +34,17 @@ final nearbyMosquesProvider =
         radiusMeters: radiusMeters,
       );
 });
+
+final nearbyHalalRestaurantsProvider =
+    FutureProvider.family<NearbyPlacesResult, int>((ref, radiusMeters) async {
+  return ref.watch(nearbyPlacesRepositoryProvider).loadHalalRestaurants(
+        radiusMeters: radiusMeters,
+      );
+});
+
+final nearbyHalalButchersProvider =
+    FutureProvider.family<NearbyPlacesResult, int>((ref, radiusMeters) async {
+  return ref.watch(nearbyPlacesRepositoryProvider).loadHalalButchers(
+        radiusMeters: radiusMeters,
+      );
+});

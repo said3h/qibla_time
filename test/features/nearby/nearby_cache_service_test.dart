@@ -76,6 +76,27 @@ void main() {
     expect(await service.read(fiveKmMadrid), isNull);
   });
 
+  test('keeps place categories in separate cache entries', () async {
+    SharedPreferences.setMockInitialValues({});
+    final prefs = await SharedPreferences.getInstance();
+    final service = NearbyCacheService(prefs: prefs);
+    const mosqueSearch = NearbyPlaceSearch(
+      category: NearbyPlaceCategory.mosque,
+      origin: PrayerLocation(latitude: 38.34, longitude: -0.48),
+      radiusMeters: 5000,
+    );
+    const restaurantSearch = NearbyPlaceSearch(
+      category: NearbyPlaceCategory.halalRestaurant,
+      origin: PrayerLocation(latitude: 38.34, longitude: -0.48),
+      radiusMeters: 5000,
+    );
+
+    await service.write(search: mosqueSearch, places: [_place()]);
+
+    expect(await service.read(mosqueSearch), isNotNull);
+    expect(await service.read(restaurantSearch), isNull);
+  });
+
   test('rejects corrupt or old cache payloads', () async {
     SharedPreferences.setMockInitialValues({
       'nearby:v1:mosque:5000': '{broken',

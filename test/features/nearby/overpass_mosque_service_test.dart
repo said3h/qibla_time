@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
 import 'package:qibla_time/features/nearby/services/overpass_mosque_service.dart';
+import 'package:qibla_time/features/nearby/models/nearby_place.dart';
 
 void main() {
   test('parses a valid Overpass mosque response', () async {
@@ -65,6 +66,140 @@ void main() {
     );
 
     expect(places, isEmpty);
+  });
+
+  test('accepts only explicitly tagged halal restaurants', () async {
+    final requestedBodies = <String>[];
+    final service = OverpassMosqueService(
+      client: MockClient((request) async {
+        requestedBodies.add(request.body);
+        return http.Response(
+          jsonEncode({
+            'elements': [
+              _foodElement(
+                id: 1,
+                tags: {
+                  'amenity': 'restaurant',
+                  'diet:halal': 'yes',
+                  'name': 'Verified Restaurant',
+                },
+              ),
+              _foodElement(
+                id: 2,
+                tags: {
+                  'amenity': 'fast_food',
+                  'diet:halal': 'only',
+                  'name': 'Halal Fast Food',
+                },
+              ),
+              _foodElement(
+                id: 3,
+                tags: {
+                  'amenity': 'restaurant',
+                  'name': 'Unverified Restaurant',
+                },
+              ),
+              _foodElement(
+                id: 4,
+                tags: {
+                  'amenity': 'restaurant',
+                  'diet:halal': 'no',
+                  'name': 'Not Halal',
+                },
+              ),
+            ],
+          }),
+          200,
+        );
+      }),
+    );
+
+    final places = await service.fetchHalalRestaurants(
+      latitude: 38.34,
+      longitude: -0.48,
+      radiusMeters: 5000,
+    );
+
+    expect(places.map((place) => place.name), [
+      'Verified Restaurant',
+      'Halal Fast Food',
+    ]);
+    expect(
+      places.every(
+        (place) => place.category == NearbyPlaceCategory.halalRestaurant,
+      ),
+      isTrue,
+    );
+    expect(requestedBodies.single, contains('diet%3Ahalal'));
+  });
+
+  test('accepts documented halal butcher tags and rejects generic butchers',
+      () async {
+    final service = OverpassMosqueService(
+      client: MockClient((_) async => http.Response(
+            jsonEncode({
+              'elements': [
+                _foodElement(
+                  id: 1,
+                  tags: {
+                    'shop': 'butcher',
+                    'diet:halal': 'yes',
+                    'name': 'Halal Meat',
+                  },
+                ),
+                _foodElement(
+                  id: 2,
+                  tags: {
+                    'shop': 'butcher',
+                    'butcher': 'halal',
+                    'name': 'Halal Butcher',
+                  },
+                ),
+                _foodElement(
+                  id: 3,
+                  tags: {
+                    'shop': 'butcher',
+                    'name': 'Generic Butcher',
+                  },
+                ),
+              ],
+            }),
+            200,
+          )),
+    );
+
+    final places = await service.fetchHalalButchers(
+      latitude: 38.34,
+      longitude: -0.48,
+      radiusMeters: 5000,
+    );
+
+    expect(places.map((place) => place.name), ['Halal Meat', 'Halal Butcher']);
+    expect(
+      places.every(
+        (place) => place.category == NearbyPlaceCategory.halalButcher,
+      ),
+      isTrue,
+    );
+  });
+
+  test('rejects inactive halal businesses', () {
+    final service = OverpassMosqueService();
+
+    expect(
+      service.parseElement(
+        _foodElement(
+          id: 1,
+          tags: {
+            'amenity': 'restaurant',
+            'diet:halal': 'yes',
+            'disused': 'yes',
+          },
+        ),
+        category: NearbyPlaceCategory.halalRestaurant,
+      ),
+      isNull,
+    );
   });
 
   test('ignores incomplete elements without coordinates', () {
@@ -312,6 +447,19 @@ void main() {
     expect(headers['Accept'], 'application/json');
     expect(headers['User-Agent'], contains('QiblaTime/1.6.0'));
   });
+}
+
+Map<String, dynamic> _foodElement({
+  required int id,
+  required Map<String, String> tags,
+}) {
+  return {
+    'type': 'node',
+    'id': id,
+    'lat': 38.345 + (id / 10000),
+    'lon': -0.49,
+    'tags': tags,
+  };
 }
 
 Map<String, Object> _mosqueElement({

@@ -3700,21 +3700,26 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get nearbyHalalRestaurantsSubtitle =>
-      'Prepared for a future phase with verified data.';
+      'Find restaurants explicitly marked halal in OpenStreetMap.';
 
   @override
   String get nearbyHalalButchers => 'Halal butchers';
 
   @override
   String get nearbyHalalButchersSubtitle =>
-      'Prepared for a future phase with verified data.';
-
-  @override
-  String get nearbyComingSoon => 'Coming soon';
+      'Find butchers explicitly marked halal in OpenStreetMap.';
 
   @override
   String get nearbyMosquesScreenSubtitle =>
       'Mosques sorted by distance. Islamic denomination is not shown unless the source clearly provides it.';
+
+  @override
+  String get nearbyHalalRestaurantsScreenSubtitle =>
+      'Restaurants explicitly marked halal, sorted by distance.';
+
+  @override
+  String get nearbyHalalButchersScreenSubtitle =>
+      'Butchers explicitly marked halal, sorted by distance.';
 
   @override
   String get nearbyList => 'List';
@@ -3741,6 +3746,14 @@ class AppLocalizationsEn extends AppLocalizations {
       'We could not find mosques in this radius. Try a larger radius.';
 
   @override
+  String get nearbyNoRestaurantsBody =>
+      'We could not find explicitly marked halal restaurants in this radius. Try a larger radius.';
+
+  @override
+  String get nearbyNoButchersBody =>
+      'We could not find explicitly marked halal butchers in this radius. Try a larger radius.';
+
+  @override
   String get nearbyRetry => 'Retry';
 
   @override
@@ -3751,13 +3764,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get nearbyLocationDeniedBody =>
-      'Enable location or select a manual city to search nearby mosques.';
+      'Enable location or select a manual city to search nearby places.';
 
   @override
   String get nearbyUseManualCity => 'Use manual city';
 
   @override
   String get nearbyUnnamedMosque => 'Unnamed mosque';
+
+  @override
+  String get nearbyUnnamedRestaurant => 'Unnamed halal restaurant';
+
+  @override
+  String get nearbyUnnamedButcher => 'Unnamed halal butcher';
 
   @override
   String nearbyDistance(Object distance) {

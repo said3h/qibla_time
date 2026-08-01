@@ -3687,21 +3687,26 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get nearbyHalalRestaurantsSubtitle =>
-      'Prepared for a future phase with verified data.';
+      'OpenStreetMap\'de açıkça helal olarak işaretlenmiş restoranları bul.';
 
   @override
   String get nearbyHalalButchers => 'Helal kasaplar';
 
   @override
   String get nearbyHalalButchersSubtitle =>
-      'Prepared for a future phase with verified data.';
-
-  @override
-  String get nearbyComingSoon => 'Yakında';
+      'OpenStreetMap\'de açıkça helal olarak işaretlenmiş kasapları bul.';
 
   @override
   String get nearbyMosquesScreenSubtitle =>
-      'Mosques sorted by distance. Islamic denomination is not shown unless the source clearly provides it.';
+      'Camiler mesafeye göre sıralanır. İslami ekol yalnızca kaynak açıkça belirtiyorsa gösterilir.';
+
+  @override
+  String get nearbyHalalRestaurantsScreenSubtitle =>
+      'Açıkça helal olarak işaretlenmiş restoranlar, mesafeye göre sıralanır.';
+
+  @override
+  String get nearbyHalalButchersScreenSubtitle =>
+      'Açıkça helal olarak işaretlenmiş kasaplar, mesafeye göre sıralanır.';
 
   @override
   String get nearbyList => 'Liste';
@@ -3727,6 +3732,14 @@ class AppLocalizationsTr extends AppLocalizations {
       'Bu yarıçapta cami bulamadık. Daha geniş bir yarıçap dene.';
 
   @override
+  String get nearbyNoRestaurantsBody =>
+      'Bu yarıçapta açıkça helal olarak işaretlenmiş restoran bulamadık. Daha geniş bir yarıçap dene.';
+
+  @override
+  String get nearbyNoButchersBody =>
+      'Bu yarıçapta açıkça helal olarak işaretlenmiş kasap bulamadık. Daha geniş bir yarıçap dene.';
+
+  @override
   String get nearbyRetry => 'Tekrar dene';
 
   @override
@@ -3737,13 +3750,19 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get nearbyLocationDeniedBody =>
-      'Yakındaki camileri aramak için konumu aç veya manuel bir şehir seç.';
+      'Yakındaki yerleri aramak için konumu aç veya manuel bir şehir seç.';
 
   @override
   String get nearbyUseManualCity => 'Manuel şehir kullan';
 
   @override
   String get nearbyUnnamedMosque => 'İsimsiz cami';
+
+  @override
+  String get nearbyUnnamedRestaurant => 'İsimsiz helal restoran';
+
+  @override
+  String get nearbyUnnamedButcher => 'İsimsiz helal kasap';
 
   @override
   String nearbyDistance(Object distance) {

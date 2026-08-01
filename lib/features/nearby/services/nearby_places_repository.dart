@@ -29,25 +29,59 @@ class NearbyPlacesRepository {
   Future<NearbyPlacesResult> loadMosques({
     required int radiusMeters,
     bool forceRefresh = false,
+  }) {
+    return _loadPlaces(
+      category: NearbyPlaceCategory.mosque,
+      radiusMeters: radiusMeters,
+      forceRefresh: forceRefresh,
+    );
+  }
+
+  Future<NearbyPlacesResult> loadHalalRestaurants({
+    required int radiusMeters,
+    bool forceRefresh = false,
+  }) {
+    return _loadPlaces(
+      category: NearbyPlaceCategory.halalRestaurant,
+      radiusMeters: radiusMeters,
+      forceRefresh: forceRefresh,
+    );
+  }
+
+  Future<NearbyPlacesResult> loadHalalButchers({
+    required int radiusMeters,
+    bool forceRefresh = false,
+  }) {
+    return _loadPlaces(
+      category: NearbyPlaceCategory.halalButcher,
+      radiusMeters: radiusMeters,
+      forceRefresh: forceRefresh,
+    );
+  }
+
+  Future<NearbyPlacesResult> _loadPlaces({
+    required NearbyPlaceCategory category,
+    required int radiusMeters,
+    required bool forceRefresh,
   }) async {
     final accessResult = await _locationDataSource.getLocation();
     if (accessResult == null) {
-      _debugLog('location unavailable before nearby mosque search');
+      _debugLog('location unavailable before nearby ${category.name} search');
       final diagnostic = await _locationDataSource.getDiagnostic();
       return NearbyPlacesResult.locationUnavailable(diagnostic);
     }
     if (!_hasUsableCoordinates(accessResult.location)) {
-      _debugLog('invalid nearby mosque origin ignored');
+      _debugLog('invalid nearby ${category.name} origin ignored');
       final diagnostic = await _locationDataSource.getDiagnostic();
       return NearbyPlacesResult.locationUnavailable(diagnostic);
     }
     _debugLog(
-      'nearby mosque search source=${accessResult.source.name} '
+      'nearby ${category.name} search source=${accessResult.source.name} '
       'radius=$radiusMeters',
     );
 
     final search = NearbyPlaceSearch(
-      category: NearbyPlaceCategory.mosque,
+      category: category,
       origin: accessResult.location,
       radiusMeters: radiusMeters,
     );
@@ -55,7 +89,7 @@ class NearbyPlacesRepository {
     final cached = forceRefresh ? null : await _cacheService.read(search);
     if (cached != null) {
       _debugLog(
-        'nearby mosque result source=cache radius=$radiusMeters '
+        'nearby ${category.name} result source=cache radius=$radiusMeters '
         'count=${cached.places.length}',
       );
       return NearbyPlacesResult.success(
@@ -68,14 +102,15 @@ class NearbyPlacesRepository {
 
     final List<NearbyPlace> places;
     try {
-      places = await _overpassService.fetchMosques(
+      places = await _overpassService.fetchPlaces(
+        category: category,
         latitude: search.origin.latitude,
         longitude: search.origin.longitude,
         radiusMeters: radiusMeters,
       );
     } catch (error) {
       _debugLog(
-        'nearby mosque network error type=${error.runtimeType} '
+        'nearby ${category.name} network error type=${error.runtimeType} '
         'radius=$radiusMeters',
       );
       rethrow;
@@ -83,7 +118,7 @@ class NearbyPlacesRepository {
     final sorted = _withDistanceAndSort(places, search);
     await _cacheService.write(search: search, places: sorted);
     _debugLog(
-      'nearby mosque result source=network radius=$radiusMeters '
+      'nearby ${category.name} result source=network radius=$radiusMeters '
       'count=${sorted.length}',
     );
     return NearbyPlacesResult.success(

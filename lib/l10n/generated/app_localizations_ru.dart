@@ -3723,21 +3723,26 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get nearbyHalalRestaurantsSubtitle =>
-      'Prepared for a future phase with verified data.';
+      'Найдите рестораны, явно отмеченные как халяльные в OpenStreetMap.';
 
   @override
   String get nearbyHalalButchers => 'Халяль-мясные';
 
   @override
   String get nearbyHalalButchersSubtitle =>
-      'Prepared for a future phase with verified data.';
-
-  @override
-  String get nearbyComingSoon => 'Скоро';
+      'Найдите мясные магазины, явно отмеченные как халяльные в OpenStreetMap.';
 
   @override
   String get nearbyMosquesScreenSubtitle =>
-      'Mosques sorted by distance. Islamic denomination is not shown unless the source clearly provides it.';
+      'Мечети отсортированы по расстоянию. Исламское течение показывается только при явном указании источника.';
+
+  @override
+  String get nearbyHalalRestaurantsScreenSubtitle =>
+      'Рестораны, явно отмеченные как халяльные, отсортированы по расстоянию.';
+
+  @override
+  String get nearbyHalalButchersScreenSubtitle =>
+      'Халяльные мясные магазины, отсортированные по расстоянию.';
 
   @override
   String get nearbyList => 'Список';
@@ -3764,6 +3769,14 @@ class AppLocalizationsRu extends AppLocalizations {
       'В этом радиусе мечети не найдены. Попробуйте увеличить радиус.';
 
   @override
+  String get nearbyNoRestaurantsBody =>
+      'В этом радиусе не найдены рестораны, явно отмеченные как халяльные. Попробуйте увеличить радиус.';
+
+  @override
+  String get nearbyNoButchersBody =>
+      'В этом радиусе не найдены мясные магазины, явно отмеченные как халяльные. Попробуйте увеличить радиус.';
+
+  @override
   String get nearbyRetry => 'Повторить';
 
   @override
@@ -3774,13 +3787,19 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get nearbyLocationDeniedBody =>
-      'Включите геолокацию или выберите город вручную, чтобы найти ближайшие мечети.';
+      'Включите геолокацию или выберите город вручную, чтобы найти ближайшие места.';
 
   @override
   String get nearbyUseManualCity => 'Использовать выбранный город';
 
   @override
   String get nearbyUnnamedMosque => 'Мечеть без названия';
+
+  @override
+  String get nearbyUnnamedRestaurant => 'Халяльный ресторан без названия';
+
+  @override
+  String get nearbyUnnamedButcher => 'Халяльный мясной магазин без названия';
 
   @override
   String nearbyDistance(Object distance) {

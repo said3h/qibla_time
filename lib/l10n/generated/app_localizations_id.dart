@@ -3711,21 +3711,26 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get nearbyHalalRestaurantsSubtitle =>
-      'Prepared for a future phase with verified data.';
+      'Temukan restoran yang ditandai halal secara jelas di OpenStreetMap.';
 
   @override
   String get nearbyHalalButchers => 'Toko daging halal';
 
   @override
   String get nearbyHalalButchersSubtitle =>
-      'Prepared for a future phase with verified data.';
-
-  @override
-  String get nearbyComingSoon => 'Segera hadir';
+      'Temukan toko daging yang ditandai halal secara jelas di OpenStreetMap.';
 
   @override
   String get nearbyMosquesScreenSubtitle =>
-      'Mosques sorted by distance. Islamic denomination is not shown unless the source clearly provides it.';
+      'Masjid diurutkan berdasarkan jarak. Mazhab hanya ditampilkan jika sumber menyebutkannya dengan jelas.';
+
+  @override
+  String get nearbyHalalRestaurantsScreenSubtitle =>
+      'Restoran yang ditandai halal secara jelas, diurutkan berdasarkan jarak.';
+
+  @override
+  String get nearbyHalalButchersScreenSubtitle =>
+      'Toko daging yang ditandai halal secara jelas, diurutkan berdasarkan jarak.';
 
   @override
   String get nearbyList => 'Daftar';
@@ -3752,6 +3757,14 @@ class AppLocalizationsId extends AppLocalizations {
       'Kami tidak menemukan masjid dalam radius ini. Coba radius yang lebih besar.';
 
   @override
+  String get nearbyNoRestaurantsBody =>
+      'Kami tidak menemukan restoran yang ditandai halal dalam radius ini. Coba radius yang lebih besar.';
+
+  @override
+  String get nearbyNoButchersBody =>
+      'Kami tidak menemukan toko daging yang ditandai halal dalam radius ini. Coba radius yang lebih besar.';
+
+  @override
   String get nearbyRetry => 'Coba lagi';
 
   @override
@@ -3762,13 +3775,19 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get nearbyLocationDeniedBody =>
-      'Aktifkan lokasi atau pilih kota secara manual untuk mencari masjid terdekat.';
+      'Aktifkan lokasi atau pilih kota secara manual untuk mencari tempat terdekat.';
 
   @override
   String get nearbyUseManualCity => 'Gunakan kota manual';
 
   @override
   String get nearbyUnnamedMosque => 'Masjid tanpa nama';
+
+  @override
+  String get nearbyUnnamedRestaurant => 'Restoran halal tanpa nama';
+
+  @override
+  String get nearbyUnnamedButcher => 'Toko daging halal tanpa nama';
 
   @override
   String nearbyDistance(Object distance) {

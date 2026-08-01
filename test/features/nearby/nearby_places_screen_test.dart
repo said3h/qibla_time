@@ -3,10 +3,11 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:qibla_time/features/nearby/screens/nearby_places_screen.dart';
+import 'package:qibla_time/features/nearby/screens/nearby_mosques_screen.dart';
 import 'package:qibla_time/l10n/l10n.dart';
 
 void main() {
-  testWidgets('shows coming soon categories without opening empty screens',
+  testWidgets('opens the available halal restaurant and butcher categories',
       (tester) async {
     await tester.pumpWidget(
       const ProviderScope(
@@ -26,11 +27,21 @@ void main() {
     expect(find.text('Mosques'), findsOneWidget);
     expect(find.text('Halal restaurants'), findsOneWidget);
     expect(find.text('Halal butchers'), findsOneWidget);
-    expect(find.text('Coming soon'), findsNWidgets(2));
+    expect(find.text('Coming soon'), findsNothing);
 
     await tester.tap(find.text('Halal restaurants'));
-    await tester.pumpAndSettle();
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 500));
 
-    expect(find.byType(NearbyPlacesScreen), findsOneWidget);
+    expect(find.byType(NearbyHalalRestaurantsScreen), findsOneWidget);
+
+    await tester.tap(find.byIcon(Icons.arrow_back_ios_new_rounded));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 500));
+    await tester.tap(find.text('Halal butchers'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 500));
+
+    expect(find.byType(NearbyHalalButchersScreen), findsOneWidget);
   });
 }

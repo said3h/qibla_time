@@ -3719,21 +3719,26 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get nearbyHalalRestaurantsSubtitle =>
-      'Prepared for a future phase with verified data.';
+      'Vind restaurants die in OpenStreetMap uitdrukkelijk als halal zijn gemarkeerd.';
 
   @override
   String get nearbyHalalButchers => 'Halal slagers';
 
   @override
   String get nearbyHalalButchersSubtitle =>
-      'Prepared for a future phase with verified data.';
-
-  @override
-  String get nearbyComingSoon => 'Binnenkort';
+      'Vind slagerijen die in OpenStreetMap uitdrukkelijk als halal zijn gemarkeerd.';
 
   @override
   String get nearbyMosquesScreenSubtitle =>
-      'Mosques sorted by distance. Islamic denomination is not shown unless the source clearly provides it.';
+      'Moskeeën gesorteerd op afstand. De islamitische stroming wordt alleen getoond als de bron die duidelijk vermeldt.';
+
+  @override
+  String get nearbyHalalRestaurantsScreenSubtitle =>
+      'Uitdrukkelijk als halal gemarkeerde restaurants, gesorteerd op afstand.';
+
+  @override
+  String get nearbyHalalButchersScreenSubtitle =>
+      'Uitdrukkelijk als halal gemarkeerde slagerijen, gesorteerd op afstand.';
 
   @override
   String get nearbyList => 'Lijst';
@@ -3760,6 +3765,14 @@ class AppLocalizationsNl extends AppLocalizations {
       'We konden geen moskeeën vinden binnen deze straal. Probeer een grotere straal.';
 
   @override
+  String get nearbyNoRestaurantsBody =>
+      'We konden geen uitdrukkelijk als halal gemarkeerde restaurants vinden binnen deze straal. Probeer een grotere straal.';
+
+  @override
+  String get nearbyNoButchersBody =>
+      'We konden geen uitdrukkelijk als halal gemarkeerde slagerijen vinden binnen deze straal. Probeer een grotere straal.';
+
+  @override
   String get nearbyRetry => 'Opnieuw';
 
   @override
@@ -3770,13 +3783,19 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get nearbyLocationDeniedBody =>
-      'Schakel locatie in of kies handmatig een stad om moskeeën in de buurt te zoeken.';
+      'Schakel locatie in of kies handmatig een stad om plaatsen in de buurt te zoeken.';
 
   @override
   String get nearbyUseManualCity => 'Handmatige stad gebruiken';
 
   @override
   String get nearbyUnnamedMosque => 'Moskee zonder naam';
+
+  @override
+  String get nearbyUnnamedRestaurant => 'Naamloos halalrestaurant';
+
+  @override
+  String get nearbyUnnamedButcher => 'Naamloze halalslagerij';
 
   @override
   String nearbyDistance(Object distance) {

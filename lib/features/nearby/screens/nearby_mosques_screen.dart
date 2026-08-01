@@ -11,20 +11,41 @@ import '../../prayer_times/domain/entities/prayer_name.dart';
 import '../../prayer_times/domain/entities/resolved_prayer_schedule.dart';
 import '../../prayer_times/presentation/providers/prayer_times_providers.dart';
 import '../providers/nearby_places_provider.dart';
+import '../models/nearby_place.dart';
 import '../services/nearby_distance_service.dart';
 import '../services/nearby_navigation_service.dart';
 import '../services/nearby_places_repository.dart';
 import '../widgets/nearby_place_card.dart';
 
-class NearbyMosquesScreen extends ConsumerStatefulWidget {
-  const NearbyMosquesScreen({super.key});
-
-  @override
-  ConsumerState<NearbyMosquesScreen> createState() =>
-      _NearbyMosquesScreenState();
+class NearbyMosquesScreen extends NearbyResultsScreen {
+  const NearbyMosquesScreen({super.key})
+      : super(category: NearbyPlaceCategory.mosque);
 }
 
-class _NearbyMosquesScreenState extends ConsumerState<NearbyMosquesScreen> {
+class NearbyHalalRestaurantsScreen extends NearbyResultsScreen {
+  const NearbyHalalRestaurantsScreen({super.key})
+      : super(category: NearbyPlaceCategory.halalRestaurant);
+}
+
+class NearbyHalalButchersScreen extends NearbyResultsScreen {
+  const NearbyHalalButchersScreen({super.key})
+      : super(category: NearbyPlaceCategory.halalButcher);
+}
+
+class NearbyResultsScreen extends ConsumerStatefulWidget {
+  const NearbyResultsScreen({
+    super.key,
+    required this.category,
+  });
+
+  final NearbyPlaceCategory category;
+
+  @override
+  ConsumerState<NearbyResultsScreen> createState() =>
+      _NearbyResultsScreenState();
+}
+
+class _NearbyResultsScreenState extends ConsumerState<NearbyResultsScreen> {
   final _navigationService = const NearbyNavigationService();
   final _distanceService = const NearbyDistanceService();
 
@@ -33,9 +54,18 @@ class _NearbyMosquesScreenState extends ConsumerState<NearbyMosquesScreen> {
     final tokens = QiblaThemes.current;
     final l10n = context.l10n;
     final radiusMeters = ref.watch(nearbyRadiusProvider);
-    final resultAsync = ref.watch(nearbyMosquesProvider(radiusMeters));
-    final nextPrayer = ref.watch(nextPrayerInfoProvider);
-    final prayerSchedule = ref.watch(prayerScheduleProvider).valueOrNull;
+    final resultAsync = switch (widget.category) {
+      NearbyPlaceCategory.mosque =>
+        ref.watch(nearbyMosquesProvider(radiusMeters)),
+      NearbyPlaceCategory.halalRestaurant =>
+        ref.watch(nearbyHalalRestaurantsProvider(radiusMeters)),
+      NearbyPlaceCategory.halalButcher =>
+        ref.watch(nearbyHalalButchersProvider(radiusMeters)),
+    };
+    final isMosque = widget.category == NearbyPlaceCategory.mosque;
+    final nextPrayer = isMosque ? ref.watch(nextPrayerInfoProvider) : null;
+    final prayerSchedule =
+        isMosque ? ref.watch(prayerScheduleProvider).valueOrNull : null;
 
     return Scaffold(
       backgroundColor: tokens.bgPage,
@@ -43,8 +73,8 @@ class _NearbyMosquesScreenState extends ConsumerState<NearbyMosquesScreen> {
         child: Column(
           children: [
             _Header(
-              title: l10n.nearbyMosques,
-              subtitle: l10n.nearbyMosquesScreenSubtitle,
+              title: _title(context),
+              subtitle: _subtitle(context),
               onBack: () => Navigator.of(context).pop(),
             ),
             _Controls(
@@ -60,17 +90,13 @@ class _NearbyMosquesScreenState extends ConsumerState<NearbyMosquesScreen> {
                 ),
                 error: (_, __) => _ErrorState(
                   message: l10n.nearbyPlacesLoadError,
-                  onRetry: () => ref.invalidate(
-                    nearbyMosquesProvider(radiusMeters),
-                  ),
+                  onRetry: () => _invalidate(radiusMeters),
                 ),
                 data: (result) {
                   if (result.status ==
                       NearbyPlacesResultStatus.locationUnavailable) {
                     return _LocationUnavailableState(
-                      onRetry: () => ref.invalidate(
-                        nearbyMosquesProvider(radiusMeters),
-                      ),
+                      onRetry: () => _invalidate(radiusMeters),
                     );
                   }
 
@@ -84,20 +110,15 @@ class _NearbyMosquesScreenState extends ConsumerState<NearbyMosquesScreen> {
                         ),
                         const SizedBox(height: 24),
                         _EmptyState(
-                          onRetry: () => ref.invalidate(
-                            nearbyMosquesProvider(radiusMeters),
-                          ),
+                          body: _emptyBody(context),
+                          onRetry: () => _invalidate(radiusMeters),
                         ),
                       ],
                     );
                   }
 
                   return RefreshIndicator(
-                    onRefresh: () async {
-                      ref.invalidate(nearbyMosquesProvider(radiusMeters));
-                      await ref
-                          .read(nearbyMosquesProvider(radiusMeters).future);
-                    },
+                    onRefresh: () => _refresh(radiusMeters),
                     child: ListView.separated(
                       padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
                       itemCount: result.places.length + 1,
@@ -110,12 +131,14 @@ class _NearbyMosquesScreenState extends ConsumerState<NearbyMosquesScreen> {
                           );
                         }
                         final place = result.places[index - 1];
-                        final nextPrayerLabel = _safeNextPrayerLabel(
-                          context: context,
-                          result: result,
-                          prayerSchedule: prayerSchedule,
-                          nextPrayer: nextPrayer,
-                        );
+                        final nextPrayerLabel = isMosque
+                            ? _safeNextPrayerLabel(
+                                context: context,
+                                result: result,
+                                prayerSchedule: prayerSchedule,
+                                nextPrayer: nextPrayer,
+                              )
+                            : null;
                         return NearbyPlaceCard(
                           place: place,
                           nextPrayerLabel: nextPrayerLabel,
@@ -132,6 +155,57 @@ class _NearbyMosquesScreenState extends ConsumerState<NearbyMosquesScreen> {
         ),
       ),
     );
+  }
+
+  String _title(BuildContext context) {
+    return switch (widget.category) {
+      NearbyPlaceCategory.mosque => context.l10n.nearbyMosques,
+      NearbyPlaceCategory.halalRestaurant =>
+        context.l10n.nearbyHalalRestaurants,
+      NearbyPlaceCategory.halalButcher => context.l10n.nearbyHalalButchers,
+    };
+  }
+
+  String _subtitle(BuildContext context) {
+    return switch (widget.category) {
+      NearbyPlaceCategory.mosque => context.l10n.nearbyMosquesScreenSubtitle,
+      NearbyPlaceCategory.halalRestaurant =>
+        context.l10n.nearbyHalalRestaurantsScreenSubtitle,
+      NearbyPlaceCategory.halalButcher =>
+        context.l10n.nearbyHalalButchersScreenSubtitle,
+    };
+  }
+
+  String _emptyBody(BuildContext context) {
+    return switch (widget.category) {
+      NearbyPlaceCategory.mosque => context.l10n.nearbyNoResultsBody,
+      NearbyPlaceCategory.halalRestaurant =>
+        context.l10n.nearbyNoRestaurantsBody,
+      NearbyPlaceCategory.halalButcher => context.l10n.nearbyNoButchersBody,
+    };
+  }
+
+  void _invalidate(int radiusMeters) {
+    switch (widget.category) {
+      case NearbyPlaceCategory.mosque:
+        ref.invalidate(nearbyMosquesProvider(radiusMeters));
+      case NearbyPlaceCategory.halalRestaurant:
+        ref.invalidate(nearbyHalalRestaurantsProvider(radiusMeters));
+      case NearbyPlaceCategory.halalButcher:
+        ref.invalidate(nearbyHalalButchersProvider(radiusMeters));
+    }
+  }
+
+  Future<void> _refresh(int radiusMeters) async {
+    _invalidate(radiusMeters);
+    switch (widget.category) {
+      case NearbyPlaceCategory.mosque:
+        await ref.read(nearbyMosquesProvider(radiusMeters).future);
+      case NearbyPlaceCategory.halalRestaurant:
+        await ref.read(nearbyHalalRestaurantsProvider(radiusMeters).future);
+      case NearbyPlaceCategory.halalButcher:
+        await ref.read(nearbyHalalButchersProvider(radiusMeters).future);
+    }
   }
 
   String? _safeNextPrayerLabel({
@@ -359,8 +433,12 @@ class _ErrorState extends StatelessWidget {
 }
 
 class _EmptyState extends StatelessWidget {
-  const _EmptyState({required this.onRetry});
+  const _EmptyState({
+    required this.body,
+    required this.onRetry,
+  });
 
+  final String body;
   final VoidCallback onRetry;
 
   @override
@@ -368,7 +446,7 @@ class _EmptyState extends StatelessWidget {
     return _StateMessage(
       icon: Icons.search_off_rounded,
       title: context.l10n.nearbyNoResults,
-      body: context.l10n.nearbyNoResultsBody,
+      body: body,
       actionLabel: context.l10n.nearbyRetry,
       onAction: onRetry,
     );
