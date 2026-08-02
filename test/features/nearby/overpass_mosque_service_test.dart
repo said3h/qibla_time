@@ -491,8 +491,8 @@ void main() {
       isEmpty,
     );
     expect(requestedHosts, [
+      'maps.mail.ru',
       'overpass.private.coffee',
-      'overpass-api.de',
     ]);
   });
 

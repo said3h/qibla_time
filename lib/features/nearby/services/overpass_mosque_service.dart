@@ -13,13 +13,14 @@ class OverpassMosqueService {
     http.Client? client,
     Uri? endpoint,
     this.timeout = const Duration(seconds: 25),
-    this.maxAttempts = 2,
+    this.maxAttempts = 3,
   })  : _client = client ?? http.Client(),
         _endpoints = endpoint == null
             ? _defaultEndpoints
             : List<Uri>.unmodifiable(<Uri>[endpoint]);
 
   static final List<Uri> _defaultEndpoints = List<Uri>.unmodifiable(<Uri>[
+    Uri.parse('https://maps.mail.ru/osm/tools/overpass/api/interpreter'),
     Uri.parse('https://overpass.private.coffee/api/interpreter'),
     Uri.parse('https://overpass-api.de/api/interpreter'),
   ]);
