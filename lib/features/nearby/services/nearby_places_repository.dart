@@ -116,7 +116,9 @@ class NearbyPlacesRepository {
       rethrow;
     }
     final sorted = _withDistanceAndSort(places, search);
-    await _cacheService.write(search: search, places: sorted);
+    if (sorted.isNotEmpty) {
+      await _cacheService.write(search: search, places: sorted);
+    }
     _debugLog(
       'nearby ${category.name} result source=network radius=$radiusMeters '
       'count=${sorted.length}',

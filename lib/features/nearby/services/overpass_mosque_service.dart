@@ -204,14 +204,35 @@ class OverpassMosqueService {
       NearbyPlaceCategory.halalRestaurant => '''
   node(around:$radius,$lat,$lng)["amenity"~"^(restaurant|fast_food|cafe)\$"]["diet:halal"~"^(yes|only)\$",i];
   way(around:$radius,$lat,$lng)["amenity"~"^(restaurant|fast_food|cafe)\$"]["diet:halal"~"^(yes|only)\$",i];
-  relation(around:$radius,$lat,$lng)["amenity"~"^(restaurant|fast_food|cafe)\$"]["diet:halal"~"^(yes|only)\$",i];''',
+  relation(around:$radius,$lat,$lng)["amenity"~"^(restaurant|fast_food|cafe)\$"]["diet:halal"~"^(yes|only)\$",i];
+  node(around:$radius,$lat,$lng)["amenity"~"^(restaurant|fast_food|cafe)\$"]["halal"~"^(yes|only)\$",i];
+  way(around:$radius,$lat,$lng)["amenity"~"^(restaurant|fast_food|cafe)\$"]["halal"~"^(yes|only)\$",i];
+  relation(around:$radius,$lat,$lng)["amenity"~"^(restaurant|fast_food|cafe)\$"]["halal"~"^(yes|only)\$",i];
+  node(around:$radius,$lat,$lng)["amenity"~"^(restaurant|fast_food|cafe)\$"]["certified:halal"~"^(yes|only)\$",i];
+  way(around:$radius,$lat,$lng)["amenity"~"^(restaurant|fast_food|cafe)\$"]["certified:halal"~"^(yes|only)\$",i];
+  relation(around:$radius,$lat,$lng)["amenity"~"^(restaurant|fast_food|cafe)\$"]["certified:halal"~"^(yes|only)\$",i];
+  node(around:$radius,$lat,$lng)["amenity"~"^(restaurant|fast_food|cafe)\$"]["cuisine"~"(^|[;, ]+)halal([;, ]+|\$)",i];
+  way(around:$radius,$lat,$lng)["amenity"~"^(restaurant|fast_food|cafe)\$"]["cuisine"~"(^|[;, ]+)halal([;, ]+|\$)",i];
+  relation(around:$radius,$lat,$lng)["amenity"~"^(restaurant|fast_food|cafe)\$"]["cuisine"~"(^|[;, ]+)halal([;, ]+|\$)",i];
+  node(around:$radius,$lat,$lng)["amenity"~"^(restaurant|fast_food|cafe)\$"]["name"~"halal",i];
+  way(around:$radius,$lat,$lng)["amenity"~"^(restaurant|fast_food|cafe)\$"]["name"~"halal",i];
+  relation(around:$radius,$lat,$lng)["amenity"~"^(restaurant|fast_food|cafe)\$"]["name"~"halal",i];''',
       NearbyPlaceCategory.halalButcher => '''
   node(around:$radius,$lat,$lng)["shop"="butcher"]["diet:halal"~"^(yes|only)\$",i];
   way(around:$radius,$lat,$lng)["shop"="butcher"]["diet:halal"~"^(yes|only)\$",i];
   relation(around:$radius,$lat,$lng)["shop"="butcher"]["diet:halal"~"^(yes|only)\$",i];
+  node(around:$radius,$lat,$lng)["shop"="butcher"]["halal"~"^(yes|only)\$",i];
+  way(around:$radius,$lat,$lng)["shop"="butcher"]["halal"~"^(yes|only)\$",i];
+  relation(around:$radius,$lat,$lng)["shop"="butcher"]["halal"~"^(yes|only)\$",i];
+  node(around:$radius,$lat,$lng)["shop"="butcher"]["certified:halal"~"^(yes|only)\$",i];
+  way(around:$radius,$lat,$lng)["shop"="butcher"]["certified:halal"~"^(yes|only)\$",i];
+  relation(around:$radius,$lat,$lng)["shop"="butcher"]["certified:halal"~"^(yes|only)\$",i];
   node(around:$radius,$lat,$lng)["shop"="butcher"]["butcher"~"^halal\$",i];
   way(around:$radius,$lat,$lng)["shop"="butcher"]["butcher"~"^halal\$",i];
-  relation(around:$radius,$lat,$lng)["shop"="butcher"]["butcher"~"^halal\$",i];''',
+  relation(around:$radius,$lat,$lng)["shop"="butcher"]["butcher"~"^halal\$",i];
+  node(around:$radius,$lat,$lng)["shop"="butcher"]["name"~"halal",i];
+  way(around:$radius,$lat,$lng)["shop"="butcher"]["name"~"halal",i];
+  relation(around:$radius,$lat,$lng)["shop"="butcher"]["name"~"halal",i];''',
     };
     return '''
 [out:json][timeout:12];
@@ -247,8 +268,30 @@ out center tags;
   }
 
   bool _isExplicitlyHalal(Map<String, String> tags) {
-    final value = tags['diet:halal']?.toLowerCase();
-    return value == 'yes' || value == 'only';
+    if (_hasHalalDenial(tags)) return false;
+
+    const directKeys = ['diet:halal', 'halal', 'certified:halal'];
+    for (final key in directKeys) {
+      final value = tags[key]?.toLowerCase();
+      if (value == 'yes' || value == 'only') return true;
+    }
+
+    if (_hasHalalToken(tags['cuisine'])) return true;
+    return _hasHalalToken(tags['name']);
+  }
+
+  bool _hasHalalDenial(Map<String, String> tags) {
+    const directKeys = ['diet:halal', 'halal', 'certified:halal'];
+    return directKeys.any((key) {
+      final value = tags[key]?.toLowerCase();
+      return value == 'no' || value == 'none' || value == 'false';
+    });
+  }
+
+  bool _hasHalalToken(String? value) {
+    if (value == null) return false;
+    return RegExp(r'(^|[^a-z])halal([^a-z]|$)', caseSensitive: false)
+        .hasMatch(value);
   }
 
   bool _isInactive(Map<String, String> tags) {
@@ -339,6 +382,8 @@ out center tags;
       'operator',
       'shop',
       'diet:halal',
+      'halal',
+      'certified:halal',
       'butcher',
       'cuisine',
       'brand',

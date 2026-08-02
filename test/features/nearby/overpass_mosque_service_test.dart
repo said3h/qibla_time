@@ -95,12 +95,35 @@ void main() {
               _foodElement(
                 id: 3,
                 tags: {
+                  'amenity': 'cafe',
+                  'halal': 'yes',
+                  'name': 'Verified Cafe',
+                },
+              ),
+              _foodElement(
+                id: 4,
+                tags: {
+                  'amenity': 'restaurant',
+                  'cuisine': 'turkish;halal',
+                  'name': 'Cuisine Tagged Restaurant',
+                },
+              ),
+              _foodElement(
+                id: 5,
+                tags: {
+                  'amenity': 'restaurant',
+                  'name': 'Halal Palace',
+                },
+              ),
+              _foodElement(
+                id: 6,
+                tags: {
                   'amenity': 'restaurant',
                   'name': 'Unverified Restaurant',
                 },
               ),
               _foodElement(
-                id: 4,
+                id: 7,
                 tags: {
                   'amenity': 'restaurant',
                   'diet:halal': 'no',
@@ -123,6 +146,9 @@ void main() {
     expect(places.map((place) => place.name), [
       'Verified Restaurant',
       'Halal Fast Food',
+      'Verified Cafe',
+      'Cuisine Tagged Restaurant',
+      'Halal Palace',
     ]);
     expect(
       places.every(
@@ -159,6 +185,21 @@ void main() {
                   id: 3,
                   tags: {
                     'shop': 'butcher',
+                    'halal': 'yes',
+                    'name': 'Tagged Butcher',
+                  },
+                ),
+                _foodElement(
+                  id: 4,
+                  tags: {
+                    'shop': 'butcher',
+                    'name': 'Carniceria Halal',
+                  },
+                ),
+                _foodElement(
+                  id: 5,
+                  tags: {
+                    'shop': 'butcher',
                     'name': 'Generic Butcher',
                   },
                 ),
@@ -174,7 +215,12 @@ void main() {
       radiusMeters: 5000,
     );
 
-    expect(places.map((place) => place.name), ['Halal Meat', 'Halal Butcher']);
+    expect(places.map((place) => place.name), [
+      'Halal Meat',
+      'Halal Butcher',
+      'Tagged Butcher',
+      'Carniceria Halal',
+    ]);
     expect(
       places.every(
         (place) => place.category == NearbyPlaceCategory.halalButcher,

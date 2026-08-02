@@ -88,6 +88,36 @@ void main() {
     expect(requests, 1);
   });
 
+  test('does not cache empty nearby search results', () async {
+    SharedPreferences.setMockInitialValues({});
+    final prefs = await SharedPreferences.getInstance();
+    var requests = 0;
+    final repository = NearbyPlacesRepository(
+      locationDataSource: _FakeLocationDataSource(
+        result: const LocationAccessResult(
+          location: PrayerLocation(latitude: 38.34, longitude: -0.48),
+          source: LocationAccessSource.manual,
+        ),
+      ),
+      overpassService: OverpassMosqueService(
+        client: MockClient((_) async {
+          requests++;
+          return http.Response('{"elements":[]}', 200);
+        }),
+      ),
+      cacheService: NearbyCacheService(prefs: prefs),
+    );
+
+    final first = await repository.loadHalalRestaurants(radiusMeters: 5000);
+    final second = await repository.loadHalalRestaurants(radiusMeters: 5000);
+
+    expect(first.places, isEmpty);
+    expect(second.places, isEmpty);
+    expect(first.fromCache, isFalse);
+    expect(second.fromCache, isFalse);
+    expect(requests, 2);
+  });
+
   test('loads halal butchers and rejects untagged businesses', () async {
     SharedPreferences.setMockInitialValues({});
     final repository = NearbyPlacesRepository(
