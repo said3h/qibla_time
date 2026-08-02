@@ -157,6 +157,12 @@ void main() {
       isTrue,
     );
     expect(requestedBodies.single, contains('diet%3Ahalal'));
+    expect(
+      Uri.decodeQueryComponent(requestedBodies.single),
+      contains(
+        'nwr["diet:halal"](around:5000,38.340000,-0.480000)',
+      ),
+    );
   });
 
   test('accepts documented halal butcher tags and rejects generic butchers',
@@ -462,6 +468,57 @@ void main() {
       throwsA(isA<OverpassException>()),
     );
     expect(permanentAttempts, 1);
+  });
+
+  test('switches to the fallback endpoint after a transient failure', () async {
+    final requestedHosts = <String>[];
+    final service = OverpassMosqueService(
+      client: MockClient((request) async {
+        requestedHosts.add(request.url.host);
+        if (requestedHosts.length == 1) {
+          return http.Response('busy', 504);
+        }
+        return http.Response(jsonEncode({'elements': []}), 200);
+      }),
+    );
+
+    expect(
+      await service.fetchHalalRestaurants(
+        latitude: 38.34,
+        longitude: -0.48,
+        radiusMeters: 50000,
+      ),
+      isEmpty,
+    );
+    expect(requestedHosts, [
+      'overpass.private.coffee',
+      'overpass-api.de',
+    ]);
+  });
+
+  test('queries butchers as a compact candidate set and filters locally',
+      () async {
+    late String postedQuery;
+    final service = OverpassMosqueService(
+      client: MockClient((request) async {
+        postedQuery = request.bodyFields['data'] ?? '';
+        return http.Response(jsonEncode({'elements': []}), 200);
+      }),
+    );
+
+    await service.fetchHalalButchers(
+      latitude: 38.34,
+      longitude: -0.48,
+      radiusMeters: 50000,
+    );
+
+    expect(
+      postedQuery,
+      contains(
+        'nwr["shop"="butcher"](around:50000,38.340000,-0.480000)',
+      ),
+    );
+    expect(RegExp(r'nwr\[').allMatches(postedQuery), hasLength(1));
   });
 
   test('posts a bounded meter radius query with nodes ways and relations',

@@ -12,14 +12,20 @@ class OverpassMosqueService {
   OverpassMosqueService({
     http.Client? client,
     Uri? endpoint,
-    this.timeout = const Duration(seconds: 12),
+    this.timeout = const Duration(seconds: 25),
     this.maxAttempts = 2,
   })  : _client = client ?? http.Client(),
-        endpoint =
-            endpoint ?? Uri.parse('https://overpass-api.de/api/interpreter');
+        _endpoints = endpoint == null
+            ? _defaultEndpoints
+            : List<Uri>.unmodifiable(<Uri>[endpoint]);
+
+  static final List<Uri> _defaultEndpoints = List<Uri>.unmodifiable(<Uri>[
+    Uri.parse('https://overpass.private.coffee/api/interpreter'),
+    Uri.parse('https://overpass-api.de/api/interpreter'),
+  ]);
 
   final http.Client _client;
-  final Uri endpoint;
+  final List<Uri> _endpoints;
   final Duration timeout;
   final int maxAttempts;
 
@@ -114,6 +120,7 @@ class OverpassMosqueService {
     Object? lastError;
     final attempts = maxAttempts.clamp(1, 3);
     for (var attempt = 1; attempt <= attempts; attempt++) {
+      final endpoint = _endpoints[(attempt - 1) % _endpoints.length];
       try {
         final response = await _client.post(
           endpoint,
@@ -202,40 +209,14 @@ class OverpassMosqueService {
   way(around:$radius,$lat,$lng)["building"="mosque"];
   relation(around:$radius,$lat,$lng)["building"="mosque"];''',
       NearbyPlaceCategory.halalRestaurant => '''
-  node(around:$radius,$lat,$lng)["amenity"~"^(restaurant|fast_food|cafe)\$"]["diet:halal"~"^(yes|only)\$",i];
-  way(around:$radius,$lat,$lng)["amenity"~"^(restaurant|fast_food|cafe)\$"]["diet:halal"~"^(yes|only)\$",i];
-  relation(around:$radius,$lat,$lng)["amenity"~"^(restaurant|fast_food|cafe)\$"]["diet:halal"~"^(yes|only)\$",i];
-  node(around:$radius,$lat,$lng)["amenity"~"^(restaurant|fast_food|cafe)\$"]["halal"~"^(yes|only)\$",i];
-  way(around:$radius,$lat,$lng)["amenity"~"^(restaurant|fast_food|cafe)\$"]["halal"~"^(yes|only)\$",i];
-  relation(around:$radius,$lat,$lng)["amenity"~"^(restaurant|fast_food|cafe)\$"]["halal"~"^(yes|only)\$",i];
-  node(around:$radius,$lat,$lng)["amenity"~"^(restaurant|fast_food|cafe)\$"]["certified:halal"~"^(yes|only)\$",i];
-  way(around:$radius,$lat,$lng)["amenity"~"^(restaurant|fast_food|cafe)\$"]["certified:halal"~"^(yes|only)\$",i];
-  relation(around:$radius,$lat,$lng)["amenity"~"^(restaurant|fast_food|cafe)\$"]["certified:halal"~"^(yes|only)\$",i];
-  node(around:$radius,$lat,$lng)["amenity"~"^(restaurant|fast_food|cafe)\$"]["cuisine"~"(^|[;, ]+)halal([;, ]+|\$)",i];
-  way(around:$radius,$lat,$lng)["amenity"~"^(restaurant|fast_food|cafe)\$"]["cuisine"~"(^|[;, ]+)halal([;, ]+|\$)",i];
-  relation(around:$radius,$lat,$lng)["amenity"~"^(restaurant|fast_food|cafe)\$"]["cuisine"~"(^|[;, ]+)halal([;, ]+|\$)",i];
-  node(around:$radius,$lat,$lng)["amenity"~"^(restaurant|fast_food|cafe)\$"]["name"~"halal",i];
-  way(around:$radius,$lat,$lng)["amenity"~"^(restaurant|fast_food|cafe)\$"]["name"~"halal",i];
-  relation(around:$radius,$lat,$lng)["amenity"~"^(restaurant|fast_food|cafe)\$"]["name"~"halal",i];''',
+  nwr["diet:halal"](around:$radius,$lat,$lng)["amenity"~"^(restaurant|fast_food|cafe)\$"];
+  nwr["halal"](around:$radius,$lat,$lng)["amenity"~"^(restaurant|fast_food|cafe)\$"];
+  nwr["certified:halal"](around:$radius,$lat,$lng)["amenity"~"^(restaurant|fast_food|cafe)\$"];''',
       NearbyPlaceCategory.halalButcher => '''
-  node(around:$radius,$lat,$lng)["shop"="butcher"]["diet:halal"~"^(yes|only)\$",i];
-  way(around:$radius,$lat,$lng)["shop"="butcher"]["diet:halal"~"^(yes|only)\$",i];
-  relation(around:$radius,$lat,$lng)["shop"="butcher"]["diet:halal"~"^(yes|only)\$",i];
-  node(around:$radius,$lat,$lng)["shop"="butcher"]["halal"~"^(yes|only)\$",i];
-  way(around:$radius,$lat,$lng)["shop"="butcher"]["halal"~"^(yes|only)\$",i];
-  relation(around:$radius,$lat,$lng)["shop"="butcher"]["halal"~"^(yes|only)\$",i];
-  node(around:$radius,$lat,$lng)["shop"="butcher"]["certified:halal"~"^(yes|only)\$",i];
-  way(around:$radius,$lat,$lng)["shop"="butcher"]["certified:halal"~"^(yes|only)\$",i];
-  relation(around:$radius,$lat,$lng)["shop"="butcher"]["certified:halal"~"^(yes|only)\$",i];
-  node(around:$radius,$lat,$lng)["shop"="butcher"]["butcher"~"^halal\$",i];
-  way(around:$radius,$lat,$lng)["shop"="butcher"]["butcher"~"^halal\$",i];
-  relation(around:$radius,$lat,$lng)["shop"="butcher"]["butcher"~"^halal\$",i];
-  node(around:$radius,$lat,$lng)["shop"="butcher"]["name"~"halal",i];
-  way(around:$radius,$lat,$lng)["shop"="butcher"]["name"~"halal",i];
-  relation(around:$radius,$lat,$lng)["shop"="butcher"]["name"~"halal",i];''',
+  nwr["shop"="butcher"](around:$radius,$lat,$lng);''',
     };
     return '''
-[out:json][timeout:12];
+[out:json][timeout:25];
 (
 $selectors
 );
