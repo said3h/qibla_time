@@ -68,6 +68,10 @@ jobs:
             echo "Missing GEOAPIFY_API_KEY secret" >&2
             exit 1
           fi
+          if [[ "${GEOAPIFY_API_KEY}" =~ [[:space:]] ]]; then
+            echo "GEOAPIFY_API_KEY contains whitespace. Save only the API key value, without labels or quotes." >&2
+            exit 1
+          fi
 
       - name: Configure Android release signing (upload key)
         if: matrix.platform == 'android'
@@ -117,7 +121,7 @@ jobs:
           GEOAPIFY_API_KEY: ${{ secrets.GEOAPIFY_API_KEY }}
         run: >
           flutter build apk --debug
-          --dart-define=GEOAPIFY_API_KEY=${GEOAPIFY_API_KEY}
+          --dart-define="GEOAPIFY_API_KEY=${GEOAPIFY_API_KEY}"
           --dart-define=QIBLA_INTERNAL_TAFSIR_BUILD=true
           --dart-define=QURAN_TAFSIR_PANEL_ENABLED=true
           --dart-define=TAFSIR_API_ENABLED=true
@@ -130,7 +134,7 @@ jobs:
           GEOAPIFY_API_KEY: ${{ secrets.GEOAPIFY_API_KEY }}
         run: >
           flutter build apk --release
-          --dart-define=GEOAPIFY_API_KEY=${GEOAPIFY_API_KEY}
+          --dart-define="GEOAPIFY_API_KEY=${GEOAPIFY_API_KEY}"
 
       - name: Build release App Bundle (AAB)
         if: matrix.platform == 'android'
@@ -138,7 +142,7 @@ jobs:
           GEOAPIFY_API_KEY: ${{ secrets.GEOAPIFY_API_KEY }}
         run: >
           flutter build appbundle --release
-          --dart-define=GEOAPIFY_API_KEY=${GEOAPIFY_API_KEY}
+          --dart-define="GEOAPIFY_API_KEY=${GEOAPIFY_API_KEY}"
 
       - name: Verify release APK signing certificate SHA-256
         if: matrix.platform == 'android'
@@ -262,7 +266,7 @@ jobs:
           GEOAPIFY_API_KEY: ${{ secrets.GEOAPIFY_API_KEY }}
         run: >
           flutter build ios --release --no-codesign --config-only
-          --dart-define=GEOAPIFY_API_KEY=${GEOAPIFY_API_KEY}
+          --dart-define="GEOAPIFY_API_KEY=${GEOAPIFY_API_KEY}"
           --dart-define=QIBLA_INTERNAL_TAFSIR_BUILD=true
           --dart-define=QURAN_TAFSIR_PANEL_ENABLED=true
           --dart-define=TAFSIR_API_ENABLED=true
