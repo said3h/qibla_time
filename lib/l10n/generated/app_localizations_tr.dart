@@ -3777,7 +3777,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get nearbyPlacesLoadErrorBody =>
-      'OpenStreetMap şu anda sorgulanamadı. Birkaç saniye sonra tekrar dene.';
+      'Yer hizmeti şu anda sorgulanamadı. Birkaç saniye sonra tekrar dene.';
 
   @override
   String nearbyPrayerStartsInMinutes(Object prayerName, int minutes) {
@@ -3796,6 +3796,10 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get nearbyOsmAttribution => 'Veriler OpenStreetMap’ten';
+
+  @override
+  String get nearbyGeoapifyAttribution =>
+      'Geoapify tarafından desteklenir · © OpenStreetMap katkıda bulunanları';
 
   @override
   String get nearbyCachedResults => 'Showing saved results';

@@ -3814,7 +3814,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get nearbyPlacesLoadErrorBody =>
-      'Сейчас не удалось запросить OpenStreetMap. Повторите попытку через несколько секунд.';
+      'Сейчас не удалось запросить сервис мест. Повторите попытку через несколько секунд.';
 
   @override
   String nearbyPrayerStartsInMinutes(Object prayerName, int minutes) {
@@ -3833,6 +3833,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get nearbyOsmAttribution => 'Данные OpenStreetMap';
+
+  @override
+  String get nearbyGeoapifyAttribution =>
+      'Работает на Geoapify · © участники OpenStreetMap';
 
   @override
   String get nearbyCachedResults => 'Showing saved results';

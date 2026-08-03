@@ -3810,7 +3810,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get nearbyPlacesLoadErrorBody =>
-      'OpenStreetMap kan nu niet worden geraadpleegd. Probeer het over een paar seconden opnieuw.';
+      'De locatieservice kan nu niet worden geraadpleegd. Probeer het over een paar seconden opnieuw.';
 
   @override
   String nearbyPrayerStartsInMinutes(Object prayerName, int minutes) {
@@ -3829,6 +3829,10 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get nearbyOsmAttribution => 'Gegevens van OpenStreetMap';
+
+  @override
+  String get nearbyGeoapifyAttribution =>
+      'Mogelijk gemaakt door Geoapify · © OpenStreetMap-bijdragers';
 
   @override
   String get nearbyCachedResults => 'Showing saved results';

@@ -6637,7 +6637,7 @@ abstract class AppLocalizations {
   /// No description provided for @nearbyPlacesLoadErrorBody.
   ///
   /// In es, this message translates to:
-  /// **'No pudimos consultar OpenStreetMap ahora mismo. Inténtalo de nuevo en unos segundos.'**
+  /// **'No pudimos consultar el servicio de lugares ahora mismo. Inténtalo de nuevo en unos segundos.'**
   String get nearbyPlacesLoadErrorBody;
 
   /// No description provided for @nearbyPrayerStartsInMinutes.
@@ -6663,6 +6663,12 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Datos obtenidos de OpenStreetMap'**
   String get nearbyOsmAttribution;
+
+  /// No description provided for @nearbyGeoapifyAttribution.
+  ///
+  /// In es, this message translates to:
+  /// **'Con tecnología de Geoapify · © colaboradores de OpenStreetMap'**
+  String get nearbyGeoapifyAttribution;
 
   /// No description provided for @nearbyCachedResults.
   ///

@@ -107,6 +107,9 @@ class _NearbyResultsScreenState extends ConsumerState<NearbyResultsScreen> {
                         _SourceNotice(
                           fromCache: result.fromCache,
                           source: result.originSource,
+                          usesGeoapify: result.places.any(
+                            (place) => place.source.startsWith('Geoapify'),
+                          ),
                         ),
                         const SizedBox(height: 24),
                         _EmptyState(
@@ -128,6 +131,9 @@ class _NearbyResultsScreenState extends ConsumerState<NearbyResultsScreen> {
                           return _SourceNotice(
                             fromCache: result.fromCache,
                             source: result.originSource,
+                            usesGeoapify: result.places.any(
+                              (place) => place.source.startsWith('Geoapify'),
+                            ),
                           );
                         }
                         final place = result.places[index - 1];
@@ -364,10 +370,12 @@ class _SourceNotice extends StatelessWidget {
   const _SourceNotice({
     required this.fromCache,
     required this.source,
+    required this.usesGeoapify,
   });
 
   final bool fromCache;
   final LocationAccessSource? source;
+  final bool usesGeoapify;
 
   @override
   Widget build(BuildContext context) {
@@ -376,14 +384,20 @@ class _SourceNotice extends StatelessWidget {
     final locationLabel = source == LocationAccessSource.manual
         ? l10n.nearbyUsingManualCity
         : l10n.nearbyUsingDeviceLocation;
+    final attribution = usesGeoapify
+        ? l10n.nearbyGeoapifyAttribution
+        : l10n.nearbyOsmAttribution;
+    final attributionUri = usesGeoapify
+        ? Uri.parse('https://www.geoapify.com/')
+        : Uri.parse('https://www.openstreetmap.org/copyright');
 
     return Semantics(
       button: true,
-      label: l10n.nearbyOsmAttribution,
+      label: attribution,
       child: InkWell(
         borderRadius: BorderRadius.circular(18),
         onTap: () => launchUrl(
-          Uri.parse('https://www.openstreetmap.org/copyright'),
+          attributionUri,
           mode: LaunchMode.externalApplication,
         ),
         child: Container(
@@ -396,7 +410,7 @@ class _SourceNotice extends StatelessWidget {
           child: Text(
             [
               locationLabel,
-              l10n.nearbyOsmAttribution,
+              attribution,
               if (fromCache) l10n.nearbyCachedResults,
             ].join(' · '),
             style: GoogleFonts.dmSans(

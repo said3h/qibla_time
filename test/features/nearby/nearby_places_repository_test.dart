@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
 import 'package:qibla_time/features/nearby/services/nearby_cache_service.dart';
+import 'package:qibla_time/features/nearby/services/geoapify_places_service.dart';
 import 'package:qibla_time/features/nearby/services/nearby_places_repository.dart';
 import 'package:qibla_time/features/nearby/services/overpass_mosque_service.dart';
 import 'package:qibla_time/features/prayer_times/data/datasources/prayer_location_datasource.dart';
@@ -86,6 +87,70 @@ void main() {
     expect(first.fromCache, isFalse);
     expect(cached.fromCache, isTrue);
     expect(requests, 1);
+  });
+
+  test('uses Geoapify first for halal restaurants when configured', () async {
+    SharedPreferences.setMockInitialValues({});
+    var geoapifyRequests = 0;
+    var overpassRequests = 0;
+    final repository = NearbyPlacesRepository(
+      locationDataSource: _FakeLocationDataSource(
+        result: const LocationAccessResult(
+          location: PrayerLocation(latitude: 40.4168, longitude: -3.7038),
+          source: LocationAccessSource.live,
+        ),
+      ),
+      geoapifyService: GeoapifyPlacesService(
+        apiKey: 'test-key',
+        client: MockClient((_) async {
+          geoapifyRequests++;
+          return http.Response(_geoapifyRestaurantJson, 200);
+        }),
+      ),
+      overpassService: OverpassMosqueService(
+        client: MockClient((_) async {
+          overpassRequests++;
+          return http.Response(_halalRestaurantJson, 200);
+        }),
+      ),
+      cacheService: NearbyCacheService(),
+    );
+
+    final result = await repository.loadHalalRestaurants(radiusMeters: 5000);
+
+    expect(result.places.single.name, 'Geoapify Restaurant');
+    expect(result.places.single.source, 'Geoapify / OpenStreetMap');
+    expect(geoapifyRequests, 1);
+    expect(overpassRequests, 0);
+  });
+
+  test('falls back to Overpass when Geoapify fails', () async {
+    SharedPreferences.setMockInitialValues({});
+    var overpassRequests = 0;
+    final repository = NearbyPlacesRepository(
+      locationDataSource: _FakeLocationDataSource(
+        result: const LocationAccessResult(
+          location: PrayerLocation(latitude: 40.4168, longitude: -3.7038),
+          source: LocationAccessSource.live,
+        ),
+      ),
+      geoapifyService: GeoapifyPlacesService(
+        apiKey: 'test-key',
+        client: MockClient((_) async => http.Response('unavailable', 503)),
+      ),
+      overpassService: OverpassMosqueService(
+        client: MockClient((_) async {
+          overpassRequests++;
+          return http.Response(_halalRestaurantJson, 200);
+        }),
+      ),
+      cacheService: NearbyCacheService(),
+    );
+
+    final result = await repository.loadHalalRestaurants(radiusMeters: 5000);
+
+    expect(result.places.single.name, 'Halal Restaurant');
+    expect(overpassRequests, 1);
   });
 
   test('does not cache empty nearby search results', () async {
@@ -245,6 +310,30 @@ const _halalRestaurantJson = '''
         "amenity": "restaurant",
         "diet:halal": "yes",
         "name": "Halal Restaurant"
+      }
+    }
+  ]
+}
+''';
+
+const _geoapifyRestaurantJson = '''
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "place_id": "restaurant-1",
+        "name": "Geoapify Restaurant",
+        "formatted": "Madrid, Spain",
+        "lat": 40.417,
+        "lon": -3.704,
+        "categories": ["catering.restaurant"],
+        "conditions": ["halal"]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-3.704, 40.417]
       }
     }
   ]

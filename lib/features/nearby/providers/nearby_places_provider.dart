@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../prayer_times/presentation/providers/prayer_times_providers.dart';
+import '../services/geoapify_places_service.dart';
 import '../services/nearby_cache_service.dart';
 import '../services/nearby_places_repository.dart';
 import '../services/overpass_mosque_service.dart';
@@ -16,6 +17,10 @@ final overpassMosqueServiceProvider = Provider<OverpassMosqueService>((ref) {
   return OverpassMosqueService();
 });
 
+final geoapifyPlacesServiceProvider = Provider<GeoapifyPlacesService>((ref) {
+  return GeoapifyPlacesService();
+});
+
 final nearbyCacheServiceProvider = Provider<NearbyCacheService>((ref) {
   return NearbyCacheService();
 });
@@ -24,6 +29,7 @@ final nearbyPlacesRepositoryProvider = Provider<NearbyPlacesRepository>((ref) {
   return NearbyPlacesRepository(
     locationDataSource: ref.watch(prayerLocationDataSourceProvider),
     overpassService: ref.watch(overpassMosqueServiceProvider),
+    geoapifyService: ref.watch(geoapifyPlacesServiceProvider),
     cacheService: ref.watch(nearbyCacheServiceProvider),
   );
 });

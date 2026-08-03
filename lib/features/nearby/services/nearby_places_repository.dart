@@ -6,6 +6,7 @@ import '../../prayer_times/domain/entities/location_access_result.dart';
 import '../../prayer_times/domain/entities/prayer_location.dart';
 import '../models/nearby_place.dart';
 import '../models/nearby_place_search.dart';
+import 'geoapify_places_service.dart';
 import 'nearby_cache_service.dart';
 import 'nearby_distance_service.dart';
 import 'overpass_mosque_service.dart';
@@ -14,15 +15,18 @@ class NearbyPlacesRepository {
   NearbyPlacesRepository({
     required PrayerLocationDataSource locationDataSource,
     required OverpassMosqueService overpassService,
+    GeoapifyPlacesService? geoapifyService,
     required NearbyCacheService cacheService,
     NearbyDistanceService distanceService = const NearbyDistanceService(),
   })  : _locationDataSource = locationDataSource,
         _overpassService = overpassService,
+        _geoapifyService = geoapifyService,
         _cacheService = cacheService,
         _distanceService = distanceService;
 
   final PrayerLocationDataSource _locationDataSource;
   final OverpassMosqueService _overpassService;
+  final GeoapifyPlacesService? _geoapifyService;
   final NearbyCacheService _cacheService;
   final NearbyDistanceService _distanceService;
 
@@ -102,12 +106,7 @@ class NearbyPlacesRepository {
 
     final List<NearbyPlace> places;
     try {
-      places = await _overpassService.fetchPlaces(
-        category: category,
-        latitude: search.origin.latitude,
-        longitude: search.origin.longitude,
-        radiusMeters: radiusMeters,
-      );
+      places = await _fetchNetworkPlaces(search);
     } catch (error) {
       _debugLog(
         'nearby ${category.name} network error type=${error.runtimeType} '
@@ -128,6 +127,43 @@ class NearbyPlacesRepository {
       originSource: accessResult.source,
       originLocation: accessResult.location,
       fromCache: false,
+    );
+  }
+
+  Future<List<NearbyPlace>> _fetchNetworkPlaces(
+    NearbyPlaceSearch search,
+  ) async {
+    final geoapify = _geoapifyService;
+    final shouldUseGeoapify = search.category != NearbyPlaceCategory.mosque &&
+        geoapify != null &&
+        geoapify.isConfigured;
+    if (shouldUseGeoapify) {
+      try {
+        final places = await geoapify.fetchPlaces(
+          category: search.category,
+          latitude: search.origin.latitude,
+          longitude: search.origin.longitude,
+          radiusMeters: search.radiusMeters,
+        );
+        _debugLog(
+          'nearby ${search.category.name} provider=geoapify '
+          'count=${places.length}',
+        );
+        if (places.isNotEmpty) return places;
+      } catch (error) {
+        _debugLog(
+          'nearby ${search.category.name} provider=geoapify '
+          'error=${error.runtimeType}; trying overpass fallback',
+        );
+      }
+    }
+
+    _debugLog('nearby ${search.category.name} provider=overpass');
+    return _overpassService.fetchPlaces(
+      category: search.category,
+      latitude: search.origin.latitude,
+      longitude: search.origin.longitude,
+      radiusMeters: search.radiusMeters,
     );
   }
 

@@ -60,6 +60,15 @@ jobs:
       - name: Run tests
         run: flutter test
 
+      - name: Verify Geoapify API key
+        env:
+          GEOAPIFY_API_KEY: ${{ secrets.GEOAPIFY_API_KEY }}
+        run: |
+          if [[ -z "${GEOAPIFY_API_KEY}" ]]; then
+            echo "Missing GEOAPIFY_API_KEY secret" >&2
+            exit 1
+          fi
+
       - name: Configure Android release signing (upload key)
         if: matrix.platform == 'android'
         shell: bash
@@ -104,8 +113,11 @@ jobs:
 
       - name: Build debug APK
         if: matrix.platform == 'android'
+        env:
+          GEOAPIFY_API_KEY: ${{ secrets.GEOAPIFY_API_KEY }}
         run: >
           flutter build apk --debug
+          --dart-define=GEOAPIFY_API_KEY=${GEOAPIFY_API_KEY}
           --dart-define=QIBLA_INTERNAL_TAFSIR_BUILD=true
           --dart-define=QURAN_TAFSIR_PANEL_ENABLED=true
           --dart-define=TAFSIR_API_ENABLED=true
@@ -114,11 +126,19 @@ jobs:
 
       - name: Build release APK
         if: matrix.platform == 'android'
-        run: flutter build apk --release
+        env:
+          GEOAPIFY_API_KEY: ${{ secrets.GEOAPIFY_API_KEY }}
+        run: >
+          flutter build apk --release
+          --dart-define=GEOAPIFY_API_KEY=${GEOAPIFY_API_KEY}
 
       - name: Build release App Bundle (AAB)
         if: matrix.platform == 'android'
-        run: flutter build appbundle --release
+        env:
+          GEOAPIFY_API_KEY: ${{ secrets.GEOAPIFY_API_KEY }}
+        run: >
+          flutter build appbundle --release
+          --dart-define=GEOAPIFY_API_KEY=${GEOAPIFY_API_KEY}
 
       - name: Verify release APK signing certificate SHA-256
         if: matrix.platform == 'android'
@@ -238,8 +258,11 @@ jobs:
 
       - name: Prepare iOS build config
         if: matrix.platform == 'ios'
+        env:
+          GEOAPIFY_API_KEY: ${{ secrets.GEOAPIFY_API_KEY }}
         run: >
           flutter build ios --release --no-codesign --config-only
+          --dart-define=GEOAPIFY_API_KEY=${GEOAPIFY_API_KEY}
           --dart-define=QIBLA_INTERNAL_TAFSIR_BUILD=true
           --dart-define=QURAN_TAFSIR_PANEL_ENABLED=true
           --dart-define=TAFSIR_API_ENABLED=true

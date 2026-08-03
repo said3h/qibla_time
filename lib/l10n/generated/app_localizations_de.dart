@@ -3818,7 +3818,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get nearbyPlacesLoadErrorBody =>
-      'OpenStreetMap konnte gerade nicht abgefragt werden. Versuche es in ein paar Sekunden erneut.';
+      'Der Ortsdienst konnte gerade nicht abgefragt werden. Versuche es in ein paar Sekunden erneut.';
 
   @override
   String nearbyPrayerStartsInMinutes(Object prayerName, int minutes) {
@@ -3837,6 +3837,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get nearbyOsmAttribution => 'Daten von OpenStreetMap';
+
+  @override
+  String get nearbyGeoapifyAttribution =>
+      'Bereitgestellt von Geoapify · © OpenStreetMap-Mitwirkende';
 
   @override
   String get nearbyCachedResults => 'Showing saved results';

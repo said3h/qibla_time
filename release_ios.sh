@@ -17,6 +17,14 @@ else
   exit 1
 fi
 
+if [ -z "${GEOAPIFY_API_KEY:-}" ]; then
+  echo ""
+  echo "ERROR: GEOAPIFY_API_KEY no está configurada."
+  echo "Ejecuta antes:"
+  echo 'read -s "GEOAPIFY_API_KEY?Geoapify API key: "; export GEOAPIFY_API_KEY'
+  exit 1
+fi
+
 VERSION_LINE="$(grep -E '^version:[[:space:]]*[0-9]+\.[0-9]+\.[0-9]+\+[0-9]+[[:space:]]*$' pubspec.yaml | head -n 1 || true)"
 
 if [ -z "$VERSION_LINE" ]; then
@@ -47,7 +55,8 @@ if ! security find-identity -v -p codesigning | grep -qE '[0-9]+\) [A-F0-9]{40}'
   exit 1
 fi
 
-"$FLUTTER_BIN" build ipa --release
+"$FLUTTER_BIN" build ipa --release \
+  --dart-define=GEOAPIFY_API_KEY="$GEOAPIFY_API_KEY"
 
 if [ ! -d "build/ios/archive/Runner.xcarchive" ]; then
   echo ""

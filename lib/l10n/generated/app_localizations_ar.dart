@@ -3719,7 +3719,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get nearbyPlacesLoadErrorBody =>
-      'تعذّر الاتصال بـ OpenStreetMap الآن. حاول مرة أخرى بعد بضع ثوانٍ.';
+      'تعذّر الاتصال بخدمة الأماكن الآن. حاول مرة أخرى بعد بضع ثوانٍ.';
 
   @override
   String nearbyPrayerStartsInMinutes(Object prayerName, int minutes) {
@@ -3738,6 +3738,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get nearbyOsmAttribution => 'البيانات من OpenStreetMap';
+
+  @override
+  String get nearbyGeoapifyAttribution =>
+      'بدعم من Geoapify · © مساهمو OpenStreetMap';
 
   @override
   String get nearbyCachedResults => 'عرض نتائج محفوظة';

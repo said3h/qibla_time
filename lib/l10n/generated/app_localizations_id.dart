@@ -3802,7 +3802,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get nearbyPlacesLoadErrorBody =>
-      'Kami belum dapat menghubungi OpenStreetMap saat ini. Coba lagi dalam beberapa detik.';
+      'Kami belum dapat menghubungi layanan tempat saat ini. Coba lagi dalam beberapa detik.';
 
   @override
   String nearbyPrayerStartsInMinutes(Object prayerName, int minutes) {
@@ -3821,6 +3821,10 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get nearbyOsmAttribution => 'Data dari OpenStreetMap';
+
+  @override
+  String get nearbyGeoapifyAttribution =>
+      'Didukung oleh Geoapify · © kontributor OpenStreetMap';
 
   @override
   String get nearbyCachedResults => 'Showing saved results';

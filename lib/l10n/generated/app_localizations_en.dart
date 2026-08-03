@@ -3791,7 +3791,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get nearbyPlacesLoadErrorBody =>
-      'We could not query OpenStreetMap right now. Try again in a few seconds.';
+      'We could not query the places service right now. Try again in a few seconds.';
 
   @override
   String nearbyPrayerStartsInMinutes(Object prayerName, int minutes) {
@@ -3810,6 +3810,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get nearbyOsmAttribution => 'Data from OpenStreetMap';
+
+  @override
+  String get nearbyGeoapifyAttribution =>
+      'Powered by Geoapify · © OpenStreetMap contributors';
 
   @override
   String get nearbyCachedResults => 'Showing saved results';

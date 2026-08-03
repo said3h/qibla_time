@@ -179,7 +179,7 @@ class _OsmAttribution extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      context.l10n.nearbyOsmAttribution,
+      context.l10n.nearbyGeoapifyAttribution,
       textAlign: TextAlign.center,
       style: GoogleFonts.dmSans(
         fontSize: 11,
