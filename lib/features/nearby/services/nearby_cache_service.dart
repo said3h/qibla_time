@@ -7,7 +7,7 @@ import '../models/nearby_place_search.dart';
 import 'nearby_distance_service.dart';
 
 class NearbyCacheService {
-  static const formatVersion = 3;
+  static const formatVersion = 4;
 
   NearbyCacheService({
     SharedPreferences? prefs,

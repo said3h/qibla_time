@@ -120,7 +120,7 @@ void main() {
 
     expect(result.places.single.name, 'Geoapify Restaurant');
     expect(result.places.single.source, 'Geoapify / OpenStreetMap');
-    expect(geoapifyRequests, 1);
+    expect(geoapifyRequests, 2);
     expect(overpassRequests, 0);
   });
 

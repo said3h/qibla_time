@@ -3718,14 +3718,14 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get nearbyHalalRestaurantsSubtitle =>
-      'Encontre restaurantes marcados explicitamente como halal no OpenStreetMap.';
+      'Encontre locais halal verificados e opções próximas de kebab ou pita para confirmar.';
 
   @override
   String get nearbyHalalButchers => 'Talhos halal';
 
   @override
   String get nearbyHalalButchersSubtitle =>
-      'Encontre talhos marcados explicitamente como halal no OpenStreetMap.';
+      'Encontre talhos halal verificados e opções próximas para confirmar.';
 
   @override
   String get nearbyMosquesScreenSubtitle =>
@@ -3733,11 +3733,11 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get nearbyHalalRestaurantsScreenSubtitle =>
-      'Restaurantes marcados explicitamente como halal, ordenados por distância.';
+      'Locais halal verificados e possíveis opções, claramente identificados e ordenados por distância.';
 
   @override
   String get nearbyHalalButchersScreenSubtitle =>
-      'Talhos marcados explicitamente como halal, ordenados por distância.';
+      'Talhos halal verificados e possíveis opções, claramente identificados e ordenados por distância.';
 
   @override
   String get nearbyList => 'Lista';
@@ -3832,6 +3832,19 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get nearbyGeoapifyAttribution =>
       'Com tecnologia Geoapify · © colaboradores do OpenStreetMap';
+
+  @override
+  String get nearbyHalalVerified => 'Halal verificado';
+
+  @override
+  String get nearbyPossibleHalal => 'Possíveis opções halal';
+
+  @override
+  String get nearbyConfirmHalal => 'Confirme com o estabelecimento';
+
+  @override
+  String get nearbyPossibleHalalExplanation =>
+      'Estes locais correspondem às categorias relevantes, mas a fonte não os identifica como halal. Confirme antes de pedir.';
 
   @override
   String get nearbyCachedResults => 'Showing saved results';

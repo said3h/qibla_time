@@ -6481,7 +6481,7 @@ abstract class AppLocalizations {
   /// No description provided for @nearbyHalalRestaurantsSubtitle.
   ///
   /// In es, this message translates to:
-  /// **'Busca restaurantes marcados explícitamente como halal en OpenStreetMap.'**
+  /// **'Busca locales halal verificados y opciones cercanas de kebab o pita para confirmar.'**
   String get nearbyHalalRestaurantsSubtitle;
 
   /// No description provided for @nearbyHalalButchers.
@@ -6493,7 +6493,7 @@ abstract class AppLocalizations {
   /// No description provided for @nearbyHalalButchersSubtitle.
   ///
   /// In es, this message translates to:
-  /// **'Busca carnicerías marcadas explícitamente como halal en OpenStreetMap.'**
+  /// **'Busca carnicerías halal verificadas y opciones cercanas para confirmar.'**
   String get nearbyHalalButchersSubtitle;
 
   /// No description provided for @nearbyMosquesScreenSubtitle.
@@ -6505,13 +6505,13 @@ abstract class AppLocalizations {
   /// No description provided for @nearbyHalalRestaurantsScreenSubtitle.
   ///
   /// In es, this message translates to:
-  /// **'Restaurantes marcados explícitamente como halal, ordenados por distancia.'**
+  /// **'Locales halal verificados y posibles opciones, claramente etiquetados y ordenados por distancia.'**
   String get nearbyHalalRestaurantsScreenSubtitle;
 
   /// No description provided for @nearbyHalalButchersScreenSubtitle.
   ///
   /// In es, this message translates to:
-  /// **'Carnicerías marcadas explícitamente como halal, ordenadas por distancia.'**
+  /// **'Carnicerías halal verificadas y posibles opciones, claramente etiquetadas y ordenadas por distancia.'**
   String get nearbyHalalButchersScreenSubtitle;
 
   /// No description provided for @nearbyList.
@@ -6669,6 +6669,30 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Con tecnología de Geoapify · © colaboradores de OpenStreetMap'**
   String get nearbyGeoapifyAttribution;
+
+  /// No description provided for @nearbyHalalVerified.
+  ///
+  /// In es, this message translates to:
+  /// **'Halal verificado'**
+  String get nearbyHalalVerified;
+
+  /// No description provided for @nearbyPossibleHalal.
+  ///
+  /// In es, this message translates to:
+  /// **'Posibles opciones halal'**
+  String get nearbyPossibleHalal;
+
+  /// No description provided for @nearbyConfirmHalal.
+  ///
+  /// In es, this message translates to:
+  /// **'Confirma si es halal'**
+  String get nearbyConfirmHalal;
+
+  /// No description provided for @nearbyPossibleHalalExplanation.
+  ///
+  /// In es, this message translates to:
+  /// **'Estos lugares coinciden por categoría, pero la fuente no los marca como halal. Confírmalo antes de pedir.'**
+  String get nearbyPossibleHalalExplanation;
 
   /// No description provided for @nearbyCachedResults.
   ///

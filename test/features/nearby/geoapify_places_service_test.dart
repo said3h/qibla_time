@@ -8,11 +8,11 @@ import 'package:qibla_time/features/nearby/services/geoapify_places_service.dart
 
 void main() {
   test('requests halal restaurants around the requested coordinates', () async {
-    late Uri requestedUri;
+    final requestedUris = <Uri>[];
     final service = GeoapifyPlacesService(
       apiKey: 'test-key',
       client: MockClient((request) async {
-        requestedUri = request.url;
+        requestedUris.add(request.url);
         return http.Response(_restaurantResponse, 200);
       }),
     );
@@ -25,20 +25,58 @@ void main() {
     );
 
     expect(
-      requestedUri.queryParameters['categories'],
+      requestedUris.first.queryParameters['categories'],
       'catering.restaurant,catering.fast_food,catering.cafe',
     );
-    expect(requestedUri.queryParameters['conditions'], 'halal');
+    expect(requestedUris.first.queryParameters['conditions'], 'halal');
     expect(
-      requestedUri.queryParameters['filter'],
+      requestedUris.first.queryParameters['filter'],
       'circle:-3.7038,40.4168,10000',
     );
-    expect(requestedUri.queryParameters['apiKey'], 'test-key');
+    expect(requestedUris.first.queryParameters['apiKey'], 'test-key');
+    expect(
+      requestedUris.last.queryParameters['categories'],
+      'catering.fast_food.kebab,catering.fast_food.pita',
+    );
+    expect(requestedUris.last.queryParameters, isNot(contains('conditions')));
     expect(places, hasLength(1));
     expect(places.single.name, 'Halal Madrid');
     expect(places.single.address, 'Calle Mayor 1, Madrid');
     expect(places.single.source, 'Geoapify / OpenStreetMap');
     expect(places.single.category, NearbyPlaceCategory.halalRestaurant);
+    expect(
+      places.single.halalVerification,
+      HalalVerificationStatus.verified,
+    );
+  });
+
+  test('returns unverified kebab candidates without calling them halal',
+      () async {
+    final service = GeoapifyPlacesService(
+      apiKey: 'test-key',
+      client: MockClient((request) async {
+        if (request.url.queryParameters.containsKey('conditions')) {
+          return http.Response(
+            '{"type":"FeatureCollection","features":[]}',
+            200,
+          );
+        }
+        return http.Response(_kebabCandidateResponse, 200);
+      }),
+    );
+
+    final places = await service.fetchPlaces(
+      category: NearbyPlaceCategory.halalRestaurant,
+      latitude: 40.4168,
+      longitude: -3.7038,
+      radiusMeters: 10000,
+    );
+
+    expect(places.single.name, 'Central Kebab');
+    expect(
+      places.single.halalVerification,
+      HalalVerificationStatus.possible,
+    );
   });
 
   test('uses the documented butcher category', () async {
@@ -121,6 +159,27 @@ final _restaurantResponse = jsonEncode({
       'geometry': {
         'type': 'Point',
         'coordinates': [-3.704, 40.417],
+      },
+    },
+  ],
+});
+
+final _kebabCandidateResponse = jsonEncode({
+  'type': 'FeatureCollection',
+  'features': [
+    {
+      'type': 'Feature',
+      'properties': {
+        'place_id': 'kebab-1',
+        'name': 'Central Kebab',
+        'formatted': 'Madrid, Spain',
+        'lat': 40.418,
+        'lon': -3.705,
+        'categories': ['catering.fast_food.kebab'],
+      },
+      'geometry': {
+        'type': 'Point',
+        'coordinates': [-3.705, 40.418],
       },
     },
   ],

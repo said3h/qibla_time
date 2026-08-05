@@ -37,16 +37,67 @@ class GeoapifyPlacesService {
       );
     }
 
-    final categories = switch (category) {
+    final verifiedCategories = switch (category) {
       NearbyPlaceCategory.halalRestaurant =>
         'catering.restaurant,catering.fast_food,catering.cafe',
       NearbyPlaceCategory.halalButcher => 'commercial.food_and_drink.butcher',
       NearbyPlaceCategory.mosque => throw StateError('unreachable'),
     };
+    final candidateCategories = switch (category) {
+      NearbyPlaceCategory.halalRestaurant =>
+        'catering.fast_food.kebab,catering.fast_food.pita',
+      NearbyPlaceCategory.halalButcher => 'commercial.food_and_drink.butcher',
+      NearbyPlaceCategory.mosque => throw StateError('unreachable'),
+    };
+
+    final responses = await Future.wait([
+      _fetchQuery(
+        categories: verifiedCategories,
+        condition: 'halal',
+        category: category,
+        latitude: latitude,
+        longitude: longitude,
+        radiusMeters: radiusMeters,
+        fallbackVerification: HalalVerificationStatus.verified,
+      ),
+      _fetchQuery(
+        categories: candidateCategories,
+        category: category,
+        latitude: latitude,
+        longitude: longitude,
+        radiusMeters: radiusMeters,
+        fallbackVerification: HalalVerificationStatus.possible,
+      ),
+    ]);
+    final successful = responses.where((response) => response.error == null);
+    if (successful.isEmpty) throw responses.first.error!;
+
+    final byId = <String, NearbyPlace>{};
+    for (final response in responses) {
+      for (final place in response.places) {
+        final existing = byId[place.id];
+        if (existing == null ||
+            place.halalVerification == HalalVerificationStatus.verified) {
+          byId[place.id] = place;
+        }
+      }
+    }
+    return byId.values.toList();
+  }
+
+  Future<_GeoapifyQueryResult> _fetchQuery({
+    required String categories,
+    String? condition,
+    required NearbyPlaceCategory category,
+    required double latitude,
+    required double longitude,
+    required int radiusMeters,
+    required HalalVerificationStatus fallbackVerification,
+  }) async {
     final uri = _endpoint.replace(
       queryParameters: {
         'categories': categories,
-        'conditions': 'halal',
+        if (condition != null) 'conditions': condition,
         'filter': 'circle:$longitude,$latitude,$radiusMeters',
         'bias': 'proximity:$longitude,$latitude',
         'limit': '100',
@@ -67,19 +118,40 @@ class GeoapifyPlacesService {
           'Geoapify returned HTTP ${response.statusCode}',
         );
       }
-      return _parseResponse(response.body, category);
+      return _GeoapifyQueryResult(
+        places: _parseResponse(
+          response.body,
+          category,
+          fallbackVerification,
+        ),
+      );
     } on TimeoutException {
-      throw const GeoapifyPlacesException('Geoapify request timed out');
+      return const _GeoapifyQueryResult(
+        error: GeoapifyPlacesException('Geoapify request timed out'),
+      );
     } on FormatException {
-      throw const GeoapifyPlacesException('Geoapify returned invalid JSON');
+      return const _GeoapifyQueryResult(
+        error: GeoapifyPlacesException('Geoapify returned invalid JSON'),
+      );
+    } on GeoapifyPlacesException catch (error) {
+      return _GeoapifyQueryResult(error: error);
     } on http.ClientException catch (error) {
-      throw GeoapifyPlacesException('Geoapify network error: $error');
+      return _GeoapifyQueryResult(
+        error: GeoapifyPlacesException('Geoapify network error: $error'),
+      );
+    } catch (error) {
+      return _GeoapifyQueryResult(
+        error: GeoapifyPlacesException(
+          'Geoapify response error: ${error.runtimeType}',
+        ),
+      );
     }
   }
 
   List<NearbyPlace> _parseResponse(
     String body,
     NearbyPlaceCategory category,
+    HalalVerificationStatus fallbackVerification,
   ) {
     final decoded = jsonDecode(body) as Map<String, dynamic>;
     final features = decoded['features'] as List<dynamic>? ?? const [];
@@ -107,6 +179,15 @@ class GeoapifyPlacesService {
                   ?.map((value) => value.toString())
                   .toList() ??
               const <String>[];
+          final conditions = (properties['conditions'] as List<dynamic>?)
+                  ?.map((value) => value.toString())
+                  .toList() ??
+              const <String>[];
+          final verification = [...categories, ...conditions].any(
+            (value) => value == 'halal' || value.startsWith('halal.'),
+          )
+              ? HalalVerificationStatus.verified
+              : fallbackVerification;
           final placeId = properties['place_id']?.toString() ??
               '${latitude.toStringAsFixed(6)},${longitude.toStringAsFixed(6)}';
 
@@ -126,6 +207,7 @@ class GeoapifyPlacesService {
                   : openingHours,
             ),
             wheelchair: _text(properties['wheelchair']),
+            halalVerification: verification,
             sourceTags: {
               if (categories.isNotEmpty) 'categories': categories.join(','),
               if (properties['conditions'] != null)
@@ -143,6 +225,16 @@ class GeoapifyPlacesService {
     final text = value?.toString().trim();
     return text == null || text.isEmpty ? null : text;
   }
+}
+
+class _GeoapifyQueryResult {
+  const _GeoapifyQueryResult({
+    this.places = const <NearbyPlace>[],
+    this.error,
+  });
+
+  final List<NearbyPlace> places;
+  final GeoapifyPlacesException? error;
 }
 
 class GeoapifyPlacesException implements Exception {

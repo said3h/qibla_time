@@ -81,6 +81,10 @@ class NearbyPlaceCard extends StatelessWidget {
                           ),
                         ),
                       ],
+                      if (place.halalVerification != null) ...[
+                        const SizedBox(height: 8),
+                        _VerificationBadge(status: place.halalVerification!),
+                      ],
                     ],
                   ),
                 ),
@@ -164,6 +168,38 @@ class NearbyPlaceCard extends StatelessWidget {
         context.l10n.nearbyUnnamedRestaurant,
       NearbyPlaceCategory.halalButcher => context.l10n.nearbyUnnamedButcher,
     };
+  }
+}
+
+class _VerificationBadge extends StatelessWidget {
+  const _VerificationBadge({required this.status});
+
+  final HalalVerificationStatus status;
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = QiblaThemes.current;
+    final verified = status == HalalVerificationStatus.verified;
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 5),
+      decoration: BoxDecoration(
+        color: verified ? tokens.primaryBg : tokens.bgPage,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(
+          color: verified ? tokens.primaryBorder : tokens.border,
+        ),
+      ),
+      child: Text(
+        verified
+            ? context.l10n.nearbyHalalVerified
+            : context.l10n.nearbyConfirmHalal,
+        style: GoogleFonts.dmSans(
+          fontSize: 10,
+          fontWeight: FontWeight.w700,
+          color: verified ? tokens.primary : tokens.textSecondary,
+        ),
+      ),
+    );
   }
 }
 

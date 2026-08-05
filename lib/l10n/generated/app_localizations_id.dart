@@ -3711,14 +3711,14 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get nearbyHalalRestaurantsSubtitle =>
-      'Temukan restoran yang ditandai halal secara jelas di OpenStreetMap.';
+      'Temukan tempat halal terverifikasi dan pilihan kebab atau pita terdekat untuk dikonfirmasi.';
 
   @override
   String get nearbyHalalButchers => 'Toko daging halal';
 
   @override
   String get nearbyHalalButchersSubtitle =>
-      'Temukan toko daging yang ditandai halal secara jelas di OpenStreetMap.';
+      'Temukan toko daging halal terverifikasi dan pilihan terdekat untuk dikonfirmasi.';
 
   @override
   String get nearbyMosquesScreenSubtitle =>
@@ -3726,11 +3726,11 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get nearbyHalalRestaurantsScreenSubtitle =>
-      'Restoran yang ditandai halal secara jelas, diurutkan berdasarkan jarak.';
+      'Tempat halal terverifikasi dan kemungkinan pilihan, diberi label jelas dan diurutkan berdasarkan jarak.';
 
   @override
   String get nearbyHalalButchersScreenSubtitle =>
-      'Toko daging yang ditandai halal secara jelas, diurutkan berdasarkan jarak.';
+      'Toko daging halal terverifikasi dan kemungkinan pilihan, diberi label jelas dan diurutkan berdasarkan jarak.';
 
   @override
   String get nearbyList => 'Daftar';
@@ -3825,6 +3825,19 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get nearbyGeoapifyAttribution =>
       'Didukung oleh Geoapify · © kontributor OpenStreetMap';
+
+  @override
+  String get nearbyHalalVerified => 'Halal terverifikasi';
+
+  @override
+  String get nearbyPossibleHalal => 'Kemungkinan pilihan halal';
+
+  @override
+  String get nearbyConfirmHalal => 'Konfirmasi kepada tempat';
+
+  @override
+  String get nearbyPossibleHalalExplanation =>
+      'Tempat ini sesuai dengan kategori terkait, tetapi sumber data tidak menandainya sebagai halal. Konfirmasikan sebelum memesan.';
 
   @override
   String get nearbyCachedResults => 'Showing saved results';

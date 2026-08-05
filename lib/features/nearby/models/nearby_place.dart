@@ -4,6 +4,11 @@ enum NearbyPlaceCategory {
   halalButcher,
 }
 
+enum HalalVerificationStatus {
+  verified,
+  possible,
+}
+
 class NearbyPlace {
   const NearbyPlace({
     required this.id,
@@ -18,6 +23,7 @@ class NearbyPlace {
     this.openingHours,
     this.wheelchair,
     this.distanceMeters,
+    this.halalVerification,
     this.sourceTags = const <String, String>{},
   });
 
@@ -33,6 +39,7 @@ class NearbyPlace {
   final String? openingHours;
   final String? wheelchair;
   final double? distanceMeters;
+  final HalalVerificationStatus? halalVerification;
   final Map<String, String> sourceTags;
 
   NearbyPlace copyWith({
@@ -51,6 +58,7 @@ class NearbyPlace {
       openingHours: openingHours,
       wheelchair: wheelchair,
       distanceMeters: distanceMeters ?? this.distanceMeters,
+      halalVerification: halalVerification,
       sourceTags: sourceTags,
     );
   }
@@ -69,6 +77,8 @@ class NearbyPlace {
       if (openingHours != null) 'openingHours': openingHours,
       if (wheelchair != null) 'wheelchair': wheelchair,
       if (distanceMeters != null) 'distanceMeters': distanceMeters,
+      if (halalVerification != null)
+        'halalVerification': halalVerification!.name,
       if (sourceTags.isNotEmpty) 'sourceTags': sourceTags,
     };
   }
@@ -90,6 +100,11 @@ class NearbyPlace {
       openingHours: json['openingHours'] as String?,
       wheelchair: json['wheelchair'] as String?,
       distanceMeters: (json['distanceMeters'] as num?)?.toDouble(),
+      halalVerification: switch (json['halalVerification']) {
+        'verified' => HalalVerificationStatus.verified,
+        'possible' => HalalVerificationStatus.possible,
+        _ => null,
+      },
       sourceTags: (json['sourceTags'] as Map<String, dynamic>?)
               ?.map((key, value) => MapEntry(key, value.toString())) ??
           const <String, String>{},

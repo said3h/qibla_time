@@ -198,11 +198,21 @@ class NearbyPlacesRepository {
         ),
       );
     }).toList();
-    withDistance.sort(
-      (a, b) => (a.distanceMeters ?? double.infinity)
-          .compareTo(b.distanceMeters ?? double.infinity),
-    );
+    withDistance.sort((a, b) {
+      final verification = _verificationRank(a).compareTo(_verificationRank(b));
+      if (verification != 0) return verification;
+      return (a.distanceMeters ?? double.infinity)
+          .compareTo(b.distanceMeters ?? double.infinity);
+    });
     return withDistance;
+  }
+
+  int _verificationRank(NearbyPlace place) {
+    return switch (place.halalVerification) {
+      HalalVerificationStatus.verified => 0,
+      HalalVerificationStatus.possible => 1,
+      null => 0,
+    };
   }
 }
 

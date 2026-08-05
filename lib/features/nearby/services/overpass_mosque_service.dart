@@ -188,6 +188,11 @@ class OverpassMosqueService {
       website: _readFirst(tags, const ['website', 'contact:website']),
       openingHours: _readFirst(tags, const ['opening_hours']),
       wheelchair: _readFirst(tags, const ['wheelchair']),
+      halalVerification: category == NearbyPlaceCategory.mosque
+          ? null
+          : _hasDirectHalalEvidence(tags)
+              ? HalalVerificationStatus.verified
+              : HalalVerificationStatus.possible,
       sourceTags: _filteredTags(tags),
     );
   }
@@ -268,6 +273,15 @@ out center tags;
       final value = tags[key]?.toLowerCase();
       return value == 'no' || value == 'none' || value == 'false';
     });
+  }
+
+  bool _hasDirectHalalEvidence(Map<String, String> tags) {
+    const directKeys = ['diet:halal', 'halal', 'certified:halal'];
+    return directKeys.any((key) {
+          final value = tags[key]?.toLowerCase();
+          return value == 'yes' || value == 'only';
+        }) ||
+        tags['butcher']?.toLowerCase() == 'halal';
   }
 
   bool _hasHalalToken(String? value) {

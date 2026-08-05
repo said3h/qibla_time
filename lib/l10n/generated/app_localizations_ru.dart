@@ -3723,14 +3723,14 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get nearbyHalalRestaurantsSubtitle =>
-      'Найдите рестораны, явно отмеченные как халяльные в OpenStreetMap.';
+      'Найдите подтверждённые халяльные места и ближайшие кебаб- или пита-заведения для уточнения.';
 
   @override
   String get nearbyHalalButchers => 'Халяль-мясные';
 
   @override
   String get nearbyHalalButchersSubtitle =>
-      'Найдите мясные магазины, явно отмеченные как халяльные в OpenStreetMap.';
+      'Найдите подтверждённые халяльные мясные магазины и ближайшие варианты для уточнения.';
 
   @override
   String get nearbyMosquesScreenSubtitle =>
@@ -3738,11 +3738,11 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get nearbyHalalRestaurantsScreenSubtitle =>
-      'Рестораны, явно отмеченные как халяльные, отсортированы по расстоянию.';
+      'Подтверждённые халяльные места и возможные варианты с понятными метками, отсортированные по расстоянию.';
 
   @override
   String get nearbyHalalButchersScreenSubtitle =>
-      'Халяльные мясные магазины, отсортированные по расстоянию.';
+      'Подтверждённые халяльные мясные магазины и возможные варианты с понятными метками, отсортированные по расстоянию.';
 
   @override
   String get nearbyList => 'Список';
@@ -3837,6 +3837,19 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get nearbyGeoapifyAttribution =>
       'Работает на Geoapify · © участники OpenStreetMap';
+
+  @override
+  String get nearbyHalalVerified => 'Халяль подтверждён';
+
+  @override
+  String get nearbyPossibleHalal => 'Возможно халяль';
+
+  @override
+  String get nearbyConfirmHalal => 'Уточните в заведении';
+
+  @override
+  String get nearbyPossibleHalalExplanation =>
+      'Эти места подходят по категории, но источник данных не отмечает их как халяльные. Уточните перед заказом.';
 
   @override
   String get nearbyCachedResults => 'Showing saved results';

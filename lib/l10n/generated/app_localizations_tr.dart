@@ -3687,14 +3687,14 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get nearbyHalalRestaurantsSubtitle =>
-      'OpenStreetMap\'de açıkça helal olarak işaretlenmiş restoranları bul.';
+      'Doğrulanmış helal yerleri ve teyit edilecek yakındaki kebap veya pide seçeneklerini bul.';
 
   @override
   String get nearbyHalalButchers => 'Helal kasaplar';
 
   @override
   String get nearbyHalalButchersSubtitle =>
-      'OpenStreetMap\'de açıkça helal olarak işaretlenmiş kasapları bul.';
+      'Doğrulanmış helal kasapları ve teyit edilecek yakındaki seçenekleri bul.';
 
   @override
   String get nearbyMosquesScreenSubtitle =>
@@ -3702,11 +3702,11 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get nearbyHalalRestaurantsScreenSubtitle =>
-      'Açıkça helal olarak işaretlenmiş restoranlar, mesafeye göre sıralanır.';
+      'Doğrulanmış helal yerler ve olası seçenekler, açıkça etiketlenip mesafeye göre sıralanır.';
 
   @override
   String get nearbyHalalButchersScreenSubtitle =>
-      'Açıkça helal olarak işaretlenmiş kasaplar, mesafeye göre sıralanır.';
+      'Doğrulanmış helal kasaplar ve olası seçenekler, açıkça etiketlenip mesafeye göre sıralanır.';
 
   @override
   String get nearbyList => 'Liste';
@@ -3800,6 +3800,19 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get nearbyGeoapifyAttribution =>
       'Geoapify tarafından desteklenir · © OpenStreetMap katkıda bulunanları';
+
+  @override
+  String get nearbyHalalVerified => 'Helal doğrulandı';
+
+  @override
+  String get nearbyPossibleHalal => 'Muhtemel helal seçenekler';
+
+  @override
+  String get nearbyConfirmHalal => 'İşletmeden doğrulayın';
+
+  @override
+  String get nearbyPossibleHalalExplanation =>
+      'Bu yerler ilgili kategorilerle eşleşiyor ancak veri kaynağında helal olarak işaretlenmemiş. Sipariş vermeden önce doğrulayın.';
 
   @override
   String get nearbyCachedResults => 'Showing saved results';

@@ -120,11 +120,12 @@ class _NearbyResultsScreenState extends ConsumerState<NearbyResultsScreen> {
                     );
                   }
 
+                  final listItems = _buildListItems(result.places);
                   return RefreshIndicator(
                     onRefresh: () => _refresh(radiusMeters),
                     child: ListView.separated(
                       padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-                      itemCount: result.places.length + 1,
+                      itemCount: listItems.length + 1,
                       separatorBuilder: (_, __) => const SizedBox(height: 12),
                       itemBuilder: (context, index) {
                         if (index == 0) {
@@ -136,7 +137,15 @@ class _NearbyResultsScreenState extends ConsumerState<NearbyResultsScreen> {
                             ),
                           );
                         }
-                        final place = result.places[index - 1];
+                        final item = listItems[index - 1];
+                        if (item.header != null) {
+                          return _VerificationHeader(
+                            status: item.header!,
+                            showExplanation:
+                                item.header == HalalVerificationStatus.possible,
+                          );
+                        }
+                        final place = item.place!;
                         final nextPrayerLabel = isMosque
                             ? _safeNextPrayerLabel(
                                 context: context,
@@ -170,6 +179,26 @@ class _NearbyResultsScreenState extends ConsumerState<NearbyResultsScreen> {
         context.l10n.nearbyHalalRestaurants,
       NearbyPlaceCategory.halalButcher => context.l10n.nearbyHalalButchers,
     };
+  }
+
+  List<_NearbyResultItem> _buildListItems(List<NearbyPlace> places) {
+    if (widget.category == NearbyPlaceCategory.mosque) {
+      return places.map(_NearbyResultItem.forPlace).toList();
+    }
+
+    final items = <_NearbyResultItem>[];
+    for (final status in HalalVerificationStatus.values) {
+      final matching = places.where((place) {
+        if (status == HalalVerificationStatus.possible) {
+          return place.halalVerification != HalalVerificationStatus.verified;
+        }
+        return place.halalVerification == status;
+      }).toList();
+      if (matching.isEmpty) continue;
+      items.add(_NearbyResultItem.forHeader(status));
+      items.addAll(matching.map(_NearbyResultItem.forPlace));
+    }
+    return items;
   }
 
   String _subtitle(BuildContext context) {
@@ -361,6 +390,69 @@ class _Controls extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _NearbyResultItem {
+  const _NearbyResultItem.forPlace(this.place) : header = null;
+  const _NearbyResultItem.forHeader(this.header) : place = null;
+
+  final NearbyPlace? place;
+  final HalalVerificationStatus? header;
+}
+
+class _VerificationHeader extends StatelessWidget {
+  const _VerificationHeader({
+    required this.status,
+    required this.showExplanation,
+  });
+
+  final HalalVerificationStatus status;
+  final bool showExplanation;
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = QiblaThemes.current;
+    final verified = status == HalalVerificationStatus.verified;
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(2, 8, 2, 2),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(
+                verified ? Icons.verified_outlined : Icons.info_outline_rounded,
+                size: 17,
+                color: verified ? tokens.primary : tokens.textSecondary,
+              ),
+              const SizedBox(width: 8),
+              Text(
+                verified
+                    ? context.l10n.nearbyHalalVerified
+                    : context.l10n.nearbyPossibleHalal,
+                style: GoogleFonts.dmSans(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w800,
+                  color: tokens.textPrimary,
+                ),
+              ),
+            ],
+          ),
+          if (showExplanation) ...[
+            const SizedBox(height: 5),
+            Text(
+              context.l10n.nearbyPossibleHalalExplanation,
+              style: GoogleFonts.dmSans(
+                fontSize: 11,
+                height: 1.4,
+                color: tokens.textSecondary,
+              ),
+            ),
+          ],
+        ],
       ),
     );
   }
