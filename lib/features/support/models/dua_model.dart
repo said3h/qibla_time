@@ -1,3 +1,34 @@
+class DuaPart {
+  final String arabicText;
+  final String transliteration;
+  final String translation;
+  final int count;
+
+  const DuaPart({
+    required this.arabicText,
+    required this.transliteration,
+    required this.translation,
+    required this.count,
+  });
+
+  factory DuaPart.fromJson(Map<String, dynamic> json) {
+    final count = (json['count'] as num?)?.toInt() ?? 1;
+    if (count < 1) throw const FormatException('Invalid dua part count');
+    return DuaPart(
+      arabicText: json['arabicText'] as String,
+      transliteration: json['transliteration'] as String? ?? '',
+      translation: json['translation'] as String? ?? '',
+      count: count,
+    );
+  }
+
+  static List<DuaPart> parse(dynamic value) => List.unmodifiable(
+        (value as List? ?? const []).map(
+          (part) => DuaPart.fromJson(Map<String, dynamic>.from(part as Map)),
+        ),
+      );
+}
+
 class Dua {
   final String id;
   final String title;
@@ -9,6 +40,7 @@ class Dua {
   final bool isFeatured;
   final String? source;
   final int? count;
+  final List<DuaPart> parts;
   final List<String>? tags;
   final List<String>? times;
 
@@ -23,6 +55,7 @@ class Dua {
     this.isFeatured = false,
     this.source,
     this.count,
+    this.parts = const [],
     this.tags,
     this.times,
   });
@@ -39,6 +72,7 @@ class Dua {
       isFeatured: json['isFeatured'] as bool? ?? false,
       source: json['source'] as String?,
       count: json['count'] as int?,
+      parts: DuaPart.parse(json['parts']),
       tags: (json['tags'] as List<dynamic>?)?.cast<String>(),
       times: (json['times'] as List<dynamic>?)?.cast<String>(),
     );
@@ -56,6 +90,7 @@ class Dua {
       isFeatured: isFeatured,
       source: source,
       count: count,
+      parts: parts,
       tags: tags,
       times: times,
     );
@@ -117,6 +152,7 @@ class DuaMultilenguaje {
         reference: json['reference'] as String?,
         source: json['source'] as String?,
         count: json['count'] as int?,
+        parts: DuaPart.parse(json['parts']),
         tags: (json['tags'] as List<dynamic>?)?.cast<String>(),
         times: (json['times'] as List<dynamic>?)?.cast<String>(),
         isFeatured: json['isFeatured'] as bool? ?? false,
@@ -151,6 +187,7 @@ class DuaMultilenguaje {
       isFeatured: translation.isFeatured,
       source: translation.source,
       count: translation.count,
+      parts: translation.parts,
       tags: translation.tags,
       times: translation.times,
     );
@@ -177,6 +214,7 @@ class DuaMultilenguaje {
         isFeatured: firstEntry.isFeatured,
         source: firstEntry.source,
         count: firstEntry.count,
+        parts: firstEntry.parts,
         tags: firstEntry.tags,
         times: firstEntry.times,
       );
@@ -193,6 +231,7 @@ class DuaMultilenguaje {
       isFeatured: translation.isFeatured,
       source: translation.source,
       count: translation.count,
+      parts: translation.parts,
       tags: translation.tags,
       times: translation.times,
     );
@@ -264,6 +303,7 @@ class DuaTranslation {
   final String? reference;
   final String? source;
   final int? count;
+  final List<DuaPart> parts;
   final List<String>? tags;
   final List<String>? times;
   final bool isFeatured;
@@ -277,6 +317,7 @@ class DuaTranslation {
     this.reference,
     this.source,
     this.count,
+    this.parts = const [],
     this.tags,
     this.times,
     this.isFeatured = false,
@@ -292,6 +333,7 @@ class DuaTranslation {
       reference: json['reference'] as String?,
       source: json['source'] as String?,
       count: json['count'] as int?,
+      parts: DuaPart.parse(json['parts']),
       tags: (json['tags'] as List<dynamic>?)?.cast<String>(),
       times: (json['times'] as List<dynamic>?)?.cast<String>(),
       isFeatured: json['isFeatured'] as bool? ?? false,

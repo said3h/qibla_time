@@ -6,6 +6,7 @@ import '../../../core/localization/locale_controller.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/utils/religious_reference_formatter.dart';
 import '../models/dua_model.dart';
+import '../widgets/dua_parts_content.dart';
 import '../services/dua_service.dart';
 import '../utils/dua_locale_presentation.dart';
 import '../utils/dua_share_helper.dart';
@@ -381,43 +382,51 @@ class _DuaCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 12),
-          SizedBox(
-            width: double.infinity,
-            child: Text(
-              dua.arabicText,
-              textAlign: TextAlign.right,
-              textDirection: TextDirection.rtl,
-              style: tokens.arabicTextStyle(
-                fontSize: 19,
-                height: 1.9,
+          if (dua.parts.isNotEmpty)
+            DuaPartsContent(
+                parts: dua.parts,
+                tokens: tokens,
+                languageCode: languageCode,
+                arabicFontSize: 19),
+          if (dua.parts.isEmpty) ...[
+            SizedBox(
+              width: double.infinity,
+              child: Text(
+                dua.arabicText,
+                textAlign: TextAlign.right,
+                textDirection: TextDirection.rtl,
+                style: tokens.arabicTextStyle(
+                  fontSize: 19,
+                  height: 1.9,
+                ),
               ),
             ),
-          ),
-          if (hasTransliteration) ...[
-            const SizedBox(height: 8),
-            Text(
-              dua.transliteration,
-              style: tokens.transliterationTextStyle(
-                fontSize: 11,
-                height: 1.6,
+            if (hasTransliteration) ...[
+              const SizedBox(height: 8),
+              Text(
+                dua.transliteration,
+                style: tokens.transliterationTextStyle(
+                  fontSize: 11,
+                  height: 1.6,
+                ),
               ),
-            ),
-          ],
-          if (hasTranslation) ...[
-            const SizedBox(height: 8),
-            Text(
-              dua.translation,
-              style: GoogleFonts.dmSans(
-                fontSize: 12,
-                color: tokens.textPrimary,
-                height: 1.7,
+            ],
+            if (hasTranslation) ...[
+              const SizedBox(height: 8),
+              Text(
+                dua.translation,
+                style: GoogleFonts.dmSans(
+                  fontSize: 12,
+                  color: tokens.textPrimary,
+                  height: 1.7,
+                ),
               ),
-            ),
+            ],
           ],
           const SizedBox(height: 10),
           Row(
             children: [
-              if (dua.count != null && dua.count! > 1)
+              if (dua.parts.isEmpty && dua.count != null && dua.count! > 1)
                 Container(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 8,
@@ -440,7 +449,8 @@ class _DuaCard extends StatelessWidget {
                     ),
                   ),
                 ),
-              if (dua.count != null && dua.count! > 1) const SizedBox(width: 8),
+              if (dua.parts.isEmpty && dua.count != null && dua.count! > 1)
+                const SizedBox(width: 8),
               IconButton(
                 tooltip: isSaved
                     ? DuaLocalePresentation.unsaveTooltip(languageCode)
