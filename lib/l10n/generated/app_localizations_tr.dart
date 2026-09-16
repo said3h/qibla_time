@@ -148,11 +148,11 @@ class AppLocalizationsTr extends AppLocalizations {
       'Dikkat dağıtmayan temiz, odaklanmış deneyim';
 
   @override
-  String get onboardingIntroPrivacy => 'Tam gizlilik';
+  String get onboardingIntroPrivacy => 'Gizlilik';
 
   @override
   String get onboardingIntroPrivacyBody =>
-      'Verileriniz asla cihazınızdan ayrılmaz';
+      'Reklam veya kullanım analizi yoktur. Çevrimiçi özellikler harici hizmetlere bağlanabilir.';
 
   @override
   String get onboardingIntroLanguages => '11 dil';
@@ -3687,14 +3687,14 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get nearbyHalalRestaurantsSubtitle =>
-      'Doğrulanmış helal yerleri ve teyit edilecek yakındaki kebap veya pide seçeneklerini bul.';
+      'Kaynakta helal olarak işaretlenen yerleri ve teyit edilecek yakındaki kebap veya pide seçeneklerini bul.';
 
   @override
   String get nearbyHalalButchers => 'Helal kasaplar';
 
   @override
   String get nearbyHalalButchersSubtitle =>
-      'Doğrulanmış helal kasapları ve teyit edilecek yakındaki seçenekleri bul.';
+      'Kaynakta helal olarak işaretlenen kasapları ve teyit edilecek yakındaki seçenekleri bul.';
 
   @override
   String get nearbyMosquesScreenSubtitle =>
@@ -3702,11 +3702,11 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get nearbyHalalRestaurantsScreenSubtitle =>
-      'Doğrulanmış helal yerler ve olası seçenekler, açıkça etiketlenip mesafeye göre sıralanır.';
+      'Helal bilgisi veri kaynağından gelir; Qibla Time sertifikaları doğrulamaz. İşletmeden teyit edin.';
 
   @override
   String get nearbyHalalButchersScreenSubtitle =>
-      'Doğrulanmış helal kasaplar ve olası seçenekler, açıkça etiketlenip mesafeye göre sıralanır.';
+      'Helal bilgisi veri kaynağından gelir; Qibla Time sertifikaları doğrulamaz. İşletmeden teyit edin.';
 
   @override
   String get nearbyList => 'Liste';
@@ -3802,7 +3802,10 @@ class AppLocalizationsTr extends AppLocalizations {
       'Geoapify tarafından desteklenir · © OpenStreetMap katkıda bulunanları';
 
   @override
-  String get nearbyHalalVerified => 'Helal doğrulandı';
+  String get nearbyHalalFilterAll => 'Tümü';
+
+  @override
+  String get nearbyHalalVerified => 'Kaynağa göre helal';
 
   @override
   String get nearbyPossibleHalal => 'Muhtemel helal seçenekler';

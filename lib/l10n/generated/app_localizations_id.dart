@@ -147,11 +147,11 @@ class AppLocalizationsId extends AppLocalizations {
   String get onboardingIntroNoAdsBody => 'Pengalaman bersih tanpa gangguan';
 
   @override
-  String get onboardingIntroPrivacy => 'Privasi penuh';
+  String get onboardingIntroPrivacy => 'Privasi';
 
   @override
   String get onboardingIntroPrivacyBody =>
-      'Data Anda tidak pernah meninggalkan perangkat';
+      'Tanpa iklan atau analitik penggunaan. Fitur online dapat menghubungi layanan eksternal.';
 
   @override
   String get onboardingIntroLanguages => '11 bahasa';
@@ -3711,14 +3711,14 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get nearbyHalalRestaurantsSubtitle =>
-      'Temukan tempat halal terverifikasi dan pilihan kebab atau pita terdekat untuk dikonfirmasi.';
+      'Temukan tempat yang ditandai halal oleh sumber data dan pilihan kebab atau pita terdekat untuk dikonfirmasi.';
 
   @override
   String get nearbyHalalButchers => 'Toko daging halal';
 
   @override
   String get nearbyHalalButchersSubtitle =>
-      'Temukan toko daging halal terverifikasi dan pilihan terdekat untuk dikonfirmasi.';
+      'Temukan toko daging yang ditandai halal oleh sumber data dan pilihan terdekat untuk dikonfirmasi.';
 
   @override
   String get nearbyMosquesScreenSubtitle =>
@@ -3726,11 +3726,11 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get nearbyHalalRestaurantsScreenSubtitle =>
-      'Tempat halal terverifikasi dan kemungkinan pilihan, diberi label jelas dan diurutkan berdasarkan jarak.';
+      'Label halal berasal dari sumber data; Qibla Time tidak memverifikasi sertifikat. Konfirmasikan kepada tempat tersebut.';
 
   @override
   String get nearbyHalalButchersScreenSubtitle =>
-      'Toko daging halal terverifikasi dan kemungkinan pilihan, diberi label jelas dan diurutkan berdasarkan jarak.';
+      'Label halal berasal dari sumber data; Qibla Time tidak memverifikasi sertifikat. Konfirmasikan kepada tempat tersebut.';
 
   @override
   String get nearbyList => 'Daftar';
@@ -3827,7 +3827,10 @@ class AppLocalizationsId extends AppLocalizations {
       'Didukung oleh Geoapify · © kontributor OpenStreetMap';
 
   @override
-  String get nearbyHalalVerified => 'Halal terverifikasi';
+  String get nearbyHalalFilterAll => 'Semua';
+
+  @override
+  String get nearbyHalalVerified => 'Halal menurut sumber';
 
   @override
   String get nearbyPossibleHalal => 'Kemungkinan pilihan halal';

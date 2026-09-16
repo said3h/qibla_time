@@ -147,11 +147,11 @@ class AppLocalizationsRu extends AppLocalizations {
   String get onboardingIntroNoAdsBody => 'Чистый опыт без отвлечений';
 
   @override
-  String get onboardingIntroPrivacy => 'Полная приватность';
+  String get onboardingIntroPrivacy => 'Конфиденциальность';
 
   @override
   String get onboardingIntroPrivacyBody =>
-      'Ваши данные никогда не покидают устройство';
+      'Без рекламы и аналитики использования. Онлайн-функции могут обращаться к внешним сервисам.';
 
   @override
   String get onboardingIntroLanguages => '11 языков';
@@ -3723,14 +3723,14 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get nearbyHalalRestaurantsSubtitle =>
-      'Найдите подтверждённые халяльные места и ближайшие кебаб- или пита-заведения для уточнения.';
+      'Найдите места, отмеченные источником как халяльные, и ближайшие заведения с кебабом или питой для уточнения.';
 
   @override
   String get nearbyHalalButchers => 'Халяль-мясные';
 
   @override
   String get nearbyHalalButchersSubtitle =>
-      'Найдите подтверждённые халяльные мясные магазины и ближайшие варианты для уточнения.';
+      'Найдите мясные магазины, отмеченные источником как халяльные, и ближайшие варианты для уточнения.';
 
   @override
   String get nearbyMosquesScreenSubtitle =>
@@ -3738,11 +3738,11 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get nearbyHalalRestaurantsScreenSubtitle =>
-      'Подтверждённые халяльные места и возможные варианты с понятными метками, отсортированные по расстоянию.';
+      'Отметка «халяль» взята из источника данных; Qibla Time не проверяет сертификаты. Уточните в заведении.';
 
   @override
   String get nearbyHalalButchersScreenSubtitle =>
-      'Подтверждённые халяльные мясные магазины и возможные варианты с понятными метками, отсортированные по расстоянию.';
+      'Отметка «халяль» взята из источника данных; Qibla Time не проверяет сертификаты. Уточните в заведении.';
 
   @override
   String get nearbyList => 'Список';
@@ -3839,7 +3839,10 @@ class AppLocalizationsRu extends AppLocalizations {
       'Работает на Geoapify · © участники OpenStreetMap';
 
   @override
-  String get nearbyHalalVerified => 'Халяль подтверждён';
+  String get nearbyHalalFilterAll => 'Все';
+
+  @override
+  String get nearbyHalalVerified => 'Халяль по данным источника';
 
   @override
   String get nearbyPossibleHalal => 'Возможно халяль';

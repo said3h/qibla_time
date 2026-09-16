@@ -395,13 +395,13 @@ abstract class AppLocalizations {
   /// No description provided for @onboardingIntroPrivacy.
   ///
   /// In es, this message translates to:
-  /// **'Privacidad total'**
+  /// **'Privacidad'**
   String get onboardingIntroPrivacy;
 
   /// No description provided for @onboardingIntroPrivacyBody.
   ///
   /// In es, this message translates to:
-  /// **'Tus datos nunca salen de tu dispositivo'**
+  /// **'Sin anuncios ni analíticas. Las funciones online pueden contactar servicios externos.'**
   String get onboardingIntroPrivacyBody;
 
   /// No description provided for @onboardingIntroLanguages.
@@ -6481,7 +6481,7 @@ abstract class AppLocalizations {
   /// No description provided for @nearbyHalalRestaurantsSubtitle.
   ///
   /// In es, this message translates to:
-  /// **'Busca locales halal verificados y opciones cercanas de kebab o pita para confirmar.'**
+  /// **'Busca locales marcados como halal por la fuente y opciones cercanas de kebab o pita para confirmar.'**
   String get nearbyHalalRestaurantsSubtitle;
 
   /// No description provided for @nearbyHalalButchers.
@@ -6493,7 +6493,7 @@ abstract class AppLocalizations {
   /// No description provided for @nearbyHalalButchersSubtitle.
   ///
   /// In es, this message translates to:
-  /// **'Busca carnicerías halal verificadas y opciones cercanas para confirmar.'**
+  /// **'Busca carnicerías marcadas como halal por la fuente y opciones cercanas para confirmar.'**
   String get nearbyHalalButchersSubtitle;
 
   /// No description provided for @nearbyMosquesScreenSubtitle.
@@ -6505,13 +6505,13 @@ abstract class AppLocalizations {
   /// No description provided for @nearbyHalalRestaurantsScreenSubtitle.
   ///
   /// In es, this message translates to:
-  /// **'Locales halal verificados y posibles opciones, claramente etiquetados y ordenados por distancia.'**
+  /// **'La indicación halal procede de la fuente de datos; Qibla Time no verifica certificados. Confírmalo con el establecimiento.'**
   String get nearbyHalalRestaurantsScreenSubtitle;
 
   /// No description provided for @nearbyHalalButchersScreenSubtitle.
   ///
   /// In es, this message translates to:
-  /// **'Carnicerías halal verificadas y posibles opciones, claramente etiquetadas y ordenadas por distancia.'**
+  /// **'La indicación halal procede de la fuente de datos; Qibla Time no verifica certificados. Confírmalo con el establecimiento.'**
   String get nearbyHalalButchersScreenSubtitle;
 
   /// No description provided for @nearbyList.
@@ -6670,10 +6670,16 @@ abstract class AppLocalizations {
   /// **'Con tecnología de Geoapify · © colaboradores de OpenStreetMap'**
   String get nearbyGeoapifyAttribution;
 
+  /// No description provided for @nearbyHalalFilterAll.
+  ///
+  /// In es, this message translates to:
+  /// **'Todos'**
+  String get nearbyHalalFilterAll;
+
   /// No description provided for @nearbyHalalVerified.
   ///
   /// In es, this message translates to:
-  /// **'Halal verificado'**
+  /// **'Halal según la fuente'**
   String get nearbyHalalVerified;
 
   /// No description provided for @nearbyPossibleHalal.

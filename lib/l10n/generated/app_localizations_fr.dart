@@ -147,11 +147,11 @@ class AppLocalizationsFr extends AppLocalizations {
   String get onboardingIntroNoAdsBody => 'Expérience claire, sans distractions';
 
   @override
-  String get onboardingIntroPrivacy => 'Confidentialité totale';
+  String get onboardingIntroPrivacy => 'Confidentialité';
 
   @override
   String get onboardingIntroPrivacyBody =>
-      'Vos données ne quittent jamais votre appareil';
+      'Sans publicité ni analyse d’utilisation. Les fonctions en ligne peuvent contacter des services externes.';
 
   @override
   String get onboardingIntroLanguages => '11 langues';
@@ -3740,14 +3740,14 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get nearbyHalalRestaurantsSubtitle =>
-      'Trouve des lieux halal vérifiés et des options kebab ou pita à confirmer.';
+      'Trouve des lieux indiqués comme halal par la source et des options kebab ou pita à confirmer.';
 
   @override
   String get nearbyHalalButchers => 'Boucheries halal';
 
   @override
   String get nearbyHalalButchersSubtitle =>
-      'Trouve des boucheries halal vérifiées et des options proches à confirmer.';
+      'Trouve des boucheries indiquées comme halal par la source et des options proches à confirmer.';
 
   @override
   String get nearbyMosquesScreenSubtitle =>
@@ -3755,11 +3755,11 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get nearbyHalalRestaurantsScreenSubtitle =>
-      'Lieux halal vérifiés et options possibles, clairement indiqués et classés par distance.';
+      'La mention halal vient de la source de données ; Qibla Time ne vérifie pas les certificats. Confirme auprès de l’établissement.';
 
   @override
   String get nearbyHalalButchersScreenSubtitle =>
-      'Boucheries halal vérifiées et options possibles, clairement indiquées et classées par distance.';
+      'La mention halal vient de la source de données ; Qibla Time ne vérifie pas les certificats. Confirme auprès de l’établissement.';
 
   @override
   String get nearbyList => 'Liste';
@@ -3856,7 +3856,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Propulsé par Geoapify · © contributeurs OpenStreetMap';
 
   @override
-  String get nearbyHalalVerified => 'Halal vérifié';
+  String get nearbyHalalFilterAll => 'Tous';
+
+  @override
+  String get nearbyHalalVerified => 'Halal selon la source';
 
   @override
   String get nearbyPossibleHalal => 'Options potentiellement halal';

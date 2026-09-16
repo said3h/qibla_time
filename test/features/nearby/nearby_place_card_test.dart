@@ -8,6 +8,8 @@ import 'package:qibla_time/l10n/l10n.dart';
 void main() {
   testWidgets('labels verified and possible halal places clearly',
       (tester) async {
+    await tester.binding.setSurfaceSize(const Size(320, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
     Future<void> pumpPlace(HalalVerificationStatus status) async {
       await tester.pumpWidget(
         MaterialApp(
@@ -39,9 +41,11 @@ void main() {
     }
 
     await pumpPlace(HalalVerificationStatus.verified);
-    expect(find.text('Halal verificado'), findsOneWidget);
+    expect(find.text('Halal según la fuente'), findsOneWidget);
+    expect(tester.takeException(), isNull);
 
     await pumpPlace(HalalVerificationStatus.possible);
     expect(find.text('Confirma si es halal'), findsOneWidget);
+    expect(tester.takeException(), isNull);
   });
 }

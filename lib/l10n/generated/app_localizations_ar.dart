@@ -147,10 +147,11 @@ class AppLocalizationsAr extends AppLocalizations {
   String get onboardingIntroNoAdsBody => 'تجربة نظيفة وبدون مشتتات';
 
   @override
-  String get onboardingIntroPrivacy => 'خصوصية تامة';
+  String get onboardingIntroPrivacy => 'الخصوصية';
 
   @override
-  String get onboardingIntroPrivacyBody => 'بياناتك لا تغادر جهازك أبدًا';
+  String get onboardingIntroPrivacyBody =>
+      'بلا إعلانات أو تحليلات استخدام. قد تتصل الميزات عبر الإنترنت بخدمات خارجية.';
 
   @override
   String get onboardingIntroLanguages => '11 لغة';
@@ -3629,14 +3630,14 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get nearbyHalalRestaurantsSubtitle =>
-      'اعثر على أماكن حلال موثقة وخيارات كباب أو بيتا قريبة للتحقق منها.';
+      'اعثر على أماكن يصفها المصدر بأنها حلال وخيارات كباب أو بيتا قريبة للتحقق منها.';
 
   @override
   String get nearbyHalalButchers => 'جزارات حلال';
 
   @override
   String get nearbyHalalButchersSubtitle =>
-      'اعثر على محلات جزارة حلال موثقة وخيارات قريبة للتحقق منها.';
+      'اعثر على محلات جزارة يصفها المصدر بأنها حلال وخيارات قريبة للتحقق منها.';
 
   @override
   String get nearbyMosquesScreenSubtitle =>
@@ -3644,11 +3645,11 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get nearbyHalalRestaurantsScreenSubtitle =>
-      'أماكن حلال موثقة وخيارات محتملة، موضحة بوضوح ومرتبة حسب المسافة.';
+      'وصف حلال مأخوذ من مصدر البيانات؛ لا يتحقق Qibla Time من شهادات الحلال. تأكد من المنشأة.';
 
   @override
   String get nearbyHalalButchersScreenSubtitle =>
-      'محلات جزارة حلال موثقة وخيارات محتملة، موضحة بوضوح ومرتبة حسب المسافة.';
+      'وصف حلال مأخوذ من مصدر البيانات؛ لا يتحقق Qibla Time من شهادات الحلال. تأكد من المنشأة.';
 
   @override
   String get nearbyList => 'قائمة';
@@ -3744,7 +3745,10 @@ class AppLocalizationsAr extends AppLocalizations {
       'بدعم من Geoapify · © مساهمو OpenStreetMap';
 
   @override
-  String get nearbyHalalVerified => 'حلال موثّق';
+  String get nearbyHalalFilterAll => 'الكل';
+
+  @override
+  String get nearbyHalalVerified => 'حلال بحسب المصدر';
 
   @override
   String get nearbyPossibleHalal => 'خيارات قد تكون حلالًا';

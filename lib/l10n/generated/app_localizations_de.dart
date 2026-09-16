@@ -147,11 +147,11 @@ class AppLocalizationsDe extends AppLocalizations {
   String get onboardingIntroNoAdsBody => 'Klares Erlebnis ohne Ablenkungen';
 
   @override
-  String get onboardingIntroPrivacy => 'Vollständige Privatsphäre';
+  String get onboardingIntroPrivacy => 'Datenschutz';
 
   @override
   String get onboardingIntroPrivacyBody =>
-      'Deine Daten verlassen dein Gerät nie';
+      'Keine Werbung oder Nutzungsanalysen. Online-Funktionen können externe Dienste kontaktieren.';
 
   @override
   String get onboardingIntroLanguages => '11 Sprachen';
@@ -3727,14 +3727,14 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get nearbyHalalRestaurantsSubtitle =>
-      'Finde bestätigte Halal-Lokale und nahe Kebab- oder Pita-Angebote zum Nachfragen.';
+      'Finde laut Datenquelle als halal gekennzeichnete Lokale und nahe Kebab- oder Pita-Angebote zum Nachfragen.';
 
   @override
   String get nearbyHalalButchers => 'Halal-Metzgereien';
 
   @override
   String get nearbyHalalButchersSubtitle =>
-      'Finde bestätigte Halal-Metzgereien und nahe Angebote zum Nachfragen.';
+      'Finde laut Datenquelle als halal gekennzeichnete Metzgereien und nahe Angebote zum Nachfragen.';
 
   @override
   String get nearbyMosquesScreenSubtitle =>
@@ -3742,11 +3742,11 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get nearbyHalalRestaurantsScreenSubtitle =>
-      'Bestätigte Halal-Lokale und mögliche Optionen, klar gekennzeichnet und nach Entfernung sortiert.';
+      'Die Halal-Angabe stammt aus der Datenquelle; Qibla Time prüft keine Zertifikate. Frage beim Betrieb nach.';
 
   @override
   String get nearbyHalalButchersScreenSubtitle =>
-      'Bestätigte Halal-Metzgereien und mögliche Optionen, klar gekennzeichnet und nach Entfernung sortiert.';
+      'Die Halal-Angabe stammt aus der Datenquelle; Qibla Time prüft keine Zertifikate. Frage beim Betrieb nach.';
 
   @override
   String get nearbyList => 'Liste';
@@ -3843,7 +3843,10 @@ class AppLocalizationsDe extends AppLocalizations {
       'Bereitgestellt von Geoapify · © OpenStreetMap-Mitwirkende';
 
   @override
-  String get nearbyHalalVerified => 'Halal bestätigt';
+  String get nearbyHalalFilterAll => 'Alle';
+
+  @override
+  String get nearbyHalalVerified => 'Halal laut Datenquelle';
 
   @override
   String get nearbyPossibleHalal => 'Möglicherweise halal';

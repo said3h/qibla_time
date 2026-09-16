@@ -1,6 +1,6 @@
 # Qibla Time — Islamic Companion App
 
-> Prayer times, Qibla direction, Quran, Dhikr, and more — with no ads and no data collection.
+> Prayer times, Qibla direction, Quran, Dhikr, and more — with no ads, analytics, or tracking SDKs.
 
 [![Flutter](https://img.shields.io/badge/Flutter-3.x-blue?logo=flutter)](https://flutter.dev)
 [![Dart](https://img.shields.io/badge/Dart-3.x-blue?logo=dart)](https://dart.dev)
@@ -30,7 +30,7 @@
 - **Onboarding** — Clean 7-step intro flow covering permissions and key features
 - **Period Mode** — Discreet banner and adapted prayer reminders during menstruation
 - **Local Notifications** — Exact-time adhan alerts for each prayer (no server dependency)
-- **No Ads, No Tracking** — Completely offline-first; no data ever leaves your device
+- **No Ads, No Tracking** — No advertising or analytics SDKs. Online features contact external content providers; nearby searches send location coordinates and radius to places providers. See [Privacy Policy](PRIVACY_POLICY.md).
 
 ---
 

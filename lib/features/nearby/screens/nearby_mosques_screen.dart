@@ -48,6 +48,7 @@ class NearbyResultsScreen extends ConsumerStatefulWidget {
 class _NearbyResultsScreenState extends ConsumerState<NearbyResultsScreen> {
   final _navigationService = const NearbyNavigationService();
   final _distanceService = const NearbyDistanceService();
+  _HalalPlaceFilter _halalFilter = _HalalPlaceFilter.all;
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +64,7 @@ class _NearbyResultsScreenState extends ConsumerState<NearbyResultsScreen> {
         ref.watch(nearbyHalalButchersProvider(radiusMeters)),
     };
     final isMosque = widget.category == NearbyPlaceCategory.mosque;
+    final showHalalFilter = !isMosque;
     final nextPrayer = isMosque ? ref.watch(nextPrayerInfoProvider) : null;
     final prayerSchedule =
         isMosque ? ref.watch(prayerScheduleProvider).valueOrNull : null;
@@ -83,6 +85,13 @@ class _NearbyResultsScreenState extends ConsumerState<NearbyResultsScreen> {
                 ref.read(nearbyRadiusProvider.notifier).state = value;
               },
             ),
+            if (showHalalFilter)
+              _HalalFilterBar(
+                value: _halalFilter,
+                onChanged: (value) {
+                  setState(() => _halalFilter = value);
+                },
+              ),
             Expanded(
               child: resultAsync.when(
                 loading: () => Center(
@@ -120,7 +129,28 @@ class _NearbyResultsScreenState extends ConsumerState<NearbyResultsScreen> {
                     );
                   }
 
-                  final listItems = _buildListItems(result.places);
+                  final visiblePlaces = _filterPlaces(result.places);
+                  if (visiblePlaces.isEmpty) {
+                    return ListView(
+                      padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+                      children: [
+                        _SourceNotice(
+                          fromCache: result.fromCache,
+                          source: result.originSource,
+                          usesGeoapify: result.places.any(
+                            (place) => place.source.startsWith('Geoapify'),
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+                        _EmptyState(
+                          body: _emptyBody(context),
+                          onRetry: () => _invalidate(radiusMeters),
+                        ),
+                      ],
+                    );
+                  }
+
+                  final listItems = _buildListItems(visiblePlaces);
                   return RefreshIndicator(
                     onRefresh: () => _refresh(radiusMeters),
                     child: ListView.separated(
@@ -201,6 +231,25 @@ class _NearbyResultsScreenState extends ConsumerState<NearbyResultsScreen> {
     return items;
   }
 
+  List<NearbyPlace> _filterPlaces(List<NearbyPlace> places) {
+    if (widget.category == NearbyPlaceCategory.mosque ||
+        _halalFilter == _HalalPlaceFilter.all) {
+      return places;
+    }
+
+    return places.where((place) {
+      final verification =
+          place.halalVerification ?? HalalVerificationStatus.possible;
+      return switch (_halalFilter) {
+        _HalalPlaceFilter.all => true,
+        _HalalPlaceFilter.verified =>
+          verification == HalalVerificationStatus.verified,
+        _HalalPlaceFilter.possible =>
+          verification == HalalVerificationStatus.possible,
+      };
+    }).toList();
+  }
+
   String _subtitle(BuildContext context) {
     return switch (widget.category) {
       NearbyPlaceCategory.mosque => context.l10n.nearbyMosquesScreenSubtitle,
@@ -277,6 +326,12 @@ class _NearbyResultsScreenState extends ConsumerState<NearbyResultsScreen> {
             remaining.inMinutes.remainder(60),
           );
   }
+}
+
+enum _HalalPlaceFilter {
+  all,
+  verified,
+  possible,
 }
 
 class _Header extends StatelessWidget {
@@ -395,6 +450,59 @@ class _Controls extends StatelessWidget {
   }
 }
 
+class _HalalFilterBar extends StatelessWidget {
+  const _HalalFilterBar({
+    required this.value,
+    required this.onChanged,
+  });
+
+  final _HalalPlaceFilter value;
+  final ValueChanged<_HalalPlaceFilter> onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = QiblaThemes.current;
+
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+      child: Row(
+        children: _HalalPlaceFilter.values.map((filter) {
+          final selected = filter == value;
+          return Padding(
+            padding: const EdgeInsetsDirectional.only(end: 8),
+            child: ChoiceChip(
+              selected: selected,
+              label: Text(_labelForFilter(context, filter)),
+              showCheckmark: false,
+              visualDensity: VisualDensity.compact,
+              backgroundColor: tokens.bgSurface,
+              selectedColor: tokens.primaryBg,
+              side: BorderSide(
+                color: selected ? tokens.primaryBorder : tokens.border,
+              ),
+              labelStyle: GoogleFonts.dmSans(
+                fontSize: 12,
+                fontWeight: FontWeight.w800,
+                color: selected ? tokens.primary : tokens.textSecondary,
+              ),
+              onSelected: (_) => onChanged(filter),
+            ),
+          );
+        }).toList(),
+      ),
+    );
+  }
+
+  String _labelForFilter(BuildContext context, _HalalPlaceFilter filter) {
+    return switch (filter) {
+      _HalalPlaceFilter.all => context.l10n.nearbyHalalFilterAll,
+      _HalalPlaceFilter.verified => context.l10n.nearbyHalalVerified,
+      _HalalPlaceFilter.possible => context.l10n.nearbyConfirmHalal,
+    };
+  }
+}
+
 class _NearbyResultItem {
   const _NearbyResultItem.forPlace(this.place) : header = null;
   const _NearbyResultItem.forHeader(this.header) : place = null;
@@ -424,19 +532,21 @@ class _VerificationHeader extends StatelessWidget {
           Row(
             children: [
               Icon(
-                verified ? Icons.verified_outlined : Icons.info_outline_rounded,
+                Icons.info_outline_rounded,
                 size: 17,
                 color: verified ? tokens.primary : tokens.textSecondary,
               ),
               const SizedBox(width: 8),
-              Text(
-                verified
-                    ? context.l10n.nearbyHalalVerified
-                    : context.l10n.nearbyPossibleHalal,
-                style: GoogleFonts.dmSans(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w800,
-                  color: tokens.textPrimary,
+              Expanded(
+                child: Text(
+                  verified
+                      ? context.l10n.nearbyHalalVerified
+                      : context.l10n.nearbyPossibleHalal,
+                  style: GoogleFonts.dmSans(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w800,
+                    color: tokens.textPrimary,
+                  ),
                 ),
               ),
             ],

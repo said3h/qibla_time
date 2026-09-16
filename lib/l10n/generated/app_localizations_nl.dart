@@ -147,11 +147,11 @@ class AppLocalizationsNl extends AppLocalizations {
   String get onboardingIntroNoAdsBody => 'Schone ervaring zonder afleidingen';
 
   @override
-  String get onboardingIntroPrivacy => 'Volledige privacy';
+  String get onboardingIntroPrivacy => 'Privacy';
 
   @override
   String get onboardingIntroPrivacyBody =>
-      'Jouw gegevens verlaten nooit je apparaat';
+      'Geen advertenties of gebruiksanalyses. Onlinefuncties kunnen externe diensten benaderen.';
 
   @override
   String get onboardingIntroLanguages => '11 talen';
@@ -3719,14 +3719,14 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get nearbyHalalRestaurantsSubtitle =>
-      'Vind geverifieerde halalzaken en nabije kebab- of pita-opties om na te vragen.';
+      'Vind zaken die de bron als halal aanduidt en nabije kebab- of pita-opties om na te vragen.';
 
   @override
   String get nearbyHalalButchers => 'Halal slagers';
 
   @override
   String get nearbyHalalButchersSubtitle =>
-      'Vind geverifieerde halalslagerijen en nabije opties om na te vragen.';
+      'Vind slagerijen die de bron als halal aanduidt en nabije opties om na te vragen.';
 
   @override
   String get nearbyMosquesScreenSubtitle =>
@@ -3734,11 +3734,11 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get nearbyHalalRestaurantsScreenSubtitle =>
-      'Geverifieerde halalzaken en mogelijke opties, duidelijk gelabeld en gesorteerd op afstand.';
+      'De halalvermelding komt van de gegevensbron; Qibla Time controleert geen certificaten. Vraag het bij de zaak na.';
 
   @override
   String get nearbyHalalButchersScreenSubtitle =>
-      'Geverifieerde halalslagerijen en mogelijke opties, duidelijk gelabeld en gesorteerd op afstand.';
+      'De halalvermelding komt van de gegevensbron; Qibla Time controleert geen certificaten. Vraag het bij de zaak na.';
 
   @override
   String get nearbyList => 'Lijst';
@@ -3835,7 +3835,10 @@ class AppLocalizationsNl extends AppLocalizations {
       'Mogelijk gemaakt door Geoapify · © OpenStreetMap-bijdragers';
 
   @override
-  String get nearbyHalalVerified => 'Halal geverifieerd';
+  String get nearbyHalalFilterAll => 'Alles';
+
+  @override
+  String get nearbyHalalVerified => 'Halal volgens de bron';
 
   @override
   String get nearbyPossibleHalal => 'Mogelijk halal';

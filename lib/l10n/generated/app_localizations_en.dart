@@ -148,10 +148,11 @@ class AppLocalizationsEn extends AppLocalizations {
       'Clean, focused experience with no distractions';
 
   @override
-  String get onboardingIntroPrivacy => 'Complete privacy';
+  String get onboardingIntroPrivacy => 'Privacy';
 
   @override
-  String get onboardingIntroPrivacyBody => 'Your data never leaves your device';
+  String get onboardingIntroPrivacyBody =>
+      'No ads or analytics. Online features may contact external services.';
 
   @override
   String get onboardingIntroLanguages => '11 languages';
@@ -3700,14 +3701,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get nearbyHalalRestaurantsSubtitle =>
-      'Find verified halal places and nearby kebab or pita options to confirm.';
+      'Find places marked halal by the source and nearby kebab or pita options to confirm.';
 
   @override
   String get nearbyHalalButchers => 'Halal butchers';
 
   @override
   String get nearbyHalalButchersSubtitle =>
-      'Find verified halal butchers and nearby options to confirm.';
+      'Find butchers marked halal by the source and nearby options to confirm.';
 
   @override
   String get nearbyMosquesScreenSubtitle =>
@@ -3715,11 +3716,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get nearbyHalalRestaurantsScreenSubtitle =>
-      'Verified halal places and possible options, clearly labelled and sorted by distance.';
+      'Halal labels come from the data source, not a certification check by Qibla Time. Confirm with the venue.';
 
   @override
   String get nearbyHalalButchersScreenSubtitle =>
-      'Verified halal butchers and possible options, clearly labelled and sorted by distance.';
+      'Halal labels come from the data source, not a certification check by Qibla Time. Confirm with the venue.';
 
   @override
   String get nearbyList => 'List';
@@ -3816,7 +3817,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Powered by Geoapify · © OpenStreetMap contributors';
 
   @override
-  String get nearbyHalalVerified => 'Halal verified';
+  String get nearbyHalalFilterAll => 'All';
+
+  @override
+  String get nearbyHalalVerified => 'Halal according to source';
 
   @override
   String get nearbyPossibleHalal => 'Possible halal options';
