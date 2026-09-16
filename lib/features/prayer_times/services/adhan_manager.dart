@@ -8,6 +8,7 @@ import '../../../core/services/logger_service.dart';
 import '../../period/services/period_mode_service.dart';
 import '../../tracking/services/weekly_summary_notification_service.dart';
 import '../presentation/providers/prayer_times_providers.dart';
+import '../domain/entities/prayer_notification_window.dart';
 import 'notification_service.dart';
 
 final adhanManagerProvider = Provider<AdhanManager>((ref) => AdhanManager(ref));
@@ -86,17 +87,32 @@ class AdhanManager {
       'date=${resolvedSchedule.schedule.date} location=${resolvedSchedule.location.latitude},${resolvedSchedule.location.longitude}',
     );
 
+    // Prepare the complete window before cancelling existing alarms. Use one
+    // location/settings snapshot and calendar dates (not 24-hour increments).
+    final date = resolvedSchedule.schedule.date;
+    final calculator = _ref.read(prayerCalculationDataSourceProvider);
+    final schedules = [
+      resolvedSchedule.schedule,
+      for (var day = 1; day < prayerNotificationDays; day++)
+        calculator.calculate(
+          location: resolvedSchedule.location,
+          settings: resolvedSchedule.settings,
+          now: DateTime(date.year, date.month, date.day + day),
+        ),
+    ];
+
     // Programa las oraciones que quedan hoy (IDs 0-4)
     AppLogger.info('AdhanManager.scheduleTodayAdhans: calling rescheduleToday');
     await _ref
         .read(reschedulePrayerNotificationsUseCaseProvider)
         .call(resolvedSchedule.schedule);
 
-    // Programa todas las oraciones de mañana (IDs 5-9) para garantizar que el
-    // adhan suene aunque el usuario no vuelva a abrir la app antes de Fajr.
-    AppLogger.info(
-        'AdhanManager.scheduleTodayAdhans: scheduling tomorrow adhans');
-    await _scheduleTomorrowAdhans();
+    for (var day = 1; day < schedules.length; day++) {
+      await _ref.read(prayerNotificationsDataSourceProvider).scheduleFutureDay(
+            schedules[day],
+            dayOffset: day,
+          );
+    }
 
     await _ref
         .read(weeklySummaryNotificationServiceProvider)
@@ -107,28 +123,6 @@ class AdhanManager {
       'AdhanManager.scheduleTodayAdhans: done at $finishedAt '
       '(took=${finishedAt.difference(startedAt).inMilliseconds}ms)',
     );
-  }
-
-  Future<void> _scheduleTomorrowAdhans() async {
-    try {
-      final tomorrow = DateTime.now().add(const Duration(days: 1));
-      final resolvedTomorrow = await _ref
-          .read(prayerTimesRepositoryProvider)
-          .getScheduleForDate(tomorrow);
-      if (resolvedTomorrow == null) {
-        return;
-      }
-      await _ref
-          .read(prayerNotificationsDataSourceProvider)
-          .scheduleTomorrow(resolvedTomorrow.schedule);
-    } catch (e, stackTrace) {
-      // No es bloqueante: si falla la programación de mañana, hoy sigue sonando.
-      AppLogger.error(
-        'Failed to schedule tomorrow adhans',
-        error: e,
-        stackTrace: stackTrace,
-      );
-    }
   }
 
   Future<void> cancelPrayer(String prayerName) async {

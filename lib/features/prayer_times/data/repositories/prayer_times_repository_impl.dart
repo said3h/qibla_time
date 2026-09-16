@@ -1,4 +1,5 @@
 import '../../../../core/services/logger_service.dart';
+import '../../domain/entities/cached_prayer_schedule.dart';
 import '../../domain/entities/prayer_location.dart';
 import '../../domain/entities/resolved_prayer_schedule.dart';
 import '../../domain/repositories/prayer_times_repository.dart';
@@ -26,8 +27,7 @@ class PrayerTimesRepositoryImpl implements PrayerTimesRepository {
         _widgetDataSource = widgetDataSource,
         _selectSourceUseCase =
             selectSourceUseCase ?? const SelectPrayerScheduleSourceUseCase(),
-        _findInvalidEntriesUseCase =
-            findInvalidEntriesUseCase ??
+        _findInvalidEntriesUseCase = findInvalidEntriesUseCase ??
             const FindInvalidPrayerCacheEntriesUseCase();
 
   final PrayerLocationDataSource _locationDataSource;
@@ -88,11 +88,20 @@ class PrayerTimesRepositoryImpl implements PrayerTimesRepository {
         error: e,
         stackTrace: stackTrace,
       );
-      rethrow;
     }
 
     final settings = await _settingsDataSource.getSettings();
-    final cachedSchedule = await _cacheDataSource.getFor(location, reference);
+    CachedPrayerSchedule? cachedSchedule;
+    try {
+      cachedSchedule =
+          await _cacheDataSource.getFor(location, reference, settings);
+    } catch (e, stackTrace) {
+      AppLogger.error(
+        'Failed to read prayer cache; calculating schedule',
+        error: e,
+        stackTrace: stackTrace,
+      );
+    }
     final source = _selectSourceUseCase.call(
       cachedSchedule: cachedSchedule,
       currentLocation: location,
@@ -109,7 +118,6 @@ class PrayerTimesRepositoryImpl implements PrayerTimesRepository {
             error: e,
             stackTrace: stackTrace,
           );
-          rethrow;
         }
       }
       return ResolvedPrayerSchedule(
@@ -126,14 +134,17 @@ class PrayerTimesRepositoryImpl implements PrayerTimesRepository {
       now: reference,
     );
     try {
-      await _cacheDataSource.save(location: location, schedule: calculated);
+      await _cacheDataSource.save(
+        location: location,
+        schedule: calculated,
+        settings: settings,
+      );
     } catch (e, stackTrace) {
       AppLogger.error(
         'Failed to cache calculated prayer schedule',
         error: e,
         stackTrace: stackTrace,
       );
-      rethrow;
     }
     if (syncWidget) {
       try {
@@ -144,7 +155,6 @@ class PrayerTimesRepositoryImpl implements PrayerTimesRepository {
           error: e,
           stackTrace: stackTrace,
         );
-        rethrow;
       }
     }
     return ResolvedPrayerSchedule(

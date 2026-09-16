@@ -5,22 +5,30 @@ import '../../domain/entities/cached_prayer_schedule.dart';
 import '../../domain/entities/prayer_cache_status.dart';
 import '../../domain/entities/prayer_location.dart';
 import '../../domain/entities/prayer_schedule.dart';
+import '../../domain/entities/prayer_settings.dart';
 import '../models/prayer_cache_entry_model.dart';
 
 class PrayerCacheDataSource {
   Box get _box => Hive.box(StorageService.prayerCacheBox);
 
-  String buildKey(PrayerLocation location, DateTime date) {
-    return 'prayers_${location.latitude.toStringAsFixed(2)}_${location.longitude.toStringAsFixed(2)}_${date.year}-${date.month}-${date.day}';
+  String buildKey(
+    PrayerLocation location,
+    DateTime date,
+    PrayerSettings settings,
+  ) {
+    // Legacy entries do not identify their calculation settings; recalculate
+    // instead of reusing them under a potentially different configuration.
+    return 'prayers_v2_${location.latitude.toStringAsFixed(2)}_${location.longitude.toStringAsFixed(2)}_${date.year}-${date.month}-${date.day}_${settings.method.name}_${settings.madhab.name}_${settings.timeOffsetMinutes}';
   }
 
   Future<void> save({
     required PrayerLocation location,
     required PrayerSchedule schedule,
+    required PrayerSettings settings,
   }) async {
     final date = schedule.date;
     final entry = PrayerCacheEntryModel(
-      key: buildKey(location, date),
+      key: buildKey(location, date, settings),
       location: location,
       schedule: schedule,
       validUntil: DateTime(date.year, date.month, date.day, 23, 59, 59)
@@ -32,8 +40,9 @@ class PrayerCacheDataSource {
   Future<CachedPrayerSchedule?> getFor(
     PrayerLocation location,
     DateTime date,
+    PrayerSettings settings,
   ) async {
-    final key = buildKey(location, date);
+    final key = buildKey(location, date, settings);
     final raw = _box.get(key);
     if (raw is! String) {
       return null;

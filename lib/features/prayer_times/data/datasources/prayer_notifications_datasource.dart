@@ -3,6 +3,7 @@ import '../../../../core/services/logger_service.dart';
 import '../../../../core/services/settings_service.dart';
 import '../../../../l10n/l10n.dart';
 import '../../domain/entities/prayer_name.dart';
+import '../../domain/entities/prayer_notification_window.dart';
 import '../../domain/entities/prayer_schedule.dart';
 import '../../domain/entities/ramadan_status.dart';
 import '../../services/notification_service.dart';
@@ -25,16 +26,6 @@ class PrayerNotificationsDataSource {
     PrayerName.asr: 2,
     PrayerName.maghrib: 3,
     PrayerName.isha: 4,
-  };
-
-  // IDs 5-9: oraciones de mañana — garantizan adhan aunque el usuario no abra
-  // la app antes del primer salah del día siguiente.
-  static const Map<PrayerName, int> _tomorrowPrayerIds = {
-    PrayerName.fajr: 5,
-    PrayerName.dhuhr: 6,
-    PrayerName.asr: 7,
-    PrayerName.maghrib: 8,
-    PrayerName.isha: 9,
   };
 
   static const int _ramadanImsakReminderId = 100;
@@ -144,10 +135,17 @@ class PrayerNotificationsDataSource {
     await _scheduleJumuahReminder(schedule, now: now);
   }
 
-  /// Programa todas las oraciones del día siguiente con IDs 5-9.
-  /// Se llama justo después de [rescheduleToday] para garantizar que el adhan
-  /// suene aunque el usuario no abra la app antes del primer salah de mañana.
-  Future<void> scheduleTomorrow(PrayerSchedule tomorrowSchedule) async {
+  /// Adds one future calendar day without cancelling earlier days.
+  Future<void> scheduleFutureDay(
+    PrayerSchedule schedule, {
+    required int dayOffset,
+  }) async {
+    RangeError.checkValueInInterval(
+      dayOffset,
+      1,
+      prayerNotificationDays - 1,
+      'dayOffset',
+    );
     if (!await _settingsService.getNotificationsEnabled()) {
       return;
     }
@@ -157,7 +155,9 @@ class PrayerNotificationsDataSource {
     int scheduled = 0;
     int exactPermissionRequired = 0;
 
-    for (final prayer in tomorrowSchedule.times.entries) {
+    for (final prayer in schedule.times.entries) {
+      final id =
+          dayOffset * prayerNotificationsPerDay + _prayerIds[prayer.key]!;
       final scheduledAt = _adhanScheduledAt(prayer.value);
 
       // Salvaguarda: no programar si por alguna razón el tiempo ya pasó
@@ -176,15 +176,15 @@ class PrayerNotificationsDataSource {
         final canScheduleExact =
             await _notificationService.canScheduleExactAdhanAlarms();
         AppLogger.info(
-          'scheduleTomorrow: scheduling ${prayer.key.key} raw=${prayer.value} '
+          'scheduleFutureDay: day=$dayOffset ${prayer.key.key} raw=${prayer.value} '
           'scheduled=$scheduledAt '
           'diffSeconds=${scheduledAt.difference(prayer.value).inSeconds} '
           'diffMinutesFromNow=${scheduledAt.difference(now).inMinutes} '
-          'notificationId=${_tomorrowPrayerIds[prayer.key]} '
+          'notificationId=$id '
           'canScheduleExact=$canScheduleExact',
         );
         final result = await _notificationService.scheduleAdhan(
-          id: _tomorrowPrayerIds[prayer.key]!,
+          id: id,
           prayerName: prayer.key.localizedDisplayName(
             AppLocaleController.effectiveLanguageCode(),
           ),
@@ -198,7 +198,7 @@ class PrayerNotificationsDataSource {
         }
       } catch (e, stackTrace) {
         AppLogger.error(
-          'Failed to schedule tomorrow adhan for ${prayer.key.key}',
+          'Failed to schedule day $dayOffset adhan for ${prayer.key.key}',
           error: e,
           stackTrace: stackTrace,
         );
@@ -206,7 +206,7 @@ class PrayerNotificationsDataSource {
     }
 
     AppLogger.info(
-      'scheduleTomorrow: done. $scheduled prayers scheduled. '
+      'scheduleFutureDay: day=$dayOffset done. $scheduled prayers scheduled. '
       'exactPermissionRequired=$exactPermissionRequired',
     );
   }

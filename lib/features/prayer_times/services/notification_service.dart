@@ -10,6 +10,7 @@ import 'package:timezone/timezone.dart' as tz;
 
 import '../../../core/services/logger_service.dart';
 import '../../../l10n/l10n.dart';
+import '../domain/entities/prayer_notification_window.dart';
 
 enum AdhanScheduleResult {
   scheduled,
@@ -292,11 +293,11 @@ class NotificationService {
   }
 
   /// Cancela únicamente las notificaciones relacionadas con oraciones:
-  /// hoy (0-4), mañana (5-9), Ramadán imsak/iftar (100-101), Jumu'ah (102).
+  /// ventana de adhan (0-29), Ramadán imsak/iftar (100-101), Jumu'ah (102).
   /// No cancela la inspiración diaria (10001) ni los hadiths horarios (20000+).
   Future<void> cancelPrayerNotifications() async {
     await initialize();
-    for (final id in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 100, 101, 102]) {
+    for (final id in [...prayerNotificationIds, 100, 101, 102]) {
       await _plugin.cancel(id: id);
     }
   }
