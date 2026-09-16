@@ -168,6 +168,44 @@ void main() {
       expect(result.debugInfo?.fallbackReason, 'validation_rejected');
     });
 
+    test('preserves nested QUL content and decodes entities without UI text',
+        () {
+      final client = TafsirApiClient(source: TafsirApiSource.qulPreview);
+      final result = client.parseQulPreviewResponse(
+        utf8.encode('''
+          <h1>Recurso</h1>
+          <div class="tafsir-debug">Debug label</div>
+          <div class='spanish tafsir'>
+            <div><p>Primer <strong>texto</strong> &#233;.</p></div>
+            <div>Segundo&nbsp;p&#225;rrafo &amp; final.</div>
+            <script>tracking()</script><style>body{}</style>
+            <button>Copy</button><nav>Menu</nav>
+          </div>
+          <p>Outside content</p>
+        '''),
+        tafsirId: '268',
+        surahNumber: 1,
+        ayahNumber: 1,
+        languageCode: 'es',
+        sourceUrl: 'https://qul.tarteel.ai/test',
+      );
+      expect(result.source, TafsirLoadSource.api);
+      expect(result.entry!.text, 'Primer texto é. Segundo párrafo & final.');
+    });
+
+    test('does not mistake a similarly named class for tafsir content', () {
+      final client = TafsirApiClient(source: TafsirApiSource.qulPreview);
+      final result = client.parseQulPreviewResponse(
+        utf8.encode('<div class="tafsir-debug">Not a commentary</div>'),
+        tafsirId: '268',
+        surahNumber: 1,
+        ayahNumber: 1,
+        languageCode: 'es',
+        sourceUrl: 'https://qul.tarteel.ai/test',
+      );
+      expect(result.source, TafsirLoadSource.unavailable);
+    });
+
     test('rejects shifted verse alignment in fake response', () {
       final client = TafsirApiClient();
       final body = utf8.encode(

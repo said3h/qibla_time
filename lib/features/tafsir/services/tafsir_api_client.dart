@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+import 'package:html/dom.dart' as dom;
+import 'package:html/parser.dart' as html_parser;
 
 import '../../../core/services/logger_service.dart';
 import '../models/tafsir_entry.dart';
@@ -287,10 +289,8 @@ class TafsirApiClient {
           'ayah=$surahNumber:$ayahNumber',
     );
 
-    final title = _firstMatch(
-      html,
-      RegExp(r'<h1[^>]*>([\s\S]*?)</h1>', caseSensitive: false),
-    );
+    final document = html_parser.parse(html);
+    final title = document.querySelector('h1')?.innerHtml;
     final previewHeading = _findQulPreviewHeading(html);
     final detectedAyahNumber = _readQulHeadingAyahNumber(previewHeading);
     _debugLog(
@@ -317,13 +317,7 @@ class TafsirApiClient {
       );
     }
 
-    final textHtml = _firstMatch(
-      html,
-      RegExp(
-        r'<div[^>]*class="[^"]*\btafsir\b[^"]*"[^>]*>([\s\S]*?)</div>',
-        caseSensitive: false,
-      ),
-    );
+    final textHtml = document.querySelector('div.tafsir')?.innerHtml;
     final text = _cleanHtmlText(textHtml);
     _debugLog(
       'QuranTafsirParse',
@@ -477,10 +471,6 @@ class TafsirApiClient {
     return blockedMarkers.any(normalized.contains);
   }
 
-  String? _firstMatch(String text, RegExp pattern) {
-    return pattern.firstMatch(text)?.group(1);
-  }
-
   String? _findQulPreviewHeading(String html) {
     final headings = RegExp(
       r'<h2[^>]*>([\s\S]*?)</h2>',
@@ -507,19 +497,29 @@ class TafsirApiClient {
 
   String _cleanHtmlText(String? html) {
     if (html == null) return '';
-    return html
-        .replaceAll(RegExp(r'<br\s*/?>', caseSensitive: false), '\n')
-        .replaceAll(RegExp(r'</p\s*>', caseSensitive: false), '\n')
-        .replaceAll(RegExp(r'<[^>]+>'), ' ')
-        .replaceAll('&nbsp;', ' ')
-        .replaceAll('&amp;', '&')
-        .replaceAll('&quot;', '"')
-        .replaceAll('&#39;', "'")
-        .replaceAll('&apos;', "'")
-        .replaceAll('&lt;', '<')
-        .replaceAll('&gt;', '>')
-        .replaceAll(RegExp(r'\s+'), ' ')
-        .trim();
+    final fragment = html_parser.parseFragment(html);
+    final buffer = StringBuffer();
+    void visit(dom.Node node) {
+      if (node is dom.Text) {
+        buffer.write(node.data);
+        return;
+      }
+      if (node is dom.Element &&
+          const {'script', 'style', 'button', 'nav'}.contains(node.localName)) {
+        return;
+      }
+      final block = node is dom.Element &&
+          const {'div', 'p', 'br', 'li', 'h1', 'h2', 'blockquote'}
+              .contains(node.localName);
+      if (block) buffer.write(' ');
+      for (final child in node.nodes) {
+        visit(child);
+      }
+      if (block) buffer.write(' ');
+    }
+
+    visit(fragment);
+    return buffer.toString().replaceAll(RegExp(r'\s+'), ' ').trim();
   }
 
   TafsirDebugInfo _debugInfo({
