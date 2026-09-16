@@ -13,6 +13,18 @@ import 'dua_share_image_service.dart';
 class DuaShareService {
   const DuaShareService();
 
+  String _arabic(Dua dua) => dua.parts.isEmpty
+      ? dua.arabicText
+      : dua.parts
+          .map((part) => '${part.arabicText}\n(×${part.count})')
+          .join('\n\n');
+
+  String _translation(Dua dua) => dua.parts.isEmpty
+      ? dua.translation
+      : dua.parts
+          .map((part) => '${part.translation}\n(×${part.count})')
+          .join('\n\n');
+
   String buildShareText(
     Dua dua, {
     bool includeArabic = true,
@@ -108,9 +120,9 @@ class DuaShareService {
 
     return HadithShareData(
       arabicText: includeArabic && dua.arabicText.trim().isNotEmpty
-          ? dua.arabicText
+          ? _arabic(dua)
           : null,
-      translation: includeTranslation ? dua.translation : '',
+      translation: includeTranslation ? _translation(dua) : '',
       reference: '',
       arabicReference: null,
       badgeLabel: '',
@@ -139,9 +151,9 @@ class DuaShareService {
 
     return HadithShareData(
       arabicText: includeArabic && dua.arabicText.trim().isNotEmpty
-          ? dua.arabicText
+          ? _arabic(dua)
           : null,
-      translation: includeTranslation ? dua.translation : '',
+      translation: includeTranslation ? _translation(dua) : '',
       reference: referenceSections.join(' · '),
       arabicReference: arabicReference ?? arabicCategoryLabel,
       badgeLabel: l10n.shareBadgeDua,
