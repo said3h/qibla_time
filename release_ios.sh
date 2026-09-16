@@ -3,9 +3,12 @@ set -euo pipefail
 
 cd "$(dirname "$0")"
 
-if [ "$#" -ne 0 ]; then
-  echo "Este script ya calcula el build automáticamente."
-  echo "Uso: ./release_ios.sh"
+IOS_BUILD_OVERRIDE=""
+if [ "$#" -eq 2 ] && [ "$1" = "--build-number" ] && [[ "$2" =~ ^[1-9][0-9]*$ ]]; then
+  IOS_BUILD_OVERRIDE="$2"
+elif [ "$#" -ne 0 ]; then
+  echo "Uso: ./release_ios.sh [--build-number NUMERO]"
+  echo "Sin argumentos, el build se incrementa automáticamente."
   exit 1
 fi
 
@@ -46,13 +49,20 @@ fi
 
 VERSION_NAME="$(echo "$VERSION_LINE" | sed -E 's/^version:[[:space:]]*([0-9]+\.[0-9]+\.[0-9]+)\+[0-9]+[[:space:]]*$/\1/')"
 CURRENT_BUILD="$(echo "$VERSION_LINE" | sed -E 's/^version:[[:space:]]*[0-9]+\.[0-9]+\.[0-9]+\+([0-9]+)[[:space:]]*$/\1/')"
-NEW_BUILD=$((CURRENT_BUILD + 1))
+if [ -n "$IOS_BUILD_OVERRIDE" ]; then
+  NEW_BUILD="$IOS_BUILD_OVERRIDE"
+  echo "Build específico de iOS: $NEW_BUILD (contador Android conservado: $CURRENT_BUILD)"
+else
+  NEW_BUILD=$((CURRENT_BUILD + 1))
+fi
 
 echo "Current build: $CURRENT_BUILD"
 echo "New build: $NEW_BUILD"
 echo "Preparando Qibla Time $VERSION_NAME+$NEW_BUILD"
 
-perl -0pi -e "s/^version:\s*\Q$VERSION_NAME\E\+\Q$CURRENT_BUILD\E\s*$/version: $VERSION_NAME+$NEW_BUILD/m" pubspec.yaml
+if [ -z "$IOS_BUILD_OVERRIDE" ]; then
+  perl -0pi -e "s/^version:\s*\Q$VERSION_NAME\E\+\Q$CURRENT_BUILD\E\s*$/version: $VERSION_NAME+$NEW_BUILD/m" pubspec.yaml
+fi
 
 "$FLUTTER_BIN" clean
 "$FLUTTER_BIN" pub get
@@ -68,6 +78,7 @@ if ! security find-identity -v -p codesigning | grep -qE '[0-9]+\) [A-F0-9]{40}'
 fi
 
 "$FLUTTER_BIN" build ipa --release \
+  --build-number="$NEW_BUILD" \
   --dart-define=GEOAPIFY_API_KEY="$GEOAPIFY_API_KEY"
 
 if [ ! -d "build/ios/archive/Runner.xcarchive" ]; then
